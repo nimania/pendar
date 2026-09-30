@@ -73,10 +73,10 @@ write('calendar/','تقویم ایران',body)
 # Every item is a real internal detail page.
 for x in RECORDS:
  path=route(x);b='../../';k=x['kind']
- body=f'<div class="breadcrumbs"><a href="{b}">پندار</a> / <a href="../">{LABELS[k]}</a></div>'+heading(x['title'],x.get('summary',''),LABELS[k])+chips(x.get('topicIds',[]),b)
+ body=f'<div class="breadcrumbs"><a href="{b}">پندار</a> / <a href="../">{LABELS[k]}</a></div>'+heading(x['title'],'' if k=='article' else x.get('summary',''),LABELS[k])+chips(x.get('topicIds',[]),b)
  content=''
  if k=='book':
-  content=f'<div class="book-info"><span>نویسنده</span><a href="{b}people/{x["authorId"]}/">{e(x["author"])}</a><span>زبان</span><b>فارسی</b><span>حوزه</span><b>{e(x["category"])}</b></div><h2>چرا بخوانیم؟</h2><p>{e(x["why"])}</p><h2>راهنمای شروع</h2><p>{e(x["notes"])}</p><h2>نسخه و مشخصات</h2><p>این مدخل معرفی اثر است. ناشر، سال و شابک یک چاپ مشخص هنوز ثبت نشده‌اند؛ اطلاعات ساختگی جایگزین آن‌ها نمی‌شود.</p>'
+  content=f'<div class="book-info"><span>نویسنده</span><a href="{b}people/{x["authorId"]}/">{e(x["author"])}</a><span>زبان</span><b>فارسی</b><span>حوزه</span><b>{e(x["category"])}</b></div><h2>چرا بخوانیم؟</h2><p>{e(x["why"])}</p><h2>راهنمای شروع</h2><p>{e(x["notes"])}</p><h2>نسخه و مشخصات</h2><p>ناشر، سال و شابک چاپ‌های موجود هنوز تکمیل نشده‌اند. پیوند زیر به متن دیجیتال یا معرفی پژوهشی اثر می‌رسد.</p>'
  elif k=='person':
   content='<h2>آثار در پندار</h2>'+grid([r for r in DATA['books'] if r['authorId']==x['id']],b)
  elif k=='topic':
