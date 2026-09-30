@@ -1,12 +1,92 @@
 [
   {
+    "id": "e5726344115ec9",
+    "title": "نشست «آیا اصول اخلاقی واقعیت دارند؟»",
+    "sourceId": "ibna",
+    "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
+    "sourceUrl": "https://www.ibna.ir/news/555676/%D9%86%D8%B4%D8%B3%D8%AA-%D8%A2%DB%8C%D8%A7-%D8%A7%D8%B5%D9%88%D9%84-%D8%A7%D8%AE%D9%84%D8%A7%D9%82%DB%8C-%D9%88%D8%A7%D9%82%D8%B9%DB%8C%D8%AA-%D8%AF%D8%A7%D8%B1%D9%86%D8%AF",
+    "publishedAt": "2026-09-30T11:32:36+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
+    "summary": "پرسش اصلی این نشست این است که آیا اصول اخلاقی واقعیت دارند؟ اگر آری، به چه معنا؟ و پرسش بنیادی‌تر: اصلاً واقعیت داشتن یعنی چه!",
+    "language": "fa",
+    "topicIds": [
+      "literature",
+      "press"
+    ],
+    "kind": "article"
+  },
+  {
+    "id": "53d0103bf33742",
+    "title": "بررسی «نمایشنامه نویسی و اقتباس» در تئاترشهر",
+    "sourceId": "ibna",
+    "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
+    "sourceUrl": "https://www.ibna.ir/news/555674/%D8%A8%D8%B1%D8%B1%D8%B3%DB%8C-%D9%86%D9%85%D8%A7%DB%8C%D8%B4%D9%86%D8%A7%D9%85%D9%87-%D9%86%D9%88%DB%8C%D8%B3%DB%8C-%D9%88-%D8%A7%D9%82%D8%AA%D8%A8%D8%A7%D8%B3-%D8%AF%D8%B1-%D8%AA%D8%A6%D8%A7%D8%AA%D8%B1%D8%B4%D9%87%D8%B1",
+    "publishedAt": "2026-09-30T11:19:23+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
+    "summary": "چهاردهمین رویداد «جمعه های تئاترشهر» درقالب نشست تخصصی «نمایشنامه نویسی و اقتباس» توسط کانون نمایشنامه نویسان و مترجمان خانه تئاتر اختصاص پیدا کرده است.",
+    "language": "fa",
+    "topicIds": [
+      "literature",
+      "press"
+    ],
+    "kind": "article"
+  },
+  {
+    "id": "9f5ad446f6692e",
+    "title": "دستور پیگیری تامین کاغذ",
+    "sourceId": "ibna",
+    "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
+    "sourceUrl": "https://www.ibna.ir/news/555666/%D8%AA%D8%B4%DA%A9%DB%8C%D9%84-%DA%A9%D8%A7%D8%B1%DA%AF%D8%B1%D9%88%D9%87-%D9%88%DB%8C%DA%98%D9%87-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D8%A8%D8%AF%DB%8C%D9%84-%D9%85%D8%B7%D8%A7%D9%84%D8%A8%D8%A7%D8%AA-%D9%BE%D9%86%D8%AC-%DA%AF%D8%A7%D9%86%D9%87-%D8%B5%D9%86%D8%B9%D8%AA-%D9%86%D8%B4%D8%B1-%D8%A8%D9%87-%D8%A7%D8%AD%DA%A9%D8%A7%D9%85",
+    "publishedAt": "2026-09-30T10:44:58+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
+    "summary": "در نشست بررسی راهکارهای برون‌رفت از چالش‌های صنعت نشر و بحران‌های اقتصادی این حوزه با حضور رئیس سازمان برنامه‌وبودجه، معاون امور فرهنگی وزیر فرهنگ، نمایندگان تشکل‌ها، انجمن‌ها و…",
+    "language": "fa",
+    "topicIds": [
+      "literature",
+      "press"
+    ],
+    "kind": "article"
+  },
+  {
+    "id": "bceaf92cadad93",
+    "title": "اقلیم شگفت شعر بیدل؛ پیوند صورتِ استوار و معنای نازک",
+    "sourceId": "ibna",
+    "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
+    "sourceUrl": "https://www.ibna.ir/news/555668/%D8%A7%D9%82%D9%84%DB%8C%D9%85-%D8%B4%DA%AF%D9%81%D8%AA-%D8%B4%D8%B9%D8%B1-%D8%A8%DB%8C%D8%AF%D9%84-%D9%BE%DB%8C%D9%88%D9%86%D8%AF-%D8%B5%D9%88%D8%B1%D8%AA-%D8%A7%D8%B3%D8%AA%D9%88%D8%A7%D8%B1-%D9%88-%D9%85%D8%B9%D9%86%D8%A7%DB%8C-%D9%86%D8%A7%D8%B2%DA%A9",
+    "publishedAt": "2026-09-30T10:30:12+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
+    "summary": "اصفهان - همایش «بیدل شناسی در نیم قرن اخیر» با حضور اساتید و علاقه‌مندان به شعر و ادبیات در خمینی شهر برگزار شد.",
+    "language": "fa",
+    "topicIds": [
+      "literature",
+      "press"
+    ],
+    "kind": "article"
+  },
+  {
+    "id": "41bbfc4e4cebd7",
+    "title": "محسن کیایی با فیلم اقتباسی «شیطونی» به جشنواره فیلم کوتاه می‌آید",
+    "sourceId": "ibna",
+    "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
+    "sourceUrl": "https://www.ibna.ir/news/555663/%D9%85%D8%AD%D8%B3%D9%86-%DA%A9%DB%8C%D8%A7%DB%8C%DB%8C-%D8%A8%D8%A7-%D9%81%DB%8C%D9%84%D9%85-%D8%A7%D9%82%D8%AA%D8%A8%D8%A7%D8%B3%DB%8C-%D8%B4%DB%8C%D8%B7%D9%88%D9%86%DB%8C-%D8%A8%D9%87-%D8%AC%D8%B4%D9%86%D9%88%D8%A7%D8%B1%D9%87-%D9%81%DB%8C%D9%84%D9%85-%DA%A9%D9%88%D8%AA%D8%A7%D9%87-%D9%85%DB%8C-%D8%A2%DB%8C%D8%AF",
+    "publishedAt": "2026-09-30T10:14:26+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
+    "summary": "فیلم کوتاه «شیطونی» به نویسندگی و کارگردانی محمد رحمتی در جشنواره فیلم‌کوتاه تهران حضور خواهد داشت.",
+    "language": "fa",
+    "topicIds": [
+      "literature",
+      "press"
+    ],
+    "kind": "article"
+  },
+  {
     "id": "69f4b42b7b304a",
     "title": "شب غلامعلی عبیدی",
     "sourceId": "bukhara",
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27860.html",
     "publishedAt": "2026-08-18T16:20:53+00:00",
-    "fetchedAt": "2026-09-30T11:40:28.752842+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
     "summary": "به مناسبت هشتادسالگی داروسازی زنده‌یاد دکتر غلامعلی عبیدی، و به بهانۀ رونمایی و نمایش فیلم مستند «تبِ آینه» (خاطرات و تألماتِ یک دواساز) به تهیه‌کنندگی و کارگردانی وحید…",
     "language": "fa",
     "topicIds": [
@@ -22,7 +102,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27862.html",
     "publishedAt": "2026-08-17T16:21:42+00:00",
-    "fetchedAt": "2026-09-30T11:40:28.752842+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
     "summary": "پنجاه و هفتمین نشست از جهای بخارالسات عصر چهارشنبه‌های مجلهٔ بخارا به بررسی کتاب «نامه‌های کمال‌الملک»، که از سوی نشر دانیار منتشر شده، اختصاص یافته است. این نشست…",
     "language": "fa",
     "topicIds": [
@@ -38,7 +118,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27864.html",
     "publishedAt": "2026-08-16T16:24:39+00:00",
-    "fetchedAt": "2026-09-30T11:40:28.752842+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
     "summary": "شصت و هفتمین نشست از سلسله نشست‌های عصر سه‌شنبه‌های بخارا به نقد و بررسی کتاب «زیتون و انجیر» (دوازده مقالهٔ اجتماعی) نوشتهٔ توماس مان، ترجمهٔ محمود حدادی که…",
     "language": "fa",
     "topicIds": [
@@ -54,7 +134,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27866.html",
     "publishedAt": "2026-08-15T16:27:48+00:00",
-    "fetchedAt": "2026-09-30T11:40:28.752842+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
     "summary": "چهل و پنجمین نشست از سلسله نشست‌های عصر دوشنبه‌ها مجلهٔ بخارا به نقد و بررسی کتاب «ملال‌گریز» (ناصرالدین‌شاهِ معمار و عمارت‌هایش)، نوشتهٔ حمیدرضا پیشوایی که از سوی نشر…",
     "language": "fa",
     "topicIds": [
@@ -70,7 +150,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27868.html",
     "publishedAt": "2026-08-14T16:31:38+00:00",
-    "fetchedAt": "2026-09-30T11:40:28.752842+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
     "summary": "شانزدهمین نشست از سلسله نشست‌های عصر یکشنبه‌های بخارا به نقد و بررسی کتاب «نظریۀ فروپاشی» (تحلیلی جامعه‌شناختی‌ـ تاریخی از فروپاشی نظم سیاسی در ایران) نوشتۀ تقی آزاد ارمکی،…",
     "language": "fa",
     "topicIds": [
@@ -86,7 +166,7 @@
     "sourceTitle": "بنیاد میراث ایران",
     "sourceUrl": "https://ihf.org.uk/blog/the-unesco-world-heritage-sites-of-iran/",
     "publishedAt": "2026-07-09T13:20:13+00:00",
-    "fetchedAt": "2026-09-30T11:40:28.752842+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
     "summary": "A UNESCO World Heritage Site is a landmark or area recognised by the United Nations Educational, Scientific and Cultural Organisation for having “outstanding universal value” to humanity. These…",
     "language": "en",
     "topicIds": [
@@ -102,7 +182,7 @@
     "sourceTitle": "بنیاد میراث ایران",
     "sourceUrl": "https://ihf.org.uk/blog/chehel-sotoon-palace/",
     "publishedAt": "2026-07-09T12:11:47+00:00",
-    "fetchedAt": "2026-09-30T11:40:28.752842+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
     "summary": "Chehel Sotoon Palace📍Esfahan⛏️17th century, the Safavids One of the finest examples of Safavid (1501-1736) art and architecture, Chehel Sotoon is a timeless marvel of Iranian history. Commissioned by…",
     "language": "en",
     "topicIds": [
@@ -118,7 +198,7 @@
     "sourceTitle": "بنیاد میراث ایران",
     "sourceUrl": "https://ihf.org.uk/blog/shush-khuzestan-province/",
     "publishedAt": "2026-07-08T15:03:31+00:00",
-    "fetchedAt": "2026-09-30T11:40:28.752842+00:00",
+    "fetchedAt": "2026-09-30T11:52:43.047512+00:00",
     "summary": "Susa 📍 Shush, Khuzestan Province ⛏ 4395-4200 BC One of the region’s oldest-known settlements, Susa has been continuously inhabited for more than 6,000 years: Susa I (4200-3800 BC):…",
     "language": "en",
     "topicIds": [

@@ -22,5 +22,17 @@
       "heritage",
       "iran-studies"
     ]
+  },
+  {
+    "id": "ibna",
+    "title": "خبرگزاری کتاب ایران (ایبنا)",
+    "url": "https://www.ibna.ir/",
+    "feedUrl": "https://www.ibna.ir/rss",
+    "tier": "B",
+    "language": "fa",
+    "topicIds": [
+      "literature",
+      "press"
+    ]
   }
 ]

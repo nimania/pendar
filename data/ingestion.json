@@ -1,8 +1,8 @@
 {
-  "lastAttemptAt": "2026-09-30T11:40:28.752842+00:00",
-  "lastSuccessAt": "2026-09-30T11:40:28.752842+00:00",
-  "successfulSources": 2,
-  "sourceCount": 2,
+  "lastAttemptAt": "2026-09-30T11:52:43.047512+00:00",
+  "lastSuccessAt": "2026-09-30T11:52:43.047512+00:00",
+  "successfulSources": 3,
+  "sourceCount": 3,
   "sources": [
     {
       "sourceId": "bukhara",
@@ -17,9 +17,16 @@
       "ok": true,
       "itemCount": 3,
       "latestPublishedAt": "2026-07-09T13:20:13+00:00"
+    },
+    {
+      "sourceId": "ibna",
+      "title": "خبرگزاری کتاب ایران (ایبنا)",
+      "ok": true,
+      "itemCount": 5,
+      "latestPublishedAt": "2026-09-30T11:32:36+00:00"
     }
   ],
-  "itemCount": 8,
+  "itemCount": 13,
   "schedule": "every 6 hours",
   "summarization": "attributed-feed-excerpts"
 }
