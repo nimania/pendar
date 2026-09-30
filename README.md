@@ -1,4 +1,4 @@
-# پندار — Alpha 0.1
+# پندار — Alpha 0.2
 
 پرتال فارسی برای کشف ایران، اندیشه و فرهنگ آن.
 
@@ -28,3 +28,9 @@ workflow اصلی سایت را روی https://nimania.github.io/pendar/ منت�
 
 ## معماری
 JSON مرتبط + مولد Python + جستجوی مرورگر + GitHub Actions + GitHub Pages. این اولین آلفا از Astro استفاده نمی‌کند؛ برای این حجم داده ساخت بدون بسته‌های اضافی کافی است و داده‌ها برای انتقال بعدی مستقل‌اند.
+
+## Visual library update
+
+Ten books have individual reading guides and visual cards. Nine author pages include sourced biographies; eight include attributed historical photos, artworks or a statue. Artistic depictions are labelled. Nazem al-Islam has no verified portrait yet.
+
+Two actual book covers are used, with their sources on the detail page. Other jackets are Pendar typographic designs and explicitly labelled as such. Three edition records are sourced separately; a pictured cover is not assumed to depict that edition. Image source, creator and license are recorded in data/people.json and rendered on author pages.
