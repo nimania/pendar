@@ -15,3 +15,4 @@ body{background:#f4f3f1;color:#302e2d}.topline{background:#302e2d}.topline time,
 
 /* Constitutional reference profiles */
 .profile-nav{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.profile-nav a{padding:8px 14px;border:1px solid var(--line);border-radius:6px}.source-author{display:block;margin:4px 0 16px}.figure-overview .person-art img{height:360px;object-fit:contain;background:#ece8e0}.kind-figure .person-art img{object-fit:contain;background:#ece8e0}.detail-body h2[id],#references{scroll-margin-top:24px}.kind-figure .card-visual{background:#ece8e0}
+.profile-nav{max-width:none;margin:24px 0 0;padding:0;border:0;overflow:visible}.profile-nav a{color:#852d30;border:1px solid #d9ceca;background:#faf6f3;font-size:14px}.profile-nav a:hover{color:#5c1b20;background:#f1e5df}
