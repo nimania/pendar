@@ -1,0 +1,192 @@
+[
+  {
+    "id": "shahnameh",
+    "title": "شاهنامه",
+    "author": "فردوسی",
+    "authorId": "ferdowsi",
+    "category": "ادبیات حماسی",
+    "topicIds": [
+      "shahnameh"
+    ],
+    "sourceUrl": "https://ganjoor.net/ferdousi/shahname/",
+    "summary": "حماسه‌ای برای خواندن داستان‌های ایران؛ از جهان اسطوره تا روایت پادشاهان.",
+    "why": "از داستانی کوتاه آغاز کنید و سپس به ترتیب روایت برگردید.",
+    "notes": "آغاز کتاب، داستان رستم و سهراب و داستان سیاوش سه نقطه ورود متفاوت‌اند.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "golestan",
+    "title": "گلستان",
+    "author": "سعدی",
+    "authorId": "saadi",
+    "category": "ادبیات کلاسیک",
+    "topicIds": [
+      "literature"
+    ],
+    "sourceUrl": "https://ganjoor.net/saadi/golestan/",
+    "summary": "حکایت‌های کوتاه در نثر و شعر فارسی.",
+    "why": "برای شروع مطالعه روزانه، یک حکایت و یادداشت درباره پرسش اخلاقی آن انتخاب کنید.",
+    "notes": "باب اول، سیرت پادشاهان، برای دنبال‌کردن نسبت قدرت و اخلاق نقطه شروع مناسبی است.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "boostan",
+    "title": "بوستان",
+    "author": "سعدی",
+    "authorId": "saadi",
+    "category": "ادبیات کلاسیک",
+    "topicIds": [
+      "literature"
+    ],
+    "sourceUrl": "https://ganjoor.net/saadi/boostan/bab1/",
+    "summary": "منظومه‌ای با باب‌هایی درباره عدل، احسان و تجربه اخلاقی.",
+    "why": "حکایت‌های باب عدل را کنار حکایت‌های گلستان بخوانید.",
+    "notes": "به تفاوت زبان منظوم بوستان و نثر گلستان توجه کنید.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "hafez",
+    "title": "دیوان حافظ",
+    "author": "حافظ",
+    "authorId": "hafez",
+    "category": "شعر فارسی",
+    "topicIds": [
+      "literature"
+    ],
+    "sourceUrl": "https://ganjoor.net/hafez/",
+    "summary": "غزل‌ها و دیگر اشعار حافظ در نسخه قابل مرور گنجور.",
+    "why": "هر بار یک غزل بخوانید؛ معنی واژه‌ها را پیش از برداشت کلی بررسی کنید.",
+    "notes": "در این مدخل نسخه دیجیتال معرفی می‌شود؛ مشخصات یک چاپ کاغذی هنوز ثبت نشده است.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "khayyam",
+    "title": "رباعیات خیام",
+    "author": "عمر خیام",
+    "authorId": "khayyam",
+    "category": "شعر فارسی",
+    "topicIds": [
+      "literature"
+    ],
+    "sourceUrl": "https://ganjoor.net/khayyam/robaee/",
+    "summary": "رباعیات در انتخاب و تصحیح فروغی و غنی، مطابق معرفی گنجور.",
+    "why": "رباعیات را همراه با توجه به مسئله انتساب اشعار بخوانید.",
+    "notes": "این مدخل درباره مجموعه معرفی‌شده در گنجور است؛ همه رباعیات منسوب، انتساب قطعی ندارند.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "masnavi",
+    "title": "مثنوی معنوی",
+    "author": "مولانا",
+    "authorId": "moulavi",
+    "category": "ادبیات عرفانی",
+    "topicIds": [
+      "literature"
+    ],
+    "sourceUrl": "https://ganjoor.net/moulavi/masnavi",
+    "summary": "مجموعه‌ای از حکایت‌ها و گفتارهای عرفانی در شش دفتر.",
+    "why": "برای شروع، سرآغاز دفتر اول و یک حکایت را با شرح معتبر بخوانید.",
+    "notes": "خواندن پیوسته یک داستان از انتخاب چند بیت پراکنده فهم بیشتری از بافت متن می‌دهد.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "mantegh",
+    "title": "منطق‌الطیر",
+    "author": "عطار",
+    "authorId": "attar",
+    "category": "ادبیات عرفانی",
+    "topicIds": [
+      "literature"
+    ],
+    "sourceUrl": "https://ganjoor.net/attar/manteghotteyr/",
+    "summary": "روایت سفر مرغان و گفت‌وگو با هدهد در منظومه عطار.",
+    "why": "از آغاز داستان و عذر آوردن مرغان شروع کنید.",
+    "notes": "ساختار سفر و وادی‌ها را در یک یادداشت کوتاه دنبال کنید.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "khosro-shirin",
+    "title": "خسرو و شیرین",
+    "author": "نظامی",
+    "authorId": "nezami",
+    "category": "ادبیات داستانی",
+    "topicIds": [
+      "literature"
+    ],
+    "sourceUrl": "https://ganjoor.net/nezami/5ganj/khosro-shirin/",
+    "summary": "منظومه‌ای داستانی از خمسه نظامی.",
+    "why": "به ترتیب فصل‌ها بخوانید و شخصیت‌های اصلی را دنبال کنید.",
+    "notes": "این اثر را در مقام روایت ادبی بخوانید؛ برای تاریخ سیاسی به منبع تاریخی جداگانه رجوع کنید.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "kasravi-history",
+    "title": "تاریخ مشروطه ایران",
+    "author": "احمد کسروی",
+    "authorId": "kasravi",
+    "category": "تاریخ معاصر",
+    "topicIds": [
+      "constitution"
+    ],
+    "sourceUrl": "https://www.iranicaonline.org/articles/kasravi-ahmad-iii/",
+    "summary": "اثری شناخته‌شده در تاریخ‌نگاری انقلاب مشروطه.",
+    "why": "این روایت را در کنار یک مدخل دانشگاهی درباره مشروطه مطالعه کنید.",
+    "notes": "انتخاب چاپ و مشخصات ناشر نیازمند تکمیل است؛ منبع این مدخل معرفی پژوهشی نویسنده و آثار اوست.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  },
+  {
+    "id": "bidari",
+    "title": "تاریخ بیداری ایرانیان",
+    "author": "ناظم‌الاسلام کرمانی",
+    "authorId": "nazem",
+    "category": "تاریخ معاصر",
+    "topicIds": [
+      "constitution"
+    ],
+    "sourceUrl": "https://www.iranicaonline.org/articles/constitutional-revolution-ii/",
+    "summary": "یکی از منابع مورد استفاده در پژوهش تاریخ مشروطه.",
+    "why": "در مطالعه رخدادها، زمان ثبت روایت و موقعیت نویسنده را از خود واقعه جدا کنید.",
+    "notes": "این مدخل فعلاً معرفی اثر است؛ نسخه دانلود یا چاپ مشخص معرفی نشده است.",
+    "language": "فارسی",
+    "publisher": null,
+    "isbn": null,
+    "year": null,
+    "kind": "book"
+  }
+]

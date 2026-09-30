@@ -1,0 +1,110 @@
+[
+  {
+    "id": "constitution",
+    "title": "مشروطه",
+    "category": "تاریخ و اندیشه",
+    "summary": "آغاز مطالعه درباره مجلس، قانون اساسی و کشاکش‌های شکل‌گیری حکومت مشروطه در ایران.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/constitutional-revolution-index/",
+    "bookIds": [
+      "kasravi-history",
+      "bidari"
+    ],
+    "kind": "topic"
+  },
+  {
+    "id": "shahnameh",
+    "title": "شاهنامه",
+    "category": "ادبیات و هویت",
+    "summary": "جهان روایت‌های فردوسی؛ متن، خواندن داستان‌ها و پیوند با هنر نگارگری.",
+    "sourceUrl": "https://ganjoor.net/ferdousi/shahname/",
+    "bookIds": [
+      "shahnameh"
+    ],
+    "kind": "topic"
+  },
+  {
+    "id": "literature",
+    "title": "ادبیات فارسی",
+    "category": "زبان و ادبیات",
+    "summary": "شعر، حکایت و روایت؛ از سعدی و حافظ تا منظومه‌های عرفانی و داستانی.",
+    "sourceUrl": "https://ganjoor.net/saadi/golestan/",
+    "bookIds": [
+      "golestan",
+      "boostan",
+      "hafez",
+      "khayyam",
+      "masnavi",
+      "mantegh",
+      "khosro-shirin"
+    ],
+    "kind": "topic"
+  },
+  {
+    "id": "festivals",
+    "title": "آیین‌های ایرانی",
+    "category": "فرهنگ و زندگی",
+    "summary": "مطالعه جشن‌ها با توجه به منابع، تفاوت تقویم‌ها و شیوه‌های محلی برگزاری.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/mehragan/",
+    "bookIds": [],
+    "kind": "topic"
+  },
+  {
+    "id": "heritage",
+    "title": "میراث فرهنگی",
+    "category": "تاریخ و فرهنگ",
+    "summary": "شناخت، مطالعه و حفاظت از میراث ایران؛ از منابع پژوهشی تا مجموعه‌های موزه‌ای.",
+    "sourceUrl": "https://ihf.org.uk/about/",
+    "bookIds": [],
+    "kind": "topic"
+  },
+  {
+    "id": "iran-studies",
+    "title": "ایران‌شناسی",
+    "category": "پژوهش",
+    "summary": "شناخت زبان‌ها، تاریخ و فرهنگ جهان ایرانی، فراتر از یک مرز جغرافیایی امروز.",
+    "sourceUrl": "https://www.iranicaonline.org/about/",
+    "bookIds": [],
+    "kind": "topic"
+  },
+  {
+    "id": "civil-life",
+    "title": "زندگی مدنی",
+    "category": "جامعه و تاریخ",
+    "summary": "انجمن‌ها و تجربه مشارکت اجتماعی؛ با توجه به منابع تاریخی و زمینه هر دوره.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/eskandari-mohtaram/",
+    "bookIds": [],
+    "kind": "topic"
+  },
+  {
+    "id": "law",
+    "title": "حکومت قانون",
+    "category": "اندیشه سیاسی",
+    "summary": "پرسش از محدودیت قدرت، نمایندگی و نهادهای قانونی؛ نقطه ورود این نسخه، تجربه مشروطه است.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/constitutional-revolution-i/",
+    "bookIds": [
+      "kasravi-history",
+      "bidari"
+    ],
+    "kind": "topic"
+  },
+  {
+    "id": "press",
+    "title": "نشریات و مطبوعات",
+    "category": "رسانه و فرهنگ",
+    "summary": "نشریات به‌عنوان بخشی از زندگی فرهنگی و تاریخ گردش اندیشه در ایران.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/constitutional-revolution-vi/",
+    "bookIds": [],
+    "kind": "topic"
+  },
+  {
+    "id": "national-identity",
+    "title": "هویت ایرانی",
+    "category": "تاریخ و فرهنگ",
+    "summary": "پیوندهای میان زبان، تاریخ، آیین و حافظه فرهنگی؛ مسیری برای طرح پرسش و مقایسه روایت‌ها.",
+    "sourceUrl": "https://persianheritagefoundation.org/about-us/",
+    "bookIds": [
+      "shahnameh"
+    ],
+    "kind": "topic"
+  }
+]

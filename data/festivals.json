@@ -1,0 +1,62 @@
+[
+  {
+    "id": "mehrgan",
+    "title": "مهرگان",
+    "month": 7,
+    "day": 16,
+    "dateLabel": "۱۶ مهر؛ در سنت هم‌نامی روز مهر و ماه مهر",
+    "summary": "جشنی پیوندخورده با مهر در سنت‌های ایرانی. تفاوت تقویم‌ها می‌تواند به تفاوت روز برگزاری امروز منجر شود.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/mehragan/",
+    "notes": "مهرگان را با یک تاریخ واحد برای همه جوامع یکی نگیریم. تاریخ درج‌شده مبنای تقویم خورشیدی این نسخه است.",
+    "topicIds": [
+      "festivals",
+      "heritage"
+    ],
+    "kind": "festival"
+  },
+  {
+    "id": "yalda",
+    "title": "یلدا و شب چله",
+    "month": 9,
+    "day": 30,
+    "dateLabel": "شب ۳۰ آذر به ۱ دی",
+    "summary": "شب آغاز زمستان؛ مدخلی برای مطالعه سنت چله و تجربه خانوادگی این شب.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/cella-term-referring-to-any-forty-day-period/",
+    "notes": "برای مطالعه، روایت‌های محلی و سنت چله را در کنار نام یلدا بررسی کنید.",
+    "topicIds": [
+      "festivals",
+      "heritage"
+    ],
+    "kind": "festival"
+  },
+  {
+    "id": "sadeh",
+    "title": "سده",
+    "month": 11,
+    "day": 10,
+    "dateLabel": "۱۰ بهمن",
+    "summary": "جشن آتش در سنت ایرانی؛ در شاهنامه نیز با روایت هوشنگ پیوند دارد.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/sada-festival/",
+    "notes": "روایت ادبی پیدایش آتش را از گزارش تاریخی شیوه‌های برگزاری جدا بخوانید.",
+    "topicIds": [
+      "festivals",
+      "heritage"
+    ],
+    "kind": "festival"
+  },
+  {
+    "id": "nowruz",
+    "title": "نوروز",
+    "month": 1,
+    "day": 1,
+    "dateLabel": "آغاز فروردین و اعتدال بهاری",
+    "summary": "آیین آغاز سال و بهار، با تاریخ طولانی و صورت‌های متنوع برگزاری در جهان ایرانی.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/nowruz-i/",
+    "notes": "زمان دقیق تحویل سال وابسته به محاسبه نجومی است؛ شمارش روزهای این صفحه فقط تا شروع روز اول فروردین است.",
+    "topicIds": [
+      "festivals",
+      "heritage"
+    ],
+    "kind": "festival"
+  }
+]

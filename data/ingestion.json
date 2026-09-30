@@ -1,0 +1,25 @@
+{
+  "lastAttemptAt": "2026-09-30T11:11:29.559984+00:00",
+  "lastSuccessAt": "2026-09-30T11:11:29.559984+00:00",
+  "successfulSources": 2,
+  "sourceCount": 2,
+  "sources": [
+    {
+      "sourceId": "bukhara",
+      "title": "بخارا",
+      "ok": true,
+      "itemCount": 5,
+      "latestPublishedAt": "2026-08-18T16:20:53+00:00"
+    },
+    {
+      "sourceId": "ihf",
+      "title": "بنیاد میراث ایران",
+      "ok": true,
+      "itemCount": 3,
+      "latestPublishedAt": "2026-07-09T13:20:13+00:00"
+    }
+  ],
+  "itemCount": 8,
+  "schedule": "every 6 hours",
+  "summarization": "attributed-feed-excerpts"
+}

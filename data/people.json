@@ -1,0 +1,92 @@
+[
+  {
+    "id": "ferdowsi",
+    "title": "فردوسی",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با فردوسی در پندار.",
+    "sourceUrl": "https://ganjoor.net/ferdousi/shahname/",
+    "topicIds": [
+      "shahnameh"
+    ]
+  },
+  {
+    "id": "saadi",
+    "title": "سعدی",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با سعدی در پندار.",
+    "sourceUrl": "https://ganjoor.net/saadi/golestan/",
+    "topicIds": [
+      "literature"
+    ]
+  },
+  {
+    "id": "hafez",
+    "title": "حافظ",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با حافظ در پندار.",
+    "sourceUrl": "https://ganjoor.net/hafez/",
+    "topicIds": [
+      "literature"
+    ]
+  },
+  {
+    "id": "khayyam",
+    "title": "عمر خیام",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با عمر خیام در پندار.",
+    "sourceUrl": "https://ganjoor.net/khayyam/robaee/",
+    "topicIds": [
+      "literature"
+    ]
+  },
+  {
+    "id": "moulavi",
+    "title": "مولانا",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با مولانا در پندار.",
+    "sourceUrl": "https://ganjoor.net/moulavi/masnavi",
+    "topicIds": [
+      "literature"
+    ]
+  },
+  {
+    "id": "attar",
+    "title": "عطار",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با عطار در پندار.",
+    "sourceUrl": "https://ganjoor.net/attar/manteghotteyr/",
+    "topicIds": [
+      "literature"
+    ]
+  },
+  {
+    "id": "nezami",
+    "title": "نظامی",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با نظامی در پندار.",
+    "sourceUrl": "https://ganjoor.net/nezami/5ganj/khosro-shirin/",
+    "topicIds": [
+      "literature"
+    ]
+  },
+  {
+    "id": "kasravi",
+    "title": "احمد کسروی",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با احمد کسروی در پندار.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/kasravi-ahmad-iii/",
+    "topicIds": [
+      "constitution"
+    ]
+  },
+  {
+    "id": "nazem",
+    "title": "ناظم‌الاسلام کرمانی",
+    "kind": "person",
+    "summary": "آثار و منابع مرتبط با ناظم‌الاسلام کرمانی در پندار.",
+    "sourceUrl": "https://www.iranicaonline.org/articles/constitutional-revolution-ii/",
+    "topicIds": [
+      "constitution"
+    ]
+  }
+]

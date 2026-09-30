@@ -1,0 +1,26 @@
+[
+  {
+    "id": "bukhara",
+    "title": "بخارا",
+    "url": "https://bukharamag.com/",
+    "feedUrl": "https://bukharamag.com/feed/",
+    "tier": "B",
+    "language": "fa",
+    "topicIds": [
+      "press",
+      "literature"
+    ]
+  },
+  {
+    "id": "ihf",
+    "title": "بنیاد میراث ایران",
+    "url": "https://ihf.org.uk/",
+    "feedUrl": "https://ihf.org.uk/feed/",
+    "tier": "A",
+    "language": "en",
+    "topicIds": [
+      "heritage",
+      "iran-studies"
+    ]
+  }
+]
