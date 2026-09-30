@@ -18,8 +18,17 @@ class Links(HTMLParser):
 parser=Links()
 for f in OUT.rglob('*.html'):parser.file=f;parser.feed(f.read_text())
 topics={x['id'] for x in json.loads((ROOT/'data/topics.json').read_text())}
-for name in ['books','people','organizations','articles','collections','paths','festivals']:
+for name in ['books','people','figures','organizations','articles','collections','paths','festivals']:
  xs=json.loads((ROOT/'data'/f'{name}.json').read_text());assert len({x['id'] for x in xs})==len(xs)
  for x in xs:
   assert set(x.get('topicIds',[]))<=topics,(name,x['id'])
 print(f'Passed: {len(list(OUT.rglob("*.html")))} HTML files, local links, record IDs and topic references')
+
+figures=json.loads((ROOT/'data/figures.json').read_text())
+figure_ids={x['id'] for x in figures}
+for x in figures:
+ assert x['sources'] and x['biography'] and x['timeline'],x['id']
+ assert set(x['relatedIds'])<=figure_ids,x['id']
+ index=json.loads((OUT/'assets/search-index.json').read_text())
+ assert any(r['kind']=='figure' and r['url']==f"figures/{x['id']}/" for r in index),x['id']
+print(f'Passed: {len(figures)} sourced figure profiles, related figures and search entries')

@@ -1,0 +1,417 @@
+[
+  {
+    "id": "sattar-khan",
+    "title": "ستارخان",
+    "aliases": "سردار ملی",
+    "kind": "figure",
+    "category": "فرماندهان و مبارزان",
+    "life": "۱۸۶۸–۱۹۱۴ میلادی",
+    "place": "آذربایجان؛ تبریز و تهران",
+    "summary": "از رهبران مقاومت تبریز در استبداد صغیر و شناخته‌شده با لقب سردار ملی.",
+    "biography": [
+      "ستارخان از نیروهای محلی تبریز بود و با پیوستن به مجاهدان مشروطه‌خواه، در مقاومت شهر پس از به‌توپ‌بستن مجلس نقش برجسته‌ای یافت. پایگاه او محلهٔ امیرخیز بود.",
+      "پایداری تبریز در برابر نیروهای سلطنتی، او را به چهره‌ای ملی بدل کرد. پس از بازگشت مشروطه به تهران رفت؛ در درگیری خلع سلاح مجاهدان در پارک اتابک زخمی شد."
+    ],
+    "timeline": [
+      {
+        "date": "۱۹۰۷",
+        "text": "پیوستن به مجاهدان تبریز."
+      },
+      {
+        "date": "۱۹۰۸–۱۹۰۹",
+        "text": "مقاومت در استبداد صغیر و محاصرهٔ تبریز."
+      },
+      {
+        "date": "۱۹۱۰",
+        "text": "زخمی‌شدن در واقعهٔ پارک اتابک."
+      }
+    ],
+    "note": "نقش ستارخان را در کنار مردم تبریز، انجمن ایالتی و دیگر مجاهدان بخوانید؛ مقاومت شهر نتیجهٔ عملکرد یک نفر نبود.",
+    "relatedIds": [
+      "baqer-khan",
+      "yeprem-khan"
+    ],
+    "topicIds": [
+      "constitution",
+      "law"
+    ],
+    "sources": [
+      {
+        "url": "https://www.iranicaonline.org/articles/sattar-khan-one-of-the-most-popular-heroes-from-tabriz-who-defended-the-town-during-the-lesser-autocracy-in-1908-09/",
+        "title": "SATTĀR KHAN",
+        "author": "Anja Pistor-Hatam"
+      }
+    ],
+    "reviewedAt": "2026-09-30",
+    "image": {
+      "path": "assets/figures/sattar-khan.jpg",
+      "caption": "عکس تاریخی ستارخان",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:SattarKhanPortrait.jpg",
+      "license": "Public domain",
+      "licenseUrl": null,
+      "credit": "Unknown"
+    }
+  },
+  {
+    "id": "baqer-khan",
+    "title": "باقرخان",
+    "aliases": "سالار ملی",
+    "kind": "figure",
+    "category": "فرماندهان و مبارزان",
+    "life": "دههٔ ۱۸۷۰–۱۹۱۶ میلادی",
+    "place": "تبریز؛ تهران و نواحی مرزی غرب ایران",
+    "summary": "از رهبران مجاهدان تبریز و همراه ستارخان؛ شناخته‌شده با لقب سالار ملی.",
+    "biography": [
+      "باقرخان، بنای تبریزی و از چهره‌های محلهٔ خیابان، در صف مجاهدان مشروطه‌خواه قرار گرفت. او در دفاع از تبریز طی استبداد صغیر نقشی مهم داشت.",
+      "پس از بازگشت مشروطه به تهران رفت. در سال‌های جنگ جهانی اول به حرکت ملی‌گرایان در غرب ایران پیوست و در ۱۹۱۶، همراه گروهش، در نواحی مرزی کشته شد."
+    ],
+    "timeline": [
+      {
+        "date": "۱۹۰۷",
+        "text": "حضور در نیروهای مجاهد تبریز."
+      },
+      {
+        "date": "۱۹۰۸–۱۹۰۹",
+        "text": "دفاع از تبریز در برابر نیروهای سلطنتی."
+      },
+      {
+        "date": "۱۹۱۶",
+        "text": "کشته‌شدن در نواحی مرزی نزدیک قصرشیرین."
+      }
+    ],
+    "note": "ایرانیکا زمان تولد او را دههٔ ۱۸۷۰ ذکر می‌کند؛ در این مدخل سال تولد دقیق ثبت نشده است.",
+    "relatedIds": [
+      "sattar-khan"
+    ],
+    "topicIds": [
+      "constitution",
+      "law"
+    ],
+    "sources": [
+      {
+        "url": "https://www.iranicaonline.org/articles/baqer-khan-salar-melli/",
+        "title": "BĀQER KHAN SĀLĀR-E MELLI",
+        "author": "Abbas Amanat"
+      }
+    ],
+    "reviewedAt": "2026-09-30",
+    "image": {
+      "path": "assets/figures/baqer-khan.webp",
+      "caption": "عکس تاریخی باقرخان",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baqir_Khan,_studio_portrait,_c._1908%E2%80%931911.webp",
+      "license": "Public domain",
+      "licenseUrl": null,
+      "credit": "\nUnknown photographer"
+    }
+  },
+  {
+    "id": "behbahani",
+    "title": "سید عبدالله بهبهانی",
+    "aliases": "عبدالله بهبهانی",
+    "kind": "figure",
+    "category": "روحانیان و اندیشه‌ورزان",
+    "life": "۱۸۴۰–۱۹۱۰ میلادی",
+    "place": "نجف و تهران",
+    "summary": "از رهبران روحانی جنبش مشروطه و از چهره‌های بانفوذ سیاست تهران.",
+    "biography": [
+      "بهبهانی در نجف متولد شد و در تهران به یکی از روحانیان بانفوذ بدل شد. همکاری او با سید محمد طباطبایی در اعتراض‌های منتهی به تشکیل مجلس، از نقاط مهم زندگی سیاسی‌اش بود.",
+      "پس از کودتای محمدعلی‌شاه از تهران دور شد و با بازگشت مشروطه به پایتخت بازگشت. در کشاکش اعتدالیون و دموکرات‌ها در ۱۹۱۰ در خانه‌اش ترور شد."
+    ],
+    "timeline": [
+      {
+        "date": "۱۹۰۵–۱۹۰۶",
+        "text": "همکاری در اعتراض‌ها و مطالبهٔ عدالتخانه و مجلس."
+      },
+      {
+        "date": "۱۹۰۸",
+        "text": "دورشدن از تهران پس از کودتا."
+      },
+      {
+        "date": "۱۹۱۰",
+        "text": "ترور در تهران."
+      }
+    ],
+    "note": "این مدخل دربارهٔ سید عبدالله بهبهانی است؛ او را با فرزندش، سید محمد بهبهانی، نباید یکی گرفت. انتساب مسئولیت ترور نیازمند بررسی روایت‌های مختلف است.",
+    "relatedIds": [
+      "taqizadeh",
+      "fazlollah-nouri"
+    ],
+    "topicIds": [
+      "constitution",
+      "law"
+    ],
+    "sources": [
+      {
+        "url": "https://www.iranicaonline.org/articles/abdallah-behbahani/",
+        "title": "BEHBAHĀNĪ, ʿABD-ALLĀH",
+        "author": "Hamid Algar"
+      }
+    ],
+    "reviewedAt": "2026-09-30"
+  },
+  {
+    "id": "taqizadeh",
+    "title": "سید حسن تقی‌زاده",
+    "aliases": "حسن تقی‌زاده؛ تقی زاده",
+    "kind": "figure",
+    "category": "نمایندگان و سیاست‌ورزان",
+    "life": "۱۸۷۸–۱۹۷۰ میلادی",
+    "place": "تبریز و تهران",
+    "summary": "نمایندهٔ تبریز در مجلس اول و از چهره‌های تحول‌خواه مشروطه.",
+    "biography": [
+      "تقی‌زاده در تبریز آموزش دید و به علوم جدید و اندیشه‌های اصلاحی علاقه یافت. در مجلس اول نمایندهٔ تبریز و از مدافعان فعال حکومت مشروطه بود.",
+      "پس از به‌توپ‌بستن مجلس به خارج رفت و با بازگشت مشروطه بار دیگر در سیاست ایران حضور یافت. در مجلس دوم به جریان دموکرات نزدیک بود و اختلاف‌های سیاسی و مذهبی او را دوباره به خروج از کشور کشاند."
+    ],
+    "timeline": [
+      {
+        "date": "۱۹۰۶",
+        "text": "ورود به مجلس اول به نمایندگی تبریز."
+      },
+      {
+        "date": "۱۹۰۸",
+        "text": "خروج از ایران پس از کودتا."
+      },
+      {
+        "date": "۱۹۰۹–۱۹۱۰",
+        "text": "حضور در مجلس دوم و کشاکش‌های حزبی."
+      }
+    ],
+    "note": "این صفحه بر دورهٔ مشروطه تمرکز دارد؛ فعالیت‌های دولتی و پژوهشی دهه‌های بعد را نباید به مواضع او در مجلس اول تعمیم داد.",
+    "relatedIds": [
+      "behbahani",
+      "jahangir-khan"
+    ],
+    "topicIds": [
+      "constitution",
+      "law"
+    ],
+    "sources": [
+      {
+        "url": "https://www.iranicaonline.org/articles/taqizadeh-sayyed-hasan-01/",
+        "title": "TAQIZADEH, SAYYED ḤASAN i.",
+        "author": "Iraj Afshar"
+      }
+    ],
+    "reviewedAt": "2026-09-30",
+    "image": {
+      "path": "assets/figures/taqizadeh.jpg",
+      "caption": "عکس تاریخی سید حسن تقی‌زاده",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hassan_Taqizadeh_2.jpg",
+      "license": "Public domain",
+      "licenseUrl": null,
+      "credit": "IICHS"
+    }
+  },
+  {
+    "id": "yeprem-khan",
+    "title": "یپرم‌خان",
+    "aliases": "یپرم داویدیان؛ افریم‌خان",
+    "kind": "figure",
+    "category": "فرماندهان و مبارزان",
+    "life": "۱۸۶۸–۱۹۱۲ میلادی",
+    "place": "قفقاز؛ گیلان و تهران",
+    "summary": "فرماندهٔ ارمنی مشروطه‌خواه و رئیس نظمیه پس از فتح تهران.",
+    "biography": [
+      "یپرم‌خان از فعالان ارمنی قفقاز بود و در گیلان به جنبش مشروطه پیوست. در پیشروی نیروهای شمال به تهران و برکناری محمدعلی‌شاه نقش نظامی مهمی داشت.",
+      "پس از پیروزی، رئیس نظمیه شد. اجرای خلع سلاح مجاهدان در پارک اتابک و بستن مجلس دوم، جایگاه او را در میان هم‌رزمان سابقش مناقشه‌برانگیز کرد. در نبرد با نیروهای سالارالدوله در ۱۹۱۲ کشته شد."
+    ],
+    "timeline": [
+      {
+        "date": "۱۹۰۹",
+        "text": "مشارکت در فتح تهران."
+      },
+      {
+        "date": "۱۹۱۰",
+        "text": "اجرای خلع سلاح مجاهدان در پارک اتابک."
+      },
+      {
+        "date": "۱۹۱۱",
+        "text": "بستن مجلس دوم در پی اولتیماتوم روسیه."
+      }
+    ],
+    "note": "برای شناخت او، نقش انقلابی و عملکردش در مقام رئیس نظمیه را هر دو بررسی کنید؛ این دو مرحله یکسان نبودند.",
+    "relatedIds": [
+      "sardar-asad",
+      "sattar-khan"
+    ],
+    "topicIds": [
+      "constitution",
+      "law"
+    ],
+    "sources": [
+      {
+        "url": "https://www.iranicaonline.org/articles/eprem-khan/",
+        "title": "EPʿREM KHAN",
+        "author": "Aram Arkun"
+      }
+    ],
+    "reviewedAt": "2026-09-30"
+  },
+  {
+    "id": "sardar-asad",
+    "title": "سردار اسعد بختیاری",
+    "aliases": "علی‌قلی‌خان بختیاری؛ سردار اسعد دوم",
+    "kind": "figure",
+    "category": "فرماندهان و مبارزان",
+    "life": "۱۸۵۷ یا ۱۸۵۸–۱۹۱۷ میلادی",
+    "place": "بختیاری؛ اصفهان و تهران",
+    "summary": "از فرماندهان نیروهای بختیاری در فتح تهران و بازگرداندن مشروطه.",
+    "biography": [
+      "علی‌قلی‌خان از خاندان ایلخانی بختیاری و شاخهٔ هفت‌لنگ بود. پس از تجربهٔ زندان و خدمت در دستگاه قاجار، در دورهٔ مشروطه به نیروهای مخالف محمدعلی‌شاه پیوست.",
+      "در ۱۹۰۹ نیروهای بختیاری را به سوی تهران رهبری کرد. پیروزی نیروهای مشروطه‌خواه به خلع شاه انجامید. پس از آن نیز در حکومت مشروطه و فعالیت‌های فرهنگی حضور داشت."
+    ],
+    "timeline": [
+      {
+        "date": "۱۸۸۲",
+        "text": "زندانی‌شدن پس از کشته‌شدن پدرش."
+      },
+      {
+        "date": "۱۹۰۹",
+        "text": "حرکت نیروهای بختیاری به تهران و فتح پایتخت."
+      },
+      {
+        "date": "۱۹۱۷",
+        "text": "درگذشت در تهران."
+      }
+    ],
+    "note": "عنوان سردار اسعد در خاندان بختیاری به افراد دیگری نیز تعلق داشته است؛ این صفحه دربارهٔ علی‌قلی‌خان، سردار اسعد دوم، است.",
+    "relatedIds": [
+      "yeprem-khan"
+    ],
+    "topicIds": [
+      "constitution",
+      "law"
+    ],
+    "sources": [
+      {
+        "url": "https://www.iranicaonline.org/articles/baktiari-nesba-of-a-number-of-baktiari-chiefs/ba%E1%B8%B5tiari-ii-%E1%B8%A5aji-%CA%BFaliqoli-khan-sardar-as%CA%BFad/",
+        "title": "BAḴTĪĀRĪ ii. Ḥājī ʿAlīqolī Khan Sardār Asʿad",
+        "author": "ʿAlī-Akbar Saʿīdī Sīrjānī"
+      }
+    ],
+    "reviewedAt": "2026-09-30",
+    "image": {
+      "path": "assets/figures/sardar-asad.jpg",
+      "caption": "عکس تاریخی سردار اسعد بختیاری",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sardar.asad.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "credit": "Alasvand.saam"
+    }
+  },
+  {
+    "id": "jahangir-khan",
+    "title": "میرزا جهانگیرخان صوراسرافیل",
+    "aliases": "جهانگیرخان شیرازی؛ صور اسرافیل",
+    "kind": "figure",
+    "category": "روزنامه‌نگاران و نویسندگان",
+    "life": "۱۸۷۵–۱۹۰۸ میلادی",
+    "place": "شیراز و تهران",
+    "summary": "از گردانندگان روزنامهٔ صوراسرافیل و از روزنامه‌نگاران کشته‌شده پس از کودتای ۱۹۰۸.",
+    "biography": [
+      "جهانگیرخان شیرازی از چهره‌های مطبوعاتی جنبش مشروطه بود. روزنامهٔ صوراسرافیل با همکاری او، قاسم‌خان تبریزی و علی‌اکبر دهخدا منتشر شد.",
+      "صوراسرافیل از تریبون‌های مهم نقد سیاسی و اجتماعی بود. پس از به‌توپ‌بستن مجلس، جهانگیرخان بازداشت و کشته شد؛ سرنوشت او بخشی از تاریخ سرکوب مطبوعات در آغاز استبداد صغیر است."
+    ],
+    "timeline": [
+      {
+        "date": "۱۹۰۷",
+        "text": "آغاز انتشار صوراسرافیل در تهران."
+      },
+      {
+        "date": "۱۹۰۸",
+        "text": "کودتا و توقف انتشار روزنامه در تهران."
+      },
+      {
+        "date": "۱۹۰۸",
+        "text": "کشته‌شدن جهانگیرخان پس از کودتا."
+      }
+    ],
+    "note": "جهانگیرخان و دهخدا دو شخص جداگانه‌اند؛ ستون طنز «چرند و پرند» را دهخدا می‌نوشت. نام روزنامه گاهی به صورت لقب جهانگیرخان به کار می‌رود.",
+    "relatedIds": [
+      "taqizadeh"
+    ],
+    "topicIds": [
+      "constitution",
+      "law",
+      "press"
+    ],
+    "sources": [
+      {
+        "url": "https://www.iranicaonline.org/articles/constitutional-revolution-vii/",
+        "title": "Constitutional Revolution vii. Literature",
+        "author": "دانشنامهٔ ایرانیکا"
+      },
+      {
+        "url": "https://www.iranicaonline.org/articles/dehkoda/",
+        "title": "DEHḴODĀ, MĪRZĀ ʿALĪ-AKBAR QAZVĪNĪ",
+        "author": "دانشنامهٔ ایرانیکا"
+      },
+      {
+        "url": "https://www.iranicaonline.org/articles/constitutional-revolution-vi/",
+        "title": "Constitutional Revolution vi. The Press",
+        "author": "دانشنامهٔ ایرانیکا"
+      }
+    ],
+    "reviewedAt": "2026-09-30",
+    "image": {
+      "path": "assets/figures/jahangir-khan.jpg",
+      "caption": "عکس تاریخی میرزا جهانگیرخان صوراسرافیل",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mirza_Jahangir_Khan_2.jpg",
+      "license": "Public domain",
+      "licenseUrl": null,
+      "credit": "Unknown authorUnknown author"
+    }
+  },
+  {
+    "id": "fazlollah-nouri",
+    "title": "شیخ فضل‌الله نوری",
+    "aliases": "فضل‌الله نوری؛ مشروطهٔ مشروعه",
+    "kind": "figure",
+    "category": "روحانیان و اندیشه‌ورزان",
+    "life": "۱۸۴۳–۱۹۰۹ میلادی",
+    "place": "مازندران و تهران",
+    "summary": "روحانی مدافع مشروطهٔ مشروعه و سپس از مخالفان مشروطه‌خواهان.",
+    "biography": [
+      "نوری فقیهی بانفوذ در تهران بود. در مراحل نخست اعتراض‌ها همراهی داشت، اما بر ضرورت انطباق نظام سیاسی و قانون‌گذاری با شریعت تأکید می‌کرد و با برنامهٔ مشروطه‌خواهان اختلاف یافت.",
+      "او خواهان مشروطهٔ مشروعه بود و در ادامه از سلطنت محمدعلی‌شاه پشتیبانی کرد. پس از فتح تهران، محاکمه و اعدام شد."
+    ],
+    "timeline": [
+      {
+        "date": "۱۹۰۶",
+        "text": "حضور در اعتراض‌های آغازین."
+      },
+      {
+        "date": "۱۹۰۷–۱۹۰۸",
+        "text": "مبارزه برای مشروعه و مخالفت با مشروطه‌خواهان."
+      },
+      {
+        "date": "۱۹۰۹",
+        "text": "محاکمه و اعدام پس از فتح تهران."
+      }
+    ],
+    "note": "موضع او در طول جنبش تغییر کرد. برای فهم اختلاف، نوشته‌های مشروعه‌خواهان و پاسخ‌های مشروطه‌خواهان را کنار هم بخوانید؛ این صفحه تاریخ دقیق اعدام را ثبت نمی‌کند.",
+    "relatedIds": [
+      "behbahani"
+    ],
+    "topicIds": [
+      "constitution",
+      "law"
+    ],
+    "sources": [
+      {
+        "url": "https://www.iranicaonline.org/articles/nuri-fazl-allah/",
+        "title": "NURI, FAŻL-ALLĀH",
+        "author": "Vanessa Martin"
+      }
+    ],
+    "reviewedAt": "2026-09-30",
+    "image": {
+      "path": "assets/figures/fazlollah-nouri.jpg",
+      "caption": "عکس تاریخی شیخ فضل‌الله نوری",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sheikh_Fazlollah_Noori.jpg",
+      "license": "Public domain",
+      "licenseUrl": null,
+      "credit": "Unknown authorUnknown author"
+    }
+  }
+]

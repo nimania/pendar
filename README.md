@@ -34,3 +34,6 @@ JSON مرتبط + مولد Python + جستجوی مرورگر + GitHub Actions +
 Ten books have individual reading guides and visual cards. Nine author pages include sourced biographies; eight include attributed historical photos, artworks or a statue. Artistic depictions are labelled. Nazem al-Islam has no verified portrait yet.
 
 Two actual book covers are used, with their sources on the detail page. Other jackets are Pendar typographic designs and explicitly labelled as such. Three edition records are sourced separately; a pictured cover is not assumed to depict that edition. Image source, creator and license are recorded in data/people.json and rendered on author pages.
+
+## چهره‌های مشروطه
+بخش `/figures/` با ۸ پروفایل مرجع اولیه، خط زمان میلادی، نام‌های دیگر، منابع ایرانیکا، پیوند چهره‌های مرتبط و کتاب‌های مطالعه. داده‌ها در `data/figures.json` نگهداری می‌شوند. عکس‌های مستند دارای انتساب و مجوز هستند؛ مدخل‌های بدون تصویر تأییدشده با جای‌نگهدار متنی نمایش داده می‌شوند. فهرست کامل فعالان مشروطه نیست.

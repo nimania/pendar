@@ -9,13 +9,14 @@ OUT=ROOT/'dist'
 if OUT.exists():shutil.rmtree(OUT)
 OUT.mkdir()
 shutil.copytree(ROOT/'assets',OUT/'assets')
-DATA={k:json.loads((ROOT/'data'/f'{k}.json').read_text()) for k in ['books','people','topics','festivals','collections','paths','organizations','articles','sources']}
+DATA={k:json.loads((ROOT/'data'/f'{k}.json').read_text()) for k in ['books','people','topics','festivals','collections','paths','organizations','articles','sources','figures']}
 STATUS=json.loads((ROOT/'data/ingestion.json').read_text())
-LABELS={'book':'کتاب','person':'نویسنده','topic':'موضوع','festival':'آیین','collection':'پرونده','path':'مسیر مطالعه','organization':'نهاد','article':'مطلب'}
-FOLDERS={'book':'books','person':'people','topic':'topics','festival':'calendar','collection':'collections','path':'paths','organization':'organizations','article':'today'}
+LABELS={'figure':'چهرهٔ مشروطه','book':'کتاب','person':'نویسنده','topic':'موضوع','festival':'آیین','collection':'پرونده','path':'مسیر مطالعه','organization':'نهاد','article':'مطلب'}
+FOLDERS={'figure':'figures','book':'books','person':'people','topic':'topics','festival':'calendar','collection':'collections','path':'paths','organization':'organizations','article':'today'}
 RECORDS=[x for group in DATA.values() for x in group if 'kind' in x]
 TOPICS={x['id']:x for x in DATA['topics']}
 BOOKS={x['id']:x for x in DATA['books']}
+FIGURES={x['id']:x for x in DATA['figures']}
 def e(s):return html.escape(str(s or ''),quote=True)
 def fa(n):return str(n).translate(str.maketrans('0123456789','۰۱۲۳۴۵۶۷۸۹'))
 def route(x):return f'{FOLDERS[x["kind"]]}/{x["id"]}/'
@@ -31,6 +32,10 @@ def person_visual(x,b):
  if x.get('image'):
   m=x['image'];return f'<div class="person-art"><img src="{b}{e(m["path"])}" alt="{e(m["caption"])}" loading="lazy" width="500" height="650"><span class="art-label">{e("عکس تاریخی" if x["id"]=="kasravi" else "تندیس" if x["id"]=="khayyam" else "بازنمایی هنری")}</span></div>'
  return f'<div class="person-art person-no-image" role="img" aria-label="تصویر مستند برای {e(x["title"])} ثبت نشده"><strong>{e(x["title"])}</strong><span>تصویر مستند هنوز ثبت نشده</span></div>'
+def figure_visual(x,b):
+ if x.get('image'):
+  m=x['image'];return f'<div class="person-art"><img src="{b}{e(m["path"])}" alt="{e(m["caption"])}" loading="lazy"><span class="art-label">عکس تاریخی</span></div>'
+ return f'<div class="person-art person-no-image"><strong>{e(x["title"])}</strong><span>تصویر مستند هنوز ثبت نشده</span></div>'
 def image_credit(m):
  text=ext(m['sourceUrl'],m['caption'])
  if m.get('license'):text+=f'<span class="media-license">{e(m.get("credit",""))} · {e(m["license"])}</span>'
@@ -46,11 +51,11 @@ def card(x,b='',featured=False):
  sub=x.get('author') or x.get('type') or x.get('category') or x.get('sourceTitle') or LABELS[x['kind']]
  date=f'<time data-date="{e(x["publishedAt"])}" datetime="{e(x["publishedAt"])}"></time>' if x.get('publishedAt') else ''
  extra=f'<span class="lang">EN</span>' if x.get('language')=='en' else ''
- visual=book_visual(x,b) if x['kind']=='book' else person_visual(x,b) if x['kind']=='person' else ''
+ visual=book_visual(x,b) if x['kind']=='book' else person_visual(x,b) if x['kind']=='person' else figure_visual(x,b) if x['kind']=='figure' else ''
  if visual:visual=f'<a class="card-visual" href="{b}{route(x)}" aria-label="{e(x["title"])}">{visual}</a>'
- return f'''<article class="card kind-{x['kind']}" data-category="{e(x.get('category') or x.get('type') or x.get('sourceTitle') or '')}" data-search="{e(x['title']+' '+x.get('summary','')+' '+sub+' '+' '.join(TOPICS[t]['title'] for t in x.get('topicIds',[]) if t in TOPICS))}">{visual}<div class="meta">{e(sub)}{extra}{date}</div><h3><a href="{b}{route(x)}">{e(x['title'])}</a></h3><p>{e(x.get('summary',''))}</p><div class="card-bottom"><span>{LABELS[x['kind']]}</span><a href="{b}{route(x)}">بیشتر بخوانید</a></div></article>'''
+ return f'''<article class="card kind-{x['kind']}" data-category="{e(x.get('category') or x.get('type') or x.get('sourceTitle') or '')}" data-search="{e(x['title']+' '+x.get('summary','')+' '+x.get('aliases','')+' '+sub+' '+' '.join(TOPICS[t]['title'] for t in x.get('topicIds',[]) if t in TOPICS))}">{visual}<div class="meta">{e(sub)}{extra}{date}</div><h3><a href="{b}{route(x)}">{e(x['title'])}</a></h3><p>{e(x.get('summary',''))}</p><div class="card-bottom"><span>{LABELS[x['kind']]}</span><a href="{b}{route(x)}">بیشتر بخوانید</a></div></article>'''
 def grid(xs,b='',cls=''):return f'<div class="cards {cls}">'+''.join(card(x,b) for x in xs)+'</div>'
-NAV=[('','خانه'),('today/','پندار امروز'),('books/','کتابخانه'),('people/','نویسندگان'),('topics/','موضوعات'),('calendar/','تقویم ایران'),('collections/','پرونده‌ها'),('paths/','مسیرهای مطالعه'),('organizations/','نهادها و جریان‌ها')]
+NAV=[('','خانه'),('today/','پندار امروز'),('books/','کتابخانه'),('people/','نویسندگان'),('figures/','چهره‌های مشروطه'),('topics/','موضوعات'),('calendar/','تقویم ایران'),('collections/','پرونده‌ها'),('paths/','مسیرهای مطالعه'),('organizations/','نهادها و جریان‌ها')]
 def head(title,path,b):
  return f'''<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="پندار؛ کشف ایران، اندیشه و فرهنگ آن. کتابخانه، پرونده‌ها، آیین‌ها و نهادها."><title>{e(title)} | پندار</title><link rel="canonical" href="https://nimania.github.io/pendar/{path}"><link rel="icon" href="{b}assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="{b}assets/vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="{b}assets/style.css?v={STYLE_VERSION}"><script src="{b}assets/app.js" defer></script></head><body><a class="skip" href="#content">رفتن به محتوا</a><div class="topline"><span>ایران، اندیشه و فرهنگ</span><time id="today-date"></time><a href="{b}about/">درباره پندار</a></div><header><div class="masthead"><a class="brand" href="{b}" aria-label="پندار، خانه"><img src="{b}assets/pendar-logo.png" width="1024" height="1024" alt="پندار"><span>ایران، اندیشه و فرهنگ</span></a><form action="{b}search/" class="global-search" role="search"><label for="global-q" class="sr-only">جستجو در پندار</label><input id="global-q" name="q" placeholder="کتاب، موضوع، آیین یا نهاد…"><button type="submit">جستجو</button></form><span class="edition">نسخه آلفا <b>۰٫۲</b></span></div><nav aria-label="بخش‌های پندار">'''+''.join(f'<a href="{b}{url}"'+(' aria-current="page"' if path==url else '')+f'>{label}</a>' for url,label in NAV)+'''</nav></header><main id="content">'''
 def write(path,title,body):
@@ -77,16 +82,18 @@ body+='''<div class="calendar-mini"><span class="eyebrow">نزدیک‌ترین 
 body+=section('سه پیشنهاد برای شروع','paths/',grid([DATA['books'][0],DATA['paths'][0],DATA['festivals'][0]]))
 body+=section('در کتابخانه پندار','books/',grid(DATA['books'][:4],cls='four'))
 body+=section('نویسندگان و جهان آثارشان','people/',grid(DATA['people'][:4],cls='four'))
+body+=section('چهره‌های مشروطه','figures/',grid(DATA['figures'][:4],cls='four'))
 body+=section('جهان موضوعات','topics/', '<div class="topic-cloud">'+''.join(f'<a href="topics/{t["id"]}/">{t["title"]}<span>{t["category"]}</span></a>' for t in DATA['topics'])+'</div>')
 body+=section('پرونده‌های پندار','collections/',grid(DATA['collections']))
 body+=section('نهادها و جریان‌ها','organizations/',grid(DATA['organizations'][:3]))
 write('','خانه',body)
 # Section indexes.
-for folder,key,title,desc in [('people','people','نویسندگان','آثار و منابع مرتبط با نویسندگان در پندار.'),('books','books','کتابخانه پندار','آثار و منابعی برای شروع مطالعه؛ هر کتاب با معرفی، پیشنهاد خواندن و منبع.'),('topics','topics','جهان موضوعات','از یک موضوع به کتاب، پرونده، نهاد و مطلب مرتبط برسید.'),('collections','collections','پرونده‌های پندار','منابع و پرسش‌ها را کنار هم بخوانید.'),('paths','paths','مسیرهای مطالعه','اگر نمی‌دانید از کجا شروع کنید، یک مسیر انتخاب کنید.'),('organizations','organizations','نهادها و جریان‌ها','بنیادها، نشریات و احزاب؛ معرفی فرهنگی و گرایش سیاسی به‌صورت جداگانه.'),('today','articles','پندار امروز','خبرهای فرهنگی ۴۸ ساعت اخیر. تاریخ زیر هر مطلب، زمان انتشار در منبع است.')]:
+for folder,key,title,desc in [('figures','figures','چهره‌های مشروطه','صفحه‌های مرجع دربارهٔ زندگی، نقش تاریخی و رخدادهای مهم چهره‌های مشروطه؛ همراه با منابع و پیوندهای مطالعه.'),('people','people','نویسندگان','آثار و منابع مرتبط با نویسندگان در پندار.'),('books','books','کتابخانه پندار','آثار و منابعی برای شروع مطالعه؛ هر کتاب با معرفی، پیشنهاد خواندن و منبع.'),('topics','topics','جهان موضوعات','از یک موضوع به کتاب، پرونده، نهاد و مطلب مرتبط برسید.'),('collections','collections','پرونده‌های پندار','منابع و پرسش‌ها را کنار هم بخوانید.'),('paths','paths','مسیرهای مطالعه','اگر نمی‌دانید از کجا شروع کنید، یک مسیر انتخاب کنید.'),('organizations','organizations','نهادها و جریان‌ها','بنیادها، نشریات و احزاب؛ معرفی فرهنگی و گرایش سیاسی به‌صورت جداگانه.'),('today','articles','پندار امروز','خبرهای فرهنگی ۴۸ ساعت اخیر. تاریخ زیر هر مطلب، زمان انتشار در منبع است.')]:
  xs=DATA[key]
  if key=='articles':xs=[x for x in xs if datetime.fromisoformat(x['publishedAt']) >= datetime.now(timezone.utc)-timedelta(hours=48)]
  opts=[x.get('category') or x.get('type') or x.get('sourceTitle') or LABELS[x['kind']] for x in xs]
  content=heading(title,desc,fa(len(xs))+' مدخل')
+ if key=='figures':content+='<p class="notice">این فهرست در حال گسترش است و همهٔ فعالان مشروطه را در بر نمی‌گیرد. چهره‌های موافق و مخالف جنبش کنار هم معرفی شده‌اند. تاریخ‌های زندگی و خط زمان این بخش میلادی‌اند.</p>'
  if key=='articles':content+='<div class="notice">مطالب قدیمی‌تر در صفحات موضوعی و جستجو در دسترس‌اند. این بخش فقط خبرهای ۴۸ ساعت اخیر را نمایش می‌دهد. <a href="../sources/">وضعیت منابع</a></div>'
  content+=filterbar(opts)+grid(xs,'../')
  write(folder+'/',title,content)
@@ -108,9 +115,17 @@ for x in RECORDS:
  elif k=='person':
   visual=person_visual(x,b);credit=image_credit(x['image']) if x.get('image') else '<figcaption>تا یافتن تصویر مستند، این مدخل بدون عکس نمایش داده می‌شود.</figcaption>'
   content='<div class="author-overview"><figure>'+visual+credit+'</figure><div><span class="eyebrow">زندگی و آثار</span><dl class="facts"><dt>پیوند جغرافیایی</dt><dd>'+e(x['place'])+'</dd><dt>حوزه</dt><dd>'+e(x['field'])+'</dd></dl>'+''.join('<p>'+e(t)+'</p>' for t in x['biography'])+'</div></div><h2>از کجا شروع کنیم؟</h2><p>'+e(x['startReading'])+'</p><h2>آثار در پندار</h2>'+grid([r for r in DATA['books'] if r['authorId']==x['id']],b)
+ elif k=='figure':
+  visual=figure_visual(x,b);credit=image_credit(x['image']) if x.get('image') else '<figcaption>تصویر مستند برای این مدخل هنوز ثبت نشده است.</figcaption>'
+  content='<div class="author-overview figure-overview"><figure>'+visual+credit+'</figure><div><span class="eyebrow">شناسنامهٔ تاریخی</span><dl class="facts"><dt>نام‌ها و لقب‌ها</dt><dd>'+e(x['aliases'])+'</dd><dt>زندگی</dt><dd>'+e(x['life'])+'</dd><dt>پیوند جغرافیایی</dt><dd>'+e(x['place'])+'</dd><dt>نقش</dt><dd>'+e(x['category'])+'</dd></dl><nav class="profile-nav" aria-label="بخش‌های پروفایل"><a href="#biography">زندگی و نقش</a><a href="#timeline">خط زمان</a><a href="#references">منابع</a></nav></div></div>'
+  content+='<h2 id="biography">زندگی و نقش در مشروطه</h2>'+''.join('<p>'+e(t)+'</p>' for t in x['biography'])+'<p class="meta">روایت کوتاه پندار بر پایهٔ منابع فهرست‌شده در پایین صفحه.</p>'
+  content+='<h2 id="timeline">رخدادهای مهم</h2><ol class="timeline">'+''.join('<li><b>'+e(t['date'])+' میلادی</b><p>'+e(t['text'])+'</p></li>' for t in x['timeline'])+'</ol><h2>نکتهٔ پژوهشی</h2><p>'+e(x['note'])+'</p>'
+  content+='<div class="source-box" id="references"><h2>منابع این مدخل</h2><ol>'+''.join('<li>'+ext(r['url'],r['title'])+'<span class="meta source-author">'+e(r['author'])+' · دانشنامهٔ ایرانیکا · انگلیسی</span></li>' for r in x['sources'])+'</ol><p class="meta">آخرین بررسی: ۸ مهر ۱۴۰۵. این زندگی‌نامه مقدمه‌ای برای مراجعه به منابع است؛ متن کامل مقاله‌های مرجع بازنشر نشده است.</p></div>'
+  content+='<h2>چهره‌های مرتبط</h2>'+grid([FIGURES[id] for id in x['relatedIds']],b)+'<h2>برای ادامهٔ مطالعه</h2><p>در تاریخ مشروطهٔ ایران و تاریخ بیداری ایرانیان، نام این چهره و رخدادهای پیرامون او را دنبال کنید؛ روایت دو کتاب را با مقاله‌های مرجع مقایسه کنید.</p>'+grid([BOOKS['kasravi-history'],BOOKS['bidari']],b)+f'<p><a class="button" href="{b}collections/constitution/">پروندهٔ مشروطه</a> <a class="button secondary" href="../">همهٔ چهره‌ها</a></p>'
  elif k=='topic':
   content='<h2>از اینجا شروع کنید</h2><p>یک منبع را انتخاب کنید، پرسش خود را مشخص کنید و سپس منابع مرتبط را کنار آن قرار دهید.</p>'
   if x['bookIds']:content+='<h2>کتاب‌ها</h2>'+grid([BOOKS[z] for z in x['bookIds']],b)
+  if x['id']=='constitution':content+='<h2>چهره‌های مشروطه</h2>'+grid(DATA['figures'],b)
   # Include only relevant sourced content; no fabricated topic histories.
  elif k=='festival':
   content=f'<p class="date-banner">{e(x["dateLabel"])}</p><h2>راهنمای مطالعه</h2><p>{e(x["notes"])}</p>'
@@ -122,6 +137,7 @@ for x in RECORDS:
   for h,p in x['sections']:content+=f'<h2>{e(h)}</h2><p>{e(p)}</p>'
   if x['id']=='constitution':
    content+='<h2>نقشه زمانی برای شروع مطالعه</h2><ol class="timeline"><li><b>۱۹۰۵ تا ۱۹۰۶ میلادی</b><p>اعتراض‌ها و شکل‌گیری مجلس؛ مرحله آغازین انقلاب مشروطه.</p></li><li><b>۱۹۰۶ تا ۱۹۰۸ میلادی</b><p>بحث قانون اساسی و کشاکش‌های سیاسی.</p></li><li><b>۱۹۰۸ تا ۱۹۰۹ میلادی</b><p>استبداد صغیر و مبارزه برای بازگشت مشروطه.</p></li><li><b>۱۹۰۹ تا ۱۹۱۱ میلادی</b><p>بازگشت نظام مشروطه و تجربه مجلس دوم.</p></li></ol><p class="meta">سال‌ها در این نمودار مطابق تقسیم‌بندی منبع میلادی‌اند؛ تبدیل آن‌ها به یک سال خورشیدی واحد دقیق نیست.</p>'+ext('https://www.iranicaonline.org/articles/constitutional-revolution-i/','منبع تقسیم‌بندی زمانی')
+  if x['id']=='constitution':content+='<h2>چهره‌های این دوره</h2>'+grid(DATA['figures'],b)
   content+='<h2>کتاب‌های این پرونده</h2>'+grid([BOOKS[z] for z in x['bookIds']],b)
  elif k=='path':
   content='<ol class="reading-steps">'
@@ -132,10 +148,10 @@ for x in RECORDS:
  elif k=='article':
   content=f'<div class="article-meta"><b>{e(x["sourceTitle"])}</b><time data-date="{e(x["publishedAt"])}" datetime="{e(x["publishedAt"])}"></time><span>{"متن منبع به انگلیسی" if x["language"]=="en" else "متن منبع به فارسی"}</span></div><h2>این مطلب درباره چیست؟</h2><p>{e(x["summary"])}</p><p class="meta">این توضیح کوتاه از خوراک رسمی منبع دریافت شده است. متن کامل و جزئیات در صفحه اصلی منبع قرار دارد.</p><h2>برای دنبال‌کردن موضوع</h2><p>موضوعات مرتبط و مدخل‌های زیر را مرور کنید. تاریخ انتشار منبع را هنگام استفاده از اطلاعات رویدادها در نظر بگیرید.</p>'
  if x.get('sourceUrl'):content+='<div class="source-box"><h2>منبع و مطالعه بیشتر</h2>'+ext(x['sourceUrl'],'مشاهده متن یا معرفی در منبع اصلی')+'</div>'
- body+='<div class="detail-body">'+content+'</div>'+related(x,b)
+ body+='<div class="detail-body">'+content+'</div>'+(related(x,b) if k!='figure' else '')
  write(path,x['title'],body)
 # Search index and client interface.
-index=[dict(title=r['title'],summary=r.get('summary',''),kind=r['kind'],label=LABELS[r['kind']],url=route(r),topics=[TOPICS[t]['title'] for t in r.get('topicIds',[]) if t in TOPICS],extra=r.get('author') or r.get('type') or r.get('sourceTitle') or '') for r in RECORDS]
+index=[dict(title=r['title'],summary=r.get('summary',''),kind=r['kind'],label=LABELS[r['kind']],url=route(r),topics=[TOPICS[t]['title'] for t in r.get('topicIds',[]) if t in TOPICS],extra=r.get('aliases') or r.get('author') or r.get('type') or r.get('sourceTitle') or '') for r in RECORDS]
 (OUT/'assets/search-index.json').write_text(json.dumps(index,ensure_ascii=False))
 (OUT/'assets/festivals.json').write_text(json.dumps(DATA['festivals'],ensure_ascii=False))
 body=heading('جستجو در پندار','کتاب، نویسنده، موضوع، پرونده، آیین، نهاد و مطلب را در یک جا پیدا کنید.')
