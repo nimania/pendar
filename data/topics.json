@@ -9,7 +9,10 @@
       "kasravi-history",
       "bidari"
     ],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "constitution"
+    ]
   },
   {
     "id": "shahnameh",
@@ -20,7 +23,10 @@
     "bookIds": [
       "shahnameh"
     ],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "shahnameh"
+    ]
   },
   {
     "id": "literature",
@@ -37,7 +43,10 @@
       "mantegh",
       "khosro-shirin"
     ],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "literature"
+    ]
   },
   {
     "id": "festivals",
@@ -46,7 +55,10 @@
     "summary": "مطالعه جشن‌ها با توجه به منابع، تفاوت تقویم‌ها و شیوه‌های محلی برگزاری.",
     "sourceUrl": "https://www.iranicaonline.org/articles/mehragan/",
     "bookIds": [],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "festivals"
+    ]
   },
   {
     "id": "heritage",
@@ -55,7 +67,10 @@
     "summary": "شناخت، مطالعه و حفاظت از میراث ایران؛ از منابع پژوهشی تا مجموعه‌های موزه‌ای.",
     "sourceUrl": "https://ihf.org.uk/about/",
     "bookIds": [],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "heritage"
+    ]
   },
   {
     "id": "iran-studies",
@@ -64,7 +79,10 @@
     "summary": "شناخت زبان‌ها، تاریخ و فرهنگ جهان ایرانی، فراتر از یک مرز جغرافیایی امروز.",
     "sourceUrl": "https://www.iranicaonline.org/about/",
     "bookIds": [],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "iran-studies"
+    ]
   },
   {
     "id": "civil-life",
@@ -73,7 +91,10 @@
     "summary": "انجمن‌ها و تجربه مشارکت اجتماعی؛ با توجه به منابع تاریخی و زمینه هر دوره.",
     "sourceUrl": "https://www.iranicaonline.org/articles/eskandari-mohtaram/",
     "bookIds": [],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "civil-life"
+    ]
   },
   {
     "id": "law",
@@ -85,7 +106,10 @@
       "kasravi-history",
       "bidari"
     ],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "law"
+    ]
   },
   {
     "id": "press",
@@ -94,7 +118,10 @@
     "summary": "نشریات به‌عنوان بخشی از زندگی فرهنگی و تاریخ گردش اندیشه در ایران.",
     "sourceUrl": "https://www.iranicaonline.org/articles/constitutional-revolution-vi/",
     "bookIds": [],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "press"
+    ]
   },
   {
     "id": "national-identity",
@@ -105,6 +132,9 @@
     "bookIds": [
       "shahnameh"
     ],
-    "kind": "topic"
+    "kind": "topic",
+    "topicIds": [
+      "national-identity"
+    ]
   }
 ]
