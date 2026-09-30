@@ -1,9 +1,10 @@
 """Build a dependency-free static portal from linked JSON records."""
-import html, json, shutil
+import html, json, shutil, hashlib
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parents[1]
+STYLE_VERSION=hashlib.sha256((ROOT/'assets/style.css').read_bytes()).hexdigest()[:12]
 OUT=ROOT/'dist'
 if OUT.exists():shutil.rmtree(OUT)
 OUT.mkdir()
@@ -30,7 +31,7 @@ def card(x,b='',featured=False):
 def grid(xs,b='',cls=''):return f'<div class="cards {cls}">'+''.join(card(x,b) for x in xs)+'</div>'
 NAV=[('','خانه'),('today/','پندار امروز'),('books/','کتابخانه'),('topics/','موضوعات'),('calendar/','تقویم ایران'),('collections/','پرونده‌ها'),('paths/','مسیرهای مطالعه'),('organizations/','نهادها و جریان‌ها')]
 def head(title,path,b):
- return f'''<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="پندار؛ کشف ایران، اندیشه و فرهنگ آن. کتابخانه، پرونده‌ها، آیین‌ها و نهادها."><title>{e(title)} | پندار</title><link rel="canonical" href="https://nimania.github.io/pendar/{path}"><link rel="icon" href="{b}assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="{b}assets/vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="{b}assets/style.css"><script src="{b}assets/app.js" defer></script></head><body><a class="skip" href="#content">رفتن به محتوا</a><div class="topline"><span>ایران، اندیشه و فرهنگ</span><time id="today-date"></time><a href="{b}about/">درباره پندار</a></div><header><div class="masthead"><a class="brand" href="{b}" aria-label="پندار، خانه"><img src="{b}assets/pendar-logo.png" width="1024" height="1024" alt="پندار"><span>ایران، اندیشه و فرهنگ</span></a><form action="{b}search/" class="global-search" role="search"><label for="global-q" class="sr-only">جستجو در پندار</label><input id="global-q" name="q" placeholder="کتاب، موضوع، آیین یا نهاد…"><button type="submit">جستجو</button></form><span class="edition">نسخه آلفا <b>۰٫۱</b></span></div><nav aria-label="بخش‌های پندار">'''+''.join(f'<a href="{b}{url}"'+(' aria-current="page"' if path==url else '')+f'>{label}</a>' for url,label in NAV)+'''</nav></header><main id="content">'''
+ return f'''<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="پندار؛ کشف ایران، اندیشه و فرهنگ آن. کتابخانه، پرونده‌ها، آیین‌ها و نهادها."><title>{e(title)} | پندار</title><link rel="canonical" href="https://nimania.github.io/pendar/{path}"><link rel="icon" href="{b}assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="{b}assets/vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="{b}assets/style.css?v={STYLE_VERSION}"><script src="{b}assets/app.js" defer></script></head><body><a class="skip" href="#content">رفتن به محتوا</a><div class="topline"><span>ایران، اندیشه و فرهنگ</span><time id="today-date"></time><a href="{b}about/">درباره پندار</a></div><header><div class="masthead"><a class="brand" href="{b}" aria-label="پندار، خانه"><img src="{b}assets/pendar-logo.png" width="1024" height="1024" alt="پندار"><span>ایران، اندیشه و فرهنگ</span></a><form action="{b}search/" class="global-search" role="search"><label for="global-q" class="sr-only">جستجو در پندار</label><input id="global-q" name="q" placeholder="کتاب، موضوع، آیین یا نهاد…"><button type="submit">جستجو</button></form><span class="edition">نسخه آلفا <b>۰٫۱</b></span></div><nav aria-label="بخش‌های پندار">'''+''.join(f'<a href="{b}{url}"'+(' aria-current="page"' if path==url else '')+f'>{label}</a>' for url,label in NAV)+'''</nav></header><main id="content">'''
 def write(path,title,body):
  depth=len([x for x in path.split('/') if x]);b='../'*depth
  directory=OUT/path;directory.mkdir(parents=True,exist_ok=True)
