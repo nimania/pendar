@@ -1,12 +1,28 @@
 [
   {
+    "id": "7e05a1cc0c55ba",
+    "title": "در «شب عباس یاری» چه گذشت؟",
+    "sourceId": "ibna",
+    "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
+    "sourceUrl": "https://www.ibna.ir/news/555705/%D8%AF%D8%B1-%D8%B4%D8%A8-%D8%B9%D8%A8%D8%A7%D8%B3-%DB%8C%D8%A7%D8%B1%DB%8C-%DA%86%D9%87-%DA%AF%D8%B0%D8%B4%D8%AA",
+    "publishedAt": "2026-10-01T13:38:50+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
+    "summary": "«شب عباس یاری» در نهصد و هفتاد و ششمین شب از سلسله شب‌های مجله بخارا، عصر چهارشنبه ۸ مهر ۱۴۰۵ با سخنرانی امیر اثباتی، فرهاد توحیدی، شهرام مکری…",
+    "language": "fa",
+    "topicIds": [
+      "literature",
+      "press"
+    ],
+    "kind": "article"
+  },
+  {
     "id": "000c1600044b2c",
     "title": "تداوم روایت موسیقی ایرانی در کازان",
     "sourceId": "ibna",
     "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
     "sourceUrl": "https://www.ibna.ir/news/555704/%D8%AA%D8%AF%D8%A7%D9%88%D9%85-%D8%B1%D9%88%D8%A7%DB%8C%D8%AA-%D9%85%D9%88%D8%B3%DB%8C%D9%82%DB%8C-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%DA%A9%D8%A7%D8%B2%D8%A7%D9%86",
     "publishedAt": "2026-10-01T09:55:03+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "ارکستر موسیقی ملی ایران به رهبری همایون رحیمیان و با آواز مجتبی عسگری، شامگاه چهارشنبه ۸ مهرماه در سالن موسی جلیل شهر کازان روسیه روی صحنه رفت و…",
     "language": "fa",
     "topicIds": [
@@ -22,7 +38,7 @@
     "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
     "sourceUrl": "https://www.ibna.ir/news/555703/%D8%B2%D8%A7%D9%88%DB%8C%D9%87-%D8%AF%DB%8C%D8%AF-%D8%AF%D9%88%DA%AF%D8%A7%D9%86%D9%87-%D9%88-%D8%A8%D8%A7%D8%B2%D8%A2%D9%81%D8%B1%DB%8C%D9%86%DB%8C-%D8%B1%D9%88%D8%A7%DB%8C%D8%AA-%D8%AF%D8%B1-%D8%A7%D8%AF%D8%A8%DB%8C%D8%A7%D8%AA-%D8%AF%D8%A7%D8%B3%D8%AA%D8%A7%D9%86%DB%8C",
     "publishedAt": "2026-10-01T09:46:10+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "عصر چهارشنبه ۸ مهرماه ۱۴۰۵، آیین رونمایی از کتاب «آنها که نمی‌شناختیم»، دومین مجموعه داستان بزرگسال زهره مسکنی، با حضور جمعی از نویسندگان، منتقدان و اهالی فرهنگ و…",
     "language": "fa",
     "topicIds": [
@@ -38,7 +54,7 @@
     "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
     "sourceUrl": "https://www.ibna.ir/news/555700/%DB%8C%DA%A9-%D8%A7%D8%AB%D8%B1-%D8%AA%D9%82%D8%B1%DB%8C%D8%B8%DB%8C-%D8%A8%D9%87-%D8%AA%D8%B1%DA%A9%DB%8C-%D8%AA%D8%B1%D8%AC%D9%85%D9%87-%D8%B4%D8%AF",
     "publishedAt": "2026-10-01T08:58:34+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "رمان «معبد زیرزمینی» اثر معصومه میرابوطالبی به زبان ترکی استانبولی ترجمه و روانه بازار کتاب ترکیه شد.",
     "language": "fa",
     "topicIds": [
@@ -54,7 +70,7 @@
     "sourceTitle": "خبرگزاری کتاب ایران (ایبنا)",
     "sourceUrl": "https://www.ibna.ir/news/555677/%D9%BE%DB%8C%D8%B4%D9%86%D9%87%D8%A7%D8%AF-%D8%AA%D8%B4%DA%A9%DB%8C%D9%84-%DA%A9%D9%86%D8%B3%D8%B1%D8%B3%DB%8C%D9%88%D9%85-%D8%AE%D8%B1%DB%8C%D8%AF-%DA%A9%D8%A7%D8%BA%D8%B0-%D9%88-%D9%85%D9%82%D9%88%D8%A7-%D8%A8%D8%B1%D8%A7%DB%8C-%DA%A9%D8%A7%D9%87%D8%B4-%D9%81%D8%B4%D8%A7%D8%B1-%D8%A8%D8%A7%D8%B2%D8%A7%D8%B1",
     "publishedAt": "2026-10-01T08:13:23+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "فعالان صنعت چاپ در گردهمایی بررسی و تحلیل چالش‌های زنجیره تأمین و توسعه صنعت چاپ، پیشنهاد تشکیل یک سازوکار خرید تجمیعی با مشارکت مصرف‌کنندگان عمده مطرح کردند.",
     "language": "fa",
     "topicIds": [
@@ -342,7 +358,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27860.html",
     "publishedAt": "2026-08-18T16:20:53+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "به مناسبت هشتادسالگی داروسازی زنده‌یاد دکتر غلامعلی عبیدی، و به بهانۀ رونمایی و نمایش فیلم مستند «تبِ آینه» (خاطرات و تألماتِ یک دواساز) به تهیه‌کنندگی و کارگردانی وحید…",
     "language": "fa",
     "topicIds": [
@@ -358,7 +374,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27862.html",
     "publishedAt": "2026-08-17T16:21:42+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "پنجاه و هفتمین نشست از جهای بخارالسات عصر چهارشنبه‌های مجلهٔ بخارا به بررسی کتاب «نامه‌های کمال‌الملک»، که از سوی نشر دانیار منتشر شده، اختصاص یافته است. این نشست…",
     "language": "fa",
     "topicIds": [
@@ -374,7 +390,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27864.html",
     "publishedAt": "2026-08-16T16:24:39+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "شصت و هفتمین نشست از سلسله نشست‌های عصر سه‌شنبه‌های بخارا به نقد و بررسی کتاب «زیتون و انجیر» (دوازده مقالهٔ اجتماعی) نوشتهٔ توماس مان، ترجمهٔ محمود حدادی که…",
     "language": "fa",
     "topicIds": [
@@ -390,7 +406,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27866.html",
     "publishedAt": "2026-08-15T16:27:48+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "چهل و پنجمین نشست از سلسله نشست‌های عصر دوشنبه‌ها مجلهٔ بخارا به نقد و بررسی کتاب «ملال‌گریز» (ناصرالدین‌شاهِ معمار و عمارت‌هایش)، نوشتهٔ حمیدرضا پیشوایی که از سوی نشر…",
     "language": "fa",
     "topicIds": [
@@ -406,7 +422,7 @@
     "sourceTitle": "بخارا",
     "sourceUrl": "https://bukharamag.com/1405.05.27868.html",
     "publishedAt": "2026-08-14T16:31:38+00:00",
-    "fetchedAt": "2026-10-01T13:34:07.544379+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "شانزدهمین نشست از سلسله نشست‌های عصر یکشنبه‌های بخارا به نقد و بررسی کتاب «نظریۀ فروپاشی» (تحلیلی جامعه‌شناختی‌ـ تاریخی از فروپاشی نظم سیاسی در ایران) نوشتۀ تقی آزاد ارمکی،…",
     "language": "fa",
     "topicIds": [
@@ -422,7 +438,7 @@
     "sourceTitle": "بنیاد میراث ایران",
     "sourceUrl": "https://ihf.org.uk/blog/the-unesco-world-heritage-sites-of-iran/",
     "publishedAt": "2026-07-09T13:20:13+00:00",
-    "fetchedAt": "2026-10-01T06:10:46.488053+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "A UNESCO World Heritage Site is a landmark or area recognised by the United Nations Educational, Scientific and Cultural Organisation for having “outstanding universal value” to humanity. These…",
     "language": "en",
     "topicIds": [
@@ -438,7 +454,7 @@
     "sourceTitle": "بنیاد میراث ایران",
     "sourceUrl": "https://ihf.org.uk/blog/chehel-sotoon-palace/",
     "publishedAt": "2026-07-09T12:11:47+00:00",
-    "fetchedAt": "2026-10-01T06:10:46.488053+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "Chehel Sotoon Palace📍Esfahan⛏️17th century, the Safavids One of the finest examples of Safavid (1501-1736) art and architecture, Chehel Sotoon is a timeless marvel of Iranian history. Commissioned by…",
     "language": "en",
     "topicIds": [
@@ -454,7 +470,7 @@
     "sourceTitle": "بنیاد میراث ایران",
     "sourceUrl": "https://ihf.org.uk/blog/shush-khuzestan-province/",
     "publishedAt": "2026-07-08T15:03:31+00:00",
-    "fetchedAt": "2026-10-01T06:10:46.488053+00:00",
+    "fetchedAt": "2026-10-01T22:47:36.290559+00:00",
     "summary": "Susa 📍 Shush, Khuzestan Province ⛏ 4395-4200 BC One of the region’s oldest-known settlements, Susa has been continuously inhabited for more than 6,000 years: Susa I (4200-3800 BC):…",
     "language": "en",
     "topicIds": [
