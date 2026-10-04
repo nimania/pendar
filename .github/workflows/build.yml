@@ -1,4 +1,4 @@
-name: Build & Deploy Jan Kalam (static)
+name: Build & Deploy Pendar (static)
 
 # Runs OUTSIDE Iran on GitHub's servers, so it can reach news sources and the AI.
 # A push to main also republishes front-end changes such as the figures timeline.
