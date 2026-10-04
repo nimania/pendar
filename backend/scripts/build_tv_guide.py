@@ -226,16 +226,68 @@ def is_junk_programme(p: dict, channel: dict | None = None) -> bool:
             return True
     return False
 
-def _programme_score(p: dict, channel: dict | None = None) -> int:
+SOURCE_TRUST_SCORES = {
+    "official": 100,
+    "verified": 88,
+    "aggregated": 72,
+    "planned": 0,
+}
+
+SOURCE_TRUST_OVERRIDES = {
+    "irib": 76,
+    "persiana": 74,
+    "iranintl": 90,
+    "radiofarda": 100,
+    "afintl": 100,
+    "ariana": 100,
+}
+
+MIN_PUBLISH_SCORE = 68
+MIN_NOW_SCORE = 74
+
+def source_trust_score(channel: dict | None = None) -> int:
+    channel = channel or {}
+    key = str(channel.get("source_key") or "")
+    if key in SOURCE_TRUST_OVERRIDES:
+        return SOURCE_TRUST_OVERRIDES[key]
+    return SOURCE_TRUST_SCORES.get(str(channel.get("confidence") or "aggregated"), 0)
+
+def programme_quality_score(p: dict, channel: dict | None = None) -> int:
     if is_junk_programme(p, channel):
+        return 0
+    title = normalize_programme_title(p.get("title_fa") or p.get("title_en") or "")
+    score = source_trust_score(channel)
+
+    if len(title) >= 4:
+        score += 4
+    if p.get("desc_fa"):
+        score += 6
+    if p.get("icon"):
+        score += 2
+    if p.get("categories"):
+        score += 2
+
+    try:
+        start = parse_iso(p["start"])
+        stop = parse_iso(p["stop"])
+        minutes = (stop - start).total_seconds() / 60
+        if 2 <= minutes <= 360:
+            score += 4
+        elif minutes < 2 or minutes > 480:
+            score -= 50
+        if (channel or {}).get("source_key") == "irib" and abs(minutes - 30) < 0.01 and not p.get("desc_fa"):
+            score -= 4
+    except Exception:
+        score -= 50
+
+    return max(0, min(100, int(score)))
+
+def _programme_score(p: dict, channel: dict | None = None) -> int:
+    q = programme_quality_score(p, channel)
+    if q <= 0:
         return -1000
     title = normalize_programme_title(p.get("title_fa") or p.get("title_en") or "")
-    score = 100 + min(len(title), 50)
-    if p.get("desc_fa"):
-        score += 10
-    if p.get("icon"):
-        score += 3
-    return score
+    return q * 10 + min(len(title), 50)
 
 def clean_programmes(programmes: list[dict], channels: list[dict]) -> tuple[list[dict], dict]:
     """Remove placeholders and repair overlaps, especially in IRIB data."""
@@ -250,6 +302,7 @@ def clean_programmes(programmes: list[dict], channels: list[dict]) -> tuple[list
         "removed_junk": 0,
         "removed_duplicate_start": 0,
         "trimmed_overlap": 0,
+        "removed_low_quality": 0,
         "output": 0,
     }
 
@@ -289,10 +342,26 @@ def clean_programmes(programmes: list[dict], channels: list[dict]) -> tuple[list
                 stats["removed_junk"] += 1
                 continue
             try:
-                if parse_iso(p["stop"]) <= parse_iso(p["start"]):
+                start = parse_iso(p["start"])
+                stop = parse_iso(p["stop"])
+                if stop <= start:
+                    stats["removed_low_quality"] += 1
                     continue
+                duration_minutes = round((stop - start).total_seconds() / 60, 1)
             except Exception:
+                stats["removed_low_quality"] += 1
                 continue
+
+            quality = programme_quality_score(p, channel)
+            if quality < MIN_PUBLISH_SCORE:
+                stats["removed_low_quality"] += 1
+                continue
+
+            p["quality_score"] = quality
+            p["duration_minutes"] = duration_minutes
+            p["current_eligible"] = bool(
+                quality >= MIN_NOW_SCORE and 2 <= duration_minutes <= 360
+            )
             cleaned.append(p)
 
     cleaned.sort(key=lambda x: (x["start"], x["channel_id"]))
@@ -769,12 +838,21 @@ def build() -> dict:
     used = {p["channel_id"] for p in programmes}
     channels = [c for c in channels if c["id"] in used]
     source_stats = {}
+    quality_acc = {}
     for c in channels:
+        c["trust_score"] = source_trust_score(c)
         s = source_stats.setdefault(c["source_key"], {"channels": 0, "programmes": 0})
         s["channels"] += 1
     for p in programmes:
         key = p["channel_id"].split(":", 1)[0]
         source_stats.setdefault(key, {"channels": 0, "programmes": 0})["programmes"] += 1
+        qa = quality_acc.setdefault(key, {"sum": 0, "count": 0})
+        qa["sum"] += int(p.get("quality_score") or 0)
+        qa["count"] += 1
+
+    for key, st in source_stats.items():
+        qa = quality_acc.get(key, {"sum": 0, "count": 0})
+        st["avg_quality"] = round(qa["sum"] / qa["count"]) if qa["count"] else 0
 
     return {
         "schema_version": 2,
