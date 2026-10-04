@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "sources": [
     {
       "id": "taaghche",
@@ -92,6 +92,88 @@
       "kind": "store_editorial",
       "adapter": "rss",
       "url": "https://taaghche.com/blog/feed/"
+    },
+    {
+      "id": "qoqnoosp",
+      "name_fa": "پخش ققنوس",
+      "kind": "distributor",
+      "adapter": "telegram_distributor",
+      "url": "https://t.me/s/qoqnoosp",
+      "website": "https://www.qoqnoosp.com/",
+      "scope_fa": "تازه‌ها و تجدیدچاپ‌های معرفی‌شده در کانال رسمی پخش"
+    },
+    {
+      "id": "cheshmehdis",
+      "name_fa": "پخش چشمه",
+      "kind": "distributor",
+      "adapter": "telegram_distributor",
+      "url": "https://t.me/s/cheshmehdis",
+      "website": "https://www.cheshmehdis.com/",
+      "scope_fa": "تازه‌ها و تجدیدچاپ‌های معرفی‌شده در کانال رسمی پخش"
+    }
+  ],
+  "candidate_sources": [
+    {
+      "id": "markazi-distribution",
+      "name_fa": "پخش مرکزی",
+      "kind": "distributor",
+      "status": "needs_verified_feed",
+      "evidence": "publisher_mentions",
+      "phone": [
+        "02166950256",
+        "09120190270"
+      ],
+      "note_fa": "تا تأیید کانال یا سایت رسمی، وارد امتیاز رادار نمی‌شود."
+    },
+    {
+      "id": "alborz-books-distribution",
+      "name_fa": "پخش البرز (کتاب)",
+      "kind": "distributor",
+      "status": "needs_disambiguation",
+      "note_fa": "نتایج عمومی عمدتاً به شرکت پخش البرز دارویی/کالایی اشاره دارند؛ منبع کتاب باید جداگانه تأیید شود."
+    },
+    {
+      "id": "gostaresh-distribution",
+      "name_fa": "پخش کتاب گسترش",
+      "kind": "distributor",
+      "status": "needs_verified_feed",
+      "evidence": "publisher_mentions"
+    },
+    {
+      "id": "sedayemoaser",
+      "name_fa": "پخش صدای معاصر",
+      "kind": "distributor",
+      "status": "needs_verified_feed",
+      "evidence": "publisher_mentions"
+    },
+    {
+      "id": "asarbook",
+      "name_fa": "پخش آثار",
+      "kind": "distributor",
+      "status": "needs_verified_feed",
+      "url": "https://asarbook.com/",
+      "evidence": "publisher_mentions"
+    },
+    {
+      "id": "ketabavaran",
+      "name_fa": "کتاب‌آوران",
+      "kind": "distributor",
+      "status": "needs_verified_feed",
+      "evidence": "publisher_mentions"
+    },
+    {
+      "id": "payamemrooz",
+      "name_fa": "پیام امروز",
+      "kind": "distributor",
+      "status": "needs_verified_feed",
+      "evidence": "publisher_mentions"
+    },
+    {
+      "id": "farhang-distribution",
+      "name_fa": "پخش فرهنگ",
+      "kind": "distributor",
+      "status": "needs_verified_feed",
+      "evidence": "publisher_mentions"
     }
   ]
 }
