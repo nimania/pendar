@@ -196,9 +196,18 @@ function _tvSources(d){
   return '<div class="tv-source-list">'+rows+'</div><p class="tv-method">فقط منبعی که در آخرین گردآوری واقعاً دادهٔ معتبر تحویل داده باشد «متصل» محسوب می‌شود. خطای یک منبع مانع به‌روزرسانی بقیهٔ Guide نمی‌شود.</p>';
 }
 
-function _tvStreaming(){
-  return '<div class="tv-streaming-intro"><h2>کجا تماشا کنم؟</h2><p>این لایه برای موجودی فیلم و سریال روی سرویس‌های ایرانی است و به صفحهٔ هر عنوان در «جان فیلم» وصل خواهد شد.</p></div>'+
-  '<div class="tv-streaming-grid">'+TV_GUIDE_STREAMING.map(s=>'<div class="tv-streaming-card"><strong>'+esc(s.name)+'</strong><span>در صف اتصال</span></div>').join("")+'</div>';
+async function _tvStreaming(){
+  let d={services:[],stats:{}};
+  try{if(typeof loadStreamingAvailability==="function")d=await loadStreamingAvailability()}catch(_){}
+  const services=(d.services||[]).length?d.services:TV_GUIDE_STREAMING.map(x=>({name_fa:x.name,status:x.status}));
+  const cards=services.map(s=>{
+    const h=s.health||{}, name=s.name_fa||s.name_en||s.key||"سرویس";
+    const state=h.status==="ok"?"متصل":h.status==="error"?"خطای موقت":"در صف اتصال";
+    const stat=h.status==="ok"&&Number(h.matched_titles||0)?faN(h.matched_titles)+" عنوان تأییدشده":state;
+    const logo=s.logo?'<img src="'+esc(s.logo)+'" alt="'+esc(name)+'" title="'+esc(name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'inline\'"><span style="display:none">'+esc(name.slice(0,2))+'</span>':'<span>'+esc(name.slice(0,2))+'</span>';
+    return '<div class="tv-streaming-card" title="'+esc(name)+'" aria-label="'+esc(name)+'"><strong class="tv-stream-logo">'+logo+'</strong><span>'+stat+'</span></div>';
+  }).join("");
+  return '<div class="tv-streaming-intro"><h2>کجا تماشا کنم؟</h2><p>موجودی فقط وقتی نمایش داده می‌شود که عنوان یا alias اثر با دادهٔ خود سرویس تطبیق دقیق داشته باشد.</p></div><div class="tv-streaming-grid">'+cards+'</div>';
 }
 
 async function showTVGuide(mode){
@@ -220,7 +229,7 @@ async function renderTVGuide(){
   let body="";
   if(mode==="channels")body=_tvChannels(d);
   else if(mode==="sources")body=_tvSources(d);
-  else if(mode==="streaming")body=_tvStreaming();
+  else if(mode==="streaming")body=await _tvStreaming();
   else{
     const rows=_tvModeRows(d,mode), cmap=_tvChannelMap(d);
     const title=mode==="now"?"در حال پخش":mode==="tonight"?"امشب":mode==="sports"?"ورزش":mode==="next"?"چند ساعت آینده":"برنامه‌ها";
