@@ -1097,3 +1097,8 @@
 :root[data-theme="dark"] .aqi-unhealthy,:root[data-theme="dark"] .aqi-chip.aqi-unhealthy{background:#402525;color:#e59696;border-color:#633434}
 :root[data-theme="dark"] .aqi-very-unhealthy,:root[data-theme="dark"] .aqi-chip.aqi-very-unhealthy{background:#39263d;color:#c99fd2;border-color:#5c3a63}
 :root[data-theme="dark"] .aqi-hazardous,:root[data-theme="dark"] .aqi-chip.aqi-hazardous{background:#3b2227;color:#d899a4;border-color:#5f333b}
+
+.book-original-title{margin-top:12px;font-size:.78rem;color:var(--muted);line-height:1.7}
+.book-original-title b{color:var(--ink);font-weight:650}
+.book-buy.exact{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+.book-buy.search{border-style:dashed}
