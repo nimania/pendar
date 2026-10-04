@@ -474,9 +474,9 @@ async function openPublisher(slug, canonicalId=null){
   const d=await loadBooks(), p=(d.publishers||[]).find(x=>x.slug===slug);
   if(!p){el.innerHTML='<div class="state"><div class="big">ناشر پیدا نشد</div></div>';return}
   const books=(p.book_slugs||[]).map(s=>_bookBySlug(d,s)).filter(Boolean);
-  el.innerHTML=`<button class="back" onclick="showBooks('publishers')">بازگشت به ناشرها</button>${_bookPublisherProfile(p,books)}<div class="books-grid">${books.map(_bookCard).join("")}</div>`;
+  el.innerHTML=`<button class="back" onclick="showBooks('publishers')">بازگشت به ناشرها</button>${_bookPublisherProfile(p,books)}${canonicalPub?canonicalStrip(canonicalPub):""}<div class="books-grid">${books.map(_bookCard).join("")}</div>`;
   document.title=p.name_fa+" | ناشرهای جانِ کتاب";
-  setHash("#/publisher/"+encodeURIComponent(slug));
+  setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/publisher/"+encodeURIComponent(slug));
 }
 function _personIdentityNorm(s){
   return String(s||"").replace(/ي/g,"ی").replace(/ى/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim().toLowerCase();
@@ -512,8 +512,8 @@ async function openBookPerson(slug, canonicalId=null){
   const lede=document.getElementById("books-lede"); if(lede) lede.style.display="none";
   const el=document.getElementById("books-content"); el.innerHTML='<div class="spinner"></div>';
   const books=(p.book_slugs||[]).map(s=>_bookBySlug(d,s)).filter(Boolean);
-  el.innerHTML=`<button class="back" onclick="showBooks('people')">بازگشت به پدیدآورندگان</button><div class="book-person-head"><span class="press-kicker">پدیدآورنده</span><h1>${esc(p.name_fa)}</h1><p>${esc((p.roles_fa||[]).join(" · "))}</p><p class="muted">این فرد هنوز پروفایل مستقل «چهره» ندارد؛ با اضافه‌شدن به جان کلام، همین نشانی به پروفایل واحد او هدایت می‌شود.</p></div><div class="books-grid">${books.map(_bookCard).join("")}</div>`;
-  setHash("#/book-person/"+encodeURIComponent(slug));
+  el.innerHTML=`<button class="back" onclick="showBooks('people')">بازگشت به پدیدآورندگان</button><div class="book-person-head"><span class="press-kicker">پدیدآورنده</span><h1>${esc(p.name_fa)}</h1><p>${esc((p.roles_fa||[]).join(" · "))}</p><p class="muted">این پروفایل بخشی از هویت واحد این فرد در پندار است.</p></div>${canonicalPerson?canonicalStrip(canonicalPerson):""}<div class="books-grid">${books.map(_bookCard).join("")}</div>`;
+  setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/book-person/"+encodeURIComponent(slug));
 }
 
 let periodicalRows = [];
