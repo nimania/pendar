@@ -2356,7 +2356,7 @@ async function renderSystem() {
   if (!el) return;
   el.innerHTML = '<div class="spinner"></div>';
   const safe = async (name, fallback) => {
-    try { return await getJSON(\`${DATA}/${name}\`, 20000); } catch (_) { return fallback; }
+    try { return await getJSON(`${DATA}/${name}`, 20000); } catch (_) { return fallback; }
   };
   const [health, stats, meta, pressHealth, tv, weather, periodicals] = await Promise.all([
     safe("system-health.json", null),
@@ -2405,7 +2405,7 @@ async function renderSystem() {
   const gateLabel = gateOk === true ? "نسخهٔ منتشرشده سالم است" : gateOk === false ? "گیت انتشار خطا دارد" : "گزارش گیت پیدا نشد";
   const gateCls = gateOk === true ? "ok" : gateOk === false ? "bad" : "warn";
   const runUrl = github.repository && github.run_id
-    ? \`https://github.com/${github.repository}/actions/runs/${github.run_id}\`
+    ? `https://github.com/${github.repository}/actions/runs/${github.run_id}`
     : "";
 
   const metrics = [
@@ -2418,18 +2418,18 @@ async function renderSystem() {
     _sysMetric("کتاب‌ها", books, "رکورد", ""),
     _sysMetric("جان ماجرا", majra, "داده محفوظ؛ فعلاً خارج از Home", ""),
     _sysMetric("جراید", periodicalCount, "مطلب", ""),
-    _sysMetric("منابع جراید", pressRows.length, \`${pressCounts.active||0} فعال\`, ""),
-    _sysMetric("شبکه‌های TV Guide", tvChannels, \`${tvSources} منبع\`, ""),
-    _sysMetric("برنامه‌های TV Guide", tvPrograms, \`${tvErrors.length} خطای منبع\`, tvErrors.length?"warn":"")
+    _sysMetric("منابع جراید", pressRows.length, `${pressCounts.active||0} فعال`, ""),
+    _sysMetric("شبکه‌های TV Guide", tvChannels, `${tvSources} منبع`, ""),
+    _sysMetric("برنامه‌های TV Guide", tvPrograms, `${tvErrors.length} خطای منبع`, tvErrors.length?"warn":"")
   ].join("");
 
   const pressIssueHtml = pressIssues.length ? pressIssues.map(row => {
     const [lbl, cls] = _sysState(row.state);
-    return \`<div class="sys-source-row"><div><b>${esc(row.source_name||"منبع")}</b><small>${esc(row.last_error||row.method||"")}</small></div><span class="sys-pill ${cls}">${esc(lbl)}</span></div>\`;
+    return `<div class="sys-source-row"><div><b>${esc(row.source_name||"منبع")}</b><small>${esc(row.last_error||row.method||"")}</small></div><span class="sys-pill ${cls}">${esc(lbl)}</span></div>`;
   }).join("") : '<div class="sys-empty">همهٔ منابع ثبت‌شده در وضعیت فعال‌اند.</div>';
 
   const tvErrorHtml = tvErrors.length ? tvErrors.slice(0,20).map(([name,msg]) =>
-    \`<div class="sys-source-row"><div><b>${esc(name)}</b><small>${esc(typeof msg==="string"?msg:JSON.stringify(msg))}</small></div><span class="sys-pill bad">خطا</span></div>\`
+    `<div class="sys-source-row"><div><b>${esc(name)}</b><small>${esc(typeof msg==="string"?msg:JSON.stringify(msg))}</small></div><span class="sys-pill bad">خطا</span></div>`
   ).join("") : '<div class="sys-empty">خطای منبعی در خروجی فعلی TV Guide ثبت نشده است.</div>';
 
   const thresholdLabels = {
@@ -2439,10 +2439,10 @@ async function renderSystem() {
   const thresholdHtml = Object.entries(thresholds).map(([k,v]) => {
     const current = hc[k];
     const pass = Number(current) >= Number(v);
-    return \`<div class="sys-th-row"><span>${esc(thresholdLabels[k]||k)}</span><b>${_sysNum(current)}</b><small>حداقل ${_sysNum(v)}</small><span class="sys-pill ${pass?"ok":"bad"}">${pass?"قبول":"رد"}</span></div>\`;
+    return `<div class="sys-th-row"><span>${esc(thresholdLabels[k]||k)}</span><b>${_sysNum(current)}</b><small>حداقل ${_sysNum(v)}</small><span class="sys-pill ${pass?"ok":"bad"}">${pass?"قبول":"رد"}</span></div>`;
   }).join("") || '<div class="sys-empty">آستانه‌ها در این نسخه ثبت نشده‌اند.</div>';
 
-  el.innerHTML = \`
+  el.innerHTML = `
     <section class="sys-hero ${gateCls}">
       <div><span class="home-eyebrow">آخرین نسخهٔ منتشرشده</span><h2>${esc(gateLabel)}</h2>
         <p>این صفحه سلامت آخرین نسخه‌ای را نشان می‌دهد که اجازهٔ انتشار گرفته؛ build ردشده جای نسخهٔ سالم را نمی‌گیرد.</p></div>
@@ -2465,7 +2465,7 @@ async function renderSystem() {
         <div class="sys-detail-row"><span>Run ID</span><b>${esc(github.run_id||"—")}</b></div>
         <div class="sys-detail-row"><span>Commit</span><code>${esc((github.sha||"—").slice(0,12))}</code></div>
         <div class="sys-detail-row"><span>Repository</span><b>${esc(github.repository||"—")}</b></div>
-        ${runUrl?\`<a class="sys-run-link" href="${esc(runUrl)}" target="_blank" rel="noopener">باز کردن GitHub Actions ↗</a>\`:""}
+        ${runUrl?`<a class="sys-run-link" href="${esc(runUrl)}" target="_blank" rel="noopener">باز کردن GitHub Actions ↗</a>`:""}
       </section>
     </div>
 
@@ -2486,9 +2486,9 @@ async function renderSystem() {
       <div class="sys-panel-head"><div><span class="home-eyebrow">Integrity Gate</span><h3>آستانه‌های جلوگیری از انتشار خراب</h3></div>
         <span class="sys-mini">افت کل خبرها بیش از ${health?.max_total_drop!=null?faN(Math.round(health.max_total_drop*100))+"٪":"۲۰٪"} نیز deploy را می‌بندد</span></div>
       <div class="sys-thresholds">${thresholdHtml}</div>
-      ${(health?.errors||[]).length?\`<div class="sys-errors">${health.errors.map(e=>\`<div>${esc(e)}</div>\`).join("")}</div>\`:""}
+      ${(health?.errors||[]).length?`<div class="sys-errors">${health.errors.map(e=>`<div>${esc(e)}</div>`).join("")}</div>`:""}
     </section>
-  \`;
+  `;
 }
 
 function showTech() {
