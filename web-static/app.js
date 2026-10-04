@@ -41,7 +41,7 @@ async function getJSON(path, timeoutMs = 12000) {
 
 
 function setArticleSeo(x){
-  const title=(x.seo_title_fa||x.headline_fa||x.title_original||"جان جراید").trim();
+  const title=(x.seo_title_fa||x.headline_fa||x.title_original||"پیشخوان جراید").trim();
   const desc=(x.meta_description_fa||x.summary_fa||"").trim();
   document.title=title+" | جان‌کلام";
   let m=document.querySelector('meta[name="description"]');
@@ -57,7 +57,7 @@ function setArticleSeo(x){
     "headline":title,"description":desc,
     "datePublished":x.source_published_at||x.published_at||undefined,
     "dateModified":x.published_at||undefined,
-    "author":{"@type":"Organization","name":x.publisher||"جان جراید"},
+    "author":{"@type":"Organization","name":x.publisher||"پیشخوان جراید"},
     "publisher":{"@type":"Organization","name":"جان‌کلام"},
     "mainEntityOfPage":location.href,
     "isBasedOn":x.source_url||x.article_url||undefined,
@@ -742,7 +742,7 @@ async function openPressArticle(id) {
   el.innerHTML=`<article class="press-detail press-longread">
     <button class="back press-article-back" onclick="showPress('${esc(x.publisher||"")}')">بازگشت به ${esc(x.publisher||"نشریه")}</button>
     <header class="press-longread-head">
-      <div class="press-kicker-row"><span class="press-kicker">جان جراید</span><span class="press-source-name">${esc(x.publisher||"نشریه")}</span>${x.section_fa?`<span class="press-section-dot">•</span><span class="press-section-name">${esc(x.section_fa)}</span>`:""}</div>
+      <div class="press-kicker-row"><span class="press-kicker">پیشخوان جراید</span><span class="press-source-name">${esc(x.publisher||"نشریه")}</span>${x.section_fa?`<span class="press-section-dot">•</span><span class="press-section-name">${esc(x.section_fa)}</span>`:""}</div>
       <h1>${esc(x.headline_fa||x.title_original||"")}</h1>
       ${x.title_original && x.title_original!==(x.headline_fa||"")?`<div class="press-original">${esc(x.title_original)}</div>`:""}
       ${summary?`<p class="press-deck">${esc(summary)}</p>`:""}
@@ -1111,7 +1111,7 @@ async function openStory(id) {
   catch (e) {
     // Deep links can outlive the compact feed.  Give a useful failure state
     // rather than leaving a blank/spinner page.
-    v.innerHTML = `<button class="back" onclick="showFeed()">بازگشت به خط خبری</button><div class="state"><div class="big">این خبر در آرشیو فعلی پیدا نشد</div><p class="muted">شناسهٔ خبر: ${esc(cleanId)}</p></div>`;
+    v.innerHTML = `<button class="back" onclick="showFeed()">بازگشت به سرخط</button><div class="state"><div class="big">این خبر در آرشیو فعلی پیدا نشد</div><p class="muted">شناسهٔ خبر: ${esc(cleanId)}</p></div>`;
     return;
   }
 
@@ -1179,7 +1179,7 @@ async function openStory(id) {
   const relSection = timelineSection(s, relatedStories(s));
 
   v.innerHTML = `
-    <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به خط خبری</button>
+    <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به سرخط</button>
     <div class="d-head"><div class="meta"><span class="chip">${CAT_FA[s.category] || "خبر"}</span><span class="dot"></span><span class="muted">${relTime(s.published_at)}</span>${trendBadge(s.trend)}<span class="spacer" style="flex:1"></span>${saveBtn(s.id)}</div>
       <h1>${esc(s.headline_fa || "")}</h1>
       <div class="d-meta"><span class="imp ${imp.cls}"><span class="bars"><i></i><i></i><i></i></span><span class="lbl">${imp.lbl}</span></span>
@@ -1408,7 +1408,7 @@ function openDay(dateStr) {
   if (!ALL.length) return;
   setHash("#/day/" + dateStr);
   show("topicarchive"); setTab("feed");
-  document.getElementById("ta-back-t").textContent = "بازگشت به خط خبری";
+  document.getElementById("ta-back-t").textContent = "بازگشت به سرخط";
   document.getElementById("ta-back").onclick = showFeed;
   const items = ALL.filter(s => (s.published_at || "").slice(0, 10) === dateStr);
   document.getElementById("ta-title").textContent = "خبرهای " + dayLabel(dateStr);
@@ -1472,7 +1472,7 @@ function openEntity(slug) {
   if (!ALL.length) return;
   setHash("#/person/" + slug);
   show("topicarchive"); setTab("feed");
-  document.getElementById("ta-back-t").textContent = "بازگشت به خط خبری";
+  document.getElementById("ta-back-t").textContent = "بازگشت به سرخط";
   document.getElementById("ta-back").onclick = showFeed;
   const items = ALL.filter(s => (s.entities || []).some(e => e.slug === slug));
   const meta = items.flatMap(s => s.entities || []).find(e => e.slug === slug) || {};
@@ -1491,7 +1491,7 @@ function openSource(name) {
   if (!ALL.length) return;
   setHash("#/source/" + encodeURIComponent(name));
   show("topicarchive"); setTab("feed");
-  document.getElementById("ta-back-t").textContent = "بازگشت به خط خبری";
+  document.getElementById("ta-back-t").textContent = "بازگشت به سرخط";
   document.getElementById("ta-back").onclick = showFeed;
   const items = ALL.filter(s => (s.source_names || []).includes(name));
   document.getElementById("ta-title").textContent = "منبع: " + name;
@@ -1604,7 +1604,7 @@ async function renderHomePrices() {
       return `<div class="hp"><span class="hp-label">${esc(p.label_fa)}</span>
         <span class="hp-val">${faN(grp(p.value))}</span>
         <span class="hp-chg ${cls}">${arrow} ${faN(Math.abs(p.dp || 0))}٪</span></div>`;
-    }).join("") + `<button class="hp-more" onclick="showMarket()">بازار ›</button>`;
+    }).join("") + `<button class="hp-more" onclick="showMarket()">پنداربازار ›</button>`;
   } catch (e) {}
 }
 
@@ -1749,7 +1749,7 @@ async function renderMarket() {
       (cryptoRows ? `<div class="rule" style="margin-top:26px"><span>رمزارزها</span><span class="l"></span></div><div class="price-grid crypto-grid">${cryptoRows}</div>` : "") +
       `<p class="muted" style="margin-top:14px">ارز و طلا: TGJU · رمزارزها: CoinGecko. تبدیل‌ها تقریبی و بر اساس همین آخرین نرخ‌های ذخیره‌شده‌اند.</p>`;
   setupMarketConverter();
-  } catch (e) { el.innerHTML = `<div class="state"><div class="big">بازار بارگذاری نشد</div></div>`; }
+  } catch (e) { el.innerHTML = `<div class="state"><div class="big">پنداربازار بارگذاری نشد</div></div>`; }
 }
 
 function setupMarketConverter() {
@@ -1987,7 +1987,7 @@ async function renderHomeStats() {
       <div class="sb-metrics">
         <span class="sb-item sb-click" onclick="showTrends()"><b>${faN(st.total || 0)}</b><span>کل خبرها</span></span>
         <span class="sb-sep"></span>
-        <span class="sb-item sb-click" onclick="showFigures()"><b>${faN(people.length)}</b><span>چهره‌ها</span></span>
+        <span class="sb-item sb-click" onclick="showFigures()"><b>${faN(people.length)}</b><span>جان کلام</span></span>
         <span class="sb-sep"></span>
         <span class="sb-item sb-click sb-opinions" onclick="showFigures()"><b>${faN(opinionCount)}</b><span>کل اظهارنظرها</span></span>
         <span class="sb-sep"></span>
@@ -2050,7 +2050,7 @@ renderHomeWeather();
 updateMineBadge();
 
 
-/* ---- جان‌کلام چهره‌ها — commentators' views, kept apart from the facts ----
+/* ---- جان کلام — commentators' views, kept apart from the facts ----
    Data: story.figures (matched per story) + data/figures.json (all figures).
    A view is always attributed to its author and linked to the original post. */
 const KIND_NOTE = { party_claim: "ادعای یکی از طرفین" };
@@ -2203,10 +2203,10 @@ async function renderFigureTimeline() {
 
 function figuresSection(list) {
   if (!list || !list.length) return "";
-  return `<div class="layers"><h3 class="section-h">چهره‌ها چه می‌گویند <span class="n">دیدگاه شخصی — نه واقعیتِ خبر</span></h3>
+  return `<div class="layers"><h3 class="section-h">جان کلام <span class="n">دیدگاه شخصی — نه واقعیتِ خبر</span></h3>
     <div class="views">${list.map(p => figureCard(p, true)).join("")}</div>
     <p class="muted fig-note">دیدگاه‌های مستقیم از کانال‌های عمومی خود افراد و «گفته در خبر» از منابع خبری جدا برچسب می‌خورند؛ لینک هر مورد به منبع همان گفته می‌رود.
-      <a href="#/figures" onclick="event.preventDefault();showFigures()">همهٔ چهره‌ها</a></p></div>`;
+      <a href="#/figures" onclick="event.preventDefault();showFigures()">همهٔ جان کلام</a></p></div>`;
 }
 let _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null, _figDirectoryMode = "direct";
 async function loadCuratedPoems(){ if(_CURATED_POEMS) return _CURATED_POEMS; try{_CURATED_POEMS=await getJSON(`${DATA}/curated-figure-poems.json`);}catch(_){_CURATED_POEMS={};} return _CURATED_POEMS||{}; }
@@ -2273,7 +2273,7 @@ async function renderFigures() {
       x.directory !== false && (((x.posts||[]).length > 0) || (x.count||0) > 0)
     )
     .sort((a,b) => (b.count||0)-(a.count||0) || String(a.name_fa||"").localeCompare(String(b.name_fa||""),"fa"));
-  el.innerHTML = `<p class="muted">چهره‌ها در یک فهرست واحد؛ دیدگاه‌های مستقیم و گفته‌های منتسب در خبرها داخل همان پروفایل جمع می‌شوند.</p>` +
+  el.innerHTML = `<p class="muted">نظرها و دیدگاه چهره‌ها در یک فهرست واحد؛ دیدگاه‌های مستقیم و گفته‌های منتسب در خبرها داخل همان پروفایل جمع می‌شوند.</p>` +
     (people.length ? `<div class="fig-grid">${people.map(x => `<button class="fig-person" onclick="openFigure('${esc(x.handle)}')">
       ${avatar(x, "md")}
       <span class="fp-body"><span class="fp-name">${esc(x.name_fa)}</span><span class="fp-role">${esc(x.role_fa||"")}</span>
