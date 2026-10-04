@@ -174,6 +174,13 @@ async function _buildSmartSearchDocs(){
     (b.people||[]).forEach(x=>docs.push({kind:"پدیدآورنده",title:x.name_fa||"",sub:(x.roles_fa||[]).join(" · "),go:`openBookPerson('${String(x.slug).replace(/'/g,"\\'")}')`,text:[x.name_fa,...(x.roles_fa||[])].join(" ")}));
     (b.publishers||[]).forEach(x=>docs.push({kind:"ناشر",title:x.name_fa||"",sub:faN((x.book_slugs||[]).length)+" کتاب",go:`openPublisher('${String(x.slug).replace(/'/g,"\\'")}')`,text:[x.name_fa,...(x.categories_fa||[])].join(" ")}));
   }catch(_){}
+  try{
+    const m=await loadMovies();
+    (m.movies||[]).forEach(x=>{
+      const director=x.director?.name_fa||x.director?.name_en||"";
+      docs.push({kind:x.type==="series"?"سریال":"فیلم",title:x.title_fa||x.original_title||"",sub:[x.year,director].filter(Boolean).join(" · "),go:`openMovie('${String(x.slug).replace(/'/g,"\\'")}')`,text:[x.title_fa,x.original_title,director,...(x.cast||[]),...(x.genres_fa||[])].join(" "),snippet:x.overview_fa||""});
+    });
+  }catch(_){}
   _smartSearchDocs=docs; return docs;
 }
 function _ssExcerpt(s,Q){
@@ -218,7 +225,7 @@ document.addEventListener("click",e=>{const box=document.getElementById("smart-s
 const VIEWS = { feed: "feed-view", detail: "detail-view", trends: "trends-view",
   factchecks: "factchecks-view", topics: "topics-view", topicarchive: "topic-archive-view",
   weather: "weather-view", iran: "iran-view", faq: "faq-view", market: "market-view",
-  figures: "figures-view", press: "press-view", books: "books-view", tech: "tech-view" };
+  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tech: "tech-view" };
 const TABS = ["feed", "trends", "factchecks", "iran", "topics"];
 const SCOPE_FA = { local: "استانی", national: "کشوری", international: "بین‌المللی" };
 function setTab(w) { for (const t of TABS) document.getElementById("tab-" + t).classList.toggle("active", w === t); }
@@ -789,7 +796,7 @@ async function route() {
   if (kind === "press-source" && arg) return showPress(arg);
   if (kind === "press-article" && arg) return openPressArticle(arg);
   if (kind === "books") return showBooks(["publishers","people","new","all","used","reviews"].includes(arg) ? arg : "books");
-  if (kind === "book" && arg) return openBook(arg);
+  if (kind === "book" && arg) return openBook(arg);\n  if (kind === "movies") return showMovies();\n  if (kind === "movie" && arg) return openMovie(arg);
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
   if (kind === "tech") return showTech();
