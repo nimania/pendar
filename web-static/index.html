@@ -33,16 +33,16 @@
           <div class="smart-search-results" id="smart-search-results"><div class="smart-search-hint">مثلاً «نامه‌های کمال‌الملک»، «مونا برزویی»، «بخارا» یا «هوش مصنوعی»</div></div>
         </div>
       </div>
-      <button class="icon-btn" onclick="showMarket()" aria-label="بازار" title="بازار — ارز، طلا و رمزارز">
+      <button class="icon-btn" onclick="showMarket()" aria-label="پنداربازار" title="پنداربازار — ارز، طلا، سکه و رمزارز">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18V11M10 18V6M16 18v-9M21 18H3" stroke-linecap="round"/><path d="M4 8l5-4 5 3 6-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <button class="icon-btn" onclick="showWeather()" aria-label="آب‌وهوا" title="آب‌وهوا">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7.5 18.5h9a4 4 0 0 0 .5-8 5.5 5.5 0 0 0-10.4-1.7A4.9 4.9 0 0 0 7.5 18.5Z" stroke-linejoin="round"/><path d="M16.5 4.5l1-1M20 8h1.5M12 3V1.5" stroke-linecap="round"/></svg>
       </button>
-      <button class="icon-btn" onclick="showFigures()" aria-label="چهره‌ها" title="چهره‌ها — دیدگاه تحلیلگران">
+      <button class="icon-btn" onclick="showFigures()" aria-label="جان کلام" title="جان کلام — نظرها و دیدگاه چهره‌ها">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5" stroke-linecap="round"/><path d="M15.5 5.2a3 3 0 0 1 0 5.6M17.5 14.3c1.7.6 2.8 2.2 3.1 4.7" stroke-linecap="round"/></svg>
       </button>
-      <button class="icon-btn" onclick="showPress()" aria-label="جان جراید" title="جانِ جراید — گزیدهٔ فارسی مطبوعات جهان">
+      <button class="icon-btn" onclick="showPress()" aria-label="پیشخوان جراید" title="پیشخوان جراید — گزیدهٔ فارسی مطبوعات جهان">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V4Z"/><path d="M8 8h8M8 12h8M8 16h5" stroke-linecap="round"/></svg>
       </button>
       <button class="icon-btn" onclick="showBooks()" aria-label="کتاب‌ها" title="کتاب‌ها — کتاب‌های دیده‌شده در جان‌کلام">
@@ -68,13 +68,13 @@
         <p class="muted" id="built" style="margin-top:6px"></p>
         <div class="section-shortcuts home-shortcuts">
           <button onclick="showBooks()">کتابخانه</button>
-          <button onclick="showPress()">جان جراید</button>
-          <button onclick="showFigures()">چهره‌ها</button>
+          <button onclick="showPress()">پیشخوان جراید</button>
+          <button onclick="showFigures()">جان کلام</button>
         </div>
       </div>
       <div class="home-stats" id="home-stats"></div>
-      <div class="home-glance" id="home-glance" aria-label="بازار و آب‌وهوای امروز"></div>
-      <div class="rule"><span>خط خبری</span><span class="l"></span></div>
+      <div class="home-glance" id="home-glance" aria-label="پنداربازار و آب‌وهوای امروز"></div>
+      <div class="rule"><span>سرخط</span><span class="l"></span></div>
       <div class="feed-controls">
         <div class="feed-control-row feed-days"><span class="fc-label">بازه</span><div class="day-chips day-range-chips">
   <button class="day-chip on" data-range="all" onclick="setFeedRange('all')">همه</button>
@@ -89,7 +89,7 @@
           <span class="fc-label">فیلتر</span>
           <div class="imp-filter" id="imp-filter">
             <button class="fchip on" onclick="setTier('all')">همه</button>
-            <button class="fchip" onclick="setTier('mine')">خط خبری من <span class="mine-badge" id="mine-badge" style="display:none"></span></button>
+            <button class="fchip" onclick="setTier('mine')">سرخط من <span class="mine-badge" id="mine-badge" style="display:none"></span></button>
             <button class="fchip" onclick="setTier('rising')">در حال رشد</button>
             <button class="fchip" onclick="setTier('hot')">🔥 داغ</button>
             <span class="fchip-sep"></span>
@@ -145,16 +145,16 @@
     </section>
 
     <section class="trends-view" id="market-view">
-      <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به خط خبری</button>
+      <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به سرخط</button>
       <div class="lede">
-        <h1>بازار</h1>
+        <h1>پنداربازار</h1>
         <p>نرخِ لحظه‌ایِ ارز، طلا و سکه — هر ساعت از tgju به‌روز می‌شود.</p>
       </div>
       <div id="market"><div class="spinner"></div></div>
     </section>
 
     <section class="trends-view" id="weather-view">
-      <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به خط خبری</button>
+      <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به سرخط</button>
       <div class="lede">
         <h1>آب‌وهوا و کیفیت هوای ایران</h1>
         <p>دما، کمینه/بیشینه، شاخص AQI و آلاینده‌های اصلی شهرهای ایران؛ دادهٔ رسمی محیط‌زیست هرجا در دسترس باشد و برآورد CAMS در سایر موارد.</p>
@@ -172,20 +172,20 @@
 
     <section class="trends-view" id="figures-view">
       <div class="lede" id="figures-lede">
-        <h1>چهره‌ها چه می‌گویند؟</h1>
+        <h1>جان کلام</h1>
         <p>تایملاین مستقلِ دیدگاه‌ها و تحلیل‌ها؛ جدیدترین مورد همیشه بالاتر است. این‌ها نظرِ شخصی‌اند، نه واقعیتِ خبر.</p>
         <div class="section-shortcuts"><button onclick="showBooks()">کتابخانهٔ جان‌کلام</button><button onclick="showMovies()">جان فیلم</button></div>
       </div>
-      <div class="rule"><span>تایملاین چهره‌ها</span><span class="l"></span><button class="sortchip" onclick="renderFiguresDirectory()">فهرست همهٔ چهره‌ها</button></div>
+      <div class="rule"><span>نظرها و دیدگاه‌ها</span><span class="l"></span><button class="sortchip" onclick="renderFiguresDirectory()">فهرست چهره‌ها</button></div>
       <div class="figure-timeline" id="figure-timeline"><div class="spinner"></div></div>
       <div id="figures"></div>
     </section>
 
     <section class="trends-view" id="press-view">
-      <button class="back" onclick="showFeed()">بازگشت به خط خبری</button>
+      <button class="back" onclick="showFeed()">بازگشت به سرخط</button>
       <div class="lede press-lede">
         <span class="press-kicker">ایران در آینهٔ رسانه‌ها</span>
-        <h1>جانِ جراید</h1>
+        <h1>پیشخوان جراید</h1>
         <p>رسانه‌های داخل ایران، فارسی‌زبانان خارج از کشور و مطبوعات جهان در یک فهرست واحد؛ تمرکز بر مطالب مرتبط با ایران، با حفظ نام و زبان منبع.</p>
         <div class="section-shortcuts"><button onclick="showBooks()">کتاب‌های دیده‌شده در جراید</button><button onclick="showMovies()">فیلم‌های دیده‌شده در جراید</button></div>
       </div>
@@ -193,7 +193,7 @@
     </section>
 
     <section class="trends-view" id="books-view">
-      <button class="back" onclick="showFeed()">بازگشت به خط خبری</button>
+      <button class="back" onclick="showFeed()">بازگشت به سرخط</button>
       <div class="lede books-lede" id="books-lede">
         <span class="press-kicker">کتاب‌هایی که در محتوا دیده‌ایم</span>
         <h1>کتابخانهٔ جان‌کلام</h1>
@@ -203,7 +203,7 @@
     </section>
 
     <section class="trends-view" id="movies-view">
-      <button class="back" onclick="showFeed()">بازگشت به خط خبری</button>
+      <button class="back" onclick="showFeed()">بازگشت به سرخط</button>
       <div id="movies-content"><div class="spinner"></div></div>
     </section>
 
@@ -228,7 +228,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>جان‌کلام · هوش خبری فارسی</p>
-      <div class="footer-links"><button onclick="showBooks()">کتابخانه</button><button onclick="showMovies()">جان فیلم</button><button onclick="showPress()">جان جراید</button><button onclick="showFigures()">چهره‌ها</button><button onclick="showTech()">فناوری و طراحی</button><button onclick="showFaq()">روش کار</button><a href="https://vibefarsi.ir/" target="_blank" rel="noopener">VibeFarsi ↗</a></div>
+      <div class="footer-links"><button onclick="showBooks()">کتابخانه</button><button onclick="showMovies()">جان فیلم</button><button onclick="showPress()">پیشخوان جراید</button><button onclick="showFigures()">جان کلام</button><button onclick="showTech()">فناوری و طراحی</button><button onclick="showFaq()">روش کار</button><a href="https://vibefarsi.ir/" target="_blank" rel="noopener">VibeFarsi ↗</a></div>
     </div>
   </footer>
 
