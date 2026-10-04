@@ -31,10 +31,12 @@ jobs:
           build_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           press_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/periodicals.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           weather_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          commerce_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/books-commerce.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           test -n "$build_id"
           echo "build_id=$build_id" >> "$GITHUB_OUTPUT"
           echo "press_id=$press_id" >> "$GITHUB_OUTPUT"
           echo "weather_id=$weather_id" >> "$GITHUB_OUTPUT"
+          echo "commerce_id=$commerce_id" >> "$GITHUB_OUTPUT"
 
       - name: Download latest complete static site
         env:
@@ -84,6 +86,26 @@ jobs:
           PY
           fi
 
+      - name: Overlay freshest book commerce
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMERCE_ID: ${{ steps.refresh.outputs.commerce_id }}
+        run: |
+          if [ -n "$COMMERCE_ID" ] && [ -f site/data/books.json ]; then
+            rm -rf /tmp/book-commerce && mkdir -p /tmp/book-commerce
+            if gh run download "$COMMERCE_ID" -n books-commerce-data -D /tmp/book-commerce; then
+              src="$(find /tmp/book-commerce -type f -name books.json | head -1)"
+              if [ -n "$src" ]; then
+                python backend/scripts/merge_book_commerce.py --source "$src" --target site/data/books.json --target-js site/data/books.js
+              fi
+              assets="$(find /tmp/book-commerce -type d -path '*/assets/books' | head -1)"
+              if [ -n "$assets" ]; then
+                mkdir -p site/assets/books
+                rsync -a "$assets/" site/assets/books/
+              fi
+            fi
+          fi
+
       - name: Overlay freshest weather and air quality
         env:
           GH_TOKEN: ${{ github.token }}
@@ -110,7 +132,7 @@ jobs:
           import hashlib, pathlib, re
           root = pathlib.Path("site")
           versions = {}
-          for name in ("app.js", "styles.css", "iran-provinces.js", "data/press-directory.js"):
+          for name in ("app.js", "styles.css", "iran-provinces.js", "data/press-directory.js", "data/books.js"):
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]
