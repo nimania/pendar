@@ -150,6 +150,10 @@ jobs:
         working-directory: backend
         run: python -m scripts.build_movies
 
+      - name: Enrich film catalog from EPG
+        continue-on-error: true
+        run: python backend/scripts/enrich_movies_from_epg.py --tv backend/public/data/tv-guide.json --movies backend/public/data/movies.json --movies-js backend/public/data/movies.js
+
       - name: Build streaming availability
         continue-on-error: true
         run: python backend/scripts/build_streaming_availability.py --movies backend/public/data/movies.json --output backend/public/data/streaming.json
