@@ -76,8 +76,8 @@ jobs:
 
       - name: Enrich books with Torob sellers, prices and covers
         env:
-          TOROB_BOOK_LIMIT: "12"
-          TOROB_MCP_GAP: "2.1"
+          TOROB_BOOK_LIMIT: "2"
+          TOROB_MCP_GAP: "5.5"
         run: |
           mkdir -p backend/public/data backend/public/assets/books
           cp site/data/books.json backend/public/data/books.json
