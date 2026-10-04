@@ -28,8 +28,8 @@ BOOKS = ROOT / "public" / "data" / "books.json"
 BOOKS_JS = ROOT / "public" / "data" / "books.js"
 ASSETS = ROOT / "public" / "assets" / "books"
 ENDPOINT = os.environ.get("TOROB_MCP_URL", "https://torob-mcp.mmdju3.workers.dev/mcp")
-GAP = float(os.environ.get("TOROB_MCP_GAP", "2.1"))
-MAX_BOOKS = int(os.environ.get("TOROB_BOOK_LIMIT", "12"))
+GAP = float(os.environ.get("TOROB_MCP_GAP", "5.5"))
+MAX_BOOKS = int(os.environ.get("TOROB_BOOK_LIMIT", "2"))
 
 
 def norm(s: str | None) -> str:
@@ -184,7 +184,15 @@ def enrich() -> dict:
     time.sleep(GAP)
 
     done = matched = 0
-    for book in books:
+    # Fill missing commerce first. Once all books have Torob data, refresh the
+    # oldest checked rows first so prices naturally rotate without bursts.
+    def priority(book):
+        torob=book.get("torob") or {}
+        if not torob.get("matched"):
+            return (0, "")
+        return (1, str(torob.get("checked_at") or ""))
+    queue=sorted(books, key=priority)
+    for book in queue:
         if done >= MAX_BOOKS:
             break
         title = str(book.get("title_fa") or "").strip()
@@ -194,6 +202,7 @@ def enrich() -> dict:
         queries = [f"کتاب {title} {creator}".strip(), f"کتاب {title}"]
         search = None
         product = None
+        search_failed = False
         for query in queries:
             try:
                 search = call(
@@ -204,7 +213,9 @@ def enrich() -> dict:
                 rid += 1
             except Exception as exc:
                 print(f"search failed for {title}: {exc}")
+                search_failed = True
                 search = None
+                break
             products = (search or {}).get("products") or []
             product = _choose_product(book, products)
             if product:
@@ -212,11 +223,14 @@ def enrich() -> dict:
 
         done += 1
         if not product:
-            book["torob"] = {
-                "matched": False,
-                "checked_at": datetime.now(timezone.utc).isoformat(),
-                "query": (search or {}).get("query") if search else queries[-1],
-            }
+            # A bot challenge/network failure is not evidence that a previous
+            # match disappeared. Preserve the last known commerce snapshot.
+            if not search_failed and not (book.get("torob") or {}).get("matched"):
+                book["torob"] = {
+                    "matched": False,
+                    "checked_at": datetime.now(timezone.utc).isoformat(),
+                    "query": (search or {}).get("query") if search else queries[-1],
+                }
             continue
 
         detail_args = {
@@ -232,6 +246,16 @@ def enrich() -> dict:
         except Exception as exc:
             print(f"details failed for {title}: {exc}")
             details = {}
+            # Keep the previous seller list when only the detail call fails.
+            previous=(book.get("torob") or {})
+            if previous.get("matched") and previous.get("offers"):
+                details={
+                    "offers": previous.get("offers") or [],
+                    "offer_count": previous.get("offer_count"),
+                    "price_range_toman": previous.get("price_range_toman"),
+                    "price_spread_toman": previous.get("price_spread_toman"),
+                    "attribution": previous.get("attribution"),
+                }
 
         offers = [
             _project_offer(o)
