@@ -325,6 +325,7 @@ def fetch_filmnet_catalog(limit: int = MAX_FILMNET_TITLES) -> list[dict]:
             ("query", ""),
             ("types", "single_video"),
             ("types", "series"),
+            ("types", "video_content_list"),
         ])
         try:
             payload = _fetch_json(FILMNET_API + "?" + query)
@@ -334,7 +335,11 @@ def fetch_filmnet_catalog(limit: int = MAX_FILMNET_TITLES) -> list[dict]:
             offset += count
             continue
         batch = payload.get("data") if isinstance(payload, dict) else []
+        if isinstance(batch, dict):
+            batch = batch.get("items") or batch.get("results") or []
         if not isinstance(batch, list) or not batch:
+            if offset == 0:
+                print("FilmNet catalog empty; response keys:", list(payload.keys()) if isinstance(payload, dict) else type(payload).__name__)
             break
         failures = 0
         for x in batch:
