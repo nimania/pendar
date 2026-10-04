@@ -30,49 +30,27 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Find latest complete site, periodicals and weather
+      - name: Find latest complete periodicals site and weather
         id: base
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          build_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           press_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/periodicals.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           weather_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          test -n "$build_id"
-          echo "build_id=$build_id" >> "$GITHUB_OUTPUT"
+          test -n "$press_id"
           echo "press_id=$press_id" >> "$GITHUB_OUTPUT"
           echo "weather_id=$weather_id" >> "$GITHUB_OUTPUT"
 
-      - name: Download latest complete static site
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BUILD_ID: ${{ steps.base.outputs.build_id }}
-        run: |
-          rm -rf site && mkdir -p site
-          gh run download "$BUILD_ID" -n latest-static-site -D site
-
-      - name: Overlay freshest periodicals and books graph
+      - name: Download latest complete periodicals site
         env:
           GH_TOKEN: ${{ github.token }}
           PRESS_ID: ${{ steps.base.outputs.press_id }}
         run: |
-          if [ -n "$PRESS_ID" ]; then
-            rm -rf /tmp/press-pages /tmp/press-site
-            mkdir -p /tmp/press-pages /tmp/press-site
-            if gh run download "$PRESS_ID" -n github-pages -D /tmp/press-pages && [ -f /tmp/press-pages/artifact.tar ]; then
-              tar -xf /tmp/press-pages/artifact.tar -C /tmp/press-site
-              mkdir -p site/data
-              for name in periodicals.json press-directory.json press-directory.js books.json books.js press-registry-health.json; do
-                if [ -f "/tmp/press-site/data/$name" ]; then
-                  cp "/tmp/press-site/data/$name" "site/data/$name"
-                fi
-              done
-              if [ -d /tmp/press-site/assets/periodicals ]; then
-                mkdir -p site/assets/periodicals
-                rsync -a /tmp/press-site/assets/periodicals/ site/assets/periodicals/
-              fi
-            fi
-          fi
+          rm -rf site /tmp/press-pages
+          mkdir -p site /tmp/press-pages
+          gh run download "$PRESS_ID" -n github-pages -D /tmp/press-pages
+          test -f /tmp/press-pages/artifact.tar
+          tar -xf /tmp/press-pages/artifact.tar -C site
 
       - name: Enrich books with Torob sellers, prices and covers
         env:
