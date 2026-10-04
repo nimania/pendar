@@ -11,6 +11,7 @@ on:
       - "backend/scripts/build_streaming_availability.py"
       - "backend/scripts/build_movies.py"
       - "backend/scripts/link_tv_guide_movies.py"
+      - "backend/scripts/enrich_movies_from_epg.py"
       - "backend/scripts/build_entities.py"
       - ".github/workflows/fast-deploy.yml"
 
@@ -120,6 +121,13 @@ jobs:
           fi
           if [ -f backend/public/data/movies.js ]; then
             cp backend/public/data/movies.js site/data/movies.js
+          fi
+
+      - name: Enrich film catalog from EPG
+        continue-on-error: true
+        run: |
+          if [ -f web-static/data/tv-guide.json ] && [ -f site/data/movies.json ]; then
+            python backend/scripts/enrich_movies_from_epg.py --tv web-static/data/tv-guide.json --movies site/data/movies.json --movies-js site/data/movies.js
           fi
 
       - name: Overlay freshest book commerce
