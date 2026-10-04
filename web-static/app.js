@@ -1022,6 +1022,7 @@ async function loadFeed() {
     renderDayChips();
     updateFreshness();
     renderHomeDaily();
+    renderHomeMajra();
   } catch (e) {
     const why = e && e.name === "AbortError" ? "دریافت داده بیش از حد طول کشید." : "فایل خبرها در دسترس نیست.";
     el.innerHTML = `<div class="state"><div class="big">خبرها بارگذاری نشد</div>
@@ -1752,10 +1753,8 @@ async function renderHomeMajra() {
   const el = document.getElementById("home-majra-cards");
   if (!section || !el) return;
   try {
-    const [t, stories] = await Promise.all([
-      getJSON(`${DATA}/trends.json`, 18000),
-      getJSON(`${DATA}/stories.json`).catch(() => [])
-    ]);
+    const t = await getJSON(`${DATA}/trends.json`, 30000);
+    const stories = (ALL && ALL.length) ? ALL : await getJSON(`${DATA}/stories.json`, 30000).catch(() => []);
     const byId = new Map((stories || []).map(s => [String(s.id), s]));
     // A single story can be attached to several topic/trend slugs. On the
     // homepage that used to render the same event more than once. Keep the
@@ -1799,7 +1798,8 @@ async function renderHomeMajra() {
     }
     section.style.display = "";
   } catch (e) {
-    section.style.display = "none";
+    section.style.display = "";
+    el.innerHTML = '<div class="state"><div class="big">جان ماجرا موقتاً در دسترس نیست</div><button class="fchip on" onclick="renderHomeMajra()">تلاش دوباره</button></div>';
   }
 }
 
@@ -2145,7 +2145,6 @@ function statsBlock(st) {
 loadFeed().then(route);   // load the feed, then honor any deep link in the URL
 renderHomeStats();
 renderHomeGlance();
-renderHomeMajra();
 renderHomePrices();
 renderHomeWeather();
 updateMineBadge();
