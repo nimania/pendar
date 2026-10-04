@@ -182,3 +182,13 @@
  .hub-book-detail .book-detail-copy h1{font-size:22px}
  .hub-book-detail .book-desc{font-size:12px}
 }
+
+
+/* Publisher catalog stats — 2026-10-04 */
+.publisher-stats{display:flex;gap:22px;flex-wrap:wrap;margin:16px 0 8px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.publisher-stats span{display:flex;align-items:baseline;gap:6px}
+.publisher-stats b{font-size:18px;font-weight:700}
+.publisher-stats small{font-size:10px;color:var(--ink-faint)}
+.publisher-categories{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px}
+.publisher-categories span{font-size:10px;color:var(--ink-faint);padding:4px 7px;background:var(--surface);border-radius:999px}
+@media(max-width:600px){.publisher-stats{gap:14px}.publisher-stats b{font-size:16px}}
