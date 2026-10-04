@@ -1,5 +1,6 @@
 let tvGuideCache=null;
 let tvGuideState={mode:"now",channel:"all",group:"all",query:""};
+let tvStreamingState={query:"",kind:"all",service:"all",sort:"recent"};
 
 const TV_GUIDE_SOURCE_LABELS={
   official:"رسمی",
@@ -196,18 +197,106 @@ function _tvSources(d){
   return '<div class="tv-source-list">'+rows+'</div><p class="tv-method">فقط منبعی که در آخرین گردآوری واقعاً دادهٔ معتبر تحویل داده باشد «متصل» محسوب می‌شود. خطای یک منبع مانع به‌روزرسانی بقیهٔ Guide نمی‌شود.</p>';
 }
 
+function _tvStreamServiceLogo(s,compact=false){
+  const name=s?.name_fa||s?.name_en||s?.key||"سرویس";
+  if(s?.logo)return '<img src="'+esc(s.logo)+'" alt="'+esc(name)+'" title="'+esc(name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'inline-flex\'"><span class="tv-stream-fallback" style="display:none">'+esc(name.slice(0,2))+'</span>';
+  return '<span class="tv-stream-fallback">'+esc(name.slice(0,2))+'</span>';
+}
+function _tvStreamPoster(m){
+  if(m?.poster_url)return '<img src="'+esc(m.poster_url)+'" alt="'+esc(m.title_fa||m.original_title||"")+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">';
+  return '<span>🎬</span>';
+}
+function _tvStreamRows(movies,streaming){
+  const map=new Map((movies.movies||[]).map(m=>[String(m.slug),m]));
+  return Object.entries(streaming.availability||{}).map(([slug,av])=>({movie:map.get(String(slug)),availability:Array.isArray(av)?av:[]})).filter(x=>x.movie&&x.availability.length);
+}
+function _tvStreamFilterRows(rows){
+  const q=_tvNorm(tvStreamingState.query);
+  return rows.filter(x=>{
+    const m=x.movie;
+    if(tvStreamingState.kind!=="all"&&m.type!==tvStreamingState.kind)return false;
+    if(tvStreamingState.service!=="all"&&!x.availability.some(a=>String(a.service)===tvStreamingState.service))return false;
+    if(q&&!_tvNorm([m.title_fa,m.original_title,(m.aliases||[]).join(" "),(m.genres_fa||[]).join(" "),m.country_fa].join(" ")).includes(q))return false;
+    return true;
+  }).sort((a,b)=>{
+    if(tvStreamingState.sort==="multi")return b.availability.length-a.availability.length||Number(b.movie.year||0)-Number(a.movie.year||0);
+    if(tvStreamingState.sort==="year")return Number(b.movie.year||0)-Number(a.movie.year||0);
+    if(tvStreamingState.sort==="title")return String(a.movie.title_fa||"").localeCompare(String(b.movie.title_fa||""),"fa");
+    const ad=Date.parse(a.movie.first_seen_at||"")||0,bd=Date.parse(b.movie.first_seen_at||"")||0;
+    return bd-ad||Number(b.movie.year||0)-Number(a.movie.year||0);
+  });
+}
+function _tvStreamProviderMarks(av,services){
+  const seen=new Set();
+  return av.map(a=>{
+    const key=String(a.service||"");
+    if(!key||seen.has(key))return "";
+    seen.add(key);
+    const s=services.get(key)||{key,name_fa:key};
+    return '<span class="tv-stream-provider-mark" title="'+esc(s.name_fa||s.name_en||key)+'">'+_tvStreamServiceLogo(s,true)+'</span>';
+  }).join("");
+}
+function _tvStreamTitleCard(row,services){
+  const m=row.movie,av=row.availability||[];
+  return '<button class="tv-stream-title-card" onclick="openMovie(\''+esc(m.slug)+'\')">'+
+    '<span class="tv-stream-poster">'+_tvStreamPoster(m)+'</span>'+
+    '<span class="tv-stream-copy"><span class="tv-stream-kicker">'+(m.type==="series"?"سریال":"فیلم")+(m.year?" · "+esc(m.year):"")+'</span>'+
+      '<strong>'+esc(m.title_fa||m.original_title||"")+'</strong>'+
+      (m.original_title&&m.original_title!==m.title_fa?'<small dir="ltr">'+esc(m.original_title)+'</small>':"")+
+      '<span class="tv-stream-provider-list">'+_tvStreamProviderMarks(av,services)+'</span>'+
+      (av.length>1?'<em>روی '+faN(av.length)+' سرویس</em>':"")+
+    '</span>'+
+  '</button>';
+}
+function _tvStreamingToolbar(services){
+  const connected=(services||[]).filter(s=>(s.health||{}).status==="ok");
+  const serviceOptions=['<option value="all">همهٔ سرویس‌ها</option>'].concat(connected.map(s=>'<option value="'+esc(s.key)+'" '+(tvStreamingState.service===s.key?"selected":"")+'>'+esc(s.name_fa||s.name_en||s.key)+'</option>')).join("");
+  return '<div class="tv-stream-discovery-toolbar">'+
+    '<label class="tv-stream-search"><span>⌕</span><input type="search" placeholder="اسم فیلم یا سریال را بنویس…" value="'+esc(tvStreamingState.query)+'" oninput="tvStreamingState.query=this.value;renderTVGuide()"></label>'+
+    '<select onchange="tvStreamingState.kind=this.value;renderTVGuide()"><option value="all" '+(tvStreamingState.kind==="all"?"selected":"")+'>همه</option><option value="movie" '+(tvStreamingState.kind==="movie"?"selected":"")+'>فیلم</option><option value="series" '+(tvStreamingState.kind==="series"?"selected":"")+'>سریال</option></select>'+
+    '<select onchange="tvStreamingState.service=this.value;renderTVGuide()">'+serviceOptions+'</select>'+
+    '<select onchange="tvStreamingState.sort=this.value;renderTVGuide()"><option value="recent" '+(tvStreamingState.sort==="recent"?"selected":"")+'>تازه اضافه‌شده</option><option value="multi" '+(tvStreamingState.sort==="multi"?"selected":"")+'>روی چند سرویس</option><option value="year" '+(tvStreamingState.sort==="year"?"selected":"")+'>سال ساخت</option><option value="title" '+(tvStreamingState.sort==="title"?"selected":"")+'>الفبایی</option></select>'+
+  '</div>';
+}
 async function _tvStreaming(){
-  let d={services:[],stats:{}};
-  try{if(typeof loadStreamingAvailability==="function")d=await loadStreamingAvailability()}catch(_){}
-  const services=(d.services||[]).length?d.services:TV_GUIDE_STREAMING.map(x=>({name_fa:x.name,status:x.status}));
-  const cards=services.map(s=>{
-    const h=s.health||{}, name=s.name_fa||s.name_en||s.key||"سرویس";
+  let streaming={services:[],stats:{}},movies={movies:[]};
+  try{
+    const loaded=await Promise.all([
+      typeof loadStreamingAvailability==="function"?loadStreamingAvailability():Promise.resolve(streaming),
+      typeof loadMovies==="function"?loadMovies():Promise.resolve(movies)
+    ]);
+    streaming=loaded[0]||streaming; movies=loaded[1]||movies;
+  }catch(_){}
+  const services=(streaming.services||[]).length?streaming.services:TV_GUIDE_STREAMING.map(x=>({name_fa:x.name,status:x.status,key:_tvNorm(x.name)}));
+  const serviceMap=new Map(services.map(s=>[String(s.key),s]));
+  const allRows=_tvStreamRows(movies,streaming);
+  const rows=_tvStreamFilterRows(allRows);
+  const connected=services.filter(s=>(s.health||{}).status==="ok");
+  const multi=allRows.filter(x=>x.availability.length>1).sort((a,b)=>b.availability.length-a.availability.length).slice(0,8);
+  const recent=allRows.slice().sort((a,b)=>(Date.parse(b.movie.first_seen_at||"")||0)-(Date.parse(a.movie.first_seen_at||"")||0)||Number(b.movie.year||0)-Number(a.movie.year||0)).slice(0,10);
+
+  const serviceCards=services.map(s=>{
+    const h=s.health||{},name=s.name_fa||s.name_en||s.key||"سرویس";
     const state=h.status==="ok"?"متصل":h.status==="error"?"خطای موقت":"در صف اتصال";
     const stat=h.status==="ok"&&Number(h.matched_titles||0)?faN(h.matched_titles)+" عنوان تأییدشده":state;
-    const logo=s.logo?'<img src="'+esc(s.logo)+'" alt="'+esc(name)+'" title="'+esc(name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'inline\'"><span style="display:none">'+esc(name.slice(0,2))+'</span>':'<span>'+esc(name.slice(0,2))+'</span>';
-    return '<div class="tv-streaming-card" title="'+esc(name)+'" aria-label="'+esc(name)+'"><strong class="tv-stream-logo">'+logo+'</strong><span>'+stat+'</span></div>';
+    return '<button class="tv-streaming-card '+(tvStreamingState.service===s.key?"on":"")+'" title="'+esc(name)+'" aria-label="'+esc(name)+'" onclick="tvStreamingState.service=\''+esc(s.key)+'\';renderTVGuide()">'+
+      '<strong class="tv-stream-logo">'+_tvStreamServiceLogo(s)+'</strong><span>'+stat+'</span></button>';
   }).join("");
-  return '<div class="tv-streaming-intro"><h2>کجا تماشا کنم؟</h2><p>موجودی فقط وقتی نمایش داده می‌شود که عنوان یا alias اثر با دادهٔ خود سرویس تطبیق دقیق داشته باشد.</p></div><div class="tv-streaming-grid">'+cards+'</div>';
+
+  const discovery=_tvStreamingToolbar(services)+
+    '<div class="tv-stream-result-head"><h2>کجا تماشا کنم؟</h2><span>'+faN(rows.length)+' عنوان با موجودی تأییدشده</span></div>'+
+    (rows.length?'<div class="tv-stream-title-grid">'+rows.map(x=>_tvStreamTitleCard(x,serviceMap)).join("")+'</div>':'<div class="state tv-empty"><div class="big">نتیجهٔ تأییدشده‌ای پیدا نشد</div><p>نتیجهٔ مبهم یا بدون تطبیق دقیق عمداً نمایش داده نمی‌شود.</p></div>');
+
+  let highlights="";
+  if(!tvStreamingState.query&&tvStreamingState.kind==="all"&&tvStreamingState.service==="all"){
+    highlights=
+      (recent.length?'<section class="tv-stream-highlight"><div class="tv-stream-result-head"><h2>تازه اضافه‌شده</h2><span>'+faN(recent.length)+' عنوان</span></div><div class="tv-stream-rail">'+recent.map(x=>_tvStreamTitleCard(x,serviceMap)).join("")+'</div></section>':"")+
+      (multi.length?'<section class="tv-stream-highlight"><div class="tv-stream-result-head"><h2>روی چند سرویس</h2><span>انتخاب آسان‌تر بین سرویس‌ها</span></div><div class="tv-stream-rail">'+multi.map(x=>_tvStreamTitleCard(x,serviceMap)).join("")+'</div></section>':"");
+  }
+
+  return '<div class="tv-streaming-intro"><h2>استریمینگ</h2><p>جست‌وجوی یکپارچهٔ فیلم و سریال در سرویس‌های فارسی؛ فقط با تطبیق دقیق و موجودی تأییدشده.</p>'+
+    '<div class="tv-stream-stats"><span><b>'+faN((streaming.stats||{}).canonical_titles||movies.movies.length||0)+'</b> عنوان بررسی‌شده</span><span><b>'+faN((streaming.stats||{}).titles_with_availability||allRows.length)+'</b> عنوان قابل تماشا</span><span><b>'+faN(connected.length)+'</b> سرویس متصل</span></div></div>'+
+    '<div class="tv-streaming-grid">'+serviceCards+'</div>'+highlights+discovery;
 }
 
 async function showTVGuide(mode){
@@ -236,9 +325,10 @@ async function renderTVGuide(){
     body='<div class="tv-list-head"><h2>'+title+'</h2><span>'+faN(rows.length)+' برنامه</span></div>'+
       (rows.length?'<div class="tv-program-list">'+rows.map(p=>_tvProgrammeCard(p,cmap.get(String(p.channel_id)),now)).join("")+'</div>':'<div class="state tv-empty"><div class="big">در این بازه برنامه‌ای پیدا نشد</div><p>ممکن است منبع EPG هنوز برای این شبکه یا بازهٔ زمانی متصل نشده باشد.</p></div>');
   }
+  const controls=(mode==="streaming"||mode==="sources")?"":_tvToolbar(d);
   el.innerHTML='<header class="tv-hero">'+
-    '<div><span class="press-kicker">راهنمای یکپارچهٔ تماشای فارسی</span><h1>الان چی پخش می‌شه؟</h1><p>تلویزیون، شبکه‌های فارسی‌زبان، ورزش و در ادامه سرویس‌های استریمینگ؛ همه در یک جدول زمانی واحد.</p></div>'+
+    '<div><span class="press-kicker">راهنمای یکپارچهٔ تماشای فارسی</span><h1>'+(mode==="streaming"?"چی ببینم و کجا؟":"الان چی پخش می‌شه؟")+'</h1><p>'+(mode==="streaming"?"فیلم و سریال را بین سرویس‌های فارسی جست‌وجو کن و فقط موجودی تأییدشده را ببین.":"تلویزیون، شبکه‌های فارسی‌زبان، ورزش و سرویس‌های استریمینگ؛ همه در یک راهنمای واحد.")+'</p></div>'+
     '<div class="tv-status-card"><b>'+faN((d.channels||[]).length)+'</b><span>شبکهٔ دارای داده</span><small>'+faN(active)+' منبع متصل · آخرین ساخت '+esc(generated)+'</small></div>'+
-  '</header>'+_tvTabs()+_tvToolbar(d)+body+
+  '</header>'+_tvTabs()+controls+body+
   '<div class="tv-footer-note">زمان‌ها بر اساس ساعت ایران نمایش داده می‌شوند. رکوردهای فنی، تبلیغاتی، placeholder و زمان‌بندی‌های هم‌پوشان پیش از نمایش فیلتر می‌شوند.</div>';
 }
