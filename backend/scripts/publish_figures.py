@@ -19,7 +19,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlsplit
 from urllib.request import Request, urlopen
 
-_repo = os.environ.get("GITHUB_REPOSITORY", "nimania/jan-kalam")
+_repo = os.environ.get("GITHUB_REPOSITORY", "nimania/pendar")
 try:
     _owner, _repo_name = _repo.split("/", 1)
 except ValueError:
