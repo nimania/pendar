@@ -1102,3 +1102,15 @@
 .book-original-title b{color:var(--ink);font-weight:650}
 .book-buy.exact{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
 .book-buy.search{border-style:dashed}
+
+.book-editions{display:grid;gap:12px}
+.book-edition{padding:15px;border:1px solid var(--border);border-radius:14px;background:var(--card)}
+.book-edition-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:11px}
+.book-edition-head h3{font-family:"Noto Naskh Arabic",serif;font-size:1.15rem;line-height:1.5;margin:2px 0 0}
+.book-edition-head small{font-size:.72rem;color:var(--muted);line-height:1.7;text-align:left}
+.book-edition-entities{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.book-edition-person{display:flex;flex-direction:column;gap:2px;text-align:right;padding:8px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface-2);color:inherit;font-family:inherit;cursor:pointer}
+.book-edition-person:hover{border-color:var(--accent)}
+.book-edition-person span{font-size:.66rem;color:var(--muted)}
+.book-edition-person b{font-size:.82rem}
+@media(max-width:620px){.book-edition-head{display:block}.book-edition-head small{display:block;text-align:right;margin-top:6px}}
