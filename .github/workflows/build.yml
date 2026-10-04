@@ -128,6 +128,10 @@ jobs:
             fi
           fi
 
+      - name: Refresh TV Guide EPG
+        continue-on-error: true
+        run: python backend/scripts/build_tv_guide.py --output backend/public/data/tv-guide.json
+
       - name: Rebuild book graph against fresh news, figures and press
         working-directory: backend
         run: python -m scripts.build_books
