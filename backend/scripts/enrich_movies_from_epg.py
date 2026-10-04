@@ -11,9 +11,21 @@ import concurrent.futures
 import hashlib
 import json
 import re
+import urllib.parse
 from pathlib import Path
 
 from build_streaming_availability import query_filimo, query_filmnet, query_namava
+from build_movies import (
+    FILM_CLASSES,
+    SERIES_CLASSES,
+    _wikidata_search,
+    _wikidata_get_entity,
+    _claim_ids,
+    _claim_string,
+    _claim_year,
+    _label,
+    _aliases as wikidata_aliases,
+)
 
 FA_DIGITS = str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789")
 NON_WORD = re.compile(r"[^0-9a-zA-Z\u0600-\u06FF]+")
@@ -116,6 +128,102 @@ def candidates(tv: dict, movies: list[dict]) -> list[dict]:
     out.sort(key=lambda x: (-x["count"], 0 if x["type"] == "movie" else 1, x["title_fa"]))
     return out[:MAX_CANDIDATES]
 
+def _year_compatible(a, b) -> bool:
+    def values(v):
+        try:
+            y=int(str(v).translate(FA_DIGITS))
+        except Exception:
+            return set()
+        out={y}
+        if 1300 <= y <= 1500:
+            out.update({y+621,y+622})
+        elif 1900 <= y <= 2200:
+            out.update({y-621,y-622})
+        return out
+    aa,bb=values(a),values(b)
+    return not aa or not bb or bool(aa & bb)
+
+def verify_wikidata_candidate(candidate: dict) -> dict | None:
+    """Accept only one exact-label/alias Wikidata film/series identity."""
+    title=str(candidate.get("title_fa") or "").strip()
+    if not title:
+        return None
+    lang="fa" if re.search(r"[\u0600-\u06ff]",title) else "en"
+    ids=[]
+    try:
+        ids=_wikidata_search(title,lang)
+        if lang!="en":
+            ids += [x for x in _wikidata_search(title,"en") if x not in ids]
+    except Exception:
+        return None
+
+    wanted=norm(title)
+    valid=[]
+    for qid in ids[:12]:
+        try:
+            entity=_wikidata_get_entity(qid)
+        except Exception:
+            continue
+        if not entity:
+            continue
+        classes=set(_claim_ids(entity,"P31"))
+        typ="series" if classes & SERIES_CLASSES else "movie" if classes & FILM_CLASSES else None
+        if not typ or typ != candidate.get("type"):
+            continue
+
+        names=[
+            _label(entity,"fa"),
+            _label(entity,"en"),
+            *wikidata_aliases(entity,"fa"),
+            *wikidata_aliases(entity,"en"),
+        ]
+        if wanted not in {norm(x) for x in names if x}:
+            continue
+
+        year=_claim_year(entity)
+        if not _year_compatible(candidate.get("year"),year):
+            continue
+
+        valid.append((qid,entity,year,names))
+
+    if len(valid)!=1:
+        return None
+
+    qid,entity,year,names=valid[0]
+    fa=_label(entity,"fa") or title
+    en=_label(entity,"en") or None
+    aliases=[]
+    for x in [fa,en,*names]:
+        if x and norm(x) not in {norm(y) for y in aliases}:
+            aliases.append(x)
+
+    imdb=_claim_string(entity,"P345")
+    tmdb_movie=_claim_string(entity,"P4947")
+    tmdb_tv=_claim_string(entity,"P4983")
+    image=_claim_string(entity,"P18")
+    poster=("https://commons.wikimedia.org/wiki/Special:FilePath/"+urllib.parse.quote(image)+"?width=500") if image else None
+
+    external={"wikidata":"https://www.wikidata.org/wiki/"+qid}
+    if imdb:
+        external["imdb"]="https://www.imdb.com/title/"+imdb+"/"
+    if tmdb_movie:
+        external["tmdb"]="https://www.themoviedb.org/movie/"+tmdb_movie
+    elif tmdb_tv:
+        external["tmdb"]="https://www.themoviedb.org/tv/"+tmdb_tv
+
+    return {
+        "qid":qid,
+        "type":candidate.get("type"),
+        "title_fa":fa,
+        "original_title":en,
+        "aliases":aliases[:30],
+        "year":year or candidate.get("year"),
+        "poster_url":poster,
+        "external":external,
+        "tmdb_id":tmdb_movie or tmdb_tv,
+        "tmdb_type":"movie" if tmdb_movie else "tv" if tmdb_tv else None,
+    }
+
 def provider_ref(service: str, row: dict) -> dict:
     ref = {
         "id": str(row.get("provider_id") or ""),
@@ -124,7 +232,7 @@ def provider_ref(service: str, row: dict) -> dict:
     }
     return {k: v for k, v in ref.items() if v not in ("", None)}
 
-def verify_candidate(candidate: dict) -> tuple[dict, list[dict], list[str]]:
+def verify_candidate(candidate: dict) -> tuple[dict, list[dict], dict | None, list[str]]:
     matches = []
     errors = []
     for key, querier in QUERIERS.items():
@@ -138,18 +246,33 @@ def verify_candidate(candidate: dict) -> tuple[dict, list[dict], list[str]]:
                         matches.append(row)
         except Exception as exc:
             errors.append(f"{key}:{type(exc).__name__}")
-    return candidate, matches, errors
 
-def stable_slug(candidate: dict, matches: list[dict]) -> str:
+    wikidata = None
+    if not matches:
+        wikidata = verify_wikidata_candidate(candidate)
+    return candidate, matches, wikidata, errors
+
+def stable_slug(candidate: dict, matches: list[dict], wikidata: dict | None = None) -> str:
+    if wikidata and wikidata.get("qid"):
+        return "wikidata-" + str(wikidata["qid"]).lower()
     identity = norm(candidate["title_fa"]) + "|" + candidate["type"] + "|" + str(candidate.get("year") or "")
     digest = hashlib.sha1(identity.encode("utf-8")).hexdigest()[:12]
     return "epg-" + digest
 
-def to_movie(candidate: dict, matches: list[dict]) -> dict:
+def to_movie(candidate: dict, matches: list[dict], wikidata: dict | None = None) -> dict:
     title_en = next((str(x.get("title_en") or "").strip() for x in matches if x.get("title_en")), "")
+    if not title_en and wikidata:
+        title_en = str(wikidata.get("original_title") or "").strip()
     poster = next((x.get("poster_url") for x in matches if x.get("poster_url")), None)
+    if not poster and wikidata:
+        poster = wikidata.get("poster_url")
+
     aliases = [candidate["title_fa"]]
-    if title_en and norm(title_en) != norm(candidate["title_fa"]):
+    if wikidata:
+        aliases = list(wikidata.get("aliases") or aliases)
+        if norm(candidate["title_fa"]) not in {norm(x) for x in aliases}:
+            aliases.insert(0,candidate["title_fa"])
+    elif title_en and norm(title_en) != norm(candidate["title_fa"]):
         aliases.append(title_en)
 
     refs = {}
@@ -158,13 +281,21 @@ def to_movie(candidate: dict, matches: list[dict]) -> dict:
         if service:
             refs[service] = provider_ref(service, x)
 
+    verification = {
+        "level": "epg_provider_exact" if refs else "epg_wikidata_exact",
+        "source": "EPG + provider exact search" if refs else "EPG + unique exact Wikidata identity",
+        "providers": sorted(refs),
+    }
+    if wikidata and wikidata.get("qid"):
+        verification["qid"]=wikidata["qid"]
+
     return {
-        "slug": stable_slug(candidate, matches),
+        "slug": stable_slug(candidate, matches, wikidata),
         "type": candidate["type"],
-        "title_fa": candidate["title_fa"],
+        "title_fa": (wikidata or {}).get("title_fa") or candidate["title_fa"],
         "original_title": title_en or None,
         "aliases": aliases,
-        "year": candidate.get("year"),
+        "year": (wikidata or {}).get("year") or candidate.get("year"),
         "country_fa": None,
         "genres_fa": [],
         "runtime_min": None,
@@ -173,15 +304,11 @@ def to_movie(candidate: dict, matches: list[dict]) -> dict:
         "director": None,
         "cast": [],
         "ratings": {},
-        "external": {},
+        "external": (wikidata or {}).get("external") or {},
         "provider_refs": refs,
         "mentions": [],
         "mention_count": 0,
-        "verification": {
-            "level": "epg_provider_exact",
-            "source": "EPG + provider exact search",
-            "providers": sorted(refs),
-        },
+        "verification": verification,
         "epg_discovery": {
             "count": candidate["count"],
             "channels": candidate["channels"],
@@ -214,15 +341,21 @@ def main():
     cands = candidates(tv, movies)
     verified = []
     provider_counts = {k: 0 for k in QUERIERS}
+    wikidata_verified = 0
+    tmdb_linked = 0
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
         futures = [pool.submit(verify_candidate, c) for c in cands]
         for future in concurrent.futures.as_completed(futures):
-            candidate, matches, _errors = future.result()
-            if not matches:
+            candidate, matches, wikidata, _errors = future.result()
+            if not matches and not wikidata:
                 continue
-            movie = to_movie(candidate, matches)
+            movie = to_movie(candidate, matches, wikidata)
             verified.append(movie)
+            if wikidata:
+                wikidata_verified += 1
+                if (wikidata.get("external") or {}).get("tmdb"):
+                    tmdb_linked += 1
             for svc in movie.get("provider_refs") or {}:
                 provider_counts[svc] = provider_counts.get(svc, 0) + 1
 
@@ -241,12 +374,16 @@ def main():
     stats["epg_candidates_checked"] = len(cands)
     stats["epg_provider_verified_added"] = len(added)
     stats["epg_provider_counts"] = provider_counts
+    stats["epg_wikidata_verified"] = wikidata_verified
+    stats["epg_tmdb_linked"] = tmdb_linked
 
     write_movies(movie_path, payload, js_path)
     print("EPG movie enrichment:", json.dumps({
         "candidates_checked": len(cands),
         "added": len(added),
         "providers": provider_counts,
+        "wikidata_verified": wikidata_verified,
+        "tmdb_linked": tmdb_linked,
         "catalog_total": len(movies),
         "sample_added": [m["title_fa"] for m in added[:15]],
     }, ensure_ascii=False))
