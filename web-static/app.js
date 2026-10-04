@@ -137,7 +137,7 @@ function _profileTimelineCard(row){
   return '<article class="p360-time-row"'+click+'><span class="p360-time-kind">'+esc(row.kind)+'</span><div><b>'+esc(row.title||"")+'</b>'+(row.sub?'<p>'+esc(row.sub)+'</p>':"")+'<small>'+esc(row.when||"")+'</small></div></article>';
 }
 function _profileRelationCards(rows){
-  return rows.map(x=>'<button class="p360-rel" onclick="openCanonicalEntity(\''+esc(x.entity.id)+'\')"><small>'+esc(x.label)+'</small><b>'+esc(x.entity.name_fa||x.entity.id)+'</b><span>'+esc(_entityTypeFa(x.entity.type))+'</span></button>').join("");
+  return rows.map(x=>'<button class="p360-rel" onclick="openEntityProfile(\''+esc(x.entity.id)+'\')"><small>'+esc(x.label)+'</small><b>'+esc(x.entity.name_fa||x.entity.id)+'</b><span>'+esc(_entityTypeFa(x.entity.type))+'</span></button>').join("");
 }
 function _profileFallbackAvatar(entity){
   const letter=String(entity.name_fa||"?").trim().slice(0,1)||"?";
@@ -519,7 +519,7 @@ async function _buildSmartSearchDocs(){
         title:x.name_fa||x.id,
         sub:roles,
         canonicalId:x.id,
-        go:`openCanonicalEntity('${String(x.id).replace(/'/g,"\\'")}')`,
+        go:`openEntityProfile('${String(x.id).replace(/'/g,"\\'")}')`,
         text:[x.name_fa,aliases,roles,summary,x.type].join(" "),
         snippet:summary
       });
