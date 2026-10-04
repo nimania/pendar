@@ -9,6 +9,7 @@ on:
       - "web-static/**"
       - "backend/scripts/build_tv_guide.py"
       - "backend/scripts/build_streaming_availability.py"
+      - "backend/scripts/build_entities.py"
       - ".github/workflows/fast-deploy.yml"
 
 permissions:
@@ -169,6 +170,9 @@ jobs:
               s = re.sub(r'const V = "[^"]*";', f'const V = "pendar-{app_v}";', s, count=1)
               sw.write_text(s, encoding="utf-8")
           PY
+      - name: Build canonical entity registry
+        run: python backend/scripts/build_entities.py --data-dir site/data
+
       - name: Validate Pendar data integrity before publish
         run: python backend/scripts/validate_site_integrity.py --site site
 
