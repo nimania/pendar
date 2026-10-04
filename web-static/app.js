@@ -78,11 +78,15 @@ async function canonicalEntityByName(type, name) {
   return id ? ((d.entities||[]).find(x=>x.id===id)||null) : null;
 }
 function _canonicalRelationLabel(rel, incoming) {
-  const m = {created_by:"پدیدآورنده",published_by:"ناشر",directed_by:"کارگردان",cast_member:"بازیگر",about_topic:"موضوع",related_topic:"موضوع مرتبط"};
+  const m = {created_by:"پدیدآورنده",published_by:"ناشر",directed_by:"کارگردان",cast_member:"بازیگر",about_topic:"موضوع",related_topic:"موضوع مرتبط",quoted_by:"نقل‌شده در",related_person:"فرد مرتبط",mentioned_by_source:"ذکر در رسانه",mentioned_by_person:"اشاره توسط"};
   if (incoming && rel==="created_by") return "اثر";
   if (incoming && rel==="published_by") return "کتاب ناشر";
   if (incoming && rel==="directed_by") return "فیلم";
   if (incoming && rel==="cast_member") return "اثر";
+  if (incoming && rel==="quoted_by") return "چهرهٔ نقل‌شده";
+  if (incoming && rel==="mentioned_by_source") return "اثر نام‌برده";
+  if (incoming && rel==="mentioned_by_person") return "اثر نام‌برده";
+  if (incoming && rel==="related_person") return "فرد مرتبط";
   return m[rel] || "مرتبط";
 }
 function canonicalStrip(entity) {
@@ -173,7 +177,7 @@ async function openCanonicalEntity(id) {
   if(entity.type==="person" && routes.book_person) return openBookPerson(routes.book_person,entity.id);
   if(entity.type==="book" && routes.book) return openBook(routes.book,entity.id);
   if(entity.type==="publisher" && routes.publisher) return openPublisher(routes.publisher,entity.id);
-  if(entity.type==="source") return showPress(routes.press_source||entity.name_fa,entity.id);
+  if(entity.type==="source" && routes.press_source) return showPress(routes.press_source,entity.id);
   if(entity.type==="movie" && routes.movie) return openMovie(routes.movie,entity.id);
   return renderCanonicalEntity(entity);
 }
