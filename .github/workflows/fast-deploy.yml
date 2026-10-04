@@ -9,6 +9,7 @@ on:
       - "web-static/**"
       - "backend/scripts/build_tv_guide.py"
       - "backend/scripts/build_streaming_availability.py"
+      - "backend/scripts/build_movies.py"
       - "backend/scripts/build_entities.py"
       - ".github/workflows/fast-deploy.yml"
 
@@ -92,6 +93,30 @@ jobs:
               encoding="utf-8",
           )
           PY
+          fi
+
+      - name: Restore movie identity cache
+        uses: actions/cache@v4
+        with:
+          path: backend/data/movie_identity_cache.json
+          key: pendar-movie-identity-fast-${{ github.run_id }}
+          restore-keys: |
+            pendar-movie-identity-
+            pendar-movie-identity-fast-
+
+      - name: Refresh canonical movie catalog
+        continue-on-error: true
+        run: |
+          mkdir -p backend/public/data
+          for name in periodicals.json stories.json figures.json; do
+            if [ -f "site/data/$name" ]; then cp "site/data/$name" "backend/public/data/$name"; fi
+          done
+          python backend/scripts/build_movies.py
+          if [ -f backend/public/data/movies.json ]; then
+            cp backend/public/data/movies.json site/data/movies.json
+          fi
+          if [ -f backend/public/data/movies.js ]; then
+            cp backend/public/data/movies.js site/data/movies.js
           fi
 
       - name: Overlay freshest book commerce
