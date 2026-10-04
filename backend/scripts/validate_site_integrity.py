@@ -53,6 +53,7 @@ def snapshot(site: Path) -> dict:
     figures = load_json(site, "figures.json")
     trends = load_json(site, "trends.json")
     books = load_json(site, "books.json")
+    entity_registry = load_json(site, "entity-registry.json")
 
     # These are not thresholded yet, but malformed files must never reach Pages.
     periodicals = maybe_json(site, "periodicals.json")
@@ -66,6 +67,9 @@ def snapshot(site: Path) -> dict:
     )
     topics = trends.get("topics", []) if isinstance(trends, dict) else []
     book_rows = books.get("books", []) if isinstance(books, dict) else []
+    entity_rows = entity_registry.get("entities", []) if isinstance(entity_registry, dict) else []
+    entity_counts = entity_registry.get("counts", {}) if isinstance(entity_registry, dict) else {}
+    entity_conflicts = entity_registry.get("conflicts", []) if isinstance(entity_registry, dict) else []
 
     total = stats.get("total") if isinstance(stats, dict) else None
     if not isinstance(total, int):
@@ -82,6 +86,9 @@ def snapshot(site: Path) -> dict:
         "statements": statements,
         "majra_topics": len([x for x in topics if isinstance(x, dict) and x.get("slug")]),
         "books": len(book_rows),
+        "canonical_entities": len(entity_rows),
+        "canonical_people": int(entity_counts.get("person") or 0),
+        "entity_conflicts": len(entity_conflicts) if isinstance(entity_conflicts, list) else 0,
         "timeline_points": len(timeline),
         "periodicals_rows": count_rows(periodicals) if periodicals is not None else None,
         "press_directory_rows": count_rows(press_directory) if press_directory is not None else None,
@@ -98,6 +105,8 @@ def main() -> int:
     p.add_argument("--min-statements", type=int, default=100)
     p.add_argument("--min-majra-topics", type=int, default=3)
     p.add_argument("--min-books", type=int, default=50)
+    p.add_argument("--min-canonical-entities", type=int, default=500)
+    p.add_argument("--min-canonical-people", type=int, default=100)
     p.add_argument("--max-total-drop", type=float, default=0.20)
     args = p.parse_args()
 
@@ -115,6 +124,8 @@ def main() -> int:
         "statements": args.min_statements,
         "majra_topics": args.min_majra_topics,
         "books": args.min_books,
+        "canonical_entities": args.min_canonical_entities,
+        "canonical_people": args.min_canonical_people,
     }
     for key, minimum in thresholds.items():
         if cur[key] < minimum:
@@ -169,7 +180,7 @@ def main() -> int:
         "Pendar integrity gate passed: "
         f"{cur['total_news']} news, {cur['figures']} figures, "
         f"{cur['statements']} statements, {cur['majra_topics']} Jan-e Majra topics, "
-        f"{cur['books']} books."
+        f"{cur['books']} books, {cur['canonical_entities']} canonical entities."
     )
     return 0
 
