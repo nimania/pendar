@@ -127,11 +127,11 @@ jobs:
           # Content runs can outlive UI commits. Pull only the latest web-static
           # tree from main so a later periodical deploy never rolls the UI back.
           git fetch origin main --depth=1
-          rm -rf /tmp/jankalam-ui && mkdir -p /tmp/jankalam-ui
-          git archive origin/main web-static | tar -x -C /tmp/jankalam-ui
-          rsync -a --exclude 'data/' /tmp/jankalam-ui/web-static/ site/
+          rm -rf /tmp/pendar-ui && mkdir -p /tmp/pendar-ui
+          git archive origin/main web-static | tar -x -C /tmp/pendar-ui
+          rsync -a --exclude 'data/' /tmp/pendar-ui/web-static/ site/
           mkdir -p site/data
-          cp /tmp/jankalam-ui/web-static/data/pendar-*.json site/data/
+          cp /tmp/pendar-ui/web-static/data/pendar-*.json site/data/
           cp backend/public/data/periodicals.json site/data/periodicals.json
           cp backend/public/data/press-directory.json site/data/press-directory.json
           cp backend/public/data/press-directory.js site/data/press-directory.js
@@ -169,7 +169,7 @@ jobs:
           app_v = versions.get("app.js")
           if sw.exists() and app_v:
               s = sw.read_text(encoding="utf-8")
-              s = re.sub(r'const V = "[^"]*";', f'const V = "jankalam-{app_v}";', s, count=1)
+              s = re.sub(r'const V = "[^"]*";', f'const V = "pendar-{app_v}";', s, count=1)
               sw.write_text(s, encoding="utf-8")
           PY
 
