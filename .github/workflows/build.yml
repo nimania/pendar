@@ -119,6 +119,26 @@ jobs:
         working-directory: backend
         run: python -m scripts.build_books
 
+      - name: Merge freshest Torob commerce into current books
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          commerce_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/books-commerce.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          if [ -n "$commerce_id" ]; then
+            rm -rf /tmp/book-commerce && mkdir -p /tmp/book-commerce
+            if gh run download "$commerce_id" -n books-commerce-data -D /tmp/book-commerce; then
+              src="$(find /tmp/book-commerce -type f -name books.json | head -1)"
+              if [ -n "$src" ] && [ -f backend/public/data/books.json ]; then
+                python backend/scripts/merge_book_commerce.py --source "$src" --target backend/public/data/books.json --target-js backend/public/data/books.js
+              fi
+              assets="$(find /tmp/book-commerce -type d -path '*/assets/books' | head -1)"
+              if [ -n "$assets" ]; then
+                mkdir -p backend/public/assets/books
+                rsync -a "$assets/" backend/public/assets/books/
+              fi
+            fi
+          fi
+
       - name: Save the figures published in this build
         uses: actions/upload-artifact@v4
         with:
