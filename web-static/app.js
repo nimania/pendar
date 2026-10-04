@@ -287,6 +287,13 @@ async function openBook(slug){
   if(!b){el.innerHTML='<div class="state"><div class="big">کتاب پیدا نشد</div></div>';return}
   const creators=(b.creators||[]).map(x=>`<button class="book-entity-link" onclick="openBookPerson('${esc(x.slug)}')"><span>${esc(x.role_fa||"پدیدآورنده")}</span><b>${esc(x.name_fa)}</b></button>`).join("");
   const pub=b.publisher?.slug?`<button class="book-entity-link" onclick="openPublisher('${esc(b.publisher.slug)}')"><span>ناشر</span><b>${esc(b.publisher.name_fa||"")}</b></button>`:"";
+  const editions=(b.editions||[]).map(e=>{
+    const ecs=(e.creators||[]).map(x=>`<button class="book-edition-person" onclick="openBookPerson('${esc(x.slug)}')"><span>${esc(x.role_fa||"پدیدآورنده")}</span><b>${esc(x.name_fa||"")}</b></button>`).join("");
+    const ep=e.publisher?.slug?`<button class="book-edition-person" onclick="openPublisher('${esc(e.publisher.slug)}')"><span>ناشر</span><b>${esc(e.publisher.name_fa||"")}</b></button>`:"";
+    const facts=[e.publication_year_fa?`سال ${esc(e.publication_year_fa)}`:"",e.pages?`${faN(e.pages)} صفحه`:"",e.isbn?`شابک ${esc(e.isbn)}`:""].filter(Boolean).join(" · ");
+    const links=(e.purchase_links||[]).map(x=>`<a class="book-buy ${x.exact?"exact":"search"}" href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(x.store||"فروشگاه")}</b><span>${esc(x.format_fa||"دسترسی")} · ${x.exact?"لینک دقیق":"جست‌وجو"} ↗</span></a>`).join("");
+    return `<article class="book-edition"><div class="book-edition-head"><div><span class="press-kicker">نسخه / ترجمه</span><h3>${esc(e.label_fa||"نسخهٔ شناخته‌شده")}</h3></div>${facts?`<small>${facts}</small>`:""}</div><div class="book-edition-entities">${ecs}${ep}</div>${links?`<div class="book-buy-grid">${links}</div>`:""}</article>`;
+  }).join("");
   const buys=(b.purchase_links||[]).map(x=>`<a class="book-buy ${x.exact?"exact":"search"}" href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(x.store||"فروشگاه")}</b><span>${esc(x.format_fa||(x.exact?"خرید مستقیم":"جست‌وجوی عنوان"))} · ${x.exact?"لینک دقیق":"جست‌وجو"} ↗</span></a>`).join("");
   const mentions=(b.mentions||[]).map(m=>{
     const kindLabel=m.kind==="figure"?"چهره":m.kind==="news"?"خط خبری":"جریده";
@@ -308,6 +315,7 @@ async function openBook(slug){
         </div>
       </div>
       <div class="book-entities">${creators}${pub}</div>
+      ${editions?`<div class="rule"><span>نسخه‌ها و ترجمه‌های شناخته‌شده</span><span class="l"></span></div><div class="book-editions">${editions}</div>`:""}
       ${buys?`<div class="rule"><span>خرید و دسترسی</span><span class="l"></span></div><div class="book-buy-grid">${buys}</div>`:""}
       <div class="rule"><span>کجا در جان‌کلام از این کتاب نام برده شده؟</span><span class="l"></span></div>
       <div class="book-mentions">${mentions||'<div class="state"><div class="big">هنوز اشاره‌ای ثبت نشده</div></div>'}</div>
