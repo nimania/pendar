@@ -1012,8 +1012,8 @@ function renderFeed() {
   const el = document.getElementById("feed");
   if (!ALL.length) { el.innerHTML = `<div class="state"><div class="big">هنوز خبری منتشر نشده</div></div>`; return; }
   if (tier === "mine" && followCount() === 0 && !(FOLLOW.saved && FOLLOW.saved.length)) {
-    el.innerHTML = `<div class="state mine-empty"><div class="big">خط خبریِ تو خالی است</div>
-      <p class="muted">با زدنِ ستارهٔ ★ روی موضوع‌ها (در تبِ موضوعات)، استان‌ها (در صفحهٔ ایران) و منابع، یا ذخیرهٔ خبرها، اینجا خط خبریِ شخصیِ خودت ساخته می‌شود — روی همین دستگاه.</p></div>`;
+    el.innerHTML = `<div class="state mine-empty"><div class="big">سرخطِ تو خالی است</div>
+      <p class="muted">با زدنِ ستارهٔ ★ روی موضوع‌ها (در تبِ موضوعات)، استان‌ها (در صفحهٔ ایران) و منابع، یا ذخیرهٔ خبرها، اینجا سرخطِ شخصیِ خودت ساخته می‌شود — روی همین دستگاه.</p></div>`;
     return;
   }
   let items = feedFilter(tier);
@@ -1330,7 +1330,7 @@ const FAQ = [
   ["هوش مصنوعی دقیقاً چه‌کار می‌کند؟",
     "خلاصه و تفکیکِ چهارلایه را یک مدلِ هوش مصنوعی (جمینای) می‌سازد، اما خروجی‌اش پیش از انتشار اعتبارسنجیِ ساختاری می‌شود و همیشه به منابعِ واقعی گره خورده است. متنِ منابع دست‌نخورده و لینک‌دار می‌ماند."],
   ["هر چند وقت به‌روز می‌شود؟",
-    "هر یک ساعت، به‌صورتِ خودکار. زمانِ آخرین به‌روزرسانی بالای «خط خبری» نوشته شده است."],
+    "هر یک ساعت، به‌صورتِ خودکار. زمانِ آخرین به‌روزرسانی بالای «سرخط» نوشته شده است."],
 ];
 function renderFaq() {
   if (_faqLoaded) return;
@@ -1480,7 +1480,7 @@ function openEntity(slug) {
   document.getElementById("ta-title").textContent = (meta.kind === "body" ? "نهاد: " : "چهره: ") + name;
   document.getElementById("ta-sub").textContent = faN(items.length) + " خبر مرتبط";
   document.getElementById("ta-feed").innerHTML =
-    followBar("entities", slug, "خبرهای این چهره در «خط خبری من» بیاید")
+    followBar("entities", slug, "خبرهای این چهره در «سرخط من» بیاید")
     + referenceStrip(meta) + groupedFeed(items);
 }
 
@@ -1496,7 +1496,7 @@ function openSource(name) {
   const items = ALL.filter(s => (s.source_names || []).includes(name));
   document.getElementById("ta-title").textContent = "منبع: " + name;
   document.getElementById("ta-sub").textContent = faN(items.length) + " خبر از این منبع";
-  document.getElementById("ta-feed").innerHTML = followBar("sources", name, "خبرهای این منبع در «خط خبری من» بیاید") + groupedFeed(items);
+  document.getElementById("ta-feed").innerHTML = followBar("sources", name, "خبرهای این منبع در «سرخط من» بیاید") + groupedFeed(items);
 }
 
 /* ---- ایران — province map + scope classification ----
@@ -1536,7 +1536,7 @@ async function renderIran() {
       </div>
       <p class="muted" style="text-align:center;margin:2px 0 12px">روی هر استان بزن تا خبرهایش را ببینی — رنگِ پررنگ‌تر یعنی خبرِ بیشتر.</p>
       <details class="prov-follow"><summary>دنبال‌کردنِ استان‌ها ★</summary>
-        <p class="muted" style="margin:8px 0">استان‌هایی که دنبال کنی، خبرهایشان در «خط خبری من» می‌آید (روی این دستگاه ذخیره می‌شود).</p>
+        <p class="muted" style="margin:8px 0">استان‌هایی که دنبال کنی، خبرهایشان در «سرخط من» می‌آید (روی این دستگاه ذخیره می‌شود).</p>
         <div class="pfollow-grid">${provChips}</div></details>
       <div class="imp-filter" id="iran-scopes">${scopes.map(s => `<button class="fchip" data-s="${s[0]}" onclick="setIranScope('${s[0]}')">${s[1]}${s[2] ? ` <span class="chip-n">${faN(s[2])}</span>` : ""}</button>`).join("")}</div>
       <div id="iran-body"></div>`;
@@ -1559,7 +1559,7 @@ function openProvince(slug) {
   const name = (PATHS[slug] || {}).fa || slug;
   document.getElementById("ta-title").textContent = "استان: " + name;
   document.getElementById("ta-sub").textContent = faN(items.length) + " خبر در این استان";
-  document.getElementById("ta-feed").innerHTML = followBar("provinces", slug, "خبرهای این استان در «خط خبری من» بیاید") + groupedFeed(items);
+  document.getElementById("ta-feed").innerHTML = followBar("provinces", slug, "خبرهای این استان در «سرخط من» بیاید") + groupedFeed(items);
 }
 function hitProvFollow(slug, btn) {
   toggleF("provinces", slug);
@@ -1702,7 +1702,7 @@ async function renderHomeMajra() {
   }
 }
 
-// بازار — dedicated market page (full price board)
+// پنداربازار — dedicated market page (full price board)
 function showMarket() { show("market"); setTab("feed"); renderMarket(); setHash("#/market"); }
 async function renderMarket() {
   const el = document.getElementById("market");
@@ -1951,7 +1951,7 @@ function updateMineBadge() {
   b.style.display = n ? "inline-flex" : "none";
 }
 
-/* ----- personalized feed ("خط خبری من"----- */
+/* ----- personalized feed ("سرخط من") ----- */
 function mineFeed() {
   return ALL.filter(s =>
     (s.topics || []).some(t => isF("topics", t.slug)) ||
@@ -2206,7 +2206,7 @@ function figuresSection(list) {
   return `<div class="layers"><h3 class="section-h">جان کلام <span class="n">دیدگاه شخصی — نه واقعیتِ خبر</span></h3>
     <div class="views">${list.map(p => figureCard(p, true)).join("")}</div>
     <p class="muted fig-note">دیدگاه‌های مستقیم از کانال‌های عمومی خود افراد و «گفته در خبر» از منابع خبری جدا برچسب می‌خورند؛ لینک هر مورد به منبع همان گفته می‌رود.
-      <a href="#/figures" onclick="event.preventDefault();showFigures()">همهٔ جان کلام</a></p></div>`;
+      <a href="#/figures" onclick="event.preventDefault();showFigures()">ورود به جان کلام</a></p></div>`;
 }
 let _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null, _figDirectoryMode = "direct";
 async function loadCuratedPoems(){ if(_CURATED_POEMS) return _CURATED_POEMS; try{_CURATED_POEMS=await getJSON(`${DATA}/curated-figure-poems.json`);}catch(_){_CURATED_POEMS={};} return _CURATED_POEMS||{}; }
