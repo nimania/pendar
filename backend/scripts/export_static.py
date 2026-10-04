@@ -48,7 +48,7 @@ WEB_STATIC = os.path.join(os.path.dirname(__file__), "..", "..", "web-static")
 # Public base URL (no trailing slash) — used for canonical links, Open Graph and
 # the sitemap. SITE_URL wins for a custom domain; otherwise derive GitHub Pages
 # from GITHUB_REPOSITORY so repository renames do not leave stale canonical URLs.
-_repo = os.environ.get("GITHUB_REPOSITORY", "nimania/jan-kalam")
+_repo = os.environ.get("GITHUB_REPOSITORY", "nimania/pendar")
 try:
     _owner, _repo_name = _repo.split("/", 1)
 except ValueError:
