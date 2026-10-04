@@ -102,6 +102,13 @@ async function openKnowledgeEntity(kind,id,setRoute=true){
     if(canonical?.kind==="figure") return openFigure(canonical.value);
     if(canonical?.kind==="book-person") return openBookPerson(canonical.value);
   }
+  if(kind==="book"){
+    try{
+      const books=await loadBooks();
+      const current=(books.books||[]).find(b=>pkNorm(b.title_fa||b.title)===pkNorm(item.title));
+      if(current) return openBook(current.slug);
+    }catch(_){}
+  }
 
   const facts=[];
   if(item.life)facts.push(item.life);
