@@ -169,8 +169,10 @@ async function _buildSmartSearchDocs(){
     (b.books||[]).forEach(x=>{
       const creators=(x.creators||[]).map(c=>c.name_fa).join(" · ");
       const publisher=x.publisher?.name_fa||"";
-      docs.push({kind:"کتاب",title:x.title_fa||"",sub:[creators,publisher].filter(Boolean).join(" · "),go:`openBook('${String(x.slug).replace(/'/g,"\\'")}')`,text:[x.title_fa,x.subtitle_fa,creators,publisher,x.category_fa].join(" "),snippet:x.description_fa||""});
+      docs.push({kind:"کتاب",title:x.title_fa||"",sub:[creators,publisher].filter(Boolean).join(" · "),go:`openBook('${String(x.slug).replace(/'/g,"\\'")}')`,text:[x.title_fa,x.subtitle_fa,x.original_title,creators,publisher,x.category_fa].join(" "),snippet:x.description_fa||""});
     });
+    (b.people||[]).forEach(x=>docs.push({kind:"پدیدآورنده",title:x.name_fa||"",sub:(x.roles_fa||[]).join(" · "),go:`openBookPerson('${String(x.slug).replace(/'/g,"\\'")}')`,text:[x.name_fa,...(x.roles_fa||[])].join(" ")}));
+    (b.publishers||[]).forEach(x=>docs.push({kind:"ناشر",title:x.name_fa||"",sub:faN((x.book_slugs||[]).length)+" کتاب",go:`openPublisher('${String(x.slug).replace(/'/g,"\\'")}')`,text:[x.name_fa,...(x.categories_fa||[])].join(" ")}));
   }catch(_){}
   _smartSearchDocs=docs; return docs;
 }
@@ -285,7 +287,7 @@ async function openBook(slug){
   if(!b){el.innerHTML='<div class="state"><div class="big">کتاب پیدا نشد</div></div>';return}
   const creators=(b.creators||[]).map(x=>`<button class="book-entity-link" onclick="openBookPerson('${esc(x.slug)}')"><span>${esc(x.role_fa||"پدیدآورنده")}</span><b>${esc(x.name_fa)}</b></button>`).join("");
   const pub=b.publisher?.slug?`<button class="book-entity-link" onclick="openPublisher('${esc(b.publisher.slug)}')"><span>ناشر</span><b>${esc(b.publisher.name_fa||"")}</b></button>`:"";
-  const buys=(b.purchase_links||[]).map(x=>`<a class="book-buy" href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(x.store||"فروشگاه")}</b><span>${esc(x.format_fa||"خرید کتاب")} ↗</span></a>`).join("");
+  const buys=(b.purchase_links||[]).map(x=>`<a class="book-buy ${x.exact?"exact":"search"}" href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(x.store||"فروشگاه")}</b><span>${esc(x.format_fa||(x.exact?"خرید مستقیم":"جست‌وجوی عنوان"))} · ${x.exact?"لینک دقیق":"جست‌وجو"} ↗</span></a>`).join("");
   const mentions=(b.mentions||[]).map(m=>{
     const kindLabel=m.kind==="figure"?"چهره":m.kind==="news"?"خط خبری":"جریده";
     const inner=`<span class="book-mention-source">${esc(kindLabel)} · ${esc(m.source_name||"منبع")}</span><strong>${esc(m.headline_fa||"ذکر کتاب")}</strong>${m.summary_fa?`<p>${esc(m.summary_fa)}</p>`:""}`;
@@ -301,7 +303,8 @@ async function openBook(slug){
         <div class="book-detail-copy"><span class="press-kicker">کتاب</span><h1>${esc(b.title_fa||"")}</h1>
           ${b.subtitle_fa?`<p class="book-subtitle">${esc(b.subtitle_fa)}</p>`:""}
           <p class="book-desc">${esc(b.description_fa||"")}</p>
-          <div class="book-facts">${b.pages?`<span>تعداد صفحات <b>${faN(b.pages)}</b></span>`:""}${b.category_fa?`<span>موضوع <b>${esc(b.category_fa)}</b></span>`:""}${b.isbn?`<span>شابک <b>${esc(b.isbn)}</b></span>`:""}</div>
+          <div class="book-facts">${b.pages?`<span>تعداد صفحات <b>${faN(b.pages)}</b></span>`:""}${b.publication_year_fa?`<span>سال انتشار <b>${esc(b.publication_year_fa)}</b></span>`:""}${b.original_year?`<span>سال اثر اصلی <b>${faN(b.original_year)}</b></span>`:""}${b.category_fa?`<span>موضوع <b>${esc(b.category_fa)}</b></span>`:""}${b.isbn?`<span>شابک <b>${esc(b.isbn)}</b></span>`:""}</div>
+          ${b.original_title?`<div class="book-original-title">عنوان اصلی: <b dir="ltr">${esc(b.original_title)}</b></div>`:""}
         </div>
       </div>
       <div class="book-entities">${creators}${pub}</div>
