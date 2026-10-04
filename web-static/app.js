@@ -437,6 +437,30 @@ function _ssScore(d,Q){
   if(d.canonicalId)score+=2;
   return score+(hits?Math.min(hits,5):0);
 }
+function _ssHumanRoles(roles){
+  const labels={
+    figure:"چهره",
+    book_person:"پدیدآورندهٔ کتاب",
+    content_source:"منبع محتوایی",
+    author:"نویسنده",
+    translator:"مترجم",
+    editor:"ویراستار",
+    director:"کارگردان",
+    actor:"بازیگر",
+    publisher:"ناشر",
+    journalist:"روزنامه‌نگار",
+    researcher:"پژوهشگر"
+  };
+  return [...new Set((roles||[]).map(r=>{
+    const raw=String(r||"").trim();
+    if(!raw)return "";
+    if(labels[raw])return labels[raw];
+    // Never leak internal role codes into the public search UI.
+    if(/^[a-z0-9_:-]+$/i.test(raw))return "";
+    return raw;
+  }).filter(Boolean))].join(" · ");
+}
+
 async function _buildSmartSearchDocs(){
   if(_smartSearchDocs) return _smartSearchDocs;
   const docs=[];
@@ -509,9 +533,13 @@ async function _buildSmartSearchDocs(){
   try{
     const er=await loadCanonicalEntities();
     const labels={person:"شخص",organization:"نهاد",source:"رسانه",publisher:"ناشر",book:"کتاب",movie:"فیلم/سریال",topic:"موضوع",place:"مکان"};
+    const personNames=new Set((er.entities||[]).filter(x=>x.type==="person").map(x=>_canonicalNorm(x.name_fa)).filter(Boolean));
     (er.entities||[]).forEach(x=>{
+      // A personal channel/source may carry exactly the same public name as its owner.
+      // Keep it in the graph, but do not show a second competing "identity" in search.
+      if(x.type==="source" && personNames.has(_canonicalNorm(x.name_fa))) return;
       const label=labels[x.type]||"هویت";
-      const roles=(x.roles||[]).join(" · ");
+      const roles=_ssHumanRoles(x.roles);
       const aliases=(x.aliases||[]).join(" ");
       const summary=x.meta?.summary||"";
       docs.push({
@@ -519,6 +547,7 @@ async function _buildSmartSearchDocs(){
         title:x.name_fa||x.id,
         sub:roles,
         canonicalId:x.id,
+        canonicalType:x.type,
         go:`openEntityProfile('${String(x.id).replace(/'/g,"\\'")}')`,
         text:[x.name_fa,aliases,roles,summary,x.type].join(" "),
         snippet:summary
@@ -546,6 +575,17 @@ async function smartSearch(q){
     out.innerHTML='<div class="smart-search-hint">در حال جست‌وجو در خبرها، گفته‌ها، کتاب‌ها و دانش پندار…</div>';
     const docs=await _buildSmartSearchDocs();
     let ranked=docs.map(d=>({d,score:_ssScore(d,Q)})).filter(x=>x.score>1).sort((a,b)=>b.score-a.score);
+    // Collapse duplicate canonical identities that share the same visible name.
+    // Prefer a person over a source when both exist under that exact name.
+    const canonicalByName=new Map();
+    ranked.forEach(x=>{
+      if(!x.d.canonicalId)return;
+      const k=_canonicalNorm(x.d.title);
+      const prev=canonicalByName.get(k);
+      const rank=t=>t==="person"?4:t==="organization"?3:t==="publisher"?2:t==="source"?1:0;
+      if(!prev || rank(x.d.canonicalType)>rank(prev.d.canonicalType) || (rank(x.d.canonicalType)===rank(prev.d.canonicalType)&&x.score>prev.score)) canonicalByName.set(k,x);
+    });
+    ranked=ranked.filter(x=>!x.d.canonicalId || canonicalByName.get(_canonicalNorm(x.d.title))===x);
     if(Q.personIntent){
       const by=new Map();
       ranked.filter(x=>x.d.kind==="دیدگاه").forEach(x=>{const k=x.d.handle;if(!by.has(k)||by.get(k).score<x.score)by.set(k,x)});
