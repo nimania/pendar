@@ -225,7 +225,7 @@ document.addEventListener("click",e=>{const box=document.getElementById("smart-s
 const VIEWS = { feed: "feed-view", detail: "detail-view", trends: "trends-view",
   factchecks: "factchecks-view", topics: "topics-view", topicarchive: "topic-archive-view",
   weather: "weather-view", iran: "iran-view", faq: "faq-view", market: "market-view",
-  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tech: "tech-view" };
+  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", knowledge: "knowledge-view", tech: "tech-view" };
 const TABS = ["feed", "trends", "factchecks", "iran", "topics"];
 const SCOPE_FA = { local: "استانی", national: "کشوری", international: "بین‌المللی" };
 function setTab(w) { for (const t of TABS) document.getElementById("tab-" + t).classList.toggle("active", w === t); }
@@ -824,6 +824,7 @@ async function route() {
   if (kind === "book" && arg) return openBook(arg);
   if (kind === "movies") return showMovies();
   if (kind === "movie" && arg) return openMovie(arg);
+  if (kind === "knowledge") return showKnowledge(arg || "home");
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
   if (kind === "tech") return showTech();
@@ -1493,15 +1494,26 @@ function referenceStrip(ent) {
 }
 
 // a figure's page: all their stories in one place (+ follow into "my feed")
-function openEntity(slug) {
+async function openEntity(slug) {
   if (!ALL.length) return;
+  const items = ALL.filter(s => (s.entities || []).some(e => e.slug === slug));
+  const meta = items.flatMap(s => s.entities || []).find(e => e.slug === slug) || {};
+  const name = meta.name_fa || slug;
+
+  // Canonical identity: if this news entity is also a registered figure,
+  // resolve the legacy /person route to that single profile.
+  if (meta.kind !== "body") {
+    try {
+      const figures = await loadFigures();
+      const linked = _figureForBookPerson({name_fa:name, aliases_fa:meta.aliases_fa||meta.aliases||[]}, figures);
+      if (linked) return openFigure(linked.handle);
+    } catch (_) {}
+  }
+
   setHash("#/person/" + slug);
   show("topicarchive"); setTab("feed");
   document.getElementById("ta-back-t").textContent = "بازگشت به سرخط";
   document.getElementById("ta-back").onclick = showFeed;
-  const items = ALL.filter(s => (s.entities || []).some(e => e.slug === slug));
-  const meta = items.flatMap(s => s.entities || []).find(e => e.slug === slug) || {};
-  const name = meta.name_fa || slug;
   document.getElementById("ta-title").textContent = (meta.kind === "body" ? "نهاد: " : "چهره: ") + name;
   document.getElementById("ta-sub").textContent = faN(items.length) + " خبر مرتبط";
   document.getElementById("ta-feed").innerHTML =
@@ -1514,6 +1526,9 @@ function followBar(kind, id, note) {
 }
 function openSource(name) {
   if (!ALL.length) return;
+  const canonical = PRESS_SOURCES.find(s => [s.name,...(s.aliases||[])].includes(name));
+  if (canonical) return showPress(canonical.name);
+
   setHash("#/source/" + encodeURIComponent(name));
   show("topicarchive"); setTab("feed");
   document.getElementById("ta-back-t").textContent = "بازگشت به سرخط";
