@@ -89,21 +89,33 @@ function _tvChannelLogo(c){
   if(c&&c.logo)return '<img src="'+esc(c.logo)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">';
   return '<b>'+esc(String(c?.name_fa||c?.name||"TV").slice(0,2))+'</b>';
 }
+function _tvProgrammeStreaming(p){
+  const rows=Array.isArray(p?.streaming_services)?p.streaming_services:[];
+  if(!rows.length)return "";
+  return '<span class="tv-program-streaming">'+rows.slice(0,4).map(s=>{
+    const name=s.name_fa||s.key||"سرویس";
+    if(s.logo)return '<span class="tv-program-provider" title="'+esc(name)+'"><img src="'+esc(s.logo)+'" alt="'+esc(name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></span>';
+    return '<span class="tv-program-provider fallback" title="'+esc(name)+'">'+esc(name.slice(0,2))+'</span>';
+  }).join("")+(rows.length>4?'<small>+'+faN(rows.length-4)+'</small>':"")+'</span>';
+}
 function _tvProgrammeCard(p,c,now){
   const s=_tvDate(p.start), e=_tvDate(p.stop);
   const live=!!(s&&e&&s<=now&&now<e);
+  const linked=!!p.canonical_slug;
   let progress="";
   if(live){
     const pct=Math.max(0,Math.min(100,((now-s)/(e-s))*100));
     progress='<span class="tv-progress"><i style="width:'+pct.toFixed(1)+'%"></i></span>';
   }
   const meta=[p.year,(p.categories||[]).slice(0,2).join(" · ")].filter(Boolean).join(" · ");
-  return '<article class="tv-program '+(live?"is-live":"")+'">'+
+  const click=linked?' onclick="openMovie(\''+esc(p.canonical_slug)+'\')" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){openMovie(\''+esc(p.canonical_slug)+'\')} "':"";
+  return '<article class="tv-program '+(live?"is-live ":"")+(linked?"is-linked":"")+'"'+click+'>'+
     '<div class="tv-channel-logo">'+_tvChannelLogo(c)+'</div>'+
     '<div class="tv-program-main">'+
-      '<div class="tv-program-top"><span class="tv-time">'+_tvFaTime(p.start)+(p.stop?"–"+_tvFaTime(p.stop):"")+'</span>'+(live?'<span class="tv-live-dot">● در حال پخش</span>':"")+'</div>'+
+      '<div class="tv-program-top"><span class="tv-time">'+_tvFaTime(p.start)+(p.stop?"–"+_tvFaTime(p.stop):"")+'</span>'+(live?'<span class="tv-live-dot">● در حال پخش</span>':"")+(linked?'<span class="tv-canonical-badge">جان فیلم</span>':"")+'</div>'+
       '<h3>'+esc(p.title_fa||p.title||"بدون عنوان")+'</h3>'+
       '<p class="tv-channel-name">'+esc(c?.name_fa||c?.name||p.channel_id||"")+(meta?" · "+esc(meta):"")+' '+_tvSourceBadge(c?.confidence||"aggregated")+' '+_tvQualityBadge(p,c)+'</p>'+
+      (linked?'<div class="tv-program-watch"><span>'+esc(p.canonical_title||"")+'</span>'+_tvProgrammeStreaming(p)+'</div>':"")+
       (p.desc_fa?'<p class="tv-desc">'+esc(p.desc_fa)+'</p>':"")+
       progress+
     '</div>'+
@@ -314,6 +326,7 @@ async function renderTVGuide(){
   const el=document.getElementById("tv-guide-content"); if(!el)return;
   const d=await loadTVGuide(), now=new Date(), mode=tvGuideState.mode;
   const active=Object.keys(d.source_stats||{}).length;
+  const linkStats=d.canonical_link_stats||{};
   const generated=d.generated_at?_tvFaDate(d.generated_at)+" · "+_tvFaTime(d.generated_at):"در انتظار نخستین به‌روزرسانی";
   let body="";
   if(mode==="channels")body=_tvChannels(d);
@@ -328,7 +341,7 @@ async function renderTVGuide(){
   const controls=(mode==="streaming"||mode==="sources")?"":_tvToolbar(d);
   el.innerHTML='<header class="tv-hero">'+
     '<div><span class="press-kicker">راهنمای یکپارچهٔ تماشای فارسی</span><h1>'+(mode==="streaming"?"چی ببینم و کجا؟":"الان چی پخش می‌شه؟")+'</h1><p>'+(mode==="streaming"?"فیلم و سریال را بین سرویس‌های فارسی جست‌وجو کن و فقط موجودی تأییدشده را ببین.":"تلویزیون، شبکه‌های فارسی‌زبان، ورزش و سرویس‌های استریمینگ؛ همه در یک راهنمای واحد.")+'</p></div>'+
-    '<div class="tv-status-card"><b>'+faN((d.channels||[]).length)+'</b><span>شبکهٔ دارای داده</span><small>'+faN(active)+' منبع متصل · آخرین ساخت '+esc(generated)+'</small></div>'+
+    '<div class="tv-status-card"><b>'+faN((d.channels||[]).length)+'</b><span>شبکهٔ دارای داده</span><small>'+faN(active)+' منبع متصل'+(Number(linkStats.linked_programmes||0)?' · '+faN(linkStats.linked_programmes)+' برنامه متصل به جان فیلم':"")+' · آخرین ساخت '+esc(generated)+'</small></div>'+
   '</header>'+_tvTabs()+controls+body+
   '<div class="tv-footer-note">زمان‌ها بر اساس ساعت ایران نمایش داده می‌شوند. رکوردهای فنی، تبلیغاتی، placeholder و زمان‌بندی‌های هم‌پوشان پیش از نمایش فیلتر می‌شوند.</div>';
 }
