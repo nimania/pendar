@@ -1841,6 +1841,9 @@ async function renderHomeGlance() {
 
 // Compact human layer on the homepage: curated figures with portraits,
 // ordered by their most recent activity. News-only synthetic profiles are excluded.
+// Some profiles aggregate heterogeneous/source-mixed material and are therefore
+// kept off homepage surfaces while remaining fully available in Jan Kalam.
+const HOME_FIGURE_EXCLUDE=new Set(["mostafatajzadeh"]);
 async function renderHomePeople(){
   const section=document.getElementById("home-people-strip");
   const el=document.getElementById("home-people-list");
@@ -1848,7 +1851,10 @@ async function renderHomePeople(){
   try{
     const d=await loadFigures();
     const figures=(d.figures||[])
-      .filter(f=>f && f.avatar && f.field!=="news" && !String(f.handle||"").startsWith("news-"))
+      .filter(f=>f && f.avatar &&
+        f.field!=="news" &&
+        !String(f.handle||"").startsWith("news-") &&
+        !HOME_FIGURE_EXCLUDE.has(String(f.handle||"").toLowerCase()))
       .map(f=>({
         ...f,
         _latest:(f.posts||[]).map(p=>String(p.published_at||"")).sort().slice(-1)[0]||""
@@ -1896,7 +1902,8 @@ async function renderHomeDaily(){
     const homeFigures=(d.figures||[]).filter(f =>
       f && f.avatar &&
       f.field !== "news" &&
-      !String(f.handle||"").startsWith("news-")
+      !String(f.handle||"").startsWith("news-") &&
+      !HOME_FIGURE_EXCLUDE.has(String(f.handle||"").toLowerCase())
     );
     const rankedPosts=homeFigures.flatMap(f=>(f.posts||[]).map(p=>({...p,_person:f})))
       .filter(p=>p.published_at)
