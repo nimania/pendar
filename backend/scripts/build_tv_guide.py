@@ -24,7 +24,7 @@ IRIB_XML = "https://raw.githubusercontent.com/Samhouston010/sepehr-irib-epg/main
 IRIB_CHANNELS = "https://raw.githubusercontent.com/Samhouston010/sepehr-irib-epg/main/channels.json"
 IRANINTL_XML = "https://raw.githubusercontent.com/SandObserver/iranintl-xmltv/main/output/iranintl.xml"
 EPGPW_GB_GZ = "https://epg.pw/xmltv/epg_GB.xml.gz"
-ARIANA_XML = "https://iptv-org.github.io/epg/guides/af/arianatelevision.com.epg.xml"
+ARIANA_SCHEDULE = "https://www.arianatelevision.com/program-schedule/"
 
 SOURCE_REGISTRY = [
     {"key": "irib", "name": "صداوسیما / تلوبیون", "status": "aggregated", "note": "EPG جاریِ شبکه‌های سراسری و استانی؛ گردآوری‌شده از APIهای تلوبیون/سپهر"},
@@ -34,7 +34,7 @@ SOURCE_REGISTRY = [
     {"key": "radiofarda", "name": "Radio Farda", "status": "official", "note": "جدول پخش روزانهٔ رسمی رادیو فردا"},
     {"key": "gem", "name": "GEM Group", "status": "planned", "note": "نیازمند تطبیق چند منبع"},
     {"key": "afintl", "name": "Afghanistan International", "status": "official", "note": "جدول پخش مستقیم از صفحه رسمی Live شبکه"},
-    {"key": "ariana", "name": "Ariana TV", "status": "verified", "note": "XMLTV تولیدشده از جدول Ariana Television توسط iptv-org/epg"},
+    {"key": "ariana", "name": "Ariana TV", "status": "official", "note": "جدول هفتگی مستقیم از صفحه رسمی Ariana Television"},
     {"key": "tolo", "name": "TOLO TV", "status": "planned", "note": "Schedule رسمی"},
     {"key": "mbc-persia", "name": "MBC Persia", "status": "planned", "note": "زمان‌بندی نیمه‌ساختاریافته"},
 ]
@@ -284,6 +284,90 @@ def ingest_radiofarda(now: datetime) -> tuple[list[dict], list[dict]]:
 def parse_iso(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
 
+def ingest_ariana(now: datetime) -> tuple[list[dict], list[dict]]:
+    """Parse the weekly schedule embedded in Ariana Television's official page."""
+    raw = fetch(ARIANA_SCHEDULE).decode("utf-8", errors="ignore")
+    match = re.search(
+        r'id=["\']jtrt_table_settings_508["\'][^>]*>(.*?)</(?:script|div|textarea)>',
+        raw,
+        flags=re.I | re.S,
+    )
+    if not match:
+        raise RuntimeError("Ariana TV: embedded schedule JSON not found")
+    payload = unescape(match.group(1)).strip()
+    data = json.loads(payload)
+    if not isinstance(data, list) or not data or not isinstance(data[0], list):
+        raise RuntimeError("Ariana TV: invalid schedule JSON")
+    rows = list(data[0])
+    if rows:
+        rows = rows[1:]
+
+    tz = ZoneInfo("Asia/Kabul")
+    local_today = now.astimezone(tz).date()
+    programmes: list[dict] = []
+
+    for off in range(-1, 7):
+        day = local_today + timedelta(days=off)
+        # JS Date.day(): Sunday=0 ... Saturday=6. Table columns:
+        # time, Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday.
+        js_day = (day.weekday() + 1) % 7
+        col = js_day + 2
+        if col > 7:
+            col = 1
+        starts: list[tuple[datetime, str]] = []
+        current_day = day
+        prev_minutes = None
+        for row in rows:
+            if not isinstance(row, list) or len(row) <= col or not row[0] or not row[col]:
+                continue
+            hm = re.sub(r"<[^>]+>", "", str(row[0])).strip()
+            title = re.sub(r"<[^>]+>", "", unescape(str(row[col]))).strip()
+            mt = re.search(r"([0-9]{1,2}):([0-9]{2})", hm.translate(FA_DIGITS))
+            if not mt or not title:
+                continue
+            h, m = int(mt.group(1)), int(mt.group(2))
+            minutes = h * 60 + m
+            if prev_minutes is not None and minutes + 8 * 60 < prev_minutes:
+                current_day += timedelta(days=1)
+            dt = datetime(current_day.year, current_day.month, current_day.day, h, m, tzinfo=tz)
+            starts.append((dt.astimezone(timezone.utc), title))
+            prev_minutes = minutes
+        for i, (start, title) in enumerate(starts):
+            stop = starts[i + 1][0] if i + 1 < len(starts) else start + timedelta(minutes=30)
+            if stop < now - timedelta(hours=12) or start > now + timedelta(days=7):
+                continue
+            programmes.append({
+                "channel_id": "ariana:tv",
+                "start": iso(start),
+                "stop": iso(stop),
+                "title_fa": title,
+                "title_en": title,
+                "desc_fa": None,
+                "year": None,
+                "categories": ["ورزش"] if re.search(r"(sport|football|cricket|fifa|cup|league|match)", title, re.I) else [],
+                "icon": None,
+                "rating": None,
+            })
+
+    # Deduplicate overlap caused by entries that wrap after midnight.
+    uniq = {}
+    for p in programmes:
+        uniq[(p["start"], p["title_fa"])] = p
+    programmes = sorted(uniq.values(), key=lambda x: x["start"])
+    if not programmes:
+        raise RuntimeError("Ariana TV: no current schedule rows")
+    channel = {
+        "id": "ariana:tv",
+        "name_fa": "آریانا تلویزیون",
+        "name": "Ariana Television",
+        "logo": None,
+        "group": "general",
+        "source_key": "ariana",
+        "source_name": "Ariana TV",
+        "confidence": "official",
+    }
+    return [channel], programmes
+
 def ingest_afintl(now: datetime) -> tuple[list[dict], list[dict]]:
     """Parse Afghanistan International's official live now/next schedule."""
     raw = fetch("https://www.afintl.com/live")
@@ -522,7 +606,6 @@ def build() -> dict:
         dict(key="irib", name="صداوسیما / تلوبیون", url=IRIB_XML, confidence="aggregated", metadata_loader=load_irib_metadata),
         dict(key="persiana", name="Persiana Group", url=PERSIANA_XML, confidence="aggregated", metadata_loader=None),
         dict(key="iranintl", name="Iran International", url=IRANINTL_XML, confidence="verified", metadata_loader=lambda: {"iranintl.iitv": {"name": "ایران اینترنشنال", "name_en": "Iran International", "group": "خبری"}}),
-        dict(key="ariana", name="Ariana TV", url=ARIANA_XML, confidence="verified", metadata_loader=None),
     ]
     for spec in specs:
         try:
@@ -544,6 +627,7 @@ def build() -> dict:
     for key, name, loader in (
         ("radiofarda", "Radio Farda", ingest_radiofarda),
         ("afintl", "Afghanistan International", ingest_afintl),
+        ("ariana", "Ariana TV", ingest_ariana),
     ):
         try:
             ch, pr = loader(now)
