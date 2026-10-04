@@ -1,0 +1,6 @@
+{"version":1,"sources":[
+  {"id":"taaghche","name_fa":"طاقچه","kind":"store","adapter":"taaghche","url":"https://taaghche.com/"},
+  {"id":"ketabrah","name_fa":"کتابراه","kind":"store","adapter":"ketabrah","url":"https://ketabrah.com/"},
+  {"id":"tarjomaan","name_fa":"ترجمان","kind":"review_publication","adapter":"rss","url":"https://tarjomaan.com/feed/"},
+  {"id":"taaghcheblog","name_fa":"مجلهٔ طاقچه","kind":"store_editorial","adapter":"rss","url":"https://taaghche.com/blog/feed/"}
+]}

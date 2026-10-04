@@ -6,8 +6,10 @@ import json
 from pathlib import Path
 try:
     from scripts.book_catalog import curate_payload
+    from scripts.book_radar import attach_radar
 except ModuleNotFoundError:
     from book_catalog import curate_payload
+    from book_radar import attach_radar
 
 
 def main() -> None:
@@ -25,6 +27,7 @@ def main() -> None:
 
     src=json.loads(srcp.read_text(encoding="utf-8"))
     dst=json.loads(dstp.read_text(encoding="utf-8"))
+    attach_radar(dst, src)
     cached={
         str(x.get("slug")):x for x in (src.get("books") or [])
         if isinstance(x,dict) and x.get("slug")

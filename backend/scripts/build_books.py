@@ -16,8 +16,10 @@ from pathlib import Path
 from urllib.parse import quote
 try:
     from scripts.book_catalog import apply_curation
+    from scripts.book_radar import attach_radar
 except ModuleNotFoundError:
     from book_catalog import apply_curation
+    from book_radar import attach_radar
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -592,6 +594,7 @@ def build() -> dict:
             "figure": sum(1 for x in content_sources if x["kind"] == "figure"),
         },
     }
+    attach_radar(payload, previous)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     compact=json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
     OUT.write_text(compact, encoding="utf-8")

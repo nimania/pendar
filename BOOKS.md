@@ -54,3 +54,43 @@ python -m unittest discover -s backend/tests -p test_book_catalog.py -v
 node --check web-static/books-hub.js
 node --check web-static/app.js
 ```
+
+## Independent Book Radar
+
+Public shelf discovery does not require a Jan Kalam news mention. The registry in
+`backend/book-radar-sources.json` currently enables Taaghche and Ketabrah public
+bestseller/new-to-store shelves, and Tarjomaan/Taaghche magazine review feeds.
+Unrecognized page structures fail visibly in source health. Discounts, featured
+marketing, and free-book shelves are excluded from scoring. The collector makes
+small sequential public requests every six hours via books-commerce.yml.
+
+Title + author identifies a work. Store product URLs identify editions; audio,
+ebook, translators and publishers remain edition-specific. Clean pinned covers
+are retained. Newly discovered covers only use canonical provider artwork,
+without merchant thumbnails or promotional badges.
+
+Each provider contributes its highest shelf weight at most once: bestseller
+3/(1+(position-1)/10), new-to-store 1/(1+(position-1)/10). Each additional independent
+provider adds one point. This is a visibility indicator, not units sold, quality,
+or a comprehensive Persian-market rank. Positions are observed display positions
+within the monitored shelf, not published numerical sales ranks. Ratings are
+shown with their vote counts, without contributing to the trend score.
+
+History is one latest snapshot per work/provider/shelf/format/day, retained for
+90 days. Weekly changes require an observation of the same list 7–10 days ago;
+repeated same-day runs cannot manufacture growth. Signals expire after 48 hours.
+Failures retain old evidence with its old date. News/press and cached commerce
+merges preserve independent discoveries and rebuild their people/publisher graph.
+The reviewed fallback seed uses the same evidence model for reliable UI startup.
+
+`پروندهٔ بررسی اولیه` currently describes evidence and edition selection. Related
+review links are attributed to their publication and store editorial is labelled.
+It does not claim to have read the full book. Full critical reviews require text
+or a lawful sample and a separately attributed editorial record. Print publisher
+new releases and English books about Iran are subsequent source adapters; they
+are not claimed as currently monitored.
+
+```sh
+python backend/scripts/collect_book_radar.py --catalog web-static/data/books.json --out-js web-static/books-data.js
+python -m unittest discover -s backend/tests -p 'test_book*.py' -v
+```
