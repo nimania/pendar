@@ -7,6 +7,7 @@ on:
     paths:
       - "backend/scripts/enrich_books_torob.py"
       - "backend/scripts/build_books.py"
+      - "backend/scripts/merge_book_commerce.py"
       - ".github/workflows/books-commerce.yml"
   schedule:
     - cron: "23 */6 * * *"
