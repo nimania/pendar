@@ -24,8 +24,15 @@ function _pkNav(active){
   return '<nav class="pk-tabs">'+tabs.map(([id,t])=>'<button class="'+(active===id?'on':'')+'" onclick="showKnowledge(\''+id+'\')">'+t+'</button>').join("")+'</nav>';
 }
 function _pkStat(n,label){return '<div class="pk-stat"><b>'+faN(n)+'</b><span>'+label+'</span></div>'}
-function _pkCard(kind,id,title,summary,meta){
-  return '<button class="pk-card" onclick="openKnowledgeEntity(\''+kind+'\',\''+pkEsc(id)+'\')"><span class="press-kicker">'+pkEsc(meta||kind)+'</span><strong>'+pkEsc(title||id)+'</strong><p>'+pkEsc(summary||"")+'</p></button>';
+function _pkAsset(item){
+  const p=item?.image?.path||item?.cover?.path||"";
+  return /^assets\/(people|figures|books)\//.test(p) ? "assets/pendar/"+p.replace(/^assets\//,"") : "";
+}
+function _pkCard(kind,id,title,summary,meta,item){
+  const img=_pkAsset(item);
+  return '<button class="pk-card '+(img?'has-img':'')+'" onclick="openKnowledgeEntity(\''+kind+'\',\''+pkEsc(id)+'\')">'+
+    (img?'<img class="pk-card-img" src="'+pkEsc(img)+'" alt="" loading="lazy">':'')+
+    '<span class="press-kicker">'+pkEsc(meta||kind)+'</span><strong>'+pkEsc(title||id)+'</strong><p>'+pkEsc(summary||"")+'</p></button>';
 }
 
 async function showKnowledge(section="home"){
@@ -44,25 +51,25 @@ async function showKnowledge(section="home"){
   let body="";
   if(section==="people"){
     const all=[
-      ...d.people.map(x=>({kind:"person",id:x.id,title:x.title,summary:x.summary,meta:x.field||"شخصیت فرهنگی"})),
-      ...d.figures.map(x=>({kind:"figure",id:x.id,title:x.title,summary:x.summary,meta:x.category||"چهره تاریخی"}))
+      ...d.people.map(x=>({...x,kind:"person",meta:x.field||"شخصیت فرهنگی"})),
+      ...d.figures.map(x=>({...x,kind:"figure",meta:x.category||"چهره تاریخی"}))
     ];
-    body='<div class="pk-grid">'+all.map(x=>_pkCard(x.kind,x.id,x.title,x.summary,x.meta)).join("")+'</div>';
+    body='<div class="pk-grid">'+all.map(x=>_pkCard(x.kind,x.id,x.title,x.summary,x.meta,x)).join("")+'</div>';
   }else if(section==="topics"){
-    body='<div class="pk-grid">'+d.topics.map(x=>_pkCard("topic",x.id,x.title,x.summary,x.category)).join("")+'</div>';
+    body='<div class="pk-grid">'+d.topics.map(x=>_pkCard("topic",x.id,x.title,x.summary,x.category,x)).join("")+'</div>';
   }else if(section==="collections"){
-    body='<div class="pk-grid">'+d.collections.map(x=>_pkCard("collection",x.id,x.title,x.summary,"پرونده مطالعاتی")).join("")+'</div>';
+    body='<div class="pk-grid">'+d.collections.map(x=>_pkCard("collection",x.id,x.title,x.summary,"پرونده مطالعاتی",x)).join("")+'</div>';
   }else if(section==="paths"){
-    body='<div class="pk-grid">'+d.paths.map(x=>_pkCard("path",x.id,x.title,x.summary,"مسیر مطالعه")).join("")+'</div>';
+    body='<div class="pk-grid">'+d.paths.map(x=>_pkCard("path",x.id,x.title,x.summary,"مسیر مطالعه",x)).join("")+'</div>';
   }else if(section==="festivals"){
-    body='<div class="pk-grid">'+d.festivals.map(x=>_pkCard("festival",x.id,x.title,x.summary,x.dateLabel)).join("")+'</div>';
+    body='<div class="pk-grid">'+d.festivals.map(x=>_pkCard("festival",x.id,x.title,x.summary,x.dateLabel,x)).join("")+'</div>';
   }else if(section==="organizations"){
-    body='<div class="pk-grid">'+d.organizations.map(x=>_pkCard("organization",x.id,x.title,x.summary,[x.type,x.country].filter(Boolean).join(" · "))).join("")+'</div>';
+    body='<div class="pk-grid">'+d.organizations.map(x=>_pkCard("organization",x.id,x.title,x.summary,[x.type,x.country].filter(Boolean).join(" · "),x)).join("")+'</div>';
   }else{
     const featured=[
-      ...d.collections.slice(0,3).map(x=>_pkCard("collection",x.id,x.title,x.summary,"پرونده")),
-      ...d.festivals.slice(0,2).map(x=>_pkCard("festival",x.id,x.title,x.summary,x.dateLabel)),
-      ...d.people.slice(0,3).map(x=>_pkCard("person",x.id,x.title,x.summary,x.field))
+      ...d.collections.slice(0,3).map(x=>_pkCard("collection",x.id,x.title,x.summary,"پرونده",x)),
+      ...d.festivals.slice(0,2).map(x=>_pkCard("festival",x.id,x.title,x.summary,x.dateLabel,x)),
+      ...d.people.slice(0,3).map(x=>_pkCard("person",x.id,x.title,x.summary,x.field,x))
     ].join("");
     body='<section class="pk-hero"><span class="home-eyebrow">لایهٔ دانش پندار</span><h1>ایران را فقط از خبر امروز نبین</h1><p>چهره‌ها، کتاب‌ها، آیین‌ها، نهادها و پرونده‌های تاریخی در همان شبکه‌ای که خبرها و دیدگاه‌های امروز را نگه می‌دارد.</p></section>'+
       '<div class="pk-stats">'+_pkStat(d.people.length+d.figures.length,"شخص و چهره تاریخی")+_pkStat(d.books.length,"کتاب پایه")+_pkStat(d.topics.length,"موضوع")+_pkStat(d.organizations.length,"نهاد")+_pkStat(d.festivals.length,"آیین")+'</div>'+
@@ -124,12 +131,13 @@ async function openKnowledgeEntity(kind,id,setRoute=true){
   const pathSteps=(item.steps||[]).length?'<section class="pk-section"><h2>گام‌ها</h2><div class="pk-timeline">'+item.steps.map(x=>'<div><b>'+pkEsc(x.title)+'</b><span>'+pkEsc(x.text)+(x.url?' <a class="pk-source" href="'+pkEsc(x.url)+'" target="_blank" rel="noopener">منبع ↗</a>':'')+'</span></div>').join("")+'</div></section>':"";
   const sections=(item.sections||[]).length?'<section class="pk-section">'+item.sections.map(x=>'<article><h2>'+pkEsc(x[0])+'</h2><p>'+pkEsc(x[1])+'</p></article>').join("")+'</section>':"";
   const relatedBooks=(item.bookIds||[]).map(bid=>d.books.find(b=>b.id===bid)).filter(Boolean);
-  const books=relatedBooks.length?'<section class="pk-section"><h2>کتاب‌های مرتبط</h2><div class="pk-grid">'+relatedBooks.map(b=>_pkCard("book",b.id,b.title,b.summary,b.author)).join("")+'</div></section>':"";
+  const books=relatedBooks.length?'<section class="pk-section"><h2>کتاب‌های مرتبط</h2><div class="pk-grid">'+relatedBooks.map(b=>_pkCard("book",b.id,b.title,b.summary,b.author,b)).join("")+'</div></section>':"";
   const source=item.sourceUrl||item.officialUrl;
   const sourceLink=source?'<a class="pk-source" href="'+pkEsc(source)+'" target="_blank" rel="noopener">منبع اصلی ↗</a>':"";
 
+  const hero=_pkAsset(item);
   el.innerHTML='<button class="back" onclick="showKnowledge(\''+(kind==="festival"?"festivals":kind==="organization"?"organizations":kind==="collection"?"collections":kind==="path"?"paths":kind==="topic"?"topics":"people")+'\')">بازگشت به دانش پندار</button>'+
-    '<article class="pk-detail"><span class="press-kicker">'+pkEsc(kind==="figure"?"چهره تاریخی":kind==="person"?"شخص":kind==="organization"?"نهاد":kind==="festival"?"آیین":kind==="collection"?"پرونده":kind==="path"?"مسیر مطالعه":"موضوع")+'</span>'+
+    '<article class="pk-detail">'+(hero?'<img class="pk-detail-img" src="'+pkEsc(hero)+'" alt="'+pkEsc(item.title||"")+'">':'')+'<span class="press-kicker">'+pkEsc(kind==="figure"?"چهره تاریخی":kind==="person"?"شخص":kind==="organization"?"نهاد":kind==="festival"?"آیین":kind==="collection"?"پرونده":kind==="path"?"مسیر مطالعه":"موضوع")+'</span>'+
     '<h1>'+pkEsc(item.title)+'</h1>'+(facts.length?'<div class="pk-facts">'+facts.map(x=>'<span>'+pkEsc(x)+'</span>').join("")+'</div>':"")+
     '<p class="pk-summary">'+pkEsc(item.summary||"")+'</p>'+bios+timeline+pathSteps+sections+books+
     (item.note?'<p class="pk-note">'+pkEsc(item.note)+'</p>':"")+(item.notes?'<p class="pk-note">'+pkEsc(item.notes)+'</p>':"")+sourceLink+'</article>';
