@@ -1662,6 +1662,43 @@ async function renderHomeGlance() {
   } catch (_) {}
 }
 
+// Homepage daily intelligence: the strongest current stories plus the latest figure statements.
+async function renderHomeDaily(){
+  const storyEl=document.getElementById("home-daily-stories");
+  const voiceEl=document.getElementById("home-daily-voices");
+  if(!storyEl||!voiceEl) return;
+  const score=s=>{
+    const imp=Number(s.importance_score||0);
+    const sources=Math.min(Number(s.source_count||0),8)*3;
+    const figures=Math.min(Number(s.figure_count||0),6)*2;
+    const hot=s.trend?.hot?12:s.trend?.rising?7:0;
+    const age=s.published_at?Math.max(0,(Date.now()-new Date(s.published_at).getTime())/36e5):999;
+    const freshness=Math.max(0,18-Math.min(age,18));
+    return imp+sources+figures+hot+freshness;
+  };
+  const stories=(ALL||[]).slice().sort((a,b)=>score(b)-score(a)).slice(0,5);
+  storyEl.innerHTML=stories.length?stories.map((s,i)=>`
+    <button class="home-intel-row" onclick="openStory('${esc(s.id)}')">
+      <span class="home-intel-rank">${faN(i+1)}</span>
+      <span class="home-intel-copy"><b>${esc(s.headline_fa||"")}</b><small>${[relTime(s.published_at),s.source_count?faN(s.source_count)+" منبع":"",s.figure_count?faN(s.figure_count)+" دیدگاه":""].filter(Boolean).join(" · ")}</small></span>
+      <span class="home-intel-go">←</span>
+    </button>`).join(""):'<div class="state"><div class="big">هنوز سرخطی ثبت نشده</div></div>';
+  try{
+    const d=await loadFigures();
+    const posts=(d.figures||[]).flatMap(f=>(f.posts||[]).map(p=>({...p,_person:f})))
+      .filter(p=>p.published_at)
+      .sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at))).slice(0,5);
+    voiceEl.innerHTML=posts.length?posts.map(p=>`
+      <button class="home-voice-row" onclick="openStatement('${esc(statementKey(p))}')">
+        ${avatar(p._person,"sm")}
+        <span class="home-intel-copy"><span class="home-voice-name">${esc(p._person.name_fa||"")}</span><b>${esc(p.topic_fa||p.summary_fa||"دیدگاه تازه")}</b><small>${[relTime(p.published_at),p.kind==="news_statement"?"در خبرها":"دیدگاه مستقیم"].join(" · ")}</small></span>
+        <span class="home-intel-go">←</span>
+      </button>`).join(""):'<div class="state"><div class="big">گفتهٔ تازه‌ای ثبت نشده</div></div>';
+  }catch(_){
+    voiceEl.innerHTML='<div class="state"><div class="big">گفته‌ها در دسترس نیستند</div></div>';
+  }
+}
+
 // Homepage Jan-e Majra: a compact window into the strongest current topic dossiers.
 function scrollHomeMajra(dir) {
   const el = document.getElementById("home-majra-cards");
@@ -2069,6 +2106,7 @@ function statsBlock(st) {
 loadFeed().then(route);   // load the feed, then honor any deep link in the URL
 renderHomeStats();
 renderHomeGlance();
+renderHomeDaily();
 renderHomeMajra();
 renderHomePrices();
 renderHomeWeather();
