@@ -349,7 +349,10 @@ def ingest_bbc_persian(now: datetime) -> tuple[list[dict], list[dict]]:
     if not programmes:
         try:
             probe = html_tokens(fetch(f"https://wspartners.bbc.com/schedules/bbc_persian_tv/day/{today.isoformat()}"))
-            print("BBC DEBUG TOKENS:", json.dumps(probe[:160], ensure_ascii=False))
+            gmt = [t for t in probe if "GMT" in t][:120]
+            durations = [t for t in probe if re.search(r"\d{2}:\d{2}:\d{2}", t)][:80]
+            print("BBC DEBUG GMT:", json.dumps(gmt, ensure_ascii=False))
+            print("BBC DEBUG DUR:", json.dumps(durations, ensure_ascii=False))
         except Exception as exc:
             print("BBC DEBUG FETCH FAILED:", exc)
         raise RuntimeError("BBC Persian: no current schedule parsed")
