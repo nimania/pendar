@@ -241,6 +241,37 @@ def add_current_figures(reg: Registry, data: dict) -> None:
         if eid and handle:
             reg.entities[eid]["meta"].setdefault("handle", handle)
 
+        for post in as_list(row.get("posts")):
+            source_name = str(post.get("source_name") or "").strip()
+            if source_name:
+                sid = reg.add(
+                    "source", source_name, preferred=f"src-{hash_key(source_name)}",
+                    roles=["content_source"],
+                    ref={"dataset": "figures.posts.source", "key": source_name},
+                )
+                reg.edge(eid, "quoted_by", sid)
+
+            topic_name = str(post.get("topic_fa") or "").strip()
+            if topic_name:
+                tid = reg.add(
+                    "topic", topic_name, preferred=f"topic-{hash_key(topic_name)}",
+                    ref={"dataset": "figures.posts.topic", "key": topic_name},
+                )
+                reg.edge(eid, "related_topic", tid)
+
+            for related in as_list(post.get("related_people")):
+                if not isinstance(related, dict):
+                    continue
+                related_name = related.get("name_fa") or related.get("handle")
+                related_handle = str(related.get("handle") or "").strip()
+                rid = reg.add(
+                    "person", related_name, preferred=related_handle or None,
+                    roles=["related_person"],
+                    ref={"dataset": "figures.posts.related_people", "key": related_handle or related_name},
+                    route=("figure", related_handle) if related_handle else None,
+                )
+                reg.edge(eid, "related_person", rid)
+
 
 def add_knowledge_people(reg: Registry, rows: list[dict], dataset: str, route_key: str) -> None:
     for row in rows:
@@ -381,6 +412,27 @@ def add_books(reg: Registry, data: dict) -> None:
             tid = reg.add("topic", str(topic), preferred=str(topic), ref={"dataset": "books.topic", "key": str(topic)})
             reg.edge(bid, "about_topic", tid)
 
+        for mention in as_list(book.get("mentions")):
+            if not isinstance(mention, dict):
+                continue
+            source_name = str(mention.get("source_name") or "").strip()
+            if source_name:
+                sid = reg.add(
+                    "source", source_name, preferred=f"src-{hash_key(source_name)}",
+                    roles=["content_source"],
+                    ref={"dataset": "books.mentions.source", "key": source_name},
+                )
+                reg.edge(bid, "mentioned_by_source", sid)
+            handle = str(mention.get("handle") or "").strip()
+            if handle:
+                pid = reg.add(
+                    "person", mention.get("name_fa") or handle, preferred=handle,
+                    roles=["figure"],
+                    ref={"dataset": "books.mentions.figure", "key": handle},
+                    route=("figure", handle),
+                )
+                reg.edge(bid, "mentioned_by_person", pid)
+
 
 def split_director_names(value: Any) -> list[str]:
     if isinstance(value, dict):
@@ -425,6 +477,27 @@ def add_movies(reg: Registry, data: dict) -> None:
                 ref={"dataset": "movies.cast", "key": str(name)},
             )
             reg.edge(mid, "cast_member", pid)
+
+        for mention in as_list(movie.get("mentions")):
+            if not isinstance(mention, dict):
+                continue
+            source_name = str(mention.get("source_name") or "").strip()
+            if source_name:
+                sid = reg.add(
+                    "source", source_name, preferred=f"src-{hash_key(source_name)}",
+                    roles=["content_source"],
+                    ref={"dataset": "movies.mentions.source", "key": source_name},
+                )
+                reg.edge(mid, "mentioned_by_source", sid)
+            handle = str(mention.get("handle") or "").strip()
+            if handle:
+                pid = reg.add(
+                    "person", mention.get("name_fa") or handle, preferred=handle,
+                    roles=["figure"],
+                    ref={"dataset": "movies.mentions.figure", "key": handle},
+                    route=("figure", handle),
+                )
+                reg.edge(mid, "mentioned_by_person", pid)
 
 
 def add_press_sources(reg: Registry, data_dir: Path) -> None:
