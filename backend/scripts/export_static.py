@@ -46,8 +46,14 @@ OUT = os.environ.get("STATIC_OUT", "public")
 DATA = os.path.join(OUT, "data")
 WEB_STATIC = os.path.join(os.path.dirname(__file__), "..", "..", "web-static")
 # Public base URL (no trailing slash) — used for canonical links, Open Graph and
-# the sitemap. Override with SITE_URL for a custom domain.
-SITE = os.environ.get("SITE_URL", "https://nimania.github.io/jan-kalam").rstrip("/")
+# the sitemap. SITE_URL wins for a custom domain; otherwise derive GitHub Pages
+# from GITHUB_REPOSITORY so repository renames do not leave stale canonical URLs.
+_repo = os.environ.get("GITHUB_REPOSITORY", "nimania/jan-kalam")
+try:
+    _owner, _repo_name = _repo.split("/", 1)
+except ValueError:
+    _owner, _repo_name = "nimania", "jan-kalam"
+SITE = os.environ.get("SITE_URL", f"https://{_owner}.github.io/{_repo_name}").rstrip("/")
 
 # Answers are pre-baked at build time (static host can't run the AI live).
 QUESTIONS = [
@@ -140,7 +146,7 @@ def _story_page(d: dict, app_v: str) -> str:
 <meta name="description" content="{e(summary)}">
 <link rel="canonical" href="{e(url)}">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="جان‌کلام">
+<meta property="og:site_name" content="پندار">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(summary)}">
 <meta property="og:url" content="{e(url)}">
@@ -166,7 +172,7 @@ section p{{margin:0;color:#dce8e1}}
 </head>
 <body>
 <div class="wrap">
-<a class="brand" href="{SITE}/">جان‌کلام</a>
+<a class="brand" href="{SITE}/">پندار</a>
 <div class="meta">هوش خبری فارسی — واقعیت جدا از تحلیل، هر منبع به‌تفکیک</div>
 <h1>{e(d.get("headline_fa") or "")}</h1>
 <div class="meta">{e(str(d.get("source_count") or 0))} منبع{(' · ' + e(srcs)) if srcs else ''}</div>
@@ -175,7 +181,7 @@ section p{{margin:0;color:#dce8e1}}
 {blocks}
 <a class="cta" href="{e(app_url)}">باز کردن در جان‌کلام — منابع، واقعیت و ابهام</a>
 <a class="home" href="{SITE}/">← همهٔ خبرها</a>
-<a class="home" href="{SITE}/#/books">کتابخانهٔ جان‌کلام</a>
+<a class="home" href="{SITE}/#/books">پیشخوان کتاب پندار</a>
 </div>
 </body>
 </html>
@@ -204,7 +210,7 @@ def _entity_page(ent: dict, cards: list[dict]) -> str:
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{e(url)}">
 <meta property="og:type" content="profile">
-<meta property="og:site_name" content="جان‌کلام">
+<meta property="og:site_name" content="پندار">
 <meta property="og:title" content="{e(name)} — خبرها">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{e(url)}">
@@ -230,7 +236,7 @@ li a{{color:#dce8e1;font-size:17px}}
 </head>
 <body>
 <div class="wrap">
-<a class="brand" href="{SITE}/">جان‌کلام</a> · <a href="{SITE}/#/books">کتابخانه</a>
+<a class="brand" href="{SITE}/">پندار</a> · <a href="{SITE}/#/books">کتابخانه</a>
 <div class="meta">{kind_fa} · هوش خبری فارسی</div>
 <h1>خبرهای {e(name)}</h1>
 <div class="meta">{e(str(ent.get("count", 0)))} خبر مرتبط</div>
@@ -258,12 +264,12 @@ def _person_page(person: dict, *, news: bool = False) -> str:
         for p in posts)
     return f"""<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(name)} — جان‌کلام</title>
-<meta name="description" content="{e(label)}ی {e(name)} در جان‌کلام"><link rel="canonical" href="{e(url)}">
+<meta name="description" content="{e(label)}ی {e(name)} در جان کلامِ پندار"><link rel="canonical" href="{e(url)}">
 <meta property="og:type" content="profile"><meta property="og:title" content="{e(name)} — جان‌کلام">
 <meta property="og:url" content="{e(url)}"><meta name="theme-color" content="#155a4f">
 {('<meta property="og:image" content="' + e(person.get("avatar")) + '">' if person.get("avatar") else '')}
 <style>body{{margin:0;background:#0f1512;color:#e8efe9;font-family:Vazirmatn,system-ui,sans-serif;line-height:1.9}}.wrap{{max-width:680px;margin:auto;padding:28px 20px}}a{{color:#3ec99f;text-decoration:none}}.meta{{color:#8fa89b}}li{{padding:12px 0;border-bottom:1px solid #24352d}}.cta{{display:inline-block;margin-top:20px;padding:10px 16px;border-radius:10px;background:#1a9d7e;color:#04120d;font-weight:700}}.profile-avatar{{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #24352d;margin:14px 0}}</style>
-</head><body><div class="wrap"><a href="{SITE}/">جان‌کلام</a> · <a href="{SITE}/#/books">کتابخانه</a>{('<div><img class="profile-avatar" src="' + e(person.get("avatar")) + '" alt="' + e(name) + '"></div>') if person.get("avatar") else ''}<h1>{e(name)}</h1>
+</head><body><div class="wrap"><a href="{SITE}/">پندار</a> · <a href="{SITE}/#/books">کتابخانه</a>{('<div><img class="profile-avatar" src="' + e(person.get("avatar")) + '" alt="' + e(name) + '"></div>') if person.get("avatar") else ''}<h1>{e(name)}</h1>
 <p class="meta">{e(person.get("role_fa") or "")} · {label}</p><ul>{items}</ul>
 <a class="cta" href="{e(app_url)}">باز کردن پروفایل کامل</a></div></body></html>"""
 
