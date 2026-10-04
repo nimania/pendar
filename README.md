@@ -1,7 +1,6 @@
-# Jan Kalam (جان‌کلام)
+# Pendar (پندار)
 
-AI-powered Persian-language news intelligence. This repo currently contains the
-**backend (Phases 0–4)**. See `PRODUCT_SPEC.md`, `ARCHITECTURE.md`,
+Pendar is a Persian-language knowledge and news-intelligence platform. «جان کلام» is one of its verticals for attributed public statements and analysis. This repository contains the production backend, static web app, collectors and publishing workflows. See `PRODUCT_SPEC.md`, `ARCHITECTURE.md`,
 and `ROADMAP.md` for the full plan.
 
 Automatic publishing of newly deployed figure summaries to `@jane_kalaam` with
@@ -30,7 +29,7 @@ for the one-time bot permission and `TELEGRAM_BOT_TOKEN` secret setup.
   endpoints `POST /admin/cluster` and `POST /admin/rank`.
 - **AI synthesis pipeline (Phase 4):** a draft (clustered) story → `provider.generate`
   → **validated** against a Pydantic contract (raw model output is never trusted)
-  → the Persian Jan Kalam + four layers are persisted and the story is
+  → the Persian Pendar synthesis + four layers are persisted and the story is
   **published**. A provider adapter runs a deterministic **mock offline (no key)**
   so the whole pipeline works and is tested without any network or key; setting an
   Anthropic key switches to real Persian generation with no code change. Every
@@ -57,7 +56,7 @@ for the one-time bot permission and `TELEGRAM_BOT_TOKEN` secret setup.
 cd backend
 python -m scripts.seed        # sample data (or run the full ingest→cluster→rank→synthesize chain)
 uvicorn app.main:app          # serves BOTH the API and the web app
-# open http://127.0.0.1:8000/   → the Jan Kalam web app (installable PWA)
+# open http://127.0.0.1:8000/   → the Pendar web app (installable PWA)
 # http://127.0.0.1:8000/docs    → API docs
 ```
 
@@ -165,7 +164,7 @@ the SQLite test path keeps working.
 ## Project layout
 
 ```
-jan-kalam/
+pendar/
 ├── PRODUCT_SPEC.md  ARCHITECTURE.md  ROADMAP.md  README.md
 └── backend/
     ├── app/
