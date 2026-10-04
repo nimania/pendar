@@ -15,6 +15,7 @@ import re
 import time
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -27,6 +28,7 @@ OUT = ROOT / "public" / "data" / "movies.json"
 OUT_JS = ROOT / "public" / "data" / "movies.js"
 CANDIDATES = ROOT / "periodicals" / "movie_candidates.json"
 IDENTITY_CACHE = ROOT / "data" / "movie_identity_cache.json"
+SEEN_CACHE = ROOT / "data" / "movie_seen_cache.json"
 
 USER_AGENT = "Pendar-MovieCatalog/2.0 (+https://nimania.github.io/pendar/)"
 FILMNET_API = "https://filmnet.ir/api-v2/video-contents"
@@ -864,6 +866,19 @@ def build() -> dict:
 
     _write_json(IDENTITY_CACHE, cache)
     attach_mentions(public, sources)
+
+    seen_cache = _load_json(SEEN_CACHE, {})
+    if not isinstance(seen_cache, dict):
+        seen_cache = {}
+    seen_now = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    for movie in public:
+        slug = str(movie.get("slug") or "").strip()
+        if not slug:
+            continue
+        first_seen = str(seen_cache.get(slug) or "").strip() or seen_now
+        seen_cache[slug] = first_seen
+        movie["first_seen_at"] = first_seen
+    _write_json(SEEN_CACHE, seen_cache)
 
     public.sort(key=lambda x: (
         -int(bool((x.get("provider_refs") or {}).get("filmnet"))),
