@@ -1,4 +1,4 @@
-/* جان‌کلام — static build. Reads pre-generated JSON from ./data (no backend). */
+/* Pendar — static build. Reads pre-generated JSON from ./data (no backend). */
 const DATA = "data";
 
 const CAT_FA = { iran: "ایران", world: "جهان", politics: "سیاست", economy: "اقتصاد",
@@ -43,7 +43,7 @@ async function getJSON(path, timeoutMs = 12000) {
 function setArticleSeo(x){
   const title=(x.seo_title_fa||x.headline_fa||x.title_original||"پیشخوان جراید").trim();
   const desc=(x.meta_description_fa||x.summary_fa||"").trim();
-  document.title=title+" | جان‌کلام";
+  document.title=title+" | پندار";
   let m=document.querySelector('meta[name="description"]');
   if(!m){m=document.createElement("meta");m.name="description";document.head.appendChild(m);}
   if(desc)m.content=desc;
@@ -58,7 +58,7 @@ function setArticleSeo(x){
     "datePublished":x.source_published_at||x.published_at||undefined,
     "dateModified":x.published_at||undefined,
     "author":{"@type":"Organization","name":x.publisher||"پیشخوان جراید"},
-    "publisher":{"@type":"Organization","name":"جان‌کلام"},
+    "publisher":{"@type":"Organization","name":"پندار"},
     "mainEntityOfPage":location.href,
     "isBasedOn":x.source_url||x.article_url||undefined,
     "keywords":(x.seo_keywords_fa||[]).join(", ")
@@ -207,14 +207,14 @@ async function smartSearch(q){
       ranked.filter(x=>x.d.kind==="دیدگاه").forEach(x=>{const k=x.d.handle;if(!by.has(k)||by.get(k).score<x.score)by.set(k,x)});
       const people=[...by.values()].sort((a,b)=>b.score-a.score).slice(0,7);
       const rest=ranked.filter(x=>x.d.kind!=="دیدگاه").slice(0,5);
-      out.innerHTML=people.length?`<div class="ss-answer"><strong>چهره‌های مرتبط با این پرسش</strong><small>بر اساس گفته‌های ثبت‌شده در جان کلام</small></div>${people.map(x=>_ssRenderRow(x.d,Q,"چهره")).join("")}${rest.length?`<div class="ss-divider">مطالب مرتبط</div>${rest.map(x=>_ssRenderRow(x.d,Q)).join("")}`:""}`:'<div class="smart-search-hint">در گفته‌های ثبت‌شده، پاسخ روشنی پیدا نشد.</div>';
+      out.innerHTML=people.length?`<div class="ss-answer"><strong>چهره‌های مرتبط با این پرسش</strong><small>بر اساس گفته‌های ثبت‌شده در بخش جان کلامِ پندار</small></div>${people.map(x=>_ssRenderRow(x.d,Q,"چهره")).join("")}${rest.length?`<div class="ss-divider">مطالب مرتبط</div>${rest.map(x=>_ssRenderRow(x.d,Q)).join("")}`:""}`:'<div class="smart-search-hint">در گفته‌های ثبت‌شده، پاسخ روشنی پیدا نشد.</div>';
       return;
     }
     if(Q.sourceIntent){
       const by=new Map();
       ranked.filter(x=>x.d.source).forEach(x=>{const k=x.d.source;if(!by.has(k)||by.get(k).score<x.score)by.set(k,x)});
       const src=[...by.values()].sort((a,b)=>b.score-a.score).slice(0,8);
-      out.innerHTML=src.length?`<div class="ss-answer"><strong>رسانه‌ها و نشریات مرتبط</strong><small>بر اساس آرشیو فعلی جان کلام</small></div>${src.map(x=>_ssRenderRow(x.d,Q,"منبع")).join("")}`:'<div class="smart-search-hint">منبع مرتبطی پیدا نشد.</div>';return;
+      out.innerHTML=src.length?`<div class="ss-answer"><strong>رسانه‌ها و نشریات مرتبط</strong><small>بر اساس آرشیو فعلی پندار</small></div>${src.map(x=>_ssRenderRow(x.d,Q,"منبع")).join("")}`:'<div class="smart-search-hint">منبع مرتبطی پیدا نشد.</div>';return;
     }
     ranked=ranked.slice(0,14);
     out.innerHTML=ranked.length?ranked.map(x=>_ssRenderRow(x.d,Q)).join(""):'<div class="smart-search-hint">نتیجه‌ای پیدا نشد. عبارت را طبیعی‌تر یا کوتاه‌تر امتحان کن.</div>';
@@ -1338,7 +1338,7 @@ function setFactTab(k) {
 let _faqLoaded = false;
 const FAQ = [
   ["خبرها از کجا می‌آیند؟",
-    "جان‌کلام به‌طور خودکار از فیدِ (RSS) ده‌ها خبرگزاری می‌خواند: منابعِ جهانی (رویترز، AP، بی‌بی‌سی، گاردین، الجزیره)، منابعِ داخلیِ فارسی (ایرنا، ایسنا، تسنیم) و منابعِ فارسیِ برون‌مرزی (بی‌بی‌سی فارسی، ایران اینترنشنال، رادیو فردا، دویچه‌وله). هدف این است که هم روایتِ داخلی و هم روایتِ خارجی کنارِ هم دیده شوند."],
+    "پندار به‌طور خودکار از فیدِ (RSS) ده‌ها خبرگزاری می‌خواند: منابعِ جهانی (رویترز، AP، بی‌بی‌سی، گاردین، الجزیره)، منابعِ داخلیِ فارسی (ایرنا، ایسنا، تسنیم) و منابعِ فارسیِ برون‌مرزی (بی‌بی‌سی فارسی، ایران اینترنشنال، رادیو فردا، دویچه‌وله). هدف این است که هم روایتِ داخلی و هم روایتِ خارجی کنارِ هم دیده شوند."],
   ["چطور از چند منبع یک خبر می‌سازد؟",
     "سیستم خبرهایی که دربارهٔ یک رویدادِ واحد هستند را «خوشه‌بندی» می‌کند: عنوان‌ها و متن‌ها را مقایسه می‌کند و گزارش‌های مربوط به یک اتفاق را در یک خبرِ واحد کنار هم می‌گذارد. برای همین زیرِ هر خبر می‌بینی «۳ منبع» یا «۵ منبع»."],
   ["منظور از تفکیکِ «واقعیت / دیدگاه / جان‌کلام / ابهام» چیست؟",
@@ -1352,7 +1352,7 @@ const FAQ = [
   ["ارتباط با ایران چطور تعیین می‌شود؟",
     "بر اساسِ واژه‌های کلیدیِ مرتبط با ایران در متنِ خبر. اگر ربطی نباشد، سیستم به‌زور ربطی نمی‌سازد — خبر بی‌ارتباط صریحاً «بدون ارتباط مستقیم با ایران» علامت می‌خورد."],
   ["کپی‌رایت چه می‌شود؟ آیا متنِ کاملِ خبرها را می‌آورید؟",
-    "نه. جان‌کلام هیچ‌وقت متنِ کاملِ مقاله‌ها را بازنشر نمی‌کند. فقط خلاصهٔ کوتاه می‌سازد و به منبعِ اصلی لینک می‌دهد تا خودت آنجا کامل بخوانی."],
+    "نه. پندار هیچ‌وقت متنِ کاملِ مقاله‌ها را بازنشر نمی‌کند. فقط خلاصهٔ کوتاه می‌سازد و به منبعِ اصلی لینک می‌دهد تا خودت آنجا کامل بخوانی."],
   ["هوش مصنوعی دقیقاً چه‌کار می‌کند؟",
     "خلاصه و تفکیکِ چهارلایه را یک مدلِ هوش مصنوعی (جمینای) می‌سازد، اما خروجی‌اش پیش از انتشار اعتبارسنجیِ ساختاری می‌شود و همیشه به منابعِ واقعی گره خورده است. متنِ منابع دست‌نخورده و لینک‌دار می‌ماند."],
   ["هر چند وقت به‌روز می‌شود؟",
@@ -1362,7 +1362,7 @@ function renderFaq() {
   if (_faqLoaded) return;
   document.getElementById("faq").innerHTML = FAQ.map(([q, a]) =>
     `<details class="faq-item"><summary>${esc(q)}</summary><div class="faq-a">${a}</div></details>`).join("")
-    + `<p class="muted" style="margin-top:18px;text-align:center">جان‌کلام — واقعیت جدا از تحلیل، هر منبع به‌تفکیک.</p>`;
+    + `<p class="muted" style="margin-top:18px;text-align:center">پندار — خبر، دیدگاه و زمینه در یک شبکهٔ واحد.</p>`;
   _faqLoaded = true;
 }
 
@@ -2308,7 +2308,7 @@ function showTech() {
   el.innerHTML = `
     <div class="tech-grid">
       <article class="tech-card"><h2>رابط فارسی و RTL</h2><p>کامپوننت‌های رابط با الگوهای بومیِ راست‌چین طراحی شده‌اند؛ کارت، آمار، آواتار، تب‌ها، نشان‌ها، خط زمان، حالت خالی و بارگذاری.</p><div class="tech-tags"><span class="tech-tag">Card</span><span class="tech-tag">Stat</span><span class="tech-tag">Avatar</span><span class="tech-tag">Tabs</span><span class="tech-tag">Badge</span></div></article>
-      <article class="tech-card"><h2>VibeFarsi UI</h2><p>برای زبان بصری و رفتار کامپوننت‌های فارسی از VibeFarsi الهام گرفته‌ایم. جان‌کلام فعلاً پروژهٔ React/Tailwind نیست؛ بنابراین الگوها در CSS/JavaScript موجود بازپیاده‌سازی شده‌اند و خود کتابخانه dependency اجرایی سایت نیست.</p><div class="tech-tags"><a class="tech-tag" href="https://vibefarsi.ir/" target="_blank" rel="noopener">vibefarsi.ir ↗</a></div></article>
+      <article class="tech-card"><h2>VibeFarsi UI</h2><p>برای زبان بصری و رفتار کامپوننت‌های فارسی از VibeFarsi الهام گرفته‌ایم. پندار فعلاً پروژهٔ React/Tailwind نیست؛ بنابراین الگوها در CSS/JavaScript موجود بازپیاده‌سازی شده‌اند و خود کتابخانه dependency اجرایی سایت نیست.</p><div class="tech-tags"><a class="tech-tag" href="https://vibefarsi.ir/" target="_blank" rel="noopener">vibefarsi.ir ↗</a></div></article>
       <article class="tech-card"><h2>خبر و تحلیل</h2><p>Backend پایتون خبرها را دریافت، خوشه‌بندی، رتبه‌بندی و برای خروجی استاتیک آماده می‌کند. واقعیت خبر، تحلیل رسانه و دیدگاه اشخاص در لایه‌های جدا نگهداری می‌شوند.</p><div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">SQLAlchemy</span><span class="tech-tag">JSON</span></div></article>
       <article class="tech-card"><h2>انتشار استاتیک</h2><p>خروجی نهایی HTML/CSS/JavaScript است و با GitHub Actions ساخته و روی GitHub Pages منتشر می‌شود؛ بنابراین خواندن سایت به سرور اپلیکیشن دائمی وابسته نیست.</p><div class="tech-tags"><span class="tech-tag">GitHub Actions</span><span class="tech-tag">GitHub Pages</span><span class="tech-tag">PWA</span></div></article>
     </div>
@@ -2318,11 +2318,11 @@ function showTech() {
       <div class="tech-row"><b>پردازش</b><span>Python · خوشه‌بندی خبر · استخراج گفته‌ها · رتبه‌بندی و synthesis</span></div>
       <div class="tech-row"><b>داده</b><span>SQLAlchemy و خروجی‌های JSON برای رابط استاتیک</span></div>
       <div class="tech-row"><b>رابط</b><span>HTML + Vanilla JavaScript + CSS؛ فارسی و RTL از ابتدا</span></div>
-      <div class="tech-row"><b>طراحی</b><span>Design tokens داخلی جان‌کلام + الگوهای سازگارشده از VibeFarsi UI</span></div>
+      <div class="tech-row"><b>طراحی</b><span>Design tokens داخلی پندار + الگوهای سازگارشده از VibeFarsi UI</span></div>
       <div class="tech-row"><b>انتشار</b><span>GitHub Actions → GitHub Pages</span></div>
     </div>
     <div class="rule"><span>VibeFarsi کجا اثر گذاشته؟</span><span class="l"></span></div>
-    <div class="tech-card"><p>در بازطراحی تدریجی جان‌کلام، الگوهای Card و Stat برای خلاصه‌ها و اعداد، Avatar برای چهره‌ها، Segmented Control/Tabs برای فیلترها، Badge برای وضعیت‌ها، Timeline برای زنجیرهٔ رویداد و Skeleton/Empty State برای وضعیت‌های بارگذاری و نبود داده مبنا قرار می‌گیرند. این تطبیق مرحله‌ای است تا معماری سبک فعلی حفظ شود.</p></div>
+    <div class="tech-card"><p>در بازطراحی تدریجی پندار، الگوهای Card و Stat برای خلاصه‌ها و اعداد، Avatar برای چهره‌ها، Segmented Control/Tabs برای فیلترها، Badge برای وضعیت‌ها، Timeline برای زنجیرهٔ رویداد و Skeleton/Empty State برای وضعیت‌های بارگذاری و نبود داده مبنا قرار می‌گیرند. این تطبیق مرحله‌ای است تا معماری سبک فعلی حفظ شود.</p></div>
   `;
 }
 function showFigures() {
