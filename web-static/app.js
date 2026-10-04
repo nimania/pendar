@@ -252,7 +252,8 @@ async function loadBooks(){
 function _bookBySlug(d,slug){return (d.books||[]).find(x=>String(x.slug)===String(slug))}
 function _bookCard(b){
   const creator=(b.creators||[])[0];
-  return `<button class="book-card" onclick="openBook('${esc(b.slug)}')">
+  const searchText=[b.title_fa,b.subtitle_fa,b.original_title,(b.creators||[]).map(x=>x.name_fa).join(" "),b.publisher?.name_fa,b.category_fa].filter(Boolean).join(" ");
+  return `<button class="book-card" data-book-search="${esc(searchText)}" onclick="openBook('${esc(b.slug)}')">
     <span class="book-cover-wrap">${b.cover_url?`<img class="book-cover" src="${esc(b.cover_url)}" alt="جلد ${esc(b.title_fa||"کتاب")}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:`<span class="book-cover-placeholder">کتاب</span>`}</span>
     <span class="book-card-copy"><strong>${esc(b.title_fa||"")}</strong>
       ${creator?`<small>${esc(creator.name_fa)} · ${esc(creator.role_fa||"")}</small>`:""}
@@ -260,6 +261,13 @@ function _bookCard(b){
       <em>${faN(b.mention_count||0)} اشاره در جان‌کلام</em>
     </span>
   </button>`;
+}
+function filterBookLibrary(q){
+  const needle=String(q||"").replace(/ي/g,"ی").replace(/ى/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").toLowerCase().trim();
+  document.querySelectorAll("#books-content .book-card").forEach(el=>{
+    const hay=String(el.dataset.bookSearch||"").replace(/ي/g,"ی").replace(/ى/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").toLowerCase();
+    el.style.display=!needle||hay.includes(needle)?"":"none";
+  });
 }
 async function showBooks(mode="books"){
   show("books"); setTab("");
@@ -275,7 +283,14 @@ async function showBooks(mode="books"){
     el.innerHTML=tabs+(people.length?`<div class="publisher-grid">${people.map(p=>`<button class="publisher-card" onclick="openBookPerson('${esc(p.slug)}')"><strong>${esc(p.name_fa)}</strong><small>${faN((p.book_slugs||[]).length)} کتاب</small><em>${esc((p.roles_fa||[]).join(" · "))}</em></button>`).join("")}</div>`:'<div class="state"><div class="big">هنوز پدیدآورنده‌ای ثبت نشده</div></div>');
   }else{
     const books=(d.books||[]).filter(x=>(x.mention_count||0)>0);
-    el.innerHTML=tabs+(books.length?`<div class="books-grid">${books.map(_bookCard).join("")}</div>`:'<div class="state"><div class="big">هنوز کتاب تأییدشده‌ای نداریم</div></div>');
+    const stats=`<div class="book-library-stats">
+      <span><b>${faN(books.length)}</b> کتاب</span>
+      <span><b>${faN((d.people||[]).length)}</b> پدیدآورنده</span>
+      <span><b>${faN((d.publishers||[]).length)}</b> ناشر</span>
+      ${Number.isFinite(Number(d.candidate_count))?`<span class="candidate-stat"><b>${faN(d.candidate_count)}</b> عنوان در حال بررسی</span>`:""}
+    </div>`;
+    const search=books.length>5?`<div class="book-library-search"><input type="search" placeholder="جست‌وجو در کتاب‌ها، نویسنده‌ها و ناشرها…" oninput="filterBookLibrary(this.value)" aria-label="جست‌وجوی کتابخانه"></div>`:"";
+    el.innerHTML=tabs+stats+search+(books.length?`<div class="books-grid">${books.map(_bookCard).join("")}</div>`:'<div class="state"><div class="big">هنوز کتاب تأییدشده‌ای نداریم</div></div>');
   }
   setHash(mode==="publishers"?"#/books/publishers":mode==="people"?"#/books/people":"#/books");
 }
