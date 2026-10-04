@@ -69,7 +69,7 @@ def parse_telegram_distributor(html, source, person, identity):
     return rows
 
 
-def cheshmeh_catalog(source, max_publishers=240, per_publisher=1000):
+def cheshmeh_catalog(source, identity, max_publishers=240, per_publisher=1000):
     """Fetch Cheshmeh Distribution's public publisher catalog API.
 
     The API exposes publisher, title, cover, stock, author, translator, topic and
