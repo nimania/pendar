@@ -28,7 +28,7 @@ class BookCatalogTests(unittest.TestCase):
         book = {'slug': 'namehaye-irani', 'title_fa': 'نامه‌های ایرانی', 'cover_url': 'assets/books/namehaye-irani.jpg'}
         apply_curation(book)
         self.assertTrue(book['cover']['verified_clean'])
-        self.assertEqual(book['cover_url'], 'assets/books/namehaye-irani-clean.jpg')
+        self.assertEqual(book['cover_url'], 'assets/books/namehaye-irani-clean-v2.jpg')
 
     def test_discovery_does_not_claim_inventory(self):
         links = discovery_links({'title_fa': 'عنوان تست'})
@@ -53,7 +53,7 @@ class BookCatalogTests(unittest.TestCase):
             result = json.loads((root / 'target').read_text())['books'][0]
             self.assertEqual(result['torob']['price_toman'], 200)
             self.assertEqual(result['torob']['offers_checked_at'], '2026-10-01')
-            self.assertIn('-clean.', result['cover_url'])
+            self.assertTrue(result['cover']['verified_clean'])
 
 
 if __name__ == '__main__':

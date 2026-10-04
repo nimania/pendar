@@ -2,7 +2,7 @@ window.__BOOK_CURATION__={
   "version": 1,
   "books": {
     "namehaye-irani": {
-      "cover_url": "assets/books/namehaye-irani-clean.jpg",
+      "cover_url": "assets/books/namehaye-irani-clean-v2.jpg",
       "cover": {
         "verified_clean": true,
         "source_url": "https://static.wixstatic.com/media/068d93_7f3426acf5024675bcf67796b53f8f97~mv2.jpg",

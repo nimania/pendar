@@ -71,6 +71,7 @@ function renderBookLibrary(){
   document.querySelectorAll('[data-library-saved]').forEach(el=>{el.classList.toggle('on',s.saved=== (el.dataset.librarySaved==='true'));el.setAttribute('aria-pressed',String(s.saved===(el.dataset.librarySaved==='true')))});
 }
 async function showBooks(mode='books'){
+  document.title='جانِ کتاب | کتابخانهٔ جان‌کلام';
   show('books');setTab('');const lede=document.getElementById('books-lede');if(lede)lede.style.display='none';
   const el=document.getElementById('books-content');el.innerHTML='<div class="spinner"></div>';const d=await loadBooks();
   const tabs=`<div class="books-tabs"><button class="fchip ${mode==='books'?'on':''}" onclick="showBooks('books')">کتاب‌ها</button><button class="fchip ${mode==='people'?'on':''}" onclick="showBooks('people')">پدیدآورندگان</button><button class="fchip ${mode==='publishers'?'on':''}" onclick="showBooks('publishers')">ناشرها</button></div>`;
@@ -110,7 +111,7 @@ function _bookActivity(b){
   const now=Date.now(),counts=Array(8).fill(0);
   for(const m of b.mentions||[]){const d=_bookDate(m.published_at);if(!d)continue;const age=now-d;if(age>=0&&age<56*864e5)counts[7-Math.floor(age/(7*864e5))]++}
   const max=Math.max(1,...counts);
-  return `<div class="book-activity"><div><h3>ردّ کتاب در جان‌کلام</h3><p>${faN(b.mention_count||0)} اشاره · ${faN(_bookStats(b).sources)} منبع</p></div><div class="book-activity-bars" role="img" aria-label="اشاره‌های ثبت‌شده در هشت هفته، از قدیمی به تازه: ${counts.map(faN).join('،')}">${counts.map((n,i)=>`<span title="${faN(8-i)} هفته تا امروز: ${faN(n)} اشاره"><i style="height:${Math.max(4,n/max*100)}%"></i><small>${faN(n)}</small></span>`).join('')}</div><small>۸ هفتهٔ اخیر · قدیمی ← تازه</small></div>`;
+  return `<div class="book-activity"><div><h3>ردّ کتاب در جان‌کلام</h3><p>${faN(b.mention_count||0)} اشاره · ${faN(_bookStats(b).sources)} منبع</p></div><div class="book-activity-bars" role="img" aria-label="اشاره‌های ثبت‌شده در هشت هفته، از قدیمی به تازه: ${counts.map(faN).join('،')}">${counts.map((n,i)=>`<span title="${faN(8-i)} هفته تا امروز: ${faN(n)} اشاره"><i style="height:${Math.max(4,n/max*100)}%"></i><small>${faN(n)}</small></span>`).join('')}</div><small>از چپ: ۸ هفته پیش تا این هفته</small></div>`;
 }
 function _bookRelated(b,books){
   const names=new Set((b.creators||[]).map(c=>_bookNorm(c.name_fa)));
@@ -121,6 +122,7 @@ async function shareBook(slug){const url=location.origin+location.pathname+'#/bo
 async function openBook(slug){
   show('books');setTab('');document.getElementById('books-lede').style.display='none';const el=document.getElementById('books-content');el.innerHTML='<div class="spinner"></div>';const d=await loadBooks(),b=_bookBySlug(d,slug);
   if(!b){el.innerHTML='<div class="state"><div class="big">کتاب پیدا نشد</div></div>';return}
+  document.title=(b.title_fa||'کتاب')+' | جانِ کتاب';
   const entity=(c,fn,role)=>`<button class="book-entity-link" ${_bookAction(fn,c.slug)}><span>${esc(role)}</span><b>${esc(c.name_fa||'')}</b></button>`;
   const related=_bookRelated(b,d.books||[]),stats=_bookStats(b),q=_bookQuote(b);
   const editions=(b.editions||[]).map(e=>`<article class="book-edition"><span class="press-kicker">نسخه / ترجمه</span><h3>${esc(e.label_fa||'نسخهٔ شناخته‌شده')}</h3><div class="book-facts">${e.pages?`<span>${faN(e.pages)} صفحه</span>`:''}${e.publication_year_fa?`<span>سال ${esc(e.publication_year_fa)}</span>`:''}${e.isbn?`<span>شابک <b dir="ltr">${esc(e.isbn)}</b></span>`:''}</div><div class="book-entities">${(e.creators||[]).map(c=>entity(c,'openBookPerson',c.role_fa||'پدیدآورنده')).join('')}${e.publisher?entity(e.publisher,'openPublisher','ناشر'):''}</div></article>`).join('');
