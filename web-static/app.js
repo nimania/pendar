@@ -387,7 +387,9 @@ function _toman(v){
   const n=Number(v);
   return Number.isFinite(n)&&n>0 ? n.toLocaleString("fa-IR")+" تومان" : "—";
 }
-async function openPublisher(slug){
+async function openPublisher(slug, canonicalId=null){
+  const canonicalPub=canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByRef("books.publishers",slug);
+  canonicalId=canonicalPub?.id||canonicalId;
   show("books"); setTab("");
   const lede=document.getElementById("books-lede"); if(lede) lede.style.display="none";
   const el=document.getElementById("books-content"); el.innerHTML='<div class="spinner"></div>';
@@ -415,8 +417,9 @@ function _figureForBookPerson(person, figureData){
     return candidates.includes(name) || aliases.some(a=>candidates.includes(a));
   })||null;
 }
-async function openBookPerson(slug){
-  const [d,figures]=await Promise.all([loadBooks(),loadFigures()]);
+async function openBookPerson(slug, canonicalId=null){
+  const [d,figures,canonicalPerson]=await Promise.all([loadBooks(),loadFigures(),canonicalId?canonicalEntityById(canonicalId):canonicalEntityByRef("books.people",slug)]);
+  canonicalId=canonicalPerson?.id||canonicalId;
   const p=(d.people||[]).find(x=>x.slug===slug);
   if(!p){
     show("books"); setTab("");
@@ -424,8 +427,9 @@ async function openBookPerson(slug){
     document.getElementById("books-content").innerHTML='<div class="state"><div class="big">پدیدآورنده پیدا نشد</div></div>';
     return;
   }
+  if(canonicalPerson?.routes?.figure) return openFigure(canonicalPerson.routes.figure,true,canonicalPerson.id);
   const linkedFigure=_figureForBookPerson(p,figures);
-  if(linkedFigure) return openFigure(linkedFigure.handle);
+  if(linkedFigure) return openFigure(linkedFigure.handle,true,canonicalId);
   show("books"); setTab("");
   const lede=document.getElementById("books-lede"); if(lede) lede.style.display="none";
   const el=document.getElementById("books-content"); el.innerHTML='<div class="spinner"></div>';
@@ -641,10 +645,12 @@ function pressLogo(s) {
 function setPressScope(v){ pressScope=v; renderPress(""); }
 function setPressLanguage(v){ pressLanguage=v; renderPress(""); }
 
-function showPress(sourceName) {
+async function showPress(sourceName, canonicalId=null) {
+  const canonicalSource=sourceName?(canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByName("source",sourceName)):null;
+  canonicalId=canonicalSource?.id||canonicalId;
   show("press"); setTab("press");
   renderPress(sourceName || "");
-  setHash(sourceName ? "#/press-source/" + encodeURIComponent(sourceName) : "#/press");
+  setHash(sourceName ? (canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/press-source/" + encodeURIComponent(sourceName)) : "#/press");
 }
 async function loadPeriodicals() {
   if (periodicalRows.length) return periodicalRows;
@@ -1628,6 +1634,8 @@ async function openEntity(slug) {
   const items = ALL.filter(s => (s.entities || []).some(e => e.slug === slug));
   const meta = items.flatMap(s => s.entities || []).find(e => e.slug === slug) || {};
   const name = meta.name_fa || slug;
+  const canonical=await canonicalEntityByName(meta.kind==="body"?"organization":"person",name);
+  if(canonical) return openCanonicalEntity(canonical.id);
 
   // Canonical identity: if this news entity is also a registered figure,
   // resolve the legacy /person route to that single profile.
@@ -1653,8 +1661,10 @@ async function openEntity(slug) {
 function followBar(kind, id, note) {
   return `<div class="follow-bar">${followBtn(kind, id, "در حال دنبال‌کردن", "دنبال کن")}<span class="fb-note">${esc(note)}</span></div>`;
 }
-function openSource(name) {
+async function openSource(name) {
   if (!ALL.length) return;
+  const entity=await canonicalEntityByName("source",name);
+  if(entity) return showPress(entity.routes?.press_source||entity.name_fa,entity.id);
   const canonical = PRESS_SOURCES.find(s => [s.name,...(s.aliases||[])].includes(name));
   if (canonical) return showPress(canonical.name);
 
@@ -2705,9 +2715,11 @@ function telegramEmbed(post) {
   return `<div class="telegram-embed telegram-embed-${esc(post.telegram_media)}"><iframe src="${src}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media; picture-in-picture" title="رسانهٔ پست تلگرام"></iframe></div>`;
 }
 
-async function openFigure(handle, resetFilter = true) {
+async function openFigure(handle, resetFilter = true, canonicalId = null) {
+  const canonicalFigure=canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByRef("figures",handle);
+  canonicalId=canonicalFigure?.id||canonicalId;
   if (resetFilter) _figureProfileFilter = "all";
-  setHash("#/figure/" + handle);
+  setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/figure/" + handle);
   show("figures"); setTab("");
   document.getElementById("figures-lede").style.display = "none";
   document.getElementById("figure-timeline").innerHTML = "";
@@ -2751,6 +2763,7 @@ async function openFigure(handle, resetFilter = true) {
       ${socialLinks(x.social)}
       <div class="x-profile-stats"><span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${figureMovies.length ? `<span><b>${faN(figureMovies.length)}</b> فیلم/سریال</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}</div>
     </div>
+    ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
       <button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>
