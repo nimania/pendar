@@ -1,11 +1,12 @@
 let tvGuideCache=null;
-let tvGuideState={mode:"now",channel:"all",query:""};
+let tvGuideState={mode:"now",channel:"all",group:"all",query:""};
 
 const TV_GUIDE_SOURCE_LABELS={
   official:"رسمی",
   verified:"تأییدشده",
   aggregated:"تجمیعی",
-  planned:"در صف اتصال"
+  planned:"در صف اتصال",
+  error:"خطای موقت"
 };
 
 const TV_GUIDE_GROUPS={
@@ -58,7 +59,7 @@ function _tvFaDate(v){
 function _tvChannelMap(d){return new Map((d.channels||[]).map(c=>[String(c.id),c]))}
 function _tvNorm(v){return String(v||"").replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim().toLowerCase()}
 function _tvSourceBadge(tier){
-  const cls=tier==="official"?"official":tier==="verified"?"verified":tier==="aggregated"?"aggregated":"planned";
+  const cls=["official","verified","aggregated","error"].includes(tier)?tier:"planned";
   return '<span class="tv-source-badge '+cls+'">'+esc(TV_GUIDE_SOURCE_LABELS[tier]||tier||"")+'</span>';
 }
 function _tvChannelLogo(c){
@@ -91,6 +92,7 @@ function _tvModeRows(d,mode){
   const now=new Date(), cmap=_tvChannelMap(d);
   let rows=(d.programmes||[]).filter(p=>_tvDate(p.start)&&_tvDate(p.stop));
   if(tvGuideState.channel!=="all")rows=rows.filter(p=>String(p.channel_id)===String(tvGuideState.channel));
+  if(tvGuideState.group!=="all")rows=rows.filter(p=>cmap.get(String(p.channel_id))?.group===tvGuideState.group);
   const q=_tvNorm(tvGuideState.query);
   if(q)rows=rows.filter(p=>{
     const c=cmap.get(String(p.channel_id));
@@ -120,7 +122,9 @@ function _tvModeRows(d,mode){
 function _tvToolbar(d){
   const channels=(d.channels||[]).filter(c=>(d.programmes||[]).some(p=>String(p.channel_id)===String(c.id)));
   const options=['<option value="all">همهٔ شبکه‌ها</option>'].concat(channels.map(c=>'<option value="'+esc(c.id)+'" '+(tvGuideState.channel===c.id?"selected":"")+'>'+esc(c.name_fa||c.name||c.id)+'</option>')).join("");
-  return '<div class="tv-toolbar">'+
+  const groupOrder=["all","news","sports","movies","series","kids","docs","general"];
+  const groups='<div class="tv-groups">'+groupOrder.map(g=>'<button class="'+(tvGuideState.group===g?"on":"")+'" onclick="tvGuideState.group=\''+g+'\';tvGuideState.channel=\'all\';renderTVGuide()">'+esc(TV_GUIDE_GROUPS[g]||g)+'</button>').join("")+'</div>';
+  return groups+'<div class="tv-toolbar">'+
     '<label class="tv-search"><span>⌕</span><input type="search" placeholder="جست‌وجوی برنامه یا شبکه…" value="'+esc(tvGuideState.query)+'" oninput="tvGuideState.query=this.value;renderTVGuide()"></label>'+
     '<select onchange="tvGuideState.channel=this.value;renderTVGuide()">'+options+'</select>'+
   '</div>';
@@ -133,7 +137,8 @@ function _tvTabs(){
 
 function _tvChannels(d){
   const now=new Date(), ps=d.programmes||[];
-  const cards=(d.channels||[]).map(c=>{
+  const visible=(d.channels||[]).filter(c=>tvGuideState.group==="all"||c.group===tvGuideState.group);
+  const cards=visible.map(c=>{
     const rows=ps.filter(p=>String(p.channel_id)===String(c.id)).sort((a,b)=>_tvDate(a.start)-_tvDate(b.start));
     const current=rows.find(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop));
     const next=rows.find(p=>_tvDate(p.start)>now);
@@ -148,8 +153,14 @@ function _tvChannels(d){
 }
 
 function _tvSources(d){
-  const rows=(d.sources||[]).map(s=>'<div class="tv-source-row"><span><strong>'+esc(s.name)+'</strong><small>'+esc(s.note||"")+'</small></span>'+_tvSourceBadge(s.status||s.confidence||"planned")+'</div>').join("");
-  return '<div class="tv-source-list">'+rows+'</div><p class="tv-method">برنامه‌های نمایش‌داده‌شده فقط از منبعی وارد می‌شوند که دادهٔ زمان‌بندی آن در آخرین نوبت گردآوری معتبر بوده باشد. منابع «در صف اتصال» هنوز در جدول برنامه استفاده نمی‌شوند.</p>';
+  const stats=d.source_stats||{}, errors=d.source_errors||{};
+  const rows=(d.sources||[]).map(s=>{
+    const st=stats[s.key], err=errors[s.key];
+    const state=st?(s.status||s.confidence||"aggregated"):(err?"error":"planned");
+    const meta=st?(faN(st.channels||0)+" شبکه · "+faN(st.programmes||0)+" برنامه"):(err?"اتصال در آخرین نوبت ناموفق بود":"هنوز وارد جدول نشده");
+    return '<div class="tv-source-row"><span><strong>'+esc(s.name)+'</strong><small>'+esc(s.note||"")+'</small><em>'+esc(meta)+'</em></span>'+_tvSourceBadge(state)+'</div>';
+  }).join("");
+  return '<div class="tv-source-list">'+rows+'</div><p class="tv-method">فقط منبعی که در آخرین گردآوری واقعاً دادهٔ معتبر تحویل داده باشد «متصل» محسوب می‌شود. خطای یک منبع مانع به‌روزرسانی بقیهٔ Guide نمی‌شود.</p>';
 }
 
 function _tvStreaming(){
@@ -171,7 +182,7 @@ async function showTVGuide(mode){
 async function renderTVGuide(){
   const el=document.getElementById("tv-guide-content"); if(!el)return;
   const d=await loadTVGuide(), now=new Date(), mode=tvGuideState.mode;
-  const active=(d.sources||[]).filter(s=>s.status!=="planned").length;
+  const active=Object.keys(d.source_stats||{}).length;
   const generated=d.generated_at?_tvFaDate(d.generated_at)+" · "+_tvFaTime(d.generated_at):"در انتظار نخستین به‌روزرسانی";
   let body="";
   if(mode==="channels")body=_tvChannels(d);
