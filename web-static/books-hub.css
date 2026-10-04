@@ -146,3 +146,39 @@
   .publisher-grid{grid-template-columns:1fr}
   .publisher-grid .book-directory-card{min-height:60px}
 }
+
+
+/* Jan-e Ketab detail minimal pass — 2026-10-04 */
+.hub-book-detail{max-width:920px;margin-inline:auto;padding:0;background:transparent;border:0}
+.hub-book-detail .book-hero{grid-template-columns:160px minmax(0,1fr);gap:28px;align-items:start;padding:18px 0 24px;border-bottom:1px solid var(--line)}
+.hub-book-detail .book-detail-cover{height:245px;min-height:245px;background:transparent;border:0}
+.hub-book-detail .book-detail-cover img{max-height:235px;box-shadow:3px 7px 18px #0002}
+.hub-book-detail .book-detail-copy h1{font-size:30px;line-height:1.55;margin:2px 0 6px}
+.hub-book-detail .book-subtitle{font-size:13px;color:var(--ink-faint);margin:0 0 12px}
+.hub-book-detail .book-desc{max-width:660px;font-size:13px;line-height:2;color:var(--ink-soft);margin:10px 0 14px}
+.hub-book-detail .book-facts{gap:6px;margin:10px 0}
+.hub-book-detail .book-facts span{font-size:10px;padding:5px 8px;border:0;background:var(--surface)}
+.hub-book-detail .book-entities{margin:0;padding:13px 0;border-bottom:1px solid var(--line);gap:7px}
+.hub-book-detail .book-entity-link{border:0;background:transparent;padding:4px 0;margin-inline-end:18px}
+.hub-book-detail .book-entity-link span{font-size:9px}
+.hub-book-detail .book-entity-link b{font-size:12px}
+.hub-book-detail .book-detail-nav{display:flex;gap:18px;padding:13px 0;border-bottom:1px solid var(--line)}
+.hub-book-detail .book-detail-nav a{font-size:11px}
+.hub-book-detail .book-commerce{margin:0;padding:22px 0;border:0;border-bottom:1px solid var(--line);background:transparent}
+.hub-book-detail .book-section-title{margin-bottom:12px}
+.hub-book-detail .book-section-title h2{font-size:17px}
+.hub-book-detail .book-commerce-tabs{margin-bottom:10px}
+.hub-book-detail .book-commerce-group{margin:0 0 10px}
+.hub-book-detail .book-store-row{border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;padding:10px 0}
+.hub-book-detail .book-used-dossier{margin:0;padding:20px 0;border:0;border-bottom:1px solid var(--line);background:transparent}
+.hub-book-detail .book-fold{padding:15px 0}
+.hub-book-detail .book-fold>summary{font-size:12px;list-style-position:inside}
+.hub-book-detail .radar-dossier{background:transparent}
+.hub-book-detail .book-related{margin-top:28px}
+@media(max-width:600px){
+ .hub-book-detail .book-hero{grid-template-columns:110px minmax(0,1fr);gap:16px}
+ .hub-book-detail .book-detail-cover{height:175px;min-height:175px}
+ .hub-book-detail .book-detail-cover img{max-height:168px}
+ .hub-book-detail .book-detail-copy h1{font-size:22px}
+ .hub-book-detail .book-desc{font-size:12px}
+}
