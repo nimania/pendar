@@ -2358,14 +2358,15 @@ async function renderSystem() {
   const safe = async (name, fallback) => {
     try { return await getJSON(`${DATA}/${name}`, 20000); } catch (_) { return fallback; }
   };
-  const [health, stats, meta, pressHealth, tv, weather, periodicals] = await Promise.all([
+  const [health, stats, meta, pressHealth, tv, weather, periodicals, entityRegistry] = await Promise.all([
     safe("system-health.json", null),
     safe("stats.json", {}),
     safe("meta.json", {}),
     safe("press-registry-health.json", []),
     safe("tv-guide.json", {}),
     safe("weather.json", []),
-    safe("periodicals.json", [])
+    safe("periodicals.json", []),
+    safe("entity-registry.json", {})
   ]);
 
   const hc = (health && health.counts) || {};
@@ -2400,6 +2401,10 @@ async function renderSystem() {
     : [];
   const periodicalCount = Array.isArray(periodicals) ? periodicals.length : (hc.periodicals_rows || 0);
   const weatherCount = Array.isArray(weather) ? weather.length : 0;
+  const erCounts = entityRegistry?.counts || {};
+  const canonicalEntities = hc.canonical_entities ?? erCounts.total;
+  const canonicalPeople = hc.canonical_people ?? erCounts.person;
+  const entityConflicts = hc.entity_conflicts ?? (Array.isArray(entityRegistry?.conflicts) ? entityRegistry.conflicts.length : 0);
 
   const gateOk = health ? health.ok === true : null;
   const gateLabel = gateOk === true ? "نسخهٔ منتشرشده سالم است" : gateOk === false ? "گیت انتشار خطا دارد" : "گزارش گیت پیدا نشد";
@@ -2416,6 +2421,7 @@ async function renderSystem() {
     _sysMetric("چهره‌ها", figures, "پروفایل canonical", ""),
     _sysMetric("گفته‌ها", statements, "پست و نقل‌قول", ""),
     _sysMetric("کتاب‌ها", books, "رکورد", ""),
+    _sysMetric("هویت‌های canonical", canonicalEntities, `${canonicalPeople||0} نفر · ${entityConflicts||0} تعارض`, entityConflicts?"warn":"ok"),
     _sysMetric("جان ماجرا", majra, "داده محفوظ؛ فعلاً خارج از Home", ""),
     _sysMetric("جراید", periodicalCount, "مطلب", ""),
     _sysMetric("منابع جراید", pressRows.length, `${pressCounts.active||0} فعال`, ""),
