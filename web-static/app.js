@@ -181,6 +181,26 @@ async function _buildSmartSearchDocs(){
       docs.push({kind:x.type==="series"?"سریال":"فیلم",title:x.title_fa||x.original_title||"",sub:[x.year,director].filter(Boolean).join(" · "),go:`openMovie('${String(x.slug).replace(/'/g,"\\'")}')`,text:[x.title_fa,x.original_title,director,...(x.cast||[]),...(x.genres_fa||[])].join(" "),snippet:x.overview_fa||""});
     });
   }catch(_){}
+  try{
+    const k=await loadPendarKnowledge();
+    const add=(kind,rows,label,subfn)=>{
+      (rows||[]).forEach(x=>docs.push({
+        kind:label,
+        title:x.title||x.name_fa||"",
+        sub:subfn?subfn(x):"",
+        go:`openKnowledgeEntity('${kind}','${String(x.id||"").replace(/'/g,"\\'")}')`,
+        text:[x.title,x.summary,x.field,x.category,x.type,x.country,(x.topicIds||[]).join(" ")].join(" "),
+        snippet:x.summary||""
+      }));
+    };
+    add("person",k.people,"دانش · شخص",x=>x.field||x.place||"");
+    add("figure",k.figures,"دانش · چهره",x=>x.category||x.life||"");
+    add("topic",k.topics,"دانش · موضوع",x=>x.category||"");
+    add("collection",k.collections,"دانش · پرونده",x=>"پرونده مطالعاتی");
+    add("path",k.paths,"دانش · مسیر",x=>"مسیر مطالعه");
+    add("festival",k.festivals,"دانش · آیین",x=>x.dateLabel||"");
+    add("organization",k.organizations,"دانش · نهاد",x=>[x.type,x.country].filter(Boolean).join(" · "));
+  }catch(_){}
   _smartSearchDocs=docs; return docs;
 }
 function _ssExcerpt(s,Q){
@@ -199,7 +219,7 @@ async function smartSearch(q){
   _smartSearchTimer=setTimeout(async()=>{
     const out=document.getElementById("smart-search-results"), Q=_ssQuery(q);
     if(Q.n.length<2){out.innerHTML='<div class="smart-search-hint">می‌توانی طبیعی بنویسی؛ مثلاً «چه کسانی درباره احتمال جنگ حرف زده‌اند؟»</div>';return}
-    out.innerHTML='<div class="smart-search-hint">در حال جست‌وجو در خبرها، گفته‌ها و جراید…</div>';
+    out.innerHTML='<div class="smart-search-hint">در حال جست‌وجو در خبرها، گفته‌ها، کتاب‌ها و دانش پندار…</div>';
     const docs=await _buildSmartSearchDocs();
     let ranked=docs.map(d=>({d,score:_ssScore(d,Q)})).filter(x=>x.score>1).sort((a,b)=>b.score-a.score);
     if(Q.personIntent){
