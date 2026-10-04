@@ -142,6 +142,7 @@ jobs:
           path: |
             backend/data/movie_identity_cache.json
             backend/data/movie_seen_cache.json
+            backend/data/movie_imdb_cache.json
           key: pendar-movie-identity-${{ github.run_id }}
           restore-keys: |
             pendar-movie-identity-
@@ -153,6 +154,10 @@ jobs:
       - name: Enrich film catalog from EPG
         continue-on-error: true
         run: python backend/scripts/enrich_movies_from_epg.py --tv backend/public/data/tv-guide.json --movies backend/public/data/movies.json --movies-js backend/public/data/movies.js
+
+      - name: Enrich IMDb IDs
+        continue-on-error: true
+        run: python backend/scripts/enrich_imdb_ids.py --movies backend/public/data/movies.json --movies-js backend/public/data/movies.js --cache backend/data/movie_imdb_cache.json
 
       - name: Collect 30nama public archive
         continue-on-error: true
