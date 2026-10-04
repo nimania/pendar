@@ -54,6 +54,7 @@ def snapshot(site: Path) -> dict:
     trends = load_json(site, "trends.json")
     books = load_json(site, "books.json")
     entity_registry = load_json(site, "entity-registry.json")
+    entity_qa = load_json(site, "entity-qa.json")
 
     # These are not thresholded yet, but malformed files must never reach Pages.
     periodicals = maybe_json(site, "periodicals.json")
@@ -70,6 +71,7 @@ def snapshot(site: Path) -> dict:
     entity_rows = entity_registry.get("entities", []) if isinstance(entity_registry, dict) else []
     entity_counts = entity_registry.get("counts", {}) if isinstance(entity_registry, dict) else {}
     entity_conflicts = entity_registry.get("conflicts", []) if isinstance(entity_registry, dict) else []
+    qa_stats = entity_qa.get("stats", {}) if isinstance(entity_qa, dict) else {}
 
     total = stats.get("total") if isinstance(stats, dict) else None
     if not isinstance(total, int):
@@ -89,6 +91,11 @@ def snapshot(site: Path) -> dict:
         "canonical_entities": len(entity_rows),
         "canonical_people": int(entity_counts.get("person") or 0),
         "entity_conflicts": len(entity_conflicts) if isinstance(entity_conflicts, list) else 0,
+        "entity_duplicate_candidates": int(qa_stats.get("duplicate_candidates") or 0),
+        "entity_ambiguous_aliases": int(qa_stats.get("ambiguous_aliases") or 0),
+        "entity_orphans": int(qa_stats.get("orphans") or 0),
+        "entity_broken_edges": int(qa_stats.get("broken_edges") or 0),
+        "entity_invalid_overrides": int(qa_stats.get("invalid_overrides") or 0),
         "timeline_points": len(timeline),
         "periodicals_rows": count_rows(periodicals) if periodicals is not None else None,
         "press_directory_rows": count_rows(press_directory) if press_directory is not None else None,
@@ -130,6 +137,11 @@ def main() -> int:
     for key, minimum in thresholds.items():
         if cur[key] < minimum:
             errors.append(f"{key}={cur[key]} is below minimum {minimum}")
+
+    if cur["entity_broken_edges"] > 0:
+        errors.append(f"entity graph has {cur['entity_broken_edges']} broken edges")
+    if cur["entity_invalid_overrides"] > 0:
+        errors.append(f"entity overrides have {cur['entity_invalid_overrides']} validation errors")
 
     # stats.timeline should describe the same published corpus as stats.total.
     if cur["timeline_points"] != cur["total_news"]:
