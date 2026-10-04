@@ -475,6 +475,12 @@ def _all_content_sources(archive: list[dict], stories: list[dict], figures: list
 
 
 def build() -> dict:
+    previous = _load_json(OUT, {})
+    previous_books = {
+        str(x.get("slug")): x
+        for x in (previous.get("books") or [])
+        if isinstance(x, dict) and x.get("slug")
+    } if isinstance(previous, dict) else {}
     archive = _load_archive()
     stories = _load_stories()
     figures = _load_figures()
@@ -530,6 +536,12 @@ def build() -> dict:
         b["mention_count"] = len(b["mentions"])
         if not b.get("purchase_links"):
             b["purchase_links"] = _search_links(b["title_fa"])
+        old = previous_books.get(str(b.get("slug")))
+        if old:
+            if old.get("torob"):
+                b["torob"] = old["torob"]
+            if str(old.get("cover_url") or "").startswith("assets/books/"):
+                b["cover_url"] = old["cover_url"]
         public_books.append(b)
 
     public_books.sort(key=lambda b: (-int(b.get("mention_count") or 0), b.get("title_fa") or ""))
