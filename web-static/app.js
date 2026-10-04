@@ -1,6 +1,7 @@
 /* Pendar — static build. Reads pre-generated JSON from ./data (no backend). */
 const DATA = "data";
 
+// Shared data caches must exist before startup renderers run.\nlet _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null;\n
 const CAT_FA = { iran: "ایران", world: "جهان", politics: "سیاست", economy: "اقتصاد",
   technology: "فناوری", ai: "هوش مصنوعی", culture: "فرهنگ", sport: "ورزش", science: "علم", environment: "محیط‌زیست", entertainment: "سرگرمی", health: "سلامت" };
 const IRAN_FA = { high: "ارتباط بالا با ایران", medium: "ارتباط با ایران",
@@ -1018,6 +1019,7 @@ async function loadFeed() {
     renderFeed();
     renderDayChips();
     updateFreshness();
+    renderHomeDaily();
   } catch (e) {
     const why = e && e.name === "AbortError" ? "دریافت داده بیش از حد طول کشید." : "فایل خبرها در دسترس نیست.";
     el.innerHTML = `<div class="state"><div class="big">خبرها بارگذاری نشد</div>
@@ -2141,7 +2143,6 @@ function statsBlock(st) {
 loadFeed().then(route);   // load the feed, then honor any deep link in the URL
 renderHomeStats();
 renderHomeGlance();
-renderHomeDaily();
 renderHomeMajra();
 renderHomePrices();
 renderHomeWeather();
@@ -2306,7 +2307,7 @@ function figuresSection(list) {
     <p class="muted fig-note">دیدگاه‌های مستقیم از کانال‌های عمومی خود افراد و «گفته در خبر» از منابع خبری جدا برچسب می‌خورند؛ لینک هر مورد به منبع همان گفته می‌رود.
       <a href="#/figures" onclick="event.preventDefault();showFigures()">ورود به جان کلام</a></p></div>`;
 }
-let _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null, _figDirectoryMode = "direct";
+let _figDirectoryMode = "direct";
 async function loadCuratedPoems(){ if(_CURATED_POEMS) return _CURATED_POEMS; try{_CURATED_POEMS=await getJSON(`${DATA}/curated-figure-poems.json`);}catch(_){_CURATED_POEMS={};} return _CURATED_POEMS||{}; }
 async function loadFigures() {
   if (_FIG) return _FIG;
