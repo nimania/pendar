@@ -132,7 +132,7 @@ jobs:
           import hashlib, pathlib, re
           root = pathlib.Path("site")
           versions = {}
-          for name in ("app.js", "styles.css", "iran-provinces.js", "data/press-directory.js", "data/books.js"):
+          for name in ("app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "iran-provinces.js", "data/press-directory.js", "data/books.js"):
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]
@@ -170,3 +170,4 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_attempt }}
+

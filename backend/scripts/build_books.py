@@ -14,6 +14,10 @@ import json
 import re
 from pathlib import Path
 from urllib.parse import quote
+try:
+    from scripts.book_catalog import apply_curation
+except ModuleNotFoundError:
+    from book_catalog import apply_curation
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -542,6 +546,7 @@ def build() -> dict:
                 b["torob"] = old["torob"]
             if str(old.get("cover_url") or "").startswith("assets/books/"):
                 b["cover_url"] = old["cover_url"]
+        apply_curation(b)
         public_books.append(b)
 
     public_books.sort(key=lambda b: (-int(b.get("mention_count") or 0), b.get("title_fa") or ""))

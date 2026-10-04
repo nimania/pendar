@@ -8,6 +8,8 @@ on:
       - "backend/scripts/enrich_books_torob.py"
       - "backend/scripts/build_books.py"
       - "backend/scripts/merge_book_commerce.py"
+      - "backend/scripts/book_catalog.py"
+      - "web-static/data/book-curation.json"
       - ".github/workflows/books-commerce.yml"
   schedule:
     - cron: "23 */6 * * *"
@@ -30,6 +32,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Verify book identity and commerce preservation
+        run: python -m unittest discover -s backend/tests -p test_book_catalog.py -v
 
       - name: Find latest complete periodicals site and weather
         id: base
@@ -81,7 +85,7 @@ jobs:
 
       - name: Enrich books with Torob sellers, prices and covers
         env:
-          TOROB_BOOK_LIMIT: "2"
+          TOROB_BOOK_LIMIT: "6"
           TOROB_MCP_GAP: "5.5"
         run: |
           mkdir -p backend/public/data backend/public/assets/books
@@ -126,7 +130,7 @@ jobs:
           import hashlib, pathlib, re
           root=pathlib.Path("site")
           versions={}
-          for name in ("app.js","styles.css","iran-provinces.js","data/press-directory.js","data/books.js"):
+          for name in ("app.js","styles.css","books-hub.js","books-hub.css","book-curation.js","iran-provinces.js","data/press-directory.js","data/books.js"):
               p=root/name
               if p.exists():
                   versions[name]=hashlib.md5(p.read_bytes()).hexdigest()[:8]

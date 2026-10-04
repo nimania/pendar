@@ -8,8 +8,8 @@ The script is conservative: a Torob result is accepted only when the normalized
 book title is present in the returned product name. Dynamic commerce data lives
 under book["torob"]; editorial metadata remains untouched.
 
-Covers are downloaded into public/assets/books/ so the site is not dependent on
-hotlinking a merchant image.
+Merchant images remain candidates. Visually reviewed covers are pinned in the
+editorial registry and shipped as repository assets.
 """
 from __future__ import annotations
 
@@ -22,6 +22,10 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+try:
+    from scripts.book_catalog import curate_payload
+except ModuleNotFoundError:
+    from book_catalog import curate_payload
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOKS = ROOT / "public" / "data" / "books.json"
@@ -100,45 +104,31 @@ def _choose_product(book: dict, products: list[dict]) -> dict | None:
             continue
         # Hard gate: exact normalized title phrase or every meaningful title token.
         phrase = title in name
-        token_hits = sum(1 for t in title_tokens if t in name)
+        token_hits = sum(1 for t in title_tokens if t in name.split())
         if not phrase and token_hits < max(2, len(title_tokens)):
             continue
         score = (100 if phrase else 0) + token_hits * 10
         creator = norm(_creator_hint(book))
-        if creator and creator in name:
+        identities = [norm(c.get('name_fa')) for c in book.get('creators') or []]
+        identities += [norm(c.get('name_fa')) for e in book.get('editions') or [] for c in e.get('creators') or []]
+        # Montesquieu has two common Persian spellings.
+        identities += ['مونتسکیو'] if 'منتسکیو' in identities else []
+        publisher = norm((book.get('publisher') or {}).get('name_fa')).removeprefix('نشر ').removeprefix('انتشارات ')
+        isbn = re.sub(r'[^0-9X]', '', str(book.get('isbn') or '').upper())
+        isbn_hit = bool(isbn and isbn in re.sub(r'[^0-9X]', '', str(p.get('isbn') or p.get('name_fa') or '').upper()))
+        creator_hit = any(h and h in name for h in identities)
+        publisher_hit = bool(publisher and publisher in name)
+        if not isbn_hit and not creator_hit and not publisher_hit:
+            continue
+        if isbn_hit:
+            score += 60
+        if creator_hit:
             score += 20
         if p.get("available"):
             score += 3
         if score > best_score:
             best, best_score = p, score
     return best
-
-
-def _download_cover(slug: str, url: str) -> str | None:
-    if not url:
-        return None
-    ASSETS.mkdir(parents=True, exist_ok=True)
-    req = urllib.request.Request(
-        url,
-        headers={"user-agent": "Mozilla/5.0 JanKalam/1.0", "accept": "image/*"},
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=30) as res:
-            data = res.read(5_500_000)
-            ctype = (res.headers.get("content-type") or "").lower()
-        if len(data) < 500:
-            return None
-        ext = ".webp" if "webp" in ctype else ".png" if "png" in ctype else ".jpg"
-        path = ASSETS / f"{slug}{ext}"
-        # Remove an older extension for the same slug.
-        for old in ASSETS.glob(f"{slug}.*"):
-            if old != path:
-                old.unlink(missing_ok=True)
-        path.write_bytes(data)
-        return f"assets/books/{path.name}"
-    except Exception as exc:
-        print(f"cover download failed for {slug}: {exc}")
-        return None
 
 
 def _project_offer(o: dict) -> dict:
@@ -166,7 +156,7 @@ def _project_offer(o: dict) -> dict:
 def enrich() -> dict:
     if not BOOKS.exists():
         raise SystemExit("books.json does not exist")
-    payload = json.loads(BOOKS.read_text(encoding="utf-8"))
+    payload = curate_payload(json.loads(BOOKS.read_text(encoding="utf-8")))
     books = payload.get("books") or []
     rid = 10
 
@@ -188,9 +178,7 @@ def enrich() -> dict:
     # oldest checked rows first so prices naturally rotate without bursts.
     def priority(book):
         torob=book.get("torob") or {}
-        if not torob.get("matched"):
-            return (0, "")
-        return (1, str(torob.get("checked_at") or ""))
+        return (0 if not torob.get('checked_at') else 1, str(torob.get('checked_at') or ''))
     queue=sorted(books, key=priority)
     for book in queue:
         if done >= MAX_BOOKS:
@@ -243,12 +231,15 @@ def enrich() -> dict:
         try:
             details = call("product_details", detail_args, rid=rid)
             rid += 1
+            offers_checked_at = datetime.now(timezone.utc).isoformat()
         except Exception as exc:
             print(f"details failed for {title}: {exc}")
             details = {}
             # Keep the previous seller list when only the detail call fails.
             previous=(book.get("torob") or {})
-            if previous.get("matched") and previous.get("offers"):
+            offers_checked_at = None
+            if previous.get("matched") and previous.get("prk") == product.get("prk") and previous.get("offers"):
+                offers_checked_at = previous.get('offers_checked_at') or previous.get('checked_at')
                 details={
                     "offers": previous.get("offers") or [],
                     "offer_count": previous.get("offer_count"),
@@ -281,15 +272,15 @@ def enrich() -> dict:
             if len(uniq) >= 8:
                 break
 
-        local_cover = _download_cover(book.get("slug") or "book", product.get("image") or "")
-        if local_cover:
-            # Torob is a discovery source for the cover, but the public site uses
-            # our local static copy rather than hotlinking it.
-            book["cover_url"] = local_cover
+        # Commerce images are candidates only. Editorial cover replacements
+        # require visual review and a record in book-curation.json.
 
         book["torob"] = {
             "matched": True,
             "checked_at": datetime.now(timezone.utc).isoformat(),
+            "offers_checked_at": offers_checked_at,
+            "match_basis": "title_and_creator_or_publisher_or_isbn",
+            "edition_verified": False,
             "prk": product.get("prk"),
             "name_fa": product.get("name_fa"),
             "product_url": product.get("url"),

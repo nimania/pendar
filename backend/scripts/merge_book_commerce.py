@@ -4,6 +4,10 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+try:
+    from scripts.book_catalog import curate_payload
+except ModuleNotFoundError:
+    from book_catalog import curate_payload
 
 
 def main() -> None:
@@ -40,6 +44,10 @@ def main() -> None:
                 newer_incoming=str(incoming.get("checked_at") or "") > str(current.get("checked_at") or "")
                 primary=incoming if newer_incoming else current
                 secondary=current if newer_incoming else incoming
+                if primary.get('prk') and secondary.get('prk') and primary['prk'] != secondary['prk']:
+                    # A changed product identity must never inherit another
+                    # edition's seller URLs or prices.
+                    secondary={}
                 combined=dict(secondary)
                 for k,v in primary.items():
                     if v not in (None, "", [], {}):
@@ -50,6 +58,8 @@ def main() -> None:
                 for k in ("offers","offer_count","price_range_toman","price_spread_toman","attribution"):
                     if primary.get(k) in (None, "", [], {}) and secondary.get(k) not in (None, "", [], {}):
                         combined[k]=secondary[k]
+                if not primary.get('offers') and secondary.get('offers'):
+                    combined['offers_checked_at']=secondary.get('offers_checked_at') or secondary.get('checked_at')
                 b["torob"]=combined
                 merged+=1
             elif not current:
@@ -61,6 +71,7 @@ def main() -> None:
         if cover.startswith("assets/books/") and not str(b.get("cover_url") or "").startswith("assets/books/"):
             b["cover_url"]=cover
 
+    curate_payload(dst)
     compact=json.dumps(dst,ensure_ascii=False,separators=(",",":"))
     dstp.write_text(compact,encoding="utf-8")
     if args.target_js:
