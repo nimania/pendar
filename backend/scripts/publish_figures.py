@@ -19,7 +19,12 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlsplit
 from urllib.request import Request, urlopen
 
-SITE = "https://nimania.github.io/jan-kalam"
+_repo = os.environ.get("GITHUB_REPOSITORY", "nimania/jan-kalam")
+try:
+    _owner, _repo_name = _repo.split("/", 1)
+except ValueError:
+    _owner, _repo_name = "nimania", "jan-kalam"
+SITE = os.environ.get("SITE_URL", f"https://{_owner}.github.io/{_repo_name}").rstrip("/")
 STATE_BRANCH = "telegram-state"
 STATE_PATH = "telegram/figures-state.json"
 STATUSES = {"baseline", "pending", "sending", "sent"}
