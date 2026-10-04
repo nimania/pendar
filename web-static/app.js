@@ -1,7 +1,9 @@
 /* Pendar — static build. Reads pre-generated JSON from ./data (no backend). */
 const DATA = "data";
 
-// Shared data caches must exist before startup renderers run.\nlet _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null;\n
+// Shared data caches must exist before startup renderers run.
+let _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null;
+
 const CAT_FA = { iran: "ایران", world: "جهان", politics: "سیاست", economy: "اقتصاد",
   technology: "فناوری", ai: "هوش مصنوعی", culture: "فرهنگ", sport: "ورزش", science: "علم", environment: "محیط‌زیست", entertainment: "سرگرمی", health: "سلامت" };
 const IRAN_FA = { high: "ارتباط بالا با ایران", medium: "ارتباط با ایران",
