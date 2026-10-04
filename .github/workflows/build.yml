@@ -154,6 +154,10 @@ jobs:
         continue-on-error: true
         run: python backend/scripts/enrich_movies_from_epg.py --tv backend/public/data/tv-guide.json --movies backend/public/data/movies.json --movies-js backend/public/data/movies.js
 
+      - name: Collect 30nama public archive
+        continue-on-error: true
+        run: python backend/scripts/collect_30nama_archive.py --output backend/public/data/30nama.json --movies backend/public/data/movies.json --movies-js backend/public/data/movies.js
+
       - name: Build streaming availability
         continue-on-error: true
         run: python backend/scripts/build_streaming_availability.py --movies backend/public/data/movies.json --output backend/public/data/streaming.json
