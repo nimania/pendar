@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -146,6 +147,13 @@ def main() -> int:
         "thresholds": thresholds,
         "max_total_drop": args.max_total_drop,
         "previous_counts": previous,
+        "github": {
+            "repository": os.environ.get("GITHUB_REPOSITORY"),
+            "workflow": os.environ.get("GITHUB_WORKFLOW"),
+            "run_id": os.environ.get("GITHUB_RUN_ID"),
+            "sha": os.environ.get("GITHUB_SHA"),
+            "ref_name": os.environ.get("GITHUB_REF_NAME"),
+        },
         "errors": errors,
     }
 
