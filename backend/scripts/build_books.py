@@ -30,6 +30,7 @@ PUBLIC_FIGURES = ROOT / "public" / "data" / "figures.json"
 OUT = ROOT / "public" / "data" / "books.json"
 OUT_JS = ROOT / "public" / "data" / "books.js"
 CANDIDATES = ROOT / "periodicals" / "book_candidates.json"
+PENDAR_LEGACY_BOOKS = ROOT.parent / "web-static" / "data" / "pendar-books.json"
 
 # Hand-verified seed/enrichment. Automatic discoveries merge into this registry.
 MANUAL_BOOKS = [
@@ -282,6 +283,45 @@ def _load_json(path: Path, default):
         return default
 
 
+def _legacy_pendar_seed_books() -> list[dict]:
+    """Promote verified legacy Pendar works into the canonical book catalog.
+
+    Masnavi is intentionally excluded here because Book Radar already owns its
+    canonical work slug; the UI resolver links the legacy record to that page.
+    """
+    rows = _load_json(PENDAR_LEGACY_BOOKS, [])
+    out = []
+    for x in rows if isinstance(rows, list) else []:
+        if _norm(x.get("title")) == _norm("مثنوی معنوی"):
+            continue
+        title = str(x.get("title") or "").strip()
+        author = str(x.get("author") or "").strip()
+        if not title or not author:
+            continue
+        slug = str(x.get("id") or _stable_slug("book", title))
+        out.append({
+            "slug": slug,
+            "record_type": "work",
+            "title_fa": title,
+            "description_fa": str(x.get("summary") or ""),
+            "category_fa": str(x.get("category") or "کتاب"),
+            "language": str(x.get("language") or "فارسی"),
+            "creators": [_creator(author, "نویسنده")],
+            "publisher": None,
+            "purchase_links": [],
+            "source_meta": ([{"label": "پندار / منبع معرفی", "url": x.get("sourceUrl")}]
+                            if x.get("sourceUrl") else []),
+            "pendar_legacy_id": x.get("id"),
+            "topic_ids": x.get("topicIds") or [],
+            "reading_format_fa": x.get("readingFormat"),
+            "reading_pace_fa": x.get("readingPace"),
+            "reading_steps_fa": x.get("readingSteps") or [],
+            "audience_fa": x.get("audience"),
+            "edition_advice_fa": x.get("editionAdvice"),
+        })
+    return out
+
+
 def _load_archive() -> list[dict]:
     """Fresh press rows first, with archive fallback for older builds."""
     public = _load_json(PUBLIC_PERIODICALS, [])
@@ -521,7 +561,7 @@ def build() -> dict:
     )
 
     by_title: dict[str, dict] = {}
-    for raw in MANUAL_BOOKS:
+    for raw in MANUAL_BOOKS + _legacy_pendar_seed_books():
         b = json.loads(json.dumps(raw, ensure_ascii=False))
         b["confidence"] = "verified"
         b["discovery"] = "manual"
