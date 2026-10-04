@@ -1114,3 +1114,6 @@
 .book-edition-person span{font-size:.66rem;color:var(--muted)}
 .book-edition-person b{font-size:.82rem}
 @media(max-width:620px){.book-edition-head{display:block}.book-edition-head small{display:block;text-align:right;margin-top:6px}}
+
+.story-books{margin:18px 0 22px}
+.figure-books{padding:16px 0 4px}
