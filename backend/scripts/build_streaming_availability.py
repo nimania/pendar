@@ -20,15 +20,15 @@ from pathlib import Path
 USER_AGENT = "Pendar-Streaming/1.0 (+https://nimania.github.io/pendar/)"
 
 SERVICES = [
-    {"key":"filimo","name_fa":"فیلیمو","name_en":"Filimo","status":"active","homepage":"https://www.filimo.com/"},
-    {"key":"filmnet","name_fa":"فیلم‌نت","name_en":"FilmNet","status":"active","homepage":"https://filmnet.ir/"},
-    {"key":"namava","name_fa":"نماوا","name_en":"Namava","status":"active","homepage":"https://www.namava.ir/main"},
-    {"key":"tamashakhoneh","name_fa":"تماشاخونه","name_en":"Tamashakhoneh","status":"planned","homepage":None},
-    {"key":"starnet","name_fa":"استارنت","name_en":"StarNet","status":"planned","homepage":None},
-    {"key":"telewebion","name_fa":"تلوبیون","name_en":"Telewebion","status":"planned","homepage":"https://telewebion.com/"},
-    {"key":"lenz","name_fa":"لنز","name_en":"Lenz","status":"planned","homepage":"https://lenz.ir/"},
-    {"key":"gapfilm","name_fa":"گپ‌فیلم","name_en":"GapFilm","status":"planned","homepage":"https://gapfilm.ir/"},
-    {"key":"digitoon","name_fa":"دیجی‌تون","name_en":"Digitoon","status":"planned","homepage":"https://digitoon.ir/"},
+    {"key":"filimo","name_fa":"فیلیمو","name_en":"Filimo","status":"active","homepage":"https://www.filimo.com/","logo":"https://upload.wikimedia.org/wikipedia/commons/5/5d/Filimo_logo.svg"},
+    {"key":"filmnet","name_fa":"فیلم‌نت","name_en":"FilmNet","status":"active","homepage":"https://filmnet.ir/","logo":"https://upload.wikimedia.org/wikipedia/commons/5/53/FilmNet_Logo.png"},
+    {"key":"namava","name_fa":"نماوا","name_en":"Namava","status":"active","homepage":"https://www.namava.ir/main","logo":"https://upload.wikimedia.org/wikipedia/commons/5/50/Namava_logo.svg"},
+    {"key":"tamashakhoneh","name_fa":"تماشاخونه","name_en":"Tamashakhoneh","status":"planned","homepage":"https://tmk.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=tmk.ir"},
+    {"key":"starnet","name_fa":"استارنت","name_en":"StarNet","status":"planned","homepage":"https://starnet.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=starnet.ir"},
+    {"key":"telewebion","name_fa":"تلوبیون","name_en":"Telewebion","status":"planned","homepage":"https://telewebion.com/","logo":"https://upload.wikimedia.org/wikipedia/commons/c/c2/Telewebion.svg"},
+    {"key":"lenz","name_fa":"لنز","name_en":"Lenz","status":"planned","homepage":"https://lenz.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=lenz.ir"},
+    {"key":"gapfilm","name_fa":"گپ‌فیلم","name_en":"GapFilm","status":"planned","homepage":"https://gapfilm.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=gapfilm.ir"},
+    {"key":"digitoon","name_fa":"دیجی‌تون","name_en":"Digitoon","status":"planned","homepage":"https://digitoon.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=digitoon.ir"},
 ]
 
 GENERIC_PREFIX_RE = re.compile(r"^(?:سریال|فیلم|مستند|انیمیشن|مجموعه|movie|film|series|documentary)\s+", re.I)
