@@ -37,9 +37,11 @@ jobs:
         run: |
           press_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/periodicals.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           weather_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          commerce_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/books-commerce.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           test -n "$press_id"
           echo "press_id=$press_id" >> "$GITHUB_OUTPUT"
           echo "weather_id=$weather_id" >> "$GITHUB_OUTPUT"
+          echo "commerce_id=$commerce_id" >> "$GITHUB_OUTPUT"
 
       - name: Download latest complete periodicals site
         env:
@@ -51,6 +53,26 @@ jobs:
           gh run download "$PRESS_ID" -n github-pages -D /tmp/press-pages
           test -f /tmp/press-pages/artifact.tar
           tar -xf /tmp/press-pages/artifact.tar -C site
+
+      - name: Restore last known Torob snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMERCE_ID: ${{ steps.base.outputs.commerce_id }}
+        run: |
+          if [ -n "$COMMERCE_ID" ] && [ -f site/data/books.json ]; then
+            rm -rf /tmp/previous-commerce && mkdir -p /tmp/previous-commerce
+            if gh run download "$COMMERCE_ID" -n books-commerce-data -D /tmp/previous-commerce; then
+              src="$(find /tmp/previous-commerce -type f -name books.json | head -1)"
+              if [ -n "$src" ]; then
+                python backend/scripts/merge_book_commerce.py --source "$src" --target site/data/books.json --target-js site/data/books.js
+              fi
+              assets="$(find /tmp/previous-commerce -type d -path '*/assets/books' | head -1)"
+              if [ -n "$assets" ]; then
+                mkdir -p site/assets/books
+                rsync -a "$assets/" site/assets/books/
+              fi
+            fi
+          fi
 
       - name: Enrich books with Torob sellers, prices and covers
         env:
