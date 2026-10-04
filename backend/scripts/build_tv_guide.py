@@ -12,7 +12,10 @@ import json
 import re
 import urllib.request
 import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
+from html import unescape
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 PERSIANA_XML = "https://raw.githubusercontent.com/Samhouston010/persiana-tv-epg/main/persiana.xml"
@@ -23,9 +26,9 @@ IRANINTL_XML = "https://raw.githubusercontent.com/SandObserver/iranintl-xmltv/ma
 SOURCE_REGISTRY = [
     {"key": "irib", "name": "صداوسیما / تلوبیون", "status": "aggregated", "note": "EPG جاریِ شبکه‌های سراسری و استانی؛ گردآوری‌شده از APIهای تلوبیون/سپهر"},
     {"key": "persiana", "name": "Persiana Group", "status": "aggregated", "note": "XMLTV جاریِ شبکه‌های گروه پرشیانا"},
-    {"key": "bbc-persian", "name": "BBC Persian", "status": "planned", "note": "جدول رسمی قابل استخراج"},
+    {"key": "bbc-persian", "name": "BBC Persian", "status": "official", "note": "جدول روزانهٔ رسمی BBC Media Partners"},
     {"key": "iranintl", "name": "Iran International", "status": "verified", "note": "XMLTV تازه‌شونده، استخراج‌شده از جدول رسمی شبکه"},
-    {"key": "radiofarda", "name": "Radio Farda", "status": "planned", "note": "جدول رسمی روزانه"},
+    {"key": "radiofarda", "name": "Radio Farda", "status": "official", "note": "جدول پخش روزانهٔ رسمی رادیو فردا"},
     {"key": "gem", "name": "GEM Group", "status": "planned", "note": "نیازمند تطبیق چند منبع"},
     {"key": "afintl", "name": "Afghanistan International", "status": "planned", "note": "جدول رسمی + اکنون/بعدی"},
     {"key": "ariana", "name": "Ariana TV", "status": "planned", "note": "TV Schedule رسمی"},
@@ -179,6 +182,184 @@ def load_irib_metadata() -> dict[str, dict]:
             out[tvg] = row
     return out
 
+
+FA_DIGITS = str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789")
+
+class TextTokens(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.tokens: list[str] = []
+
+    def handle_data(self, data: str) -> None:
+        for part in re.split(r"[\r\n]+", unescape(data or "")):
+            t = re.sub(r"\s+", " ", part).strip()
+            if t:
+                self.tokens.append(t)
+
+def html_tokens(raw: bytes) -> list[str]:
+    p = TextTokens()
+    p.feed(raw.decode("utf-8", errors="ignore"))
+    return p.tokens
+
+def _local_slot(day, hm: str, tz: ZoneInfo) -> datetime:
+    h, m = [int(x) for x in hm.translate(FA_DIGITS).split(":")]
+    return datetime(day.year, day.month, day.day, h, m, tzinfo=tz).astimezone(timezone.utc)
+
+def ingest_radiofarda(now: datetime) -> tuple[list[dict], list[dict]]:
+    tz = ZoneInfo("Asia/Tehran")
+    local_today = now.astimezone(tz).date()
+    rx = re.compile(r"^([۰-۹0-9]{1,2}:[۰-۹0-9]{2})\s*-\s*([۰-۹0-9]{1,2}:[۰-۹0-9]{2})(?:\s+زنده)?$")
+    programmes: list[dict] = []
+    seen: set[tuple[str, str]] = set()
+
+    for off in range(-1, 6):
+        day = local_today + timedelta(days=off)
+        url = f"https://www.radiofarda.com/tv/schedule/97/{day.year}/{day.month}/{day.day}"
+        try:
+            tokens = html_tokens(fetch(url))
+        except Exception as exc:
+            print("WARNING: Radio Farda day", day, "failed:", exc)
+            continue
+        for i, token in enumerate(tokens):
+            m = rx.match(token)
+            if not m:
+                continue
+            title = ""
+            desc = ""
+            for t in tokens[i + 1 : i + 12]:
+                if rx.match(t):
+                    break
+                if t in {".", ",.", "،", "Image", "XS", "SM", "MD", "LG"}:
+                    continue
+                if t.startswith("Image"):
+                    continue
+                if not title:
+                    title = t
+                elif not desc and len(t) > 12 and t != title:
+                    desc = t
+                    break
+            if not title:
+                continue
+            start = _local_slot(day, m.group(1), tz)
+            stop = _local_slot(day, m.group(2), tz)
+            if stop <= start:
+                stop += timedelta(days=1)
+            key = (iso(start), title)
+            if key in seen:
+                continue
+            seen.add(key)
+            programmes.append({
+                "channel_id": "radiofarda:tv",
+                "start": iso(start),
+                "stop": iso(stop),
+                "title_fa": title,
+                "title_en": None,
+                "desc_fa": desc or None,
+                "year": None,
+                "categories": ["خبر"],
+                "icon": None,
+                "rating": None,
+            })
+
+    lo, hi = now - timedelta(hours=12), now + timedelta(days=8)
+    programmes = [p for p in programmes if parse_iso(p["stop"]) >= lo and parse_iso(p["start"]) <= hi]
+    programmes.sort(key=lambda x: x["start"])
+    if not programmes:
+        raise RuntimeError("Radio Farda: no current schedule parsed")
+    channel = {
+        "id": "radiofarda:tv",
+        "name_fa": "رادیو فردا",
+        "name": "Radio Farda",
+        "logo": None,
+        "group": "news",
+        "source_key": "radiofarda",
+        "source_name": "Radio Farda",
+        "confidence": "official",
+    }
+    return [channel], programmes
+
+def parse_iso(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
+
+def ingest_bbc_persian(now: datetime) -> tuple[list[dict], list[dict]]:
+    time_re = re.compile(r"^(\d{2}):(\d{2})\s+GMT$")
+    dur_re = re.compile(r"^(\d{2}):(\d{2}):(\d{2})$")
+    programmes: list[dict] = []
+    seen: set[tuple[str, str]] = set()
+    today = now.date()
+
+    for off in range(-1, 5):
+        day = today + timedelta(days=off)
+        url = f"https://wspartners.bbc.com/schedules/bbc_persian_tv/day/{day.isoformat()}"
+        try:
+            tokens = html_tokens(fetch(url))
+        except Exception as exc:
+            print("WARNING: BBC Persian day", day, "failed:", exc)
+            continue
+        for i, token in enumerate(tokens):
+            mt = time_re.match(token)
+            if not mt:
+                continue
+            block = []
+            for t in tokens[i + 1 : i + 28]:
+                if time_re.match(t):
+                    break
+                block.append(t)
+            duration = None
+            for t in reversed(block):
+                md = dur_re.match(t)
+                if md:
+                    duration = timedelta(hours=int(md.group(1)), minutes=int(md.group(2)), seconds=int(md.group(3)))
+                    break
+            title = ""
+            for t in block:
+                if dur_re.match(t):
+                    continue
+                if t in {"Back to top", "Early", "Morning", "Afternoon", "Evening"}:
+                    continue
+                if re.match(r"^\d{2}/\d{2}/\d{4}\s+\d{2}:\d{2}\s+GMT$", t):
+                    continue
+                if len(t) > 1:
+                    title = t
+                    break
+            if not title or duration is None:
+                continue
+            start = datetime(day.year, day.month, day.day, int(mt.group(1)), int(mt.group(2)), tzinfo=timezone.utc)
+            stop = start + duration
+            key = (iso(start), title)
+            if key in seen:
+                continue
+            seen.add(key)
+            programmes.append({
+                "channel_id": "bbc-persian:tv",
+                "start": iso(start),
+                "stop": iso(stop),
+                "title_fa": title,
+                "title_en": None,
+                "desc_fa": None,
+                "year": None,
+                "categories": ["خبر"],
+                "icon": None,
+                "rating": None,
+            })
+
+    lo, hi = now - timedelta(hours=12), now + timedelta(days=8)
+    programmes = [p for p in programmes if parse_iso(p["stop"]) >= lo and parse_iso(p["start"]) <= hi]
+    programmes.sort(key=lambda x: x["start"])
+    if not programmes:
+        raise RuntimeError("BBC Persian: no current schedule parsed")
+    channel = {
+        "id": "bbc-persian:tv",
+        "name_fa": "بی‌بی‌سی فارسی",
+        "name": "BBC Persian",
+        "logo": None,
+        "group": "news",
+        "source_key": "bbc-persian",
+        "source_name": "BBC Persian",
+        "confidence": "official",
+    }
+    return [channel], programmes
+
 def build() -> dict:
     now = datetime.now(timezone.utc)
     channels: list[dict] = []
@@ -206,6 +387,18 @@ def build() -> dict:
         except Exception as exc:
             errors[spec["key"]] = f"{type(exc).__name__}: {exc}"
             print("WARNING:", spec["name"], "failed:", exc)
+
+    for key, name, loader in (
+        ("radiofarda", "Radio Farda", ingest_radiofarda),
+        ("bbc-persian", "BBC Persian", ingest_bbc_persian),
+    ):
+        try:
+            ch, pr = loader(now)
+            channels.extend(ch)
+            programmes.extend(pr)
+        except Exception as exc:
+            errors[key] = f"{type(exc).__name__}: {exc}"
+            print("WARNING:", name, "failed:", exc)
 
     if not channels or not programmes:
         raise RuntimeError("All active EPG sources failed; refusing to overwrite good data")
