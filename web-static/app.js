@@ -132,6 +132,24 @@ function _profileStoryMatches(entity,story,names){
   }
   return (story.entities||[]).some(e=>names.has(_canonicalNorm(e.name_fa||e.name||"")));
 }
+function _profilePeriodicalMatches(entity,row,names){
+  if(!row)return false;
+  if(entity.type==="source"){
+    return names.has(_canonicalNorm(row.publisher||row.source_name||""));
+  }
+  const text=[
+    row.headline_fa,row.title_fa,row.title_original,row.summary_fa,row.body_fa,
+    row.meta_description_fa,row.section_fa,...(row.key_points_fa||[]),...(row.seo_keywords_fa||[])
+  ].filter(Boolean).join(" ");
+  const hay=" "+_canonicalNorm(text)+" ";
+  if(hay.trim().length<2)return false;
+  for(const n of names){
+    if(!n)continue;
+    // Match complete normalized names/aliases, not arbitrary substrings.
+    if(hay.includes(" "+n+" "))return true;
+  }
+  return false;
+}
 function _profileTimelineCard(row){
   const click=row.go?' onclick="'+row.go+'"':'';
   return '<article class="p360-time-row"'+click+'><span class="p360-time-kind">'+esc(row.kind)+'</span><div><b>'+esc(row.title||"")+'</b>'+(row.sub?'<p>'+esc(row.sub)+'</p>':"")+'<small>'+esc(row.when||"")+'</small></div></article>';
@@ -181,10 +199,11 @@ async function openEntityProfile(id){
   const orgLinks=links.filter(x=>x.entity.type==="organization");
   const publisherLinks=links.filter(x=>x.entity.type==="publisher");
 
-  let pressItems=[];
-  if(entity.type==="source"){
-    pressItems=(periodicals||[]).filter(x=>names.has(_canonicalNorm(x.publisher||x.source_name||""))).slice().sort((a,b)=>String(b.source_published_at||b.published_at||"").localeCompare(String(a.source_published_at||a.published_at||""))).slice(0,10);
-  }
+  const pressItems=(periodicals||[])
+    .filter(x=>_profilePeriodicalMatches(entity,x,names))
+    .slice()
+    .sort((a,b)=>String(b.source_published_at||b.published_at||"").localeCompare(String(a.source_published_at||a.published_at||"")))
+    .slice(0,18);
 
   const timeline=[];
   stories.forEach(s=>timeline.push({
@@ -205,7 +224,7 @@ async function openEntityProfile(id){
   const newsPosts=posts.filter(p=>p.kind==="news_statement");
   const relationTypes=new Set(links.map(x=>x.entity.type));
   const stats=[
-    ["خبر",stories.length],["گفته/دیدگاه",posts.length],["کتاب",linkedBooks.length],["فیلم/سریال",linkedMovies.length],["رابطه",links.length]
+    ["خبر",stories.length],["جراید",pressItems.length],["گفته/دیدگاه",posts.length],["کتاب",linkedBooks.length],["فیلم/سریال",linkedMovies.length],["رابطه",links.length]
   ];
 
   let portrait="";
@@ -215,13 +234,14 @@ async function openEntityProfile(id){
     portrait='<img class="p360-avatar-img" src="'+esc(src)+'" alt="" loading="eager" referrerpolicy="no-referrer" onerror="this.replaceWith(document.createTextNode(\''+esc((entity.name_fa||"?").slice(0,1))+'\'))">';
   }else portrait=_profileFallbackAvatar(entity);
 
-  const roleText=(entity.roles||[]).join(" · ");
+  const roleText=typeof _ssHumanRoles==="function"?_ssHumanRoles(entity.roles):(entity.roles||[]).join(" · ");
   const summary=entity.meta?.summary||entity.meta?.role_fa||entity.meta?.field_fa||"";
   const specialized='<button onclick="openCanonicalEntity(\''+esc(id)+'\')">صفحهٔ تخصصی</button>';
   const graphBtn='<button onclick="openEntityGraph(\''+esc(id)+'\')">شبکهٔ ارتباطی</button>';
 
   const storyHtml=stories.length?'<div class="feed">'+stories.slice(0,6).map(feedCard).join("")+'</div>':'<div class="p360-empty">در فید جاری خبری برای این هویت ثبت نشده است.</div>';
   const postHtml=posts.length?'<div class="p360-posts">'+posts.slice().sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||""))).slice(0,8).map(p=>'<button onclick="openStatement(\''+esc(statementKey(p))+'\')"><small>'+(p.kind==="news_statement"?"گفته در خبر":"دیدگاه")+' · '+esc(relTime(p.published_at))+'</small><b>'+esc(p.topic_fa||"")+'</b><p>'+esc(p.summary_fa||"")+'</p></button>').join("")+'</div>':'<div class="p360-empty">گفته‌ای برای این هویت ثبت نشده است.</div>';
+  const pressHtml=pressItems.length?'<div class="p360-periodicals">'+pressItems.slice(0,10).map(x=>'<button onclick="openPressArticle(\''+esc(x.id)+'\')"><small>'+esc(x.publisher||"جریده")+' · '+esc(relTime(x.source_published_at||x.published_at))+'</small><b>'+esc(x.headline_fa||x.title_fa||x.title_original||"")+'</b><span>'+esc((x.summary_fa||"").slice(0,180))+'</span></button>').join("")+'</div>':'<div class="p360-empty">در آرشیو فعلی جراید ذکری از این هویت پیدا نشد.</div>';
   const booksHtml=linkedBooks.length?'<div class="books-grid">'+linkedBooks.slice(0,8).map(_bookCard).join("")+'</div>':'<div class="p360-empty">کتاب مرتبطی در رجیستری ثبت نشده است.</div>';
   const moviesHtml=linkedMovies.length?'<div class="movie-grid">'+linkedMovies.slice(0,8).map(_movieCard).join("")+'</div>':'<div class="p360-empty">فیلم یا سریال مرتبطی ثبت نشده است.</div>';
   const relGroups=[
@@ -234,9 +254,10 @@ async function openEntityProfile(id){
     '<article class="p360">'+
       '<header class="p360-hero"><div class="p360-avatar">'+portrait+'</div><div class="p360-identity"><span class="press-kicker">Pendar 360 · '+esc(_entityTypeFa(entity.type))+'</span><h1>'+esc(entity.name_fa||entity.id)+'</h1>'+(roleText?'<p class="p360-roles">'+esc(roleText)+'</p>':"")+(summary?'<p class="p360-summary">'+esc(summary)+'</p>':"")+'<code dir="ltr">'+esc(entity.id)+'</code></div><div class="p360-actions">'+specialized+graphBtn+'</div></header>'+
       '<div class="p360-stats">'+stats.map(x=>'<span><b>'+faN(x[1])+'</b><small>'+x[0]+'</small></span>').join("")+'</div>'+
-      '<nav class="p360-jump"><button onclick="document.getElementById(\'p360-timeline\')?.scrollIntoView({behavior:\'smooth\'})">خط زمانی</button><button onclick="document.getElementById(\'p360-news\')?.scrollIntoView({behavior:\'smooth\'})">خبرها</button><button onclick="document.getElementById(\'p360-statements\')?.scrollIntoView({behavior:\'smooth\'})">گفته‌ها</button><button onclick="document.getElementById(\'p360-books\')?.scrollIntoView({behavior:\'smooth\'})">کتاب‌ها</button><button onclick="document.getElementById(\'p360-movies\')?.scrollIntoView({behavior:\'smooth\'})">فیلم‌ها</button><button onclick="document.getElementById(\'p360-relations\')?.scrollIntoView({behavior:\'smooth\'})">شبکه</button></nav>'+
+      '<nav class="p360-jump"><button onclick="document.getElementById(\'p360-timeline\')?.scrollIntoView({behavior:\'smooth\'})">خط زمانی</button><button onclick="document.getElementById(\'p360-news\')?.scrollIntoView({behavior:\'smooth\'})">خبرها</button><button onclick="document.getElementById(\'p360-press\')?.scrollIntoView({behavior:\'smooth\'})">جراید</button><button onclick="document.getElementById(\'p360-statements\')?.scrollIntoView({behavior:\'smooth\'})">گفته‌ها</button><button onclick="document.getElementById(\'p360-books\')?.scrollIntoView({behavior:\'smooth\'})">کتاب‌ها</button><button onclick="document.getElementById(\'p360-movies\')?.scrollIntoView({behavior:\'smooth\'})">فیلم‌ها</button><button onclick="document.getElementById(\'p360-relations\')?.scrollIntoView({behavior:\'smooth\'})">شبکه</button></nav>'+
       '<section class="p360-section" id="p360-timeline"><div class="p360-section-head"><div><span>Timeline</span><h2>خط زمانی</h2></div><small>'+faN(timeline.length)+' رویداد در دادهٔ فعلی</small></div>'+(timeline.length?'<div class="p360-timeline">'+timeline.slice(0,16).map(_profileTimelineCard).join("")+'</div>':'<div class="p360-empty">رویداد زمان‌دار ثبت نشده است.</div>')+'</section>'+
       '<section class="p360-section" id="p360-news"><div class="p360-section-head"><div><span>News</span><h2>خبرهای مرتبط</h2></div><small>'+faN(stories.length)+' خبر در فید جاری</small></div>'+storyHtml+'</section>'+
+      '<section class="p360-section" id="p360-press"><div class="p360-section-head"><div><span>Press mentions</span><h2>در جراید</h2></div><small>'+faN(pressItems.length)+' مطلب مرتبط در آرشیو فعلی</small></div>'+pressHtml+'</section>'+
       '<section class="p360-section" id="p360-statements"><div class="p360-section-head"><div><span>Statements</span><h2>گفته‌ها و دیدگاه‌ها</h2></div><small>'+faN(directPosts.length)+' مستقیم · '+faN(newsPosts.length)+' در خبر</small></div>'+postHtml+'</section>'+
       '<section class="p360-section" id="p360-books"><div class="p360-section-head"><div><span>Books</span><h2>کتاب‌ها</h2></div><small>'+faN(linkedBooks.length)+' اثر مرتبط</small></div>'+booksHtml+'</section>'+
       '<section class="p360-section" id="p360-movies"><div class="p360-section-head"><div><span>Screen</span><h2>فیلم و سریال</h2></div><small>'+faN(linkedMovies.length)+' اثر مرتبط</small></div>'+moviesHtml+'</section>'+
