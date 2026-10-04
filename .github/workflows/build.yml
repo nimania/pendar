@@ -115,6 +115,10 @@ jobs:
             fi
           fi
 
+      - name: Rebuild book graph against fresh news, figures and press
+        working-directory: backend
+        run: python -m scripts.build_books
+
       - name: Save the figures published in this build
         uses: actions/upload-artifact@v4
         with:
