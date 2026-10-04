@@ -94,6 +94,38 @@ MANUAL_BOOKS = [
         ],
     },
     {
+        "slug": "maliye-rooh-mashrooteh",
+        "title_fa": "مالیه روح مشروطه است",
+        "subtitle_fa": "بازخوانی نقش مستشاران آمریکایی در اصلاح نظام مالی ایران",
+        "description_fa": (
+            "پژوهشی از میکائیل عظیمی دربارهٔ اصلاح مالیهٔ عمومی ایران پس از مشروطه "
+            "و تجربهٔ مورگان شوستر و آرتور میلسپو در بازسازی ساختار مالی کشور."
+        ),
+        "category_fa": "تاریخ اقتصادی، اقتصاد سیاسی و مشروطه",
+        "publication_year_fa": "۱۴۰۲",
+        "pages": 330,
+        "isbn": "9786229806418",
+        "cover_url": "",
+        "creators": [
+            {"slug": "mikaeil-azimi", "name_fa": "میکائیل عظیمی", "role_fa": "نویسنده"}
+        ],
+        "publisher": {"slug": "nahadgara", "name_fa": "انتشارات نهادگرا"},
+        "purchase_links": [
+            {
+                "store": "طاقچه",
+                "url": "https://taaghche.com/book/249352/%D9%85%D8%A7%D9%84%DB%8C%D9%87-%D8%B1%D9%88%D8%AD-%D9%85%D8%B4%D8%B1%D9%88%D8%B7%D9%87-%D8%A7%D8%B3%D8%AA",
+                "format_fa": "نسخهٔ الکترونیکی",
+                "exact": True,
+            }
+        ],
+        "source_meta": [
+            {
+                "label": "طاقچه",
+                "url": "https://taaghche.com/book/249352/%D9%85%D8%A7%D9%84%DB%8C%D9%87-%D8%B1%D9%88%D8%AD-%D9%85%D8%B4%D8%B1%D9%88%D8%B7%D9%87-%D8%A7%D8%B3%D8%AA",
+            }
+        ],
+    },
+    {
         "slug": "namehaye-irani",
         "record_type": "work",
         "title_fa": "نامه‌های ایرانی",
@@ -206,6 +238,7 @@ def _person_slug(name: str) -> str:
         _norm("محمد درویش"): "mohammad-darvish",
         _norm("منتسکیو"): "montesquieu",
         _norm("محمد مجلسی"): "mohammad-majlesi",
+        _norm("میکائیل عظیمی"): "mikaeil-azimi",
     }
     return known.get(_norm(name), _stable_slug("person", name))
 
@@ -217,6 +250,8 @@ def _publisher_slug(name: str) -> str:
         _norm("نشر اطراف"): "atraf",
         _norm("نشر همرخ"): "hamrokh",
         _norm("نشر دنیای نو"): "donyaye-no",
+        _norm("انتشارات نهادگرا"): "nahadgara",
+        _norm("نشر نهادگرا"): "nahadgara",
     }
     return known.get(_norm(name), _stable_slug("publisher", name))
 
