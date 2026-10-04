@@ -796,7 +796,9 @@ async function route() {
   if (kind === "press-source" && arg) return showPress(arg);
   if (kind === "press-article" && arg) return openPressArticle(arg);
   if (kind === "books") return showBooks(["publishers","people","new","all","used","reviews"].includes(arg) ? arg : "books");
-  if (kind === "book" && arg) return openBook(arg);\n  if (kind === "movies") return showMovies();\n  if (kind === "movie" && arg) return openMovie(arg);
+  if (kind === "book" && arg) return openBook(arg);
+  if (kind === "movies") return showMovies();
+  if (kind === "movie" && arg) return openMovie(arg);
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
   if (kind === "tech") return showTech();
