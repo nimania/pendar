@@ -12,6 +12,15 @@ const CRED_FA = { high: "اعتبار بالا", medium: "چند منبع", low:
 const CRED_CLS = { high: "st-ok", medium: "st-neutral", low: "st-warn" };
 const faN = s => String(s).replace(".", "٫").replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+// Homepage editorial wording: use neutral/national terminology in the public
+// front page without mutating the underlying archived/source text.
+function homeEditorialText(v) {
+  return String(v ?? "")
+    .replace(/صهیونیست(?:‌|\s)?های/g, "اسرائیلی‌های")
+    .replace(/صهیونیست(?:‌|\s)?ها/g, "اسرائیلی‌ها")
+    .replace(/صهیونیستی/g, "اسرائیلی")
+    .replace(/صهیونیست/g, "اسرائیلی");
+}
 
 function impInfo(v) {
   if (v >= 75) return { cls: "high", lbl: "بسیار مهم" };
@@ -1182,7 +1191,7 @@ button.tl-item:hover .tl-h{color:#1a9d7e}
   document.head.appendChild(st);
 })();
 
-function feedCard(s) {
+function feedCard(s, homepage = false) {
   const imp = impInfo(s.importance_score);
   const badges = (s.source_names || []).slice(0, 4).map(x => `<span class="src-badge clickable" data-src="${esc(x)}" onclick="event.stopPropagation();openSource(this.dataset.src)">${esc(x)}</span>`).join("");
   // Show the article's image when the outlet's RSS provided one; otherwise
@@ -1196,8 +1205,8 @@ function feedCard(s) {
       <span class="imp ${imp.cls}"><span class="bars"><i></i><i></i><i></i></span><span class="lbl">${imp.lbl}</span></span></div>
     <div style="display:flex;gap:12px;align-items:flex-start">
       <div style="flex:1;min-width:0">
-        <h2>${esc(s.headline_fa || "")}</h2>
-        <p class="kalam">${esc(s.summary_fa || "")}</p>
+        <h2>${esc(homepage ? homeEditorialText(s.headline_fa || "") : (s.headline_fa || ""))}</h2>
+        <p class="kalam">${esc(homepage ? homeEditorialText(s.summary_fa || "") : (s.summary_fa || ""))}</p>
       </div>
       ${thumb}
     </div>
@@ -1270,7 +1279,7 @@ function renderFeed() {
   else if (sortMode === "rising") items = items.slice().sort((a,b)=>((b.trend&&b.trend.velocity)||0)-((a.trend&&a.trend.velocity)||0));
   const empty = { rising: "الان خبری در حالِ رشد نیست", hot: "الان خبرِ داغی نداریم",
     mine: "هنوز خبری از دنبال‌شده‌هایت نیست" }[tier] || "خبری در این نما نیست";
-  el.innerHTML = items.length ? items.map(feedCard).join("")
+  el.innerHTML = items.length ? items.map(s => feedCard(s, true)).join("")
     : `<div class="state"><div class="big">${empty}</div></div>`;
 }
 function setTier(t) {
@@ -1955,7 +1964,7 @@ async function renderHomeDaily(){
   storyEl.innerHTML=stories.length?stories.map((s,i)=>`
     <button class="home-intel-row" onclick="openStory('${esc(s.id)}')">
       <span class="home-intel-rank">${faN(i+1)}</span>
-      <span class="home-intel-copy"><b>${esc(s.headline_fa||"")}</b><small>${[relTime(s.published_at),s.source_count?faN(s.source_count)+" منبع":"",s.figure_count?faN(s.figure_count)+" دیدگاه":""].filter(Boolean).join(" · ")}</small></span>
+      <span class="home-intel-copy"><b>${esc(homeEditorialText(s.headline_fa||""))}</b><small>${[relTime(s.published_at),s.source_count?faN(s.source_count)+" منبع":"",s.figure_count?faN(s.figure_count)+" دیدگاه":""].filter(Boolean).join(" · ")}</small></span>
       <span class="home-intel-go">←</span>
     </button>`).join(""):'<div class="state"><div class="big">هنوز سرخطی ثبت نشده</div></div>';
   try{
@@ -1984,7 +1993,7 @@ async function renderHomeDaily(){
     voiceEl.innerHTML=posts.length?posts.map(p=>`
       <button class="home-voice-row" onclick="openStatement('${esc(statementKey(p))}')">
         ${avatar(p._person,"sm")}
-        <span class="home-intel-copy"><span class="home-voice-name">${esc(p._person.name_fa||"")}</span><b>${esc(p.topic_fa||p.summary_fa||"دیدگاه تازه")}</b><small>${[relTime(p.published_at),p.kind==="news_statement"?"در خبرها":"دیدگاه مستقیم"].join(" · ")}</small></span>
+        <span class="home-intel-copy"><span class="home-voice-name">${esc(p._person.name_fa||"")}</span><b>${esc(homeEditorialText(p.topic_fa||p.summary_fa||"دیدگاه تازه"))}</b><small>${[relTime(p.published_at),p.kind==="news_statement"?"در خبرها":"دیدگاه مستقیم"].join(" · ")}</small></span>
         <span class="home-intel-go">←</span>
       </button>`).join(""):'<div class="state"><div class="big">گفتهٔ تازه‌ای ثبت نشده</div></div>';
   }catch(_){
