@@ -13,6 +13,7 @@ on:
       - "backend/scripts/link_tv_guide_movies.py"
       - "backend/scripts/enrich_movies_from_epg.py"
       - "backend/scripts/collect_30nama_archive.py"
+      - "backend/scripts/enrich_imdb_ids.py"
       - "backend/scripts/build_entities.py"
       - "backend/scripts/finalize_entity_registry.py"
       - "backend/data/entity-overrides.json"
@@ -106,6 +107,7 @@ jobs:
           path: |
             backend/data/movie_identity_cache.json
             backend/data/movie_seen_cache.json
+            backend/data/movie_imdb_cache.json
           key: pendar-movie-identity-fast-${{ github.run_id }}
           restore-keys: |
             pendar-movie-identity-
@@ -131,6 +133,13 @@ jobs:
         run: |
           if [ -f web-static/data/tv-guide.json ] && [ -f site/data/movies.json ]; then
             python backend/scripts/enrich_movies_from_epg.py --tv web-static/data/tv-guide.json --movies site/data/movies.json --movies-js site/data/movies.js
+          fi
+
+      - name: Enrich IMDb IDs
+        continue-on-error: true
+        run: |
+          if [ -f site/data/movies.json ]; then
+            python backend/scripts/enrich_imdb_ids.py --movies site/data/movies.json --movies-js site/data/movies.js --cache backend/data/movie_imdb_cache.json
           fi
 
       - name: Collect 30nama public archive
