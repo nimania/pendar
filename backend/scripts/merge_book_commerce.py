@@ -30,12 +30,22 @@ def main() -> None:
         old=cached.get(str(b.get("slug")))
         if not old:
             continue
-        if old.get("torob"):
-            b["torob"]=old["torob"]
+        incoming=old.get("torob") or {}
+        current=b.get("torob") or {}
+        use=False
+        if incoming:
+            if incoming.get("matched") and not current.get("matched"):
+                use=True
+            elif incoming.get("matched") and current.get("matched"):
+                use=str(incoming.get("checked_at") or "") > str(current.get("checked_at") or "")
+            elif not current:
+                use=True
+        if use:
+            b["torob"]=incoming
             merged+=1
-        cover=str(old.get("cover_url") or "")
-        if cover.startswith("assets/books/"):
-            b["cover_url"]=cover
+            cover=str(old.get("cover_url") or "")
+            if cover.startswith("assets/books/"):
+                b["cover_url"]=cover
 
     compact=json.dumps(dst,ensure_ascii=False,separators=(",",":"))
     dstp.write_text(compact,encoding="utf-8")
