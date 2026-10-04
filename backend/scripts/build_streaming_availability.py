@@ -113,6 +113,30 @@ def query_filimo(movie: dict) -> tuple[list[dict], bool]:
             })
     return dedupe(candidates),ok
 
+def _extract_filmnet_rows(value, depth: int = 0) -> list[dict]:
+    if depth > 5:
+        return []
+    if isinstance(value, list):
+        objects=[x for x in value if isinstance(x,dict)]
+        if objects and any(x.get("title") and (x.get("id") or x.get("short_id") or x.get("type")) for x in objects):
+            return objects
+        for item in value:
+            found=_extract_filmnet_rows(item,depth+1)
+            if found:
+                return found
+    elif isinstance(value,dict):
+        for key in ("items","results","video_contents","videoContents","contents","data"):
+            if key in value:
+                found=_extract_filmnet_rows(value.get(key),depth+1)
+                if found:
+                    return found
+        for item in value.values():
+            found=_extract_filmnet_rows(item,depth+1)
+            if found:
+                return found
+    return []
+
+
 def query_filmnet(movie: dict) -> tuple[list[dict], bool]:
     candidates=[]
     ok=False
@@ -126,7 +150,7 @@ def query_filmnet(movie: dict) -> tuple[list[dict], bool]:
             ok=True
         except Exception:
             continue
-        rows=payload.get("data") if isinstance(payload,dict) else []
+        rows=_extract_filmnet_rows(payload.get("data") if isinstance(payload,dict) else payload)
         for x in rows or []:
             if not isinstance(x,dict): continue
             titles=[x.get("title"),x.get("original_name"),x.get("original_title")]
