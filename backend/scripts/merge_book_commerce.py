@@ -37,15 +37,29 @@ def main() -> None:
             if incoming.get("matched") and not current.get("matched"):
                 use=True
             elif incoming.get("matched") and current.get("matched"):
-                use=str(incoming.get("checked_at") or "") > str(current.get("checked_at") or "")
+                newer_incoming=str(incoming.get("checked_at") or "") > str(current.get("checked_at") or "")
+                primary=incoming if newer_incoming else current
+                secondary=current if newer_incoming else incoming
+                combined=dict(secondary)
+                for k,v in primary.items():
+                    if v not in (None, "", [], {}):
+                        combined[k]=v
+                # Seller/detail payloads are expensive and may be absent when
+                # Torob challenges a later refresh. Never replace a richer
+                # snapshot with an empty list merely because it is newer.
+                for k in ("offers","offer_count","price_range_toman","price_spread_toman","attribution"):
+                    if primary.get(k) in (None, "", [], {}) and secondary.get(k) not in (None, "", [], {}):
+                        combined[k]=secondary[k]
+                b["torob"]=combined
+                merged+=1
             elif not current:
                 use=True
         if use:
             b["torob"]=incoming
             merged+=1
-            cover=str(old.get("cover_url") or "")
-            if cover.startswith("assets/books/"):
-                b["cover_url"]=cover
+        cover=str(old.get("cover_url") or "")
+        if cover.startswith("assets/books/") and not str(b.get("cover_url") or "").startswith("assets/books/"):
+            b["cover_url"]=cover
 
     compact=json.dumps(dst,ensure_ascii=False,separators=(",",":"))
     dstp.write_text(compact,encoding="utf-8")
