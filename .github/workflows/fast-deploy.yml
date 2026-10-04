@@ -1,4 +1,5 @@
-name: Fast Deploy Jan Kalam UI\n# Also publishes seeded Jan-e Jaraid data under web-static/data.
+name: Fast Deploy Pendar UI
+# Also publishes seeded Jan-e Jaraid data under web-static/data.
 
 on:
   workflow_dispatch:
@@ -165,7 +166,7 @@ jobs:
           app_v = versions.get("app.js")
           if sw.exists() and app_v:
               s = sw.read_text(encoding="utf-8")
-              s = re.sub(r'const V = "[^"]*";', f'const V = "jankalam-{app_v}";', s, count=1)
+              s = re.sub(r'const V = "[^"]*";', f'const V = "pendar-{app_v}";', s, count=1)
               sw.write_text(s, encoding="utf-8")
           PY
       - name: Validate Pendar data integrity before publish
