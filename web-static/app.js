@@ -1839,7 +1839,15 @@ async function renderHomeDaily(){
     </button>`).join(""):'<div class="state"><div class="big">هنوز سرخطی ثبت نشده</div></div>';
   try{
     const d=await loadFigures();
-    const posts=(d.figures||[]).flatMap(f=>(f.posts||[]).map(p=>({...p,_person:f})))
+    // Homepage voices are intentionally limited to curated figures with a real
+    // portrait. News-only people (synthetic "news-*" profiles / field=news)
+    // stay in the dedicated news-people views and never fill this homepage box.
+    const homeFigures=(d.figures||[]).filter(f =>
+      f && f.avatar &&
+      f.field !== "news" &&
+      !String(f.handle||"").startsWith("news-")
+    );
+    const posts=homeFigures.flatMap(f=>(f.posts||[]).map(p=>({...p,_person:f})))
       .filter(p=>p.published_at)
       .sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at))).slice(0,5);
     voiceEl.innerHTML=posts.length?posts.map(p=>`
