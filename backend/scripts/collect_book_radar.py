@@ -12,10 +12,10 @@ import requests
 from bs4 import BeautifulSoup
 try:
     from scripts.book_market_sources import PublicMCP, digikala, fidibo, classified_group, classified_batches
-    from scripts.book_distributors import parse_telegram_distributor
+    from scripts.book_distributors import parse_telegram_distributor, cheshmeh_catalog
 except ModuleNotFoundError:
     from book_market_sources import PublicMCP, digikala, fidibo, classified_group, classified_batches
-    from book_distributors import parse_telegram_distributor
+    from book_distributors import parse_telegram_distributor, cheshmeh_catalog
 try:
     from scripts.book_radar import identity, norm, daily_history, indicators, rebuild_graph, attach_radar
     from scripts.book_catalog import curate_payload
@@ -168,11 +168,13 @@ def collect(payload, registry, now=None, local=None):
                     except Exception:
                         status['note_fa'] = 'قفسهٔ متنی دریافت شد؛ تازه‌های صفحهٔ اصلی فعلاً در دسترس نیست'
             else:
-                raw = fixture if fixture is not None else fetch(source['url'])
+                raw = fixture if fixture is not None else (None if source['adapter'] == 'cheshmeh_catalog' else fetch(source['url']))
                 if source['adapter'] == 'rss':
                     rows = reading_feed(raw, source, now)
                 elif source['adapter'] == 'telegram_distributor':
                     rows = parse_telegram_distributor(raw, source, person, identity)
+                elif source['adapter'] == 'cheshmeh_catalog':
+                    rows = cheshmeh_catalog(source)
                 else:
                     rows = (taaghche if source['adapter'] == 'taaghche' else ketabrah)(raw, source)
             if source['adapter'] == 'rss':
@@ -187,13 +189,22 @@ def collect(payload, registry, now=None, local=None):
                         slug = matches[0]
                     b = books.setdefault(slug, {'slug': slug, 'record_type': 'work', 'title_fa': r['title_fa'], 'language': 'fa', 'discovery': 'direct_shelf', 'confidence': 'source_verified', 'first_seen_at': now.isoformat(), 'mentions': [], 'mention_count': 0, 'editions': []})
                     # Distinct store editions and formats retain their own creator/publisher metadata.
-                    edition = {'label_fa': r['source_name'] + ' · ' + {'audio':'صوتی','print':'چاپی','ebook':'الکترونیکی'}[r['format']], 'creators': r['creators'], 'publisher': r.get('publisher'), 'pages': r.get('pages'), 'store_added_at': r.get('store_added_at'), 'store_publication_label': r.get('store_publication_label'), 'purchase_links': [{'store': r['source_name'], 'url': r['url'], 'exact': True, 'format': r['format'], 'price': r.get('price'), 'currency': r.get('currency'), 'availability': r.get('availability', 'unknown'), 'last_checked': now.isoformat()}]}
+                    edition = {'label_fa': r['source_name'] + ' · ' + {'audio':'صوتی','print':'چاپی','ebook':'الکترونیکی'}[r['format']], 'creators': r['creators'], 'publisher': r.get('publisher'), 'pages': r.get('pages'), 'store_added_at': r.get('store_added_at'), 'store_publication_label': r.get('store_publication_label'), 'purchase_links': ([{'store': r['source_name'], 'url': r['url'], 'exact': True, 'format': r['format'], 'price': r.get('price'), 'currency': r.get('currency'), 'availability': r.get('availability', 'unknown'), 'last_checked': now.isoformat()}] if r.get('purchase_exact', True) else [])}
                     editions = {e['purchase_links'][0]['url']: e for e in b.get('editions', []) if e.get('purchase_links')}
-                    editions[r['url']] = edition
-                    b['editions'] = list(editions.values())
+                    if edition.get('purchase_links'):
+                        editions[r['url']] = edition
+                        b['editions'] = list(editions.values())
+                    elif not any((e.get('label_fa') == edition.get('label_fa') and e.get('publisher') == edition.get('publisher')) for e in b.get('editions', [])):
+                        b.setdefault('editions', []).append(edition)
                     b.setdefault('creators', [c for c in r['creators'] if c['role_fa'] == 'نویسنده'])
                     if r.get('subtitle_fa'):
                         b['subtitle_fa'] = r['subtitle_fa']
+                    if r.get('category_fa') and not b.get('category_fa'):
+                        b['category_fa'] = r['category_fa']
+                    if r.get('external_ids'):
+                        b.setdefault('external_ids', {}).update({k: v for k, v in r['external_ids'].items() if v not in (None, '')})
+                    if 'stock_quantity' in r:
+                        b.setdefault('source_inventory', {})[r['source_id']] = {'quantity': r.get('stock_quantity'), 'availability': r.get('availability'), 'checked_at': now.isoformat()}
                     if not b.get('cover_url') and r.get('cover_url'):
                         b['cover_url'] = r['cover_url']
                         b['cover'] = {'source_name': r['source_name'], 'source_url': r['url'], 'verification': 'canonical_provider_artwork'}
