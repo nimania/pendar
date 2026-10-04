@@ -58,7 +58,9 @@ jobs:
       - name: Restore news database (cache)
         uses: actions/cache@v4
         with:
-          path: backend/build.db
+          path: |
+            backend/build.db
+            backend/data/external-figure-posts.json
           key: jankalam-db-${{ github.run_id }}
           restore-keys: |
             jankalam-db-
