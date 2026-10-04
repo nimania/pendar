@@ -110,6 +110,16 @@
       "url": "https://t.me/s/cheshmehdis",
       "website": "https://www.cheshmehdis.com/",
       "scope_fa": "تازه‌ها و تجدیدچاپ‌های معرفی‌شده در کانال رسمی پخش"
+    },
+    {
+      "id": "cheshmeh-catalog",
+      "name_fa": "کاتالوگ پخش چشمه",
+      "kind": "catalog",
+      "adapter": "cheshmeh_catalog",
+      "url": "https://cheshmehdis.com/publishers",
+      "site_url": "https://cheshmehdis.com/publishers",
+      "endpoint": "https://server.cheshmehdis.com/api/v1/main-level/publishers/products",
+      "scope_fa": "ناشرها و کتاب‌های موجود در کاتالوگ عمومی پخش چشمه"
     }
   ],
   "candidate_sources": [
