@@ -248,7 +248,7 @@ document.addEventListener("click",e=>{const box=document.getElementById("smart-s
 const VIEWS = { feed: "feed-view", detail: "detail-view", trends: "trends-view",
   factchecks: "factchecks-view", topics: "topics-view", topicarchive: "topic-archive-view",
   weather: "weather-view", iran: "iran-view", faq: "faq-view", market: "market-view",
-  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", knowledge: "knowledge-view", tech: "tech-view" };
+  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tvguide: "tv-guide-view", knowledge: "knowledge-view", tech: "tech-view" };
 const TABS = ["feed", "trends", "factchecks", "iran", "topics"];
 const SCOPE_FA = { local: "استانی", national: "کشوری", international: "بین‌المللی" };
 function setTab(w) { for (const t of TABS) document.getElementById("tab-" + t).classList.toggle("active", w === t); }
@@ -847,6 +847,7 @@ async function route() {
   if (kind === "book" && arg) return openBook(arg);
   if (kind === "movies") return showMovies();
   if (kind === "movie" && arg) return openMovie(arg);
+  if (kind === "tv") return showTVGuide(arg || "now");
   if (kind === "knowledge") return showKnowledge(arg || "home");
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
