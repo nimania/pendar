@@ -23,6 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Refresh TV Guide EPG
+        continue-on-error: true
+        run: python backend/scripts/build_tv_guide.py --output web-static/data/tv-guide.json
+
       - name: Find latest successful build and periodicals runs
         id: refresh
         env:
@@ -130,11 +134,12 @@ jobs:
           rsync -a --exclude 'data/' web-static/ site/
           mkdir -p site/data
           cp web-static/data/pendar-*.json site/data/
+          if [ -f web-static/data/tv-guide.json ]; then cp web-static/data/tv-guide.json site/data/tv-guide.json; fi
           python - <<'PY'
           import hashlib, pathlib, re
           root = pathlib.Path("site")
           versions = {}
-          for name in ("app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "knowledge-hub.js"):
+          for name in ("app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "tv-guide.js", "tv-guide.css", "knowledge-hub.js"):
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]
