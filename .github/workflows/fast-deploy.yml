@@ -10,6 +10,7 @@ on:
       - "backend/scripts/build_tv_guide.py"
       - "backend/scripts/build_streaming_availability.py"
       - "backend/scripts/build_movies.py"
+      - "backend/scripts/link_tv_guide_movies.py"
       - "backend/scripts/build_entities.py"
       - ".github/workflows/fast-deploy.yml"
 
@@ -163,6 +164,13 @@ jobs:
         run: |
           if [ -f site/data/movies.json ]; then
             python backend/scripts/build_streaming_availability.py --movies site/data/movies.json --output site/data/streaming.json
+          fi
+
+      - name: Link TV Guide to canonical movies
+        continue-on-error: true
+        run: |
+          if [ -f web-static/data/tv-guide.json ] && [ -f site/data/movies.json ] && [ -f site/data/streaming.json ]; then
+            python backend/scripts/link_tv_guide_movies.py --tv web-static/data/tv-guide.json --movies site/data/movies.json --streaming site/data/streaming.json
           fi
 
       - name: Overlay current UI without overwriting generated data
