@@ -237,23 +237,29 @@ def build(movies_path: Path) -> dict:
             continue
         seeded=[]
         refs=movie.get("provider_refs") or {}
-        filmnet_ref=refs.get("filmnet") if isinstance(refs,dict) else None
-        if isinstance(filmnet_ref,dict) and filmnet_ref.get("url"):
-            seeded.append({
-                "service":"filmnet",
-                "title":movie.get("title_fa") or movie.get("original_title") or "",
-                "title_en":movie.get("original_title"),
-                "url":filmnet_ref.get("url"),
-                "direct":True,
-                "provider_id":str(filmnet_ref.get("id") or filmnet_ref.get("short_id") or ""),
-                "match":"provider_identity",
-                "verified_by":"provider_catalog",
-                "poster_url":movie.get("poster_url"),
-            })
-            h=health["filmnet"]
-            h["status"]="ok"
-            h["checked_at"]=now_iso()
-            h["matched_titles"]+=1
+        if isinstance(refs,dict):
+            for service_key,ref in refs.items():
+                if service_key not in QUERIERS or not isinstance(ref,dict):
+                    continue
+                svc=next((x for x in SERVICES if x["key"]==service_key),{})
+                url=ref.get("url") or svc.get("homepage")
+                if not url:
+                    continue
+                seeded.append({
+                    "service":service_key,
+                    "title":movie.get("title_fa") or movie.get("original_title") or "",
+                    "title_en":movie.get("original_title"),
+                    "url":url,
+                    "direct":bool(ref.get("direct",service_key in {"filimo","filmnet"})),
+                    "provider_id":str(ref.get("id") or ref.get("short_id") or ""),
+                    "match":"provider_identity",
+                    "verified_by":"provider_catalog",
+                    "poster_url":movie.get("poster_url"),
+                })
+                h=health[service_key]
+                h["status"]="ok"
+                h["checked_at"]=now_iso()
+                h["matched_titles"]+=1
         if seeded:
             availability[slug]=dedupe(seeded)
 
@@ -277,7 +283,7 @@ def build(movies_path: Path) -> dict:
         refs=movie.get("provider_refs") or {}
         for service in active:
             key=service["key"]
-            if key=="filmnet" and isinstance(refs,dict) and refs.get("filmnet"):
+            if isinstance(refs,dict) and refs.get(key):
                 continue
             health[key]["queried_titles"]+=1
             tasks.append((slug,movie,service))
