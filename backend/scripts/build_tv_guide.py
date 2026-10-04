@@ -176,6 +176,130 @@ def ingest_xmltv(
         raise RuntimeError(f"{name}: no current EPG rows")
     return channels, programmes
 
+TIME_RANGE_TITLE_RE = re.compile(
+    r"^\s*[۰-۹0-9]{1,2}:[۰-۹0-9]{2}\s*[-–—]\s*[۰-۹0-9]{1,2}:[۰-۹0-9]{2}\s*$"
+)
+
+GENERIC_JUNK_TITLES = {
+    "برنامه", "program", "بدون عنوان", "پخش آنلاین", "زنده"
+}
+
+IRIB_JUNK_PREFIXES = (
+    "میان برنامه", "میان‌برنامه",
+    "آگهی", "پیام بازرگانی", "پیام های بازرگانی", "پیام‌های بازرگانی",
+    "آرم ", "آرم‌", "آرم استیشن", "آرم بازرگانی", "آرم تایم",
+    "تیزر", "پیش پرده", "پیش‌پرده", "پیش نمایش", "پیش‌نمایش",
+    "وله ", "وله‌", "فیلر", "کپشن", "هویت بصری",
+    "برنامک", "اعلام برنامه", "تقدیم برنامه",
+    "نشان شبکه", "نشان پیام", "اینفو آرم"
+)
+
+IRIB_JUNK_EXACT = {"هم اکنون", "آرم", "نشان", "پایان برنامه"}
+
+def normalize_programme_title(title: str) -> str:
+    t = re.sub(r"\s+", " ", str(title or "")).strip(" -–—|/")
+    t = re.sub(r"^هم\s*اکنون\s*[/:\-]\s*", "", t, flags=re.I)
+    t = re.sub(r"\s*[-–—]?\s*تایم\s+تقریبی\s*$", "", t, flags=re.I)
+    return t.strip()
+
+def is_junk_programme(p: dict, channel: dict | None = None) -> bool:
+    title = normalize_programme_title(p.get("title_fa") or p.get("title_en") or "")
+    if not title:
+        return True
+    low = title.casefold()
+    if low in GENERIC_JUNK_TITLES:
+        return True
+    if TIME_RANGE_TITLE_RE.match(title):
+        return True
+
+    source = (channel or {}).get("source_key") or str(p.get("channel_id", "")).split(":", 1)[0]
+    channel_name = normalize_programme_title((channel or {}).get("name_fa") or (channel or {}).get("name") or "")
+
+    if source == "iranintl" and channel_name and low == channel_name.casefold() and not p.get("desc_fa"):
+        return True
+    if source == "radiofarda" and low in {"پخش آنلاین", "زنده"}:
+        return True
+    if source == "irib":
+        if title in IRIB_JUNK_EXACT:
+            return True
+        if any(title.startswith(prefix) for prefix in IRIB_JUNK_PREFIXES):
+            return True
+    return False
+
+def _programme_score(p: dict, channel: dict | None = None) -> int:
+    if is_junk_programme(p, channel):
+        return -1000
+    title = normalize_programme_title(p.get("title_fa") or p.get("title_en") or "")
+    score = 100 + min(len(title), 50)
+    if p.get("desc_fa"):
+        score += 10
+    if p.get("icon"):
+        score += 3
+    return score
+
+def clean_programmes(programmes: list[dict], channels: list[dict]) -> tuple[list[dict], dict]:
+    """Remove placeholders and repair overlaps, especially in IRIB data."""
+    cmap = {str(c.get("id")): c for c in channels}
+    grouped: dict[str, list[dict]] = {}
+    for p in programmes:
+        grouped.setdefault(str(p.get("channel_id")), []).append(dict(p))
+
+    cleaned: list[dict] = []
+    stats = {
+        "input": len(programmes),
+        "removed_junk": 0,
+        "removed_duplicate_start": 0,
+        "trimmed_overlap": 0,
+        "output": 0,
+    }
+
+    for cid, rows in grouped.items():
+        channel = cmap.get(cid, {})
+        source = channel.get("source_key")
+        rows.sort(key=lambda p: (p.get("start") or "", -_programme_score(p, channel)))
+
+        unique: list[dict] = []
+        i = 0
+        while i < len(rows):
+            same = [rows[i]]
+            j = i + 1
+            while j < len(rows) and rows[j].get("start") == rows[i].get("start"):
+                same.append(rows[j])
+                j += 1
+            best = max(same, key=lambda p: _programme_score(p, channel))
+            stats["removed_duplicate_start"] += max(0, len(same) - 1)
+            unique.append(best)
+            i = j
+
+        if source == "irib":
+            for idx, p in enumerate(unique[:-1]):
+                try:
+                    start = parse_iso(p["start"])
+                    stop = parse_iso(p["stop"])
+                    nxt = parse_iso(unique[idx + 1]["start"])
+                    if start < nxt < stop:
+                        p["stop"] = iso(nxt)
+                        stats["trimmed_overlap"] += 1
+                except Exception:
+                    pass
+
+        for p in unique:
+            p["title_fa"] = normalize_programme_title(p.get("title_fa") or p.get("title_en") or "")
+            if is_junk_programme(p, channel):
+                stats["removed_junk"] += 1
+                continue
+            try:
+                if parse_iso(p["stop"]) <= parse_iso(p["start"]):
+                    continue
+            except Exception:
+                continue
+            cleaned.append(p)
+
+    cleaned.sort(key=lambda x: (x["start"], x["channel_id"]))
+    stats["output"] = len(cleaned)
+    return cleaned, stats
+
+
 def load_irib_metadata() -> dict[str, dict]:
     rows = json.loads(fetch(IRIB_CHANNELS).decode("utf-8-sig"))
     out: dict[str, dict] = {}
@@ -641,6 +765,7 @@ def build() -> dict:
         raise RuntimeError("All active EPG sources failed; refusing to overwrite good data")
 
     programmes.sort(key=lambda x: (x["start"], x["channel_id"]))
+    programmes, quality_stats = clean_programmes(programmes, channels)
     used = {p["channel_id"] for p in programmes}
     channels = [c for c in channels if c["id"] in used]
     source_stats = {}
@@ -658,6 +783,7 @@ def build() -> dict:
         "sources": SOURCE_REGISTRY,
         "source_stats": source_stats,
         "source_errors": errors,
+        "quality_stats": quality_stats,
         "channels": channels,
         "programmes": programmes,
     }
@@ -673,7 +799,7 @@ def main() -> None:
     if out.exists():
         try:
             old = json.loads(out.read_text(encoding="utf-8"))
-            comparable = ("channels", "programmes", "sources", "source_stats", "source_errors")
+            comparable = ("channels", "programmes", "sources", "source_stats", "source_errors", "quality_stats")
             if all(old.get(k) == data.get(k) for k in comparable):
                 print("TV Guide unchanged:", len(data["channels"]), "channels,", len(data["programmes"]), "programmes")
                 return
@@ -682,7 +808,7 @@ def main() -> None:
 
     out.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     parts = [f"{k}={v['channels']}ch/{v['programmes']}p" for k, v in data["source_stats"].items()]
-    print("TV Guide:", len(data["channels"]), "channels,", len(data["programmes"]), "programmes", "|", ", ".join(parts), "->", out)
+    print("TV Guide:", len(data["channels"]), "channels,", len(data["programmes"]), "programmes", "|", ", ".join(parts), "| quality", data.get("quality_stats"), "->", out)
 
 if __name__ == "__main__":
     main()
