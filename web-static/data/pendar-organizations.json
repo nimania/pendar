@@ -1,0 +1,170 @@
+[
+  {
+    "id": "iranica",
+    "type": "بنیاد پژوهشی",
+    "scope": "تاریخ و تمدن ایران",
+    "officialUrl": "https://www.iranicaonline.org/about/",
+    "politicalOrientation": null,
+    "status": "نیازمند بررسی وضعیت جاری",
+    "checkedAt": "2026-09-30",
+    "sources": [
+      "https://www.iranicaonline.org/about/"
+    ],
+    "title": "بنیاد دانشنامه ایرانیکا",
+    "kind": "organization",
+    "topicIds": [
+      "iran-studies",
+      "heritage"
+    ],
+    "country": "آمریکا",
+    "summary": "پشتیبانی از تداوم دانشنامه‌ای درباره تاریخ، زبان‌ها و فرهنگ جهان ایرانی.",
+    "sourceUrl": "https://www.iranicaonline.org/about/"
+  },
+  {
+    "id": "farhang",
+    "type": "بنیاد فرهنگی",
+    "scope": "هنر و فرهنگ ایران",
+    "officialUrl": "https://farhang.org/about/",
+    "politicalOrientation": null,
+    "status": "نیازمند بررسی وضعیت جاری",
+    "checkedAt": "2026-09-30",
+    "sources": [
+      "https://farhang.org/about/"
+    ],
+    "title": "بنیاد فرهنگ",
+    "kind": "organization",
+    "topicIds": [
+      "iran-studies",
+      "heritage"
+    ],
+    "country": "آمریکا",
+    "summary": "معرفی و گسترش هنر و فرهنگ ایرانی؛ در معرفی رسمی خود نهادی غیرسیاسی است.",
+    "sourceUrl": "https://farhang.org/about/"
+  },
+  {
+    "id": "ihf",
+    "type": "بنیاد فرهنگی",
+    "scope": "میراث فرهنگی",
+    "officialUrl": "https://ihf.org.uk/about/",
+    "politicalOrientation": null,
+    "status": "نیازمند بررسی وضعیت جاری",
+    "checkedAt": "2026-09-30",
+    "sources": [
+      "https://ihf.org.uk/about/"
+    ],
+    "title": "بنیاد میراث ایران",
+    "kind": "organization",
+    "topicIds": [
+      "iran-studies",
+      "heritage"
+    ],
+    "country": "بریتانیا",
+    "summary": "حمایت از برنامه‌ها و پژوهش‌های مربوط به شناخت و حفظ فرهنگ و میراث ایران.",
+    "sourceUrl": "https://ihf.org.uk/about/"
+  },
+  {
+    "id": "phf",
+    "type": "بنیاد پژوهشی",
+    "scope": "ایران فرهنگی",
+    "officialUrl": "https://persianheritagefoundation.org/about-us/",
+    "politicalOrientation": null,
+    "status": "نیازمند بررسی وضعیت جاری",
+    "checkedAt": "2026-09-30",
+    "sources": [
+      "https://persianheritagefoundation.org/about-us/"
+    ],
+    "title": "بنیاد میراث پارسی",
+    "kind": "organization",
+    "topicIds": [
+      "iran-studies",
+      "heritage"
+    ],
+    "country": "آمریکا",
+    "summary": "حمایت از پژوهش درباره جهان ایرانی و فارسی‌مآب فراتر از مرزهای امروز ایران.",
+    "sourceUrl": "https://persianheritagefoundation.org/about-us/"
+  },
+  {
+    "id": "afshar",
+    "type": "بنیاد فرهنگی",
+    "scope": "زبان فارسی و ایران‌شناسی",
+    "officialUrl": "https://t.me/s/AfsharFoundation",
+    "politicalOrientation": null,
+    "status": "نیازمند بررسی وضعیت جاری",
+    "checkedAt": "2026-09-30",
+    "sources": [
+      "https://t.me/s/AfsharFoundation"
+    ],
+    "title": "بنیاد موقوفات محمود افشار",
+    "kind": "organization",
+    "topicIds": [
+      "iran-studies",
+      "heritage"
+    ],
+    "country": "ایران",
+    "summary": "انتشار پژوهش‌های ایران‌شناسی و فعالیت درباره زبان فارسی؛ منبع این معرفی کانال بنیاد است.",
+    "sourceUrl": "https://t.me/s/AfsharFoundation"
+  },
+  {
+    "id": "bukhara",
+    "type": "نشریه",
+    "scope": "ادبیات و فرهنگ",
+    "officialUrl": "https://bukharamag.com/",
+    "politicalOrientation": null,
+    "status": "نیازمند بررسی وضعیت جاری",
+    "checkedAt": "2026-09-30",
+    "sources": [
+      "https://bukharamag.com/"
+    ],
+    "title": "بخارا",
+    "kind": "organization",
+    "topicIds": [
+      "press",
+      "literature"
+    ],
+    "country": "ایران",
+    "summary": "مجله فرهنگی و هنری فارسی و برگزارکننده شب‌های فرهنگی بخارا.",
+    "sourceUrl": "https://bukharamag.com/"
+  },
+  {
+    "id": "cpi",
+    "type": "حزب",
+    "scope": "اندیشه و سیاست ایران",
+    "officialUrl": "https://www.irancpi.net/",
+    "politicalOrientation": null,
+    "status": "نیازمند بررسی وضعیت جاری",
+    "checkedAt": "2026-09-30",
+    "sources": [
+      "https://www.irancpi.net/"
+    ],
+    "title": "حزب مشروطه ایران (لیبرال دمکرات)",
+    "kind": "organization",
+    "topicIds": [
+      "law",
+      "national-identity"
+    ],
+    "country": "ثبت نشده",
+    "summary": "مدخل آغازین برای بررسی اسناد رسمی حزب؛ تعیین دقیق رویکرد و وضعیت جاری در انتظار بررسی است.",
+    "sourceUrl": "https://www.irancpi.net/"
+  },
+  {
+    "id": "novin",
+    "type": "حزب",
+    "scope": "اندیشه و سیاست ایران",
+    "officialUrl": "https://irannovinpoliticalparty.com/",
+    "politicalOrientation": null,
+    "status": "نیازمند بررسی وضعیت جاری",
+    "checkedAt": "2026-09-30",
+    "sources": [
+      "https://irannovinpoliticalparty.com/"
+    ],
+    "title": "حزب ایران نوین",
+    "kind": "organization",
+    "topicIds": [
+      "law",
+      "national-identity"
+    ],
+    "country": "ثبت نشده",
+    "summary": "وب‌سایت رسمی شامل اسناد و پیش‌نویس‌های حزبی است؛ این مدخل به حزب معاصر اشاره دارد و با حزب تاریخی هم‌نام یکی نیست.",
+    "sourceUrl": "https://irannovinpoliticalparty.com/"
+  }
+]
