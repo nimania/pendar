@@ -73,7 +73,10 @@ def refresh_avatars(db, *, now: datetime | None = None, fetcher=_fetch_avatar) -
         a = have.get(f.handle)
         if a is not None:
             ft = a.fetched_at if a.fetched_at.tzinfo else a.fetched_at.replace(tzinfo=timezone.utc)
-            if ft >= fresh:
+            # Curated external portraits must override any older Telegram-derived
+            # cache entry (e.g. a Telegram logo previously stored for Donald Trump).
+            # There are only a handful of these, so refresh them on every build.
+            if f.handle not in _EXTERNAL_AVATARS and ft >= fresh:
                 skipped += 1
                 continue
         try:
