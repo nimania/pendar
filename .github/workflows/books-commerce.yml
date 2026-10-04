@@ -12,6 +12,7 @@ on:
       - "backend/scripts/book_radar.py"
       - "backend/scripts/collect_book_radar.py"
       - "backend/scripts/book_market_sources.py"
+      - "backend/scripts/book_distributors.py"
       - "backend/book-radar-sources.json"
       - "backend/tests/test_book_radar.py"
       - "backend/tests/test_book_market_sources.py"
