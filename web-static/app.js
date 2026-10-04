@@ -1023,7 +1023,6 @@ async function loadFeed() {
     renderDayChips();
     updateFreshness();
     renderHomeDaily();
-    renderHomeMajra();
   } catch (e) {
     const why = e && e.name === "AbortError" ? "دریافت داده بیش از حد طول کشید." : "فایل خبرها در دسترس نیست.";
     el.innerHTML = `<div class="state"><div class="big">خبرها بارگذاری نشد</div>
