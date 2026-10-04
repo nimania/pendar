@@ -131,6 +131,7 @@ jobs:
           git archive origin/main web-static | tar -x -C /tmp/jankalam-ui
           rsync -a --exclude 'data/' /tmp/jankalam-ui/web-static/ site/
           mkdir -p site/data
+          cp /tmp/jankalam-ui/web-static/data/pendar-*.json site/data/
           cp backend/public/data/periodicals.json site/data/periodicals.json
           cp backend/public/data/press-directory.json site/data/press-directory.json
           cp backend/public/data/press-directory.js site/data/press-directory.js
@@ -151,7 +152,7 @@ jobs:
           import hashlib, pathlib, re
           root = pathlib.Path("site")
           versions = {}
-          for name in ("app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js"):
+          for name in ("app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "knowledge-hub.js"):
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]
