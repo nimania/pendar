@@ -154,6 +154,10 @@ jobs:
         continue-on-error: true
         run: python backend/scripts/build_streaming_availability.py --movies backend/public/data/movies.json --output backend/public/data/streaming.json
 
+      - name: Link TV Guide to canonical movies
+        continue-on-error: true
+        run: python backend/scripts/link_tv_guide_movies.py --tv backend/public/data/tv-guide.json --movies backend/public/data/movies.json --streaming backend/public/data/streaming.json
+
       - name: Merge freshest Torob commerce into current books
         env:
           GH_TOKEN: ${{ github.token }}
