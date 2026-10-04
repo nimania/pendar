@@ -100,8 +100,65 @@ function canonicalStrip(entity) {
   const related = links.length ? '<div class="canonical-related">' + links.map(function(x){
     return '<button onclick="openCanonicalEntity(\'' + esc(x.entity.id) + '\')"><small>' + esc(x.label) + '</small><b>' + esc(x.entity.name_fa||x.entity.id) + '</b></button>';
   }).join("") + '</div>' : "";
-  return '<section class="canonical-strip"><div class="canonical-head"><div><span>هویت واحد پندار</span><b>' + esc(entity.name_fa||"") + '</b></div><code dir="ltr">' + esc(entity.id) + '</code></div>' + related + '</section>';
+  return '<section class="canonical-strip"><div class="canonical-head"><div><span>هویت واحد پندار</span><b>' + esc(entity.name_fa||"") + '</b></div><div class="canonical-head-actions"><code dir="ltr">' + esc(entity.id) + '</code><button class="canonical-graph-btn" onclick="openEntityGraph(\'' + esc(entity.id) + '\')">شبکهٔ ارتباطی</button></div></div>' + related + '</section>';
 }
+
+let _entityGraphFilter="all";
+function _entityTypeFa(type){
+  const m={person:"شخص",organization:"نهاد",source:"رسانه",publisher:"ناشر",book:"کتاب",movie:"فیلم/سریال",topic:"موضوع",place:"مکان"};
+  return m[type]||type||"هویت";
+}
+function _entityGraphLinks(data,id){
+  const all=new Map((data.entities||[]).map(x=>[x.id,x])),out=[];
+  for(const edge of (data.edges||[])){
+    let other=null,incoming=false;
+    if(edge.from===id) other=all.get(edge.to);
+    else if(edge.to===id){other=all.get(edge.from);incoming=true}
+    if(!other) continue;
+    out.push({entity:other,edge:edge,incoming:incoming,label:_canonicalRelationLabel(edge.rel,incoming)});
+  }
+  return out;
+}
+function setEntityGraphFilter(id,type){
+  _entityGraphFilter=type||"all";
+  openEntityGraph(id,false);
+}
+async function openEntityGraph(id,resetFilter=true){
+  id=decodeURIComponent(String(id||""));
+  if(resetFilter)_entityGraphFilter="all";
+  const data=await loadCanonicalEntities();
+  const entity=(data.entities||[]).find(x=>x.id===id);
+  show("graph");setTab("");setHash("#/graph/"+encodeURIComponent(id));
+  const el=document.getElementById("entity-graph-content");
+  if(!entity){el.innerHTML='<div class="state"><div class="big">این هویت پیدا نشد</div></div>';return}
+  document.title="شبکهٔ "+(entity.name_fa||"هویت")+" | پندار";
+  const allLinks=_entityGraphLinks(data,id);
+  const typeCounts={};
+  for(const x of allLinks)typeCounts[x.entity.type]=(typeCounts[x.entity.type]||0)+1;
+  const links=allLinks.filter(x=>_entityGraphFilter==="all"||x.entity.type===_entityGraphFilter).slice(0,24);
+  const W=1000,H=620,cx=500,cy=310;
+  const positions=links.map((x,i)=>{
+    const n=links.length,ring=i<12?1:2,idx=ring===1?i:i-12,count=ring===1?Math.min(n,12):Math.max(1,n-12);
+    const a=(-Math.PI/2)+(Math.PI*2*idx/count)+(ring===2?Math.PI/count:0);
+    const rx=ring===1?315:430,ry=ring===1?205:255;
+    return {...x,x:cx+Math.cos(a)*rx,y:cy+Math.sin(a)*ry};
+  });
+  const lines=positions.map(p=>'<line x1="'+cx+'" y1="'+cy+'" x2="'+p.x.toFixed(1)+'" y2="'+p.y.toFixed(1)+'"></line>').join("");
+  const nodes=positions.map(p=>{
+    const left=(p.x/W*100).toFixed(2),top=(p.y/H*100).toFixed(2);
+    return '<button class="entity-graph-node type-'+esc(p.entity.type)+'" style="left:'+left+'%;top:'+top+'%" onclick="openCanonicalEntity(\''+esc(p.entity.id)+'\')"><small>'+esc(p.label)+'</small><b>'+esc(p.entity.name_fa||p.entity.id)+'</b><span>'+esc(_entityTypeFa(p.entity.type))+'</span></button>';
+  }).join("");
+  const filters=[["all","همه",allLinks.length],...Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([t,n])=>[t,_entityTypeFa(t),n])];
+  const filterHtml=filters.map(x=>'<button class="fchip '+(_entityGraphFilter===x[0]?'on':'')+'" onclick="setEntityGraphFilter(\''+esc(id)+'\',\''+esc(x[0])+'\')">'+esc(x[1])+' <span>'+faN(x[2])+'</span></button>').join("");
+  const relSummary=Object.entries(allLinks.reduce((m,x)=>{m[x.label]=(m[x.label]||0)+1;return m},{})).sort((a,b)=>b[1]-a[1]).slice(0,8).map(x=>'<span><b>'+faN(x[1])+'</b> '+esc(x[0])+'</span>').join("");
+  el.innerHTML='<button class="back" onclick="openCanonicalEntity(\''+esc(id)+'\')">بازگشت به پروفایل</button>'+
+    '<section class="entity-graph-hero"><div><span class="press-kicker">Relationship Graph</span><h1>'+esc(entity.name_fa||entity.id)+'</h1><p>'+faN(allLinks.length)+' پیوند مستقیمِ ثبت‌شده در رجیستری canonical پندار</p></div><button onclick="openCanonicalEntity(\''+esc(id)+'\')">پروفایل کامل</button></section>'+
+    '<div class="entity-graph-filters">'+filterHtml+'</div>'+
+    (relSummary?'<div class="entity-graph-summary">'+relSummary+'</div>':'')+
+    (links.length?'<div class="entity-graph-stage"><svg class="entity-graph-lines" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'+lines+'</svg><button class="entity-graph-center" onclick="openCanonicalEntity(\''+esc(id)+'\')"><small>'+esc(_entityTypeFa(entity.type))+'</small><b>'+esc(entity.name_fa||entity.id)+'</b></button>'+nodes+'</div>':'<div class="state"><div class="big">برای این هویت هنوز رابطهٔ مستقیمی ثبت نشده</div></div>')+
+    '<p class="entity-graph-note">این نمودار فقط رابطه‌های ثبت‌شده در دادهٔ پندار را نشان می‌دهد؛ نزدیکی بصری به‌تنهایی معنای رابطهٔ قوی‌تر ندارد.</p>';
+}
+
 async function openCanonicalEntity(id) {
   id = decodeURIComponent(String(id||""));
   const entity = await canonicalEntityById(id);
@@ -371,7 +428,7 @@ document.addEventListener("click",e=>{const box=document.getElementById("smart-s
 const VIEWS = { feed: "feed-view", detail: "detail-view", trends: "trends-view",
   factchecks: "factchecks-view", topics: "topics-view", topicarchive: "topic-archive-view",
   weather: "weather-view", iran: "iran-view", faq: "faq-view", market: "market-view",
-  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tvguide: "tv-guide-view", knowledge: "knowledge-view", entity: "entity-view", system: "system-view", tech: "tech-view" };
+  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tvguide: "tv-guide-view", knowledge: "knowledge-view", entity: "entity-view", graph: "entity-graph-view", system: "system-view", tech: "tech-view" };
 const TABS = ["feed", "trends", "factchecks", "iran", "topics"];
 const SCOPE_FA = { local: "استانی", national: "کشوری", international: "بین‌المللی" };
 function setTab(w) { for (const t of TABS) document.getElementById("tab-" + t).classList.toggle("active", w === t); }
@@ -981,6 +1038,7 @@ async function route() {
   if (kind === "tv") return showTVGuide(arg || "now");
   if (kind === "knowledge") return showKnowledge(arg || "home");
   if (kind === "entity" && arg) return openCanonicalEntity(arg);
+  if (kind === "graph" && arg) return openEntityGraph(arg);
   if (kind === "system") return showSystem();
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
