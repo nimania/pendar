@@ -24,6 +24,7 @@ SERVICES = [
     {"key":"filimo","name_fa":"فیلیمو","name_en":"Filimo","status":"active","homepage":"https://www.filimo.com/","logo":"https://upload.wikimedia.org/wikipedia/commons/5/5d/Filimo_logo.svg"},
     {"key":"filmnet","name_fa":"فیلم‌نت","name_en":"FilmNet","status":"active","homepage":"https://filmnet.ir/","logo":"https://upload.wikimedia.org/wikipedia/commons/5/53/FilmNet_Logo.png"},
     {"key":"namava","name_fa":"نماوا","name_en":"Namava","status":"active","homepage":"https://www.namava.ir/main","logo":"https://upload.wikimedia.org/wikipedia/commons/5/50/Namava_logo.svg"},
+    {"key":"30nama","name_fa":"۳۰نما","name_en":"30nama","status":"active","homepage":"https://30nama.com/","logo":"https://30nama.com/favicon.ico"},
     {"key":"tamashakhoneh","name_fa":"تماشاخونه","name_en":"Tamashakhoneh","status":"planned","homepage":"https://tmk.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=tmk.ir"},
     {"key":"starnet","name_fa":"استارنت","name_en":"StarNet","status":"planned","homepage":"https://starnet.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=starnet.ir"},
     {"key":"telewebion","name_fa":"تلوبیون","name_en":"Telewebion","status":"planned","homepage":"https://telewebion.com/","logo":"https://upload.wikimedia.org/wikipedia/commons/c/c2/Telewebion.svg"},
@@ -238,8 +239,9 @@ def build(movies_path: Path) -> dict:
         seeded=[]
         refs=movie.get("provider_refs") or {}
         if isinstance(refs,dict):
+            service_keys={x["key"] for x in SERVICES}
             for service_key,ref in refs.items():
-                if service_key not in QUERIERS or not isinstance(ref,dict):
+                if service_key not in service_keys or not isinstance(ref,dict):
                     continue
                 svc=next((x for x in SERVICES if x["key"]==service_key),{})
                 url=ref.get("url") or svc.get("homepage")
