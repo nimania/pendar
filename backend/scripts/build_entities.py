@@ -83,6 +83,8 @@ class Registry:
         self.edges: list[dict] = []
         self._edge_keys: set[tuple] = set()
         self.conflicts: list[dict] = []
+        self.ambiguous_aliases: list[dict] = []
+        self._blocked_aliases: dict[str, set[str]] = {t: set() for t in SUPPORTED_TYPES}
 
     def _new_id(self, kind: str, preferred: str | None, name: str) -> str:
         base = safe_key(preferred) if preferred else ""
@@ -161,14 +163,25 @@ class Registry:
             n = norm(alias)
             if not n:
                 continue
+            if n in self._blocked_aliases[kind]:
+                continue
             owner = self.alias_index[kind].get(n)
             if owner and owner != eid:
-                self.conflicts.append({
-                    "type": kind,
-                    "reason": "alias_collision",
-                    "alias": alias,
-                    "entity_ids": sorted({owner, eid}),
-                })
+                if not merge_by_alias:
+                    self.alias_index[kind].pop(n, None)
+                    self._blocked_aliases[kind].add(n)
+                    self.ambiguous_aliases.append({
+                        "type": kind,
+                        "alias": alias,
+                        "entity_ids": sorted({owner, eid}),
+                    })
+                else:
+                    self.conflicts.append({
+                        "type": kind,
+                        "reason": "alias_collision",
+                        "alias": alias,
+                        "entity_ids": sorted({owner, eid}),
+                    })
                 continue
             self.alias_index[kind][n] = eid
             if norm(alias) != norm(ent["name_fa"]) and all(norm(x) != n for x in ent["aliases"]):
@@ -483,6 +496,7 @@ def compact(reg: Registry) -> dict:
         "edges": sorted(reg.edges, key=lambda x: (x["from"], x["rel"], x["to"])),
         "alias_index": alias_index,
         "conflicts": reg.conflicts,
+        "ambiguous_aliases": reg.ambiguous_aliases,
     }
 
 
@@ -513,6 +527,7 @@ def main() -> int:
         "entity registry: "
         + ", ".join(f"{k}={v}" for k, v in c.items())
         + f", edges={len(result['edges'])}, conflicts={len(result['conflicts'])}"
+        + f", ambiguous_aliases={len(result['ambiguous_aliases'])}"
     )
     if c["person"] < 1 or c["book"] < 1 or c["source"] < 1:
         raise SystemExit("entity registry is unexpectedly sparse")
