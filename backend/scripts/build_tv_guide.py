@@ -8,6 +8,7 @@ not create synthetic programme rows.
 from __future__ import annotations
 
 import argparse
+import gzip
 import json
 import re
 import urllib.request
@@ -22,11 +23,12 @@ PERSIANA_XML = "https://raw.githubusercontent.com/Samhouston010/persiana-tv-epg/
 IRIB_XML = "https://raw.githubusercontent.com/Samhouston010/sepehr-irib-epg/main/sepehr.xml"
 IRIB_CHANNELS = "https://raw.githubusercontent.com/Samhouston010/sepehr-irib-epg/main/channels.json"
 IRANINTL_XML = "https://raw.githubusercontent.com/SandObserver/iranintl-xmltv/main/output/iranintl.xml"
+EPGPW_GB_GZ = "https://epg.pw/xmltv/epg_GB.xml.gz"
 
 SOURCE_REGISTRY = [
     {"key": "irib", "name": "صداوسیما / تلوبیون", "status": "aggregated", "note": "EPG جاریِ شبکه‌های سراسری و استانی؛ گردآوری‌شده از APIهای تلوبیون/سپهر"},
     {"key": "persiana", "name": "Persiana Group", "status": "aggregated", "note": "XMLTV جاریِ شبکه‌های گروه پرشیانا"},
-    {"key": "bbc-persian", "name": "BBC Persian", "status": "official", "note": "جدول روزانهٔ رسمی BBC Media Partners"},
+    {"key": "bbc-persian", "name": "BBC Persian", "status": "aggregated", "note": "تلاش برای جدول رسمی BBC؛ در صورت نیاز fallback استاندارد XMLTV از EPG.PW"},
     {"key": "iranintl", "name": "Iran International", "status": "verified", "note": "XMLTV تازه‌شونده، استخراج‌شده از جدول رسمی شبکه"},
     {"key": "radiofarda", "name": "Radio Farda", "status": "official", "note": "جدول پخش روزانهٔ رسمی رادیو فردا"},
     {"key": "gem", "name": "GEM Group", "status": "planned", "note": "نیازمند تطبیق چند منبع"},
@@ -282,6 +284,7 @@ def parse_iso(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
 
 def ingest_bbc_persian(now: datetime) -> tuple[list[dict], list[dict]]:
+    """Prefer BBC's official schedule; fall back to a standard XMLTV mirror."""
     time_re = re.compile(r"^(\d{2}):(\d{2})\s+GMT$")
     dur_re = re.compile(r"^(\d{2}):(\d{2}):(\d{2})$")
     programmes: list[dict] = []
@@ -293,8 +296,7 @@ def ingest_bbc_persian(now: datetime) -> tuple[list[dict], list[dict]]:
         url = f"https://wspartners.bbc.com/schedules/bbc_persian_tv/day/{day.isoformat()}"
         try:
             tokens = html_tokens(fetch(url))
-        except Exception as exc:
-            print("WARNING: BBC Persian day", day, "failed:", exc)
+        except Exception:
             continue
         for i, token in enumerate(tokens):
             mt = time_re.match(token)
@@ -343,28 +345,67 @@ def ingest_bbc_persian(now: datetime) -> tuple[list[dict], list[dict]]:
                 "rating": None,
             })
 
+    confidence = "official"
+    if not programmes:
+        confidence = "aggregated"
+        raw = gzip.decompress(fetch(EPGPW_GB_GZ))
+        root = ET.fromstring(raw)
+        ids = set()
+        for ch in root.findall("channel"):
+            names = [" ".join((x.text or "").split()) for x in ch.findall("display-name")]
+            if any("bbc persian" in n.lower() for n in names):
+                cid = (ch.attrib.get("id") or "").strip()
+                if cid:
+                    ids.add(cid)
+        if not ids:
+            raise RuntimeError("BBC Persian: no channel found in fallback EPG")
+        lo, hi = now - timedelta(hours=12), now + timedelta(days=5)
+        for node in root.findall("programme"):
+            raw_id = (node.attrib.get("channel") or "").strip()
+            if raw_id not in ids:
+                continue
+            try:
+                start = parse_xmltv_time(node.attrib.get("start", ""))
+                stop = parse_xmltv_time(node.attrib.get("stop", ""))
+            except Exception:
+                continue
+            if stop < lo or start > hi or stop <= start:
+                continue
+            title_fa = text_by_lang(node, "title", "fa")
+            title_en = text_by_lang(node, "title", "en") or text_by_lang(node, "title", "")
+            title = title_fa or title_en or "BBC Persian"
+            key = (iso(start), title)
+            if key in seen:
+                continue
+            seen.add(key)
+            desc = text_by_lang(node, "desc", "fa") or text_by_lang(node, "desc", "en")
+            programmes.append({
+                "channel_id": "bbc-persian:tv",
+                "start": iso(start),
+                "stop": iso(stop),
+                "title_fa": title,
+                "title_en": title_en or None,
+                "desc_fa": desc or None,
+                "year": None,
+                "categories": ["خبر"],
+                "icon": None,
+                "rating": None,
+            })
+
     lo, hi = now - timedelta(hours=12), now + timedelta(days=8)
     programmes = [p for p in programmes if parse_iso(p["stop"]) >= lo and parse_iso(p["start"]) <= hi]
     programmes.sort(key=lambda x: x["start"])
     if not programmes:
-        try:
-            probe = html_tokens(fetch(f"https://wspartners.bbc.com/schedules/bbc_persian_tv/day/{today.isoformat()}"))
-            gmt = [t for t in probe if "GMT" in t][:120]
-            durations = [t for t in probe if re.search(r"\d{2}:\d{2}:\d{2}", t)][:80]
-            print("BBC DEBUG GMT:", json.dumps(gmt, ensure_ascii=False))
-            print("BBC DEBUG DUR:", json.dumps(durations, ensure_ascii=False))
-        except Exception as exc:
-            print("BBC DEBUG FETCH FAILED:", exc)
         raise RuntimeError("BBC Persian: no current schedule parsed")
     channel = {
         "id": "bbc-persian:tv",
         "name_fa": "بی‌بی‌سی فارسی",
         "name": "BBC Persian",
-        "logo": None,
+        "logo": "https://i.imgur.com/4uTMnPb.png",
         "group": "news",
         "source_key": "bbc-persian",
         "source_name": "BBC Persian",
-        "confidence": "official",
+        "confidence": confidence,
     }
     return [channel], programmes
 
