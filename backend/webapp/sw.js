@@ -1,6 +1,6 @@
-/* جان‌کلام service worker — offline-capable PWA.
+/* Pendar service worker — offline-capable PWA.
    App shell: cache-first. API: network-first with cache fallback. */
-const VERSION = "jankalam-v1";
+const VERSION = "pendar-v2";
 const SHELL = [
   "/", "/index.html", "/styles.css", "/app.js",
   "/manifest.webmanifest", "/icons/icon.svg",
