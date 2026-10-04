@@ -185,6 +185,9 @@ jobs:
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir backend/public/data
 
+      - name: Finalize canonical entity registry
+        run: python backend/scripts/finalize_entity_registry.py --registry backend/public/data/entity-registry.json --overrides backend/data/entity-overrides.json --qa-output backend/public/data/entity-qa.json
+
       - name: Validate Pendar data integrity before publish
         env:
           GH_TOKEN: ${{ github.token }}
