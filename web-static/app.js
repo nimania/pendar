@@ -1839,6 +1839,34 @@ async function renderHomeGlance() {
   } catch (_) {}
 }
 
+// Compact human layer on the homepage: curated figures with portraits,
+// ordered by their most recent activity. News-only synthetic profiles are excluded.
+async function renderHomePeople(){
+  const section=document.getElementById("home-people-strip");
+  const el=document.getElementById("home-people-list");
+  if(!section||!el) return;
+  try{
+    const d=await loadFigures();
+    const figures=(d.figures||[])
+      .filter(f=>f && f.avatar && f.field!=="news" && !String(f.handle||"").startsWith("news-"))
+      .map(f=>({
+        ...f,
+        _latest:(f.posts||[]).map(p=>String(p.published_at||"")).sort().slice(-1)[0]||""
+      }))
+      .sort((a,b)=>String(b._latest).localeCompare(String(a._latest)))
+      .slice(0,14);
+    if(!figures.length){ section.style.display="none"; return; }
+    el.innerHTML=figures.map(f=>`
+      <button class="home-person" onclick="openFigure('${esc(f.handle)}')" aria-label="${esc(f.name_fa||"")}">
+        <span class="home-person-ring"><img src="${esc(f.avatar)}" alt="" loading="lazy" onerror="this.closest('.home-person')?.remove()"></span>
+        <span class="home-person-name">${esc(f.name_fa||"")}</span>
+      </button>`).join("");
+    section.style.display="";
+  }catch(_){
+    section.style.display="none";
+  }
+}
+
 // Homepage daily intelligence: the strongest current stories plus the latest figure statements.
 async function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
@@ -2301,6 +2329,7 @@ renderHomeStats();
 renderHomeGlance();
 renderHomePrices();
 renderHomeWeather();
+renderHomePeople();
 updateMineBadge();
 
 
