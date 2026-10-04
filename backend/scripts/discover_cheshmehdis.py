@@ -37,5 +37,16 @@ for src in scripts[-20:]:
             if len(v)>300: continue
             if any(k in v.lower() for k in ("publisher","book","api")):
                 cands.add(urljoin(BASE,v))
-out={"page":PAGE,"scripts":scripts,"candidates":sorted(cands)}
+contexts=[]
+for src in scripts[-20:]:
+    try: body,_=get(src)
+    except Exception: continue
+    for needle in ("getMainLevelPublishersProducts","publishers-list","base_url","book_info"):
+        start=0
+        while True:
+            i=body.find(needle,start)
+            if i<0: break
+            contexts.append({"needle":needle,"script":src,"context":body[max(0,i-900):i+1800]})
+            start=i+len(needle)
+out={"page":PAGE,"scripts":scripts,"candidates":sorted(cands),"contexts":contexts[:40]}
 print(json.dumps(out,ensure_ascii=False,indent=2))
