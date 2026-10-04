@@ -137,6 +137,9 @@ jobs:
               sw.write_text(s,encoding="utf-8")
           PY
 
+      - name: Validate Pendar data integrity before publish
+        run: python backend/scripts/validate_site_integrity.py --site site
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -160,6 +160,18 @@ jobs:
             fi
           fi
 
+      - name: Validate Pendar data integrity before publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          rm -rf /tmp/previous-site
+          mkdir -p /tmp/previous-site
+          prev_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          if [ -n "$prev_id" ]; then
+            gh run download "$prev_id" -n latest-static-site -D /tmp/previous-site || true
+          fi
+          python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
+
       - name: Save the figures published in this build
         uses: actions/upload-artifact@v4
         with:
