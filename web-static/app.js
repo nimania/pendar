@@ -1860,7 +1860,9 @@ async function renderHomePeople(){
         _latest:(f.posts||[]).map(p=>String(p.published_at||"")).sort().slice(-1)[0]||""
       }))
       .sort((a,b)=>String(b._latest).localeCompare(String(a._latest)))
-      .slice(0,14);
+      // The five newest figures already appear in the vertical "latest statements"
+      // panel below. Skip them here so the horizontal strip adds different faces.
+      .slice(5,19);
     if(!figures.length){ section.style.display="none"; return; }
     el.innerHTML=figures.map(f=>`
       <button class="home-person" onclick="openFigure('${esc(f.handle)}')" aria-label="${esc(f.name_fa||"")}">
