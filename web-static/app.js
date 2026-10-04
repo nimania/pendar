@@ -113,7 +113,135 @@ function canonicalStrip(entity) {
   const related = links.length ? '<div class="canonical-related">' + links.map(function(x){
     return '<button onclick="openCanonicalEntity(\'' + esc(x.entity.id) + '\')"><small>' + esc(x.label) + '</small><b>' + esc(x.entity.name_fa||x.entity.id) + '</b></button>';
   }).join("") + '</div>' : "";
-  return '<section class="canonical-strip"><div class="canonical-head"><div><span>هویت واحد پندار</span><b>' + esc(entity.name_fa||"") + '</b></div><div class="canonical-head-actions"><code dir="ltr">' + esc(entity.id) + '</code><button class="canonical-graph-btn" onclick="openEntityGraph(\'' + esc(entity.id) + '\')">شبکهٔ ارتباطی</button></div></div>' + related + '</section>';
+  return '<section class="canonical-strip"><div class="canonical-head"><div><span>هویت واحد پندار</span><b>' + esc(entity.name_fa||"") + '</b></div><div class="canonical-head-actions"><code dir="ltr">' + esc(entity.id) + '</code><button class="canonical-graph-btn" onclick="openEntityProfile(\'' + esc(entity.id) + '\')">پروفایل ۳۶۰</button><button class="canonical-graph-btn" onclick="openEntityGraph(\'' + esc(entity.id) + '\')">شبکهٔ ارتباطی</button></div></div>' + related + '</section>';
+}
+
+
+function _profileEntityNames(entity){
+  return new Set([entity?.name_fa,...(entity?.aliases||[])].map(_canonicalNorm).filter(Boolean));
+}
+function _profileStoryMatches(entity,story,names){
+  if(!story)return false;
+  if(entity.type==="source"){
+    const src=[...(story.source_names||[]),...((story.sources||[]).map(x=>typeof x==="string"?x:(x?.name||x?.source_name||"")))];
+    return src.some(x=>names.has(_canonicalNorm(x)));
+  }
+  if(entity.type==="topic"){
+    const slug=entity.routes?.topic;
+    return (story.topics||[]).some(t=>(slug&&String(t.slug)===String(slug))||names.has(_canonicalNorm(t.name_fa||t.name||"")));
+  }
+  return (story.entities||[]).some(e=>names.has(_canonicalNorm(e.name_fa||e.name||"")));
+}
+function _profileTimelineCard(row){
+  const click=row.go?' onclick="'+row.go+'"':'';
+  return '<article class="p360-time-row"'+click+'><span class="p360-time-kind">'+esc(row.kind)+'</span><div><b>'+esc(row.title||"")+'</b>'+(row.sub?'<p>'+esc(row.sub)+'</p>':"")+'<small>'+esc(row.when||"")+'</small></div></article>';
+}
+function _profileRelationCards(rows){
+  return rows.map(x=>'<button class="p360-rel" onclick="openCanonicalEntity(\''+esc(x.entity.id)+'\')"><small>'+esc(x.label)+'</small><b>'+esc(x.entity.name_fa||x.entity.id)+'</b><span>'+esc(_entityTypeFa(x.entity.type))+'</span></button>').join("");
+}
+function _profileFallbackAvatar(entity){
+  const letter=String(entity.name_fa||"?").trim().slice(0,1)||"?";
+  return '<div class="p360-avatar-fallback">'+esc(letter)+'</div>';
+}
+async function openEntityProfile(id){
+  id=decodeURIComponent(String(id||""));
+  const [reg,figData,bookData,movieData,periodicals]=await Promise.all([
+    loadCanonicalEntities(),loadFigures(),loadBooks(),loadMovies(),loadPeriodicals()
+  ]);
+  const entity=(reg.entities||[]).find(x=>x.id===id);
+  show("profile");setTab("");setHash("#/profile/"+encodeURIComponent(id));
+  const el=document.getElementById("entity-profile-content");
+  if(!entity){el.innerHTML='<div class="state"><div class="big">این هویت پیدا نشد</div></div>';return}
+  document.title=(entity.name_fa||"هویت")+" — نمای ۳۶۰ | پندار";
+
+  const names=_profileEntityNames(entity);
+  const links=_entityGraphLinks(reg,id);
+  const figure=entity.routes?.figure?(figData.figures||[]).find(x=>String(x.handle)===String(entity.routes.figure)):null;
+  const posts=figure?(figure.posts||[]):[];
+  const stories=(ALL||[]).filter(s=>_profileStoryMatches(entity,s,names));
+
+  const linkedBooks=[];
+  const linkedMovies=[];
+  const seenBooks=new Set(),seenMovies=new Set();
+  function addBookEntity(e){
+    const slug=e?.routes?.book;if(!slug||seenBooks.has(slug))return;
+    const b=(bookData.books||[]).find(x=>String(x.slug)===String(slug));if(b){seenBooks.add(slug);linkedBooks.push(b)}
+  }
+  function addMovieEntity(e){
+    const slug=e?.routes?.movie;if(!slug||seenMovies.has(slug))return;
+    const m=(movieData.movies||[]).find(x=>String(x.slug)===String(slug));if(m){seenMovies.add(slug);linkedMovies.push(m)}
+  }
+  if(entity.type==="book")addBookEntity(entity);
+  if(entity.type==="movie")addMovieEntity(entity);
+  links.forEach(x=>{if(x.entity.type==="book")addBookEntity(x.entity);if(x.entity.type==="movie")addMovieEntity(x.entity)});
+
+  const sourceLinks=links.filter(x=>x.entity.type==="source");
+  const topicLinks=links.filter(x=>x.entity.type==="topic");
+  const peopleLinks=links.filter(x=>x.entity.type==="person");
+  const orgLinks=links.filter(x=>x.entity.type==="organization");
+  const publisherLinks=links.filter(x=>x.entity.type==="publisher");
+
+  let pressItems=[];
+  if(entity.type==="source"){
+    pressItems=(periodicals||[]).filter(x=>names.has(_canonicalNorm(x.publisher||x.source_name||""))).slice().sort((a,b)=>String(b.source_published_at||b.published_at||"").localeCompare(String(a.source_published_at||a.published_at||""))).slice(0,10);
+  }
+
+  const timeline=[];
+  stories.forEach(s=>timeline.push({
+    date:s.published_at||"",kind:"خبر",title:s.headline_fa||s.title_fa||"",sub:s.summary_fa||"",
+    when:relTime(s.published_at),go:"openStory('"+esc(s.id)+"')"
+  }));
+  posts.forEach(p=>timeline.push({
+    date:p.published_at||"",kind:p.kind==="news_statement"?"گفته در خبر":"دیدگاه",title:p.topic_fa||figure?.name_fa||entity.name_fa,
+    sub:p.summary_fa||"",when:relTime(p.published_at),go:"openStatement('"+esc(statementKey(p))+"')"
+  }));
+  pressItems.forEach(x=>timeline.push({
+    date:x.source_published_at||x.published_at||"",kind:"جریده",title:x.headline_fa||x.title_fa||x.title_original||"",
+    sub:x.summary_fa||"",when:relTime(x.source_published_at||x.published_at),go:"openPressArticle('"+esc(x.id)+"')"
+  }));
+  timeline.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+
+  const directPosts=posts.filter(p=>p.kind!=="news_statement");
+  const newsPosts=posts.filter(p=>p.kind==="news_statement");
+  const relationTypes=new Set(links.map(x=>x.entity.type));
+  const stats=[
+    ["خبر",stories.length],["گفته/دیدگاه",posts.length],["کتاب",linkedBooks.length],["فیلم/سریال",linkedMovies.length],["رابطه",links.length]
+  ];
+
+  let portrait="";
+  if(figure && typeof avatar==="function") portrait=avatar(figure,"lg");
+  else if(entity.meta?.avatar||entity.meta?.image){
+    const src=entity.meta.avatar||entity.meta.image;
+    portrait='<img class="p360-avatar-img" src="'+esc(src)+'" alt="" loading="eager" referrerpolicy="no-referrer" onerror="this.replaceWith(document.createTextNode(\''+esc((entity.name_fa||"?").slice(0,1))+'\'))">';
+  }else portrait=_profileFallbackAvatar(entity);
+
+  const roleText=(entity.roles||[]).join(" · ");
+  const summary=entity.meta?.summary||entity.meta?.role_fa||entity.meta?.field_fa||"";
+  const specialized='<button onclick="openCanonicalEntity(\''+esc(id)+'\')">صفحهٔ تخصصی</button>';
+  const graphBtn='<button onclick="openEntityGraph(\''+esc(id)+'\')">شبکهٔ ارتباطی</button>';
+
+  const storyHtml=stories.length?'<div class="feed">'+stories.slice(0,6).map(feedCard).join("")+'</div>':'<div class="p360-empty">در فید جاری خبری برای این هویت ثبت نشده است.</div>';
+  const postHtml=posts.length?'<div class="p360-posts">'+posts.slice().sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||""))).slice(0,8).map(p=>'<button onclick="openStatement(\''+esc(statementKey(p))+'\')"><small>'+(p.kind==="news_statement"?"گفته در خبر":"دیدگاه")+' · '+esc(relTime(p.published_at))+'</small><b>'+esc(p.topic_fa||"")+'</b><p>'+esc(p.summary_fa||"")+'</p></button>').join("")+'</div>':'<div class="p360-empty">گفته‌ای برای این هویت ثبت نشده است.</div>';
+  const booksHtml=linkedBooks.length?'<div class="books-grid">'+linkedBooks.slice(0,8).map(_bookCard).join("")+'</div>':'<div class="p360-empty">کتاب مرتبطی در رجیستری ثبت نشده است.</div>';
+  const moviesHtml=linkedMovies.length?'<div class="movie-grid">'+linkedMovies.slice(0,8).map(_movieCard).join("")+'</div>':'<div class="p360-empty">فیلم یا سریال مرتبطی ثبت نشده است.</div>';
+  const relGroups=[
+    ["آدم‌ها",peopleLinks],["رسانه‌ها",sourceLinks],["موضوعات",topicLinks],["نهادها",orgLinks],["ناشرها",publisherLinks]
+  ].filter(x=>x[1].length);
+  const relationsHtml=relGroups.length?relGroups.map(([label,rows])=>'<div class="p360-rel-group"><h3>'+esc(label)+' <span>'+faN(rows.length)+'</span></h3><div class="p360-rel-grid">'+_profileRelationCards(rows.slice(0,12))+'</div></div>').join(""):'<div class="p360-empty">رابطهٔ مستقیمی هنوز ثبت نشده است.</div>';
+
+  el.innerHTML=
+    '<button class="back" onclick="history.length>1?history.back():showFeed()">بازگشت</button>'+
+    '<article class="p360">'+
+      '<header class="p360-hero"><div class="p360-avatar">'+portrait+'</div><div class="p360-identity"><span class="press-kicker">Pendar 360 · '+esc(_entityTypeFa(entity.type))+'</span><h1>'+esc(entity.name_fa||entity.id)+'</h1>'+(roleText?'<p class="p360-roles">'+esc(roleText)+'</p>':"")+(summary?'<p class="p360-summary">'+esc(summary)+'</p>':"")+'<code dir="ltr">'+esc(entity.id)+'</code></div><div class="p360-actions">'+specialized+graphBtn+'</div></header>'+
+      '<div class="p360-stats">'+stats.map(x=>'<span><b>'+faN(x[1])+'</b><small>'+x[0]+'</small></span>').join("")+'</div>'+
+      '<nav class="p360-jump"><a href="#p360-timeline">خط زمانی</a><a href="#p360-news">خبرها</a><a href="#p360-statements">گفته‌ها</a><a href="#p360-books">کتاب‌ها</a><a href="#p360-movies">فیلم‌ها</a><a href="#p360-relations">شبکه</a></nav>'+
+      '<section class="p360-section" id="p360-timeline"><div class="p360-section-head"><div><span>Timeline</span><h2>خط زمانی</h2></div><small>'+faN(timeline.length)+' رویداد در دادهٔ فعلی</small></div>'+(timeline.length?'<div class="p360-timeline">'+timeline.slice(0,16).map(_profileTimelineCard).join("")+'</div>':'<div class="p360-empty">رویداد زمان‌دار ثبت نشده است.</div>')+'</section>'+
+      '<section class="p360-section" id="p360-news"><div class="p360-section-head"><div><span>News</span><h2>خبرهای مرتبط</h2></div><small>'+faN(stories.length)+' خبر در فید جاری</small></div>'+storyHtml+'</section>'+
+      '<section class="p360-section" id="p360-statements"><div class="p360-section-head"><div><span>Statements</span><h2>گفته‌ها و دیدگاه‌ها</h2></div><small>'+faN(directPosts.length)+' مستقیم · '+faN(newsPosts.length)+' در خبر</small></div>'+postHtml+'</section>'+
+      '<section class="p360-section" id="p360-books"><div class="p360-section-head"><div><span>Books</span><h2>کتاب‌ها</h2></div><small>'+faN(linkedBooks.length)+' اثر مرتبط</small></div>'+booksHtml+'</section>'+
+      '<section class="p360-section" id="p360-movies"><div class="p360-section-head"><div><span>Screen</span><h2>فیلم و سریال</h2></div><small>'+faN(linkedMovies.length)+' اثر مرتبط</small></div>'+moviesHtml+'</section>'+
+      '<section class="p360-section" id="p360-relations"><div class="p360-section-head"><div><span>Knowledge graph</span><h2>شبکهٔ ارتباطی</h2></div><button onclick="openEntityGraph(\''+esc(id)+'\')">باز کردن Graph کامل ←</button></div>'+relationsHtml+'</section>'+
+    '</article>';
 }
 
 let _entityGraphFilter="all";
@@ -165,7 +293,7 @@ async function openEntityGraph(id,resetFilter=true){
   const filterHtml=filters.map(x=>'<button class="fchip '+(_entityGraphFilter===x[0]?'on':'')+'" onclick="setEntityGraphFilter(\''+esc(id)+'\',\''+esc(x[0])+'\')">'+esc(x[1])+' <span>'+faN(x[2])+'</span></button>').join("");
   const relSummary=Object.entries(allLinks.reduce((m,x)=>{m[x.label]=(m[x.label]||0)+1;return m},{})).sort((a,b)=>b[1]-a[1]).slice(0,8).map(x=>'<span><b>'+faN(x[1])+'</b> '+esc(x[0])+'</span>').join("");
   el.innerHTML='<button class="back" onclick="openCanonicalEntity(\''+esc(id)+'\')">بازگشت به پروفایل</button>'+
-    '<section class="entity-graph-hero"><div><span class="press-kicker">Relationship Graph</span><h1>'+esc(entity.name_fa||entity.id)+'</h1><p>'+faN(allLinks.length)+' پیوند مستقیمِ ثبت‌شده در رجیستری canonical پندار</p></div><button onclick="openCanonicalEntity(\''+esc(id)+'\')">پروفایل کامل</button></section>'+
+    '<section class="entity-graph-hero"><div><span class="press-kicker">Relationship Graph</span><h1>'+esc(entity.name_fa||entity.id)+'</h1><p>'+faN(allLinks.length)+' پیوند مستقیمِ ثبت‌شده در رجیستری canonical پندار</p></div><div class="entity-graph-hero-actions"><button onclick="openEntityProfile(\''+esc(id)+'\')">پروفایل ۳۶۰</button><button onclick="openCanonicalEntity(\''+esc(id)+'\')">صفحهٔ تخصصی</button></div></section>'+
     '<div class="entity-graph-filters">'+filterHtml+'</div>'+
     (relSummary?'<div class="entity-graph-summary">'+relSummary+'</div>':'')+
     (links.length?'<div class="entity-graph-stage"><svg class="entity-graph-lines" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'+lines+'</svg><button class="entity-graph-center" onclick="openCanonicalEntity(\''+esc(id)+'\')"><small>'+esc(_entityTypeFa(entity.type))+'</small><b>'+esc(entity.name_fa||entity.id)+'</b></button>'+nodes+'</div>':'<div class="state"><div class="big">برای این هویت هنوز رابطهٔ مستقیمی ثبت نشده</div></div>')+
@@ -441,7 +569,7 @@ document.addEventListener("click",e=>{const box=document.getElementById("smart-s
 const VIEWS = { feed: "feed-view", detail: "detail-view", trends: "trends-view",
   factchecks: "factchecks-view", topics: "topics-view", topicarchive: "topic-archive-view",
   weather: "weather-view", iran: "iran-view", faq: "faq-view", market: "market-view",
-  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tvguide: "tv-guide-view", knowledge: "knowledge-view", entity: "entity-view", graph: "entity-graph-view", entityqa: "entity-qa-view", system: "system-view", tech: "tech-view" };
+  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tvguide: "tv-guide-view", knowledge: "knowledge-view", entity: "entity-view", graph: "entity-graph-view", profile: "entity-profile-view", entityqa: "entity-qa-view", system: "system-view", tech: "tech-view" };
 const TABS = ["feed", "trends", "factchecks", "iran", "topics"];
 const SCOPE_FA = { local: "استانی", national: "کشوری", international: "بین‌المللی" };
 function setTab(w) { for (const t of TABS) document.getElementById("tab-" + t).classList.toggle("active", w === t); }
@@ -1052,6 +1180,7 @@ async function route() {
   if (kind === "knowledge") return showKnowledge(arg || "home");
   if (kind === "entity" && arg) return openCanonicalEntity(arg);
   if (kind === "graph" && arg) return openEntityGraph(arg);
+  if (kind === "profile" && arg) return openEntityProfile(arg);
   if (kind === "system" && arg === "entities") return showEntityQA();
   if (kind === "system") return showSystem();
   if (kind === "publisher" && arg) return openPublisher(arg);
