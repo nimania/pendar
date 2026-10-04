@@ -66,10 +66,13 @@
     border-bottom:1px solid var(--line);
   }
   .top .wrap{display:flex; align-items:center; gap:14px; height:64px}
-  .brand{display:flex; align-items:baseline; gap:10px; cursor:pointer; user-select:none}
+  .brand{display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none}
   .brand .logo{
     font-family:"Noto Naskh Arabic",serif; font-weight:700; font-size:27px;
     color:var(--accent); letter-spacing:-.5px; line-height:1;
+  }
+  .brand .logo-img{
+    display:block; width:auto; height:42px; max-width:132px; object-fit:contain;
   }
   .brand .tag{font-size:12.5px; color:var(--ink-faint); font-weight:500}
   .spacer{flex:1}
