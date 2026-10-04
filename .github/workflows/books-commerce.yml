@@ -169,6 +169,9 @@ jobs:
               sw.write_text(s,encoding="utf-8")
           PY
 
+      - name: Build canonical entity registry
+        run: python backend/scripts/build_entities.py --data-dir site/data
+
       - name: Validate Pendar data integrity before publish
         run: python backend/scripts/validate_site_integrity.py --site site
 
