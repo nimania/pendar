@@ -1,0 +1,24 @@
+name: Discover Cheshmeh Distribution API
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/scripts/discover_cheshmehdis.py"
+      - ".github/workflows/discover-cheshmehdis.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install requests beautifulsoup4
+      - name: Discover public API candidates
+        run: python backend/scripts/discover_cheshmehdis.py
