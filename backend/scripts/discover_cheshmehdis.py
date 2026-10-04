@@ -48,7 +48,15 @@ for src in scripts[-20:]:
             if i<0: break
             contexts.append({"needle":needle,"script":src,"context":body[max(0,i-900):i+1800]})
             start=i+len(needle)
-out={"page":PAGE,"scripts":scripts,"candidates":sorted(cands),"contexts":contexts[:40]}
+api_paths=set()
+for src in scripts[-20:]:
+    try: body,_=get(src)
+    except Exception: continue
+    for m in re.finditer(r'bo\.base_url\+["\']([^"\']+)["\']', body):
+        path=m.group(1)
+        if path.startswith("/"):
+            api_paths.add(path)
+out={"page":PAGE,"scripts":scripts,"candidates":sorted(cands),"api_paths":sorted(api_paths),"contexts":contexts[:40]}
 print(json.dumps(out,ensure_ascii=False,indent=2))
 
 
