@@ -135,8 +135,15 @@ def repair_publisher_metadata(payload):
                 continue
             clean = clean_publisher_name(raw)
             if clean and clean != raw:
-                # Preserve the stripped print label on the edition/book when possible.
-                m = re.search(r'(?:نوبت\s+)?چاپ\s*[:：]?\s*(.+)
+                m = re.search(r'(?:نوبت\s+)?چاپ\s*[:：]?\s*(.+)$', raw)
+                if m and not node.get('print_label'):
+                    node['print_label'] = m.group(1).strip(' .،-|')
+                node['publisher'] = {'slug': 'publisher-' + identity(clean, '')[6:], 'name_fa': clean}
+    rebuild_graph(payload)
+    return payload
+
+
+def collect(payload, registry, now=None, local=None):
     now = now or datetime.now(timezone.utc)
     repair_publisher_metadata(payload)
     previous = payload.get('radar') or {}
