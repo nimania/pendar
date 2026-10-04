@@ -16,6 +16,7 @@ on:
       - "backend/tests/test_book_radar.py"
       - "backend/tests/test_book_market_sources.py"
       - "backend/tests/test_book_radar_ui.js"
+      - "backend/tests/test_book_market_ui.js"
       - "web-static/data/book-curation.json"
       - ".github/workflows/books-commerce.yml"
   schedule:
@@ -44,7 +45,9 @@ jobs:
       - name: Verify book identity and commerce preservation
         run: python -m unittest discover -s backend/tests -p 'test_book*.py' -v
       - name: Verify browser radar edition overlay
-        run: node backend/tests/test_book_radar_ui.js
+        run: |
+          node backend/tests/test_book_radar_ui.js
+          node backend/tests/test_book_market_ui.js
 
       - name: Find latest complete periodicals site and weather
         id: base
@@ -145,7 +148,7 @@ jobs:
           import hashlib, pathlib, re
           root=pathlib.Path("site")
           versions={}
-          for name in ("app.js","styles.css","books-hub.js","books-hub.css","book-radar-ui.js","book-radar-data.js","book-curation.js","iran-provinces.js","data/press-directory.js","data/books.js"):
+          for name in ("app.js","styles.css","books-hub.js","books-hub.css","book-radar-ui.js","book-radar-data.js","book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js","iran-provinces.js","data/press-directory.js","data/books.js"):
               p=root/name
               if p.exists():
                   versions[name]=hashlib.md5(p.read_bytes()).hexdigest()[:8]

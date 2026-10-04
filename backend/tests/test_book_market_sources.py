@@ -5,7 +5,7 @@ import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from book_market_sources import decode_rpc, digikala, fidibo, classified_group
+from book_market_sources import decode_rpc, digikala, fidibo, classified_group, classified_batches, classified_details
 from collect_book_radar import collect
 
 
@@ -57,6 +57,31 @@ class MarketSourcesTests(unittest.TestCase):
         group = classified_group(data, 'رمان', datetime.now(timezone.utc))
         self.assertEqual(len(group['items']), 1)
         self.assertEqual(group['items'][0]['title_fa'], 'کتاب های رمان قدیمی')
+
+    def test_national_search_batches_and_partial_failure_keep_original_dates(self):
+        now = datetime(2026, 10, 4, 8, tzinfo=timezone.utc)
+        previous_date = '2026-10-03T08:00:00+00:00'
+        calls = []
+        class Client:
+            def call(self, name, args):
+                calls.append(args['cities'])
+                if args['cities'] == ['5']:
+                    raise ValueError('offline')
+                return {'items': []}
+        previous = {'groups': [{'query': 'رمان', 'batches': [{'cities': ['5'], 'observed_at': previous_date, 'items': [{'url': 'https://divar.ir/v/old', 'observed_at': previous_date}]}]}]}
+        groups, failures = classified_batches(Client(), ['رمان'], [str(i) for i in range(6)], now, previous)
+        self.assertEqual([len(c) for c in calls], [5, 1])
+        self.assertEqual(failures, 1)
+        self.assertEqual(groups[0]['items'][0]['observed_at'], previous_date)
+        with self.assertRaises(ValueError):
+            classified_group({'unknown_cities': ['unknown']}, 'رمان', now)
+
+    def test_preview_keeps_only_official_images_and_no_contact_or_coordinates(self):
+        value = {'url': 'https://divar.ir/v/abc', 'title': 'رمان', 'description': 'شرح', 'images': ['https://s100.divarcdn.com/a.webp', 'https://evil.test/x'], 'contact': 'private', 'location': [35, 51]}
+        row = classified_details(value, datetime.now(timezone.utc))
+        self.assertEqual(row['images'], ['https://s100.divarcdn.com/a.webp'])
+        self.assertNotIn('contact', row)
+        self.assertNotIn('location', row)
 
     def test_classifieds_never_create_books_or_scores_and_failure_preserves_date(self):
         import tempfile

@@ -119,7 +119,7 @@ jobs:
           import hashlib, pathlib, re
           root=pathlib.Path("site")
           versions={}
-          for name in ("app.js","styles.css","books-hub.js","books-hub.css","book-radar-ui.js","book-radar-data.js","book-curation.js","iran-provinces.js","data/press-directory.js","data/books.js"):
+          for name in ("app.js","styles.css","books-hub.js","books-hub.css","book-radar-ui.js","book-radar-data.js","book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js","iran-provinces.js","data/press-directory.js","data/books.js"):
               p=root/name
               if p.exists():
                   versions[name]=hashlib.md5(p.read_bytes()).hexdigest()[:8]

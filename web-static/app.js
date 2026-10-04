@@ -262,7 +262,8 @@ async function openPublisher(slug){
   const d=await loadBooks(), p=(d.publishers||[]).find(x=>x.slug===slug);
   if(!p){el.innerHTML='<div class="state"><div class="big">ناشر پیدا نشد</div></div>';return}
   const books=(p.book_slugs||[]).map(s=>_bookBySlug(d,s)).filter(Boolean);
-  el.innerHTML=`<button class="back" onclick="showBooks('publishers')">بازگشت به ناشرها</button><div class="book-person-head"><span class="press-kicker">ناشر</span><h1>${esc(p.name_fa)}</h1><p>${faN(books.length)} کتاب تأییدشده در جان‌کلام</p></div><div class="books-grid">${books.map(_bookCard).join("")}</div>`;
+  el.innerHTML=`<button class="back" onclick="showBooks('publishers')">بازگشت به ناشرها</button>${_bookPublisherProfile(p,books)}<div class="books-grid">${books.map(_bookCard).join("")}</div>`;
+  document.title=p.name_fa+" | ناشرهای جانِ کتاب";
   setHash("#/publisher/"+encodeURIComponent(slug));
 }
 async function openBookPerson(slug){
@@ -787,7 +788,7 @@ async function route() {
   if (kind === "press") return showPress();
   if (kind === "press-source" && arg) return showPress(arg);
   if (kind === "press-article" && arg) return openPressArticle(arg);
-  if (kind === "books") return showBooks(arg === "publishers" ? "publishers" : arg === "people" ? "people" : "books");
+  if (kind === "books") return showBooks(["publishers","people","new","all","used","reviews"].includes(arg) ? arg : "books");
   if (kind === "book" && arg) return openBook(arg);
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
@@ -1702,7 +1703,7 @@ async function renderMarket() {
       getJSON(`${DATA}/crypto.json`).catch(() => []),
     ]);
     if ((!prices || !prices.length) && (!crypto || !crypto.length)) {
-      el.innerHTML = `<div class="state"><div class="big">نرخ‌ها در دسترس نیست</div></div>`; return;
+      el.innerHTML = `<div class="state"><div class="big">نرخ‌ها در دسترس نیست</div></div>`;return;
     }
     const priceRows = (prices || []).map(p => {
       const cls = p.dir === "up" ? "up" : p.dir === "down" ? "down" : "flat";
@@ -1941,7 +1942,7 @@ function updateMineBadge() {
   b.style.display = n ? "inline-flex" : "none";
 }
 
-/* ----- personalized feed ("خط خبری من") ----- */
+/* ----- personalized feed ("خط خبری من"----- */
 function mineFeed() {
   return ALL.filter(s =>
     (s.topics || []).some(t => isF("topics", t.slug)) ||

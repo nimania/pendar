@@ -30,10 +30,7 @@ function _bookRadarSignals(b){return (b.radar?.signals||[]).filter(r=>{const t=_
 function _bookRadarScore(b){const scores=new Map();for(const r of _bookRadarSignals(b)){const n=(r.kind==='bestseller'?3:1)/(1+Math.max(0,r.position-1)/10);scores.set(r.source_id,Math.max(n,scores.get(r.source_id)||0))}return [...scores.values()].reduce((a,b)=>a+b,0)+Math.max(0,scores.size-1)}
 function _bookRadarSources(b){return [...new Set(_bookRadarSignals(b).map(r=>r.source_id))]}
 function _bookRadarChange(b){return _bookRadarSignals(b).length?Math.max(0,...(b.radar?.weekly_changes||[]).map(r=>r.change)):0}
-function _bookRadarBadge(b){
-  const rows=_bookRadarSignals(b),names=[...new Set(rows.map(r=>r.source_name))];
-  return names.length?`${names.length>1?'چندمنبعی · ':''}${esc(names.join(' + '))}`:b.radar?'آخرین مشاهده: '+_bookChecked((b.radar.signals||[])[0]?.observed_at):`${faN(b.mention_count||0)} اشاره · ${faN(_bookStats(b).sources)} منبع`;
-}
+function _bookRadarBadge(b){const ids=_bookRadarSources(b);return ids.length?ids.map(_bookSourceIcon).join(' '):b.radar?'آخرین مشاهده: '+_bookChecked((b.radar.signals||[])[0]?.observed_at):`${faN(b.mention_count||0)} اشاره`}
 function _bookRadarMatches(b,state){
   const rows=_bookRadarSignals(b);
   if(state.source&&!rows.some(r=>r.source_id===state.source))return false;
@@ -53,25 +50,9 @@ function _bookRadarHome(data){
   return `<section class="radar-status"><span class="radar-live-dot"></span><strong>رادار مستقل کتاب</strong><span>آخرین پایش: ${_bookChecked(data.radar.updated_at)}</span><span>${faN(healthy.filter(s=>s.kind==='store').length)} فروشگاه · ${faN(healthy.filter(s=>['review_publication','store_editorial'].includes(s.kind)).length)} منبع معرفی و نقد${healthy.some(s=>s.kind==='classifieds')?' · بازار آگهی‌های دیوار':''}</span><details><summary>منابع و روش انتخاب</summary><p>این شاخص از حضور و جایگاه کتاب در فهرست‌های پرفروش و تازه‌های فروشگاه‌ها ساخته می‌شود. حضور در چند فروشگاه وزن بیشتری دارد؛ صوتی و متنی یک فروشگاه، دو منبع حساب نمی‌شوند. تخفیف و امتیاز کاربران وزن ترند نمی‌گیرند.</p><p>دیجی‌کالا: پرفروش‌ها و جدیدترین‌های نتیجهٔ جست‌وجوی «کتاب»، با حذف مجموعه‌ها. فیدیبو: قفسه‌های پرفروش و تازه‌های متنی، به‌علاوهٔ تازه‌های صفحهٔ اصلی در صورت دسترسی. آگهی‌های دیوار در امتیاز رادار وارد نمی‌شوند.</p><p>جایگاه، ترتیب نمایش در فهرست است؛ تعداد فروش در دسترس نیست. رشد هفتگی فقط بعد از ثبت مشاهدات قابل مقایسه در دو هفته نمایش داده می‌شود.</p><div class="radar-source-list">${(data.radar.sources||[]).map(s=>`<a href="${esc(_bookUrl(s.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(s.name_fa)}</b><span>${s.status==='ok'?'پایش موفق':'فعلاً دریافت نشد'} · ${s.last_success_at?_bookChecked(s.last_success_at):'بدون مشاهدهٔ موفق'}${s.note_fa?' · '+esc(s.note_fa):''}</span></a>`).join('')}</div></details></section>${shelves('اکنون در رادار','بر پایهٔ فهرست‌های فروشگاه‌های پایش‌شده',ranked)}${shelves('تازه روی قفسه‌ها','تازه در فهرستِ فروشگاه؛ تاریخ انتشارِ اثر نیست',fresh)}`;
 }
 
-const BOOK_USED_CITIES=[['tehran','تهران'],['karaj','کرج'],['mashhad','مشهد'],['isfahan','اصفهان'],['shiraz','شیراز']];
-let bookUsedCity='',bookUsedQuery='رمان';
-function _bookUsedRows(group,cityFilter=true){const key=v=>_bookNorm(v).replace(/[^\p{L}\p{N}]/gu,'').replace(/آ/g,'ا');return (group?.items||[]).filter(r=>key(r.title_fa).includes(key(group.query))).filter(r=>!cityFilter||!bookUsedCity||r.city===BOOK_USED_CITIES.find(c=>c[0]===bookUsedCity)?.[1]).slice(0,6)}
-function _bookUsedCards(rows){return rows.length?`<div class="book-used-grid">${rows.map(r=>`<a href="${esc(_bookUrl(r.url))}" target="_blank" rel="noopener noreferrer"><small>دیوار · ${esc(r.city||'شهر نامشخص')} · پایش ${_bookChecked(r.observed_at)}</small><strong>${esc(r.title_fa)}</strong><b>${r.asking_price_toman?_toman(r.asking_price_toman):esc(r.price_label_fa)}</b><span>دیدن و بررسی آگهی ↗</span></a>`).join('')}</div>`:'<p class="book-method">در نمونهٔ ثبت‌شده، آگهی‌ای برای این انتخاب پیدا نشد. جست‌وجوی مستقیم دیوار را بررسی کن.</p>'}
-function _bookDivarSearch(query,city='iran'){return 'https://divar.ir/s/'+city+'/book-student-literature?q='+encodeURIComponent(query)}
-function _bookUsedMarket(data){
-  const market=data.radar?.classifieds;if(!market?.groups?.length)return '';
-  const group=market.groups.find(g=>g.query===bookUsedQuery)||market.groups[0];
-  const date=_bookDate(group.observed_at),stale=!date||Date.now()-date>48*36e5;
-  return `<section class="book-used-market" id="book-used-market"><div class="book-section-title"><h2>بازار کتاب دست‌دوم</h2><span>نمونهٔ آگهی‌های دیوار · ۵ شهر</span></div><p class="book-method">قیمت‌ها، قیمت اعلامیِ آگهی‌اند. نو یا دست‌دوم بودن، نسخه و موجودبودن نیازمند بررسی است؛ آگهیِ مجموعه ممکن است قیمت چند کتاب را نشان دهد.${stale?' این نمونه قدیمی است؛ برای آگهی‌های فعلی جست‌وجوی مستقیم را باز کن.':''}</p><div class="book-used-controls"><select aria-label="شهر آگهی‌های کتاب" onchange="bookUsedCity=this.value;renderBookUsedMarket()"><option value="">همهٔ شهرهای نمونه</option>${BOOK_USED_CITIES.map(([v,t])=>`<option value="${v}" ${bookUsedCity===v?'selected':''}>${t}</option>`).join('')}</select><select aria-label="عنوان در بازار آگهی" onchange="bookUsedQuery=this.value;renderBookUsedMarket()">${market.groups.map(g=>`<option value="${esc(g.query)}" ${group.query===g.query?'selected':''}>${esc(g.query)}</option>`).join('')}</select><a href="${esc(_bookDivarSearch(group.query,bookUsedCity||'iran'))}" target="_blank" rel="noopener noreferrer">جست‌وجوی فعلی در دیوار ↗</a></div>${_bookUsedCards(_bookUsedRows(group))}</section>`;
-}
-function renderBookUsedMarket(){const el=document.getElementById('book-used-market');if(el&&booksCache)el.outerHTML=_bookUsedMarket(booksCache)}
-function _bookUsedDossier(b,data){
-  const group=data.radar?.classifieds?.groups?.find(g=>g.book_slug===b.slug);
-  return `<section class="book-used-dossier"><div class="book-section-title"><h2>پیداکردن نسخهٔ دست‌دوم</h2><span>دیوار</span></div><p class="book-method">این‌ها نتایج جست‌وجوی عنوان‌اند؛ نویسنده، مترجم، ناشر، سلامت کتاب و قیمت را در آگهی بررسی کن.</p>${group?_bookUsedCards(_bookUsedRows(group,false)):''}<div class="book-used-searches">${BOOK_USED_CITIES.map(([city,label])=>`<a href="${esc(_bookDivarSearch(b.title_fa,city))}" target="_blank" rel="noopener noreferrer">جست‌وجو در ${label} ↗</a>`).join('')}</div></section>`;
-}
 function _bookRadarReading(data){
   const rows=(data.radar?.reading||[]).filter(r=>{const d=_bookDate(r.published_at);return d&&Date.now()-d>=0&&Date.now()-d<45*864e5}).sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at))).slice(0,6);
-  return rows.length?`<section class="radar-reading"><div class="book-section-title"><h2>میز معرفی و نقد</h2><span>از رسانه‌های کتاب؛ با ذکر منبع</span></div><div class="radar-reading-grid">${rows.map(r=>`<a href="${esc(_bookUrl(r.url))}" target="_blank" rel="noopener noreferrer"><small>${esc(r.source_name)} · ${_bookChecked(r.published_at)}</small><strong>${esc(r.title_fa)}</strong>${_bookReadingBrief(r)}<span>${r.source_type==='store_editorial'?'مطلبِ مجلهٔ فروشگاه':'مطلبِ نشریه'} ↗</span></a>`).join('')}</div></section>`:'';
+  return rows.length?`<section class="radar-reading"><div class="book-section-title"><h2>میز معرفی و نقد</h2><span>از رسانه‌های کتاب؛ با ذکر منبع</span></div><div class="radar-reading-grid">${rows.map(r=>`<a href="${esc(_bookUrl(r.url))}" target="_blank" rel="noopener noreferrer"><small>${_bookSourceIcon(r.source_id)} · ${_bookChecked(r.published_at)}</small><strong>${esc(r.title_fa)}</strong>${_bookReadingBrief(r)}<span>${r.source_type==='store_editorial'?'مطلبِ مجلهٔ فروشگاه':'مطلبِ نشریه'} ↗</span></a>`).join('')}</div></section>`:'';
 }
 function _bookRadarDossier(b,data){
   if(!b.radar)return '';

@@ -130,3 +130,12 @@ no cross-book price average is computed. Failed refreshes preserve the original
 observation date; stale samples are labelled. Both MCP services are community
 projects, unaffiliated with the marketplaces. Requests are bounded and paced,
 with independent source health and no retry loop on upstream blocking.
+
+
+## Interface and public directories (2026-10-04)
+
+Jan-e-Ketab shows one view at a time: discovery, store arrivals, full catalogue, used listings, reviews or publisher directory. The first page is limited to 12 books; filters and evidence remain available in disclosure panels. Store logos retain accessible source names.
+
+Divar's official public MCP city resource contains 1,177 city IDs and 31 province IDs. National searches explicitly visit all 31 provinces in batches of at most five; this is a bounded sample of listings, not a census. The collector and browser never silently substitute an unknown city. Partial source failures preserve original per-listing observation dates. Interactive public searches are paced at 3.2 seconds, can be cancelled, and exclude loosely related results. The preview displays public photos, description, price and specifications in a native dialog. Seller contact stays on Divar. No contact or coordinate tools are used.
+
+`web-static/data/book-directory.json` records each logo and contact source. Publisher logos are matched by unique normalized name against Ketabrah's publisher directory, with official publisher websites taking precedence where verified. Public social links, address and telephone are included only after verification on the publisher's official site/channel. Missing metadata is disclosed, and initials provide a visual fallback when no official logo has been verified. This directory is independent of regenerated publisher slugs.

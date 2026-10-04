@@ -153,9 +153,11 @@ def fidibo(html, source):
 def classified_group(data, query, now, slug=None):
     if data.get('filters_not_applied', {}).get('category') or data.get('category_note'):
         raise ValueError('book category not applied')
+    if data.get('unknown_cities'):
+        raise ValueError('requested location not applied')
     rows = []
     compact = lambda v: re.sub(r'[^\w]', '', norm(v)).replace('آ', 'ا')
-    for item in data.get('items', [])[:12]:
+    for item in data.get('items', [])[:30]:
         if compact(query) not in compact(item.get('title')):
             continue  # Upstream search can return semantically related services.
         url = item.get('url', '')
@@ -166,5 +168,49 @@ def classified_group(data, query, now, slug=None):
         rows.append({'token': item.get('token'), 'title_fa': item.get('title'), 'url': url,
             'asking_price_toman': price if reliable else None,
             'price_label_fa': 'قیمت اعلامی آگهی' if reliable else 'قیمت نیازمند بررسی' if item.get('price_is_placeholder') else 'توافقی / نامشخص',
-            'city': item.get('city'), 'observed_at': now.isoformat(), 'condition': 'unknown'})
+            'city': item.get('city'), 'thumbnail': divar_image(item.get('thumbnail')),
+            'observed_at': now.isoformat(), 'condition': 'unknown'})
     return {'query': query, 'book_slug': slug, 'observed_at': now.isoformat(), 'items': rows}
+
+
+def divar_image(value):
+    return value if isinstance(value, str) and re.fullmatch(r'https://s\d+\.divarcdn\.com/[^\s<>]+', value) else ''
+
+
+def classified_details(data, now):
+    """Keep only the public preview; never collect contact or location data."""
+    url = data.get('url', '')
+    if not re.fullmatch(r'https://divar\.ir/v/[A-Za-z0-9_-]+', url):
+        raise ValueError('invalid ad URL')
+    images = [v for v in data.get('images', []) if divar_image(v)][:8]
+    return {'title_fa': data.get('title', ''), 'description': str(data.get('description') or '')[:4000],
+            'images': images, 'thumbnail': divar_image(data.get('thumbnail')), 'city': data.get('city'),
+            'district': data.get('district'), 'specs': data.get('specs', [])[:12],
+            'url': url, 'observed_at': now.isoformat()}
+
+
+def classified_batches(client, queries, cities, now, previous=None):
+    """The public API accepts at most five cities/provinces per call."""
+    groups, failures = [], 0
+    old = {g['query']: g for g in (previous or {}).get('groups', [])}
+    for query in queries:
+        batches = []
+        for offset in range(0, len(cities), 5):
+            places = cities[offset:offset+5]
+            try:
+                raw = client.call('search_ads', {'query': query, 'category': 'book-student-literature', 'cities': places, 'limit': 30})
+                group = classified_group(raw, query, now)
+                batches.append({'cities': places, **group})
+            except Exception:
+                failures += 1
+                cached = next((b for b in old.get(query, {}).get('batches', []) if b.get('cities') == places), None)
+                if cached:
+                    batches.append(cached)
+        if batches:
+            items = list({r['url']: r for batch in batches for r in batch['items']}.values())
+            groups.append({'query': query, 'observed_at': max(b['observed_at'] for b in batches), 'items': items, 'batches': batches})
+        elif query in old:
+            groups.append(old[query])
+    if failures == len(queries) * ((len(cities)+4)//5):
+        raise ValueError('all classified batches unavailable')
+    return groups, failures

@@ -11,9 +11,9 @@ from email.utils import parsedate_to_datetime
 import requests
 from bs4 import BeautifulSoup
 try:
-    from scripts.book_market_sources import PublicMCP, digikala, fidibo, classified_group
+    from scripts.book_market_sources import PublicMCP, digikala, fidibo, classified_group, classified_batches
 except ModuleNotFoundError:
-    from book_market_sources import PublicMCP, digikala, fidibo, classified_group
+    from book_market_sources import PublicMCP, digikala, fidibo, classified_group, classified_batches
 try:
     from scripts.book_radar import identity, norm, daily_history, indicators, rebuild_graph, attach_radar
     from scripts.book_catalog import curate_payload
@@ -140,13 +140,18 @@ def collect(payload, registry, now=None, local=None):
             fixture = Path(local[source['id']]).read_text() if local and source['id'] in local else None
             if source['adapter'] == 'divar':
                 client = PublicMCP(source['endpoint'])
-                datasets = json.loads(fixture) if fixture else {q: client.call('search_ads', {'query': q, 'category': 'book-student-literature', 'cities': source['cities'], 'limit': 8}) for q in source['queries']}
-                groups = []
-                for q, data in datasets.items():
+                if fixture:
+                    groups = [classified_group(data, q, now) for q, data in json.loads(fixture).items()]
+                else:
+                    groups, failures = classified_batches(client, source['queries'], source['cities'], now, classifieds)
+                    if failures:
+                        status['note_fa'] = f'{failures} بخش جست‌وجو دریافت نشد؛ تاریخ نمونه‌های قبلی حفظ شده است'
+                for group in groups:
+                    q = group['query']
                     compact = lambda v: re.sub(r'[^\w]', '', norm(v)).replace('آ', 'ا')
                     matches = [b['slug'] for b in books.values() if compact(b['title_fa']) == compact(q)]
-                    groups.append(classified_group(data, q, now, matches[0] if len(matches) == 1 else None))
-                classifieds = {'observed_at': now.isoformat(), 'cities': source['cities'], 'scope_fa': 'نمونهٔ آگهی‌های کتاب در تهران، کرج، مشهد، اصفهان و شیراز', 'groups': groups}
+                    group['book_slug'] = matches[0] if len(matches) == 1 else None
+                classifieds = {'observed_at': max(g['observed_at'] for g in groups) if groups else now.isoformat(), 'cities': source['cities'], 'scope_fa': source.get('scope_fa', 'نمونهٔ آگهی‌های کتاب در شهرهای انتخاب‌شده'), 'groups': groups}
                 rows = [r for g in groups for r in g['items']]
             elif source['adapter'] == 'digikala':
                 client = PublicMCP(source['endpoint'])
