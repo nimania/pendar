@@ -67,7 +67,14 @@ def post_key(url):
     if host == "ble.ir" and re.fullmatch(r"/[A-Za-z0-9_-]+/[A-Za-z0-9_-]+", path):
         handle, rid = path.strip("/").split("/")
         return f"https://ble.ir/{handle.lower()}/{rid}"
-    raise ValueError("A figure post must link to its original Telegram or Bale message")
+    if host in {"www.youtube.com", "youtube.com", "m.youtube.com"} and path == "/watch":
+        from urllib.parse import parse_qs
+        vid = (parse_qs(parts.query).get("v") or [""])[0]
+        if re.fullmatch(r"[A-Za-z0-9_-]{6,20}", vid):
+            return f"https://www.youtube.com/watch?v={vid}"
+    if host == "youtu.be" and re.fullmatch(r"/[A-Za-z0-9_-]{6,20}", path):
+        return f"https://www.youtube.com/watch?v={path.lstrip('/')}"
+    raise ValueError("A figure post must link to its original Telegram, Bale, or YouTube item")
 
 
 def shown_posts(export):
