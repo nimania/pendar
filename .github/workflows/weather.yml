@@ -140,6 +140,9 @@ jobs:
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir site/data
 
+      - name: Finalize canonical entity registry
+        run: python backend/scripts/finalize_entity_registry.py --registry site/data/entity-registry.json --overrides backend/data/entity-overrides.json --qa-output site/data/entity-qa.json
+
       - name: Validate Pendar data integrity before publish
         run: python backend/scripts/validate_site_integrity.py --site site
 
