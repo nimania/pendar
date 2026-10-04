@@ -347,6 +347,11 @@ def ingest_bbc_persian(now: datetime) -> tuple[list[dict], list[dict]]:
     programmes = [p for p in programmes if parse_iso(p["stop"]) >= lo and parse_iso(p["start"]) <= hi]
     programmes.sort(key=lambda x: x["start"])
     if not programmes:
+        try:
+            probe = html_tokens(fetch(f"https://wspartners.bbc.com/schedules/bbc_persian_tv/day/{today.isoformat()}"))
+            print("BBC DEBUG TOKENS:", json.dumps(probe[:160], ensure_ascii=False))
+        except Exception as exc:
+            print("BBC DEBUG FETCH FAILED:", exc)
         raise RuntimeError("BBC Persian: no current schedule parsed")
     channel = {
         "id": "bbc-persian:tv",
