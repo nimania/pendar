@@ -2292,7 +2292,7 @@ function setFigureProfileFilter(handle, mode) {
 }
 async function openStatement(id) {
   const raw = decodeURIComponent(id);
-  const [direct, statementBookData] = await Promise.all([loadFigures(), loadBooks()]);
+  const [direct, statementBookData, statementMovieData] = await Promise.all([loadFigures(), loadBooks(), loadMovies()]);
   let person = null, post = null, isNews = false;
   for (const f of (direct.figures || [])) {
     const p = (f.posts || []).find(x => String(x.id) === raw);
@@ -2306,12 +2306,15 @@ async function openStatement(id) {
   if (!post) { el.innerHTML = '<div class="state"><div class="big">این گفته پیدا نشد</div></div>'; return; }
   const statementBooks=(statementBookData.books||[]).filter(b=>(b.mentions||[]).some(m=>String(m.post_id||"")===String(raw)));
   const statementBooksSection=statementBooks.length?'<div class="rule"><span>کتاب‌های مرتبط با این گفته</span><span class="l"></span></div><div class="press-book-links">'+statementBooks.map(b=>'<button onclick="openBook(\''+esc(b.slug)+'\')"><span>کتاب</span><b>'+esc(b.title_fa||"")+'</b></button>').join("")+'</div>':"";
+  const statementMovies=(statementMovieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>String(mm.post_id||"")===String(raw)));
+  const statementMoviesSection=statementMovies.length?'<div class="rule"><span>فیلم‌ها و سریال‌های مرتبط با این گفته</span><span class="l"></span></div><div class="press-book-links">'+statementMovies.map(m=>'<button onclick="openMovie(\''+esc(m.slug)+'\')"><span>فیلم</span><b>'+esc(m.title_fa||m.original_title||"")+'</b></button>').join("")+'</div>':"";
   setHash("#/statement/" + encodeURIComponent(raw));
   el.innerHTML = '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "(\'" + esc(person.handle) + "\')\">بازگشت به پروفایل</button>" +
     '<div class="fig-head">' + avatar(person,"lg") + '<div class="fig-head-body"><h1>' + esc(person.name_fa) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
     '<div class="rule"><span>' + (isNews ? "گفته در خبر" : "دیدگاه") + '</span><span class="l"></span></div>' +
     figureCard(post,false) +
     statementBooksSection +
+    statementMoviesSection +
     ((post.related_people || []).length ? '<div class="rule"><span>ارتباط این گفته</span><span class="l"></span></div><div class="views">' +
       post.related_people.map(r => `<button class="fig-person" onclick="openFigure('${esc(r.handle)}')"><span class="fp-body"><span class="fp-name">${esc(r.name_fa)}</span><span class="fp-role">${r.relation === "response" ? "پاسخ / واکنش مرتبط" : "شخص نام‌برده در این گفته"}</span></span></button>`).join("") + '</div>' : '') +
     '<p class="muted fig-note">این صفحه نشانی مستقل دارد و می‌توان مستقیماً به همین گفته ارجاع داد.</p>';
@@ -2332,7 +2335,7 @@ async function openFigure(handle, resetFilter = true) {
   document.getElementById("figure-timeline").innerHTML = "";
   const el = document.getElementById("figures");
   el.innerHTML = `<div class="spinner"></div>`;
-  const [d, curatedPoems, bookData] = await Promise.all([loadFigures(), loadCuratedPoems(), loadBooks()]);
+  const [d, curatedPoems, bookData, movieData] = await Promise.all([loadFigures(), loadCuratedPoems(), loadBooks(), loadMovies()]);
   const x = (d.figures || []).find(f => f.handle.toLowerCase() === String(handle).toLowerCase());
   if (!x) { el.innerHTML = `<div class="state"><div class="big">این چهره پیدا نشد</div></div>`; return; }
   const direct = (x.posts || []).filter(p => p.kind !== "news_statement");
@@ -2340,7 +2343,8 @@ async function openFigure(handle, resetFilter = true) {
   const nameNorm=s=>String(s||"").replace(/ي/g,"ی").replace(/ى/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim();
   const bookPerson=(bookData.people||[]).find(p=>nameNorm(p.name_fa)===nameNorm(x.name_fa));
   const figureBooks=(bookPerson?.book_slugs||[]).map(s=>_bookBySlug(bookData,s)).filter(Boolean);
-  const shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books") ? [] : (x.posts || []);
+  const figureMovies=(movieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>mm.kind==="figure"&&(String(mm.handle||"").toLowerCase()===String(x.handle||"").toLowerCase()||(x.posts||[]).some(p=>String(p.id)===String(mm.post_id)))));
+  const shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies") ? [] : (x.posts || []);
   const latest = (x.posts || []).map(p => p.published_at).filter(Boolean).sort().pop();
   const poems = Array.isArray(curatedPoems[x.handle]) ? curatedPoems[x.handle] : [];
   const poemSection = poems.length ? `<section class="curated-poems"><div class="curated-poems-head"><div><span class="curated-kicker">اثر ویژه</span><h2>یک شعر؛ بخش‌های منتشرشده</h2><p>این ${faN(poems.length)} متن، بخش‌های مختلف یک شعر از مونا برزویی‌اند. ترتیب نهایی بخش‌ها هنوز اعلام نشده است؛ شماره‌های زیر فقط برای تفکیک در آرشیو جان کلام‌اند و ترتیب شعر را نشان نمی‌دهند.</p></div><span class="curated-count">${faN(poems.length)} بخش</span></div><div class="curated-poem-list">${poems.map((p,i)=>`<article class="curated-poem"><div class="curated-poem-no" title="شمارهٔ آرشیوی؛ نه ترتیب شعر">بخش ${faN(i+1)}*</div><div class="curated-poem-text">${esc(p.text||"").replace(/\\n/g,"<br>")}</div></article>`).join("")}</div></section>` : "";
@@ -2367,17 +2371,19 @@ async function openFigure(handle, resetFilter = true) {
       <div class="x-handle">@${esc(x.handle)}</div>
       <p class="x-bio">${esc(x.role_fa || "")}</p>
       ${socialLinks(x.social)}
-      <div class="x-profile-stats"><span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}</div>
+      <div class="x-profile-stats"><span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${figureMovies.length ? `<span><b>${faN(figureMovies.length)}</b> فیلم/سریال</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}</div>
     </div>
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
       <button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>
       <button class="${_figureProfileFilter==="news"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','news')">در خبرها</button>
       ${figureBooks.length ? `<button class="${_figureProfileFilter==="books"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'books\')">کتاب‌ها</button>` : ""}
+      ${figureMovies.length ? `<button class="${_figureProfileFilter==="movies"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'movies\')">فیلم‌ها</button>` : ""}
       ${poems.length ? `<button class="${_figureProfileFilter==="works"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'works\')">آثار</button>` : ""}
     </nav>
     ${_figureProfileFilter==="books" ? `<section class="figure-books"><div class="books-grid">${figureBooks.map(_bookCard).join("")}</div></section>` : ""}
-    ${_figureProfileFilter==="works" ? poemSection : ""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books") ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
+    ${_figureProfileFilter==="movies" ? `<section class="figure-movies"><div class="movie-grid">${figureMovies.map(_movieCard).join("")}</div></section>` : ""}
+    ${_figureProfileFilter==="works" ? poemSection : ""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies") ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
   </div>`;
 }
