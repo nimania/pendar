@@ -10,6 +10,7 @@ Rules:
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 import re
 import urllib.parse
@@ -244,32 +245,42 @@ def build(movies_path: Path) -> dict:
         reverse=True,
     )[:120]
 
+    tasks=[]
     for movie in remote_movies:
         slug=str(movie.get("slug") or "").strip()
         if not slug:
             continue
-        matches=list(availability.get(slug) or [])
         refs=movie.get("provider_refs") or {}
         for service in active:
             key=service["key"]
             if key=="filmnet" and isinstance(refs,dict) and refs.get("filmnet"):
                 continue
             health[key]["queried_titles"]+=1
-            try:
-                rows,responded=QUERIERS[key](movie)
-                health[key]["checked_at"]=now_iso()
-                if responded and health[key]["status"]!="ok":
-                    health[key]["status"]="ok"
-                if rows:
-                    health[key]["matched_titles"]+=1
-                    matches.extend(rows)
-            except Exception as exc:
-                health[key]["checked_at"]=now_iso()
+            tasks.append((slug,movie,service))
+
+    def run_remote(slug,movie,service):
+        key=service["key"]
+        try:
+            rows,responded=QUERIERS[key](movie)
+            return slug,key,rows,responded,None
+        except Exception as exc:
+            return slug,key,[],False,f"{type(exc).__name__}: {exc}"
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
+        future_map=[pool.submit(run_remote,*task) for task in tasks]
+        for future in concurrent.futures.as_completed(future_map):
+            slug,key,rows,responded,error=future.result()
+            health[key]["checked_at"]=now_iso()
+            if error:
                 if health[key]["status"]!="ok":
                     health[key]["status"]="error"
-                health[key]["error"]=f"{type(exc).__name__}: {exc}"
-        if matches:
-            availability[slug]=dedupe(matches)
+                health[key]["error"]=error
+                continue
+            if responded and health[key]["status"]!="ok":
+                health[key]["status"]="ok"
+            if rows:
+                health[key]["matched_titles"]+=1
+                availability[slug]=dedupe(list(availability.get(slug) or [])+rows)
 
     for svc in active:
         key=svc["key"]
