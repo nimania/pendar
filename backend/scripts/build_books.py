@@ -57,6 +57,84 @@ MANUAL_BOOKS = [
             {"label": "دیجی بوک شهر", "url": "https://digibookshahr.com/product/%D8%AE%D8%B1%DB%8C%D8%AF-%DA%A9%D8%AA%D8%A7%D8%A8-%D9%86%D8%A7%D9%85%D9%87-%D9%87%D8%A7%DB%8C-%DA%A9%D9%85%D8%A7%D9%84-%D8%A7%D9%84%D9%85%D9%84%DA%A9-%D8%A8%D9%87-%DA%A9%D9%88%D8%B4%D8%B4-%D8%B9%D9%84/"},
         ],
     },
+    {
+        "slug": "paydari-irani",
+        "title_fa": "پایداری ایرانی",
+        "subtitle_fa": "محیط زیست به‌مثابه زندگی",
+        "description_fa": (
+            "مجموعه‌ای از مقاله‌های متخصصان حوزه‌های محیط‌زیست، اقتصاد، جامعه‌شناسی، "
+            "آب، انرژی، کشاورزی و توسعهٔ پایدار ایران که به کوشش محمد درویش تدوین شده است."
+        ),
+        "category_fa": "محیط‌زیست و توسعهٔ پایدار",
+        "publication_year_fa": "۱۴۰۴",
+        "pages": None,
+        "isbn": "",
+        "cover_url": "",
+        "creators": [
+            {"slug": "mohammad-darvish", "name_fa": "محمد درویش", "role_fa": "به‌کوشش / گردآورنده"}
+        ],
+        "publisher": {"slug": "hamrokh", "name_fa": "نشر همرخ"},
+        "purchase_links": [
+            {
+                "store": "نشر همرخ",
+                "url": "https://hamrokh.com/kala/paydari-irani/",
+                "format_fa": "صفحهٔ رسمی کتاب",
+                "exact": True,
+            },
+            {
+                "store": "دیجی بوک شهر",
+                "url": "https://digibookshahr.com/product/%DA%A9%D8%AA%D8%A7%D8%A8-%D9%BE%D8%A7%DB%8C%D8%AF%D8%A7%D8%B1%DB%8C-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D8%A7%D8%AB%D8%B1-%D9%85%D8%AD%D9%85%D8%AF-%D8%AF%D8%B1%D9%88%DB%8C%D8%B4-%D9%86%D8%B4%D8%B1/",
+                "format_fa": "نسخهٔ چاپی",
+                "exact": True,
+            },
+        ],
+        "source_meta": [
+            {"label": "نشر همرخ", "url": "https://hamrokh.com/kala/paydari-irani/"},
+            {"label": "محمد درویش", "url": "https://t.me/darvishnameh/14469"},
+        ],
+    },
+    {
+        "slug": "namehaye-irani",
+        "record_type": "work",
+        "title_fa": "نامه‌های ایرانی",
+        "subtitle_fa": "رمان نامه‌نگارانهٔ منتسکیو",
+        "original_title": "Lettres persanes",
+        "original_year": 1721,
+        "description_fa": (
+            "اثر نامه‌نگارانهٔ شارل دو منتسکیو دربارهٔ دو مسافر ایرانی در فرانسه؛ "
+            "روایتی طنزآمیز و انتقادی از جامعه، قدرت، استبداد و مناسبات فرهنگی اروپا."
+        ),
+        "category_fa": "ادبیات و فلسفهٔ سیاسی",
+        "pages": None,
+        "isbn": "",
+        "cover_url": "",
+        "creators": [
+            {"slug": "montesquieu", "name_fa": "منتسکیو", "role_fa": "نویسنده"}
+        ],
+        "editions": [
+            {
+                "label_fa": "ترجمهٔ محمد مجلسی",
+                "publication_year_fa": "۱۴۰۲",
+                "pages": 496,
+                "isbn": "9789641720096",
+                "creators": [
+                    {"slug": "mohammad-majlesi", "name_fa": "محمد مجلسی", "role_fa": "مترجم"}
+                ],
+                "publisher": {"slug": "donyaye-no", "name_fa": "نشر دنیای نو"},
+                "purchase_links": [
+                    {
+                        "store": "ناکجا",
+                        "url": "https://www.naakojaaketab.com/product-page/%DA%A9%D8%AA%D8%A7%D8%A8-%D9%86%D8%A7%D9%85%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D9%85%D9%86%D8%AA%D8%B3%DA%A9%DB%8C%D9%88",
+                        "format_fa": "نسخهٔ چاپی",
+                        "exact": True,
+                    }
+                ],
+            }
+        ],
+        "source_meta": [
+            {"label": "معرفی اثر", "url": "https://www.naakojaaketab.com/product-page/%DA%A9%D8%AA%D8%A7%D8%A8-%D9%86%D8%A7%D9%85%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D9%85%D9%86%D8%AA%D8%B3%DA%A9%DB%8C%D9%88"}
+        ],
+    },
 ]
 
 # Metadata confirmed from publisher/bookseller records. These rows enrich titles
@@ -125,6 +203,9 @@ def _person_slug(name: str) -> str:
         _norm("توماس مان"): "thomas-mann",
         _norm("محمود حدادی"): "mahmoud-haddadi",
         _norm("حمیدرضا پیشوایی"): "hamidreza-pishvaei",
+        _norm("محمد درویش"): "mohammad-darvish",
+        _norm("منتسکیو"): "montesquieu",
+        _norm("محمد مجلسی"): "mohammad-majlesi",
     }
     return known.get(_norm(name), _stable_slug("person", name))
 
@@ -134,6 +215,8 @@ def _publisher_slug(name: str) -> str:
         _norm("نشر دانیار"): "daniyar",
         _norm("نشر فرهنگ سیادت"): "farhang-siadat",
         _norm("نشر اطراف"): "atraf",
+        _norm("نشر همرخ"): "hamrokh",
+        _norm("نشر دنیای نو"): "donyaye-no",
     }
     return known.get(_norm(name), _stable_slug("publisher", name))
 
@@ -419,18 +502,23 @@ def build() -> dict:
     people: dict[str, dict] = {}
     publishers: dict[str, dict] = {}
     for b in public_books:
-        for cr in b.get("creators", []):
-            p = people.setdefault(cr["slug"], {
-                "slug": cr["slug"], "name_fa": cr["name_fa"],
-                "roles_fa": [], "book_slugs": [],
-            })
-            if cr["role_fa"] not in p["roles_fa"]:
-                p["roles_fa"].append(cr["role_fa"])
-            if b["slug"] not in p["book_slugs"]:
-                p["book_slugs"].append(b["slug"])
+        creator_groups = [b.get("creators", [])] + [e.get("creators", []) for e in (b.get("editions") or [])]
+        for group in creator_groups:
+            for cr in group:
+                p = people.setdefault(cr["slug"], {
+                    "slug": cr["slug"], "name_fa": cr["name_fa"],
+                    "roles_fa": [], "book_slugs": [],
+                })
+                if cr["role_fa"] not in p["roles_fa"]:
+                    p["roles_fa"].append(cr["role_fa"])
+                if b["slug"] not in p["book_slugs"]:
+                    p["book_slugs"].append(b["slug"])
 
-        pub = b.get("publisher") or {}
-        if pub.get("slug"):
+        pubs = []
+        if (b.get("publisher") or {}).get("slug"):
+            pubs.append(b["publisher"])
+        pubs += [e.get("publisher") for e in (b.get("editions") or []) if (e.get("publisher") or {}).get("slug")]
+        for pub in pubs:
             p = publishers.setdefault(pub["slug"], {
                 "slug": pub["slug"], "name_fa": pub["name_fa"],
                 "book_slugs": [], "categories_fa": [],
