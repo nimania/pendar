@@ -264,15 +264,18 @@ async function showBooks(mode="books"){
   const lede=document.getElementById("books-lede"); if(lede) lede.style.display="";
   const el=document.getElementById("books-content"); el.innerHTML='<div class="spinner"></div>';
   const d=await loadBooks();
-  const tabs=`<div class="books-tabs"><button class="fchip ${mode==="books"?"on":""}" onclick="showBooks('books')">کتاب‌ها</button><button class="fchip ${mode==="publishers"?"on":""}" onclick="showBooks('publishers')">ناشرها</button></div>`;
+  const tabs=`<div class="books-tabs"><button class="fchip ${mode==="books"?"on":""}" onclick="showBooks('books')">کتاب‌ها</button><button class="fchip ${mode==="people"?"on":""}" onclick="showBooks('people')">پدیدآورندگان</button><button class="fchip ${mode==="publishers"?"on":""}" onclick="showBooks('publishers')">ناشرها</button></div>`;
   if(mode==="publishers"){
     const pubs=(d.publishers||[]).filter(x=>(x.book_slugs||[]).length);
     el.innerHTML=tabs+(pubs.length?`<div class="publisher-grid">${pubs.map(p=>`<button class="publisher-card" onclick="openPublisher('${esc(p.slug)}')"><strong>${esc(p.name_fa)}</strong><small>${faN((p.book_slugs||[]).length)} کتاب</small><em>${esc((p.categories_fa||[]).slice(0,3).join(" · "))}</em></button>`).join("")}</div>`:'<div class="state"><div class="big">هنوز ناشری با کتاب تأییدشده نداریم</div></div>');
+  }else if(mode==="people"){
+    const people=(d.people||[]).filter(x=>(x.book_slugs||[]).length);
+    el.innerHTML=tabs+(people.length?`<div class="publisher-grid">${people.map(p=>`<button class="publisher-card" onclick="openBookPerson('${esc(p.slug)}')"><strong>${esc(p.name_fa)}</strong><small>${faN((p.book_slugs||[]).length)} کتاب</small><em>${esc((p.roles_fa||[]).join(" · "))}</em></button>`).join("")}</div>`:'<div class="state"><div class="big">هنوز پدیدآورنده‌ای ثبت نشده</div></div>');
   }else{
     const books=(d.books||[]).filter(x=>(x.mention_count||0)>0);
     el.innerHTML=tabs+(books.length?`<div class="books-grid">${books.map(_bookCard).join("")}</div>`:'<div class="state"><div class="big">هنوز کتاب تأییدشده‌ای نداریم</div></div>');
   }
-  setHash(mode==="publishers"?"#/books/publishers":"#/books");
+  setHash(mode==="publishers"?"#/books/publishers":mode==="people"?"#/books/people":"#/books");
 }
 async function openBook(slug){
   show("books"); setTab("");
@@ -284,8 +287,12 @@ async function openBook(slug){
   const pub=b.publisher?.slug?`<button class="book-entity-link" onclick="openPublisher('${esc(b.publisher.slug)}')"><span>ناشر</span><b>${esc(b.publisher.name_fa||"")}</b></button>`:"";
   const buys=(b.purchase_links||[]).map(x=>`<a class="book-buy" href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(x.store||"فروشگاه")}</b><span>${esc(x.format_fa||"خرید کتاب")} ↗</span></a>`).join("");
   const mentions=(b.mentions||[]).map(m=>{
-    const inner=`<span class="book-mention-source">${esc(m.source_name||"منبع")}</span><strong>${esc(m.headline_fa||"ذکر کتاب")}</strong>${m.summary_fa?`<p>${esc(m.summary_fa)}</p>`:""}`;
-    return m.article_id?`<button class="book-mention" onclick="openPressArticle('${esc(m.article_id)}')">${inner}</button>`:`<a class="book-mention" href="${esc(m.url||"#")}" target="_blank" rel="noopener">${inner}</a>`;
+    const kindLabel=m.kind==="figure"?"چهره":m.kind==="news"?"خط خبری":"جریده";
+    const inner=`<span class="book-mention-source">${esc(kindLabel)} · ${esc(m.source_name||"منبع")}</span><strong>${esc(m.headline_fa||"ذکر کتاب")}</strong>${m.summary_fa?`<p>${esc(m.summary_fa)}</p>`:""}`;
+    if(m.article_id) return `<button class="book-mention" onclick="openPressArticle('${esc(m.article_id)}')">${inner}</button>`;
+    if(m.story_id) return `<button class="book-mention" onclick="openStory('${esc(m.story_id)}')">${inner}</button>`;
+    if(m.post_id) return `<button class="book-mention" onclick="openStatement('${esc(m.post_id)}')">${inner}</button>`;
+    return `<a class="book-mention" href="${esc(m.url||"#")}" target="_blank" rel="noopener">${inner}</a>`;
   }).join("");
   el.innerHTML=`<button class="back" onclick="showBooks()">بازگشت به کتاب‌ها</button>
     <article class="book-detail">
@@ -836,7 +843,7 @@ async function route() {
   if (kind === "press") return showPress();
   if (kind === "press-source" && arg) return showPress(arg);
   if (kind === "press-article" && arg) return openPressArticle(arg);
-  if (kind === "books") return showBooks(arg === "publishers" ? "publishers" : "books");
+  if (kind === "books") return showBooks(arg === "publishers" ? "publishers" : arg === "people" ? "people" : "books");
   if (kind === "book" && arg) return openBook(arg);
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
