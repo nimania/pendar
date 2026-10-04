@@ -7,6 +7,7 @@ on:
     paths:
       - "web-static/**"
       - "backend/scripts/build_tv_guide.py"
+      - "backend/scripts/build_streaming_availability.py"
       - ".github/workflows/fast-deploy.yml"
 
 permissions:
@@ -126,6 +127,13 @@ jobs:
             cp /tmp/weather/weather.json site/data/weather.json
           else
             echo "::warning::Could not download latest weather artifact; keeping build data."
+          fi
+
+      - name: Refresh streaming availability
+        continue-on-error: true
+        run: |
+          if [ -f site/data/movies.json ]; then
+            python backend/scripts/build_streaming_availability.py --movies site/data/movies.json --output site/data/streaming.json
           fi
 
       - name: Overlay current UI without overwriting generated data
