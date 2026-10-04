@@ -74,7 +74,33 @@
       </div>
       <div class="home-stats" id="home-stats"></div>
       <div class="home-glance" id="home-glance" aria-label="پنداربازار و آب‌وهوای امروز"></div>
-      <div class="rule"><span>سرخط</span><span class="l"></span></div>
+
+      <section class="home-daily" id="home-daily" aria-label="خلاصه امروز">
+        <div class="home-daily-head">
+          <div><span class="home-eyebrow">داشبورد روزانه</span><h2>امروز در جان کلام</h2></div>
+          <span class="home-daily-note">خبر + چهره + زمینه</span>
+        </div>
+        <div class="home-daily-grid">
+          <div class="home-daily-panel">
+            <div class="home-panel-title"><b>مهم‌ترین اتفاق‌ها</b><span>۵ مورد</span></div>
+            <div id="home-daily-stories"><div class="spinner"></div></div>
+          </div>
+          <div class="home-daily-panel">
+            <div class="home-panel-title"><b>تازه‌ترین گفته‌ها</b><button onclick="showFigures()">همهٔ چهره‌ها ←</button></div>
+            <div id="home-daily-voices"><div class="spinner"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-majra" id="home-majra" style="display:none">
+        <div class="home-majra-head">
+          <div><span class="home-eyebrow">پرونده‌های در حال شکل‌گیری</span><h2>جانِ ماجرا</h2></div>
+          <button class="hm-all" onclick="showTrends()">همهٔ پرونده‌ها ←</button>
+        </div>
+        <div class="home-majra-cards" id="home-majra-cards"></div>
+      </section>
+
+      <div class="rule"><span>همهٔ سرخط‌ها</span><span class="l"></span></div>
       <div class="feed-controls">
         <div class="feed-control-row feed-days"><span class="fc-label">بازه</span><div class="day-chips day-range-chips">
   <button class="day-chip on" data-range="all" onclick="setFeedRange('all')">همه</button>
