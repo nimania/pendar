@@ -208,3 +208,34 @@
  .book-used-dossier .book-section-title{align-items:flex-start;flex-direction:column}
  .book-used-shortcuts{overflow-x:auto}
 }
+
+
+/* Pishkhan Ketab identity — 2026-10-04 */
+.book-brand-heading{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-height:64px;
+  padding:8px 0 10px;
+}
+.book-hub-logo{
+  width:54px;
+  height:54px;
+  border-radius:14px;
+  object-fit:cover;
+  display:block;
+  border:1px solid var(--line);
+  background:var(--surface);
+  box-shadow:var(--shadow-soft);
+}
+.book-hub-brand-name{
+  font-family:"Noto Naskh Arabic",serif;
+  font-size:27px;
+  font-weight:700;
+  color:var(--ink);
+  line-height:1.2;
+}
+@media(max-width:600px){
+  .book-hub-logo{width:46px;height:46px;border-radius:12px}
+  .book-hub-brand-name{font-size:23px}
+}
