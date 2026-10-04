@@ -28,7 +28,7 @@ EPGPW_GB_GZ = "https://epg.pw/xmltv/epg_GB.xml.gz"
 SOURCE_REGISTRY = [
     {"key": "irib", "name": "صداوسیما / تلوبیون", "status": "aggregated", "note": "EPG جاریِ شبکه‌های سراسری و استانی؛ گردآوری‌شده از APIهای تلوبیون/سپهر"},
     {"key": "persiana", "name": "Persiana Group", "status": "aggregated", "note": "XMLTV جاریِ شبکه‌های گروه پرشیانا"},
-    {"key": "bbc-persian", "name": "BBC Persian", "status": "aggregated", "note": "تلاش برای جدول رسمی BBC؛ در صورت نیاز fallback استاندارد XMLTV از EPG.PW"},
+    {"key": "bbc-persian", "name": "BBC Persian", "status": "planned", "note": "صفحه رسمی شناسایی شده؛ اتصال ماشینی پایدار هنوز در حال تکمیل است"},
     {"key": "iranintl", "name": "Iran International", "status": "verified", "note": "XMLTV تازه‌شونده، استخراج‌شده از جدول رسمی شبکه"},
     {"key": "radiofarda", "name": "Radio Farda", "status": "official", "note": "جدول پخش روزانهٔ رسمی رادیو فردا"},
     {"key": "gem", "name": "GEM Group", "status": "planned", "note": "نیازمند تطبیق چند منبع"},
@@ -439,7 +439,6 @@ def build() -> dict:
 
     for key, name, loader in (
         ("radiofarda", "Radio Farda", ingest_radiofarda),
-        ("bbc-persian", "BBC Persian", ingest_bbc_persian),
     ):
         try:
             ch, pr = loader(now)
