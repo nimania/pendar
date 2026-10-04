@@ -15,7 +15,7 @@
 .book-method{font-size:12px;color:var(--ink-faint);line-height:1.9;margin:10px 0}.book-library-panel{margin:30px 0}
 .book-list-tabs,.book-commerce-tabs{display:flex;gap:7px;flex-wrap:wrap}.book-list-tabs button,.book-commerce-tabs button{font:inherit;font-size:12px;border:1px solid var(--line);border-radius:24px;padding:7px 13px;background:var(--surface);color:var(--ink-soft);cursor:pointer}
 .book-list-tabs button.on,.book-commerce-tabs button.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
-.book-library-controls{display:grid;grid-template-columns:minmax(200px,2fr) repeat(3,minmax(115px,1fr));gap:9px;margin:18px 0 10px}
+.book-library-controls{display:grid;grid-template-columns:minmax(190px,2fr) repeat(4,minmax(100px,1fr));gap:9px;margin:18px 0 10px}
 .book-library-controls input,.book-library-controls select{font:inherit;font-size:12px;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:11px 12px;border-radius:12px;min-width:0;width:100%}
 .book-results-line{display:flex;justify-content:space-between;gap:12px;margin:12px 0 17px;color:var(--ink-faint);font-size:11px}
 .hub-book-card.book-card{display:flex;flex-direction:column;position:relative;padding:0;gap:0;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:18px;min-width:0;cursor:default;text-align:right}
@@ -60,3 +60,18 @@
 .radar-dossier{margin:28px 0;border:1px solid var(--line);border-radius:20px;padding:22px;background:var(--surface);line-height:1.9}.radar-dossier-intro{font-size:14px}.radar-evidence{display:flex;flex-direction:column;gap:8px}.radar-evidence>a{display:flex;align-items:center;gap:15px;border:1px solid var(--line);border-radius:13px;padding:14px;color:var(--ink);text-decoration:none}.radar-evidence>a>div{flex:1}.radar-evidence strong,.radar-evidence small{display:block;font-size:12px}.radar-evidence small{color:var(--ink-faint);font-size:10px}.radar-rating{font-size:14px;white-space:nowrap}.radar-version-note{background:var(--paper);border-radius:13px;padding:10px 18px;margin-top:18px}.radar-version-note h3{font-size:15px}.radar-version-note p{font-size:12px}
 @media(max-width:900px){.radar-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.radar-mini-cover{height:190px}}
 @media(max-width:520px){.radar-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.radar-mini-cover{height:190px}.radar-reading-grid,.radar-source-list{grid-template-columns:1fr}.radar-evidence>a{flex-wrap:wrap}.radar-rating{font-size:12px}.radar-dossier{padding:16px}.radar-status{padding:14px}}
+
+.radar-reading-grid p{font-size:12px;margin:0;color:var(--ink-soft)}.radar-reading-grid .radar-brief-caveat{padding-top:10px;border-top:1px solid var(--line)}
+
+/* Public classified samples keep prices and scope explicit. */
+.book-used-market,.book-used-dossier{margin:32px 0;padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.book-used-controls,.book-used-searches{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+.book-used-controls select{font:inherit;padding:9px 12px;max-width:100%;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:7px}
+.book-used-controls a,.book-used-searches a{font-size:12px;color:var(--accent);padding:8px 12px;border:1px solid var(--line);border-radius:7px}
+.book-used-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.book-used-grid>a{display:flex;flex-direction:column;gap:9px;min-width:0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:8px;color:var(--ink)}
+.book-used-grid small,.book-used-grid span{font-size:11px;color:var(--ink-faint);line-height:1.8}
+.book-used-grid strong{font-size:14px;line-height:1.8;overflow-wrap:anywhere;flex:1}
+.book-used-grid b{font-size:13px;color:var(--accent)}
+@media(max-width:700px){.book-used-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.book-used-market,.book-used-dossier{padding:14px}.book-used-controls select{width:100%}}
+@media(max-width:430px){.book-used-grid{grid-template-columns:1fr}}

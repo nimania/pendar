@@ -59,7 +59,8 @@ node --check web-static/app.js
 
 Public shelf discovery does not require a Jan Kalam news mention. The registry in
 `backend/book-radar-sources.json` currently enables Taaghche and Ketabrah public
-bestseller/new-to-store shelves, and Tarjomaan/Taaghche magazine review feeds.
+bestseller/new-to-store shelves, Fidibo public ebook and homepage shelves, Digikala
+book-search shelves, and Tarjomaan/Taaghche magazine review feeds.
 Unrecognized page structures fail visibly in source health. Discounts, featured
 marketing, and free-book shelves are excluded from scoring. The collector makes
 small sequential public requests every six hours via books-commerce.yml.
@@ -94,3 +95,38 @@ are not claimed as currently monitored.
 python backend/scripts/collect_book_radar.py --catalog web-static/data/books.json --out-js web-static/books-data.js
 python -m unittest discover -s backend/tests -p 'test_book*.py' -v
 ```
+
+Two manually verified review digests in `book-radar-ui.js` summarize the cited
+Taaghche magazine reviews of *Ten Qizilbash* and *Why Men Love Bitches*. They
+name the source reviewer, separate appeal from limitations, and do not claim
+first-hand reading of the full book. RSS headlines alone never generate a digest.
+
+## Additional markets
+
+Digikala uses the read-only public MCP documented by
+https://github.com/mmdju/digikala-mcp. Two bounded book queries use best_selling
+and newest ordering. This is the result of searching «کتاب», not the complete
+book category or national sales. Single-work product titles provide author,
+translator and publisher; bundles and ambiguous titles are omitted. Prices are
+toman, availability is a dated observation, and merchant thumbnails never
+replace clean cover artwork. Orthographic work reconciliation requires a unique
+match of both title and author; different authors remain distinct.
+
+Fidibo's public SSR categoryContext/homeContext JSON is parsed without executing
+JavaScript. Bestseller/new shelves only are included. Narrator-equals-subtitle
+records are skipped to avoid attributing authorship to a voice artist. Publisher
+identity comes from the publisher action URL, not footerText (which can name a
+translator). Homepage failure does not discard valid ebook shelves.
+
+Divar uses https://github.com/mmdju/divar-mcp for public book-category samples
+in Tehran, Karaj, Mashhad, Isfahan and Shiraz. Initial queries cover novels and
+two selected titles; they are explicitly a sample, not exhaustive coverage.
+Every dossier also offers city-specific direct searches. Matching a query does
+not verify writer, edition or condition. The upstream book category cannot filter
+private sellers; no listing is labelled definitely used. No phone, coordinates,
+chat or contact data are requested or stored. Placeholder, negotiable and missing
+prices are not numeric offers. Ads never enter the book visibility score, and
+no cross-book price average is computed. Failed refreshes preserve the original
+observation date; stale samples are labelled. Both MCP services are community
+projects, unaffiliated with the marketplaces. Requests are bounded and paced,
+with independent source health and no retry loop on upstream blocking.

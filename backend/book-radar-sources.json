@@ -1,6 +1,69 @@
-{"version":1,"sources":[
-  {"id":"taaghche","name_fa":"طاقچه","kind":"store","adapter":"taaghche","url":"https://taaghche.com/"},
-  {"id":"ketabrah","name_fa":"کتابراه","kind":"store","adapter":"ketabrah","url":"https://ketabrah.com/"},
-  {"id":"tarjomaan","name_fa":"ترجمان","kind":"review_publication","adapter":"rss","url":"https://tarjomaan.com/feed/"},
-  {"id":"taaghcheblog","name_fa":"مجلهٔ طاقچه","kind":"store_editorial","adapter":"rss","url":"https://taaghche.com/blog/feed/"}
-]}
+{
+  "version": 2,
+  "sources": [
+    {
+      "id": "taaghche",
+      "name_fa": "طاقچه",
+      "kind": "store",
+      "adapter": "taaghche",
+      "url": "https://taaghche.com/"
+    },
+    {
+      "id": "ketabrah",
+      "name_fa": "کتابراه",
+      "kind": "store",
+      "adapter": "ketabrah",
+      "url": "https://ketabrah.com/"
+    },
+    {
+      "id": "digikala",
+      "name_fa": "دیجی‌کالا",
+      "kind": "store",
+      "adapter": "digikala",
+      "url": "https://www.digikala.com/search/?q=کتاب",
+      "endpoint": "https://digikala-mcp.mmdju.workers.dev/mcp"
+    },
+    {
+      "id": "fidibo",
+      "name_fa": "فیدیبو",
+      "kind": "store",
+      "adapter": "fidibo",
+      "url": "https://fidibo.com/ebooks",
+      "extra_url": "https://fidibo.com/"
+    },
+    {
+      "id": "divar",
+      "name_fa": "دیوار",
+      "kind": "classifieds",
+      "adapter": "divar",
+      "url": "https://divar.ir/s/iran/book-student-literature",
+      "endpoint": "https://divar-mcp.mmdju2.workers.dev/mcp",
+      "cities": [
+        "tehran",
+        "karaj",
+        "mashhad",
+        "isfahan",
+        "shiraz"
+      ],
+      "queries": [
+        "رمان",
+        "تکه هایی از یک کل منسجم",
+        "چگونه آدم ها را بخوانیم"
+      ]
+    },
+    {
+      "id": "tarjomaan",
+      "name_fa": "ترجمان",
+      "kind": "review_publication",
+      "adapter": "rss",
+      "url": "https://tarjomaan.com/feed/"
+    },
+    {
+      "id": "taaghcheblog",
+      "name_fa": "مجلهٔ طاقچه",
+      "kind": "store_editorial",
+      "adapter": "rss",
+      "url": "https://taaghche.com/blog/feed/"
+    }
+  ]
+}

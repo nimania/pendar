@@ -1,0 +1,72 @@
+"""Verify upstream error envelopes and avoid false edition/price claims."""
+import json
+import sys
+import unittest
+from datetime import datetime, timezone
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+from book_market_sources import decode_rpc, digikala, fidibo, classified_group
+from collect_book_radar import collect
+
+
+class MarketSourcesTests(unittest.TestCase):
+    source = {'id': 's', 'name_fa': 'فروشگاه', 'url': 'https://fidibo.com/ebooks'}
+
+    def test_json_and_sse_mcp_errors_do_not_become_empty_success(self):
+        value = {'result': {'content': [{'type': 'text', 'text': '{"items":[]}'}]}}
+        self.assertEqual(decode_rpc(json.dumps(value)), {'items': []})
+        self.assertEqual(decode_rpc('event: message\ndata: '+json.dumps(value)+'\n\n'), {'items': []})
+        for response in ({'error': {'code': -1}}, {'result': {'isError': True}}):
+            with self.assertRaises(ValueError):
+                decode_rpc(json.dumps(response))
+
+    def test_digikala_separates_author_translator_publisher_and_excludes_bundle(self):
+        card = {'title': 'کتاب زندگی اثر نویسنده ترجمه مترجم نشر ناشر', 'url': 'https://www.digikala.com/product/dkp-1/name', 'price_toman': 230000, 'in_stock': False}
+        bundle = dict(card, title='مجموعه کتاب زندگی اثر نویسنده 3 جلدی')
+        rows = digikala({'bestseller': {'query_used': 'کتاب', 'items': [card, bundle]}}, self.source)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]['author'], 'نویسنده')
+        self.assertEqual(rows[0]['creators'][1]['role_fa'], 'مترجم')
+        self.assertEqual(rows[0]['publisher']['name_fa'], 'ناشر')
+        self.assertEqual(rows[0]['currency'], 'IRT')
+        self.assertEqual(rows[0]['availability'], 'out_of_stock')
+        self.assertEqual(rows[0]['cover_url'], '')
+
+    def test_fidibo_narrator_subtitle_is_not_used_as_author(self):
+        b = {'title': 'اثر', 'subtitle': 'نویسنده', 'narrator': 'گوینده', 'content_type': 'audiobook', 'action': {'web_url': '/book/1-name'}, 'footerText': 'نام مترجم', 'footerTextAction': {'web_url': '/publishers/1-ناشر'}}
+        context = {'list': [{'component': 'HL_BOOKS_FULL', 'title': 'تازه‌های متنی', 'items': [b, dict(b, subtitle='گوینده')]}]}
+        rows = fidibo('<script>window.homeContext = '+json.dumps(context)+'; window.isSSR=true;</script>', self.source)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]['author'], 'نویسنده')
+        self.assertEqual(rows[0]['publisher']['name_fa'], 'ناشر')
+        self.assertEqual(rows[0]['creators'][1]['role_fa'], 'گوینده')
+
+    def test_divar_placeholder_negotiable_and_missing_prices_never_compare(self):
+        card = {'token': 'abc', 'url': 'https://divar.ir/v/abc', 'title': 'کتاب', 'price_toman': 200000, 'city': 'تهران'}
+        data = {'items': [card, dict(card, price_is_placeholder=True), dict(card, negotiable=True), dict(card, price_toman=None)]}
+        group = classified_group(data, 'کتاب', datetime.now(timezone.utc))
+        self.assertEqual([r['asking_price_toman'] for r in group['items']], [200000, None, None, None])
+        self.assertTrue(all(r['condition'] == 'unknown' for r in group['items']))
+        with self.assertRaises(ValueError):
+            classified_group({'filters_not_applied': {'category': 'book'}, 'items': []}, 'کتاب', datetime.now(timezone.utc))
+
+    def test_classifieds_never_create_books_or_scores_and_failure_preserves_date(self):
+        import tempfile
+        now = datetime(2026, 10, 4, 8, tzinfo=timezone.utc)
+        old = '2026-10-03T08:00:00+00:00'
+        payload = {'books': [], 'radar': {'classifieds': {'observed_at': old, 'groups': []}}}
+        source = {'id': 'divar', 'name_fa': 'دیوار', 'adapter': 'divar', 'kind': 'classifieds', 'url': 'https://divar.ir', 'endpoint': 'unused', 'cities': ['tehran'], 'queries': ['رمان']}
+        with tempfile.NamedTemporaryFile(mode='w+') as f:
+            json.dump({'رمان': {'items': [{'url': 'https://divar.ir/v/abc', 'title': 'اثر', 'price_toman': 123}]}}, f); f.flush()
+            collect(payload, {'sources': [source]}, now=now, local={'divar': f.name})
+            self.assertEqual(payload['books'], [])
+            self.assertEqual(payload['radar']['history'], [])
+            date = payload['radar']['classifieds']['observed_at']
+            f.seek(0); f.truncate(); f.write('invalid'); f.flush()
+            collect(payload, {'sources': [source]}, now=now, local={'divar': f.name})
+            self.assertEqual(payload['radar']['sources'][0]['status'], 'unavailable')
+            self.assertEqual(payload['radar']['classifieds']['observed_at'], date)
+
+
+if __name__ == '__main__':
+    unittest.main()

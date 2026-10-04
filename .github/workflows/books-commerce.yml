@@ -11,8 +11,10 @@ on:
       - "backend/scripts/book_catalog.py"
       - "backend/scripts/book_radar.py"
       - "backend/scripts/collect_book_radar.py"
+      - "backend/scripts/book_market_sources.py"
       - "backend/book-radar-sources.json"
       - "backend/tests/test_book_radar.py"
+      - "backend/tests/test_book_market_sources.py"
       - "web-static/data/book-curation.json"
       - ".github/workflows/books-commerce.yml"
   schedule:
@@ -36,6 +38,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install public source parsers
+        run: python -m pip install requests beautifulsoup4
       - name: Verify book identity and commerce preservation
         run: python -m unittest discover -s backend/tests -p 'test_book*.py' -v
 
@@ -89,7 +93,6 @@ jobs:
 
       - name: Discover books independently from public store shelves and review feeds
         run: |
-          python -m pip install requests beautifulsoup4
           python backend/scripts/collect_book_radar.py --catalog site/data/books.json --out-js site/data/books.js
 
       - name: Enrich books with Torob sellers and prices

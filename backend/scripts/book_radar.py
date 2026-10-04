@@ -18,6 +18,12 @@ def identity(title, author):
     return 'radar-' + hashlib.sha1((norm(title) + '|' + norm(author)).encode()).hexdigest()[:12]
 
 
+def person_profile_allowed(name):
+    # Existing user exclusion applies to person pages, not book coverage.
+    compact = norm(name).replace(' ', '').replace('ـ', '').replace('\u200d', '')
+    return not any(token in compact for token in ('خمینی', 'خامنهای', 'پهلوی'))
+
+
 def stamp(value):
     try:
         return datetime.fromisoformat(str(value).replace('Z', '+00:00')).astimezone(timezone.utc)
@@ -67,7 +73,7 @@ def rebuild_graph(payload):
     for b in payload.get('books', []):
         for e in [b] + list(b.get('editions') or []):
             for c in e.get('creators') or []:
-                if not c.get('slug'):
+                if not c.get('slug') or not person_profile_allowed(c.get('name_fa')):
                     continue
                 p = people.setdefault(c['slug'], {'slug': c['slug'], 'name_fa': c['name_fa'], 'roles_fa': [], 'book_slugs': []})
                 if c.get('role_fa') and c['role_fa'] not in p['roles_fa']:

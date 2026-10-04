@@ -11,6 +11,10 @@ from email.utils import parsedate_to_datetime
 import requests
 from bs4 import BeautifulSoup
 try:
+    from scripts.book_market_sources import PublicMCP, digikala, fidibo, classified_group
+except ModuleNotFoundError:
+    from book_market_sources import PublicMCP, digikala, fidibo, classified_group
+try:
     from scripts.book_radar import identity, norm, daily_history, indicators, rebuild_graph, attach_radar
     from scripts.book_catalog import curate_payload
 except ModuleNotFoundError:
@@ -90,7 +94,7 @@ def ketabrah(html, source):
             if not re.search(r'/(?:book|audiobook)/\d+', url):
                 continue
             img = cell.select_one('a.cover img')
-            cover = img.get('src', '') if img else ''
+            cover = (img.get('data-src') or img.get('src', '')) if img else ''
             if not re.fullmatch(r'https://img\.ketabrah\.com/img/s/\d+\.jpg', cover):
                 cover = ''
             out.append({'title_fa': clean, 'author': author.get_text(' ', strip=True), 'creators': [person(author.get_text(' ', strip=True))], 'cover_url': cover, 'url': url, 'format': fmt, 'source_id': source['id'], 'source_name': source['name_fa'], 'kind': kind, 'position': pos, 'list_label': label, 'list_url': list_url, 'price': None, 'currency': None})
@@ -123,21 +127,50 @@ def collect(payload, registry, now=None, local=None):
     previous = payload.get('radar') or {}
     books = {b['slug']: b for b in payload.get('books', [])}
     observed, health, readings = [], [], []
+    classifieds = previous.get('classifieds') or {}
     # Sequential small public requests; each source fails independently.
     for source in registry['sources']:
         status = {'id': source['id'], 'name_fa': source['name_fa'], 'url': source['url'], 'kind': source['kind'], 'attempted_at': now.isoformat()}
         try:
-            raw = Path(local[source['id']]).read_text() if local and source['id'] in local else fetch(source['url'])
-            if source['adapter'] == 'rss':
-                rows = reading_feed(raw, source, now)
-                readings.extend(rows)
+            fixture = Path(local[source['id']]).read_text() if local and source['id'] in local else None
+            if source['adapter'] == 'divar':
+                client = PublicMCP(source['endpoint'])
+                datasets = json.loads(fixture) if fixture else {q: client.call('search_ads', {'query': q, 'category': 'book-student-literature', 'cities': source['cities'], 'limit': 8}) for q in source['queries']}
+                groups = []
+                for q, data in datasets.items():
+                    compact = lambda v: re.sub(r'[^\w]', '', norm(v)).replace('آ', 'ا')
+                    matches = [b['slug'] for b in books.values() if compact(b['title_fa']) == compact(q)]
+                    groups.append(classified_group(data, q, now, matches[0] if len(matches) == 1 else None))
+                classifieds = {'observed_at': now.isoformat(), 'cities': source['cities'], 'scope_fa': 'نمونهٔ آگهی‌های کتاب در تهران، کرج، مشهد، اصفهان و شیراز', 'groups': groups}
+                rows = [r for g in groups for r in g['items']]
+            elif source['adapter'] == 'digikala':
+                client = PublicMCP(source['endpoint'])
+                shelves = json.loads(fixture) if fixture else {kind: client.call('search_digikala', {'query': 'کتاب', 'sort': sort, 'limit': 20}) for kind, sort in [('bestseller', 'best_selling'), ('new_to_store', 'newest')]}
+                rows = digikala(shelves, source)
+            elif source['adapter'] == 'fidibo':
+                raw = fixture if fixture is not None else fetch(source['url'])
+                rows = fidibo(raw, source)
+                if fixture is None and source.get('extra_url'):
+                    try:
+                        rows += fidibo(fetch(source['extra_url']), source)
+                    except Exception:
+                        status['note_fa'] = 'قفسهٔ متنی دریافت شد؛ تازه‌های صفحهٔ اصلی فعلاً در دسترس نیست'
             else:
-                rows = (taaghche if source['adapter'] == 'taaghche' else ketabrah)(raw, source)
+                raw = fixture if fixture is not None else fetch(source['url'])
+                rows = reading_feed(raw, source, now) if source['adapter'] == 'rss' else (taaghche if source['adapter'] == 'taaghche' else ketabrah)(raw, source)
+            if source['adapter'] == 'rss':
+                readings.extend(rows)
+            elif source['adapter'] != 'divar':
                 for r in rows:
                     slug = identity(r['title_fa'], r['author'])
+                    # Safe orthographic reconciliation only when title AND author uniquely match.
+                    compact = lambda v: re.sub(r'[^\w]', '', norm(v)).replace('آ', 'ا')
+                    matches = [b['slug'] for b in books.values() if compact(b['title_fa']) == compact(r['title_fa']) and any(compact(c['name_fa']) == compact(r['author']) for c in b.get('creators', []) if c.get('role_fa') == 'نویسنده')]
+                    if len(matches) == 1:
+                        slug = matches[0]
                     b = books.setdefault(slug, {'slug': slug, 'record_type': 'work', 'title_fa': r['title_fa'], 'language': 'fa', 'discovery': 'direct_shelf', 'confidence': 'source_verified', 'first_seen_at': now.isoformat(), 'mentions': [], 'mention_count': 0, 'editions': []})
                     # Distinct store editions and formats retain their own creator/publisher metadata.
-                    edition = {'label_fa': r['source_name'] + ' · ' + ('صوتی' if r['format'] == 'audio' else 'الکترونیکی'), 'creators': r['creators'], 'publisher': r.get('publisher'), 'pages': r.get('pages'), 'store_added_at': r.get('store_added_at'), 'store_publication_label': r.get('store_publication_label'), 'purchase_links': [{'store': r['source_name'], 'url': r['url'], 'exact': True, 'format': r['format'], 'price': r.get('price'), 'currency': r.get('currency'), 'availability': 'unknown', 'last_checked': now.isoformat()}]}
+                    edition = {'label_fa': r['source_name'] + ' · ' + {'audio':'صوتی','print':'چاپی','ebook':'الکترونیکی'}[r['format']], 'creators': r['creators'], 'publisher': r.get('publisher'), 'pages': r.get('pages'), 'store_added_at': r.get('store_added_at'), 'store_publication_label': r.get('store_publication_label'), 'purchase_links': [{'store': r['source_name'], 'url': r['url'], 'exact': True, 'format': r['format'], 'price': r.get('price'), 'currency': r.get('currency'), 'availability': r.get('availability', 'unknown'), 'last_checked': now.isoformat()}]}
                     editions = {e['purchase_links'][0]['url']: e for e in b.get('editions', []) if e.get('purchase_links')}
                     editions[r['url']] = edition
                     b['editions'] = list(editions.values())
@@ -158,10 +191,10 @@ def collect(payload, registry, now=None, local=None):
         health.append(status)
     history = daily_history(previous.get('history'), observed, now)
     for b in books.values():
-        if b.get('discovery') == 'direct_shelf':
+        if b.get('discovery') == 'direct_shelf' or any(r['slug'] == b['slug'] for r in history):
             b['radar'] = indicators(b['slug'], history, now)
     payload['books'] = list(books.values())
-    payload['radar'] = {'updated_at': now.isoformat(), 'method_version': 1, 'sources': health, 'history': history, 'reading': list({r['url']: r for r in readings}.values())[:24], 'scope_fa': 'فهرست‌های منتخب و پرفروش فروشگاه‌های پایش‌شده؛ بدون دسترسی به تعداد فروش بازار'}
+    payload['radar'] = {'updated_at': now.isoformat(), 'method_version': 2, 'sources': health, 'history': history, 'classifieds': classifieds, 'reading': list({r['url']: r for r in readings}.values())[:24], 'scope_fa': 'فهرست‌های منتخب و پرفروش فروشگاه‌های پایش‌شده؛ بدون دسترسی به تعداد فروش بازار'}
     rebuild_graph(payload)
     return curate_payload(payload)
 

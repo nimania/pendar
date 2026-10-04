@@ -6,7 +6,7 @@ import unittest
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from book_radar import identity, daily_history, indicators, attach_radar
+from book_radar import identity, daily_history, indicators, attach_radar, person_profile_allowed
 
 
 class RadarTests(unittest.TestCase):
@@ -18,6 +18,11 @@ class RadarTests(unittest.TestCase):
     def test_title_requires_same_author(self):
         self.assertNotEqual(identity('یک عنوان', 'الف'), identity('یک عنوان', 'ب'))
         self.assertEqual(identity('كتاب يك', 'نام'), identity('کتاب یک', 'نام'))
+
+    def test_existing_person_page_exclusions_apply_to_creators(self):
+        for name in ('سید علی خامنه‌ای', 'سیدعلی خامنه ای', 'روح‌الله خمینی', 'رضا پهلوی'):
+            self.assertFalse(person_profile_allowed(name))
+        self.assertTrue(person_profile_allowed('حسین مسرور'))
 
     def test_repeated_collection_cannot_create_growth(self):
         earlier = self.row(); earlier['observed_at'] = (self.now-timedelta(hours=1)).isoformat()
