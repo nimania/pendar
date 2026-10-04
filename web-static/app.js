@@ -273,14 +273,39 @@ async function openPublisher(slug){
   document.title=p.name_fa+" | ناشرهای جانِ کتاب";
   setHash("#/publisher/"+encodeURIComponent(slug));
 }
+function _personIdentityNorm(s){
+  return String(s||"").replace(/ي/g,"ی").replace(/ى/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim().toLowerCase();
+}
+function _figureForBookPerson(person, figureData){
+  if(!person) return null;
+  const explicit=String(person.figure_handle||person.handle||"").trim().toLowerCase();
+  if(explicit){
+    const byHandle=(figureData.figures||[]).find(f=>String(f.handle||"").toLowerCase()===explicit);
+    if(byHandle) return byHandle;
+  }
+  const name=_personIdentityNorm(person.name_fa);
+  const aliases=(person.aliases_fa||person.aliases||[]).map(_personIdentityNorm).filter(Boolean);
+  return (figureData.figures||[]).find(f=>{
+    const candidates=[f.name_fa,...(f.aliases_fa||[]),...(f.aliases||[])].map(_personIdentityNorm).filter(Boolean);
+    return candidates.includes(name) || aliases.some(a=>candidates.includes(a));
+  })||null;
+}
 async function openBookPerson(slug){
+  const [d,figures]=await Promise.all([loadBooks(),loadFigures()]);
+  const p=(d.people||[]).find(x=>x.slug===slug);
+  if(!p){
+    show("books"); setTab("");
+    const lede=document.getElementById("books-lede"); if(lede) lede.style.display="none";
+    document.getElementById("books-content").innerHTML='<div class="state"><div class="big">پدیدآورنده پیدا نشد</div></div>';
+    return;
+  }
+  const linkedFigure=_figureForBookPerson(p,figures);
+  if(linkedFigure) return openFigure(linkedFigure.handle);
   show("books"); setTab("");
   const lede=document.getElementById("books-lede"); if(lede) lede.style.display="none";
   const el=document.getElementById("books-content"); el.innerHTML='<div class="spinner"></div>';
-  const d=await loadBooks(), p=(d.people||[]).find(x=>x.slug===slug);
-  if(!p){el.innerHTML='<div class="state"><div class="big">پدیدآورنده پیدا نشد</div></div>';return}
   const books=(p.book_slugs||[]).map(s=>_bookBySlug(d,s)).filter(Boolean);
-  el.innerHTML=`<button class="back" onclick="showBooks()">بازگشت به کتاب‌ها</button><div class="book-person-head"><span class="press-kicker">پدیدآورنده</span><h1>${esc(p.name_fa)}</h1><p>${esc((p.roles_fa||[]).join(" · "))}</p></div><div class="books-grid">${books.map(_bookCard).join("")}</div>`;
+  el.innerHTML=`<button class="back" onclick="showBooks('people')">بازگشت به پدیدآورندگان</button><div class="book-person-head"><span class="press-kicker">پدیدآورنده</span><h1>${esc(p.name_fa)}</h1><p>${esc((p.roles_fa||[]).join(" · "))}</p><p class="muted">این فرد هنوز پروفایل مستقل «چهره» ندارد؛ با اضافه‌شدن به جان کلام، همین نشانی به پروفایل واحد او هدایت می‌شود.</p></div><div class="books-grid">${books.map(_bookCard).join("")}</div>`;
   setHash("#/book-person/"+encodeURIComponent(slug));
 }
 
