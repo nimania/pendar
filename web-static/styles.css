@@ -1117,3 +1117,33 @@
 
 .story-books{margin:18px 0 22px}
 .figure-books{padding:16px 0 4px}
+
+
+/* Book commerce / Torob seller comparison */
+.book-card-price{display:inline-flex;align-items:center;margin-top:7px;padding:4px 7px;border-radius:8px;background:var(--surface-2);color:var(--accent);font-size:.72rem;font-weight:750}
+.torob-box{border:1px solid var(--border);border-radius:15px;background:var(--card);overflow:hidden}
+.torob-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 16px;border-bottom:1px solid var(--border);background:var(--surface-2)}
+.torob-summary>div{display:flex;flex-direction:column;gap:2px}
+.torob-summary strong{font-size:1.1rem}
+.torob-summary small{font-size:.72rem;color:var(--muted)}
+.torob-summary a{font-size:.78rem;color:var(--accent);text-decoration:none;font-weight:700}
+.torob-offers{display:grid}
+.torob-offer{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 15px;border-bottom:1px solid var(--border);text-decoration:none;color:inherit}
+.torob-offer:last-child{border-bottom:0}
+.torob-offer:hover{background:var(--surface-2)}
+.torob-offer.soldout{opacity:.62}
+.torob-offer.unreliable{border-inline-start:3px solid #b26a25}
+.torob-rank{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);color:var(--muted);font-size:.68rem}
+.torob-shop,.torob-price{display:flex;flex-direction:column;gap:2px}
+.torob-shop b{font-size:.86rem}
+.torob-shop small,.torob-price small{font-size:.68rem;color:var(--muted)}
+.torob-price{align-items:flex-end;text-align:left}
+.torob-price b{font-size:.84rem;white-space:nowrap}
+.torob-price .warn{color:#a35f20;font-weight:700}
+.torob-note{margin:0;padding:10px 15px;border-top:1px solid var(--border);font-size:.7rem;color:var(--muted);line-height:1.8}
+@media(max-width:620px){
+  .torob-summary{display:block}
+  .torob-summary a{display:inline-block;margin-top:8px}
+  .torob-offer{grid-template-columns:24px minmax(0,1fr)}
+  .torob-price{grid-column:2;align-items:flex-start;text-align:right}
+}
