@@ -1849,9 +1849,18 @@ async function renderHomeDaily(){
       f.field !== "news" &&
       !String(f.handle||"").startsWith("news-")
     );
-    const posts=homeFigures.flatMap(f=>(f.posts||[]).map(p=>({...p,_person:f})))
+    const rankedPosts=homeFigures.flatMap(f=>(f.posts||[]).map(p=>({...p,_person:f})))
       .filter(p=>p.published_at)
-      .sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at))).slice(0,5);
+      .sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)));
+    // Show at most one item per figure on the homepage. Because rankedPosts is
+    // newest-first, the first item we keep is that person's latest statement.
+    const seenHomeFigures=new Set();
+    const posts=rankedPosts.filter(p=>{
+      const key=String(p._person?.handle||p.handle||"").toLowerCase();
+      if(!key || seenHomeFigures.has(key)) return false;
+      seenHomeFigures.add(key);
+      return true;
+    }).slice(0,5);
     voiceEl.innerHTML=posts.length?posts.map(p=>`
       <button class="home-voice-row" onclick="openStatement('${esc(statementKey(p))}')">
         ${avatar(p._person,"sm")}
