@@ -235,6 +235,8 @@ function _ssScore(d,Q){
   if(Q.personIntent&&d.kind==="دیدگاه")score+=7;
   if(Q.sourceIntent&&["جریده","مطلب جریده"].includes(d.kind))score+=7;
   if(d.kind==="چهره"&&title===Q.n)score+=30;
+  if(d.canonicalId&&title===Q.n)score+=45;
+  if(d.canonicalId)score+=2;
   return score+(hits?Math.min(hits,5):0);
 }
 async function _buildSmartSearchDocs(){
@@ -305,6 +307,25 @@ async function _buildSmartSearchDocs(){
     add("path",k.paths,"دانش · مسیر",x=>"مسیر مطالعه");
     add("festival",k.festivals,"دانش · آیین",x=>x.dateLabel||"");
     add("organization",k.organizations,"دانش · نهاد",x=>[x.type,x.country].filter(Boolean).join(" · "));
+  }catch(_){}
+  try{
+    const er=await loadCanonicalEntities();
+    const labels={person:"شخص",organization:"نهاد",source:"رسانه",publisher:"ناشر",book:"کتاب",movie:"فیلم/سریال",topic:"موضوع",place:"مکان"};
+    (er.entities||[]).forEach(x=>{
+      const label=labels[x.type]||"هویت";
+      const roles=(x.roles||[]).join(" · ");
+      const aliases=(x.aliases||[]).join(" ");
+      const summary=x.meta?.summary||"";
+      docs.push({
+        kind:"هویت · "+label,
+        title:x.name_fa||x.id,
+        sub:roles,
+        canonicalId:x.id,
+        go:`openCanonicalEntity('${String(x.id).replace(/'/g,"\\'")}')`,
+        text:[x.name_fa,aliases,roles,summary,x.type].join(" "),
+        snippet:summary
+      });
+    });
   }catch(_){}
   _smartSearchDocs=docs; return docs;
 }
@@ -2753,7 +2774,9 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const bookPerson=(bookData.people||[]).find(p=>nameNorm(p.name_fa)===nameNorm(x.name_fa));
   const figureBooks=(bookPerson?.book_slugs||[]).map(s=>_bookBySlug(bookData,s)).filter(Boolean);
   const figureMovies=(movieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>mm.kind==="figure"&&(String(mm.handle||"").toLowerCase()===String(x.handle||"").toLowerCase()||(x.posts||[]).some(p=>String(p.id)===String(mm.post_id)))));
-  const shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies") ? [] : (x.posts || []);
+  const canonicalNames=new Set([x.name_fa,...(canonicalFigure?.aliases||[])].map(_canonicalNorm).filter(Boolean));
+  const figureStories=canonicalFigure?ALL.filter(s=>(s.entities||[]).some(e=>canonicalNames.has(_canonicalNorm(e.name_fa||"")))):[];
+  const shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies" || _figureProfileFilter === "stories") ? [] : (x.posts || []);
   const latest = (x.posts || []).map(p => p.published_at).filter(Boolean).sort().pop();
   const poems = Array.isArray(curatedPoems[x.handle]) ? curatedPoems[x.handle] : [];
   const poemSection = poems.length ? `<section class="curated-poems"><div class="curated-poems-head"><div><span class="curated-kicker">اثر ویژه</span><h2>یک شعر؛ بخش‌های منتشرشده</h2><p>این ${faN(poems.length)} متن، بخش‌های مختلف یک شعر از مونا برزویی‌اند. ترتیب نهایی بخش‌ها هنوز اعلام نشده است؛ شماره‌های زیر فقط برای تفکیک در آرشیو جان کلام‌اند و ترتیب شعر را نشان نمی‌دهند.</p></div><span class="curated-count">${faN(poems.length)} بخش</span></div><div class="curated-poem-list">${poems.map((p,i)=>`<article class="curated-poem"><div class="curated-poem-no" title="شمارهٔ آرشیوی؛ نه ترتیب شعر">بخش ${faN(i+1)}*</div><div class="curated-poem-text">${esc(p.text||"").replace(/\\n/g,"<br>")}</div></article>`).join("")}</div></section>` : "";
@@ -2780,20 +2803,22 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       <div class="x-handle">@${esc(x.handle)}</div>
       <p class="x-bio">${esc(x.role_fa || "")}</p>
       ${socialLinks(x.social)}
-      <div class="x-profile-stats"><span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${figureMovies.length ? `<span><b>${faN(figureMovies.length)}</b> فیلم/سریال</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}</div>
+      <div class="x-profile-stats"><span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${figureMovies.length ? `<span><b>${faN(figureMovies.length)}</b> فیلم/سریال</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}</div>
     </div>
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
       <button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>
-      <button class="${_figureProfileFilter==="news"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','news')">در خبرها</button>
+      <button class="${_figureProfileFilter==="news"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','news')">گفته در خبرها</button>
+      ${figureStories.length ? `<button class="${_figureProfileFilter==="stories"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'stories\')">خبرها</button>` : ""}
       ${figureBooks.length ? `<button class="${_figureProfileFilter==="books"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'books\')">کتاب‌ها</button>` : ""}
       ${figureMovies.length ? `<button class="${_figureProfileFilter==="movies"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'movies\')">فیلم‌ها</button>` : ""}
       ${poems.length ? `<button class="${_figureProfileFilter==="works"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'works\')">آثار</button>` : ""}
     </nav>
+    ${_figureProfileFilter==="stories" ? `<section class="figure-stories">${groupedFeed(figureStories)}</section>` : ""}
     ${_figureProfileFilter==="books" ? `<section class="figure-books"><div class="books-grid">${figureBooks.map(_bookCard).join("")}</div></section>` : ""}
     ${_figureProfileFilter==="movies" ? `<section class="figure-movies"><div class="movie-grid">${figureMovies.map(_movieCard).join("")}</div></section>` : ""}
-    ${_figureProfileFilter==="works" ? poemSection : ""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies") ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
+    ${_figureProfileFilter==="works" ? poemSection : ""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories") ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
   </div>`;
 }
