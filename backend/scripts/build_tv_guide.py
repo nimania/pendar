@@ -24,6 +24,7 @@ IRIB_XML = "https://raw.githubusercontent.com/Samhouston010/sepehr-irib-epg/main
 IRIB_CHANNELS = "https://raw.githubusercontent.com/Samhouston010/sepehr-irib-epg/main/channels.json"
 IRANINTL_XML = "https://raw.githubusercontent.com/SandObserver/iranintl-xmltv/main/output/iranintl.xml"
 EPGPW_GB_GZ = "https://epg.pw/xmltv/epg_GB.xml.gz"
+ARIANA_XML = "https://iptv-org.github.io/epg/guides/af/arianatelevision.com.epg.xml"
 
 SOURCE_REGISTRY = [
     {"key": "irib", "name": "صداوسیما / تلوبیون", "status": "aggregated", "note": "EPG جاریِ شبکه‌های سراسری و استانی؛ گردآوری‌شده از APIهای تلوبیون/سپهر"},
@@ -33,7 +34,7 @@ SOURCE_REGISTRY = [
     {"key": "radiofarda", "name": "Radio Farda", "status": "official", "note": "جدول پخش روزانهٔ رسمی رادیو فردا"},
     {"key": "gem", "name": "GEM Group", "status": "planned", "note": "نیازمند تطبیق چند منبع"},
     {"key": "afintl", "name": "Afghanistan International", "status": "official", "note": "جدول پخش مستقیم از صفحه رسمی Live شبکه"},
-    {"key": "ariana", "name": "Ariana TV", "status": "planned", "note": "TV Schedule رسمی"},
+    {"key": "ariana", "name": "Ariana TV", "status": "verified", "note": "XMLTV تولیدشده از جدول Ariana Television توسط iptv-org/epg"},
     {"key": "tolo", "name": "TOLO TV", "status": "planned", "note": "Schedule رسمی"},
     {"key": "mbc-persia", "name": "MBC Persia", "status": "planned", "note": "زمان‌بندی نیمه‌ساختاریافته"},
 ]
@@ -521,6 +522,7 @@ def build() -> dict:
         dict(key="irib", name="صداوسیما / تلوبیون", url=IRIB_XML, confidence="aggregated", metadata_loader=load_irib_metadata),
         dict(key="persiana", name="Persiana Group", url=PERSIANA_XML, confidence="aggregated", metadata_loader=None),
         dict(key="iranintl", name="Iran International", url=IRANINTL_XML, confidence="verified", metadata_loader=lambda: {"iranintl.iitv": {"name": "ایران اینترنشنال", "name_en": "Iran International", "group": "خبری"}}),
+        dict(key="ariana", name="Ariana TV", url=ARIANA_XML, confidence="verified", metadata_loader=None),
     ]
     for spec in specs:
         try:
