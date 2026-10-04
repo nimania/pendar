@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="books-hub.css">
   <link rel="stylesheet" href="movies-hub.css">
+  <link rel="stylesheet" href="tv-guide.css">
 </head>
 <body>
   <header class="top">
@@ -49,6 +50,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4.5h9a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3V4.5Z"/><path d="M8 7.5h6M8 11h6" stroke-linecap="round"/><path d="M17 7.5h2v12.5h-2" stroke-linecap="round"/></svg>
       </button>
       <button class="icon-btn" onclick="showMovies()" aria-label="فیلم‌ها" title="جان فیلم — فیلم‌ها و سریال‌های دیده‌شده در جان‌کلام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M7 5.5l2.2 4M12 5.5l2.2 4M17 5.5l2.2 4M4 10h16"/></svg></button>
+      <button class="icon-btn" onclick="showTVGuide('now')" aria-label="راهنمای تماشا" title="راهنمای تماشا — الان، امشب، ورزش و شبکه‌ها"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M9 2l3 3 3-3M8 10l7 3.5L8 17v-7Z" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="icon-btn" onclick="showKnowledge()" aria-label="دانش پندار" title="دانش پندار — تاریخ، فرهنگ، آیین‌ها و نهادها"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5v-16Z"/></svg></button>
       <button class="icon-btn" onclick="showTech()" aria-label="فناوری و طراحی" title="فناوری و طراحی">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -72,6 +74,7 @@
           <button onclick="showBooks()">پیشخوان کتاب</button>
           <button onclick="showPress()">پیشخوان جراید</button>
           <button onclick="showFigures()">جان کلام</button>
+          <button onclick="showTVGuide('now')">راهنمای تماشا</button>
         </div>
       </div>
       <div class="home-stats" id="home-stats"></div>
@@ -235,6 +238,11 @@
       <div id="movies-content"><div class="spinner"></div></div>
     </section>
 
+    <section class="trends-view" id="tv-guide-view">
+      <button class="back" onclick="showFeed()">بازگشت به پندار امروز</button>
+      <div id="tv-guide-content"><div class="spinner"></div></div>
+    </section>
+
     <section class="trends-view" id="knowledge-view">
       <button class="back" onclick="showFeed()">بازگشت به پندار امروز</button>
       <div id="knowledge-content"><div class="spinner"></div></div>
@@ -261,7 +269,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>پندار · ایران، خبر، اندیشه و فرهنگ</p>
-      <div class="footer-links"><button onclick="showKnowledge()">دانش پندار</button><button onclick="showBooks()">پیشخوان کتاب</button><button onclick="showMovies()">جان فیلم</button><button onclick="showPress()">پیشخوان جراید</button><button onclick="showFigures()">جان کلام</button><button onclick="showTech()">فناوری و طراحی</button><button onclick="showFaq()">روش کار</button><a href="https://vibefarsi.ir/" target="_blank" rel="noopener">VibeFarsi ↗</a></div>
+      <div class="footer-links"><button onclick="showKnowledge()">دانش پندار</button><button onclick="showBooks()">پیشخوان کتاب</button><button onclick="showMovies()">جان فیلم</button><button onclick="showTVGuide('now')">راهنمای تماشا</button><button onclick="showPress()">پیشخوان جراید</button><button onclick="showFigures()">جان کلام</button><button onclick="showTech()">فناوری و طراحی</button><button onclick="showFaq()">روش کار</button><a href="https://vibefarsi.ir/" target="_blank" rel="noopener">VibeFarsi ↗</a></div>
     </div>
   </footer>
 
@@ -304,6 +312,7 @@
 <script src="books-hub.js"></script>
 <script src="movies-data.js"></script>
 <script src="movies-hub.js"></script>
+<script src="tv-guide.js"></script>
 <script src="knowledge-hub.js"></script>
   <script src="app.js"></script>
 </body>
