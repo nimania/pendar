@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "web-static/**"
+      - "backend/scripts/build_tv_guide.py"
       - ".github/workflows/fast-deploy.yml"
 
 permissions:
