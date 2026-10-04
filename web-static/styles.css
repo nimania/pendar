@@ -1154,9 +1154,9 @@
 
 /* Pendar-inspired Jan Kalam masthead — 2026-10-04 */
 :root{
-  --jk-head:#2b1233;
-  --jk-head-2:#5f256d;
-  --jk-head-3:#7a3888;
+  --jk-head:#3b2418;
+  --jk-head-2:#7a4a2f;
+  --jk-head-3:#9a6545;
   --jk-lilac:#d7b3dc;
   --jk-lilac-soft:#f2e7f4;
   --jk-lime:#dbea2a;
@@ -1164,18 +1164,18 @@
 }
 header.top{
   background:
-    radial-gradient(circle at 8% -80%,#d7b3dc55 0 145px,transparent 146px),
+    radial-gradient(circle at 8% -80%,#d9b89a55 0 145px,transparent 146px),
     radial-gradient(circle at 84% 170%,#dbea2a22 0 110px,transparent 111px),
-    linear-gradient(115deg,var(--jk-head-2) 0%,#4d1d59 55%,var(--jk-head) 100%);
+    linear-gradient(115deg,var(--jk-head-2) 0%,#5b3523 55%,var(--jk-head) 100%);
   border-bottom:1px solid #ffffff20;
   backdrop-filter:saturate(1.2) blur(14px);
-  box-shadow:0 8px 28px #26102d1f;
+  box-shadow:0 8px 28px #2d1b121f;
 }
 .top .wrap{height:70px}
 .brand .logo-img{
   height:48px;
   max-width:145px;
-  filter:brightness(0) invert(1) drop-shadow(0 5px 12px #17091c55);
+  filter:brightness(0) invert(1) drop-shadow(0 5px 12px #21130d55);
 }
 .brand .tag{color:#eaddec;font-weight:550}
 .icon-btn{
@@ -1222,7 +1222,7 @@ header.top{
 @media(max-width:600px){
   header.top{
     background:
-      radial-gradient(circle at 5% -120%,#d7b3dc44 0 120px,transparent 121px),
+      radial-gradient(circle at 5% -120%,#d9b89a44 0 120px,transparent 121px),
       linear-gradient(115deg,var(--jk-head-2),var(--jk-head))
   }
   .top .wrap{height:64px;gap:10px}
