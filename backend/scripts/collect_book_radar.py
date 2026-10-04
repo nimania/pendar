@@ -174,7 +174,7 @@ def collect(payload, registry, now=None, local=None):
                 elif source['adapter'] == 'telegram_distributor':
                     rows = parse_telegram_distributor(raw, source, person, identity)
                 elif source['adapter'] == 'cheshmeh_catalog':
-                    rows = cheshmeh_catalog(source)
+                    rows = cheshmeh_catalog(source, identity)
                 else:
                     rows = (taaghche if source['adapter'] == 'taaghche' else ketabrah)(raw, source)
             if source['adapter'] == 'rss':
