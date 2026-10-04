@@ -32,7 +32,7 @@ SOURCE_REGISTRY = [
     {"key": "iranintl", "name": "Iran International", "status": "verified", "note": "XMLTV تازه‌شونده، استخراج‌شده از جدول رسمی شبکه"},
     {"key": "radiofarda", "name": "Radio Farda", "status": "official", "note": "جدول پخش روزانهٔ رسمی رادیو فردا"},
     {"key": "gem", "name": "GEM Group", "status": "planned", "note": "نیازمند تطبیق چند منبع"},
-    {"key": "afintl", "name": "Afghanistan International", "status": "planned", "note": "جدول رسمی + اکنون/بعدی"},
+    {"key": "afintl", "name": "Afghanistan International", "status": "official", "note": "جدول پخش مستقیم از صفحه رسمی Live شبکه"},
     {"key": "ariana", "name": "Ariana TV", "status": "planned", "note": "TV Schedule رسمی"},
     {"key": "tolo", "name": "TOLO TV", "status": "planned", "note": "Schedule رسمی"},
     {"key": "mbc-persia", "name": "MBC Persia", "status": "planned", "note": "زمان‌بندی نیمه‌ساختاریافته"},
@@ -283,6 +283,108 @@ def ingest_radiofarda(now: datetime) -> tuple[list[dict], list[dict]]:
 def parse_iso(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
 
+def ingest_afintl(now: datetime) -> tuple[list[dict], list[dict]]:
+    """Parse Afghanistan International's official live now/next schedule."""
+    raw = fetch("https://www.afintl.com/live")
+    tokens = html_tokens(raw)
+    try:
+        start_i = tokens.index("جدول پخش")
+    except ValueError:
+        raise RuntimeError("Afghanistan International: schedule marker not found")
+
+    segment = tokens[start_i + 1 :]
+    for marker in ("پخش زنده و سایر برنامه‌های افغانستان اینترنشنال", "برای دسترسی به اطلاعات جامع"):
+        for i, t in enumerate(segment):
+            if t.startswith(marker):
+                segment = segment[:i]
+                break
+
+    digit = r"[۰-۹0-9]"
+    only_time = re.compile(rf"^({digit}{{1,2}}:{digit}{{2}})$")
+    joined = re.compile(rf"^({digit}{{1,2}}:{digit}{{2}})\s*(.+)$")
+    ignored = {"در حال پخش", "Live TV", "جدول پخش", "آخرین خبرها"}
+    pairs: list[tuple[str, str]] = []
+
+    i = 0
+    while i < len(segment):
+        token = segment[i].strip()
+        m_join = joined.match(token)
+        if m_join and m_join.group(2).strip():
+            pairs.append((m_join.group(1), m_join.group(2).strip()))
+            i += 1
+            continue
+        m = only_time.match(token)
+        if not m:
+            i += 1
+            continue
+        title = ""
+        j = i + 1
+        while j < min(len(segment), i + 7):
+            candidate = segment[j].strip()
+            if only_time.match(candidate) or joined.match(candidate):
+                break
+            if candidate not in ignored and len(candidate) > 1:
+                title = candidate
+                break
+            j += 1
+        if title:
+            pairs.append((m.group(1), title))
+        i = max(i + 1, j)
+
+    if len(pairs) < 5:
+        raise RuntimeError(f"Afghanistan International: too few schedule rows ({len(pairs)})")
+
+    tz = ZoneInfo("Asia/Kabul")
+    local_now = now.astimezone(tz)
+    current_day = local_now.date()
+    programmes: list[dict] = []
+    starts: list[tuple[datetime, str]] = []
+    prev_minutes = None
+
+    for hm, title in pairs:
+        ascii_hm = hm.translate(FA_DIGITS)
+        h, m = [int(x) for x in ascii_hm.split(":")]
+        minutes = h * 60 + m
+        if prev_minutes is not None and minutes + 8 * 60 < prev_minutes:
+            current_day += timedelta(days=1)
+        dt = datetime(current_day.year, current_day.month, current_day.day, h, m, tzinfo=tz)
+        if not starts and dt < local_now - timedelta(hours=4):
+            dt += timedelta(days=1)
+            current_day = dt.date()
+        starts.append((dt.astimezone(timezone.utc), title))
+        prev_minutes = minutes
+
+    for idx, (start, title) in enumerate(starts):
+        stop = starts[idx + 1][0] if idx + 1 < len(starts) else start + timedelta(minutes=30)
+        if stop <= now - timedelta(hours=2) or start >= now + timedelta(hours=36):
+            continue
+        programmes.append({
+            "channel_id": "afintl:tv",
+            "start": iso(start),
+            "stop": iso(stop),
+            "title_fa": title,
+            "title_en": None,
+            "desc_fa": None,
+            "year": None,
+            "categories": ["خبر ورزشی" if "ورزشی" in title else "خبر"],
+            "icon": None,
+            "rating": None,
+        })
+
+    if not programmes:
+        raise RuntimeError("Afghanistan International: no current programme rows")
+    channel = {
+        "id": "afintl:tv",
+        "name_fa": "افغانستان اینترنشنال",
+        "name": "Afghanistan International",
+        "logo": None,
+        "group": "news",
+        "source_key": "afintl",
+        "source_name": "Afghanistan International",
+        "confidence": "official",
+    }
+    return [channel], programmes
+
 def ingest_bbc_persian(now: datetime) -> tuple[list[dict], list[dict]]:
     """Prefer BBC's official schedule; fall back to a standard XMLTV mirror."""
     time_re = re.compile(r"^(\d{2}):(\d{2})\s+GMT$")
@@ -439,6 +541,7 @@ def build() -> dict:
 
     for key, name, loader in (
         ("radiofarda", "Radio Farda", ingest_radiofarda),
+        ("afintl", "Afghanistan International", ingest_afintl),
     ):
         try:
             ch, pr = loader(now)
