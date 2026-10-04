@@ -50,3 +50,12 @@ for src in scripts[-20:]:
             start=i+len(needle)
 out={"page":PAGE,"scripts":scripts,"candidates":sorted(cands),"contexts":contexts[:40]}
 print(json.dumps(out,ensure_ascii=False,indent=2))
+
+
+API_SAMPLE="https://server.cheshmehdis.com/api/v1/main-level/publishers/products?limit=2&nocache=1"
+try:
+    sample_text, sample_type = get(API_SAMPLE)
+    sample_json = json.loads(sample_text)
+    print(json.dumps({"api_sample_url":API_SAMPLE,"content_type":sample_type,"top_keys":list(sample_json.keys()) if isinstance(sample_json,dict) else [],"sample":sample_json},ensure_ascii=False,indent=2)[:30000])
+except Exception as exc:
+    print(json.dumps({"api_sample_url":API_SAMPLE,"error":type(exc).__name__,"detail":str(exc)},ensure_ascii=False))
