@@ -110,7 +110,7 @@ def _cache_bust() -> str:
         with open(sw, encoding="utf-8") as f:
             swtext = f.read()
         swtext = re.sub(r'const V = "[^"]*";',
-                        'const V = "jankalam-' + app_v + '";', swtext, count=1)
+                        'const V = "pendar-' + app_v + '";', swtext, count=1)
         _write_text(sw, swtext)
     return app_v
 
