@@ -67,3 +67,12 @@ try:
     print(json.dumps({"api_sample_url":API_SAMPLE,"content_type":sample_type,"top_keys":list(sample_json.keys()) if isinstance(sample_json,dict) else [],"sample":sample_json},ensure_ascii=False,indent=2)[:30000])
 except Exception as exc:
     print(json.dumps({"api_sample_url":API_SAMPLE,"error":type(exc).__name__,"detail":str(exc)},ensure_ascii=False))
+
+
+FILTER_SAMPLE="https://server.cheshmehdis.com/api/v1/filter/requirement"
+try:
+    t,ct=get(FILTER_SAMPLE)
+    j=json.loads(t)
+    print(json.dumps({"filter_sample_url":FILTER_SAMPLE,"content_type":ct,"top_keys":list(j.keys()) if isinstance(j,dict) else [],"sample":j},ensure_ascii=False,indent=2)[:30000])
+except Exception as exc:
+    print(json.dumps({"filter_sample_url":FILTER_SAMPLE,"error":type(exc).__name__,"detail":str(exc)},ensure_ascii=False))
