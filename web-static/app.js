@@ -1173,7 +1173,9 @@ async function openStory(id) {
   }
 
   const imp = impInfo(s.importance_score);
-  const peopleSuggestions = await storyPeopleSuggestions(s);
+  const [peopleSuggestions, storyBookData] = await Promise.all([storyPeopleSuggestions(s), loadBooks()]);
+  const storyBooks=(storyBookData.books||[]).filter(b=>(b.mentions||[]).some(m=>String(m.story_id||"")===String(cleanId)));
+  const storyBooksSection=storyBooks.length?`<section class="story-books"><div class="rule"><span>کتاب‌های مرتبط با این خبر</span><span class="l"></span></div><div class="press-book-links">${storyBooks.map(b=>`<button onclick="openBook('${esc(b.slug)}')"><span>کتاب</span><b>${esc(b.title_fa||"")}</b></button>`).join("")}</div></section>`:"";
   const li = a => (a || []).map(x => `<li>${esc(x)}</li>`).join("");
   const views = (s.source_views || []).map(sv => `<div class="view"><div class="v-h"><span class="v-name">${esc(sv.source_name)}</span></div><p>${esc(sv.viewpoint_fa || "")}</p></div>`).join("");
   const cites = (s.sources || []).map(c => `<a class="cite" href="${c.article_url || "#"}" target="_blank" rel="noopener">
@@ -1246,6 +1248,7 @@ async function openStory(id) {
     ${detailGeoStrip(s)}
     ${peopleRow(s.entities)}
     ${peopleSuggestions}
+    ${storyBooksSection}
     <div class="twocol"><div class="qa"><h3>چه اتفاقی افتاد؟</h3><p>${esc(s.what_happened_fa || "—")}</p></div>
       <div class="qa"><h3>چرا اهمیت دارد؟</h3><p>${esc(s.why_it_matters_fa || "—")}</p></div></div>
     ${known}
@@ -2348,7 +2351,7 @@ function setFigureProfileFilter(handle, mode) {
 }
 async function openStatement(id) {
   const raw = decodeURIComponent(id);
-  const direct = await loadFigures();
+  const [direct, statementBookData] = await Promise.all([loadFigures(), loadBooks()]);
   let person = null, post = null, isNews = false;
   for (const f of (direct.figures || [])) {
     const p = (f.posts || []).find(x => String(x.id) === raw);
@@ -2360,11 +2363,14 @@ async function openStatement(id) {
   document.getElementById("figure-timeline").innerHTML = "";
   const el = document.getElementById("figures");
   if (!post) { el.innerHTML = '<div class="state"><div class="big">این گفته پیدا نشد</div></div>'; return; }
+  const statementBooks=(statementBookData.books||[]).filter(b=>(b.mentions||[]).some(m=>String(m.post_id||"")===String(raw)));
+  const statementBooksSection=statementBooks.length?'<div class="rule"><span>کتاب‌های مرتبط با این گفته</span><span class="l"></span></div><div class="press-book-links">'+statementBooks.map(b=>'<button onclick="openBook(\''+esc(b.slug)+'\')"><span>کتاب</span><b>'+esc(b.title_fa||"")+'</b></button>').join("")+'</div>':"";
   setHash("#/statement/" + encodeURIComponent(raw));
   el.innerHTML = '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "(\'" + esc(person.handle) + "\')\">بازگشت به پروفایل</button>" +
     '<div class="fig-head">' + avatar(person,"lg") + '<div class="fig-head-body"><h1>' + esc(person.name_fa) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
     '<div class="rule"><span>' + (isNews ? "گفته در خبر" : "دیدگاه") + '</span><span class="l"></span></div>' +
     figureCard(post,false) +
+    statementBooksSection +
     ((post.related_people || []).length ? '<div class="rule"><span>ارتباط این گفته</span><span class="l"></span></div><div class="views">' +
       post.related_people.map(r => `<button class="fig-person" onclick="openFigure('${esc(r.handle)}')"><span class="fp-body"><span class="fp-name">${esc(r.name_fa)}</span><span class="fp-role">${r.relation === "response" ? "پاسخ / واکنش مرتبط" : "شخص نام‌برده در این گفته"}</span></span></button>`).join("") + '</div>' : '') +
     '<p class="muted fig-note">این صفحه نشانی مستقل دارد و می‌توان مستقیماً به همین گفته ارجاع داد.</p>';
