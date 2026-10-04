@@ -92,7 +92,14 @@ def shown_posts(export):
             summary = str(row.get("summary_fa") or "").strip()
             if not summary:
                 continue
-            key = post_key(row.get("url") or "")
+            try:
+                key = post_key(row.get("url") or "")
+            except ValueError:
+                print(
+                    "::warning::Skipping a figure post with an unsupported or malformed source URL: "
+                    + str(row.get("url") or "(missing)")
+                )
+                continue
             handle = str(row.get("handle") or figure.get("handle") or key.split("/")[-2])
             posts[key] = {
                 "url": key, "handle": handle,
