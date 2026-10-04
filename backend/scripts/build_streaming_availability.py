@@ -24,7 +24,7 @@ SERVICES = [
     {"key":"filimo","name_fa":"فیلیمو","name_en":"Filimo","status":"active","homepage":"https://www.filimo.com/","logo":"https://upload.wikimedia.org/wikipedia/commons/5/5d/Filimo_logo.svg"},
     {"key":"filmnet","name_fa":"فیلم‌نت","name_en":"FilmNet","status":"active","homepage":"https://filmnet.ir/","logo":"https://upload.wikimedia.org/wikipedia/commons/5/53/FilmNet_Logo.png"},
     {"key":"namava","name_fa":"نماوا","name_en":"Namava","status":"active","homepage":"https://www.namava.ir/main","logo":"https://upload.wikimedia.org/wikipedia/commons/5/50/Namava_logo.svg"},
-    {"key":"30nama","name_fa":"۳۰نما","name_en":"30nama","status":"active","homepage":"https://30nama.com/","logo":"https://30nama.com/favicon.ico"},
+    {"key":"30nama","name_fa":"۳۰نما","name_en":"30nama","status":"search","homepage":"https://30nama.com/","logo":"https://30nama.com/favicon.ico"},
     {"key":"tamashakhoneh","name_fa":"تماشاخونه","name_en":"Tamashakhoneh","status":"planned","homepage":"https://tmk.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=tmk.ir"},
     {"key":"starnet","name_fa":"استارنت","name_en":"StarNet","status":"planned","homepage":"https://starnet.ir/","logo":"https://www.google.com/s2/favicons?sz=128&domain=starnet.ir"},
     {"key":"telewebion","name_fa":"تلوبیون","name_en":"Telewebion","status":"planned","homepage":"https://telewebion.com/","logo":"https://upload.wikimedia.org/wikipedia/commons/c/c2/Telewebion.svg"},
@@ -220,15 +220,34 @@ def build(movies_path: Path) -> dict:
     movies=movies if isinstance(movies,list) else []
 
     availability={}
+    search_links={}
     health={}
     for service in SERVICES:
         key=service["key"]
         health[key]={
-            "status":"planned" if service.get("status")=="planned" else "unknown",
+            "status":"planned" if service.get("status")=="planned" else "search_only" if service.get("status")=="search" else "unknown",
             "checked_at":None,"matched_titles":0,"queried_titles":0,
         }
 
     active=[svc for svc in SERVICES if svc["key"] in QUERIERS]
+
+    for movie in movies:
+        slug=str(movie.get("slug") or "").strip()
+        refs=movie.get("search_refs") or {}
+        if slug and isinstance(refs,dict):
+            rows=[]
+            for service_key,ref in refs.items():
+                if not isinstance(ref,dict) or not ref.get("url"):
+                    continue
+                rows.append({
+                    "service":service_key,
+                    "url":ref.get("url"),
+                    "basis":ref.get("basis"),
+                    "confidence":ref.get("confidence"),
+                    "query":ref.get("query"),
+                })
+            if rows:
+                search_links[slug]=rows
 
     # Provider refs are already exact, first-party availability evidence.
     # Seed them for the entire catalog without making a second network request.
@@ -331,10 +350,12 @@ def build(movies_path: Path) -> dict:
         "matching_policy":"exact-title-or-alias; year-consistent-when-present",
         "services":services,
         "availability":availability,
+        "search_links":search_links,
         "stats":{
             "canonical_titles":len(movies),
             "titles_with_availability":len(availability),
             "availability_records":sum(len(v) for v in availability.values()),
+            "search_link_records":sum(len(v) for v in search_links.values()),
         },
     }
 
