@@ -128,11 +128,13 @@ jobs:
           # Generated datasets (especially Jan-e Jaraid) belong to collector/build
           # artifacts. A UI hotfix must never replace them with seeded repo data.
           rsync -a --exclude 'data/' web-static/ site/
+          mkdir -p site/data
+          cp web-static/data/pendar-*.json site/data/
           python - <<'PY'
           import hashlib, pathlib, re
           root = pathlib.Path("site")
           versions = {}
-          for name in ("app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js"):
+          for name in ("app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "knowledge-hub.js"):
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]
