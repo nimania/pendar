@@ -173,6 +173,32 @@ FIGURES: list[Figure] = [
     Figure("DrSoroush", "عبدالکریم سروش", "فیلسوف و نظریه‌پرداز دینی", "philosophy"),
     # --- اپوزیسیون ---
     Figure("ganji_akbar", "اکبر گنجی", "نویسنده و روزنامه‌نگار", "opposition"),
+
+    # ══════════════════════════════════════════════════════════════════════
+    #  مرحلهٔ ۶ — چهره‌های افزوده‌شده پس از راستی‌آزمایی کانال رسمی
+    # ══════════════════════════════════════════════════════════════════════
+    # --- سیاست و جامعه ---
+    Figure("jalalrashidikoochi1", "جلال رشیدی کوچی", "نمایندهٔ سابق مجلس و فعال سیاسی", "politics"),
+    Figure("sherwin_vakili", "شروین وکیلی", "جامعه‌شناس، نویسنده و پژوهشگر", "society",
+           (("website", "https://www.soshians.ir"),
+            ("instagram", "https://www.instagram.com/sherwin_vakili/"),
+            ("youtube", "https://www.youtube.com/SherwinVakili"))),
+    # --- تاریخ / اندیشه و سیاست ---
+    Figure("ParhamRamin", "رامین پرهام", "نویسنده و تحلیلگر سیاسی", "opposition",
+           (("x", "https://x.com/parhamramin"),
+            ("instagram", "https://www.instagram.com/raminparhamofficial/"))),
+    # --- رسانه و تحلیل ---
+    Figure("FarahmandBeirut", "مهرداد فرهمند", "روزنامه‌نگار و تحلیلگر", "media",
+           (("youtube", "https://www.youtube.com/@mehrdad.farahmand"),)),
+    # --- فرهنگ و هنر ---
+    Figure("ShamlouHouse", "احمد شاملو", "شاعر، نویسنده و مترجم", "culture",
+           (("x", "https://x.com/ShamlouHouse"),)),
+    Figure("ShahyarGhanbariOfficial", "شهیار قنبری", "ترانه‌سرا، شاعر و هنرمند", "culture",
+           (("website", "https://www.shahyarghanbari.com"),)),
+    # --- رسانه / اپوزیسیون ---
+    Figure("rodast_omiddana", "امید دانا", "برنامه‌ساز و مفسر سیاسی", "opposition",
+           (("instagram", "https://www.instagram.com/risheh84/"),
+            ("youtube", "https://www.youtube.com/@omiddana"))),
 ]
 
 
