@@ -192,3 +192,19 @@
 .publisher-categories{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px}
 .publisher-categories span{font-size:10px;color:var(--ink-faint);padding:4px 7px;background:var(--surface);border-radius:999px}
 @media(max-width:600px){.publisher-stats{gap:14px}.publisher-stats b{font-size:16px}}
+
+
+/* Zero-click used-book search — 2026-10-04 */
+.book-used-shortcuts{display:flex;gap:8px;margin:6px 0 12px}
+.book-used-dossier .book-section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.book-used-dossier .book-section-title h2{display:flex;align-items:center;gap:6px;margin:0}
+.book-ad-card{display:flex;align-items:center;gap:10px;text-align:right}
+.book-ad-preview{display:flex;flex-direction:column;gap:4px;padding:0;border:0;background:transparent;text-align:right;cursor:pointer}
+.book-ad-preview strong{font-size:13px;line-height:1.7}
+.book-ad-preview b{font-size:11px;color:var(--ink)}
+.book-ad-copy>a{font-size:10px;color:var(--ink-faint);text-decoration:none}
+.book-ad-copy>a:hover{text-decoration:underline}
+@media(max-width:600px){
+ .book-used-dossier .book-section-title{align-items:flex-start;flex-direction:column}
+ .book-used-shortcuts{overflow-x:auto}
+}
