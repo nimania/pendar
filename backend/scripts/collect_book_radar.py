@@ -126,6 +126,11 @@ def collect(payload, registry, now=None, local=None):
     now = now or datetime.now(timezone.utc)
     previous = payload.get('radar') or {}
     books = {b['slug']: b for b in payload.get('books', [])}
+    # Repair earlier product-title records that accidentally included a translator
+    # in the author string. The corrected source row will recreate this edition.
+    for slug, b in list(books.items()):
+        if b.get('discovery') == 'direct_shelf' and any(re.search(r'ترجم(?:ه|ۀ)', c.get('name_fa', '')) for c in b.get('creators', []) if c.get('role_fa') == 'نویسنده') and all(l.get('store') == 'دیجی‌کالا' for e in b.get('editions', []) for l in e.get('purchase_links', [])):
+            del books[slug]
     observed, health, readings = [], [], []
     classifieds = previous.get('classifieds') or {}
     # Sequential small public requests; each source fails independently.
@@ -189,7 +194,7 @@ def collect(payload, registry, now=None, local=None):
             status.update(status='unavailable', count=0, last_success_at=old.get('last_success_at'), error=type(e).__name__)
             readings.extend(r for r in previous.get('reading', []) if r.get('source_id') == source['id'])
         health.append(status)
-    history = daily_history(previous.get('history'), observed, now)
+    history = daily_history([r for r in previous.get('history', []) if r['slug'] in books], observed, now)
     for b in books.values():
         if b.get('discovery') == 'direct_shelf' or any(r['slug'] == b['slug'] for r in history):
             b['radar'] = indicators(b['slug'], history, now)

@@ -31,6 +31,8 @@ class MarketSourcesTests(unittest.TestCase):
         self.assertEqual(rows[0]['currency'], 'IRT')
         self.assertEqual(rows[0]['availability'], 'out_of_stock')
         self.assertEqual(rows[0]['cover_url'], '')
+        card['title'] = 'کتاب زندگی اثر نویسنده ترجمۀ مترجم نشر ناشر'
+        self.assertEqual(digikala({'bestseller': {'query_used': 'کتاب', 'items': [card]}}, self.source)[0]['author'], 'نویسنده')
 
     def test_fidibo_narrator_subtitle_is_not_used_as_author(self):
         b = {'title': 'اثر', 'subtitle': 'نویسنده', 'narrator': 'گوینده', 'content_type': 'audiobook', 'action': {'web_url': '/book/1-name'}, 'footerText': 'نام مترجم', 'footerTextAction': {'web_url': '/publishers/1-ناشر'}}
@@ -50,6 +52,12 @@ class MarketSourcesTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             classified_group({'filters_not_applied': {'category': 'book'}, 'items': []}, 'کتاب', datetime.now(timezone.utc))
 
+    def test_divar_loosely_related_service_results_are_excluded(self):
+        data = {'items': [{'url': 'https://divar.ir/v/abc', 'title': 'کتابخانه شخصی خرید و فروش در منزل', 'price_toman': 1000000000}, {'url': 'https://divar.ir/v/def', 'title': 'کتاب های رمان قدیمی', 'price_toman': 200000}]}
+        group = classified_group(data, 'رمان', datetime.now(timezone.utc))
+        self.assertEqual(len(group['items']), 1)
+        self.assertEqual(group['items'][0]['title_fa'], 'کتاب های رمان قدیمی')
+
     def test_classifieds_never_create_books_or_scores_and_failure_preserves_date(self):
         import tempfile
         now = datetime(2026, 10, 4, 8, tzinfo=timezone.utc)
@@ -57,7 +65,7 @@ class MarketSourcesTests(unittest.TestCase):
         payload = {'books': [], 'radar': {'classifieds': {'observed_at': old, 'groups': []}}}
         source = {'id': 'divar', 'name_fa': 'دیوار', 'adapter': 'divar', 'kind': 'classifieds', 'url': 'https://divar.ir', 'endpoint': 'unused', 'cities': ['tehran'], 'queries': ['رمان']}
         with tempfile.NamedTemporaryFile(mode='w+') as f:
-            json.dump({'رمان': {'items': [{'url': 'https://divar.ir/v/abc', 'title': 'اثر', 'price_toman': 123}]}}, f); f.flush()
+            json.dump({'رمان': {'items': [{'url': 'https://divar.ir/v/abc', 'title': 'رمان', 'price_toman': 123}]}}, f); f.flush()
             collect(payload, {'sources': [source]}, now=now, local={'divar': f.name})
             self.assertEqual(payload['books'], [])
             self.assertEqual(payload['radar']['history'], [])

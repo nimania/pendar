@@ -10,7 +10,14 @@ function _bookOverlayRadar(data){
   const fallback=window.__BOOK_RADAR__;
   if(!fallback?.radar || String(data.radar?.updated_at||'')>=String(fallback.radar.updated_at||''))return data;
   const books=new Map((data.books||[]).map(b=>[b.slug,b]));
-  for(const row of fallback.books||[]){const old=books.get(row.slug);books.set(row.slug,old?{...row,...old,radar:row.radar}:structuredClone(row))}
+  for(const row of fallback.books||[]){
+    const old=books.get(row.slug);
+    if(!old){books.set(row.slug,structuredClone(row));continue}
+    const editions=new Map();
+    for(const e of [...(old.editions||[]),...(row.editions||[])]){const key=e.purchase_links?.[0]?.url||JSON.stringify(e);editions.set(key,e)}
+    const links=new Map();for(const l of [...(old.purchase_links||[]),...(row.purchase_links||[])])if(l.url)links.set(l.url,l);
+    books.set(row.slug,{...row,...old,radar:row.radar,editions:[...editions.values()],purchase_links:[...links.values()],cover_url:old.cover_url||row.cover_url,cover:old.cover||row.cover});
+  }
   data.books=[...books.values()];data.radar=structuredClone(fallback.radar);
   const people=new Map(),publishers=new Map();
   for(const b of data.books)for(const e of [b,...(b.editions||[])]){
@@ -48,7 +55,7 @@ function _bookRadarHome(data){
 
 const BOOK_USED_CITIES=[['tehran','تهران'],['karaj','کرج'],['mashhad','مشهد'],['isfahan','اصفهان'],['shiraz','شیراز']];
 let bookUsedCity='',bookUsedQuery='رمان';
-function _bookUsedRows(group){return (group?.items||[]).filter(r=>!bookUsedCity||r.city===BOOK_USED_CITIES.find(c=>c[0]===bookUsedCity)?.[1]).slice(0,6)}
+function _bookUsedRows(group,cityFilter=true){const key=v=>_bookNorm(v).replace(/[^\p{L}\p{N}]/gu,'').replace(/آ/g,'ا');return (group?.items||[]).filter(r=>key(r.title_fa).includes(key(group.query))).filter(r=>!cityFilter||!bookUsedCity||r.city===BOOK_USED_CITIES.find(c=>c[0]===bookUsedCity)?.[1]).slice(0,6)}
 function _bookUsedCards(rows){return rows.length?`<div class="book-used-grid">${rows.map(r=>`<a href="${esc(_bookUrl(r.url))}" target="_blank" rel="noopener noreferrer"><small>دیوار · ${esc(r.city||'شهر نامشخص')} · پایش ${_bookChecked(r.observed_at)}</small><strong>${esc(r.title_fa)}</strong><b>${r.asking_price_toman?_toman(r.asking_price_toman):esc(r.price_label_fa)}</b><span>دیدن و بررسی آگهی ↗</span></a>`).join('')}</div>`:'<p class="book-method">در نمونهٔ ثبت‌شده، آگهی‌ای برای این انتخاب پیدا نشد. جست‌وجوی مستقیم دیوار را بررسی کن.</p>'}
 function _bookDivarSearch(query,city='iran'){return 'https://divar.ir/s/'+city+'/book-student-literature?q='+encodeURIComponent(query)}
 function _bookUsedMarket(data){
@@ -60,7 +67,7 @@ function _bookUsedMarket(data){
 function renderBookUsedMarket(){const el=document.getElementById('book-used-market');if(el&&booksCache)el.outerHTML=_bookUsedMarket(booksCache)}
 function _bookUsedDossier(b,data){
   const group=data.radar?.classifieds?.groups?.find(g=>g.book_slug===b.slug);
-  return `<section class="book-used-dossier"><div class="book-section-title"><h2>پیداکردن نسخهٔ دست‌دوم</h2><span>دیوار</span></div><p class="book-method">این‌ها نتایج جست‌وجوی عنوان‌اند؛ نویسنده، مترجم، ناشر، سلامت کتاب و قیمت را در آگهی بررسی کن.</p>${group?_bookUsedCards(group.items.slice(0,6)):''}<div class="book-used-searches">${BOOK_USED_CITIES.map(([city,label])=>`<a href="${esc(_bookDivarSearch(b.title_fa,city))}" target="_blank" rel="noopener noreferrer">جست‌وجو در ${label} ↗</a>`).join('')}</div></section>`;
+  return `<section class="book-used-dossier"><div class="book-section-title"><h2>پیداکردن نسخهٔ دست‌دوم</h2><span>دیوار</span></div><p class="book-method">این‌ها نتایج جست‌وجوی عنوان‌اند؛ نویسنده، مترجم، ناشر، سلامت کتاب و قیمت را در آگهی بررسی کن.</p>${group?_bookUsedCards(_bookUsedRows(group,false)):''}<div class="book-used-searches">${BOOK_USED_CITIES.map(([city,label])=>`<a href="${esc(_bookDivarSearch(b.title_fa,city))}" target="_blank" rel="noopener noreferrer">جست‌وجو در ${label} ↗</a>`).join('')}</div></section>`;
 }
 function _bookRadarReading(data){
   const rows=(data.radar?.reading||[]).filter(r=>{const d=_bookDate(r.published_at);return d&&Date.now()-d>=0&&Date.now()-d<45*864e5}).sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at))).slice(0,6);

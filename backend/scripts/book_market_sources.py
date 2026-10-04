@@ -69,14 +69,14 @@ def digikala(shelves, source):
             if not m or not str(b.get('url', '')).startswith('https://www.digikala.com/product/dkp-'):
                 continue
             title, tail = m.groups()
-            parts = re.split(r'\s+(ترجمه|انتشارات|نشر)\s+', tail, maxsplit=1)
+            parts = re.split(r'\s+(ترجم(?:هٔ?|ۀ)|انتشارات|نشر)\s+', tail, maxsplit=1)
             author = parts[0].strip()
             if not author:
                 continue
             creators, pub = [person(author)], None
             if len(parts) == 3:
                 role, name = parts[1:]
-                if role == 'ترجمه':
+                if role.startswith('ترجم'):
                     tr = re.split(r'\s+(?:انتشارات|نشر)\s+', name, maxsplit=1)
                     creators.append(person(tr[0], 'مترجم'))
                     pub = publisher(tr[1]) if len(tr) > 1 else None
@@ -154,7 +154,10 @@ def classified_group(data, query, now, slug=None):
     if data.get('filters_not_applied', {}).get('category') or data.get('category_note'):
         raise ValueError('book category not applied')
     rows = []
+    compact = lambda v: re.sub(r'[^\w]', '', norm(v)).replace('آ', 'ا')
     for item in data.get('items', [])[:12]:
+        if compact(query) not in compact(item.get('title')):
+            continue  # Upstream search can return semantically related services.
         url = item.get('url', '')
         if not re.fullmatch(r'https://divar\.ir/v/[A-Za-z0-9_-]+', url):
             continue
