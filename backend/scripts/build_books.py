@@ -18,6 +18,9 @@ from urllib.parse import quote
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 ARCHIVE = ROOT / "periodicals" / "archive.json"
+PUBLIC_PERIODICALS = ROOT / "public" / "data" / "periodicals.json"
+PUBLIC_STORIES = ROOT / "public" / "data" / "stories.json"
+PUBLIC_FIGURES = ROOT / "public" / "data" / "figures.json"
 OUT = ROOT / "public" / "data" / "books.json"
 OUT_JS = ROOT / "public" / "data" / "books.js"
 CANDIDATES = ROOT / "periodicals" / "book_candidates.json"
@@ -147,12 +150,37 @@ def _search_links(title: str) -> list[dict]:
     ]
 
 
-def _load_archive() -> list[dict]:
+def _load_json(path: Path, default):
     try:
-        data = json.loads(ARCHIVE.read_text(encoding="utf-8"))
-        return data if isinstance(data, list) else []
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data
     except (OSError, ValueError):
-        return []
+        return default
+
+
+def _load_archive() -> list[dict]:
+    """Fresh press rows first, with archive fallback for older builds."""
+    public = _load_json(PUBLIC_PERIODICALS, [])
+    archive = _load_json(ARCHIVE, [])
+    out, seen = [], set()
+    for x in list(public if isinstance(public, list) else []) + list(archive if isinstance(archive, list) else []):
+        key = str(x.get("id") or x.get("source_url") or x.get("article_url") or "")
+        if key and key in seen:
+            continue
+        if key:
+            seen.add(key)
+        out.append(x)
+    return out
+
+
+def _load_stories() -> list[dict]:
+    data = _load_json(PUBLIC_STORIES, [])
+    return data if isinstance(data, list) else []
+
+
+def _load_figures() -> list[dict]:
+    data = _load_json(PUBLIC_FIGURES, {})
+    return data.get("figures", []) if isinstance(data, dict) else []
 
 
 def _article_text(x: dict) -> str:
@@ -161,6 +189,14 @@ def _article_text(x: dict) -> str:
         x.get("body_fa"), " ".join(x.get("key_points_fa") or []),
     ]
     return "\n".join(str(v or "") for v in vals)
+
+
+def _story_text(x: dict) -> str:
+    return "\n".join(str(v or "") for v in [x.get("headline_fa"), x.get("summary_fa")])
+
+
+def _figure_post_text(p: dict) -> str:
+    return "\n".join(str(v or "") for v in [p.get("topic_fa"), p.get("summary_fa")])
 
 
 def _mention(x: dict) -> dict:
@@ -172,6 +208,31 @@ def _mention(x: dict) -> dict:
         "summary_fa": x.get("summary_fa") or "",
         "url": x.get("source_url") or x.get("article_url") or x.get("telegram_post_url"),
         "published_at": x.get("source_published_at") or x.get("published_at"),
+    }
+
+
+def _story_mention(x: dict) -> dict:
+    return {
+        "kind": "news",
+        "source_name": "خط خبری",
+        "story_id": x.get("id"),
+        "headline_fa": x.get("headline_fa") or "",
+        "summary_fa": x.get("summary_fa") or "",
+        "url": None,
+        "published_at": x.get("published_at"),
+    }
+
+
+def _figure_mention(person: dict, post: dict) -> dict:
+    return {
+        "kind": "figure",
+        "source_name": person.get("name_fa") or "چهره",
+        "handle": person.get("handle"),
+        "post_id": post.get("id"),
+        "headline_fa": post.get("topic_fa") or f"گفتهٔ {person.get('name_fa') or 'چهره'}",
+        "summary_fa": post.get("summary_fa") or "",
+        "url": post.get("url"),
+        "published_at": post.get("published_at"),
     }
 
 
@@ -265,7 +326,10 @@ def _merge_enrichment(book: dict) -> dict:
 def _dedupe_mentions(rows: list[dict]) -> list[dict]:
     out, seen = [], set()
     for m in rows:
-        key = str(m.get("article_id") or m.get("url") or "")
+        key = str(
+            m.get("article_id") or m.get("story_id") or m.get("post_id")
+            or m.get("url") or ""
+        )
         if key and key in seen:
             continue
         if key:
@@ -274,20 +338,43 @@ def _dedupe_mentions(rows: list[dict]) -> list[dict]:
     return out
 
 
+def _all_content_sources(archive: list[dict], stories: list[dict], figures: list[dict]) -> list[dict]:
+    out = []
+    for x in archive:
+        out.append({"kind": "press", "text": _article_text(x), "mention": _mention(x), "raw": x})
+    for x in stories:
+        out.append({"kind": "news", "text": _story_text(x), "mention": _story_mention(x), "raw": x})
+    for person in figures:
+        for post in person.get("posts") or []:
+            text = _figure_post_text(post)
+            if text.strip():
+                out.append({
+                    "kind": "figure", "text": text,
+                    "mention": _figure_mention(person, post),
+                    "raw": post,
+                })
+    return out
+
+
 def build() -> dict:
     archive = _load_archive()
+    stories = _load_stories()
+    figures = _load_figures()
+    content_sources = _all_content_sources(archive, stories, figures)
 
-    # Broad private candidate queue.
+    # Broad private candidate queue across press, news and figure posts.
     candidates: dict[str, dict] = {}
-    for x in archive:
-        text = _article_text(x)
+    for src in content_sources:
+        text = src["text"]
         for title in BOOK_RE.findall(text):
             key = _norm(title)
             if len(key) < 2:
                 continue
             row = candidates.setdefault(key, {"title_fa": title.strip(), "mentions": [], "status": "candidate"})
-            row["mentions"].append(_mention(x))
+            row["mentions"].append(src["mention"])
 
+    # Automatic publication remains conservative and currently requires the
+    # richer bibliographic phrasing typically found in long-form press.
     auto = _auto_verified(archive)
     for key, row in auto.items():
         cand = candidates.setdefault(key, {"title_fa": row["title_fa"], "mentions": [], "status": "candidate"})
@@ -314,13 +401,13 @@ def build() -> dict:
             continue
         by_title[key] = _merge_enrichment(raw)
 
-    # Attach every matching mention from the archive, not just the discovery article.
+    # Attach every matching mention across press, news and figures.
     public_books = []
     for key, b in by_title.items():
         mentions = list(b.get("mentions") or [])
-        for x in archive:
-            if key and key in _norm(_article_text(x)):
-                mentions.append(_mention(x))
+        for src in content_sources:
+            if key and key in _norm(src["text"]):
+                mentions.append(src["mention"])
         b["mentions"] = _dedupe_mentions(mentions)
         b["mention_count"] = len(b["mentions"])
         if not b.get("purchase_links"):
@@ -359,6 +446,11 @@ def build() -> dict:
         "publishers": list(publishers.values()),
         "candidate_count": len(candidates),
         "auto_verified_count": sum(1 for x in candidates.values() if x.get("status") == "auto_verified"),
+        "candidate_sources": {
+            "press": sum(1 for x in content_sources if x["kind"] == "press"),
+            "news": sum(1 for x in content_sources if x["kind"] == "news"),
+            "figure": sum(1 for x in content_sources if x["kind"] == "figure"),
+        },
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     compact=json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
