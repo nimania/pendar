@@ -42,7 +42,7 @@ people/publisher graph. Editorial overlays are reapplied after cache merges.
 
 ## Discovery
 
-The 30-day ranking counts dated mentions in monitored Jan Kalam sources, not
+The 30-day ranking counts dated mentions in monitored Pendar sources, not
 sales or total market popularity. The eight-week chart uses the same evidence.
 Reading lists stay in localStorage on the reader's browser. Related books use
 shared people, publisher, category or source and disclose those relationships.
