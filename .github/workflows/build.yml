@@ -58,12 +58,21 @@ jobs:
       - name: Restore news database (cache)
         uses: actions/cache@v4
         with:
-          path: |
-            backend/build.db
-            backend/data/external-figure-posts.json
+          # Keep the database cache path stable forever. GitHub includes the
+          # path list in its cache version, so adding unrelated files here can
+          # silently orphan the entire historical news database.
+          path: backend/build.db
           key: jankalam-db-${{ github.run_id }}
           restore-keys: |
             jankalam-db-
+
+      - name: Restore external figure feed cache
+        uses: actions/cache@v4
+        with:
+          path: backend/data/external-figure-posts.json
+          key: jankalam-extfig-${{ github.run_id }}
+          restore-keys: |
+            jankalam-extfig-
       - name: Generate news (ingest → cluster → rank → synthesize → export)
         working-directory: backend
         env:
