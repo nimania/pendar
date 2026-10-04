@@ -300,6 +300,31 @@ def discover_candidates(sources: list[dict]) -> list[dict]:
     )
 
 
+def _extract_filmnet_rows(value, depth: int = 0) -> list[dict]:
+    if depth > 5:
+        return []
+    if isinstance(value, list):
+        objects = [x for x in value if isinstance(x, dict)]
+        if objects and any(x.get("title") and (x.get("id") or x.get("short_id") or x.get("type")) for x in objects):
+            return objects
+        for item in value:
+            found = _extract_filmnet_rows(item, depth + 1)
+            if found:
+                return found
+    elif isinstance(value, dict):
+        preferred = ("items", "results", "video_contents", "videoContents", "contents", "data")
+        for key in preferred:
+            if key in value:
+                found = _extract_filmnet_rows(value.get(key), depth + 1)
+                if found:
+                    return found
+        for item in value.values():
+            found = _extract_filmnet_rows(item, depth + 1)
+            if found:
+                return found
+    return []
+
+
 def _category_values(x: dict, wanted: str) -> list[str]:
     out = []
     for cat in x.get("categories") or []:
@@ -334,12 +359,12 @@ def fetch_filmnet_catalog(limit: int = MAX_FILMNET_TITLES) -> list[dict]:
             print("FilmNet catalog warning:", type(exc).__name__, str(exc)[:120])
             offset += count
             continue
-        batch = payload.get("data") if isinstance(payload, dict) else []
-        if isinstance(batch, dict):
-            batch = batch.get("items") or batch.get("results") or []
-        if not isinstance(batch, list) or not batch:
+        batch = _extract_filmnet_rows(payload.get("data") if isinstance(payload, dict) else payload)
+        if not batch:
             if offset == 0:
-                print("FilmNet catalog empty; response keys:", list(payload.keys()) if isinstance(payload, dict) else type(payload).__name__)
+                data_obj=payload.get("data") if isinstance(payload,dict) else None
+                detail=list(data_obj.keys()) if isinstance(data_obj,dict) else type(data_obj).__name__
+                print("FilmNet catalog empty; response keys:", list(payload.keys()) if isinstance(payload, dict) else type(payload).__name__, "data:", detail)
             break
         failures = 0
         for x in batch:
