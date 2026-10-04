@@ -3,6 +3,14 @@ from __future__ import annotations
 import re
 from bs4 import BeautifulSoup
 
+def clean_publisher_name(value):
+    """Remove edition/print metadata accidentally appended to publisher names."""
+    s = re.sub(r"\s+", " ", str(value or "")).strip(" .،,;؛|-–—")
+    # A publisher name may start with «چاپ و نشر ...», so only strip چاپ when it
+    # appears after an already-established name token.
+    s = re.sub(r"\s+(?:[،,|\-–—]\s*)?(?:نوبت\s+)?چاپ(?:\s+.*)?$", "", s).strip(" .،,;؛|-–—")
+    return s
+
 def parse_telegram_distributor(html, source, person, identity):
     soup = BeautifulSoup(html, "html.parser")
     rows = []
@@ -17,6 +25,7 @@ def parse_telegram_distributor(html, source, person, identity):
         publisher = re.search(r"(?:ناشر|انتشارات)\s*[:：]?\s*([^\n|]+)", text)
         translator = re.search(r"(?:مترجم|ترجمه)\s*[:：]?\s*([^\n|]+)", text)
         pages = re.search(r"(\d{2,4})\s*صفحه", text)
+        print_match = re.search(r"(?:نوبت\s+)?چاپ\s*[:：]?\s*([^\n|،,]+)", text)
         price = re.search(r"(?:قیمت|قيمت)\s*[:：]?\s*([\d.,٬،]+)\s*(هزار\s*)?(?:تومان|ریال)", text)
         lines = [x.strip(" .،-|#") for x in text.splitlines() if x.strip()]
         blocked = ("پخش ", "ناشر", "انتشارات", "نویسنده", "نويسنده", "مترجم", "ترجمه", "قطع", "چاپ", "صفحه", "قیمت", "قيمت", "تاریخ", "instagram", "www.", "http", "@")
@@ -33,7 +42,7 @@ def parse_telegram_distributor(html, source, person, identity):
                 creators.append(person(t, "مترجم"))
         pub = None
         if publisher:
-            pn = publisher.group(1).strip(" .،-|")
+            pn = clean_publisher_name(publisher.group(1))
             if pn and len(pn) <= 100:
                 pub = {"slug": "publisher-" + identity(pn, "")[6:], "name_fa": pn}
         link = msg.select_one("a.tgme_widget_message_date")
@@ -51,6 +60,7 @@ def parse_telegram_distributor(html, source, person, identity):
             "creators": creators,
             "publisher": pub,
             "pages": int(pages.group(1)) if pages else None,
+            "print_label": print_match.group(1).strip(" .،-|") if print_match else None,
             "cover_url": "",
             "url": href if href.startswith("https://") else source["url"],
             "format": "print",
@@ -105,7 +115,7 @@ def cheshmeh_catalog(source, identity, max_publishers=240, per_publisher=1000):
             group = groups[0]
         if not group:
             continue
-        publisher_name = (group.get("name") or pub.get("name") or "").strip()
+        publisher_name = clean_publisher_name(group.get("name") or pub.get("name") or "")
         for pos, item in enumerate(group.get("products") or [], 1):
             title = (item.get("name") or "").strip()
             if not title:
