@@ -139,7 +139,9 @@ jobs:
       - name: Restore movie identity cache
         uses: actions/cache@v4
         with:
-          path: backend/data/movie_identity_cache.json
+          path: |
+            backend/data/movie_identity_cache.json
+            backend/data/movie_seen_cache.json
           key: pendar-movie-identity-${{ github.run_id }}
           restore-keys: |
             pendar-movie-identity-
