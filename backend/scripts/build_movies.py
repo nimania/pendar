@@ -33,6 +33,8 @@ FILMNET_API = "https://filmnet.ir/api-v2/video-contents"
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 MAX_FILMNET_TITLES = 360
 MAX_WIKIDATA_CANDIDATES = 180
+MAX_PROVIDER_TITLES_PER_SERVICE = 180
+PROVIDER_SEARCH_TERMS = ["ا","ب","د","ر","س","ش","ک","م","ن","ت","ف","و","ی","ج","ع","ه"]
 
 ANCHORS = [
     {
@@ -337,6 +339,221 @@ def _category_values(x: dict, wanted: str) -> list[str]:
     return out
 
 
+def _filmnet_movie(x: dict) -> dict | None:
+    title = str(x.get("title") or "").strip()
+    short_id = x.get("short_id")
+    provider_slug = x.get("slug")
+    if not title or not short_id or not provider_slug:
+        return None
+    original = str(x.get("original_name") or x.get("original_title") or "").strip()
+    aliases = [title] + ([original] if original and _norm(original) != _norm(title) else [])
+    cover = x.get("cover_image")
+    if isinstance(cover, dict):
+        cover = cover.get("path")
+    year = x.get("year")
+    try:
+        year = int(year) if year is not None else None
+    except Exception:
+        year = None
+    typ = "series" if str(x.get("type") or "") == "series" else "movie"
+    url = f"https://filmnet.ir/contents/{short_id}/{provider_slug}"
+    return {
+        "slug": "filmnet-" + str(short_id),
+        "type": typ,
+        "title_fa": title,
+        "original_title": original or None,
+        "aliases": aliases,
+        "year": year,
+        "country_fa": " / ".join(_category_values(x, "territory")) or None,
+        "genres_fa": _category_values(x, "genre"),
+        "runtime_min": round(float(x["duration"]) / 60) if isinstance(x.get("duration"), (int, float)) and x.get("duration") else None,
+        "poster_url": cover,
+        "overview_fa": x.get("summary") or "",
+        "director": None,
+        "cast": [],
+        "ratings": {},
+        "external": {},
+        "provider_refs": {
+            "filmnet": {
+                "id": str(x.get("id") or ""),
+                "short_id": str(short_id),
+                "slug": str(provider_slug),
+                "url": url,
+            }
+        },
+        "verification": {"level": "provider_catalog", "source": "FilmNet"},
+    }
+
+
+def _extract_filimo_rows(value, depth: int = 0) -> list[dict]:
+    if depth > 5:
+        return []
+    if isinstance(value, list):
+        objects = [x for x in value if isinstance(x, dict)]
+        if objects and any(x.get("movie_title") or x.get("title") for x in objects):
+            return objects
+        for item in value:
+            found = _extract_filimo_rows(item, depth + 1)
+            if found:
+                return found
+    elif isinstance(value, dict):
+        for key in ("items", "results", "movies", "data"):
+            if key in value:
+                found = _extract_filimo_rows(value.get(key), depth + 1)
+                if found:
+                    return found
+        for item in value.values():
+            found = _extract_filimo_rows(item, depth + 1)
+            if found:
+                return found
+    return []
+
+
+def _filimo_movie(x: dict) -> dict | None:
+    title = str(x.get("movie_title") or x.get("title") or "").strip()
+    provider_id = str(x.get("movie_id") or x.get("id") or "").strip()
+    key = str(x.get("link_key") or "").strip()
+    if not title or not provider_id:
+        return None
+    original = str(x.get("movie_title_en") or x.get("title_en") or "").strip()
+    aliases = [title] + ([original] if original and _norm(original) != _norm(title) else [])
+    link_type = str(x.get("link_type") or x.get("type") or "").lower()
+    typ = "series" if "series" in link_type else "movie"
+    duration = x.get("duration")
+    runtime = None
+    if isinstance(duration, dict) and isinstance(duration.get("value"), (int, float)):
+        runtime = round(float(duration["value"]) / 60)
+    countries = []
+    for item in x.get("countries") or []:
+        if isinstance(item, dict) and item.get("country"):
+            countries.append(str(item["country"]))
+    genres = []
+    for item in x.get("categories") or []:
+        if isinstance(item, dict) and item.get("title"):
+            genres.append(str(item["title"]))
+    url = "https://www.filimo.com/m/" + key if key else "https://www.filimo.com/"
+    return {
+        "slug": "filimo-" + provider_id,
+        "type": typ,
+        "title_fa": title,
+        "original_title": original or None,
+        "aliases": aliases,
+        "year": None,
+        "country_fa": " / ".join(countries) or None,
+        "genres_fa": genres[:6],
+        "runtime_min": runtime,
+        "poster_url": x.get("cover"),
+        "overview_fa": x.get("descr") or "",
+        "director": {"name_fa": str(x.get("director"))} if x.get("director") else None,
+        "cast": [],
+        "ratings": {},
+        "external": {},
+        "provider_refs": {
+            "filimo": {
+                "id": provider_id,
+                "link_key": key,
+                "url": url,
+            }
+        },
+        "verification": {"level": "provider_search", "source": "Filimo"},
+    }
+
+
+def _namava_rows(payload) -> list[dict]:
+    try:
+        rows = payload["result"]["result_items"][0]["groups"]["Media"]
+    except Exception:
+        return []
+    if isinstance(rows, dict):
+        rows = rows.get("items") or rows.get("results") or []
+    return rows if isinstance(rows, list) else []
+
+
+def _namava_movie(x: dict) -> dict | None:
+    title = str(x.get("name") or x.get("title") or "").strip()
+    provider_id = str(x.get("id") or "").strip()
+    if not title or not provider_id:
+        return None
+    original = str(x.get("name_en") or x.get("original_name") or "").strip()
+    aliases = [title] + ([original] if original and _norm(original) != _norm(title) else [])
+    raw_type = str(x.get("type") or "").lower()
+    typ = "series" if "series" in raw_type else "movie"
+    return {
+        "slug": "namava-" + provider_id,
+        "type": typ,
+        "title_fa": title,
+        "original_title": original or None,
+        "aliases": aliases,
+        "year": None,
+        "country_fa": None,
+        "genres_fa": [],
+        "runtime_min": None,
+        "poster_url": x.get("image_url"),
+        "overview_fa": "",
+        "director": None,
+        "cast": [],
+        "ratings": {},
+        "external": {},
+        "provider_refs": {
+            "namava": {
+                "id": provider_id,
+                "url": "https://www.namava.ir/main",
+            }
+        },
+        "verification": {"level": "provider_search", "source": "Namava"},
+    }
+
+
+def _provider_search_term(service: str, term: str) -> list[dict]:
+    try:
+        if service == "filimo":
+            url = "https://www.filimo.com/api/en/v1/movie/movie/list/tagid/1000300/text/" + urllib.parse.quote(term, safe="") + "/sug/on"
+            payload = _fetch_json(url)
+            raw = _extract_filimo_rows(payload.get("data") if isinstance(payload, dict) else payload)
+            return [m for m in (_filimo_movie(x) for x in raw) if m]
+        if service == "namava":
+            params = urllib.parse.urlencode({"type": "all", "count": 20, "page": 1, "query": term})
+            payload = _fetch_json("https://www.namava.ir/api/v3.0/search/advance?" + params)
+            return [m for m in (_namava_movie(x) for x in _namava_rows(payload)) if m]
+        if service == "filmnet":
+            params = urllib.parse.urlencode([
+                ("offset","0"),("count","24"),("order","latest"),("query",term),
+                ("types","single_video"),("types","series"),("types","video_content_list"),
+            ])
+            payload = _fetch_json(FILMNET_API + "?" + params)
+            raw = _extract_filmnet_rows(payload.get("data") if isinstance(payload, dict) else payload)
+            return [m for m in (_filmnet_movie(x) for x in raw) if m]
+    except Exception as exc:
+        print("Provider search warning:", service, repr(term), type(exc).__name__, str(exc)[:100])
+    return []
+
+
+def fetch_provider_search_catalog(service: str, limit: int = MAX_PROVIDER_TITLES_PER_SERVICE) -> list[dict]:
+    rows = []
+    seen = set()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+        futures = [pool.submit(_provider_search_term, service, term) for term in PROVIDER_SEARCH_TERMS]
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                batch = future.result()
+            except Exception:
+                continue
+            for movie in batch:
+                refs = movie.get("provider_refs") or {}
+                ref = refs.get(service) or {}
+                key = str(ref.get("id") or movie.get("slug") or "")
+                if not key or key in seen:
+                    continue
+                seen.add(key)
+                rows.append(movie)
+                if len(rows) >= limit:
+                    break
+            if len(rows) >= limit:
+                break
+    print(service, "search catalog:", len(rows), "titles")
+    return rows[:limit]
+
+
 def fetch_filmnet_catalog(limit: int = MAX_FILMNET_TITLES) -> list[dict]:
     rows: list[dict] = []
     offset = 0
@@ -370,49 +587,10 @@ def fetch_filmnet_catalog(limit: int = MAX_FILMNET_TITLES) -> list[dict]:
         for x in batch:
             if not isinstance(x, dict):
                 continue
-            title = str(x.get("title") or "").strip()
-            short_id = x.get("short_id")
-            provider_slug = x.get("slug")
-            if not title or not short_id or not provider_slug:
+            movie = _filmnet_movie(x)
+            if not movie:
                 continue
-            original = str(x.get("original_name") or x.get("original_title") or "").strip()
-            aliases = [title] + ([original] if original and _norm(original) != _norm(title) else [])
-            cover = x.get("cover_image")
-            if isinstance(cover, dict):
-                cover = cover.get("path")
-            year = x.get("year")
-            try:
-                year = int(year) if year is not None else None
-            except Exception:
-                year = None
-            typ = "series" if str(x.get("type") or "") == "series" else "movie"
-            url = f"https://filmnet.ir/contents/{short_id}/{provider_slug}"
-            rows.append({
-                "slug": "filmnet-" + str(short_id),
-                "type": typ,
-                "title_fa": title,
-                "original_title": original or None,
-                "aliases": aliases,
-                "year": year,
-                "country_fa": " / ".join(_category_values(x, "territory")) or None,
-                "genres_fa": _category_values(x, "genre"),
-                "runtime_min": round(float(x["duration"]) / 60) if isinstance(x.get("duration"), (int, float)) and x.get("duration") else None,
-                "poster_url": cover,
-                "overview_fa": x.get("summary") or "",
-                "director": None,
-                "cast": [],
-                "ratings": {},
-                "external": {},
-                "provider_refs": {
-                    "filmnet": {
-                        "id": str(x.get("id") or ""),
-                        "short_id": str(short_id),
-                        "slug": str(provider_slug),
-                        "url": url,
-                    }
-                },
-                "verification": {"level": "provider_catalog", "source": "FilmNet"},
-            })
+            rows.append(movie)
             if len(rows) >= limit:
                 break
         offset += count
@@ -629,7 +807,12 @@ def build() -> dict:
     for raw in ANCHORS:
         add_deduped(public, raw)
 
-    provider_rows = fetch_filmnet_catalog()
+    filmnet_rows = fetch_filmnet_catalog()
+    if not filmnet_rows:
+        filmnet_rows = fetch_provider_search_catalog("filmnet")
+    filimo_rows = fetch_provider_search_catalog("filimo")
+    namava_rows = fetch_provider_search_catalog("namava")
+    provider_rows = filmnet_rows + filimo_rows + namava_rows
     for movie in provider_rows:
         add_deduped(public, movie)
 
@@ -678,7 +861,10 @@ def build() -> dict:
         "catalog_stats": {
             "published": len(public),
             "anchor_titles": len(ANCHORS),
-            "filmnet_catalog_titles": len(provider_rows),
+            "provider_catalog_titles": len(provider_rows),
+            "filmnet_titles": len(filmnet_rows),
+            "filimo_titles": len(filimo_rows),
+            "namava_titles": len(namava_rows),
             "editorial_candidates": len(candidates),
             "wikidata_checked": len(verify_rows),
             "wikidata_verified": len(verified),
@@ -697,7 +883,8 @@ def build() -> dict:
     print(
         "movies:",
         "published", len(public),
-        "| filmnet", len(provider_rows),
+        "| providers", len(provider_rows),
+        "(filmnet", len(filmnet_rows), "filimo", len(filimo_rows), "namava", len(namava_rows), ")",
         "| candidates", len(candidates),
         "| wikidata verified", len(verified),
         "| mentions", sum(x.get("mention_count", 0) for x in public),
