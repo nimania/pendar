@@ -164,6 +164,9 @@ jobs:
             fi
           fi
 
+      - name: Build canonical entity registry
+        run: python backend/scripts/build_entities.py --data-dir backend/public/data
+
       - name: Validate Pendar data integrity before publish
         env:
           GH_TOKEN: ${{ github.token }}
