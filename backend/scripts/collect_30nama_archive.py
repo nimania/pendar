@@ -192,6 +192,47 @@ def find_existing(movies: list[dict], item: dict) -> dict|None:
         matches.append(movie)
     return matches[0] if len(matches)==1 else None
 
+def imdb_id_from_movie(movie: dict) -> str | None:
+    ext=movie.get("external") or {}
+    url=str(ext.get("imdb") or "")
+    m=re.search(r"/title/(tt\d+)",url)
+    return m.group(1) if m else None
+
+def search_ref_for_movie(movie: dict) -> dict | None:
+    imdb=imdb_id_from_movie(movie)
+    if imdb:
+        return {
+            "url":BASE+"/search?"+urllib.parse.urlencode({"q":imdb}),
+            "basis":"imdb_id",
+            "query":imdb,
+            "confidence":"exact_lookup",
+        }
+    title=str(movie.get("original_title") or movie.get("title_fa") or "").strip()
+    year=movie.get("year")
+    if not title:
+        return None
+    query=(title+" "+str(year)).strip() if year else title
+    return {
+        "url":BASE+"/search?"+urllib.parse.urlencode({"q":query}),
+        "basis":"title_year" if year else "title",
+        "query":query,
+        "confidence":"search_only",
+    }
+
+def attach_search_refs(payload: dict) -> int:
+    movies=payload.get("movies") if isinstance(payload,dict) else []
+    movies=movies if isinstance(movies,list) else []
+    count=0
+    for movie in movies:
+        ref=search_ref_for_movie(movie)
+        if not ref:
+            continue
+        movie.setdefault("search_refs",{})["30nama"]=ref
+        count+=1
+    stats=payload.setdefault("catalog_stats",{})
+    stats["30nama_search_links"]=count
+    return count
+
 def provider_ref(item: dict) -> dict:
     return {
         "id":str(item["id"]),
@@ -266,20 +307,22 @@ def main():
     ap.add_argument("--output",required=True)
     ap.add_argument("--movies")
     ap.add_argument("--movies-js")
+    ap.add_argument("--crawl-public", action="store_true")
     args=ap.parse_args()
 
-    items=collect()
+    items=collect() if args.crawl_public else []
     output={
-        "schema_version":1,
+        "schema_version":2,
         "generated_at":now_iso(),
-        "scope":"public metadata lists only; no media/download/subscriber content",
+        "scope":"public metadata/search links only; no media/download/subscriber content",
         "source":"30nama.com",
+        "crawl_status":"attempted" if args.crawl_public else "disabled_on_github_runner",
         "items":items,
         "stats":{
             "items":len(items),
             "movies":sum(1 for x in items if x["type"]=="movie"),
             "series":sum(1 for x in items if x["type"]=="series"),
-            "lists":len(PUBLIC_LIST_URLS),
+            "lists":len(PUBLIC_LIST_URLS) if args.crawl_public else 0,
         },
     }
     out=Path(args.output)
@@ -291,7 +334,10 @@ def main():
         mp=Path(args.movies)
         payload=load(mp,{"movies":[]})
         before=len(payload.get("movies") or [])
-        payload=merge_archive(payload,items)
+        if items:
+            payload=merge_archive(payload,items)
+        search_links=attach_search_refs(payload)
+        output["stats"]["search_links"]=search_links
         compact=json.dumps(payload,ensure_ascii=False,separators=(",",":"))
         mp.write_text(compact,encoding="utf-8")
         if args.movies_js:
@@ -302,7 +348,7 @@ def main():
             **{k:v for k,v in (payload.get("catalog_stats") or {}).items() if k.startswith("30nama_")},
         }
 
-    print("30nama public archive:",json.dumps({**output["stats"],**merge_stats},ensure_ascii=False))
+    print("30nama integration:",json.dumps({**output["stats"],**merge_stats},ensure_ascii=False))
 
 if __name__=="__main__":
     main()
