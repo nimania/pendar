@@ -58,6 +58,21 @@ function _tvFaDate(v){
 }
 function _tvChannelMap(d){return new Map((d.channels||[]).map(c=>[String(c.id),c]))}
 function _tvNorm(v){return String(v||"").replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim().toLowerCase()}
+function _tvLooksJunk(p,c){
+  const t=_tvNorm(p?.title_fa||p?.title_en||"");
+  if(!t||["برنامه","program","بدون عنوان","پخش آنلاین","زنده"].includes(t))return true;
+  if(/^[۰-۹0-9]{1,2}:[۰-۹0-9]{2}\s*[-–—]\s*[۰-۹0-9]{1,2}:[۰-۹0-9]{2}$/.test(t))return true;
+  if(c?.source_key==="iranintl"&&t===_tvNorm(c?.name_fa||c?.name||"")&&!p?.desc_fa)return true;
+  if(c?.source_key==="irib"&&/^(میان[ ‌-]?برنامه|آگهی|پیام[ ‌-]?بازرگانی|آرم|تیزر|پیش[ ‌-]?(پرده|نمایش)|وله|فیلر|کپشن|هویت بصری|برنامک|اعلام برنامه|تقدیم برنامه|نشان شبکه|نشان پیام|اینفو آرم)/.test(t))return true;
+  return false;
+}
+function _tvProgrammeScore(p,c){
+  if(_tvLooksJunk(p,c))return -1000;
+  let score=100+Math.min(50,String(p?.title_fa||p?.title_en||"").length);
+  if(p?.desc_fa)score+=10;
+  if(p?.icon)score+=3;
+  return score;
+}
 function _tvSourceBadge(tier){
   const cls=["official","verified","aggregated","error"].includes(tier)?tier:"planned";
   return '<span class="tv-source-badge '+cls+'">'+esc(TV_GUIDE_SOURCE_LABELS[tier]||tier||"")+'</span>';
@@ -90,7 +105,10 @@ function _tvProgrammeCard(p,c,now){
 
 function _tvModeRows(d,mode){
   const now=new Date(), cmap=_tvChannelMap(d);
-  let rows=(d.programmes||[]).filter(p=>_tvDate(p.start)&&_tvDate(p.stop));
+  let rows=(d.programmes||[]).filter(p=>{
+    const c=cmap.get(String(p.channel_id));
+    return _tvDate(p.start)&&_tvDate(p.stop)&&!_tvLooksJunk(p,c);
+  });
   if(tvGuideState.channel!=="all")rows=rows.filter(p=>String(p.channel_id)===String(tvGuideState.channel));
   if(tvGuideState.group!=="all")rows=rows.filter(p=>cmap.get(String(p.channel_id))?.group===tvGuideState.group);
   const q=_tvNorm(tvGuideState.query);
@@ -98,7 +116,15 @@ function _tvModeRows(d,mode){
     const c=cmap.get(String(p.channel_id));
     return _tvNorm([p.title_fa,p.title_en,p.desc_fa,(p.categories||[]).join(" "),c?.name_fa,c?.name].join(" ")).includes(q);
   });
-  if(mode==="now")rows=rows.filter(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop));
+  if(mode==="now"){
+    rows=rows.filter(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop));
+    const best=new Map();
+    for(const p of rows){
+      const key=String(p.channel_id), c=cmap.get(key), prev=best.get(key);
+      if(!prev||_tvProgrammeScore(p,c)>_tvProgrammeScore(prev,c)||(_tvProgrammeScore(p,c)===_tvProgrammeScore(prev,c)&&_tvDate(p.start)>_tvDate(prev.start)))best.set(key,p);
+    }
+    rows=[...best.values()];
+  }
   else if(mode==="tonight"){
     const key=_tvDayKey(now);
     rows=rows.filter(p=>{
@@ -139,7 +165,7 @@ function _tvChannels(d){
   const now=new Date(), ps=d.programmes||[];
   const visible=(d.channels||[]).filter(c=>tvGuideState.group==="all"||c.group===tvGuideState.group);
   const cards=visible.map(c=>{
-    const rows=ps.filter(p=>String(p.channel_id)===String(c.id)).sort((a,b)=>_tvDate(a.start)-_tvDate(b.start));
+    const rows=ps.filter(p=>String(p.channel_id)===String(c.id)&&!_tvLooksJunk(p,c)).sort((a,b)=>_tvDate(a.start)-_tvDate(b.start));
     const current=rows.find(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop));
     const next=rows.find(p=>_tvDate(p.start)>now);
     return '<button class="tv-channel-card" onclick="tvGuideState.channel=\''+esc(c.id)+'\';showTVGuide(\'now\')">'+
@@ -198,5 +224,5 @@ async function renderTVGuide(){
     '<div><span class="press-kicker">راهنمای یکپارچهٔ تماشای فارسی</span><h1>الان چی پخش می‌شه؟</h1><p>تلویزیون، شبکه‌های فارسی‌زبان، ورزش و در ادامه سرویس‌های استریمینگ؛ همه در یک جدول زمانی واحد.</p></div>'+
     '<div class="tv-status-card"><b>'+faN((d.channels||[]).length)+'</b><span>شبکهٔ دارای داده</span><small>'+faN(active)+' منبع متصل · آخرین ساخت '+esc(generated)+'</small></div>'+
   '</header>'+_tvTabs()+_tvToolbar(d)+body+
-  '<div class="tv-footer-note">زمان‌ها بر اساس ساعت ایران نمایش داده می‌شوند. منبع و سطح اطمینان هر شبکه جداگانه نگهداری می‌شود.</div>';
+  '<div class="tv-footer-note">زمان‌ها بر اساس ساعت ایران نمایش داده می‌شوند. رکوردهای فنی، تبلیغاتی، placeholder و زمان‌بندی‌های هم‌پوشان پیش از نمایش فیلتر می‌شوند.</div>';
 }
