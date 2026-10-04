@@ -12,6 +12,7 @@ on:
       - "backend/scripts/build_movies.py"
       - "backend/scripts/link_tv_guide_movies.py"
       - "backend/scripts/enrich_movies_from_epg.py"
+      - "backend/scripts/collect_30nama_archive.py"
       - "backend/scripts/build_entities.py"
       - "backend/scripts/finalize_entity_registry.py"
       - "backend/data/entity-overrides.json"
@@ -130,6 +131,13 @@ jobs:
         run: |
           if [ -f web-static/data/tv-guide.json ] && [ -f site/data/movies.json ]; then
             python backend/scripts/enrich_movies_from_epg.py --tv web-static/data/tv-guide.json --movies site/data/movies.json --movies-js site/data/movies.js
+          fi
+
+      - name: Collect 30nama public archive
+        continue-on-error: true
+        run: |
+          if [ -f site/data/movies.json ]; then
+            python backend/scripts/collect_30nama_archive.py --output site/data/30nama.json --movies site/data/movies.json --movies-js site/data/movies.js
           fi
 
       - name: Overlay freshest book commerce
