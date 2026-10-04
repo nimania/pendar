@@ -86,6 +86,28 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh run download "${{ steps.base.outputs.run_id }}" -n latest-static-site -D site
 
+      - name: Restore freshest Torob commerce cache
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p backend/public/data
+          if [ -f site/data/books.json ]; then cp site/data/books.json backend/public/data/books.json; fi
+          commerce_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/books-commerce.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          if [ -n "$commerce_id" ]; then
+            rm -rf /tmp/book-commerce && mkdir -p /tmp/book-commerce
+            if gh run download "$commerce_id" -n books-commerce-data -D /tmp/book-commerce; then
+              src="$(find /tmp/book-commerce -type f -name books.json | head -1)"
+              if [ -n "$src" ] && [ -f backend/public/data/books.json ]; then
+                python backend/scripts/merge_book_commerce.py --source "$src" --target backend/public/data/books.json --target-js backend/public/data/books.js
+              fi
+              assets="$(find /tmp/book-commerce -type d -path '*/assets/books' | head -1)"
+              if [ -n "$assets" ]; then
+                mkdir -p backend/public/assets/books
+                rsync -a "$assets/" backend/public/assets/books/
+              fi
+            fi
+          fi
+
       - name: Merge latest news and figure mentions into books
         run: |
           mkdir -p backend/public/data
@@ -115,6 +137,10 @@ jobs:
           if [ -d backend/web-static/assets/periodicals ]; then
             mkdir -p site/assets/periodicals
             cp -R backend/web-static/assets/periodicals/. site/assets/periodicals/
+          fi
+          if [ -d backend/public/assets/books ]; then
+            mkdir -p site/assets/books
+            rsync -a backend/public/assets/books/ site/assets/books/
           fi
           python - <<'PY'
           import hashlib, pathlib, re
