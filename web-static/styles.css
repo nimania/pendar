@@ -1150,3 +1150,95 @@
   .torob-offer{grid-template-columns:24px minmax(0,1fr)}
   .torob-price{grid-column:2;align-items:flex-start;text-align:right}
 }
+
+
+/* Pendar-inspired Jan Kalam masthead — 2026-10-04 */
+:root{
+  --jk-head:#2b1233;
+  --jk-head-2:#5f256d;
+  --jk-head-3:#7a3888;
+  --jk-lilac:#d7b3dc;
+  --jk-lilac-soft:#f2e7f4;
+  --jk-lime:#dbea2a;
+  --jk-lime-strong:#e7f33c;
+}
+header.top{
+  background:
+    radial-gradient(circle at 8% -80%,#d7b3dc55 0 145px,transparent 146px),
+    radial-gradient(circle at 84% 170%,#dbea2a22 0 110px,transparent 111px),
+    linear-gradient(115deg,var(--jk-head-2) 0%,#4d1d59 55%,var(--jk-head) 100%);
+  border-bottom:1px solid #ffffff20;
+  backdrop-filter:saturate(1.2) blur(14px);
+  box-shadow:0 8px 28px #26102d1f;
+}
+.top .wrap{height:70px}
+.brand .logo-img{
+  height:48px;
+  max-width:145px;
+  filter:brightness(0) invert(1) drop-shadow(0 5px 12px #17091c55);
+}
+.brand .tag{color:#eaddec;font-weight:550}
+.icon-btn{
+  background:#ffffff10;
+  border-color:#ffffff22;
+  color:#f0e6f2;
+  box-shadow:none;
+  backdrop-filter:blur(5px)
+}
+.icon-btn:hover{
+  background:#ffffff1c;
+  border-color:#ffffff42;
+  color:var(--jk-lime)
+}
+.smart-search-panel{
+  border-color:#d8c7dd!important;
+  box-shadow:0 20px 50px #2a103633!important
+}
+.smart-search-panel input{
+  border-color:#dfd2e2!important
+}
+.smart-search-panel input:focus{
+  border-color:var(--jk-head-3)!important;
+  box-shadow:0 0 0 3px #7a388817!important
+}
+.smart-search-hint{color:#7b6980}
+.smart-search-result:hover{background:#f3eaf5!important}
+.smart-search-result .ss-type{color:#7b3889!important}
+.tabbar{
+  border-top-color:#ded2e1;
+  background:color-mix(in srgb,var(--paper) 94%,transparent)
+}
+.tab.active{color:#742d84}
+.fchip.on,.day-chip.on,.sortchip.on{
+  border-color:#7a3888!important;
+  background:#7a3888!important;
+  color:#fff!important
+}
+.section-shortcuts button:hover,
+.back:hover,
+.footer-links button:hover,
+.footer-links a:hover{color:#742d84}
+:focus-visible{outline-color:var(--jk-lime)}
+@media(max-width:600px){
+  header.top{
+    background:
+      radial-gradient(circle at 5% -120%,#d7b3dc44 0 120px,transparent 121px),
+      linear-gradient(115deg,var(--jk-head-2),var(--jk-head))
+  }
+  .top .wrap{height:64px;gap:10px}
+  .brand .logo-img{height:43px;max-width:128px}
+  .brand .tag{display:none}
+  .icon-btn{width:36px;height:36px;border-radius:10px}
+}
+:root[data-theme="dark"] header.top{
+  background:
+    radial-gradient(circle at 8% -80%,#b58ac033 0 145px,transparent 146px),
+    linear-gradient(115deg,#4e2059 0%,#391541 55%,#24102a 100%)
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) header.top{
+    background:
+      radial-gradient(circle at 8% -80%,#b58ac033 0 145px,transparent 146px),
+      linear-gradient(115deg,#4e2059 0%,#391541 55%,#24102a 100%)
+  }
+}
