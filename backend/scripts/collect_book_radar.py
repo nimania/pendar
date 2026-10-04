@@ -12,8 +12,10 @@ import requests
 from bs4 import BeautifulSoup
 try:
     from scripts.book_market_sources import PublicMCP, digikala, fidibo, classified_group, classified_batches
+    from scripts.book_distributors import parse_telegram_distributor
 except ModuleNotFoundError:
     from book_market_sources import PublicMCP, digikala, fidibo, classified_group, classified_batches
+    from book_distributors import parse_telegram_distributor
 try:
     from scripts.book_radar import identity, norm, daily_history, indicators, rebuild_graph, attach_radar
     from scripts.book_catalog import curate_payload
@@ -167,7 +169,12 @@ def collect(payload, registry, now=None, local=None):
                         status['note_fa'] = 'قفسهٔ متنی دریافت شد؛ تازه‌های صفحهٔ اصلی فعلاً در دسترس نیست'
             else:
                 raw = fixture if fixture is not None else fetch(source['url'])
-                rows = reading_feed(raw, source, now) if source['adapter'] == 'rss' else (taaghche if source['adapter'] == 'taaghche' else ketabrah)(raw, source)
+                if source['adapter'] == 'rss':
+                    rows = reading_feed(raw, source, now)
+                elif source['adapter'] == 'telegram_distributor':
+                    rows = parse_telegram_distributor(raw, source, person, identity)
+                else:
+                    rows = (taaghche if source['adapter'] == 'taaghche' else ketabrah)(raw, source)
             if source['adapter'] == 'rss':
                 readings.extend(rows)
             elif source['adapter'] != 'divar':
