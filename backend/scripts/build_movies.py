@@ -35,6 +35,7 @@ MAX_FILMNET_TITLES = 360
 MAX_WIKIDATA_CANDIDATES = 180
 MAX_PROVIDER_TITLES_PER_SERVICE = 180
 PROVIDER_SEARCH_TERMS = ["ا","ب","د","ر","س","ش","ک","م","ن","ت","ف","و","ی","ج","ع","ه"]
+FILIMO_SEARCH_TERMS = ["ای","ان","ار","ام","ما","را","در","با","تو","من","ها","کا","شا","دا","نا","رو","فی","سر","دو","نو"]
 
 ANCHORS = [
     {
@@ -505,34 +506,52 @@ def _namava_movie(x: dict) -> dict | None:
 
 
 def _provider_search_term(service: str, term: str) -> list[dict]:
+    rows=[]
     try:
         if service == "filimo":
             url = "https://www.filimo.com/api/en/v1/movie/movie/list/tagid/1000300/text/" + urllib.parse.quote(term, safe="") + "/sug/on"
             payload = _fetch_json(url)
             raw = _extract_filimo_rows(payload.get("data") if isinstance(payload, dict) else payload)
             return [m for m in (_filimo_movie(x) for x in raw) if m]
+
         if service == "namava":
-            params = urllib.parse.urlencode({"type": "all", "count": 20, "page": 1, "query": term})
-            payload = _fetch_json("https://www.namava.ir/api/v3.0/search/advance?" + params)
-            return [m for m in (_namava_movie(x) for x in _namava_rows(payload)) if m]
+            for page in (1,2,3):
+                params = urllib.parse.urlencode({"type": "all", "count": 20, "page": page, "query": term})
+                payload = _fetch_json("https://www.namava.ir/api/v3.0/search/advance?" + params)
+                batch=[m for m in (_namava_movie(x) for x in _namava_rows(payload)) if m]
+                if not batch:
+                    break
+                rows.extend(batch)
+                if len(batch)<20:
+                    break
+            return rows
+
         if service == "filmnet":
-            params = urllib.parse.urlencode([
-                ("offset","0"),("count","24"),("order","latest"),("query",term),
-                ("types","single_video"),("types","series"),("types","video_content_list"),
-            ])
-            payload = _fetch_json(FILMNET_API + "?" + params)
-            raw = _extract_filmnet_rows(payload.get("data") if isinstance(payload, dict) else payload)
-            return [m for m in (_filmnet_movie(x) for x in raw) if m]
+            for offset in (0,24,48):
+                params = urllib.parse.urlencode([
+                    ("offset",str(offset)),("count","24"),("order","latest"),("query",term),
+                    ("types","single_video"),("types","series"),("types","video_content_list"),
+                ])
+                payload = _fetch_json(FILMNET_API + "?" + params)
+                raw = _extract_filmnet_rows(payload.get("data") if isinstance(payload, dict) else payload)
+                batch=[m for m in (_filmnet_movie(x) for x in raw) if m]
+                if not batch:
+                    break
+                rows.extend(batch)
+                if len(batch)<24:
+                    break
+            return rows
     except Exception as exc:
         print("Provider search warning:", service, repr(term), type(exc).__name__, str(exc)[:100])
-    return []
+    return rows
 
 
 def fetch_provider_search_catalog(service: str, limit: int = MAX_PROVIDER_TITLES_PER_SERVICE) -> list[dict]:
     rows = []
     seen = set()
+    terms = FILIMO_SEARCH_TERMS if service=="filimo" else PROVIDER_SEARCH_TERMS
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
-        futures = [pool.submit(_provider_search_term, service, term) for term in PROVIDER_SEARCH_TERMS]
+        futures = [pool.submit(_provider_search_term, service, term) for term in terms]
         for future in concurrent.futures.as_completed(futures):
             try:
                 batch = future.result()
