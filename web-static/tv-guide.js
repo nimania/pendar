@@ -28,7 +28,9 @@ const TV_GUIDE_STREAMING=[
   {name:"تلوبیون",status:"planned"},
   {name:"لنز",status:"planned"},
   {name:"گپ‌فیلم",status:"planned"},
-  {name:"دیجی‌تون",status:"planned"}
+  {name:"دیجی‌تون",status:"planned"},
+  {name:"تماشاخونه",status:"planned"},
+  {name:"استارنت",status:"planned"}
 ];
 
 async function loadTVGuide(){
@@ -77,6 +79,11 @@ function _tvSourceBadge(tier){
   const cls=["official","verified","aggregated","error"].includes(tier)?tier:"planned";
   return '<span class="tv-source-badge '+cls+'">'+esc(TV_GUIDE_SOURCE_LABELS[tier]||tier||"")+'</span>';
 }
+function _tvQualityBadge(p,c){
+  const q=Number(p?.quality_score||0);
+  const label=q>=90?"اعتماد بالا":q>=75?"قابل اتکا":"محدود";
+  return '<span class="tv-quality-badge" title="امتیاز کیفیت '+faN(q)+' از ۱۰۰">'+label+'</span>';
+}
 function _tvChannelLogo(c){
   if(c&&c.logo)return '<img src="'+esc(c.logo)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">';
   return '<b>'+esc(String(c?.name_fa||c?.name||"TV").slice(0,2))+'</b>';
@@ -95,7 +102,7 @@ function _tvProgrammeCard(p,c,now){
     '<div class="tv-program-main">'+
       '<div class="tv-program-top"><span class="tv-time">'+_tvFaTime(p.start)+(p.stop?"–"+_tvFaTime(p.stop):"")+'</span>'+(live?'<span class="tv-live-dot">● در حال پخش</span>':"")+'</div>'+
       '<h3>'+esc(p.title_fa||p.title||"بدون عنوان")+'</h3>'+
-      '<p class="tv-channel-name">'+esc(c?.name_fa||c?.name||p.channel_id||"")+(meta?" · "+esc(meta):"")+'</p>'+
+      '<p class="tv-channel-name">'+esc(c?.name_fa||c?.name||p.channel_id||"")+(meta?" · "+esc(meta):"")+' '+_tvSourceBadge(c?.confidence||"aggregated")+' '+_tvQualityBadge(p,c)+'</p>'+
       (p.desc_fa?'<p class="tv-desc">'+esc(p.desc_fa)+'</p>':"")+
       progress+
     '</div>'+
@@ -117,7 +124,7 @@ function _tvModeRows(d,mode){
     return _tvNorm([p.title_fa,p.title_en,p.desc_fa,(p.categories||[]).join(" "),c?.name_fa,c?.name].join(" ")).includes(q);
   });
   if(mode==="now"){
-    rows=rows.filter(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop));
+    rows=rows.filter(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop)&&p.current_eligible!==false&&Number(p.quality_score||100)>=74);
     const best=new Map();
     for(const p of rows){
       const key=String(p.channel_id), c=cmap.get(key), prev=best.get(key);
@@ -183,7 +190,7 @@ function _tvSources(d){
   const rows=(d.sources||[]).map(s=>{
     const st=stats[s.key], err=errors[s.key];
     const state=st?(s.status||s.confidence||"aggregated"):(err?"error":"planned");
-    const meta=st?(faN(st.channels||0)+" شبکه · "+faN(st.programmes||0)+" برنامه"):(err?"اتصال در آخرین نوبت ناموفق بود":"هنوز وارد جدول نشده");
+    const meta=st?(faN(st.channels||0)+" شبکه · "+faN(st.programmes||0)+" برنامه · کیفیت میانگین "+faN(st.avg_quality||0)+"/۱۰۰"):(err?"اتصال در آخرین نوبت ناموفق بود":"هنوز وارد جدول نشده");
     return '<div class="tv-source-row"><span><strong>'+esc(s.name)+'</strong><small>'+esc(s.note||"")+'</small><em>'+esc(meta)+'</em></span>'+_tvSourceBadge(state)+'</div>';
   }).join("");
   return '<div class="tv-source-list">'+rows+'</div><p class="tv-method">فقط منبعی که در آخرین گردآوری واقعاً دادهٔ معتبر تحویل داده باشد «متصل» محسوب می‌شود. خطای یک منبع مانع به‌روزرسانی بقیهٔ Guide نمی‌شود.</p>';
