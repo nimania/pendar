@@ -202,14 +202,58 @@ def build(movies_path: Path) -> dict:
             "checked_at":None,"matched_titles":0,"queried_titles":0,
         }
 
-    active=[s for s in SERVICES if s["key"] in QUERIERS]
-    # Keep builds bounded as the canonical catalog grows.
-    for movie in movies[:250]:
+    active=[svc for svc in SERVICES if svc["key"] in QUERIERS]
+
+    # Provider refs are already exact, first-party availability evidence.
+    # Seed them for the entire catalog without making a second network request.
+    for movie in movies:
         slug=str(movie.get("slug") or "").strip()
-        if not slug: continue
-        matches=[]
+        if not slug:
+            continue
+        seeded=[]
+        refs=movie.get("provider_refs") or {}
+        filmnet_ref=refs.get("filmnet") if isinstance(refs,dict) else None
+        if isinstance(filmnet_ref,dict) and filmnet_ref.get("url"):
+            seeded.append({
+                "service":"filmnet",
+                "title":movie.get("title_fa") or movie.get("original_title") or "",
+                "title_en":movie.get("original_title"),
+                "url":filmnet_ref.get("url"),
+                "direct":True,
+                "provider_id":str(filmnet_ref.get("id") or filmnet_ref.get("short_id") or ""),
+                "match":"provider_identity",
+                "verified_by":"provider_catalog",
+                "poster_url":movie.get("poster_url"),
+            })
+            h=health["filmnet"]
+            h["status"]="ok"
+            h["checked_at"]=now_iso()
+            h["matched_titles"]+=1
+        if seeded:
+            availability[slug]=dedupe(seeded)
+
+    # Remote cross-provider search is intentionally bounded. Prefer editorially
+    # relevant/verified titles, then newer catalog entries.
+    remote_movies=sorted(
+        movies,
+        key=lambda m: (
+            int(m.get("mention_count") or 0),
+            1 if (m.get("verification") or {}).get("level") in {"hand_verified","wikidata_exact"} else 0,
+            int(m.get("year") or 0),
+        ),
+        reverse=True,
+    )[:120]
+
+    for movie in remote_movies:
+        slug=str(movie.get("slug") or "").strip()
+        if not slug:
+            continue
+        matches=list(availability.get(slug) or [])
+        refs=movie.get("provider_refs") or {}
         for service in active:
             key=service["key"]
+            if key=="filmnet" and isinstance(refs,dict) and refs.get("filmnet"):
+                continue
             health[key]["queried_titles"]+=1
             try:
                 rows,responded=QUERIERS[key](movie)
@@ -227,8 +271,8 @@ def build(movies_path: Path) -> dict:
         if matches:
             availability[slug]=dedupe(matches)
 
-    for s in active:
-        key=s["key"]
+    for svc in active:
+        key=svc["key"]
         if health[key]["status"]=="unknown":
             health[key]["status"]="error"
 
