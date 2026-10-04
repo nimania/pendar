@@ -72,10 +72,6 @@ jobs:
           AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
         run: python -m scripts.publish_periodicals
 
-      - name: Build books knowledge layer
-        working-directory: backend
-        run: python -m scripts.build_books
-
       - name: Find latest successful full site build
         id: base
         env:
@@ -89,6 +85,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh run download "${{ steps.base.outputs.run_id }}" -n latest-static-site -D site
+
+      - name: Merge latest news and figure mentions into books
+        run: |
+          mkdir -p backend/public/data
+          for name in stories.json figures.json; do
+            if [ -f "site/data/$name" ]; then
+              cp "site/data/$name" "backend/public/data/$name"
+            fi
+          done
+          cd backend
+          python -m scripts.build_books
 
       - name: Overlay Jan-e Jarayed data and current UI
         run: |
