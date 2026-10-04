@@ -123,6 +123,7 @@ class Registry:
         ref: dict | None = None,
         route: tuple[str, str] | None = None,
         meta: dict | None = None,
+        merge_by_alias: bool = True,
     ) -> str | None:
         if kind not in self.alias_index:
             return None
@@ -131,10 +132,10 @@ class Registry:
             return None
         alias_rows = aliases_from(aliases or [])
         names = [name] + alias_rows
-        eid = self._candidate(kind, names)
+        preferred_id = f"{kind}:{safe_key(preferred)}" if preferred and safe_key(preferred) else None
+        eid = self._candidate(kind, names) if merge_by_alias else None
         if eid is None:
-            preferred_id = f"{kind}:{safe_key(preferred)}" if preferred and safe_key(preferred) else None
-            if preferred_id and preferred_id in self.entities and norm(self.entities[preferred_id].get("name_fa")) == norm(name):
+            if preferred_id and preferred_id in self.entities:
                 eid = preferred_id
             else:
                 eid = self._new_id(kind, preferred, name)
@@ -332,6 +333,7 @@ def add_books(reg: Registry, data: dict) -> None:
                 "cover_url": book.get("cover_url"),
                 "mention_count": book.get("mention_count"),
             },
+            merge_by_alias=False,
         )
         for creator in as_list(book.get("creators")):
             pslug = str(creator.get("slug") or "").strip()
@@ -396,6 +398,7 @@ def add_movies(reg: Registry, data: dict) -> None:
                 "poster_url": movie.get("poster_url"),
                 "mention_count": movie.get("mention_count"),
             },
+            merge_by_alias=False,
         )
         for name in split_director_names(movie.get("director")):
             pid = reg.add(
