@@ -18,12 +18,13 @@ from pathlib import Path
 PERSIANA_XML = "https://raw.githubusercontent.com/Samhouston010/persiana-tv-epg/main/persiana.xml"
 IRIB_XML = "https://raw.githubusercontent.com/Samhouston010/sepehr-irib-epg/main/sepehr.xml"
 IRIB_CHANNELS = "https://raw.githubusercontent.com/Samhouston010/sepehr-irib-epg/main/channels.json"
+IRANINTL_XML = "https://raw.githubusercontent.com/SandObserver/iranintl-xmltv/main/output/iranintl.xml"
 
 SOURCE_REGISTRY = [
     {"key": "irib", "name": "صداوسیما / تلوبیون", "status": "aggregated", "note": "EPG جاریِ شبکه‌های سراسری و استانی؛ گردآوری‌شده از APIهای تلوبیون/سپهر"},
     {"key": "persiana", "name": "Persiana Group", "status": "aggregated", "note": "XMLTV جاریِ شبکه‌های گروه پرشیانا"},
     {"key": "bbc-persian", "name": "BBC Persian", "status": "planned", "note": "جدول رسمی قابل استخراج"},
-    {"key": "iranintl", "name": "Iran International", "status": "planned", "note": "جدول رسمی + اکنون/بعدی"},
+    {"key": "iranintl", "name": "Iran International", "status": "verified", "note": "XMLTV تازه‌شونده، استخراج‌شده از جدول رسمی شبکه"},
     {"key": "radiofarda", "name": "Radio Farda", "status": "planned", "note": "جدول رسمی روزانه"},
     {"key": "gem", "name": "GEM Group", "status": "planned", "note": "نیازمند تطبیق چند منبع"},
     {"key": "afintl", "name": "Afghanistan International", "status": "planned", "note": "جدول رسمی + اکنون/بعدی"},
@@ -187,6 +188,7 @@ def build() -> dict:
     specs = [
         dict(key="irib", name="صداوسیما / تلوبیون", url=IRIB_XML, confidence="aggregated", metadata_loader=load_irib_metadata),
         dict(key="persiana", name="Persiana Group", url=PERSIANA_XML, confidence="aggregated", metadata_loader=None),
+        dict(key="iranintl", name="Iran International", url=IRANINTL_XML, confidence="verified", metadata_loader=lambda: {"iranintl.iitv": {"name": "ایران اینترنشنال", "name_en": "Iran International", "group": "خبری"}}),
     ]
     for spec in specs:
         try:
