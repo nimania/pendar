@@ -42,6 +42,7 @@ VIDEO_CHUNK_CHARS = 18000
 VIDEO_CHUNK_OVERLAP = 700
 DOWNSUB_ENDPOINT = "https://api.downsub.com/download"
 YOUTUBE_RECAP_STATE_OUT = HERE.parent / "data" / "youtube-recap-state.json"
+YOUTUBE_TRANSCRIPT_CACHE_OUT = HERE.parent / "data" / "youtube-transcripts.json"
 PROJECT_FINANCE_OUT = HERE.parent / "data" / "project-finance.json"
 YOUTUBE_RETRY_HOURS = 72
 YOUTUBE_RECAP_VERSION = 3
@@ -724,6 +725,47 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
     return "", ""
 
 
+def _load_transcript_cache() -> dict:
+    try:
+        data = json.loads(YOUTUBE_TRANSCRIPT_CACHE_OUT.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _save_transcript_cache(cache: dict) -> None:
+    YOUTUBE_TRANSCRIPT_CACHE_OUT.parent.mkdir(parents=True, exist_ok=True)
+    YOUTUBE_TRANSCRIPT_CACHE_OUT.write_text(
+        json.dumps(cache, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def _cached_transcript(cache: dict, video_id: str) -> tuple[str, str]:
+    row = cache.get(str(video_id)) if isinstance(cache, dict) else None
+    if not isinstance(row, dict):
+        return "", ""
+    text = str(row.get("text") or "").strip()
+    if len(text) < 120:
+        return "", ""
+    return text, str(row.get("language") or "")
+
+
+def _store_transcript(cache: dict, video_id: str, text: str, lang: str,
+                      entry: dict, figure) -> None:
+    cache[str(video_id)] = {
+        "video_id": str(video_id),
+        "text": str(text or "").strip(),
+        "language": str(lang or ""),
+        "char_count": len(str(text or "")),
+        "captured_at": datetime.now().astimezone().isoformat(),
+        "video_title": entry.get("title") or "",
+        "url": entry.get("url") or f"https://www.youtube.com/watch?v={video_id}",
+        "handle": getattr(figure, "handle", "") or "",
+        "name_fa": getattr(figure, "name_fa", "") or "",
+    }
+    _save_transcript_cache(cache)
+
+
 def _load_recap_state() -> dict:
     try:
         data = json.loads(YOUTUBE_RECAP_STATE_OUT.read_text(encoding="utf-8"))
@@ -920,12 +962,11 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
     fresh: list[dict] = []
     attempts = 0
     recap_state = _load_recap_state()
+    transcript_cache = _load_transcript_cache()
     headers = {"User-Agent": "Mozilla/5.0 (compatible; JanKalam/1.0)"}
     api = YouTubeTranscriptApi()
 
     candidates = catalog if isinstance(catalog, list) else []
-    # Process newest catalog items first; this covers official channels and
-    # trusted hosted appearances with the same recap pipeline.
     candidates = sorted(
         [
             x for x in candidates
@@ -946,71 +987,107 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
             figure = by_handle.get(str(entry.get("handle") or ""))
             if figure is None:
                 continue
-            ext_id = "youtube-" + str(entry["id"])
+            video_id = str(entry["id"])
+            ext_id = "youtube-" + video_id
             existing = old_youtube.get(ext_id) or {}
             if int(existing.get("recap_version") or 0) >= YOUTUBE_RECAP_VERSION:
                 continue
-            state_key = f"{figure.handle}:{entry['id']}"
+            state_key = f"{figure.handle}:{video_id}"
             if not _retry_due(recap_state.get(state_key) or {}):
                 continue
             attempts += 1
-            transcript, lang = youtube_transcript(api, client, str(entry["id"]))
-            if len(transcript) < 120:
+
+            # A failure for one video must never discard recaps already completed
+            # earlier in the same run.
+            try:
+                transcript, lang = _cached_transcript(transcript_cache, video_id)
+                if transcript:
+                    print(f"youtube: transcript cache hit {video_id} ({len(transcript)} chars)")
+                else:
+                    transcript, lang = youtube_transcript(api, client, video_id)
+                    if len(transcript) >= 120:
+                        _store_transcript(transcript_cache, video_id, transcript, lang, entry, figure)
+                        print(f"youtube: transcript cached {video_id} ({len(transcript)} chars)")
+
+                if len(transcript) < 120:
+                    recap_state[state_key] = {
+                        "status": "no_transcript",
+                        "version": YOUTUBE_RECAP_VERSION,
+                        "last_attempt": datetime.now().astimezone().isoformat(),
+                    }
+                    _save_recap_state(recap_state)
+                    print(f"youtube: transcript unavailable {video_id} after fallbacks")
+                    continue
+
+                lab = _video_recap(provider, {
+                    "id": video_id,
+                    "person": figure.name_fa,
+                    "role": figure.role_fa,
+                    "video_title": entry.get("title") or "",
+                    "transcript": transcript,
+                })
+                summary = str(lab.get("summary_fa") or "").strip()
+                recap = str(lab.get("recap_fa") or "").strip()
+                studio_recap = str(lab.get("studio_recap_fa") or "").strip()
+                if not summary or not recap or not studio_recap:
+                    recap_state[state_key] = {
+                        "status": "ai_incomplete",
+                        "version": YOUTUBE_RECAP_VERSION,
+                        "last_attempt": datetime.now().astimezone().isoformat(),
+                    }
+                    _save_recap_state(recap_state)
+                    _save_project_finance()
+                    print(f"youtube: AI recap incomplete {video_id}")
+                    continue
+
+                row = {
+                    "id": ext_id, "handle": figure.handle, "name_fa": figure.name_fa,
+                    "role_fa": figure.role_fa, "field": figure.field, "kind": "analysis",
+                    "platform": "youtube", "source_language": lang or "und",
+                    "translation_label_fa": ("بازگویی از ویدئوی اصلی" if lang == "fa"
+                                             else f"بازگویی از {lang or 'زبان اصلی'}"),
+                    "topic_fa": str(lab.get("topic_fa") or entry.get("title") or "ویدئوی تازه").strip(),
+                    "summary_fa": summary,
+                    "recap_fa": recap,
+                    "_studio_recap_fa": studio_recap,
+                    "recap_version": YOUTUBE_RECAP_VERSION,
+                    "key_points_fa": [
+                        str(x).strip() for x in (lab.get("key_points_fa") or [])
+                        if str(x).strip()
+                    ][:20],
+                    "transcript_available": True,
+                    "url": entry.get("url"),
+                    "published_at": entry.get("published_at"),
+                    "media_url": entry.get("thumbnail") or entry.get("media_url"),
+                    "video_title": entry.get("title") or "",
+                    "source_type": entry.get("source_type") or "official",
+                }
+                fresh.append(row)
                 recap_state[state_key] = {
-                    "status": "no_transcript",
+                    "status": "success",
                     "version": YOUTUBE_RECAP_VERSION,
                     "last_attempt": datetime.now().astimezone().isoformat(),
                 }
-                print(f"youtube: transcript unavailable {entry['id']} after fallbacks")
-                continue
-            lab = _video_recap(provider, {
-                "id": entry["id"],
-                "person": figure.name_fa,
-                "role": figure.role_fa,
-                "video_title": entry.get("title") or "",
-                "transcript": transcript,
-            })
-            summary = str(lab.get("summary_fa") or "").strip()
-            recap = str(lab.get("recap_fa") or "").strip()
-            studio_recap = str(lab.get("studio_recap_fa") or "").strip()
-            if not summary or not recap or not studio_recap:
+                # Persist immediately so a later provider outage cannot erase a
+                # completed video or force another paid transcript request.
+                _save_recap_state(recap_state)
+                _save_project_finance()
+                print(f"youtube: recap complete {video_id} ({figure.handle})")
+            except Exception as exc:
                 recap_state[state_key] = {
-                    "status": "ai_incomplete",
+                    "status": "ai_error",
                     "version": YOUTUBE_RECAP_VERSION,
                     "last_attempt": datetime.now().astimezone().isoformat(),
+                    "error": type(exc).__name__,
                 }
-                print(f"youtube: AI recap incomplete {entry['id']}")
+                _save_recap_state(recap_state)
+                _save_project_finance()
+                print(f"youtube: video failed {video_id} ({type(exc).__name__}); continuing")
                 continue
-            recap_state[state_key] = {
-                "status": "success",
-                "version": YOUTUBE_RECAP_VERSION,
-                "last_attempt": datetime.now().astimezone().isoformat(),
-            }
-            fresh.append({
-                "id": ext_id, "handle": figure.handle, "name_fa": figure.name_fa,
-                "role_fa": figure.role_fa, "field": figure.field, "kind": "analysis",
-                "platform": "youtube", "source_language": lang or "und",
-                "translation_label_fa": ("بازگویی از ویدئوی اصلی" if lang == "fa"
-                                         else f"بازگویی از {lang or 'زبان اصلی'}"),
-                "topic_fa": str(lab.get("topic_fa") or entry.get("title") or "ویدئوی تازه").strip(),
-                "summary_fa": summary,
-                "recap_fa": recap,
-                # Private runner/cache field. figure_posts._public() removes underscore
-                # keys, so this script-ready edition never reaches public Pages JSON.
-                "_studio_recap_fa": studio_recap,
-                "recap_version": YOUTUBE_RECAP_VERSION,
-                "key_points_fa": [
-                    str(x).strip() for x in (lab.get("key_points_fa") or [])
-                    if str(x).strip()
-                ][:20],
-                "transcript_available": True,
-                "url": entry.get("url"),
-                "published_at": entry.get("published_at"),
-                "media_url": entry.get("thumbnail") or entry.get("media_url"),
-                "video_title": entry.get("title") or "",
-                "source_type": entry.get("source_type") or "official",
-            })
+
     _save_recap_state(recap_state)
+    _save_transcript_cache(transcript_cache)
+    _save_project_finance()
     print(f"youtube: {attempts} catalog videos checked; {len(fresh)} public + studio recaps")
     return fresh
 
