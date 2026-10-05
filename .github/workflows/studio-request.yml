@@ -1,0 +1,43 @@
+name: Queue selected recording script
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+jobs:
+  queue:
+    if: github.event.issue.user.login == 'nimania' && startsWith(github.event.issue.title, '[studio] ')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract YouTube video id
+        id: video
+        env:
+          TITLE: ${{ github.event.issue.title }}
+        run: |
+          video_id="${TITLE#"[studio] "}"
+          if ! printf '%s' "$video_id" | grep -Eq '^[A-Za-z0-9_-]{11}$'; then
+            echo "::error::Invalid YouTube video id"
+            exit 1
+          fi
+          echo "id=$video_id" >> "$GITHUB_OUTPUT"
+
+      - name: Queue recording-script build
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VIDEO_ID: ${{ steps.video.outputs.id }}
+        run: |
+          gh workflow run build.yml --repo "$GITHUB_REPOSITORY" -f premium_video_id="$VIDEO_ID"
+
+      - name: Confirm and close request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VIDEO_ID: ${{ steps.video.outputs.id }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "✦ درخواست نسخهٔ ضبط برای `$VIDEO_ID` وارد صف شد. پس از Build موفق، علامت ✧ در پندار به ✦ تبدیل می‌شود."
+          gh issue close "$ISSUE" --repo "$GITHUB_REPOSITORY" --reason completed
