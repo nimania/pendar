@@ -101,6 +101,9 @@ FIGURES: list[Figure] = [
            (("youtube", "https://www.youtube.com/@ashkan_zare"),), external=True,
            aliases=("Ashkan Zare",)),
 
+    Figure("ali-abdi-jedaal", "علی عبدی", "تحلیلگر و مهمان رسانه‌ای", "politics",
+           external=True, aliases=("Ali Abdi",)),
+
     Figure("arash-nalchegar", "آرش نعل‌چگر", "پادکستر و میزبان فیوز پادکست", "media",
            external=True, aliases=("Arash Nalchegar", "آرش نعل چگر", "آرش نعلچگر")),
 
