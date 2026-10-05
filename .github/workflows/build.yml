@@ -72,6 +72,7 @@ jobs:
           path: |
             backend/data/external-figure-posts.json
             backend/data/youtube-recap-state.json
+            backend/data/youtube-transcripts.json
             backend/data/project-finance.json
           key: jankalam-extfig-${{ github.run_id }}
           restore-keys: |
