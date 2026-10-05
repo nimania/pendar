@@ -76,6 +76,16 @@ FIGURES: list[Figure] = [
     # ══════════════════════════════════════════════════════════════════════
     #  چهره‌های تکمیلی — پروفایل واحد، منابع مستقیم و گفته در خبر
     # ══════════════════════════════════════════════════════════════════════
+    Figure("ali-alizadeh", "علی علیزاده", "تحلیلگر سیاسی و مدیر رسانه", "media",
+           (("youtube", "https://youtube.com/jedaaltv"),
+            ("website", "https://jedaal.tv/")), external=True,
+           aliases=("Ali Alizadeh", "جدال", "Jedaal", "Jedaal Farsi"),
+           telegram_handle="jedaal"),
+    Figure("ali-bandari", "علی بندری", "پادکستر و تولیدکننده محتوا", "media",
+           (("youtube", "https://www.youtube.com/@BplusPodcast"),
+            ("website", "https://bpluspodcast.com/")), external=True,
+           aliases=("Ali Bandari", "بی‌پلاس", "بی پلاس", "Bplus", "BPLUS"),
+           telegram_handle="podcastbplus"),
     Figure("reza-alijani", "رضا علیجانی", "روزنامه‌نگار و تحلیلگر سیاسی", "politics", external=True),
     Figure("mahmoud-farjami", "محمود فرجامی", "نویسنده و پژوهشگر رسانه", "media", external=True),
     Figure("rashid-kakavand", "رشید کاکاوند", "نویسنده و پژوهشگر ادبیات", "culture", external=True),
