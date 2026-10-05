@@ -30,6 +30,7 @@ REFRESH_DAYS = 7
 _EXTERNAL_AVATARS = {
     "donald-trump": "https://www.whitehouse.gov/wp-content/uploads/2025/06/President-Donald-Trump-Official-Presidential-Portrait.png",
     "monaborzouei": "https://pbs.twimg.com/profile_images/1787448818503479296/2ruhVAQW_400x400.jpg",
+    "nima-afshar-naderi": "https://pbs.twimg.com/profile_images/2094137144591933440/SIBK8HjF_400x400.jpg",
 }
 _TIMEOUT = 20.0
 _MAX_BYTES = 600_000
