@@ -2764,9 +2764,36 @@ function figuresSection(list) {
 }
 let _figDirectoryMode = "direct";
 async function loadCuratedPoems(){ if(_CURATED_POEMS) return _CURATED_POEMS; try{_CURATED_POEMS=await getJSON(`${DATA}/curated-figure-poems.json`);}catch(_){_CURATED_POEMS={};} return _CURATED_POEMS||{}; }
+const _LOCAL_FIGURE_FALLBACKS = [
+  {
+    handle: "nima-afshar-naderi",
+    name_fa: "نیما افشارنادری",
+    role_fa: "تولیدکننده محتوا و میزبان «جان کلام»",
+    field: "media",
+    field_fa: "رسانه و تحلیل",
+    gender: "m",
+    external: true,
+    avatar: null,
+    channel_url: "",
+    count: 0,
+    posts: [],
+    social: [
+      {kind:"x", label:"ایکس", url:"https://x.com/nimania"},
+      {kind:"instagram", label:"اینستاگرام", url:"https://www.instagram.com/nima.afsharnaderi/"},
+      {kind:"youtube", label:"یوتیوب", url:"https://www.youtube.com/channel/UCYDOVO7EpX3QNEf9Ddk1-AQ"},
+      {kind:"telegram", label:"تلگرام", url:"https://t.me/nimaafsharnaderi"}
+    ]
+  }
+];
 async function loadFigures() {
   if (_FIG) return _FIG;
   try { _FIG = await getJSON(`${DATA}/figures.json`); } catch (e) { _FIG = { figures: [], fields: {} }; }
+  _FIG.figures = Array.isArray(_FIG.figures) ? _FIG.figures : [];
+  for (const fallback of _LOCAL_FIGURE_FALLBACKS) {
+    if (!_FIG.figures.some(f => String(f.handle||"").toLowerCase() === fallback.handle)) {
+      _FIG.figures.push(fallback);
+    }
+  }
   return _FIG;
 }
 async function loadNewsPeople() {
