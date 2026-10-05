@@ -174,6 +174,8 @@ FIGURES: list[Figure] = [
     Figure("hossein-entezami", "حسین انتظامی", "مدیر فرهنگی و رسانه‌ای", "media", external=True),
     Figure("mahnaz-shirali", "مهناز شیرالی", "جامعه‌شناس و پژوهشگر", "society", (), "f", external=True),
     Figure("fayaz-zahed", "فیاض زاهد", "روزنامه‌نگار و تحلیلگر سیاسی", "politics", external=True),
+    Figure("nima-afshar-naderi", "نیما افشارنادری", "تولیدکننده محتوا و میزبان «جان کلام»", "media", external=True,
+           aliases=("نیما افشار نادری", "Nima Afshar Naderi")),
 
     # ══════════════════════════════════════════════════════════════════════
     #  چهره‌های بین‌المللی — منابع چندزبانه
