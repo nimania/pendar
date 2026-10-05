@@ -40,6 +40,31 @@ SOURCE_REGISTRY = [
     {"key": "setareh", "name": "Setareh TV", "status": "official", "note": "منبع رسمی ستاره تی‌وی؛ جدول پخش رسمی در setareh.tv/conductor"},
 ]
 
+STATIC_CHANNELS = [
+    {
+        "id": "bbc-persian:tv",
+        "name_fa": "بی‌بی‌سی فارسی",
+        "name": "BBC Persian",
+        "logo": "https://i.imgur.com/4uTMnPb.png",
+        "group": "news",
+        "source_key": "bbc-persian",
+        "source_name": "BBC Persian",
+        "confidence": "official",
+        "description_fa": "شبکهٔ تلویزیونی فارسی‌زبان بی‌بی‌سی؛ پوشش خبر، تحلیل، مستند و برنامه‌های فرهنگی برای مخاطبان فارسی‌زبان.",
+    },
+    {
+        "id": "setareh:tv",
+        "name_fa": "ستاره تی‌وی",
+        "name": "Setareh TV",
+        "logo": None,
+        "group": "general",
+        "source_key": "setareh",
+        "source_name": "Setareh TV",
+        "confidence": "official",
+        "description_fa": "شبکهٔ فارسی‌زبان ستاره تی‌وی؛ صفحهٔ مستقل شبکه و جدول پخش رسمی آن در راهنمای تماشای پندار نگهداری می‌شود.",
+    },
+]
+
 def fetch(url: str) -> bytes:
     req = urllib.request.Request(
         url,
@@ -839,13 +864,22 @@ def build() -> dict:
     programmes.sort(key=lambda x: (x["start"], x["channel_id"]))
     programmes, quality_stats = clean_programmes(programmes, channels)
     used = {p["channel_id"] for p in programmes}
-    channels = [c for c in channels if c["id"] in used]
+
+    # Keep known networks in the directory even when their current EPG source
+    # is temporarily unavailable. Dynamic rows win when present.
+    live_channels = [c for c in channels if c["id"] in used]
+    by_id = {str(c.get("id")): c for c in STATIC_CHANNELS}
+    for ch in live_channels:
+        by_id[str(ch.get("id"))] = {**by_id.get(str(ch.get("id")), {}), **ch}
+    channels = list(by_id.values())
+
     source_stats = {}
     quality_acc = {}
     for c in channels:
         c["trust_score"] = source_trust_score(c)
-        s = source_stats.setdefault(c["source_key"], {"channels": 0, "programmes": 0})
-        s["channels"] += 1
+        if c["id"] in used:
+            s = source_stats.setdefault(c["source_key"], {"channels": 0, "programmes": 0})
+            s["channels"] += 1
     for p in programmes:
         key = p["channel_id"].split(":", 1)[0]
         source_stats.setdefault(key, {"channels": 0, "programmes": 0})["programmes"] += 1
