@@ -55,25 +55,8 @@ jobs:
             if [ -n "$artifact_id" ]; then
               rm -rf /tmp/healthcheck && mkdir -p /tmp/healthcheck
               if gh run download "$candidate" -n latest-static-site -D /tmp/healthcheck >/dev/null 2>&1; then
-                news="$(python - <<'PY'
-import json, pathlib
-p=pathlib.Path("/tmp/healthcheck/data/stats.json")
-try:
-    print(int(json.loads(p.read_text(encoding="utf-8")).get("total") or 0))
-except Exception:
-    print(0)
-PY
-)"
-                figures="$(python - <<'PY'
-import json, pathlib
-p=pathlib.Path("/tmp/healthcheck/data/figures.json")
-try:
-    d=json.loads(p.read_text(encoding="utf-8"))
-    print(len(d.get("figures", [])) if isinstance(d, dict) else 0)
-except Exception:
-    print(0)
-PY
-)"
+                news="$(python -c 'import json,pathlib; p=pathlib.Path("/tmp/healthcheck/data/stats.json"); print(int(json.loads(p.read_text(encoding="utf-8")).get("total") or 0) if p.is_file() else 0)' 2>/dev/null || echo 0)"
+                figures="$(python -c 'import json,pathlib; p=pathlib.Path("/tmp/healthcheck/data/figures.json"); d=json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}; print(len(d.get("figures", [])) if isinstance(d, dict) else 0)' 2>/dev/null || echo 0)"
                 if [ "$news" -ge 10000 ] && [ "$figures" -ge 100 ]; then
                   build_id="$candidate"
                   echo "Selected healthy full build $candidate ($news news, $figures figures)"
