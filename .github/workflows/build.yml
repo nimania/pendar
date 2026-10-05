@@ -191,6 +191,19 @@ jobs:
             fi
           fi
 
+      - name: Overlay freshest Movie Master indexes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          movie_master_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/movie-master.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          if [ -n "$movie_master_id" ]; then
+            rm -rf /tmp/movie-master && mkdir -p /tmp/movie-master
+            if gh run download "$movie_master_id" -n pendar-movie-master-indexes -D /tmp/movie-master; then
+              mkdir -p backend/public/data
+              find /tmp/movie-master -type f \( -name 'movie-master-summary.json' -o -name 'movie-master-top.json' \) -exec cp {} backend/public/data/ \;
+            fi
+          fi
+
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir backend/public/data
 
