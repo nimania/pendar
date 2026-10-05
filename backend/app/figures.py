@@ -185,7 +185,9 @@ FIGURES: list[Figure] = [
             ("instagram", "https://www.instagram.com/nima.afsharnaderi/"),
             ("youtube", "https://www.youtube.com/channel/UCYDOVO7EpX3QNEf9Ddk1-AQ"),
             ("telegram", "https://t.me/nimaafsharnaderi"),
-            ("website", "https://grokipedia.com/page/nima-afshar-naderi")), external=True,
+            ("website", "https://grokipedia.com/page/nima-afshar-naderi"),
+            ("github", "https://nimania.github.io/"),
+            ("diner", "https://www.instagram.com/nimasdiner/")), external=True,
            aliases=("نیما افشار نادری", "Nima Afshar Naderi")),
 
     # ══════════════════════════════════════════════════════════════════════
@@ -364,7 +366,7 @@ FIGURES: list[Figure] = [
 ]
 
 
-SOCIAL_FA = {"website": "وب‌سایت", "x": "ایکس", "instagram": "اینستاگرام",
+SOCIAL_FA = {"website": "وب‌سایت", "github": "گیت‌هاب", "diner": "Nima’s Diner", "x": "ایکس", "instagram": "اینستاگرام",
              "youtube": "یوتیوب", "facebook": "فیس‌بوک", "telegram": "تلگرام", "bale": "بله",
              "truthsocial": "تروث سوشیال", "eitaa": "ایتا", "rubika": "روبیکا",
              "soroush": "سروش‌پلاس", "igap": "آی‌گپ"}
