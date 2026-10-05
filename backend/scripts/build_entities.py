@@ -234,6 +234,9 @@ def add_current_figures(reg: Registry, data: dict) -> None:
                 "field_fa": row.get("field_fa"),
                 "avatar": row.get("avatar"),
                 "statement_count": row.get("count"),
+                "verified": row.get("verified"),
+                "claimed": row.get("claimed"),
+                "social": row.get("social"),
             },
         )
         # Social/channel identifiers can be useful aliases for resolution but
