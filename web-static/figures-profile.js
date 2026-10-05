@@ -185,3 +185,32 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
   </div>`;
 }
+
+/* Figures directory: the directory mode state (_figDirectoryMode), its
+   setter (setFigureDirectoryMode), the directory page (showFigures) and the
+   directory render (renderFiguresDirectory). Moved here from app.js to keep
+   the figures views together; showFigures resets the figures-core timeline
+   filters and is reached by route() for #/figures. */
+let _figDirectoryMode = "direct";
+function setFigureDirectoryMode(mode) {
+  _figDirectoryMode = mode;
+  renderFigures();
+}
+function showFigures() {
+  show("figures"); setTab("");
+  document.title="چهره‌ها | پندار";
+  document.getElementById("figures-lede").style.display = "";
+  document.getElementById("figures").innerHTML = "";
+  // A previous visit can leave timeline filters in local page state.  The
+  // /figures route itself must always open on a useful default instead of an
+  // apparently broken empty filtered view.
+  _figTimelineMode = "all";
+  _figTimelineField = "all";
+  renderFigureTimeline();
+  setHash("#/figures");
+}
+function renderFiguresDirectory() {
+  document.getElementById("figure-timeline").innerHTML = "";
+  _figDirectoryMode = "direct";
+  renderFigures();
+}

@@ -367,36 +367,9 @@ function socialLinks(links) {
 
 // Figure cards, the figure follow store, the home figures timeline and
 // figuresSection() now live in figures-core.js, loaded before this file.
-let _figDirectoryMode = "direct";
-// Shared dataset loaders (loadCuratedPoems, loadFigures, loadStudioRecaps,
-// loadProjectFinance, loadNewsPeople) now live in loaders.js, loaded before
-// this file.
-function setFigureDirectoryMode(mode) {
-  _figDirectoryMode = mode;
-  renderFigures();
-}
-
-// System dashboard (_sys* formatters, showSystem, renderSystem) and the
-// tech/credits page (showTech) now live in system-tech.js, loaded before
-// this file.
-function showFigures() {
-  show("figures"); setTab("");
-  document.title="چهره‌ها | پندار";
-  document.getElementById("figures-lede").style.display = "";
-  document.getElementById("figures").innerHTML = "";
-  // A previous visit can leave timeline filters in local page state.  The
-  // /figures route itself must always open on a useful default instead of an
-  // apparently broken empty filtered view.
-  _figTimelineMode = "all";
-  _figTimelineField = "all";
-  renderFigureTimeline();
-  setHash("#/figures");
-}
-function renderFiguresDirectory() {
-  document.getElementById("figure-timeline").innerHTML = "";
-  _figDirectoryMode = "direct";
-  renderFigures();
-}
+// The figures directory (_figDirectoryMode, setFigureDirectoryMode,
+// showFigures, renderFiguresDirectory) now lives in figures-profile.js,
+// loaded before this file.
 // Studio recaps (showStudioRecaps, openStudioRecap, requestStudioRecap +
 // done/queue/font state), project finance (showProjectFinance) and latest
 // videos (showLatestVideos) now live in studio-videos.js, loaded before
