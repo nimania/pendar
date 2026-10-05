@@ -280,83 +280,126 @@ def _sample_text(text: str, limit: int = YOUTUBE_TRANSCRIPT_CHARS) -> str:
             "\n[… بخش پایانی …]\n" + text[-third:])
 
 
-def youtube_transcript(api: YouTubeTranscriptApi, video_id: str) -> tuple[str, str]:
-    listing = api.list(video_id)
-    transcript = None
-    preferred = ["fa", "en", "ar", "tr", "fr", "de"]
+def _timedtext_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
+    """Best-effort fallback when youtube-transcript-api is blocked on cloud IPs.
+
+    YouTube's public timedtext endpoint can expose uploaded or auto-generated
+    captions without requiring us to download or redistribute the media itself.
+    """
+    for lang in ("fa", "en", "ar", "tr", "fr", "de"):
+        for kind in ("", "asr"):
+            params = {"v": video_id, "lang": lang, "fmt": "json3"}
+            if kind:
+                params["kind"] = kind
+            try:
+                r = client.get("https://www.youtube.com/api/timedtext", params=params)
+                if r.status_code != 200 or not r.text.strip():
+                    continue
+                data = r.json()
+                parts = []
+                for event in data.get("events", []):
+                    segs = event.get("segs") or []
+                    text = "".join(str(seg.get("utf8") or "") for seg in segs)
+                    text = html.unescape(text).replace("\n", " ").strip()
+                    if text:
+                        parts.append(text)
+                text = re.sub(r"\s+", " ", " ".join(parts)).strip()
+                if len(text) >= 120:
+                    return _sample_text(text), lang
+            except Exception:
+                continue
+    return "", ""
+
+
+def youtube_transcript(api: YouTubeTranscriptApi, client: httpx.Client,
+                       video_id: str) -> tuple[str, str]:
     try:
-        transcript = listing.find_transcript(preferred)
-    except Exception:
-        transcript = next(iter(listing), None)
-    if transcript is None:
-        return "", ""
-    fetched = transcript.fetch()
-    text = " ".join(str(s.text or "").strip() for s in fetched if str(s.text or "").strip())
-    return _sample_text(html.unescape(text)), str(getattr(transcript, "language_code", "") or "")
+        listing = api.list(video_id)
+        transcript = None
+        preferred = ["fa", "en", "ar", "tr", "fr", "de"]
+        try:
+            transcript = listing.find_transcript(preferred)
+        except Exception:
+            transcript = next(iter(listing), None)
+        if transcript is not None:
+            fetched = transcript.fetch()
+            text = " ".join(str(s.text or "").strip() for s in fetched if str(s.text or "").strip())
+            text = _sample_text(html.unescape(text))
+            if len(text) >= 120:
+                return text, str(getattr(transcript, "language_code", "") or "")
+    except Exception as exc:
+        print(f"youtube: transcript api blocked {video_id} ({type(exc).__name__}); trying timedtext")
+
+    text, lang = _timedtext_transcript(client, video_id)
+    if text:
+        print(f"youtube: timedtext fallback ok {video_id} ({lang})")
+        return text, lang
+    return "", ""
 
 
-def collect_youtube(provider, old: list[dict]) -> list[dict]:
+def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None) -> list[dict]:
     seen = {str(x.get("id")) for x in old if x.get("platform") == "youtube"}
     fresh: list[dict] = []
     attempts = 0
     headers = {"User-Agent": "Mozilla/5.0 (compatible; JanKalam/1.0)"}
     api = YouTubeTranscriptApi()
+
+    candidates = catalog if isinstance(catalog, list) else []
+    # Process newest catalog items first; this covers official channels and
+    # trusted hosted appearances with the same recap pipeline.
+    candidates = sorted(
+        [x for x in candidates if isinstance(x, dict) and x.get("id") and x.get("handle")],
+        key=lambda x: str(x.get("published_at") or ""),
+        reverse=True,
+    )
+
+    by_handle = {f.handle: f for f in FIGURES}
     with httpx.Client(headers=headers, timeout=25, follow_redirects=True) as client:
-        for figure in FIGURES:
+        for entry in candidates:
             if attempts >= YOUTUBE_MAX_NEW_PER_RUN:
                 break
-            url = youtube_url(figure)
-            if not url:
+            figure = by_handle.get(str(entry.get("handle") or ""))
+            if figure is None:
                 continue
-            try:
-                channel_id = youtube_channel_id(client, url)
-                if not channel_id:
-                    print(f"youtube: channel id unresolved for {figure.name_fa}")
-                    continue
-                entries = youtube_feed(client, channel_id)[:YOUTUBE_MAX_PER_CHANNEL]
-            except Exception as exc:
-                print(f"youtube: feed unavailable for {figure.name_fa} ({type(exc).__name__})")
+            ext_id = "youtube-" + str(entry["id"])
+            if ext_id in seen:
                 continue
-            for entry in entries:
-                ext_id = "youtube-" + entry["id"]
-                if ext_id in seen or attempts >= YOUTUBE_MAX_NEW_PER_RUN:
-                    continue
-                attempts += 1
-                try:
-                    transcript, lang = youtube_transcript(api, entry["id"])
-                except Exception as exc:
-                    print(f"youtube: transcript unavailable {entry['id']} ({type(exc).__name__})")
-                    continue
-                if len(transcript) < 120:
-                    continue
-                labels = _label(provider, [{
-                    "id": entry["id"],
-                    "person": figure.name_fa,
-                    "role": figure.role_fa,
-                    "video_title": entry["title"],
-                    "transcript": transcript,
-                }])
-                lab = labels.get(entry["id"], {})
-                if lab.get("publish") is not True or not str(lab.get("summary_fa") or "").strip():
-                    continue
-                fresh.append({
-                    "id": ext_id, "handle": figure.handle, "name_fa": figure.name_fa,
-                    "role_fa": figure.role_fa, "field": figure.field, "kind": "analysis",
-                    "platform": "youtube", "source_language": lang or "und",
-                    "translation_label_fa": ("بازگویی از ویدئوی اصلی" if lang == "fa"
-                                             else f"بازگویی از {lang or 'زبان اصلی'}"),
-                    "topic_fa": str(lab.get("topic_fa") or entry["title"] or "ویدئوی تازه").strip(),
-                    "summary_fa": str(lab.get("summary_fa") or "").strip(),
-                    "recap_fa": str(lab.get("recap_fa") or lab.get("summary_fa") or "").strip(),
-                    "key_points_fa": [
-                        str(x).strip() for x in (lab.get("key_points_fa") or [])
-                        if str(x).strip()
-                    ][:20],
-                    "transcript_available": True,
-                    "url": entry["url"], "published_at": entry["published_at"],
-                    "media_url": entry.get("media_url"), "video_title": entry["title"],
-                })
-    print(f"youtube: {attempts} new videos checked; {len(fresh)} substantive rows")
+            attempts += 1
+            transcript, lang = youtube_transcript(api, client, str(entry["id"]))
+            if len(transcript) < 120:
+                print(f"youtube: transcript unavailable {entry['id']} after fallbacks")
+                continue
+            labels = _label(provider, [{
+                "id": entry["id"],
+                "person": figure.name_fa,
+                "role": figure.role_fa,
+                "video_title": entry.get("title") or "",
+                "transcript": transcript,
+            }])
+            lab = labels.get(str(entry["id"]), {})
+            if lab.get("publish") is not True or not str(lab.get("summary_fa") or "").strip():
+                continue
+            fresh.append({
+                "id": ext_id, "handle": figure.handle, "name_fa": figure.name_fa,
+                "role_fa": figure.role_fa, "field": figure.field, "kind": "analysis",
+                "platform": "youtube", "source_language": lang or "und",
+                "translation_label_fa": ("بازگویی از ویدئوی اصلی" if lang == "fa"
+                                         else f"بازگویی از {lang or 'زبان اصلی'}"),
+                "topic_fa": str(lab.get("topic_fa") or entry.get("title") or "ویدئوی تازه").strip(),
+                "summary_fa": str(lab.get("summary_fa") or "").strip(),
+                "recap_fa": str(lab.get("recap_fa") or lab.get("summary_fa") or "").strip(),
+                "key_points_fa": [
+                    str(x).strip() for x in (lab.get("key_points_fa") or [])
+                    if str(x).strip()
+                ][:20],
+                "transcript_available": True,
+                "url": entry.get("url"),
+                "published_at": entry.get("published_at"),
+                "media_url": entry.get("thumbnail") or entry.get("media_url"),
+                "video_title": entry.get("title") or "",
+                "source_type": entry.get("source_type") or "official",
+            })
+    print(f"youtube: {attempts} catalog videos checked; {len(fresh)} substantive recaps")
     return fresh
 
 
@@ -389,6 +432,7 @@ def run() -> int:
 
     # Keep the visual video archive separate from AI-filtered figure statements.
     # If YouTube is temporarily unavailable, preserve the last known-good catalog.
+    catalog: list[dict] = []
     try:
         catalog = collect_youtube_catalog()
         if catalog:
@@ -404,7 +448,7 @@ def run() -> int:
     except Exception as exc:
         print(f"truth collector: keeping existing data ({type(exc).__name__})")
     try:
-        fresh.extend(collect_youtube(provider, old))
+        fresh.extend(collect_youtube(provider, old, catalog))
     except Exception as exc:
         print(f"youtube collector: keeping existing data ({type(exc).__name__})")
 
