@@ -1,3 +1,93 @@
+
+function _movieDescriptionText(value){
+  // Provider descriptions may contain HTML or escaped HTML. Template content is inert.
+  let text=String(value||"");
+  for(let pass=0;pass<3;pass++){
+    const template=document.createElement("template");
+    template.innerHTML=text.replace(/<(?:br\s*\/?|\/(?:p|div|li|h[1-6]))\s*>/gi,"\n");
+    template.content.querySelectorAll("script,style,iframe,object,embed").forEach(node=>node.remove());
+    const clean=template.content.textContent||"";
+    if(clean===text)break;
+    text=clean;
+  }
+  return text.replace(/\u00a0/g," ").replace(/[ \t]+/g," ").replace(/ *\n */g,"\n").replace(/\n{3,}/g,"\n\n").trim();
+}
+
+// Editorial, spoiler-free readings keyed by exact TMDB identity; never inferred from genre or title.
+const MOVIE_JAN_KALAM = {
+  "movie/60243": [
+    "حق با کیست؟",
+    "جدایی نادر از سیمین، کشمکش خانواده و مسئولیت را به پرسشی درباره حقیقت تبدیل می‌کند. هر شخصیت دلایل خودش را دارد و قضاوت، با شناخت موقعیت او دشوارتر می‌شود.",
+    "برای وقتی که درام واقع‌گرا و دوراهی‌های اخلاقی را به جواب‌های ساده ترجیح می‌دهی."
+  ],
+  "movie/2011": [
+    "خانه، هویت و آزادی",
+    "پرسپولیس، تاریخ بزرگ را از دریچه زندگی یک دختر روایت می‌کند. میان ایران و مهاجرت، پرسش اصلی این است: چطور خودت بمانی وقتی محیط از تو می‌خواهد کس دیگری باشی؟",
+    "برای علاقه‌مندان به روایت شخصی، هویت و تجربه مهاجرت؛ با زبان تصویری ساده و موضوعاتی بزرگسالانه."
+  ],
+  "movie/582": [
+    "شنیدنِ زندگی، بیداریِ وجدان",
+    "زندگی دیگران درباره مرز میان اطاعت و وجدان است. نظارت بر زندگی خصوصی، به پرسشی درباره قدرت، هنر و مسئولیت فردی تبدیل می‌شود.",
+    "برای وقتی که یک درام آرام و پرتنش درباره حریم خصوصی و اخلاق قدرت می‌خواهی."
+  ],
+  "movie/238": [
+    "قدرت، خانواده، بهای وفاداری",
+    "پدرخوانده، خانواده را جایی نشان می‌دهد که محبت و قدرت به هم گره خورده‌اند. وفاداری می‌تواند هم پناه باشد و هم تعهدی که آزادی انتخاب را محدود می‌کند.",
+    "برای علاقه‌مندان به درام جنایی، روابط خانوادگی و روایت‌هایی با ریتم صبورانه."
+  ],
+  "movie/278": [
+    "امید پشت دیوار",
+    "رستگاری در شاوشنک درباره حفظ کرامت و امید در محیطی است که برای فرسودن انسان ساخته شده. دوستی و استقامت، قلب این روایت زندان‌اند.",
+    "برای وقتی که یک درام انسانی درباره تاب‌آوری و دوستی می‌خواهی."
+  ],
+  "movie/155": [
+    "امنیت به چه قیمتی؟",
+    "شوالیه تاریکی، نبرد ابرقهرمان و تبهکار را به آزمون اخلاقی یک شهر تبدیل می‌کند. وقتی ترس همه‌گیر می‌شود، مرز میان عدالت و عبور از قانون کجاست؟",
+    "برای علاقه‌مندان به تریلر جنایی و اکشنی که دوراهی اخلاقی هم دارد."
+  ],
+  "movie/27205": [
+    "ذهن هم میدان نبرد است",
+    "تلقین، یک مأموریت پیچیده را در فضای رؤیا پیش می‌برد؛ جایی که خاطره، احساس گناه و میل به کنترل واقعیت به هم می‌رسند.",
+    "برای وقتی که معمای تصویری و روایت چندلایه می‌خواهی و از دنبال‌کردن جزئیات لذت می‌بری."
+  ],
+  "movie/157336": [
+    "فاصله تا خانه",
+    "میان‌ستاره‌ای، سفر فضایی را با پیوند والد و فرزند گره می‌زند. پشت مقیاس عظیم کیهان، مسئله‌ای انسانی قرار دارد: زمان و فاصله با رابطه‌های ما چه می‌کنند؟",
+    "برای علاقه‌مندان به علمی‌تخیلی حماسی با محور خانواده و گذر زمان."
+  ],
+  "movie/496243": [
+    "طبقاتی که دیده نمی‌شوند",
+    "انگل از برخورد دو خانواده به شکاف طبقاتی می‌رسد؛ شکافی که در خانه، کار و کوچک‌ترین رفتارهای روزمره حضور دارد. طنز و اضطراب، کنار هم پیش می‌روند.",
+    "برای وقتی که طنز تلخ و تعلیق اجتماعی می‌خواهی و تغییر لحن غافلگیرت نمی‌کند."
+  ],
+  "movie/424": [
+    "انتخاب در دل فاجعه",
+    "فهرست شیندلر، مسئولیت فردی را در دل خشونت سازمان‌یافته دنبال می‌کند. پرسش محوری‌اش این است که یک انسان، در برابر رنج دیگران، چه انتخابی می‌کند؟",
+    "برای تماشای یک درام تاریخی سنگین درباره هولوکاست و مسئولیت اخلاقی."
+  ],
+  "movie/129": [
+    "بزرگ‌شدن در جهانی ناآشنا",
+    "شهر اشباح، سفر یک کودک در جهانی شگفت را به تجربه‌ای درباره هویت، کار و شجاعت تبدیل می‌کند. خیال، راهی برای دیدن ترس‌ها و امکان رشد است.",
+    "برای علاقه‌مندان به جهان‌سازی خیال‌انگیز و داستان‌های بلوغ با جزئیات تصویری فراوان."
+  ],
+  "movie/13": [
+    "زندگی فراتر از نقشه‌های ما",
+    "فارست گامپ، زندگی یک مرد را از میان رخدادهای بزرگ تاریخ آمریکا عبور می‌دهد. عشق، تصادف و پشتکار، بیشتر از یک برنامه حساب‌شده مسیر او را شکل می‌دهند.",
+    "برای وقتی که روایتی عاطفی، اپیزودیک و آمیخته به طنز می‌خواهی."
+  ]
+};
+
+function _movieJanKalam(m){
+  const url=String((m.external||{}).tmdb||"");
+  const match=url.match(/^https:\/\/(?:www\.)?themoviedb\.org\/(movie|tv)\/(\d+)(?:[/?#-]|$)/);
+  return match?MOVIE_JAN_KALAM[match[1]+"/"+match[2]]||null:null;
+}
+function _movieJanKalamSection(m){
+  const reading=_movieJanKalam(m);
+  if(!reading)return "";
+  return '<section class="movie-jan-kalam" aria-label="جان کلام فیلم"><div class="book-section-title"><h2>جان کلام</h2><span>بدون اسپویل</span></div><h3>'+esc(reading[0])+'</h3><p>'+esc(reading[1])+'</p><p class="movie-jan-kalam-audience">'+esc(reading[2])+'</p><small>برداشت تحریریه پندار</small></section>';
+}
+
 let moviesCache=null;
 let streamingCache=null;
 let movieMasterCache=null;
@@ -159,11 +249,11 @@ function _movieCatalogBar(d,streaming){
     '</div>'+
   '</section>';
 }
-function _movieCard(m){var genres=(m.genres_fa||[]).slice(0,2).join(" · "),fn=m.master_id?"openMasterMovie":"openMovie",arg=m.master_id||m.slug;return '<button class="movie-card" onclick="'+fn+'(\''+esc(arg)+'\')"><span class="movie-poster">'+_moviePoster(m,false)+'</span><span class="movie-card-copy"><span class="movie-kicker">'+(m.type==="series"?"سریال":"فیلم")+' · '+esc(m.year||"")+'</span><strong>'+esc(m.title_fa||m.original_title||"")+'</strong>'+(m.original_title&&m.original_title!==m.title_fa?'<small dir="ltr">'+esc(m.original_title)+'</small>':"")+'<em>'+esc([genres,m.country_fa].filter(Boolean).join(" · "))+'</em><span class="movie-card-foot">'+(m.ratings&&m.ratings.imdb?'IMDb '+esc(m.ratings.imdb):"")+(_movieMentionCount(m)?' · '+faN(_movieMentionCount(m))+' اشاره در جان‌کلام':"")+'</span></span></button>'}
+function _movieCard(m){var genres=(m.genres_fa||[]).slice(0,2).join(" · "),fn=m.master_id?"openMasterMovie":"openMovie",arg=m.master_id||m.slug;return '<button class="movie-card" onclick="'+fn+'(\''+esc(arg)+'\')"><span class="movie-poster">'+_moviePoster(m,false)+'</span><span class="movie-card-copy"><span class="movie-kicker">'+(m.type==="series"?"سریال":"فیلم")+' · '+esc(m.year||"")+'</span><strong>'+esc(m.title_fa||m.original_title||"")+'</strong>'+(m.original_title&&m.original_title!==m.title_fa?'<small dir="ltr">'+esc(m.original_title)+'</small>':"")+(_movieJanKalam(m)?'<span class="movie-card-jan">'+esc(_movieJanKalam(m)[0])+'</span>':"")+'<em>'+esc([genres,m.country_fa].filter(Boolean).join(" · "))+'</em><span class="movie-card-foot">'+(m.ratings&&m.ratings.imdb?'IMDb '+esc(m.ratings.imdb):"")+(_movieMentionCount(m)?' · '+faN(_movieMentionCount(m))+' اشاره در جان‌کلام':"")+'</span></span></button>'}
 async function showMovies(){show("movies");setTab("");document.title="جانِ فیلم | جان‌کلام";var el=document.getElementById("movies-content");el.innerHTML='<div class="spinner"></div>';var loaded=await Promise.all([loadMovies(),loadStreamingAvailability(),loadMovieMaster()]),d=loaded[0],streaming=loaded[1],master=loaded[2];el.innerHTML='<header class="movie-hub-heading"><span class="press-kicker">فیلم‌ها و سریال‌ها در شبکهٔ پندار</span><h1>جانِ فیلم<span>.</span></h1><p>«منتخب پندار» آثار متصل به خبر، چهره، EPG و سرویس‌های تماشا را نشان می‌دهد؛ «کاتالوگ گسترده» لایهٔ جهانی Movie Master است.</p></header>'+_movieSourceTabs(master)+'<div id="movie-catalog-bar">'+(movieState.source==="master"?_movieMasterCatalogBar(master):_movieCatalogBar(d,streaming))+'</div><div class="movie-toolbar"><input id="movie-search" type="search" placeholder="فیلم یا سریال…" value="'+esc(movieState.query)+'" oninput="movieState.query=this.value;renderMovieGrid()"><select data-role="kind" onchange="movieState.kind=this.value;renderMovieGrid()"><option value="all" '+(movieState.kind==="all"?"selected":"")+'>همه</option><option value="movie" '+(movieState.kind==="movie"?"selected":"")+'>فیلم</option><option value="series" '+(movieState.kind==="series"?"selected":"")+'>سریال</option></select><select onchange="movieState.sort=this.value;renderMovieGrid()"><option value="popularity" '+(movieState.sort==="popularity"?"selected":"")+'>محبوب‌تر</option><option value="year" '+(movieState.sort==="year"?"selected":"")+'>تازه‌تر</option><option value="mentions" '+(movieState.sort==="mentions"?"selected":"")+'>بیشترین اشاره</option><option value="title" '+(movieState.sort==="title"?"selected":"")+'>الفبایی</option></select></div><div class="movie-grid" id="movie-grid"></div><p class="movie-method" id="movie-grid-note"></p>';renderMovieGrid();setHash("#/movies")}
 
 async function renderMovieGrid(){var el=document.getElementById("movie-grid");if(!el)return;var loaded=await Promise.all([loadMovies(),loadStreamingAvailability(),loadMovieMaster()]),d=loaded[0],streaming=loaded[1],master=loaded[2],q=_movieNorm(movieState.query),rows;if(movieState.source==="master"){rows=(master.items||[]).filter(x=>x.hydrated).map(_masterMovie)}else{rows=(d.movies||[])}rows=rows.filter(function(m){return movieState.kind==="all"||m.type===movieState.kind}).filter(function(m){return movieState.genre==="all"||(m.genres_fa||[]).includes(movieState.genre)}).filter(function(m){return !q||_movieNorm([m.title_fa,m.original_title].concat(m.genres_fa||[]).join(" ")).includes(q)});rows.sort(function(a,b){if(movieState.sort==="popularity")return Number(b.popularity||0)-Number(a.popularity||0);if(movieState.sort==="mentions")return _movieMentionCount(b)-_movieMentionCount(a);if(movieState.sort==="title")return String(a.title_fa||a.original_title||"").localeCompare(String(b.title_fa||b.original_title||""),"fa");return Number(b.year||0)-Number(a.year||0)});const bar=document.getElementById("movie-catalog-bar");if(bar)bar.innerHTML=movieState.source==="master"?_movieMasterCatalogBar(master):_movieCatalogBar(d,streaming);const tabs=document.querySelector(".movie-source-tabs");if(tabs)tabs.outerHTML=_movieSourceTabs(master);const note=document.getElementById("movie-grid-note");if(note)note.textContent=movieState.source==="master"?"برای سبک ماندن سایت، فعلاً فقط بخش غنی‌شده و پرکاربرد Movie Master در مرور وب لود می‌شود؛ آمار بالا مربوط به کل دیتابیس است.":"این بخش آثار متصل و تأییدشدهٔ خود پندار را نشان می‌دهد.";el.innerHTML=rows.length?rows.slice(0,500).map(_movieCard).join(""):'<div class="state"><div class="big">چیزی پیدا نشد</div><p>فیلتر نوع یا ژانر را تغییر بده.</p></div>'}
 
-async function openMasterMovie(pendarId){show("movies");setTab("");var el=document.getElementById("movies-content");el.innerHTML='<div class="spinner"></div>';var master=await loadMovieMaster(),raw=(master.items||[]).find(x=>String(x.pendar_id)===String(pendarId));if(!raw){el.innerHTML='<div class="state"><div class="big">عنوان پیدا نشد</div></div>';return}var m=_masterMovie(raw),links=_movieIdentityLinks(m),genres=(m.genres_fa||[]).join(" · ");document.title=(m.title_fa||m.original_title||"جان فیلم")+" | پندار";el.innerHTML='<button class="back" onclick="showMovies()">بازگشت به جانِ فیلم</button><article class="movie-detail"><div class="movie-hero"><div class="movie-poster movie-poster-lg">'+_moviePoster(m,true)+'</div><div class="movie-hero-copy"><span class="press-kicker">'+(m.type==="series"?"سریال":"فیلم")+' · '+esc(m.year||"")+'</span><h1>'+esc(m.title_fa||m.original_title||"")+'</h1>'+(m.original_title&&m.original_title!==m.title_fa?'<p class="movie-original" dir="ltr">'+esc(m.original_title)+'</p>':"")+'<p class="movie-master-genre">'+esc(genres)+'</p><div class="movie-facts"><span><small>Pendar ID</small><b>'+esc(m.master_id)+'</b></span><span><small>TMDB ID</small><b>'+esc(raw.tmdb_id||"")+'</b></span>'+(raw.imdb_id?'<span><small>IMDb</small><b>'+esc(raw.imdb_id)+'</b></span>':"")+'</div><div class="movie-external">'+links+'</div></div></div><section class="movie-provenance"><div class="book-section-title"><h2>هویت Master</h2><span>بدون fuzzy match</span></div><div class="movie-prov-card"><strong>TMDB Movie Master</strong><p>این رکورد مستقیماً با TMDB ID رسمی ساخته شده و در صورت موجود بودن، IMDb و Wikidata نیز از همان هویت دریافت شده‌اند.</p></div></section><p class="movie-method">در مرحلهٔ بعد جزئیات بیشتر، عوامل، خلاصه و اتصال این هویت به availability و اشاره‌های پندار اضافه می‌شود.</p></article>';setHash("#/master-movie/"+encodeURIComponent(pendarId))}
+async function openMasterMovie(pendarId){show("movies");setTab("");var el=document.getElementById("movies-content");el.innerHTML='<div class="spinner"></div>';var master=await loadMovieMaster(),raw=(master.items||[]).find(x=>String(x.pendar_id)===String(pendarId));if(!raw){el.innerHTML='<div class="state"><div class="big">عنوان پیدا نشد</div></div>';return}var m=_masterMovie(raw),links=_movieIdentityLinks(m),genres=(m.genres_fa||[]).join(" · ");document.title=(m.title_fa||m.original_title||"جان فیلم")+" | پندار";el.innerHTML='<button class="back" onclick="showMovies()">بازگشت به جانِ فیلم</button><article class="movie-detail"><div class="movie-hero"><div class="movie-poster movie-poster-lg">'+_moviePoster(m,true)+'</div><div class="movie-hero-copy"><span class="press-kicker">'+(m.type==="series"?"سریال":"فیلم")+' · '+esc(m.year||"")+'</span><h1>'+esc(m.title_fa||m.original_title||"")+'</h1>'+(m.original_title&&m.original_title!==m.title_fa?'<p class="movie-original" dir="ltr">'+esc(m.original_title)+'</p>':"")+'<p class="movie-master-genre">'+esc(genres)+'</p><div class="movie-facts"><span><small>Pendar ID</small><b>'+esc(m.master_id)+'</b></span><span><small>TMDB ID</small><b>'+esc(raw.tmdb_id||"")+'</b></span>'+(raw.imdb_id?'<span><small>IMDb</small><b>'+esc(raw.imdb_id)+'</b></span>':"")+'</div><div class="movie-external">'+links+'</div></div></div>'+_movieJanKalamSection(m)+'<section class="movie-provenance"><div class="book-section-title"><h2>هویت Master</h2><span>بدون fuzzy match</span></div><div class="movie-prov-card"><strong>TMDB Movie Master</strong><p>این رکورد مستقیماً با TMDB ID رسمی ساخته شده و در صورت موجود بودن، IMDb و Wikidata نیز از همان هویت دریافت شده‌اند.</p></div></section><p class="movie-method">در مرحلهٔ بعد جزئیات بیشتر، عوامل، خلاصه و اتصال این هویت به availability و اشاره‌های پندار اضافه می‌شود.</p></article>';setHash("#/master-movie/"+encodeURIComponent(pendarId))}
 
-async function openMovie(slug,canonicalId=null){var canonicalMovie=canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByRef('movies',slug);canonicalId=canonicalMovie&&canonicalMovie.id||canonicalId;show("movies");setTab("");var el=document.getElementById("movies-content");el.innerHTML='<div class="spinner"></div>';var loaded=await Promise.all([loadMovies(),loadStreamingAvailability()]),d=loaded[0],streaming=loaded[1],m=_movieBySlug(d,slug);if(!m){el.innerHTML='<div class="state"><div class="big">فیلم پیدا نشد</div></div>';return}document.title=(m.title_fa||m.original_title)+" | جانِ فیلم";var mentions=(m.mentions||[]).map(function(x){var fn=x.article_id?"openPressArticle":x.story_id?"openStory":x.post_id?"openStatement":null,id=x.article_id||x.story_id||x.post_id;var body='<span>'+esc(x.source_name||"جان‌کلام")+'</span><strong>'+esc(x.headline_fa||x.topic_fa||"اشاره به این اثر")+'</strong>'+(x.summary_fa?'<p>'+esc(x.summary_fa)+'</p>':"");return fn?'<button class="movie-mention" onclick="'+fn+'(\''+esc(id)+'\')">'+body+'</button>':'<div class="movie-mention">'+body+'</div>'}).join("");var ext=Object.entries(m.external||{}).filter(function(x){return /^https:\/\//.test(x[1])}).map(function(x){return '<a href="'+esc(x[1])+'" target="_blank" rel="noopener noreferrer">'+x[0].toUpperCase()+' ↗</a>'}).join("");var r=m.ratings||{};el.innerHTML='<button class="back" onclick="showMovies()">بازگشت به جانِ فیلم</button><article class="movie-detail"><div class="movie-hero"><div class="movie-poster movie-poster-lg">'+_moviePoster(m,true)+'</div><div class="movie-hero-copy"><span class="press-kicker">'+(m.type==="series"?"سریال":"فیلم")+' · '+esc(m.year||"")+'</span><h1>'+esc(m.title_fa||m.original_title||"")+'</h1>'+(m.original_title?'<p class="movie-original" dir="ltr">'+esc(m.original_title)+'</p>':"")+'<p class="movie-overview">'+esc(m.overview_fa||"")+'</p><div class="movie-ratings">'+_movieRating("IMDb",r.imdb)+_movieRating("Rotten Tomatoes",r.rotten_tomatoes,"%")+_movieRating("Metacritic",r.metacritic)+'</div><div class="movie-facts">'+(m.director&&m.director.name_fa?'<span><small>کارگردان</small><b>'+esc(m.director.name_fa)+'</b></span>':"")+(m.runtime_min?'<span><small>مدت</small><b>'+faN(m.runtime_min)+' دقیقه</b></span>':"")+(m.country_fa?'<span><small>محصول</small><b>'+esc(m.country_fa)+'</b></span>':"")+'</div>'+(m.cast&&m.cast.length?'<p class="movie-cast"><b>بازیگران:</b> '+esc(m.cast.join("، "))+'</p>':"")+'<div class="movie-external">'+ext+'</div></div></div>'+(canonicalMovie?canonicalStrip(canonicalMovie):'')+_movieProvenance(streaming,m)+_movieWatchSection(streaming,m)+'<section class="movie-evidence"><div class="book-section-title"><h2>در جان‌کلام</h2><span>'+faN(_movieMentionCount(m))+' اشاره</span></div><p class="movie-method">هر بار که این اثر در گفتهٔ یک چهره، خبر یا مطلب جریده شناسایی شود، پیوند آن اینجا ثبت می‌شود.</p><div class="movie-mentions">'+(mentions||'<div class="movie-empty-evidence">هنوز اشارهٔ مستندی برای این اثر ثبت نشده است.</div>')+'</div></section></article>';setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/movie/"+encodeURIComponent(slug))}
+async function openMovie(slug,canonicalId=null){var canonicalMovie=canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByRef('movies',slug);canonicalId=canonicalMovie&&canonicalMovie.id||canonicalId;show("movies");setTab("");var el=document.getElementById("movies-content");el.innerHTML='<div class="spinner"></div>';var loaded=await Promise.all([loadMovies(),loadStreamingAvailability()]),d=loaded[0],streaming=loaded[1],m=_movieBySlug(d,slug);if(!m){el.innerHTML='<div class="state"><div class="big">فیلم پیدا نشد</div></div>';return}document.title=(m.title_fa||m.original_title)+" | جانِ فیلم";var mentions=(m.mentions||[]).map(function(x){var fn=x.article_id?"openPressArticle":x.story_id?"openStory":x.post_id?"openStatement":null,id=x.article_id||x.story_id||x.post_id;var body='<span>'+esc(x.source_name||"جان‌کلام")+'</span><strong>'+esc(x.headline_fa||x.topic_fa||"اشاره به این اثر")+'</strong>'+(x.summary_fa?'<p>'+esc(_movieDescriptionText(x.summary_fa))+'</p>':"");return fn?'<button class="movie-mention" onclick="'+fn+'(\''+esc(id)+'\')">'+body+'</button>':'<div class="movie-mention">'+body+'</div>'}).join("");var ext=Object.entries(m.external||{}).filter(function(x){return /^https:\/\//.test(x[1])}).map(function(x){return '<a href="'+esc(x[1])+'" target="_blank" rel="noopener noreferrer">'+x[0].toUpperCase()+' ↗</a>'}).join("");var r=m.ratings||{};el.innerHTML='<button class="back" onclick="showMovies()">بازگشت به جانِ فیلم</button><article class="movie-detail"><div class="movie-hero"><div class="movie-poster movie-poster-lg">'+_moviePoster(m,true)+'</div><div class="movie-hero-copy"><span class="press-kicker">'+(m.type==="series"?"سریال":"فیلم")+' · '+esc(m.year||"")+'</span><h1>'+esc(m.title_fa||m.original_title||"")+'</h1>'+(m.original_title?'<p class="movie-original" dir="ltr">'+esc(m.original_title)+'</p>':"")+'<p class="movie-overview">'+esc(_movieDescriptionText(m.overview_fa))+'</p><div class="movie-ratings">'+_movieRating("IMDb",r.imdb)+_movieRating("Rotten Tomatoes",r.rotten_tomatoes,"%")+_movieRating("Metacritic",r.metacritic)+'</div><div class="movie-facts">'+(m.director&&m.director.name_fa?'<span><small>کارگردان</small><b>'+esc(m.director.name_fa)+'</b></span>':"")+(m.runtime_min?'<span><small>مدت</small><b>'+faN(m.runtime_min)+' دقیقه</b></span>':"")+(m.country_fa?'<span><small>محصول</small><b>'+esc(m.country_fa)+'</b></span>':"")+'</div>'+(m.cast&&m.cast.length?'<p class="movie-cast"><b>بازیگران:</b> '+esc(m.cast.join("، "))+'</p>':"")+'<div class="movie-external">'+ext+'</div></div></div>'+_movieJanKalamSection(m)+(canonicalMovie?canonicalStrip(canonicalMovie):'')+_movieProvenance(streaming,m)+_movieWatchSection(streaming,m)+'<section class="movie-evidence"><div class="book-section-title"><h2>در جان‌کلام</h2><span>'+faN(_movieMentionCount(m))+' اشاره</span></div><p class="movie-method">هر بار که این اثر در گفتهٔ یک چهره، خبر یا مطلب جریده شناسایی شود، پیوند آن اینجا ثبت می‌شود.</p><div class="movie-mentions">'+(mentions||'<div class="movie-empty-evidence">هنوز اشارهٔ مستندی برای این اثر ثبت نشده است.</div>')+'</div></section></article>';setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/movie/"+encodeURIComponent(slug))}
