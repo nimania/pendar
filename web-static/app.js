@@ -829,6 +829,7 @@ const PRESS_SOURCES = [
   {name:"خیابان جمهوری", aliases:["Jomhouri Street"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه گفت‌وگومحور", description:"کانال گفت‌وگومحور با مهمانان مختلف."},
   {name:"جدال", aliases:["Jedaal","Jedaal Farsi"], domain:"jedaal.tv", scope:"youtube", lang:"fa", type:"رسانه گفت‌وگومحور", description:"رسانهٔ علی علیزاده؛ شامل برنامه‌های تحلیلی و گفت‌وگو با مهمانان."},
   {name:"سیمرغ طلایی", aliases:["Golden Simorgh","GoldenSimorgh"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه گفت‌وگومحور", description:"کانال ویدئویی گفت‌وگو و تحلیل با مهمانان و صاحب‌نظران."},
+  {name:"تلویزیون هوش مصنوعی سیمرغ", aliases:["Simorgh AI TV"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه فناوری و ویدئویی", description:"کانال ویدئویی جامعهٔ هوش مصنوعی ایران."},
 
   // روزنامه‌ها و مطبوعات داخل ایران
   {name:"همشهری", aliases:["همشهری آنلاین"], domain:"hamshahrionline.ir", scope:"iran-paper", lang:"fa", type:"روزنامه"},
