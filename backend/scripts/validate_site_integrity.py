@@ -56,9 +56,9 @@ def snapshot(site: Path) -> dict:
     entity_registry = load_json(site, "entity-registry.json")
     entity_qa = load_json(site, "entity-qa.json")
 
-    # These are not thresholded yet, but malformed files must never reach Pages.
     periodicals = maybe_json(site, "periodicals.json")
-    press_directory = maybe_json(site, "press-directory.json")
+    press_directory = load_json(site, "press-directory.json")
+    tv_guide = load_json(site, "tv-guide.json")
 
     figure_rows = figures.get("figures", []) if isinstance(figures, dict) else []
     statements = sum(
@@ -72,6 +72,9 @@ def snapshot(site: Path) -> dict:
     entity_counts = entity_registry.get("counts", {}) if isinstance(entity_registry, dict) else {}
     entity_conflicts = entity_registry.get("conflicts", []) if isinstance(entity_registry, dict) else []
     qa_stats = entity_qa.get("stats", {}) if isinstance(entity_qa, dict) else {}
+    tv_channels = tv_guide.get("channels", []) if isinstance(tv_guide, dict) else []
+    tv_programmes = tv_guide.get("programmes", []) if isinstance(tv_guide, dict) else []
+    tv_channel_ids = {str(x.get("id") or "") for x in tv_channels if isinstance(x, dict)}
 
     total = stats.get("total") if isinstance(stats, dict) else None
     if not isinstance(total, int):
@@ -98,7 +101,11 @@ def snapshot(site: Path) -> dict:
         "entity_invalid_overrides": int(qa_stats.get("invalid_overrides") or 0),
         "timeline_points": len(timeline),
         "periodicals_rows": count_rows(periodicals) if periodicals is not None else None,
-        "press_directory_rows": count_rows(press_directory) if press_directory is not None else None,
+        "press_directory_rows": count_rows(press_directory),
+        "tv_channels": len(tv_channels),
+        "tv_programmes": len(tv_programmes),
+        "tv_has_bbc_persian": "bbc-persian:tv" in tv_channel_ids,
+        "tv_has_setareh": "setareh:tv" in tv_channel_ids,
     }
 
 
@@ -114,6 +121,9 @@ def main() -> int:
     p.add_argument("--min-books", type=int, default=50)
     p.add_argument("--min-canonical-entities", type=int, default=500)
     p.add_argument("--min-canonical-people", type=int, default=100)
+    p.add_argument("--min-press-directory", type=int, default=20)
+    p.add_argument("--min-tv-channels", type=int, default=2)
+    p.add_argument("--min-tv-programmes", type=int, default=5)
     p.add_argument("--max-total-drop", type=float, default=0.20)
     args = p.parse_args()
 
@@ -133,6 +143,9 @@ def main() -> int:
         "books": args.min_books,
         "canonical_entities": args.min_canonical_entities,
         "canonical_people": args.min_canonical_people,
+        "press_directory_rows": args.min_press_directory,
+        "tv_channels": args.min_tv_channels,
+        "tv_programmes": args.min_tv_programmes,
     }
     for key, minimum in thresholds.items():
         if cur[key] < minimum:
@@ -142,6 +155,11 @@ def main() -> int:
         errors.append(f"entity graph has {cur['entity_broken_edges']} broken edges")
     if cur["entity_invalid_overrides"] > 0:
         errors.append(f"entity overrides have {cur['entity_invalid_overrides']} validation errors")
+
+    if not cur["tv_has_bbc_persian"]:
+        errors.append("TV Guide is missing BBC Persian")
+    if not cur["tv_has_setareh"]:
+        errors.append("TV Guide is missing Setareh TV")
 
     # stats.timeline should describe the same published corpus as stats.total.
     if cur["timeline_points"] != cur["total_news"]:
@@ -192,7 +210,9 @@ def main() -> int:
         "Pendar integrity gate passed: "
         f"{cur['total_news']} news, {cur['figures']} figures, "
         f"{cur['statements']} statements, {cur['majra_topics']} Jan-e Majra topics, "
-        f"{cur['books']} books, {cur['canonical_entities']} canonical entities."
+        f"{cur['books']} books, {cur['canonical_entities']} canonical entities, "
+        f"{cur['press_directory_rows']} press sources, "
+        f"{cur['tv_channels']} TV channels / {cur['tv_programmes']} programmes."
     )
     return 0
 
