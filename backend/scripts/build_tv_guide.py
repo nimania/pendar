@@ -37,6 +37,7 @@ SOURCE_REGISTRY = [
     {"key": "ariana", "name": "Ariana TV", "status": "official", "note": "جدول هفتگی مستقیم از صفحه رسمی Ariana Television"},
     {"key": "tolo", "name": "TOLO TV", "status": "planned", "note": "Schedule رسمی"},
     {"key": "mbc-persia", "name": "MBC Persia", "status": "planned", "note": "زمان‌بندی نیمه‌ساختاریافته"},
+    {"key": "setareh", "name": "Setareh TV", "status": "official", "note": "منبع رسمی ستاره تی‌وی؛ جدول پخش رسمی در setareh.tv/conductor"},
 ]
 
 def fetch(url: str) -> bytes:
