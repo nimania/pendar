@@ -784,6 +784,9 @@ async function openBookPerson(slug, canonicalId=null){
 let periodicalRows = [];
 let pressScope = "all";
 let pressLanguage = "all";
+let pressKind = "all";
+let pressSourceTab = "latest";
+let pressSourceCurrent = "";
 let pressStatsCache = null;
 let pressHealthCache = null;
 let pressDirectoryCache = null;
@@ -812,13 +815,20 @@ const PRESS_SOURCES = [
   {name:"Zabane.z", domain:"youtube.com", scope:"youtube", lang:"fa", type:"کانال ویدئویی"},
   {name:"۷ آبان", aliases:["7Aban_h","7Aban"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"کانال ویدئویی"},
   {name:"Ivar Farhadi", aliases:["ایوار فرهادی"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"کانال شخصی"},
-  {name:"Farhikhtegan Online", aliases:["فرهیختگان آنلاین"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه ویدئویی"},
+  {name:"فرهیختگان آنلاین", aliases:["Farhikhtegan Online"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه ویدئویی", description:"بخش آنلاین و ویدئویی روزنامهٔ فرهیختگان."},
   {name:"Manoto TV", aliases:["من‌وتو","من و تو"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"شبکه ویدئویی"},
-  {name:"Cimorg Futures", domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه آینده‌پژوهی"},
+  {name:"سیمرغ فیوچرز", aliases:["Cimorg Futures"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه آینده‌پژوهی", description:"رسانهٔ ویدئویی با تمرکز بر آینده‌پژوهی و گفت‌وگو."},
   {name:"Persian Clubhouse", domain:"youtube.com", scope:"youtube", lang:"fa", type:"گفت‌وگو و کلاب‌هاوس"},
   {name:"Baziya (Ali Zia)", aliases:["Baziya","بازیا","علی ضیا"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"تاک‌شو ویدئویی"},
   {name:"Rok Show", domain:"youtube.com", scope:"youtube", lang:"fa", type:"برنامه ویدئویی"},
   {name:"Pump VOD", domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه ویدئویی"},
+  {name:"استودیو پات", aliases:["Studio Patt"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه گفت‌وگومحور", description:"استودیو و رسانهٔ ویدئویی با گفت‌وگوها و مهمانان متعدد."},
+  {name:"فیوز پادکست", aliases:["Fuse Podcast"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"پادکست گفت‌وگومحور", description:"پادکست ویدئویی به میزبانی آرش نعل‌چگر با مهمانان مختلف."},
+  {name:"افق فردا", aliases:["Tomorrow’s Horizon","Tomorrow's Horizon"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه گفت‌وگومحور", description:"رسانهٔ ویدئویی با گفت‌وگوها و حاضرین متعدد."},
+  {name:"فیلم سجاد نی", aliases:["Sajadni Movies"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"کانال سینمایی", description:"کانال ویدئویی سجاد نی دربارهٔ سینما و موضوعات مرتبط."},
+  {name:"خیابان جمهوری", aliases:["Jomhouri Street"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه گفت‌وگومحور", description:"کانال گفت‌وگومحور با مهمانان مختلف."},
+  {name:"جدال", aliases:["Jedaal","Jedaal Farsi"], domain:"jedaal.tv", scope:"youtube", lang:"fa", type:"رسانه گفت‌وگومحور", description:"رسانهٔ علی علیزاده؛ شامل برنامه‌های تحلیلی و گفت‌وگو با مهمانان."},
+  {name:"سیمرغ طلایی", aliases:["Golden Simorgh","GoldenSimorgh"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه گفت‌وگومحور", description:"کانال ویدئویی گفت‌وگو و تحلیل با مهمانان و صاحب‌نظران."},
 
   // روزنامه‌ها و مطبوعات داخل ایران
   {name:"همشهری", aliases:["همشهری آنلاین"], domain:"hamshahrionline.ir", scope:"iran-paper", lang:"fa", type:"روزنامه"},
@@ -985,10 +995,22 @@ const PRESS_SOURCES = [
   {name:"Süddeutsche Zeitung", domain:"sueddeutsche.de", scope:"world", lang:"de", type:"روزنامه"}
 ]
 
-const PRESS_SCOPE_FA = {all:"همه", "iran-agency":"خبرگزاری‌ها و رسانه‌های خبری ایران", "iran-paper":"روزنامه‌های ایران", "iran-magazine":"مجلات ایران", youtube:"کانال‌ها و پادکست‌های ویدئویی", diaspora:"جراید دیاسپورا", world:"رسانه‌های جهان", magazine:"همهٔ مجلات و هفته‌نامه‌ها"};
+const PRESS_SCOPE_FA = {all:"همه", "iran-agency":"رسانه‌های خبری ایران", "iran-paper":"مطبوعات ایران", "iran-magazine":"مجلات ایران", youtube:"ویدئو و پادکست", diaspora:"رسانه‌های فارسی بیرون ایران", world:"رسانه‌های جهان", magazine:"مجلات"};
+const PRESS_KIND_FA = {all:"همه", newspaper:"روزنامه‌ها", agency:"خبرگزاری‌ها", magazine:"مجلات", podcast:"پادکست‌ها", youtube:"کانال‌های یوتیوب", talk:"گفت‌وگومحور", broadcast:"تلویزیون و رادیو", online:"رسانه‌های آنلاین"};
+function pressKindOf(s){
+  const t=String(s?.type||"");
+  if(/پادکست/.test(t)) return "podcast";
+  if(/گفت[‌ -]?وگو|تاک[‌ -]?شو|کلاب/.test(t)) return "talk";
+  if(/روزنامه/.test(t)) return "newspaper";
+  if(/خبرگزاری/.test(t)) return "agency";
+  if(/مجله|ماهنامه|فصلنامه|هفته[‌ -]?نامه|دوماهنامه/.test(t)) return "magazine";
+  if(/تلویزیون|رادیو|شبکه/.test(t)) return "broadcast";
+  if(s?.scope==="youtube") return "youtube";
+  return "online";
+}
 function pressMatchesScope(s, scope){
   if(scope==="all") return true;
-  if(scope==="magazine") return /مجله|هفته‌نامه/.test(String(s.type||""));
+  if(scope==="magazine") return pressKindOf(s)==="magazine";
   if(scope==="iran-magazine") return s.scope==="iran-magazine";
   return s.scope===scope;
 }
@@ -999,9 +1021,28 @@ function pressLogo(s) {
   return `<span class="press-logo"><img src="${src}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><b style="display:none">${esc((s.name||"ج").slice(0,1))}</b></span>`;
 }
 function setPressScope(v){ pressScope=v; renderPress(""); }
+function setPressKind(v){ pressKind=v; renderPress(""); }
 function setPressLanguage(v){ pressLanguage=v; renderPress(""); }
+function setPressSourceTab(sourceName, tab){ pressSourceTab=tab; renderPress(sourceName); }
+function _pressFindSource(name){
+  const n=_canonicalNorm(name||"");
+  return PRESS_SOURCES.find(s=>[s.name,...(s.aliases||[])].some(x=>_canonicalNorm(x)===n))||null;
+}
+function _pressMediaData(meta, figureData){
+  if(!meta||!figureData)return {adapter:null,videos:[],people:[]};
+  const names=new Set([meta.name,...(meta.aliases||[])].map(_canonicalNorm));
+  const figures=figureData.figures||[];
+  const adapter=figures.find(f=>f.directory===false && [f.name_fa,...(f.aliases||[])].map(_canonicalNorm).some(x=>names.has(x)))||null;
+  const videos=(adapter?.youtube_videos||[]).slice().sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
+  const ids=new Set(videos.map(v=>String(v.id||"")).filter(Boolean));
+  const people=figures.filter(f=>f.directory!==false && (f.youtube_videos||[]).some(v=>ids.has(String(v.id||""))))
+    .map(f=>({handle:f.handle,name_fa:f.name_fa,role_fa:f.role_fa,avatar:f.avatar,count:(f.youtube_videos||[]).filter(v=>ids.has(String(v.id||""))).length}))
+    .sort((a,b)=>b.count-a.count||String(a.name_fa||"").localeCompare(String(b.name_fa||""),"fa"));
+  return {adapter,videos,people};
+}
 
 async function showPress(sourceName, canonicalId=null) {
+  if((sourceName||"")!==pressSourceCurrent){ pressSourceCurrent=sourceName||""; pressSourceTab="latest"; }
   const canonicalSource=sourceName?(canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByName("source",sourceName)):null;
   canonicalId=canonicalSource?.id||canonicalId;
   show("press"); setTab("press");
@@ -1105,41 +1146,53 @@ async function renderPress(sourceName, canonicalSource=null) {
     const sourceDirRow=s=>{
       const names=[s.name,...(s.aliases||[])];
       const matches=names.map(n=>directoryMap.get(n)).filter(Boolean);
-      if(!matches.length) return null;
+      if(!matches.length) return {count:0,latest_at:null};
       return matches.reduce((a,x)=>({
         count:a.count+Number(x.count||0),
         latest_at:(!a.latest_at||String(x.latest_at||"")>String(a.latest_at||""))?(x.latest_at||a.latest_at):a.latest_at
       }),{count:0,latest_at:null});
     };
-    const visibleSources=PRESS_SOURCES.filter(s=>sourceDirRow(s)?.count>0);
-    const sources=visibleSources.filter(s => pressMatchesScope(s,pressScope) && (pressLanguage==="all"||s.lang===pressLanguage));
-    const scopeControls=Object.entries(PRESS_SCOPE_FA).map(([k,v])=>`<button class="fchip ${pressScope===k?"on":""}" onclick="setPressScope('${k}')">${v}</button>`).join("");
-    const langs=[...new Set(visibleSources.filter(s=>pressMatchesScope(s,pressScope)).map(s=>s.lang))];
+    const allSources=PRESS_SOURCES.filter(s=>pressLanguage==="all"||s.lang===pressLanguage);
+    const sources=allSources.filter(s=>pressKind==="all"||pressKindOf(s)===pressKind)
+      .sort((a,b)=>{
+        const ad=sourceDirRow(a),bd=sourceDirRow(b);
+        return Number(bd.count>0)-Number(ad.count>0)||bd.count-ad.count||String(a.name||"").localeCompare(String(b.name||""),"fa");
+      });
+    const kindCounts={};
+    for(const s of PRESS_SOURCES) kindCounts[pressKindOf(s)]=(kindCounts[pressKindOf(s)]||0)+1;
+    const kindControls=Object.entries(PRESS_KIND_FA).map(([k,v])=>`<button class="press-kind-chip ${pressKind===k?"on":""}" onclick="setPressKind('${k}')"><span>${v}</span><b>${faN(k==="all"?PRESS_SOURCES.length:(kindCounts[k]||0))}</b></button>`).join("");
+    const langs=[...new Set(PRESS_SOURCES.filter(s=>pressKind==="all"||pressKindOf(s)===pressKind).map(s=>s.lang))];
     const langControls=["all",...langs].map(k=>`<button class="fchip ${pressLanguage===k?"on":""}" onclick="setPressLanguage('${k}')">${PRESS_LANG_FA[k]||k}</button>`).join("");
     const cards=sources.map(s=>{
-      const dr=sourceDirRow(s)||{count:0,latest_at:null};
-      const h=pressSourceHealth(s,health);
-      const bits=[faN(dr.count)+" مطلب"];
-      if(dr.latest_at) bits.push("آخرین: "+relTime(dr.latest_at));
-      const status=bits.join(" · ");
-      return `<button class="press-source press-source-rich" onclick="showPress('${esc(s.name)}')">
+      const dr=sourceDirRow(s), h=pressSourceHealth(s,health), kind=PRESS_KIND_FA[pressKindOf(s)]||s.type;
+      const active=dr.count>0;
+      return `<button class="press-source press-source-rich press-directory-card ${active?"has-content":"no-content"}" onclick="showPress('${esc(s.name)}')">
         ${pressLogo(s)}
-        <span class="press-source-copy"><span class="press-source-title"><strong>${esc(s.name)}</strong>${pressHealthBadge(h)}</span><small>${esc(s.type)} · ${PRESS_LANG_FA[s.lang]||s.lang}</small><em>${status}${h&&h.last_run?` · پایش ${relTime(h.last_run)}`:""}</em></span>
+        <span class="press-source-copy">
+          <span class="press-source-title"><strong>${esc(s.name)}</strong>${pressHealthBadge(h)}</span>
+          <small>${esc(s.type)} · ${PRESS_LANG_FA[s.lang]||s.lang}</small>
+          ${s.description?`<p>${esc(s.description)}</p>`:""}
+          <em>${active?faN(dr.count)+" مطلب":(s.scope==="youtube"?"منبع ویدئویی ثبت‌شده":"در انتظار نخستین محتوای پردازش‌شده")}${dr.latest_at?" · آخرین: "+relTime(dr.latest_at):""}</em>
+        </span><span class="press-kind-label">${esc(kind)}</span>
       </button>`;
     }).join("");
     const known=new Set(PRESS_SOURCES.flatMap(s=>[s.name,...(s.aliases||[])]));
-    const extra=manifest
-      .filter(x=>x&&x.source_name&&Number(x.count||0)>0&&!known.has(String(x.source_name)))
-      .map(x=>[String(x.source_name),Number(x.count||0)]);
-    el.innerHTML=`<div class="press-directory-note"><b>تمرکز تحریریه:</b> مطالبی که به ایران، ایرانیان، سیاست خارجی ایران یا پیامدهای منطقه‌ای مرتبط‌اند؛ زبان منبع محدودیت نیست.</div>
-      <div class="press-filter-row">${scopeControls}</div>
+    const extra=manifest.filter(x=>x&&x.source_name&&Number(x.count||0)>0&&!known.has(String(x.source_name))).map(x=>[String(x.source_name),Number(x.count||0)]);
+    const activeCount=PRESS_SOURCES.filter(s=>sourceDirRow(s).count>0).length;
+    el.innerHTML=`<section class="press-directory-hero"><span class="press-kicker">دایرکتوری منابع پندار</span><h1>منابع</h1><p>روزنامه‌ها، خبرگزاری‌ها، مجلات، پادکست‌ها و رسانه‌های ویدئویی در یک فهرست واحد؛ هر منبع صفحهٔ مستقل خودش را دارد.</p><div class="press-directory-stats"><span><b>${faN(PRESS_SOURCES.length)}</b> منبع ثبت‌شده</span><span><b>${faN(activeCount)}</b> دارای محتوای پردازش‌شده</span><span><b>${faN(PRESS_SOURCES.filter(s=>s.scope==="youtube").length)}</b> منبع ویدئویی</span></div></section>
+      <div class="press-kind-filter">${kindControls}</div>
       <div class="press-filter-row press-langs">${langControls}</div>
-      ${cards?`<div class="press-grid">${cards}</div>`:`<div class="state"><div class="big">در این بخش هنوز منبعی با محتوای منتشرشده نداریم</div></div>`}
-      ${extra.length?`<div class="rule"><span>دیگر نشریات پردازش‌شده</span><span class="l"></span></div><div class="press-grid">${extra.map(([name,count])=>`<button class="press-source" onclick="showPress('${esc(name)}')"><span class="press-mark">ج</span><strong>${esc(name)}</strong><small>${faN(count)} مطلب</small></button>`).join("")}</div>`:""}`;
+      ${cards?`<div class="press-grid press-directory-grid">${cards}</div>`:`<div class="state"><div class="big">منبعی با این فیلتر پیدا نشد</div></div>`}
+      ${extra.length?`<div class="rule"><span>منابع تازهٔ پردازش‌شده</span><span class="l"></span></div><div class="press-grid">${extra.map(([name,count])=>`<button class="press-source" onclick="showPress('${esc(name)}')"><span class="press-mark">ج</span><strong>${esc(name)}</strong><small>${faN(count)} مطلب</small></button>`).join("")}</div>`:""}`;
+
     return;
   }
 
-  const meta=PRESS_SOURCES.find(s=>s.name===sourceName);
+  const meta=_pressFindSource(sourceName);
+  let mediaData={adapter:null,videos:[],people:[]};
+  if(meta?.scope==="youtube"){
+    try{ mediaData=_pressMediaData(meta,await loadFigures()); }catch(_){}
+  }
   const items=meta ? [meta.name,...(meta.aliases||[])].flatMap(n=>groups.get(n)||[]) : (groups.get(sourceName)||[]);
   const st=meta?pressSourceStats(meta,stats):{story_count:0,iran_story_count:0,latest_at:null};
   const h=meta?pressSourceHealth(meta,health):null;
@@ -1162,9 +1215,18 @@ async function renderPress(sourceName, canonicalSource=null) {
     </article>`;
   };
   const renderSourcePage=(feedItems=[])=>{
-    el.innerHTML=`<div class="press-source-head"><button class="back" onclick="showPress()">همهٔ رسانه‌ها</button>${meta?pressLogo(meta):""}<div><h2>${esc(sourceName)} ${pressHealthBadge(h)}</h2>${meta?`<p>${esc(meta.type)} · ${PRESS_LANG_FA[meta.lang]||meta.lang} · ${PRESS_SCOPE_FA[meta.scope]||""}${st.iran_story_count?` · ${faN(st.iran_story_count)} خبر مرتبط با ایران`:""}${st.latest_at?` · آخرین خبر: ${relTime(st.latest_at)}`:""}${h&&h.last_run?` · آخرین پایش: ${relTime(h.last_run)}`:""}${h?` · دریافت آخر: ${faN(h.last_fetched||0)} / جدید: ${faN(h.last_new||0)}`:""}</p>`:""}</div></div>
+    const isVideo=meta?.scope==="youtube";
+    const latestHtml=(items.length||feedItems.length)?`<div class="press-source-count">${faN(feedItems.length + items.length)} مطلب موجود از این منبع</div><div class="press-list">${feedItems.map(sourceStoryCard).join("")}${items.map(x=>`<article class="press-article press-click" onclick="openPressArticle('\\${esc(x.id)}')"><span class="chip">${esc(meta?.name||sourceName)}</span><h2>${esc(x.headline_fa||x.title_fa||x.title_original||"")}</h2>${x.summary_fa?`<p>${esc(x.summary_fa)}</p>`:""}<div class="press-read">خواندن بازگویی تفصیلی ←</div></article>`).join("")}</div>`:`<div class="state press-empty"><div class="big">هنوز مطلبی از این رسانه پردازش نشده</div><p class="muted">خود منبع در دایرکتوری ثبت شده است و محتوای تازه پس از دریافت در همین صفحه ظاهر می‌شود.</p></div>`;
+    const videosHtml=mediaData.videos.length?`<div class="press-video-grid">${mediaData.videos.slice(0,60).map(v=>`<article class="press-video-card"><a href="${esc(v.url)}" target="_blank" rel="noopener"><span class="press-video-thumb">${v.thumbnail?`<img src="${esc(v.thumbnail)}" alt="" loading="lazy">`:""}<i>▶</i></span><b>${esc(v.title||"ویدئو")}</b><small>${v.published_at?relTime(v.published_at):"YouTube"}</small></a>${v.recap_fa?`<button onclick="openStatement('youtube-${String(v.id||"").replace(/'/g,"\\'")}')">جان کلام این ویدئو</button>`:""}</article>`).join("")}</div>`:`<div class="state press-empty"><div class="big">هنوز ویدئویی در خروجی ثبت نشده</div><p class="muted">کانال منبع ثبت شده و با اجرای گردآورنده، ویدئوهای تازه اینجا قرار می‌گیرند.</p></div>`;
+    const peopleHtml=mediaData.people.length?`<div class="press-source-people">${mediaData.people.map(p=>`<button onclick="openFigure('${String(p.handle||"").replace(/'/g,"\\'")}')">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:`<span class="press-person-fallback">${esc((p.name_fa||"?").slice(0,1))}</span>`}<span><b>${esc(p.name_fa||"")}</b><small>${esc(p.role_fa||"")} · ${faN(p.count)} ویدئو</small></span></button>`).join("")}</div>`:`<div class="state press-empty"><div class="big">هنوز چهره‌ای به این منبع متصل نشده</div><p class="muted">با شناسایی نام مهمان‌ها در ویدئوها، پروفایل چهره‌ها به این صفحه متصل می‌شود.</p></div>`;
+    const aboutHtml=`<section class="press-source-about"><h2>دربارهٔ ${esc(meta?.name||sourceName)}</h2><p>${esc(meta?.description||((meta?.type||"رسانه")+" در دایرکتوری منابع پندار."))}</p><div class="press-source-facts"><span><b>نوع</b>${esc(meta?.type||"رسانه")}</span><span><b>زبان</b>${esc(PRESS_LANG_FA[meta?.lang]||meta?.lang||"—")}</span><span><b>حوزه</b>${esc(PRESS_SCOPE_FA[meta?.scope]||meta?.scope||"—")}</span>${h?`<span><b>وضعیت پایش</b>${esc(h.state||"—")}</span>`:""}</div></section>`;
+    const tabs=[["latest","آخرین مطالب"],...(isVideo?[["videos","ویدئوها"],["people","چهره‌های حاضر"]]:[]),["about","دربارهٔ منبع"]];
+    const tabsHtml=`<div class="press-source-tabs">${tabs.map(([k,label])=>`<button class="${pressSourceTab===k?"on":""}" onclick="setPressSourceTab('${esc(meta?.name||sourceName)}','${k}')">${label}${k==="videos"&&mediaData.videos.length?` <b>${faN(mediaData.videos.length)}</b>`:""}${k==="people"&&mediaData.people.length?` <b>${faN(mediaData.people.length)}</b>`:""}</button>`).join("")}</div>`;
+    const body=pressSourceTab==="videos"?videosHtml:pressSourceTab==="people"?peopleHtml:pressSourceTab==="about"?aboutHtml:latestHtml;
+    el.innerHTML=`<div class="press-source-head"><button class="back" onclick="showPress()">همهٔ منابع</button>${meta?pressLogo(meta):""}<div><span class="press-kicker">${esc(meta?.type||"رسانه")}</span><h2>${esc(meta?.name||sourceName)} ${pressHealthBadge(h)}</h2>${meta?`<p>${PRESS_LANG_FA[meta.lang]||meta.lang}${st.iran_story_count?` · ${faN(st.iran_story_count)} خبر مرتبط با ایران`:""}${st.latest_at?` · آخرین خبر: ${relTime(st.latest_at)}`:""}${h&&h.last_run?` · آخرین پایش: ${relTime(h.last_run)}`:""}</p>`:""}</div></div>
       ${canonicalSource?canonicalStrip(canonicalSource):""}
-      ${(items.length||feedItems.length)?`<div class="press-source-count">${faN(feedItems.length + items.length)} مطلب موجود از این منبع</div><div class="press-list">${feedItems.map(sourceStoryCard).join("")}${items.map(x=>`<article class="press-article press-click" onclick="openPressArticle(\'${esc(x.id)}\')"><span class="chip">${esc(sourceName)}</span><h2>${esc(x.headline_fa||x.title_fa||x.title_original||"")}</h2>${x.summary_fa?`<p>${esc(x.summary_fa)}</p>`:""}<div class="press-read">خواندن بازگویی تفصیلی ←</div></article>`).join("")}</div>`:`<div class="state press-empty"><div class="big">هنوز مطلبی از این رسانه پردازش نشده</div><p class="muted">این منبع در فهرست پایش است. مطالب مرتبط با ایران پس از دریافت و پردازش در همین صفحه ظاهر می‌شوند.</p></div>`}`;
+      ${tabsHtml}
+      <div class="press-source-tab-body">${body}</div>`;
   };
   renderSourcePage([]);
 
