@@ -417,6 +417,15 @@ def _video_premium_recap(provider, row: dict) -> dict:
         audited_text = str(audited.get("studio_recap_fa") or "").strip()
         if audited_text:
             data["studio_recap_fa"] = audited_text
+    studio_final = str(data.get("studio_recap_fa") or "").strip()
+    source_words = max(1, len(transcript.split()))
+    min_studio_words = min(4500, max(900, int(source_words * 0.18)))
+    if studio_final and len(studio_final.split()) < min_studio_words:
+        print(
+            f"youtube: premium quality gate rejected {row.get('id')} "
+            f"({len(studio_final.split())} words < {min_studio_words})"
+        )
+        data["studio_recap_fa"] = ""
     if any(k in data for k in ("recap_fa", "summary_fa", "topic_fa", "studio_recap_fa")):
         return data
     posts = data.get("posts")
@@ -657,6 +666,37 @@ def _lang_rank(lang: str) -> int:
     return 99
 
 
+def _transcript_quality_ok(text: str) -> bool:
+    """Reject binary/image garbage and severely corrupted caption payloads."""
+    s = str(text or "").strip()
+    if len(s) < 120:
+        return False
+    compact = [ch for ch in s if not ch.isspace()]
+    if not compact:
+        return False
+    bad = sum(1 for ch in compact if ch == "\ufffd" or (ord(ch) < 32 and ch not in "\t\n\r"))
+    if bad / len(compact) > 0.01:
+        return False
+    alnum = sum(1 for ch in compact if ch.isalpha() or ch.isdigit())
+    if alnum / len(compact) < 0.45:
+        return False
+    return len(s.split()) >= 25
+
+
+def _subtitle_url_candidate(url: str, node: dict, lang: str, key_name: str) -> bool:
+    u = str(url or "").lower()
+    if not u.startswith(("http://", "https://")):
+        return False
+    if any(x in u for x in (".jpg", ".jpeg", ".png", ".webp", ".gif", "i.ytimg.com/", "ggpht.com/")):
+        return False
+    if key_name != "url":
+        return True
+    meta = " ".join(str(node.get(k) or "") for k in (
+        "type", "kind", "format", "ext", "name", "label", "title", "language", "lang"
+    )).lower()
+    return bool(lang) or any(x in meta for x in ("subtitle", "caption", "vtt", "srt", "txt", "json3", "transcript"))
+
+
 def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
     """Fetch a transcript through the paid DownSub API when configured.
 
@@ -686,7 +726,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
     ctype = str(r.headers.get("content-type") or "").lower()
     if "json" not in ctype:
         text = _caption_text_from_payload(r.text)
-        if len(text) >= 120:
+        if _transcript_quality_ok(text):
             print(f"youtube: DownSub transcript ok {video_id} (plain)")
             return re.sub(r"\s+", " ", text).strip(), ""
         return "", ""
@@ -711,7 +751,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
                     text_candidates.append((_lang_rank(lang), lang, value))
             for key_name in ("url", "download_url", "download", "src", "link"):
                 value = node.get(key_name)
-                if isinstance(value, str) and value.startswith(("http://", "https://")):
+                if isinstance(value, str) and _subtitle_url_candidate(value, node, lang, key_name):
                     url_candidates.append((_lang_rank(lang), lang, value))
             for value in node.values():
                 if isinstance(value, (dict, list)):
@@ -729,7 +769,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         if lang and _lang_rank(lang) >= 99:
             continue
         text = _caption_text_from_payload(raw)
-        if len(text) >= 120:
+        if _transcript_quality_ok(text):
             print(f"youtube: DownSub transcript ok {video_id} ({lang or 'unknown'})")
             return re.sub(r"\s+", " ", text).strip(), lang
 
@@ -740,8 +780,11 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
             rr = client.get(url, timeout=60)
             if rr.status_code != 200:
                 continue
+            ctype = str(rr.headers.get("content-type") or "").lower()
+            if ctype.startswith(("image/", "audio/", "video/")):
+                continue
             text = _caption_text_from_payload(rr.text)
-            if len(text) >= 120:
+            if _transcript_quality_ok(text):
                 print(f"youtube: DownSub subtitle ok {video_id} ({lang or 'unknown'})")
                 return re.sub(r"\s+", " ", text).strip(), lang
         except Exception:
@@ -752,7 +795,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         if lang:
             continue
         text = _caption_text_from_payload(raw)
-        if len(text) >= 120:
+        if _transcript_quality_ok(text):
             print(f"youtube: DownSub transcript ok {video_id} (unlabeled)")
             return re.sub(r"\s+", " ", text).strip(), ""
     print(f"youtube: DownSub returned no usable transcript for {video_id}")
@@ -779,13 +822,16 @@ def _cached_transcript(cache: dict, video_id: str) -> tuple[str, str]:
     if not isinstance(row, dict):
         return "", ""
     text = str(row.get("text") or "").strip()
-    if len(text) < 120:
+    if not _transcript_quality_ok(text):
+        cache.pop(str(video_id), None)
         return "", ""
     return text, str(row.get("language") or "")
 
 
 def _store_transcript(cache: dict, video_id: str, text: str, lang: str,
                       entry: dict, figure) -> None:
+    if not _transcript_quality_ok(text):
+        return
     cache[str(video_id)] = {
         "video_id": str(video_id),
         "text": str(text or "").strip(),
