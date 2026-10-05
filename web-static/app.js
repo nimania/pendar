@@ -2,7 +2,7 @@
 const DATA = "data";
 
 // Shared data caches must exist before startup renderers run.
-let _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null;
+let _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null, _STUDIO_RECAPS = null;
 
 const CAT_FA = { iran: "ایران", world: "جهان", politics: "سیاست", economy: "اقتصاد",
   technology: "فناوری", ai: "هوش مصنوعی", culture: "فرهنگ", sport: "ورزش", science: "علم", environment: "محیط‌زیست", entertainment: "سرگرمی", health: "سلامت" };
@@ -1243,6 +1243,8 @@ async function route() {
   if (kind === "faq") return showFaq();
   if (kind === "figures") return showFigures();
   if (kind === "videos") return showLatestVideos(arg === "recaps" ? "recaps" : "all");
+  if (kind === "studio-recaps") return showStudioRecaps();
+  if (kind === "studio-recap" && arg) return openStudioRecap(arg);
   if (kind === "press") return showPress();
   if (kind === "press-source" && arg) return showPress(arg);
   if (kind === "press-article" && arg) return openPressArticle(arg);
@@ -2690,8 +2692,8 @@ function socialLinks(links) {
 .figure-search-hit b{display:flex;align-items:center;gap:4px}
 .figure-search-hit small{color:#8fa89b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .figure-search-empty{padding:14px;color:#8fa89b;text-align:center}
-.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}.latest-videos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:8px 0 22px}.latest-videos-head h1{margin:4px 0 6px}.latest-videos-head p{margin:0;max-width:720px;color:#8fa89b;line-height:1.8}.latest-videos-stats{display:flex;gap:8px;flex-wrap:wrap}.latest-videos-stats span,.latest-videos-stats button{border:1px solid rgba(143,168,155,.22);border-radius:999px;padding:7px 11px;font:inherit;font-size:12px;background:transparent;color:inherit}.latest-videos-stats button{cursor:pointer}.latest-videos-stats button.on{border-color:rgba(26,157,126,.48);background:rgba(26,157,126,.10);color:#1a9d7e}.latest-videos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.latest-video-card{overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.latest-video-main{display:block;color:inherit;text-decoration:none}.latest-video-copy{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.latest-video-copy b{font-size:14px;line-height:1.6}.latest-video-copy small{font-size:11.5px;color:#8fa89b}.latest-video-people{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px}.latest-video-people button{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(143,168,155,.2);border-radius:999px;background:transparent;color:inherit;padding:4px 8px;font:inherit;font-size:11.5px;cursor:pointer}.latest-video-people img{width:20px;height:20px;border-radius:50%;object-fit:cover}.latest-video-actions{padding:0 10px 12px}.latest-video-actions button,.video-recap-btn{width:100%;border:1px solid rgba(26,157,126,.35);background:rgba(26,157,126,.08);color:#1a9d7e;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}.figure-youtube-card>a{color:inherit;text-decoration:none}.video-recap-btn{margin:0 10px 10px;width:calc(100% - 20px)}.video-statement-recap{font-size:17px;line-height:2.05;margin-top:18px}.video-statement-recap p{margin:0 0 1.2em}.video-statement-points{margin:18px 0;padding:16px 18px;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.video-statement-points h3{margin:0 0 10px}.video-statement-points li{line-height:1.85;margin:6px 0}
-@media(max-width:900px){.latest-videos-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.figure-youtube{padding:12px}.figure-youtube-grid,.latest-videos-grid{grid-template-columns:1fr}.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
+.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}.latest-videos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:8px 0 22px}.latest-videos-head h1{margin:4px 0 6px}.latest-videos-head p{margin:0;max-width:720px;color:#8fa89b;line-height:1.8}.latest-videos-stats{display:flex;gap:8px;flex-wrap:wrap}.latest-videos-stats span,.latest-videos-stats button{border:1px solid rgba(143,168,155,.22);border-radius:999px;padding:7px 11px;font:inherit;font-size:12px;background:transparent;color:inherit}.latest-videos-stats button{cursor:pointer}.latest-videos-stats button.on{border-color:rgba(26,157,126,.48);background:rgba(26,157,126,.10);color:#1a9d7e}.latest-videos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.latest-video-card{overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.latest-video-main{display:block;color:inherit;text-decoration:none}.latest-video-copy{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.latest-video-copy b{font-size:14px;line-height:1.6}.latest-video-copy small{font-size:11.5px;color:#8fa89b}.latest-video-people{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px}.latest-video-people button{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(143,168,155,.2);border-radius:999px;background:transparent;color:inherit;padding:4px 8px;font:inherit;font-size:11.5px;cursor:pointer}.latest-video-people img{width:20px;height:20px;border-radius:50%;object-fit:cover}.latest-video-actions{padding:0 10px 12px}.latest-video-actions button,.video-recap-btn{width:100%;border:1px solid rgba(26,157,126,.35);background:rgba(26,157,126,.08);color:#1a9d7e;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}.figure-youtube-card>a{color:inherit;text-decoration:none}.video-recap-btn{margin:0 10px 10px;width:calc(100% - 20px)}.video-statement-recap{font-size:17px;line-height:2.05;margin-top:18px}.video-statement-recap p{margin:0 0 1.2em}.video-statement-points{margin:18px 0;padding:16px 18px;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.video-statement-points h3{margin:0 0 10px}.video-statement-points li{line-height:1.85;margin:6px 0}.studio-recap-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}.studio-recap-card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid rgba(143,168,155,.18);border-radius:16px;background:rgba(143,168,155,.035)}.studio-recap-card h2{font-size:17px;line-height:1.65;margin:0}.studio-recap-card p{margin:0;color:#8fa89b;line-height:1.75}.studio-recap-card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11.5px;color:#8fa89b}.studio-recap-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.studio-recap-card-actions button,.studio-recap-card-actions a,.studio-recap-toolbar button,.studio-recap-toolbar a{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:8px 11px;font:inherit;font-size:12px;cursor:pointer;text-decoration:none}.studio-recap-card-actions .primary,.studio-recap-toolbar .primary{border-color:rgba(26,157,126,.4);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-article{max-width:860px;margin:0 auto;padding:6px 0 36px}.studio-recap-article h1{line-height:1.45;margin:12px 0 8px}.studio-recap-byline{color:#8fa89b;line-height:1.8}.studio-recap-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}.studio-recap-body{font-size:18px;line-height:2.08}.studio-recap-body p{margin:0 0 1.35em}.studio-recap-body h2{margin:2.1em 0 .7em;font-size:22px}.studio-recap-notice{padding:11px 13px;border:1px solid rgba(143,168,155,.16);border-radius:12px;color:#8fa89b;font-size:12px;line-height:1.8}
+@media(max-width:900px){.latest-videos-grid,.studio-recap-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.figure-youtube{padding:12px}.figure-youtube-grid,.latest-videos-grid,.studio-recap-list{grid-template-columns:1fr}.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
   document.head.appendChild(st);
 })();
 
@@ -2842,6 +2844,17 @@ async function loadFigures() {
   }
   return _FIG;
 }
+async function loadStudioRecaps() {
+  if (_STUDIO_RECAPS) return _STUDIO_RECAPS;
+  try {
+    const rows = await getJSON(`${DATA}/studio-recaps.json`);
+    _STUDIO_RECAPS = Array.isArray(rows) ? rows : [];
+  } catch (_) {
+    _STUDIO_RECAPS = [];
+  }
+  return _STUDIO_RECAPS;
+}
+
 async function loadNewsPeople() {
   if (_NEWS_PEOPLE) return _NEWS_PEOPLE;
   try { _NEWS_PEOPLE = await getJSON(`${DATA}/news-people.json`); } catch (e) { _NEWS_PEOPLE = { figures: [], fields: {} }; }
@@ -3151,6 +3164,79 @@ function renderFiguresDirectory() {
   _figDirectoryMode = "direct";
   renderFigures();
 }
+function _studioRecapBodyHtml(text) {
+  const parts = String(text || "").split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);
+  return parts.map(p => {
+    const plain = p.replace(/^#+\s*/, "").trim();
+    if (/^جان کلام[：:]?$/.test(plain)) return '<h2>جان کلام</h2>';
+    if (/^#{1,3}\s+/.test(p)) return '<h2>'+esc(plain)+'</h2>';
+    return '<p>'+esc(p).replace(/\n/g,"<br>")+'</p>';
+  }).join("");
+}
+async function copyStudioRecap(id, btn) {
+  const rows=await loadStudioRecaps();
+  const row=rows.find(x=>String(x.id)===String(id));
+  if(!row) return;
+  try {
+    await navigator.clipboard.writeText(String(row.studio_recap_fa||""));
+    if(btn){const old=btn.textContent;btn.textContent="کپی شد ✓";setTimeout(()=>{btn.textContent=old},1600);}
+  } catch (_) {
+    if(btn) btn.textContent="کپی نشد";
+  }
+}
+async function showStudioRecaps() {
+  show("figures"); setTab("");
+  const lede=document.getElementById("figures-lede"); if(lede) lede.style.display="none";
+  const timeline=document.getElementById("figure-timeline"); if(timeline) timeline.innerHTML="";
+  const el=document.getElementById("figures"); if(!el) return;
+  el.innerHTML='<div class="spinner"></div>';
+  const rows=await loadStudioRecaps();
+  document.title="ری‌کپ‌های پریمیوم | پندار";
+  setHash("#/studio-recaps");
+  el.innerHTML=`
+    <div class="latest-videos-head">
+      <button class="back" onclick="showLatestVideos('recaps')">بازگشت به ویدئوها</button>
+      <div><span class="press-kicker">استودیو جان کلام</span><h1>ری‌کپ‌های پریمیوم</h1>
+      <p>نسخه‌های کامل و آمادهٔ اجرا؛ تولیدشده از تمام متن قابل‌دسترسی ویدئو و بازبینی‌شده برای جا نماندن نکات.</p></div>
+      <div class="latest-videos-stats"><span><b>${faN(rows.length)}</b> پریمیوم</span></div>
+    </div>
+    <div class="studio-recap-notice">این آرشیو روی GitHub Pages عمومی است. متن‌ها برای تولید و ضبط «جان کلام» آماده شده‌اند و ممکن است بسیار مفصل‌تر از ری‌کپ عمومی باشند.</div>
+    ${rows.length?`<div class="studio-recap-list">${rows.map(r=>`
+      <article class="studio-recap-card">
+        <div class="studio-recap-card-meta"><span>${esc(r.name_fa||"")}</span><span>·</span><span>${r.published_at?relTime(r.published_at):""}</span><span>·</span><span>${faN(r.word_count||String(r.studio_recap_fa||"").split(/\s+/).filter(Boolean).length)} واژه</span></div>
+        <h2>${esc(r.topic_fa||r.video_title||"ری‌کپ پریمیوم")}</h2>
+        <p>${esc(r.summary_fa||"")}</p>
+        <div class="studio-recap-card-actions">
+          <button class="primary" onclick="openStudioRecap('${String(r.id||"").replace(/'/g,"\\'")}')">متن کامل</button>
+          <a href="${esc(r.url||"#")}" target="_blank" rel="noopener">ویدئوی اصلی ↗</a>
+        </div>
+      </article>`).join("")}</div>`:'<div class="state"><div class="big">هنوز نسخهٔ پریمیومی ساخته نشده.</div></div>'}
+  `;
+}
+async function openStudioRecap(id) {
+  show("figures"); setTab("");
+  const lede=document.getElementById("figures-lede"); if(lede) lede.style.display="none";
+  const timeline=document.getElementById("figure-timeline"); if(timeline) timeline.innerHTML="";
+  const el=document.getElementById("figures"); if(!el) return;
+  el.innerHTML='<div class="spinner"></div>';
+  const rows=await loadStudioRecaps();
+  const r=rows.find(x=>String(x.id)===String(id));
+  if(!r){el.innerHTML='<div class="state"><div class="big">این ری‌کپ پیدا نشد.</div></div>';return;}
+  document.title=(r.topic_fa||r.video_title||"ری‌کپ پریمیوم")+" | پندار";
+  setHash("#/studio-recap/"+encodeURIComponent(String(r.id||"")));
+  el.innerHTML=`<article class="studio-recap-article">
+    <button class="back" onclick="showStudioRecaps()">بازگشت به آرشیو پریمیوم</button>
+    <span class="press-kicker">استودیو جان کلام · ${esc(r.name_fa||"")}</span>
+    <h1>${esc(r.topic_fa||r.video_title||"ری‌کپ پریمیوم")}</h1>
+    <div class="studio-recap-byline">${esc(r.video_title||"")}${r.word_count?` · ${faN(r.word_count)} واژه`:""}${r.published_at?` · ${relTime(r.published_at)}`:""}</div>
+    <div class="studio-recap-toolbar">
+      <button class="primary" onclick="copyStudioRecap('${String(r.id||"").replace(/'/g,"\\'")}',this)">کپی متن برای ضبط</button>
+      <a href="${esc(r.url||"#")}" target="_blank" rel="noopener">ویدئوی اصلی ↗</a>
+    </div>
+    <div class="studio-recap-body">${_studioRecapBodyHtml(r.studio_recap_fa)}</div>
+  </article>`;
+}
+
 async function showLatestVideos(mode = "all") {
   show("figures"); setTab("");
   const lede=document.getElementById("figures-lede");
@@ -3160,7 +3246,9 @@ async function showLatestVideos(mode = "all") {
   const el=document.getElementById("figures");
   if(!el) return;
   el.innerHTML='<div class="spinner"></div>';
-  const d=await loadFigures();
+  const [d,studioRows]=await Promise.all([loadFigures(),loadStudioRecaps()]);
+  const studioByVideo=new Map((studioRows||[]).map(r=>[String(r.video_id||""),
+    r]));
   const byVideo=new Map();
   for(const person of (d.figures||[])){
     for(const v of (person.youtube_videos||[])){
@@ -3183,6 +3271,7 @@ async function showLatestVideos(mode = "all") {
   const videos=[...byVideo.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
   const recapVideos=videos.filter(v=>String(v.recap_fa||"").trim());
   const recapsOnly=mode==="recaps";
+  const studioCount=(studioRows||[]).length;
   const visibleVideos=recapsOnly?recapVideos:videos;
   const peopleCount=new Set(videos.flatMap(v=>v.people.map(p=>String(p.handle).toLowerCase()))).size;
   document.title=(recapsOnly?"ری‌کپ ویدئوهای چهره‌ها":"آخرین ویدئوهای چهره‌ها")+" | پندار";
@@ -3196,6 +3285,7 @@ async function showLatestVideos(mode = "all") {
         <button class="${!recapsOnly?"on":""}" onclick="showLatestVideos('all')"><b>${faN(videos.length)}</b> ویدئو</button>
         <span><b>${faN(peopleCount)}</b> چهره</span>
         ${recapVideos.length?`<button class="${recapsOnly?"on":""}" onclick="showLatestVideos('recaps')"><b>${faN(recapVideos.length)}</b> ری‌کپ</button>`:""}
+        ${studioCount?`<button onclick="showStudioRecaps()"><b>${faN(studioCount)}</b> پریمیوم</button>`:""}
       </div>
     </div>
     ${visibleVideos.length?`<div class="latest-videos-grid">${visibleVideos.slice(0,120).map(v=>`
@@ -3205,7 +3295,7 @@ async function showLatestVideos(mode = "all") {
           <span class="latest-video-copy"><b>${esc(v.title||"ویدئوی یوتیوب")}</b><small>${v.published_at?relTime(v.published_at):"YouTube"} · YouTube ↗</small></span>
         </a>
         <div class="latest-video-people">${v.people.map(p=>`<button onclick="openFigure('${String(p.handle||"").replace(/'/g,"\\'")}')">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></button>`).join("")}</div>
-        ${v.recap_fa?`<div class="latest-video-actions"><button onclick="openStatement('youtube-${String(v.id||"").replace(/'/g,"\\'")}')">ری‌کپ حرفه‌ای</button></div>`:""}
+        ${v.recap_fa?`<div class="latest-video-actions"><button onclick="openStatement('youtube-${String(v.id||"").replace(/'/g,"\\'")}')">ری‌کپ حرفه‌ای</button>${studioByVideo.has(String(v.id||""))?`<button onclick="openStudioRecap('${String(studioByVideo.get(String(v.id||"")).id||"").replace(/'/g,"\\'")}')">نسخهٔ پریمیوم</button>`:""}</div>`:""}
       </article>`).join("")}</div>`:`<div class="state"><div class="big">${recapsOnly?"هنوز ری‌کپی آماده نشده":"هنوز ویدئویی برای چهره‌ها پیدا نشده"}</div></div>`}
   `;
 }
