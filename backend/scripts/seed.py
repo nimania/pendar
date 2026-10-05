@@ -208,10 +208,9 @@ def run() -> None:
             name = figure_source_name(f)
             wanted.add(name)
             s = db.query(Source).filter_by(name=name).one_or_none()
-            # External figures are profile identities fed by other collectors and
-            # by attributed statements in news. Never invent a Telegram source
-            # from their stable profile handle.
-            if f.external:
+            # External figures may still expose a verified direct Telegram source.
+            # In that case ingest it, while keeping the stable profile route handle.
+            if f.external and not f.telegram_handle:
                 if s is not None:
                     s.enabled = False
                     s.homepage_url = figure_home_url(f)
