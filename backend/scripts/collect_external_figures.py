@@ -46,6 +46,7 @@ YOUTUBE_TRANSCRIPT_CACHE_OUT = HERE.parent / "data" / "youtube-transcripts.json"
 PROJECT_FINANCE_OUT = HERE.parent / "data" / "project-finance.json"
 YOUTUBE_RETRY_HOURS = 72
 YOUTUBE_RECAP_VERSION = 3
+STUDIO_RECAP_VERSION = 1
 
 # Paid-tier reference prices, USD per 1M text tokens, from Google's Gemini API
 # pricing page. These are estimates only: actual billing may be $0 on free tier.
@@ -1043,6 +1044,7 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
     attempts = 0
     recap_state = _load_recap_state()
     transcript_cache = _load_transcript_cache()
+    premium_video_id = str(os.environ.get("PREMIUM_VIDEO_ID") or "").strip()
     headers = {"User-Agent": "Mozilla/5.0 (compatible; JanKalam/1.0)"}
     api = YouTubeTranscriptApi()
 
@@ -1055,48 +1057,127 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
             and x.get("handle")
             and str(x.get("handle") or "") not in YOUTUBE_RECAP_EXCLUDE_HANDLES
         ],
-        key=lambda x: str(x.get("published_at") or ""),
+        key=lambda x: (
+            1 if str(x.get("id") or "") == premium_video_id else 0,
+            str(x.get("published_at") or ""),
+        ),
         reverse=True,
     )
 
     by_handle = {f.handle: f for f in FIGURES}
+    premium_seen = False
     with httpx.Client(headers=headers, timeout=25, follow_redirects=True) as client:
         for entry in candidates:
-            if attempts >= YOUTUBE_MAX_NEW_PER_RUN:
-                break
+            video_id = str(entry["id"])
+            wants_premium = bool(premium_video_id and video_id == premium_video_id)
+            if wants_premium:
+                premium_seen = True
+            elif attempts >= YOUTUBE_MAX_NEW_PER_RUN:
+                continue
+
             figure = by_handle.get(str(entry.get("handle") or ""))
             if figure is None:
                 continue
-            video_id = str(entry["id"])
             ext_id = "youtube-" + video_id
             existing = old_youtube.get(ext_id) or {}
-            if int(existing.get("recap_version") or 0) >= YOUTUBE_RECAP_VERSION:
-                continue
-            state_key = f"{figure.handle}:{video_id}"
-            if not _retry_due(recap_state.get(state_key) or {}):
-                continue
-            attempts += 1
 
-            # A failure for one video must never discard recaps already completed
-            # earlier in the same run.
+            if wants_premium:
+                if int(existing.get("premium_version") or 0) >= STUDIO_RECAP_VERSION and str(existing.get("_studio_recap_fa") or "").strip():
+                    print(f"youtube: selected studio script already current {video_id}")
+                    continue
+            else:
+                if int(existing.get("recap_version") or 0) >= YOUTUBE_RECAP_VERSION:
+                    continue
+
+            state_key = f"{figure.handle}:{video_id}"
+            if not wants_premium and not _retry_due(recap_state.get(state_key) or {}):
+                continue
+            if not wants_premium:
+                attempts += 1
+
             try:
                 transcript, lang = _cached_transcript(transcript_cache, video_id)
                 if transcript:
                     print(f"youtube: transcript cache hit {video_id} ({len(transcript)} chars)")
                 else:
                     transcript, lang = youtube_transcript(api, client, video_id)
-                    if len(transcript) >= 120:
+                    if _transcript_quality_ok(transcript):
                         _store_transcript(transcript_cache, video_id, transcript, lang, entry, figure)
                         print(f"youtube: transcript cached {video_id} ({len(transcript)} chars)")
 
-                if len(transcript) < 120:
+                if not _transcript_quality_ok(transcript):
                     recap_state[state_key] = {
                         "status": "no_transcript",
                         "version": YOUTUBE_RECAP_VERSION,
                         "last_attempt": datetime.now().astimezone().isoformat(),
                     }
                     _save_recap_state(recap_state)
-                    print(f"youtube: transcript unavailable {video_id} after fallbacks")
+                    print(f"youtube: transcript unavailable or rejected {video_id}")
+                    continue
+
+                if wants_premium:
+                    lab = _video_premium_recap(provider, {
+                        "id": video_id,
+                        "person": figure.name_fa,
+                        "role": figure.role_fa,
+                        "video_title": entry.get("title") or existing.get("video_title") or "",
+                        "transcript": transcript,
+                    })
+                    studio_recap = str(lab.get("studio_recap_fa") or "").strip()
+                    if not studio_recap:
+                        recap_state[state_key] = {
+                            "status": "premium_incomplete",
+                            "version": YOUTUBE_RECAP_VERSION,
+                            "premium_version": STUDIO_RECAP_VERSION,
+                            "last_attempt": datetime.now().astimezone().isoformat(),
+                        }
+                        _save_recap_state(recap_state)
+                        _save_project_finance()
+                        print(f"youtube: selected studio script incomplete {video_id}")
+                        continue
+
+                    row = dict(existing)
+                    row.update({
+                        "id": ext_id,
+                        "handle": figure.handle,
+                        "name_fa": figure.name_fa,
+                        "role_fa": figure.role_fa,
+                        "field": figure.field,
+                        "kind": "analysis",
+                        "platform": "youtube",
+                        "source_language": row.get("source_language") or lang or "und",
+                        "translation_label_fa": row.get("translation_label_fa") or (
+                            "بازگویی از ویدئوی اصلی" if lang == "fa"
+                            else f"بازگویی از {lang or 'زبان اصلی'}"
+                        ),
+                        "topic_fa": str(row.get("topic_fa") or lab.get("topic_fa") or entry.get("title") or "ویدئوی تازه").strip(),
+                        "summary_fa": str(row.get("summary_fa") or lab.get("summary_fa") or "").strip(),
+                        "recap_fa": str(row.get("recap_fa") or lab.get("recap_fa") or "").strip(),
+                        "_studio_recap_fa": studio_recap,
+                        "premium_version": STUDIO_RECAP_VERSION,
+                        "recap_version": max(int(row.get("recap_version") or 0), YOUTUBE_RECAP_VERSION),
+                        "transcript_available": True,
+                        "url": row.get("url") or entry.get("url"),
+                        "published_at": row.get("published_at") or entry.get("published_at"),
+                        "media_url": row.get("media_url") or entry.get("thumbnail") or entry.get("media_url"),
+                        "video_title": row.get("video_title") or entry.get("title") or "",
+                        "source_type": row.get("source_type") or entry.get("source_type") or "official",
+                    })
+                    if not row.get("key_points_fa"):
+                        row["key_points_fa"] = [
+                            str(x).strip() for x in (lab.get("key_points_fa") or [])
+                            if str(x).strip()
+                        ][:20]
+                    fresh.append(row)
+                    recap_state[state_key] = {
+                        "status": "success",
+                        "version": YOUTUBE_RECAP_VERSION,
+                        "premium_version": STUDIO_RECAP_VERSION,
+                        "last_attempt": datetime.now().astimezone().isoformat(),
+                    }
+                    _save_recap_state(recap_state)
+                    _save_project_finance()
+                    print(f"youtube: selected studio script complete {video_id} ({figure.handle})")
                     continue
 
                 lab = _video_public_recap(provider, {
@@ -1116,7 +1197,7 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                     }
                     _save_recap_state(recap_state)
                     _save_project_finance()
-                    print(f"youtube: AI recap incomplete {video_id}")
+                    print(f"youtube: public recap incomplete {video_id}")
                     continue
 
                 row = {
@@ -1146,15 +1227,14 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                     "version": YOUTUBE_RECAP_VERSION,
                     "last_attempt": datetime.now().astimezone().isoformat(),
                 }
-                # Persist immediately so a later provider outage cannot erase a
-                # completed video or force another paid transcript request.
                 _save_recap_state(recap_state)
                 _save_project_finance()
-                print(f"youtube: recap complete {video_id} ({figure.handle})")
+                print(f"youtube: public recap complete {video_id} ({figure.handle})")
             except Exception as exc:
                 recap_state[state_key] = {
-                    "status": "ai_error",
+                    "status": "premium_error" if wants_premium else "ai_error",
                     "version": YOUTUBE_RECAP_VERSION,
+                    "premium_version": STUDIO_RECAP_VERSION if wants_premium else 0,
                     "last_attempt": datetime.now().astimezone().isoformat(),
                     "error": type(exc).__name__,
                 }
@@ -1163,10 +1243,12 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                 print(f"youtube: video failed {video_id} ({type(exc).__name__}); continuing")
                 continue
 
+    if premium_video_id and not premium_seen:
+        print(f"youtube: requested studio video not found in current catalog {premium_video_id}")
     _save_recap_state(recap_state)
     _save_transcript_cache(transcript_cache)
     _save_project_finance()
-    print(f"youtube: {attempts} catalog videos checked; {len(fresh)} public recaps")
+    print(f"youtube: {attempts} automatic public videos checked; {len(fresh)} rows updated")
     return fresh
 
 
