@@ -47,11 +47,13 @@ jobs:
           press_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/periodicals.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           weather_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           commerce_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/books-commerce.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          movie_master_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/movie-master.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           test -n "$build_id"
           echo "build_id=$build_id" >> "$GITHUB_OUTPUT"
           echo "press_id=$press_id" >> "$GITHUB_OUTPUT"
           echo "weather_id=$weather_id" >> "$GITHUB_OUTPUT"
           echo "commerce_id=$commerce_id" >> "$GITHUB_OUTPUT"
+          echo "movie_master_id=$movie_master_id" >> "$GITHUB_OUTPUT"
 
       - name: Download latest complete static site
         env:
@@ -99,6 +101,21 @@ jobs:
               encoding="utf-8",
           )
           PY
+          fi
+
+      - name: Overlay freshest Movie Master indexes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MOVIE_MASTER_ID: ${{ steps.refresh.outputs.movie_master_id }}
+        run: |
+          if [ -z "$MOVIE_MASTER_ID" ]; then
+            echo "::warning::No successful Movie Master run found."
+          else
+            rm -rf /tmp/movie-master && mkdir -p /tmp/movie-master
+            if gh run download "$MOVIE_MASTER_ID" -n pendar-movie-master-indexes -D /tmp/movie-master; then
+              mkdir -p site/data
+              find /tmp/movie-master -type f \( -name 'movie-master-summary.json' -o -name 'movie-master-top.json' \) -exec cp {} site/data/ \;
+            fi
           fi
 
       - name: Restore movie identity cache
