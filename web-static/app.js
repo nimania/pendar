@@ -78,7 +78,8 @@ const _LOCAL_ENTITY_FALLBACKS = [
         {kind:"x",label:"ایکس",url:"https://x.com/nimania"},
         {kind:"instagram",label:"اینستاگرام",url:"https://www.instagram.com/nima.afsharnaderi/"},
         {kind:"youtube",label:"یوتیوب",url:"https://www.youtube.com/channel/UCYDOVO7EpX3QNEf9Ddk1-AQ"},
-        {kind:"telegram",label:"تلگرام",url:"https://t.me/nimaafsharnaderi"}
+        {kind:"telegram",label:"تلگرام",url:"https://t.me/nimaafsharnaderi"},
+        {kind:"website",label:"گروکی‌پدیا",url:"https://grokipedia.com/page/nima-afshar-naderi"}
       ]
     }
   }
@@ -2844,7 +2845,8 @@ const _LOCAL_FIGURE_FALLBACKS = [
       {kind:"x", label:"ایکس", url:"https://x.com/nimania"},
       {kind:"instagram", label:"اینستاگرام", url:"https://www.instagram.com/nima.afsharnaderi/"},
       {kind:"youtube", label:"یوتیوب", url:"https://www.youtube.com/channel/UCYDOVO7EpX3QNEf9Ddk1-AQ"},
-      {kind:"telegram", label:"تلگرام", url:"https://t.me/nimaafsharnaderi"}
+      {kind:"telegram", label:"تلگرام", url:"https://t.me/nimaafsharnaderi"},
+      {kind:"website", label:"گروکی‌پدیا", url:"https://grokipedia.com/page/nima-afshar-naderi"}
     ]
   }
 ];
