@@ -2698,6 +2698,17 @@ function socialLinks(links) {
 .identity-claimed,.profile-claimed{display:inline-block;margin-inline-start:8px;color:#6f7c75;font-size:12px;font-weight:500}
 .profile-claimed{display:block;margin:4px 0 7px;color:#6f7c75}
 .canonical-head b{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.figure-profile-search{position:relative;padding:12px 16px 4px;border-bottom:1px solid rgba(143,168,155,.16)}
+.figure-profile-search-box{display:flex;align-items:center;gap:8px;border:1px solid rgba(143,168,155,.28);border-radius:999px;padding:8px 12px;background:rgba(143,168,155,.04)}
+.figure-profile-search-box input{width:100%;border:0;outline:0;background:transparent;color:inherit;font:inherit}
+.figure-profile-search-box input::placeholder{color:#8fa89b}
+.figure-profile-search-results{display:none;position:absolute;z-index:30;top:58px;right:16px;left:16px;background:var(--card,#fff);border:1px solid rgba(143,168,155,.24);border-radius:14px;box-shadow:0 14px 36px rgba(0,0,0,.12);overflow:hidden;max-height:390px;overflow-y:auto}
+.figure-search-hit{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border:0;border-bottom:1px solid rgba(143,168,155,.12);background:transparent;color:inherit;text-align:right;cursor:pointer}
+.figure-search-hit:hover{background:rgba(26,157,126,.06)}
+.figure-search-hit span{display:flex;flex-direction:column;min-width:0}
+.figure-search-hit b{display:flex;align-items:center;gap:4px}
+.figure-search-hit small{color:#8fa89b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.figure-search-empty{padding:14px;color:#8fa89b;text-align:center}
 @media(max-width:600px){.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
   document.head.appendChild(st);
 })();
@@ -3180,6 +3191,19 @@ async function openFigureByName(name) {
   const x = (d.figures || []).find(f => norm(f.name_fa) === norm(name));
   if (x) return openFigure(x.handle);
 }
+async function searchFigureProfiles(query) {
+  const box=document.getElementById("figure-profile-search-results");
+  if(!box) return;
+  const q=_canonicalNorm(query||"");
+  if(!q){box.innerHTML="";box.style.display="none";return}
+  const d=await loadFigures();
+  const rows=(d.figures||[]).filter(f=>{
+    const hay=[f.name_fa,f.handle,f.role_fa,f.field_fa,...(f.aliases||[])].map(_canonicalNorm).join(" ");
+    return hay.includes(q);
+  }).slice(0,8);
+  box.style.display="block";
+  box.innerHTML=rows.length?rows.map(f=>`<button class="figure-search-hit" onclick="openFigure('${String(f.handle||"").replace(/'/g,"\\'")}')">${avatar(f,"sm")}<span><b>${esc(f.name_fa||"")}${f.verified?'<em class="profile-verified" title="هویت تأییدشده">✓</em>':""}</b><small>${esc(f.role_fa||f.field_fa||"")}</small></span></button>`).join(""):'<div class="figure-search-empty">چهره‌ای پیدا نشد.</div>';
+}
 let _figureProfileFilter = "all";
 function setFigureProfileFilter(handle, mode) {
   _figureProfileFilter = mode;
@@ -3262,6 +3286,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   </article>`;
   el.innerHTML = `<div class="x-profile">
     <div class="x-profile-top"><button class="x-back" onclick="showFigures()" aria-label="بازگشت">←</button><div><b>${esc(x.name_fa)}</b><small>${faN((x.posts||[]).length)} گفته</small></div></div>
+    <div class="figure-profile-search"><div class="figure-profile-search-box"><span aria-hidden="true">⌕</span><input type="search" placeholder="جستجو میان چهره‌ها…" autocomplete="off" oninput="searchFigureProfiles(this.value)" onfocus="if(this.value)searchFigureProfiles(this.value)"></div><div id="figure-profile-search-results" class="figure-profile-search-results"></div></div>
     <div class="x-cover"></div>
     <div class="x-profile-main">
       <div class="x-avatar-wrap">${avatar(x,"lg")}</div>
