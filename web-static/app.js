@@ -2,7 +2,7 @@
 const DATA = "data";
 
 // Shared data caches must exist before startup renderers run.
-let _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null, _STUDIO_RECAPS = null;
+let _FIG = null, _NEWS_PEOPLE = null, _CURATED_POEMS = null, _STUDIO_RECAPS = null, _PROJECT_FINANCE = null;
 
 const CAT_FA = { iran: "ایران", world: "جهان", politics: "سیاست", economy: "اقتصاد",
   technology: "فناوری", ai: "هوش مصنوعی", culture: "فرهنگ", sport: "ورزش", science: "علم", environment: "محیط‌زیست", entertainment: "سرگرمی", health: "سلامت" };
@@ -1257,6 +1257,7 @@ async function route() {
   if (kind === "figures") return showFigures();
   if (kind === "videos") return showLatestVideos(arg === "recaps" ? "recaps" : "all");
   if (kind === "studio-recaps") return showStudioRecaps();
+  if (kind === "finance") return showProjectFinance();
   if (kind === "studio-recap" && arg) return openStudioRecap(arg);
   if (kind === "press") return showPress();
   if (kind === "press-source" && arg) return showPress(arg);
@@ -2710,7 +2711,7 @@ function socialLinks(links) {
 .figure-search-hit b{display:flex;align-items:center;gap:4px}
 .figure-search-hit small{color:#8fa89b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .figure-search-empty{padding:14px;color:#8fa89b;text-align:center}
-.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}.latest-videos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:8px 0 22px}.latest-videos-head h1{margin:4px 0 6px}.latest-videos-head p{margin:0;max-width:720px;color:#8fa89b;line-height:1.8}.latest-videos-stats{display:flex;gap:8px;flex-wrap:wrap}.latest-videos-stats span,.latest-videos-stats button{border:1px solid rgba(143,168,155,.22);border-radius:999px;padding:7px 11px;font:inherit;font-size:12px;background:transparent;color:inherit}.latest-videos-stats button{cursor:pointer}.latest-videos-stats button.on{border-color:rgba(26,157,126,.48);background:rgba(26,157,126,.10);color:#1a9d7e}.latest-videos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.latest-video-card{overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.latest-video-main{display:block;color:inherit;text-decoration:none}.latest-video-copy{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.latest-video-copy b{font-size:14px;line-height:1.6}.latest-video-copy small{font-size:11.5px;color:#8fa89b}.latest-video-people{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px}.latest-video-people button{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(143,168,155,.2);border-radius:999px;background:transparent;color:inherit;padding:4px 8px;font:inherit;font-size:11.5px;cursor:pointer}.latest-video-people img{width:20px;height:20px;border-radius:50%;object-fit:cover}.latest-video-actions{padding:0 10px 12px}.latest-video-actions button,.video-recap-btn{width:100%;border:1px solid rgba(26,157,126,.35);background:rgba(26,157,126,.08);color:#1a9d7e;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}.figure-youtube-card>a{color:inherit;text-decoration:none}.video-recap-btn{margin:0 10px 10px;width:calc(100% - 20px)}.youtube-recap-embed{position:relative;width:100%;aspect-ratio:16/9;margin:18px 0 22px;border-radius:16px;overflow:hidden;background:#090b0a;border:1px solid rgba(143,168,155,.16)}.youtube-recap-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-statement-recap{font-size:17px;line-height:2.05;margin-top:18px}.video-statement-recap p{margin:0 0 1.2em}.video-statement-points{margin:18px 0;padding:16px 18px;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.video-statement-points h3{margin:0 0 10px}.video-statement-points li{line-height:1.85;margin:6px 0}.studio-recap-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}.studio-recap-card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid rgba(143,168,155,.18);border-radius:16px;background:rgba(143,168,155,.035)}.studio-recap-card h2{font-size:17px;line-height:1.65;margin:0}.studio-recap-card p{margin:0;color:#8fa89b;line-height:1.75}.studio-recap-card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11.5px;color:#8fa89b}.studio-recap-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.studio-recap-card-actions button,.studio-recap-card-actions a,.studio-recap-toolbar button,.studio-recap-toolbar a{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:8px 11px;font:inherit;font-size:12px;cursor:pointer;text-decoration:none}.studio-recap-card-actions .primary,.studio-recap-toolbar .primary{border-color:rgba(26,157,126,.4);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-article{max-width:860px;margin:0 auto;padding:6px 0 36px}.studio-recap-article h1{line-height:1.45;margin:12px 0 8px}.studio-recap-byline{color:#8fa89b;line-height:1.8}.studio-recap-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}.studio-recap-body{font-size:18px;line-height:2.08}.studio-recap-body p{margin:0 0 1.35em}.studio-recap-body h2{margin:2.1em 0 .7em;font-size:22px}.studio-recap-notice{padding:11px 13px;border:1px solid rgba(143,168,155,.16);border-radius:12px;color:#8fa89b;font-size:12px;line-height:1.8}.studio-queue-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:16px 0}.studio-queue-filters{display:flex;gap:7px;flex-wrap:wrap}.studio-queue-filters button{border:1px solid rgba(143,168,155,.22);border-radius:999px;background:transparent;color:inherit;padding:7px 11px;font:inherit;font-size:12px;cursor:pointer}.studio-queue-filters button.on{border-color:rgba(26,157,126,.42);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-card.done{opacity:.62}.studio-recorded{display:inline-flex;align-items:center;gap:5px;color:#1a9d7e}.studio-reader-nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin:24px 0}.studio-reader-nav button{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:9px 12px;font:inherit;cursor:pointer}.studio-font-tools{display:flex;gap:6px;align-items:center}.studio-font-tools button{min-width:38px}.studio-recap-article.recorded .press-kicker:after{content:" · ضبط شد ✓";color:#1a9d7e}.studio-recap-body{font-size:var(--studio-font-size,18px)}
+.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}.latest-videos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:8px 0 22px}.latest-videos-head h1{margin:4px 0 6px}.latest-videos-head p{margin:0;max-width:720px;color:#8fa89b;line-height:1.8}.latest-videos-stats{display:flex;gap:8px;flex-wrap:wrap}.latest-videos-stats span,.latest-videos-stats button{border:1px solid rgba(143,168,155,.22);border-radius:999px;padding:7px 11px;font:inherit;font-size:12px;background:transparent;color:inherit}.latest-videos-stats button{cursor:pointer}.latest-videos-stats button.on{border-color:rgba(26,157,126,.48);background:rgba(26,157,126,.10);color:#1a9d7e}.latest-videos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.latest-video-card{overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.latest-video-main{display:block;color:inherit;text-decoration:none}.latest-video-copy{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.latest-video-copy b{font-size:14px;line-height:1.6}.latest-video-copy small{font-size:11.5px;color:#8fa89b}.latest-video-people{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px}.latest-video-people button{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(143,168,155,.2);border-radius:999px;background:transparent;color:inherit;padding:4px 8px;font:inherit;font-size:11.5px;cursor:pointer}.latest-video-people img{width:20px;height:20px;border-radius:50%;object-fit:cover}.latest-video-actions{padding:0 10px 12px}.latest-video-actions button,.video-recap-btn{width:100%;border:1px solid rgba(26,157,126,.35);background:rgba(26,157,126,.08);color:#1a9d7e;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}.figure-youtube-card>a{color:inherit;text-decoration:none}.video-recap-btn{margin:0 10px 10px;width:calc(100% - 20px)}.youtube-recap-embed{position:relative;width:100%;aspect-ratio:16/9;margin:18px 0 22px;border-radius:16px;overflow:hidden;background:#090b0a;border:1px solid rgba(143,168,155,.16)}.youtube-recap-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-statement-recap{font-size:17px;line-height:2.05;margin-top:18px}.video-statement-recap p{margin:0 0 1.2em}.video-statement-points{margin:18px 0;padding:16px 18px;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.video-statement-points h3{margin:0 0 10px}.video-statement-points li{line-height:1.85;margin:6px 0}.studio-recap-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}.studio-recap-card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid rgba(143,168,155,.18);border-radius:16px;background:rgba(143,168,155,.035)}.studio-recap-card h2{font-size:17px;line-height:1.65;margin:0}.studio-recap-card p{margin:0;color:#8fa89b;line-height:1.75}.studio-recap-card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11.5px;color:#8fa89b}.studio-recap-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.studio-recap-card-actions button,.studio-recap-card-actions a,.studio-recap-toolbar button,.studio-recap-toolbar a{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:8px 11px;font:inherit;font-size:12px;cursor:pointer;text-decoration:none}.studio-recap-card-actions .primary,.studio-recap-toolbar .primary{border-color:rgba(26,157,126,.4);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-article{max-width:860px;margin:0 auto;padding:6px 0 36px}.studio-recap-article h1{line-height:1.45;margin:12px 0 8px}.studio-recap-byline{color:#8fa89b;line-height:1.8}.studio-recap-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}.studio-recap-body{font-size:18px;line-height:2.08}.studio-recap-body p{margin:0 0 1.35em}.studio-recap-body h2{margin:2.1em 0 .7em;font-size:22px}.studio-recap-notice{padding:11px 13px;border:1px solid rgba(143,168,155,.16);border-radius:12px;color:#8fa89b;font-size:12px;line-height:1.8}.studio-queue-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:16px 0}.studio-queue-filters{display:flex;gap:7px;flex-wrap:wrap}.studio-queue-filters button{border:1px solid rgba(143,168,155,.22);border-radius:999px;background:transparent;color:inherit;padding:7px 11px;font:inherit;font-size:12px;cursor:pointer}.studio-queue-filters button.on{border-color:rgba(26,157,126,.42);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-card.done{opacity:.62}.studio-recorded{display:inline-flex;align-items:center;gap:5px;color:#1a9d7e}.studio-reader-nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin:24px 0}.studio-reader-nav button{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:9px 12px;font:inherit;cursor:pointer}.studio-font-tools{display:flex;gap:6px;align-items:center}.studio-font-tools button{min-width:38px}.studio-recap-article.recorded .press-kicker:after{content:" · ضبط شد ✓";color:#1a9d7e}.studio-recap-body{font-size:var(--studio-font-size,18px)}.finance-wrap{max-width:1100px;margin:0 auto;padding-bottom:40px}.finance-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}.finance-metric{padding:15px;border:1px solid rgba(143,168,155,.18);border-radius:15px;background:rgba(143,168,155,.035)}.finance-metric span{display:block;color:#8fa89b;font-size:12px}.finance-metric b{display:block;font-size:24px;margin-top:5px}.finance-metric small{display:block;color:#8fa89b;margin-top:4px;line-height:1.6}.finance-note{padding:13px 15px;border:1px solid rgba(143,168,155,.18);border-radius:14px;line-height:1.9;color:#8fa89b;margin:14px 0}.finance-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}.finance-table th,.finance-table td{padding:10px 8px;border-bottom:1px solid rgba(143,168,155,.14);text-align:right;vertical-align:top}.finance-table th{color:#8fa89b;font-weight:500}.finance-video-title{display:block;max-width:430px}.finance-video-title b{display:block;color:inherit}.finance-video-title small{color:#8fa89b}.finance-money{direction:ltr;display:inline-block}.finance-empty{padding:28px;text-align:center;color:#8fa89b;border:1px dashed rgba(143,168,155,.18);border-radius:14px}@media(max-width:900px){.finance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.finance-grid{grid-template-columns:1fr}.finance-table{display:block;overflow-x:auto;white-space:nowrap}}
 @media(max-width:900px){.latest-videos-grid,.studio-recap-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.figure-youtube{padding:12px}.figure-youtube-grid,.latest-videos-grid,.studio-recap-list{grid-template-columns:1fr}.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
   document.head.appendChild(st);
 })();
@@ -2871,6 +2872,15 @@ async function loadStudioRecaps() {
     _STUDIO_RECAPS = [];
   }
   return _STUDIO_RECAPS;
+}
+
+async function loadProjectFinance() {
+  try {
+    _PROJECT_FINANCE = await getJSON(`${DATA}/project-finance.json?v=${Date.now()}`);
+    return (_PROJECT_FINANCE && typeof _PROJECT_FINANCE === "object") ? _PROJECT_FINANCE : {};
+  } catch (_) {
+    return {};
+  }
 }
 
 async function loadNewsPeople() {
@@ -3202,6 +3212,56 @@ async function copyStudioRecap(id, btn) {
     if(btn) btn.textContent="کپی نشد";
   }
 }
+function _financeNum(v){const n=Number(v||0);return faN(n.toLocaleString("en-US"))}
+function _financeUsd(v){const n=Number(v||0);return "$"+n.toFixed(n<0.01?4:2)}
+async function showProjectFinance(){
+  show("figures"); setTab("");
+  const lede=document.getElementById("figures-lede"); if(lede) lede.style.display="none";
+  const timeline=document.getElementById("figure-timeline"); if(timeline) timeline.innerHTML="";
+  const el=document.getElementById("figures"); if(!el) return;
+  el.innerHTML='<div class="spinner"></div>';
+  const d=await loadProjectFinance();
+  const t=d.totals||{}, rows=Array.isArray(d.videos)?d.videos:[];
+  const videos=Number(t.videos_seen_by_ai||0);
+  const per100=videos>0?(Number(t.estimated_paid_usd||0)/videos)*100:0;
+  document.title="مالی پروژه | پندار";
+  setHash("#/finance");
+  el.innerHTML=`<div class="finance-wrap">
+    <div class="latest-videos-head">
+      <button class="back" onclick="showStudioRecaps()">بازگشت به استودیو</button>
+      <div><span class="press-kicker">پندار · حسابداری پروژه</span><h1>مالی پروژه</h1>
+      <p>مصرف API و هزینهٔ برآوردی پردازش ویدئوها از زمان فعال شدن ثبت مالی.</p></div>
+    </div>
+    <div class="finance-grid">
+      <article class="finance-metric"><span>ویدئوهای پردازش‌شده</span><b>${_financeNum(videos)}</b><small>ویدئوهایی که AI برایشان مصرف ثبت کرده</small></article>
+      <article class="finance-metric"><span>فراخوانی Gemini</span><b>${_financeNum(t.ai_calls||0)}</b><small>${_financeNum(t.total_tokens||0)} توکن کل</small></article>
+      <article class="finance-metric"><span>هزینهٔ مرجع AI</span><b class="finance-money">${_financeUsd(t.estimated_paid_usd||0)}</b><small>برآورد Paid Tier؛ الزاماً مبلغ صورتحساب نیست</small></article>
+      <article class="finance-metric"><span>برآورد ۱۰۰ ویدئو</span><b class="finance-money">${videos?_financeUsd(per100):"—"}</b><small>بر اساس میانگین مصرف واقعی ثبت‌شده</small></article>
+      <article class="finance-metric"><span>Input tokens</span><b>${_financeNum(t.prompt_tokens||0)}</b><small>توکن‌های ورودی Gemini</small></article>
+      <article class="finance-metric"><span>Output tokens</span><b>${_financeNum(t.completion_tokens||0)}</b><small>توکن‌های خروجی Gemini</small></article>
+      <article class="finance-metric"><span>DownSub requests</span><b>${_financeNum(t.downsub_requests||0)}</b><small>${_financeNum(t.downsub_http_200||0)} پاسخ HTTP 200</small></article>
+      <article class="finance-metric"><span>AI بدون نرخ شناخته‌شده</span><b>${_financeNum(t.unpriced_ai_calls||0)}</b><small>برای این درخواست‌ها برآورد دلاری صفر منظور شده</small></article>
+    </div>
+    <div class="finance-note">
+      مبلغ AI «هزینهٔ مرجع» است: اگر API روی Free Tier باشد هزینهٔ واقعی می‌تواند صفر باشد.
+      نرخ مرجع فعلی برای Gemini 2.5 Flash-Lite برابر $0.10 ورودی و $0.40 خروجی به‌ازای هر یک میلیون توکن، و برای Gemini 2.5 Flash برابر $0.30 و $2.50 است.
+      برای DownSub فعلاً فقط تعداد درخواست‌ها ثبت می‌شود و تا زمانی که قاعدهٔ دقیق تبدیل request به credit را قطعی نکنیم، دلار تخمینی نمی‌زنیم.
+      ${d.updated_at?` آخرین ثبت: ${_sysTime(d.updated_at)}.`:""}
+    </div>
+    <div class="rule"><span>ریز مصرف ویدئوها</span><span class="l"></span></div>
+    ${rows.length?`<table class="finance-table"><thead><tr><th>ویدئو</th><th>AI calls</th><th>Input</th><th>Output</th><th>AI est.</th><th>DownSub</th></tr></thead><tbody>
+      ${rows.map(r=>`<tr>
+        <td><span class="finance-video-title"><b>${esc(r.topic_fa||r.video_title||r.video_id||"ویدئو")}</b><small>${esc(r.name_fa||"")}${r.last_at?" · "+relTime(r.last_at):""}</small></span></td>
+        <td>${_financeNum(r.ai_calls||0)}</td>
+        <td>${_financeNum(r.prompt_tokens||0)}</td>
+        <td>${_financeNum(r.completion_tokens||0)}</td>
+        <td><span class="finance-money">${_financeUsd(r.estimated_paid_usd||0)}</span></td>
+        <td>${_financeNum(r.downsub_requests||0)}</td>
+      </tr>`).join("")}
+    </tbody></table>`:'<div class="finance-empty">هنوز مصرفی ثبت نشده؛ از Build بعدی این جدول پر می‌شود.</div>'}
+  </div>`;
+}
+
 const STUDIO_DONE_KEY="pendar_studio_recorded_v1";
 const STUDIO_FONT_KEY="pendar_studio_font_v1";
 let _studioQueueMode="pending";
@@ -3237,6 +3297,7 @@ async function showStudioRecaps(mode = _studioQueueMode) {
         <button class="${_studioQueueMode==="all"?"on":""}" onclick="setStudioQueueMode('all')">همه · ${faN(allRows.length)}</button>
         <button class="${_studioQueueMode==="done"?"on":""}" onclick="setStudioQueueMode('done')">ضبط‌شده · ${faN(allRows.length-pendingCount)}</button>
       </div>
+      <div class="studio-queue-filters"><button onclick="showProjectFinance()">مالی پروژه</button></div>
     </div>
     ${rows.length?`<div class="studio-recap-list">${rows.map(r=>`
       <article class="studio-recap-card ${done.has(String(r.id))?"done":""}">
