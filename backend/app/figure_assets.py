@@ -80,7 +80,7 @@ def refresh_avatars(db, *, now: datetime | None = None, fetcher=_fetch_avatar) -
                 skipped += 1
                 continue
         try:
-            res = fetcher(f.handle)
+            res = fetcher(f.telegram_handle or f.handle)
         except Exception as exc:  # network / HTTP — never break the build
             logger.warning("avatar fetch failed for %s: %s", f.handle, exc)
             failed += 1
@@ -105,6 +105,7 @@ def avatar_paths(db) -> dict[str, str]:
     allowed_external = set(_EXTERNAL_AVATARS)
     return {a.handle: f"figures/{a.handle}.{a.ext}" for a in db.query(FigureAsset).all()
             if not next((f.external for f in FIGURES if f.handle == a.handle), False)
+            or next((bool(f.telegram_handle) for f in FIGURES if f.handle == a.handle), False)
             or a.handle in allowed_external}
 
 
