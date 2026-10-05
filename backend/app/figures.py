@@ -36,6 +36,7 @@ class Figure:
     verified: bool = False  # identity/account ownership has been verified
     claimed: bool = False  # profile is controlled by the person represented
     directory: bool = True  # false = media/source adapter for video ingestion; not a person-directory profile
+    avatar: str | None = None  # optional verified profile image override
 
 
 FIGURES: list[Figure] = [
