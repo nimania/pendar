@@ -921,7 +921,7 @@ const PRESS_SOURCES = [
   {name:"Süddeutsche Zeitung", domain:"sueddeutsche.de", scope:"world", lang:"de", type:"روزنامه"}
 ]
 
-const PRESS_SCOPE_FA = {all:"همه", "iran-agency":"خبرگزاری‌ها و رسانه‌های خبری ایران", "iran-paper":"روزنامه‌های ایران", "iran-magazine":"مجلات ایران", diaspora:"جراید دیاسپورا", world:"رسانه‌های جهان", magazine:"همهٔ مجلات و هفته‌نامه‌ها"};
+const PRESS_SCOPE_FA = {all:"همه", "iran-agency":"خبرگزاری‌ها و رسانه‌های خبری ایران", "iran-paper":"روزنامه‌های ایران", "iran-magazine":"مجلات ایران", youtube:"کانال‌ها و پادکست‌های ویدئویی", diaspora:"جراید دیاسپورا", world:"رسانه‌های جهان", magazine:"همهٔ مجلات و هفته‌نامه‌ها"};
 function pressMatchesScope(s, scope){
   if(scope==="all") return true;
   if(scope==="magazine") return /مجله|هفته‌نامه/.test(String(s.type||""));
@@ -3293,7 +3293,7 @@ async function showLatestVideos(mode = "all") {
         byVideo.set(key,row);
       }
       if(!row.people.some(p=>String(p.handle).toLowerCase()===String(person.handle).toLowerCase())){
-        row.people.push({handle:person.handle,name_fa:person.name_fa,avatar:person.avatar,role_fa:person.role_fa});
+        row.people.push({handle:person.handle,name_fa:person.name_fa,avatar:person.avatar,role_fa:person.role_fa,directory:person.directory!==false});
       }
     }
   }
@@ -3302,7 +3302,8 @@ async function showLatestVideos(mode = "all") {
   const recapsOnly=mode==="recaps";
   const studioCount=(studioRows||[]).length;
   const visibleVideos=recapsOnly?recapVideos:videos;
-  const peopleCount=new Set(videos.flatMap(v=>v.people.map(p=>String(p.handle).toLowerCase()))).size;
+  const peopleCount=new Set(videos.flatMap(v=>v.people.filter(p=>p.directory!==false).map(p=>String(p.handle).toLowerCase()))).size;
+  const sourceCount=new Set(videos.flatMap(v=>v.people.filter(p=>p.directory===false).map(p=>String(p.handle).toLowerCase()))).size;
   document.title=(recapsOnly?"ری‌کپ ویدئوهای چهره‌ها":"آخرین ویدئوهای چهره‌ها")+" | پندار";
   setHash(recapsOnly?"#/videos/recaps":"#/videos");
   el.innerHTML=`
@@ -3312,7 +3313,7 @@ async function showLatestVideos(mode = "all") {
       <p>${recapsOnly?"ویدئوهایی که متن کامل آن‌ها استخراج و به ری‌کپ حرفه‌ای و وفادارانه تبدیل شده است.":"تازه‌ترین ویدئوهای چهره‌های پندار؛ از کانال‌های رسمی و حضورهای شناسایی‌شده در میزبان‌های معتبر."}</p></div>
       <div class="latest-videos-stats">
         <button class="${!recapsOnly?"on":""}" onclick="showLatestVideos('all')"><b>${faN(videos.length)}</b> ویدئو</button>
-        <span><b>${faN(peopleCount)}</b> چهره</span>
+        <span><b>${faN(peopleCount)}</b> چهره</span>${sourceCount?`<span><b>${faN(sourceCount)}</b> منبع</span>`:""}
         ${recapVideos.length?`<button class="${recapsOnly?"on":""}" onclick="showLatestVideos('recaps')"><b>${faN(recapVideos.length)}</b> ری‌کپ</button>`:""}
         ${studioCount?`<button onclick="showStudioRecaps()"><b>${faN(studioCount)}</b> پریمیوم</button>`:""}
       </div>
@@ -3323,7 +3324,7 @@ async function showLatestVideos(mode = "all") {
           <span class="figure-youtube-thumb">${v.thumbnail?`<img src="${esc(v.thumbnail)}" alt="" loading="lazy">`:""}<span class="figure-youtube-play">▶</span></span>
           <span class="latest-video-copy"><b>${esc(v.title||"ویدئوی یوتیوب")}</b><small>${v.published_at?relTime(v.published_at):"YouTube"} · YouTube ↗</small></span>
         </a>
-        <div class="latest-video-people">${v.people.map(p=>`<button onclick="openFigure('${String(p.handle||"").replace(/'/g,"\\'")}')">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></button>`).join("")}</div>
+        <div class="latest-video-people">${v.people.map(p=>p.directory!==false?`<button onclick="openFigure('${String(p.handle||"").replace(/'/g,"\\'")}')">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></button>`:`<span class="latest-video-source">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></span>`).join("")}</div>
         ${v.recap_fa?`<div class="latest-video-actions"><button onclick="openStatement('youtube-${String(v.id||"").replace(/'/g,"\\'")}')">ری‌کپ حرفه‌ای</button>${studioByVideo.has(String(v.id||""))?`<button onclick="openStudioRecap('${String(studioByVideo.get(String(v.id||"")).id||"").replace(/'/g,"\\'")}')">نسخهٔ پریمیوم</button>`:""}</div>`:""}
       </article>`).join("")}</div>`:`<div class="state"><div class="big">${recapsOnly?"هنوز ری‌کپی آماده نشده":"هنوز ویدئویی برای چهره‌ها پیدا نشده"}</div></div>`}
   `;
