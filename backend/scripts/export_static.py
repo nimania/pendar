@@ -330,9 +330,9 @@ def run() -> None:
             external_posts = json.load(ef)
     except (OSError, ValueError):
         external_posts = []
-    # Private-production style recaps are intentionally exported in their own
-    # archive instead of being mixed into figures.json. The Pages site is public,
-    # so this archive is accessible to anyone who knows the route.
+    # Studio recaps are exported as a separate recording-workstation feed rather
+    # than mixed into figures.json. The Pages site is public, so this feed is
+    # intentionally readable from the Studio route until access control is added.
     studio_recaps = []
     for post in external_posts if isinstance(external_posts, list) else []:
         studio_text = str(post.get("_studio_recap_fa") or "").strip()
