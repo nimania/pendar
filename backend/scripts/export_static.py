@@ -336,7 +336,13 @@ def run() -> None:
     studio_recaps = []
     for post in external_posts if isinstance(external_posts, list) else []:
         studio_text = str(post.get("_studio_recap_fa") or "").strip()
-        if str(post.get("platform") or "") != "youtube" or not studio_text:
+        # Only explicitly selected recording scripts count as studio output.
+        # Legacy auto-generated drafts are intentionally hidden.
+        if (
+            str(post.get("platform") or "") != "youtube"
+            or not studio_text
+            or int(post.get("premium_version") or 0) < 1
+        ):
             continue
         studio_recaps.append({
             "id": str(post.get("id") or ""),
@@ -353,6 +359,7 @@ def run() -> None:
             "media_url": post.get("media_url") or "",
             "source_type": post.get("source_type") or "official",
             "recap_version": post.get("recap_version"),
+            "premium_version": post.get("premium_version"),
             "word_count": len(studio_text.split()),
         })
     studio_recaps.sort(key=lambda x: str(x.get("published_at") or ""), reverse=True)
