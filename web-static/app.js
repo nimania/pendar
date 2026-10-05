@@ -2710,7 +2710,8 @@ function socialLinks(links) {
 .figure-search-hit b{display:flex;align-items:center;gap:4px}
 .figure-search-hit small{color:#8fa89b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .figure-search-empty{padding:14px;color:#8fa89b;text-align:center}
-@media(max-width:600px){.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
+.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}
+@media(max-width:600px){.figure-youtube{padding:12px}.figure-youtube-grid{grid-template-columns:1fr}.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
   document.head.appendChild(st);
 })();
 
@@ -3267,9 +3268,10 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const bookPerson=(bookData.people||[]).find(p=>nameNorm(p.name_fa)===nameNorm(x.name_fa));
   const figureBooks=(bookPerson?.book_slugs||[]).map(s=>_bookBySlug(bookData,s)).filter(Boolean);
   const figureMovies=(movieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>mm.kind==="figure"&&(String(mm.handle||"").toLowerCase()===String(x.handle||"").toLowerCase()||(x.posts||[]).some(p=>String(p.id)===String(mm.post_id)))));
+  const youtubeVideos=(x.youtube_videos||[]).filter(v=>v&&v.url);
   const canonicalNames=new Set([x.name_fa,...(canonicalFigure?.aliases||[])].map(_canonicalNorm).filter(Boolean));
   const figureStories=canonicalFigure?ALL.filter(s=>(s.entities||[]).some(e=>canonicalNames.has(_canonicalNorm(e.name_fa||"")))):[];
-  const shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies" || _figureProfileFilter === "stories") ? [] : (x.posts || []);
+  const shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies" || _figureProfileFilter === "stories" || _figureProfileFilter === "videos") ? [] : (x.posts || []);
   const latest = (x.posts || []).map(p => p.published_at).filter(Boolean).sort().pop();
   const poems = Array.isArray(curatedPoems[x.handle]) ? curatedPoems[x.handle] : [];
   const poemSection = poems.length ? `<section class="curated-poems"><div class="curated-poems-head"><div><span class="curated-kicker">اثر ویژه</span><h2>یک شعر؛ بخش‌های منتشرشده</h2><p>این ${faN(poems.length)} متن، بخش‌های مختلف یک شعر از مونا برزویی‌اند. ترتیب نهایی بخش‌ها هنوز اعلام نشده است؛ شماره‌های زیر فقط برای تفکیک در آرشیو جان کلام‌اند و ترتیب شعر را نشان نمی‌دهند.</p></div><span class="curated-count">${faN(poems.length)} بخش</span></div><div class="curated-poem-list">${poems.map((p,i)=>`<article class="curated-poem"><div class="curated-poem-no" title="شمارهٔ آرشیوی؛ نه ترتیب شعر">بخش ${faN(i+1)}*</div><div class="curated-poem-text">${esc(p.text||"").replace(/\\n/g,"<br>")}</div></article>`).join("")}</div></section>` : "";
@@ -3298,7 +3300,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       <div class="x-handle">@${esc(x.handle)}</div>
       <p class="x-bio">${esc(x.role_fa || "")}</p>
       ${socialLinks(x.social)}
-      <div class="x-profile-stats"><span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${figureMovies.length ? `<span><b>${faN(figureMovies.length)}</b> فیلم/سریال</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}</div>
+      <div class="x-profile-stats"><span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${figureMovies.length ? `<span><b>${faN(figureMovies.length)}</b> فیلم/سریال</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}</div>
     </div>
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
@@ -3308,12 +3310,14 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       ${figureStories.length ? `<button class="${_figureProfileFilter==="stories"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'stories\')">خبرها</button>` : ""}
       ${figureBooks.length ? `<button class="${_figureProfileFilter==="books"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'books\')">کتاب‌ها</button>` : ""}
       ${figureMovies.length ? `<button class="${_figureProfileFilter==="movies"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'movies\')">فیلم‌ها</button>` : ""}
+      ${youtubeVideos.length ? `<button class="${_figureProfileFilter==="videos"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'videos\')">ویدئوها</button>` : ""}
       ${poems.length ? `<button class="${_figureProfileFilter==="works"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'works\')">آثار</button>` : ""}
     </nav>
     ${_figureProfileFilter==="stories" ? `<section class="figure-stories">${groupedFeed(figureStories)}</section>` : ""}
     ${_figureProfileFilter==="books" ? `<section class="figure-books"><div class="books-grid">${figureBooks.map(_bookCard).join("")}</div></section>` : ""}
     ${_figureProfileFilter==="movies" ? `<section class="figure-movies"><div class="movie-grid">${figureMovies.map(_movieCard).join("")}</div></section>` : ""}
-    ${_figureProfileFilter==="works" ? poemSection : ""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories") ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
+    ${_figureProfileFilter==="videos" ? `<section class="figure-youtube"><div class="figure-youtube-grid">${youtubeVideos.map(v=>`<a class="figure-youtube-card" href="${esc(v.url)}" target="_blank" rel="noopener"><span class="figure-youtube-thumb">${v.thumbnail?`<img src="${esc(v.thumbnail)}" alt="" loading="lazy">`:""}<span class="figure-youtube-play">▶</span></span><span class="figure-youtube-body"><b>${esc(v.title||"ویدئوی یوتیوب")}</b><small>${v.published_at?relTime(v.published_at):"YouTube"} · باز کردن در یوتیوب ↗</small></span></a>`).join("")}</div></section>` : ""}
+    ${_figureProfileFilter==="works" ? poemSection : ""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos") ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
   </div>`;
 }
