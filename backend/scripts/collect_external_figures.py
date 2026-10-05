@@ -200,6 +200,16 @@ publish, topic_fa, summary_fa, recap_fa, key_points_fa."""
 
 
 
+VIDEO_PUBLIC_SYSTEM = """تو ویراستار «جان کلام» هستی. ورودی متن یک ویدئوی عمومی است.
+فقط بر اساس همین متن و بدون افزودن اطلاعات بیرونی، یک خروجی عمومیِ کم‌هزینه و روشن بساز:
+- topic_fa: عنوان دقیق و کوتاه، حداکثر ۸ کلمه.
+- summary_fa: خلاصهٔ خنثی ۳ تا ۶ جمله‌ای.
+- recap_fa: ری‌کپ روان و وفادارانه در چند پاراگراف که مسیر اصلی بحث و نکات مهم را منتقل کند.
+- key_points_fa: ۵ تا ۱۲ نکتهٔ اصلی؛ هر مورد یک جمله.
+ادعاها و ارزیابی‌ها را به گوینده نسبت بده. این خروجی نسخهٔ عمومی است، نه متن آمادهٔ ضبط.
+خروجی فقط JSON با کلیدهای topic_fa, summary_fa, recap_fa, key_points_fa باشد."""
+
+
 VIDEO_CHUNK_SYSTEM = """تو ویراستار تحریریهٔ «جان کلام» هستی. این فقط یک بخش از متن کامل یک ویدئو است.
 از همین بخش، یادداشت تحریریه‌ای دقیق و وفادارانه بساز تا بعداً با بخش‌های دیگر ترکیب شود.
 قواعد:
@@ -218,7 +228,7 @@ VIDEO_RECAP_SYSTEM = """تو سردبیر ارشد «جان کلام» هستی.
 وفادارانه‌ای است که به ترتیب از تمام بخش‌های متن کامل ویدئو ساخته شده‌اند. فقط بر اساس همین
 مواد و بدون افزودن اطلاعات بیرونی، خروجی فارسی تولید کن.
 
-دو سطح خروجی لازم است:
+این فراخوانی فقط برای ویدئویی انجام می‌شود که مالک پروژه آن را برای نسخهٔ ضبط انتخاب کرده است.\n\nدو سطح خروجی لازم است:
 
 ۱) خروجی عمومی:
 - topic_fa: عنوان دقیق و کوتاه، حداکثر ۸ کلمه.
@@ -304,7 +314,31 @@ def _generate_json(provider, system: str, payload: dict, context: dict) -> dict:
     return result.data if isinstance(result.data, dict) else {}
 
 
-def _video_recap(provider, row: dict) -> dict:
+def _video_public_recap(provider, row: dict) -> dict:
+    """One lightweight AI pass for the public recap. Premium is built separately
+    only when the owner explicitly requests a recording script."""
+    if getattr(provider, "name", "") == "mock":
+        return {}
+    transcript = str(row.get("transcript") or "").strip()
+    if not transcript:
+        return {}
+    payload = {
+        "video_id": row.get("id"),
+        "person": row.get("person"),
+        "role": row.get("role"),
+        "video_title": row.get("video_title"),
+        "transcript": _sample_text(transcript),
+        "source_chars": len(transcript),
+    }
+    return _generate_json(
+        provider,
+        VIDEO_PUBLIC_SYSTEM,
+        payload,
+        {"video_id": row.get("id"), "stage": "public-recap"},
+    )
+
+
+def _video_premium_recap(provider, row: dict) -> dict:
     if getattr(provider, "name", "") == "mock":
         return {}
     transcript = str(row.get("transcript") or "").strip()
@@ -1019,7 +1053,7 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                     print(f"youtube: transcript unavailable {video_id} after fallbacks")
                     continue
 
-                lab = _video_recap(provider, {
+                lab = _video_public_recap(provider, {
                     "id": video_id,
                     "person": figure.name_fa,
                     "role": figure.role_fa,
@@ -1028,8 +1062,7 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                 })
                 summary = str(lab.get("summary_fa") or "").strip()
                 recap = str(lab.get("recap_fa") or "").strip()
-                studio_recap = str(lab.get("studio_recap_fa") or "").strip()
-                if not summary or not recap or not studio_recap:
+                if not summary or not recap:
                     recap_state[state_key] = {
                         "status": "ai_incomplete",
                         "version": YOUTUBE_RECAP_VERSION,
@@ -1049,7 +1082,6 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                     "topic_fa": str(lab.get("topic_fa") or entry.get("title") or "ویدئوی تازه").strip(),
                     "summary_fa": summary,
                     "recap_fa": recap,
-                    "_studio_recap_fa": studio_recap,
                     "recap_version": YOUTUBE_RECAP_VERSION,
                     "key_points_fa": [
                         str(x).strip() for x in (lab.get("key_points_fa") or [])
@@ -1088,7 +1120,7 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
     _save_recap_state(recap_state)
     _save_transcript_cache(transcript_cache)
     _save_project_finance()
-    print(f"youtube: {attempts} catalog videos checked; {len(fresh)} public + studio recaps")
+    print(f"youtube: {attempts} catalog videos checked; {len(fresh)} public recaps")
     return fresh
 
 
