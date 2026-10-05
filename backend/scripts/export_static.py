@@ -321,6 +321,31 @@ def run() -> None:
         print(f"figures export skipped: {exc}")
         fig_posts = []
 
+    # Bring external figure posts (notably YouTube transcript recaps) into the
+    # same matching pool *before* stories are enriched, so they can appear both
+    # on person profiles and on relevant news pages.
+    ext_path = os.path.join(os.path.dirname(__file__), "..", "data", "external-figure-posts.json")
+    try:
+        with open(ext_path, encoding="utf-8") as ef:
+            external_posts = json.load(ef)
+    except (OSError, ValueError):
+        external_posts = []
+    for post in external_posts if isinstance(external_posts, list) else []:
+        if not post.get("summary_fa") or not post.get("url"):
+            continue
+        row = dict(post)
+        row["_tokens"] = figure_svc._mtokens(
+            post.get("topic_fa"), post.get("summary_fa"),
+            post.get("recap_fa"), " ".join(post.get("key_points_fa") or [])
+        )
+        try:
+            raw = str(post.get("published_at") or "")
+            row["_time"] = datetime.fromisoformat(raw.replace("Z", "+00:00")) if raw else None
+        except ValueError:
+            row["_time"] = None
+        fig_posts.append(row)
+    fig_posts.sort(key=lambda p: str(p.get("published_at") or ""), reverse=True)
+
     feed = story_svc.get_feed(db, limit=60, offset=0, category=None)
     cards = [c.model_dump(mode="json") for c in feed.items]
 
@@ -551,15 +576,6 @@ def run() -> None:
     # the same profile whenever their normalized Persian name matches. News-only
     # people are appended to the same index, so the UI never creates duplicate identities.
     figure_index = figure_svc.figures_index(fig_posts, avatars=fig_avatars)
-    # External/multilingual collectors write normalized Persian figure posts here.
-    # Keeping this as a small JSON interchange makes Truth Social, French media,
-    # English interviews, etc. independent from the Telegram ingestion model.
-    ext_path = os.path.join(os.path.dirname(__file__), "..", "data", "external-figure-posts.json")
-    try:
-        with open(ext_path, encoding="utf-8") as ef:
-            external_posts = json.load(ef)
-    except (OSError, ValueError):
-        external_posts = []
     by_handle = {str(x.get("handle")): x for x in figure_index.get("figures", [])}
 
     # Visual YouTube archive: latest uploads from verified channels, regardless
@@ -570,11 +586,27 @@ def run() -> None:
             youtube_videos = json.load(yf)
     except (OSError, ValueError):
         youtube_videos = []
+    recap_by_video = {}
+    for post in external_posts if isinstance(external_posts, list) else []:
+        if str(post.get("platform") or "") != "youtube":
+            continue
+        pid = str(post.get("id") or "")
+        vid = pid.removeprefix("youtube-")
+        if vid:
+            recap_by_video[(str(post.get("handle") or ""), vid)] = post
     for video in youtube_videos if isinstance(youtube_videos, list) else []:
         fig = by_handle.get(str(video.get("handle") or ""))
         if not fig or not video.get("url"):
             continue
-        fig.setdefault("youtube_videos", []).append(video)
+        out_video = dict(video)
+        recap = recap_by_video.get((str(video.get("handle") or ""), str(video.get("id") or "")))
+        if recap:
+            out_video["summary_fa"] = recap.get("summary_fa") or ""
+            out_video["recap_fa"] = recap.get("recap_fa") or recap.get("summary_fa") or ""
+            out_video["key_points_fa"] = recap.get("key_points_fa") or []
+            out_video["transcript_available"] = bool(recap.get("transcript_available"))
+            out_video["topic_fa"] = recap.get("topic_fa") or ""
+        fig.setdefault("youtube_videos", []).append(out_video)
     for fig in by_handle.values():
         if fig.get("youtube_videos"):
             fig["youtube_videos"] = sorted(
@@ -583,13 +615,7 @@ def run() -> None:
                 reverse=True,
             )[:15]
 
-    for post in external_posts if isinstance(external_posts, list) else []:
-        fig = by_handle.get(str(post.get("handle") or ""))
-        if not fig or not post.get("summary_fa") or not post.get("url"):
-            continue
-        fig.setdefault("posts", []).append(post)
-        fig["posts"] = sorted(fig["posts"], key=lambda p: str(p.get("published_at") or ""), reverse=True)[:30]
-        fig["count"] = len(fig["posts"])
+
     figure_index = merge_news_people(figure_index, db, now=now, avatars=fig_avatars)
     _write(os.path.join(DATA, "figures.json"), figure_index)
     # Compatibility file for older cached clients; all new UI reads figures.json.
