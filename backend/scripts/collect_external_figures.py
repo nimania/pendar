@@ -38,6 +38,9 @@ YOUTUBE_MAX_NEW_PER_RUN = 12
 YOUTUBE_MAX_PER_CHANNEL = 3
 YOUTUBE_KEEP_PER_FIGURE = 40
 YOUTUBE_TRANSCRIPT_CHARS = 32000
+DOWNSUB_ENDPOINT = "https://api.downsub.com/download"
+YOUTUBE_RECAP_STATE_OUT = HERE.parent / "data" / "youtube-recap-state.json"
+YOUTUBE_RETRY_HOURS = 72
 
 # Keep videos visible in the archive, but do not spend transcript/AI credits
 # on channels whose uploads do not need Jan Kalam recaps.
@@ -288,6 +291,147 @@ def _sample_text(text: str, limit: int = YOUTUBE_TRANSCRIPT_CHARS) -> str:
             "\n[… بخش پایانی …]\n" + text[-third:])
 
 
+def _lang_rank(lang: str) -> int:
+    lang = str(lang or "").lower().replace("_", "-")
+    preferred = ["fa", "fa-auto", "fa-ir", "en", "en-auto", "en-us", "en-gb"]
+    for i, value in enumerate(preferred):
+        if lang == value or lang.startswith(value + "-"):
+            return i
+    return 99
+
+
+def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
+    """Fetch a transcript through the paid DownSub API when configured.
+
+    The parser is intentionally tolerant because DownSub may return either
+    transcript text directly or metadata containing downloadable subtitle URLs.
+    """
+    key = os.environ.get("DOWNSUB_API_KEY", "").strip()
+    if not key:
+        return "", ""
+    video_url = f"https://www.youtube.com/watch?v={video_id}"
+    try:
+        r = client.post(
+            DOWNSUB_ENDPOINT,
+            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+            json={"url": video_url},
+            timeout=60,
+        )
+    except Exception as exc:
+        print(f"youtube: DownSub request failed {video_id} ({type(exc).__name__})")
+        return "", ""
+    if r.status_code != 200:
+        print(f"youtube: DownSub HTTP {r.status_code} for {video_id}")
+        return "", ""
+
+    # Some API responses may be plain subtitle/transcript text.
+    ctype = str(r.headers.get("content-type") or "").lower()
+    if "json" not in ctype:
+        text = _caption_text_from_payload(r.text)
+        if len(text) >= 120:
+            print(f"youtube: DownSub transcript ok {video_id} (plain)")
+            return _sample_text(text), ""
+        return "", ""
+
+    try:
+        data = r.json()
+    except Exception:
+        return "", ""
+
+    text_candidates: list[tuple[int, str, str]] = []
+    url_candidates: list[tuple[int, str, str]] = []
+
+    def walk(node, inherited_lang=""):
+        if isinstance(node, dict):
+            lang = str(
+                node.get("lang") or node.get("language") or node.get("language_code")
+                or node.get("code") or inherited_lang or ""
+            )
+            for key_name in ("transcript", "content", "text", "subtitle_text", "body"):
+                value = node.get(key_name)
+                if isinstance(value, str) and len(value.strip()) >= 120 and not value.startswith(("http://", "https://")):
+                    text_candidates.append((_lang_rank(lang), lang, value))
+            for key_name in ("url", "download_url", "download", "src", "link"):
+                value = node.get(key_name)
+                if isinstance(value, str) and value.startswith(("http://", "https://")):
+                    url_candidates.append((_lang_rank(lang), lang, value))
+            for value in node.values():
+                if isinstance(value, (dict, list)):
+                    walk(value, lang)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value, inherited_lang)
+        elif isinstance(node, str) and len(node.strip()) >= 120 and not node.startswith(("http://", "https://")):
+            text_candidates.append((_lang_rank(inherited_lang), inherited_lang, node))
+
+    walk(data)
+
+    # Prefer Persian, then English; avoid random language tracks when metadata exists.
+    for _, lang, raw in sorted(text_candidates, key=lambda x: x[0]):
+        if lang and _lang_rank(lang) >= 99:
+            continue
+        text = _caption_text_from_payload(raw)
+        if len(text) >= 120:
+            print(f"youtube: DownSub transcript ok {video_id} ({lang or 'unknown'})")
+            return _sample_text(text), lang
+
+    for _, lang, url in sorted(url_candidates, key=lambda x: x[0]):
+        if lang and _lang_rank(lang) >= 99:
+            continue
+        try:
+            rr = client.get(url, timeout=60)
+            if rr.status_code != 200:
+                continue
+            text = _caption_text_from_payload(rr.text)
+            if len(text) >= 120:
+                print(f"youtube: DownSub subtitle ok {video_id} ({lang or 'unknown'})")
+                return _sample_text(text), lang
+        except Exception:
+            continue
+
+    # If the response had no usable language metadata, accept a substantial direct text.
+    for _, lang, raw in text_candidates:
+        if lang:
+            continue
+        text = _caption_text_from_payload(raw)
+        if len(text) >= 120:
+            print(f"youtube: DownSub transcript ok {video_id} (unlabeled)")
+            return _sample_text(text), ""
+    print(f"youtube: DownSub returned no usable transcript for {video_id}")
+    return "", ""
+
+
+def _load_recap_state() -> dict:
+    try:
+        data = json.loads(YOUTUBE_RECAP_STATE_OUT.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _save_recap_state(state: dict) -> None:
+    YOUTUBE_RECAP_STATE_OUT.parent.mkdir(parents=True, exist_ok=True)
+    YOUTUBE_RECAP_STATE_OUT.write_text(
+        json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def _retry_due(row: dict) -> bool:
+    if not row:
+        return True
+    if row.get("status") == "success":
+        return False
+    raw = str(row.get("last_attempt") or "")
+    if not raw:
+        return True
+    try:
+        dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        now = datetime.now(dt.tzinfo) if dt.tzinfo else datetime.now()
+        return (now - dt).total_seconds() >= YOUTUBE_RETRY_HOURS * 3600
+    except ValueError:
+        return True
+
+
 def _timedtext_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
     """Best-effort fallback when youtube-transcript-api is blocked on cloud IPs.
 
@@ -410,6 +554,10 @@ def _ytdlp_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
 
 def youtube_transcript(api: YouTubeTranscriptApi, client: httpx.Client,
                        video_id: str) -> tuple[str, str]:
+    if os.environ.get("DOWNSUB_API_KEY", "").strip():
+        text, lang = _downsub_transcript(client, video_id)
+        if text:
+            return text, lang
     try:
         listing = api.list(video_id)
         transcript = None
@@ -442,6 +590,7 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
     seen = {str(x.get("id")) for x in old if x.get("platform") == "youtube"}
     fresh: list[dict] = []
     attempts = 0
+    recap_state = _load_recap_state()
     headers = {"User-Agent": "Mozilla/5.0 (compatible; JanKalam/1.0)"}
     api = YouTubeTranscriptApi()
 
@@ -471,9 +620,16 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
             ext_id = "youtube-" + str(entry["id"])
             if ext_id in seen:
                 continue
+            state_key = f"{figure.handle}:{entry['id']}"
+            if not _retry_due(recap_state.get(state_key) or {}):
+                continue
             attempts += 1
             transcript, lang = youtube_transcript(api, client, str(entry["id"]))
             if len(transcript) < 120:
+                recap_state[state_key] = {
+                    "status": "no_transcript",
+                    "last_attempt": datetime.now().astimezone().isoformat(),
+                }
                 print(f"youtube: transcript unavailable {entry['id']} after fallbacks")
                 continue
             labels = _label(provider, [{
@@ -485,7 +641,15 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
             }])
             lab = labels.get(str(entry["id"]), {})
             if lab.get("publish") is not True or not str(lab.get("summary_fa") or "").strip():
+                recap_state[state_key] = {
+                    "status": "not_substantive",
+                    "last_attempt": datetime.now().astimezone().isoformat(),
+                }
                 continue
+            recap_state[state_key] = {
+                "status": "success",
+                "last_attempt": datetime.now().astimezone().isoformat(),
+            }
             fresh.append({
                 "id": ext_id, "handle": figure.handle, "name_fa": figure.name_fa,
                 "role_fa": figure.role_fa, "field": figure.field, "kind": "analysis",
@@ -506,6 +670,7 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                 "video_title": entry.get("title") or "",
                 "source_type": entry.get("source_type") or "official",
             })
+    _save_recap_state(recap_state)
     print(f"youtube: {attempts} catalog videos checked; {len(fresh)} substantive recaps")
     return fresh
 
