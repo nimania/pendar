@@ -2792,6 +2792,7 @@ const SOCIAL_ICON = {
   youtube: '<rect x="3" y="6" width="18" height="12" rx="3.5"/><path d="M11 9.5l4 2.5-4 2.5z" fill="currentColor" stroke="none"/>',
   facebook: '<path d="M14 8h2V5h-2a3 3 0 0 0-3 3v2H9v3h2v6h3v-6h2.2l.4-3H14V8.5a.5.5 0 0 1 .5-.5z" stroke-linejoin="round"/>',
   website: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9S14.5 18.5 12 21c-2.5-2.5-3.5-6-3.5-9S9.5 5.5 12 3z"/>',
+  podcast: '<path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/>',
   truthsocial: '<path d="M6 5h12M12 5v14M7.5 10.5h9" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/>',
 };
 function avatar(p, cls) {

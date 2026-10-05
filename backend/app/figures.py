@@ -287,9 +287,9 @@ FIGURES: list[Figure] = [
     Figure("fayaz-zahed", "فیاض زاهد", "روزنامه‌نگار و تحلیلگر سیاسی", "politics", external=True),
     Figure("soufia-abdollahi", "صوفیا عبداللهی", "سردبیر پیشخوان کتاب · هم‌بنیان‌گذار پادکست سر و کله", "media",
            (("x", "https://twitter.com/soufelang"),
-            ("website", "https://castbox.fm/channel/id4988561?utm_source=podcaster&utm_medium=dlink&utm_campaign=c_4988561&utm_content=%D9%BE%DB%8C%D8%B4%D8%AE%D9%88%D8%A7%D9%86%20%DA%A9%D8%AA%D8%A7%D8%A8-CastBox_FM")),
+            ("podcast", "https://castbox.fm/channel/id4988561?utm_source=podcaster&utm_medium=dlink&utm_campaign=c_4988561&utm_content=%D9%BE%DB%8C%D8%B4%D8%AE%D9%88%D8%A7%D9%86%20%DA%A9%D8%AA%D8%A7%D8%A8-CastBox_FM")),
            aliases=("Soufia Abdollahi", "صوفیا عبدالهی"),
-           avatar="https://pbs.twimg.com/profile_images/2089743720841121792/-A11EueU_400x400.jpg"),
+           avatar="assets/pendar/figures/soufia-abdollahi.jpg"),
     Figure("nima-afshar-naderi", "نیما افشارنادری", "تولیدکننده محتوا و میزبان «جان کلام»", "media",
            (("x", "https://x.com/nimania"),
             ("instagram", "https://www.instagram.com/nima.afsharnaderi/"),
@@ -478,7 +478,7 @@ FIGURES: list[Figure] = [
 
 
 SOCIAL_FA = {"website": "وب‌سایت", "github": "گیت‌هاب", "diner": "Nima’s Diner", "x": "ایکس", "instagram": "اینستاگرام",
-             "youtube": "یوتیوب", "facebook": "فیس‌بوک", "telegram": "تلگرام", "bale": "بله",
+             "youtube": "یوتیوب", "facebook": "فیس‌بوک", "telegram": "تلگرام", "bale": "بله", "podcast": "پادکست",
              "truthsocial": "تروث سوشیال", "eitaa": "ایتا", "rubika": "روبیکا",
              "soroush": "سروش‌پلاس", "igap": "آی‌گپ"}
 
@@ -491,7 +491,8 @@ def figure_social(f: Figure) -> list[dict]:
     if f.bale:
         links.append({"kind": "bale", "label": SOCIAL_FA["bale"], "url": f"https://ble.ir/{f.bale}"})
     for kind, url in f.social:
-        links.append({"kind": kind, "label": SOCIAL_FA.get(kind, kind), "url": url})
+        label = "پادکست پیشخوان کتاب" if f.handle == "soufia-abdollahi" and kind == "podcast" else SOCIAL_FA.get(kind, kind)
+        links.append({"kind": kind, "label": label, "url": url})
     return links
 
 
@@ -510,5 +511,5 @@ def figure_home_url(f: Figure) -> str:
     if th:
         return f"https://t.me/{th}"
     if f.external:
-        return next((url for kind, url in f.social if kind in {"truthsocial", "website"}), "")
+        return next((url for kind, url in f.social if kind in {"truthsocial", "website", "podcast"}), "")
     return f"https://t.me/{f.handle}"
