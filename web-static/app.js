@@ -60,13 +60,56 @@ function _canonicalNorm(v) {
     .replace(/[«»“”"'‘’()[\]{}،,:;؛!?؟/\\|+_=*~^%$#@]+/g," ")
     .toLowerCase().replace(/\s+/g," ").trim();
 }
+const _LOCAL_ENTITY_FALLBACKS = [
+  {
+    id:"person:nima-afshar-naderi",
+    type:"person",
+    name_fa:"نیما افشارنادری",
+    aliases:["نیما افشار نادری","Nima Afshar Naderi"],
+    roles:["figure","تولیدکننده محتوا و میزبان «جان کلام»"],
+    refs:[{dataset:"figures",key:"nima-afshar-naderi"}],
+    routes:{figure:"nima-afshar-naderi"},
+    meta:{
+      role_fa:"تولیدکننده محتوا و میزبان «جان کلام»",
+      field_fa:"رسانه و تحلیل",
+      verified:true,
+      claimed:true,
+      social:[
+        {kind:"x",label:"ایکس",url:"https://x.com/nimania"},
+        {kind:"instagram",label:"اینستاگرام",url:"https://www.instagram.com/nima.afsharnaderi/"},
+        {kind:"youtube",label:"یوتیوب",url:"https://www.youtube.com/channel/UCYDOVO7EpX3QNEf9Ddk1-AQ"},
+        {kind:"telegram",label:"تلگرام",url:"https://t.me/nimaafsharnaderi"}
+      ]
+    }
+  }
+];
+function _injectLocalEntities(reg){
+  reg = reg && typeof reg==="object" ? reg : {entities:[],edges:[],alias_index:{}};
+  reg.entities = Array.isArray(reg.entities) ? reg.entities : [];
+  reg.edges = Array.isArray(reg.edges) ? reg.edges : [];
+  reg.alias_index = reg.alias_index && typeof reg.alias_index==="object" ? reg.alias_index : {};
+  for(const fallback of _LOCAL_ENTITY_FALLBACKS){
+    let current=reg.entities.find(x=>String(x.id)===fallback.id);
+    if(!current){reg.entities.push(fallback);current=fallback}
+    else{
+      current.meta=Object.assign({},fallback.meta,current.meta||{});
+      current.routes=Object.assign({},fallback.routes,current.routes||{});
+      current.refs=[...(current.refs||[])];
+      for(const ref of fallback.refs||[]) if(!current.refs.some(r=>r.dataset===ref.dataset&&String(r.key)===String(ref.key))) current.refs.push(ref);
+      current.aliases=[...new Set([...(current.aliases||[]),...(fallback.aliases||[])])];
+    }
+    reg.alias_index.person=reg.alias_index.person||{};
+    for(const n of [current.name_fa,...(current.aliases||[])]) reg.alias_index.person[_canonicalNorm(n)]=current.id;
+  }
+  return reg;
+}
 async function loadCanonicalEntities() {
   if (_ENTITY_REGISTRY) return _ENTITY_REGISTRY;
   try {
     const d = await getJSON(DATA + "/entity-registry.json?v=" + Date.now(), 12000);
-    _ENTITY_REGISTRY = d && typeof d === "object" ? d : {entities:[],edges:[],alias_index:{}};
+    _ENTITY_REGISTRY = _injectLocalEntities(d);
   } catch (_) {
-    _ENTITY_REGISTRY = {entities:[],edges:[],alias_index:{}};
+    _ENTITY_REGISTRY = _injectLocalEntities({entities:[],edges:[],alias_index:{}});
   }
   return _ENTITY_REGISTRY;
 }
@@ -113,7 +156,9 @@ function canonicalStrip(entity) {
   const related = links.length ? '<div class="canonical-related">' + links.map(function(x){
     return '<button onclick="openCanonicalEntity(\'' + esc(x.entity.id) + '\')"><small>' + esc(x.label) + '</small><b>' + esc(x.entity.name_fa||x.entity.id) + '</b></button>';
   }).join("") + '</div>' : "";
-  return '<section class="canonical-strip"><div class="canonical-head"><div><span>هویت واحد پندار</span><b>' + esc(entity.name_fa||"") + '</b></div><div class="canonical-head-actions"><code dir="ltr">' + esc(entity.id) + '</code><button class="canonical-graph-btn" onclick="openEntityProfile(\'' + esc(entity.id) + '\')">پروفایل ۳۶۰</button><button class="canonical-graph-btn" onclick="openEntityGraph(\'' + esc(entity.id) + '\')">شبکهٔ ارتباطی</button></div></div>' + related + '</section>';
+  const verified=entity.meta?.verified?'<span class="identity-verified" title="هویت تأییدشده">✓ تأییدشده</span>':"";
+  const claimed=entity.meta?.claimed?'<span class="identity-claimed">مدیریت توسط خود فرد</span>':"";
+  return '<section class="canonical-strip"><div class="canonical-head"><div><span>هویت واحد پندار</span><b>' + esc(entity.name_fa||"") + verified + claimed + '</b></div><div class="canonical-head-actions"><code dir="ltr">' + esc(entity.id) + '</code><button class="canonical-graph-btn" onclick="openEntityProfile(\'' + esc(entity.id) + '\')">پروفایل ۳۶۰</button><button class="canonical-graph-btn" onclick="openEntityGraph(\'' + esc(entity.id) + '\')">شبکهٔ ارتباطی</button></div></div>' + related + '</section>';
 }
 
 
@@ -2649,6 +2694,10 @@ function socialLinks(links) {
 .fig-source-stats{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:7px 0 10px;font-size:13px;color:#8fa89b}
 .fig-source-stats b{color:var(--text)}
 .fig-profile-filters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 16px}
+.identity-verified,.profile-verified{display:inline-flex;align-items:center;justify-content:center;margin-inline-start:7px;color:#1677ff;font-size:.78em;font-weight:800;vertical-align:middle}
+.identity-claimed,.profile-claimed{display:inline-block;margin-inline-start:8px;color:#6f7c75;font-size:12px;font-weight:500}
+.profile-claimed{display:block;margin:4px 0 7px;color:#6f7c75}
+.canonical-head b{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 @media(max-width:600px){.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
   document.head.appendChild(st);
 })();
@@ -2774,6 +2823,8 @@ const _LOCAL_FIGURE_FALLBACKS = [
     field_fa: "رسانه و تحلیل",
     gender: "m",
     external: true,
+    verified: true,
+    claimed: true,
     avatar: null,
     channel_url: "",
     count: 0,
@@ -3215,7 +3266,8 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     <div class="x-profile-main">
       <div class="x-avatar-wrap">${avatar(x,"lg")}</div>
       <div class="x-profile-actions">${figureFollowBtn(x.handle,false)}</div>
-      <h1>${esc(x.name_fa)}</h1>
+      <h1>${esc(x.name_fa)}${x.verified?'<span class="profile-verified" title="هویت تأییدشده">✓</span>':""}</h1>
+      ${x.claimed?'<div class="profile-claimed">این پروفایل توسط خود فرد تأیید و مدیریت می‌شود.</div>':""}
       <div class="x-handle">@${esc(x.handle)}</div>
       <p class="x-bio">${esc(x.role_fa || "")}</p>
       ${socialLinks(x.social)}
