@@ -15,6 +15,7 @@ const CRED_FA = { high: "اعتبار بالا", medium: "چند منبع", low:
 const CRED_CLS = { high: "st-ok", medium: "st-neutral", low: "st-warn" };
 
 const faN = s => String(s).replace(".", "٫").replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+const grp = n => Number(n).toLocaleString("en-US");  // group digits with thousands separators
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 // Homepage editorial wording: use neutral/national terminology in the public
