@@ -72,7 +72,7 @@ jobs:
         run: |
           python backend/scripts/hydrate_movie_master.py \
             --db backend/data/movie-master.sqlite \
-            --limit 1500 \
+            --limit 5000 \
             --workers 4 \
             --summary backend/public/data/movie-master-summary.json \
             --top backend/public/data/movie-master-top.json \
