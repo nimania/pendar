@@ -181,7 +181,8 @@ FIGURES: list[Figure] = [
            (("x", "https://x.com/nimania"),
             ("instagram", "https://www.instagram.com/nima.afsharnaderi/"),
             ("youtube", "https://www.youtube.com/channel/UCYDOVO7EpX3QNEf9Ddk1-AQ"),
-            ("telegram", "https://t.me/nimaafsharnaderi")), external=True,
+            ("telegram", "https://t.me/nimaafsharnaderi"),
+            ("website", "https://grokipedia.com/page/nima-afshar-naderi")), external=True,
            aliases=("نیما افشار نادری", "Nima Afshar Naderi")),
 
     # ══════════════════════════════════════════════════════════════════════
