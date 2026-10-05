@@ -140,6 +140,9 @@ YOUTUBE_PRESS_SOURCES = {
     "Sepehris Cult": "https://www.youtube.com/@SepehrisCult",
     "احسان منصوری": "https://www.youtube.com/@ehsanmansoori",
     "اشکان زارع": "https://www.youtube.com/@ashkan_zare",
+    "جدال": "https://youtube.com/jedaaltv",
+    "سیمرغ طلایی": "https://www.youtube.com/@GoldenSimorgh-d4u",
+    "تلویزیون هوش مصنوعی سیمرغ": "https://www.youtube.com/channel/UCrdxqvmkMQrohT0Setx--pw",
 }
 
 
@@ -278,6 +281,9 @@ PRESS_REGISTRY = [
     ("Chanteh Podcast","https://www.youtube.com/channel/UCvCbxRVG7kyB0uwSOK0eLnQ","fa","youtube"),
     ("Ivar Farhadi","https://www.youtube.com/channel/UCpKTQ7EgNIb5nMahQLdMthw","fa","youtube"),
     ("Farhikhtegan Online","https://www.youtube.com/channel/UCq05uUbwwT1YtxU26Cfwdfw","fa","youtube"),
+    ("جدال","https://youtube.com/jedaaltv","fa","youtube"),
+    ("سیمرغ طلایی","https://www.youtube.com/@GoldenSimorgh-d4u","fa","youtube"),
+    ("تلویزیون هوش مصنوعی سیمرغ","https://www.youtube.com/channel/UCrdxqvmkMQrohT0Setx--pw","fa","youtube"),
     ("Manoto TV","https://www.youtube.com/channel/UCnUdm0u-2FRffBnxQYHuTHA","fa","youtube"),
     ("Baziya (Ali Zia)","https://www.youtube.com/channel/UC8LVufbnNQkU20_fyycIL7A","fa","youtube"),
     ("Rok Show","https://www.youtube.com/channel/UCeLPadoZ4vXAM13iyvivhBg","fa","youtube"),
