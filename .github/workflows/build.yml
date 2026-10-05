@@ -32,10 +32,10 @@ permissions:
   id-token: write
 
 concurrency:
-  # Data refreshes are serialized. UI-only pushes use fast-deploy.yml and no
-  # longer start this expensive ingestion/AI pipeline.
+  # Scheduled refreshes remain serialized. A newer code push supersedes an
+  # older push, so stale builds cannot block urgent pipeline fixes.
   group: data-refresh
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   build:
