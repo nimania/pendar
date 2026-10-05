@@ -561,6 +561,28 @@ def run() -> None:
     except (OSError, ValueError):
         external_posts = []
     by_handle = {str(x.get("handle")): x for x in figure_index.get("figures", [])}
+
+    # Visual YouTube archive: latest uploads from verified channels, regardless
+    # of transcript availability or whether the video became an AI summary.
+    yt_path = os.path.join(os.path.dirname(__file__), "..", "data", "youtube-videos.json")
+    try:
+        with open(yt_path, encoding="utf-8") as yf:
+            youtube_videos = json.load(yf)
+    except (OSError, ValueError):
+        youtube_videos = []
+    for video in youtube_videos if isinstance(youtube_videos, list) else []:
+        fig = by_handle.get(str(video.get("handle") or ""))
+        if not fig or not video.get("url"):
+            continue
+        fig.setdefault("youtube_videos", []).append(video)
+    for fig in by_handle.values():
+        if fig.get("youtube_videos"):
+            fig["youtube_videos"] = sorted(
+                fig["youtube_videos"],
+                key=lambda v: str(v.get("published_at") or ""),
+                reverse=True,
+            )[:15]
+
     for post in external_posts if isinstance(external_posts, list) else []:
         fig = by_handle.get(str(post.get("handle") or ""))
         if not fig or not post.get("summary_fa") or not post.get("url"):
