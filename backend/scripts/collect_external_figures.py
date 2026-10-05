@@ -37,6 +37,21 @@ YOUTUBE_MAX_PER_CHANNEL = 3
 YOUTUBE_KEEP_PER_FIGURE = 40
 YOUTUBE_TRANSCRIPT_CHARS = 32000
 
+# Trusted host channels for people who regularly appear on YouTube without
+# maintaining a dedicated personal channel. Only uploads whose title contains
+# one of the person's name variants are attached to that profile.
+YOUTUBE_FEATURED_SOURCES = {
+    "abbas-souri": [
+        ("https://www.youtube.com/@Parsi_Live", ("عباس سوری", "عباس سوري")),
+    ],
+    "ahmadzeidabad": [
+        ("https://www.youtube.com/@Abdi_media4", ("احمد زیدآبادی", "احمد زيدآبادی", "زیدآبادی", "زيدآبادی")),
+    ],
+    "iranemana_official": [
+        ("https://www.youtube.com/@Parsi_Live", ("سجاد فتاحی",)),
+    ],
+}
+
 SYSTEM = """تو ویراستار «جان کلام» هستی. متن عمومی یک چهره را از منبع اصلی دریافت می‌کنی.
 فقط محتوای دارای موضع، ادعا، تصمیم، استدلال یا پیام عمومی معنادار را publish=true کن.
 تبلیغ، تبریک ساده، بازنشر بدون نظر تازه، محتوای تکراری و متن تقریباً خالی را publish=false کن.
@@ -173,28 +188,57 @@ def collect_youtube_catalog() -> list[dict]:
     with httpx.Client(headers=headers, timeout=25, follow_redirects=True) as client:
         for figure in FIGURES:
             url = youtube_url(figure)
-            if not url:
-                continue
-            try:
-                channel_id = youtube_channel_id(client, url)
-                if not channel_id:
-                    print(f"youtube catalog: channel id unresolved for {figure.name_fa}")
+            if url:
+                try:
+                    channel_id = youtube_channel_id(client, url)
+                    if not channel_id:
+                        print(f"youtube catalog: channel id unresolved for {figure.name_fa}")
+                    else:
+                        entries = youtube_feed(client, channel_id)[:15]
+                        for entry in entries:
+                            rows.append({
+                                "id": entry["id"],
+                                "handle": figure.handle,
+                                "title": entry["title"],
+                                "url": entry["url"],
+                                "published_at": entry["published_at"],
+                                "thumbnail": entry.get("media_url"),
+                                "channel_url": url,
+                                "source_type": "official",
+                            })
+                except Exception as exc:
+                    print(f"youtube catalog: feed unavailable for {figure.name_fa} ({type(exc).__name__})")
+
+            # Selected third-party hosts, title-matched to avoid unrelated uploads.
+            for host_url, needles in YOUTUBE_FEATURED_SOURCES.get(figure.handle, []):
+                try:
+                    channel_id = youtube_channel_id(client, host_url)
+                    if not channel_id:
+                        continue
+                    entries = youtube_feed(client, channel_id)[:15]
+                except Exception as exc:
+                    print(f"youtube catalog: host feed unavailable for {figure.name_fa} ({type(exc).__name__})")
                     continue
-                entries = youtube_feed(client, channel_id)[:15]
-            except Exception as exc:
-                print(f"youtube catalog: feed unavailable for {figure.name_fa} ({type(exc).__name__})")
-                continue
-            for entry in entries:
-                rows.append({
-                    "id": entry["id"],
-                    "handle": figure.handle,
-                    "title": entry["title"],
-                    "url": entry["url"],
-                    "published_at": entry["published_at"],
-                    "thumbnail": entry.get("media_url"),
-                    "channel_url": url,
-                })
-    return rows
+                for entry in entries:
+                    title = str(entry.get("title") or "")
+                    if not any(n in title for n in needles):
+                        continue
+                    rows.append({
+                        "id": entry["id"],
+                        "handle": figure.handle,
+                        "title": title,
+                        "url": entry["url"],
+                        "published_at": entry["published_at"],
+                        "thumbnail": entry.get("media_url"),
+                        "channel_url": host_url,
+                        "source_type": "featured",
+                    })
+
+    # De-duplicate the same video when it is reachable through more than one rule.
+    dedup = {}
+    for row in rows:
+        dedup[(row["handle"], row["id"])] = row
+    return list(dedup.values())
 
 
 def _sample_text(text: str, limit: int = YOUTUBE_TRANSCRIPT_CHARS) -> str:
