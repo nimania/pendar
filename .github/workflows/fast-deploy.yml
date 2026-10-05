@@ -61,7 +61,19 @@ jobs:
           BUILD_ID: ${{ steps.refresh.outputs.build_id }}
         run: |
           rm -rf site && mkdir -p site
-          gh run download "$BUILD_ID" -n latest-static-site -D site
+          if gh run download "$BUILD_ID" -n latest-static-site -D site; then
+            echo "Using latest full-build site artifact."
+          else
+            echo "::warning::latest-static-site unavailable; falling back to the most recent successful Fast Deploy artifact."
+            prev_fast_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/fast-deploy.yml/runs?status=success&per_page=5" --jq '[.workflow_runs[] | select(.id != '${GITHUB_RUN_ID}')][0].id // empty')"
+            test -n "$prev_fast_id"
+            artifact_name="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$prev_fast_id/artifacts" --jq '[.artifacts[] | select(.expired==false and (.name|startswith("github-pages")))] | .[0].name // empty')"
+            test -n "$artifact_name"
+            rm -rf /tmp/prev-fast && mkdir -p /tmp/prev-fast
+            gh run download "$prev_fast_id" -n "$artifact_name" -D /tmp/prev-fast
+            test -f /tmp/prev-fast/artifact.tar
+            tar -xf /tmp/prev-fast/artifact.tar -C site
+          fi
 
       - name: Overlay freshest Jan-e Jaraid generated data
         env:
@@ -243,10 +255,12 @@ jobs:
               )
           idx.write_text(text, encoding="utf-8")
           sw = root / "sw.js"
-          app_v = versions.get("app.js")
-          if sw.exists() and app_v:
+          if sw.exists() and versions:
+              bundle_v = hashlib.md5(
+                  "|".join(f"{k}:{versions[k]}" for k in sorted(versions)).encode("utf-8")
+              ).hexdigest()[:10]
               s = sw.read_text(encoding="utf-8")
-              s = re.sub(r'const V = "[^"]*";', f'const V = "pendar-{app_v}";', s, count=1)
+              s = re.sub(r'const V = "[^"]*";', f'const V = "pendar-{bundle_v}";', s, count=1)
               sw.write_text(s, encoding="utf-8")
           PY
       - name: Validate Jan Film JavaScript
