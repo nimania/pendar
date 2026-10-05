@@ -37,11 +37,13 @@ TRUTH_LIMIT = 30
 YOUTUBE_MAX_NEW_PER_RUN = 12
 YOUTUBE_MAX_PER_CHANNEL = 3
 YOUTUBE_KEEP_PER_FIGURE = 40
-YOUTUBE_TRANSCRIPT_CHARS = 32000
+YOUTUBE_TRANSCRIPT_CHARS = 32000  # legacy public-recap limit; studio mode uses the full transcript
+VIDEO_CHUNK_CHARS = 18000
+VIDEO_CHUNK_OVERLAP = 700
 DOWNSUB_ENDPOINT = "https://api.downsub.com/download"
 YOUTUBE_RECAP_STATE_OUT = HERE.parent / "data" / "youtube-recap-state.json"
 YOUTUBE_RETRY_HOURS = 72
-YOUTUBE_RECAP_VERSION = 2
+YOUTUBE_RECAP_VERSION = 3
 
 # Keep videos visible in the archive, but do not spend transcript/AI credits
 # on channels whose uploads do not need Jan Kalam recaps.
@@ -77,23 +79,142 @@ publish, topic_fa, summary_fa, recap_fa, key_points_fa."""
 
 
 
-VIDEO_RECAP_SYSTEM = """تو ویراستار حرفه‌ای «جان کلام» هستی. متن پیاده‌شدهٔ یک ویدئوی عمومی از یک چهره را می‌گیری.
-این ویدئو از قبل برای پردازش انتخاب شده است؛ دربارهٔ انتشار یا حذف آن تصمیم نگیر.
-فقط بر اساس متن ورودی و بدون افزودن اطلاعات بیرونی، خروجی فارسی بساز:
+VIDEO_CHUNK_SYSTEM = """تو ویراستار تحریریهٔ «جان کلام» هستی. این فقط یک بخش از متن کامل یک ویدئو است.
+از همین بخش، یادداشت تحریریه‌ای دقیق و وفادارانه بساز تا بعداً با بخش‌های دیگر ترکیب شود.
+قواعد:
+- ترتیب بحث، استدلال‌ها، مثال‌ها، نام‌ها، هشدارها، استثناها و نتیجه‌های همین بخش را حفظ کن.
+- هیچ اطلاعات بیرونی، داوری یا فکت تازه‌ای اضافه نکن.
+- متن را رونویسی نکن؛ با زبان روان فارسی بازگویی کن، اما جزئیات معنادار را حذف نکن.
+- هر ادعا یا ارزیابی را به گوینده نسبت بده، مگر اینکه صرفاً توصیف ساختار سخن باشد.
+- اگر این بخش ادامهٔ بحث قبلی است، از ساختن مقدمه یا نتیجهٔ مصنوعی خودداری کن.
+خروجی فقط JSON با کلید chunk_recap_fa باشد."""
+
+
+VIDEO_RECAP_SYSTEM = """تو سردبیر ارشد «جان کلام» هستی. ورودی شامل مشخصات ویدئو و یادداشت‌های
+وفادارانه‌ای است که به ترتیب از تمام بخش‌های متن کامل ویدئو ساخته شده‌اند. فقط بر اساس همین
+مواد و بدون افزودن اطلاعات بیرونی، خروجی فارسی تولید کن.
+
+دو سطح خروجی لازم است:
+
+۱) خروجی عمومی:
 - topic_fa: عنوان دقیق و کوتاه، حداکثر ۸ کلمه.
-- summary_fa: خلاصهٔ خنثی ۳ تا ۶ جمله‌ای.
-- recap_fa: ری‌کپ حرفه‌ای، مفصل، نکته‌به‌نکته، روان، یکپارچه و وفادارانه. مسیر استدلال، ترتیب نکات، مثال‌ها، هشدارها و نتیجه‌گیری‌ها حفظ شود؛ ادعاها به گوینده نسبت داده شوند و هیچ تحلیل یا داوری تازه‌ای اضافه نشود. متن باید برای تولید ویدئوی «جان کلام» قابل استفاده باشد.
-- key_points_fa: مهم‌ترین نکات مستقل؛ هر مورد یک جملهٔ کوتاه.
-خروجی فقط یک JSON object با همین چهار کلید باشد."""
+- summary_fa: خلاصهٔ خنثی ۳ تا ۶ جمله‌ای برای کارت.
+- recap_fa: ری‌کپ حرفه‌ای و یکپارچه، نسبتاً مفصل، که مسیر اصلی بحث و نکات مهم را حفظ کند.
+- key_points_fa: مهم‌ترین نکات مستقل و وفادارانه؛ هر مورد یک جملهٔ کوتاه.
+
+۲) خروجی استودیویی/پریمیوم برای اجرای ویدئوی «جان کلام»:
+- studio_recap_fa باید متنی مستقل، حرفه‌ای، دقیق، نکته‌به‌نکته و آمادهٔ خواندن باشد؛ نه بولت‌پوینت
+  و نه رونویسی خام.
+- لحن تحریریه‌ای، روشن و روان باشد: «او می‌گوید»، «از نظر او»، «تأکید می‌کند»، «در ادامه
+  استدلال می‌کند» و مانند آن، تا مرز میان روایت سردبیر و نظر گوینده همیشه روشن بماند.
+- در آغاز، در یک یا دو پاراگراف مسئلهٔ مرکزی، پرسش اصلی و مسیر کلی سخن را معرفی کن.
+- سپس استدلال را تقریباً با همان توالی ویدئو پیش ببر. مثال‌ها، قیاس‌ها، ارجاعات تاریخی،
+  استثناها، تغییر مسیرهای مهم و جمع‌بندی‌های میانی را حذف نکن.
+- هر جا گوینده میان دو مفهوم تمایز می‌گذارد یا رابطهٔ علت و معلولی می‌سازد، آن تمایز و منطق
+  را روشن توضیح بده.
+- لحن را ساده‌سازی افراطی نکن؛ متن باید برای مخاطب عمومیِ جدی، تقریباً در سطح درک ۱۶ سال به
+  بالا، روان باشد اما عمق استدلال را نگه دارد.
+- هیچ اطلاعات بیرونی یا تصحیح تاریخی/سیاسی از خودت وارد نکن. اگر ادعایی محل مناقشه است، آن
+  را همچنان به گوینده نسبت بده.
+- از نقل طولانی و عین عبارت‌های متن اصلی پرهیز کن؛ محتوای آن را بازنویسی و ترکیب کن.
+- طول را متناسب با محتوای واقعی نگه دار: ویدئوی کوتاه را بی‌دلیل کش نده، اما برای ویدئوی
+  بلند و استدلالی معمولاً حدود ۱۲۰۰ تا ۳۰۰۰ واژهٔ فارسی لازم است. حذف نکته برای کوتاه‌کردن
+  متن مجاز نیست.
+- در پایان حتماً تیتر مستقل «جان کلام» بیاور و در ۳ تا ۵ پاراگراف، هستهٔ استدلال و نتیجهٔ
+  نهایی گوینده را جمع‌بندی کن؛ بدون افزودن نظر سردبیر.
+
+خروجی فقط یک JSON object با کلیدهای
+topic_fa, summary_fa, recap_fa, key_points_fa, studio_recap_fa
+باشد."""
+
+
+def _split_transcript(text: str, limit: int = VIDEO_CHUNK_CHARS,
+                      overlap: int = VIDEO_CHUNK_OVERLAP) -> list[str]:
+    """Split the complete transcript in order without discarding any section."""
+    text = re.sub(r"\s+", " ", str(text or "")).strip()
+    if not text:
+        return []
+    if len(text) <= limit:
+        return [text]
+    chunks: list[str] = []
+    start = 0
+    n = len(text)
+    while start < n:
+        end = min(n, start + limit)
+        if end < n:
+            cut = text.rfind(" ", start + int(limit * 0.75), end)
+            if cut > start:
+                end = cut
+        chunk = text[start:end].strip()
+        if chunk:
+            chunks.append(chunk)
+        if end >= n:
+            break
+        start = max(start + 1, end - overlap)
+    return chunks
+
+
+def _generate_json(provider, system: str, payload: dict, context: dict) -> dict:
+    result = provider.generate(
+        system=system,
+        user=json.dumps(payload, ensure_ascii=False),
+        context=context,
+    )
+    return result.data if isinstance(result.data, dict) else {}
 
 
 def _video_recap(provider, row: dict) -> dict:
     if getattr(provider, "name", "") == "mock":
         return {}
-    prompt = "ویدئو:\n" + json.dumps(row, ensure_ascii=False)
-    result = provider.generate(system=VIDEO_RECAP_SYSTEM, user=prompt, context={"video": row})
-    data = result.data if isinstance(result.data, dict) else {}
-    if any(k in data for k in ("recap_fa", "summary_fa", "topic_fa")):
+    transcript = str(row.get("transcript") or "").strip()
+    chunks = _split_transcript(transcript)
+    if not chunks:
+        return {}
+
+    section_notes: list[str] = []
+    total = len(chunks)
+    for idx, chunk in enumerate(chunks, 1):
+        payload = {
+            "video_id": row.get("id"),
+            "person": row.get("person"),
+            "video_title": row.get("video_title"),
+            "part": idx,
+            "parts_total": total,
+            "transcript_part": chunk,
+        }
+        data = _generate_json(
+            provider,
+            VIDEO_CHUNK_SYSTEM,
+            payload,
+            {"video_id": row.get("id"), "stage": "chunk", "part": idx, "parts_total": total},
+        )
+        note = str(data.get("chunk_recap_fa") or "").strip()
+        # For a short one-chunk transcript, fall back to the source itself rather
+        # than losing the whole recap because a chunk response was malformed.
+        if not note and total == 1:
+            note = chunk
+        if not note:
+            return {}
+        section_notes.append(note)
+
+    final_payload = {
+        "video_id": row.get("id"),
+        "person": row.get("person"),
+        "role": row.get("role"),
+        "video_title": row.get("video_title"),
+        "transcript_chars": len(transcript),
+        "sections": [
+            {"part": i + 1, "recap_fa": note}
+            for i, note in enumerate(section_notes)
+        ],
+    }
+    data = _generate_json(
+        provider,
+        VIDEO_RECAP_SYSTEM,
+        final_payload,
+        {"video_id": row.get("id"), "stage": "studio-final", "parts_total": total},
+    )
+    if any(k in data for k in ("recap_fa", "summary_fa", "topic_fa", "studio_recap_fa")):
         return data
     posts = data.get("posts")
     if isinstance(posts, list) and posts:
@@ -363,7 +484,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         text = _caption_text_from_payload(r.text)
         if len(text) >= 120:
             print(f"youtube: DownSub transcript ok {video_id} (plain)")
-            return _sample_text(text), ""
+            return re.sub(r"\\s+", " ", text).strip(), ""
         return "", ""
 
     try:
@@ -406,7 +527,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         text = _caption_text_from_payload(raw)
         if len(text) >= 120:
             print(f"youtube: DownSub transcript ok {video_id} ({lang or 'unknown'})")
-            return _sample_text(text), lang
+            return re.sub(r"\\s+", " ", text).strip(), lang
 
     for _, lang, url in sorted(url_candidates, key=lambda x: x[0]):
         if lang and _lang_rank(lang) >= 99:
@@ -418,7 +539,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
             text = _caption_text_from_payload(rr.text)
             if len(text) >= 120:
                 print(f"youtube: DownSub subtitle ok {video_id} ({lang or 'unknown'})")
-                return _sample_text(text), lang
+                return re.sub(r"\\s+", " ", text).strip(), lang
         except Exception:
             continue
 
@@ -429,7 +550,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         text = _caption_text_from_payload(raw)
         if len(text) >= 120:
             print(f"youtube: DownSub transcript ok {video_id} (unlabeled)")
-            return _sample_text(text), ""
+            return re.sub(r"\\s+", " ", text).strip(), ""
     print(f"youtube: DownSub returned no usable transcript for {video_id}")
     return "", ""
 
@@ -492,7 +613,7 @@ def _timedtext_transcript(client: httpx.Client, video_id: str) -> tuple[str, str
                         parts.append(text)
                 text = re.sub(r"\s+", " ", " ".join(parts)).strip()
                 if len(text) >= 120:
-                    return _sample_text(text), lang
+                    return re.sub(r"\\s+", " ", text).strip(), lang
             except Exception:
                 continue
     return "", ""
@@ -581,7 +702,7 @@ def _ytdlp_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
                 text = _caption_text_from_payload(r.text)
                 if len(text) >= 120:
                     print(f"youtube: yt-dlp captions ok {video_id} ({lang})")
-                    return _sample_text(text), str(lang or "")
+                    return re.sub(r"\\s+", " ", text).strip(), str(lang or "")
             except Exception:
                 continue
     return "", ""
@@ -604,7 +725,7 @@ def youtube_transcript(api: YouTubeTranscriptApi, client: httpx.Client,
         if transcript is not None:
             fetched = transcript.fetch()
             text = " ".join(str(s.text or "").strip() for s in fetched if str(s.text or "").strip())
-            text = _sample_text(html.unescape(text))
+            text = re.sub(r"\\s+", " ", html.unescape(text)).strip()
             if len(text) >= 120:
                 return text, str(getattr(transcript, "language_code", "") or "")
     except Exception as exc:
@@ -622,7 +743,11 @@ def youtube_transcript(api: YouTubeTranscriptApi, client: httpx.Client,
 
 
 def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None) -> list[dict]:
-    seen = {str(x.get("id")) for x in old if x.get("platform") == "youtube"}
+    old_youtube = {
+        str(x.get("id")): x
+        for x in old
+        if isinstance(x, dict) and x.get("platform") == "youtube" and x.get("id")
+    }
     fresh: list[dict] = []
     attempts = 0
     recap_state = _load_recap_state()
@@ -653,7 +778,8 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
             if figure is None:
                 continue
             ext_id = "youtube-" + str(entry["id"])
-            if ext_id in seen:
+            existing = old_youtube.get(ext_id) or {}
+            if int(existing.get("recap_version") or 0) >= YOUTUBE_RECAP_VERSION:
                 continue
             state_key = f"{figure.handle}:{entry['id']}"
             if not _retry_due(recap_state.get(state_key) or {}):
@@ -677,7 +803,8 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
             })
             summary = str(lab.get("summary_fa") or "").strip()
             recap = str(lab.get("recap_fa") or "").strip()
-            if not summary or not recap:
+            studio_recap = str(lab.get("studio_recap_fa") or "").strip()
+            if not summary or not recap or not studio_recap:
                 recap_state[state_key] = {
                     "status": "ai_incomplete",
                     "version": YOUTUBE_RECAP_VERSION,
@@ -699,6 +826,10 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                 "topic_fa": str(lab.get("topic_fa") or entry.get("title") or "ویدئوی تازه").strip(),
                 "summary_fa": summary,
                 "recap_fa": recap,
+                # Private runner/cache field. figure_posts._public() removes underscore
+                # keys, so this script-ready edition never reaches public Pages JSON.
+                "_studio_recap_fa": studio_recap,
+                "recap_version": YOUTUBE_RECAP_VERSION,
                 "key_points_fa": [
                     str(x).strip() for x in (lab.get("key_points_fa") or [])
                     if str(x).strip()
@@ -711,7 +842,7 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                 "source_type": entry.get("source_type") or "official",
             })
     _save_recap_state(recap_state)
-    print(f"youtube: {attempts} catalog videos checked; {len(fresh)} substantive recaps")
+    print(f"youtube: {attempts} catalog videos checked; {len(fresh)} public + studio recaps")
     return fresh
 
 
