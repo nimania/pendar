@@ -87,7 +87,10 @@ VIDEO_CHUNK_SYSTEM = """تو ویراستار تحریریهٔ «جان کلام
 - متن را رونویسی نکن؛ با زبان روان فارسی بازگویی کن، اما جزئیات معنادار را حذف نکن.
 - هر ادعا یا ارزیابی را به گوینده نسبت بده، مگر اینکه صرفاً توصیف ساختار سخن باشد.
 - اگر این بخش ادامهٔ بحث قبلی است، از ساختن مقدمه یا نتیجهٔ مصنوعی خودداری کن.
-خروجی فقط JSON با کلید chunk_recap_fa باشد."""
+- علاوه بر متن پیوسته، همهٔ نکات مستقل همین بخش را هم در chunk_points_fa فهرست کن؛
+  حتی نکات فرعی، مثال‌های تعیین‌کننده، استثناها و قیود مهم. هدف این است که در مرحلهٔ نهایی
+  چیزی از قلم نیفتد.
+خروجی فقط JSON با کلیدهای chunk_recap_fa و chunk_points_fa باشد."""
 
 
 VIDEO_RECAP_SYSTEM = """تو سردبیر ارشد «جان کلام» هستی. ورودی شامل مشخصات ویدئو و یادداشت‌های
@@ -117,15 +120,31 @@ VIDEO_RECAP_SYSTEM = """تو سردبیر ارشد «جان کلام» هستی.
 - هیچ اطلاعات بیرونی یا تصحیح تاریخی/سیاسی از خودت وارد نکن. اگر ادعایی محل مناقشه است، آن
   را همچنان به گوینده نسبت بده.
 - از نقل طولانی و عین عبارت‌های متن اصلی پرهیز کن؛ محتوای آن را بازنویسی و ترکیب کن.
-- طول را متناسب با محتوای واقعی نگه دار: ویدئوی کوتاه را بی‌دلیل کش نده، اما برای ویدئوی
-  بلند و استدلالی معمولاً حدود ۱۲۰۰ تا ۳۰۰۰ واژهٔ فارسی لازم است. حذف نکته برای کوتاه‌کردن
-  متن مجاز نیست.
-- در پایان حتماً تیتر مستقل «جان کلام» بیاور و در ۳ تا ۵ پاراگراف، هستهٔ استدلال و نتیجهٔ
+- هیچ سقف کلمه‌ای برای studio_recap_fa وجود ندارد. طول متن باید تابع محتوای واقعی باشد و
+  تا جایی ادامه پیدا کند که هیچ نکتهٔ معنادار، استدلال، مثال، قید، استثنا، هشدار، ارجاع یا
+  نتیجهٔ موجود در یادداشت‌های بخش‌ها ناگفته نماند. از تکرار بی‌فایده پرهیز کن، اما برای
+  کوتاه‌کردن متن هیچ نکته‌ای را حذف نکن.
+- studio_recap_fa باید برای خواندن و ضبط مستقیم مناسب باشد؛ پاراگراف‌بندی طبیعی داشته باشد
+  و از تیترهای میانی فقط وقتی استفاده کند که به فهم ساختار بحث کمک می‌کنند.
+- در پایان حتماً تیتر مستقل «جان کلام» بیاور و در چند پاراگراف، هستهٔ استدلال و نتیجهٔ
   نهایی گوینده را جمع‌بندی کن؛ بدون افزودن نظر سردبیر.
 
 خروجی فقط یک JSON object با کلیدهای
 topic_fa, summary_fa, recap_fa, key_points_fa, studio_recap_fa
 باشد."""
+
+VIDEO_RECAP_AUDIT_SYSTEM = """تو ویراستار کنترل کیفیت «جان کلام» هستی.
+ورودی شامل یادداشت‌های کاملِ همهٔ بخش‌های ویدئو و یک نسخهٔ استودیویی پیشنهادی است.
+وظیفه‌ات فقط کنترل پوشش و اصلاح کمبودهاست:
+- تک‌تک نکات بخش‌ها را با متن استودیویی مقایسه کن.
+- هر استدلال، مثال، قید، استثنا، هشدار، ارجاع، نتیجهٔ میانی یا نتیجهٔ نهایی که در متن جا
+  افتاده یا بیش از حد فشرده شده را به متن برگردان.
+- ترتیب کلی بحث را حفظ کن و متن را یکپارچه و قابل اجرا نگه دار.
+- هیچ اطلاعات بیرونی، تحلیل تازه یا داوری خودت اضافه نکن.
+- اگر متن از قبل کامل است، همان را با فقط اصلاحات زبانی ضروری برگردان.
+- خروجی باید تا جایی مفصل باشد که هیچ نکتهٔ معناداری ناگفته نماند؛ سقف کلمه ندارد.
+- بخش پایانی «جان کلام» را حفظ کن.
+خروجی فقط JSON با کلید studio_recap_fa باشد."""
 
 
 def _split_transcript(text: str, limit: int = VIDEO_CHUNK_CHARS,
@@ -172,6 +191,7 @@ def _video_recap(provider, row: dict) -> dict:
         return {}
 
     section_notes: list[str] = []
+    section_points: list[list[str]] = []
     total = len(chunks)
     for idx, chunk in enumerate(chunks, 1):
         payload = {
@@ -189,6 +209,10 @@ def _video_recap(provider, row: dict) -> dict:
             {"video_id": row.get("id"), "stage": "chunk", "part": idx, "parts_total": total},
         )
         note = str(data.get("chunk_recap_fa") or "").strip()
+        points = [
+            str(x).strip() for x in (data.get("chunk_points_fa") or [])
+            if str(x).strip()
+        ]
         # For a short one-chunk transcript, fall back to the source itself rather
         # than losing the whole recap because a chunk response was malformed.
         if not note and total == 1:
@@ -196,6 +220,7 @@ def _video_recap(provider, row: dict) -> dict:
         if not note:
             return {}
         section_notes.append(note)
+        section_points.append(points)
 
     final_payload = {
         "video_id": row.get("id"),
@@ -204,7 +229,11 @@ def _video_recap(provider, row: dict) -> dict:
         "video_title": row.get("video_title"),
         "transcript_chars": len(transcript),
         "sections": [
-            {"part": i + 1, "recap_fa": note}
+            {
+                "part": i + 1,
+                "recap_fa": note,
+                "points_fa": section_points[i],
+            }
             for i, note in enumerate(section_notes)
         ],
     }
@@ -214,6 +243,24 @@ def _video_recap(provider, row: dict) -> dict:
         final_payload,
         {"video_id": row.get("id"), "stage": "studio-final", "parts_total": total},
     )
+    studio = str(data.get("studio_recap_fa") or "").strip()
+    if studio:
+        audit_payload = {
+            "video_id": row.get("id"),
+            "person": row.get("person"),
+            "video_title": row.get("video_title"),
+            "sections": final_payload["sections"],
+            "studio_recap_fa": studio,
+        }
+        audited = _generate_json(
+            provider,
+            VIDEO_RECAP_AUDIT_SYSTEM,
+            audit_payload,
+            {"video_id": row.get("id"), "stage": "studio-audit", "parts_total": total},
+        )
+        audited_text = str(audited.get("studio_recap_fa") or "").strip()
+        if audited_text:
+            data["studio_recap_fa"] = audited_text
     if any(k in data for k in ("recap_fa", "summary_fa", "topic_fa", "studio_recap_fa")):
         return data
     posts = data.get("posts")
