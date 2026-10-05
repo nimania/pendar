@@ -230,6 +230,9 @@ def classify_figure_posts(db: Session, *, provider: Provider | None = None,
 from app.clustering.similarity import tokenize  # noqa: E402
 
 _BY_HANDLE = {f.handle.lower(): f for f in FIGURES}
+for _f in FIGURES:
+    if _f.telegram_handle:
+        _BY_HANDLE[_f.telegram_handle.lower()] = _f
 # Field slugs → Persian section titles. Order here is the display order.
 FIELD_FA = {
     "politics": "سیاست و جامعه",
@@ -364,9 +367,13 @@ def figures_index(posts: list[dict], *, per_figure: int = 15,
             "handle": f.handle, "name_fa": f.name_fa, "role_fa": f.role_fa,
             "field": f.field, "field_fa": FIELD_FA.get(f.field, ""),
             "gender": f.gender,
-            "channel_url": ("" if f.external else f"https://t.me/{f.handle}"), "external": f.external,
+            "channel_url": (f"https://t.me/{f.telegram_handle}" if f.telegram_handle else ("" if f.external else f"https://t.me/{f.handle}")),
+            "external": f.external,
+            "verified": f.verified,
+            "claimed": f.claimed,
             "avatar": avatars.get(f.handle),
             "social": figure_social(f),
+            "aliases": list(f.aliases),
             "count": len(by.get(f.handle, [])), "posts": items,
         })
     return {"fields": FIELD_FA, "figures": figures}
