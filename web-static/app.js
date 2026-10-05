@@ -1242,6 +1242,7 @@ async function route() {
   if (kind === "weather") return showWeather();
   if (kind === "faq") return showFaq();
   if (kind === "figures") return showFigures();
+  if (kind === "videos") return showLatestVideos();
   if (kind === "press") return showPress();
   if (kind === "press-source" && arg) return showPress(arg);
   if (kind === "press-article" && arg) return openPressArticle(arg);
@@ -2689,8 +2690,8 @@ function socialLinks(links) {
 .figure-search-hit b{display:flex;align-items:center;gap:4px}
 .figure-search-hit small{color:#8fa89b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .figure-search-empty{padding:14px;color:#8fa89b;text-align:center}
-.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}
-@media(max-width:600px){.figure-youtube{padding:12px}.figure-youtube-grid{grid-template-columns:1fr}.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
+.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}.latest-videos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:8px 0 22px}.latest-videos-head h1{margin:4px 0 6px}.latest-videos-head p{margin:0;max-width:720px;color:#8fa89b;line-height:1.8}.latest-videos-stats{display:flex;gap:8px;flex-wrap:wrap}.latest-videos-stats span{border:1px solid rgba(143,168,155,.22);border-radius:999px;padding:7px 11px;font-size:12px}.latest-videos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.latest-video-card{overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.latest-video-main{display:block;color:inherit;text-decoration:none}.latest-video-copy{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.latest-video-copy b{font-size:14px;line-height:1.6}.latest-video-copy small{font-size:11.5px;color:#8fa89b}.latest-video-people{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px}.latest-video-people button{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(143,168,155,.2);border-radius:999px;background:transparent;color:inherit;padding:4px 8px;font:inherit;font-size:11.5px;cursor:pointer}.latest-video-people img{width:20px;height:20px;border-radius:50%;object-fit:cover}
+@media(max-width:900px){.latest-videos-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.figure-youtube{padding:12px}.figure-youtube-grid,.latest-videos-grid{grid-template-columns:1fr}.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
   document.head.appendChild(st);
 })();
 
@@ -3149,6 +3150,52 @@ function renderFiguresDirectory() {
   document.getElementById("figure-timeline").innerHTML = "";
   _figDirectoryMode = "direct";
   renderFigures();
+}
+async function showLatestVideos() {
+  show("figures"); setTab("");
+  const lede=document.getElementById("figures-lede");
+  if(lede) lede.style.display="none";
+  const timeline=document.getElementById("figure-timeline");
+  if(timeline) timeline.innerHTML="";
+  const el=document.getElementById("figures");
+  if(!el) return;
+  el.innerHTML='<div class="spinner"></div>';
+  const d=await loadFigures();
+  const byVideo=new Map();
+  for(const person of (d.figures||[])){
+    for(const v of (person.youtube_videos||[])){
+      if(!v || !v.url) continue;
+      const key=String(v.id||v.url);
+      let row=byVideo.get(key);
+      if(!row){
+        row={...v,people:[]};
+        byVideo.set(key,row);
+      }
+      if(!row.people.some(p=>String(p.handle).toLowerCase()===String(person.handle).toLowerCase())){
+        row.people.push({handle:person.handle,name_fa:person.name_fa,avatar:person.avatar,role_fa:person.role_fa});
+      }
+    }
+  }
+  const videos=[...byVideo.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
+  const peopleCount=new Set(videos.flatMap(v=>v.people.map(p=>String(p.handle).toLowerCase()))).size;
+  document.title="آخرین ویدئوهای چهره‌ها | پندار";
+  setHash("#/videos");
+  el.innerHTML=`
+    <div class="latest-videos-head">
+      <button class="back" onclick="showFigures()">بازگشت به جان کلام</button>
+      <div><span class="press-kicker">جان کلام · ویدئو</span><h1>آخرین ویدئوها</h1>
+      <p>تازه‌ترین ویدئوهای چهره‌های پندار؛ از کانال‌های رسمی و حضورهای شناسایی‌شده در میزبان‌های معتبر.</p></div>
+      <div class="latest-videos-stats"><span><b>${faN(videos.length)}</b> ویدئو</span><span><b>${faN(peopleCount)}</b> چهره</span></div>
+    </div>
+    ${videos.length?`<div class="latest-videos-grid">${videos.slice(0,120).map(v=>`
+      <article class="latest-video-card">
+        <a class="latest-video-main" href="${esc(v.url)}" target="_blank" rel="noopener">
+          <span class="figure-youtube-thumb">${v.thumbnail?`<img src="${esc(v.thumbnail)}" alt="" loading="lazy">`:""}<span class="figure-youtube-play">▶</span></span>
+          <span class="latest-video-copy"><b>${esc(v.title||"ویدئوی یوتیوب")}</b><small>${v.published_at?relTime(v.published_at):"YouTube"} · YouTube ↗</small></span>
+        </a>
+        <div class="latest-video-people">${v.people.map(p=>`<button onclick="openFigure('${String(p.handle||"").replace(/'/g,"\\'")}')">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></button>`).join("")}</div>
+      </article>`).join("")}</div>`:'<div class="state"><div class="big">هنوز ویدئویی برای چهره‌ها پیدا نشده</div></div>'}
+  `;
 }
 async function renderFigures() {
   document.getElementById("figures-lede").style.display = "";
