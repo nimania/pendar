@@ -174,7 +174,11 @@ FIGURES: list[Figure] = [
     Figure("hossein-entezami", "حسین انتظامی", "مدیر فرهنگی و رسانه‌ای", "media", external=True),
     Figure("mahnaz-shirali", "مهناز شیرالی", "جامعه‌شناس و پژوهشگر", "society", (), "f", external=True),
     Figure("fayaz-zahed", "فیاض زاهد", "روزنامه‌نگار و تحلیلگر سیاسی", "politics", external=True),
-    Figure("nima-afshar-naderi", "نیما افشارنادری", "تولیدکننده محتوا و میزبان «جان کلام»", "media", external=True,
+    Figure("nima-afshar-naderi", "نیما افشارنادری", "تولیدکننده محتوا و میزبان «جان کلام»", "media",
+           (("x", "https://x.com/nimania"),
+            ("instagram", "https://www.instagram.com/nima.afsharnaderi/"),
+            ("youtube", "https://www.youtube.com/channel/UCYDOVO7EpX3QNEf9Ddk1-AQ"),
+            ("telegram", "https://t.me/nimaafsharnaderi")), external=True,
            aliases=("نیما افشار نادری", "Nima Afshar Naderi")),
 
     # ══════════════════════════════════════════════════════════════════════
