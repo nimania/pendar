@@ -249,6 +249,9 @@ jobs:
               s = re.sub(r'const V = "[^"]*";', f'const V = "pendar-{app_v}";', s, count=1)
               sw.write_text(s, encoding="utf-8")
           PY
+      - name: Validate Jan Film JavaScript
+        run: node --check web-static/movies-hub.js
+
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir site/data
 
