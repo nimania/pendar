@@ -522,10 +522,21 @@ async function _buildSmartSearchDocs(){
     const f=await loadFigures();
     (f.figures||[]).forEach(x=>{
       const posts=x.posts||[];
-      if(posts.length || (x.count||0)>0){
-        docs.push({kind:"چهره",title:x.name_fa,sub:x.role_fa||"",handle:x.handle,go:`openFigure('${String(x.handle).replace(/'/g,"\\'")}')`,text:[x.name_fa,x.role_fa,x.handle].join(" ")});
+      // Every real directory profile belongs in global search, even before it
+      // has a published statement. Media/source adapters remain excluded.
+      if(x.directory!==false){
+        docs.push({
+          kind:"چهره",
+          title:x.name_fa,
+          sub:x.role_fa||"",
+          handle:x.handle,
+          go:`openFigure('${String(x.handle).replace(/'/g,"\\'")}')`,
+          text:[x.name_fa,x.role_fa,x.handle,...(x.aliases||[])].join(" "),
+          aliases:x.aliases||[],
+          count:Number(x.count||posts.length||0)
+        });
       }
-      posts.forEach(p=>docs.push({kind:"دیدگاه",title:x.name_fa,sub:p.topic_fa||p.source_name||"دیدگاه",handle:x.handle,go:`openStatement('${String(statementKey(p)).replace(/'/g,"\\'")}')`,text:[x.name_fa,x.role_fa,p.topic_fa,p.summary_fa,p.source_name].join(" "),snippet:p.summary_fa||""}));
+      posts.forEach(p=>docs.push({kind:"دیدگاه",title:x.name_fa,sub:p.topic_fa||p.source_name||"دیدگاه",handle:x.handle,go:`openStatement('${String(statementKey(p)).replace(/'/g,"\\'")}')`,text:[x.name_fa,x.role_fa,...(x.aliases||[]),p.topic_fa,p.summary_fa,p.source_name].join(" "),snippet:p.summary_fa||""}));
     });
   }catch(_){}
   try{
@@ -633,8 +644,48 @@ async function smartSearch(q){
       const src=[...by.values()].sort((a,b)=>b.score-a.score).slice(0,8);
       out.innerHTML=src.length?`<div class="ss-answer"><strong>رسانه‌ها و نشریات مرتبط</strong><small>بر اساس آرشیو فعلی پندار</small></div>${src.map(x=>_ssRenderRow(x.d,Q,"منبع")).join("")}`:'<div class="smart-search-hint">منبع مرتبطی پیدا نشد.</div>';return;
     }
-    ranked=ranked.slice(0,14);
-    out.innerHTML=ranked.length?ranked.map(x=>_ssRenderRow(x.d,Q)).join(""):'<div class="smart-search-hint">نتیجه‌ای پیدا نشد. عبارت را طبیعی‌تر یا کوتاه‌تر امتحان کن.</div>';
+    // When a query clearly names a known person, lead with the profile once
+    // instead of flooding the panel with many statements from that same person.
+    const profileHits=ranked.filter(x=>x.d.kind==="چهره").filter(x=>{
+      const title=_sq(x.d.title), aliases=(x.d.aliases||[]).map(_sq);
+      if(title===Q.n || aliases.includes(Q.n)) return true;
+      if(Q.base.length===1) return title.split(" ").includes(Q.base[0]) || aliases.some(a=>a.split(" ").includes(Q.base[0]));
+      return Q.base.every(t=>title.includes(t) || aliases.some(a=>a.includes(t)));
+    }).slice(0,3);
+
+    if(profileHits.length){
+      const handles=new Set(profileHits.map(x=>x.d.handle).filter(Boolean));
+      const related=[];
+      const seen=new Set();
+      for(const x of ranked){
+        if(x.d.kind==="چهره") continue;
+        // For a named-person search, prefer that person's own statements first.
+        if(handles.size && x.d.handle && !handles.has(x.d.handle) && related.length<3) continue;
+        const key=[x.d.kind,_sq(x.d.title),_sq(x.d.sub),_sq((x.d.snippet||"").slice(0,90))].join("|");
+        if(seen.has(key)) continue;
+        seen.add(key); related.push(x);
+        if(related.length>=3) break;
+      }
+      out.innerHTML=
+        `<div class="ss-answer"><strong>چهره</strong><small>پروفایل اصلی</small></div>`+
+        profileHits.map(x=>_ssRenderRow(x.d,Q,x.d.count?`چهره · ${faN(x.d.count)} گفته`:"چهره")).join("")+
+        (related.length?`<div class="ss-divider">چند نتیجهٔ مرتبط</div>${related.map(x=>_ssRenderRow(x.d,Q)).join("")}`:"");
+      return;
+    }
+
+    // Generic searches stay compact as well: dedupe near-identical rows and
+    // cap each visible title/kind combination before rendering.
+    const compact=[], seen=new Set(), perTitle=new Map();
+    for(const x of ranked){
+      const titleKey=_sq(x.d.title), bucket=x.d.kind+"|"+titleKey;
+      const n=perTitle.get(bucket)||0;
+      if(n>=2) continue;
+      const key=[bucket,_sq(x.d.sub),_sq((x.d.snippet||"").slice(0,90))].join("|");
+      if(seen.has(key)) continue;
+      seen.add(key); perTitle.set(bucket,n+1); compact.push(x);
+      if(compact.length>=8) break;
+    }
+    out.innerHTML=compact.length?compact.map(x=>_ssRenderRow(x.d,Q)).join(""):'<div class="smart-search-hint">نتیجه‌ای پیدا نشد. عبارت را طبیعی‌تر یا کوتاه‌تر امتحان کن.</div>';
   },140);
 }
 document.addEventListener("click",e=>{const box=document.getElementById("smart-search");if(box?.classList.contains("open")&&!box.contains(e.target))toggleSmartSearch(false)});
