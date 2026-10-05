@@ -3,6 +3,9 @@ name: Fast Deploy Pendar UI
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Build & Deploy Pendar (static)"]
+    types: [completed]
   push:
     branches: [main]
     paths:
@@ -31,9 +34,12 @@ concurrency:
 
 jobs:
   build-ui:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Refresh TV Guide EPG
         continue-on-error: true
         run: python backend/scripts/build_tv_guide.py --output web-static/data/tv-guide.json
