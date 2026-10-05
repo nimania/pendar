@@ -231,7 +231,7 @@ button.tl-item:hover .tl-h{color:#1a9d7e}
 // in secondary-views.js, loaded before this file. grp moved to core.js.
 
 // archive feed grouped by importance tier ("به تفکیک اهمیت")
-const TIERS = [["high", "بسیار مهم"], ["mid", "مهم"], ["low", "متوسط"]];
+// TIERS moved to nav.js (next to groupedFeed, its only user).
 // Feed grouping (groupedFeed, groupedByCategory, utcDayISO, dayLabel) and
 // the navigation openers (openDay, openTrendDossier, openTopic,
 // referenceStrip, openEntity, followBar, openSource) now live in nav.js,

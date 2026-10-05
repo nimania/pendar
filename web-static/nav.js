@@ -10,6 +10,7 @@
    and app.js helpers (show, setTab, showFeed) at runtime. No behavior
    change. */
 
+const TIERS = [["high", "بسیار مهم"], ["mid", "مهم"], ["low", "متوسط"]];
 function groupedFeed(items) {
   if (!items.length) return `<div class="state"><div class="big">خبری نیست</div></div>`;
   let html = "";
@@ -92,7 +93,8 @@ async function openTrendDossier(slug) {
     </div>` + groupedFeed(timeline);
 }
 
-function openTopic(slug) {
+async function openTopic(slug) {
+  if (!ALL.length) { try { ALL = await getJSON(`${DATA}/stories.json`); } catch (e) {} }
   setHash("#/topic/" + slug);
   show("topicarchive"); setTab("topics");
   document.getElementById("ta-back-t").textContent = "بازگشت به موضوعات";
