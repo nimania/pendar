@@ -250,7 +250,9 @@ jobs:
               sw.write_text(s, encoding="utf-8")
           PY
       - name: Validate Jan Film JavaScript
-        run: node --check web-static/movies-hub.js
+        run: |
+          node --check web-static/movies-hub.js
+          node --check web-static/app.js
 
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir site/data
