@@ -41,6 +41,7 @@ YOUTUBE_TRANSCRIPT_CHARS = 32000
 DOWNSUB_ENDPOINT = "https://api.downsub.com/download"
 YOUTUBE_RECAP_STATE_OUT = HERE.parent / "data" / "youtube-recap-state.json"
 YOUTUBE_RETRY_HOURS = 72
+YOUTUBE_RECAP_VERSION = 2
 
 # Keep videos visible in the archive, but do not spend transcript/AI credits
 # on channels whose uploads do not need Jan Kalam recaps.
@@ -74,6 +75,38 @@ SYSTEM = """تو ویراستار «جان کلام» هستی. متن عموم�
 خروجی فقط JSON با کلید posts و برای هر id:
 publish, topic_fa, summary_fa, recap_fa, key_points_fa."""
 
+
+
+VIDEO_RECAP_SYSTEM = """تو ویراستار حرفه‌ای «جان کلام» هستی. متن پیاده‌شدهٔ یک ویدئوی عمومی از یک چهره را می‌گیری.
+این ویدئو از قبل برای پردازش انتخاب شده است؛ دربارهٔ انتشار یا حذف آن تصمیم نگیر.
+فقط بر اساس متن ورودی و بدون افزودن اطلاعات بیرونی، خروجی فارسی بساز:
+- topic_fa: عنوان دقیق و کوتاه، حداکثر ۸ کلمه.
+- summary_fa: خلاصهٔ خنثی ۳ تا ۶ جمله‌ای.
+- recap_fa: ری‌کپ حرفه‌ای، مفصل، نکته‌به‌نکته، روان، یکپارچه و وفادارانه. مسیر استدلال، ترتیب نکات، مثال‌ها، هشدارها و نتیجه‌گیری‌ها حفظ شود؛ ادعاها به گوینده نسبت داده شوند و هیچ تحلیل یا داوری تازه‌ای اضافه نشود. متن باید برای تولید ویدئوی «جان کلام» قابل استفاده باشد.
+- key_points_fa: مهم‌ترین نکات مستقل؛ هر مورد یک جملهٔ کوتاه.
+خروجی فقط یک JSON object با همین چهار کلید باشد."""
+
+
+def _video_recap(provider, row: dict) -> dict:
+    if getattr(provider, "name", "") == "mock":
+        return {}
+    prompt = "ویدئو:\n" + json.dumps(row, ensure_ascii=False)
+    result = provider.generate(system=VIDEO_RECAP_SYSTEM, user=prompt, context={"video": row})
+    data = result.data if isinstance(result.data, dict) else {}
+    if any(k in data for k in ("recap_fa", "summary_fa", "topic_fa")):
+        return data
+    posts = data.get("posts")
+    if isinstance(posts, list) and posts:
+        return posts[0] if isinstance(posts[0], dict) else {}
+    if isinstance(posts, dict):
+        vid = str(row.get("id") or "")
+        hit = posts.get(vid)
+        if isinstance(hit, dict):
+            return hit
+        for value in posts.values():
+            if isinstance(value, dict):
+                return value
+    return {}
 
 def _provider():
     return get_provider()
@@ -419,6 +452,8 @@ def _save_recap_state(state: dict) -> None:
 def _retry_due(row: dict) -> bool:
     if not row:
         return True
+    if int(row.get("version") or 0) != YOUTUBE_RECAP_VERSION:
+        return True
     if row.get("status") == "success":
         return False
     raw = str(row.get("last_attempt") or "")
@@ -628,26 +663,31 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
             if len(transcript) < 120:
                 recap_state[state_key] = {
                     "status": "no_transcript",
+                    "version": YOUTUBE_RECAP_VERSION,
                     "last_attempt": datetime.now().astimezone().isoformat(),
                 }
                 print(f"youtube: transcript unavailable {entry['id']} after fallbacks")
                 continue
-            labels = _label(provider, [{
+            lab = _video_recap(provider, {
                 "id": entry["id"],
                 "person": figure.name_fa,
                 "role": figure.role_fa,
                 "video_title": entry.get("title") or "",
                 "transcript": transcript,
-            }])
-            lab = labels.get(str(entry["id"]), {})
-            if lab.get("publish") is not True or not str(lab.get("summary_fa") or "").strip():
+            })
+            summary = str(lab.get("summary_fa") or "").strip()
+            recap = str(lab.get("recap_fa") or "").strip()
+            if not summary or not recap:
                 recap_state[state_key] = {
-                    "status": "not_substantive",
+                    "status": "ai_incomplete",
+                    "version": YOUTUBE_RECAP_VERSION,
                     "last_attempt": datetime.now().astimezone().isoformat(),
                 }
+                print(f"youtube: AI recap incomplete {entry['id']}")
                 continue
             recap_state[state_key] = {
                 "status": "success",
+                "version": YOUTUBE_RECAP_VERSION,
                 "last_attempt": datetime.now().astimezone().isoformat(),
             }
             fresh.append({
@@ -657,8 +697,8 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
                 "translation_label_fa": ("بازگویی از ویدئوی اصلی" if lang == "fa"
                                          else f"بازگویی از {lang or 'زبان اصلی'}"),
                 "topic_fa": str(lab.get("topic_fa") or entry.get("title") or "ویدئوی تازه").strip(),
-                "summary_fa": str(lab.get("summary_fa") or "").strip(),
-                "recap_fa": str(lab.get("recap_fa") or lab.get("summary_fa") or "").strip(),
+                "summary_fa": summary,
+                "recap_fa": recap,
                 "key_points_fa": [
                     str(x).strip() for x in (lab.get("key_points_fa") or [])
                     if str(x).strip()
