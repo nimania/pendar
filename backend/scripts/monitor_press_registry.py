@@ -28,6 +28,19 @@ def looks_feed(ctype: str, body: str) -> bool:
     head=body[:2500].lower()
     return "xml" in (ctype or "").lower() or "<rss" in head or "<feed" in head or "<rdf:rdf" in head
 
+def youtube_feed_from_page(html: str) -> str | None:
+    patterns=[
+        r'"channelId":"(UC[\w-]{20,})"',
+        r'"externalId":"(UC[\w-]{20,})"',
+        r'itemprop="channelId"\s+content="(UC[\w-]{20,})"',
+        r'<link rel="canonical" href="https://www\.youtube\.com/channel/(UC[\w-]{20,})"',
+    ]
+    for pattern in patterns:
+        mm=re.search(pattern,html)
+        if mm:
+            return "https://www.youtube.com/feeds/videos.xml?channel_id="+mm.group(1)
+    return None
+
 def discover_feed(base: str, html: str) -> list[str]:
     found=[]
     for tag in re.findall(r"<link\b[^>]*>", html, re.I):
@@ -61,7 +74,8 @@ def monitor_source(entry):
             final,status,ctype,body=fetch(homepage)
             row["homepage"]=final; row["http_status"]=status
             feed=None
-            candidates=discover_feed(final,body)
+            youtube_feed=youtube_feed_from_page(body) if "youtube.com/" in final else None
+            candidates=([youtube_feed] if youtube_feed else []) + discover_feed(final,body)
             for candidate in dict.fromkeys(candidates):
                 if excluded(name,candidate): continue
                 try:
