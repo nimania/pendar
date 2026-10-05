@@ -3452,7 +3452,7 @@ async function showLatestVideos(mode = "all") {
         <button class="${!recapsOnly?"on":""}" onclick="showLatestVideos('all')"><b>${faN(videos.length)}</b> ویدئو</button>
         <span><b>${faN(peopleCount)}</b> چهره</span>${sourceCount?`<span><b>${faN(sourceCount)}</b> منبع</span>`:""}
         ${recapVideos.length?`<button class="${recapsOnly?"on":""}" onclick="showLatestVideos('recaps')"><b>${faN(recapVideos.length)}</b> ری‌کپ</button>`:""}
-        ${studioCount?`<button onclick="showStudioRecaps()"><b>${faN(studioCount)}</b> پریمیوم</button>`:""}
+        <button onclick="showStudioRecaps()">${studioCount?`<b>${faN(studioCount)}</b> `:""}پریمیوم</button>
       </div>
     </div>
     ${visibleVideos.length?`<div class="latest-videos-grid">${visibleVideos.slice(0,120).map(v=>`
