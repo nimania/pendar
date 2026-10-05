@@ -32,6 +32,9 @@ class Figure:
     bale: str | None = None  # verified public Bale channel handle (without @)
     external: bool = False  # profile is fed by non-Telegram collectors (Truth Social, web, etc.)
     aliases: tuple[str, ...] = ()  # alternate public names matched into the same profile
+    telegram_handle: str | None = None  # direct Telegram source when route handle is a stable slug
+    verified: bool = False  # identity/account ownership has been verified
+    claimed: bool = False  # profile is controlled by the person represented
 
 
 FIGURES: list[Figure] = [
@@ -365,8 +368,9 @@ SOCIAL_FA = {"website": "وب‌سایت", "x": "ایکس", "instagram": "این
 
 def figure_social(f: Figure) -> list[dict]:
     """Public links for a figure, Telegram channel first."""
-    links = [] if f.external else [{"kind": "telegram", "label": SOCIAL_FA["telegram"],
-              "url": f"https://t.me/{f.handle}"}]
+    th = f.telegram_handle or (None if f.external else f.handle)
+    links = [] if not th else [{"kind": "telegram", "label": SOCIAL_FA["telegram"],
+              "url": f"https://t.me/{th}"}]
     if f.bale:
         links.append({"kind": "bale", "label": SOCIAL_FA["bale"], "url": f"https://ble.ir/{f.bale}"})
     for kind, url in f.social:
@@ -380,10 +384,14 @@ def figure_source_name(f: Figure) -> str:
 
 
 def figure_feed_url(f: Figure) -> str:
-    return "" if f.external else f"https://t.me/s/{f.handle}"
+    th = f.telegram_handle or (None if f.external else f.handle)
+    return f"https://t.me/s/{th}" if th else ""
 
 
 def figure_home_url(f: Figure) -> str:
+    th = f.telegram_handle or (None if f.external else f.handle)
+    if th:
+        return f"https://t.me/{th}"
     if f.external:
         return next((url for kind, url in f.social if kind in {"truthsocial", "website"}), "")
     return f"https://t.me/{f.handle}"
