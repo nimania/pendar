@@ -104,6 +104,13 @@ PRESS_FEEDS = {
 # Store canonical @handles here; the monitor resolves the real channel_id at runtime
 # instead of trusting manually copied IDs (which are easy to mismatch).
 YOUTUBE_PRESS_SOURCES = {
+    "Pump VOD": "https://www.youtube.com/channel/UCMPdfQnOy5Vu07j6C141FWQ",
+    "Rok Show": "https://www.youtube.com/channel/UCeLPadoZ4vXAM13iyvivhBg",
+    "Baziya (Ali Zia)": "https://www.youtube.com/channel/UC8LVufbnNQkU20_fyycIL7A",
+    "Manoto TV": "https://www.youtube.com/channel/UCnUdm0u-2FRffBnxQYHuTHA",
+    "Farhikhtegan Online": "https://www.youtube.com/channel/UCq05uUbwwT1YtxU26Cfwdfw",
+    "Ivar Farhadi": "https://www.youtube.com/channel/UCpKTQ7EgNIb5nMahQLdMthw",
+    "Chanteh Podcast": "https://www.youtube.com/channel/UCvCbxRVG7kyB0uwSOK0eLnQ",
     "مسعود بهنود": "https://www.youtube.com/@mbehnoud",
     "دیدارنیوز": "https://www.youtube.com/@didarnews",
     "همشهری TV": "https://www.youtube.com/@hamshahritv",
@@ -134,6 +141,22 @@ YOUTUBE_PRESS_SOURCES = {
     "احسان منصوری": "https://www.youtube.com/@ehsanmansoori",
     "اشکان زارع": "https://www.youtube.com/@ashkan_zare",
 }
+
+
+# Verified YouTube RSS feeds supplied for curated video sources.
+PRESS_FEEDS.update({
+    "Chanteh Podcast": "https://www.youtube.com/feeds/videos.xml?channel_id=UCvCbxRVG7kyB0uwSOK0eLnQ",
+    "Zabane.z": "https://www.youtube.com/feeds/videos.xml?channel_id=UC6ovmNwfP1IGZK2hu211tIQ",
+    "۷ آبان": "https://www.youtube.com/feeds/videos.xml?channel_id=UCsvEKD1jr4i0gKAJ5JZfHbA",
+    "Ivar Farhadi": "https://www.youtube.com/feeds/videos.xml?channel_id=UCpKTQ7EgNIb5nMahQLdMthw",
+    "Farhikhtegan Online": "https://www.youtube.com/feeds/videos.xml?channel_id=UCq05uUbwwT1YtxU26Cfwdfw",
+    "Manoto TV": "https://www.youtube.com/feeds/videos.xml?channel_id=UCnUdm0u-2FRffBnxQYHuTHA",
+    "Cimorg Futures": "https://www.youtube.com/feeds/videos.xml?channel_id=UCOqLHxtUgG4JjE088iidj2g",
+    "Persian Clubhouse": "https://www.youtube.com/feeds/videos.xml?channel_id=UCaX72gRAke5eL4Dl5ikc2UQ",
+    "Baziya (Ali Zia)": "https://www.youtube.com/feeds/videos.xml?channel_id=UC8LVufbnNQkU20_fyycIL7A",
+    "Rok Show": "https://www.youtube.com/feeds/videos.xml?channel_id=UCeLPadoZ4vXAM13iyvivhBg",
+    "Pump VOD": "https://www.youtube.com/feeds/videos.xml?channel_id=UCMPdfQnOy5Vu07j6C141FWQ",
+})
 
 PRESS_REGISTRY = [
     # Iran — agencies / news portals
@@ -252,6 +275,13 @@ PRESS_REGISTRY = [
     ("احسان منصوری","https://www.youtube.com/@ehsanmansoori","fa","youtube"),
     ("اشکان زارع","https://www.youtube.com/@ashkan_zare","fa","youtube"),
 
+    ("Chanteh Podcast","https://www.youtube.com/channel/UCvCbxRVG7kyB0uwSOK0eLnQ","fa","youtube"),
+    ("Ivar Farhadi","https://www.youtube.com/channel/UCpKTQ7EgNIb5nMahQLdMthw","fa","youtube"),
+    ("Farhikhtegan Online","https://www.youtube.com/channel/UCq05uUbwwT1YtxU26Cfwdfw","fa","youtube"),
+    ("Manoto TV","https://www.youtube.com/channel/UCnUdm0u-2FRffBnxQYHuTHA","fa","youtube"),
+    ("Baziya (Ali Zia)","https://www.youtube.com/channel/UC8LVufbnNQkU20_fyycIL7A","fa","youtube"),
+    ("Rok Show","https://www.youtube.com/channel/UCeLPadoZ4vXAM13iyvivhBg","fa","youtube"),
+    ("Pump VOD","https://www.youtube.com/channel/UCMPdfQnOy5Vu07j6C141FWQ","fa","youtube"),
     # Iranian periodicals — RSS/site/PDF fallback
     ("سپیده دانایی","https://www.magiran.com/magazine/5447","fa","iran-magazine"),
     ("ترجمان","https://tarjomaan.com","fa","iran-magazine"),
