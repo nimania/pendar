@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "backend/scripts/build_movie_master.py"
+      - "backend/scripts/hydrate_movie_master.py"
       - ".github/workflows/movie-master.yml"
 
 permissions:
@@ -37,6 +38,24 @@ jobs:
           restore-keys: |
             pendar-movie-master-
 
+      - name: Download latest Jan Film catalog
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p backend/data
+          build_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          if [ -n "$build_id" ]; then
+            rm -rf /tmp/pendar-latest && mkdir -p /tmp/pendar-latest
+            if gh run download "$build_id" -n latest-static-site -D /tmp/pendar-latest; then
+              if [ -f /tmp/pendar-latest/data/movies.json ]; then
+                cp /tmp/pendar-latest/data/movies.json backend/data/curated-movies.json
+              fi
+            fi
+          fi
+          if [ ! -f backend/data/curated-movies.json ] && [ -f web-static/data/movies.json ]; then
+            cp web-static/data/movies.json backend/data/curated-movies.json
+          fi
+
       - name: Build Movie Master from official TMDB daily exports
         run: |
           mkdir -p backend/data backend/public/data
@@ -44,7 +63,19 @@ jobs:
             --db backend/data/movie-master.sqlite \
             --summary backend/public/data/movie-master-summary.json \
             --top backend/public/data/movie-master-top.json \
-            --curated-movies web-static/data/movies.json \
+            --curated-movies backend/data/curated-movies.json \
+            --top-limit 5000
+
+      - name: Hydrate priority Movie Master titles
+        env:
+          TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+        run: |
+          python backend/scripts/hydrate_movie_master.py \
+            --db backend/data/movie-master.sqlite \
+            --limit 1500 \
+            --workers 4 \
+            --summary backend/public/data/movie-master-summary.json \
+            --top backend/public/data/movie-master-top.json \
             --top-limit 5000
 
       - name: Validate master database
