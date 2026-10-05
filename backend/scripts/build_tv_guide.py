@@ -29,7 +29,7 @@ ARIANA_SCHEDULE = "https://www.arianatelevision.com/program-schedule/"
 SOURCE_REGISTRY = [
     {"key": "irib", "name": "صداوسیما / تلوبیون", "status": "aggregated", "note": "EPG جاریِ شبکه‌های سراسری و استانی؛ گردآوری‌شده از APIهای تلوبیون/سپهر"},
     {"key": "persiana", "name": "Persiana Group", "status": "aggregated", "note": "XMLTV جاریِ شبکه‌های گروه پرشیانا"},
-    {"key": "bbc-persian", "name": "BBC Persian", "status": "planned", "note": "صفحه رسمی شناسایی شده؛ اتصال ماشینی پایدار هنوز در حال تکمیل است"},
+    {"key": "bbc-persian", "name": "BBC Persian", "status": "official", "note": "جدول پخش رسمی BBC Persian؛ با fallback استاندارد XMLTV در صورت اختلال منبع رسمی"},
     {"key": "iranintl", "name": "Iran International", "status": "verified", "note": "XMLTV تازه‌شونده، استخراج‌شده از جدول رسمی شبکه"},
     {"key": "radiofarda", "name": "Radio Farda", "status": "official", "note": "جدول پخش روزانهٔ رسمی رادیو فردا"},
     {"key": "gem", "name": "GEM Group", "status": "planned", "note": "نیازمند تطبیق چند منبع"},
@@ -241,6 +241,7 @@ SOURCE_TRUST_OVERRIDES = {
     "radiofarda": 100,
     "afintl": 100,
     "ariana": 100,
+    "bbc-persian": 100,
 }
 
 MIN_PUBLISH_SCORE = 68
@@ -822,6 +823,7 @@ def build() -> dict:
         ("radiofarda", "Radio Farda", ingest_radiofarda),
         ("afintl", "Afghanistan International", ingest_afintl),
         ("ariana", "Ariana TV", ingest_ariana),
+        ("bbc-persian", "BBC Persian", ingest_bbc_persian),
     ):
         try:
             ch, pr = loader(now)
