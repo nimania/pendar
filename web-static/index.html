@@ -6,6 +6,21 @@
   <title>پندار</title>
   <meta name="description" content="پندار — ایران، خبر، اندیشه و فرهنگ در یک شبکهٔ دانشی فارسی.">
   <meta name="theme-color" content="#3c3938">
+  <script>
+    // Deep-link boot guard: do not paint the default homepage before the
+    // router has selected the requested view.
+    (function () {
+      var route = (location.hash || "").replace(/^#\/?/, "");
+      if (!route) return;
+      document.documentElement.classList.add("route-boot");
+      window.__routeBootTimer = setTimeout(function () {
+        document.documentElement.classList.remove("route-boot");
+      }, 6000);
+    })();
+  </script>
+  <style>
+    html.route-boot body { visibility: hidden; }
+  </style>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
