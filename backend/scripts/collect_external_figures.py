@@ -179,6 +179,12 @@ YOUTUBE_RECAP_EXCLUDE_HANDLES = {
 YOUTUBE_SHARED_HOSTS = (
     "https://www.youtube.com/@Parsi_Live",
     "https://www.youtube.com/@Abdi_media4",
+    "https://youtube.com/jedaaltv",
+    "https://www.youtube.com/@Studio_patt",
+    "https://www.youtube.com/@fusepodcast",
+    "https://www.youtube.com/@jomhouristreet",
+    "https://www.youtube.com/@TomorrowsHorizon2024",
+    "https://www.youtube.com/@GoldenSimorgh-d4u",
 )
 
 SYSTEM = """تو ویراستار «جان کلام» هستی. متن عمومی یک چهره را از منبع اصلی دریافت می‌کنی.
