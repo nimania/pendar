@@ -90,7 +90,7 @@ def _cache_bust() -> str:
     served stale from the browser/CDN cache. Also bumps the service-worker
     cache name so it re-installs when the code changes. Returns the app hash."""
     idx = os.path.join(OUT, "index.html")
-    assets = ["core.js", "router.js", "entities.js", "entity-qa.js", "charts-social.js", "figures-core.js", "figures-profile.js", "studio-videos.js", "press.js", "search.js", "market-weather.js", "book-app.js", "app.js", "styles.css", "iran-provinces.js"]
+    assets = ["core.js", "router.js", "entities.js", "entity-qa.js", "system-tech.js", "charts-social.js", "figures-core.js", "figures-profile.js", "studio-videos.js", "press.js", "search.js", "market-weather.js", "book-app.js", "app.js", "styles.css", "iran-provinces.js"]
     vers = {a: _digest(os.path.join(OUT, a)) for a in assets}
     try:
         with open(idx, encoding="utf-8") as f:
