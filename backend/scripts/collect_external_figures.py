@@ -42,8 +42,128 @@ VIDEO_CHUNK_CHARS = 18000
 VIDEO_CHUNK_OVERLAP = 700
 DOWNSUB_ENDPOINT = "https://api.downsub.com/download"
 YOUTUBE_RECAP_STATE_OUT = HERE.parent / "data" / "youtube-recap-state.json"
+PROJECT_FINANCE_OUT = HERE.parent / "data" / "project-finance.json"
 YOUTUBE_RETRY_HOURS = 72
 YOUTUBE_RECAP_VERSION = 3
+
+# Paid-tier reference prices, USD per 1M text tokens, from Google's Gemini API
+# pricing page. These are estimates only: actual billing may be $0 on free tier.
+AI_REFERENCE_PRICES = {
+    "gemini-2.5-flash-lite": {"input": 0.10, "output": 0.40},
+    "gemini-2.5-flash": {"input": 0.30, "output": 2.50},
+}
+_FINANCE_DATA: dict | None = None
+
+
+def _finance_data() -> dict:
+    global _FINANCE_DATA
+    if _FINANCE_DATA is not None:
+        return _FINANCE_DATA
+    try:
+        data = json.loads(PROJECT_FINANCE_OUT.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            data = {}
+    except (OSError, ValueError):
+        data = {}
+    data.setdefault("version", 1)
+    data.setdefault("started_at", datetime.now().astimezone().isoformat())
+    data.setdefault("events", [])
+    _FINANCE_DATA = data
+    return data
+
+
+def _ai_reference_cost(model: str, prompt_tokens: int, completion_tokens: int) -> tuple[float, bool]:
+    name = str(model or "").lower()
+    rates = None
+    # Match aliases such as gemini-2.5-flash-lite-latest without confusing
+    # flash-lite with flash.
+    if "gemini-2.5-flash-lite" in name:
+        rates = AI_REFERENCE_PRICES["gemini-2.5-flash-lite"]
+    elif "gemini-2.5-flash" in name:
+        rates = AI_REFERENCE_PRICES["gemini-2.5-flash"]
+    if not rates:
+        return 0.0, False
+    cost = (prompt_tokens / 1_000_000) * rates["input"] + (completion_tokens / 1_000_000) * rates["output"]
+    return cost, True
+
+
+def _record_ai_usage(result, context: dict) -> None:
+    prompt = int(getattr(result, "prompt_tokens", 0) or 0)
+    completion = int(getattr(result, "completion_tokens", 0) or 0)
+    model = str(getattr(result, "model", "") or "")
+    cost, priced = _ai_reference_cost(model, prompt, completion)
+    _finance_data()["events"].append({
+        "kind": "ai",
+        "at": datetime.now().astimezone().isoformat(),
+        "video_id": str((context or {}).get("video_id") or ""),
+        "stage": str((context or {}).get("stage") or "other"),
+        "model": model,
+        "prompt_tokens": prompt,
+        "completion_tokens": completion,
+        "total_tokens": prompt + completion,
+        "estimated_paid_usd": round(cost, 8),
+        "pricing_known": priced,
+    })
+
+
+def _record_downsub_request(video_id: str, status_code: int) -> None:
+    _finance_data()["events"].append({
+        "kind": "downsub",
+        "at": datetime.now().astimezone().isoformat(),
+        "video_id": str(video_id or ""),
+        "http_status": int(status_code or 0),
+    })
+
+
+def _save_project_finance() -> None:
+    data = _finance_data()
+    events = [x for x in data.get("events", []) if isinstance(x, dict)][-5000:]
+    data["events"] = events
+    ai = [x for x in events if x.get("kind") == "ai"]
+    downsub = [x for x in events if x.get("kind") == "downsub"]
+    video_ids = {str(x.get("video_id") or "") for x in ai if x.get("video_id")}
+    data["updated_at"] = datetime.now().astimezone().isoformat()
+    data["totals"] = {
+        "ai_calls": len(ai),
+        "prompt_tokens": sum(int(x.get("prompt_tokens") or 0) for x in ai),
+        "completion_tokens": sum(int(x.get("completion_tokens") or 0) for x in ai),
+        "total_tokens": sum(int(x.get("total_tokens") or 0) for x in ai),
+        "estimated_paid_usd": round(sum(float(x.get("estimated_paid_usd") or 0) for x in ai), 6),
+        "unpriced_ai_calls": sum(1 for x in ai if not x.get("pricing_known")),
+        "downsub_requests": len(downsub),
+        "downsub_http_200": sum(1 for x in downsub if int(x.get("http_status") or 0) == 200),
+        "videos_seen_by_ai": len(video_ids),
+    }
+    # Per-video rollup keeps the site useful without exposing thousands of calls.
+    by_video: dict[str, dict] = {}
+    for x in events:
+        vid = str(x.get("video_id") or "")
+        if not vid:
+            continue
+        row = by_video.setdefault(vid, {
+            "video_id": vid, "ai_calls": 0, "prompt_tokens": 0,
+            "completion_tokens": 0, "estimated_paid_usd": 0.0,
+            "downsub_requests": 0, "last_at": "",
+        })
+        row["last_at"] = max(str(row.get("last_at") or ""), str(x.get("at") or ""))
+        if x.get("kind") == "ai":
+            row["ai_calls"] += 1
+            row["prompt_tokens"] += int(x.get("prompt_tokens") or 0)
+            row["completion_tokens"] += int(x.get("completion_tokens") or 0)
+            row["estimated_paid_usd"] += float(x.get("estimated_paid_usd") or 0)
+        elif x.get("kind") == "downsub":
+            row["downsub_requests"] += 1
+    for row in by_video.values():
+        row["estimated_paid_usd"] = round(row["estimated_paid_usd"], 6)
+    data["videos"] = sorted(by_video.values(), key=lambda x: str(x.get("last_at") or ""), reverse=True)[:500]
+    data["pricing_note"] = (
+        "AI dollar amounts are paid-tier reference estimates, not proof of an actual charge. "
+        "Free-tier Gemini usage may bill $0. DownSub dollar cost is not estimated until its "
+        "credit-to-request billing rule is confirmed."
+    )
+    PROJECT_FINANCE_OUT.parent.mkdir(parents=True, exist_ok=True)
+    PROJECT_FINANCE_OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
 
 # Keep videos visible in the archive, but do not spend transcript/AI credits
 # on channels whose uploads do not need Jan Kalam recaps.
@@ -179,6 +299,7 @@ def _generate_json(provider, system: str, payload: dict, context: dict) -> dict:
         user=json.dumps(payload, ensure_ascii=False),
         context=context,
     )
+    _record_ai_usage(result, context)
     return result.data if isinstance(result.data, dict) else {}
 
 
@@ -521,6 +642,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
     except Exception as exc:
         print(f"youtube: DownSub request failed {video_id} ({type(exc).__name__})")
         return "", ""
+    _record_downsub_request(video_id, r.status_code)
     if r.status_code != 200:
         print(f"youtube: DownSub HTTP {r.status_code} for {video_id}")
         return "", ""
@@ -958,6 +1080,7 @@ def run() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(merged, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"external figures: {len(fresh)} fresh substantive rows; {len(merged)} rows kept")
+    _save_project_finance()
     return 0
 
 
