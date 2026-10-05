@@ -43,6 +43,9 @@ FIGURES: list[Figure] = [
     # ══════════════════════════════════════════════════════════════════════
     Figure("Garajetadayoni", "مهدی تدینی", "مورخ و مترجم", "politics"),
     Figure("ahmadzeidabad", "احمد زیدآبادی", "روزنامه‌نگار و تحلیلگر سیاسی", "politics"),
+    Figure("abbas-souri", "عباس سوری", "سردبیر رسانه پارسی", "media",
+           (("x", "https://x.com/Abas_Suri"),), external=True,
+           aliases=("عباس سوري", "Abbas Souri", "Abas Suri")),
     Figure("abdiabbas", "عباس عبدی", "روزنامه‌نگار و پژوهشگر اجتماعی", "politics", bale="ayandeha"),
     Figure("fazeli_mohammad", "محمد فاضلی", "جامعه‌شناس", "politics",
            (("website", "https://mohammadfazeli.ir"),)),
