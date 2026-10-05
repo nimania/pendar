@@ -1044,11 +1044,18 @@ function _pressMediaData(meta, figureData){
 
 async function showPress(sourceName, canonicalId=null) {
   if((sourceName||"")!==pressSourceCurrent){ pressSourceCurrent=sourceName||""; pressSourceTab="latest"; }
-  const canonicalSource=sourceName?(canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByName("source",sourceName)):null;
-  canonicalId=canonicalSource?.id||canonicalId;
+  let canonicalSource=sourceName?(canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByName("source",sourceName)):null;
+  if(sourceName&&!canonicalSource){
+    const meta=_pressFindSource(sourceName);
+    for(const alias of (meta?.aliases||[])){
+      canonicalSource=await canonicalEntityByName("source",alias);
+      if(canonicalSource)break;
+    }
+  }
   show("press"); setTab("press");
   renderPress(sourceName || "", canonicalSource);
-  setHash(sourceName ? (canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/press-source/" + encodeURIComponent(sourceName)) : "#/press");
+  // Source pages keep their own stable route even when a canonical entity exists.
+  setHash(sourceName ? "#/press-source/" + encodeURIComponent(sourceName) : "#/press");
 }
 async function loadPeriodicals() {
   if (periodicalRows.length) return periodicalRows;
