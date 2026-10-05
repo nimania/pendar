@@ -11,6 +11,7 @@ are best-effort; failures keep the previous cached external-figure data intact.
 from __future__ import annotations
 
 import html
+import os
 import json
 import re
 import xml.etree.ElementTree as ET
@@ -20,6 +21,7 @@ from urllib.parse import urlparse
 
 import httpx
 from youtube_transcript_api import YouTubeTranscriptApi
+from yt_dlp import YoutubeDL
 
 from app.ai.providers import get_provider
 from app.figures import FIGURES
@@ -311,6 +313,95 @@ def _timedtext_transcript(client: httpx.Client, video_id: str) -> tuple[str, str
     return "", ""
 
 
+def _caption_text_from_payload(payload: str) -> str:
+    payload = str(payload or "")
+    if not payload.strip():
+        return ""
+    # json3 captions
+    try:
+        data = json.loads(payload)
+        parts = []
+        for event in data.get("events", []):
+            segs = event.get("segs") or []
+            text = "".join(str(seg.get("utf8") or "") for seg in segs)
+            text = html.unescape(text).replace("\n", " ").strip()
+            if text:
+                parts.append(text)
+        if parts:
+            return re.sub(r"\s+", " ", " ".join(parts)).strip()
+    except Exception:
+        pass
+    # VTT/SRT fallback: strip timestamps, cue indexes and markup.
+    lines = []
+    for raw in payload.splitlines():
+        line = raw.strip()
+        if not line or line == "WEBVTT" or "-->" in line or re.fullmatch(r"\d+", line):
+            continue
+        line = re.sub(r"<[^>]+>", "", line)
+        line = re.sub(r"\{\\an\d+\}", "", line)
+        line = html.unescape(line).strip()
+        if line:
+            lines.append(line)
+    # Auto captions often repeat overlapping cues; collapse adjacent duplicates.
+    out = []
+    for line in lines:
+        if not out or line != out[-1]:
+            out.append(line)
+    return re.sub(r"\s+", " ", " ".join(out)).strip()
+
+
+def _ytdlp_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
+    """Discover caption tracks with yt-dlp and fetch the best text track."""
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    opts = {
+        "quiet": True,
+        "no_warnings": True,
+        "skip_download": True,
+        "extract_flat": False,
+        "socket_timeout": 20,
+    }
+    proxy = os.environ.get("YOUTUBE_PROXY_URL", "").strip()
+    if proxy:
+        opts["proxy"] = proxy
+    try:
+        with YoutubeDL(opts) as ydl:
+            info = ydl.extract_info(url, download=False)
+    except Exception as exc:
+        print(f"youtube: yt-dlp metadata unavailable {video_id} ({type(exc).__name__})")
+        return "", ""
+
+    manual = info.get("subtitles") or {}
+    auto = info.get("automatic_captions") or {}
+    preferred = ["fa", "fa-IR", "en", "en-US", "en-GB", "ar", "tr", "fr", "de"]
+    choices = []
+    for source_rank, tracks in ((0, manual), (1, auto)):
+        for lang, formats in tracks.items():
+            lang_rank = preferred.index(lang) if lang in preferred else len(preferred) + 1
+            choices.append((source_rank, lang_rank, lang, formats or []))
+    choices.sort(key=lambda x: (x[0], x[1]))
+
+    for _, _, lang, formats in choices:
+        formats = sorted(
+            formats,
+            key=lambda x: 0 if x.get("ext") == "json3" else 1 if x.get("ext") == "vtt" else 2,
+        )
+        for fmt in formats:
+            cap_url = fmt.get("url")
+            if not cap_url:
+                continue
+            try:
+                r = client.get(cap_url)
+                if r.status_code != 200:
+                    continue
+                text = _caption_text_from_payload(r.text)
+                if len(text) >= 120:
+                    print(f"youtube: yt-dlp captions ok {video_id} ({lang})")
+                    return _sample_text(text), str(lang or "")
+            except Exception:
+                continue
+    return "", ""
+
+
 def youtube_transcript(api: YouTubeTranscriptApi, client: httpx.Client,
                        video_id: str) -> tuple[str, str]:
     try:
@@ -333,6 +424,10 @@ def youtube_transcript(api: YouTubeTranscriptApi, client: httpx.Client,
     text, lang = _timedtext_transcript(client, video_id)
     if text:
         print(f"youtube: timedtext fallback ok {video_id} ({lang})")
+        return text, lang
+
+    text, lang = _ytdlp_transcript(client, video_id)
+    if text:
         return text, lang
     return "", ""
 
