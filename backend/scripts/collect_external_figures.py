@@ -39,6 +39,12 @@ YOUTUBE_MAX_PER_CHANNEL = 3
 YOUTUBE_KEEP_PER_FIGURE = 40
 YOUTUBE_TRANSCRIPT_CHARS = 32000
 
+# Keep videos visible in the archive, but do not spend transcript/AI credits
+# on channels whose uploads do not need Jan Kalam recaps.
+YOUTUBE_RECAP_EXCLUDE_HANDLES = {
+    "nima-afshar-naderi",
+}
+
 # Trusted interview/media channels. Their latest uploads are scanned once per
 # build and title-matched against *all* curated figures, so hosted appearances
 # do not require a one-off rule per person.
@@ -443,7 +449,13 @@ def collect_youtube(provider, old: list[dict], catalog: list[dict] | None = None
     # Process newest catalog items first; this covers official channels and
     # trusted hosted appearances with the same recap pipeline.
     candidates = sorted(
-        [x for x in candidates if isinstance(x, dict) and x.get("id") and x.get("handle")],
+        [
+            x for x in candidates
+            if isinstance(x, dict)
+            and x.get("id")
+            and x.get("handle")
+            and str(x.get("handle") or "") not in YOUTUBE_RECAP_EXCLUDE_HANDLES
+        ],
         key=lambda x: str(x.get("published_at") or ""),
         reverse=True,
     )
@@ -547,7 +559,16 @@ def run() -> int:
     except Exception as exc:
         print(f"youtube collector: keeping existing data ({type(exc).__name__})")
 
-    by_id = {str(x.get("id")): x for x in old if isinstance(x, dict) and x.get("id")}
+    by_id = {
+        str(x.get("id")): x
+        for x in old
+        if isinstance(x, dict)
+        and x.get("id")
+        and not (
+            str(x.get("platform") or "") == "youtube"
+            and str(x.get("handle") or "") in YOUTUBE_RECAP_EXCLUDE_HANDLES
+        )
+    }
     for x in fresh:
         by_id[str(x["id"])] = x
     merged = _bounded(list(by_id.values()))
