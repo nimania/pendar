@@ -34,7 +34,7 @@ TRUTH_BASE = "https://truthsocial.com"
 TRUTH_ACCOUNT = "realDonaldTrump"
 TRUTH_LIMIT = 30
 
-YOUTUBE_MAX_NEW_PER_RUN = 12
+YOUTUBE_MAX_NEW_PER_RUN = 30
 YOUTUBE_MAX_PER_CHANNEL = 3
 YOUTUBE_KEEP_PER_FIGURE = 40
 YOUTUBE_TRANSCRIPT_CHARS = 32000  # legacy public-recap limit; studio mode uses the full transcript
