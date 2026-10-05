@@ -617,6 +617,7 @@ def collect_youtube_catalog() -> list[dict]:
         matchers = [
             (figure, _youtube_name_variants(figure))
             for figure in FIGURES
+            if getattr(figure, "directory", True) is not False
         ]
         for host_url in YOUTUBE_SHARED_HOSTS:
             try:
