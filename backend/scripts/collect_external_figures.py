@@ -26,6 +26,7 @@ from app.figures import FIGURES
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE.parent / "data" / "external-figure-posts.json"
+YOUTUBE_CATALOG_OUT = HERE.parent / "data" / "youtube-videos.json"
 
 TRUTH_BASE = "https://truthsocial.com"
 TRUTH_ACCOUNT = "realDonaldTrump"
@@ -160,6 +161,42 @@ def youtube_feed(client: httpx.Client, channel_id: str) -> list[dict]:
     return out
 
 
+def collect_youtube_catalog() -> list[dict]:
+    """Latest uploads from every verified YouTube channel attached to a figure.
+
+    This archive is intentionally independent from transcript/AI availability:
+    a real upload should still appear on the person's profile even when YouTube
+    exposes no captions for it.
+    """
+    rows: list[dict] = []
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; Pendar/1.0)"}
+    with httpx.Client(headers=headers, timeout=25, follow_redirects=True) as client:
+        for figure in FIGURES:
+            url = youtube_url(figure)
+            if not url:
+                continue
+            try:
+                channel_id = youtube_channel_id(client, url)
+                if not channel_id:
+                    print(f"youtube catalog: channel id unresolved for {figure.name_fa}")
+                    continue
+                entries = youtube_feed(client, channel_id)[:15]
+            except Exception as exc:
+                print(f"youtube catalog: feed unavailable for {figure.name_fa} ({type(exc).__name__})")
+                continue
+            for entry in entries:
+                rows.append({
+                    "id": entry["id"],
+                    "handle": figure.handle,
+                    "title": entry["title"],
+                    "url": entry["url"],
+                    "published_at": entry["published_at"],
+                    "thumbnail": entry.get("media_url"),
+                    "channel_url": url,
+                })
+    return rows
+
+
 def _sample_text(text: str, limit: int = YOUTUBE_TRANSCRIPT_CHARS) -> str:
     text = re.sub(r"\s+", " ", text).strip()
     if len(text) <= limit:
@@ -271,6 +308,19 @@ def run() -> int:
     old = load_old()
     provider = _provider()
     fresh: list[dict] = []
+
+    # Keep the visual video archive separate from AI-filtered figure statements.
+    # If YouTube is temporarily unavailable, preserve the last known-good catalog.
+    try:
+        catalog = collect_youtube_catalog()
+        if catalog:
+            YOUTUBE_CATALOG_OUT.write_text(
+                json.dumps(catalog, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(f"youtube catalog: {len(catalog)} uploads saved")
+    except Exception as exc:
+        print(f"youtube catalog: keeping existing data ({type(exc).__name__})")
     try:
         fresh.extend(collect_truth(provider, old))
     except Exception as exc:
