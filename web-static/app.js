@@ -2837,7 +2837,7 @@ const _LOCAL_FIGURE_FALLBACKS = [
     external: true,
     verified: true,
     claimed: true,
-    avatar: null,
+    avatar: "https://pbs.twimg.com/profile_images/2094137144591933440/SIBK8HjF_400x400.jpg",
     channel_url: "",
     count: 0,
     posts: [],
