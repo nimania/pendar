@@ -2685,13 +2685,20 @@ if (_isDeepLink) {
   if (feedView) feedView.style.display = "none";
   setTab("");
 }
-loadFeed(!_isDeepLink)
-  .then(route)
-  .finally(() => {
-    if (window.__routeBootTimer) clearTimeout(window.__routeBootTimer);
-    document.documentElement.classList.remove("route-boot");
-  });
-if (!_isDeepLink) {
+
+function _bootReveal(){
+  if (window.__routeBootTimer) clearTimeout(window.__routeBootTimer);
+  document.documentElement.classList.remove("route-boot");
+}
+
+if (_isDeepLink) {
+  // Route the requested destination immediately. Most deep-link views
+  // (figures, videos, books, press, knowledge, etc.) do not need stories.json.
+  // Load the news feed independently so a slow feed can never block navigation.
+  Promise.resolve(route()).finally(_bootReveal);
+  loadFeed(false).catch(()=>{});
+} else {
+  loadFeed(true).finally(_bootReveal);
   renderHomeStats();
   renderHomeGlance();
   renderHomePrices();
