@@ -2660,6 +2660,8 @@ const SOCIAL_ICON = {
   bale: '<rect x="4" y="4" width="16" height="16" rx="5"/><path d="M8 8h5a3 3 0 0 1 0 6H8zm0 6h6a3 3 0 0 1 0 6" stroke-linejoin="round"/>',
   x: '<path d="M4 4l16 16M20 4L4 20" stroke-linecap="round"/>',
   instagram: '<rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.4"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/>',
+  diner: '<rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.4"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/>',
+  github: '<path d="M9 19c-4 1.2-4-2-5-2m10 4v-3.5c0-1 .1-1.7-.5-2.3 2.8-.3 5.7-1.4 5.7-6.2 0-1.4-.5-2.5-1.3-3.4.1-.3.6-1.6-.1-3.3 0 0-1.1-.3-3.6 1.3a12.3 12.3 0 0 0-6.4 0C5.3 2 4.2 2.3 4.2 2.3c-.7 1.7-.2 3-.1 3.3A4.8 4.8 0 0 0 2.8 9c0 4.8 2.9 5.9 5.7 6.2-.4.4-.6 1-.6 2V21"/>',
   youtube: '<rect x="3" y="6" width="18" height="12" rx="3.5"/><path d="M11 9.5l4 2.5-4 2.5z" fill="currentColor" stroke="none"/>',
   facebook: '<path d="M14 8h2V5h-2a3 3 0 0 0-3 3v2H9v3h2v6h3v-6h2.2l.4-3H14V8.5a.5.5 0 0 1 .5-.5z" stroke-linejoin="round"/>',
   website: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9S14.5 18.5 12 21c-2.5-2.5-3.5-6-3.5-9S9.5 5.5 12 3z"/>',
