@@ -69,7 +69,9 @@ jobs:
       - name: Restore external figure feed cache
         uses: actions/cache@v4
         with:
-          path: backend/data/external-figure-posts.json
+          path: |
+            backend/data/external-figure-posts.json
+            backend/data/youtube-recap-state.json
           key: jankalam-extfig-${{ github.run_id }}
           restore-keys: |
             jankalam-extfig-
