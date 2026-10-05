@@ -635,7 +635,7 @@ async function smartSearch(q){
       ranked.filter(x=>x.d.kind==="دیدگاه").forEach(x=>{const k=x.d.handle;if(!by.has(k)||by.get(k).score<x.score)by.set(k,x)});
       const people=[...by.values()].sort((a,b)=>b.score-a.score).slice(0,7);
       const rest=ranked.filter(x=>x.d.kind!=="دیدگاه").slice(0,5);
-      out.innerHTML=people.length?`<div class="ss-answer"><strong>چهره‌های مرتبط با این پرسش</strong><small>بر اساس گفته‌های ثبت‌شده در بخش جان کلامِ پندار</small></div>${people.map(x=>_ssRenderRow(x.d,Q,"چهره")).join("")}${rest.length?`<div class="ss-divider">مطالب مرتبط</div>${rest.map(x=>_ssRenderRow(x.d,Q)).join("")}`:""}`:'<div class="smart-search-hint">در گفته‌های ثبت‌شده، پاسخ روشنی پیدا نشد.</div>';
+      out.innerHTML=people.length?`<div class="ss-answer"><strong>چهره‌های مرتبط با این پرسش</strong><small>بر اساس گفته‌های ثبت‌شده در بخش چهره‌های پندار</small></div>${people.map(x=>_ssRenderRow(x.d,Q,"چهره")).join("")}${rest.length?`<div class="ss-divider">مطالب مرتبط</div>${rest.map(x=>_ssRenderRow(x.d,Q)).join("")}`:""}`:'<div class="smart-search-hint">در گفته‌های ثبت‌شده، پاسخ روشنی پیدا نشد.</div>';
       return;
     }
     if(Q.sourceIntent){
@@ -2624,7 +2624,7 @@ async function renderHomeStats() {
       <div class="sb-metrics">
         <span class="sb-item sb-click" onclick="showTrends()"><b>${faN(st.total || 0)}</b><span>کل خبرها</span></span>
         <span class="sb-sep"></span>
-        <span class="sb-item sb-click" onclick="showFigures()"><b>${faN(people.length)}</b><span>جان کلام</span></span>
+        <span class="sb-item sb-click" onclick="showFigures()"><b>${faN(people.length)}</b><span>چهره‌ها</span></span>
         <span class="sb-sep"></span>
         <span class="sb-item sb-click sb-opinions" onclick="showFigures()"><b>${faN(opinionCount)}</b><span>کل اظهارنظرها</span></span>
         <span class="sb-sep"></span>
@@ -2769,7 +2769,7 @@ function socialLinks(links) {
 .figure-search-hit b{display:flex;align-items:center;gap:4px}
 .figure-search-hit small{color:#8fa89b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .figure-search-empty{padding:14px;color:#8fa89b;text-align:center}
-.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}.latest-videos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:8px 0 22px}.latest-videos-head h1{margin:4px 0 6px}.latest-videos-head p{margin:0;max-width:720px;color:#8fa89b;line-height:1.8}.latest-videos-stats{display:flex;gap:8px;flex-wrap:wrap}.latest-videos-stats span,.latest-videos-stats button{border:1px solid rgba(143,168,155,.22);border-radius:999px;padding:7px 11px;font:inherit;font-size:12px;background:transparent;color:inherit}.latest-videos-stats button{cursor:pointer}.latest-videos-stats button.on{border-color:rgba(26,157,126,.48);background:rgba(26,157,126,.10);color:#1a9d7e}.latest-videos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.latest-video-card{overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.latest-video-main{display:block;color:inherit;text-decoration:none}.latest-video-copy{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.latest-video-copy b{font-size:14px;line-height:1.6}.latest-video-copy small{font-size:11.5px;color:#8fa89b}.latest-video-people{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px}.latest-video-people button{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(143,168,155,.2);border-radius:999px;background:transparent;color:inherit;padding:4px 8px;font:inherit;font-size:11.5px;cursor:pointer}.latest-video-people img{width:20px;height:20px;border-radius:50%;object-fit:cover}.latest-video-actions{padding:0 10px 12px}.latest-video-actions button,.video-recap-btn{width:100%;border:1px solid rgba(26,157,126,.35);background:rgba(26,157,126,.08);color:#1a9d7e;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}.figure-youtube-card>a{color:inherit;text-decoration:none}.video-recap-btn{margin:0 10px 10px;width:calc(100% - 20px)}.youtube-recap-embed{position:relative;width:100%;aspect-ratio:16/9;margin:18px 0 22px;border-radius:16px;overflow:hidden;background:#090b0a;border:1px solid rgba(143,168,155,.16)}.youtube-recap-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-statement-recap{font-size:17px;line-height:2.05;margin-top:18px}.video-statement-recap p{margin:0 0 1.2em}.video-statement-points{margin:18px 0;padding:16px 18px;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.video-statement-points h3{margin:0 0 10px}.video-statement-points li{line-height:1.85;margin:6px 0}.studio-recap-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}.studio-recap-card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid rgba(143,168,155,.18);border-radius:16px;background:rgba(143,168,155,.035)}.studio-recap-card h2{font-size:17px;line-height:1.65;margin:0}.studio-recap-card p{margin:0;color:#8fa89b;line-height:1.75}.studio-recap-card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11.5px;color:#8fa89b}.studio-recap-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.studio-recap-card-actions button,.studio-recap-card-actions a,.studio-recap-toolbar button,.studio-recap-toolbar a{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:8px 11px;font:inherit;font-size:12px;cursor:pointer;text-decoration:none}.studio-recap-card-actions .primary,.studio-recap-toolbar .primary{border-color:rgba(26,157,126,.4);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-article{max-width:860px;margin:0 auto;padding:6px 0 36px}.studio-recap-article h1{line-height:1.45;margin:12px 0 8px}.studio-recap-byline{color:#8fa89b;line-height:1.8}.studio-recap-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}.studio-recap-body{font-size:18px;line-height:2.08}.studio-recap-body p{margin:0 0 1.35em}.studio-recap-body h2{margin:2.1em 0 .7em;font-size:22px}.studio-recap-notice{padding:11px 13px;border:1px solid rgba(143,168,155,.16);border-radius:12px;color:#8fa89b;font-size:12px;line-height:1.8}.studio-queue-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:16px 0}.studio-queue-filters{display:flex;gap:7px;flex-wrap:wrap}.studio-queue-filters button{border:1px solid rgba(143,168,155,.22);border-radius:999px;background:transparent;color:inherit;padding:7px 11px;font:inherit;font-size:12px;cursor:pointer}.studio-queue-filters button.on{border-color:rgba(26,157,126,.42);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-card.done{opacity:.62}.studio-recorded{display:inline-flex;align-items:center;gap:5px;color:#1a9d7e}.studio-reader-nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin:24px 0}.studio-reader-nav button{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:9px 12px;font:inherit;cursor:pointer}.studio-font-tools{display:flex;gap:6px;align-items:center}.studio-font-tools button{min-width:38px}.studio-recap-article.recorded .press-kicker:after{content:" · ضبط شد ✓";color:#1a9d7e}.studio-recap-body{font-size:var(--studio-font-size,18px)}.finance-wrap{max-width:1100px;margin:0 auto;padding-bottom:40px}.finance-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}.finance-metric{padding:15px;border:1px solid rgba(143,168,155,.18);border-radius:15px;background:rgba(143,168,155,.035)}.finance-metric span{display:block;color:#8fa89b;font-size:12px}.finance-metric b{display:block;font-size:24px;margin-top:5px}.finance-metric small{display:block;color:#8fa89b;margin-top:4px;line-height:1.6}.finance-note{padding:13px 15px;border:1px solid rgba(143,168,155,.18);border-radius:14px;line-height:1.9;color:#8fa89b;margin:14px 0}.finance-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}.finance-table th,.finance-table td{padding:10px 8px;border-bottom:1px solid rgba(143,168,155,.14);text-align:right;vertical-align:top}.finance-table th{color:#8fa89b;font-weight:500}.finance-video-title{display:block;max-width:430px}.finance-video-title b{display:block;color:inherit}.finance-video-title small{color:#8fa89b}.finance-money{direction:ltr;display:inline-block}.finance-empty{padding:28px;text-align:center;color:#8fa89b;border:1px dashed rgba(143,168,155,.18);border-radius:14px}@media(max-width:900px){.finance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.finance-grid{grid-template-columns:1fr}.finance-table{display:block;overflow-x:auto;white-space:nowrap}}
+.figure-youtube{padding:16px}.figure-youtube-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.figure-youtube-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035);color:inherit;text-decoration:none}.figure-youtube-thumb{position:relative;display:block;aspect-ratio:16/9;background:#111;overflow:hidden}.figure-youtube-thumb img{width:100%;height:100%;object-fit:cover;display:block}.figure-youtube-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:32px;border-radius:9px;background:#ff0033;color:#fff;font-size:16px}.figure-youtube-body{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.figure-youtube-body b{font-size:14px;line-height:1.55}.figure-youtube-body small{font-size:11.5px;color:#8fa89b}.latest-videos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:8px 0 22px}.latest-videos-head h1{margin:4px 0 6px}.latest-videos-head p{margin:0;max-width:720px;color:#8fa89b;line-height:1.8}.latest-videos-stats{display:flex;gap:8px;flex-wrap:wrap}.latest-videos-stats span,.latest-videos-stats button{border:1px solid rgba(143,168,155,.22);border-radius:999px;padding:7px 11px;font:inherit;font-size:12px;background:transparent;color:inherit}.latest-videos-stats button{cursor:pointer}.latest-videos-stats button.on{border-color:rgba(26,157,126,.48);background:rgba(26,157,126,.10);color:#1a9d7e}.latest-videos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.latest-video-card{overflow:hidden;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.latest-video-main{display:block;color:inherit;text-decoration:none}.latest-video-copy{display:flex;flex-direction:column;gap:5px;padding:10px 12px}.latest-video-copy b{font-size:14px;line-height:1.6}.latest-video-copy small{font-size:11.5px;color:#8fa89b}.latest-video-people{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px}.latest-video-people button{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(143,168,155,.2);border-radius:999px;background:transparent;color:inherit;padding:4px 8px;font:inherit;font-size:11.5px;cursor:pointer}.latest-video-people img{width:20px;height:20px;border-radius:50%;object-fit:cover}.latest-video-actions{padding:0 10px 12px}.latest-video-actions button,.video-recap-btn{width:100%;border:1px solid rgba(26,157,126,.35);background:rgba(26,157,126,.08);color:#1a9d7e;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}.figure-youtube-card>a{color:inherit;text-decoration:none}.video-recap-btn{margin:0 10px 10px;width:calc(100% - 20px)}.youtube-recap-embed{position:relative;width:100%;aspect-ratio:16/9;margin:18px 0 22px;border-radius:16px;overflow:hidden;background:#090b0a;border:1px solid rgba(143,168,155,.16)}.youtube-recap-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-statement-recap{font-size:17px;line-height:2.05;margin-top:18px}.video-statement-recap p{margin:0 0 1.2em}.video-statement-points{margin:18px 0;padding:16px 18px;border:1px solid rgba(143,168,155,.18);border-radius:14px;background:rgba(143,168,155,.035)}.video-statement-points h3{margin:0 0 10px}.video-statement-points li{line-height:1.85;margin:6px 0}.studio-recap-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}.studio-recap-card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid rgba(143,168,155,.18);border-radius:16px;background:rgba(143,168,155,.035)}.studio-recap-card h2{font-size:17px;line-height:1.65;margin:0}.studio-recap-card p{margin:0;color:#8fa89b;line-height:1.75}.studio-recap-card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11.5px;color:#8fa89b}.studio-recap-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.studio-recap-card-actions button,.studio-recap-card-actions a,.studio-recap-toolbar button,.studio-recap-toolbar a{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:8px 11px;font:inherit;font-size:12px;cursor:pointer;text-decoration:none}.studio-recap-card-actions .primary,.studio-recap-toolbar .primary{border-color:rgba(26,157,126,.4);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-article{max-width:860px;margin:0 auto;padding:6px 0 36px}.studio-recap-article h1{line-height:1.45;margin:12px 0 8px}.studio-recap-byline{color:#8fa89b;line-height:1.8}.studio-recap-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}.studio-recap-body{font-size:18px;line-height:2.08}.studio-recap-body p{margin:0 0 1.35em}.studio-recap-body h2{margin:2.1em 0 .7em;font-size:22px}.studio-recap-notice{padding:11px 13px;border:1px solid rgba(143,168,155,.16);border-radius:12px;color:#8fa89b;font-size:12px;line-height:1.8}.studio-queue-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:16px 0}.studio-queue-filters{display:flex;gap:7px;flex-wrap:wrap}.studio-queue-filters button{border:1px solid rgba(143,168,155,.22);border-radius:999px;background:transparent;color:inherit;padding:7px 11px;font:inherit;font-size:12px;cursor:pointer}.studio-queue-filters button.on{border-color:rgba(26,157,126,.42);background:rgba(26,157,126,.09);color:#1a9d7e}.studio-recap-card.done{opacity:.62}.studio-recorded{display:inline-flex;align-items:center;gap:5px;color:#1a9d7e}.studio-reader-nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin:24px 0}.studio-reader-nav button{border:1px solid rgba(143,168,155,.22);border-radius:10px;background:transparent;color:inherit;padding:9px 12px;font:inherit;cursor:pointer}.studio-font-tools{display:flex;gap:6px;align-items:center}.studio-font-tools button{min-width:38px}.studio-recap-article.recorded .press-kicker:after{content:" · ضبط شد ✓";color:#1a9d7e}.studio-recap-body{font-size:var(--studio-font-size,18px)}.latest-video-actions .studio-mark{min-width:38px;padding-inline:10px;font-size:18px;font-weight:700}.latest-video-actions .studio-mark.ready{font-size:19px}.latest-video-actions .studio-mark.request{opacity:.82}.finance-wrap{max-width:1100px;margin:0 auto;padding-bottom:40px}.finance-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}.finance-metric{padding:15px;border:1px solid rgba(143,168,155,.18);border-radius:15px;background:rgba(143,168,155,.035)}.finance-metric span{display:block;color:#8fa89b;font-size:12px}.finance-metric b{display:block;font-size:24px;margin-top:5px}.finance-metric small{display:block;color:#8fa89b;margin-top:4px;line-height:1.6}.finance-note{padding:13px 15px;border:1px solid rgba(143,168,155,.18);border-radius:14px;line-height:1.9;color:#8fa89b;margin:14px 0}.finance-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}.finance-table th,.finance-table td{padding:10px 8px;border-bottom:1px solid rgba(143,168,155,.14);text-align:right;vertical-align:top}.finance-table th{color:#8fa89b;font-weight:500}.finance-video-title{display:block;max-width:430px}.finance-video-title b{display:block;color:inherit}.finance-video-title small{color:#8fa89b}.finance-money{direction:ltr;display:inline-block}.finance-empty{padding:28px;text-align:center;color:#8fa89b;border:1px dashed rgba(143,168,155,.18);border-radius:14px}@media(max-width:900px){.finance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.finance-grid{grid-template-columns:1fr}.finance-table{display:block;overflow-x:auto;white-space:nowrap}}
 @media(max-width:900px){.latest-videos-grid,.studio-recap-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.figure-youtube{padding:12px}.figure-youtube-grid,.latest-videos-grid,.studio-recap-list{grid-template-columns:1fr}.home-fig-card{padding:14px}.home-fig-card .v-h{align-items:flex-start}.home-fig-card .muted{font-size:11px}}`;
   document.head.appendChild(st);
 })();
@@ -2879,10 +2879,10 @@ async function renderFigureTimeline() {
 
 function figuresSection(list) {
   if (!list || !list.length) return "";
-  return `<div class="layers"><h3 class="section-h">جان کلام <span class="n">دیدگاه شخصی — نه واقعیتِ خبر</span></h3>
+  return `<div class="layers"><h3 class="section-h">چهره‌ها <span class="n">دیدگاه شخصی — نه واقعیتِ خبر</span></h3>
     <div class="views">${list.map(p => figureCard(p, true)).join("")}</div>
     <p class="muted fig-note">دیدگاه‌های مستقیم از کانال‌های عمومی خود افراد و «گفته در خبر» از منابع خبری جدا برچسب می‌خورند؛ لینک هر مورد به منبع همان گفته می‌رود.
-      <a href="#/figures" onclick="event.preventDefault();showFigures()">ورود به جان کلام</a></p></div>`;
+      <a href="#/figures" onclick="event.preventDefault();showFigures()">ورود به چهره‌ها</a></p></div>`;
 }
 let _figDirectoryMode = "direct";
 async function loadCuratedPoems(){ if(_CURATED_POEMS) return _CURATED_POEMS; try{_CURATED_POEMS=await getJSON(`${DATA}/curated-figure-poems.json`);}catch(_){_CURATED_POEMS={};} return _CURATED_POEMS||{}; }
@@ -3235,6 +3235,7 @@ function showTech() {
 }
 function showFigures() {
   show("figures"); setTab("");
+  document.title="چهره‌ها | پندار";
   document.getElementById("figures-lede").style.display = "";
   document.getElementById("figures").innerHTML = "";
   // A previous visit can leave timeline filters in local page state.  The
@@ -3346,7 +3347,7 @@ async function showStudioRecaps(mode = _studioQueueMode) {
     <div class="latest-videos-head">
       <button class="back" onclick="showLatestVideos('recaps')">بازگشت به ویدئوها</button>
       <div><span class="press-kicker">استودیوی ضبط جان کلام</span><h1>صف آمادهٔ ضبط</h1>
-      <p>تازه‌ترین ری‌کپ‌های پریمیوم؛ هر متن برای خواندن مستقیم، ضبط و انتشار در یوتیوب آماده شده است.</p></div>
+      <p>نسخه‌های مفصل و انتخاب‌شده برای خواندن مستقیم، ضبط و انتشار در یوتیوب.</p></div>
       <div class="latest-videos-stats"><span><b>${faN(pendingCount)}</b> برای ضبط</span><span><b>${faN(allRows.length)}</b> کل</span></div>
     </div>
     <div class="studio-queue-tools">
@@ -3360,7 +3361,7 @@ async function showStudioRecaps(mode = _studioQueueMode) {
     ${rows.length?`<div class="studio-recap-list">${rows.map(r=>`
       <article class="studio-recap-card ${done.has(String(r.id))?"done":""}">
         <div class="studio-recap-card-meta"><span>${esc(r.name_fa||"")}</span><span>·</span><span>${r.published_at?relTime(r.published_at):""}</span><span>·</span><span>${faN(r.word_count||String(r.studio_recap_fa||"").split(/\s+/).filter(Boolean).length)} واژه</span>${done.has(String(r.id))?'<span class="studio-recorded">· ضبط شد ✓</span>':""}</div>
-        <h2>${esc(r.topic_fa||r.video_title||"ری‌کپ پریمیوم")}</h2>
+        <h2>${esc(r.topic_fa||r.video_title||"نسخهٔ ضبط")}</h2>
         <p>${esc(r.summary_fa||"")}</p>
         <div class="studio-recap-card-actions">
           <button class="primary" onclick="openStudioRecap('${String(r.id||"").replace(/'/g,"\\'")}')">${done.has(String(r.id))?"باز کردن متن":"شروع ضبط"}</button>
@@ -3378,16 +3379,16 @@ async function openStudioRecap(id) {
   const rows=(await loadStudioRecaps()).slice().sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
   const idx=rows.findIndex(x=>String(x.id)===String(id));
   const r=idx>=0?rows[idx]:null;
-  if(!r){el.innerHTML='<div class="state"><div class="big">این ری‌کپ پیدا نشد.</div></div>';return;}
+  if(!r){el.innerHTML='<div class="state"><div class="big">این نسخهٔ ضبط پیدا نشد.</div></div>';return;}
   const newer=idx>0?rows[idx-1]:null;
   const older=idx<rows.length-1?rows[idx+1]:null;
   const done=studioIsDone(r.id);
-  document.title=(r.topic_fa||r.video_title||"ری‌کپ پریمیوم")+" | استودیو";
+  document.title=(r.topic_fa||r.video_title||"نسخهٔ ضبط")+" | استودیو";
   setHash("#/studio-recap/"+encodeURIComponent(String(r.id||"")));
   el.innerHTML=`<article class="studio-recap-article ${done?"recorded":""}">
     <button class="back" onclick="showStudioRecaps()">بازگشت به صف ضبط</button>
     <span class="press-kicker">استودیو جان کلام · ${esc(r.name_fa||"")}</span>
-    <h1>${esc(r.topic_fa||r.video_title||"ری‌کپ پریمیوم")}</h1>
+    <h1>${esc(r.topic_fa||r.video_title||"نسخهٔ ضبط")}</h1>
     <div class="studio-recap-byline">${esc(r.video_title||"")}${r.word_count?` · ${faN(r.word_count)} واژه`:""}${r.published_at?` · ${relTime(r.published_at)}`:""}</div>
     <div class="studio-recap-toolbar">
       <button class="primary" onclick="copyStudioRecap('${String(r.id||"").replace(/'/g,"\\'")}',this)">کپی متن</button>
@@ -3403,6 +3404,15 @@ async function openStudioRecap(id) {
     </div>
   </article>`;
 }
+function requestStudioRecap(videoId) {
+  const id=youtubeVideoId(videoId);
+  if(!id) return;
+  const title="[studio] "+id;
+  const body="درخواست ساخت نسخهٔ ضبط پندار برای این ویدئو:\n\nhttps://www.youtube.com/watch?v="+id+"\n\nپس از ثبت این درخواست توسط حساب nimania، پردازش عمیق فقط برای همین ویدئو اجرا می‌شود.";
+  const url="https://github.com/nimania/pendar/issues/new?title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body);
+  window.open(url,"_blank","noopener,noreferrer");
+}
+
 async function showLatestVideos(mode = "all") {
   show("figures"); setTab("");
   const lede=document.getElementById("figures-lede");
@@ -3441,18 +3451,18 @@ async function showLatestVideos(mode = "all") {
   const visibleVideos=recapsOnly?recapVideos:videos;
   const peopleCount=new Set(videos.flatMap(v=>v.people.filter(p=>p.directory!==false).map(p=>String(p.handle).toLowerCase()))).size;
   const sourceCount=new Set(videos.flatMap(v=>v.people.filter(p=>p.directory===false).map(p=>String(p.handle).toLowerCase()))).size;
-  document.title=(recapsOnly?"ری‌کپ ویدئوهای چهره‌ها":"آخرین ویدئوهای چهره‌ها")+" | پندار";
+  document.title=(recapsOnly?"جان کلام ویدئوهای چهره‌ها":"آخرین ویدئوهای چهره‌ها")+" | پندار";
   setHash(recapsOnly?"#/videos/recaps":"#/videos");
   el.innerHTML=`
     <div class="latest-videos-head">
-      <button class="back" onclick="showFigures()">بازگشت به جان کلام</button>
-      <div><span class="press-kicker">جان کلام · ویدئو</span><h1>${recapsOnly?"ری‌کپ‌های ویدئویی":"آخرین ویدئوها"}</h1>
-      <p>${recapsOnly?"ویدئوهایی که متن کامل آن‌ها استخراج و به ری‌کپ حرفه‌ای و وفادارانه تبدیل شده است.":"تازه‌ترین ویدئوهای چهره‌های پندار؛ از کانال‌های رسمی و حضورهای شناسایی‌شده در میزبان‌های معتبر."}</p></div>
+      <button class="back" onclick="showFigures()">بازگشت به چهره‌ها</button>
+      <div><span class="press-kicker">چهره‌ها · ویدئو</span><h1>${recapsOnly?"جان کلام ویدئوها":"آخرین ویدئوها"}</h1>
+      <p>${recapsOnly?"ویدئوهایی که متن آن‌ها به «جان کلام» حرفه‌ای و وفادارانه تبدیل شده است.":"تازه‌ترین ویدئوهای چهره‌های پندار؛ از کانال‌های رسمی و حضورهای شناسایی‌شده در میزبان‌های معتبر."}</p></div>
       <div class="latest-videos-stats">
         <button class="${!recapsOnly?"on":""}" onclick="showLatestVideos('all')"><b>${faN(videos.length)}</b> ویدئو</button>
         <span><b>${faN(peopleCount)}</b> چهره</span>${sourceCount?`<span><b>${faN(sourceCount)}</b> منبع</span>`:""}
-        ${recapVideos.length?`<button class="${recapsOnly?"on":""}" onclick="showLatestVideos('recaps')"><b>${faN(recapVideos.length)}</b> ری‌کپ</button>`:""}
-        <button onclick="showStudioRecaps()">${studioCount?`<b>${faN(studioCount)}</b> `:""}پریمیوم</button>
+        ${recapVideos.length?`<button class="${recapsOnly?"on":""}" onclick="showLatestVideos('recaps')"><b>${faN(recapVideos.length)}</b> ≣ جان کلام</button>`:""}
+        <button onclick="showStudioRecaps()" title="نسخه‌های ضبط آماده" aria-label="نسخه‌های ضبط آماده">${studioCount?`<b>${faN(studioCount)}</b> `:""}✦</button>
       </div>
     </div>
     ${visibleVideos.length?`<div class="latest-videos-grid">${visibleVideos.slice(0,120).map(v=>`
@@ -3463,7 +3473,7 @@ async function showLatestVideos(mode = "all") {
         </a>
         <div class="latest-video-people">${v.people.map(p=>p.directory!==false?`<button onclick="openFigure('${String(p.handle||"").replace(/'/g,"\\'")}')">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></button>`:`<span class="latest-video-source">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></span>`).join("")}</div>
         ${v.recap_fa?`<div class="latest-video-actions"><button onclick="openStatement('youtube-${String(v.id||"").replace(/'/g,"\\'")}')">ری‌کپ حرفه‌ای</button>${studioByVideo.has(String(v.id||""))?`<button onclick="openStudioRecap('${String(studioByVideo.get(String(v.id||"")).id||"").replace(/'/g,"\\'")}')">نسخهٔ پریمیوم</button>`:""}</div>`:""}
-      </article>`).join("")}</div>`:`<div class="state"><div class="big">${recapsOnly?"هنوز ری‌کپی آماده نشده":"هنوز ویدئویی برای چهره‌ها پیدا نشده"}</div></div>`}
+      </article>`).join("")}</div>`:`<div class="state"><div class="big">${recapsOnly?"هنوز جان کلامی آماده نشده":"هنوز ویدئویی برای چهره‌ها پیدا نشده"}</div></div>`}
   `;
 }
 async function renderFigures() {
@@ -3542,7 +3552,7 @@ async function openStatement(id) {
   const isYoutube = post.platform === "youtube";
   const recapText = String(post.recap_fa || "").trim();
   const recapHtml = isYoutube && recapText
-    ? '<section class="video-statement-recap"><div class="rule"><span>ری‌کپ کامل ویدئو</span><span class="l"></span></div>' +
+    ? '<section class="video-statement-recap"><div class="rule"><span>≣ جان کلام</span><span class="l"></span></div>' +
       recapText.split(/\\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join('') + '</section>'
     : '';
   const videoEmbedHtml = isYoutube
@@ -3554,7 +3564,7 @@ async function openStatement(id) {
     : '';
   el.innerHTML = '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "(\'" + esc(person.handle) + "\')\">بازگشت به پروفایل</button>" +
     '<div class="fig-head">' + avatar(person,"lg") + '<div class="fig-head-body"><h1>' + esc(person.name_fa) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
-    '<div class="rule"><span>' + (isYoutube ? "ری‌کپ ویدئو" : (isNews ? "گفته در خبر" : "دیدگاه")) + '</span><span class="l"></span></div>' +
+    '<div class="rule"><span>' + (isYoutube ? "جان کلام" : (isNews ? "گفته در خبر" : "دیدگاه")) + '</span><span class="l"></span></div>' +
     figureCard(post,false) + videoEmbedHtml + pointsHtml + recapHtml +
     statementBooksSection +
     statementMoviesSection +
