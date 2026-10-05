@@ -143,23 +143,10 @@ function _canonicalRelationLabel(rel, incoming) {
   return m[rel] || "مرتبط";
 }
 function canonicalStrip(entity) {
-  if (!entity || !_ENTITY_REGISTRY) return "";
-  const all = new Map((_ENTITY_REGISTRY.entities||[]).map(x=>[x.id,x]));
-  const links = [];
-  for (const edge of (_ENTITY_REGISTRY.edges||[])) {
-    let other=null,incoming=false;
-    if(edge.from===entity.id) other=all.get(edge.to);
-    else if(edge.to===entity.id){other=all.get(edge.from);incoming=true}
-    if(!other) continue;
-    links.push({entity:other,label:_canonicalRelationLabel(edge.rel,incoming)});
-    if(links.length>=10) break;
-  }
-  const related = links.length ? '<div class="canonical-related">' + links.map(function(x){
-    return '<button onclick="openCanonicalEntity(\'' + esc(x.entity.id) + '\')"><small>' + esc(x.label) + '</small><b>' + esc(x.entity.name_fa||x.entity.id) + '</b></button>';
-  }).join("") + '</div>' : "";
-  const verified=entity.meta?.verified?'<span class="identity-verified" title="هویت تأییدشده">✓ تأییدشده</span>':"";
-  const claimed=entity.meta?.claimed?'<span class="identity-claimed">مدیریت توسط خود فرد</span>':"";
-  return '<section class="canonical-strip"><div class="canonical-head"><div><span>هویت واحد پندار</span><b>' + esc(entity.name_fa||"") + verified + claimed + '</b></div><div class="canonical-head-actions"><code dir="ltr">' + esc(entity.id) + '</code><button class="canonical-graph-btn" onclick="openEntityProfile(\'' + esc(entity.id) + '\')">پروفایل ۳۶۰</button><button class="canonical-graph-btn" onclick="openEntityGraph(\'' + esc(entity.id) + '\')">شبکهٔ ارتباطی</button></div></div>' + related + '</section>';
+  // Canonical identity data is an internal plumbing layer. Keep it available
+  // to routing/data code, but never expose registry IDs, "Pendar 360" or
+  // relationship-debug controls in the public UI.
+  return "";
 }
 
 
@@ -298,7 +285,7 @@ async function openEntityProfile(id){
   el.innerHTML=
     '<button class="back" onclick="history.length>1?history.back():showFeed()">بازگشت</button>'+
     '<article class="p360">'+
-      '<header class="p360-hero"><div class="p360-avatar">'+portrait+'</div><div class="p360-identity"><span class="press-kicker">Pendar 360 · '+esc(_entityTypeFa(entity.type))+'</span><h1>'+esc(entity.name_fa||entity.id)+'</h1>'+(roleText?'<p class="p360-roles">'+esc(roleText)+'</p>':"")+(summary?'<p class="p360-summary">'+esc(summary)+'</p>':"")+'<code dir="ltr">'+esc(entity.id)+'</code></div><div class="p360-actions">'+specialized+graphBtn+'</div></header>'+
+      '<header class="p360-hero"><div class="p360-avatar">'+portrait+'</div><div class="p360-identity"><h1>'+esc(entity.name_fa||"")+'</h1>'+(roleText?'<p class="p360-roles">'+esc(roleText)+'</p>':"")+(summary?'<p class="p360-summary">'+esc(summary)+'</p>':"")+'</div></header>'+
       '<div class="p360-stats">'+stats.map(x=>'<span><b>'+faN(x[1])+'</b><small>'+x[0]+'</small></span>').join("")+'</div>'+
       '<nav class="p360-jump"><button onclick="document.getElementById(\'p360-timeline\')?.scrollIntoView({behavior:\'smooth\'})">خط زمانی</button><button onclick="document.getElementById(\'p360-news\')?.scrollIntoView({behavior:\'smooth\'})">خبرها</button><button onclick="document.getElementById(\'p360-press\')?.scrollIntoView({behavior:\'smooth\'})">جراید</button><button onclick="document.getElementById(\'p360-statements\')?.scrollIntoView({behavior:\'smooth\'})">گفته‌ها</button><button onclick="document.getElementById(\'p360-books\')?.scrollIntoView({behavior:\'smooth\'})">کتاب‌ها</button><button onclick="document.getElementById(\'p360-movies\')?.scrollIntoView({behavior:\'smooth\'})">فیلم‌ها</button><button onclick="document.getElementById(\'p360-relations\')?.scrollIntoView({behavior:\'smooth\'})">شبکه</button></nav>'+
       '<section class="p360-section" id="p360-timeline"><div class="p360-section-head"><div><span>Timeline</span><h2>خط زمانی</h2></div><small>'+faN(timeline.length)+' رویداد در دادهٔ فعلی</small></div>'+(timeline.length?'<div class="p360-timeline">'+timeline.slice(0,16).map(_profileTimelineCard).join("")+'</div>':'<div class="p360-empty">رویداد زمان‌دار ثبت نشده است.</div>')+'</section>'+
@@ -597,30 +584,9 @@ async function _buildSmartSearchDocs(){
     add("festival",k.festivals,"دانش · آیین",x=>x.dateLabel||"");
     add("organization",k.organizations,"دانش · نهاد",x=>[x.type,x.country].filter(Boolean).join(" · "));
   }catch(_){}
-  try{
-    const er=await loadCanonicalEntities();
-    const labels={person:"شخص",organization:"نهاد",source:"رسانه",publisher:"ناشر",book:"کتاب",movie:"فیلم/سریال",topic:"موضوع",place:"مکان"};
-    const personNames=new Set((er.entities||[]).filter(x=>x.type==="person").map(x=>_canonicalNorm(x.name_fa)).filter(Boolean));
-    (er.entities||[]).forEach(x=>{
-      // A personal channel/source may carry exactly the same public name as its owner.
-      // Keep it in the graph, but do not show a second competing "identity" in search.
-      if(x.type==="source" && personNames.has(_canonicalNorm(x.name_fa))) return;
-      const label=labels[x.type]||"هویت";
-      const roles=_ssHumanRoles(x.roles);
-      const aliases=(x.aliases||[]).join(" ");
-      const summary=x.meta?.summary||"";
-      docs.push({
-        kind:"هویت · "+label,
-        title:x.name_fa||x.id,
-        sub:roles,
-        canonicalId:x.id,
-        canonicalType:x.type,
-        go:`openEntityProfile('${String(x.id).replace(/'/g,"\\'")}')`,
-        text:[x.name_fa,aliases,roles,summary,x.type].join(" "),
-        snippet:summary
-      });
-    });
-  }catch(_){}
+  // Canonical registry entries are deliberately omitted from public search.
+  // Users should see actual people, books, articles and sections — not internal
+  // identity records or implementation labels.
   _smartSearchDocs=docs; return docs;
 }
 function _ssExcerpt(s,Q){
@@ -760,7 +726,7 @@ async function openBookPerson(slug, canonicalId=null){
   const lede=document.getElementById("books-lede"); if(lede) lede.style.display="none";
   const el=document.getElementById("books-content"); el.innerHTML='<div class="spinner"></div>';
   const books=(p.book_slugs||[]).map(s=>_bookBySlug(d,s)).filter(Boolean);
-  el.innerHTML=`<button class="back" onclick="showBooks('people')">بازگشت به پدیدآورندگان</button><div class="book-person-head"><span class="press-kicker">پدیدآورنده</span><h1>${esc(p.name_fa)}</h1><p>${esc((p.roles_fa||[]).join(" · "))}</p><p class="muted">این پروفایل بخشی از هویت واحد این فرد در پندار است.</p></div>${canonicalPerson?canonicalStrip(canonicalPerson):""}<div class="books-grid">${books.map(_bookCard).join("")}</div>`;
+  el.innerHTML=`<button class="back" onclick="showBooks('people')">بازگشت به پدیدآورندگان</button><div class="book-person-head"><span class="press-kicker">پدیدآورنده</span><h1>${esc(p.name_fa)}</h1><p>${esc((p.roles_fa||[]).join(" · "))}</p></div>${canonicalPerson?canonicalStrip(canonicalPerson):""}<div class="books-grid">${books.map(_bookCard).join("")}</div>`;
   setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/book-person/"+encodeURIComponent(slug));
 }
 
@@ -1457,14 +1423,16 @@ function feedCard(s, homepage = false) {
 let ALL = [];
 let tier = "all";
 let feedRange = "all";
-async function loadFeed() {
+async function loadFeed(renderHome = true) {
   const el = document.getElementById("feed");
   try {
     ALL = await getJSON(`${DATA}/stories.json`);
-    renderFeed();
-    renderDayChips();
-    updateFreshness();
-    renderHomeDaily();
+    if (renderHome) {
+      renderFeed();
+      renderDayChips();
+      updateFreshness();
+      renderHomeDaily();
+    }
   } catch (e) {
     const why = e && e.name === "AbortError" ? "دریافت داده بیش از حد طول کشید." : "فایل خبرها در دسترس نیست.";
     el.innerHTML = `<div class="state"><div class="big">خبرها بارگذاری نشد</div>
@@ -2642,12 +2610,21 @@ function statsBlock(st) {
     <p class="muted" style="margin:6px 0 4px">شمارِ خبرهای تازه در هر روز. روی «امروز/دیروز» یا هر میله بزن تا خبرهای همان روز را با تفکیک دسته ببینی.</p>`;
 }
 
-loadFeed().then(route);   // load the feed, then honor any deep link in the URL
-renderHomeStats();
-renderHomeGlance();
-renderHomePrices();
-renderHomeWeather();
-renderHomePeople();
+const _initialRoute = (location.hash || "").replace(/^#\/?/, "");
+const _isDeepLink = Boolean(_initialRoute);
+if (_isDeepLink) {
+  const feedView = document.getElementById("feed-view");
+  if (feedView) feedView.style.display = "none";
+  setTab("");
+}
+loadFeed(!_isDeepLink).then(route);
+if (!_isDeepLink) {
+  renderHomeStats();
+  renderHomeGlance();
+  renderHomePrices();
+  renderHomeWeather();
+  renderHomePeople();
+}
 updateMineBadge();
 
 
