@@ -75,6 +75,14 @@ jobs:
           key: jankalam-extfig-${{ github.run_id }}
           restore-keys: |
             jankalam-extfig-
+      - name: Collect figure videos and recaps
+        working-directory: backend
+        env:
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
+          DOWNSUB_API_KEY: ${{ secrets.DOWNSUB_API_KEY }}
+        run: python -m scripts.collect_external_figures
       - name: Generate news (ingest → cluster → rank → synthesize → export)
         working-directory: backend
         env:
@@ -92,7 +100,6 @@ jobs:
         run: |
           python -m scripts.seed
           python -c "from app.tasks.scheduler import run_full_cycle; print(run_full_cycle())"
-          python -m scripts.collect_external_figures
           python -m scripts.export_static
           python -m scripts.build_periodicals
       - name: Overlay freshest Jan-e Jaraid data before publishing
