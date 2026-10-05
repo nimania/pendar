@@ -11,6 +11,7 @@ feedparser>=6.0
 httpx>=0.28
 beautifulsoup4>=4.12   # Telegram channel preview pages (t.me/s/…)
 youtube-transcript-api==1.2.4  # transcript-first YouTube figure ingestion
+yt-dlp>=2026.9.18       # resilient caption-track discovery / subtitle fallback
 telethon>=1.40         # authenticated document download from public periodical channels
 pypdf>=5.0             # text extraction from text-based newspaper/magazine PDFs
 
