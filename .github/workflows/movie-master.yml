@@ -1,0 +1,90 @@
+name: Pendar Movie Master
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 9 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "backend/scripts/build_movie_master.py"
+      - ".github/workflows/movie-master.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: movie-master
+  cancel-in-progress: true
+
+jobs:
+  build-master:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Restore Movie Master database
+        uses: actions/cache@v4
+        with:
+          path: backend/data/movie-master.sqlite
+          key: pendar-movie-master-${{ github.run_id }}
+          restore-keys: |
+            pendar-movie-master-
+
+      - name: Build Movie Master from official TMDB daily exports
+        run: |
+          mkdir -p backend/data backend/public/data
+          python backend/scripts/build_movie_master.py \
+            --db backend/data/movie-master.sqlite \
+            --summary backend/public/data/movie-master-summary.json \
+            --top backend/public/data/movie-master-top.json \
+            --curated-movies web-static/data/movies.json \
+            --top-limit 5000
+
+      - name: Validate master database
+        run: |
+          python - <<'PY'
+          import json, pathlib, sqlite3
+          db=pathlib.Path("backend/data/movie-master.sqlite")
+          summary=pathlib.Path("backend/public/data/movie-master-summary.json")
+          assert db.exists() and db.stat().st_size > 1024 * 1024, "master DB is unexpectedly small"
+          data=json.loads(summary.read_text(encoding="utf-8"))
+          total=int(data["stats"]["total_active"])
+          movies=int(data["stats"]["movies"])
+          series=int(data["stats"]["series"])
+          assert total == movies + series
+          assert movies > 100000 and series > 10000, (movies, series)
+          con=sqlite3.connect(db)
+          dup=con.execute("SELECT COUNT(*) FROM (SELECT media_type,tmdb_id,COUNT(*) c FROM titles GROUP BY media_type,tmdb_id HAVING c>1)").fetchone()[0]
+          assert dup == 0, f"duplicate TMDB identities: {dup}"
+          print("Validated:", json.dumps(data["stats"], ensure_ascii=False))
+          PY
+
+      - name: Compress master database
+        run: gzip -9 -c backend/data/movie-master.sqlite > backend/data/movie-master.sqlite.gz
+
+      - name: Upload Movie Master database
+        uses: actions/upload-artifact@v4
+        with:
+          name: pendar-movie-master-db
+          path: backend/data/movie-master.sqlite.gz
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+
+      - name: Upload Movie Master public indexes
+        uses: actions/upload-artifact@v4
+        with:
+          name: pendar-movie-master-indexes
+          path: |
+            backend/public/data/movie-master-summary.json
+            backend/public/data/movie-master-top.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
