@@ -484,7 +484,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         text = _caption_text_from_payload(r.text)
         if len(text) >= 120:
             print(f"youtube: DownSub transcript ok {video_id} (plain)")
-            return re.sub(r"\\s+", " ", text).strip(), ""
+            return re.sub(r"\s+", " ", text).strip(), ""
         return "", ""
 
     try:
@@ -527,7 +527,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         text = _caption_text_from_payload(raw)
         if len(text) >= 120:
             print(f"youtube: DownSub transcript ok {video_id} ({lang or 'unknown'})")
-            return re.sub(r"\\s+", " ", text).strip(), lang
+            return re.sub(r"\s+", " ", text).strip(), lang
 
     for _, lang, url in sorted(url_candidates, key=lambda x: x[0]):
         if lang and _lang_rank(lang) >= 99:
@@ -539,7 +539,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
             text = _caption_text_from_payload(rr.text)
             if len(text) >= 120:
                 print(f"youtube: DownSub subtitle ok {video_id} ({lang or 'unknown'})")
-                return re.sub(r"\\s+", " ", text).strip(), lang
+                return re.sub(r"\s+", " ", text).strip(), lang
         except Exception:
             continue
 
@@ -550,7 +550,7 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         text = _caption_text_from_payload(raw)
         if len(text) >= 120:
             print(f"youtube: DownSub transcript ok {video_id} (unlabeled)")
-            return re.sub(r"\\s+", " ", text).strip(), ""
+            return re.sub(r"\s+", " ", text).strip(), ""
     print(f"youtube: DownSub returned no usable transcript for {video_id}")
     return "", ""
 
@@ -613,7 +613,7 @@ def _timedtext_transcript(client: httpx.Client, video_id: str) -> tuple[str, str
                         parts.append(text)
                 text = re.sub(r"\s+", " ", " ".join(parts)).strip()
                 if len(text) >= 120:
-                    return re.sub(r"\\s+", " ", text).strip(), lang
+                    return re.sub(r"\s+", " ", text).strip(), lang
             except Exception:
                 continue
     return "", ""
@@ -702,7 +702,7 @@ def _ytdlp_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
                 text = _caption_text_from_payload(r.text)
                 if len(text) >= 120:
                     print(f"youtube: yt-dlp captions ok {video_id} ({lang})")
-                    return re.sub(r"\\s+", " ", text).strip(), str(lang or "")
+                    return re.sub(r"\s+", " ", text).strip(), str(lang or "")
             except Exception:
                 continue
     return "", ""
@@ -725,7 +725,7 @@ def youtube_transcript(api: YouTubeTranscriptApi, client: httpx.Client,
         if transcript is not None:
             fetched = transcript.fetch()
             text = " ".join(str(s.text or "").strip() for s in fetched if str(s.text or "").strip())
-            text = re.sub(r"\\s+", " ", html.unescape(text)).strip()
+            text = re.sub(r"\s+", " ", html.unescape(text)).strip()
             if len(text) >= 120:
                 return text, str(getattr(transcript, "language_code", "") or "")
     except Exception as exc:
