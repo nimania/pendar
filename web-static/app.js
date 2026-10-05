@@ -1236,7 +1236,7 @@ async function route() {
   if (kind === "books") return showBooks(["publishers","people","new","all","used","reviews"].includes(arg) ? arg : "books");
   if (kind === "book" && arg) return openBook(arg);
   if (kind === "movies") return showMovies();
-  if (kind === "movie" && arg) return openMovie(arg);
+  if (kind === "movie" && arg) return openMovie(arg);\n  if (kind === "master-movie" && arg) return openMasterMovie(arg);
   if (kind === "tv") return showTVGuide(arg || "now");
   if (kind === "knowledge") return showKnowledge(arg || "home");
   if (kind === "entity" && arg) return openCanonicalEntity(arg);
