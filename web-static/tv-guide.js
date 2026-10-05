@@ -61,6 +61,9 @@ function _tvFaDate(v){
 }
 function _tvChannelMap(d){return new Map((d.channels||[]).map(c=>[String(c.id),c]))}
 function _tvNorm(v){return String(v||"").replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim().toLowerCase()}
+function _tvJs(v){return String(v||"").replace(/\\/g,"\\\\").replace(/'/g,"\\'")}
+function _tvProgrammeKey(p){return _tvNorm(p?.title_fa||p?.title_en||p?.title||"")}
+function _tvGroupLabel(g){return TV_GUIDE_GROUPS[g]||g||"عمومی"}
 function _tvLooksJunk(p,c){
   const t=_tvNorm(p?.title_fa||p?.title_en||"");
   if(!t||["برنامه","program","بدون عنوان","پخش آنلاین","زنده"].includes(t))return true;
@@ -108,18 +111,19 @@ function _tvProgrammeCard(p,c,now){
     progress='<span class="tv-progress"><i style="width:'+pct.toFixed(1)+'%"></i></span>';
   }
   const meta=[p.year,(p.categories||[]).slice(0,2).join(" · ")].filter(Boolean).join(" · ");
-  const click=linked?' onclick="openMovie(\''+esc(p.canonical_slug)+'\')" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){openMovie(\''+esc(p.canonical_slug)+'\')} "':"";
-  return '<article class="tv-program '+(live?"is-live ":"")+(linked?"is-linked":"")+'"'+click+'>'+
-    '<div class="tv-channel-logo">'+_tvChannelLogo(c)+'</div>'+
+  const pid=_tvProgrammeKey(p);
+  const cid=String(c?.id||p.channel_id||"");
+  return '<article class="tv-program '+(live?"is-live ":"")+(linked?"is-linked":"")+'">'+
+    '<button class="tv-channel-logo tv-link-reset" onclick="openTVChannel(\''+_tvJs(cid)+'\')" title="صفحهٔ '+esc(c?.name_fa||c?.name||"شبکه")+'">'+_tvChannelLogo(c)+'</button>'+
     '<div class="tv-program-main">'+
       '<div class="tv-program-top"><span class="tv-time">'+_tvFaTime(p.start)+(p.stop?"–"+_tvFaTime(p.stop):"")+'</span>'+(live?'<span class="tv-live-dot">● در حال پخش</span>':"")+(linked?'<span class="tv-canonical-badge">جان فیلم</span>':"")+'</div>'+
-      '<h3>'+esc(p.title_fa||p.title||"بدون عنوان")+'</h3>'+
-      '<p class="tv-channel-name">'+esc(c?.name_fa||c?.name||p.channel_id||"")+(meta?" · "+esc(meta):"")+' '+_tvSourceBadge(c?.confidence||"aggregated")+' '+_tvQualityBadge(p,c)+'</p>'+
+      '<h3><button class="tv-title-link" onclick="openTVProgramme(\''+_tvJs(pid)+'\')">'+esc(p.title_fa||p.title||"بدون عنوان")+'</button></h3>'+
+      '<p class="tv-channel-name"><button class="tv-inline-link" onclick="openTVChannel(\''+_tvJs(cid)+'\')">'+esc(c?.name_fa||c?.name||p.channel_id||"")+'</button>'+(meta?" · "+esc(meta):"")+' '+_tvSourceBadge(c?.confidence||"aggregated")+' '+_tvQualityBadge(p,c)+'</p>'+
       (linked?'<div class="tv-program-watch"><span>'+esc(p.canonical_title||"")+'</span>'+_tvProgrammeStreaming(p)+'</div>':"")+
       (p.desc_fa?'<p class="tv-desc">'+esc(p.desc_fa)+'</p>':"")+
       progress+
     '</div>'+
-    (p.icon?'<div class="tv-program-art"><img src="'+esc(p.icon)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></div>':"")+
+    (p.icon?'<button class="tv-program-art tv-link-reset" onclick="openTVProgramme(\''+_tvJs(pid)+'\')"><img src="'+esc(p.icon)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></button>':"")+
   '</article>';
 }
 
@@ -188,14 +192,69 @@ function _tvChannels(d){
     const rows=ps.filter(p=>String(p.channel_id)===String(c.id)&&!_tvLooksJunk(p,c)).sort((a,b)=>_tvDate(a.start)-_tvDate(b.start));
     const current=rows.find(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop));
     const next=rows.find(p=>_tvDate(p.start)>now);
-    return '<button class="tv-channel-card" onclick="tvGuideState.channel=\''+esc(c.id)+'\';showTVGuide(\'now\')">'+
+    return '<button class="tv-channel-card" onclick="openTVChannel(\''+_tvJs(c.id)+'\')">'+
       '<span class="tv-channel-card-logo">'+_tvChannelLogo(c)+'</span>'+
-      '<span class="tv-channel-card-copy"><strong>'+esc(c.name_fa||c.name||c.id)+'</strong><small>'+esc(TV_GUIDE_GROUPS[c.group]||c.group||"شبکه")+' · '+esc(c.source_name||"")+'</small>'+
+      '<span class="tv-channel-card-copy"><strong>'+esc(c.name_fa||c.name||c.id)+'</strong><small>'+esc(_tvGroupLabel(c.group))+' · '+esc(c.source_name||"")+'</small>'+
       (current?'<em>الان: '+esc(current.title_fa||current.title||"")+'</em>':next?'<em>بعدی '+_tvFaTime(next.start)+': '+esc(next.title_fa||next.title||"")+'</em>':'<em>برنامه‌ای در بازه فعلی نیست</em>')+
       '</span>'+_tvSourceBadge(c.confidence||"aggregated")+
     '</button>';
   }).join("");
   return cards?'<div class="tv-channel-grid">'+cards+'</div>':'<div class="state"><div class="big">هنوز شبکه‌ای وارد نشده است</div></div>';
+}
+
+async function openTVChannel(channelId){
+  show("tvguide"); setTab("");
+  const el=document.getElementById("tv-guide-content");
+  if(el)el.innerHTML='<div class="spinner"></div>';
+  const d=await loadTVGuide(), cmap=_tvChannelMap(d), c=cmap.get(String(channelId));
+  if(!c){el.innerHTML='<div class="state"><div class="big">شبکه پیدا نشد</div></div>';return}
+  const now=new Date();
+  const rows=(d.programmes||[]).filter(p=>String(p.channel_id)===String(c.id)&&!_tvLooksJunk(p,c)).sort((a,b)=>_tvDate(a.start)-_tvDate(b.start));
+  const current=rows.find(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop));
+  const future=rows.filter(p=>_tvDate(p.stop)>=now).slice(0,40);
+  const cats=[...new Set(rows.flatMap(p=>p.categories||[]).filter(Boolean))].slice(0,8);
+  const desc=c.description_fa||c.description||('صفحهٔ '+(c.name_fa||c.name||'شبکه')+' در راهنمای تماشای پندار؛ شامل اطلاعات شبکه، وضعیت منبع و جدول پخش ثبت‌شده.');
+  document.title=(c.name_fa||c.name||"شبکه")+" | راهنمای تماشا";
+  setHash("#/tv/channel/"+encodeURIComponent(String(c.id)));
+  el.innerHTML=
+    '<button class="back" onclick="showTVGuide(\'channels\')">بازگشت به شبکه‌ها</button>'+
+    '<section class="tv-entity-hero"><div class="tv-entity-logo">'+_tvChannelLogo(c)+'</div><div class="tv-entity-copy"><span class="press-kicker">شبکهٔ تلویزیونی</span><h1>'+esc(c.name_fa||c.name||c.id)+'</h1>'+
+      (c.name&&c.name!==c.name_fa?'<div class="tv-entity-en" dir="ltr">'+esc(c.name)+'</div>':"")+
+      '<p>'+esc(desc)+'</p><div class="tv-entity-meta"><span>'+esc(_tvGroupLabel(c.group))+'</span><span>'+esc(c.source_name||"منبع ثبت نشده")+'</span>'+_tvSourceBadge(c.confidence||"aggregated")+(c.trust_score?'<span>اعتماد '+faN(c.trust_score)+'/۱۰۰</span>':"")+'</div></div></section>'+
+    (cats.length?'<div class="tv-tag-row">'+cats.map(x=>'<span>'+esc(x)+'</span>').join("")+'</div>':"")+
+    (current?'<section class="tv-entity-section"><div class="tv-list-head"><h2>در حال پخش</h2></div>'+_tvProgrammeCard(current,c,now)+'</section>':"")+
+    '<section class="tv-entity-section"><div class="tv-list-head"><h2>جدول پخش</h2><span>'+faN(future.length)+' برنامهٔ آینده</span></div>'+
+      (future.length?'<div class="tv-program-list">'+future.map(p=>_tvProgrammeCard(p,c,now)).join("")+'</div>':'<div class="state tv-empty"><div class="big">برنامهٔ آینده‌ای ثبت نشده</div></div>')+'</section>';
+}
+
+async function openTVProgramme(programmeKey){
+  show("tvguide"); setTab("");
+  const el=document.getElementById("tv-guide-content");
+  if(el)el.innerHTML='<div class="spinner"></div>';
+  const d=await loadTVGuide(), cmap=_tvChannelMap(d), key=_tvNorm(programmeKey);
+  const rows=(d.programmes||[]).filter(p=>_tvProgrammeKey(p)===key&&!_tvLooksJunk(p,cmap.get(String(p.channel_id)))).sort((a,b)=>_tvDate(a.start)-_tvDate(b.start));
+  if(!rows.length){el.innerHTML='<div class="state"><div class="big">برنامه پیدا نشد</div></div>';return}
+  const now=new Date(), p=rows.find(x=>_tvDate(x.start)<=now&&now<_tvDate(x.stop))||rows.find(x=>_tvDate(x.start)>=now)||rows[rows.length-1];
+  const channels=[...new Map(rows.map(x=>{const ch=cmap.get(String(x.channel_id));return [String(x.channel_id),ch]}).filter(x=>x[1])).values()];
+  const descriptions=rows.map(x=>String(x.desc_fa||"").trim()).filter(Boolean).sort((a,b)=>b.length-a.length);
+  const desc=descriptions[0]||('صفحهٔ برنامهٔ «'+(p.title_fa||p.title_en||"")+'» در راهنمای تماشای پندار؛ زمان‌های پخش و شبکه‌های پخش‌کننده در این صفحه به‌روز می‌شوند.');
+  const categories=[...new Set(rows.flatMap(x=>x.categories||[]).filter(Boolean))];
+  const future=rows.filter(x=>_tvDate(x.stop)>=now).slice(0,30);
+  const past=rows.filter(x=>_tvDate(x.stop)<now).slice(-8).reverse();
+  const canonical=rows.find(x=>x.canonical_slug);
+  document.title=(p.title_fa||p.title_en||"برنامه")+" | راهنمای تماشا";
+  setHash("#/tv/program/"+encodeURIComponent(key));
+  el.innerHTML=
+    '<button class="back" onclick="showTVGuide(\'now\')">بازگشت به راهنمای تماشا</button>'+
+    '<section class="tv-entity-hero tv-programme-hero">'+(p.icon?'<div class="tv-entity-art"><img src="'+esc(p.icon)+'" alt="" loading="eager" referrerpolicy="no-referrer"></div>':'<div class="tv-entity-art fallback">TV</div>')+
+      '<div class="tv-entity-copy"><span class="press-kicker">برنامهٔ تلویزیونی</span><h1>'+esc(p.title_fa||p.title_en||"بدون عنوان")+'</h1>'+
+      (p.title_en&&p.title_en!==p.title_fa?'<div class="tv-entity-en" dir="ltr">'+esc(p.title_en)+'</div>':"")+
+      '<p>'+esc(desc)+'</p>'+
+      '<div class="tv-entity-meta">'+(p.year?'<span>'+esc(p.year)+'</span>':"")+categories.slice(0,5).map(x=>'<span>'+esc(x)+'</span>').join("")+(canonical?'<button onclick="openMovie(\''+_tvJs(canonical.canonical_slug)+'\')">صفحهٔ مرتبط در جان فیلم ←</button>':"")+'</div></div></section>'+
+    '<section class="tv-entity-section"><div class="tv-list-head"><h2>شبکه‌های پخش‌کننده</h2><span>'+faN(channels.length)+' شبکه</span></div><div class="tv-program-channels">'+channels.map(ch=>'<button onclick="openTVChannel(\''+_tvJs(ch.id)+'\')"><span class="tv-channel-card-logo">'+_tvChannelLogo(ch)+'</span><span><b>'+esc(ch.name_fa||ch.name||"")+'</b><small>'+esc(_tvGroupLabel(ch.group))+'</small></span></button>').join("")+'</div></section>'+
+    '<section class="tv-entity-section"><div class="tv-list-head"><h2>پخش‌های آینده</h2><span>'+faN(future.length)+' نوبت</span></div>'+
+      (future.length?'<div class="tv-airings">'+future.map(x=>{const ch=cmap.get(String(x.channel_id));return '<button onclick="openTVChannel(\''+_tvJs(x.channel_id)+'\')"><b>'+esc(ch?.name_fa||ch?.name||"")+'</b><span>'+esc(_tvFaDate(x.start))+' · '+_tvFaTime(x.start)+'–'+_tvFaTime(x.stop)+'</span></button>'}).join("")+'</div>':'<div class="state tv-empty"><div class="big">پخش آینده‌ای ثبت نشده</div></div>')+'</section>'+
+    (past.length?'<section class="tv-entity-section"><div class="tv-list-head"><h2>پخش‌های اخیر</h2></div><div class="tv-airings muted">'+past.map(x=>{const ch=cmap.get(String(x.channel_id));return '<button onclick="openTVChannel(\''+_tvJs(x.channel_id)+'\')"><b>'+esc(ch?.name_fa||ch?.name||"")+'</b><span>'+esc(_tvFaDate(x.start))+' · '+_tvFaTime(x.start)+'</span></button>'}).join("")+'</div></section>':"");
 }
 
 function _tvSources(d){
@@ -312,7 +371,10 @@ async function _tvStreaming(){
 }
 
 async function showTVGuide(mode){
-  tvGuideState.mode=mode||"now";
+  mode=mode||"now";
+  if(String(mode).startsWith("channel/")) return openTVChannel(String(mode).slice(8));
+  if(String(mode).startsWith("program/")) return openTVProgramme(String(mode).slice(8));
+  tvGuideState.mode=mode;
   show("tvguide"); setTab("");
   document.title="راهنمای تماشا | پندار";
   const el=document.getElementById("tv-guide-content");
