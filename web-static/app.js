@@ -756,6 +756,19 @@ const PRESS_SOURCES = [
   {name:"مشرق نیوز", domain:"mashreghnews.ir", scope:"iran-agency", lang:"fa", type:"رسانه خبری"},
   {name:"انصاف نیوز", domain:"ensafnews.com", scope:"iran-agency", lang:"fa", type:"رسانه خبری"},
 
+  // کانال‌ها و پادکست‌های ویدئویی
+  {name:"Chanteh Podcast", aliases:["چنته پادکست"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"پادکست ویدئویی"},
+  {name:"Zabane.z", domain:"youtube.com", scope:"youtube", lang:"fa", type:"کانال ویدئویی"},
+  {name:"۷ آبان", aliases:["7Aban_h","7Aban"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"کانال ویدئویی"},
+  {name:"Ivar Farhadi", aliases:["ایوار فرهادی"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"کانال شخصی"},
+  {name:"Farhikhtegan Online", aliases:["فرهیختگان آنلاین"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه ویدئویی"},
+  {name:"Manoto TV", aliases:["من‌وتو","من و تو"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"شبکه ویدئویی"},
+  {name:"Cimorg Futures", domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه آینده‌پژوهی"},
+  {name:"Persian Clubhouse", domain:"youtube.com", scope:"youtube", lang:"fa", type:"گفت‌وگو و کلاب‌هاوس"},
+  {name:"Baziya (Ali Zia)", aliases:["Baziya","بازیا","علی ضیا"], domain:"youtube.com", scope:"youtube", lang:"fa", type:"تاک‌شو ویدئویی"},
+  {name:"Rok Show", domain:"youtube.com", scope:"youtube", lang:"fa", type:"برنامه ویدئویی"},
+  {name:"Pump VOD", domain:"youtube.com", scope:"youtube", lang:"fa", type:"رسانه ویدئویی"},
+
   // روزنامه‌ها و مطبوعات داخل ایران
   {name:"همشهری", aliases:["همشهری آنلاین"], domain:"hamshahrionline.ir", scope:"iran-paper", lang:"fa", type:"روزنامه"},
   {name:"پیام ما", aliases:["روزنامه پیام‌ما"], domain:"payamema.ir", scope:"iran-paper", lang:"fa", type:"روزنامه"},
