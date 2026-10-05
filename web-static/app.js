@@ -2633,7 +2633,12 @@ if (_isDeepLink) {
   if (feedView) feedView.style.display = "none";
   setTab("");
 }
-loadFeed(!_isDeepLink).then(route);
+loadFeed(!_isDeepLink)
+  .then(route)
+  .finally(() => {
+    if (window.__routeBootTimer) clearTimeout(window.__routeBootTimer);
+    document.documentElement.classList.remove("route-boot");
+  });
 if (!_isDeepLink) {
   renderHomeStats();
   renderHomeGlance();
