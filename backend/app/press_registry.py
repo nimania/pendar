@@ -99,6 +99,42 @@ PRESS_FEEDS = {
     "سلامت نیوز": "http://salamatnews.com/rss.xml",
 }
 
+
+# Curated YouTube channels treated as first-class Jan-e Jaraid sources.
+# Store canonical @handles here; the monitor resolves the real channel_id at runtime
+# instead of trusting manually copied IDs (which are easy to mismatch).
+YOUTUBE_PRESS_SOURCES = {
+    "مسعود بهنود": "https://www.youtube.com/@mbehnoud",
+    "دیدارنیوز": "https://www.youtube.com/@didarnews",
+    "همشهری TV": "https://www.youtube.com/@hamshahritv",
+    "ایران فردا TV": "https://www.youtube.com/@Iranefarda_TV",
+    "جمشید چالنگی": "https://www.youtube.com/@JamshidChalangi1",
+    "بزرگمهر شرف‌الدین": "https://www.youtube.com/@BozorgmehrSharafedin",
+    "کارگاه": "https://www.youtube.com/@Kargahnet",
+    "دگم نباش": "https://www.youtube.com/@DogmNabash",
+    "۷ آبان": "https://www.youtube.com/@7Aban_h",
+    "دکتر فرهنگ هلاکویی": "https://www.youtube.com/@dr.holakoueeofficialchannel",
+    "Channel One TV": "https://www.youtube.com/@ChanelOneTVIranian",
+    "Zabane.z": "https://www.youtube.com/@Zabane.z",
+    "رسانه آلترناتیو": "https://www.youtube.com/@ResanehAlternative",
+    "Persian Clubhouse": "https://www.youtube.com/@persianclubhouse113",
+    "Fuse Podcast": "https://www.youtube.com/@fusepodcast",
+    "Studio Patt": "https://www.youtube.com/@Studio_patt",
+    "نزدیک‌تر تاک": "https://www.youtube.com/@nazdiktar_talk",
+    "Cimorg Futures": "https://www.youtube.com/@CimorgFutures",
+    "Azad Social": "https://www.youtube.com/@azadsocial",
+    "خط فرضی": "https://www.youtube.com/@Khattefarzi",
+    "کاغذ سیاست": "https://www.youtube.com/@kaghazesiasat",
+    "Yazdan Talkshow": "https://www.youtube.com/@yazdantalkshow",
+    "Jomhouri Street": "https://www.youtube.com/@jomhouristreet",
+    "Tomorrow’s Horizon": "https://www.youtube.com/@TomorrowsHorizon2024",
+    "Sajadni Movies": "https://www.youtube.com/@sajadniMovies",
+    "Khashayar Stories": "https://www.youtube.com/@Khashayarstories",
+    "Sepehris Cult": "https://www.youtube.com/@SepehrisCult",
+    "احسان منصوری": "https://www.youtube.com/@ehsanmansoori",
+    "اشکان زارع": "https://www.youtube.com/@ashkan_zare",
+}
+
 PRESS_REGISTRY = [
     # Iran — agencies / news portals
     ("ایرنا","https://www.irna.ir","fa","iran-agency"),
@@ -184,6 +220,37 @@ PRESS_REGISTRY = [
     ("زومیت","https://www.zoomit.ir","fa","iran-agency"),
     ("گیمفا","https://gamefa.com","fa","iran-agency"),
     ("سلامت نیوز","https://www.salamatnews.com","fa","iran-agency"),
+
+    # Curated YouTube channels / video podcasts
+    ("مسعود بهنود","https://www.youtube.com/@mbehnoud","fa","youtube"),
+    ("دیدارنیوز","https://www.youtube.com/@didarnews","fa","youtube"),
+    ("همشهری TV","https://www.youtube.com/@hamshahritv","fa","youtube"),
+    ("ایران فردا TV","https://www.youtube.com/@Iranefarda_TV","fa","youtube"),
+    ("جمشید چالنگی","https://www.youtube.com/@JamshidChalangi1","fa","youtube"),
+    ("بزرگمهر شرف‌الدین","https://www.youtube.com/@BozorgmehrSharafedin","fa","youtube"),
+    ("کارگاه","https://www.youtube.com/@Kargahnet","fa","youtube"),
+    ("دگم نباش","https://www.youtube.com/@DogmNabash","fa","youtube"),
+    ("۷ آبان","https://www.youtube.com/@7Aban_h","fa","youtube"),
+    ("دکتر فرهنگ هلاکویی","https://www.youtube.com/@dr.holakoueeofficialchannel","fa","youtube"),
+    ("Channel One TV","https://www.youtube.com/@ChanelOneTVIranian","fa","youtube"),
+    ("Zabane.z","https://www.youtube.com/@Zabane.z","fa","youtube"),
+    ("رسانه آلترناتیو","https://www.youtube.com/@ResanehAlternative","fa","youtube"),
+    ("Persian Clubhouse","https://www.youtube.com/@persianclubhouse113","fa","youtube"),
+    ("Fuse Podcast","https://www.youtube.com/@fusepodcast","fa","youtube"),
+    ("Studio Patt","https://www.youtube.com/@Studio_patt","fa","youtube"),
+    ("نزدیک‌تر تاک","https://www.youtube.com/@nazdiktar_talk","fa","youtube"),
+    ("Cimorg Futures","https://www.youtube.com/@CimorgFutures","fa","youtube"),
+    ("Azad Social","https://www.youtube.com/@azadsocial","fa","youtube"),
+    ("خط فرضی","https://www.youtube.com/@Khattefarzi","fa","youtube"),
+    ("کاغذ سیاست","https://www.youtube.com/@kaghazesiasat","fa","youtube"),
+    ("Yazdan Talkshow","https://www.youtube.com/@yazdantalkshow","fa","youtube"),
+    ("Jomhouri Street","https://www.youtube.com/@jomhouristreet","fa","youtube"),
+    ("Tomorrow’s Horizon","https://www.youtube.com/@TomorrowsHorizon2024","fa","youtube"),
+    ("Sajadni Movies","https://www.youtube.com/@sajadniMovies","fa","youtube"),
+    ("Khashayar Stories","https://www.youtube.com/@Khashayarstories","fa","youtube"),
+    ("Sepehris Cult","https://www.youtube.com/@SepehrisCult","fa","youtube"),
+    ("احسان منصوری","https://www.youtube.com/@ehsanmansoori","fa","youtube"),
+    ("اشکان زارع","https://www.youtube.com/@ashkan_zare","fa","youtube"),
 
     # Iranian periodicals — RSS/site/PDF fallback
     ("سپیده دانایی","https://www.magiran.com/magazine/5447","fa","iran-magazine"),
