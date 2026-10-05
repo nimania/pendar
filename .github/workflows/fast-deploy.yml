@@ -44,17 +44,49 @@ jobs:
         continue-on-error: true
         run: python backend/scripts/build_tv_guide.py --output web-static/data/tv-guide.json
 
-      - name: Find latest successful build and periodicals runs
+      - name: Find latest healthy build and auxiliary runs
         id: refresh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          build_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          build_id=""
+          for candidate in $(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=10" --jq '.workflow_runs[].id'); do
+            artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$candidate/artifacts" --jq '[.artifacts[] | select(.expired==false and .name=="latest-static-site")][0].id // empty')"
+            if [ -n "$artifact_id" ]; then
+              rm -rf /tmp/healthcheck && mkdir -p /tmp/healthcheck
+              if gh run download "$candidate" -n latest-static-site -D /tmp/healthcheck >/dev/null 2>&1; then
+                news="$(python - <<'PY'
+import json, pathlib
+p=pathlib.Path("/tmp/healthcheck/data/stats.json")
+try:
+    print(int(json.loads(p.read_text(encoding="utf-8")).get("total") or 0))
+except Exception:
+    print(0)
+PY
+)"
+                figures="$(python - <<'PY'
+import json, pathlib
+p=pathlib.Path("/tmp/healthcheck/data/figures.json")
+try:
+    d=json.loads(p.read_text(encoding="utf-8"))
+    print(len(d.get("figures", [])) if isinstance(d, dict) else 0)
+except Exception:
+    print(0)
+PY
+)"
+                if [ "$news" -ge 10000 ] && [ "$figures" -ge 100 ]; then
+                  build_id="$candidate"
+                  echo "Selected healthy full build $candidate ($news news, $figures figures)"
+                  break
+                fi
+              fi
+            fi
+          done
+          test -n "$build_id"
           press_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/periodicals.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           weather_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           commerce_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/books-commerce.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           movie_master_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/movie-master.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          test -n "$build_id"
           echo "build_id=$build_id" >> "$GITHUB_OUTPUT"
           echo "press_id=$press_id" >> "$GITHUB_OUTPUT"
           echo "weather_id=$weather_id" >> "$GITHUB_OUTPUT"
