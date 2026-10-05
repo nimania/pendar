@@ -37,20 +37,13 @@ YOUTUBE_MAX_PER_CHANNEL = 3
 YOUTUBE_KEEP_PER_FIGURE = 40
 YOUTUBE_TRANSCRIPT_CHARS = 32000
 
-# Trusted host channels for people who regularly appear on YouTube without
-# maintaining a dedicated personal channel. Only uploads whose title contains
-# one of the person's name variants are attached to that profile.
-YOUTUBE_FEATURED_SOURCES = {
-    "abbas-souri": [
-        ("https://www.youtube.com/@Parsi_Live", ("عباس سوری", "عباس سوري")),
-    ],
-    "ahmadzeidabad": [
-        ("https://www.youtube.com/@Abdi_media4", ("احمد زیدآبادی", "احمد زيدآبادی", "زیدآبادی", "زيدآبادی")),
-    ],
-    "iranemana_official": [
-        ("https://www.youtube.com/@Parsi_Live", ("سجاد فتاحی",)),
-    ],
-}
+# Trusted interview/media channels. Their latest uploads are scanned once per
+# build and title-matched against *all* curated figures, so hosted appearances
+# do not require a one-off rule per person.
+YOUTUBE_SHARED_HOSTS = (
+    "https://www.youtube.com/@Parsi_Live",
+    "https://www.youtube.com/@Abdi_media4",
+)
 
 SYSTEM = """تو ویراستار «جان کلام» هستی. متن عمومی یک چهره را از منبع اصلی دریافت می‌کنی.
 فقط محتوای دارای موضع، ادعا، تصمیم، استدلال یا پیام عمومی معنادار را publish=true کن.
@@ -176,52 +169,77 @@ def youtube_feed(client: httpx.Client, channel_id: str) -> list[dict]:
     return out
 
 
-def collect_youtube_catalog() -> list[dict]:
-    """Latest uploads from every verified YouTube channel attached to a figure.
+def _youtube_name_variants(figure) -> tuple[str, ...]:
+    """Conservative title-match variants for hosted appearances."""
+    raw = [figure.name_fa, *getattr(figure, "aliases", ())]
+    out = []
+    for value in raw:
+        value = re.sub(r"\s+", " ", str(value or "")).strip()
+        # Short/common tokens are too risky for global title matching.
+        if len(value) < 5 or value in out:
+            continue
+        out.append(value)
+    return tuple(out)
 
-    This archive is intentionally independent from transcript/AI availability:
-    a real upload should still appear on the person's profile even when YouTube
-    exposes no captions for it.
+
+def collect_youtube_catalog() -> list[dict]:
+    """Latest uploads for every curated figure with a discoverable YouTube presence.
+
+    Official channels are attached directly. In addition, a small allow-list of
+    trusted host channels is fetched once and their video titles are matched
+    against every figure's canonical name and aliases. This makes the feature
+    global rather than person-specific while avoiding noisy YouTube-wide search.
     """
     rows: list[dict] = []
     headers = {"User-Agent": "Mozilla/5.0 (compatible; Pendar/1.0)"}
     with httpx.Client(headers=headers, timeout=25, follow_redirects=True) as client:
+        # 1) Direct/official channels declared on the figure.
         for figure in FIGURES:
             url = youtube_url(figure)
-            if url:
-                try:
-                    channel_id = youtube_channel_id(client, url)
-                    if not channel_id:
-                        print(f"youtube catalog: channel id unresolved for {figure.name_fa}")
-                    else:
-                        entries = youtube_feed(client, channel_id)[:15]
-                        for entry in entries:
-                            rows.append({
-                                "id": entry["id"],
-                                "handle": figure.handle,
-                                "title": entry["title"],
-                                "url": entry["url"],
-                                "published_at": entry["published_at"],
-                                "thumbnail": entry.get("media_url"),
-                                "channel_url": url,
-                                "source_type": "official",
-                            })
-                except Exception as exc:
-                    print(f"youtube catalog: feed unavailable for {figure.name_fa} ({type(exc).__name__})")
-
-            # Selected third-party hosts, title-matched to avoid unrelated uploads.
-            for host_url, needles in YOUTUBE_FEATURED_SOURCES.get(figure.handle, []):
-                try:
-                    channel_id = youtube_channel_id(client, host_url)
-                    if not channel_id:
-                        continue
-                    entries = youtube_feed(client, channel_id)[:15]
-                except Exception as exc:
-                    print(f"youtube catalog: host feed unavailable for {figure.name_fa} ({type(exc).__name__})")
+            if not url:
+                continue
+            try:
+                channel_id = youtube_channel_id(client, url)
+                if not channel_id:
+                    print(f"youtube catalog: channel id unresolved for {figure.name_fa}")
                     continue
-                for entry in entries:
-                    title = str(entry.get("title") or "")
-                    if not any(n in title for n in needles):
+                entries = youtube_feed(client, channel_id)[:15]
+            except Exception as exc:
+                print(f"youtube catalog: feed unavailable for {figure.name_fa} ({type(exc).__name__})")
+                continue
+            for entry in entries:
+                rows.append({
+                    "id": entry["id"],
+                    "handle": figure.handle,
+                    "title": entry["title"],
+                    "url": entry["url"],
+                    "published_at": entry["published_at"],
+                    "thumbnail": entry.get("media_url"),
+                    "channel_url": url,
+                    "source_type": "official",
+                })
+
+        # 2) Hosted appearances: scan each trusted host once, then match all people.
+        matchers = [
+            (figure, _youtube_name_variants(figure))
+            for figure in FIGURES
+        ]
+        for host_url in YOUTUBE_SHARED_HOSTS:
+            try:
+                channel_id = youtube_channel_id(client, host_url)
+                if not channel_id:
+                    print(f"youtube catalog: shared host unresolved {host_url}")
+                    continue
+                entries = youtube_feed(client, channel_id)[:15]
+            except Exception as exc:
+                print(f"youtube catalog: shared host unavailable {host_url} ({type(exc).__name__})")
+                continue
+            for entry in entries:
+                title = re.sub(r"\s+", " ", str(entry.get("title") or "")).strip()
+                if not title:
+                    continue
+                for figure, needles in matchers:
+                    if not needles or not any(n in title for n in needles):
                         continue
                     rows.append({
                         "id": entry["id"],
@@ -231,7 +249,7 @@ def collect_youtube_catalog() -> list[dict]:
                         "published_at": entry["published_at"],
                         "thumbnail": entry.get("media_url"),
                         "channel_url": host_url,
-                        "source_type": "featured",
+                        "source_type": "hosted",
                     })
 
     # De-duplicate the same video when it is reachable through more than one rule.
