@@ -358,6 +358,29 @@ def run() -> None:
     studio_recaps.sort(key=lambda x: str(x.get("published_at") or ""), reverse=True)
     _write(os.path.join(DATA, "studio-recaps.json"), studio_recaps)
 
+    # Publish the project cost ledger for the Finance view. It contains usage
+    # counters and estimates only; no API keys, secrets or transcript contents.
+    finance_path = os.path.join(os.path.dirname(__file__), "..", "data", "project-finance.json")
+    try:
+        with open(finance_path, encoding="utf-8") as ff:
+            project_finance = json.load(ff)
+        if not isinstance(project_finance, dict):
+            project_finance = {}
+    except (OSError, ValueError):
+        project_finance = {}
+    post_by_video = {
+        str(p.get("id") or "").removeprefix("youtube-"): p
+        for p in external_posts if isinstance(p, dict) and str(p.get("platform") or "") == "youtube"
+    }
+    for row in project_finance.get("videos", []) if isinstance(project_finance.get("videos"), list) else []:
+        p = post_by_video.get(str(row.get("video_id") or "")) or {}
+        row["name_fa"] = p.get("name_fa") or row.get("name_fa") or ""
+        row["video_title"] = p.get("video_title") or row.get("video_title") or ""
+        row["topic_fa"] = p.get("topic_fa") or row.get("topic_fa") or ""
+        row["url"] = p.get("url") or row.get("url") or ""
+        row["published_at"] = p.get("published_at") or row.get("published_at")
+    _write(os.path.join(DATA, "project-finance.json"), project_finance)
+
     for post in external_posts if isinstance(external_posts, list) else []:
         if not post.get("summary_fa") or not post.get("url"):
             continue
