@@ -330,6 +330,34 @@ def run() -> None:
             external_posts = json.load(ef)
     except (OSError, ValueError):
         external_posts = []
+    # Private-production style recaps are intentionally exported in their own
+    # archive instead of being mixed into figures.json. The Pages site is public,
+    # so this archive is accessible to anyone who knows the route.
+    studio_recaps = []
+    for post in external_posts if isinstance(external_posts, list) else []:
+        studio_text = str(post.get("_studio_recap_fa") or "").strip()
+        if str(post.get("platform") or "") != "youtube" or not studio_text:
+            continue
+        studio_recaps.append({
+            "id": str(post.get("id") or ""),
+            "video_id": str(post.get("id") or "").removeprefix("youtube-"),
+            "handle": post.get("handle") or "",
+            "name_fa": post.get("name_fa") or "",
+            "role_fa": post.get("role_fa") or "",
+            "topic_fa": post.get("topic_fa") or "",
+            "video_title": post.get("video_title") or "",
+            "summary_fa": post.get("summary_fa") or "",
+            "studio_recap_fa": studio_text,
+            "published_at": post.get("published_at"),
+            "url": post.get("url") or "",
+            "media_url": post.get("media_url") or "",
+            "source_type": post.get("source_type") or "official",
+            "recap_version": post.get("recap_version"),
+            "word_count": len(studio_text.split()),
+        })
+    studio_recaps.sort(key=lambda x: str(x.get("published_at") or ""), reverse=True)
+    _write(os.path.join(DATA, "studio-recaps.json"), studio_recaps)
+
     for post in external_posts if isinstance(external_posts, list) else []:
         if not post.get("summary_fa") or not post.get("url"):
             continue
