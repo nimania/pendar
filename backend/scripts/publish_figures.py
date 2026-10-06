@@ -332,6 +332,10 @@ def publish(posts, ledger, telegram, chat_id, *, sleep=time.sleep,
         if key not in entries:
             entries[key] = {"status": "pending", "post": post}
             changed = True
+        elif entries[key]["status"] == "pending":
+            # Refresh post data so prompt/field changes reach queued posts.
+            entries[key]["post"] = post
+            changed = True
     if changed:
         ledger.save(state)  # persist the queue before any network delivery
     pending = sorted(((key, entry) for key, entry in entries.items() if entry["status"] == "pending"),
