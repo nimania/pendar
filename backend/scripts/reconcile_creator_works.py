@@ -33,6 +33,8 @@ def reconcile(root, db_path=None):
             if person.get('type')=='person': people[person['id']]=person
     books=read(root/'books.json',{}); by_slug={b['slug']:b for b in books.get('books',[])}
     creators={p['slug']:p for p in books.get('people',[])}
+    creator_names=defaultdict(list)
+    for creator in creators.values(): creator_names[norm(creator.get('name_fa'))].append(creator)
     title_books=defaultdict(list); qid_books=defaultdict(list)
     for b in by_slug.values():
         title_books[norm(b.get('title_fa') or b.get('original_title'))].append(b['slug'])
@@ -63,8 +65,9 @@ def reconcile(root, db_path=None):
         names={norm(v) for v in [p.get('name_fa')]+p.get('aliases',[]) if v}
         for ref in p.get('refs',[]):
             if ref.get('dataset')=='books.people': linked.update(creators.get(str(ref.get('key')),{}).get('book_slugs',[]))
-        for creator in creators.values():
-            if norm(creator.get('name_fa')) in names and owners[norm(creator.get('name_fa'))]=={pid}: linked.update(creator.get('book_slugs',[]))
+        for name in names:
+            if owners[name]=={pid}:
+                for creator in creator_names.get(name,[]): linked.update(creator.get('book_slugs',[]))
         for slug in linked:
             if slug in by_slug:
                 b=by_slug[slug]; rows.setdefault('pendar-book:'+slug,{'id':'pendar-book:'+slug,'kind':'book','internal_slug':slug,'title_fa':b.get('title_fa')})
