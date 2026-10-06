@@ -174,6 +174,55 @@ MANUAL_BOOKS = [
             {"label": "معرفی اثر", "url": "https://www.naakojaaketab.com/product-page/%DA%A9%D8%AA%D8%A7%D8%A8-%D9%86%D8%A7%D9%85%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D9%85%D9%86%D8%AA%D8%B3%DA%A9%DB%8C%D9%88"}
         ],
     },
+    {
+        "slug": "ahaliye-magnolia",
+        "title_fa": "اهالی ماگنولیا",
+        "description_fa": (
+            "نخستین رمان زویا پیرزاد پس از ۲۲ سال؛ روایتی دربارهٔ خاطره، گذشته و هویت. "
+            "آخرین رمان پیشین او، «عادت می‌کنیم»، سال ۱۳۸۳ منتشر شده بود."
+        ),
+        "category_fa": "ادبیات داستانی ایران",
+        "publication_year_fa": "۱۴۰۴",
+        "pages": 226,
+        "isbn": "",
+        "cover_url": "",
+        "creators": [
+            {"slug": "zoya-pirzad", "name_fa": "زویا پیرزاد", "role_fa": "نویسنده"}
+        ],
+        "publisher": {"slug": "jahan-ketab", "name_fa": "نشر جهان کتاب"},
+        "purchase_links": [],
+        "source_meta": [
+            {"label": "عصر ایران", "url": "https://www.asriran.com/fa/news/1196223/"},
+            {"label": "خبرآنلاین", "url": "https://www.khabaronline.ir/news/2283519/"},
+        ],
+    },
+    {
+        "slug": "shahnameh-mosavvar-sayan",
+        "title_fa": "شاهنامهٔ مصوّر سایان",
+        "subtitle_fa": "نسخهٔ مصوّر شاهنامهٔ فردوسی، نشر سایان",
+        "description_fa": (
+            "نسخهٔ مصوّر شاهنامهٔ فردوسی از نشر سایان؛ ویرایشی تصویری از داستان‌های "
+            "پهلوانی و پادشاهی ایران برای خواننده‌ای که هم‌زمان متن و تصویر را می‌خواهد."
+        ),
+        "category_fa": "ادبیات حماسی",
+        "isbn": "",
+        "cover_url": "",
+        "creators": [
+            {"slug": "ferdowsi", "name_fa": "فردوسی", "role_fa": "شاعر"}
+        ],
+        "publisher": {"slug": "sayan", "name_fa": "نشر سایان"},
+        "purchase_links": [
+            {
+                "store": "نشر سایان",
+                "url": "https://cyanpub.ir/product-134",
+                "format_fa": "نسخهٔ چاپی مصوّر",
+                "exact": True,
+            }
+        ],
+        "source_meta": [
+            {"label": "نشر سایان", "url": "https://cyanpub.ir/product-134"}
+        ],
+    },
 ]
 
 # Metadata confirmed from publisher/bookseller records. These rows enrich titles
