@@ -1,5 +1,5 @@
 """Publish crawlable static routes from the same datasets used by the UI."""
-import argparse, datetime, html, json, re, shutil
+import argparse, datetime, hashlib, html, json, re, shutil
 from pathlib import Path
 from urllib.parse import quote, unquote
 
@@ -133,6 +133,49 @@ def build(site):
         if primary and url in pages:
             pages[url].update(body=pages[primary]['body'],description=pages[primary]['description'],indexable=False)
             aliases[url]=primary
+    # Persist handles across builds, while keeping internal identity IDs unchanged.
+    previous=read(data/'person-handles.json',{}).get('people',{})
+    handles={'people':{},'routes':{}}
+    reserved={handle:record.get('id') or record.get('figure') for handle,record in previous.items()}
+    def person_handle(identity, fallback):
+        old=next((h for h,r in previous.items() if (r.get('id') or r.get('figure'))==identity),None)
+        if old:return old
+        candidate=re.sub(r'[^a-z0-9]+','-',str(fallback).lower()).strip('-')
+        if not candidate:candidate='person-'+hashlib.sha1(identity.encode()).hexdigest()[:10]
+        if candidate in reserved and reserved[candidate]!=identity:candidate+='-'+hashlib.sha1(identity.encode()).hexdigest()[:8]
+        reserved[candidate]=identity
+        return candidate
+    def publish_person(handle, record, old_urls, base):
+        new='/@'+handle+'/'
+        handles['people'][handle]=record
+        if base in pages:
+            pages[new]={**pages[base],'canonical':new,'schema_type':'ProfilePage','section':'figures'}
+            # Alias pages stay readable but immediately move to the canonical profile.
+            for old in set(old_urls+[base]):
+                handles['routes'][unquote(old.strip('/'))]=handle
+                if old in pages:
+                    pages[old].update(canonical=new,indexable=False,redirect=new)
+                    aliases[old]=new
+        return new
+    for e in entities:
+        if e.get('type')!='person' and not str(e.get('id','')).startswith('person:'):continue
+        eid=e['id'];base=route('entity',eid)
+        if base not in pages:continue
+        refs=e.get('refs') or []
+        handle=person_handle(eid,eid.removeprefix('person:'))
+        old=[base]+[route('figure' if r.get('dataset')=='figures' else 'book-person',r['key']) for r in refs if r.get('dataset') in ['figures','books.people'] and r.get('key')]
+        primary=pages[base]['canonical']
+        publish_person(handle,{'id':eid},old,primary if primary in pages else base)
+    for f in figures:
+        old=route('figure',f.get('handle',''))
+        if unquote(old.strip('/')) in handles['routes'] or old not in pages:continue
+        identity='figure:'+f['handle']
+        handle=person_handle(identity,f['handle'])
+        publish_person(handle,{'figure':f['handle']},[old],old)
+    for section,rows in catalogs.items():
+        catalogs[section]=list(dict.fromkeys((aliases.get(url,url),name) for url,name in rows))
+    (data/'person-handles.json').write_text(json.dumps(handles,ensure_ascii=False),encoding='utf-8')
+    (data/'person-handles.js').write_text('window.PENDAR_HANDLES='+json.dumps(handles,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf-8')
     for filename,kind in [('pendar-festivals.json','festival'),('pendar-organizations.json','organization'),('pendar-topics.json','topic'),('pendar-collections.json','collection'),('pendar-paths.json','path'),('pendar-articles.json','article')]:
         for row in array(read(data/filename,[]),'items'):
             add('knowledge',kind+'/'+str(row.get('id','')),row.get('title') or row.get('name_fa'),'\n'.join(text(row.get(k)) for k in ['summary','description','body','notes','dateLabel'] if row.get(k)))
@@ -162,7 +205,7 @@ def build(site):
         base=route('entity',e.get('id',''))
         if base in pages:
             for kind in ['profile','graph']:
-                pages[route(kind,e['id'])]={**pages[base],'canonical':pages[base]['canonical'],'indexable':False}
+                pages[route(kind,e['id'])]={k:v for k,v in {**pages[base],'canonical':pages[base]['canonical'],'indexable':False}.items() if k!='redirect'}
     pages['/']={'title':'پندار؛ خبر، چهره‌ها، کتاب، فیلم و سریال','description':'پندار؛ خبر و اندیشه، دیدگاه چهره‌ها، پیشخوان کتاب و جراید، فیلم و سریال و راهنمای تماشا.','body':links([(route(k),v) for k,v in SECTIONS.items()])+ '<h2>تازه‌ترین خبرها</h2>'+links(catalogs['headlines'][:20]),'canonical':'/','indexable':True,'schema_type':'WebSite'}
     generated=[]; sitemap=[]
     for url,page in pages.items():
@@ -177,9 +220,11 @@ def build(site):
         schema_text=json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')
         head='<link rel="canonical" href="'+esc(canonical)+'"><meta name="robots" content="'+('index,follow,max-image-preview:large' if page['indexable'] else 'noindex,follow')+'"><meta property="og:type" content="'+('article' if page['schema_type']=='Article' else 'website')+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(desc)+'"><meta property="og:url" content="'+esc(canonical)+'"><meta name="twitter:card" content="summary_large_image">'
         if schema['@graph'][0].get('image'):head+='<meta property="og:image" content="'+esc(schema['@graph'][0]['image'])+'">'
+        if page.get('redirect'):head+='<meta http-equiv="refresh" content="0;url='+esc(page['redirect'])+'">'
         head+='<script type="application/ld+json" id="seo-schema">'+schema_text+'</script>'
         out=re.sub(r'<title>.*?</title>',lambda _: '<title>'+esc(title)+'</title>',template,count=1)
         out=re.sub(r'<meta name="description"[^>]*>',lambda _: '<meta name="description" content="'+esc(desc)+'">',out,count=1)
+        if 'person-handles.js' not in out:out=out.replace('<script defer src="router.js">','<script defer src="data/person-handles.js"></script><script defer src="router.js">')
         out=out.replace('<head>','<head><base href="/">',1).replace('</head>',head+'</head>')
         content='<section id="seo-static" class="wrap"><nav><a href="/">پندار</a> · <a href="/'+esc(page.get('section',page.get('kind','headlines')))+'/">'+esc(SECTIONS.get(page.get('section',page.get('kind')),'مطالب پندار'))+'</a></nav><h1>'+esc(page['title'])+'</h1>'+page['body']+'</section><!-- seo-end -->'
         out=out.replace('<main class="wrap">',content+'<main class="wrap">')
@@ -202,3 +247,4 @@ def build(site):
     return pages
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--site',required=True);build(parser.parse_args().site)
+

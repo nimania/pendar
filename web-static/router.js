@@ -12,7 +12,9 @@ function currentRoute(){
   return (location.hash || window.__PENDAR_ROUTE || location.pathname).replace(/^#\/?/,"").replace(/^\/+|\/+$/g,"");
 }
 function routeURL(h){
-  const raw=String(h||"").replace(/^#\/?/,"").replace(/^\/+|\/+$/g,"");
+  let raw=String(h||"").replace(/^#\/?/,"").replace(/^\/+|\/+$/g,"");
+  const handle=window.PENDAR_HANDLES?.routes?.[decodeURIComponent(raw)];
+  if(handle)raw="@"+handle;
   return raw?"/"+raw+"/":"/";
 }
 let _seoRequest=0;
@@ -50,6 +52,12 @@ async function route() {
     history.replaceState(null, "", location.pathname + location.search);
   }
   const raw = currentRoute();
+  if(raw.startsWith("@")){
+    const person=window.PENDAR_HANDLES?.people?.[decodeURIComponent(raw.slice(1)).toLowerCase()];
+    if(person?.id)return openCanonicalEntity(person.id);
+    if(person?.figure)return openFigure(person.figure);
+    show("entity");setTab("");document.getElementById("entity-content").textContent="این چهره پیدا نشد";return;
+  }
   const i = raw.indexOf("/");
   const kind = i < 0 ? raw : raw.slice(0, i);
   const arg = i < 0 ? "" : decodeURIComponent(raw.slice(i + 1));
@@ -102,11 +110,11 @@ async function route() {
 window.addEventListener("hashchange",()=>{if(!_navLock){const h=location.hash;history.replaceState(null,"",routeURL(h)+location.search);route();updateRouteSeo(location.pathname);}});
 window.addEventListener("popstate",()=>{window.__PENDAR_ROUTE="";route();updateRouteSeo(location.pathname);});
 // Existing hash URLs remain valid, but acquire a real canonical path.
-if(location.hash){const path=routeURL(location.hash);history.replaceState(null,"",path+location.search);updateRouteSeo(path);}
+if(location.hash||routeURL(location.pathname)!==location.pathname){const path=routeURL(location.hash||location.pathname);history.replaceState(null,"",path+location.search);updateRouteSeo(path);}
 const PUBLIC_ROUTES=new Set(["headlines","home","story","person","topic","trend","source","province","day","trends","fact","iran","topics","market","weather","faq","figures","videos","studio-recaps","finance","studio-recap","press","press-source","press-article","books","book","movies","movie","master-movie","tv","knowledge","entity","graph","profile","system","publisher","book-person","tech","figure","news-person","statement"]);
 function cleanInternalLinks(root){
   const links=root.matches?.("a[href]")?[root]:[...root.querySelectorAll?.("a[href]")||[]];
-  for(const a of links){const h=a.getAttribute("href");if(h?.startsWith("#/"))a.setAttribute("href",routeURL(h));}
+  for(const a of links){const h=a.getAttribute("href");if(h?.startsWith("#/"))a.setAttribute("href",routeURL(h));else if(h?.startsWith("/")&&!h.startsWith("//")){const clean=routeURL(h);if(clean!==h&&window.PENDAR_HANDLES?.routes?.[decodeURIComponent(h.replace(/^\/+|\/+$/g,""))])a.setAttribute("href",clean);}}
 }
 cleanInternalLinks(document);
 new MutationObserver(mutations=>{for(const m of mutations){if(m.type==="attributes")cleanInternalLinks(m.target);for(const n of m.addedNodes||[])if(n.nodeType===1)cleanInternalLinks(n);}}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["href"]});
@@ -115,7 +123,8 @@ document.addEventListener("click",event=>{
  if(!a||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||a.target||a.hasAttribute("download")||a.hasAttribute("onclick"))return;
  const url=new URL(a.href,location.href);
  if(url.origin!==location.origin)return;
- if(url.pathname!=="/"&&!PUBLIC_ROUTES.has(url.pathname.split("/")[1]))return;
+ if(url.pathname!=="/"&&!url.pathname.startsWith("/@")&&!PUBLIC_ROUTES.has(url.pathname.split("/")[1]))return;
  event.preventDefault();window.__PENDAR_ROUTE="";
  history.pushState(null,"",url.pathname+url.search);route();updateRouteSeo(url.pathname);
 });
+

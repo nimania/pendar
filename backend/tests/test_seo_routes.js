@@ -10,3 +10,12 @@ assert.equal(ctx.currentRoute(),'movie/yal-2026');
 ctx.setHash('#/books');assert.equal(history.at(-1),'/books/');
 ctx.setHash('');assert.equal(history.at(-1),'/');
 console.log('Legacy hash conversion, encoded IDs, clean deep routes and home navigation passed');
+
+
+ctx.window.PENDAR_HANDLES={routes:{'entity/person:someone':'someone','figure/socialname':'someone'},people:{someone:{id:'person:someone'}}};
+assert.equal(ctx.routeURL('#/entity/person%3Asomeone'),'/@someone/');
+assert.equal(ctx.routeURL('/figure/socialname/'),'/@someone/');
+assert.equal(ctx.routeURL('/@someone/'),'/@someone/');
+let opened;ctx.openCanonicalEntity=id=>opened=id;
+ctx.location.pathname='/@someone/';ctx.route();assert.equal(opened,'person:someone');
+console.log('Canonical handles and legacy profile routes passed');
