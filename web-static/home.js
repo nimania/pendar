@@ -70,7 +70,7 @@ async function renderHomeGlance() {
 // ordered by their most recent activity. News-only synthetic profiles are excluded.
 // Some profiles aggregate heterogeneous/source-mixed material and are therefore
 // kept off homepage surfaces while remaining fully available in Jan Kalam.
-const HOME_FIGURE_EXCLUDE=new Set(["mostafatajzadeh"]);
+const HOME_FIGURE_EXCLUDE=new Set(["mostafatajzadeh", "masih_alinejad"]);
 async function renderHomePeople(){
   const section=document.getElementById("home-people-strip");
   const el=document.getElementById("home-people-list");
