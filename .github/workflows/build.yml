@@ -380,11 +380,11 @@ jobs:
         with:
           name: published-figures
           path: telegram-export
-      - name: Publish new figures to Jane Kalaam
+      - name: Publish new figures to Pendario
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_BOT_USERNAME: janekalaam_bot
-          TELEGRAM_CHAT_ID: "@jane_kalaam"
+          TELEGRAM_CHAT_ID: "@pendario"
           GH_TOKEN: ${{ github.token }}
           TELEGRAM_RESOLVE_URL: ${{ inputs.resolve_url }}
           TELEGRAM_RESOLUTION: ${{ inputs.resolution }}

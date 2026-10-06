@@ -166,24 +166,24 @@ class ApiTests(unittest.TestCase):
     def test_identity_and_post_permission_are_required(self, request):
         request.side_effect = [
             (200, {"ok": True, "result": {"id": 10, "username": "janekalaam_bot"}}),
-            (200, {"ok": True, "result": {"id": -100123, "username": "jane_kalaam", "type": "channel"}}),
+            (200, {"ok": True, "result": {"id": -100123, "username": "pendario", "type": "channel"}}),
             (200, {"ok": True, "result": {"status": "administrator", "can_post_messages": True}}),
         ]
-        self.assertEqual(Telegram("fake").verify("janekalaam_bot", "@jane_kalaam"), -100123)
+        self.assertEqual(Telegram("fake").verify("janekalaam_bot", "@pendario"), -100123)
         request.side_effect = None
         request.return_value = (200, {"ok": True, "result": {"username": "other_bot"}})
         with self.assertRaisesRegex(RuntimeError, "does not belong"):
-            Telegram("fake").verify("janekalaam_bot", "@jane_kalaam")
+            Telegram("fake").verify("janekalaam_bot", "@pendario")
 
     @patch("backend.scripts.publish_figures.http_json")
     def test_no_post_permission_prevents_publishing(self, request):
         request.side_effect = [
             (200, {"ok": True, "result": {"id": 10, "username": "janekalaam_bot"}}),
-            (200, {"ok": True, "result": {"id": -100123, "username": "jane_kalaam", "type": "channel"}}),
+            (200, {"ok": True, "result": {"id": -100123, "username": "pendario", "type": "channel"}}),
             (200, {"ok": True, "result": {"status": "administrator", "can_post_messages": False}}),
         ]
         with self.assertRaisesRegex(RuntimeError, "Post Messages"):
-            Telegram("fake").verify("janekalaam_bot", "@jane_kalaam")
+            Telegram("fake").verify("janekalaam_bot", "@pendario")
 
     @patch("backend.scripts.publish_figures.http_json")
     def test_explicit_rate_limit_can_retry_but_ambiguous_response_cannot(self, request):

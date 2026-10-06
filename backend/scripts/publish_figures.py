@@ -177,7 +177,7 @@ def message_payload(post, chat_id, site=SITE):
     figure_url = f"{site.rstrip('/')}/#/figure/{quote(post['handle'], safe='')}"
     text = (f"{field_emoji} جان‌کلام {name}\n{topic}\n\n"
             f"{clipped(post['summary_fa'], 3200)}\n\n"
-            f"{figure_url}\n\n@jane_kalaam")
+            f"{figure_url}\n\n@pendario")
     return {
         "chat_id": chat_id, "text": text,
         # Plain text avoids HTML/Markdown injection and broken Persian escaping.
@@ -371,7 +371,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     posts = shown_posts(json.loads(args.figures.read_text(encoding="utf-8")))
     if args.dry_run:
-        print(json.dumps([message_payload(p, "@jane_kalaam") for p in posts], ensure_ascii=False, indent=2))
+        print(json.dumps([message_payload(p, "@pendario") for p in posts], ensure_ascii=False, indent=2))
         return 0
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     if not token:
@@ -383,7 +383,7 @@ def main(argv=None):
         raise RuntimeError("GitHub repository and delivery-state credentials are required")
     telegram = Telegram(token)
     chat_id = telegram.verify(os.environ.get("TELEGRAM_BOT_USERNAME", "janekalaam_bot"),
-                              os.environ.get("TELEGRAM_CHAT_ID", "@jane_kalaam"))
+                              os.environ.get("TELEGRAM_CHAT_ID", "@pendario"))
     result = publish(posts, GitHubLedger(repository, gh_token), telegram, chat_id,
                      resolve_url=os.environ.get("TELEGRAM_RESOLVE_URL", "").strip(),
                      resolution=os.environ.get("TELEGRAM_RESOLUTION", "") or "mark_sent")

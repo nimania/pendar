@@ -1,6 +1,6 @@
 # ارسال خودکار جان‌کلام چهره‌ها به تلگرام
 
-مقصد: `@jane_kalaam` — ربات: `@janekalaam_bot`.
+مقصد: `@pendario` — ربات: `@janekalaam_bot`.
 
 پس از انتشار موفق سایت در GitHub Pages، هر دیدگاه تازهٔ صفحهٔ چهره‌ها با نام شخص،
 موضوع، خلاصه و دو دکمهٔ «متن اصلی» و «صفحهٔ این شخص» ارسال می‌شود. همان خلاصهٔ
@@ -9,7 +9,7 @@
 
 ## فعال‌سازی
 
-1. در تنظیمات کانال `@jane_kalaam`، ربات `@janekalaam_bot` را ادمین کنید و اجازهٔ
+1. در تنظیمات کانال `@pendario`، ربات `@janekalaam_bot` را ادمین کنید و اجازهٔ
    **Post Messages / ارسال پیام** بدهید.
 2. توکن همین ربات را از `@BotFather` بگیرید. در
    [Secrets پروژه](https://github.com/nimania/jan-kalam/settings/secrets/actions/new)

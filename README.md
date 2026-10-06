@@ -3,7 +3,7 @@
 Pendar is a Persian-language knowledge and news-intelligence platform. «جان کلام» is one of its verticals for attributed public statements and analysis. This repository contains the production backend, static web app, collectors and publishing workflows. See `PRODUCT_SPEC.md`, `ARCHITECTURE.md`,
 and `ROADMAP.md` for the full plan.
 
-Automatic publishing of newly deployed figure summaries to `@jane_kalaam` with
+Automatic publishing of newly deployed figure summaries to `@pendario` with
 `@janekalaam_bot` is configured in the Pages workflow. See [TELEGRAM.md](TELEGRAM.md)
 for the one-time bot permission and `TELEGRAM_BOT_TOKEN` secret setup.
 
