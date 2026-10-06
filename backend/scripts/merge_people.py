@@ -111,7 +111,7 @@ def merge(root):
             # Older generated person URLs used the normalized name hash.
             # Only unambiguous names may redirect to a sourced identity.
             legacy='person:'+hash_key(label)
-            if legacy not in by_id and legacy!=owner: redirects.setdefault(legacy,owner)
+            if owner in by_id and legacy not in by_id and legacy!=owner: redirects.setdefault(legacy,owner)
     write(root/'entity-registry.json',registry)
     for number,aliases in enumerate(alias_buckets): write(root/'person-aliases'/f'{number}.json',aliases)
     # Movie credits link directly to canonical people, including known figures.
