@@ -142,7 +142,9 @@
       "source_url": "https://t.me/s/filmnetofficial?before=10891",
       "checked_at": "2026-10-06",
       "reason": "به‌زودی؛ شروع پخش ۱۷ مهر",
-      "upcoming": true
+      "upcoming": true,
+      "slug": "yal-2026",
+      "poster_url": "assets/yal-2026.png"
     }
   ]
 }

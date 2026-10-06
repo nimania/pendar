@@ -319,6 +319,12 @@ jobs:
             python backend/scripts/link_tv_guide_movies.py --tv "$tv" --movies site/data/movies.json --streaming site/data/streaming.json
           fi
 
+      - name: Refresh sourced watch release calendar
+        continue-on-error: true
+        env:
+          TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+        run: python backend/scripts/refresh_watch_schedule.py
+
       - name: Overlay current UI without overwriting generated data
         run: |
           # Generated datasets (especially Jan-e Jaraid) belong to collector/build

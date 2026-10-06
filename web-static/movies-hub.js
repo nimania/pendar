@@ -175,7 +175,7 @@ function _movieProvenance(streaming,m){
     '<div class="movie-prov-card"><span class="movie-prov-label">تأیید موجودی</span>'+_movieAvailabilityEvidence(streaming,m)+'</div></div>'+
     '<p class="movie-method">پندار نتیجهٔ fuzzy یا حدسی را به‌عنوان هویت یا موجودی قطعی نمایش نمی‌دهد؛ تطبیق‌ها باید دقیق و قابل ردیابی باشند.</p></section>';
 }
-async function loadMovies(){if(moviesCache)return moviesCache;let d=null;try{d=await getJSON(DATA+"/movies.json?v="+Date.now(),5000)}catch(_){}if(!d||!Array.isArray(d.movies)||!d.movies.length)d=(window.__MOVIES_DATA__&&typeof window.__MOVIES_DATA__==="object")?window.__MOVIES_DATA__:{movies:[]};moviesCache={...d,movies:Array.isArray(d.movies)?d.movies:[]};return moviesCache}
+async function loadMovies(){if(moviesCache)return moviesCache;let d=null;try{d=await getJSON(DATA+"/movies.json?v="+Date.now(),5000)}catch(_){}if(!d||!Array.isArray(d.movies)||!d.movies.length)d=(window.__MOVIES_DATA__&&typeof window.__MOVIES_DATA__==="object")?window.__MOVIES_DATA__:{movies:[]};moviesCache={...d,movies:[...(Array.isArray(d.movies)?d.movies:[]),...(window.__PENDAR_LOCAL_MOVIES__||[]).filter(x=>!(d.movies||[]).some(m=>m.slug===x.slug))]};return moviesCache}
 async function loadMovieMaster(){
   if(movieMasterCache)return movieMasterCache;
   let summary=null,top=null;

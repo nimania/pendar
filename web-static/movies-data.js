@@ -6,3 +6,4 @@ window.__MOVIES_DATA__ = {
   ],
   updated_at:"2026-10-04"
 };
+window.__PENDAR_LOCAL_MOVIES__=[{"slug":"yal-2026","type":"series","title_fa":"یل","original_title":"Yal","year":2026,"country_fa":"ایران","genres_fa":[],"poster_url":"assets/yal-2026.png","overview_fa":"سریال اختصاصی فیلم‌نت به کارگردانی جمشید محمودی و تهیه‌کنندگی نوید محمودی. آغاز پخش: جمعه ۱۷ مهر ۱۴۰۵. نویسندگان: جمشید محمودی و رضا بهاروند.","director":{"name_fa":"جمشید محمودی"},"cast":[],"ratings":{},"external":{"filmnet":"https://filmnet.ir"},"mentions":[]}];

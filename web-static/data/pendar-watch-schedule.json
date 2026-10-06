@@ -1,0 +1,46 @@
+{
+  "channels": [
+    {
+      "id": "stream-filmnet",
+      "name_fa": "فیلم‌نت",
+      "platform_type": "iran_stream",
+      "group": "series",
+      "confidence": "official"
+    },
+    {
+      "id": "stream-filimo",
+      "name_fa": "فیلیمو",
+      "platform_type": "iran_stream",
+      "group": "series",
+      "confidence": "official"
+    },
+    {
+      "id": "stream-namava",
+      "name_fa": "نماوا",
+      "platform_type": "iran_stream",
+      "group": "series",
+      "confidence": "official"
+    }
+  ],
+  "programmes": [
+    {
+      "channel_id": "stream-filmnet",
+      "title_fa": "یل · قسمت اول",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "canonical_slug": "yal-2026",
+      "icon": "assets/yal-2026.png",
+      "source_url": "https://t.me/filmnetofficial/10890",
+      "quality_score": 100,
+      "desc_fa": "آغاز پخش؛ ساعت انتشار اعلام نشده."
+    },
+    {
+      "channel_id": "stream-filmnet",
+      "title_fa": "آنتیک · اکران آنلاین",
+      "start": "2026-10-06T18:00:00+03:30",
+      "stop": "2026-10-06T18:01:00+03:30",
+      "source_url": "https://t.me/s/filmnetofficial",
+      "quality_score": 100
+    }
+  ]
+}

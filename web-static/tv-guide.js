@@ -1,5 +1,5 @@
 let tvGuideCache=null;
-let tvGuideState={mode:"now",channel:"all",group:"all",query:""};
+let tvGuideState={mode:"now",channel:"all",group:"all",query:"",platformType:"all"};
 let tvStreamingState={query:"",kind:"all",service:"all",sort:"recent"};
 
 const TV_GUIDE_SOURCE_LABELS={
@@ -42,6 +42,7 @@ async function loadTVGuide(){
   tvGuideCache.channels=Array.isArray(tvGuideCache.channels)?tvGuideCache.channels:[];
   tvGuideCache.programmes=Array.isArray(tvGuideCache.programmes)?tvGuideCache.programmes:[];
   tvGuideCache.sources=Array.isArray(tvGuideCache.sources)?tvGuideCache.sources:[];
+  await mergeWatchSchedule(tvGuideCache);
   return tvGuideCache;
 }
 
@@ -116,12 +117,12 @@ function _tvProgrammeCard(p,c,now){
   return '<article class="tv-program '+(live?"is-live ":"")+(linked?"is-linked":"")+'">'+
     '<button class="tv-channel-logo tv-link-reset" onclick="openTVChannel(\''+_tvJs(cid)+'\')" title="صفحهٔ '+esc(c?.name_fa||c?.name||"شبکه")+'">'+_tvChannelLogo(c)+'</button>'+
     '<div class="tv-program-main">'+
-      '<div class="tv-program-top"><span class="tv-time">'+_tvFaTime(p.start)+(p.stop?"–"+_tvFaTime(p.stop):"")+'</span>'+(live?'<span class="tv-live-dot">● در حال پخش</span>':"")+(linked?'<span class="tv-canonical-badge">جان فیلم</span>':"")+'</div>'+
+      '<div class="tv-program-top"><span class="tv-time">'+(p.date_only?"ساعت اعلام نشده":_tvFaTime(p.start))+(p.stop?"–"+_tvFaTime(p.stop):"")+'</span>'+(live?'<span class="tv-live-dot">● در حال پخش</span>':"")+(linked?'<span class="tv-canonical-badge">جان فیلم</span>':"")+'</div>'+
       '<h3><button class="tv-title-link" onclick="openTVProgramme(\''+_tvJs(pid)+'\')">'+esc(p.title_fa||p.title||"بدون عنوان")+'</button></h3>'+
       '<p class="tv-channel-name"><button class="tv-inline-link" onclick="openTVChannel(\''+_tvJs(cid)+'\')">'+esc(c?.name_fa||c?.name||p.channel_id||"")+'</button>'+(meta?" · "+esc(meta):"")+' '+_tvSourceBadge(c?.confidence||"aggregated")+' '+_tvQualityBadge(p,c)+'</p>'+
       (linked?'<div class="tv-program-watch"><span>'+esc(p.canonical_title||"")+'</span>'+_tvProgrammeStreaming(p)+'</div>':"")+
       (p.desc_fa?'<p class="tv-desc">'+esc(p.desc_fa)+'</p>':"")+
-      progress+
+      (p.source_url?'<a href="'+esc(p.source_url)+'" target="_blank" rel="noopener">'+(c?.platform_type==="turkish"?'برنامه و قسمت‌ها در مشکی‌مدیا ↗':'منبع زمان پخش ↗')+'</a>':'')+progress+
     '</div>'+
     (p.icon?'<button class="tv-program-art tv-link-reset" onclick="openTVProgramme(\''+_tvJs(pid)+'\')"><img src="'+esc(p.icon)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></button>':"")+
   '</article>';
@@ -131,8 +132,9 @@ function _tvModeRows(d,mode){
   const now=new Date(), cmap=_tvChannelMap(d);
   let rows=(d.programmes||[]).filter(p=>{
     const c=cmap.get(String(p.channel_id));
-    return _tvDate(p.start)&&_tvDate(p.stop)&&!_tvLooksJunk(p,c);
+    return _tvDate(p.start)&&(_tvDate(p.stop)||p.date_only)&&!_tvLooksJunk(p,c);
   });
+  if(tvGuideState.platformType!=="all")rows=rows.filter(p=>(cmap.get(String(p.channel_id))?.platform_type||"television")===tvGuideState.platformType);
   if(tvGuideState.channel!=="all")rows=rows.filter(p=>String(p.channel_id)===String(tvGuideState.channel));
   if(tvGuideState.group!=="all")rows=rows.filter(p=>cmap.get(String(p.channel_id))?.group===tvGuideState.group);
   const q=_tvNorm(tvGuideState.query);
@@ -140,7 +142,9 @@ function _tvModeRows(d,mode){
     const c=cmap.get(String(p.channel_id));
     return _tvNorm([p.title_fa,p.title_en,p.desc_fa,(p.categories||[]).join(" "),c?.name_fa,c?.name].join(" ")).includes(q);
   });
-  if(mode==="now"){
+  if(mode==="today")rows=rows.filter(p=>_tvDayKey(_tvDate(p.start))===_tvDayKey(now));
+  else if(mode==="week"){const start=new Date(_tvDayKey(now)+"T00:00:00+03:30");start.setUTCDate(start.getUTCDate()-((new Date(_tvDayKey(now)+"T12:00:00+03:30").getUTCDay()+1)%7));const end=new Date(start.getTime()+7*86400000);rows=rows.filter(p=>_tvDate(p.start)>=start&&_tvDate(p.start)<end);}
+  else if(mode==="now"){
     rows=rows.filter(p=>_tvDate(p.start)<=now&&now<_tvDate(p.stop)&&p.current_eligible!==false&&Number(p.quality_score||100)>=74);
     const best=new Map();
     for(const p of rows){
@@ -174,14 +178,15 @@ function _tvToolbar(d){
   const options=['<option value="all">همهٔ شبکه‌ها</option>'].concat(channels.map(c=>'<option value="'+esc(c.id)+'" '+(tvGuideState.channel===c.id?"selected":"")+'>'+esc(c.name_fa||c.name||c.id)+'</option>')).join("");
   const groupOrder=["all","news","sports","movies","series","kids","docs","general"];
   const groups='<div class="tv-groups">'+groupOrder.map(g=>'<button class="'+(tvGuideState.group===g?"on":"")+'" onclick="tvGuideState.group=\''+g+'\';tvGuideState.channel=\'all\';renderTVGuide()">'+esc(TV_GUIDE_GROUPS[g]||g)+'</button>').join("")+'</div>';
-  return groups+'<div class="tv-toolbar">'+
+  const types=[["all","همه"],["television","تلویزیون‌ها"],["iran_stream","پلتفرم‌های ایرانی"],["world_stream","پلتفرم‌های خارجی"],["turkish","ترکی · مشکی‌مدیا"],["other","شبکه‌های دیگر"]];
+  return '<div class="tv-groups">'+types.map(([k,label])=>'<button class="'+(tvGuideState.platformType===k?"on":"")+'" onclick="tvGuideState.platformType=\''+k+'\';tvGuideState.channel=\'all\';renderTVGuide()">'+label+'</button>').join("")+'</div>'+groups+'<div class="tv-toolbar">'+
     '<label class="tv-search"><span>⌕</span><input type="search" placeholder="جست‌وجوی برنامه یا شبکه…" value="'+esc(tvGuideState.query)+'" oninput="tvGuideState.query=this.value;renderTVGuide()"></label>'+
     '<select onchange="tvGuideState.channel=this.value;renderTVGuide()">'+options+'</select>'+
   '</div>';
 }
 
 function _tvTabs(){
-  const tabs=[["now","الان"],["tonight","امشب"],["next","بعدی‌ها"],["sports","ورزش"],["channels","شبکه‌ها"],["streaming","استریمینگ"],["sources","منابع"]];
+  const tabs=[["today","امروز"],["week","این هفته"],["now","الان"],["tonight","امشب"],["next","بعدی‌ها"],["sports","ورزش"],["channels","شبکه‌ها"],["streaming","استریمینگ"],["sources","منابع"]];
   return '<div class="tv-tabs">'+tabs.map(x=>'<button class="'+(tvGuideState.mode===x[0]?"on":"")+'" onclick="showTVGuide(\''+x[0]+'\')">'+x[1]+'</button>').join("")+'</div>';
 }
 
@@ -396,7 +401,7 @@ async function renderTVGuide(){
   else if(mode==="streaming")body=await _tvStreaming();
   else{
     const rows=_tvModeRows(d,mode), cmap=_tvChannelMap(d);
-    const title=mode==="now"?"در حال پخش":mode==="tonight"?"امشب":mode==="sports"?"ورزش":mode==="next"?"چند ساعت آینده":"برنامه‌ها";
+    const title=mode==="today"?"امروز":mode==="week"?"این هفته":mode==="now"?"در حال پخش":mode==="tonight"?"امشب":mode==="sports"?"ورزش":mode==="next"?"چند ساعت آینده":"برنامه‌ها";
     body='<div class="tv-list-head"><h2>'+title+'</h2><span>'+faN(rows.length)+' برنامه</span></div>'+
       (rows.length?'<div class="tv-program-list">'+rows.map(p=>_tvProgrammeCard(p,cmap.get(String(p.channel_id)),now)).join("")+'</div>':'<div class="state tv-empty"><div class="big">در این بازه برنامه‌ای پیدا نشد</div><p>ممکن است منبع EPG هنوز برای این شبکه یا بازهٔ زمانی متصل نشده باشد.</p></div>');
   }
@@ -404,6 +409,37 @@ async function renderTVGuide(){
   el.innerHTML='<header class="tv-hero">'+
     '<div><span class="press-kicker">راهنمای یکپارچهٔ تماشای فارسی</span><h1>'+(mode==="streaming"?"چی ببینم و کجا؟":"الان چی پخش می‌شه؟")+'</h1><p>'+(mode==="streaming"?"فیلم و سریال را بین سرویس‌های فارسی جست‌وجو کن و فقط موجودی تأییدشده را ببین.":"تلویزیون، شبکه‌های فارسی‌زبان، ورزش و سرویس‌های استریمینگ؛ همه در یک راهنمای واحد.")+'</p></div>'+
     '<div class="tv-status-card"><b>'+faN((d.channels||[]).length)+'</b><span>شبکهٔ دارای داده</span><small>'+faN(active)+' منبع متصل'+(Number(linkStats.linked_programmes||0)?' · '+faN(linkStats.linked_programmes)+' برنامه متصل به جان فیلم':"")+' · آخرین ساخت '+esc(generated)+'</small></div>'+
-  '</header>'+_tvTabs()+controls+body+
+  '</header><p><a href="#/movies">ویترین سریال‌های ایران و جهان در جان فیلم ←</a></p>'+_tvTabs()+controls+body+
   '<div class="tv-footer-note">زمان‌ها بر اساس ساعت ایران نمایش داده می‌شوند. رکوردهای فنی، تبلیغاتی، placeholder و زمان‌بندی‌های هم‌پوشان پیش از نمایش فیلتر می‌شوند.</div>';
+}
+
+async function mergeWatchSchedule(d){
+ if(d._scheduleMerged)return;
+ d._scheduleMerged=true;
+ for(const ch of d.channels)if(!ch.platform_type)ch.platform_type=ch.source_key==="irib"?"television":"other";
+ const local={channels:[
+ {id:"stream-filmnet",name_fa:"فیلم‌نت",platform_type:"iran_stream",group:"series",confidence:"official"},
+ {id:"stream-filimo",name_fa:"فیلیمو",platform_type:"iran_stream",group:"series",confidence:"official"},
+ {id:"stream-namava",name_fa:"نماوا",platform_type:"iran_stream",group:"series",confidence:"official"}],
+ programmes:[{channel_id:"stream-filmnet",title_fa:"یل · قسمت اول",start:"2026-10-09T00:00:00+03:30",date_only:true,canonical_slug:"yal-2026",quality_score:100,source_url:"https://t.me/filmnetofficial/10890",desc_fa:"آغاز پخش سریال اختصاصی فیلم‌نت؛ ساعت انتشار هنوز اعلام نشده است."},
+ {channel_id:"stream-filmnet",title_fa:"آنتیک · اکران آنلاین",start:"2026-10-06T18:00:00+03:30",date_only:false,stop:"2026-10-06T18:01:00+03:30",quality_score:100,source_url:"https://t.me/s/filmnetofficial",desc_fa:"زمان آغاز اکران آنلاین؛ پس از انتشار، اثر در پلتفرم در دسترس است."}]};
+ let schedule=local;try{schedule=await getJSON(DATA+"/pendar-watch-schedule.json?v="+Date.now(),7000)}catch(_){}
+ d.channels.push(...(schedule.channels||[]).filter(c=>!d.channels.some(x=>x.id===c.id)));
+ d.programmes.push(...(schedule.programmes||[]));
+ const meshki=await loadMeshkiSeries();
+ if(meshki.live||Date.now()<Date.parse("2026-10-20T00:00:00Z")){
+ const base=_tvDayKey(new Date());
+ for(const s of meshki.rows.filter(s=>s.status==="در حال پخش"&&Number.isInteger(s.dayIndex))){
+ const id="meshki-"+s.network;
+ if(!d.channels.some(c=>c.id===id))d.channels.push({id,name_fa:MESHKI_NETWORKS[s.network]?.nameFa||s.network,group:"series",platform_type:"turkish",confidence:"aggregated",logo:MESHKI_ROOT+"images/meshki-media-logo.png"});
+ for(let offset=-6;offset<14;offset++){
+ const day=new Date(base+"T12:00:00+03:30");day.setUTCDate(day.getUTCDate()+offset);
+ if((day.getUTCDay()+6)%7!==s.dayIndex)continue;
+ const clock=String(s.airing||"").match(/([0-9۰-۹]{1,2})[:：]([0-9۰-۹]{2})/);
+ const ascii=v=>v.replace(/[۰-۹]/g,x=>String("۰۱۲۳۴۵۶۷۸۹".indexOf(x)));
+ const date=_tvDayKey(day),time=clock?ascii(clock[1]).padStart(2,"0")+":"+ascii(clock[2]):"00:00";
+ const start=date+"T"+time+":00+03:00";
+ d.programmes.push({channel_id:id,title_fa:s.titleFa,title_en:s.titleTr,start,date_only:!clock,stop:clock?new Date(Date.parse(start)+60000).toISOString():null,icon:s.hero,quality_score:90,source_url:MESHKI_ROOT+"dizi/"+s.slug+"/",desc_fa:"طبق تقویم هفتگی مشکی‌مدیا؛ ساعت مبدأ ترکیه است و اینجا به ساعت ایران نمایش داده می‌شود."});
+ }
+ }}
 }
