@@ -1,0 +1,163 @@
+{
+  "checked_at": "2026-10-06",
+  "sources": [
+    {
+      "name": "فیلیمو",
+      "url": "https://t.me/s/filimo",
+      "region": "iran"
+    },
+    {
+      "name": "فیلم‌نت",
+      "url": "https://t.me/s/filmnetofficial",
+      "region": "iran"
+    },
+    {
+      "name": "نماوا",
+      "url": "https://t.me/s/namava_ir",
+      "region": "iran",
+      "status": "رتبهٔ قابل تأیید موجود نیست"
+    }
+  ],
+  "items": [
+    {
+      "title": "East of Eden",
+      "platform": "Netflix",
+      "region": "world",
+      "rank": 1,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/netflix/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Monster: The Lizzie Borden Story",
+      "platform": "Netflix",
+      "region": "world",
+      "rank": 2,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/netflix/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Not a Stranger",
+      "platform": "Netflix",
+      "region": "world",
+      "rank": 3,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/netflix/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Neagley",
+      "platform": "Prime Video",
+      "region": "world",
+      "rank": 1,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/amazon-prime/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Reacher",
+      "platform": "Prime Video",
+      "region": "world",
+      "rank": 2,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/amazon-prime/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Off Campus",
+      "platform": "Prime Video",
+      "region": "world",
+      "rank": 3,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/amazon-prime/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Coven Academy",
+      "platform": "Disney+",
+      "region": "world",
+      "rank": 1,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/disney/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Loki",
+      "platform": "Disney+",
+      "region": "world",
+      "rank": 2,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/disney/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Africa Earth's Wild Home",
+      "platform": "Disney+",
+      "region": "world",
+      "rank": 3,
+      "checked_at": "2026-10-06",
+      "source_url": "https://flixpatrol.com/top10/disney/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Ted Lasso",
+      "platform": "Apple TV",
+      "region": "world",
+      "rank": 1,
+      "checked_at": "2026-10-05",
+      "source_url": "https://flixpatrol.com/top10/apple-tv/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Slow Horses",
+      "platform": "Apple TV",
+      "region": "world",
+      "rank": 2,
+      "checked_at": "2026-10-05",
+      "source_url": "https://flixpatrol.com/top10/apple-tv/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "Silo",
+      "platform": "Apple TV",
+      "region": "world",
+      "rank": 3,
+      "checked_at": "2026-10-05",
+      "source_url": "https://flixpatrol.com/top10/apple-tv/",
+      "reason": "رتبهٔ جهانی FlixPatrol"
+    },
+    {
+      "title": "بدنام",
+      "platform": "فیلیمو",
+      "region": "iran",
+      "reason": "قسمت ۲۶؛ قسمت پایانی ۱۷ مهر",
+      "checked_at": "2026-10-06",
+      "source_url": "https://r.filimo.com/Tbadnam26"
+    },
+    {
+      "title": "کنکل",
+      "platform": "فیلیمو",
+      "region": "iran",
+      "reason": "اعلان رسمی قسمت هفتم",
+      "checked_at": "2026-10-06",
+      "source_url": "https://r.filimo.com/TCankel7"
+    },
+    {
+      "title": "کوری",
+      "platform": "فیلم‌نت",
+      "region": "iran",
+      "reason": "اعلان رسمی قسمت پایانی",
+      "checked_at": "2026-10-06",
+      "source_url": "https://t.me/s/filmnetofficial"
+    },
+    {
+      "title": "اعتراف می‌کنم",
+      "platform": "فیلم‌نت",
+      "region": "iran",
+      "reason": "اعلان رسمی قسمت نهم",
+      "checked_at": "2026-10-06",
+      "source_url": "https://t.me/s/filmnetofficial"
+    }
+  ]
+}
