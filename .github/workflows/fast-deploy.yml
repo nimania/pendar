@@ -23,6 +23,7 @@ on:
       - "backend/data/creator-*.json"
       - "backend/scripts/merge_people.py"
       - "backend/scripts/reconcile_creator_works.py"
+      - "backend/scripts/link_creator_works.py"
       - "backend/scripts/finalize_entity_registry.py"
       - "backend/data/entity-overrides.json"
       - ".github/workflows/fast-deploy.yml"
@@ -354,6 +355,7 @@ jobs:
           PY
       - name: Validate Jan Film JavaScript
         run: |
+          node --check web-static/books-hub.js
           node --check web-static/movies-hub.js
           node --check web-static/app.js
           node --check web-static/entities.js
@@ -386,6 +388,9 @@ jobs:
           gzip -dc "$src" > /tmp/work-audit-db/master.sqlite
           python backend/tests/test_reconcile_creator_works.py
           python backend/scripts/reconcile_creator_works.py --data-dir site/data --master-db /tmp/work-audit-db/master.sqlite
+          python backend/tests/test_link_creator_works.py
+          node backend/tests/test_creator_work_links.js
+          python backend/scripts/link_creator_works.py --data-dir site/data
 
       - name: Save creator work reconciliation report
         uses: actions/upload-artifact@v4
@@ -418,6 +423,7 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_attempt }}
+
 
 
 

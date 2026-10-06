@@ -112,6 +112,7 @@ function _figureWorkUrl(value) {
   try { const url=new URL(String(value||"")); return ["http:","https:"].includes(url.protocol)?url.href:""; } catch (_) { return ""; }
 }
 function _figureWorkKey(work, kind) {
+  if(work.internal_target)return "pendar:"+work.internal_target.kind+":"+work.internal_target.id;
   if(work.tmdb_id&&["movie","tv"].includes(kind))return "tmdb:"+kind+":"+work.tmdb_id;
   const id=kind==="video"?youtubeVideoId(work.url):"";
   if(id) return "youtube:"+id;
@@ -129,7 +130,7 @@ function _figureMediaWorks(person, canonical) {
     if(!row.url&&!row.title_fa&&!row.title)return;
     const key=_figureWorkKey(row,kind);if(!key)return;
     const old=groups[group].get(key);
-    groups[group].set(key,{...row,...old,recap_fa:old?.recap_fa||row.recap_fa,statement_id:old?.statement_id||row.statement_id});
+    groups[group].set(key,{...row,...old,recap_fa:old?.recap_fa||row.recap_fa,statement_id:old?.statement_id||row.statement_id,thumbnail:old?.thumbnail||row.thumbnail});
   };
   for(const v of [...array(person.youtube_videos),...array(meta.youtube_videos),...array(person.videos),...array(meta.videos)])add("videos",v,"video");
   for(const p of array(person.posts)){
@@ -152,7 +153,10 @@ function _figureWorkCard(work) {
   const labels={podcast:"پادکست",episode:"قسمت پادکست",channel:"کانال ویدئو",audio:"صوت",music:"موسیقی",article:"مقاله",poem:"شعر",book:"کتاب",movie:"فیلم",tv:"سریال",project:"پروژه"};
   const thumb=_figureWorkUrl(work.thumbnail);
   const body=(thumb?'<img class="figure-work-cover" src="'+esc(thumb)+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':"")+'<span class="figure-work-type">'+esc(work.type_fa||labels[work.kind]||"اثر")+'</span><b>'+esc(work.title_fa||work.title||work.label||"اثر")+'</b>'+((work.role_fa||work.year)?'<small>'+esc([work.role_fa,work.year].filter(Boolean).join(" · "))+'</small>':"")+(work.description_fa?'<p>'+esc(work.description_fa)+'</p>':"")+(work.published_at?'<small>'+esc(relTime(work.published_at))+'</small>':"");
-  return '<article class="figure-work-card">'+(work.url?'<a href="'+esc(work.url)+'" target="_blank" rel="noopener">'+body+'<span class="figure-work-open">مشاهدهٔ اثر ↗</span></a>':body)+'</article>';
+  const target=work.internal_target;
+  const internal=target&&['book','movie'].includes(target.kind)&&target.id;
+  const href=internal?'#/'+(target.kind==='book'?'book/':'master-movie/')+encodeURIComponent(target.id):work.url;
+  return '<article class="figure-work-card">'+(href?'<a href="'+esc(href)+'"'+(internal?'':' target="_blank" rel="noopener"')+'>'+body+'<span class="figure-work-open">'+(internal?'مشاهده در پندار':'مشاهدهٔ اثر ↗')+'</span></a>':body)+'</article>';
 }
 function _figureVideoCard(video) {
   if(!video.url)return _figureWorkCard({...video,type_fa:"ویدئو"});
@@ -185,10 +189,10 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const mediaWorks=(master.items||[]).filter(m=>Object.prototype.hasOwnProperty.call(filmography,m.pendar_id)).map(_masterMovie);
   const figureMovies=(movieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>mm.kind==="figure"&&(String(mm.handle||"").toLowerCase()===String(x.handle||"").toLowerCase()||(x.posts||[]).some(p=>String(p.id)===String(mm.post_id)))));
   const profileMedia=_figureMediaWorks(x,canonicalFigure);
-  const localFilmIds=new Set((master.items||[]).filter(m=>Object.prototype.hasOwnProperty.call(filmography,m.pendar_id)).map(m=>String(m.tmdb_id)));
-  profileMedia.films=profileMedia.films.filter(w=>!w.tmdb_id||!localFilmIds.has(String(w.tmdb_id)));
-  const localBookNames=new Set(figureBooks.map(b=>nameNorm(b.title_fa||b.original_title)));
-  profileMedia.books=profileMedia.books.filter(w=>!localBookNames.has(nameNorm(w.title_fa||w.title)));
+  const localFilmIds=new Set(mediaWorks.map(m=>m.master_id));
+  profileMedia.films=profileMedia.films.filter(w=>!w.internal_target||!localFilmIds.has(w.internal_target.id));
+  const localBookIds=new Set(figureBooks.map(b=>b.slug));
+  profileMedia.books=profileMedia.books.filter(w=>!w.internal_target||!localBookIds.has(w.internal_target.id));
   const youtubeVideos=profileMedia.videos;
   const canonicalNames=new Set([x.name_fa,...(canonicalFigure?.aliases||[])].map(_canonicalNorm).filter(Boolean));
   const figureStories=canonicalFigure?(typeof ALL!=="undefined"?ALL:[]).filter(s=>(s.entities||[]).some(e=>canonicalNames.has(_canonicalNorm(e.name_fa||"")))):[];
@@ -273,5 +277,6 @@ function renderPersonProfileHeader(x,options={}){
     <p class="x-bio">${esc(x.role_fa||"")}</p>${socialLinks(x.social||[])}
     <div class="x-profile-stats">${options.stats||""}</div>${options.details||""}</div>`;
 }
+
 
 

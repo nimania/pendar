@@ -95,6 +95,7 @@ def reconcile(root, db_path=None):
     for pid,w,linked in works:
         kind=w.get('kind','other'); row={'person_id':pid,'name_fa':people[pid].get('name_fa'),'work_id':w.get('id'),'kind':kind,'title':w.get('title_fa') or w.get('title'),'source_url':w.get('source_url') or w.get('url')}
         key=media_key(w)
+        if key: row['tmdb_id']=key[1]
         if key:
             match=indexed.get(key)
             row['match_method']='exact_tmdb_type_and_id'
@@ -132,3 +133,4 @@ def reconcile(root, db_path=None):
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--data-dir',type=Path,required=True);p.add_argument('--master-db',type=Path)
     a=p.parse_args();reconcile(a.data_dir,a.master_db)
+
