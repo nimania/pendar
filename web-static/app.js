@@ -294,6 +294,7 @@ if (_isDeepLink) {
   renderHomePrices();
   renderHomeWeather();
   renderHomePeople();
+  renderBookTrends('home-books-strip');
 }
 updateMineBadge();
 

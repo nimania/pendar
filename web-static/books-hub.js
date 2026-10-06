@@ -14,6 +14,27 @@ function _bookDiscovery(b){
   return stores.map(([store,url,format])=>({store,url:url+q,format,exact:false}));
 }
 function _bookFormat(l){return l.format||(/الکترونیک/.test(l.format_fa||'')?'ebook':/صوتی/.test(l.format_fa||'')?'audio':'print')}
+// Editor-curated showcase: a short, ordered list of slugs featured as "ترندها".
+const BOOK_TRENDS=['daneshnameh-mosavvar-shahnameh','ahaliye-magnolia'];
+async function renderBookTrends(elId,opts={}){
+  const el=document.getElementById(elId);if(!el)return;
+  let d;try{d=await loadBooks();}catch(_){el.style.display='none';return;}
+  const by=new Map((d.books||[]).map(b=>[b.slug,b]));
+  const books=BOOK_TRENDS.map(s=>by.get(s)).filter(Boolean);
+  if(!books.length){el.style.display='none';return;}
+  const cards=books.map(b=>{
+    const creator=(b.creators||[]).find(c=>c.role_fa!=='مترجم')||(b.creators||[])[0];
+    return `<button class="trend-card" onclick="openBook('${esc(b.slug)}')" aria-label="${esc(b.title_fa||'')}">`
+      +`<span class="trend-cover">${_bookCover(b)}</span>`
+      +`<strong class="trend-title">${esc(b.title_fa||'')}</strong>`
+      +(creator?`<small class="trend-author">${esc(creator.name_fa)}</small>`:'')
+      +`</button>`;
+  }).join('');
+  const heading=opts.heading!==false
+    ?`<div class="trend-head"><h2>ترندهای کتاب</h2><button class="trend-more" onclick="showBooks('books')">همهٔ کتاب‌ها ←</button></div>`:'';
+  el.innerHTML=`${heading}<div class="trend-strip">${cards}</div>`;
+  el.style.display='';
+}
 function _curateBookData(data){
   _bookOverlayRadar(data);
   data.people=(data.people||[]).filter(p=>_bookPersonAllowed(p.name_fa));
@@ -92,7 +113,9 @@ async function showBooks(mode='books'){
    const options=[...new Set((d.books||[]).map(b=>b.category_fa).filter(Boolean))];
    content=`<section class="book-library-panel"><div class="book-search-line"><input type="search" placeholder="کتاب، نویسنده یا مترجم…" aria-label="جست‌وجوی کتابخانه" value="${esc(bookLibraryState.query)}" oninput="filterBookLibrary(this.value)"><button class="book-save ${bookLibraryState.saved?'on':''}" data-library-saved="true" onclick="setBookFilter('saved',!bookLibraryState.saved)" aria-pressed="${bookLibraryState.saved}">برای بعد</button><details class="book-filter-details"><summary>فیلترها</summary><div class="book-advanced-controls"><select aria-label="موضوع کتاب" onchange="setBookFilter('category',this.value)"><option value="">همهٔ موضوع‌ها</option>${options.map(o=>`<option value="${esc(o)}" ${bookLibraryState.category===o?'selected':''}>${esc(o)}</option>`).join('')}</select><select aria-label="نوع نسخه" onchange="setBookFilter('format',this.value)"><option value="">همهٔ نسخه‌ها</option>${['print','ebook','audio'].map(f=>`<option value="${f}" ${bookLibraryState.format===f?'selected':''}>${BOOK_FORMATS[f]}</option>`).join('')}</select><select aria-label="نوع شواهد کتاب" onchange="setBookFilter('signal',this.value)">${[['all','همهٔ شواهد'],['multi','چندمنبعی'],['bestseller','پرفروش‌ها'],['new_to_store','تازه‌های فروشگاه'],['rising','رشد هفتگی'],['news','خبر و گفت‌وگو']].map(([v,t])=>`<option value="${v}" ${bookLibraryState.signal===v?'selected':''}>${t}</option>`).join('')}</select><select aria-label="ترتیب کتاب‌ها" onchange="setBookFilter('sort',this.value)">${[['radar','دیده‌شدن در قفسه‌ها'],['rising','رشد هفتگی'],['recent','آخرین اشاره'],['mentions','بیشترین اشاره'],['price','کمترین قیمت ثبت‌شده'],['title','الفبایی']].map(([v,t])=>`<option value="${v}" ${bookLibraryState.sort===v?'selected':''}>${t}</option>`).join('')}</select><button class="book-share" onclick="resetBookFilters()">پاک‌کردن فیلترها</button></div></details></div><div class="book-source-line"><span>روی قفسهٔ</span><button class="book-source-filter ${!bookLibraryState.source?'on':''}" data-book-source="" title="همهٔ منابع" onclick="setBookFilter('source','')">همه</button>${(d.radar?.sources||[]).filter(s=>['store','distributor'].includes(s.kind)).map(s=>`<button class="book-source-filter ${s.id===bookLibraryState.source?'on':''}" data-book-source="${esc(s.id)}" aria-label="${esc(s.name_fa)}" title="${esc(s.name_fa)}" ${_bookAction('setBookSource',s.id)}>${_bookSourceIcon(s.id)}</button>`).join('')}<span id="book-result-count"></span></div>${mode==='new'?'<p class="book-method">تازه در فهرست فروشگاه؛ ممکن است خودِ اثر قدیمی‌تر باشد.</p>':''}<div class="books-grid" id="book-library-grid"></div><button class="book-load-more" id="book-library-more" onclick="bookLibraryLimit+=12;renderBookLibrary()">کتاب‌های بیشتر</button><p id="book-action-note" role="status"></p><details class="book-radar-method"><summary>منابع و روش انتخاب</summary><p class="book-method">کشف بر پایهٔ حضور و جایگاه کتاب در فهرست‌های پرفروش و تازه‌های فروشگاه‌هاست. حضور در چند منبع وزن بیشتری دارد. این شاخص تعداد فروش بازار نیست؛ رشد هفتگی فقط با دو مشاهدهٔ واقعی قابل مقایسه نشان داده می‌شود. آگهی‌ها وارد امتیاز رادار نمی‌شوند.</p><div class="radar-source-list">${(d.radar?.sources||[]).map(s=>`<a href="${esc(_bookUrl(s.url))}" target="_blank" rel="noopener noreferrer">${_bookSourceIcon(s.id)}<span>${esc(s.name_fa)} · ${s.status==='ok'?'پایش موفق':'فعلاً دریافت نشد'} · ${_bookChecked(s.last_success_at)}</span></a>`).join('')}</div></details></section>`;
   }
-  el.innerHTML=`<header class="book-hub-heading book-brand-heading"><img class="book-hub-logo" src="assets/pishkhan-ketab-logo.svg" alt="پیشخوان کتاب" loading="eager"><span class="book-hub-brand-name">پیشخوان کتاب</span></header>${tabs}${content}`;
+  const trendsSlot=mode==='books'?'<section id="book-trends-strip" class="book-trends-section" aria-label="ترندهای کتاب"></section>':'';
+  el.innerHTML=`<header class="book-hub-heading book-brand-heading"><img class="book-hub-logo" src="assets/pishkhan-ketab-logo.svg" alt="پیشخوان کتاب" loading="eager"><span class="book-hub-brand-name">پیشخوان کتاب</span></header>${tabs}${trendsSlot}${content}`;
+  if(mode==='books')renderBookTrends('book-trends-strip');
   if(document.getElementById('book-library-grid'))renderBookLibrary();
   setHash(mode==='books'?'#/books':'#/books/'+mode);
 }
