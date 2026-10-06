@@ -26,7 +26,9 @@
       "rank": 1,
       "checked_at": "2026-10-06",
       "source_url": "https://flixpatrol.com/top10/netflix/",
-      "reason": "رتبهٔ جهانی FlixPatrol"
+      "reason": "سریال تازه‌منتشرشده",
+      "release_date": "2026-10-01",
+      "release_source": "https://www.netflix.com/tudum/east-of-eden"
     },
     {
       "title": "Monster: The Lizzie Borden Story",
@@ -53,7 +55,9 @@
       "rank": 1,
       "checked_at": "2026-10-06",
       "source_url": "https://flixpatrol.com/top10/amazon-prime/",
-      "reason": "رتبهٔ جهانی FlixPatrol"
+      "reason": "سریال تازه‌منتشرشده",
+      "release_date": "2026-09-16",
+      "release_source": "https://www.paramountpressexpress.com/paramount-television-studios/shows/neagley/releases"
     },
     {
       "title": "Reacher",
@@ -80,7 +84,9 @@
       "rank": 1,
       "checked_at": "2026-10-06",
       "source_url": "https://flixpatrol.com/top10/disney/",
-      "reason": "رتبهٔ جهانی FlixPatrol"
+      "reason": "سریال تازه‌منتشرشده",
+      "release_date": "2026-10-02",
+      "release_source": "https://thewaltdisneycompany.com/news/coven-academy-freeform-hulu-disney-plus/"
     },
     {
       "title": "Loki",
@@ -133,7 +139,8 @@
       "region": "iran",
       "reason": "قسمت ۲۶؛ قسمت پایانی ۱۷ مهر",
       "checked_at": "2026-10-06",
-      "source_url": "https://r.filimo.com/Tbadnam26"
+      "source_url": "https://r.filimo.com/Tbadnam26",
+      "recent_announcement": true
     },
     {
       "title": "کنکل",
@@ -141,7 +148,8 @@
       "region": "iran",
       "reason": "اعلان رسمی قسمت هفتم",
       "checked_at": "2026-10-06",
-      "source_url": "https://r.filimo.com/TCankel7"
+      "source_url": "https://r.filimo.com/TCankel7",
+      "recent_announcement": true
     },
     {
       "title": "کوری",
@@ -149,7 +157,8 @@
       "region": "iran",
       "reason": "اعلان رسمی قسمت پایانی",
       "checked_at": "2026-10-06",
-      "source_url": "https://t.me/s/filmnetofficial"
+      "source_url": "https://t.me/s/filmnetofficial",
+      "recent_announcement": true
     },
     {
       "title": "اعتراف می‌کنم",
@@ -157,7 +166,8 @@
       "region": "iran",
       "reason": "اعلان رسمی قسمت نهم",
       "checked_at": "2026-10-06",
-      "source_url": "https://t.me/s/filmnetofficial"
+      "source_url": "https://t.me/s/filmnetofficial",
+      "recent_announcement": true
     }
   ]
 }
