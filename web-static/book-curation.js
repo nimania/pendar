@@ -83,6 +83,26 @@ window.__BOOK_CURATION__={
         "checked_at": "2026-10-04",
         "edition_label_fa": null
       }
+    },
+    "daneshnameh-mosavvar-shahnameh": {
+      "cover_url": "assets/books/daneshnameh-mosavvar-shahnameh.jpg",
+      "cover": {
+        "verified_clean": true,
+        "source_url": "https://cyanpub.ir/product-134",
+        "source_name": "نشر سایان",
+        "checked_at": "2026-10-06",
+        "edition_label_fa": null
+      }
+    },
+    "ahaliye-magnolia": {
+      "cover_url": "assets/books/ahaliye-magnolia.jpg",
+      "cover": {
+        "verified_clean": true,
+        "source_url": "https://jahaneketab.ir/wp-content/uploads/2026/10/IMG_20261003_174656_294-1.jpg",
+        "source_name": "جهان کتاب",
+        "checked_at": "2026-10-06",
+        "edition_label_fa": null
+      }
     }
   }
 };

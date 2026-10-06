@@ -185,7 +185,7 @@ MANUAL_BOOKS = [
         "publication_year_fa": "۱۴۰۴",
         "pages": 226,
         "isbn": "",
-        "cover_url": "https://jahaneketab.ir/wp-content/uploads/2026/10/IMG_20261003_174656_294-1.jpg",
+        "cover_url": "assets/books/ahaliye-magnolia.jpg",
         "creators": [
             {"slug": "zoya-pirzad", "name_fa": "زویا پیرزاد", "role_fa": "نویسنده"}
         ],
