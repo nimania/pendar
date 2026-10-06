@@ -9,14 +9,21 @@
 let _navLock = false;
 
 function setHash(h) {
-  h = h || "#/";                              // home sentinel
-  if ((location.hash || "#/") === h) return;  // no change (also no-op on first load)
+  // The homepage uses the bare URL, never the legacy #/ sentinel.
+  if (!h || h === "#" || h === "#/") {
+    if (location.hash) history.pushState(null, "", location.pathname + location.search);
+    return;
+  }
+  if (location.hash === h) return;
   _navLock = true;
   location.hash = h;
   setTimeout(() => { _navLock = false; }, 0);
 }
 
 async function route() {
+  if (location.hash === "#/" || location.hash === "#") {
+    history.replaceState(null, "", location.pathname + location.search);
+  }
   const raw = (location.hash || "").replace(/^#\/?/, "");
   const i = raw.indexOf("/");
   const kind = i < 0 ? raw : raw.slice(0, i);
@@ -67,3 +74,11 @@ async function route() {
 window.addEventListener("hashchange", () => { if (!_navLock) route(); });
 
 
+
+// pushState removes the hash without a hashchange event. Restore the home view
+// when browser Back/Forward lands on a clean homepage entry.
+window.addEventListener("popstate", () => { if (!location.hash) route(); });
+// Normalize bookmarked legacy home links as soon as the router loads.
+if (location.hash === "#/" || location.hash === "#") {
+  history.replaceState(null, "", location.pathname + location.search);
+}
