@@ -24,11 +24,11 @@ async function seriesShowcaseRows(){
 }
 function seriesShowcaseCard(row,detail){
   const m=row.movie, title=m?.title_fa||row.title;
-  const href=row.slug?"#/movie/"+encodeURIComponent(row.slug):m?.master_id?"#/master-movie/"+encodeURIComponent(m.master_id):m?.slug?"#/movie/"+encodeURIComponent(m.slug):row.source_url;
   const external=!m&&!row.slug;
+  const href=row.slug?"#/movie/"+encodeURIComponent(row.slug):m?.master_id?"#/master-movie/"+encodeURIComponent(m.master_id):m?.slug?"#/movie/"+encodeURIComponent(m.slug):(detail?row.source_url:"#/movies");
   const age=Date.now()-Date.parse(row.checked_at+"T00:00:00Z");
   const stale=age>3*86400000;
-  return '<article class="series-evidence-card"><a class="trend-card" href="'+esc(href)+'"'+(external?' target="_blank" rel="noopener"':'')+'><span class="trend-cover"><span class="book-cover-placeholder">'+esc(title)+'</span>'+
+  return '<article class="series-evidence-card"><a class="trend-card" href="'+esc(href)+'"'+(external&&detail?' target="_blank" rel="noopener"':'')+'><span class="trend-cover"><span class="book-cover-placeholder">'+esc(title)+'</span>'+
     ((m?.poster_url||row.poster_url)?'<img class="book-cover" src="'+esc(m?.poster_url||row.poster_url)+'" alt="" loading="lazy" onerror="this.remove()">':'')+
     '</span><strong class="trend-title">'+esc(title)+'</strong><small class="series-platform">'+esc(row.platform)+(row.rank?' · #'+faN(row.rank):'')+'</small></a>'+
     '<small class="series-reason">'+esc(row.reason)+(row.release_date?' · '+esc(faN(row.release_date)):'')+'</small>'+
