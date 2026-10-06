@@ -12,7 +12,7 @@ class MoviePriorityTests(unittest.TestCase):
             for pid,kind,pop,hydrated in [('pm_c','movie',0,0),('pt_c','series',999,0),('pm_d','movie',1,1),('pm_e','movie',999,1)]:
                 con.execute('INSERT INTO titles(pendar_id,media_type,tmdb_id,popularity,hydrated,source_date,first_seen_at,last_seen_at,tmdb_payload_json) VALUES(?,?,?,?,?,?,?,?,?)',(pid,kind,int(pid[3:],36),pop,hydrated,'now','now','now','{}'))
             con.commit()
-            audit=root/'audit.json';audit.write_text(json.dumps({'scope':{'movie_index':'full_master'},'works':[{'person_id':'person:wd-q803646','kind':'movie','target_id':'pm_c'}]}))
+            audit=root/'audit.json';audit.write_text(json.dumps({'scope':{'movie_index':'full_master'},'works':[{'person_id':'person:creator-q803646','kind':'movie','target_id':'pm_c'}]+[{'person_id':'person:other','kind':'tv','target_id':'pt_c'}]*10}))
             queue(db,audit)
             self.assertEqual(select_rows(con,1,3)[0]['pendar_id'],'pm_c')
             write_public(con,root/'summary.json',root/'top.json',1)

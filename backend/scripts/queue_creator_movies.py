@@ -15,7 +15,7 @@ def queue(db,audit_path):
         if not target and row.get('tmdb_id'):
             from build_movie_master import pendar_id
             target=pendar_id('series' if row['kind'] in ('tv','series') else 'movie',int(row['tmdb_id']))
-        if target: scores[target]+=1000000 if row['person_id'] in FOCUS else 1
+        if target: scores[target]+=1000000 if row['person_id'] in FOCUS or any(row['person_id'].endswith('-'+focus.rsplit('-',1)[1]) for focus in FOCUS) else 1
     con=sqlite3.connect(db)
     con.execute('CREATE TABLE IF NOT EXISTS creator_priority(pendar_id TEXT PRIMARY KEY,score INTEGER NOT NULL)')
     con.execute('DELETE FROM creator_priority')
