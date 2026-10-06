@@ -135,7 +135,7 @@ def build(site):
             aliases[url]=primary
     # Persist handles across builds, while keeping internal identity IDs unchanged.
     previous=read(data/'person-handles.json',{}).get('people',{})
-    handles={'people':{},'routes':{}}
+    handles={'people':{},'routes':{},'entities':{}}
     reserved={handle:record.get('id') or record.get('figure') for handle,record in previous.items()}
     def person_handle(identity, fallback):
         old=next((h for h,r in previous.items() if (r.get('id') or r.get('figure'))==identity),None)
@@ -175,10 +175,18 @@ def build(site):
         identity=f['handle']
         handle=person_handle(identity,f['handle'])
         publish_person(handle,{'figure':f['handle']},[old],old)
+    # Non-person identities use their existing readable content route.
+    for e in entities:
+        eid=e.get('id','');old=route('entity',eid)
+        if old not in pages or e.get('type')=='person' or eid.startswith('person:'):continue
+        primary=pages[old]['canonical']
+        target=primary if primary!=old else route('entity',eid.replace(':','/',1))
+        handles['entities'][unquote(old.strip('/'))]=target
+        if target not in pages:pages[target]={**pages[old],'canonical':target}
+        pages[old].update(canonical=pages[target]['canonical'],indexable=False,redirect=target)
+        aliases[old]=target
     for section,rows in catalogs.items():
         catalogs[section]=list(dict.fromkeys((aliases.get(url,url),name) for url,name in rows))
-    (data/'person-handles.json').write_text(json.dumps(handles,ensure_ascii=False),encoding='utf-8')
-    (data/'person-handles.js').write_text('window.PENDAR_HANDLES='+json.dumps(handles,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf-8')
     for filename,kind in [('pendar-festivals.json','festival'),('pendar-organizations.json','organization'),('pendar-topics.json','topic'),('pendar-collections.json','collection'),('pendar-paths.json','path'),('pendar-articles.json','article')]:
         for row in array(read(data/filename,[]),'items'):
             add('knowledge',kind+'/'+str(row.get('id','')),row.get('title') or row.get('name_fa'),'\n'.join(text(row.get(k)) for k in ['summary','description','body','notes','dateLabel'] if row.get(k)))
@@ -208,7 +216,12 @@ def build(site):
         base=route('entity',e.get('id',''))
         if base in pages:
             for kind in ['profile','graph']:
-                pages[route(kind,e['id'])]={k:v for k,v in {**pages[base],'canonical':pages[base]['canonical'],'indexable':False}.items() if k!='redirect'}
+                old=route(kind,e['id']);clean=route(kind,e['id'].replace(':','/',1))
+                pages[clean]={k:v for k,v in {**pages[base],'canonical':pages[base]['canonical'],'indexable':False}.items() if k!='redirect'}
+                pages[old]={**pages[clean],'redirect':clean}
+                handles['entities'][unquote(old.strip('/'))]=clean
+    (data/'person-handles.json').write_text(json.dumps(handles,ensure_ascii=False),encoding='utf-8')
+    (data/'person-handles.js').write_text('window.PENDAR_HANDLES='+json.dumps(handles,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf-8')
     pages['/']={'title':'پندار؛ خبر، چهره‌ها، کتاب، فیلم و سریال','description':'پندار؛ خبر و اندیشه، دیدگاه چهره‌ها، پیشخوان کتاب و جراید، فیلم و سریال و راهنمای تماشا.','body':links([(route(k),v) for k,v in SECTIONS.items()])+ '<h2>تازه‌ترین خبرها</h2>'+links(catalogs['headlines'][:20]),'canonical':'/','indexable':True,'schema_type':'WebSite'}
     generated=[]; sitemap=[]
     for url,page in pages.items():

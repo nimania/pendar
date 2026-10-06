@@ -19,3 +19,10 @@ assert.equal(ctx.routeURL('/@someone/'),'/@someone/');
 let opened;ctx.openCanonicalEntity=id=>opened=id;
 ctx.location.pathname='/@someone/';ctx.route();assert.equal(opened,'person:someone');
 console.log('Canonical handles and legacy profile routes passed');
+
+ctx.window.PENDAR_HANDLES.entities={'entity/book:a-book':'/book/a-book/','entity/organization:a-group':'/entity/organization/a-group/','graph/person:someone':'/graph/person/someone/'};
+assert.equal(ctx.routeURL('#/entity/book%3Aa-book'),'/book/a-book/');
+assert.equal(ctx.routeURL('/entity/organization%3Aa-group/'),'/entity/organization/a-group/');
+ctx.location.pathname='/entity/organization/a-group/';ctx.route();assert.equal(opened,'organization:a-group');
+assert.equal(ctx.routeURL('#/graph/person%3Asomeone'),'/graph/person/someone/');
+console.log('Readable book, organization and graph identity routes passed');
