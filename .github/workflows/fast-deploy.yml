@@ -4,7 +4,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Build & Deploy Pendar (static)", "Pendar Movie Master", "Collect & publish periodicals", "Refresh book radar and commerce", "Refresh weather and air quality"]
+    workflows: ["Build & Deploy Pendar (static)", "Pendar Movie Master", "Collect & publish periodicals", "Refresh book radar and commerce", "Refresh weather and air quality", "Refresh series showcases"]
     types: [completed]
   push:
     branches: [main]
@@ -337,7 +337,7 @@ jobs:
           import hashlib, pathlib, re
           root = pathlib.Path("site")
           versions = {}
-          for name in ("app.js", "router.js", "entities.js", "loaders.js", "figures-core.js", "figures-profile.js", "search.js", "book-app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "tv-guide.js", "tv-guide.css", "knowledge-hub.js"):
+          for name in ("home.js", "series-showcase.js", "app.js", "router.js", "entities.js", "loaders.js", "figures-core.js", "figures-profile.js", "search.js", "book-app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "tv-guide.js", "tv-guide.css", "knowledge-hub.js"):
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]
