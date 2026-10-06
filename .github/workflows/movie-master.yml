@@ -90,7 +90,7 @@ jobs:
         run: |
           python backend/tests/test_creator_movie_priority.py
           mkdir -p /tmp/creator-work-audit
-          audit_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs?status=success&per_page=50" --jq '[.workflow_runs[] | select(.name == "Fast Deploy Pendar UI" or .name == "Build & Deploy Pendar (static)")][0].id // empty')"
+          audit_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts?per_page=100" --jq '[.artifacts[] | select(.name == "creator-work-reconciliation" and .expired == false)][0].workflow_run.id // empty')"
           if [ -n "$audit_run" ]; then
             gh run download "$audit_run" -n creator-work-reconciliation -D /tmp/creator-work-audit
             python backend/scripts/queue_creator_movies.py --db backend/data/movie-master.sqlite --audit /tmp/creator-work-audit/creator-work-audit.json
