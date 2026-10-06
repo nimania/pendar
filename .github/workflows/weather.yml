@@ -152,16 +152,4 @@ jobs:
           name: weather-pages-${{ github.run_attempt }}
           path: site
 
-  deploy:
-    needs: build-weather
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy weather refresh
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_name: weather-pages-${{ github.run_attempt }}
-
+  # Fast Deploy consumes this artifact and publishes all datasets together.

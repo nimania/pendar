@@ -255,6 +255,9 @@ jobs:
       - name: Merge all people into canonical registry
         run: python backend/scripts/merge_people.py --data-dir backend/public/data
 
+      - name: Verify every canonical person profile is publishable
+        run: python backend/scripts/validate_person_profiles.py --data-dir site/data
+
       - name: Validate Pendar data integrity before publish
         env:
           GH_TOKEN: ${{ github.token }}

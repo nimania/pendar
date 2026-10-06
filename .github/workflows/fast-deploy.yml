@@ -4,7 +4,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Build & Deploy Pendar (static)", "Pendar Movie Master"]
+    workflows: ["Build & Deploy Pendar (static)", "Pendar Movie Master", "Collect & publish periodicals", "Refresh book radar and commerce", "Refresh weather and air quality"]
     types: [completed]
   push:
     branches: [main]
@@ -353,6 +353,9 @@ jobs:
         run: |
           python backend/scripts/merge_people.py --data-dir site/data
           rm -rf site/data/cinema-people site/data/cinema-people-index.json
+
+      - name: Verify every canonical person profile is publishable
+        run: python backend/scripts/validate_person_profiles.py --data-dir site/data
 
       - name: Validate Pendar data integrity before publish
         run: python backend/scripts/validate_site_integrity.py --site site

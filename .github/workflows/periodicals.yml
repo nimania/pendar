@@ -220,14 +220,4 @@ jobs:
           if-no-files-found: ignore
           retention-days: 3
 
-  deploy:
-    needs: build-periodicals
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
+  # Fast Deploy consumes this artifact and publishes all datasets together.
