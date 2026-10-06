@@ -44,6 +44,13 @@ async function loadFigures() {
       _FIG.figures.push(fallback);
     }
   }
+  // Keep the selected portrait visible until the next dataset rebuild.
+  for (const figure of _FIG.figures) {
+    if (String(figure.handle || "").toLowerCase() === "donald-trump") {
+      figure.avatar = "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTZkCFGyioBQXspTYONjbClEc1qCWhVPg832Ivxb_UFqgEb5xhpb1zbzgSVGjwrMjw3kGtPVA7xMtYN7NOUJOoqDHwd9Fu0zAy7RYjui5MMEh-BAGlr94I4E8ESQBJ5VYD740kLc_Gg&s=19";
+      for (const post of figure.posts || []) post.avatar = figure.avatar;
+    }
+  }
   return _FIG;
 }
 async function loadStudioRecaps() {
