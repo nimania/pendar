@@ -39,6 +39,7 @@ def main():
     people={}; films=read(root/'movie-master-top.json',{}).get('items',[]); wanted={x.get('imdb_id') for x in films if x.get('imdb_id')}
     for shard in (root/'movie-master-details').glob('*.json'):
         for film_id, film in read(shard,{}).items():
+            if film.get('imdb_id'): wanted.add(film['imdb_id'])
             for credit in film.get('credits',[]):
                 pid=credit.get('id')
                 if not isinstance(pid,int) or pid<=0: continue
@@ -120,5 +121,6 @@ def main():
     print('People from media:',len(people),'Persian names:',sum(bool(p.get('name_fa')) for b in buckets for p in b.values()),'IMDb ratings:',sum('imdb' in x for x in items.values()),'Rotten Tomatoes:',sum('rotten_tomatoes' in x for x in items.values()))
 
 if __name__=='__main__': main()
+
 
 
