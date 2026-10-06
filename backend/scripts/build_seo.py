@@ -33,6 +33,7 @@ def build(site):
     pages={}; aliases={}; catalogs={k:[] for k in SECTIONS}
     def add(kind,key,title,body,image=None,schema_type='WebPage',published=None,canonical=None):
         if not title or not key: return
+        image=image if isinstance(image,str) and image.startswith(('https://','assets/')) else None
         url=route(kind,key); description=text(body)[:170]
         content=paragraphs(body)
         if image and str(image).startswith(('https://','assets/')): content='<img src="'+esc(image)+'" alt="'+esc(title)+'" style="max-width:320px;height:auto">'+content
