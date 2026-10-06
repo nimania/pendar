@@ -240,6 +240,19 @@ jobs:
           key: people-profile-${{ github.run_id }}
           restore-keys: people-profile-
 
+      - name: Restore creator catalog cache
+        uses: actions/cache@v4
+        with:
+          path: backend/data/creator-catalog-cache.json
+          key: creator-catalog-${{ github.run_id }}
+          restore-keys: creator-catalog-
+
+      - name: Test creator identities and relationships
+        run: python backend/tests/test_creator_catalog.py
+
+      - name: Enrich verified book and film creators
+        run: python backend/scripts/enrich_creator_catalog.py --data-dir backend/public/data
+
       - name: Build people and sourced ratings
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
@@ -256,7 +269,7 @@ jobs:
         run: python backend/scripts/merge_people.py --data-dir backend/public/data
 
       - name: Verify every canonical person profile is publishable
-        run: python backend/scripts/validate_person_profiles.py --data-dir site/data
+        run: python backend/scripts/validate_person_profiles.py --data-dir backend/public/data
 
       - name: Validate Pendar data integrity before publish
         env:
@@ -347,4 +360,5 @@ jobs:
           TELEGRAM_RESOLVE_URL: ${{ inputs.resolve_url }}
           TELEGRAM_RESOLUTION: ${{ inputs.resolution }}
         run: python backend/scripts/publish_figures.py --figures telegram-export/figures.json
+
 

@@ -112,6 +112,7 @@ function _figureWorkUrl(value) {
   try { const url=new URL(String(value||"")); return ["http:","https:"].includes(url.protocol)?url.href:""; } catch (_) { return ""; }
 }
 function _figureWorkKey(work, kind) {
+  if(work.tmdb_id&&["movie","tv"].includes(kind))return "tmdb:"+kind+":"+work.tmdb_id;
   const id=kind==="video"?youtubeVideoId(work.url):"";
   if(id) return "youtube:"+id;
   const url=_figureWorkUrl(work.url);
@@ -121,7 +122,7 @@ function _figureWorkKey(work, kind) {
 function _figureMediaWorks(person, canonical) {
   const array=value=>Array.isArray(value)?value:[];
   const meta=canonical?.meta||{};
-  const groups={videos:new Map(),podcasts:new Map(),other:new Map(),channels:new Map()};
+  const groups={videos:new Map(),podcasts:new Map(),other:new Map(),channels:new Map(),books:new Map(),films:new Map()};
   const add=(group,work,kind)=>{
     if(!work||typeof work!=="object")return;
     const row={...work,url:_figureWorkUrl(work.url),kind};
@@ -138,19 +139,20 @@ function _figureMediaWorks(person, canonical) {
   for(const p of [...array(person.podcasts),...array(meta.podcasts)])add("podcasts",p,"podcast");
   for(const work of [...array(person.works),...array(meta.works)]){
     const kind=String(work.kind||work.type||"other").toLowerCase();
-    add(["video","youtube"].includes(kind)?"videos":["podcast","episode"].includes(kind)?"podcasts":"other",work,kind);
+    add(["video","youtube"].includes(kind)?"videos":["podcast","episode"].includes(kind)?"podcasts":kind==="book"?"books":["movie","film","tv","series"].includes(kind)?"films":"other",work,kind);
   }
   for(const link of array(person.social)){
     if(link.kind==="podcast")add("podcasts",{...link,title:link.label||"پادکست",format:"channel"},"podcast");
     if(link.kind==="youtube")add("channels",{...link,title:"کانال ویدئوهای "+person.name_fa},"channel");
   }
   const values=map=>[...map.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
-  return {videos:values(groups.videos),podcasts:values(groups.podcasts),other:values(groups.other),channels:values(groups.channels)};
+  return {videos:values(groups.videos),podcasts:values(groups.podcasts),other:values(groups.other),channels:values(groups.channels),books:values(groups.books),films:values(groups.films)};
 }
 function _figureWorkCard(work) {
   const labels={podcast:"پادکست",episode:"قسمت پادکست",channel:"کانال ویدئو",audio:"صوت",music:"موسیقی",article:"مقاله",poem:"شعر",book:"کتاب",movie:"فیلم",tv:"سریال",project:"پروژه"};
-  const body='<span class="figure-work-type">'+esc(work.type_fa||labels[work.kind]||"اثر")+'</span><b>'+esc(work.title_fa||work.title||work.label||"اثر")+'</b>'+(work.description_fa?'<p>'+esc(work.description_fa)+'</p>':"")+(work.published_at?'<small>'+esc(relTime(work.published_at))+'</small>':"");
-  return '<article class="figure-work-card">'+(work.url?'<a href="'+esc(work.url)+'" target="_blank" rel="noopener">'+body+'<span class="figure-work-open">مشاهده / شنیدن ↗</span></a>':body)+'</article>';
+  const thumb=_figureWorkUrl(work.thumbnail);
+  const body=(thumb?'<img class="figure-work-cover" src="'+esc(thumb)+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':"")+'<span class="figure-work-type">'+esc(work.type_fa||labels[work.kind]||"اثر")+'</span><b>'+esc(work.title_fa||work.title||work.label||"اثر")+'</b>'+((work.role_fa||work.year)?'<small>'+esc([work.role_fa,work.year].filter(Boolean).join(" · "))+'</small>':"")+(work.description_fa?'<p>'+esc(work.description_fa)+'</p>':"")+(work.published_at?'<small>'+esc(relTime(work.published_at))+'</small>':"");
+  return '<article class="figure-work-card">'+(work.url?'<a href="'+esc(work.url)+'" target="_blank" rel="noopener">'+body+'<span class="figure-work-open">مشاهدهٔ اثر ↗</span></a>':body)+'</article>';
 }
 function _figureVideoCard(video) {
   if(!video.url)return _figureWorkCard({...video,type_fa:"ویدئو"});
@@ -183,6 +185,8 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const mediaWorks=(master.items||[]).filter(m=>Object.prototype.hasOwnProperty.call(filmography,m.pendar_id)).map(_masterMovie);
   const figureMovies=(movieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>mm.kind==="figure"&&(String(mm.handle||"").toLowerCase()===String(x.handle||"").toLowerCase()||(x.posts||[]).some(p=>String(p.id)===String(mm.post_id)))));
   const profileMedia=_figureMediaWorks(x,canonicalFigure);
+  const localFilmIds=new Set((master.items||[]).filter(m=>Object.prototype.hasOwnProperty.call(filmography,m.pendar_id)).map(m=>String(m.tmdb_id)));
+  profileMedia.films=profileMedia.films.filter(w=>!w.tmdb_id||!localFilmIds.has(String(w.tmdb_id)));
   const youtubeVideos=profileMedia.videos;
   const canonicalNames=new Set([x.name_fa,...(canonicalFigure?.aliases||[])].map(_canonicalNorm).filter(Boolean));
   const figureStories=canonicalFigure?(typeof ALL!=="undefined"?ALL:[]).filter(s=>(s.entities||[]).some(e=>canonicalNames.has(_canonicalNorm(e.name_fa||"")))):[];
@@ -190,7 +194,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const latest = (x.posts || []).map(p => p.published_at).filter(Boolean).sort().pop();
   const poems = Array.isArray(curatedPoems[x.handle]) ? curatedPoems[x.handle] : [];
   const poemSection = poems.length ? `<section class="curated-poems"><div class="curated-poems-head"><div><span class="curated-kicker">اثر ویژه</span><h2>یک شعر؛ بخش‌های منتشرشده</h2><p>این ${faN(poems.length)} متن، بخش‌های مختلف یک شعر از مونا برزویی‌اند. ترتیب نهایی بخش‌ها هنوز اعلام نشده است؛ شماره‌های زیر فقط برای تفکیک در آرشیو جان کلام‌اند و ترتیب شعر را نشان نمی‌دهند.</p></div><span class="curated-count">${faN(poems.length)} بخش</span></div><div class="curated-poem-list">${poems.map((p,i)=>`<article class="curated-poem"><div class="curated-poem-no" title="شمارهٔ آرشیوی؛ نه ترتیب شعر">بخش ${faN(i+1)}*</div><div class="curated-poem-text">${esc(p.text||"").replace(/\\n/g,"<br>")}</div></article>`).join("")}</div></section>` : "";
-  const worksSection=figureBooks.length||mediaWorks.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length||profileMedia.channels.length?`<section class="figure-works">${figureBooks.length?'<h2>کتاب‌ها</h2><div class="books-grid">'+figureBooks.map(_bookCard).join("")+'</div>':""}${mediaWorks.length?'<h2>فیلم‌ها و سریال‌ها</h2><div class="movie-grid">'+mediaWorks.map(_movieCard).join("")+'</div>':""}${profileMedia.podcasts.length?'<h2>پادکست‌ها</h2><div class="figure-work-grid">'+profileMedia.podcasts.map(_figureWorkCard).join("")+'</div>':""}${youtubeVideos.length||profileMedia.channels.length?'<h2>ویدئوها</h2><div class="figure-youtube-grid">'+youtubeVideos.map(_figureVideoCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.channels.map(_figureWorkCard).join("")+'</div>':""}${poemSection}${profileMedia.other.length?'<h2>دیگر آثار</h2><div class="figure-work-grid">'+profileMedia.other.map(_figureWorkCard).join("")+'</div>':""}</section>`:'<div class="state"><div class="big">اثری ثبت نشده است.</div></div>';
+  const worksSection=figureBooks.length||profileMedia.books.length||mediaWorks.length||profileMedia.films.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length||profileMedia.channels.length?`<section class="figure-works">${figureBooks.length||profileMedia.books.length?'<h2>کتاب‌ها</h2><div class="books-grid">'+figureBooks.map(_bookCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.books.map(_figureWorkCard).join("")+'</div>':""}${mediaWorks.length||profileMedia.films.length?'<h2>فیلم‌ها و سریال‌ها</h2><div class="movie-grid">'+mediaWorks.map(_movieCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.films.map(_figureWorkCard).join("")+'</div>':""}${profileMedia.podcasts.length?'<h2>پادکست‌ها</h2><div class="figure-work-grid">'+profileMedia.podcasts.map(_figureWorkCard).join("")+'</div>':""}${youtubeVideos.length||profileMedia.channels.length?'<h2>ویدئوها</h2><div class="figure-youtube-grid">'+youtubeVideos.map(_figureVideoCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.channels.map(_figureWorkCard).join("")+'</div>':""}${poemSection}${profileMedia.other.length?'<h2>دیگر آثار</h2><div class="figure-work-grid">'+profileMedia.other.map(_figureWorkCard).join("")+'</div>':""}</section>`:'<div class="state"><div class="big">اثری ثبت نشده است.</div></div>';
   const aboutSection='<section class="x-profile-feed"><p class="x-bio">'+esc(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||"معرفی تکمیلی هنوز ثبت نشده است.")+'</p>'+(canonicalFigure?.meta?.birthday?'<p class="x-bio">تولد: '+esc(faN(canonicalFigure.meta.birthday))+'</p>':"")+'</section>';
   const postRow = p => `<article class="x-post">
     <div class="x-post-rail">${avatar(x,"sm")}</div>
@@ -206,7 +210,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     </div>
   </article>`;
   el.innerHTML = `<div class="x-profile">
-    ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${mediaWorks.length ? `<span><b>${faN(mediaWorks.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
+    ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length+profileMedia.books.length ? `<span><b>${faN(figureBooks.length+profileMedia.books.length)}</b> کتاب</span>` : ""}${mediaWorks.length+profileMedia.films.length ? `<span><b>${faN(mediaWorks.length+profileMedia.films.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
@@ -267,4 +271,5 @@ function renderPersonProfileHeader(x,options={}){
     <p class="x-bio">${esc(x.role_fa||"")}</p>${socialLinks(x.social||[])}
     <div class="x-profile-stats">${options.stats||""}</div>${options.details||""}</div>`;
 }
+
 

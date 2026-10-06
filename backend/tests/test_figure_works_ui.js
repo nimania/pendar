@@ -3,7 +3,7 @@ const fs=require("node:fs");
 const vm=require("node:vm");
 const path=require("node:path");
 const element={innerHTML:"",style:{}};
-const person={id:"person:mixed",type:"person",name_fa:"چهره نمونه",aliases:[],refs:[{dataset:"figures",key:"mixed"}],routes:{figure:"mixed"},meta:{tmdb_id:1,filmography:{"film-1":{}},works:[{kind:"article",title_fa:"مقاله نمونه",url:"https://example.com/article"}]}};
+const person={id:"person:mixed",type:"person",name_fa:"چهره نمونه",aliases:[],refs:[{dataset:"figures",key:"mixed"}],routes:{figure:"mixed"},meta:{tmdb_id:1,filmography:{"film-1":{}},works:[{kind:"book",title_fa:"کتاب خارجی",url:"https://openlibrary.org/works/OL1W",thumbnail:"https://covers.openlibrary.org/b/id/1-M.jpg"},{kind:"tv",title:"سریال خارجی",url:"https://www.themoviedb.org/tv/12",year:"2024",role_fa:"بازیگر"},{kind:"article",title_fa:"مقاله نمونه",url:"https://example.com/article"}]}};
 const figure={handle:"mixed",name_fa:"چهره نمونه",social:[{kind:"podcast",label:"پادکست نمونه",url:"https://castbox.fm/channel/test?utm_source=a"},{kind:"youtube",url:"https://www.youtube.com/@sample"}],youtube_videos:[{id:"abcdefghijk",title:"ویدئوی نمونه",url:"https://www.youtube.com/watch?v=abcdefghijk"}],podcasts:[{title:"پادکست نمونه",url:"https://castbox.fm/channel/test"}],posts:[{id:"youtube-abcdefghijk",platform:"youtube",url:"https://youtu.be/abcdefghijk",recap_fa:"جان کلام",video_title:"ویدئوی نمونه"},{id:"news-video",kind:"news_statement",platform:"youtube",url:"https://youtu.be/lmnopqrstuv",video_title:"خبر دیگران"}]};
 const escape=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const context=vm.createContext({console,URL,document:{getElementById:()=>element},ALL:[],esc:escape,faN:String,relTime:String,setHash:()=>{},show:()=>{},setTab:()=>{},canonicalEntityById:async()=>person,canonicalEntityByRef:async()=>person,loadFigures:async()=>({figures:[figure]}),loadCuratedPoems:async()=>({}),loadBooks:async()=>({people:[{name_fa:"چهره نمونه",book_slugs:["book-1"]}],books:[{slug:"book-1",title_fa:"کتاب نمونه"}]}),loadMovies:async()=>({movies:[]}),loadMovieMaster:async()=>({items:[{pendar_id:"film-1",title:"فیلم نمونه"}]}),_personFigureRecord:(e,b)=>({...e.meta,...b}),_bookBySlug:(d,s)=>d.books.find(b=>b.slug===s),_bookCard:b=>"<article>"+b.title_fa+"</article>",_masterMovie:m=>m,_movieCard:m=>"<article>"+m.title+"</article>",_canonicalNorm:String,avatar:()=>"",socialLinks:()=>"",figureFollowBtn:()=>"",canonicalStrip:()=>"",statementKey:p=>encodeURIComponent(p.id)});
@@ -16,7 +16,7 @@ vm.runInContext(fs.readFileSync(path.join(__dirname,"../../web-static/figures-pr
  assert.equal(media.videos[0].recap_fa,"جان کلام");
  vm.runInContext('_figureProfileFilter="works"',context);
  await context.openFigure("mixed",false,person.id);
- for(const title of ["کتاب نمونه","فیلم نمونه","پادکست نمونه","ویدئوی نمونه","مقاله نمونه"])assert(element.innerHTML.includes(title),title+" absent from combined works");
+ for(const title of ["کتاب نمونه","فیلم نمونه","پادکست نمونه","ویدئوی نمونه","مقاله نمونه","کتاب خارجی","سریال خارجی"])assert(element.innerHTML.includes(title),title+" absent from combined works");
  assert(!element.innerHTML.includes("خبر دیگران"),"a news mention is not the person's video work");
  const nav=element.innerHTML.match(/<nav[^>]*>([\s\S]*?)<\/nav>/)[1];
  assert(nav.includes(">آثار</button>"));

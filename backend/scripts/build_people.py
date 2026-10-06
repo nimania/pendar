@@ -19,6 +19,20 @@ def request(url, token=None):
     if token: headers['Authorization']='Bearer '+token
     with urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=20) as r: return json.load(r)
 
+
+def combined_works(credits):
+    rows={}
+    for kind in ('cast','crew'):
+        for credit in credits.get(kind,[]):
+            media=credit.get('media_type'); mid=credit.get('id')
+            if media not in ('movie','tv') or not isinstance(mid,int): continue
+            key=media+':'+str(mid)
+            role='بازیگر' if kind=='cast' else {'Director':'کارگردان','Writer':'نویسنده','Screenplay':'فیلم‌نامه‌نویس','Producer':'تهیه‌کننده','Executive Producer':'تهیه‌کننده اجرایی','Original Music Composer':'آهنگساز','Director of Photography':'مدیر فیلم‌برداری','Editor':'تدوینگر'}.get(credit.get('job'),'عوامل')
+            row=rows.setdefault(key,{'id':'tmdb:'+key,'kind':media,'tmdb_id':mid,'title':credit.get('title') or credit.get('name') or credit.get('original_title') or credit.get('original_name'),'url':'https://www.themoviedb.org/'+media+'/'+str(mid),'source_url':'https://www.themoviedb.org/'+media+'/'+str(mid),'thumbnail':'https://image.tmdb.org/t/p/w342'+credit['poster_path'] if credit.get('poster_path') else '', 'year':(credit.get('release_date') or credit.get('first_air_date') or '')[:4],'roles':[]})
+            if role not in row['roles']: row['roles'].append(role)
+            row['role_fa']='، '.join(row['roles'])
+    return sorted(rows.values(),key=lambda row:row['year'],reverse=True)
+
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument('--data-dir',default='site/data'); parser.add_argument('--limit',type=int,default=400)
     args=parser.parse_args(); root=Path(args.data_dir); now=datetime.now(timezone.utc).isoformat()
@@ -33,17 +47,23 @@ def main():
                 role='بازیگر' if credit.get('kind')=='cast' else credit.get('role','')
                 if role not in p['films'][film_id]: p['films'][film_id].append(role)
                 if role not in p['roles']: p['roles'].append(role)
+    seeds={}
+    for row in read(root/'creator-profiles.json',{}).get('people',[]):
+        pid=row.get('meta',{}).get('tmdb_id')
+        if not isinstance(pid,int) or pid<=0: continue
+        seeds[str(pid)]=row
+        people.setdefault(str(pid),{'id':pid,'name':next((a for a in row.get('aliases',[]) if re.search('[A-Za-z]',a)),row['name_fa']),'films':{},'roles':[]})
     cache_path=Path('backend/data/people-profile-cache.json'); cache=read(cache_path,read(Path('backend/data/cinema-people-cache.json'),{}))
     token=os.environ.get('TMDB_READ_TOKEN','')
-    ranked=sorted(people,key=lambda k:(int(k) not in FA,-len(people[k]['films'])))
-    pending=[k for k in ranked if k not in cache][:args.limit]
+    ranked=sorted(people,key=lambda k:(k not in seeds,int(k) not in FA,-len(people[k]['films'])))
+    pending=[k for k in ranked if cache.get(k,{}).get('profile_version')!=2][:args.limit]
     def enrich(k):
         try:
-            d=request('https://api.themoviedb.org/3/person/'+k+'?append_to_response=external_ids&language=fa-IR',token)
+            d=request('https://api.themoviedb.org/3/person/'+k+'?append_to_response=external_ids,combined_credits&language=fa-IR',token)
             qid=d.get('external_ids',{}).get('wikidata_id'); name_fa=FA.get(int(k),'')
             if not name_fa:
                 name_fa=next((n for n in [d.get('name','')]+d.get('also_known_as',[]) if re.search('[پچژگکی]',n)), '')
-            return k,{'name_fa':name_fa,'profile_path':d.get('profile_path'),'birthday':d.get('birthday'),'deathday':d.get('deathday'),'birthplace':d.get('place_of_birth'),'biography_fa':d.get('biography') if re.search('[\u0600-\u06ff]',d.get('biography','')) else '', 'wikidata_id':qid,'imdb_id':d.get('external_ids',{}).get('imdb_id'),'updated_at':now}
+            return k,{'name_fa':name_fa,'profile_path':d.get('profile_path'),'birthday':d.get('birthday'),'deathday':d.get('deathday'),'birthplace':d.get('place_of_birth'),'biography_fa':d.get('biography') if re.search('[\u0600-\u06ff]',d.get('biography','')) else '', 'wikidata_id':qid,'imdb_id':d.get('external_ids',{}).get('imdb_id'),'works':combined_works(d.get('combined_credits',{})),'social':[{'kind':'website','label':'IMDb','url':'https://www.imdb.com/name/'+d['external_ids']['imdb_id']}] if d.get('external_ids',{}).get('imdb_id') else [],'profile_version':2,'updated_at':now}
         except Exception: return k,None
     if token:
         with ThreadPoolExecutor(max_workers=4) as pool:
@@ -63,7 +83,7 @@ def main():
     Path('backend/data/cinema-people-cache.json').unlink(missing_ok=True)
     buckets=[{} for _ in range(64)]; index=[]
     for k,p in people.items():
-        p.update(cache.get(k,{})); p['name_fa']=FA.get(int(k)) or p.get('name_fa',''); p['label_source']='Pendar' if int(k) in FA else 'TMDB / Wikidata'
+        p.update(cache.get(k,{})); p['name_fa']=seeds.get(k,{}).get('name_fa') or FA.get(int(k)) or p.get('name_fa',''); p['label_source']='Pendar' if int(k) in FA else 'TMDB / Wikidata'
         buckets[int(k)%64][k]=p
         index.append({key:p.get(key) for key in ('id','name','name_fa','profile_path','roles')})
     for i,b in enumerate(buckets): write(root/'people'/f'{i}.json',b)
@@ -100,4 +120,5 @@ def main():
     print('People from media:',len(people),'Persian names:',sum(bool(p.get('name_fa')) for b in buckets for p in b.values()),'IMDb ratings:',sum('imdb' in x for x in items.values()),'Rotten Tomatoes:',sum('rotten_tomatoes' in x for x in items.values()))
 
 if __name__=='__main__': main()
+
 

@@ -338,6 +338,29 @@ def add_organizations(reg: Registry, data_dir: Path) -> None:
             reg.edge(oid, "related_topic", tid)
 
 
+def add_creator_profiles(reg: Registry, data: dict) -> None:
+    for row in as_list(data.get("people")):
+        qid = str(row.get("qid") or "")
+        if not re.fullmatch(r"Q[0-9]+", qid):
+            continue
+        meta = row.get("meta") or {}
+        roles = ["creator"]
+        if "کارگردان" in str(meta.get("role_fa") or ""): roles.append("director")
+        if "بازیگر" in str(meta.get("role_fa") or ""): roles.append("actor")
+        existing = [e for e in reg.entities.values() if e["type"] == "person" and e.get("meta", {}).get("wikidata_id") == qid]
+        preferred = existing[0]["id"].split(":", 1)[1] if len(existing) == 1 else "wd-" + qid.lower()
+        eid = reg.add("person", row.get("name_fa"), preferred=preferred,
+                      aliases=aliases_from(row.get("aliases")), roles=roles,
+                      ref={"dataset":"creator-profiles","key":qid}, meta=meta,
+                      merge_by_alias=not bool(existing))
+        if eid:
+            entity = reg.entities[eid]
+            entity["routes"].setdefault("figure", entity["id"].split(":", 1)[1])
+            for slug in as_list(row.get("book_slugs")):
+                ref = {"dataset":"books.people","key":slug}
+                if ref not in entity["refs"]: entity["refs"].append(ref)
+
+
 def add_books(reg: Registry, data: dict) -> None:
     people_by_slug: dict[str, str] = {}
     for person in as_list(data.get("people") if isinstance(data, dict) else []):
@@ -345,9 +368,10 @@ def add_books(reg: Registry, data: dict) -> None:
         eid = reg.add(
             "person", person.get("name_fa") or slug, preferred=slug or None,
             roles=["book_person"] + [str(x) for x in as_list(person.get("roles_fa"))],
+            aliases=aliases_from(person.get("aliases")),
             ref={"dataset": "books.people", "key": slug or person.get("name_fa")},
             route=("book_person", slug) if slug else None,
-            meta={"book_count": len(as_list(person.get("book_slugs")))},
+            meta={**(person.get("profile") or {}), "book_count": len(as_list(person.get("book_slugs"))), "wikidata_id": person.get("wikidata_id") or (person.get("profile") or {}).get("wikidata_id")},
         )
         if slug and eid:
             people_by_slug[slug] = eid
@@ -584,6 +608,7 @@ def build(data_dir: Path) -> dict:
     add_topics(reg, data_dir)
     add_organizations(reg, data_dir)
     add_books(reg, read_json(data_dir / "books.json", {}))
+    add_creator_profiles(reg, read_json(data_dir / "creator-profiles.json", {}))
     add_movies(reg, read_json(data_dir / "movies.json", {}))
     add_press_sources(reg, data_dir)
     return compact(reg)
@@ -612,3 +637,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

@@ -1552,3 +1552,7 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 .figure-work-type,.figure-work-open,.figure-work-card small{font-size:12px;color:var(--ink-soft)}
 .figure-work-open{color:var(--accent);margin-top:4px}
 @media(max-width:620px){.x-profile-tabs:has(button:nth-child(4)) button{font-size:11px;padding:0 6px}.figure-works{padding:14px}.figure-work-grid{grid-template-columns:1fr}}
+
+/* Sourced creator work covers use the same theme colors as the profile. */
+.figure-work-cover{width:100%;height:180px;object-fit:contain;background:var(--surface);border-radius:8px;margin-bottom:10px}.figure-work-card small{display:block;color:var(--ink-soft);margin-top:7px}
+

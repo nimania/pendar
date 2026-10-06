@@ -60,10 +60,18 @@ def merge(root):
             if alias and alias!=entity['name_fa'] and alias not in entity['aliases']: entity['aliases'].append(alias)
         meta=entity.setdefault('meta',{})
         meta.update({'tmdb_id':tmdb,'person_bucket':tmdb%64})
-        for key in ('birthday','deathday','biography_fa','wikidata_id','imdb_id'):
+        for key in ('birthday','deathday','birthplace','biography_fa','biography_en','wikidata_id','imdb_id'):
             if p.get(key) and not meta.get(key): meta[key]=p[key]
         photo='https://image.tmdb.org/t/p/w185'+p['profile_path'] if p.get('profile_path') else ''
         if photo and not meta.get('avatar'): meta['avatar']=photo
+        links=meta.setdefault('social',[])
+        for link in p.get('social',[]):
+            if not any(x.get('url')==link.get('url') for x in links): links.append(link)
+        works={w.get('url') or w.get('id'):w for w in meta.get('works',[]) if isinstance(w,dict)}
+        for work in p.get('works',[]): works.setdefault(work.get('url') or work.get('id'),work)
+        meta['works']=list(works.values())
+        meta['catalog_updated_at']=p.get('updated_at') or meta.get('catalog_updated_at')
+        if not meta.get('role_fa') and p.get('roles_fa'): meta['role_fa']='، '.join(p['roles_fa'])
         role='، '.join(dict.fromkeys(ROLE_FA.get(r,r if r=='بازیگر' else 'عوامل') for r in p.get('roles',[])))
         if role and not meta.get('role_fa'): meta['role_fa']=role
         ref={'dataset':'tmdb_people','key':str(tmdb)}
@@ -112,3 +120,4 @@ def main():
     merge(parser.parse_args().data_dir)
 
 if __name__=='__main__': main()
+
