@@ -1,5 +1,6 @@
-import tempfile,sqlite3,json,unittest
+import tempfile,sqlite3,json,unittest,sys
 from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
 from reconcile_creator_works import reconcile,media_key
 
 class ReconciliationTests(unittest.TestCase):
