@@ -67,6 +67,14 @@ def main():
         index.append({key:p.get(key) for key in ('id','name','name_fa','profile_path','roles')})
     for i,b in enumerate(buckets): write(root/'cinema-people'/f'{i}.json',b)
     write(root/'cinema-people-index.json',{'updated_at':now,'people':index})
+    for shard in (root/'movie-master-details').glob('*.json'):
+        for film_id, film in read(shard,{}).items():
+            if not re.fullmatch(r'p[mt]_[a-z0-9]+',film_id): continue
+            for credit in film.get('credits',[]):
+                person=buckets[int(credit.get('id',0))%64].get(str(credit.get('id')),{})
+                credit['name_fa']=person.get('name_fa','')
+                credit['profile_path']=person.get('profile_path')
+            write(root/'movie-details'/f'{film_id}.json',film)
     ratings=read(root/'movie-ratings.json',{'items':{}}); items=ratings.setdefault('items',{})
     try:
         with urllib.request.urlopen('https://datasets.imdbws.com/title.ratings.tsv.gz',timeout=60) as r:
