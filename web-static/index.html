@@ -94,7 +94,8 @@
       <section class="home-daily" id="home-daily" aria-label="خبر، فرهنگ و سرگرمی">
         <div class="home-daily-grid">
           <section class="home-daily-panel home-news-panel">
-            <div class="home-panel-title"><b id="home-news-title">مهم‌ترین اتفاق‌ها</b><a href="/headlines/">همهٔ سرخط‌ها ←</a></div>
+            <div class="home-panel-title home-panel-title-rich"><span><b id="home-news-title">نبض امروز</b><small>مهم‌ترین اتفاق‌ها در رادار پندار</small></span><a href="/headlines/">همهٔ سرخط‌ها ←</a></div>
+            <div class="home-dashboard-strip" id="home-news-dashboard" aria-label="وضعیت خبری امروز"></div>
             <div class="home-panel-tabs" role="tablist" aria-label="انتخاب سرخط‌ها">
               <button class="on" role="tab" aria-selected="true" data-home-news="selected" onclick="setHomeNewsMode('selected')">سرخط‌های برگزیده</button>
               <button role="tab" aria-selected="false" data-home-news="latest" onclick="setHomeNewsMode('latest')">سرخط‌های تازه</button>
@@ -102,7 +103,8 @@
             <div id="home-daily-stories"><div class="spinner"></div></div>
           </section>
           <section class="home-daily-panel home-culture-panel" id="home-culture-panel" aria-label="ویترین فرهنگ و سرگرمی">
-            <div class="home-panel-title"><b id="home-culture-title">پرفروش‌های امروز</b><a href="/books/">پیشخوان کتاب ←</a></div>
+            <div class="home-panel-title home-panel-title-rich"><span><b id="home-culture-title">ویترین امروز</b><small>کتاب، فیلم و سریال در پندار</small></span><a href="/books/">پیشخوان کتاب ←</a></div>
+            <div class="home-dashboard-strip" id="home-culture-dashboard" aria-label="وضعیت فرهنگی پندار"></div>
             <div class="home-panel-tabs home-culture-tabs" role="tablist" aria-label="ویترین فرهنگ و سرگرمی">
               <button class="on" role="tab" aria-selected="true" data-home-culture="bestsellers" onclick="setHomeCultureMode('bestsellers')">پرفروش‌های امروز</button>
               <button role="tab" aria-selected="false" data-home-culture="books" onclick="setHomeCultureMode('books')">ترندهای کتاب</button>
