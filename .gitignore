@@ -1,5 +1,6 @@
 # build output & local files (never committed)
 backend/public/
+backend/periodicals/book_candidates.json
 backend/**/*.db
 **/__pycache__/
 .venv/
