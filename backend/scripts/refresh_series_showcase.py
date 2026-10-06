@@ -3,6 +3,7 @@ import json,re,datetime,urllib.request,pathlib
 from bs4 import BeautifulSoup
 path=pathlib.Path("web-static/data/pendar-series-showcase.json")
 data=json.loads(path.read_text())
+known={ (r["platform"],r["title"]):r for r in data["items"] }
 today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
 def fetch(url):
     req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; PendarSourceMonitor/1.0)"})
@@ -52,5 +53,9 @@ for platform,channel in [("فیلیمو","filimo"),("فیلم‌نت","filmnetof
             rows[title]=dict(title=title,platform=platform,region="iran",checked_at=today,published_at=published,source_url=source,reason="اعلان تازه در کانال رسمی",poster_url=image[1] if image else None)
         if rows:data["items"]=[r for r in data["items"] if r["platform"]!=platform]+list(rows.values())[-10:]
     except Exception as exc:print(platform,type(exc).__name__)
+for row in data["items"]:
+    previous=known.get((row["platform"],row["title"]),{})
+    for key in ("release_date","release_source"):
+        if previous.get(key):row[key]=previous[key]
 data["checked_at"]=today
 path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n")
