@@ -246,11 +246,12 @@ class Telegram:
 
 
 class GitHubLedger:
-    def __init__(self, repository, token, *, branch=STATE_BRANCH):
+    def __init__(self, repository, token, *, branch=STATE_BRANCH, path=STATE_PATH):
         if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
             raise ValueError("Invalid GitHub repository")
         self.base = f"https://api.github.com/repos/{repository}"
         self.branch = branch
+        self.path = path
         self.headers = {"Authorization": f"Bearer {token}",
                         "Accept": "application/vnd.github+json",
                         "X-GitHub-Api-Version": "2022-11-28"}
@@ -266,7 +267,7 @@ class GitHubLedger:
             raise RuntimeError(f"GitHub delivery-state request failed (HTTP {status})")
 
     def load(self):
-        path = f"/contents/{STATE_PATH}?ref={quote(self.branch, safe='')}"
+        path = f"/contents/{self.path}?ref={quote(self.branch, safe='')}"
         status, item = self.request(path)
         if status == 404:
             self.sha = None
@@ -294,7 +295,7 @@ class GitHubLedger:
                 "content": base64.b64encode(content.encode()).decode()}
         if self.sha:
             data["sha"] = self.sha
-        status, result = self.request(f"/contents/{STATE_PATH}", method="PUT", data=data)
+        status, result = self.request(f"/contents/{self.path}", method="PUT", data=data)
         self.require(status)
         self.sha = result["content"]["sha"]
 

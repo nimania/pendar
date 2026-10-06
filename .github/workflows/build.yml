@@ -56,6 +56,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Check Telegram publishing
         run: python -m unittest discover -s tests -p 'test_telegram_publish.py'
+      - name: Check Telegram digest
+        run: python -m unittest discover -s tests -p 'test_telegram_digest.py'
       # Persist the news DB between hourly runs so we DON'T re-synthesize the same
       # stories every hour (only new clusters cost an AI call). Restores the most
       # recent cache; always saves a fresh one (unique key + prefix restore-keys).
@@ -316,7 +318,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: published-figures
-          path: backend/public/data/figures.json
+          path: |
+            backend/public/data/figures.json
+            backend/public/data/stories.json
           if-no-files-found: error
           retention-days: 7
       # Keep a reusable copy of the latest complete static site. The fast UI
@@ -391,6 +395,13 @@ jobs:
           TELEGRAM_RESOLVE_URL: ${{ inputs.resolve_url }}
           TELEGRAM_RESOLUTION: ${{ inputs.resolution }}
         run: python backend/scripts/publish_figures.py --figures telegram-export/figures.json
+      - name: Publish periodic digest to Pendario
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_BOT_USERNAME: janekalaam_bot
+          TELEGRAM_CHAT_ID: "@pendario"
+          GH_TOKEN: ${{ github.token }}
+        run: python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json
 
 
 
