@@ -190,25 +190,39 @@ MANUAL_BOOKS = [
             {"slug": "zoya-pirzad", "name_fa": "زویا پیرزاد", "role_fa": "نویسنده"}
         ],
         "publisher": {"slug": "jahan-ketab", "name_fa": "نشر جهان کتاب"},
-        "purchase_links": [],
+        "purchase_links": [
+            {
+                "store": "جهان کتاب",
+                "url": "https://jahaneketab.ir/product/%D8%A7%D9%87%D8%A7%D9%84%DB%8C-%D9%85%D8%A7%DA%AF%D9%86%D9%88%D9%84%DB%8C%D8%A7/",
+                "format_fa": "صفحهٔ رسمی ناشر",
+                "exact": True,
+            },
+            {
+                "store": "ایران‌کتاب",
+                "url": "https://www.iranketab.ir/book/207516-magnolia",
+                "format_fa": "نسخهٔ چاپی",
+                "exact": True,
+            },
+        ],
         "source_meta": [
+            {"label": "جهان کتاب", "url": "https://jahaneketab.ir/product/%D8%A7%D9%87%D8%A7%D9%84%DB%8C-%D9%85%D8%A7%DA%AF%D9%86%D9%88%D9%84%DB%8C%D8%A7/"},
             {"label": "عصر ایران", "url": "https://www.asriran.com/fa/news/1196223/"},
-            {"label": "خبرآنلاین", "url": "https://www.khabaronline.ir/news/2283519/"},
         ],
     },
     {
-        "slug": "shahnameh-mosavvar-sayan",
-        "title_fa": "شاهنامهٔ مصوّر سایان",
-        "subtitle_fa": "نسخهٔ مصوّر شاهنامهٔ فردوسی، نشر سایان",
+        "slug": "daneshnameh-mosavvar-shahnameh",
+        "title_fa": "دانش‌نامهٔ مصوّر شاهنامه",
+        "subtitle_fa": "نسخهٔ مشترک دیجی‌کالا و نشر سایان",
         "description_fa": (
-            "نسخهٔ مصوّر شاهنامهٔ فردوسی از نشر سایان؛ ویرایشی تصویری از داستان‌های "
-            "پهلوانی و پادشاهی ایران برای خواننده‌ای که هم‌زمان متن و تصویر را می‌خواهد."
+            "دانش‌نامه‌ای تصویری دربارهٔ شاهنامهٔ فردوسی به قلم یاسر مالی؛ "
+            "داستان‌ها، پهلوانان و جهان اسطوره‌ای شاهنامه را در قالبی مصوّر و مرجع‌گونه "
+            "روایت می‌کند. نسخهٔ مشترک دیجی‌کالا و نشر سایان."
         ),
-        "category_fa": "ادبیات حماسی",
+        "category_fa": "شاهنامه‌پژوهی و مرجع مصوّر",
         "isbn": "",
         "cover_url": "",
         "creators": [
-            {"slug": "ferdowsi", "name_fa": "فردوسی", "role_fa": "شاعر"}
+            {"slug": "yaser-mali", "name_fa": "یاسر مالی", "role_fa": "نویسنده و تصویرگر"}
         ],
         "publisher": {"slug": "sayan", "name_fa": "نشر سایان"},
         "purchase_links": [
@@ -217,10 +231,17 @@ MANUAL_BOOKS = [
                 "url": "https://cyanpub.ir/product-134",
                 "format_fa": "نسخهٔ چاپی مصوّر",
                 "exact": True,
-            }
+            },
+            {
+                "store": "دیجی‌کالا",
+                "url": "https://www.digikala.com/product/dkp-22741821/",
+                "format_fa": "نسخهٔ چاپی مصوّر",
+                "exact": True,
+            },
         ],
         "source_meta": [
-            {"label": "نشر سایان", "url": "https://cyanpub.ir/product-134"}
+            {"label": "نشر سایان", "url": "https://cyanpub.ir/product-134"},
+            {"label": "دیجی‌کالا", "url": "https://www.digikala.com/product/dkp-22741821/"},
         ],
     },
 ]
