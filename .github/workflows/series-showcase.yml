@@ -1,0 +1,29 @@
+name: Refresh series showcases
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 6 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: series-showcase-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install beautifulsoup4
+      - run: python backend/scripts/refresh_series_showcase.py
+      - name: Save sourced snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web-static/data/pendar-series-showcase.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Refresh sourced series showcases"
+          git pull --rebase origin main
+          git push
