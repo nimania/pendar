@@ -44,6 +44,38 @@ def build(site):
     for s in stories:
         full=read(data/'story'/ (str(s.get('id'))+'.json'),s)
         add('story',s.get('id'),full.get('headline_fa'),full.get('summary_fa'),schema_type='Article',published=full.get('published_at'))
+    # News archives and programme pages also need real refreshable URLs.
+    topic_rows={}; source_rows={}; person_rows={}; day_rows={}
+    for s in stories:
+        pair=(route('story',s.get('id','')),s.get('headline_fa',''))
+        for t in s.get('topics') or []:
+            if isinstance(t,dict) and t.get('slug'):topic_rows.setdefault(t['slug'],{'name':t.get('name_fa') or t['slug'],'links':[]})['links'].append(pair)
+        for e in s.get('entities') or []:
+            if isinstance(e,dict) and e.get('slug'):person_rows.setdefault(e['slug'],{'name':e.get('name_fa') or e['slug'],'links':[]})['links'].append(pair)
+        for c in s.get('sources') or []:
+            name=c.get('source_name') or c.get('name') if isinstance(c,dict) else str(c)
+            if name:source_rows.setdefault(name,{'name':name,'links':[]})['links'].append(pair)
+        date=str(s.get('published_at') or s.get('last_seen_at') or '')[:10]
+        if re.fullmatch(r'\d{4}-\d{2}-\d{2}',date):day_rows.setdefault(date,{'name':'خبرهای '+date,'links':[]})['links'].append(pair)
+    for kind,groups in [('topic',topic_rows),('source',source_rows),('person',person_rows),('day',day_rows)]:
+        for key,group in groups.items():
+            add(kind,key,group['name'],'آرشیو مطالب مرتبط در پندار، با پیوند به متن کامل خبرها و گزارش‌ها.')
+            page=pages[route(kind,key)];page['body']+=links(group['links']);page['indexable']=len(group['links'])>=2
+            section={'topic':'topics','source':'press','person':'figures','day':'headlines'}[kind]
+            page['section']=section;catalogs[section].append((route(kind,key),group['name']))
+    guide=read(data/'tv-guide.json',{})
+    for channel in guide.get('channels',[]):
+        rows=[p for p in guide.get('programmes',[]) if str(p.get('channel_id'))==str(channel.get('id'))]
+        body='\n'.join((str(p.get('title_fa') or p.get('title') or '')+' — '+str(p.get('start') or '')) for p in rows[:150])
+        add('tv','channel/'+str(channel.get('id')),channel.get('name_fa') or channel.get('name'),body,channel.get('logo'))
+    programmes={}
+    for programme in guide.get('programmes',[]):
+        title=programme.get('title_fa') or programme.get('title_en') or programme.get('title') or ''
+        key=re.sub(r'\s+',' ',str(title).replace('ي','ی').replace('ى','ی').replace('ك','ک').replace('‌',' ')).strip().lower()
+        if key:programmes.setdefault(key,{'title':title,'rows':[]})['rows'].append(programme)
+    for key,group in programmes.items():
+        body='\n'.join((str(p.get('desc_fa') or '')+' — '+str(p.get('start') or '')) for p in group['rows'][:80])
+        add('tv','program/'+key,group['title'],body,group['rows'][0].get('icon'))
     # Deep stories can outlive the compact homepage feed.
     for p in sorted((data/'story').glob('*.json')):
         s=read(p,{}); add('story',s.get('id') or p.stem,s.get('headline_fa'),s.get('summary_fa'),schema_type='Article',published=s.get('published_at'))
@@ -83,6 +115,11 @@ def build(site):
         add('master-movie',key,m.get('title_fa') or m.get('title_en'),'\n'.join(text(m.get(k)) for k in ['overview_fa','overview_en','year','genres'] if m.get(k)),('https://image.tmdb.org/t/p/w500'+m['poster_path']) if m.get('poster_path') else None,schema_type='TVSeries' if m.get('media_type')=='series' else 'Movie')
     for a in array(read(data/'periodicals.json',[]),'items'):
         add('press-article',a.get('id'),a.get('headline_fa') or a.get('title_fa') or a.get('title_original'),'\n'.join(text(a.get(k)) for k in ['summary_fa','body_fa','longform_fa'] if a.get(k)),schema_type='Article',published=a.get('published_at'))
+    for source in array(read(data/'press-directory.json',[]),'sources'):
+        name=source.get('name') or source.get('name_fa')
+        if name:
+            add('press',name,name,'\n'.join(text(source.get(k)) for k in ['description_fa','description','note','url'] if source.get(k)))
+            if route('press',name) in pages:pages[route('press-source',name)]={**pages[route('press',name)],'canonical':route('press',name),'indexable':False}
     entities=array(read(data/'entity-registry.json',{}),'entities')
     for e in entities:
         eid=e.get('id'); primary=None
