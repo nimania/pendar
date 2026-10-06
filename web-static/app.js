@@ -77,7 +77,7 @@ function showHome() {
   show("home"); setTab("home"); setHash("");
   document.title="پندار | خبر، چهره‌ها، کتاب، فیلم و سریال";
   renderHomeStats(); renderHomeGlance(); renderHomePrices(); renderHomeWeather();
-  renderHomePeople(); renderBookTrends("home-books-strip",{heading:false,limit:6}); renderHomeSeries();
+  renderHomePeople(); renderHomeCulture();
   if (ALL.length) renderHomeDaily(); else loadFeed(true);
 }
 async function showFeed() {
@@ -309,8 +309,7 @@ if (_isDeepLink) {
   renderHomePrices();
   renderHomeWeather();
   renderHomePeople();
-  renderBookTrends('home-books-strip',{heading:false,limit:6});
-  renderHomeSeries();
+  renderHomeCulture();
 }
 updateMineBadge();
 
