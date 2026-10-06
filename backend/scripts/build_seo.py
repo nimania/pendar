@@ -175,12 +175,12 @@ def build(site):
         if schema['@type']=='ProfilePage':schema['mainEntity']={'@type':'Person','name':page['title']}
         schema={'@context':'https://schema.org','@graph':[schema,{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'پندار','item':ORIGIN+'/'},{'@type':'ListItem','position':2,'name':page['title'],'item':canonical}]}]}
         schema_text=json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')
-        head='<base href="/"><link rel="canonical" href="'+esc(canonical)+'"><meta name="robots" content="'+('index,follow,max-image-preview:large' if page['indexable'] else 'noindex,follow')+'"><meta property="og:type" content="'+('article' if page['schema_type']=='Article' else 'website')+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(desc)+'"><meta property="og:url" content="'+esc(canonical)+'"><meta name="twitter:card" content="summary_large_image">'
+        head='<link rel="canonical" href="'+esc(canonical)+'"><meta name="robots" content="'+('index,follow,max-image-preview:large' if page['indexable'] else 'noindex,follow')+'"><meta property="og:type" content="'+('article' if page['schema_type']=='Article' else 'website')+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(desc)+'"><meta property="og:url" content="'+esc(canonical)+'"><meta name="twitter:card" content="summary_large_image">'
         if schema['@graph'][0].get('image'):head+='<meta property="og:image" content="'+esc(schema['@graph'][0]['image'])+'">'
         head+='<script type="application/ld+json" id="seo-schema">'+schema_text+'</script>'
         out=re.sub(r'<title>.*?</title>',lambda _: '<title>'+esc(title)+'</title>',template,count=1)
         out=re.sub(r'<meta name="description"[^>]*>',lambda _: '<meta name="description" content="'+esc(desc)+'">',out,count=1)
-        out=out.replace('</head>',head+'</head>')
+        out=out.replace('<head>','<head><base href="/">',1).replace('</head>',head+'</head>')
         content='<section id="seo-static" class="wrap"><nav><a href="/">پندار</a> · <a href="/'+esc(page.get('section',page.get('kind','headlines')))+'/">'+esc(SECTIONS.get(page.get('section',page.get('kind')),'مطالب پندار'))+'</a></nav><h1>'+esc(page['title'])+'</h1>'+page['body']+'</section><!-- seo-end -->'
         out=out.replace('<main class="wrap">',content+'<main class="wrap">')
         # Prevent the app shell from painting below the readable static content.

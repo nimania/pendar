@@ -75,7 +75,7 @@ function show(v) {
 }
 function showHome() {
   show("home"); setTab("home"); setHash("");
-  document.title="پندار";
+  document.title="پندار | خبر، چهره‌ها، کتاب، فیلم و سریال";
   renderHomeStats(); renderHomeGlance(); renderHomePrices(); renderHomeWeather();
   renderHomePeople(); renderBookTrends("home-books-strip"); renderHomeSeries();
   if (ALL.length) renderHomeDaily(); else loadFeed(true);

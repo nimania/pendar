@@ -10,6 +10,8 @@ on:
     branches: [main]
     paths:
       - "web-static/**"
+      - "backend/scripts/build_seo.py"
+      - "backend/tests/test_seo*"
       - "backend/scripts/build_tv_guide.py"
       - "backend/scripts/build_streaming_availability.py"
       - "backend/scripts/build_movies.py"
@@ -323,7 +325,9 @@ jobs:
         continue-on-error: true
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
-        run: python backend/scripts/refresh_watch_schedule.py
+        run: |
+          pip install beautifulsoup4
+          python backend/scripts/refresh_watch_schedule.py
 
       - name: Overlay current UI without overwriting generated data
         run: |

@@ -21,6 +21,7 @@ class SeoTests(unittest.TestCase):
             for url in ['/story/news-1/','/book/a-book/','/movie/a-movie/','/statement/statement-1/']:
                 html=(site/url.strip('/')/'index.html').read_text()
                 self.assertIn('<base href="/">',html)
+                self.assertLess(html.index('<base '),html.index('<link rel="stylesheet"'))
                 self.assertIn('https://pendar.io'+url,html)
                 self.assertIn('<section id="seo-static"',html)
                 self.assertIn('<meta name="robots" content="index,follow',html)
