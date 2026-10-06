@@ -102,10 +102,16 @@
             <div id="home-daily-stories"><div class="spinner"></div></div>
           </section>
           <section class="home-daily-panel home-culture-panel" id="home-culture-panel" aria-label="ویترین فرهنگ و سرگرمی">
-            <div class="home-panel-title"><b>ویترین فرهنگ و سرگرمی</b><a href="/movies/">جان فیلم ←</a></div>
+            <div class="home-panel-title"><b id="home-culture-title">پرفروش‌های امروز</b><a href="/books/">پیشخوان کتاب ←</a></div>
+            <div class="home-panel-tabs home-culture-tabs" role="tablist" aria-label="ویترین فرهنگ و سرگرمی">
+              <button class="on" role="tab" aria-selected="true" data-home-culture="bestsellers" onclick="setHomeCultureMode('bestsellers')">پرفروش‌های امروز</button>
+              <button role="tab" aria-selected="false" data-home-culture="books" onclick="setHomeCultureMode('books')">ترندهای کتاب</button>
+              <button role="tab" aria-selected="false" data-home-culture="series" onclick="setHomeCultureMode('series')">سریال‌های تازه</button>
+            </div>
             <div class="home-culture-content">
-              <section class="home-books-strip book-trends-section" id="home-books-strip" aria-label="ترندهای کتاب" style="display:none"></section>
-              <section class="book-trends-section" id="home-series-strip" aria-label="سریال‌های تازه" style="display:none"></section>
+              <section class="home-culture-pane" id="home-bestsellers-strip" aria-label="پرفروش‌ترین کتاب‌های بازار امروز"></section>
+              <section class="home-culture-pane home-books-strip book-trends-section" id="home-books-strip" aria-label="ترندهای کتاب" style="display:none"></section>
+              <section class="home-culture-pane book-trends-section" id="home-series-strip" aria-label="سریال‌های تازه" style="display:none"></section>
             </div>
             <nav class="home-culture-links"><a href="/books/">پیشخوان کتاب ←</a><a href="/movies/">جان فیلم ←</a><a href="/tv/week/">راهنمای تماشا ←</a></nav>
           </section>
