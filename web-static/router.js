@@ -45,6 +45,8 @@ async function route() {
   if (kind === "press-article" && arg) return openPressArticle(arg);
   if (kind === "books") return showBooks(["publishers","people","new","all","used","reviews"].includes(arg) ? arg : "books");
   if (kind === "book" && arg) return openBook(arg);
+  if (kind === "cinema-person" && arg) return openCinemaPerson(arg);
+  if (kind === "cinema-people") return showCinemaPeople();
   if (kind === "movies") return showMovies();
   if (kind === "movie" && arg) return openMovie(arg);
   if (kind === "master-movie" && arg) return openMasterMovie(arg);
@@ -65,3 +67,4 @@ async function route() {
 }
 
 window.addEventListener("hashchange", () => { if (!_navLock) route(); });
+

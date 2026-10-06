@@ -219,6 +219,19 @@ jobs:
             python backend/scripts/collect_30nama_archive.py --output site/data/30nama.json --movies site/data/movies.json --movies-js site/data/movies.js
           fi
 
+      - name: Restore cinema people cache
+        uses: actions/cache@v4
+        with:
+          path: backend/data/cinema-people-cache.json
+          key: cinema-people-${{ github.run_id }}
+          restore-keys: cinema-people-
+
+      - name: Build cinema faces and sourced ratings
+        env:
+          TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+        run: python backend/scripts/build_cinema_people.py --data-dir site/data
+
       - name: Overlay freshest book commerce
         env:
           GH_TOKEN: ${{ github.token }}
@@ -344,4 +357,5 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_attempt }}
+
 
