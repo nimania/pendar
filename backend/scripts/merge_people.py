@@ -7,7 +7,7 @@ import argparse
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
-from build_entities import norm, read_json
+from build_entities import norm, read_json, hash_key
 
 ROLE_FA={'Director':'کارگردان','Writer':'نویسنده','Screenplay':'فیلمنامه‌نویس','Creator':'خالق','Producer':'تهیه‌کننده','Executive Producer':'تهیه‌کننده اجرایی','Story':'داستان‌نویس','Director of Photography':'مدیر فیلم‌برداری','Editor':'تدوینگر','Original Music Composer':'آهنگساز','Casting':'انتخاب بازیگر'}
 
@@ -105,7 +105,14 @@ def merge(root):
             if norm(label): alias_owners[norm(label)].add(row['id'])
     alias_buckets=[{} for _ in range(64)]
     for label,owners in alias_owners.items():
-        if len(owners)==1: alias_buckets[sum(map(ord,label))%64][label]=next(iter(owners))
+        if len(owners)==1:
+            owner=next(iter(owners))
+            alias_buckets[sum(map(ord,label))%64][label]=owner
+            # Older generated person URLs used the normalized name hash.
+            # Only unambiguous names may redirect to a sourced identity.
+            legacy='person:'+hash_key(label)
+            if legacy not in by_id and legacy!=owner: redirects.setdefault(legacy,owner)
+    write(root/'entity-registry.json',registry)
     for number,aliases in enumerate(alias_buckets): write(root/'person-aliases'/f'{number}.json',aliases)
     # Movie credits link directly to canonical people, including known figures.
     ids={row['tmdb_id']:row['id'] for row in index}
@@ -120,4 +127,3 @@ def main():
     merge(parser.parse_args().data_dir)
 
 if __name__=='__main__': main()
-

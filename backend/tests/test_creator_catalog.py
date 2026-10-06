@@ -8,11 +8,23 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from enrich_creator_catalog import profile, work, enrich, related_work_ids
 from build_people import combined_works
 from build_entities import Registry, add_creator_profiles, add_books
+from merge_people import merge
 
 def claim(value):
     return [{'rank':'normal','mainsnak':{'datavalue':{'value':value}}}]
 
 class CreatorCatalogTests(unittest.TestCase):
+    def test_old_named_profile_url_survives_sourced_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); (root/'people').mkdir()
+            entity={'id':'person:wd-q255510','type':'person','name_fa':'لیلا حاتمی','aliases':[],'refs':[],'routes':{'figure':'wd-q255510'},'roles':[],'meta':{'tmdb_id':240240}}
+            (root/'entity-registry.json').write_text(json.dumps({'entities':[entity]}))
+            (root/'people/32.json').write_text(json.dumps({'240240':{'id':240240,'name':'Leila Hatami','name_fa':'لیلا حاتمی','films':{}}}))
+            merge(root)
+            registry=json.loads((root/'entity-registry.json').read_text())
+            self.assertEqual(registry['redirects']['person:df1e8d5cf420'],'person:wd-q255510')
+            self.assertEqual(registry['redirects']['person:tmdb-240240'],'person:wd-q255510')
+
     def test_related_ids_reject_unrequested_people_and_nonentities(self):
         data={'results':{'bindings':[{'person':{'value':'http://www.wikidata.org/entity/Q1'},'work':{'value':'http://www.wikidata.org/entity/Q2'}},{'person':{'value':'http://www.wikidata.org/entity/Q9'},'work':{'value':'http://www.wikidata.org/entity/Q3'}},{'person':{'value':'http://www.wikidata.org/entity/Q1'},'work':{'value':'http://www.wikidata.org/prop/statement/P50'}}]}}
         with patch('enrich_creator_catalog.request',return_value=data):
