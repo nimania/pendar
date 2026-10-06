@@ -1610,3 +1610,22 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 .home-person-ring.has-recent-video::after{content:"";position:absolute;inset:-5px;border:1px solid #e34b4b;border-radius:50%;pointer-events:none}
 
 .home-people-list{padding-top:8px}
+
+
+/* Homepage culture tabs + sourced bestseller snapshot. */
+.home-culture-tabs{padding-top:7px;padding-bottom:7px}
+.home-culture-pane{min-height:370px}
+.home-bestseller-list{display:flex;flex-direction:column}
+.home-bestseller-row{display:grid;grid-template-columns:28px 48px minmax(0,1fr) 22px;gap:10px;align-items:center;min-height:72px;padding:8px 13px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none}
+.home-bestseller-row:hover{background:var(--accent-soft)}
+.home-bestseller-rank{width:24px;height:24px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:.62rem;font-weight:800;color:var(--accent)}
+.home-bestseller-cover{position:relative;width:42px;height:58px;border-radius:5px;overflow:hidden;background:var(--surface-2);display:grid;place-items:center}
+.home-bestseller-cover>span{font-size:.45rem;line-height:1.25;text-align:center;padding:3px;color:var(--muted)}
+.home-bestseller-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#fff}
+.home-bestseller-copy{min-width:0;display:flex;flex-direction:column}
+.home-bestseller-copy strong{font-size:.76rem;line-height:1.65;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home-bestseller-copy small{font-size:.61rem;color:var(--muted);margin-top:2px}
+.home-bestseller-go{color:var(--accent);font-size:.85rem}
+.home-bestseller-source{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:9px 13px;font-size:.56rem;color:var(--ink-faint);background:var(--surface-2)}
+.home-bestseller-source a{color:var(--accent);text-decoration:none;white-space:nowrap}
+@media(max-width:520px){.home-culture-tabs{flex-wrap:nowrap;overflow:auto}.home-culture-tabs button{white-space:nowrap}.home-bestseller-source{align-items:flex-start;flex-direction:column}}
