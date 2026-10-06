@@ -67,6 +67,7 @@ const TABS = ["home", "feed", "trends", "factchecks", "iran", "topics"];
 const SCOPE_FA = { local: "استانی", national: "کشوری", international: "بین‌المللی" };
 function setTab(w) { for (const t of TABS) document.getElementById("tab-" + t).classList.toggle("active", w === t); }
 function show(v) {
+  document.documentElement.classList.remove("route-boot");
   for (const [key, id] of Object.entries(VIEWS))
     document.getElementById(id).style.display = key === v ? "block" : "none";
   window.scrollTo({ top: 0, behavior: "instant" });
