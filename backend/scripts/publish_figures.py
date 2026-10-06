@@ -13,7 +13,7 @@ import os
 import re
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlsplit
@@ -28,6 +28,9 @@ SITE = os.environ.get("SITE_URL", f"https://{_owner}.github.io/{_repo_name}").rs
 STATE_BRANCH = "telegram-state"
 STATE_PATH = "telegram/figures-state.json"
 STATUSES = {"baseline", "pending", "sending", "sent"}
+# Cap how many posts one figure can occupy in the channel per rolling 24h, so a
+# prolific commentator cannot flood it. Over-cap posts stay queued, not dropped.
+MAX_PER_FIGURE_PER_DAY = int(os.environ.get("MAX_FIGURE_POSTS_PER_DAY", "3"))
 
 
 class TelegramRejected(RuntimeError):
@@ -338,14 +341,36 @@ def publish(posts, ledger, telegram, chat_id, *, sleep=time.sleep,
             changed = True
     if changed:
         ledger.save(state)  # persist the queue before any network delivery
-    pending = sorted(((key, entry) for key, entry in entries.items() if entry["status"] == "pending"),
-                     key=lambda item: (item[1]["post"].get("published_at") or "", item[0]))
+    # Per-figure delivery history from already-sent entries: how many each
+    # figure has had in the last 24h, and when each last appeared. Used to cap
+    # floods and rotate fairly between figures.
+    day_ago = datetime.now(timezone.utc) - timedelta(hours=24)
+    sent_today, last_sent = {}, {}
+    for e in entries.values():
+        if e.get("status") != "sent" or not e.get("handle"):
+            continue
+        h, ts = e["handle"], e.get("sent_at") or ""
+        last_sent[h] = max(last_sent.get(h, ""), ts)
+        try:
+            when = datetime.fromisoformat(ts)
+        except ValueError:
+            when = None
+        if when and when >= day_ago:
+            sent_today[h] = sent_today.get(h, 0) + 1
+    pending = [(key, entry) for key, entry in entries.items() if entry["status"] == "pending"]
+    # Hold back figures already at the daily cap; their posts stay queued.
+    eligible = [(k, e) for k, e in pending
+                if sent_today.get(e["post"].get("handle", ""), 0) < MAX_PER_FIGURE_PER_DAY]
+    # Rotate to the figure who appeared least recently (never-posted first),
+    # then oldest post within that figure. Diversity beats strict chronology.
+    eligible.sort(key=lambda item: (last_sent.get(item[1]["post"].get("handle", ""), ""),
+                                    item[1]["post"].get("published_at") or "", item[0]))
     # Deliberately drain at most one queued figure post per workflow run.
     # build.yml runs every 15 minutes, so a large ingestion/backfill becomes a
     # paced stream instead of a Telegram burst. Nothing is dropped: remaining
     # pending entries stay on the persistent telegram-state branch.
     sent = 0
-    for key, entry in pending[:1]:
+    for key, entry in eligible[:1]:
         entry["status"] = "sending"
         ledger.save(state)  # a crash/timeout must not cause an automatic duplicate
         try:
@@ -357,7 +382,8 @@ def publish(posts, ledger, telegram, chat_id, *, sleep=time.sleep,
         except DeliveryUncertain:
             print(f"::warning::Check the channel before recovering delivery of {key}")
             raise
-        entry.update(status="sent", message_id=message_id, sent_at=utc_now())
+        entry.update(status="sent", message_id=message_id, sent_at=utc_now(),
+                     handle=entry["post"].get("handle", ""))
         entry.pop("post", None)
         ledger.save(state)  # checkpoint each successful message
         sent += 1

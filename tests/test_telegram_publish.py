@@ -74,6 +74,25 @@ class PublisherTests(unittest.TestCase):
             self.assertTrue(any(h["posts"][key]["status"] == "sending"
                                 for h in self.ledger.history if key in h["posts"]))
 
+    def test_prolific_figure_is_capped_and_figures_rotate(self):
+        from collections import Counter
+        a = lambda n: post(n, handle="figurea", url=f"https://t.me/figurea/{n}")
+        b = lambda n: post(n, handle="figureb", url=f"https://t.me/figureb/{n}")
+        flood = (a(1), a(2), a(3), a(4), b(9))
+        self.run_posts()  # baseline an empty archive
+        # No one has posted yet, so the oldest post overall goes first.
+        self.run_posts(*flood)
+        self.assertEqual(self.bot.send.call_args.args[0]["url"], a(1)["url"])
+        # figurea just appeared, so the next turn rotates to figureb.
+        self.run_posts(*flood)
+        self.assertEqual(self.bot.send.call_args.args[0]["url"], b(9)["url"])
+        for _ in range(5):
+            self.run_posts(*flood)
+        counts = Counter(c.args[0]["url"].split("/")[-2] for c in self.bot.send.call_args_list)
+        self.assertEqual(counts["figurea"], 3)  # capped at 3 per day
+        self.assertEqual(counts["figureb"], 1)  # its single post still delivered
+        self.assertEqual(self.ledger.state["posts"][a(4)["url"]]["status"], "pending")
+
     def test_db_id_summary_and_url_case_changes_do_not_republish(self):
         self.run_posts(post(1))
         rebuilt = post(1, id="new-db-id", summary_fa="خلاصهٔ اصلاح‌شده",
