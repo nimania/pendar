@@ -86,6 +86,13 @@ def merge(root):
     for number,records in enumerate(buckets): write(root/'people'/f'{number}.json',records)
     # Exact old TMDB links resolve to a matched pre-existing canonical person.
     redirects=registry.setdefault('redirects',{})
+    # A newly materialized book creator may become the canonical owner of a
+    # sourced identity. Preserve its earlier Wikidata person URL exactly.
+    for (provider,value),owners in external.items():
+        if provider in ('wikidata_id','wikidata_qid') and value.startswith('Q') and value[1:].isdigit() and len(owners)==1:
+            owner=next(iter(owners));legacy='person:wd-'+value.lower()
+            if legacy!=owner and legacy not in by_id: redirects[legacy]=owner
+
     for row in index:
         alias=f"person:tmdb-{row['tmdb_id']}"
         if alias!=row['id']: redirects[alias]=row['id']
@@ -127,3 +134,4 @@ def main():
     merge(parser.parse_args().data_dir)
 
 if __name__=='__main__': main()
+

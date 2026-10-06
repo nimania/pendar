@@ -14,6 +14,18 @@ def claim(value):
     return [{'rank':'normal','mainsnak':{'datavalue':{'value':value}}}]
 
 class CreatorCatalogTests(unittest.TestCase):
+    def test_wikidata_url_survives_materialized_book_creator(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'people').mkdir()
+            reg=Registry()
+            add_books(reg,{'people':[{'slug':'creator-q803646','name_fa':'بهرام بیضایی','wikidata_id':'Q803646','book_slugs':['work-q1']}],'books':[]})
+            add_creator_profiles(reg,{'people':[{'qid':'Q803646','name_fa':'بهرام بیضایی','meta':{'wikidata_id':'Q803646'}}]})
+            (root/'entity-registry.json').write_text(json.dumps({'entities':list(reg.entities.values())}))
+            merge(root)
+            data=json.loads((root/'entity-registry.json').read_text())
+            self.assertEqual(data['redirects']['person:wd-q803646'],'person:creator-q803646')
+            self.assertEqual(sum(e['type']=='person' for e in data['entities']),1)
+
     def test_old_named_profile_url_survives_sourced_identity(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory); (root/'people').mkdir()
@@ -67,3 +79,4 @@ class CreatorCatalogTests(unittest.TestCase):
         self.assertEqual(people[0]['routes']['figure'],people[0]['id'].split(':')[1])
 
 if __name__=='__main__': unittest.main()
+
