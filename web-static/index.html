@@ -7,6 +7,10 @@
   <meta name="description" content="پندار — ایران، خبر، اندیشه و فرهنگ در یک شبکهٔ دانشی فارسی.">
   <meta name="theme-color" content="#3c3938">
   <script>
+    // Canonical domain routes have no legacy language prefix.
+    if (location.pathname === "/fa" || location.pathname.startsWith("/fa/")) {
+      location.replace("/" + location.search + (["#", "#/"].includes(location.hash) ? "" : location.hash));
+    }
     // Deep-link boot guard: do not paint the default homepage before the
     // router has selected the requested view.
     (function () {
