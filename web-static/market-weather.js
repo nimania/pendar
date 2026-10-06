@@ -15,9 +15,6 @@ async function renderMarket() {
       getJSON(`${DATA}/prices.json`).catch(() => []),
       getJSON(`${DATA}/crypto.json`).catch(() => []),
     ]);
-    if ((!prices || !prices.length) && (!crypto || !crypto.length)) {
-      el.innerHTML = `<div class="state"><div class="big">نرخ‌ها در دسترس نیست</div></div>`;return;
-    }
     const priceRows = (prices || []).map(p => {
       const cls = p.dir === "up" ? "up" : p.dir === "down" ? "down" : "flat";
       const arrow = p.dir === "up" ? "▲" : p.dir === "down" ? "▼" : "—";
@@ -41,7 +38,7 @@ async function renderMarket() {
     window.JK_MARKET_UNITS = [{id:"toman",label:"تومان",toman:1}, ...fiatUnits, ...cryptoUnits];
 
     el.innerHTML =
-      `<div class="rule"><span>تبدیل واحد مالی</span><span class="l"></span></div>
+      `<div id="market-food"><p class="muted">در حال دریافت نبض بازار غذا…</p></div><div class="rule"><span>تبدیل واحد مالی</span><span class="l"></span></div>
        <div class="money-converter">
          <div class="mc-field"><label>مقدار</label><input id="mc-amount" type="number" inputmode="decimal" min="0" step="any" value="1" oninput="convertMarketUnit()"></div>
          <div class="mc-field"><label>از</label><select id="mc-from" onchange="convertMarketUnit()"></select></div>
@@ -53,6 +50,7 @@ async function renderMarket() {
       (cryptoRows ? `<div class="rule" style="margin-top:26px"><span>رمزارزها</span><span class="l"></span></div><div class="price-grid crypto-grid">${cryptoRows}</div>` : "") +
       `<p class="muted" style="margin-top:14px">ارز و طلا: TGJU · رمزارزها: CoinGecko. تبدیل‌ها تقریبی و بر اساس همین آخرین نرخ‌های ذخیره‌شده‌اند.</p>`;
   setupMarketConverter();
+  renderMarketFood();
   } catch (e) { el.innerHTML = `<div class="state"><div class="big">پنداربازار بارگذاری نشد</div></div>`; }
 }
 
@@ -142,4 +140,48 @@ async function renderWeather() {
       <aside class="weather-expert"><div><span class="weather-expert-kicker">کارشناس مرتبط</span><strong>محمد اصغری</strong><p>پیش‌بینی، تحلیل سامانه‌های بارشی، هشدارهای جوی و هواشناسی کشاورزی</p></div><button onclick="openFigure('asghari_weatherman')">صفحهٔ محمد اصغری ←</button></aside>
       <div class="weather-sources"><p><b>دما و شرایط جوی:</b> Open-Meteo.</p><p><b>آلودگی هوا:</b> ابتدا شبکهٔ ملی پایش کیفیت هوای سازمان حفاظت محیط‌زیست با همان endpointها و منطق منبعی که پروژهٔ متن‌باز AirCheck استفاده می‌کند. اگر دسترسی رسمی از سرور GitHub ممکن نباشد، Open-Meteo / Copernicus CAMS با برچسب «برآورد مدل» جایگزین می‌شود.</p><a href="https://github.com/ZethRise/AirCheck" target="_blank" rel="noopener">AirCheck روی GitHub ↗</a></div>`;
   } catch (e) { el.innerHTML = `<div class="state"><div class="big">آب‌وهوا بارگذاری نشد</div></div>`; }
+}
+
+const MARKET_FOOD_LABELS={qsr_fast_food:'فست‌فود و سرویس سریع',fast_casual:'فست‌کژوال',restaurant_operations:'عملیات رستوران',menu_product_innovation:'نوآوری منو و محصول',restaurant_technology_ai:'فناوری رستوران و هوش مصنوعی',equipment_automation:'تجهیزات و اتوماسیون',food_cost_pricing:'هزینه غذا و قیمت‌گذاری',supply_chain:'زنجیره تأمین',food_safety:'ایمنی غذا',labor_management:'نیروی انسانی و مدیریت',franchising:'فرنچایز',delivery_drive_thru:'دلیوری و درایو‌ثرو',consumer_behavior:'رفتار مصرف‌کننده',marketing_branding:'بازاریابی و برندینگ',restaurant_design_decor:'طراحی و دکور رستوران',packaging_design:'بسته‌بندی',beverage:'نوشیدنی',food_manufacturing:'تولید صنایع غذایی',ingredients_rd:'مواد اولیه و تحقیق‌وتوسعه',retail_food:'خرده‌فروشی غذا',regulation:'قانون‌گذاری و مقررات',sustainability:'پایداری',restaurant_industry:'صنعت رستوران',food_industry:'صنعت غذا'};
+
+const MARKET_FOOD_BASE='https://nimania.github.io/restaurant-intelligence/food-intel/';
+let marketFoodCache;
+async function renderMarketFood() {
+  const host=document.getElementById('market-food'); if(!host)return;
+  const link=x=>MARKET_FOOD_BASE+'story.html?id='+encodeURIComponent(x.id);
+  const empty='<p class="muted">در هفت روز اخیر دادهٔ کافی ثبت نشده است.</p>';
+  try {
+    const data=marketFoodCache || await (async()=>{const r=await fetch(MARKET_FOOD_BASE+'data/news.json',{signal:AbortSignal.timeout(15000),cache:'no-cache'});if(!r.ok)throw Error('food');return r.json()})();
+    marketFoodCache=data;
+    if(!host.isConnected)return;
+    const now=Date.now(),day=86400000, seen=new Set();
+    const rows=(data.items||[]).filter(x=>{
+      const t=Date.parse(x.published_at),key=x.url||x.id;
+      if(!x.title_fa||['retry','block'].includes(x.translation_quality?.status)||!Number.isFinite(t)||t>now||now-t>7*day||seen.has(key))return false;
+      seen.add(key);return true;
+    }).sort((a,b)=>Date.parse(b.published_at)-Date.parse(a.published_at));
+    const topics=new Map(),brands=new Map();
+    for(const x of rows){
+      for(const c of new Set(x.categories||[])){
+        if(!MARKET_FOOD_LABELS[c]||['food_industry','restaurant_industry'].includes(c))continue;
+        const t=topics.get(c)||{id:c,rows:[],brands:new Set(),sources:new Set()};t.rows.push(x);
+        for(const b of x.brands||[])if(b.id)t.brands.add(b.id);
+        if(x.source?.id)t.sources.add(x.source.id);topics.set(c,t);
+      }
+      for(const b of x.brands||[]){if(!b.id)continue;const v=brands.get(b.id)||{...b,rows:[]};v.rows.push(x);brands.set(b.id,v);}
+    }
+    const ranked=[...topics.values()].sort((a,b)=>b.rows.length-a.rows.length);
+    const section=(title,content)=>`<section class="mf-section"><div class="rule"><span>${title}</span><span class="l"></span></div>${content}</section>`;
+    const story=x=>`<a class="mf-story" href="${esc(link(x))}" target="_blank" rel="noopener noreferrer"><strong>${esc(x.title_fa)}</strong><small>${esc(x.source?.name||'Food Intel')} · ${esc(new Date(x.published_at).toLocaleDateString('fa-IR'))}</small></a>`;
+    const market=x=>x.market==='turkey'||x.country==='TR'||x.geo?.primary_country?.code==='TR'||x.source?.market==='turkey'?'turkey':x.market==='iran'||x.country==='IR'||x.geo?.primary_country?.code==='IR'||x.source?.market==='iran'||(x.iran_relevance_score||0)>=70?'iran':'world';
+    host.innerHTML=`<style>
+      .mf-intro{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px 0}.mf-intro h2{margin:0 0 8px}.mf-intro p,.mf-section p{line-height:1.9}.mf-intro small,.mf-story small,.mf-brand small{display:block;opacity:.65;font-size:12px}.mf-chips{display:flex;flex-wrap:wrap;gap:10px}.mf-chips a{border:1px solid currentColor;border-radius:24px;padding:8px 14px;text-decoration:none}.mf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.mf-card,.mf-brand,.mf-region{padding:18px;border:1px solid #8884;border-radius:14px}.mf-card h3{margin:0 0 10px}.mf-card a{font-size:12px}.mf-brands{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.mf-brand{text-decoration:none;display:flex;flex-direction:column;gap:10px}.mf-brand b{font-size:17px}.mf-region-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.mf-story{display:block;padding:14px 0;text-decoration:none;border-bottom:1px solid #8883}.mf-story strong{line-height:1.9;display:block}.mf-section{margin-bottom:25px}.mf-note{font-size:12px;opacity:.7;line-height:1.9}@media(max-width:760px){.mf-grid{grid-template-columns:1fr}.mf-brands{grid-template-columns:repeat(2,minmax(0,1fr))}.mf-region-grid{grid-template-columns:1fr}.mf-intro{align-items:start;flex-direction:column}}
+    </style><div class="mf-intro"><div><h2>نبض بازار غذا</h2><p class="muted">چه موضوع‌هایی خبرساز شده‌اند و کدام برندها در حرکت‌اند؟</p><small>آخرین پایش: ${esc(data.generated_at?new Date(data.generated_at).toLocaleString('fa-IR'):'نامشخص')}${now-Date.parse(data.generated_at)>2*day?' · داده‌ها نیاز به به‌روزرسانی دارند':''}</small></div><a href="${MARKET_FOOD_BASE}" target="_blank" rel="noopener noreferrer">رادار کامل Food Intel ↗</a></div>`+
+    section('نبض بازار',`<div class="mf-chips">${ranked.slice(0,6).map(t=>`<a href="${MARKET_FOOD_BASE}explore.html?category=${encodeURIComponent(t.id)}#feed" target="_blank" rel="noopener noreferrer">${esc(MARKET_FOOD_LABELS[t.id])} · ${faN(t.rows.length)} اشاره</a>`).join('')||empty}</div>`)+
+    section('سیگنال بازار',`<div class="mf-grid">${ranked.filter(t=>t.sources.size>=2).slice(0,3).map(t=>`<article class="mf-card"><h3>${esc(MARKET_FOOD_LABELS[t.id])} در کانون توجه</h3><p>در هفت روز اخیر ${faN(t.rows.length)} خبر از ${faN(t.sources.size)} منبع${t.brands.size?' با اشاره به '+faN(t.brands.size)+' برند':''} ثبت شده است.</p>${story(t.rows[0])}<a href="${MARKET_FOOD_BASE}explore.html?category=${encodeURIComponent(t.id)}#feed" target="_blank" rel="noopener noreferrer">شواهد این سیگنال ↗</a></article>`).join('')||empty}</div>`)+
+    section('برندهای در حرکت',`<div class="mf-brands">${[...brands.values()].sort((a,b)=>b.rows.length-a.rows.length).slice(0,6).map(b=>`<a class="mf-brand" href="${MARKET_FOOD_BASE}brand.html?id=${encodeURIComponent(b.id)}" target="_blank" rel="noopener noreferrer"><b>${esc(b.fa||b.name||b.id)}</b><small>${faN(b.rows.length)} اشاره در هفت روز</small><span>${esc(b.rows[0].title_fa)}</span></a>`).join('')||empty}</div>`)+
+    `<div class="mf-region-grid">${[['iran','بازار ایران'],['turkey','آن‌طرف مرز · ترکیه']].map(([id,title])=>`<div class="mf-region">${section(title,rows.filter(x=>market(x)===id).slice(0,3).map(story).join('')||empty)}<a href="${MARKET_FOOD_BASE}${id}.html" target="_blank" rel="noopener noreferrer">همهٔ خبرهای ${id==='iran'?'ایران':'ترکیه'} ↗</a></div>`).join('')}</div><p class="mf-note">مبنای این ویترین، خبرهای فارسیِ قابل انتشار در هفت روز گذشته و شمارش اشاره‌ها در منابع Food Intel است؛ شاخص فروش یا رشد واقعی بازار نیست. سیگنال‌ها خلاصهٔ آماری موضوعات چندمنبعی‌اند.</p>`;
+  } catch(e) {
+    if(host.isConnected)host.innerHTML=`<div class="mf-intro"><div><h2>نبض بازار غذا</h2><p class="muted">داده‌های رادار غذا فعلاً دریافت نشد.</p><button onclick="renderMarketFood()">تلاش دوباره</button></div><a href="${MARKET_FOOD_BASE}" target="_blank" rel="noopener noreferrer">مشاهدهٔ Food Intel ↗</a></div>`;
+  }
 }
