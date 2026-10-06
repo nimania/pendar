@@ -1577,3 +1577,7 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 
 
 .home-showcases{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}.home-showcases>section{min-width:0}.home-showcases .trend-card{text-decoration:none}@media(max-width:640px){.home-showcases{grid-template-columns:minmax(0,1fr);gap:0}}
+
+/* Meshki Media brand shortcut in the header. */
+.meshki-header-link{flex-shrink:0;text-decoration:none}
+.meshki-header-link img{display:block;width:28px;height:28px;object-fit:contain;border-radius:7px;background:#fff}
