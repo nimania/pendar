@@ -99,10 +99,10 @@ async function route() {
 }
 
 
-window.addEventListener("hashchange",()=>{if(!_navLock){const h=location.hash;history.replaceState(null,"",routeURL(h)+location.search);route();}});
+window.addEventListener("hashchange",()=>{if(!_navLock){const h=location.hash;history.replaceState(null,"",routeURL(h)+location.search);route();updateRouteSeo(location.pathname);}});
 window.addEventListener("popstate",()=>{window.__PENDAR_ROUTE="";route();updateRouteSeo(location.pathname);});
 // Existing hash URLs remain valid, but acquire a real canonical path.
-if(location.hash){const path=routeURL(location.hash);history.replaceState(null,"",path+location.search);}
+if(location.hash){const path=routeURL(location.hash);history.replaceState(null,"",path+location.search);updateRouteSeo(path);}
 const PUBLIC_ROUTES=new Set(["headlines","home","story","person","topic","trend","source","province","day","trends","fact","iran","topics","market","weather","faq","figures","videos","studio-recaps","finance","studio-recap","press","press-source","press-article","books","book","movies","movie","master-movie","tv","knowledge","entity","graph","profile","system","publisher","book-person","tech","figure","news-person","statement"]);
 function cleanInternalLinks(root){
   const links=root.matches?.("a[href]")?[root]:[...root.querySelectorAll?.("a[href]")||[]];
