@@ -329,6 +329,8 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           overwrite: true
+      - name: Set custom domain
+        run: echo 'pendar.io' > backend/public/CNAME
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
