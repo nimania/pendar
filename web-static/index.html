@@ -66,10 +66,11 @@
   </header>
 
   <main class="wrap">
-    <section id="feed-view">
+    <section id="home-view">
       <div class="lede">
         <p class="muted" id="built" style="margin-top:6px"></p>
         <div class="section-shortcuts home-shortcuts">
+          <button onclick="showFeed()">سرخط خبرها</button>
           <button onclick="showFigures()">چهره‌ها</button>
           <button onclick="showTVGuide('now')">راهنمای تماشا</button>
           <button onclick="showPress()">پیشخوان جراید</button>
@@ -103,6 +104,11 @@
         </div>
       </section>
 
+    </section>
+
+    <section id="feed-view" style="display:none">
+      <button class="back" onclick="showHome()">بازگشت به صفحهٔ اول</button>
+      <div class="lede"><h1>سرخط</h1><p>خبرها، بررسی ماجراها و پوشش منابع در یک صفحهٔ مستقل.</p><div class="section-shortcuts"><button onclick="showTrends()">بورس اخبار</button><button onclick="showFactchecks()">راستی‌آزمایی</button><button onclick="showIran()">اخبار ایران</button><button onclick="showTopics()">موضوعات</button></div></div>
       <div class="rule"><span>همهٔ سرخط‌ها</span><span class="l"></span></div>
       <div class="feed-controls">
         <div class="feed-control-row feed-days"><span class="fc-label">بازه</span><div class="day-chips day-range-chips">
@@ -237,12 +243,12 @@
     </section>
 
     <section class="trends-view" id="tv-guide-view">
-      <button class="back" onclick="showFeed()">بازگشت به پندار امروز</button>
+      <button class="back" onclick="showHome()">بازگشت به صفحهٔ اول</button>
       <div id="tv-guide-content"><div class="spinner"></div></div>
     </section>
 
     <section class="trends-view" id="knowledge-view">
-      <button class="back" onclick="showFeed()">بازگشت به پندار امروز</button>
+      <button class="back" onclick="showHome()">بازگشت به صفحهٔ اول</button>
       <div id="knowledge-content"><div class="spinner"></div></div>
     </section>
 
@@ -263,7 +269,7 @@
     </section>
 
     <section class="trends-view" id="system-view">
-      <button class="back" onclick="showFeed()">بازگشت به پندار امروز</button>
+      <button class="back" onclick="showHome()">بازگشت به صفحهٔ اول</button>
       <div class="lede">
         <span class="vf-badge">مدیریت پندار</span>
         <h1>سلامت سیستم</h1>
@@ -299,7 +305,8 @@
 
   <nav class="tabbar">
     <div class="inner">
-      <button class="tab active" id="tab-feed" onclick="showFeed()">
+      <button class="tab" id="tab-home" onclick="showHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11 12 3l9 8v10h-7v-7h-4v7H3Z"/></svg>خانه</button>
+      <button class="tab" id="tab-feed" onclick="showFeed()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5h16M4 12h16M4 19h10" stroke-linecap="round"/></svg>
         سرخط
       </button>
