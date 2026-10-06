@@ -137,6 +137,31 @@ async function renderHomePeople(){
   }
 }
 
+let homeCultureMode="bestsellers";
+function setHomeCultureMode(mode){
+  if(!["bestsellers","books","series"].includes(mode))return;
+  homeCultureMode=mode;
+  document.querySelectorAll("[data-home-culture]").forEach(button=>{
+    const on=button.dataset.homeCulture===mode;
+    button.classList.toggle("on",on);
+    button.setAttribute("aria-selected",String(on));
+  });
+  renderHomeCulture();
+}
+function renderHomeCulture(){
+  const panes={
+    bestsellers:document.getElementById("home-bestsellers-strip"),
+    books:document.getElementById("home-books-strip"),
+    series:document.getElementById("home-series-strip")
+  };
+  Object.entries(panes).forEach(([key,el])=>{if(el)el.style.display=key===homeCultureMode?"":"none";});
+  const title=document.getElementById("home-culture-title");
+  if(title)title.textContent={bestsellers:"پرفروش‌های امروز",books:"ترندهای کتاب",series:"سریال‌های تازه"}[homeCultureMode]||"ویترین فرهنگ و سرگرمی";
+  if(homeCultureMode==="bestsellers")renderHomeBookBestsellers();
+  else if(homeCultureMode==="books")renderBookTrends("home-books-strip",{heading:false,limit:6});
+  else renderHomeSeries();
+}
+
 // Two independent homepage windows: headlines and culture.
 let homeNewsMode="selected";
 function setHomeNewsMode(mode){
