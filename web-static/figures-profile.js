@@ -153,19 +153,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     </div>
   </article>`;
   el.innerHTML = `<div class="x-profile">
-    <div class="x-profile-top"><button class="x-back" onclick="showFigures()" aria-label="بازگشت">←</button><div><b>${esc(x.name_fa)}</b><small>${faN((x.posts||[]).length)} گفته</small></div></div>
-    <div class="figure-profile-search"><div class="figure-profile-search-box"><span aria-hidden="true">⌕</span><input type="search" placeholder="جستجو میان چهره‌ها…" autocomplete="off" oninput="searchFigureProfiles(this.value)" onfocus="if(this.value)searchFigureProfiles(this.value)"></div><div id="figure-profile-search-results" class="figure-profile-search-results"></div></div>
-    <div class="x-cover"></div>
-    <div class="x-profile-main">
-      <div class="x-avatar-wrap">${avatar(x,"lg")}</div>
-      <div class="x-profile-actions">${figureFollowBtn(x.handle,false)}</div>
-      <h1>${esc(x.name_fa)}${x.verified?'<span class="profile-verified" title="هویت تأییدشده">✓</span>':""}</h1>
-      ${x.claimed?'<div class="profile-claimed">این پروفایل توسط خود فرد تأیید و مدیریت می‌شود.</div>':""}
-      <div class="x-handle">@${esc(x.handle)}</div>
-      <p class="x-bio">${esc(x.role_fa || "")}</p>
-      ${socialLinks(x.social)}
-      <div class="x-profile-stats"><span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${figureMovies.length ? `<span><b>${faN(figureMovies.length)}</b> فیلم/سریال</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}</div>
-    </div>
+    ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${figureMovies.length ? `<span><b>${faN(figureMovies.length)}</b> فیلم/سریال</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
@@ -213,4 +201,16 @@ function renderFiguresDirectory() {
   document.getElementById("figure-timeline").innerHTML = "";
   _figDirectoryMode = "direct";
   renderFigures();
+}
+
+function renderPersonProfileHeader(x,options={}){
+  const name=x.name_fa||x.name||"";
+  return `<div class="x-profile-top"><button class="x-back" onclick="showFigures()" aria-label="بازگشت">←</button><div><b>${esc(name)}</b><small>${options.subtitle||faN((x.posts||[]).length)+" گفته"}</small></div></div>
+    <div class="figure-profile-search"><div class="figure-profile-search-box"><span aria-hidden="true">⌕</span><input type="search" placeholder="جستجو میان چهره‌ها…" autocomplete="off" oninput="searchFigureProfiles(this.value)" onfocus="if(this.value)searchFigureProfiles(this.value)"></div><div id="figure-profile-search-results" class="figure-profile-search-results"></div></div>
+    <div class="x-cover"></div><div class="x-profile-main"><div class="x-avatar-wrap">${options.avatar||avatar(x,"lg")}</div><div class="x-profile-actions">${options.actions||""}</div>
+    <h1>${esc(name)}${x.verified?'<span class="profile-verified" title="هویت تأییدشده">✓</span>':""}</h1>
+    ${x.claimed?'<div class="profile-claimed">این پروفایل توسط خود فرد تأیید و مدیریت می‌شود.</div>':""}
+    ${x.handle?'<div class="x-handle">@'+esc(x.handle)+'</div>':x.name&&x.name!==name?'<div class="x-handle" dir="ltr">'+esc(x.name)+'</div>':""}
+    <p class="x-bio">${esc(x.role_fa||"")}</p>${socialLinks(x.social||[])}
+    <div class="x-profile-stats">${options.stats||""}</div>${options.details||""}</div>`;
 }

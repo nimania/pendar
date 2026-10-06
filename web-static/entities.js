@@ -311,6 +311,8 @@ async function openEntityGraph(id,resetFilter=true){
 
 async function openCanonicalEntity(id) {
   id = decodeURIComponent(String(id||""));
+  const cinemaMatch=id.match(/^person:tmdb-(\d+)$/);
+  if(cinemaMatch)return openCinemaPerson(cinemaMatch[1]);
   const entity = await canonicalEntityById(id);
   if (!entity) {
     show("entity"); setTab(""); setHash("#/entity/"+encodeURIComponent(id));
