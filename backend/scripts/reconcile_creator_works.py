@@ -74,6 +74,7 @@ def reconcile(root, db_path=None):
         if rows: person_totals[pid]={'name_fa':p.get('name_fa'),'counts':{}}
         for identity,w in rows.items(): works.append((pid,w,linked))
     coverage='full_master' if db_path else 'public_subset_only'
+    wd_matches=defaultdict(list)
     total_indexed=len(indexed)
     if db_path:
         con=sqlite3.connect('file:'+str(db_path.resolve())+'?mode=ro',uri=True)
@@ -84,6 +85,11 @@ def reconcile(root, db_path=None):
                 batch=ids[offset:offset+500]
                 query='SELECT pendar_id,tmdb_id,hydrated FROM titles WHERE active=1 AND media_type=? AND tmdb_id IN ('+','.join('?' for _ in batch)+')'
                 for pendar,mid,hydrated in con.execute(query,[typ]+batch): indexed[(typ,mid)]={'pendar_id':pendar,'hydrated':hydrated}
+        wanted_qids=sorted({str(w.get('id','')).split(':',1)[-1] for _,w,_ in works if w.get('kind') in ('movie','film','tv','series') and str(w.get('id','')).startswith('wikidata:')})
+        for offset in range(0,len(wanted_qids),500):
+            batch=wanted_qids[offset:offset+500]
+            query='SELECT pendar_id,media_type,wikidata_qid FROM titles WHERE active=1 AND wikidata_qid IN ('+','.join('?' for _ in batch)+')'
+            for target,typ,qid in con.execute(query,batch): wd_matches[(typ,qid)].append(target)
         con.close()
     output=[]; counts=Counter()
     for pid,w,linked in works:
@@ -94,6 +100,12 @@ def reconcile(root, db_path=None):
             row['match_method']='exact_tmdb_type_and_id'
             if match:
                 row['target_id']=match['pendar_id']; row['status']='internal_ready' if match['pendar_id'] in ready else 'indexed_metadata_pending'
+            else: row['status']='not_indexed' if db_path else 'full_index_unchecked'
+        elif kind in ('movie','film','tv','series') and str(w.get('id','')).startswith('wikidata:'):
+            typ='series' if kind in ('tv','series') else 'movie'; qid=w['id'].split(':',1)[1]; targets=wd_matches.get((typ,qid),[])
+            row['match_method']='exact_wikidata_type_and_id'
+            if len(targets)==1: row.update(target_id=targets[0],status='internal_ready' if targets[0] in ready else 'indexed_metadata_pending')
+            elif len(targets)>1: row.update(status='duplicate_candidates',candidate_ids=targets)
             else: row['status']='not_indexed' if db_path else 'full_index_unchecked'
         elif kind=='book':
             qid=str(w.get('id','')).removeprefix('wikidata:'); exact=[w['internal_slug']] if w.get('internal_slug') in by_slug else qid_books.get(qid,[])

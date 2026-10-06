@@ -14,7 +14,7 @@ class ReconciliationTests(unittest.TestCase):
             p={'id':'person:a','type':'person','name_fa':'نویسنده','refs':[{'dataset':'books.people','key':'a'}],'meta':{'works':[{'kind':'movie','tmdb_id':12,'title':'Outside Top'},{'kind':'tv','tmdb_id':12,'title':'Missing TV'},{'kind':'book','id':'wikidata:Q1','title_fa':'همنام'}]}}
             (root/'entity-registry.json').write_text(json.dumps({'entities':[p]}))
             (root/'books.json').write_text(json.dumps({'books':[{'slug':'own','title_fa':'اثر خودش'},{'slug':'other','title_fa':'همنام'}],'people':[{'slug':'a','name_fa':'نویسنده','book_slugs':['own']}]}))
-            db=root/'master.sqlite';con=sqlite3.connect(db);con.execute('CREATE TABLE titles(pendar_id,media_type,tmdb_id,hydrated,active)');con.execute("INSERT INTO titles VALUES('pm_c','movie',12,1,1)");con.commit();con.close()
+            db=root/'master.sqlite';con=sqlite3.connect(db);con.execute('CREATE TABLE titles(pendar_id,media_type,tmdb_id,hydrated,active,wikidata_qid)');con.execute("INSERT INTO titles VALUES('pm_c','movie',12,1,1,'Q12')");con.commit();con.close()
             result=reconcile(root,db)
             self.assertEqual(result['counts']['indexed_metadata_pending'],1)
             self.assertEqual(result['counts']['not_indexed'],1)
