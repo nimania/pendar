@@ -8,13 +8,30 @@
    No behavior change. */
 
 function statementKey(p) { return encodeURIComponent(String(p.id || "")); }
-function figureCard(p, withName) {
+function figureProfileLink(person, content, className = "") {
+  return `<a class="${className}" href="#/figure/${esc(encodeURIComponent(person.handle || ""))}" onclick="event.preventDefault();event.stopPropagation();openFigure(decodeURIComponent('${esc(encodeURIComponent(person.handle || "").replace(/'/g,"%27"))}'))">${content}</a>`;
+}
+function statementCardClick(event, id) {
+  if (event.target.closest("a, button, input, select, textarea, iframe")) return;
+  if (window.getSelection && String(window.getSelection())) return;
+  openStatement(id);
+}
+function statementCardKey(event, id) {
+  if (event.target !== event.currentTarget || !["Enter", " "].includes(event.key)) return;
+  event.preventDefault();
+  openStatement(id);
+}
+function statementCardAttrs(p) {
+  const id = statementKey(p).replace(/'/g, "%27");
+  return `tabindex="0" role="link" style="cursor:pointer" aria-label="مشاهدهٔ کامل دیدگاه" onclick="statementCardClick(event,'${id}')" onkeydown="statementCardKey(event,'${id}')"`;
+}
+function figureCard(p, withName, detail = false) {
   const party = p.kind === "party_claim"
     ? `<span class="cstatus st-warn" title="این شخص خودش طرفِ این ماجراست">${KIND_NOTE.party_claim}</span>` : "";
   const head = withName
-    ? `<div class="v-h">${avatar(p, "sm")}<div class="fig-id"><a class="v-name" href="#/figure/${esc(p.handle)}" onclick="event.preventDefault();${p._newsPerson ? "openNewsPerson" : "openFigure"}('${esc(p.handle)}')">${esc(p.name_fa)}</a><span class="fig-role">${esc(p.role_fa)}</span></div><span class="spacer" style="flex:1"></span>${party}</div>`
+    ? `<div class="v-h">${figureProfileLink(p, avatar(p, "sm"))}<div class="fig-id"><a class="v-name" href="#/figure/${esc(p.handle)}" onclick="event.preventDefault();${p._newsPerson ? "openNewsPerson" : "openFigure"}('${esc(p.handle)}')">${esc(p.name_fa)}</a><span class="fig-role">${esc(p.role_fa)}</span></div><span class="spacer" style="flex:1"></span>${party}</div>`
     : `<div class="v-h"><span class="fig-topic">${esc(p.topic_fa || "")}</span><span class="spacer" style="flex:1"></span>${party}</div>`;
-  return `<div class="view fig-view">${head}
+  return `<div class="view fig-view" ${detail ? "" : statementCardAttrs(p)}>${head}
     <p>${esc(p.summary_fa || "")}</p>
     <div class="fig-foot"><button class="fig-profile-link" onclick="openStatement(\'${statementKey(p)}\')">صفحهٔ این گفته</button><span class="muted">${relTime(p.published_at)}${p.source_language && p.source_language !== "fa" ? " · " + esc(p.translation_label_fa || ("ترجمه از " + p.source_language)) : ""}</span>
       <a href="${esc(p.url)}" target="_blank" rel="noopener">${p.kind === "news_statement" ? "منبع این گفته" : p.platform === "truthsocial" ? "پست اصلی در تروث سوشیال" : p.platform === "youtube" ? "ویدئو در یوتیوب" : "متن کامل در " + (String(p.url || "").includes("ble.ir/") ? "بله" : "تلگرام")} ↗</a></div></div>`;
@@ -90,8 +107,8 @@ async function renderFigureTimeline() {
     el.innerHTML = controls + `<div class="state"><div class="big">${msg}</div></div>`;
     return;
   }
-  el.innerHTML = controls + `<div class="x-figure-stream">` + posts.slice(0, 40).map(p => `<article class="x-figure-post">
-    <div class="x-figure-avatar">${avatar(p, "sm")}</div>
+  el.innerHTML = controls + `<div class="x-figure-stream">` + posts.slice(0, 40).map(p => `<article class="x-figure-post" ${statementCardAttrs(p)}>
+    <div class="x-figure-avatar">${figureProfileLink(p, avatar(p, "sm"))}</div>
     <div class="x-figure-content">
       <div class="x-figure-head">
         <div class="x-figure-identity"><a class="x-figure-name" href="#/figure/${esc(p.handle)}" onclick="event.preventDefault();${p._newsPerson ? "openNewsPerson" : "openFigure"}('${esc(p.handle)}')">${esc(p.name_fa)}</a><span class="x-figure-role">${esc(p.role_fa || p.field_fa || "")}</span><span class="x-figure-dot">·</span><time>${relTime(p.published_at)}</time></div>
