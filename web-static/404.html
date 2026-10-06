@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>انتقال به پندار</title>
+<meta name="robots" content="noindex">
+<script>
+(function () {
+  // Recover legacy language-prefix links without losing their content route.
+  const hash = location.hash;
+  if (location.pathname === "/fa" || location.pathname.startsWith("/fa/") ||
+      /^#\/(story|statement|figure|entity)\//.test(hash)) {
+    location.replace("/" + location.search + (["#", "#/"].includes(hash) ? "" : hash));
+  }
+})();
+</script>
+</head>
+<body><p>این مسیر پیدا نشد. <a href="/">بازگشت به پندار</a></p></body>
+</html>
