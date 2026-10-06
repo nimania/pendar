@@ -79,21 +79,21 @@ async function openStatement(id) {
   setHash("#/statement/" + encodeURIComponent(raw));
   const isYoutube = post.platform === "youtube";
   const recapText = String(post.recap_fa || "").trim();
-  const recapHtml = isYoutube && recapText
+  const recapHtml = recapText
     ? '<section class="video-statement-recap"><div class="rule"><span>≣ جان کلام</span><span class="l"></span></div>' +
-      recapText.split(/\\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join('') + '</section>'
+      recapText.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join('') + '</section>'
     : '';
   const videoEmbedHtml = isYoutube
     ? youtubeRecapEmbed(post.url || String(post.id||"").replace(/^youtube-/,""), post.video_title || post.topic_fa || "ویدئوی اصلی")
     : "";
-  const pointRows = isYoutube && Array.isArray(post.key_points_fa) ? post.key_points_fa.filter(Boolean) : [];
+  const pointRows = Array.isArray(post.key_points_fa) ? post.key_points_fa.filter(Boolean) : [];
   const pointsHtml = pointRows.length
     ? '<section class="video-statement-points"><h3>نکات اصلی</h3><ul>' + pointRows.map(x=>'<li>'+esc(x)+'</li>').join('') + '</ul></section>'
     : '';
   el.innerHTML = '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "(\'" + esc(person.handle) + "\')\">بازگشت به پروفایل</button>" +
-    '<div class="fig-head">' + avatar(person,"lg") + '<div class="fig-head-body"><h1>' + esc(person.name_fa) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
+    '<div class="fig-head">' + figureProfileLink(person,avatar(person,"lg")) + '<div class="fig-head-body"><h1>' + figureProfileLink(person,esc(person.name_fa)) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
     '<div class="rule"><span>' + (isYoutube ? "جان کلام" : (isNews ? "گفته در خبر" : "دیدگاه")) + '</span><span class="l"></span></div>' +
-    figureCard(post,false) + videoEmbedHtml + pointsHtml + recapHtml +
+    figureCard(post,false,true) + telegramEmbed(post) + videoEmbedHtml + pointsHtml + recapHtml +
     statementBooksSection +
     statementMoviesSection +
     ((post.related_people || []).length ? '<div class="rule"><span>ارتباط این گفته</span><span class="l"></span></div><div class="views">' +
@@ -202,10 +202,10 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const poemSection = poems.length ? `<section class="curated-poems"><div class="curated-poems-head"><div><span class="curated-kicker">اثر ویژه</span><h2>یک شعر؛ بخش‌های منتشرشده</h2><p>این ${faN(poems.length)} متن، بخش‌های مختلف یک شعر از مونا برزویی‌اند. ترتیب نهایی بخش‌ها هنوز اعلام نشده است؛ شماره‌های زیر فقط برای تفکیک در آرشیو جان کلام‌اند و ترتیب شعر را نشان نمی‌دهند.</p></div><span class="curated-count">${faN(poems.length)} بخش</span></div><div class="curated-poem-list">${poems.map((p,i)=>`<article class="curated-poem"><div class="curated-poem-no" title="شمارهٔ آرشیوی؛ نه ترتیب شعر">بخش ${faN(i+1)}*</div><div class="curated-poem-text">${esc(p.text||"").replace(/\\n/g,"<br>")}</div></article>`).join("")}</div></section>` : "";
   const worksSection=figureBooks.length||profileMedia.books.length||mediaWorks.length||profileMedia.films.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length||profileMedia.channels.length?`<section class="figure-works">${figureBooks.length||profileMedia.books.length?'<h2>کتاب‌ها</h2><div class="books-grid">'+figureBooks.map(_bookCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.books.map(_figureWorkCard).join("")+'</div>':""}${mediaWorks.length||profileMedia.films.length?'<h2>فیلم‌ها و سریال‌ها</h2><div class="movie-grid">'+mediaWorks.map(_movieCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.films.map(_figureWorkCard).join("")+'</div>':""}${profileMedia.podcasts.length?'<h2>پادکست‌ها</h2><div class="figure-work-grid">'+profileMedia.podcasts.map(_figureWorkCard).join("")+'</div>':""}${youtubeVideos.length||profileMedia.channels.length?'<h2>ویدئوها</h2><div class="figure-youtube-grid">'+youtubeVideos.map(_figureVideoCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.channels.map(_figureWorkCard).join("")+'</div>':""}${poemSection}${profileMedia.other.length?'<h2>دیگر آثار</h2><div class="figure-work-grid">'+profileMedia.other.map(_figureWorkCard).join("")+'</div>':""}</section>`:'<div class="state"><div class="big">اثری ثبت نشده است.</div></div>';
   const aboutSection='<section class="x-profile-feed"><p class="x-bio">'+esc(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||"معرفی تکمیلی هنوز ثبت نشده است.")+'</p>'+(canonicalFigure?.meta?.birthday?'<p class="x-bio">تولد: '+esc(faN(canonicalFigure.meta.birthday))+'</p>':"")+(canonicalFigure?.meta?.deathday?'<p class="x-bio">درگذشت: '+esc(faN(canonicalFigure.meta.deathday))+'</p>':"")+(canonicalFigure?.meta?.picture_source?'<p class="x-bio"><a href="'+esc(_figureWorkUrl(canonicalFigure.meta.picture_source))+'" target="_blank" rel="noopener">منبع و مجوز عکس ↗</a></p>':"")+'</section>';
-  const postRow = p => `<article class="x-post">
-    <div class="x-post-rail">${avatar(x,"sm")}</div>
+  const postRow = p => `<article class="x-post" ${statementCardAttrs(p)}>
+    <div class="x-post-rail">${figureProfileLink(x,avatar(x,"sm"))}</div>
     <div class="x-post-body">
-      <div class="x-post-meta"><b>${esc(x.name_fa)}</b><span>·</span><time>${relTime(p.published_at)}</time></div>
+      <div class="x-post-meta"><b>${figureProfileLink(x,esc(x.name_fa))}</b><span>·</span><time>${relTime(p.published_at)}</time></div>
       ${p.kind === "news_statement" ? `<div class="x-post-context">گفته در خبر · ${esc(p.source_name || "منبع خبری")}</div>` : (p.topic_fa ? `<div class="x-post-topic">${esc(p.topic_fa)}</div>` : "")}
       <p>${esc(p.summary_fa || "")}</p>
       ${telegramEmbed(p)}
