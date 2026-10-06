@@ -82,7 +82,7 @@ def work(entity, person_qid):
     url='https://www.wikidata.org/wiki/'+entity['id']
     if page: url='https://'+page['site'][:2]+'.wikipedia.org/wiki/'+urllib.parse.quote(page['title'].replace(' ','_'))
     time=(first(entity,'P577') or {}).get('time','').lstrip('+')[:4]
-    return {'id':'wikidata:'+entity['id'],'kind':kind,'tmdb_id':int(first(entity,'P4947') or first(entity,'P4983')) if first(entity,'P4947') or first(entity,'P4983') else None,'title_fa':label(entity) or label(entity,'en'),'url':url,'thumbnail':image_url(first(entity,'P18')),'role_fa':'، '.join(roles) or 'اثر شاخص','year':time,'source_url':'https://www.wikidata.org/wiki/'+entity['id'],'openlibrary_id':first(entity,'P648')}
+    return {'id':'wikidata:'+entity['id'],'kind':kind,'tmdb_id':int(first(entity,'P4947') or first(entity,'P4983')) if first(entity,'P4947') or first(entity,'P4983') else None,'title_fa':label(entity) or label(entity,'en'),'title_en':label(entity,'en'),'source_lang':'fa' if label(entity) else 'en','description_fa':entity.get('descriptions',{}).get('fa',{}).get('value',''),'url':url,'thumbnail':image_url(first(entity,'P18')),'role_fa':'، '.join(roles) or 'اثر شاخص','year':time,'source_url':'https://www.wikidata.org/wiki/'+entity['id'],'openlibrary_id':first(entity,'P648')}
 
 def enrich(root, limit=100, seeds_path=None, cache_path=None):
     now=datetime.now(timezone.utc).isoformat(); cache_path=cache_path or SCRIPT_ROOT/'data/creator-catalog-cache.json'
@@ -167,3 +167,4 @@ def enrich(root, limit=100, seeds_path=None, cache_path=None):
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--data-dir',type=Path,default=Path('site/data'));parser.add_argument('--limit',type=int,default=100)
     args=parser.parse_args();enrich(args.data_dir,args.limit)
+

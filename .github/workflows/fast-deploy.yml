@@ -24,6 +24,7 @@ on:
       - "backend/scripts/merge_people.py"
       - "backend/scripts/reconcile_creator_works.py"
       - "backend/scripts/link_creator_works.py"
+      - "backend/scripts/materialize_creator_books.py"
       - "backend/scripts/finalize_entity_registry.py"
       - "backend/data/entity-overrides.json"
       - ".github/workflows/fast-deploy.yml"
@@ -273,6 +274,11 @@ jobs:
       - name: Enrich verified book and film creators
         run: python backend/scripts/enrich_creator_catalog.py --data-dir site/data
 
+      - name: Create sourced internal book pages
+        run: |
+          python backend/tests/test_materialize_creator_books.py
+          python backend/scripts/materialize_creator_books.py --data-dir site/data
+
       - name: Build people and sourced ratings
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
@@ -423,6 +429,7 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_attempt }}
+
 
 
 

@@ -253,6 +253,11 @@ jobs:
       - name: Enrich verified book and film creators
         run: python backend/scripts/enrich_creator_catalog.py --data-dir backend/public/data
 
+      - name: Create sourced internal book pages
+        run: |
+          python backend/tests/test_materialize_creator_books.py
+          python backend/scripts/materialize_creator_books.py --data-dir backend/public/data
+
       - name: Build people and sourced ratings
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
@@ -384,6 +389,7 @@ jobs:
           TELEGRAM_RESOLVE_URL: ${{ inputs.resolve_url }}
           TELEGRAM_RESOLUTION: ${{ inputs.resolution }}
         run: python backend/scripts/publish_figures.py --figures telegram-export/figures.json
+
 
 
 

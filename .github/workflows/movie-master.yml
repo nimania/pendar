@@ -3,12 +3,13 @@ name: Pendar Movie Master
 on:
   workflow_dispatch:
   schedule:
-    - cron: "20 9 * * *"
+    - cron: "20 */6 * * *"
   push:
     branches: [main]
     paths:
       - "backend/scripts/build_movie_master.py"
       - "backend/scripts/hydrate_movie_master.py"
+      - "backend/scripts/queue_creator_movies.py"
       - ".github/workflows/movie-master.yml"
 
 permissions:
@@ -83,6 +84,18 @@ jobs:
             --curated-movies backend/data/curated-movies.json \
             --top-limit 20000
 
+      - name: Prioritize existing creator works
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python backend/tests/test_creator_movie_priority.py
+          mkdir -p /tmp/creator-work-audit
+          audit_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs?status=success&per_page=50" --jq '[.workflow_runs[] | select(.name == "Fast Deploy Pendar UI" or .name == "Build & Deploy Pendar (static)")][0].id // empty')"
+          if [ -n "$audit_run" ]; then
+            gh run download "$audit_run" -n creator-work-reconciliation -D /tmp/creator-work-audit
+            python backend/scripts/queue_creator_movies.py --db backend/data/movie-master.sqlite --audit /tmp/creator-work-audit/creator-work-audit.json
+          fi
+
       - name: Hydrate priority Movie Master titles
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
@@ -137,3 +150,4 @@ jobs:
           if-no-files-found: error
           retention-days: 30
           overwrite: true
+

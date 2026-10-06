@@ -194,18 +194,19 @@ def hydrate_one(row: sqlite3.Row, token: str, min_interval: float) -> tuple[str,
 
 def select_rows(con: sqlite3.Connection, limit: int, max_attempts: int) -> list[sqlite3.Row]:
     con.row_factory=sqlite3.Row
+    con.execute('CREATE TABLE IF NOT EXISTS creator_priority(pendar_id TEXT PRIMARY KEY,score INTEGER NOT NULL)')
     # Reserve at most one fifth of each batch for older rows missing richer
     # metadata, while most requests keep expanding archive coverage.
     backfill=con.execute(
-        """SELECT * FROM titles WHERE active=1 AND hydrated=1
+        """SELECT t.* FROM titles t LEFT JOIN creator_priority p USING(pendar_id) WHERE active=1 AND hydrated=1
            AND tmdb_payload_json IS NULL AND COALESCE(hydrate_attempts,0) < ?
-           ORDER BY curated DESC,popularity DESC,tmdb_id ASC LIMIT ?""",
+           ORDER BY COALESCE(p.score,0) DESC,curated DESC,popularity DESC,tmdb_id ASC LIMIT ?""",
         (max_attempts,max(1,limit//5)),
     ).fetchall()
     new_rows=con.execute(
-        """SELECT * FROM titles WHERE active=1 AND hydrated=0
+        """SELECT t.* FROM titles t LEFT JOIN creator_priority p USING(pendar_id) WHERE active=1 AND hydrated=0
            AND COALESCE(hydrate_attempts,0) < ?
-           ORDER BY curated DESC,popularity DESC,tmdb_id ASC LIMIT ?""",
+           ORDER BY COALESCE(p.score,0) DESC,curated DESC,popularity DESC,tmdb_id ASC LIMIT ?""",
         (max_attempts,max(0,limit-len(backfill))),
     ).fetchall()
     return backfill+new_rows
@@ -244,8 +245,7 @@ def write_public(con: sqlite3.Connection, summary_path: Path|None, top_path: Pat
                    title_fa,title_en,year,imdb_id,wikidata_qid,poster_path,genres_json,original_language,origin_country_json
             FROM titles WHERE active=1 AND hydrated=1
             ORDER BY curated DESC,popularity DESC,tmdb_id ASC
-            LIMIT ?
-            """,(top_limit,)
+            """
         ).fetchall()
         items=[]
         for row in rows:
@@ -275,7 +275,7 @@ def write_public(con: sqlite3.Connection, summary_path: Path|None, top_path: Pat
                 json.dumps(buckets.get(bucket,{}),ensure_ascii=False,separators=(",",":"))+"\n",encoding="utf-8")
         top_path.parent.mkdir(parents=True,exist_ok=True)
         top_path.write_text(json.dumps({
-            "schema_version":1,"generated_at":utcnow(),"limit":top_limit,"items":items
+            "schema_version":1,"generated_at":utcnow(),"limit":top_limit,"items":items[:top_limit]
         },ensure_ascii=False,separators=(",",":"))+"\n",encoding="utf-8")
 
 def main():
@@ -368,3 +368,4 @@ def main():
 
 if __name__=="__main__":
     main()
+
