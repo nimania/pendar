@@ -304,7 +304,7 @@ async function openMovie(slug,canonicalId=null){const catalog=await loadMovies()
 const CINEMA_ROLE_FA={Director:"کارگردان",Writer:"نویسنده",Screenplay:"فیلمنامه‌نویس",Creator:"خالق",Producer:"تهیه‌کننده","Executive Producer":"تهیه‌کننده اجرایی",Story:"داستان","Director of Photography":"مدیر فیلم‌برداری",Editor:"تدوینگر","Original Music Composer":"آهنگساز",Casting:"انتخاب بازیگر"};
 const CINEMA_LANGUAGE_FA={fa:"فارسی",en:"انگلیسی",tr:"ترکی",fr:"فرانسوی",de:"آلمانی",ja:"ژاپنی",ko:"کره‌ای",es:"اسپانیایی",it:"ایتالیایی",ar:"عربی",hi:"هندی",ru:"روسی",zh:"چینی",pt:"پرتغالی"};
 let cinemaDataPromise;
-async function _loadCinemaData(){if(!cinemaDataPromise)cinemaDataPromise=Promise.all([getJSON(DATA+"/cinema-people-index.json",10000).catch(()=>({people:[]})),getJSON(DATA+"/movie-ratings.json",10000).catch(()=>({items:{}}))]).then(([p,r])=>({people:new Map((p.people||[]).map(x=>[Number(x.id),x])),ratings:r.items||{}}));return cinemaDataPromise}
+async function _loadCinemaData(){if(!cinemaDataPromise)cinemaDataPromise=Promise.all([getJSON(DATA+"/cinema-people-index.json",10000).catch(()=>({people:[]})),getJSON(DATA+"/movie-ratings.json",10000).catch(()=>({items:{}}))]).then(([p,r])=>({people:new Map(((p&&p.people)||[]).map(x=>[Number(x.id),x])),ratings:(r&&r.items)||{}}));return cinemaDataPromise}
 let cinemaLoaded={people:new Map(),ratings:{}};
 const _cinemaLoader=_loadCinemaData;
 _loadCinemaData=async function(){cinemaLoaded=await _cinemaLoader();return cinemaLoaded};
