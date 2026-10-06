@@ -59,7 +59,7 @@ function setArticleSeo(x){
 // and the scoring/semantic helpers) now lives in search.js, loaded before
 // this file.
 
-const VIEWS = { feed: "feed-view", detail: "detail-view", trends: "trends-view",
+const VIEWS = { home: "home-view", feed: "feed-view", detail: "detail-view", trends: "trends-view",
   factchecks: "factchecks-view", topics: "topics-view", topicarchive: "topic-archive-view",
   weather: "weather-view", iran: "iran-view", faq: "faq-view", market: "market-view",
   figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tvguide: "tv-guide-view", knowledge: "knowledge-view", entity: "entity-view", graph: "entity-graph-view", profile: "entity-profile-view", entityqa: "entity-qa-view", system: "system-view", tech: "tech-view" };
@@ -71,7 +71,19 @@ function show(v) {
     document.getElementById(id).style.display = key === v ? "block" : "none";
   window.scrollTo({ top: 0, behavior: "instant" });
 }
-function showFeed() { show("feed"); setTab("feed"); setHash(""); }
+function showHome() {
+  show("home"); setTab("home"); setHash("");
+  document.title="پندار";
+  renderHomeStats(); renderHomeGlance(); renderHomePrices(); renderHomeWeather();
+  renderHomePeople(); renderBookTrends("home-books-strip"); renderHomeSeries();
+  if (ALL.length) renderHomeDaily(); else loadFeed(true);
+}
+async function showFeed() {
+  show("feed"); setTab("feed"); setHash("#/headlines");
+  document.title="سرخط خبرها | پندار";
+  if (!ALL.length) await loadFeed(true);
+  else { renderFeed(); renderDayChips(); }
+}
 function showTopics() { show("topics"); setTab("topics"); renderTopics(); setHash("#/topics"); }
 function showTrends() { show("trends"); setTab("trends"); renderTrends(); setHash("#/trends"); }
 function showFactchecks() { show("factchecks"); setTab("factchecks"); renderFactchecks(); setHash("#/fact"); }
@@ -271,7 +283,7 @@ getJSON(`${DATA}/meta.json`).then(m => { META = m; updateFreshness(); }).catch((
 const _initialRoute = (location.hash || "").replace(/^#\/?/, "");
 const _isDeepLink = Boolean(_initialRoute);
 if (_isDeepLink) {
-  const feedView = document.getElementById("feed-view");
+  const feedView = document.getElementById("home-view");
   if (feedView) feedView.style.display = "none";
   setTab("");
 }
@@ -288,7 +300,8 @@ if (_isDeepLink) {
   Promise.resolve(route()).finally(_bootReveal);
   loadFeed(false).catch(()=>{});
 } else {
-  loadFeed(true).finally(_bootReveal);
+  showHome();
+  _bootReveal();
   renderHomeStats();
   renderHomeGlance();
   renderHomePrices();
