@@ -197,6 +197,14 @@ jobs:
       - name: Validate Pendar data integrity before publish
         run: python backend/scripts/validate_site_integrity.py --site site
 
+      - name: Validate static SEO routes
+        run: |
+          python backend/tests/test_seo.py
+          node backend/tests/test_seo_routes.js web-static/router.js
+
+      - name: Generate crawlable HTML and sitemaps
+        run: python backend/scripts/build_seo.py --site site
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

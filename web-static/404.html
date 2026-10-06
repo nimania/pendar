@@ -1,20 +1,7 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>انتقال به پندار</title>
-<meta name="robots" content="noindex">
-<script>
-(function () {
-  // Recover legacy language-prefix links without losing their content route.
-  const hash = location.hash;
-  if (location.pathname === "/fa" || location.pathname.startsWith("/fa/") ||
-      /^#\/(story|statement|figure|entity)\//.test(hash)) {
-    location.replace("/" + location.search + (["#", "#/"].includes(hash) ? "" : hash));
-  }
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>صفحه پیدا نشد | پندار</title><meta name="robots" content="noindex,follow"></head><body><h1>این صفحه پیدا نشد</h1><p>ممکن است نشانی تغییر کرده باشد یا محتوا حذف شده باشد.</p><a href="/">صفحهٔ اول پندار</a><script>
+(function(){const hash=location.hash;
+if(hash.startsWith("#/")){location.replace("/"+hash.slice(2).replace(/\/$/,"")+"/"+location.search);return;}
+const path=location.pathname.replace(/^\/fa(?=\/|$)/,"");
+if(path!==location.pathname&&/^\/(story|statement|figure|entity|book|movie|master-movie|books|movies|figures|tv|knowledge)(\/|$)/.test(path))location.replace(path+location.search);
 })();
-</script>
-</head>
-<body><p>این مسیر پیدا نشد. <a href="/">بازگشت به پندار</a></p></body>
-</html>
+</script></body></html>

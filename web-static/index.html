@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>پندار</title>
   <meta name="description" content="پندار — ایران، خبر، اندیشه و فرهنگ در یک شبکهٔ دانشی فارسی.">
-  <meta name="theme-color" content="#3c3938">
+  <link rel="canonical" href="https://pendar.io/"><meta name="theme-color" content="#3c3938">
   <script>
     // Canonical domain routes have no legacy language prefix.
     if (location.pathname === "/fa" || location.pathname.startsWith("/fa/")) {
-      location.replace("/" + location.search + (["#", "#/"].includes(location.hash) ? "" : location.hash));
+      location.replace((location.pathname.replace(/^\/fa(?=\/|$)/,"")||"/") + location.search + (["#", "#/"].includes(location.hash) ? "" : location.hash));
     }
     // Deep-link boot guard: do not paint the default homepage before the
     // router has selected the requested view.
     (function () {
-      var route = (location.hash || "").replace(/^#\/?/, "");
+      var route = (location.hash || location.pathname).replace(/^#\/?/, "").replace(/^\/+|\/+$/g,"");
       if (!route) return;
       document.documentElement.classList.add("route-boot");
       

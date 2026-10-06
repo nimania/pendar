@@ -8,23 +8,48 @@
 
 let _navLock = false;
 
-function setHash(h) {
-  // The homepage uses the bare URL, never the legacy #/ sentinel.
-  if (!h || h === "#" || h === "#/") {
-    if (location.hash) history.pushState(null, "", location.pathname + location.search);
-    return;
-  }
-  if (location.hash === h) return;
-  _navLock = true;
-  location.hash = h;
-  setTimeout(() => { _navLock = false; }, 0);
+function currentRoute(){
+  return (location.hash || window.__PENDAR_ROUTE || location.pathname).replace(/^#\/?/,"").replace(/^\/+|\/+$/g,"");
 }
-
+function routeURL(h){
+  const raw=String(h||"").replace(/^#\/?/,"").replace(/^\/+|\/+$/g,"");
+  return raw?"/"+raw+"/":"/";
+}
+let _seoRequest=0;
+async function updateRouteSeo(path){
+  const request=++_seoRequest;
+  try{
+    const response=await fetch(path+"seo.json");
+    if(!response.ok)return;
+    const meta=await response.json();
+    if(request!==_seoRequest)return;
+    document.title=meta.title;
+    for(const [name,value] of Object.entries(meta.tags)){
+      const property=name.startsWith("og:");
+      let el=document.head.querySelector('meta['+(property?"property":"name")+'="'+name+'"]');
+      if(!el){el=document.createElement("meta");el.setAttribute(property?"property":"name",name);document.head.appendChild(el);}
+      el.content=value;
+    }
+    let canonical=document.querySelector('link[rel="canonical"]');
+    if(!canonical){canonical=document.createElement("link");canonical.rel="canonical";document.head.appendChild(canonical);}
+    canonical.href=meta.canonical;
+    let schema=document.getElementById("seo-schema");
+    if(!schema){schema=document.createElement("script");schema.id="seo-schema";schema.type="application/ld+json";document.head.appendChild(schema);}
+    schema.textContent=JSON.stringify(meta.schema);
+  }catch(_){}
+}
+function setHash(h){
+  let path=routeURL(h);
+  if(location.pathname===path&&!location.hash)return;
+  window.__PENDAR_ROUTE="";
+  history.pushState(null,"",path+location.search);
+  updateRouteSeo(path);
+}
 async function route() {
   if (location.hash === "#/" || location.hash === "#") {
     history.replaceState(null, "", location.pathname + location.search);
   }
-  const raw = (location.hash || "").replace(/^#\/?/, "");
+  const raw = currentRoute();
   const i = raw.indexOf("/");
   const kind = i < 0 ? raw : raw.slice(0, i);
   const arg = i < 0 ? "" : decodeURIComponent(raw.slice(i + 1));
@@ -73,14 +98,24 @@ async function route() {
   return showHome();
 }
 
-window.addEventListener("hashchange", () => { if (!_navLock) route(); });
 
-
-
-// pushState removes the hash without a hashchange event. Restore the home view
-// when browser Back/Forward lands on a clean homepage entry.
-window.addEventListener("popstate", () => { if (!location.hash) route(); });
-// Normalize bookmarked legacy home links as soon as the router loads.
-if (location.hash === "#/" || location.hash === "#") {
-  history.replaceState(null, "", location.pathname + location.search);
+window.addEventListener("hashchange",()=>{if(!_navLock){const h=location.hash;history.replaceState(null,"",routeURL(h)+location.search);route();}});
+window.addEventListener("popstate",()=>{window.__PENDAR_ROUTE="";route();updateRouteSeo(location.pathname);});
+// Existing hash URLs remain valid, but acquire a real canonical path.
+if(location.hash){const path=routeURL(location.hash);history.replaceState(null,"",path+location.search);}
+const PUBLIC_ROUTES=new Set(["headlines","home","story","person","topic","trend","source","province","day","trends","fact","iran","topics","market","weather","faq","figures","videos","studio-recaps","finance","studio-recap","press","press-source","press-article","books","book","movies","movie","master-movie","tv","knowledge","entity","graph","profile","system","publisher","book-person","tech","figure","news-person","statement"]);
+function cleanInternalLinks(root){
+  const links=root.matches?.("a[href]")?[root]:[...root.querySelectorAll?.("a[href]")||[]];
+  for(const a of links){const h=a.getAttribute("href");if(h?.startsWith("#/"))a.setAttribute("href",routeURL(h));}
 }
+cleanInternalLinks(document);
+new MutationObserver(mutations=>{for(const m of mutations){if(m.type==="attributes")cleanInternalLinks(m.target);for(const n of m.addedNodes||[])if(n.nodeType===1)cleanInternalLinks(n);}}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["href"]});
+document.addEventListener("click",event=>{
+ const a=event.target.closest?.("a[href]");
+ if(!a||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||a.target||a.hasAttribute("download")||a.hasAttribute("onclick"))return;
+ const url=new URL(a.href,location.href);
+ if(url.origin!==location.origin)return;
+ if(url.pathname!=="/"&&!PUBLIC_ROUTES.has(url.pathname.split("/")[1]))return;
+ event.preventDefault();window.__PENDAR_ROUTE="";
+ history.pushState(null,"",url.pathname+url.search);route();updateRouteSeo(url.pathname);
+});

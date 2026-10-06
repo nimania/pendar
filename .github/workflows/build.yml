@@ -314,6 +314,14 @@ jobs:
           fi
           python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
 
+      - name: Validate static SEO routes
+        run: |
+          python backend/tests/test_seo.py
+          node backend/tests/test_seo_routes.js web-static/router.js
+
+      - name: Generate crawlable HTML and sitemaps
+        run: python backend/scripts/build_seo.py --site backend/public
+
       - name: Save the figures published in this build
         uses: actions/upload-artifact@v4
         with:
