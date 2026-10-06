@@ -139,7 +139,6 @@ async function renderHomePeople(){
 
 // Two independent homepage windows: headlines and culture.
 let homeNewsMode="selected";
-let homeCultureTab="books";
 function setHomeNewsMode(mode){
   if(!["selected","latest"].includes(mode))return;
   homeNewsMode=mode;
@@ -147,16 +146,6 @@ function setHomeNewsMode(mode){
     const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
   });
   renderHomeDaily();
-}
-function setHomeCultureTab(tab){
-  if(!["books","iran","world"].includes(tab))return;
-  homeCultureTab=tab;
-  const panel=document.getElementById("home-culture-panel");if(panel)panel.dataset.tab=tab;
-  document.querySelectorAll("[data-home-culture]").forEach(button=>{
-    const on=button.dataset.homeCulture===tab;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
-  });
-  if(tab==="books")renderBookTrends("home-books-strip",{heading:false,limit:6});
-  else renderHomeSeries();
 }
 function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");

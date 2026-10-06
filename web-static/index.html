@@ -8,6 +8,7 @@
   <meta name="description" content="پندار — ایران، خبر، اندیشه و فرهنگ در یک شبکهٔ دانشی فارسی.">
   <link rel="canonical" href="https://pendar.io/"><meta name="theme-color" content="#3c3938">
   <script>
+    document.documentElement.classList.add("js-enabled");
     // Canonical domain routes have no legacy language prefix.
     if (location.pathname === "/fa" || location.pathname.startsWith("/fa/")) {
       location.replace((location.pathname.replace(/^\/fa(?=\/|$)/,"")||"/") + location.search + (["#", "#/"].includes(location.hash) ? "" : location.hash));
@@ -22,7 +23,8 @@
     })();
   </script>
   <style>
-    html.route-boot #home-view { display: none; }
+    html.js-enabled #seo-static { display: none; }
+    html.route-boot main.wrap { visibility: hidden; }
   </style>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
@@ -99,13 +101,8 @@
             </div>
             <div id="home-daily-stories"><div class="spinner"></div></div>
           </section>
-          <section class="home-daily-panel home-culture-panel" id="home-culture-panel" data-tab="books" aria-label="ویترین فرهنگ و سرگرمی">
+          <section class="home-daily-panel home-culture-panel" id="home-culture-panel" aria-label="ویترین فرهنگ و سرگرمی">
             <div class="home-panel-title"><b>ویترین فرهنگ و سرگرمی</b><a href="/movies/">جان فیلم ←</a></div>
-            <div class="home-panel-tabs" role="tablist" aria-label="انتخاب ویترین">
-              <button class="on" role="tab" aria-selected="true" data-home-culture="books" onclick="setHomeCultureTab('books')">ترندهای کتاب</button>
-              <button role="tab" aria-selected="false" data-home-culture="iran" onclick="setHomeCultureTab('iran')">سریال ایرانی</button>
-              <button role="tab" aria-selected="false" data-home-culture="world" onclick="setHomeCultureTab('world')">سریال خارجی</button>
-            </div>
             <div class="home-culture-content">
               <section class="home-books-strip book-trends-section" id="home-books-strip" aria-label="ترندهای کتاب" style="display:none"></section>
               <section class="book-trends-section" id="home-series-strip" aria-label="سریال‌های تازه" style="display:none"></section>

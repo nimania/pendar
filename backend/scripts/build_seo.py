@@ -245,7 +245,7 @@ def build(site):
         content='<section id="seo-static" class="wrap"><nav><a href="/">پندار</a> · <a href="/'+esc(page.get('section',page.get('kind','headlines')))+'/">'+esc(SECTIONS.get(page.get('section',page.get('kind')),'مطالب پندار'))+'</a></nav><h1>'+esc(page['title'])+'</h1>'+page['body']+'</section><!-- seo-end -->'
         out=out.replace('<main class="wrap">',content+'<main class="wrap">')
         # Prevent the app shell from painting below the readable static content.
-        out=out.replace('</head>','<style>html:not(.app-ready) main.wrap{display:none}html.app-ready #seo-static{display:none}</style></head>')
+        out=out.replace('</head>','<style>html:not(.js-enabled) main.wrap{display:none}html.js-enabled #seo-static{display:none}</style></head>')
         target=site/(unquote(url.strip('/'))+'/index.html' if url!='/' else 'index.html');target.parent.mkdir(parents=True,exist_ok=True);target.write_text(out,encoding='utf-8')
         metadata={'title':title,'canonical':canonical,'schema':schema,'tags':{'description':desc,'robots':('index,follow,max-image-preview:large' if page['indexable'] else 'noindex,follow'),'og:title':title,'og:description':desc,'og:url':canonical,'og:type':('article' if page['schema_type']=='Article' else 'website'),'og:image':schema['@graph'][0].get('image',ORIGIN+'/assets/pendar-logo.svg')}}
         (target.parent/'seo.json').write_text(json.dumps(metadata,ensure_ascii=False),encoding='utf-8')
