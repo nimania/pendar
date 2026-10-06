@@ -20,7 +20,7 @@ async function renderBookTrends(elId,opts={}){
   const el=document.getElementById(elId);if(!el)return;
   let d;try{d=await loadBooks();}catch(_){el.style.display='none';return;}
   const by=new Map((d.books||[]).map(b=>[b.slug,b]));
-  const books=BOOK_TRENDS.map(s=>by.get(s)).filter(Boolean);
+  const books=BOOK_TRENDS.map(s=>by.get(s)).filter(Boolean).slice(0,opts.limit||BOOK_TRENDS.length);
   if(!books.length){el.style.display='none';return;}
   const cards=books.map(b=>{
     const creator=(b.creators||[]).find(c=>c.role_fa!=='مترجم')||(b.creators||[])[0];

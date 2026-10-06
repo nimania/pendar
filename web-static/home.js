@@ -114,59 +114,48 @@ async function renderHomePeople(){
   }
 }
 
-// Homepage daily intelligence: the strongest current stories plus the latest figure statements.
-async function renderHomeDaily(){
+// Two independent homepage windows: headlines and culture.
+let homeNewsMode="selected";
+let homeCultureTab="books";
+function setHomeNewsMode(mode){
+  if(!["selected","latest"].includes(mode))return;
+  homeNewsMode=mode;
+  document.querySelectorAll("[data-home-news]").forEach(button=>{
+    const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
+  });
+  renderHomeDaily();
+}
+function setHomeCultureTab(tab){
+  if(!["books","iran","world"].includes(tab))return;
+  homeCultureTab=tab;
+  const panel=document.getElementById("home-culture-panel");if(panel)panel.dataset.tab=tab;
+  document.querySelectorAll("[data-home-culture]").forEach(button=>{
+    const on=button.dataset.homeCulture===tab;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
+  });
+  if(tab==="books")renderBookTrends("home-books-strip",{heading:false,limit:6});
+  else renderHomeSeries();
+}
+function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
-  const voiceEl=document.getElementById("home-daily-voices");
-  if(!storyEl||!voiceEl) return;
+  if(!storyEl)return;
+  const title=document.getElementById("home-news-title");
+  if(title)title.textContent=homeNewsMode==="latest"?"سرخط‌های تازه":"مهم‌ترین اتفاق‌ها";
   const score=s=>{
     const imp=Number(s.importance_score||0);
     const sources=Math.min(Number(s.source_count||0),8)*3;
     const figures=Math.min(Number(s.figure_count||0),6)*2;
     const hot=s.trend?.hot?12:s.trend?.rising?7:0;
     const age=s.published_at?Math.max(0,(Date.now()-new Date(s.published_at).getTime())/36e5):999;
-    const freshness=Math.max(0,18-Math.min(age,18));
-    return imp+sources+figures+hot+freshness;
+    return imp+sources+figures+hot+Math.max(0,18-Math.min(age,18));
   };
-  const stories=(ALL||[]).slice().sort((a,b)=>score(b)-score(a)).slice(0,5);
+  const time=s=>Date.parse(s.published_at||s.last_seen_at||"")||0;
+  const stories=(ALL||[]).slice().sort(homeNewsMode==="latest"?(a,b)=>time(b)-time(a):(a,b)=>score(b)-score(a)||time(b)-time(a)).slice(0,5);
   storyEl.innerHTML=stories.length?stories.map((s,i)=>`
     <button class="home-intel-row" onclick="openStory('${esc(s.id)}')">
       <span class="home-intel-rank">${faN(i+1)}</span>
       <span class="home-intel-copy"><b>${esc(homeEditorialText(s.headline_fa||""))}</b><small>${[relTime(s.published_at),s.source_count?faN(s.source_count)+" منبع":"",s.figure_count?faN(s.figure_count)+" دیدگاه":""].filter(Boolean).join(" · ")}</small></span>
       <span class="home-intel-go">←</span>
-    </button>`).join(""):'<div class="state"><div class="big">هنوز سرخطی ثبت نشده</div></div>';
-  try{
-    const d=await loadFigures();
-    // Homepage voices are intentionally limited to curated figures with a real
-    // portrait. News-only people (synthetic "news-*" profiles / field=news)
-    // stay in the dedicated news-people views and never fill this homepage box.
-    const homeFigures=(d.figures||[]).filter(f =>
-      f && f.avatar &&
-      f.field !== "news" &&
-      !String(f.handle||"").startsWith("news-") &&
-      !HOME_FIGURE_EXCLUDE.has(String(f.handle||"").toLowerCase())
-    );
-    const rankedPosts=homeFigures.flatMap(f=>(f.posts||[]).map(p=>({...p,_person:f})))
-      .filter(p=>p.published_at)
-      .sort((a,b)=>homeFigurePriority(a._person)-homeFigurePriority(b._person) || String(b.published_at).localeCompare(String(a.published_at)));
-    // Show at most one item per figure on the homepage. Because rankedPosts is
-    // newest-first, the first item we keep is that person's latest statement.
-    const seenHomeFigures=new Set();
-    const posts=rankedPosts.filter(p=>{
-      const key=String(p._person?.handle||p.handle||"").toLowerCase();
-      if(!key || seenHomeFigures.has(key)) return false;
-      seenHomeFigures.add(key);
-      return true;
-    }).slice(0,5);
-    voiceEl.innerHTML=posts.length?posts.map(p=>`
-      <button class="home-voice-row" onclick="openStatement('${esc(statementKey(p))}')">
-        ${avatar(p._person,"sm")}
-        <span class="home-intel-copy"><span class="home-voice-name">${esc(p._person.name_fa||"")}</span><b>${esc(homeEditorialText(p.topic_fa||p.summary_fa||"دیدگاه تازه"))}</b><small>${[relTime(p.published_at),p.kind==="news_statement"?"در خبرها":"دیدگاه مستقیم"].join(" · ")}</small></span>
-        <span class="home-intel-go">←</span>
-      </button>`).join(""):'<div class="state"><div class="big">گفتهٔ تازه‌ای ثبت نشده</div></div>';
-  }catch(_){
-    voiceEl.innerHTML='<div class="state"><div class="big">گفته‌ها در دسترس نیستند</div></div>';
-  }
+    </button>`).join(''):'<div class="state"><div class="big">هنوز سرخطی ثبت نشده</div></div>';
 }
 
 // Homepage Jan-e Majra: a compact window into the strongest current topic dossiers.

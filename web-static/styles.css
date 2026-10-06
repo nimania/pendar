@@ -1581,3 +1581,26 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 /* Meshki Media brand shortcut in the header. */
 .meshki-header-link{flex-shrink:0;text-decoration:none}
 .meshki-header-link img{display:block;width:28px;height:28px;object-fit:contain;border-radius:7px;background:#fff}
+
+/* Matched news and culture windows on the homepage. */
+.home-daily-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.home-panel-title a{font-size:.7rem;text-decoration:none;color:var(--accent)}
+.home-panel-tabs{display:flex;gap:4px;padding:8px 12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.home-panel-tabs button{border:0;background:transparent;color:var(--ink-soft);padding:6px 9px;border-radius:8px;font:inherit;font-size:.72rem;cursor:pointer}
+.home-panel-tabs button.on{background:var(--accent-soft);color:var(--accent);font-weight:700}
+.home-culture-panel{display:flex;flex-direction:column;min-width:0}
+.home-culture-content{padding:12px 14px;flex:1}
+.home-culture-panel .trend-head,.home-culture-panel .series-region h3{display:none}
+.home-culture-panel .home-books-strip{margin:0}
+.home-culture-panel .trend-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;overflow:visible;padding:0}
+.home-culture-panel .trend-card{width:100%;min-width:0;flex-basis:auto;text-decoration:none}
+.home-culture-panel .trend-cover{width:100%;height:106px;max-width:88px;margin-inline:auto}
+.home-culture-panel .trend-title{font-size:.73rem;text-align:center}
+.home-culture-panel .trend-author,.home-culture-panel .series-platform{font-size:.63rem;text-align:center}
+.home-culture-panel .series-region .trend-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+.home-culture-panel .series-reason{font-size:.63rem;line-height:1.6;display:block;text-align:center;margin-top:6px}
+.home-culture-panel[data-tab="books"] #home-series-strip{display:none!important}
+.home-culture-panel:not([data-tab="books"]) #home-books-strip{display:none!important}
+.home-culture-links{display:flex;justify-content:space-between;gap:10px;padding:10px 14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.home-culture-links a{font-size:.67rem;text-decoration:none;color:var(--accent)}
+@media(max-width:760px){.home-daily-grid{grid-template-columns:1fr}.home-culture-panel .trend-cover{height:120px;max-width:90px}}
