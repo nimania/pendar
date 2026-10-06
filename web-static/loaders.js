@@ -71,3 +71,36 @@ async function loadNewsPeople() {
   try { _NEWS_PEOPLE = await getJSON(`${DATA}/news-people.json`); } catch (e) { _NEWS_PEOPLE = { figures: [], fields: {} }; }
   return _NEWS_PEOPLE;
 }
+
+
+
+let _PERSON_DIRECTORY_PROMISE=null;
+async function loadPersonDirectory(){
+  if(_PERSON_DIRECTORY_PROMISE)return _PERSON_DIRECTORY_PROMISE;
+  _PERSON_DIRECTORY_PROMISE=Promise.all([loadFigures(),loadCanonicalEntities(),getJSON(DATA+"/people-index.json?v=person1",30000).catch(()=>({people:[]}))]).then(([figures,registry,index])=>{
+    const rows=new Map(),handles=new Map();
+    for(const entity of registry.entities||[]){
+      if(entity.type!=="person")continue;
+      const stub=_personFigureRecord(entity,null);rows.set(entity.id,stub);handles.set(stub.handle,entity.id);
+      for(const ref of entity.refs||[])if(ref.dataset==="figures")handles.set(String(ref.key),entity.id);
+    }
+    for(const row of index.people||[]){
+      const old=rows.get(row.id)||{};
+      rows.set(row.id,{...old,...row,canonical_id:row.id,field:"culture",field_fa:"فرهنگ و هنر",posts:old.posts||[],social:old.social||[],directory:old.directory!==false});
+      handles.set(row.handle,row.id);
+    }
+    for(const figure of figures.figures||[]){
+      const id=handles.get(figure.handle)||figure.canonical_id||"figure:"+figure.handle;
+      const old=rows.get(id)||{};rows.set(id,{...old,...figure,canonical_id:id.startsWith("figure:")?null:id,aliases:[...new Set([...(old.aliases||[]),...(figure.aliases||[])])]});
+    }
+    return [...rows.values()].filter(x=>x.directory!==false);
+  });
+  return _PERSON_DIRECTORY_PROMISE;
+}
+function _personFigureRecord(entity,base){
+  const meta=entity?.meta||{},handle=entity?.routes?.figure||String(entity?.id||"").replace(/^person:/,"");
+  const social=[...(base?.social||[])];
+  for(const link of meta.social||[])if(!social.some(x=>x.url===link.url))social.push(link);
+  if(meta.tmdb_id&&!social.some(x=>String(x.url).includes("themoviedb.org/person/")))social.push({kind:"website",label:"TMDB",url:"https://www.themoviedb.org/person/"+meta.tmdb_id});
+  return {...meta,...(base||{}),handle:base?.handle||handle,profile_handle:base?.handle||"",canonical_id:entity?.id,name_fa:base?.name_fa||entity?.name_fa||"",aliases:[...new Set([...(entity?.aliases||[]),...(base?.aliases||[])])],role_fa:base?.role_fa||meta.role_fa||"",avatar:base?.avatar||meta.avatar||"",posts:base?.posts||[],social,directory:base?.directory!==false,verified:base?.verified||meta.verified||false,claimed:base?.claimed||meta.claimed||false};
+}

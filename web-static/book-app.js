@@ -71,7 +71,7 @@ async function openBookPerson(slug, canonicalId=null){
     document.getElementById("books-content").innerHTML='<div class="state"><div class="big">پدیدآورنده پیدا نشد</div></div>';
     return;
   }
-  if(canonicalPerson?.routes?.figure) return openFigure(canonicalPerson.routes.figure,true,canonicalPerson.id);
+  if(canonicalPerson?.type==="person") return openFigure(canonicalPerson.routes?.figure||canonicalPerson.id.slice(7),true,canonicalPerson.id);
   const linkedFigure=_figureForBookPerson(p,figures);
   if(linkedFigure) return openFigure(linkedFigure.handle,true,canonicalId);
   show("books"); setTab("");
@@ -81,3 +81,4 @@ async function openBookPerson(slug, canonicalId=null){
   el.innerHTML=`<button class="back" onclick="showBooks('people')">بازگشت به پدیدآورندگان</button><div class="book-person-head"><span class="press-kicker">پدیدآورنده</span><h1>${esc(p.name_fa)}</h1><p>${esc((p.roles_fa||[]).join(" · "))}</p></div>${canonicalPerson?canonicalStrip(canonicalPerson):""}<div class="books-grid">${books.map(_bookCard).join("")}</div>`;
   setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/book-person/"+encodeURIComponent(slug));
 }
+

@@ -226,11 +226,31 @@ jobs:
             fi
           fi
 
+      - name: Restore person profile cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            backend/data/people-profile-cache.json
+            backend/data/cinema-people-cache.json
+          key: people-profile-${{ github.run_id }}
+          restore-keys: |
+            people-profile-
+            cinema-people-
+
+      - name: Build people and sourced ratings
+        env:
+          TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+        run: python backend/scripts/build_people.py --data-dir backend/public/data
+
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir backend/public/data
 
       - name: Finalize canonical entity registry
         run: python backend/scripts/finalize_entity_registry.py --registry backend/public/data/entity-registry.json --overrides backend/data/entity-overrides.json --qa-output backend/public/data/entity-qa.json
+
+      - name: Merge all people into canonical registry
+        run: python backend/scripts/merge_people.py --data-dir backend/public/data
 
       - name: Validate Pendar data integrity before publish
         env:
@@ -321,3 +341,4 @@ jobs:
           TELEGRAM_RESOLVE_URL: ${{ inputs.resolve_url }}
           TELEGRAM_RESOLUTION: ${{ inputs.resolution }}
         run: python backend/scripts/publish_figures.py --figures telegram-export/figures.json
+

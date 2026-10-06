@@ -69,15 +69,27 @@ async function loadCanonicalEntities() {
   }
   return _ENTITY_REGISTRY;
 }
-async function canonicalEntityById(id) {
-  const d = await loadCanonicalEntities();
-  return (d.entities||[]).find(x => String(x.id) === String(id)) || null;
+const _PERSON_REGISTRY_BUCKETS=new Map();
+async function _loadPersonRegistryBucket(number){
+  if(!_PERSON_REGISTRY_BUCKETS.has(number))_PERSON_REGISTRY_BUCKETS.set(number,getJSON(DATA+"/people/"+number+".json?v=person1",20000));
+  try{return await _PERSON_REGISTRY_BUCKETS.get(number)}catch(error){_PERSON_REGISTRY_BUCKETS.delete(number);throw error}
 }
-async function canonicalEntityByRef(dataset, key) {
-  if (!dataset || key == null) return null;
-  const d = await loadCanonicalEntities();
-  const k = String(key);
-  return (d.entities||[]).find(x => (x.refs||[]).some(r => r.dataset===dataset && String(r.key)===k)) || null;
+async function canonicalEntityById(id) {
+  const d=await loadCanonicalEntities(),resolved=(d.redirects||{})[String(id)]||String(id);
+  const entity=(d.entities||[]).find(x=>String(x.id)===resolved);
+  const tmdb=entity?.meta?.tmdb_id||String(id).match(/^person:tmdb-(\d+)$/)?.[1];
+  if(tmdb){
+    try{const bucket=await _loadPersonRegistryBucket(Number(tmdb)%64),record=bucket[String(tmdb)];if(record)return record}catch(_){}
+  }
+  return entity||null;
+}
+async function canonicalEntityByRef(dataset,key){
+  if(!dataset||key==null)return null;
+  const d=await loadCanonicalEntities(),k=String(key);
+  const entity=(d.entities||[]).find(x=>(x.refs||[]).some(r=>r.dataset===dataset&&String(r.key)===k));
+  if(entity)return canonicalEntityById(entity.id);
+  const upstream=k.match(/^tmdb-(\d+)$/);
+  return dataset==="figures"?canonicalEntityById("person:"+k):null;
 }
 async function canonicalEntityByName(type, name) {
   if (!type || !name) return null;
@@ -311,8 +323,6 @@ async function openEntityGraph(id,resetFilter=true){
 
 async function openCanonicalEntity(id) {
   id = decodeURIComponent(String(id||""));
-  const cinemaMatch=id.match(/^person:tmdb-(\d+)$/);
-  if(cinemaMatch)return openCinemaPerson(cinemaMatch[1]);
   const entity = await canonicalEntityById(id);
   if (!entity) {
     show("entity"); setTab(""); setHash("#/entity/"+encodeURIComponent(id));
@@ -321,8 +331,7 @@ async function openCanonicalEntity(id) {
     return;
   }
   const routes=entity.routes||{};
-  if(entity.type==="person" && routes.figure) return openFigure(routes.figure,true,entity.id);
-  if(entity.type==="person" && routes.book_person) return openBookPerson(routes.book_person,entity.id);
+  if(entity.type==="person") return openFigure(routes.figure||entity.id.slice(7),true,entity.id);
   if(entity.type==="book" && routes.book) return openBook(routes.book,entity.id);
   if(entity.type==="publisher" && routes.publisher) return openPublisher(routes.publisher,entity.id);
   if(entity.type==="source" && routes.press_source) return showPress(routes.press_source,entity.id);
@@ -352,3 +361,4 @@ async function renderCanonicalEntity(entity) {
     (entity.meta && entity.meta.summary?'<p>'+esc(entity.meta.summary)+'</p>':"") +
     canonicalStrip(entity) + relHtml + '</article>';
 }
+

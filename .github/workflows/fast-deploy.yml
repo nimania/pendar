@@ -18,6 +18,8 @@ on:
       - "backend/scripts/collect_30nama_archive.py"
       - "backend/scripts/enrich_imdb_ids.py"
       - "backend/scripts/build_entities.py"
+      - "backend/scripts/build_people.py"
+      - "backend/scripts/merge_people.py"
       - "backend/scripts/finalize_entity_registry.py"
       - "backend/data/entity-overrides.json"
       - ".github/workflows/fast-deploy.yml"
@@ -219,18 +221,22 @@ jobs:
             python backend/scripts/collect_30nama_archive.py --output site/data/30nama.json --movies site/data/movies.json --movies-js site/data/movies.js
           fi
 
-      - name: Restore cinema people cache
+      - name: Restore person profile cache
         uses: actions/cache@v4
         with:
-          path: backend/data/cinema-people-cache.json
-          key: cinema-people-${{ github.run_id }}
-          restore-keys: cinema-people-
+          path: |
+            backend/data/people-profile-cache.json
+            backend/data/cinema-people-cache.json
+          key: people-profile-${{ github.run_id }}
+          restore-keys: |
+            people-profile-
+            cinema-people-
 
-      - name: Build cinema faces and sourced ratings
+      - name: Build people and sourced ratings
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
           OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
-        run: python backend/scripts/build_cinema_people.py --data-dir site/data
+        run: python backend/scripts/build_people.py --data-dir site/data
 
       - name: Overlay freshest book commerce
         env:
@@ -303,7 +309,7 @@ jobs:
           import hashlib, pathlib, re
           root = pathlib.Path("site")
           versions = {}
-          for name in ("app.js", "router.js", "entities.js", "figures-profile.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "tv-guide.js", "tv-guide.css", "knowledge-hub.js"):
+          for name in ("app.js", "router.js", "entities.js", "loaders.js", "figures-core.js", "figures-profile.js", "search.js", "book-app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "tv-guide.js", "tv-guide.css", "knowledge-hub.js"):
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]
@@ -329,12 +335,21 @@ jobs:
         run: |
           node --check web-static/movies-hub.js
           node --check web-static/app.js
+          node --check web-static/entities.js
+          node --check web-static/loaders.js
+          node --check web-static/figures-profile.js
+          node --check web-static/router.js
 
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir site/data
 
       - name: Finalize canonical entity registry
         run: python backend/scripts/finalize_entity_registry.py --registry site/data/entity-registry.json --overrides backend/data/entity-overrides.json --qa-output site/data/entity-qa.json
+
+      - name: Merge all people into canonical registry
+        run: |
+          python backend/scripts/merge_people.py --data-dir site/data
+          rm -rf site/data/cinema-people site/data/cinema-people-index.json
 
       - name: Validate Pendar data integrity before publish
         run: python backend/scripts/validate_site_integrity.py --site site
@@ -357,5 +372,6 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_attempt }}
+
 
 

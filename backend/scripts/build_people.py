@@ -15,7 +15,7 @@ def write(p, value):
     p.write_text(json.dumps(value,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 
 def request(url, token=None):
-    headers={'User-Agent':'Pendar Cinema/1.0'}
+    headers={'User-Agent':'Pendar People/1.0'}
     if token: headers['Authorization']='Bearer '+token
     with urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=20) as r: return json.load(r)
 
@@ -33,7 +33,7 @@ def main():
                 role='بازیگر' if credit.get('kind')=='cast' else credit.get('role','')
                 if role not in p['films'][film_id]: p['films'][film_id].append(role)
                 if role not in p['roles']: p['roles'].append(role)
-    cache_path=Path('backend/data/cinema-people-cache.json'); cache=read(cache_path,{})
+    cache_path=Path('backend/data/people-profile-cache.json'); cache=read(cache_path,read(Path('backend/data/cinema-people-cache.json'),{}))
     token=os.environ.get('TMDB_READ_TOKEN','')
     ranked=sorted(people,key=lambda k:(int(k) not in FA,-len(people[k]['films'])))
     pending=[k for k in ranked if k not in cache][:args.limit]
@@ -60,13 +60,14 @@ def main():
                 if label: cache[qids[q]]['name_fa']=label
         except Exception: pass
     write(cache_path,cache)
+    Path('backend/data/cinema-people-cache.json').unlink(missing_ok=True)
     buckets=[{} for _ in range(64)]; index=[]
     for k,p in people.items():
         p.update(cache.get(k,{})); p['name_fa']=FA.get(int(k)) or p.get('name_fa',''); p['label_source']='Pendar' if int(k) in FA else 'TMDB / Wikidata'
         buckets[int(k)%64][k]=p
         index.append({key:p.get(key) for key in ('id','name','name_fa','profile_path','roles')})
-    for i,b in enumerate(buckets): write(root/'cinema-people'/f'{i}.json',b)
-    write(root/'cinema-people-index.json',{'updated_at':now,'people':index})
+    for i,b in enumerate(buckets): write(root/'people'/f'{i}.json',b)
+    write(root/'people-index.json',{'updated_at':now,'people':index})
     for shard in (root/'movie-master-details').glob('*.json'):
         for film_id, film in read(shard,{}).items():
             if not re.fullmatch(r'p[mt]_[a-z0-9]+',film_id): continue
@@ -96,6 +97,7 @@ def main():
                         if 0<=value<=100: items.setdefault(imdb,{})['rotten_tomatoes']={'value':value,'source':'OMDb / Rotten Tomatoes','updated_at':now}
             except Exception: pass
     ratings['updated_at']=now; write(root/'movie-ratings.json',ratings)
-    print('Cinema people:',len(people),'Persian names:',sum(bool(p.get('name_fa')) for b in buckets for p in b.values()),'IMDb ratings:',sum('imdb' in x for x in items.values()),'Rotten Tomatoes:',sum('rotten_tomatoes' in x for x in items.values()))
+    print('People from media:',len(people),'Persian names:',sum(bool(p.get('name_fa')) for b in buckets for p in b.values()),'IMDb ratings:',sum('imdb' in x for x in items.values()),'Rotten Tomatoes:',sum('rotten_tomatoes' in x for x in items.values()))
 
 if __name__=='__main__': main()
+

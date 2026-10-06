@@ -182,7 +182,17 @@ async function smartSearch(q){
     const out=document.getElementById("smart-search-results"), Q=_ssQuery(q);
     if(Q.n.length<2){out.innerHTML='<div class="smart-search-hint">می‌توانی طبیعی بنویسی؛ مثلاً «چه کسانی درباره احتمال جنگ حرف زده‌اند؟»</div>';return}
     out.innerHTML='<div class="smart-search-hint">در حال جست‌وجو در خبرها، گفته‌ها، کتاب‌ها و دانش پندار…</div>';
-    const docs=await _buildSmartSearchDocs();
+    const baseDocs=await _buildSmartSearchDocs(),people=await loadPersonDirectory();
+    if(_sq(document.getElementById("smart-search-input")?.value||"")!==Q.n)return;
+    const knownHandles=new Set(baseDocs.filter(x=>x.kind==="چهره").map(x=>x.handle));
+    const personDocs=people.filter(x=>!knownHandles.has(x.handle)&&Q.base.every(term=>_sq([x.name_fa,...(x.aliases||[])].join(" ")).includes(term))).slice(0,40).map(x=>({
+      kind:"چهره",title:x.name_fa,sub:x.role_fa||"",handle:x.handle,
+      canonicalId:x.canonical_id,canonicalType:"person",aliases:x.aliases||[],
+      count:Number(x.count||(x.posts||[]).length||0),
+      go:x.canonical_id?"openCanonicalEntity('"+String(x.canonical_id).replace(/'/g,"\\'")+"')":"openFigure('"+String(x.handle).replace(/'/g,"\\'")+"')",
+      text:[x.name_fa,x.role_fa,...(x.aliases||[])].join(" ")
+    }));
+    const docs=baseDocs.concat(personDocs);
     let ranked=docs.map(d=>({d,score:_ssScore(d,Q)})).filter(x=>x.score>1).sort((a,b)=>b.score-a.score);
     // Collapse duplicate canonical identities that share the same visible name.
     // Prefer a person over a source when both exist under that exact name.
@@ -254,3 +264,4 @@ async function smartSearch(q){
   },140);
 }
 document.addEventListener("click",e=>{const box=document.getElementById("smart-search");if(box?.classList.contains("open")&&!box.contains(e.target))toggleSmartSearch(false)});
+

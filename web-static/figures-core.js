@@ -33,7 +33,7 @@ function toggleFigureFollow(handle, ev) {
   s.has(key) ? s.delete(key) : s.add(key);
   localStorage.setItem(FIG_FOLLOW_KEY, JSON.stringify([...s]));
   renderFigureTimeline();
-  if (document.getElementById("figures-view").style.display === "block" && location.hash.startsWith("#/figure/")) openFigure(handle);
+  if (document.getElementById("figures-view").style.display === "block" && (location.hash.startsWith("#/figure/")||location.hash.startsWith("#/entity/person"))) openFigure(handle,false);
 }
 function figureFollowBtn(handle, compact) {
   const on = isFigureFollowed(handle);
@@ -117,3 +117,4 @@ function figuresSection(list) {
     <p class="muted fig-note">دیدگاه‌های مستقیم از کانال‌های عمومی خود افراد و «گفته در خبر» از منابع خبری جدا برچسب می‌خورند؛ لینک هر مورد به منبع همان گفته می‌رود.
       <a href="#/figures" onclick="event.preventDefault();showFigures()">ورود به چهره‌ها</a></p></div>`;
 }
+
