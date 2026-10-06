@@ -91,11 +91,19 @@ async function canonicalEntityByRef(dataset,key){
   const upstream=k.match(/^tmdb-(\d+)$/);
   return dataset==="figures"?canonicalEntityById("person:"+k):null;
 }
-async function canonicalEntityByName(type, name) {
-  if (!type || !name) return null;
-  const d = await loadCanonicalEntities();
-  const id = d.alias_index && d.alias_index[type] ? d.alias_index[type][_canonicalNorm(name)] : null;
-  return id ? ((d.entities||[]).find(x=>x.id===id)||null) : null;
+const _PERSON_ALIAS_BUCKETS=new Map();
+async function canonicalEntityByName(type,name){
+  if(!type||!name)return null;
+  const d=await loadCanonicalEntities(),normalized=_canonicalNorm(name);
+  const id=d.alias_index?.[type]?.[normalized];
+  if(id)return canonicalEntityById(id);
+  if(type!=="person")return null;
+  const bucket=[...normalized].reduce((sum,c)=>sum+c.codePointAt(0),0)%64;
+  try{
+    if(!_PERSON_ALIAS_BUCKETS.has(bucket))_PERSON_ALIAS_BUCKETS.set(bucket,getJSON(DATA+"/person-aliases/"+bucket+".json?v=person1",15000));
+    const aliases=await _PERSON_ALIAS_BUCKETS.get(bucket);
+    return aliases[normalized]?canonicalEntityById(aliases[normalized]):null;
+  }catch(_){_PERSON_ALIAS_BUCKETS.delete(bucket);return null}
 }
 function _canonicalRelationLabel(rel, incoming) {
   const m = {created_by:"پدیدآورنده",published_by:"ناشر",directed_by:"کارگردان",cast_member:"بازیگر",about_topic:"موضوع",related_topic:"موضوع مرتبط",quoted_by:"نقل‌شده در",related_person:"فرد مرتبط",mentioned_by_source:"ذکر در رسانه",mentioned_by_person:"اشاره توسط"};

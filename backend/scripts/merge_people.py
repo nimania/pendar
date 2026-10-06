@@ -85,6 +85,18 @@ def merge(root):
     registry.setdefault('counts',{})['person']=base_people+extension_count
     write(root/'entity-registry.json',registry)
     write(root/'people-index.json',{'people':index,'count':base_people+extension_count})
+    alias_owners=defaultdict(set)
+    for entity in entities:
+        if entity.get('type')=='person':
+            for label in [entity.get('name_fa')]+entity.get('aliases',[]):
+                if norm(label): alias_owners[norm(label)].add(entity['id'])
+    for row in index:
+        for label in [row.get('name_fa')]+row.get('aliases',[]):
+            if norm(label): alias_owners[norm(label)].add(row['id'])
+    alias_buckets=[{} for _ in range(64)]
+    for label,owners in alias_owners.items():
+        if len(owners)==1: alias_buckets[sum(map(ord,label))%64][label]=next(iter(owners))
+    for number,aliases in enumerate(alias_buckets): write(root/'person-aliases'/f'{number}.json',aliases)
     # Movie credits link directly to canonical people, including known figures.
     ids={row['tmdb_id']:row['id'] for row in index}
     for path in (root/'movie-details').glob('*.json'):

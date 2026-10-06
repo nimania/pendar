@@ -32,8 +32,8 @@ function toggleFigureFollow(handle, ev) {
   const key = String(handle).toLowerCase(), s = figureFollows();
   s.has(key) ? s.delete(key) : s.add(key);
   localStorage.setItem(FIG_FOLLOW_KEY, JSON.stringify([...s]));
-  renderFigureTimeline();
   if (document.getElementById("figures-view").style.display === "block" && (location.hash.startsWith("#/figure/")||location.hash.startsWith("#/entity/person"))) openFigure(handle,false);
+  else renderFigureTimeline();
 }
 function figureFollowBtn(handle, compact) {
   const on = isFigureFollowed(handle);
