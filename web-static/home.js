@@ -71,13 +71,18 @@ async function renderHomeGlance() {
 // Some profiles aggregate heterogeneous/source-mixed material and are therefore
 // kept off homepage surfaces while remaining fully available in Jan Kalam.
 const HOME_FIGURE_EXCLUDE=new Set(["mostafatajzadeh", "masih_alinejad"]);
+const HOME_FIGURE_PRIORITY = ["mehdimotaharnia1344", "garajetadayoni", "abbas-souri", "iranemana_official", "darwinsabouri"];
+function homeFigurePriority(f) {
+  const index = HOME_FIGURE_PRIORITY.indexOf(String(f.handle || "").toLowerCase());
+  return index < 0 ? HOME_FIGURE_PRIORITY.length : index;
+}
 async function renderHomePeople(){
   const section=document.getElementById("home-people-strip");
   const el=document.getElementById("home-people-list");
   if(!section||!el) return;
   try{
     const d=await loadFigures();
-    const figures=(d.figures||[])
+    const eligible=(d.figures||[])
       .filter(f=>f && f.avatar &&
         f.field!=="news" &&
         !String(f.handle||"").startsWith("news-") &&
@@ -87,9 +92,11 @@ async function renderHomePeople(){
         _latest:(f.posts||[]).map(p=>String(p.published_at||"")).sort().slice(-1)[0]||""
       }))
       .sort((a,b)=>String(b._latest).localeCompare(String(a._latest)))
-      // The five newest figures already appear in the vertical "latest statements"
-      // panel below. Skip them here so the horizontal strip adds different faces.
-      .slice(5,19);
+      ;
+    const priority = eligible.filter(f => homeFigurePriority(f) < HOME_FIGURE_PRIORITY.length)
+      .sort((a,b) => homeFigurePriority(a) - homeFigurePriority(b));
+    const remaining = eligible.filter(f => homeFigurePriority(f) === HOME_FIGURE_PRIORITY.length);
+    const figures = [...priority, ...remaining].slice(0,14);
     if(!figures.length){ section.style.display="none"; return; }
     el.innerHTML=figures.map(f=>`
       <button class="home-person" onclick="openFigure('${esc(f.handle)}')" aria-label="${esc(f.name_fa||"")}">
@@ -136,7 +143,7 @@ async function renderHomeDaily(){
     );
     const rankedPosts=homeFigures.flatMap(f=>(f.posts||[]).map(p=>({...p,_person:f})))
       .filter(p=>p.published_at)
-      .sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)));
+      .sort((a,b)=>homeFigurePriority(a._person)-homeFigurePriority(b._person) || String(b.published_at).localeCompare(String(a.published_at)));
     // Show at most one item per figure on the homepage. Because rankedPosts is
     // newest-first, the first item we keep is that person's latest statement.
     const seenHomeFigures=new Set();
