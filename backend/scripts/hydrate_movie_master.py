@@ -194,18 +194,22 @@ def hydrate_one(row: sqlite3.Row, token: str, min_interval: float) -> tuple[str,
 
 def select_rows(con: sqlite3.Connection, limit: int, max_attempts: int) -> list[sqlite3.Row]:
     con.row_factory=sqlite3.Row
-    return con.execute(
-        """
-        SELECT *
-        FROM titles
-        WHERE active=1
-          AND (hydrated=0 OR tmdb_payload_json IS NULL)
-          AND COALESCE(hydrate_attempts,0) < ?
-        ORDER BY curated DESC, popularity DESC, tmdb_id ASC
-        LIMIT ?
-        """,
-        (max_attempts,limit),
+    # Reserve at most one fifth of each batch for older rows missing richer
+    # metadata, while most requests keep expanding archive coverage.
+    backfill=con.execute(
+        """SELECT * FROM titles WHERE active=1 AND hydrated=1
+           AND tmdb_payload_json IS NULL AND COALESCE(hydrate_attempts,0) < ?
+           ORDER BY curated DESC,popularity DESC,tmdb_id ASC LIMIT ?""",
+        (max_attempts,max(1,limit//5)),
     ).fetchall()
+    new_rows=con.execute(
+        """SELECT * FROM titles WHERE active=1 AND hydrated=0
+           AND COALESCE(hydrate_attempts,0) < ?
+           ORDER BY curated DESC,popularity DESC,tmdb_id ASC LIMIT ?""",
+        (max_attempts,max(0,limit-len(backfill))),
+    ).fetchall()
+    return backfill+new_rows
+
 
 def write_public(con: sqlite3.Connection, summary_path: Path|None, top_path: Path|None, top_limit: int) -> None:
     def scalar(sql,args=()):
