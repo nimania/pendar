@@ -24,7 +24,7 @@ function seriesShowcaseCard(row,detail){
   const age=Date.now()-Date.parse(row.checked_at+"T00:00:00Z");
   const stale=age>3*86400000;
   return '<article class="series-evidence-card"><a class="trend-card" href="'+esc(href)+'"'+(external?' target="_blank" rel="noopener"':'')+'><span class="trend-cover"><span class="book-cover-placeholder">'+esc(title)+'</span>'+
-    (m?.poster_url?'<img class="book-cover" src="'+esc(m.poster_url)+'" alt="" loading="lazy" onerror="this.remove()">':'')+
+    ((m?.poster_url||row.poster_url)?'<img class="book-cover" src="'+esc(m?.poster_url||row.poster_url)+'" alt="" loading="lazy" onerror="this.remove()">':'')+
     '</span><strong class="trend-title">'+esc(title)+'</strong><small class="series-platform">'+esc(row.platform)+(row.rank?' · #'+faN(row.rank):'')+'</small></a>'+
     '<small class="series-reason">'+esc(row.reason)+'</small>'+
     (detail?'<p>'+esc(m?.overview_fa||'')+'</p><small>بررسی: '+esc(faN(row.checked_at))+(stale?' · نیازمند بازبینی':'')+'</small><a class="series-source" href="'+esc(row.source_url)+'" target="_blank" rel="noopener">منبع '+(external?'و مشاهده':'')+' ↗</a>':'')+'</article>';
