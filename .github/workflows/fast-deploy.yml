@@ -22,6 +22,7 @@ on:
       - "backend/scripts/enrich_creator_catalog.py"
       - "backend/data/creator-*.json"
       - "backend/scripts/merge_people.py"
+      - "backend/scripts/reconcile_creator_works.py"
       - "backend/scripts/finalize_entity_registry.py"
       - "backend/data/entity-overrides.json"
       - ".github/workflows/fast-deploy.yml"
@@ -371,6 +372,27 @@ jobs:
         run: |
           python backend/scripts/merge_people.py --data-dir site/data
           rm -rf site/data/cinema-people site/data/cinema-people-index.json
+
+      - name: Audit creator works against the entire master catalog
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MOVIE_MASTER_ID: ${{ steps.refresh.outputs.movie_master_id }}
+        run: |
+          rm -rf /tmp/work-audit-db && mkdir -p /tmp/work-audit-db
+          test -n "$MOVIE_MASTER_ID"
+          gh run download "$MOVIE_MASTER_ID" -n pendar-movie-master-db -D /tmp/work-audit-db
+          src="$(find /tmp/work-audit-db -type f -name movie-master.sqlite.gz | head -1)"
+          test -n "$src"
+          gzip -dc "$src" > /tmp/work-audit-db/master.sqlite
+          python backend/tests/test_reconcile_creator_works.py
+          python backend/scripts/reconcile_creator_works.py --data-dir site/data --master-db /tmp/work-audit-db/master.sqlite
+
+      - name: Save creator work reconciliation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: creator-work-reconciliation
+          path: site/data/creator-work-audit.json
+          retention-days: 30
 
       - name: Verify every canonical person profile is publishable
         run: python backend/scripts/validate_person_profiles.py --data-dir site/data
