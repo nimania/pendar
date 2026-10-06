@@ -95,7 +95,26 @@
   .icon-btn svg{width:18px; height:18px}
 
   /* Section intro */
-  .lede{padding:30px 0 8px}
+  .cross-promo{
+    display:flex; align-items:center; gap:12px; margin:16px 0 0;
+    padding:12px 16px; border-radius:var(--radius);
+    background:var(--accent-soft); border:1px solid var(--line-strong);
+    color:var(--ink); box-shadow:var(--shadow-soft);
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .cross-promo:hover{box-shadow:var(--shadow); transform:translateY(-1px)}
+  .cross-promo-badge{
+    flex:none; font-weight:700; font-size:13.5px; color:var(--accent-2);
+    background:var(--surface); border:1px solid var(--line-strong);
+    border-radius:999px; padding:5px 12px; white-space:nowrap;
+  }
+  .cross-promo-text{flex:1; font-size:14px; color:var(--ink-soft); line-height:1.4}
+  .cross-promo-go{flex:none; color:var(--accent); font-size:18px; font-weight:700}
+  @media (max-width:560px){
+    .cross-promo-text{font-size:13px}
+    .cross-promo-badge{font-size:12.5px; padding:4px 10px}
+  }
+  .lede{padding:22px 0 8px}
   .lede h1{
     font-family:"Noto Naskh Arabic",serif; font-weight:600;
     font-size:clamp(24px,4.5vw,32px); margin:0 0 6px; line-height:1.35;
