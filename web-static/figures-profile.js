@@ -42,7 +42,7 @@ async function searchFigureProfiles(query) {
 }
 let _figureProfileFilter = "all";
 function setFigureProfileFilter(handle, mode) {
-  _figureProfileFilter = mode;
+  _figureProfileFilter = ["videos","books"].includes(mode) ? "works" : mode;
   openFigure(handle, false);
 }
 function youtubeVideoId(value) {
@@ -108,6 +108,56 @@ function telegramEmbed(post) {
   return `<div class="telegram-embed telegram-embed-${esc(post.telegram_media)}"><iframe src="${src}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media; picture-in-picture" title="رسانهٔ پست تلگرام"></iframe></div>`;
 }
 
+function _figureWorkUrl(value) {
+  try { const url=new URL(String(value||"")); return ["http:","https:"].includes(url.protocol)?url.href:""; } catch (_) { return ""; }
+}
+function _figureWorkKey(work, kind) {
+  const id=kind==="video"?youtubeVideoId(work.url):"";
+  if(id) return "youtube:"+id;
+  const url=_figureWorkUrl(work.url);
+  if(url){const parsed=new URL(url);for(const key of [...parsed.searchParams.keys()])if(key.startsWith("utm_"))parsed.searchParams.delete(key);return parsed.href;}
+  return String(work.id||work.title_fa||work.title||"");
+}
+function _figureMediaWorks(person, canonical) {
+  const array=value=>Array.isArray(value)?value:[];
+  const meta=canonical?.meta||{};
+  const groups={videos:new Map(),podcasts:new Map(),other:new Map(),channels:new Map()};
+  const add=(group,work,kind)=>{
+    if(!work||typeof work!=="object")return;
+    const row={...work,url:_figureWorkUrl(work.url),kind};
+    if(!row.url&&!row.title_fa&&!row.title)return;
+    const key=_figureWorkKey(row,kind);if(!key)return;
+    const old=groups[group].get(key);
+    groups[group].set(key,{...row,...old,recap_fa:old?.recap_fa||row.recap_fa,statement_id:old?.statement_id||row.statement_id});
+  };
+  for(const v of [...array(person.youtube_videos),...array(meta.youtube_videos),...array(person.videos),...array(meta.videos)])add("videos",v,"video");
+  for(const p of array(person.posts)){
+    if(p.kind==="news_statement"||p.platform!=="youtube")continue;
+    add("videos",{id:String(p.id||"").replace(/^youtube-/,""),url:p.url,title:p.video_title||p.topic_fa||"ویدئو",thumbnail:p.media_url,published_at:p.published_at,recap_fa:p.recap_fa,statement_id:p.id,source_type:p.source_type},"video");
+  }
+  for(const p of [...array(person.podcasts),...array(meta.podcasts)])add("podcasts",p,"podcast");
+  for(const work of [...array(person.works),...array(meta.works)]){
+    const kind=String(work.kind||work.type||"other").toLowerCase();
+    add(["video","youtube"].includes(kind)?"videos":["podcast","episode"].includes(kind)?"podcasts":"other",work,kind);
+  }
+  for(const link of array(person.social)){
+    if(link.kind==="podcast")add("podcasts",{...link,title:link.label||"پادکست",format:"channel"},"podcast");
+    if(link.kind==="youtube")add("channels",{...link,title:"کانال ویدئوهای "+person.name_fa},"channel");
+  }
+  const values=map=>[...map.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
+  return {videos:values(groups.videos),podcasts:values(groups.podcasts),other:values(groups.other),channels:values(groups.channels)};
+}
+function _figureWorkCard(work) {
+  const labels={podcast:"پادکست",episode:"قسمت پادکست",channel:"کانال ویدئو",audio:"صوت",music:"موسیقی",article:"مقاله",poem:"شعر",book:"کتاب",movie:"فیلم",tv:"سریال",project:"پروژه"};
+  const body='<span class="figure-work-type">'+esc(work.type_fa||labels[work.kind]||"اثر")+'</span><b>'+esc(work.title_fa||work.title||work.label||"اثر")+'</b>'+(work.description_fa?'<p>'+esc(work.description_fa)+'</p>':"")+(work.published_at?'<small>'+esc(relTime(work.published_at))+'</small>':"");
+  return '<article class="figure-work-card">'+(work.url?'<a href="'+esc(work.url)+'" target="_blank" rel="noopener">'+body+'<span class="figure-work-open">مشاهده / شنیدن ↗</span></a>':body)+'</article>';
+}
+function _figureVideoCard(video) {
+  if(!video.url)return _figureWorkCard({...video,type_fa:"ویدئو"});
+  const statement=video.statement_id||(video.recap_fa&&video.id?"youtube-"+String(video.id).replace(/^youtube-/,""):"");
+  return '<article class="figure-youtube-card"><a href="'+esc(video.url)+'" target="_blank" rel="noopener"><span class="figure-youtube-thumb">'+(video.thumbnail?'<img src="'+esc(_figureWorkUrl(video.thumbnail))+'" alt="" loading="lazy">':"")+'<span class="figure-youtube-play">▶</span></span><span class="figure-youtube-body"><b>'+esc(video.title_fa||video.title||"ویدئو")+'</b><small>'+esc(video.source_type==="hosted"?"گفت‌وگو / حضور ویدئویی":"ویدئو")+(video.published_at?" · "+esc(relTime(video.published_at)):"")+'</small></span></a>'+(video.recap_fa&&statement?'<button class="video-recap-btn" onclick="openStatement(\''+statementKey({id:statement})+'\')">جان کلام</button>':"")+'</article>';
+}
+
 async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const canonicalFigure=canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByRef("figures",handle);
   canonicalId=canonicalFigure?.id||canonicalId;
@@ -132,14 +182,15 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const filmography=canonicalFigure?.meta?.filmography||{};
   const mediaWorks=(master.items||[]).filter(m=>Object.prototype.hasOwnProperty.call(filmography,m.pendar_id)).map(_masterMovie);
   const figureMovies=(movieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>mm.kind==="figure"&&(String(mm.handle||"").toLowerCase()===String(x.handle||"").toLowerCase()||(x.posts||[]).some(p=>String(p.id)===String(mm.post_id)))));
-  const youtubeVideos=(x.youtube_videos||[]).filter(v=>v&&v.url);
+  const profileMedia=_figureMediaWorks(x,canonicalFigure);
+  const youtubeVideos=profileMedia.videos;
   const canonicalNames=new Set([x.name_fa,...(canonicalFigure?.aliases||[])].map(_canonicalNorm).filter(Boolean));
   const figureStories=canonicalFigure?(typeof ALL!=="undefined"?ALL:[]).filter(s=>(s.entities||[]).some(e=>canonicalNames.has(_canonicalNorm(e.name_fa||"")))):[];
   const shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies" || _figureProfileFilter === "stories" || _figureProfileFilter === "videos" || _figureProfileFilter === "about") ? [] : (x.posts || []);
   const latest = (x.posts || []).map(p => p.published_at).filter(Boolean).sort().pop();
   const poems = Array.isArray(curatedPoems[x.handle]) ? curatedPoems[x.handle] : [];
   const poemSection = poems.length ? `<section class="curated-poems"><div class="curated-poems-head"><div><span class="curated-kicker">اثر ویژه</span><h2>یک شعر؛ بخش‌های منتشرشده</h2><p>این ${faN(poems.length)} متن، بخش‌های مختلف یک شعر از مونا برزویی‌اند. ترتیب نهایی بخش‌ها هنوز اعلام نشده است؛ شماره‌های زیر فقط برای تفکیک در آرشیو جان کلام‌اند و ترتیب شعر را نشان نمی‌دهند.</p></div><span class="curated-count">${faN(poems.length)} بخش</span></div><div class="curated-poem-list">${poems.map((p,i)=>`<article class="curated-poem"><div class="curated-poem-no" title="شمارهٔ آرشیوی؛ نه ترتیب شعر">بخش ${faN(i+1)}*</div><div class="curated-poem-text">${esc(p.text||"").replace(/\\n/g,"<br>")}</div></article>`).join("")}</div></section>` : "";
-  const worksSection=figureBooks.length||mediaWorks.length||poems.length?`<section class="figure-works">${figureBooks.length?'<h2>کتاب‌ها</h2><div class="books-grid">'+figureBooks.map(_bookCard).join("")+'</div>':""}${mediaWorks.length?'<h2>فیلم‌ها و سریال‌ها</h2><div class="movie-grid">'+mediaWorks.map(_movieCard).join("")+'</div>':""}${poemSection}</section>`:'<div class="state"><div class="big">اثری ثبت نشده است.</div></div>';
+  const worksSection=figureBooks.length||mediaWorks.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length||profileMedia.channels.length?`<section class="figure-works">${figureBooks.length?'<h2>کتاب‌ها</h2><div class="books-grid">'+figureBooks.map(_bookCard).join("")+'</div>':""}${mediaWorks.length?'<h2>فیلم‌ها و سریال‌ها</h2><div class="movie-grid">'+mediaWorks.map(_movieCard).join("")+'</div>':""}${profileMedia.podcasts.length?'<h2>پادکست‌ها</h2><div class="figure-work-grid">'+profileMedia.podcasts.map(_figureWorkCard).join("")+'</div>':""}${youtubeVideos.length||profileMedia.channels.length?'<h2>ویدئوها</h2><div class="figure-youtube-grid">'+youtubeVideos.map(_figureVideoCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.channels.map(_figureWorkCard).join("")+'</div>':""}${poemSection}${profileMedia.other.length?'<h2>دیگر آثار</h2><div class="figure-work-grid">'+profileMedia.other.map(_figureWorkCard).join("")+'</div>':""}</section>`:'<div class="state"><div class="big">اثری ثبت نشده است.</div></div>';
   const aboutSection='<section class="x-profile-feed"><p class="x-bio">'+esc(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||"معرفی تکمیلی هنوز ثبت نشده است.")+'</p>'+(canonicalFigure?.meta?.birthday?'<p class="x-bio">تولد: '+esc(faN(canonicalFigure.meta.birthday))+'</p>':"")+'</section>';
   const postRow = p => `<article class="x-post">
     <div class="x-post-rail">${avatar(x,"sm")}</div>
@@ -155,23 +206,21 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     </div>
   </article>`;
   el.innerHTML = `<div class="x-profile">
-    ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${mediaWorks.length ? `<span><b>${faN(mediaWorks.length)}</b> فیلم/سریال</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
+    ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length ? `<span><b>${faN(figureBooks.length)}</b> کتاب</span>` : ""}${mediaWorks.length ? `<span><b>${faN(mediaWorks.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
       <button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>
       <button class="${_figureProfileFilter==="news"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','news')">گفته در خبرها</button>
       <button class="${_figureProfileFilter==="stories"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','stories')">خبرها</button>
+      <button class="${_figureProfileFilter==="works"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','works')">آثار</button>
 
       ${figureMovies.length ? `<button class="${_figureProfileFilter==="movies"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'movies\')">اشاره به فیلم‌ها</button>` : ""}
-      ${youtubeVideos.length ? `<button class="${_figureProfileFilter==="videos"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'videos\')">ویدئوها</button>` : ""}
-      <button class="${_figureProfileFilter==="works"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','works')">آثار</button>
       <button class="${_figureProfileFilter==="about"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','about')">درباره</button>
     </nav>
     ${_figureProfileFilter==="stories" ? `<section class="figure-stories">${figureStories.length?groupedFeed(figureStories):'<div class="state">خبری برای این شخص ثبت نشده است.</div>'}</section>` : ""}
     ${_figureProfileFilter==="books" ? `<section class="figure-books"><div class="books-grid">${figureBooks.map(_bookCard).join("")}</div></section>` : ""}
     ${_figureProfileFilter==="movies" ? `<section class="figure-movies"><div class="movie-grid">${figureMovies.map(_movieCard).join("")}</div></section>` : ""}
-    ${_figureProfileFilter==="videos" ? `<section class="figure-youtube"><div class="figure-youtube-grid">${youtubeVideos.map(v=>`<article class="figure-youtube-card"><a href="${esc(v.url)}" target="_blank" rel="noopener"><span class="figure-youtube-thumb">${v.thumbnail?`<img src="${esc(v.thumbnail)}" alt="" loading="lazy">`:""}<span class="figure-youtube-play">▶</span></span><span class="figure-youtube-body"><b>${esc(v.title||"ویدئوی یوتیوب")}</b><small>${v.published_at?relTime(v.published_at):"YouTube"} · باز کردن در یوتیوب ↗</small></span></a>${v.recap_fa?`<button class="video-recap-btn" onclick="openStatement('youtube-${String(v.id||"").replace(/'/g,"\\'")}')">ری‌کپ حرفه‌ای</button>`:""}</article>`).join("")}</div></section>` : ""}
     ${_figureProfileFilter==="works"||(_figureProfileFilter==="all"&&!shown.length)?worksSection:""}
     ${_figureProfileFilter==="about"?aboutSection:""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos"||_figureProfileFilter==="about"||(_figureProfileFilter==="all"&&!shown.length)) ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>

@@ -342,6 +342,7 @@ jobs:
           node --check web-static/entities.js
           node --check web-static/loaders.js
           node --check web-static/figures-profile.js
+          node backend/tests/test_figure_works_ui.js
           node --check web-static/router.js
 
       - name: Build canonical entity registry
