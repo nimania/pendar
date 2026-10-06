@@ -148,6 +148,35 @@ function setHomeCultureMode(mode){
   });
   renderHomeCulture();
 }
+function homeMiniBars(values){
+  const max=Math.max(1,...values);
+  return `<span class="home-mini-bars" aria-hidden="true">${values.map(v=>`<i style="height:${Math.max(12,Math.round(v/max*100))}%"></i>`).join("")}</span>`;
+}
+async function renderHomeCultureDashboard(){
+  const el=document.getElementById("home-culture-dashboard"); if(!el)return;
+  try{
+    const [books,movies,figures,series]=await Promise.all([
+      loadBooks().catch(()=>({books:[]})),
+      loadMovies().catch(()=>({movies:[]})),
+      loadFigures().catch(()=>({figures:[]})),
+      seriesShowcaseRows().catch(()=>({rows:[]}))
+    ]);
+    const bookCount=(books.books||[]).length;
+    const filmRows=(movies.movies||[]);
+    const movieCount=filmRows.filter(x=>x.type!=="series").length;
+    const seriesCount=filmRows.filter(x=>x.type==="series").length;
+    const peopleCount=(figures.figures||[]).length;
+    const freshSeries=(series.rows||[]).length;
+    const culturalFresh=Math.max(1,freshSeries+(BOOK_TRENDS?.length||0));
+    const bars=[bookCount,movieCount,seriesCount,peopleCount].map(v=>Math.max(1,Math.round(Math.log10(v+1)*10)));
+    el.innerHTML=`<div class="home-kpis home-kpis-culture">
+      <button onclick="showBooks()"><b>${faN(bookCount)}</b><span>کتاب</span></button>
+      <button onclick="showMovies()"><b>${faN(movieCount+seriesCount)}</b><span>فیلم و سریال</span></button>
+      <button onclick="showFigures()"><b>${faN(peopleCount)}</b><span>چهره</span></button>
+      <button onclick="showMovies()"><b>${faN(freshSeries)}</b><span>سریال تازه</span></button>
+    </div><div class="home-dashboard-foot"><span>نمای کلی محتوای پندار</span>${homeMiniBars(bars)}</div>`;
+  }catch(_){el.innerHTML="";}
+}
 function renderHomeCulture(){
   const panes={
     bestsellers:document.getElementById("home-bestsellers-strip"),
@@ -156,7 +185,8 @@ function renderHomeCulture(){
   };
   Object.entries(panes).forEach(([key,el])=>{if(el)el.style.display=key===homeCultureMode?"":"none";});
   const title=document.getElementById("home-culture-title");
-  if(title)title.textContent={bestsellers:"پرفروش‌های امروز",books:"ترندهای کتاب",series:"سریال‌های تازه"}[homeCultureMode]||"ویترین فرهنگ و سرگرمی";
+  if(title)title.textContent="ویترین امروز";
+  renderHomeCultureDashboard();
   if(homeCultureMode==="bestsellers")renderHomeBookBestsellers();
   else if(homeCultureMode==="books")renderBookTrends("home-books-strip",{heading:false,limit:6});
   else renderHomeSeries();
@@ -172,11 +202,41 @@ function setHomeNewsMode(mode){
   });
   renderHomeDaily();
 }
+function renderHomeNewsDashboard(stories){
+  const el=document.getElementById("home-news-dashboard"); if(!el)return;
+  const now=Date.now(),day=86400000;
+  const recent=(ALL||[]).filter(s=>{const t=Date.parse(s.published_at||s.last_seen_at||"");return Number.isFinite(t)&&t<=now&&now-t<=day;});
+  const sourceNames=new Set(),topicKeys=new Set();
+  for(const s of recent){
+    for(const src of (s.sources||[])){
+      const name=typeof src==="string"?src:(src.source_name||src.name||src.id);
+      if(name)sourceNames.add(name);
+    }
+    for(const t of (s.topics||[])){
+      const key=typeof t==="string"?t:(t.slug||t.name_fa||t.name);
+      if(key)topicKeys.add(key);
+    }
+  }
+  const hot=recent.filter(s=>s.trend?.hot||s.trend?.rising).length;
+  const bins=Array(8).fill(0);
+  for(const s of recent){
+    const t=Date.parse(s.published_at||s.last_seen_at||"");
+    const age=Math.max(0,now-t),idx=Math.min(7,7-Math.floor(age/(3*3600e3)));
+    bins[idx]++;
+  }
+  const latest=recent.map(s=>Date.parse(s.published_at||s.last_seen_at||"")).filter(Number.isFinite).sort((a,b)=>b-a)[0];
+  el.innerHTML=`<div class="home-kpis">
+    <button onclick="showFeed()"><b>${faN(recent.length)}</b><span>خبر · ۲۴ساعت</span></button>
+    <button onclick="showFeed()"><b>${faN(sourceNames.size||Math.max(...recent.map(x=>Number(x.source_count||0)),0))}</b><span>منبع فعال</span></button>
+    <button onclick="showTopics()"><b>${faN(topicKeys.size)}</b><span>موضوع فعال</span></button>
+    <button onclick="showTrends()"><b>${faN(hot)}</b><span>داغ / رو به رشد</span></button>
+  </div><div class="home-dashboard-foot"><span>${latest?"آخرین به‌روزرسانی "+relTime(new Date(latest).toISOString()):"رادار ۲۴ ساعت اخیر"}</span>${homeMiniBars(bins)}</div>`;
+}
 function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
   if(!storyEl)return;
   const title=document.getElementById("home-news-title");
-  if(title)title.textContent=homeNewsMode==="latest"?"سرخط‌های تازه":"مهم‌ترین اتفاق‌ها";
+  if(title)title.textContent="نبض امروز";
   const score=s=>{
     const imp=Number(s.importance_score||0);
     const sources=Math.min(Number(s.source_count||0),8)*3;
@@ -187,12 +247,19 @@ function renderHomeDaily(){
   };
   const time=s=>Date.parse(s.published_at||s.last_seen_at||"")||0;
   const stories=(ALL||[]).slice().sort(homeNewsMode==="latest"?(a,b)=>time(b)-time(a):(a,b)=>score(b)-score(a)||time(b)-time(a)).slice(0,5);
-  storyEl.innerHTML=stories.length?stories.map((s,i)=>`
-    <button class="home-intel-row" onclick="openStory('${esc(s.id)}')">
+  renderHomeNewsDashboard(stories);
+  storyEl.innerHTML=stories.length?stories.map((s,i)=>{
+    const state=s.trend?.hot?"داغ":s.trend?.rising?"در حال رشد":"";
+    const strength=Math.min(100,Math.max(12,Number(s.source_count||1)*11));
+    return `<button class="home-intel-row home-intel-row-rich" onclick="openStory('${esc(s.id)}')">
       <span class="home-intel-rank">${faN(i+1)}</span>
-      <span class="home-intel-copy"><b>${esc(homeEditorialText(s.headline_fa||""))}</b><small>${[relTime(s.published_at),s.source_count?faN(s.source_count)+" منبع":"",s.figure_count?faN(s.figure_count)+" دیدگاه":""].filter(Boolean).join(" · ")}</small></span>
+      <span class="home-intel-copy"><b>${esc(homeEditorialText(s.headline_fa||""))}</b>
+        <small>${[relTime(s.published_at),s.source_count?faN(s.source_count)+" منبع":"",s.figure_count?faN(s.figure_count)+" چهره":"",state].filter(Boolean).join(" · ")}</small>
+        <span class="home-intel-meter"><i style="width:${strength}%"></i></span>
+      </span>
       <span class="home-intel-go">←</span>
-    </button>`).join(''):'<div class="state"><div class="big">هنوز سرخطی ثبت نشده</div></div>';
+    </button>`;
+  }).join(''):'<div class="state"><div class="big">هنوز سرخطی ثبت نشده</div></div>';
 }
 
 // Homepage Jan-e Majra: a compact window into the strongest current topic dossiers.
