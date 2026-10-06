@@ -28,6 +28,8 @@ async function route() {
   const i = raw.indexOf("/");
   const kind = i < 0 ? raw : raw.slice(0, i);
   const arg = i < 0 ? "" : decodeURIComponent(raw.slice(i + 1));
+  if (kind === "headlines" || kind === "feed" || kind === "news") return showFeed();
+  if (kind === "home") return showHome();
   if (kind === "story" && arg) return openStory(arg);
   if (kind === "person" && arg) return openEntity(arg);
   if (kind === "topic" && arg) return openTopic(arg);
@@ -68,7 +70,7 @@ async function route() {
   if (kind === "figure" && arg) return openFigure(arg);
   if (kind === "news-person" && arg) return openNewsPerson(arg);
   if (kind === "statement" && arg) return openStatement(arg);
-  return showFeed();
+  return showHome();
 }
 
 window.addEventListener("hashchange", () => { if (!_navLock) route(); });
