@@ -17,13 +17,13 @@ for platform,slug in [("Netflix","netflix"),("Prime Video","amazon-prime"),("Dis
         if not heading:raise ValueError("TV ranking missing")
         table=heading.find_next("table")
         rows=[]
-        heading_date=re.search(r"on (\\w+ \\d+, \\d{4})",heading.get_text())
+        heading_date=re.search(r"on (\w+ \d+, \d{4})",heading.get_text())
         date=datetime.datetime.strptime(heading_date[1],"%B %d, %Y").date().isoformat() if heading_date else today
         for tr in table.select("tr"):
             cells=tr.find_all("td")
             if len(cells)<2:continue
             title=cells[1].get_text(" ",strip=True)
-            rank=re.search(r"\\d+",cells[0].get_text())
+            rank=re.search(r"\d+",cells[0].get_text())
             if not title or not rank:continue
             rows.append(dict(title=title,platform=platform,region="world",rank=int(rank[0]),checked_at=date,source_url=url,reason="رتبهٔ جهانی FlixPatrol"))
         if not rows:raise ValueError("No valid chart rows")
@@ -38,7 +38,7 @@ for platform,channel in [("فیلیمو","filimo"),("فیلم‌نت","filmnetof
             if not box:continue
             text=box.get_text(" ",strip=True)
             # Only explicitly identified series; exclude variety programmes and films.
-            match=re.search(r"سریال\\s*[«\"#]([^»\"،؛.!\\n]{2,60})",text)
+            match=re.search(r"سریال\s*[«\"#]([^»\"،؛.!\n]{2,60})",text)
             if not match:continue
             title=match[1].strip().replace("_"," ")
             if "#" in text[match.start():match.start()+8]: title=title.split(" ")[0] if "_" not in match[1] else title
@@ -49,8 +49,9 @@ for platform,channel in [("فیلیمو","filimo"),("فیلم‌نت","filmnetof
             link=message.select_one(".tgme_widget_message_date")
             source=link.get("href",url) if link else url
             photo=message.select_one(".tgme_widget_message_photo_wrap")
-            image=re.search(r"url\\(['\"]?(.*?)['\"]?\\)",photo.get("style","")) if photo else None
-            rows[title]=dict(title=title,platform=platform,region="iran",checked_at=today,published_at=published,source_url=source,reason="اعلان تازه در کانال رسمی",poster_url=image[1] if image else None)
+            image=re.search(r"url\(['\"]?(.*?)['\"]?\)",photo.get("style","")) if photo else None
+            if not re.search(r"قسمت\s*(?:اول|یک|۱|1)(?![۰-۹0-9])",text):continue
+            rows[title]=dict(title=title,platform=platform,region="iran",checked_at=today,published_at=published,release_date=published,source_url=source,reason="اعلان تازه در کانال رسمی",poster_url=image[1] if image else None)
         if rows:data["items"]=[r for r in data["items"] if r["platform"]!=platform]+list(rows.values())[-10:]
     except Exception as exc:print(platform,type(exc).__name__)
 for row in data["items"]:
