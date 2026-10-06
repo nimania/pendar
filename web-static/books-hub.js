@@ -14,6 +14,35 @@ function _bookDiscovery(b){
   return stores.map(([store,url,format])=>({store,url:url+q,format,exact:false}));
 }
 function _bookFormat(l){return l.format||(/الکترونیک/.test(l.format_fa||'')?'ebook':/صوتی/.test(l.format_fa||'')?'audio':'print')}
+// Current IranKetab bestseller snapshot used by the homepage culture showcase.
+// This is deliberately source-labelled and date-stamped: it reflects IranKetab's
+// current bestseller ordering, not a claim about the whole Iranian book market.
+const HOME_BOOK_BESTSELLERS={
+  checked_at:"2026-10-07",
+  source_name:"ایران‌کتاب",
+  source_url:"https://www.iranketab.ir/tag/209-bestsellers",
+  items:[
+    {rank:1,title:"اهالی ماگنولیا",author:"زویا پیرزاد",url:"https://www.iranketab.ir/book/207516-magnolia",cover:"assets/books/ahaliye-magnolia.jpg"},
+    {rank:2,title:"ارتقای فردی",author:"راب دایل",url:"https://www.iranketab.ir/book/207170-level-up",cover:"https://www.iranketab.ir/Images/ProductImages/ee12c9308caf4b08958c37a6fbc1f7e1.jpg"},
+    {rank:3,title:"دانشنامه‌ی مصور شاهنامه",author:"یاسر مالی",url:"https://www.iranketab.ir/book/205032-shahname",cover:"assets/books/daneshnameh-mosavvar-shahnameh.jpg"},
+    {rank:4,title:"جادوگر",author:"فریدا مک‌فادن",url:"https://www.iranketab.ir/book/199957-the-witch",cover:"https://www.iranketab.ir/Images/ProductImages/ae47aac1c8f84df98c656a047eddc423.jpg"},
+    {rank:5,title:"پرورش پشتکار کودکان",author:"الیسا نبولسین",url:"https://www.iranketab.ir/book/203851-the-grit-workbook-for-kids",cover:"https://www.iranketab.ir/Images/ProductImages/b513e0e1cf7c4c0f90e26c4b4657c333.jpg"},
+    {rank:6,title:"رواقی‌گری و ببرهایی که برای عصرانه می‌آیند",author:"مدرسه زندگی",url:"https://www.iranketab.ir/book/203838-fear-insecurity",cover:"https://www.iranketab.ir/Images/ProductImages/504ef495374347e0ac61abedef6f1be5.jpg"}
+  ]
+};
+function renderHomeBookBestsellers(){
+  const el=document.getElementById("home-bestsellers-strip");if(!el)return;
+  const d=HOME_BOOK_BESTSELLERS,items=d.items||[];
+  el.innerHTML=`<div class="home-bestseller-list">${items.map(b=>`<a class="home-bestseller-row" href="${esc(b.url)}" target="_blank" rel="noopener">
+      <span class="home-bestseller-rank">${faN(b.rank)}</span>
+      <span class="home-bestseller-cover"><span>${esc(b.title)}</span><img src="${esc(b.cover)}" alt="جلد ${esc(b.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></span>
+      <span class="home-bestseller-copy"><strong>${esc(b.title)}</strong><small>${esc(b.author)}</small></span>
+      <span class="home-bestseller-go">←</span>
+    </a>`).join("")}</div>
+    <div class="home-bestseller-source"><span>فهرست جاری ${esc(d.source_name)} · بررسی ${faN(d.checked_at)}</span><a href="${esc(d.source_url)}" target="_blank" rel="noopener">مشاهدهٔ فهرست منبع ↗</a></div>`;
+  el.style.display="";
+}
+
 // Editor-curated showcase: a short, ordered list of slugs featured as "ترندها".
 const BOOK_TRENDS=['daneshnameh-mosavvar-shahnameh','ahaliye-magnolia'];
 async function renderBookTrends(elId,opts={}){
