@@ -30,16 +30,23 @@ const HOME_BOOK_BESTSELLERS={
     {rank:6,title:"رواقی‌گری و ببرهایی که برای عصرانه می‌آیند",author:"مدرسه زندگی",url:"https://www.iranketab.ir/book/203838-fear-insecurity",cover:"https://www.iranketab.ir/Images/ProductImages/504ef495374347e0ac61abedef6f1be5.jpg"}
   ]
 };
-function renderHomeBookBestsellers(){
+async function renderHomeBookBestsellers(){
   const el=document.getElementById("home-bestsellers-strip");if(!el)return;
   const d=HOME_BOOK_BESTSELLERS,items=d.items||[];
-  el.innerHTML=`<div class="home-bestseller-list">${items.map(b=>`<a class="home-bestseller-row" href="${esc(b.url)}" target="_blank" rel="noopener">
+  let catalog={books:[]};try{catalog=await loadBooks();}catch(_){}
+  const norm=v=>_bookNorm(v).replace(/[^a-z0-9\u0600-\u06ff]/g,"");
+  const findInternal=b=>(catalog.books||[]).find(x=>norm(x.title_fa)===norm(b.title)||norm(x.original_title)===norm(b.title));
+  el.innerHTML=`<div class="home-bestseller-list">${items.map(b=>{
+    const internal=findInternal(b);
+    const action=internal?`openBook('${esc(internal.slug)}')`:"showBooks()";
+    const cover=internal?.cover_url||b.cover;
+    return `<button class="home-bestseller-row" onclick="${action}" aria-label="${esc(b.title)}">
       <span class="home-bestseller-rank">${faN(b.rank)}</span>
-      <span class="home-bestseller-cover"><span>${esc(b.title)}</span><img src="${esc(b.cover)}" alt="جلد ${esc(b.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></span>
-      <span class="home-bestseller-copy"><strong>${esc(b.title)}</strong><small>${esc(b.author)}</small></span>
+      <span class="home-bestseller-cover"><span>${esc(b.title)}</span><img src="${esc(cover)}" alt="جلد ${esc(b.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></span>
+      <span class="home-bestseller-copy"><strong>${esc(b.title)}</strong><small>${esc(b.author)}${internal?" · صفحه در پندار":" · پیشخوان کتاب"}</small></span>
       <span class="home-bestseller-go">←</span>
-    </a>`).join("")}</div>
-    <div class="home-bestseller-source"><span>فهرست جاری ${esc(d.source_name)} · بررسی ${faN(d.checked_at)}</span><a href="${esc(d.source_url)}" target="_blank" rel="noopener">مشاهدهٔ فهرست منبع ↗</a></div>`;
+    </button>`}).join("")}</div>
+    <div class="home-bestseller-source"><span>فهرست جاری ${esc(d.source_name)} · بررسی ${faN(d.checked_at)}</span><button onclick="showBooks()">همهٔ کتاب‌ها در پندار ←</button></div>`;
   el.style.display="";
 }
 
