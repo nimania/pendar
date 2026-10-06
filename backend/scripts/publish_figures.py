@@ -82,6 +82,27 @@ def post_key(url):
     raise ValueError("A figure post must link to its original Telegram, Bale, or YouTube item")
 
 
+_AI_ERROR_MARKERS = [
+    "متن ورودی",           # AI referring to "the input text"
+    "امکان استخراج",       # "extraction is not possible"
+    "قابل خلاصه‌سازی نیست",  # "cannot be summarized"
+    "خلاصه‌ای منسجم",      # AI describing "a coherent summary"
+    "محتوای قابل تحلیل",    # "analyzable content"
+    "داده‌های ساختاری",     # "structural data" — YouTube metadata etc.
+    "پردازش این محتوا",     # "processing this content"
+    "امکان خلاصه‌سازی",    # "possibility of summarization"
+]
+
+
+def _is_ai_error(text: str) -> bool:
+    """True when the AI returned a meta-commentary about the text instead of
+    a genuine summary — e.g. 'متن ورودی شامل داده‌های ساختاری… امکان استخراج
+    خلاصه‌ای منسجم وجود ندارد'. Two or more markers make a confident reject;
+    one marker in a very short text (< 80 chars) is also suspicious."""
+    hits = sum(1 for m in _AI_ERROR_MARKERS if m in text)
+    return hits >= 2 or (hits == 1 and len(text) < 80)
+
+
 def shown_posts(export):
     if not isinstance(export, dict) or not isinstance(export.get("figures"), list):
         raise ValueError("Invalid figures export; refusing to initialize delivery state")
@@ -97,6 +118,12 @@ def shown_posts(export):
             summary = str(row.get("summary_fa") or "").strip()
             if not summary:
                 continue
+            if _is_ai_error(summary):
+                print(
+                    "::warning::Filtered an AI error summary for "
+                    + str(row.get("name_fa") or row.get("handle") or "unknown")
+                )
+                continue
             try:
                 key = post_key(row.get("url") or "")
             except ValueError:
@@ -109,6 +136,7 @@ def shown_posts(export):
             posts[key] = {
                 "url": key, "handle": handle,
                 "name_fa": str(row.get("name_fa") or figure.get("name_fa") or handle),
+                "field": str(row.get("field") or figure.get("field") or ""),
                 "topic_fa": str(row.get("topic_fa") or "دیدگاه تازه"),
                 "summary_fa": summary,
                 "published_at": row.get("published_at") or "",
@@ -124,11 +152,30 @@ def clipped(text, limit):
     return encoded[:(limit - 1) * 2].decode("utf-16-le", errors="ignore").rstrip() + "…"
 
 
+_FIELD_EMOJI = {
+    "politics": "🏛",
+    "foreign": "🌍",
+    "society": "👥",
+    "economy": "💰",
+    "environment": "🌱",
+    "law": "⚖️",
+    "media": "📡",
+    "development": "📊",
+    "opposition": "✊",
+    "religion": "📿",
+    "philosophy": "💡",
+    "history": "📜",
+    "cinema": "🎬",
+    "culture": "🎭",
+}
+
+
 def message_payload(post, chat_id, site=SITE):
     name = clipped(post["name_fa"].strip(), 120)
     topic = clipped(post["topic_fa"].strip(), 200)
+    field_emoji = _FIELD_EMOJI.get(post.get("field", ""), "🗣")
     figure_url = f"{site.rstrip('/')}/#/figure/{quote(post['handle'], safe='')}"
-    text = (f"🗣 جان‌کلام {name}\n{topic}\n\n"
+    text = (f"{field_emoji} جان‌کلام {name}\n{topic}\n\n"
             f"{clipped(post['summary_fa'], 3200)}\n\n"
             f"{figure_url}\n\n@jane_kalaam")
     return {

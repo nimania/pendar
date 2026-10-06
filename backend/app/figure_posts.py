@@ -39,7 +39,7 @@ SHOWN_KINDS = {"analysis", "party_claim"}
 # Bump when the prompt below changes so cached posts are re-labeled with the new
 # instructions (e.g. v1 → v2 = fuller summaries). Rule-based relay rows are left
 # alone; only AI-labeled rows from an older version are re-sent.
-PROMPT_VERSION = "v3"
+PROMPT_VERSION = "v4"
 
 BATCH_SIZE = 20
 MAX_PER_RUN = 60          # ≤ 3 AI calls per build
@@ -63,9 +63,10 @@ SYSTEM_PROMPT = """\
 
 برای هر پست:
 - topic_fa: موضوع در حداکثر ۸ کلمه (مثلاً «مذاکرات ایران و آمریکا»).
-- summary_fa: فقط برای analysis و party_claim؛ یک بازگوییِ کاملِ استدلالِ شخص در
-  حدودِ ۳ تا ۶ جمله (یک پاراگراف). نکاتِ اصلی، دلیل‌ها، مثال‌ها و نتیجه‌گیریِ او را
-  با انسجام بیاور، طوری که خواننده بدونِ خواندنِ متنِ اصلی هم جانِ کلامِ او را بفهمد.
+- summary_fa: فقط برای analysis و party_claim؛ حداکثر ۲ تا ۳ جمله (کوتاه و مستقیم).
+  جملهٔ اول باید گزاره یا ادعای اصلی شخص باشد — جذاب و مشخص. بقیه فقط مهم‌ترین
+  دلیل یا نتیجه‌گیری. خلاصه باید آن‌قدر کوتاه و جالب باشد که خواننده در تلگرام بخواهد
+  کلیک کند و متن اصلی را بخواند.
   چون نام و هویت گوینده جداگانه بالای کارت نمایش داده می‌شود، summary_fa را مستقیم با
   خودِ ادعا، استدلال یا موضوع شروع کن و از آغازهای تکراری مانند «فلانی می‌گوید»،
   «به باور او»، «او معتقد است» و «از نظر او» پرهیز کن. با این حال متن باید روشن بماند
