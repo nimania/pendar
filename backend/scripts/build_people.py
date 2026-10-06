@@ -27,7 +27,7 @@ def combined_works(credits):
             media=credit.get('media_type'); mid=credit.get('id')
             if media not in ('movie','tv') or not isinstance(mid,int): continue
             key=media+':'+str(mid)
-            role='بازیگر' if kind=='cast' else {'Director':'کارگردان','Writer':'نویسنده','Screenplay':'فیلم‌نامه‌نویس','Producer':'تهیه‌کننده','Executive Producer':'تهیه‌کننده اجرایی','Original Music Composer':'آهنگساز','Director of Photography':'مدیر فیلم‌برداری','Editor':'تدوینگر'}.get(credit.get('job'),'عوامل')
+            role=('حضور آرشیوی' if re.search('archive',credit.get('character',''),re.I) else 'حضور خودش' if re.search('\bself\b|himself|herself',credit.get('character',''),re.I) else 'بازیگر') if kind=='cast' else {'Novel':'نویسندهٔ رمان مبنا','Book':'نویسندهٔ کتاب مبنا','Characters':'خالق شخصیت‌ها','Story':'داستان‌نویس','Original Story':'نویسندهٔ داستان اصلی','Director':'کارگردان','Writer':'نویسنده','Screenplay':'فیلم‌نامه‌نویس','Producer':'تهیه‌کننده','Executive Producer':'تهیه‌کننده اجرایی','Original Music Composer':'آهنگساز','Director of Photography':'مدیر فیلم‌برداری','Editor':'تدوینگر'}.get(credit.get('job'),'عوامل')
             row=rows.setdefault(key,{'id':'tmdb:'+key,'kind':media,'tmdb_id':mid,'title':credit.get('title') or credit.get('name') or credit.get('original_title') or credit.get('original_name'),'url':'https://www.themoviedb.org/'+media+'/'+str(mid),'source_url':'https://www.themoviedb.org/'+media+'/'+str(mid),'thumbnail':'https://image.tmdb.org/t/p/w342'+credit['poster_path'] if credit.get('poster_path') else '', 'year':(credit.get('release_date') or credit.get('first_air_date') or '')[:4],'roles':[]})
             if role not in row['roles']: row['roles'].append(role)
             row['role_fa']='، '.join(row['roles'])
@@ -56,14 +56,14 @@ def main():
     cache_path=Path('backend/data/people-profile-cache.json'); cache=read(cache_path,read(Path('backend/data/cinema-people-cache.json'),{}))
     token=os.environ.get('TMDB_READ_TOKEN','')
     ranked=sorted(people,key=lambda k:(k not in seeds,int(k) not in FA,-len(people[k]['films'])))
-    pending=[k for k in ranked if cache.get(k,{}).get('profile_version')!=2][:args.limit]
+    pending=[k for k in ranked if cache.get(k,{}).get('profile_version')!=3][:args.limit]
     def enrich(k):
         try:
             d=request('https://api.themoviedb.org/3/person/'+k+'?append_to_response=external_ids,combined_credits&language=fa-IR',token)
             qid=d.get('external_ids',{}).get('wikidata_id'); name_fa=FA.get(int(k),'')
             if not name_fa:
                 name_fa=next((n for n in [d.get('name','')]+d.get('also_known_as',[]) if re.search('[پچژگکی]',n)), '')
-            return k,{'name_fa':name_fa,'profile_path':d.get('profile_path'),'birthday':d.get('birthday'),'deathday':d.get('deathday'),'birthplace':d.get('place_of_birth'),'biography_fa':d.get('biography') if re.search('[\u0600-\u06ff]',d.get('biography','')) else '', 'wikidata_id':qid,'imdb_id':d.get('external_ids',{}).get('imdb_id'),'works':combined_works(d.get('combined_credits',{})),'social':[{'kind':'website','label':'IMDb','url':'https://www.imdb.com/name/'+d['external_ids']['imdb_id']}] if d.get('external_ids',{}).get('imdb_id') else [],'profile_version':2,'updated_at':now}
+            return k,{'name_fa':name_fa,'profile_path':d.get('profile_path'),'birthday':d.get('birthday'),'deathday':d.get('deathday'),'birthplace':d.get('place_of_birth'),'biography_fa':d.get('biography') if re.search('[\u0600-\u06ff]',d.get('biography','')) else '', 'wikidata_id':qid,'imdb_id':d.get('external_ids',{}).get('imdb_id'),'works':combined_works(d.get('combined_credits',{})),'social':[{'kind':'website','label':'IMDb','url':'https://www.imdb.com/name/'+d['external_ids']['imdb_id']}] if d.get('external_ids',{}).get('imdb_id') else [],'profile_version':3,'updated_at':now}
         except Exception: return k,None
     if token:
         with ThreadPoolExecutor(max_workers=4) as pool:

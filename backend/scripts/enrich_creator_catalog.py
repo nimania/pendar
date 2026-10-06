@@ -47,6 +47,19 @@ def label(entity, lang='fa'):
 def image_url(filename, width=240):
     return 'https://commons.wikimedia.org/wiki/Special:FilePath/' + urllib.parse.quote(filename.replace(' ', '_')) + '?width=' + str(width) if filename else ''
 
+def related_work_ids(qids):
+    people=' '.join('<http://www.wikidata.org/entity/'+qid+'>' for qid in qids if re.fullmatch('Q[0-9]+',qid))
+    relations=' '.join('<http://www.wikidata.org/prop/direct/'+prop+'>' for prop in ('P50','P655','P57','P58','P110','P98'))
+    query='SELECT DISTINCT ?person ?work WHERE { VALUES ?person { '+people+' } VALUES ?relation { '+relations+' } ?work ?relation ?person . FILTER(STRSTARTS(STR(?work), "http://www.wikidata.org/entity/Q")) } LIMIT 3000'
+    data=request('https://query.wikidata.org/sparql?'+urllib.parse.urlencode({'query':query,'format':'json'}))
+    result={qid:[] for qid in qids}
+    for binding in data.get('results',{}).get('bindings',[]):
+        person=binding.get('person',{}).get('value','').rsplit('/',1)[-1]
+        wid=binding.get('work',{}).get('value','').rsplit('/',1)[-1]
+        if person in result and re.fullmatch('Q[0-9]+',wid) and wid not in result[person] and len(result[person])<100:
+            result[person].append(wid)
+    return result
+
 def profile(entity, requested):
     if 'Q5' not in ids(entity, 'P31'): return None
     qid=entity['id']; links=[{'kind':'website','label':'ویکی‌داده','url':'https://www.wikidata.org/wiki/'+qid}]
@@ -74,11 +87,15 @@ def work(entity, person_qid):
 def enrich(root, limit=100, seeds_path=None, cache_path=None):
     now=datetime.now(timezone.utc).isoformat(); cache_path=cache_path or SCRIPT_ROOT/'data/creator-catalog-cache.json'
     cache=read(cache_path, {'profiles':{},'works':{},'openlibrary':{}})
-    for key in ('profiles','works','openlibrary','unresolved'): cache.setdefault(key,{})
+    for key in ('profiles','works','openlibrary','unresolved','related','related_updated'): cache.setdefault(key,{})
     initial=read(SCRIPT_ROOT/'data/creator-initial-profiles.json',{}).get('people',[])
     for seed in initial:
         for row in read(seeds_path or SCRIPT_ROOT/'data/creator-seeds.json',[]):
-            if row.get('name_fa')==seed.get('name_fa'): cache['profiles'].setdefault(row['site']+':'+row['title'],seed)
+            if row.get('name_fa')==seed.get('name_fa'):
+                cache['profiles'].setdefault(row['site']+':'+row['title'],seed)
+                if seed.get('related_ids'):
+                    cache['related'].setdefault(seed['qid'],seed['related_ids'])
+                    cache['related_updated'].setdefault(seed['qid'],seed['meta'].get('catalog_updated_at',now))
     cache['unresolved']={key:date for key,date in cache['unresolved'].items() if (datetime.now(timezone.utc)-datetime.fromisoformat(date)).days<7}
     books=read(root/'books.json',{}); people=books.get('people',[]); seeds=read(seeds_path or SCRIPT_ROOT/'data/creator-seeds.json',[])
     requests=list(seeds)+[{'name_fa':p['name_fa'],'site':'fawiki','title':p['name_fa'],'book_slug':p['slug']} for p in people if p.get('name_fa') and p.get('slug')]
@@ -106,7 +123,15 @@ def enrich(root, limit=100, seeds_path=None, cache_path=None):
         if value['qid'] not in profiles: profiles[value['qid']]=json.loads(json.dumps(value))
         if row.get('book_slug'): profiles[value['qid']].setdefault('book_slugs',[]).append(row['book_slug'])
     entity_ids=set()
-    for p in profiles.values(): entity_ids.update(p['occupation_ids']+p['notable_ids'][:20])
+    pending=[qid for qid in profiles if qid not in cache['related'] or (datetime.now(timezone.utc)-datetime.fromisoformat(cache['related_updated'].get(qid,'1970-01-01T00:00:00+00:00'))).days>=7][:50]
+    for offset in range(0,len(pending),10):
+        try:
+            batch=related_work_ids(pending[offset:offset+10]); cache['related'].update(batch)
+            cache['related_updated'].update({qid:now for qid in batch})
+        except Exception as exc: failed.append({'stage':'author_relationships','error':type(exc).__name__}); break
+    for p in profiles.values():
+        p['related_ids']=cache['related'].get(p['qid'],p.get('related_ids',[]))
+        entity_ids.update(p['occupation_ids']+p['notable_ids'][:20]+p['related_ids'])
     pending=[qid for qid in sorted(entity_ids) if qid not in cache['works']]
     for start in range(0,len(pending),50):
         try: cache['works'].update(api(ids='|'.join(pending[start:start+50])))
@@ -117,21 +142,14 @@ def enrich(root, limit=100, seeds_path=None, cache_path=None):
         is_seed=any(row.get('qid')==p['qid'] or (row.get('name_fa')==p['name_fa'] and not row.get('book_slug')) for row in seeds)
         if not is_seed and not re.search('writer|author|poet|translator|historian|philosopher|editor|illustrator|journalist|researcher|academic|linguist',occupation_text):
             p['book_slugs']=[];p['unverified_book_match']=True
-        works=[work(cache['works'][qid],p['qid']) for qid in p['notable_ids'][:20] if qid in cache['works'] and label(cache['works'][qid],'en')]
-        if not works: works=p.get('meta',{}).get('works',[])[:]
-        aid=p.get('openlibrary_id')
-        if isinstance(aid,str) and re.fullmatch('OL[0-9]+A',aid) and not p.get('unverified_book_match'):
-            if aid not in cache['openlibrary']:
-                try:
-                    data=request('https://openlibrary.org/authors/'+aid+'/works.json?limit=20')
-                    cache['openlibrary'][aid]=[e for e in data.get('entries',[]) if any(a.get('author',{}).get('key')=='/authors/'+aid for a in e.get('authors',[]))]
-                except Exception as exc: failed.append({'stage':'openlibrary','error':type(exc).__name__})
-            seen={w.get('openlibrary_id') or w.get('url','').rsplit('/',1)[-1] for w in works}
-            for e in cache['openlibrary'].get(aid,[]):
-                key=e.get('key','')
-                if not re.fullmatch('/works/OL[0-9]+W',key) or key.rsplit('/',1)[-1] in seen: continue
-                works.append({'id':'openlibrary:'+key,'kind':'book','title':e.get('title'),'url':'https://openlibrary.org'+key,'role_fa':'نویسنده','thumbnail':'https://covers.openlibrary.org/b/id/'+str(e['covers'][0])+'-M.jpg' if e.get('covers') and e['covers'][0]>0 else '', 'source_url':'https://openlibrary.org'+key})
-            p['meta']['social'].append({'kind':'website','label':'آثار در کتابخانهٔ باز','url':'https://openlibrary.org/authors/'+aid})
+        work_ids=list(dict.fromkeys(p['related_ids']+p['notable_ids'][:20]))
+        works=[work(cache['works'][qid],p['qid']) for qid in work_ids if qid in cache['works'] and (label(cache['works'][qid]) or label(cache['works'][qid],'en'))]
+        works=[w for w in works if w['role_fa']!='اثر شاخص' or w['id'].split(':')[1] in p['notable_ids']]
+        by_id={w['id']:w for w in p.get('meta',{}).get('works',[]) if w.get('id','').startswith('wikidata:')}
+        by_id.update({w['id']:w for w in works}); works=list(by_id.values())
+        # A provider author ID can contain unrelated or duplicate books.
+        # Public relationships require the exact Wikidata author/translator claim.
+        p['meta']['social']=[link for link in p['meta']['social'] if 'openlibrary.org' not in link.get('url','')]
         p['meta']['works']=works;p['meta']['catalog_updated_at']=now
         if p['meta'].get('tmdb_id'): p['meta']['tmdb_id']=int(p['meta']['tmdb_id'])
         for book_person in people:
