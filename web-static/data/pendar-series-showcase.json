@@ -134,40 +134,15 @@
       "reason": "رتبهٔ جهانی FlixPatrol"
     },
     {
-      "title": "بدنام",
-      "platform": "فیلیمو",
-      "region": "iran",
-      "reason": "قسمت ۲۶؛ قسمت پایانی ۱۷ مهر",
-      "checked_at": "2026-10-06",
-      "source_url": "https://r.filimo.com/Tbadnam26",
-      "recent_announcement": true
-    },
-    {
-      "title": "کنکل",
-      "platform": "فیلیمو",
-      "region": "iran",
-      "reason": "اعلان رسمی قسمت هفتم",
-      "checked_at": "2026-10-06",
-      "source_url": "https://r.filimo.com/TCankel7",
-      "recent_announcement": true
-    },
-    {
-      "title": "کوری",
+      "title": "یل",
       "platform": "فیلم‌نت",
       "region": "iran",
-      "reason": "اعلان رسمی قسمت پایانی",
+      "release_date": "2026-10-09",
+      "release_source": "https://t.me/s/filmnetofficial?before=10891",
+      "source_url": "https://t.me/s/filmnetofficial?before=10891",
       "checked_at": "2026-10-06",
-      "source_url": "https://t.me/s/filmnetofficial",
-      "recent_announcement": true
-    },
-    {
-      "title": "اعتراف می‌کنم",
-      "platform": "فیلم‌نت",
-      "region": "iran",
-      "reason": "اعلان رسمی قسمت نهم",
-      "checked_at": "2026-10-06",
-      "source_url": "https://t.me/s/filmnetofficial",
-      "recent_announcement": true
+      "reason": "به‌زودی؛ شروع پخش ۱۷ مهر",
+      "upcoming": true
     }
   ]
 }
