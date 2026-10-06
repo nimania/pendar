@@ -81,12 +81,34 @@ function homeFigurePriority(f, now = Date.now()) {
   const index = HOME_FIGURE_PRIORITY.indexOf(String(f.handle || "").toLowerCase());
   return index < 0 ? HOME_FIGURE_PRIORITY.length : index;
 }
+function homeHasRecentVideo(person, meta={}, now=Date.now()){
+  const array=value=>Array.isArray(value)?value:[];
+  const video=row=>{
+    if(!row||typeof row!=="object")return false;
+    const kind=String(row.kind||row.type||row.media_type||"").toLowerCase();
+    return row.platform==="youtube"||["video","youtube"].includes(kind)||row.media_type==="video"||
+      /(?:youtu\.be\/[^/?]+|youtube\.com\/(?:watch[?/]?|shorts\/|live\/|embed\/))/i.test(String(row.url||""))||
+      /\.(?:mp4|webm|mov)(?:[?#]|$)/i.test(String(row.media_url||row.url||""));
+  };
+  const rows=[...array(person.youtube_videos),...array(meta.youtube_videos),...array(person.videos),...array(meta.videos),
+    ...array(person.posts).filter(video),...array(meta.posts).filter(video),
+    ...array(person.works).filter(video),...array(meta.works).filter(video)];
+  return rows.some(row=>{
+    const time=Date.parse(row?.published_at||row?.publishedAt||row?.uploaded_at||"");
+    return Number.isFinite(time)&&time<=now&&now-time<=48*60*60*1000;
+  });
+}
 async function renderHomePeople(){
   const section=document.getElementById("home-people-strip");
   const el=document.getElementById("home-people-list");
   if(!section||!el) return;
   try{
-    const d=await loadFigures();
+    const [d,registry]=await Promise.all([loadFigures(),loadCanonicalEntities().catch(()=>({entities:[]}))]);
+    const peopleByHandle=new Map();
+    for(const person of registry.entities||[]){
+      for(const ref of person.refs||[])if(ref.dataset==="figures")peopleByHandle.set(String(ref.key).toLowerCase(),person);
+      if(person.type==="person"&&person.meta?.handle)peopleByHandle.set(String(person.meta.handle).toLowerCase(),person);
+    }
     const eligible=(d.figures||[])
       .filter(f=>f && f.avatar &&
         f.field!=="news" &&
@@ -94,6 +116,7 @@ async function renderHomePeople(){
         !HOME_FIGURE_EXCLUDE.has(String(f.handle||"").toLowerCase()))
       .map(f=>({
         ...f,
+        _recentVideo:homeHasRecentVideo(f,peopleByHandle.get(String(f.handle||"").toLowerCase())?.meta||{}),
         _latest:(f.posts||[]).map(p=>String(p.published_at||"")).sort().slice(-1)[0]||""
       }))
       .sort((a,b)=>String(b._latest).localeCompare(String(a._latest)))
@@ -104,8 +127,8 @@ async function renderHomePeople(){
     const figures = [...priority, ...remaining].slice(0,14);
     if(!figures.length){ section.style.display="none"; return; }
     el.innerHTML=figures.map(f=>`
-      <button class="home-person" onclick="openFigure('${esc(f.handle)}')" aria-label="${esc(f.name_fa||"")}">
-        <span class="home-person-ring"><img src="${esc(f.avatar)}" alt="" loading="lazy" onerror="this.closest('.home-person')?.remove()"></span>
+      <button class="home-person" onclick="openFigure('${esc(f.handle)}')" aria-label="${esc(f.name_fa||"")}${f._recentVideo?" — ویدئوی تازه در ۴۸ ساعت گذشته":""}"${f._recentVideo?' title="ویدئوی تازه در ۴۸ ساعت گذشته"':""}>
+        <span class="home-person-ring${f._recentVideo?" has-recent-video":""}"><img src="${esc(f.avatar)}" alt="" loading="lazy" onerror="this.closest('.home-person')?.remove()"></span>
         <span class="home-person-name">${esc(f.name_fa||"")}</span>
       </button>`).join("");
     section.style.display="";

@@ -1604,3 +1604,9 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 .home-culture-links{display:flex;justify-content:space-between;gap:10px;padding:10px 14px;border-top:1px solid var(--line);flex-wrap:wrap}
 .home-culture-links a{font-size:.67rem;text-decoration:none;color:var(--accent)}
 @media(max-width:760px){.home-daily-grid{grid-template-columns:1fr}.home-culture-panel .trend-cover{height:120px;max-width:90px}}
+
+/* A red outer ring marks an actual video published in the last 48 hours. */
+.home-person-ring.has-recent-video{position:relative}
+.home-person-ring.has-recent-video::after{content:"";position:absolute;inset:-5px;border:1px solid #e34b4b;border-radius:50%;pointer-events:none}
+
+.home-people-list{padding-top:8px}
