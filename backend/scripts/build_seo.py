@@ -162,7 +162,10 @@ def build(site):
         eid=e['id'];base=route('entity',eid)
         if base not in pages:continue
         refs=e.get('refs') or []
-        handle=person_handle(eid,eid.removeprefix('person:'))
+        preferred={'کاوه مدنی':'kaveh-madani','نیما افشارنادری':'nima-afshar-naderi','نیما افشار نادری':'nima-afshar-naderi','صوفیا عبداللهی':'soufia-abdollahi','مهدی مطهرنیا':'mehdi-motaharnia','مهدی تدینی':'mehdi-tadini','عباس سوری':'abbas-souri','سجاد فتاحی':'sajjad-fattahi','داروین صبوری':'darwin-sabouri'}.get(e.get('name_fa'))
+        meta=e.get('meta') or {}
+        latin=next((n for n in [e.get('name_en'),meta.get('name_en'),meta.get('name'),*(e.get('aliases') or [])] if isinstance(n,str) and re.fullmatch(r"[A-Za-z][A-Za-z .'-]+",n) and ' ' in n),None)
+        handle=person_handle(eid,preferred or latin or eid.removeprefix('person:'))
         old=[base]+[route('figure' if r.get('dataset')=='figures' else 'book-person',r['key']) for r in refs if r.get('dataset') in ['figures','books.people'] and r.get('key')]
         primary=pages[base]['canonical']
         publish_person(handle,{'id':eid},old,primary if primary in pages else base)
