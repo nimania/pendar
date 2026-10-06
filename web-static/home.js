@@ -72,7 +72,12 @@ async function renderHomeGlance() {
 // kept off homepage surfaces while remaining fully available in Jan Kalam.
 const HOME_FIGURE_EXCLUDE=new Set(["mostafatajzadeh", "masih_alinejad"]);
 const HOME_FIGURE_PRIORITY = ["mehdimotaharnia1344", "garajetadayoni", "abbas-souri", "iranemana_official", "darwinsabouri"];
-function homeFigurePriority(f) {
+function homeFigurePriority(f, now = Date.now()) {
+  const fresh = (f.posts || []).some(p => {
+    const time = Date.parse(p.published_at || "");
+    return Number.isFinite(time) && time <= now && now - time <= 24 * 60 * 60 * 1000;
+  });
+  if (!fresh) return HOME_FIGURE_PRIORITY.length;
   const index = HOME_FIGURE_PRIORITY.indexOf(String(f.handle || "").toLowerCase());
   return index < 0 ? HOME_FIGURE_PRIORITY.length : index;
 }
@@ -226,4 +231,29 @@ async function renderHomeMajra() {
     section.style.display = "";
     el.innerHTML = '<div class="state"><div class="big">جان ماجرا موقتاً در دسترس نیست</div><button class="fchip on" onclick="renderHomeMajra()">تلاش دوباره</button></div>';
   }
+}
+
+async function renderHomeSeries() {
+  const el = document.getElementById("home-series-strip");
+  if (!el) return;
+  try {
+    const [catalog, master] = await Promise.all([loadMovies(), loadMovieMaster()]);
+    const items = [...(catalog.movies || []), ...(master.items || []).map(_masterMovie)];
+    const seen = new Set();
+    const series = items.filter(m => {
+      const key = m.master_id || m.slug;
+      if (m.type !== "series" || !key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0,12);
+    if (!series.length) { el.style.display = "none"; return; }
+    el.innerHTML = '<div class="trend-head"><h2>ویترین سریال</h2><a class="trend-more" href="#/movies" onclick="event.preventDefault();movieState.kind=\'series\';showMovies()">همهٔ سریال‌ها ←</a></div><div class="trend-strip">' +
+      series.map(m => {
+        const href = m.master_id ? "#/master-movie/" + encodeURIComponent(m.master_id) : "#/movie/" + encodeURIComponent(m.slug);
+        return '<a class="trend-card" href="' + esc(href) + '"><span class="trend-cover"><span class="book-cover-placeholder">' + esc(m.title_fa || m.original_title || "") + '</span>' +
+          (m.poster_url ? '<img class="book-cover" src="' + esc(m.poster_url) + '" alt="" loading="lazy" onerror="this.remove()">' : "") +
+          '</span><strong class="trend-title">' + esc(m.title_fa || m.original_title || "") + '</strong><small class="trend-author">' + esc(m.year ? faN(m.year) : "سریال") + '</small></a>';
+      }).join("") + '</div>';
+    el.style.display = "";
+  } catch (_) { el.style.display = "none"; }
 }
