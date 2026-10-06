@@ -6,12 +6,12 @@
   <title>پندار</title>
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://pendar.io/">
-  <meta http-equiv="refresh" content="0; url=/">
   <script>
     // The old site 301-redirected "/" to "/fa/"; browsers cached that. Send
     // anyone who still lands here (cached redirect or old bookmark) to the real
     // homepage, preserving any deep-link hash.
-    location.replace("/" + (location.hash || ""));
+    const hash = ["#", "#/"].includes(location.hash) ? "" : location.hash;
+    location.replace("/" + location.search + hash);
   </script>
   <style>
     body{font-family:system-ui,"Vazirmatn",sans-serif;background:#f2f4f0;color:#181b19;
