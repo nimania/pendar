@@ -172,7 +172,7 @@ def build(site):
     for f in figures:
         old=route('figure',f.get('handle',''))
         if unquote(old.strip('/')) in handles['routes'] or old not in pages:continue
-        identity='figure:'+f['handle']
+        identity=f['handle']
         handle=person_handle(identity,f['handle'])
         publish_person(handle,{'figure':f['handle']},[old],old)
     for section,rows in catalogs.items():

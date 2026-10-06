@@ -11,7 +11,7 @@ class SeoTests(unittest.TestCase):
             (site/'index.html').write_text((Path(__file__).resolve().parents[2]/'web-static'/'index.html').read_text())
             fixtures={
                 'stories.json':[{'id':'news-1','headline_fa':'خبر آزمایشی','summary_fa':'گزارش دقیق و قابل خواندن بدون جاوااسکریپت. '*8}],
-                'figures.json':{'figures':[{'handle':'someone','name_fa':'یک چهره','posts':[{'id':'statement-1','topic_fa':'دیدگاه','summary_fa':'شرح دیدگاه همراه با توضیح و شواهد. '*8}]}]},
+                'figures.json':{'figures':[{'handle':'standalone','name_fa':'چهره مستقل','bio_fa':'زندگی و آثار این شخص در پندار معرفی می‌شود. '*5},{'handle':'someone','name_fa':'یک چهره','posts':[{'id':'statement-1','topic_fa':'دیدگاه','summary_fa':'شرح دیدگاه همراه با توضیح و شواهد. '*8}]}]},
                 'books.json':{'books':[{'slug':'a-book','title_fa':'کتاب','description_fa':'معرفی کتاب و نویسنده و اطلاعات اثر. '*8}]},
                 'movies.json':{'movies':[{'slug':'a-movie','title_fa':'فیلم','overview_fa':'شرح فیلم و داستان و اطلاعات آن. '*8}]},
                 'entity-registry.json':{'entities':[{'id':'person:someone','name_fa':'یک چهره','refs':[{'dataset':'figures','key':'someone'}]}]},
@@ -42,6 +42,9 @@ class SeoTests(unittest.TestCase):
             self.assertIn('Sitemap: https://pendar.io/sitemap.xml',(site/'robots.txt').read_text())
             (data/'movies.json').write_text('{"movies":[]}')
             build(site)
+            again=json.loads((data/'person-handles.json').read_text())
+            self.assertEqual(again['people'],handles['people'])
+            self.assertEqual(again['people']['standalone']['figure'],'standalone')
             self.assertFalse((site/'movie/a-movie/index.html').exists())
             self.assertEqual((site/'index.html').read_text().count('id="seo-static"'),1)
 if __name__=='__main__':unittest.main()
