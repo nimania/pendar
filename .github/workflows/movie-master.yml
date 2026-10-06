@@ -81,7 +81,7 @@ jobs:
             --summary backend/public/data/movie-master-summary.json \
             --top backend/public/data/movie-master-top.json \
             --curated-movies backend/data/curated-movies.json \
-            --top-limit 5000
+            --top-limit 20000
 
       - name: Hydrate priority Movie Master titles
         env:
@@ -93,7 +93,7 @@ jobs:
             --workers 4 \
             --summary backend/public/data/movie-master-summary.json \
             --top backend/public/data/movie-master-top.json \
-            --top-limit 5000
+            --top-limit 20000
 
       - name: Validate master database
         run: |
@@ -133,6 +133,7 @@ jobs:
           path: |
             backend/public/data/movie-master-summary.json
             backend/public/data/movie-master-top.json
+            backend/public/data/movie-master-details/
           if-no-files-found: error
           retention-days: 30
           overwrite: true

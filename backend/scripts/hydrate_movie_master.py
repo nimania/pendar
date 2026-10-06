@@ -127,7 +127,7 @@ def parse_title(row: sqlite3.Row, payload: dict) -> dict:
     overview_en=str(en.get("overview") or "").strip() or None
     if not overview_fa and str(payload.get("original_language") or "")=="fa":
         overview_fa=str(payload.get("overview") or "").strip() or None
-    if not overview_en and str(payload.get("original_language") or "")=="en":
+    if not overview_en:
         overview_en=str(payload.get("overview") or "").strip() or None
 
     release_date=str(payload.get(date_key) or "").strip() or None
@@ -172,6 +172,7 @@ def parse_title(row: sqlite3.Row, payload: dict) -> dict:
             "fa":fa,
             "en":en,
         },ensure_ascii=False,separators=(",",":")),
+        "tmdb_payload_json":json.dumps({key:payload.get(key) for key in ("vote_average","vote_count","number_of_seasons","number_of_episodes","networks")},ensure_ascii=False,separators=(",",":")),
         "imdb_id":imdb,
         "wikidata_qid":wikidata,
     }
@@ -198,7 +199,7 @@ def select_rows(con: sqlite3.Connection, limit: int, max_attempts: int) -> list[
         SELECT *
         FROM titles
         WHERE active=1
-          AND hydrated=0
+          AND (hydrated=0 OR tmdb_payload_json IS NULL)
           AND COALESCE(hydrate_attempts,0) < ?
         ORDER BY curated DESC, popularity DESC, tmdb_id ASC
         LIMIT ?
@@ -236,8 +237,8 @@ def write_public(con: sqlite3.Connection, summary_path: Path|None, top_path: Pat
         rows=con.execute(
             """
             SELECT pendar_id,media_type,tmdb_id,original_title,popularity,curated,hydrated,
-                   title_fa,title_en,year,imdb_id,wikidata_qid,poster_path,genres_json
-            FROM titles WHERE active=1
+                   title_fa,title_en,year,imdb_id,wikidata_qid,poster_path,genres_json,original_language,origin_country_json
+            FROM titles WHERE active=1 AND hydrated=1
             ORDER BY curated DESC,popularity DESC,tmdb_id ASC
             LIMIT ?
             """,(top_limit,)
@@ -245,9 +246,29 @@ def write_public(con: sqlite3.Connection, summary_path: Path|None, top_path: Pat
         items=[]
         for row in rows:
             x=dict(row)
+            try: x["origin_country"]=json.loads(x.pop("origin_country_json") or "[]")
+            except Exception: x["origin_country"]=[]
+            x["detail_bucket"]=int(x["tmdb_id"]) % 64
             try: x["genres"]=json.loads(x.pop("genres_json") or "[]")
             except Exception: x["genres"]=[]
             items.append(x)
+        # Details are fetched on demand; keep the browse index small.
+        detail_dir=top_path.parent / "movie-master-details"
+        detail_dir.mkdir(parents=True,exist_ok=True)
+        buckets={}
+        for item in items:
+            row=con.execute("SELECT * FROM titles WHERE pendar_id=?", (item["pendar_id"],)).fetchone()
+            detail={**item}
+            for key in ("overview_fa","overview_en","runtime_min","status","release_date","backdrop_path"):
+                detail[key]=row[key]
+            try: detail.update(json.loads(row["tmdb_payload_json"] or "{}"))
+            except Exception: pass
+            try: detail["credits"]=json.loads(row["credits_json"] or "[]")
+            except Exception: detail["credits"]=[]
+            buckets.setdefault(item["detail_bucket"],{})[item["pendar_id"]]=detail
+        for bucket in range(64):
+            (detail_dir / f"{bucket}.json").write_text(
+                json.dumps(buckets.get(bucket,{}),ensure_ascii=False,separators=(",",":"))+"\n",encoding="utf-8")
         top_path.parent.mkdir(parents=True,exist_ok=True)
         top_path.write_text(json.dumps({
             "schema_version":1,"generated_at":utcnow(),"limit":top_limit,"items":items
@@ -255,6 +276,7 @@ def write_public(con: sqlite3.Connection, summary_path: Path|None, top_path: Pat
 
 def main():
     ap=argparse.ArgumentParser()
+    ap.add_argument("--export-only",action="store_true")
     ap.add_argument("--db",required=True)
     ap.add_argument("--limit",type=int,default=1500)
     ap.add_argument("--workers",type=int,default=4)
@@ -266,8 +288,12 @@ def main():
     args=ap.parse_args()
 
     token=str(os.environ.get("TMDB_READ_TOKEN") or "").strip()
-    if not token:
-        print("TMDB hydration: skipped (TMDB_READ_TOKEN is not configured)")
+    if not token or args.export_only:
+        print("Movie Master: exporting existing metadata" if args.export_only else "TMDB hydration: skipped (TMDB_READ_TOKEN is not configured)")
+        con=sqlite3.connect(args.db)
+        ensure_columns(con)
+        write_public(con,Path(args.summary) if args.summary else None,Path(args.top) if args.top else None,args.top_limit)
+        con.close()
         return
 
     con=sqlite3.connect(args.db)
@@ -290,7 +316,7 @@ def main():
                       overview_fa=?,overview_en=?,poster_path=?,backdrop_path=?,
                       runtime_min=?,status=?,original_language=?,origin_country_json=?,
                       genres_json=?,credits_json=?,translations_json=?,
-                      imdb_id=?,wikidata_qid=?,
+                      imdb_id=?,wikidata_qid=?,tmdb_payload_json=?,
                       hydrated=1,hydrated_at=?,hydrate_attempted_at=?,
                       hydrate_attempts=COALESCE(hydrate_attempts,0)+1,hydrate_error=NULL
                     WHERE pendar_id=?
@@ -300,7 +326,7 @@ def main():
                         data["release_date"],data["year"],data["overview_fa"],data["overview_en"],
                         data["poster_path"],data["backdrop_path"],data["runtime_min"],data["status"],
                         data["original_language"],data["origin_country_json"],data["genres_json"],
-                        data["credits_json"],data["translations_json"],data["imdb_id"],data["wikidata_qid"],
+                        data["credits_json"],data["translations_json"],data["imdb_id"],data["wikidata_qid"],data["tmdb_payload_json"],
                         now,now,pendar_id,
                     )
                 )

@@ -218,6 +218,11 @@ jobs:
             if gh run download "$movie_master_id" -n pendar-movie-master-indexes -D /tmp/movie-master; then
               mkdir -p backend/public/data
               find /tmp/movie-master -type f \( -name 'movie-master-summary.json' -o -name 'movie-master-top.json' \) -exec cp {} backend/public/data/ \;
+              details="$(find /tmp/movie-master -type d -name movie-master-details | head -1)"
+              if [ -n "$details" ]; then
+                mkdir -p backend/public/data/movie-master-details
+                rsync -a "$details/" backend/public/data/movie-master-details/
+              fi
             fi
           fi
 

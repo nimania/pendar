@@ -4,7 +4,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Build & Deploy Pendar (static)"]
+    workflows: ["Build & Deploy Pendar (static)", "Pendar Movie Master"]
     types: [completed]
   push:
     branches: [main]
@@ -163,6 +163,11 @@ jobs:
             if gh run download "$MOVIE_MASTER_ID" -n pendar-movie-master-indexes -D /tmp/movie-master; then
               mkdir -p site/data
               find /tmp/movie-master -type f \( -name 'movie-master-summary.json' -o -name 'movie-master-top.json' \) -exec cp {} site/data/ \;
+              details="$(find /tmp/movie-master -type d -name movie-master-details | head -1)"
+              if [ -n "$details" ]; then
+                mkdir -p site/data/movie-master-details
+                rsync -a "$details/" site/data/movie-master-details/
+              fi
             fi
           fi
 
