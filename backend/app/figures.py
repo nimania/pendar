@@ -305,7 +305,8 @@ FIGURES: list[Figure] = [
     # ══════════════════════════════════════════════════════════════════════
     Figure("donald-trump", "دونالد ترامپ", "رئیس‌جمهور ایالات متحده", "foreign",
            (("website", "https://www.whitehouse.gov/administration/donald-j-trump/"),
-            ("truthsocial", "https://truthsocial.com/@realDonaldTrump")), external=True),
+            ("truthsocial", "https://truthsocial.com/@realDonaldTrump")), external=True,
+           avatar="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTZkCFGyioBQXspTYONjbClEc1qCWhVPg832Ivxb_UFqgEb5xhpb1zbzgSVGjwrMjw3kGtPVA7xMtYN7NOUJOoqDHwd9Fu0zAy7RYjui5MMEh-BAGlr94I4E8ESQBJ5VYD740kLc_Gg&s=19"),
 
     # ══════════════════════════════════════════════════════════════════════
     #  سیاست خارجی
