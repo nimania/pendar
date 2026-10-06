@@ -54,6 +54,8 @@ def merge(root):
             entity=by_id[target]; matched+=1
         else:
             entity={'id':eid,'type':'person','name_fa':label or p.get('name',''),'aliases':[],'roles':[],'refs':[],'routes':{},'meta':{}}
+        for field,default in [('aliases',[]),('roles',[]),('refs',[]),('routes',{}),('meta',{})]:
+            if not isinstance(entity.get(field),type(default)): entity[field]=default
         for alias in [label,p.get('name','')]:
             if alias and alias!=entity['name_fa'] and alias not in entity['aliases']: entity['aliases'].append(alias)
         meta=entity.setdefault('meta',{})

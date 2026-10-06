@@ -226,16 +226,19 @@ jobs:
             fi
           fi
 
+      - name: Restore existing profile labels for migration
+        uses: actions/cache/restore@v4
+        with:
+          path: backend/data/cinema-people-cache.json
+          key: cinema-people-migration-${{ github.run_id }}
+          restore-keys: cinema-people-
+
       - name: Restore person profile cache
         uses: actions/cache@v4
         with:
-          path: |
-            backend/data/people-profile-cache.json
-            backend/data/cinema-people-cache.json
+          path: backend/data/people-profile-cache.json
           key: people-profile-${{ github.run_id }}
-          restore-keys: |
-            people-profile-
-            cinema-people-
+          restore-keys: people-profile-
 
       - name: Build people and sourced ratings
         env:
