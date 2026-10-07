@@ -281,8 +281,3 @@ function renderPersonProfileHeader(x,options={}){
     <p class="x-bio">${esc(x.role_fa||"")}</p>${socialLinks(x.social||[])}
     <div class="x-profile-stats">${options.stats||""}</div>${options.details||""}</div>`;
 }
-
-
-
-
-(function(){const st=document.createElement("style");st.textContent=".profile-us-radar{border:1px solid rgba(143,168,155,.28);border-radius:16px;padding:16px}.profile-us-radar>div{display:flex;align-items:center;gap:10px}.profile-us-radar p{line-height:1.8}.profile-us-radar dl{display:grid;grid-template-columns:130px 1fr;margin:14px 0}.profile-us-radar dt,.profile-us-radar dd{margin:0;padding:7px;border-top:1px solid rgba(143,168,155,.18)}.profile-us-radar dt{opacity:.6}.profile-us-radar small{display:block;opacity:.55;margin-bottom:12px}.profile-us-timeline{margin:14px 0}.profile-us-timeline h3{font-size:14px}.profile-us-timeline>div{display:grid;grid-template-columns:80px 1fr;gap:10px;padding:8px 0;border-top:1px solid rgba(143,168,155,.18)}.profile-us-timeline time{direction:ltr;text-align:left;opacity:.55;font-size:12px}.profile-us-timeline span{line-height:1.7}@media(max-width:600px){.profile-us-radar dl{grid-template-columns:105px 1fr}}";document.head.appendChild(st)})();
