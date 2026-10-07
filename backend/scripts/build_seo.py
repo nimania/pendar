@@ -44,6 +44,14 @@ def build(site):
     for s in stories:
         full=read(data/'story'/ (str(s.get('id'))+'.json'),s)
         add('story',s.get('id'),full.get('headline_fa'),full.get('summary_fa'),schema_type='Article',published=full.get('published_at'))
+    province_rows={}
+    for story in stories:
+        for province in (story.get('geo') or {}).get('provinces',[]):
+            province_rows.setdefault(province['slug'], {'name':province['name_fa'],'links':[]})['links'].append((route('story',story.get('id','')),story.get('headline_fa','')))
+    for slug,group in province_rows.items():
+        add('province',slug,'سرخط '+group['name'],'تازه‌ترین خبرها و گزارش‌های '+group['name']+'؛ خبرهای شهرها، اقتصاد، محیط‌زیست و رویدادهای استان در پندار.')
+        page=pages[route('province',slug)];page['body']+=links(group['links']);page['indexable']=len(group['links'])>=2;page['section']='iran'
+        catalogs['iran'].append((route('province',slug),'سرخط '+group['name']))
     # Publish event explanations as readable HTML, using the same grouping engine as UI.
     event_builder=Path(__file__).with_name('build_event_trends.js')
     if event_builder.exists() and (data/'stories.json').exists():

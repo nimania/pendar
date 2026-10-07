@@ -18,7 +18,7 @@ _B = r"[A-Za-z0-9؀-ۿ‌]"
 
 
 def _compile(words: list[str]) -> list:
-    return [re.compile(rf"(?<!{_B}){re.escape(w)}(?!{_B})") for w in words]
+    return [re.compile(rf"(?<!{_B}){re.escape(re.sub(r"[\s\u200c]+", " ", w))}(?!{_B})") for w in words]
 
 
 # slug -> (name_fa, [keywords])
@@ -27,7 +27,7 @@ PROVINCES: dict[str, tuple[str, list[str]]] = {
     "east-azerbaijan": ("آذربایجان شرقی", ["آذربایجان شرقی", "تبریز", "مراغه", "مرند", "اهر"]),
     "ardabil": ("اردبیل", ["اردبیل", "مشگین‌شهر", "پارس‌آباد", "خلخال"]),
     "gilan": ("گیلان", ["گیلان", "رشت", "انزلی", "لاهیجان", "بندرانزلی", "رودسر"]),
-    "mazandaran": ("مازندران", ["مازندران", "ساری", "بابل", "آمل", "نوشهر", "چالوس", "قائم‌شهر", "تنکابن"]),
+    "mazandaran": ("مازندران", ["مازندران", "ساری", "بابل", "آمل", "نوشهر", "چالوس", "قائم‌شهر", "تنکابن", "رامسر", "بابلسر", "فریدونکنار", "بهشهر", "نکا", "شهر نور", "محمودآباد", "عباس‌آباد", "کلاردشت", "سوادکوه", "جویبار", "گلوگاه"]),
     "golestan": ("گلستان", ["گلستان", "گرگان", "گنبد", "علی‌آباد", "آق‌قلا"]),
     "north-khorasan": ("خراسان شمالی", ["خراسان شمالی", "بجنورد", "شیروان", "اسفراین"]),
     "razavi-khorasan": ("خراسان رضوی", ["خراسان رضوی", "مشهد", "نیشابور", "سبزوار", "تربت"]),
@@ -72,15 +72,14 @@ _NAT_PATS = _compile(NATIONAL)
 
 def classify(text: str | None) -> dict:
     """Return {scope, provinces:[{slug,name_fa}]} for a story's combined text."""
-    t = text or ""
+    t = re.sub(r"[\s\u200c]+", " ", (text or "").replace("ي", "ی").replace("ك", "ک"))
     provinces: list[dict] = []
     for slug, (fa, pats) in _PROV_PATS.items():
         if any(p.search(t) for p in pats):
             provinces.append({"slug": slug, "name_fa": fa})
-        if len(provinces) >= 2:
-            break
     if provinces:
-        return {"scope": "local", "provinces": provinces}
+        cities = [{"name_fa": kw, "province": slug} for slug in [p["slug"] for p in provinces] for kw in dict.fromkeys(PROVINCES[slug][1][1:]) if _compile([kw])[0].search(t)]
+        return {"scope": "local", "provinces": provinces, "cities": cities}
     if any(p.search(t) for p in _NAT_PATS):
         return {"scope": "national", "provinces": []}
     return {"scope": "international", "provinces": []}

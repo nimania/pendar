@@ -52,6 +52,14 @@ SOURCES = [
     ("کاشان‌نیوز", "https://www.kashannews.net", "https://www.kashannews.net/feed/", "iran", 0.5),
     ("کردپرس", "https://www.kurdpress.com", "https://www.kurdpress.com/rss", "iran", 0.55),
 
+    # Verified provincial feeds; geography is detected from article text.
+    ("مهر — اصفهان", "https://www.mehrnews.com", "https://www.mehrnews.com/rss/tp/82", "iran", 0.65),
+    ("مهر — تهران", "https://www.mehrnews.com", "https://www.mehrnews.com/rss/tp/107", "iran", 0.65),
+    ("مهر — خراسان رضوی", "https://www.mehrnews.com", "https://www.mehrnews.com/rss/tp/96", "iran", 0.65),
+    ("مهر — فارس", "https://www.mehrnews.com", "https://www.mehrnews.com/rss/tp/93", "iran", 0.65),
+    ("مهر — گیلان", "https://www.mehrnews.com", "https://www.mehrnews.com/rss/tp/88", "iran", 0.65),
+    ("مهر — مازندران", "https://www.mehrnews.com", "https://www.mehrnews.com/rss/tp/89", "iran", 0.65),
+
     # --- Global / international ---
     ("BBC", "https://www.bbc.com/news", "http://feeds.bbci.co.uk/news/world/rss.xml", "global", 0.85),
     # Spanish-language sources. EL PAÍS publishes an official RSS directory;

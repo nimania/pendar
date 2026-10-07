@@ -50,20 +50,33 @@ function setIranScope(s) {
   const items = s === "all" ? ALL : ALL.filter(x => x.geo && x.geo.scope === s);
   document.getElementById("iran-body").innerHTML = groupedFeed(items);
 }
-function openProvince(slug) {
-  if (!ALL.length) return;
+async function openProvince(slug) {
+  if (!PATHS[slug]) return;
+  if (!ALL.length) ALL = await getJSON(`${DATA}/stories.json`).catch(()=>[]);
   setHash("#/province/" + slug);
   show("topicarchive"); setTab("iran");
   document.getElementById("ta-back-t").textContent = "بازگشت به ایران";
   document.getElementById("ta-back").onclick = showIran;
   const items = ALL.filter(s => s.geo && (s.geo.provinces || []).some(p => p.slug === slug));
   const name = (PATHS[slug] || {}).fa || slug;
-  document.getElementById("ta-title").textContent = "استان: " + name;
+  document.getElementById("ta-title").textContent = "سرخط " + name;
   document.getElementById("ta-sub").textContent = faN(items.length) + " خبر در این استان";
-  document.getElementById("ta-feed").innerHTML = followBar("provinces", slug, "خبرهای این استان در «سرخط من» بیاید") + groupedFeed(items);
+  document.getElementById("ta-feed").innerHTML = followBar("provinces", slug, "خبرهای این استان در «سرخط من» بیاید") + provinceFilters(items, slug) + `<div id="province-news">${items.length?groupedFeed(items):'<p class="state">هنوز خبری برای این استان ثبت نشده است.</p>'}</div>`;
 }
 function hitProvFollow(slug, btn) {
   toggleF("provinces", slug);
   btn.classList.toggle("on", isF("provinces", slug));
   updateMineBadge();
+}
+
+function provinceFilters(items, slug) {
+  const cities=[...new Set(items.flatMap(s=>(s.geo?.cities||[]).filter(c=>c.province===slug).map(c=>c.name_fa)))].sort();
+  const categories=[...new Set(items.map(s=>s.category).filter(Boolean))];
+  window._provinceItems=items;
+  return `<div class="imp-filter"><label>شهر <select id="province-city" onchange="filterProvinceNews()"><option value="">همه شهرها</option>${cities.map(c=>`<option>${esc(c)}</option>`).join('')}</select></label><label>موضوع <select id="province-category" onchange="filterProvinceNews()"><option value="">همه موضوع‌ها</option>${categories.map(c=>`<option value="${esc(c)}">${esc(typeof CAT_FA!=='undefined'?CAT_FA[c]||c:c)}</option>`).join('')}</select></label></div>`;
+}
+function filterProvinceNews() {
+  const city=document.getElementById('province-city').value, category=document.getElementById('province-category').value;
+  const items=(window._provinceItems||[]).filter(s=>(!city||(s.geo?.cities||[]).some(c=>c.name_fa===city))&&(!category||s.category===category));
+  document.getElementById('province-news').innerHTML=items.length?groupedFeed(items):'<p class="state">خبری با این انتخاب موجود نیست.</p>';
 }

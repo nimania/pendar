@@ -10,7 +10,7 @@ class SeoTests(unittest.TestCase):
             site=Path(folder);data=site/'data';data.mkdir()
             (site/'index.html').write_text((Path(__file__).resolve().parents[2]/'web-static'/'index.html').read_text())
             fixtures={
-                'stories.json':[{'id':'news-1','headline_fa':'خبر آزمایشی','summary_fa':'گزارش دقیق و قابل خواندن بدون جاوااسکریپت. '*8}],
+                'stories.json':[{'id':'news-1','headline_fa':'خبر آزمایشی','geo':{'provinces':[{'slug':'mazandaran','name_fa':'مازندران'}]},'summary_fa':'گزارش دقیق و قابل خواندن بدون جاوااسکریپت. '*8}],
                 'figures.json':{'figures':[{'handle':'standalone','name_fa':'چهره مستقل','bio_fa':'زندگی و آثار این شخص در پندار معرفی می‌شود. '*5},{'handle':'someone','name_fa':'یک چهره','posts':[{'id':'statement-1','topic_fa':'دیدگاه','summary_fa':'شرح دیدگاه همراه با توضیح و شواهد. '*8}]}]},
                 'books.json':{'books':[{'slug':'a-book','title_fa':'کتاب','description_fa':'معرفی کتاب و نویسنده و اطلاعات اثر. '*8}]},
                 'movies.json':{'movies':[{'slug':'a-movie','title_fa':'فیلم','overview_fa':'شرح فیلم و داستان و اطلاعات آن. '*8}]},
@@ -18,13 +18,13 @@ class SeoTests(unittest.TestCase):
             }
             for name,obj in fixtures.items():(data/name).write_text(json.dumps(obj,ensure_ascii=False))
             pages=build(site)
-            for url in ['/story/news-1/','/book/a-book/','/movie/a-movie/','/statement/statement-1/','/us-radar/']:
+            for url in ['/story/news-1/','/book/a-book/','/movie/a-movie/','/statement/statement-1/','/us-radar/','/province/mazandaran/']:
                 html=(site/url.strip('/')/'index.html').read_text()
                 self.assertIn('<base href="/">',html)
                 self.assertLess(html.index('<base '),html.index('<link rel="stylesheet"'))
                 self.assertIn('https://pendar.io'+url,html)
                 self.assertIn('<section id="seo-static"',html)
-                self.assertIn('<meta name="robots" content="index,follow',html)
+                self.assertIn('<meta name="robots" content="'+('noindex,follow' if url.startswith('/province/') else 'index,follow'),html)
                 self.assertNotIn('href="#/',html[html.index('<section id="seo-static"'):html.index('<!-- seo-end -->')])
                 json.loads((site/url.strip('/')/'seo.json').read_text())
             ET.parse(site/'sitemap.xml');ET.parse(site/'sitemap-1.xml')
