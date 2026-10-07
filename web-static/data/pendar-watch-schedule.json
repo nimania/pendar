@@ -1,25 +1,261 @@
 {
+  "generated_at": "2026-10-07T13:27:39.629553+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
       "name_fa": "فیلم‌نت",
       "platform_type": "iran_stream",
       "group": "series",
-      "confidence": "official"
+      "confidence": "aggregated",
+      "logo": null
     },
     {
       "id": "stream-filimo",
       "name_fa": "فیلیمو",
       "platform_type": "iran_stream",
       "group": "series",
-      "confidence": "official"
+      "confidence": "aggregated",
+      "logo": null
     },
     {
       "id": "stream-namava",
       "name_fa": "نماوا",
       "platform_type": "iran_stream",
       "group": "series",
-      "confidence": "official"
+      "confidence": "aggregated",
+      "logo": null
+    },
+    {
+      "id": "tmdb-network-74",
+      "name_fa": "Bravo",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/wX5HsfS47u6UUCSpYXqaQ1x2qdu.png"
+    },
+    {
+      "id": "tmdb-network-6",
+      "name_fa": "NBC",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/cm111bsDVlYaC1foL0itvEI4yLG.png"
+    },
+    {
+      "id": "tmdb-network-156",
+      "name_fa": "SBS",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/uHQFPvRTlpgaIFQVN8eKWEnFOll.png"
+    },
+    {
+      "id": "tmdb-network-274",
+      "name_fa": "RTL 4",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/jJnRnPYp49BrUC44hrtwqGNkaQw.png"
+    },
+    {
+      "id": "tmdb-network-1334",
+      "name_fa": "Videoland",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/Ov29JztLk1yyMVe1FeuknzDYbL.png"
+    },
+    {
+      "id": "tmdb-network-47",
+      "name_fa": "Comedy Central",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/6ooPjtXufjsoskdJqj6pxuvHEno.png"
+    },
+    {
+      "id": "tmdb-network-4330",
+      "name_fa": "Paramount+",
+      "platform_type": "world_stream",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/fi83B1oztoS47xxcemFdPMhIzK.png"
+    },
+    {
+      "id": "tmdb-network-6100",
+      "name_fa": "Paramount+",
+      "platform_type": "world_stream",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/fi83B1oztoS47xxcemFdPMhIzK.png"
+    },
+    {
+      "id": "tmdb-network-16",
+      "name_fa": "CBS",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/wju8KhOUsR5y4bH9p3Jc50hhaLO.png"
+    },
+    {
+      "id": "tmdb-network-103",
+      "name_fa": "tv asahi",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/j3xAzk1SYQQwrQOD7acdSz675Wa.png"
+    },
+    {
+      "id": "tmdb-network-30",
+      "name_fa": "USA Network",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/g1e0H0Ka97IG5SyInMXdJkHGKiH.png"
+    },
+    {
+      "id": "tmdb-network-55",
+      "name_fa": "Spike",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/82MKSH7iM5LAGXFb0PDOclTWn5u.png"
+    },
+    {
+      "id": "tmdb-network-213",
+      "name_fa": "Netflix",
+      "platform_type": "world_stream",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
+    },
+    {
+      "id": "tmdb-network-2103",
+      "name_fa": "The New TNN",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/g3qXB4IDKL8sIk9yDVeKlsfLeFT.png"
+    },
+    {
+      "id": "tmdb-network-88",
+      "name_fa": "FX",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/aexGjtcs42DgRtZh7zOxayiry4J.png"
+    },
+    {
+      "id": "tmdb-network-192",
+      "name_fa": "M-Net",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/dJ9KWprPx7AXMOxBrGJoadLhhZQ.png"
+    },
+    {
+      "id": "tmdb-network-1826",
+      "name_fa": "kykNET",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/2tNeujuBe8MR40hoUE4FLYA7Knl.png"
+    },
+    {
+      "id": "tmdb-network-160",
+      "name_fa": "TBS",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/lUACMATs6jcscXIrzNCQzbvNVN5.png"
+    },
+    {
+      "id": "tmdb-network-2171",
+      "name_fa": "NET",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/wJHlrKe9Sm6m6F3Wj1IK81P0Lm0.png"
+    },
+    {
+      "id": "tmdb-network-7068",
+      "name_fa": "Toei Channel",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/3g3L2j03pUnze7eeah5B9dP9QDZ.png"
+    },
+    {
+      "id": "tmdb-network-9332",
+      "name_fa": "TV Asahi",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": null
+    },
+    {
+      "id": "tmdb-network-2552",
+      "name_fa": "Apple TV",
+      "platform_type": "world_stream",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/bngHRFi794mnMq34gfVcm9nDxN1.png"
+    },
+    {
+      "id": "tmdb-network-885",
+      "name_fa": "JTBC",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/44I4aVlasm8Blb8WPGXTkMYuZJF.png"
+    },
+    {
+      "id": "tmdb-network-189",
+      "name_fa": "ORF 1",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/k1poBlW9HGDnIyZU67BtH3BXQuz.png"
+    },
+    {
+      "id": "tmdb-network-308",
+      "name_fa": "Das Erste",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/nGl2dDGonksWY4fTzPPdkK3oNyq.png"
+    },
+    {
+      "id": "tmdb-network-571",
+      "name_fa": "SRF 1",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/txYJaM2VKunNRk3JooH1mnsVSOg.png"
+    },
+    {
+      "id": "tmdb-network-2118",
+      "name_fa": "ORF 2",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/yMnlNdwOHo3YrqPFXVYgvz3pimN.png"
+    },
+    {
+      "id": "tmdb-network-9",
+      "name_fa": "ITV1",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/oz9pjTHnBUmlju8OkaTymhKbh6C.png"
+    },
+    {
+      "id": "digital-world",
+      "name_fa": "عرضهٔ دیجیتال جهان",
+      "platform_type": "world_stream",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": null
     }
   ],
   "programmes": [
@@ -35,12 +271,534 @@
       "desc_fa": "آغاز پخش؛ ساعت انتشار اعلام نشده."
     },
     {
-      "channel_id": "stream-filmnet",
-      "title_fa": "آنتیک · اکران آنلاین",
-      "start": "2026-10-06T18:00:00+03:30",
-      "stop": "2026-10-06T18:01:00+03:30",
-      "source_url": "https://t.me/s/filmnetofficial",
-      "quality_score": 100
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 34 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "نمایش امشب با اجرای جیمی فالون",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/59941",
+      "icon": "https://image.tmdb.org/t/p/w500/1N4o5PmmqhlVDrcdJ2RlCFWbLGX.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 11 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "قانون و نظم: واحد قربانیان ویژه",
+      "start": "2026-10-08T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2734",
+      "icon": "https://image.tmdb.org/t/p/w500/qRVm0gh4xCLxCr1Ayw0l1CYbylR.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1 از فصل 28؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-156",
+      "title_fa": "런닝맨",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/33238",
+      "icon": "https://image.tmdb.org/t/p/w500/15SMnscZqd7HZ0bzruatOcKUlOV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 822 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "آخر شب با ست مایرز",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/61818",
+      "icon": "https://image.tmdb.org/t/p/w500/qKFP9Se7LJtBaxrMS41iu63dtK3.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 10 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "قانون و نظم",
+      "start": "2026-10-08T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/549",
+      "icon": "https://image.tmdb.org/t/p/w500/haJ9eHytVO3H3JooMJG1DiWwDNm.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-274",
+      "title_fa": "Goede Tijden, Slechte Tijden",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/11890",
+      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 23 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1334",
+      "title_fa": "Goede Tijden, Slechte Tijden",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/11890",
+      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 23 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-47",
+      "title_fa": "نمایش روزانه",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2224",
+      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 113 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4330",
+      "title_fa": "سرزمین اوباش",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/247718",
+      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 4 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6100",
+      "title_fa": "سرزمین اوباش",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/247718",
+      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 4 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-16",
+      "title_fa": "NCIS (سرویس تحقیقات جنایی نیروی دریایی آمریکا)",
+      "start": "2026-10-13T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4614",
+      "icon": "https://image.tmdb.org/t/p/w500/y4fGncqELtnvRQuwSpuH8LncZqU.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 2 از فصل 24؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-103",
+      "title_fa": "ドラえもん",
+      "start": "2026-10-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65733",
+      "icon": "https://image.tmdb.org/t/p/w500/9YqdMXlPTQGLIG67vqZdsPdPC4T.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 937 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-30",
+      "title_fa": "راو",
+      "start": "2026-10-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4656",
+      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 41 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-55",
+      "title_fa": "راو",
+      "start": "2026-10-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4656",
+      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 41 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-213",
+      "title_fa": "راو",
+      "start": "2026-10-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4656",
+      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 41 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2103",
+      "title_fa": "راو",
+      "start": "2026-10-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4656",
+      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 41 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-88",
+      "title_fa": "داستان ترسناک آمریکایی",
+      "start": "2026-10-08T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/1413",
+      "icon": "https://image.tmdb.org/t/p/w500/yCkPLQ10qKIUgRBXmQVVMF1h96d.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 13؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 93 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 93 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-103",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-160",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2171",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-7068",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9332",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2552",
+      "title_fa": "اسب‌های آرام",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/95480",
+      "icon": "https://image.tmdb.org/t/p/w500/A64zXamcdfnA04gNZUmtvC4hBwS.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 4 از فصل 6؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-885",
+      "title_fa": "아는 형님",
+      "start": "2026-10-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/70672",
+      "icon": "https://image.tmdb.org/t/p/w500/zak7mqMxJGnnWplSdbjDtV7bg2Y.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 547 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "پخش زنده شنبه شب",
+      "start": "2026-10-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/1667",
+      "icon": "https://image.tmdb.org/t/p/w500/s1cZBqbMwAF3w8S3Yo0j5nr2Yuo.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 3 از فصل 52؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-189",
+      "title_fa": "صحنه جرم",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/3034",
+      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 20 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-308",
+      "title_fa": "صحنه جرم",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/3034",
+      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 20 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-571",
+      "title_fa": "صحنه جرم",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/3034",
+      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 20 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2118",
+      "title_fa": "صحنه جرم",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/3034",
+      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 20 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9",
+      "title_fa": "Coronation Street",
+      "start": "2026-10-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/291",
+      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 184 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "دونده",
+      "start": "2026-10-13T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1377237",
+      "icon": "https://image.tmdb.org/t/p/w500/6C7rbwFFBo6DIlVbE4bwODW2wUm.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "روز افشاگری",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1275779",
+      "icon": "https://image.tmdb.org/t/p/w500/ebo3cRAfAkpXKyuVQWc1QEcc97u.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "مرگ رابین هود",
+      "start": "2026-10-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1284465",
+      "icon": "https://image.tmdb.org/t/p/w500/bzKyaqVphhtJEuPtfQmL431a1RM.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "호프",
+      "start": "2026-10-13T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1058424",
+      "icon": "https://image.tmdb.org/t/p/w500/ptqlN6mDIAqJjVA86J5eOoG82zc.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "جادوی عملی ۲",
+      "start": "2026-10-13T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1302904",
+      "icon": "https://image.tmdb.org/t/p/w500/mYq4vTv9O6zUuHsKHWUvWVE7RuX.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "هر کسی جز تو",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1072790",
+      "icon": "https://image.tmdb.org/t/p/w500/cAkikjEpMECf8iYwnqLXPbwd4TL.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "گلادیاتور ۲",
+      "start": "2026-10-21T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/558449",
+      "icon": "https://image.tmdb.org/t/p/w500/dz0BpOyup2GPWzGjztAtJzWFWS4.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "آماتور",
+      "start": "2026-10-17T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1087891",
+      "icon": "https://image.tmdb.org/t/p/w500/3yje6jj1mBXGRPcikDsONs78Lz7.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Buddy",
+      "start": "2026-10-13T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1514026",
+      "icon": "https://image.tmdb.org/t/p/w500/1BdZbNvl1SfrrX8J9X5tQzN6Ivu.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Hokum",
+      "start": "2026-10-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1430077",
+      "icon": "https://image.tmdb.org/t/p/w500/qMJo0KgPT6Nyi26zfi4iVrZj6eQ.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Transformers One",
+      "start": "2026-10-15T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/698687",
+      "icon": "https://image.tmdb.org/t/p/w500/AcHj5s73g6vIDUAJVaXShUmMVQO.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "By Any Means",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1380417",
+      "icon": "https://image.tmdb.org/t/p/w500/f4hdIed8vh10O8TkQ1CkHS8MQ3G.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "همنشین",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1084199",
+      "icon": "https://image.tmdb.org/t/p/w500/A6rRLnBH26dYwepfeMPgT0VIlbZ.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Sacrifice",
+      "start": "2026-10-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1284186",
+      "icon": "https://image.tmdb.org/t/p/w500/bAcFeDy7UavLTe8qMvYFADNA4Hj.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Oasis: Don't Look Back in Anger",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1447853",
+      "icon": "https://image.tmdb.org/t/p/w500/5XoHhKZ1IROW6f5UlRpADHnTL2l.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "کلاغ",
+      "start": "2026-10-19T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/957452",
+      "icon": "https://image.tmdb.org/t/p/w500/8QCzv1j6Wrz180M7bazsZ5fcXme.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Matchbox the Movie",
+      "start": "2026-10-08T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1148365",
+      "icon": "https://image.tmdb.org/t/p/w500/lFKA4GMz36dImEy3DQPdPF7G4V9.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "مرد گرگ نما",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/710295",
+      "icon": "https://image.tmdb.org/t/p/w500/p3Jj5TBLi3OkYT8wxXjsjlXb7Px.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "حیوانات",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1236045",
+      "icon": "https://image.tmdb.org/t/p/w500/cyltXU1lAGhRFBuHQIMWBAPj8fI.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "اتاق مجاور",
+      "start": "2026-10-19T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1088514",
+      "icon": "https://image.tmdb.org/t/p/w500/kAZS6wbDlCU0crWSLpnQoJcFHCx.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
   ]
 }
