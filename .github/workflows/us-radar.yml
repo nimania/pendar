@@ -1,0 +1,45 @@
+name: US Radar Snapshot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5,17 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate radar data
+        run: |
+          python - <<'PY'
+          import json
+          p="web-static/data/us-radar.json"
+          d=json.load(open(p,encoding="utf-8"))
+          assert d.get("updated")
+          assert isinstance(d.get("house_races"),list)
+          assert isinstance(d.get("history"),list)
+          print("US Radar data valid:", d["updated"])
+          PY
+      - name: Preserve daily snapshot
+        run: |
+          python - <<'PY'
+          import json, pathlib, datetime
+          src=pathlib.Path("web-static/data/us-radar.json")
+          d=json.loads(src.read_text(encoding="utf-8"))
+          out=pathlib.Path("web-static/data/us-radar-history")
+          out.mkdir(parents=True,exist_ok=True)
+          day=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+          p=out/f"{day}.json"
+          if not p.exists(): p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+      - name: Commit snapshot if changed
+        run: |
+          git config user.name "pendar-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add web-static/data/us-radar.json web-static/data/us-radar-history/
+          git diff --cached --quiet || git commit -m "data: archive US Radar snapshot"
+          git push
