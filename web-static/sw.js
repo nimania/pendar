@@ -1,6 +1,6 @@
 /* Pendar static PWA — network-first so new deploys always show; cache is the
    offline fallback only. Bump V on any shell change to evict old caches. */
-const V = "pendar-static-v7";
+const V = "pendar-static-v8";
 const SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./iran-provinces.js",
   "./manifest.webmanifest", "./icons/icon.svg"];
 

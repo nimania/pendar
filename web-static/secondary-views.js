@@ -10,6 +10,7 @@
 /* ---- بورس اخبار ---- */
 let _trendsLoaded = false;
 async function renderTrends() {
+  renderEventTrends();
   if (_trendsLoaded) return;
   const el = document.getElementById("trends");
   try {
