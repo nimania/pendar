@@ -1,0 +1,177 @@
+{
+  "people": [
+    {
+      "handle": "adam-hamilton",
+      "aliases": [
+        "Adam Hamilton"
+      ],
+      "context": [
+        "Kansas"
+      ],
+      "require_context": true,
+      "official_sites": [
+        "https://hamiltonforkansas.com/"
+      ]
+    },
+    {
+      "handle": "roger-marshall",
+      "aliases": [
+        "Roger Marshall"
+      ],
+      "context": [
+        "Kansas",
+        "Senate",
+        "Senator"
+      ],
+      "require_context": false,
+      "official_sites": [
+        "https://www.marshall.senate.gov/"
+      ]
+    },
+    {
+      "handle": "chris-pappas",
+      "aliases": [
+        "Chris Pappas"
+      ],
+      "context": [
+        "New Hampshire"
+      ],
+      "require_context": true,
+      "official_sites": [
+        "https://pappas.house.gov/"
+      ]
+    },
+    {
+      "handle": "john-sununu",
+      "aliases": [
+        "John E. Sununu",
+        "John Sununu"
+      ],
+      "context": [
+        "New Hampshire"
+      ],
+      "require_context": true,
+      "official_sites": [
+        "https://www.sununusenator.com/"
+      ]
+    },
+    {
+      "handle": "roy-cooper",
+      "aliases": [
+        "Roy Cooper"
+      ],
+      "context": [
+        "North Carolina",
+        "Senate",
+        "Senator"
+      ],
+      "require_context": false,
+      "official_sites": [
+        "https://roycooper.com/"
+      ]
+    },
+    {
+      "handle": "michael-whatley",
+      "aliases": [
+        "Michael Whatley"
+      ],
+      "context": [
+        "North Carolina",
+        "Senate",
+        "Senator"
+      ],
+      "require_context": false,
+      "official_sites": [
+        "https://michaelwhatley.com/"
+      ]
+    },
+    {
+      "handle": "james-talarico",
+      "aliases": [
+        "James Talarico"
+      ],
+      "context": [
+        "Texas",
+        "Senate",
+        "Senator"
+      ],
+      "require_context": false,
+      "official_sites": [
+        "https://jamestalarico.com/"
+      ]
+    },
+    {
+      "handle": "ken-paxton",
+      "aliases": [
+        "Ken Paxton"
+      ],
+      "context": [
+        "Texas",
+        "Senate",
+        "Senator"
+      ],
+      "require_context": false,
+      "official_sites": [
+        "https://www.kenpaxton.com/"
+      ]
+    },
+    {
+      "handle": "abdul-el-sayed",
+      "aliases": [
+        "Abdul El-Sayed"
+      ],
+      "context": [
+        "Michigan",
+        "Senate",
+        "Senator"
+      ],
+      "require_context": false,
+      "official_sites": [
+        "https://abdulforsenate.com/"
+      ]
+    },
+    {
+      "handle": "mike-rogers",
+      "aliases": [
+        "Mike Rogers"
+      ],
+      "context": [
+        "Michigan"
+      ],
+      "require_context": true,
+      "official_sites": [
+        "https://rogersforsenate.com/"
+      ]
+    },
+    {
+      "handle": "sherrod-brown",
+      "aliases": [
+        "Sherrod Brown"
+      ],
+      "context": [
+        "Ohio",
+        "Senate",
+        "Senator"
+      ],
+      "require_context": false,
+      "official_sites": [
+        "https://www.sherrodbrown.com/"
+      ]
+    },
+    {
+      "handle": "jon-husted",
+      "aliases": [
+        "Jon Husted"
+      ],
+      "context": [
+        "Ohio",
+        "Senate",
+        "Senator"
+      ],
+      "require_context": false,
+      "official_sites": [
+        "https://www.husted.senate.gov/"
+      ]
+    }
+  ]
+}

@@ -266,6 +266,18 @@ jobs:
           OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
         run: python backend/scripts/build_people.py --data-dir backend/public/data
 
+      - name: Include current candidate news in the full site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          candidate_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/candidate-feeds.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
+          mkdir -p /tmp/candidate-data backend/public/data
+          if [ -n "$candidate_run" ] && gh run download "$candidate_run" -n candidate-feeds -D /tmp/candidate-data; then
+            cp /tmp/candidate-data/candidate-feeds.json backend/public/data/candidate-feeds.json
+          else
+            python backend/scripts/collect_candidate_feeds.py --out backend/public/data/candidate-feeds.json
+          fi
+
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir backend/public/data
 

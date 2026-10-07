@@ -51,6 +51,7 @@ const USR_FALLBACK={
  ]
 };
 let USR=USR_FALLBACK;
+let USR_CANDIDATE_FEEDS={};
 async function loadUSRData(){try{const fresh=await getJSON(`${DATA}/us-radar.json?ts=${Date.now()}`);if(fresh&&fresh.updated)USR={...USR_FALLBACK,...fresh};}catch(_){USR=USR_FALLBACK;}}
 function usDays(){return Math.max(0,Math.ceil((Date.parse("2026-11-03T05:00:00Z")-Date.now())/86400000));}
 function usHouse(){
@@ -71,6 +72,12 @@ function usRaceHub(x){
  return `<article class="usr-race-hub" id="usr-hub-${x.code}"><header><div><small>${x.race}</small><h3>${x.state} · ${x.code}</h3></div><span class="usr-hub-rating">${x.rating}</span></header><p class="usr-hub-why">${x.why}</p>${cs.length?`<div class="usr-matchup">${cs.map(c=>`<button onclick="openFigure('${c.handle}')"><span class="usr-party ${c.party.toLowerCase()}">${c.party}</span><b>${c.name}</b><small>${c.en}</small></button>`).join('<i>VS</i>')}</div>`:""}<div class="usr-hub-stats"><div><small>آخرین poll</small><b>${x.poll}</b></div><div><small>ایران‌متر رقابت</small><span>${x.iran}</span></div></div><footer>${x.changed}</footer></article>`;
 }
 function usRaceHubs(){return `<div class="usr-race-hubs">${(USR.race_hubs||[]).map(usRaceHub).join("")}</div>`;}
+function usCandidateNews(){
+ const rows=Object.entries(USR_CANDIDATE_FEEDS).flatMap(([handle,p])=>(p.news||[]).map(n=>({...n,handle}))).sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)));
+ const seen=new Set();const unique=rows.filter(n=>{if(seen.has(n.id))return false;seen.add(n.id);return true}).slice(0,8);
+ if(!unique.length)return "";
+ return `<section><div class="usr-section-head"><div><h2>تازه‌ترین خبرهای نامزدها</h2></div></div><div class="usr-radar-news">${unique.map(n=>`<article><div><button onclick="openFigure('${n.handle}')">${esc(usCandidateByHandle(n.handle)?.name||n.handle)}</button><time>${esc(relTime(n.published_at))}</time></div><h3><a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a></h3><small>${esc(n.source)}</small></article>`).join("")}</div></section>`;
+}
 function usRadarNews(){return `<div class="usr-radar-news">${(USR.radar_news||[]).map(n=>`<article><div><span>${n.tag}</span><time>${n.date}</time></div><h3>${n.headline}</h3><p>${n.summary}</p><small>${n.source}</small></article>`).join("")}</div>`;}
 function usMap(){
  const order=["AK","WA","OR","CA","ID","NV","AZ","UT","MT","WY","CO","NM","ND","SD","NE","KS","OK","TX","MN","IA","MO","AR","LA","WI","IL","MI","IN","OH","KY","TN","MS","AL","GA","FL","SC","NC","VA","WV","PA","NY","VT","NH","ME","MA","RI","CT","NJ","DE","MD"];
@@ -93,7 +100,7 @@ function renderUSRadar(){
  <div class="usr-chambers"><article><span>مجلس نمایندگان</span><div class="usr-seatline"><b class="dem">${faN(USR.house.d)} D</b><i></i><b class="rep">${faN(USR.house.r)} R</b></div><p>${USR.house.need}</p><strong>${USR.house.outlook}</strong></article><article><span>سنا</span><div class="usr-seatline"><b class="dem">${faN(USR.senate.d)} D</b><i></i><b class="rep">${faN(USR.senate.r)} R</b></div><p>${USR.senate.need}</p><strong>${USR.senate.outlook}</strong></article></div>
  ${usGauge()}<div class="usr-take"><b>جانِ وضعیت</b><p>مجلس نمایندگان در حال حاضر هدف آسان‌تر دموکرات‌هاست. سنا دشوارتر است، اما تغییر رتبه‌بندی‌های اوایل اکتبر مسیر تصاحب آن را واقعی‌تر کرده است. این صفحه «پیش‌بینی قطعی» نیست؛ تغییر جهت رقابت را نشان می‌دهد.</p></div></section>
  <section><div class="usr-section-head"><div><small>نقشه رقابت</small><h2>کدام ایالت‌ها تعیین‌کننده‌اند؟</h2></div><span>Cook Political Report · ۶ اکتبر</span></div>${usMap()}</section>
- <section><div class="usr-section-head"><div><small>RACE HUBS</small><h2>از نقشه تا خود رقابت</h2></div><span>ایالت → نامزدها → poll → ایران‌متر → تغییر</span></div>${usRaceHubs()}</section>
+ <section><div class="usr-section-head"><div><small>RACE HUBS</small><h2>از نقشه تا خود رقابت</h2></div><span>ایالت → نامزدها → poll → ایران‌متر → تغییر</span></div>${usRaceHubs()}</section>${usCandidateNews()}
  <section><div class="usr-section-head"><div><small>امروز چه تغییر کرد؟</small><h2>خبرهای رادار</h2></div><span>فقط تغییراتی که روی نقشه اثر دارند</span></div>${usRadarNews()}</section>
  <section><div class="usr-section-head"><div><small>میدان نبرد</small><h2>رقابت‌هایی که باید نگاه کرد</h2></div><span>رتبه‌بندی و نظرسنجی‌ها ممکن است تغییر کنند</span></div><div class="usr-races">${USR.races.map(usRace).join("")}</div></section>
  <section><div class="usr-section-head"><div><small>چهره‌ها</small><h2>نام‌هایی که باید بشناسی</h2></div><span>کارت‌های داخلی رادار؛ آماده اتصال به هویت‌های سراسری پندار</span></div><div class="usr-people">${USR.candidates.map(usCandidate).join("")}</div></section>
@@ -104,4 +111,4 @@ function renderUSRadar(){
  <section><div class="usr-section-head"><div><small>راهنمای سریع</small><h2>اصطلاحات را بلد نیستی؟</h2></div></div><div class="usr-glossary">${USR.glossary.map(g=>`<details><summary>${g[0]}</summary><p>${g[1]}</p></details>`).join("")}</div></section>
  <section class="usr-sources"><b>روش و منابع داده</b><p>Snapshot این نسخه بر پایه رتبه‌بندی‌های Cook Political Report و Inside Elections و نظرسنجی‌های منتشرشده تا ۷ اکتبر ۲۰۲۶ ساخته شده است. رتبه‌بندی رقابت با نتیجه انتخابات یکی نیست و نظرسنجی منفرد نیز پیش‌بینی قطعی محسوب نمی‌شود.</p><div>Cook Political Report · Inside Elections · Reuters/Ipsos · YouGov · CBS News</div></section>`;
 }
-async function showUSRadar(){show("usradar");setTab("");setHash("#/us-radar");document.title="رادار آمریکا ۲۰۲۶ | پندار";await loadUSRData();renderUSRadar();}
+async function showUSRadar(){show("usradar");setTab("");setHash("#/us-radar");document.title="رادار آمریکا ۲۰۲۶ | پندار";await loadUSRData();try{USR_CANDIDATE_FEEDS=(await getJSON(DATA+"/candidate-feeds.json?v="+Date.now())).people||{};}catch(_){}renderUSRadar();}

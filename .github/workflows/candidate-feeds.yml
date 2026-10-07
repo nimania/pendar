@@ -1,0 +1,39 @@
+name: Refresh US candidate feeds
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "backend/scripts/collect_candidate_feeds.py"
+      - "backend/data/us-candidate-sources.json"
+      - ".github/workflows/candidate-feeds.yml"
+  schedule:
+    - cron: "11,41 * * * *"
+permissions:
+  contents: read
+concurrency:
+  group: candidate-feeds
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/cache@v4
+        with:
+          path: candidate-data/candidate-feeds.json
+          key: candidate-feeds-${{ github.run_id }}
+          restore-keys: candidate-feeds-
+      - name: Test matching and retention
+        run: python -m unittest discover -s backend/tests -p test_candidate_feeds.py
+      - name: Refresh candidate sources
+        run: python backend/scripts/collect_candidate_feeds.py --out candidate-data/candidate-feeds.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: candidate-feeds
+          path: candidate-data/candidate-feeds.json
+          retention-days: 7
+          if-no-files-found: error

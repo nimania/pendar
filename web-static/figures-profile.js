@@ -197,13 +197,27 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const youtubeVideos=profileMedia.videos;
   const canonicalNames=new Set([x.name_fa,...(canonicalFigure?.aliases||[])].map(_canonicalNorm).filter(Boolean));
   const figureStories=canonicalFigure?(typeof ALL!=="undefined"?ALL:[]).filter(s=>(s.entities||[]).some(e=>canonicalNames.has(_canonicalNorm(e.name_fa||"")))):[];
-  const shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies" || _figureProfileFilter === "stories" || _figureProfileFilter === "videos" || _figureProfileFilter === "about") ? [] : (x.posts || []);
+  let shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies" || _figureProfileFilter === "stories" || _figureProfileFilter === "videos" || _figureProfileFilter === "about") ? [] : (x.posts || []);
   const latest = (x.posts || []).map(p => p.published_at).filter(Boolean).sort().pop();
   const poems = Array.isArray(curatedPoems[x.handle]) ? curatedPoems[x.handle] : [];
   const poemSection = poems.length ? `<section class="curated-poems"><div class="curated-poems-head"><div><span class="curated-kicker">اثر ویژه</span><h2>یک شعر؛ بخش‌های منتشرشده</h2><p>این ${faN(poems.length)} متن، بخش‌های مختلف یک شعر از مونا برزویی‌اند. ترتیب نهایی بخش‌ها هنوز اعلام نشده است؛ شماره‌های زیر فقط برای تفکیک در آرشیو جان کلام‌اند و ترتیب شعر را نشان نمی‌دهند.</p></div><span class="curated-count">${faN(poems.length)} بخش</span></div><div class="curated-poem-list">${poems.map((p,i)=>`<article class="curated-poem"><div class="curated-poem-no" title="شمارهٔ آرشیوی؛ نه ترتیب شعر">بخش ${faN(i+1)}*</div><div class="curated-poem-text">${esc(p.text||"").replace(/\\n/g,"<br>")}</div></article>`).join("")}</div></section>` : "";
+  const hasWorks=figureBooks.length||profileMedia.books.length||mediaWorks.length||profileMedia.films.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length;
   const worksSection=figureBooks.length||profileMedia.books.length||mediaWorks.length||profileMedia.films.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length||profileMedia.channels.length?`<section class="figure-works">${figureBooks.length||profileMedia.books.length?'<h2>کتاب‌ها</h2><div class="books-grid">'+figureBooks.map(_bookCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.books.map(_figureWorkCard).join("")+'</div>':""}${mediaWorks.length||profileMedia.films.length?'<h2>فیلم‌ها و سریال‌ها</h2><div class="movie-grid">'+mediaWorks.map(_movieCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.films.map(_figureWorkCard).join("")+'</div>':""}${profileMedia.podcasts.length?'<h2>پادکست‌ها</h2><div class="figure-work-grid">'+profileMedia.podcasts.map(_figureWorkCard).join("")+'</div>':""}${youtubeVideos.length||profileMedia.channels.length?'<h2>ویدئوها</h2><div class="figure-youtube-grid">'+youtubeVideos.map(_figureVideoCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.channels.map(_figureWorkCard).join("")+'</div>':""}${poemSection}${profileMedia.other.length?'<h2>دیگر آثار</h2><div class="figure-work-grid">'+profileMedia.other.map(_figureWorkCard).join("")+'</div>':""}</section>`:'<div class="state"><div class="big">اثری ثبت نشده است.</div></div>';
   let usRadarRecord=null;try{const radar=await getJSON(DATA+"/us-radar.json?v="+Date.now());usRadarRecord=(radar.iran_meter||[]).find(m=>m.handle===x.handle)||null;}catch(_){}
   const usRadarSection=usRadarRecord?'<section class="x-profile-feed"><div class="rule"><span>رادار آمریکا · انتخابات ۲۰۲۶</span><span class="l"></span></div><div class="profile-us-radar"><div><b>'+esc(usRadarRecord.state||x.us_radar?.state||"")+' · سنا ۲۰۲۶</b><span class="usr-party '+esc(String(usRadarRecord.party||x.us_radar?.party||"").toLowerCase())+'">'+esc(usRadarRecord.party||x.us_radar?.party||"")+'</span></div><p>'+esc(usRadarRecord.summary_fa||"")+'</p><dl><dt>جنگ ایران</dt><dd>'+esc(usRadarRecord.war||"نامشخص")+'</dd><dt>اختیارات جنگی</dt><dd>'+esc(usRadarRecord.war_power||"نامشخص")+'</dd><dt>تحریم/دیپلماسی</dt><dd>'+esc(usRadarRecord.sanctions||"نامشخص")+'</dd><dt>اسرائیل</dt><dd>'+esc(usRadarRecord.israel||"نامشخص")+'</dd><dt>نسبت با ترامپ</dt><dd>'+esc(usRadarRecord.trump||"نامشخص")+'</dd></dl><small>منبع: '+esc(usRadarRecord.source||"")+' · اطمینان داده: '+esc(usRadarRecord.confidence||"")+'</small><button class="fig-profile-link" onclick="showUSRadar()">بازگشت به رادار آمریکا</button></div></section>':"";
+  let candidateFeed=null;
+  try{if(x.us_radar||usRadarRecord||(typeof USR_FALLBACK!=="undefined"?USR_FALLBACK.candidates:[]).some(c=>c.handle===x.handle)){
+    const feed=await getJSON(DATA+"/candidate-feeds.json?v="+Date.now());candidateFeed=feed.people?.[x.handle]||null;
+  }}catch(_){}
+  const candidateNews=candidateFeed?.news||[],candidateOfficial=candidateFeed?.official||[];
+  const hasAbout=!!(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||canonicalFigure?.meta?.birthday||canonicalFigure?.meta?.deathday);
+  const available={all:true,direct:direct.length,news:news.length,stories:figureStories.length+candidateNews.length,works:hasWorks,movies:figureMovies.length,usradar:!!usRadarRecord,official:candidateOfficial.length,about:hasAbout};
+  if(!available[_figureProfileFilter]){_figureProfileFilter="all";shown=x.posts||[];}
+  const feedCards=rows=>rows.map(r=>`<article class="candidate-feed-card"><small>${esc(r.source||"")} · ${esc(r.published_at?relTime(r.published_at):"")}</small><h3><a href="${esc(_figureWorkUrl(r.url))}" target="_blank" rel="noopener">${esc(r.title)}</a></h3></article>`).join("");
+  const candidateNewsSection=candidateNews.length?'<section class="candidate-news"><h2>تازه‌ترین خبرهای رسانه‌ها</h2>'+feedCards(candidateNews)+'</section>':"";
+  const officialSection=candidateOfficial.length?'<section class="candidate-news"><h2>از زبان خودش</h2>'+feedCards(candidateOfficial)+'</section>':"";
+  const candidateSources=(candidateFeed?.sources||[]).filter(r=>_figureWorkUrl(r.url));
+  const sourceLinks=candidateSources.length?'<div class="candidate-source-links">'+candidateSources.map(r=>'<a href="'+esc(_figureWorkUrl(r.url))+'" target="_blank" rel="noopener">'+esc(r.label)+'</a>').join("")+'</div>':"";
   const aboutSection='<section class="x-profile-feed"><p class="x-bio">'+esc(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||"معرفی تکمیلی هنوز ثبت نشده است.")+'</p>'+(canonicalFigure?.meta?.birthday?'<p class="x-bio">تولد: '+esc(faN(canonicalFigure.meta.birthday))+'</p>':"")+(canonicalFigure?.meta?.deathday?'<p class="x-bio">درگذشت: '+esc(faN(canonicalFigure.meta.deathday))+'</p>':"")+(canonicalFigure?.meta?.picture_source?'<p class="x-bio"><a href="'+esc(_figureWorkUrl(canonicalFigure.meta.picture_source))+'" target="_blank" rel="noopener">منبع و مجوز عکس ↗</a></p>':"")+'</section>';
   const postRow = p => `<article class="x-post" ${statementCardAttrs(p)}>
     <div class="x-post-rail">${figureProfileLink(x,avatar(x,"sm"))}</div>
@@ -223,20 +237,25 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
-      <button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>
-      <button class="${_figureProfileFilter==="news"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','news')">گفته در خبرها</button>
-      <button class="${_figureProfileFilter==="stories"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','stories')">خبرها</button>
-      <button class="${_figureProfileFilter==="works"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','works')">آثار</button>
+      ${direct.length?`<button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>`:""}
+      ${news.length?`<button class="${_figureProfileFilter==="news"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','news')">گفته در خبرها</button>`:""}
+      ${figureStories.length||candidateNews.length?`<button class="${_figureProfileFilter==="stories"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','stories')">خبرها</button>`:""}
+      ${hasWorks?`<button class="${_figureProfileFilter==="works"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','works')">آثار</button>`:""}
 
       ${figureMovies.length ? `<button class="${_figureProfileFilter==="movies"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'movies\')">اشاره به فیلم‌ها</button>` : ""}
-      ${x.us_radar||usRadarRecord?`<button class="${_figureProfileFilter==="usradar"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','usradar')">رادار آمریکا</button>`:""}
-      <button class="${_figureProfileFilter==="about"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','about')">درباره</button>
+      ${usRadarRecord?`<button class="${_figureProfileFilter==="usradar"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','usradar')">رادار آمریکا</button>`:""}
+      ${candidateOfficial.length?`<button class="${_figureProfileFilter==="official"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','official')">از زبان خودش</button>`:""}
+      ${hasAbout?`<button class="${_figureProfileFilter==="about"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','about')">درباره</button>`:""}
     </nav>
-    ${_figureProfileFilter==="stories" ? `<section class="figure-stories">${figureStories.length?groupedFeed(figureStories):'<div class="state">خبری برای این شخص ثبت نشده است.</div>'}</section>` : ""}
+    ${_figureProfileFilter==="stories" ? `<section class="figure-stories">${figureStories.length?groupedFeed(figureStories):""}${candidateNewsSection}</section>` : ""}
     ${_figureProfileFilter==="books" ? `<section class="figure-books"><div class="books-grid">${figureBooks.map(_bookCard).join("")}</div></section>` : ""}
     ${_figureProfileFilter==="movies" ? `<section class="figure-movies"><div class="movie-grid">${figureMovies.map(_movieCard).join("")}</div></section>` : ""}
-    ${_figureProfileFilter==="works"||(_figureProfileFilter==="all"&&!shown.length)?worksSection:""}
-    ${_figureProfileFilter==="usradar"?usRadarSection:""}\n    ${_figureProfileFilter==="about"?aboutSection:""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos"||_figureProfileFilter==="usradar"||_figureProfileFilter==="about"||(_figureProfileFilter==="all"&&!shown.length)) ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
+    ${_figureProfileFilter==="works"||(_figureProfileFilter==="all"&&!shown.length&&hasWorks)?worksSection:""}
+    ${_figureProfileFilter==="all"?candidateNewsSection+officialSection:""}
+    ${_figureProfileFilter==="official"?officialSection:""}
+    ${sourceLinks}
+    ${candidateFeed?.news_updated_at?'<small class="muted">آخرین بررسی خبرها: '+esc(relTime(candidateFeed.news_updated_at))+'</small>':""}
+    ${_figureProfileFilter==="usradar"?usRadarSection:""}\n    ${_figureProfileFilter==="about"?aboutSection:""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos"||_figureProfileFilter==="usradar"||_figureProfileFilter==="official"||_figureProfileFilter==="about"||(_figureProfileFilter==="all"&&!shown.length)) ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
   </div>`;
 }
