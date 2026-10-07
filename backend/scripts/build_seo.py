@@ -56,6 +56,10 @@ def build(site):
             pages[key]['body']+=links([(route('story',s.get('id','')),s.get('headline_fa','')) for s in event.get('items',[])])
             pages[key]['section']='trends'
             catalogs['trends'].append((key,event.get('title','')))
+            for item in event.get('items',[]):
+                story_url=route('story',item.get('id',''))
+                if story_url in pages:
+                    pages[story_url]['body']+='<h2>ماجرا را دنبال کنید</h2>'+links([(key,event.get('title',''))])
     # News archives and programme pages also need real refreshable URLs.
     topic_rows={}; source_rows={}; person_rows={}; day_rows={}
     for s in stories:
@@ -100,6 +104,14 @@ def build(site):
             title=p.get('topic_fa') or p.get('headline_fa') or p.get('title_fa') or ('دیدگاه '+str(f.get('name_fa','')))
             add('statement',p.get('id'),title,'\n'.join(filter(None,[text(p.get('recap_fa')),text(p.get('summary_fa')),text(p.get('key_points')),text(p.get('text'))])),schema_type='Article',published=p.get('published_at'))
             if p.get('id'):related.append((route('statement',p['id']),title))
+        for post in posts:
+            statement_url=route('statement',post.get('id',''))
+            if statement_url not in pages:continue
+            other=[(route('statement',q.get('id','')),q.get('topic_fa') or text(q.get('summary_fa'))[:100]) for q in posts if q.get('id') and q.get('id')!=post.get('id')][:3]
+            pages[statement_url]['body']+='<h2>از همین چهره</h2>'+links([(route('figure',f.get('handle','')),'همهٔ گفته‌های '+str(f.get('name_fa','')))]+other)
+            if post.get('story_id'):
+                story_url=route('story',post['story_id'])
+                if story_url in pages:pages[statement_url]['body']+='<h2>خبر مرتبط با این گفته</h2>'+links([(story_url,pages[story_url]['title'])])
         url=route('figure',f.get('handle',''))
         if url in pages and related:pages[url]['body']+= '<h2>دیدگاه‌ها و گفته‌ها</h2>'+links(related);pages[url]['indexable']=True
     books=read(data/'books.json',{})
@@ -213,6 +225,8 @@ def build(site):
             url=route(kind) if n==1 else route(kind,'page/'+str(n))
             paging=links([(route(kind) if i==1 else route(kind,'page/'+str(i)), 'صفحهٔ '+str(i)) for i in range(1,len(chunks)+1)]) if len(chunks)>1 else ''
             pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq'],'schema_type':'CollectionPage'}
+    if '/headlines/' in pages:
+        pages['/headlines/']['body']='<h2>ماجراهای ترند</h2>'+links(catalogs['trends'][:3])+'<h2>چهره‌ها و گفته‌ها</h2>'+links([(route('figures'),'چهره‌ها و گفته‌ها'),(route('videos','recaps'),'جان کلام ویدئوها')])+pages['/headlines/']['body']
     if '/tv/' in pages:
         schedule=read(data/'pendar-watch-schedule.json',{})
         pages['/tv/']['body']+='<h2>برنامهٔ انتشار فیلم و سریال</h2>'+''.join('<p>'+esc(p.get('title_fa'))+' — '+esc(p.get('start','')[:10])+'</p>' for p in schedule.get('programmes',[])[:100])

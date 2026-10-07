@@ -83,6 +83,7 @@ function showHome() {
 async function showFeed() {
   show("feed"); setTab("feed"); setHash("#/headlines");
   document.title="سرخط خبرها | پندار";
+  renderHeadlinesDiscovery();
   if (!ALL.length) await loadFeed(true);
   else { renderFeed(); renderDayChips(); }
 }

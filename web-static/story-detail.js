@@ -172,7 +172,8 @@ async function openStory(id) {
       <div class="chips">${chips}</div>
       <div class="answer" id="answer"><div class="a-bubble" id="a-bubble"></div>
         <div class="grounded"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> مبتنی بر منابع همین خبر</div></div>
-    </div>`;
+    </div><div id="story-discovery"></div>`;
+  renderContentDiscovery(document.getElementById("story-discovery"),s);
 }
 function showAsk(i) {
   document.querySelectorAll(".qchip").forEach(c => c.classList.remove("on"));

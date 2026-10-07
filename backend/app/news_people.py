@@ -137,7 +137,7 @@ def merge_news_people(index: dict, db: Session, *, now: datetime | None = None,
             if pid in existing_ids:
                 continue
             news_posts.append({
-                "id": pid, "handle": handle, "name_fa": f["name_fa"],
+                "id": pid, "story_id": str(x.story_id), "handle": handle, "name_fa": f["name_fa"],
                 "role_fa": x.role_fa or f.get("role_fa", ""),
                 "field": f.get("field", "news"), "avatar": f.get("avatar"),
                 "kind": "news_statement",
