@@ -46,7 +46,7 @@ async function renderHomeBookBestsellers(){
       <span class="home-bestseller-copy"><strong>${esc(b.title)}</strong><small>${esc(b.author)}${internal?" · صفحه در پندار":" · پیشخوان کتاب"}</small></span>
       <span class="home-bestseller-go">←</span>
     </button>`}).join("")}</div>
-    <div class="home-bestseller-source"><span>فهرست جاری ${esc(d.source_name)} · بررسی ${faN(d.checked_at)}</span><button onclick="showBooks()">همهٔ کتاب‌ها در پندار ←</button></div>`;
+    <div class="home-bestseller-source"><button onclick="showBooks()">همهٔ کتاب‌ها در پندار ←</button></div>`;
   el.style.display="";
 }
 
