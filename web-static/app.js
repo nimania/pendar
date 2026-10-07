@@ -62,7 +62,7 @@ function setArticleSeo(x){
 const VIEWS = { home: "home-view", feed: "feed-view", detail: "detail-view", trends: "trends-view",
   factchecks: "factchecks-view", topics: "topics-view", topicarchive: "topic-archive-view",
   weather: "weather-view", iran: "iran-view", faq: "faq-view", market: "market-view",
-  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tvguide: "tv-guide-view", knowledge: "knowledge-view", entity: "entity-view", graph: "entity-graph-view", profile: "entity-profile-view", entityqa: "entity-qa-view", system: "system-view", tech: "tech-view", badbadak: "badbadak-view" };
+  figures: "figures-view", press: "press-view", books: "books-view", movies: "movies-view", tvguide: "tv-guide-view", knowledge: "knowledge-view", entity: "entity-view", graph: "entity-graph-view", profile: "entity-profile-view", entityqa: "entity-qa-view", system: "system-view", tech: "tech-view", badbadak: "badbadak-view", usradar: "us-radar-view" };
 const TABS = ["home", "feed", "trends", "factchecks", "iran", "topics"];
 const SCOPE_FA = { local: "استانی", national: "کشوری", international: "بین‌المللی" };
 function setTab(w) { for (const t of TABS) document.getElementById("tab-" + t).classList.toggle("active", w === t); }
