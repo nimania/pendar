@@ -11,8 +11,8 @@ if(fs.existsSync(archive))for(const name of fs.readdirSync(archive)){
     if(stamp(s.published_at)<now-72*3600000 || cards.has(String(s.id)))continue;
     s.source_names=s.source_names||(s.sources||[]).map(x=>x.source_name).filter(Boolean);
     // Dossiers need feed-sized summaries and identities, not full article bodies.
-    const {id,headline_fa,summary_fa,published_at,source_count,source_names,importance_score,category,entities,topics,trend,image_url,credibility,iran_relevance}=s;
-    cards.set(String(id),{id,headline_fa,summary_fa,published_at,source_count,source_names,importance_score,category,entities,topics,trend,image_url,credibility,iran_relevance});
+    const {id,headline_fa,summary_fa,published_at,source_count,source_names,importance_score,category,entities,topics,trend,image_url,credibility,iran_relevance,countries,geo}=s;
+    cards.set(String(id),{id,headline_fa,summary_fa,published_at,source_count,source_names,importance_score,category,entities,topics,trend,image_url,credibility,iran_relevance,countries,geo});
   }catch(e){console.warn('Skipping event archive',name,e.message);}
 }
 const events=build([...cards.values()],now);

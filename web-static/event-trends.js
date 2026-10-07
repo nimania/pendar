@@ -6,6 +6,11 @@
   function tokens(v) { return new Set(norm(v).split(' ').filter(x => x.length > 2 && !stop.has(x))); }
   function stamp(v) { const s = String(v || ''); return Date.parse(s && !/(Z|[+-]\d\d:\d\d)$/.test(s) ? s+'Z' : s) || 0; }
   function overlap(a,b) { return [...a].filter(x=>b.has(x)).length; }
+  function isIranStory(s) {
+    return (s.countries||[]).some(c=>c.code==='IR') || (s.geo?.provinces||[]).length>0 ||
+      (s.topics||[]).some(t=>t.slug==='iran') ||
+      /(?:^|\s)(?:ایران|ایرانی|ایرانیان|تهران|هرمز|سپاه)(?:\s|$)/.test(norm((s.headline_fa||'')+' '+(s.summary_fa||'')));
+  }
   function same(a,b) {
     if (Math.abs(stamp(a.published_at)-stamp(b.published_at)) > 36*3600000) return false;
     const x=tokens(a.headline_fa), y=tokens(b.headline_fa), n=overlap(x,y);
@@ -39,7 +44,7 @@
         sourceCount:sources.length,summary:lead.summary_fa||'',rising:g.items.some(s=>(s.trend||{}).rising)};
     }).filter(g=>g.sources.length>=2 || g.items.length>=2).sort((a,b)=>b.score-a.score).slice(0,30);
   }
-  root.PendarEvents={build,same,norm,stamp};
+  root.PendarEvents={build,same,norm,stamp,isIranStory};
   if(typeof module!=='undefined') module.exports=root.PendarEvents;
 })(typeof window==='undefined'?globalThis:window);
 
@@ -69,8 +74,8 @@ async function renderEventTrends() {
 async function renderHomeEvents() {
   const el=document.getElementById('home-events'); if(!el)return;
   try {
-    const groups=await loadEventTrends();
-    el.innerHTML=`<div class="home-panel-title"><b>ماجراهای ترند</b><div class="home-event-tools"><a href="#/trends">همهٔ ماجراها ←</a><button type="button" aria-label="ماجراهای قبلی" onclick="scrollHomeEvents(-1)">→</button><button type="button" aria-label="ماجراهای بعدی" onclick="scrollHomeEvents(1)">←</button></div></div>
+    const groups=(await loadEventTrends()).filter(g=>g.items.some(PendarEvents.isIranStory));
+    el.innerHTML=`<div class="home-panel-title"><b>ماجراهای ترند ایران</b><div class="home-event-tools"><a href="#/trends">همهٔ ماجراها ←</a><button type="button" aria-label="ماجراهای قبلی" onclick="scrollHomeEvents(-1)">→</button><button type="button" aria-label="ماجراهای بعدی" onclick="scrollHomeEvents(1)">←</button></div></div>
       <div class="home-event-rail" aria-label="مرور ماجراهای ترند">${groups.slice(0,6).map(homeEventCard).join('')||'<p class="muted">هنوز ماجرای تازه با پوشش چند رسانه ثبت نشده است.</p>'}</div>`;
   }catch(_){el.innerHTML='<p class="muted">ماجراهای ترند فعلاً در دسترس نیست.</p>';}
 }
