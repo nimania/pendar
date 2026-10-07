@@ -35,6 +35,249 @@ const _LOCAL_FIGURE_FALLBACKS = [
     ]
   }
 ];
+
+const _US_RADAR_FIGURE_FALLBACKS = [
+  {
+    "handle": "adam-hamilton",
+    "name_fa": "آدام همیلتون",
+    "name": "Adam Hamilton",
+    "role_fa": "نامزد دموکرات سنای کانزاس",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Adam Hamilton"
+    ],
+    "us_radar": {
+      "state": "KS",
+      "party": "D",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "roger-marshall",
+    "name_fa": "راجر مارشال",
+    "name": "Roger Marshall",
+    "role_fa": "سناتور جمهوری‌خواه کانزاس",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Roger Marshall"
+    ],
+    "us_radar": {
+      "state": "KS",
+      "party": "R",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "chris-pappas",
+    "name_fa": "کریس پاپاس",
+    "name": "Chris Pappas",
+    "role_fa": "نماینده کنگره و نامزد دموکرات سنای نیوهمپشایر",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Chris Pappas"
+    ],
+    "us_radar": {
+      "state": "NH",
+      "party": "D",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "john-sununu",
+    "name_fa": "جان ای. سانونو",
+    "name": "John E. Sununu",
+    "role_fa": "سناتور سابق و نامزد جمهوری‌خواه نیوهمپشایر",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "John E. Sununu"
+    ],
+    "us_radar": {
+      "state": "NH",
+      "party": "R",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "roy-cooper",
+    "name_fa": "روی کوپر",
+    "name": "Roy Cooper",
+    "role_fa": "فرماندار سابق و نامزد دموکرات سنای کارولینای شمالی",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Roy Cooper"
+    ],
+    "us_radar": {
+      "state": "NC",
+      "party": "D",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "michael-whatley",
+    "name_fa": "مایکل واتلی",
+    "name": "Michael Whatley",
+    "role_fa": "نامزد جمهوری‌خواه سنای کارولینای شمالی",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Michael Whatley"
+    ],
+    "us_radar": {
+      "state": "NC",
+      "party": "R",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "james-talarico",
+    "name_fa": "جیمز تالاریکو",
+    "name": "James Talarico",
+    "role_fa": "نماینده ایالتی و نامزد دموکرات سنای تگزاس",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "James Talarico"
+    ],
+    "us_radar": {
+      "state": "TX",
+      "party": "D",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "ken-paxton",
+    "name_fa": "کن پکستون",
+    "name": "Ken Paxton",
+    "role_fa": "دادستان کل و نامزد جمهوری‌خواه سنای تگزاس",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Ken Paxton"
+    ],
+    "us_radar": {
+      "state": "TX",
+      "party": "R",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "abdul-el-sayed",
+    "name_fa": "عبدال السید",
+    "name": "Abdul El-Sayed",
+    "role_fa": "نامزد دموکرات سنای میشیگان",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Abdul El-Sayed"
+    ],
+    "us_radar": {
+      "state": "MI",
+      "party": "D",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "mike-rogers",
+    "name_fa": "مایک راجرز",
+    "name": "Mike Rogers",
+    "role_fa": "نماینده سابق و نامزد جمهوری‌خواه سنای میشیگان",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Mike Rogers"
+    ],
+    "us_radar": {
+      "state": "MI",
+      "party": "R",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "sherrod-brown",
+    "name_fa": "شرود براون",
+    "name": "Sherrod Brown",
+    "role_fa": "سناتور سابق و نامزد دموکرات سنای اوهایو",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Sherrod Brown"
+    ],
+    "us_radar": {
+      "state": "OH",
+      "party": "D",
+      "race": "senate-2026"
+    }
+  },
+  {
+    "handle": "jon-husted",
+    "name_fa": "جان هاستد",
+    "name": "Jon Husted",
+    "role_fa": "سناتور جمهوری‌خواه اوهایو",
+    "field": "us-politics",
+    "field_fa": "سیاست آمریکا",
+    "gender": "",
+    "external": true,
+    "count": 0,
+    "posts": [],
+    "aliases": [
+      "Jon Husted"
+    ],
+    "us_radar": {
+      "state": "OH",
+      "party": "R",
+      "race": "senate-2026"
+    }
+  }
+];
 async function loadFigures() {
   if (_FIG) return _FIG;
   try { _FIG = await getJSON(`${DATA}/figures.json`); } catch (e) { _FIG = { figures: [], fields: {} }; }
@@ -43,6 +286,9 @@ async function loadFigures() {
     if (!_FIG.figures.some(f => String(f.handle||"").toLowerCase() === fallback.handle)) {
       _FIG.figures.push(fallback);
     }
+  }
+  for (const fallback of _US_RADAR_FIGURE_FALLBACKS) {
+    if (!_FIG.figures.some(f => String(f.handle||"").toLowerCase() === fallback.handle)) _FIG.figures.push(fallback);
   }
   // Keep the selected portrait visible until the next dataset rebuild.
   for (const figure of _FIG.figures) {
