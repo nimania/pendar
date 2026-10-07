@@ -7,14 +7,13 @@
    groupedByCategory, openStory...) at runtime. No behavior change. */
 
 function updateFreshness() {
-  const el = document.getElementById("built"); if (!el) return;
-  const parts = [];
-  if (META && (META.built_iso || META.built)) parts.push("آخرین بازبینیِ سیستم: " + (META.built_iso ? relTime(META.built_iso) : META.built));
-  if (ALL && ALL.length) {
-    const newest = ALL.map(s => s.published_at).filter(Boolean).sort().slice(-1)[0];
-    if (newest) parts.push("تازه‌ترین خبر: " + relTime(newest));
-  }
-  if (parts.length) el.textContent = parts.join(" · ");
+  const el=document.getElementById("home-news-freshness");if(!el)return;
+  const built=META&&(META.built_iso||META.built);
+  const newest=(ALL||[]).map(s=>s.published_at).filter(Boolean).sort().slice(-1)[0];
+  const clock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>';
+  const item=(label,date,relative)=>`<span class="home-freshness-item">${clock}<span><small>${label}</small><b>${esc(relative?relTime(date):date)}</b></span></span>`;
+  el.innerHTML=(built?item('بازبینی پندار',built,Boolean(META.built_iso)):'')+(newest?item('تازه‌ترین خبر',newest,true):'');
+  el.hidden=!built&&!newest;
 }
 
 // compact price strip on the home page (dollar / euro / lira / emami coin)
@@ -137,9 +136,9 @@ async function renderHomePeople(){
   }
 }
 
-let homeCultureMode="bestsellers";
+let homeCultureMode="books";
 function setHomeCultureMode(mode){
-  if(!["bestsellers","books","series"].includes(mode))return;
+  if(!["books","turkish","series"].includes(mode))return;
   homeCultureMode=mode;
   document.querySelectorAll("[data-home-culture]").forEach(button=>{
     const on=button.dataset.homeCulture===mode;
@@ -179,16 +178,16 @@ async function renderHomeCultureDashboard(){
 }
 function renderHomeCulture(){
   const panes={
-    bestsellers:document.getElementById("home-bestsellers-strip"),
-    books:document.getElementById("home-books-strip"),
+    books:document.getElementById("home-book-pane"),
+    turkish:document.getElementById("home-turkish-strip"),
     series:document.getElementById("home-series-strip")
   };
   Object.entries(panes).forEach(([key,el])=>{if(el)el.style.display=key===homeCultureMode?"":"none";});
   const title=document.getElementById("home-culture-title");
   if(title)title.textContent="ویترین امروز";
   renderHomeCultureDashboard();
-  if(homeCultureMode==="bestsellers")renderHomeBookBestsellers();
-  else if(homeCultureMode==="books")renderBookTrends("home-books-strip",{heading:false,limit:6});
+  if(homeCultureMode==="books"){renderHomeBookBestsellers();renderBookTrends("home-books-strip",{heading:false,limit:6});}
+  else if(homeCultureMode==="turkish")renderHomeTurkishTonight();
   else renderHomeSeries();
 }
 
@@ -230,7 +229,7 @@ function renderHomeNewsDashboard(stories){
     <button onclick="showFeed()"><b>${faN(sourceNames.size||Math.max(...recent.map(x=>Number(x.source_count||0)),0))}</b><span>منبع فعال</span></button>
     <button onclick="showTopics()"><b>${faN(topicKeys.size)}</b><span>موضوع فعال</span></button>
     <button onclick="showTrends()"><b>${faN(hot)}</b><span>داغ / رو به رشد</span></button>
-  </div><div class="home-dashboard-foot"><span>${latest?"آخرین به‌روزرسانی "+relTime(new Date(latest).toISOString()):"رادار ۲۴ ساعت اخیر"}</span>${homeMiniBars(bins)}</div>`;
+  </div><div class="home-dashboard-foot"><span>رادار خبری · ۲۴ ساعت اخیر</span>${homeMiniBars(bins)}</div>`;
 }
 function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
@@ -326,4 +325,30 @@ async function renderHomeMajra() {
   }
 }
 
-function renderHomeSeries(){ return renderSeriesShowcase(false); }
+function renderHomeSeries(){ return renderSeriesShowcase(false,"world"); }
+
+// Tonight follows the reader-facing date in Iran, independent of device timezone.
+function homeTonightDay(now=new Date()){
+  const day=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tehran',weekday:'short'}).format(now);
+  return ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].indexOf(day);
+}
+async function renderHomeTurkishTonight(){
+  const el=document.getElementById('home-turkish-strip');if(!el)return;
+  el.innerHTML='<div class="spinner"></div>';
+  try{
+    const {rows,live}=await loadMeshkiSeries();
+    if(homeCultureMode!=='turkish'||!document.contains(el))return;
+    const tonight=rows.filter(s=>s.kind!=='film'&&s.status==='در حال پخش'&&s.dayIndex!=null&&s.dayIndex!==''&&Number(s.dayIndex)===homeTonightDay());
+    const ascii=v=>String(v).replace(/[۰-۹]/g,x=>String('۰۱۲۳۴۵۶۷۸۹'.indexOf(x)));
+    const clock=s=>{
+      const match=ascii(s.airing||'').match(/(\d{1,2})[:：](\d{2})/);
+      if(!match||Number(match[1])>23||Number(match[2])>59)return 'ساعت پخش ثبت نشده';
+      const minutes=(Number(match[1])*60+Number(match[2])+30)%(24*60);
+      return faN(String(Math.floor(minutes/60)).padStart(2,'0')+':'+String(minutes%60).padStart(2,'0'))+' · به وقت ایران';
+    };
+    el.innerHTML=`<div class="trend-head"><h2>سریال‌های ترکی امشب</h2><a class="trend-more" href="#/tv/week">تقویم پخش ←</a></div>
+      <p class="home-tonight-date">${esc(new Intl.DateTimeFormat('fa-IR',{timeZone:'Asia/Tehran',weekday:'long',day:'numeric',month:'long'}).format(new Date()))} · ${faN(tonight.length)} سریال</p>
+      <div class="home-tonight-list">${tonight.map(s=>`<a class="home-tonight-card" href="#/tv/week"><span class="home-tonight-image">${s.hero?`<img src="${esc(s.hero)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span><span><b>${esc(s.titleFa||s.titleTr)}</b><small>${esc(MESHKI_NETWORKS[s.network]?.nameFa||s.network||'')}</small><em>${esc(clock(s))}</em></span><span class="home-tonight-go">←</span></a>`).join('')||'<p class="muted">طبق تقویم موجود، سریال ترکی برای امشب ثبت نشده است.</p>'}</div>
+      <p class="home-tonight-note">${live?'طبق تقویم هفتگی مشکی‌مدیا':'بر اساس تقویم ذخیره‌شدهٔ مشکی‌مدیا'}؛ تغییر یا لغو پخش ممکن است. <a href="#/tv/week">راهنمای تماشا در پندار ←</a></p>`;
+  }catch(_){if(homeCultureMode==='turkish')el.innerHTML='<p class="muted">تقویم امشب فعلاً در دسترس نیست. <button onclick="renderHomeTurkishTonight()">تلاش دوباره</button></p>';}
+}
