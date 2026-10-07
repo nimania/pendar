@@ -1,5 +1,5 @@
 """Publish crawlable static routes from the same datasets used by the UI."""
-import argparse, datetime, hashlib, html, json, re, shutil, subprocess
+import argparse, datetime, hashlib, html, json, re, shutil, subprocess, runpy
 from pathlib import Path
 from urllib.parse import quote, unquote
 
@@ -44,13 +44,14 @@ def build(site):
     for s in stories:
         full=read(data/'story'/ (str(s.get('id'))+'.json'),s)
         add('story',s.get('id'),full.get('headline_fa'),full.get('summary_fa'),schema_type='Article',published=full.get('published_at'))
-    province_rows={}
+    geography=runpy.run_path(str(Path(__file__).resolve().parents[1]/'app'/'geo'/'service.py'))
+    province_rows={slug:{'name':value[0],'links':[]} for slug,value in geography['PROVINCES'].items()}
     for story in stories:
         for province in (story.get('geo') or {}).get('provinces',[]):
             province_rows.setdefault(province['slug'], {'name':province['name_fa'],'links':[]})['links'].append((route('story',story.get('id','')),story.get('headline_fa','')))
     for slug,group in province_rows.items():
         add('province',slug,'سرخط '+group['name'],'تازه‌ترین خبرها و گزارش‌های '+group['name']+'؛ خبرهای شهرها، اقتصاد، محیط‌زیست و رویدادهای استان در پندار.')
-        page=pages[route('province',slug)];page['body']+=links(group['links']);page['indexable']=len(group['links'])>=2;page['section']='iran'
+        page=pages[route('province',slug)];page['body']+=links(group['links']) if group['links'] else '<p>هنوز خبری برای این استان ثبت نشده است.</p>';page['indexable']=len(group['links'])>=2;page['section']='iran'
         catalogs['iran'].append((route('province',slug),'سرخط '+group['name']))
     # Publish event explanations as readable HTML, using the same grouping engine as UI.
     event_builder=Path(__file__).with_name('build_event_trends.js')
