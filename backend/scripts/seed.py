@@ -45,6 +45,13 @@ SOURCES = [
     ("هفت صبح", "https://7sobh.com", "https://7sobh.com/feed/", "iran", 0.55),
     ("رکنا", "https://www.rokna.net", "https://www.rokna.net/feed/", "iran", 0.5),
 
+    ("پیوست", "https://peivast.com", "https://peivast.com/feed", "iran", 0.65),
+    ("ایبنا", "https://www.ibna.ir", "https://www.ibna.ir/rss", "iran", 0.65),
+    ("خبرورزشی", "https://www.khabarvarzeshi.com", "https://www.khabarvarzeshi.com/rss", "iran", 0.55),
+    ("Axios", "https://www.axios.com", "https://www.axios.com/feeds/feed.rss", "global", 0.75),
+    ("کاشان‌نیوز", "https://www.kashannews.net", "https://www.kashannews.net/feed/", "iran", 0.5),
+    ("کردپرس", "https://www.kurdpress.com", "https://www.kurdpress.com/rss", "iran", 0.55),
+
     # --- Global / international ---
     ("BBC", "https://www.bbc.com/news", "http://feeds.bbci.co.uk/news/world/rss.xml", "global", 0.85),
     # Spanish-language sources. EL PAÍS publishes an official RSS directory;
@@ -151,6 +158,9 @@ SOURCES = [
 ]
 
 SOURCE_CATEGORIES = {
+    "پیوست": Category.technology,
+    "ایبنا": Category.culture,
+    "خبرورزشی": Category.sport,
     "اقتصاد آنلاین": Category.economy,
     "راه پرداخت": Category.economy,
     "دیجی‌کالا مگ": Category.culture,
