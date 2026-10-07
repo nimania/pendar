@@ -1,5 +1,5 @@
 """Publish crawlable static routes from the same datasets used by the UI."""
-import argparse, datetime, hashlib, html, json, re, shutil
+import argparse, datetime, hashlib, html, json, re, shutil, subprocess
 from pathlib import Path
 from urllib.parse import quote, unquote
 
@@ -44,6 +44,18 @@ def build(site):
     for s in stories:
         full=read(data/'story'/ (str(s.get('id'))+'.json'),s)
         add('story',s.get('id'),full.get('headline_fa'),full.get('summary_fa'),schema_type='Article',published=full.get('published_at'))
+    # Publish event explanations as readable HTML, using the same grouping engine as UI.
+    event_builder=Path(__file__).with_name('build_event_trends.js')
+    if event_builder.exists() and (data/'stories.json').exists():
+        subprocess.run(['node',str(event_builder),str(site)],check=True)
+    for event in read(data/'event-trends.json',{}).get('events',[]):
+        body='\n\n'.join(text(s.get('summary_fa')) for s in event.get('items',[])[:3] if s.get('summary_fa'))
+        add('event',event.get('id'),event.get('title'),body,schema_type='Article',published=event.get('updated'))
+        key=route('event',event.get('id',''))
+        if key in pages:
+            pages[key]['body']+=links([(route('story',s.get('id','')),s.get('headline_fa','')) for s in event.get('items',[])])
+            pages[key]['section']='trends'
+            catalogs['trends'].append((key,event.get('title','')))
     # News archives and programme pages also need real refreshable URLs.
     topic_rows={}; source_rows={}; person_rows={}; day_rows={}
     for s in stories:

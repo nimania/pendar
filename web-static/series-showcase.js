@@ -35,16 +35,16 @@ function seriesShowcaseCard(row,detail){
     (detail?'<p>'+esc(m?.overview_fa||'')+'</p><small>بررسی: '+esc(faN(row.checked_at))+(stale?' · نیازمند بازبینی':'')+'</small><a class="series-source" href="'+esc(row.source_url)+'" target="_blank" rel="noopener">منبع '+(external?'و مشاهده':'')+' ↗</a>':'')+'</article>';
 }
 let seriesShowcaseRegion="all",seriesShowcasePlatform="all";
-async function renderSeriesShowcase(detail=false){
+async function renderSeriesShowcase(detail=false,homeRegion="all"){
   const el=document.getElementById(detail?"series-showcase-full":"home-series-strip");
   if(!el)return;
   try{
     const {data,rows}=await seriesShowcaseRows();
-    if(!document.contains(el))return;
+    if(!document.contains(el)||(!detail&&typeof homeCultureMode!=="undefined"&&homeCultureMode!=="series"))return;
     const platforms=[...new Set(rows.filter(r=>seriesShowcaseRegion==="all"||r.region===seriesShowcaseRegion).map(r=>r.platform))];
     const filters=detail?'<div class="series-filters">'+[["all","همه"],["iran","ایران"],["world","جهان"]].map(([k,label])=>'<button class="fchip '+(seriesShowcaseRegion===k?'on':'')+'" onclick="seriesShowcaseRegion=\''+k+'\';seriesShowcasePlatform=\'all\';renderSeriesShowcase(true)">'+label+'</button>').join('')+'<select aria-label="پلتفرم" onchange="seriesShowcasePlatform=this.value;renderSeriesShowcase(true)"><option value="all">همهٔ پلتفرم‌ها</option>'+platforms.map(p=>'<option '+(seriesShowcasePlatform===p?'selected':'')+'>'+esc(p)+'</option>').join('')+'</select></div>':'';
-    el.innerHTML='<div class="trend-head"><h2>سریال‌های تازه</h2>'+(!detail?'<a class="trend-more" href="#/movies">نمای کامل در جان فیلم ←</a>':'')+'</div>'+ (detail?'<p><a href="#/tv/week">برنامهٔ پخش امروز و این هفته در راهنمای تماشا ←</a></p>':'')+filters+
-      [["iran","سریال‌های ایران"],["world","سریال‌های جهان"]].filter(([k])=>!detail||seriesShowcaseRegion==="all"||k===seriesShowcaseRegion).map(([k,label])=>{
+    el.innerHTML='<div class="trend-head"><h2>'+(!detail&&homeRegion==='world'?'سریال‌های غربی':'سریال‌های تازه')+'</h2>'+(!detail?'<a class="trend-more" href="#/movies">نمای کامل در جان فیلم ←</a>':'')+'</div>'+ (detail?'<p><a href="#/tv/week">برنامهٔ پخش امروز و این هفته در راهنمای تماشا ←</a></p>':'')+filters+
+      [["iran","سریال‌های ایران"],["world","سریال‌های جهان"]].filter(([k])=>detail?(seriesShowcaseRegion==="all"||k===seriesShowcaseRegion):(homeRegion==="all"||k===homeRegion)).map(([k,label])=>{
         let group=rows.filter(r=>r.region===k&&(!detail||seriesShowcasePlatform==="all"||r.platform===seriesShowcasePlatform));
         if(!detail)group=k==="iran"?group.slice(0,4):group.slice(0,4);
         return '<section class="series-region"><h3>'+label+'</h3><div class="'+(detail?'series-full-grid':'trend-strip')+'">'+(group.length?group.map(r=>seriesShowcaseCard(r,detail)).join(''):'<p class="movie-method">سریال تازه با تاریخ شروع تأییدشده موجود نیست.</p>')+'</div></section>';

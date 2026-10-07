@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="books-hub.css">
   <link rel="stylesheet" href="movies-hub.css">
   <link rel="stylesheet" href="tv-guide.css">
+  <link rel="stylesheet" href="home-polish.css">
 </head>
 <body>
   <header class="top">
@@ -70,7 +71,6 @@
   <main class="wrap">
     <section id="home-view">
       <div class="lede">
-        <p class="muted" id="built" style="margin-top:6px"></p>
         <div class="section-shortcuts home-shortcuts">
           <button onclick="showFeed()">سرخط خبرها</button>
           <button onclick="showFigures()">چهره‌ها</button>
@@ -91,11 +91,14 @@
       <div class="home-stats" id="home-stats"></div>
       <div class="home-glance" id="home-glance" aria-label="پنداربازار و آب‌وهوای امروز"></div>
 
+      <section id="home-events" class="home-events" aria-label="ماجراهای ترند"></section>
+
       <section class="home-daily" id="home-daily" aria-label="خبر، فرهنگ و سرگرمی">
         <div class="home-daily-grid">
           <section class="home-daily-panel home-news-panel">
             <div class="home-panel-title home-panel-title-rich"><span><b id="home-news-title">نبض امروز</b><small>مهم‌ترین اتفاق‌ها در رادار پندار</small></span><a href="/headlines/">همهٔ سرخط‌ها ←</a></div>
             <div class="home-dashboard-strip" id="home-news-dashboard" aria-label="وضعیت خبری امروز"></div>
+            <div id="home-news-freshness" class="home-freshness" role="status" aria-label="تازگی خبرها و بازبینی پندار"></div>
             <div class="home-panel-tabs" role="tablist" aria-label="انتخاب سرخط‌ها">
               <button class="on" role="tab" aria-selected="true" data-home-news="selected" onclick="setHomeNewsMode('selected')">سرخط‌های برگزیده</button>
               <button role="tab" aria-selected="false" data-home-news="latest" onclick="setHomeNewsMode('latest')">سرخط‌های تازه</button>
@@ -103,17 +106,20 @@
             <div id="home-daily-stories"><div class="spinner"></div></div>
           </section>
           <section class="home-daily-panel home-culture-panel" id="home-culture-panel" aria-label="ویترین فرهنگ و سرگرمی">
-            <div class="home-panel-title home-panel-title-rich"><span><b id="home-culture-title">ویترین امروز</b><small>کتاب، فیلم و سریال در پندار</small></span><a href="/books/">پیشخوان کتاب ←</a></div>
+            <div class="home-panel-title home-panel-title-rich"><span><b id="home-culture-title">ویترین امروز</b><small>کتاب و پیشنهادهای تماشای امروز</small></span><a href="/books/">پیشخوان کتاب ←</a></div>
             <div class="home-dashboard-strip" id="home-culture-dashboard" aria-label="وضعیت فرهنگی پندار"></div>
             <div class="home-panel-tabs home-culture-tabs" role="tablist" aria-label="ویترین فرهنگ و سرگرمی">
-              <button class="on" role="tab" aria-selected="true" data-home-culture="bestsellers" onclick="setHomeCultureMode('bestsellers')">پرفروش‌های امروز</button>
-              <button role="tab" aria-selected="false" data-home-culture="books" onclick="setHomeCultureMode('books')">ترندهای کتاب</button>
-              <button role="tab" aria-selected="false" data-home-culture="series" onclick="setHomeCultureMode('series')">سریال‌های تازه</button>
+              <button class="on" role="tab" aria-selected="true" data-home-culture="books" onclick="setHomeCultureMode('books')">کتاب</button>
+              <button role="tab" aria-selected="false" data-home-culture="turkish" onclick="setHomeCultureMode('turkish')">سریال‌های ترکی امشب</button>
+              <button role="tab" aria-selected="false" data-home-culture="series" onclick="setHomeCultureMode('series')">سریال‌های غربی</button>
             </div>
             <div class="home-culture-content">
-              <section class="home-culture-pane" id="home-bestsellers-strip" aria-label="پرفروش‌ترین کتاب‌های بازار امروز"></section>
-              <section class="home-culture-pane home-books-strip book-trends-section" id="home-books-strip" aria-label="ترندهای کتاب" style="display:none"></section>
-              <section class="home-culture-pane book-trends-section" id="home-series-strip" aria-label="سریال‌های تازه" style="display:none"></section>
+              <div class="home-culture-pane" id="home-book-pane">
+              <section id="home-bestsellers-strip" aria-label="پرفروش‌ترین کتاب‌های بازار امروز"></section>
+              <section class="home-culture-pane home-books-strip book-trends-section" id="home-books-strip" aria-label="ترندهای کتاب"></section>
+              </div>
+              <section class="home-culture-pane book-trends-section" id="home-turkish-strip" aria-label="سریال‌های ترکی امشب" style="display:none"></section>
+              <section class="home-culture-pane book-trends-section" id="home-series-strip" aria-label="سریال‌های غربی" style="display:none"></section>
             </div>
             <nav class="home-culture-links"><a href="/books/">پیشخوان کتاب ←</a><a href="/movies/">جان فیلم ←</a><a href="/tv/week/">راهنمای تماشا ←</a></nav>
           </section>
@@ -176,6 +182,7 @@
         <h1>بورس اخبار</h1>
         <p>موضوع‌ها و خبرهایی که بیشترین پوشش را دارند — سنجه‌ای از «داغیِ» هر موضوع بر اساس تعداد خبرها و منابعِ مستقلی که آن را پوشش داده‌اند.</p>
       </div>
+      <div id="event-trends"><div class="spinner"></div></div>
       <div id="trends"><div class="spinner"></div></div>
     </section>
 
@@ -375,6 +382,7 @@
   <script defer src="iran.js"></script>
   <script defer src="series-showcase.js"></script>
   <script defer src="home.js"></script>
+  <script defer src="event-trends.js"></script>
   <script defer src="secondary-views.js"></script>
   <script defer src="story-detail.js"></script>
   <script defer src="nav.js"></script>
