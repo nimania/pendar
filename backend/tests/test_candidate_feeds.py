@@ -7,6 +7,23 @@ spec = importlib.util.spec_from_file_location('feeds', Path(__file__).resolve().
 feeds = importlib.util.module_from_spec(spec); spec.loader.exec_module(feeds)
 
 class CandidateFeedsTests(unittest.TestCase):
+    def test_translation_cache_and_original_headline(self):
+        class Provider:
+            calls = 0
+            def generate(self, **kwargs):
+                self.calls += 1
+                return type('Result', (), {'data': {'titles': [{'id': 0, 'title_fa': 'مارشال دربارهٔ تعرفه‌ها سخن گفت'}]}})()
+        provider = Provider()
+        people = {'marshall': {'news': [{'title': 'Marshall discusses tariffs'}], 'official': []}}
+        feeds.translate_titles(people, provider)
+        row = people['marshall']['news'][0]
+        self.assertEqual(row['title_original'], 'Marshall discusses tariffs')
+        self.assertEqual(row['title_fa'], 'مارشال دربارهٔ تعرفه‌ها سخن گفت')
+        feeds.translate_titles(people, provider)
+        self.assertEqual(provider.calls, 1)
+        merged = feeds.merge_rows([dict(row, id='1', published_at=datetime.now(timezone.utc).isoformat())], [dict(row, id='1', published_at=datetime.now(timezone.utc).isoformat())])
+        self.assertEqual(merged[0]['title_fa'], row['title_fa'])
+
     def test_full_name_and_context(self):
         p = {'aliases': ['Mike Rogers'], 'context': ['Michigan'], 'require_context': True}
         self.assertTrue(feeds.matches('Michigan Senate candidate Mike Rogers', p))

@@ -11,6 +11,8 @@ from hashlib import sha256
 from html import unescape
 from html.parser import HTMLParser
 import json
+import os
+import sys
 from pathlib import Path
 import re
 from urllib.parse import urlencode, urljoin, urlparse
@@ -107,7 +109,10 @@ def discover_official(site, person):
 
 def merge_rows(old, new):
     cutoff = (datetime.now(timezone.utc) - timedelta(days=60)).isoformat()
-    by_id = {r['id']: r for r in old + new if r.get('published_at', '') >= cutoff}
+    by_id = {}
+    for r in old + new:
+        if r.get('published_at', '') >= cutoff:
+            by_id[r['id']] = {**by_id.get(r['id'], {}), **r}
     titles = set(); result = []
     for row in sorted(by_id.values(), key=lambda r: r['published_at'], reverse=True):
         key = norm(row['title'].rsplit(' - ', 1)[0])
@@ -138,6 +143,27 @@ def collect(person, previous):
         'checked_at': now, 'news_updated_at': now if news_ok else old.get('news_updated_at'),
         'errors': errors}
 
+def translate_titles(people, provider):
+    cache = {r['title']: r['title_fa'] for p in people.values() for kind in ('news', 'official') for r in p[kind] if r.get('title_fa')}
+    pending = list(dict.fromkeys(r['title'] for p in people.values() for kind in ('news', 'official') for r in p[kind] if r['title'] not in cache))
+    for start in range(0, len(pending), 35):
+        batch = pending[start:start + 35]
+        try:
+            result = provider.generate(system='Translate news headlines into accurate natural Persian. Preserve attribution, allegations, uncertainty, names and numbers. Do not add facts. Remove trailing publisher names. Return JSON {"titles": [{"id": integer, "title_fa": string}]}.',
+                user=json.dumps([{'id': i, 'title': title} for i, title in enumerate(batch)], ensure_ascii=False), context={})
+            for row in result.data.get('titles', []):
+                i = row.get('id'); fa = row.get('title_fa', '')
+                if isinstance(i, int) and 0 <= i < len(batch) and isinstance(fa, str) and re.search(r'[\u0600-\u06ff]', fa):
+                    cache[batch[i]] = fa.strip()
+        except Exception as exc:
+            print('Headline translation deferred:', type(exc).__name__)
+    for person in people.values():
+        for kind in ('news', 'official'):
+            for row in person[kind]:
+                if row['title'] in cache:
+                    row['title_fa'] = cache[row['title']]
+                    row['title_original'] = row['title']
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--out', required=True); args = ap.parse_args()
     out = Path(args.out)
@@ -146,6 +172,11 @@ def main():
     people = json.loads(REGISTRY.read_text())['people']
     with ThreadPoolExecutor(max_workers=6) as pool:
         results = dict(pool.map(lambda p: collect(p, previous), people))
+    if os.environ.get('AI_API_KEY'):
+        sys.path.insert(0, str(ROOT))
+        from app.ai.providers import get_provider
+        provider = get_provider()
+        if provider.name != 'mock': translate_titles(results, provider)
     payload = {'updated_at': datetime.now(timezone.utc).isoformat(), 'people': results}
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n')

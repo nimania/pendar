@@ -213,7 +213,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const hasAbout=!!(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||canonicalFigure?.meta?.birthday||canonicalFigure?.meta?.deathday);
   const available={all:true,direct:direct.length,news:news.length,stories:figureStories.length+candidateNews.length,works:hasWorks,movies:figureMovies.length,usradar:!!usRadarRecord,official:candidateOfficial.length,about:hasAbout};
   if(!available[_figureProfileFilter]){_figureProfileFilter="all";shown=x.posts||[];}
-  const feedCards=rows=>rows.map(r=>`<article class="candidate-feed-card"><small>${esc(r.source||"")} · ${esc(r.published_at?relTime(r.published_at):"")}</small><h3><a href="${esc(_figureWorkUrl(r.url))}" target="_blank" rel="noopener">${esc(r.title)}</a></h3></article>`).join("");
+  const feedCards=rows=>rows.map(r=>`<article class="candidate-feed-card"><small>${esc(r.source||"")} · ${esc(r.published_at?relTime(r.published_at):"")}</small><h3><a href="${esc(_figureWorkUrl(r.url))}" target="_blank" rel="noopener">${esc(r.title_fa||r.title)}</a></h3></article>`).join("");
   const candidateNewsSection=candidateNews.length?'<section class="candidate-news"><h2>تازه‌ترین خبرهای رسانه‌ها</h2>'+feedCards(candidateNews)+'</section>':"";
   const officialSection=candidateOfficial.length?'<section class="candidate-news"><h2>از زبان خودش</h2>'+feedCards(candidateOfficial)+'</section>':"";
   const candidateSources=(candidateFeed?.sources||[]).filter(r=>_figureWorkUrl(r.url));

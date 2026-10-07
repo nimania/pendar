@@ -29,7 +29,13 @@ jobs:
           restore-keys: candidate-feeds-
       - name: Test matching and retention
         run: python -m unittest discover -s backend/tests -p test_candidate_feeds.py
+      - name: Install translation dependencies
+        run: pip install httpx pydantic-settings
       - name: Refresh candidate sources
+        env:
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
         run: python backend/scripts/collect_candidate_feeds.py --out candidate-data/candidate-feeds.json
       - uses: actions/upload-artifact@v4
         with:
