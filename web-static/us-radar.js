@@ -1,5 +1,5 @@
 /* Pendar — US Radar 2026. Editorial snapshot: 2026-10-07. */
-const USR={
+const USR_FALLBACK={
  updated:"۷ اکتبر ۲۰۲۶",
  election:"۳ نوامبر ۲۰۲۶",
  house:{r:220,d:215,need:"دموکرات‌ها برای اکثریت به خالص ۳ کرسی نیاز دارند",outlook:"Inside Elections: دموکرات‌ها +۲ تا +۱۰"},
@@ -50,7 +50,17 @@ const USR={
   ["Midterm","انتخابات میان‌دوره‌ای؛ وسط دوره چهار ساله رئیس‌جمهور برگزار می‌شود."]
  ]
 };
+let USR=USR_FALLBACK;
+async function loadUSRData(){try{const fresh=await getJSON(`${DATA}/us-radar.json?ts=${Date.now()}`);if(fresh&&fresh.updated)USR={...USR_FALLBACK,...fresh};}catch(_){USR=USR_FALLBACK;}}
 function usDays(){return Math.max(0,Math.ceil((Date.parse("2026-11-03T05:00:00Z")-Date.now())/86400000));}
+function usHouse(){
+ const h=USR.house_races||[];return `<div class="usr-house-grid">${h.map(x=>`<article><div><b>${x.district}</b><span class="usr-house-rate ${x.rating.includes("D")?"d":x.rating.includes("R")?"r":"t"}">${x.rating}</span></div><h3>${x.name_fa}</h3><p>${x.note_fa}</p><small>${x.why_fa}</small></article>`).join("")}</div>`;
+}
+function usHistory(){
+ const hs=USR.history||[]; if(!hs.length)return "";
+ const max=Math.max(...hs.map(x=>Math.abs(x.generic_d||0)),10);
+ return `<div class="usr-history"><div class="usr-history-chart">${hs.map(x=>`<div class="usr-hcol" title="${x.date}"><span style="height:${Math.max(8,Math.abs(x.generic_d||0)/max*100)}%"></span><b>${x.generic_d>0?"+":""}${faN(x.generic_d)} D</b><small>${x.label_fa}</small></div>`).join("")}</div><div class="usr-change-log">${hs.slice().reverse().map(x=>`<div><time>${x.date_fa||x.date}</time><p>${x.change_fa}</p></div>`).join("")}</div></div>`;
+}
 function usGauge(){
  const total=USR.generic.d+USR.generic.r,dp=Math.round(USR.generic.d/total*100);
  return `<div class="usr-gauge"><div class="usr-gauge-bar"><span class="usr-d" style="width:${dp}%"></span><span class="usr-r" style="width:${100-dp}%"></span></div><div class="usr-gauge-labels"><b>دموکرات ${faN(USR.generic.d)}٪</b><b>جمهوری‌خواه ${faN(USR.generic.r)}٪</b></div><small>${USR.generic.label} · رأی عمومی کنگره، نه پیش‌بینی کرسی‌ها</small></div>`;
@@ -73,8 +83,10 @@ function renderUSRadar(){
  <section><div class="usr-section-head"><div><small>نقشه رقابت</small><h2>کدام ایالت‌ها تعیین‌کننده‌اند؟</h2></div><span>Cook Political Report · ۶ اکتبر</span></div>${usMap()}</section>
  <section><div class="usr-section-head"><div><small>میدان نبرد</small><h2>رقابت‌هایی که باید نگاه کرد</h2></div><span>رتبه‌بندی و نظرسنجی‌ها ممکن است تغییر کنند</span></div><div class="usr-races">${USR.races.map(usRace).join("")}</div></section>
  <section><div class="usr-section-head"><div><small>چهره‌ها</small><h2>نام‌هایی که باید بشناسی</h2></div><span>کارت‌های داخلی رادار؛ آماده اتصال به هویت‌های سراسری پندار</span></div><div class="usr-people">${USR.candidates.map(usCandidate).join("")}</div></section>
+ <section><div class="usr-section-head"><div><small>مجلس نمایندگان</small><h2>کرسی‌هایی که اکثریت را تعیین می‌کنند</h2></div><span>دموکرات‌ها فقط خالص ۳ کرسی نیاز دارند</span></div>${usHouse()}</section>
+ <section><div class="usr-section-head"><div><small>مسیر حرکت</small><h2>رادار نسبت به قبل کجا رفته؟</h2></div><span>تاریخچه snapshotها</span></div>${usHistory()}</section>
  <section class="usr-iran-panel"><div class="usr-section-head"><div><small>لنز پندار</small><h2>این انتخابات چه ربطی به ایران دارد؟</h2></div></div><div class="usr-impact"><article><b>کنترل کنگره</b><p>اکثریت مجلس و سنا بر بودجه، نظارت بر دولت و فضای سیاسی سیاست خارجی اثر می‌گذارد.</p></article><article><b>جنگ و اختیارات رئیس‌جمهور</b><p>در رقابت‌های نزدیک، موضع نامزدها درباره درگیری ایران و اختیارات جنگی به موضوع انتخاباتی تبدیل شده است.</p></article><article><b>تحریم و انتصاب‌ها</b><p>سنا در تأیید مقام‌های ارشد و قضات نقش دارد؛ ترکیب آن می‌تواند میدان مانور دولت را تغییر دهد.</p></article><article><b>سیگنال ۲۰۲۸</b><p>میان‌دوره‌ای میزان محبوبیت دولت ترامپ و جهت افکار عمومی را پیش از رقابت ریاست‌جمهوری بعدی اندازه می‌گیرد.</p></article></div></section>
  <section><div class="usr-section-head"><div><small>راهنمای سریع</small><h2>اصطلاحات را بلد نیستی؟</h2></div></div><div class="usr-glossary">${USR.glossary.map(g=>`<details><summary>${g[0]}</summary><p>${g[1]}</p></details>`).join("")}</div></section>
  <section class="usr-sources"><b>روش و منابع داده</b><p>Snapshot این نسخه بر پایه رتبه‌بندی‌های Cook Political Report و Inside Elections و نظرسنجی‌های منتشرشده تا ۷ اکتبر ۲۰۲۶ ساخته شده است. رتبه‌بندی رقابت با نتیجه انتخابات یکی نیست و نظرسنجی منفرد نیز پیش‌بینی قطعی محسوب نمی‌شود.</p><div>Cook Political Report · Inside Elections · Reuters/Ipsos · YouGov · CBS News</div></section>`;
 }
-function showUSRadar(){show("usradar");setTab("");setHash("#/us-radar");document.title="رادار آمریکا ۲۰۲۶ | پندار";renderUSRadar();}
+async function showUSRadar(){show("usradar");setTab("");setHash("#/us-radar");document.title="رادار آمریکا ۲۰۲۶ | پندار";await loadUSRData();renderUSRadar();}
