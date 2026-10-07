@@ -38,10 +38,9 @@ SOURCES = [
     # outlets are BOTH included so the source-comparison layer can show where they
     # agree and differ.
     #
-    # Removed because their feed did not work from GitHub's servers (DNS-blocked,
-    # 403/404, or returned zero items). If you have a working RSS URL for any of
-    # these, add it back: تسنیم, ایلنا, اقتصادنیوز, برترین‌ها, رادیو فردا,
-    # صدای آمریکا (VOA), ایندیپندنت فارسی, ایران‌وایر, Reuters, Associated Press.
+    # A usable feed is required before adding an outlet. Feed availability can
+    # differ between local verification and the GitHub runner; ingestion records
+    # failures without blocking the rest of the source list.
 
     # --- Global / international ---
     ("BBC", "https://www.bbc.com/news", "http://feeds.bbci.co.uk/news/world/rss.xml", "global", 0.85),
@@ -125,6 +124,17 @@ SOURCES = [
     ("مرکز حقوق بشر در ایران", "https://iranhumanrights.org", "https://iranhumanrights.org/feed/", "iran-intl-rights", 0.65),
 
 
+    # Expansion checked against live publisher RSS responses, 2026-10-07.
+    ("اقتصاد آنلاین", "https://www.eghtesadonline.com", "https://www.eghtesadonline.com/fa/rss/allnews", "iran-economy", 0.6),
+    ("راه پرداخت", "https://way2pay.ir", "https://way2pay.ir/feed/", "iran-economy", 0.6),
+    ("دیجی‌کالا مگ", "https://www.digikala.com/mag/", "https://www.digikala.com/mag/feed/", "iran-lifestyle", 0.5),
+    ("Arab News", "https://www.arabnews.com", "https://www.arabnews.com/rss.xml", "mena", 0.65),
+    ("یورونیوز عربی", "https://arabic.euronews.com", "https://arabic.euronews.com/rss", "mena-ar", 0.7),
+    ("The Times of Israel", "https://www.timesofisrael.com", "https://www.timesofisrael.com/feed/", "mena", 0.7),
+    ("Jerusalem Post", "https://www.jpost.com", "https://www.jpost.com/rss/rssfeedsfrontpage.aspx", "mena", 0.65),
+    ("Middle East Monitor", "https://www.middleeastmonitor.com", "https://www.middleeastmonitor.com/feed/", "mena", 0.6),
+    ("Financial Times — World", "https://www.ft.com/world", "https://www.ft.com/world?format=rss", "global", 0.8),
+
     # --- Persian-language: international / diaspora ---
     ("بی‌بی‌سی فارسی (BBC Persian)", "https://www.bbc.com/persian", "https://feeds.bbci.co.uk/persian/rss.xml", "iran-intl", 0.75),
     ("ایران اینترنشنال (Iran International)", "https://www.iranintl.com", "https://www.iranintl.com/feed", "iran-intl", 0.6),
@@ -138,6 +148,9 @@ SOURCES = [
 ]
 
 SOURCE_CATEGORIES = {
+    "اقتصاد آنلاین": Category.economy,
+    "راه پرداخت": Category.economy,
+    "دیجی‌کالا مگ": Category.culture,
     "The Verge": Category.technology,
     "ورزش سه": Category.sport,
     "روزنامه پیام‌ما": Category.environment,
@@ -171,7 +184,7 @@ def run() -> None:
         wanted: set[str] = set()
         for name, home, feed, region, rel in SOURCES:
             wanted.add(name)
-            lang = ("ar" if region == "iran-ar" else "en" if region == "iran-en" else "fa" if region.startswith("iran") else "es" if region == "global-es" else "tr" if region == "global-tr" else "en")
+            lang = ("ar" if region.endswith("-ar") else "en" if region == "iran-en" else "fa" if region.startswith("iran") else "es" if region == "global-es" else "tr" if region == "global-tr" else "en")
             existing = db.query(Source).filter_by(name=name).one_or_none()
             if existing:
                 existing.homepage_url = home
