@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="movies-hub.css">
   <link rel="stylesheet" href="tv-guide.css">
   <link rel="stylesheet" href="home-polish.css">
+  <link rel="stylesheet" href="us-radar.css">
 </head>
 <body>
   <header class="top">
@@ -74,6 +75,7 @@
       <div class="lede">
         <div class="section-shortcuts home-shortcuts">
           <a href="/badbadak/">بادبادک</a>
+          <button onclick="showUSRadar()">رادار آمریکا</button>
           <button onclick="showFeed()">سرخط خبرها</button>
           <button onclick="showFigures()">چهره‌ها</button>
           <button onclick="showTVGuide('now')">راهنمای تماشا</button>
@@ -315,13 +317,14 @@
       </div>
       <div class="faq" id="faq"></div>
     </section>
+  <section class="trends-view" id="us-radar-view" style="display:none"><div id="us-radar-content"></div></section>
   <section class="trends-view" id="badbadak-view" style="display:none"><header class="bb-header"><img src="assets/badbadak-logo.png" alt="بادبادک" width="220" height="131"><div><h1>بادبادک</h1><p>چهره‌ها · سبک زندگی · سرگرمی</p></div></header><div id="badbadak-content"></div></section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
       <p>پندار · ایران، خبر، اندیشه و فرهنگ</p>
-      <div class="footer-links"><a href="/badbadak/">بادبادک</a><button onclick="showKnowledge()">دانش پندار</button><button onclick="showLatestVideos()">آخرین ویدئوها</button><button onclick="showBooks()">پیشخوان کتاب</button><button onclick="showMovies()">جان فیلم</button><button onclick="showTVGuide('now')">راهنمای تماشا</button><button onclick="showPress()">پیشخوان جراید</button><button onclick="showFigures()">چهره‌ها</button><button onclick="showTech()">فناوری و طراحی</button><button onclick="showSystem()">وضعیت سیستم</button><button onclick="showFaq()">روش کار</button><a href="https://vibefarsi.ir/" target="_blank" rel="noopener">VibeFarsi ↗</a></div>
+      <div class="footer-links"><a href="/badbadak/">بادبادک</a><button onclick="showUSRadar()">رادار آمریکا</button><button onclick="showKnowledge()">دانش پندار</button><button onclick="showLatestVideos()">آخرین ویدئوها</button><button onclick="showBooks()">پیشخوان کتاب</button><button onclick="showMovies()">جان فیلم</button><button onclick="showTVGuide('now')">راهنمای تماشا</button><button onclick="showPress()">پیشخوان جراید</button><button onclick="showFigures()">چهره‌ها</button><button onclick="showTech()">فناوری و طراحی</button><button onclick="showSystem()">وضعیت سیستم</button><button onclick="showFaq()">روش کار</button><a href="https://vibefarsi.ir/" target="_blank" rel="noopener">VibeFarsi ↗</a></div>
     </div>
   </footer>
 
@@ -393,6 +396,7 @@
   <script defer src="nav.js"></script>
   <script defer src="book-app.js"></script>
   <script defer src="badbadak.js"></script>
+  <script defer src="us-radar.js"></script>
   <script defer src="app.js"></script>
 </body>
 </html>
