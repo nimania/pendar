@@ -70,9 +70,19 @@ async function renderHomeEvents() {
   const el=document.getElementById('home-events'); if(!el)return;
   try {
     const groups=await loadEventTrends();
-    el.innerHTML=`<div class="home-panel-title"><span><b>ماجراهای ترند</b><small>چه خبر است و ماجرا از چه قرار است؟</small></span><a href="#/trends">همهٔ ماجراها ←</a></div>
-      <div class="home-event-grid">${groups.slice(0,6).map((g,i)=>eventCard(g,i,true)).join('')||'<p class="muted">هنوز ماجرای تازه با پوشش چند رسانه ثبت نشده است.</p>'}</div>`;
+    el.innerHTML=`<div class="home-panel-title"><b>ماجراهای ترند</b><div class="home-event-tools"><a href="#/trends">همهٔ ماجراها ←</a><button type="button" aria-label="ماجراهای قبلی" onclick="scrollHomeEvents(-1)">→</button><button type="button" aria-label="ماجراهای بعدی" onclick="scrollHomeEvents(1)">←</button></div></div>
+      <div class="home-event-rail" aria-label="مرور ماجراهای ترند">${groups.slice(0,6).map(homeEventCard).join('')||'<p class="muted">هنوز ماجرای تازه با پوشش چند رسانه ثبت نشده است.</p>'}</div>`;
   }catch(_){el.innerHTML='<p class="muted">ماجراهای ترند فعلاً در دسترس نیست.</p>';}
+}
+function homeEventCard(g,rank) {
+  const image=g.lead?.image_url||g.items.find(s=>s.image_url)?.image_url;
+  return `<a class="home-event-tile" href="#/event/${encodeURIComponent(g.id)}" title="${esc(g.title)}">
+    <span class="home-event-photo"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 36h32M12 29l8-9 8 5 9-14M29 11h8v8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>${image&&/^https?:\/\//.test(image)?`<img src="${esc(image)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span class="home-event-number">${faN(rank+1)}</span></span>
+    <span class="home-event-caption"><b>${esc(g.title)}</b><small>${g.rising?'<i class="home-event-rising" title="در حال رشد">↗</i>':''}${faN(g.sourceCount)} رسانه <span>· ${relTime(g.updated)}</span></small></span></a>`;
+}
+function scrollHomeEvents(direction) {
+  const rail=document.querySelector('.home-event-rail');
+  if(rail)rail.scrollBy({left:-direction*rail.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
 }
 let _activeEvent=null, _eventRequest=0;
 async function openEventDossier(id) {
