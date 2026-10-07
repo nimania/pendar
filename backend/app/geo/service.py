@@ -18,7 +18,8 @@ _B = r"[A-Za-z0-9؀-ۿ‌]"
 
 
 def _compile(words: list[str]) -> list:
-    return [re.compile(rf"(?<!{_B}){re.escape(re.sub(r"[\s\u200c]+", " ", w))}(?!{_B})") for w in words]
+    normalized = [re.sub(r"[\s\u200c]+", " ", word) for word in words]
+    return [re.compile(rf"(?<!{_B}){re.escape(word)}(?!{_B})") for word in normalized]
 
 
 # slug -> (name_fa, [keywords])
