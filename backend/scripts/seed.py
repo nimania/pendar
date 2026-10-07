@@ -42,6 +42,9 @@ SOURCES = [
     # differ between local verification and the GitHub runner; ingestion records
     # failures without blocking the rest of the source list.
 
+    ("هفت صبح", "https://7sobh.com", "https://7sobh.com/feed/", "iran", 0.55),
+    ("رکنا", "https://www.rokna.net", "https://www.rokna.net/feed/", "iran", 0.5),
+
     # --- Global / international ---
     ("BBC", "https://www.bbc.com/news", "http://feeds.bbci.co.uk/news/world/rss.xml", "global", 0.85),
     # Spanish-language sources. EL PAÍS publishes an official RSS directory;
