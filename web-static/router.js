@@ -103,7 +103,7 @@ async function route() {
   if (kind === "system") return showSystem();
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
-  if (kind === "badbadak") return showBadbadak();
+  if (kind === "badbadak") return arg === "crossword" ? showBadbadakCrossword() : showBadbadak();
   if (kind === "tech") return showTech();
   if (kind === "figure" && arg) return openFigure(arg);
   if (kind === "news-person" && arg) return openNewsPerson(arg);

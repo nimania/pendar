@@ -228,6 +228,9 @@ def build(site):
             pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak'],'schema_type':'CollectionPage'}
     if '/headlines/' in pages:
         pages['/headlines/']['body']='<h2>ماجراهای ترند</h2>'+links(catalogs['trends'][:3])+'<h2>چهره‌ها و گفته‌ها</h2>'+links([(route('figures'),'چهره‌ها و گفته‌ها'),(route('videos','recaps'),'جان کلام ویدئوها')])+pages['/headlines/']['body']
+    if '/badbadak/' in pages:
+        pages['/badbadak/']['body']+='<h2>سرگرمی</h2>'+links([(route('badbadak','crossword'),'جدول کلمات متقاطع')])
+        pages[route('badbadak','crossword')]={'title':'جدول کلمات متقاطع | بادبادک','description':'جدول کلمات فارسی را در بادبادک پندار بازی کنید. یک جدول انتخاب کنید و با سرنخ‌ها کلمات را پیدا کنید.','body':'<p>یک جدول انتخاب کنید و با سرنخ‌های افقی و عمودی کلمه‌ها را پیدا کنید.</p>','kind':'badbadak','section':'badbadak','canonical':route('badbadak','crossword'),'indexable':True,'schema_type':'WebPage'}
     if '/tv/' in pages:
         schedule=read(data/'pendar-watch-schedule.json',{})
         pages['/tv/']['body']+='<h2>برنامهٔ انتشار فیلم و سریال</h2>'+''.join('<p>'+esc(p.get('title_fa'))+' — '+esc(p.get('start','')[:10])+'</p>' for p in schedule.get('programmes',[])[:100])
