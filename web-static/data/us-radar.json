@@ -411,5 +411,150 @@
       "label_fa": "تأیید ترامپ",
       "note_fa": "Reuters/Ipsos؛ فشار انتخاباتی بر نامزدهای جمهوری‌خواه را بیشتر کرده است."
     }
+  ],
+  "race_hubs": [
+    {
+      "code": "KS",
+      "state": "کانزاس",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "ایالتی که از ۱۹۳۲ دموکرات به سنا نفرستاده، حالا به Toss Up رسیده.",
+      "candidates": [
+        "adam-hamilton",
+        "roger-marshall"
+      ],
+      "poll": "Hamilton +3",
+      "iran": "جنگ ایران و هزینه زندگی به نقطه فشار علیه مارشال تبدیل شده.",
+      "changed": "۶ اکتبر: Cook از Lean R به Toss Up"
+    },
+    {
+      "code": "NH",
+      "state": "نیوهمپشایر",
+      "rating": "Lean D",
+      "race": "سنای آمریکا",
+      "why": "کرسی باز دموکرات‌ها؛ جمهوری‌خواهان امیدوار بودند آن را پس بگیرند.",
+      "candidates": [
+        "chris-pappas",
+        "john-sununu"
+      ],
+      "poll": "Pappas +8",
+      "iran": "سانونو از تصمیم آغاز جنگ فاصله گرفته؛ پاپاس خواهان پایان جنگ است.",
+      "changed": "۶ اکتبر: Cook از Toss Up به Lean D"
+    },
+    {
+      "code": "NC",
+      "state": "کارولینای شمالی",
+      "rating": "Likely D",
+      "race": "سنای آمریکا",
+      "why": "یکی از مهم‌ترین فرصت‌های pickup دموکرات‌ها.",
+      "candidates": [
+        "roy-cooper",
+        "michael-whatley"
+      ],
+      "poll": "Cooper ahead",
+      "iran": "کوپر بر نقش کنگره و مخالفت با جنگ تأکید دارد؛ واتلی از جنگ دفاع کرده.",
+      "changed": "۶ اکتبر: Cook از Lean D به Likely D"
+    },
+    {
+      "code": "TX",
+      "state": "تگزاس",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "تگزاس از ایالت امن جمهوری‌خواهان به یکی از میدان‌های اصلی تبدیل شده.",
+      "candidates": [
+        "james-talarico",
+        "ken-paxton"
+      ],
+      "poll": "Talarico +6",
+      "iran": "تالاریکو خواهان پایان جنگ و دیپلماسی است؛ پکستون از آغاز عملیات حمایت کرد.",
+      "changed": "Toss Up؛ هزینه جنگ یکی از متغیرهای مهم"
+    },
+    {
+      "code": "MI",
+      "state": "میشیگان",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "کرسی باز و رقابت تقریباً مساوی؛ برای اکثریت سنا حیاتی است.",
+      "candidates": [
+        "abdul-el-sayed",
+        "mike-rogers"
+      ],
+      "poll": "El-Sayed +1",
+      "iran": "هر دو اکنون پایان جنگ را می‌خواهند؛ راجرز نسبت به موضع قبلی‌اش چرخیده.",
+      "changed": "راجرز ۲۱ سپتامبر خواهان پایان سریع جنگ شد"
+    },
+    {
+      "code": "OH",
+      "state": "اوهایو",
+      "rating": "Toss Up",
+      "race": "سنای ویژه",
+      "why": "بازگشت احتمالی شرود براون می‌تواند یک pickup کلیدی برای دموکرات‌ها باشد.",
+      "candidates": [
+        "sherrod-brown",
+        "jon-husted"
+      ],
+      "poll": "Brown +4",
+      "iran": "جنگ، بنزین و هزینه زندگی در پیام انتخاباتی اوهایو برجسته شده.",
+      "changed": "رقابت همچنان بسیار نزدیک"
+    },
+    {
+      "code": "IA",
+      "state": "آیووا",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "اقتصاد کشاورزی آیووا به جهش قیمت دیزل حساس است.",
+      "candidates": [],
+      "poll": "Close",
+      "iran": "جنگ ایران و دیزل مستقیماً وارد رقابت شده؛ Hinson خواهان پایان سریع جنگ شده.",
+      "changed": "از Lean R به Toss Up"
+    },
+    {
+      "code": "ME",
+      "state": "مین",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "یکی از کرسی‌های اصلی مسیر دموکرات‌ها برای اکثریت.",
+      "candidates": [],
+      "poll": "Close",
+      "iran": "War Powers و استقلال از ترامپ برای رأی‌دهندگان میانه‌رو مهم است.",
+      "changed": "Toss Up"
+    },
+    {
+      "code": "AK",
+      "state": "آلاسکا",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "Mary Peltola یک ایالت معمولاً جمهوری‌خواه را رقابتی کرده است.",
+      "candidates": [],
+      "poll": "Competitive",
+      "iran": "هزینه انرژی و سیاست خارجی بخشی از فضای ملی رقابت است.",
+      "changed": "Toss Up"
+    }
+  ],
+  "radar_news": [
+    {
+      "date": "2026-10-07",
+      "tag": "ایران",
+      "headline": "۱۲ رقابت بر سر جنگ ایران از ترامپ فاصله گرفته‌اند",
+      "summary": "Reuters در بررسی ۶۲ رقابت رقابتی، جنگ ایران را یکی از مهم‌ترین نقاط فاصله‌گیری جمهوری‌خواهان آسیب‌پذیر از ترامپ یافت.",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/world/us/most-republicans-tight-midterm-distance-themselves-trump-reuters-review-finds-2026-10-07/"
+    },
+    {
+      "date": "2026-10-06",
+      "tag": "Rating",
+      "headline": "کانزاس Toss Up شد",
+      "summary": "Cook کانزاس را به Toss Up، نیوهمپشایر را Lean D و کارولینای شمالی را Likely D منتقل کرد.",
+      "source": "Cook / Washington Post",
+      "url": "https://www.cookpolitical.com/analysis/senate/senate-overview"
+    },
+    {
+      "date": "2026-09-21",
+      "tag": "ایران",
+      "headline": "مایک راجرز خواهان پایان سریع جنگ شد",
+      "summary": "نامزد جمهوری‌خواه میشیگان پس از حمایت قبلی از اختیار ترامپ، خواهان پایان سریع جنگ ایران شد.",
+      "source": "Reuters",
+      "url": "https://www.investing.com/news/politics-news/two-republican-senate-candidates-call-for-swift-end-to-iran-war-diverging-from-trump-4909742"
+    }
   ]
 }
