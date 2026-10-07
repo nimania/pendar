@@ -65,6 +65,7 @@ jobs:
           if [ -n "$build_id" ]; then
             rm -rf /tmp/pendar-latest && mkdir -p /tmp/pendar-latest
             if gh run download "$build_id" -n latest-static-site -D /tmp/pendar-latest; then
+              python backend/scripts/unpack_site_artifact.py /tmp/pendar-latest
               if [ -f /tmp/pendar-latest/data/movies.json ]; then
                 cp /tmp/pendar-latest/data/movies.json backend/data/curated-movies.json
               fi

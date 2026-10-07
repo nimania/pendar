@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import quote, unquote
 
 ORIGIN = 'https://pendar.io'
-SECTIONS = {'badbadak':'بادبادک؛ چهره‌ها، سبک زندگی و سرگرمی','headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
+SECTIONS = {'us-radar':'رادار آمریکا؛ انتخابات و پیامدها برای ایران','badbadak':'بادبادک؛ چهره‌ها، سبک زندگی و سرگرمی','headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
 def text(value):
     if isinstance(value, dict): return str(value.get('text') or value.get('summary_fa') or value.get('name_fa') or value.get('name') or value.get('title_fa') or value.get('title') or '')
     if isinstance(value, list): return '\n'.join(text(x) for x in value)
@@ -225,7 +225,7 @@ def build(site):
         for n,chunk in enumerate(chunks,1):
             url=route(kind) if n==1 else route(kind,'page/'+str(n))
             paging=links([(route(kind) if i==1 else route(kind,'page/'+str(i)), 'صفحهٔ '+str(i)) for i in range(1,len(chunks)+1)]) if len(chunks)>1 else ''
-            pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak'],'schema_type':'CollectionPage'}
+            pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak','us-radar'],'schema_type':'CollectionPage'}
     if '/headlines/' in pages:
         pages['/headlines/']['body']='<h2>ماجراهای ترند</h2>'+links(catalogs['trends'][:3])+'<h2>چهره‌ها و گفته‌ها</h2>'+links([(route('figures'),'چهره‌ها و گفته‌ها'),(route('videos','recaps'),'جان کلام ویدئوها')])+pages['/headlines/']['body']
     if '/badbadak/' in pages:

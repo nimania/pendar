@@ -66,6 +66,7 @@ jobs:
         run: |
           rm -rf site && mkdir -p site
           gh run download "$BUILD_ID" -n latest-static-site -D site
+          python backend/scripts/unpack_site_artifact.py site
 
       - name: Overlay freshest Jan-e Jaraid data
         env:

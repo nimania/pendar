@@ -80,6 +80,7 @@ jobs:
             if [ -n "$artifact_id" ]; then
               rm -rf /tmp/healthcheck && mkdir -p /tmp/healthcheck
               if gh run download "$candidate" -n latest-static-site -D /tmp/healthcheck >/dev/null 2>&1; then
+                python backend/scripts/unpack_site_artifact.py /tmp/healthcheck
                 news="$(python -c 'import json,pathlib; p=pathlib.Path("/tmp/healthcheck/data/stats.json"); print(int(json.loads(p.read_text(encoding="utf-8")).get("total") or 0) if p.is_file() else 0)' 2>/dev/null || echo 0)"
                 figures="$(python -c 'import json,pathlib; p=pathlib.Path("/tmp/healthcheck/data/figures.json"); d=json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}; print(len(d.get("figures", [])) if isinstance(d, dict) else 0)' 2>/dev/null || echo 0)"
                 if [ "$news" -ge 10000 ] && [ "$figures" -ge 100 ]; then
@@ -110,6 +111,7 @@ jobs:
         run: |
           rm -rf site && mkdir -p site
           if [ -n "$BUILD_ID" ] && gh run download "$BUILD_ID" -n latest-static-site -D site; then
+            python backend/scripts/unpack_site_artifact.py site
             echo "Using latest full-build site artifact."
           else
             echo "::warning::latest-static-site unavailable; falling back to the most recent successful Fast Deploy artifact."

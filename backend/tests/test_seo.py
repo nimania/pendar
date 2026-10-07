@@ -18,7 +18,7 @@ class SeoTests(unittest.TestCase):
             }
             for name,obj in fixtures.items():(data/name).write_text(json.dumps(obj,ensure_ascii=False))
             pages=build(site)
-            for url in ['/story/news-1/','/book/a-book/','/movie/a-movie/','/statement/statement-1/']:
+            for url in ['/story/news-1/','/book/a-book/','/movie/a-movie/','/statement/statement-1/','/us-radar/']:
                 html=(site/url.strip('/')/'index.html').read_text()
                 self.assertIn('<base href="/">',html)
                 self.assertLess(html.index('<base '),html.index('<link rel="stylesheet"'))
