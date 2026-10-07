@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import quote, unquote
 
 ORIGIN = 'https://pendar.io'
-SECTIONS = {'headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
+SECTIONS = {'badbadak':'بادبادک؛ چهره‌ها، سبک زندگی و سرگرمی','headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
 def text(value):
     if isinstance(value, dict): return str(value.get('text') or value.get('summary_fa') or value.get('name_fa') or value.get('name') or value.get('title_fa') or value.get('title') or '')
     if isinstance(value, list): return '\n'.join(text(x) for x in value)
@@ -219,12 +219,13 @@ def build(site):
         if m.get('pendar_id') and route('master-movie',m['pendar_id']) not in pages:
             add('master-movie',m['pendar_id'],m.get('title_fa') or m.get('title_en'),'\n'.join(text(m.get(k)) for k in ['overview_fa','overview_en','year','genres'] if m.get(k)),('https://image.tmdb.org/t/p/w500'+m['poster_path']) if m.get('poster_path') else None)
     # Every detail is reachable through paginated section indexes.
+    catalogs['badbadak']=[(route('story',s.get('id')),text(s.get('headline_fa'))) for s in stories if s.get('id') and re.search(r'بازیگر|خواننده|سینما|سریال|سلامت|غذا|خوراک|رستوران|زیبایی|آرایش|گردشگری|فناوری|جنجال|حادثه',text(s.get('headline_fa')))][:120]
     for kind,title in SECTIONS.items():
         rows=catalogs[kind]; chunks=[rows[i:i+150] for i in range(0,len(rows),150)] or [[]]
         for n,chunk in enumerate(chunks,1):
             url=route(kind) if n==1 else route(kind,'page/'+str(n))
             paging=links([(route(kind) if i==1 else route(kind,'page/'+str(i)), 'صفحهٔ '+str(i)) for i in range(1,len(chunks)+1)]) if len(chunks)>1 else ''
-            pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq'],'schema_type':'CollectionPage'}
+            pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak'],'schema_type':'CollectionPage'}
     if '/headlines/' in pages:
         pages['/headlines/']['body']='<h2>ماجراهای ترند</h2>'+links(catalogs['trends'][:3])+'<h2>چهره‌ها و گفته‌ها</h2>'+links([(route('figures'),'چهره‌ها و گفته‌ها'),(route('videos','recaps'),'جان کلام ویدئوها')])+pages['/headlines/']['body']
     if '/tv/' in pages:
