@@ -292,7 +292,13 @@ const _US_RADAR_FIGURE_FALLBACKS = [
 ];
 async function loadFigures() {
   if (_FIG) return _FIG;
-  try { _FIG = await getJSON(`${DATA}/figures.json`); } catch (e) { _FIG = { figures: [], fields: {} }; }
+  try { _FIG = await getJSON(`${DATA}/figures.json`, 45000); } catch (e) {
+    _FIG = { figures: [], fields: {} };
+    if (!window._figureLoadRetry) {
+      window._figureLoadRetry = true;
+      setTimeout(() => { _FIG = null; if (typeof renderHomePeople === "function") renderHomePeople(); }, 15000);
+    }
+  }
   _FIG.figures = Array.isArray(_FIG.figures) ? _FIG.figures : [];
   for (const fallback of _LOCAL_FIGURE_FALLBACKS) {
     if (!_FIG.figures.some(f => String(f.handle||"").toLowerCase() === fallback.handle)) {
