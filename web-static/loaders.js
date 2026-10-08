@@ -300,6 +300,15 @@ async function loadFigures() {
     }
   }
   _FIG.figures = Array.isArray(_FIG.figures) ? _FIG.figures : [];
+  // Editorial interview: standalone attributed statements are overlaid on the generated figures export.
+  try {
+    const curated=await getJSON(`${DATA}/curated-taraneh-mokarram.json?v=20261008`,12000);
+    if(curated?.handle){
+      const existing=_FIG.figures.find(f=>f.handle===curated.handle);
+      if(existing){Object.assign(existing,{...curated,posts:[...(curated.posts||[]),...(existing.posts||[]).filter(p=>!(curated.posts||[]).some(c=>c.id===p.id))]});}
+      else _FIG.figures.push(curated);
+    }
+  }catch(error){console.warn("Curated figure interview unavailable",error);}
   for (const fallback of _LOCAL_FIGURE_FALLBACKS) {
     if (!_FIG.figures.some(f => String(f.handle||"").toLowerCase() === fallback.handle)) {
       _FIG.figures.push(fallback);
