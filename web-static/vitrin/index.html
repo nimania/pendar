@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>ویترین | پندار</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101115;color:#f2f2f3;font-family:Tahoma,Arial,sans-serif}main{max-width:1170px;margin:auto;padding:38px 20px}header{border-bottom:1px solid #38393e;padding-bottom:24px;margin-bottom:25px}h1{margin:0;font-size:32px}header p{color:#a8a9ae;font-size:14px} .sources{display:grid;grid-template-columns:1fr 1fr;gap:22px}.panel{min-width:0;border:1px solid #303137;border-radius:15px;overflow:hidden;background:#18191e}.panel h2{font-size:21px;margin:0}.panelhead{padding:20px;border-bottom:1px solid #33343a;display:flex;align-items:center;justify-content:space-between;gap:15px}.panelhead a{color:#e7e7e9;font-size:13px;text-decoration:none}.stamp{color:#91939d;font-size:12px;margin:8px 20px 0}.items{list-style:none;padding:6px 20px 16px;margin:0}.items li{border-bottom:1px solid #303137}.items li:last-child{border:0}.items a{display:block;padding:13px 0;color:#f3f3f5;line-height:1.8;text-decoration:none;font-size:15px}.items a:hover{color:#ff7575}.error{color:#d6b1b1;padding:15px 20px}.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.toolbar button{border:1px solid #555761;background:#24262c;color:#fff;border-radius:8px;padding:9px 15px;cursor:pointer}@media(max-width:720px){.sources{grid-template-columns:1fr}main{padding:24px 14px}h1{font-size:26px}}
+</style></head><body><main><header><h1>ویترین</h1><p>پیوندهای تازه از مردم‌ریپورت و گویا نیوز · گردآوری خودکار هر ساعت</p><div class="toolbar"><button id="refresh" type="button">بازخوانی فهرست</button><span id="status" aria-live="polite"></span></div></header><div class="sources" id="sources"><p>در حال بارگذاری…</p></div></main>
+<script>
+const root=document.getElementById('sources'),status=document.getElementById('status');
+const faDate=value=>value?new Intl.DateTimeFormat('fa-IR',{dateStyle:'short',timeStyle:'short',timeZone:'Asia/Tehran'}).format(new Date(value))+' (تهران)':'نامشخص';
+function node(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
+async function load(){
+status.textContent='در حال دریافت…';
+try{
+const response=await fetch('/data/vitrin.json?ts='+Date.now(),{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);
+const data=await response.json();root.replaceChildren();
+for(const source of data.sources||[]){
+const panel=node('section','panel'),head=node('div','panelhead'),h2=node('h2','',source.name),home=node('a','','وب‌سایت اصلی ↗');
+home.href=source.homepage;home.target='_blank';home.rel='noopener noreferrer';head.append(h2,home);panel.append(head,node('p','stamp','آخرین برداشت: '+faDate(source.updated_at)));
+const list=node('ul','items');for(const entry of source.items||[]){const li=node('li'),a=node('a','',entry.title);a.href=entry.url;a.target='_blank';a.rel='noopener noreferrer';li.append(a);list.append(li)}
+if(!list.children.length)panel.append(node('p','error','در حال حاضر پیوندی برای این منبع دریافت نشده است.'));else panel.append(list);root.append(panel)}
+status.textContent='فهرست دریافت شد';
+}catch(e){root.replaceChildren(node('p','error','بارگذاری داده‌ها ناموفق بود. دوباره تلاش کنید.'));status.textContent='خطا در دریافت'}
+}
+document.getElementById('refresh').addEventListener('click',load);load();
+</script></body></html>
