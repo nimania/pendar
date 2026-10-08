@@ -23,10 +23,13 @@ def build(site):
     editorial=read(Path(__file__).resolve().parents[1]/'data'/'editorial-recaps.json',[])
     figure_data=read(data/'figures.json',{'figures':[]})
     for entry in editorial:
+        for profile in entry.get('profiles',[]):
+            if not any(str(f.get('handle','')).lower()==profile['handle'].lower() for f in figure_data.get('figures',[])):
+                figure_data.setdefault('figures',[]).append(profile.copy())
         for figure in figure_data.get('figures',[]):
             if str(figure.get('handle','')).lower() not in {h.lower() for h in entry['handles']}: continue
             post={k:v for k,v in entry.items() if k!='handles'}
-            post.update(handle=figure['handle'],avatar=figure.get('avatar',''),role_fa='گفت‌وگو با سیمرغ طلایی',published_at=entry['recorded_at'])
+            post.update(handle=figure['handle'],avatar=figure.get('avatar',''),role_fa=entry.get('source_name','گفت‌وگو'),published_at=entry['recorded_at'])
             figure['posts']=[post]+[p for p in figure.get('posts',[]) if p.get('id')!=entry['id']]
     if editorial:
         (data/'figures.json').write_text(json.dumps(figure_data,ensure_ascii=False),encoding='utf-8')
