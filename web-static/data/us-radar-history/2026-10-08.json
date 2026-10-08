@@ -1,0 +1,560 @@
+{
+  "updated": "۷ اکتبر ۲۰۲۶ · ایران‌متر",
+  "updated_iso": "2026-10-07T14:30:00Z",
+  "generic": {
+    "d": 44,
+    "r": 37,
+    "label": "Reuters/Ipsos · ۶ اکتبر"
+  },
+  "house": {
+    "r": 220,
+    "d": 215,
+    "need": "دموکرات‌ها برای اکثریت به خالص ۳ کرسی نیاز دارند",
+    "outlook": "Cook: محتمل‌ترین بازه +۵ تا +۱۵ برای دموکرات‌ها"
+  },
+  "house_races": [
+    {
+      "district": "AZ-01",
+      "rating": "Lean D",
+      "name_fa": "آریزونا ۱",
+      "note_fa": "Cook این کرسی را از Toss Up به Lean D برده است.",
+      "why_fa": "یکی از نمونه‌های روشن حرکت حومه‌ها به سمت دموکرات‌ها."
+    },
+    {
+      "district": "NC-11",
+      "rating": "Toss Up",
+      "name_fa": "کارولینای شمالی ۱۱",
+      "note_fa": "کرسی جمهوری‌خواه که از Lean R به Toss Up منتقل شده.",
+      "why_fa": "اگر چنین کرسی‌هایی بیفتند، مسیر اکثریت دموکرات‌ها کوتاه می‌شود."
+    },
+    {
+      "district": "FL-22",
+      "rating": "Toss Up",
+      "name_fa": "فلوریدا ۲۲",
+      "note_fa": "رقابتی‌تر شده و اکنون Toss Up است.",
+      "why_fa": "نشان می‌دهد فشار انتخاباتی فقط به ایالت‌های شمالی محدود نیست."
+    },
+    {
+      "district": "OH-07",
+      "rating": "Toss Up",
+      "name_fa": "اوهایو ۷",
+      "note_fa": "یکی از دو رقابت مجلس در اوهایو که همزمان با نبرد حساس سنا زیر نظر است.",
+      "why_fa": "ترکیب turnout سنا و مجلس می‌تواند نتیجه هر دو را جابه‌جا کند."
+    },
+    {
+      "district": "OH-09",
+      "rating": "Toss Up",
+      "name_fa": "اوهایو ۹",
+      "note_fa": "یکی از رقابت‌های بسیار نزدیک مجلس در اوهایو.",
+      "why_fa": "برای فهم موج یا نبود موج دموکرات‌ها در Midwest مهم است."
+    },
+    {
+      "district": "IA-01",
+      "rating": "Toss Up",
+      "name_fa": "آیووا ۱",
+      "note_fa": "Mariannette Miller-Meeks در یکی از رقابتی‌ترین کرسی‌های کشور دفاع می‌کند.",
+      "why_fa": "Reuters او را از جمهوری‌خواهانی دانسته که در چند موضوع از ترامپ فاصله گرفته‌اند."
+    }
+  ],
+  "history": [
+    {
+      "date": "2026-04-14",
+      "date_fa": "۲۵ فروردین",
+      "generic_d": 6,
+      "label_fa": "آوریل",
+      "change_fa": "Cook Battleground: دموکرات‌ها در ۳۶ حوزه رقابتی ۵۰ به ۴۴ جلو بودند."
+    },
+    {
+      "date": "2026-09-11",
+      "date_fa": "۲۰ شهریور",
+      "generic_d": 2,
+      "label_fa": "سپتامبر",
+      "change_fa": "در ۳۷ حوزه رقابتی Cook فاصله به D+2 رسید؛ رقابت محلی فشرده‌تر از فضای ملی بود."
+    },
+    {
+      "date": "2026-09-25",
+      "date_fa": "۳ مهر",
+      "generic_d": 5,
+      "label_fa": "اواخر سپتامبر",
+      "change_fa": "Cook پانزده Rating مجلس را به سمت دموکرات‌ها جابه‌جا کرد و بازه +۵ تا +۱۵ کرسی را محتمل دانست."
+    },
+    {
+      "date": "2026-10-06",
+      "date_fa": "۱۴ مهر",
+      "generic_d": 7,
+      "label_fa": "اکتبر",
+      "change_fa": "Reuters/Ipsos: رأی‌دهندگان ثبت‌نام‌شده دموکرات‌ها را ۴۴ به ۳۷ ترجیح دادند؛ ترامپ در ۳۲٪ تأیید قرار گرفت."
+    }
+  ],
+  "iran_meter": [
+    {
+      "handle": "james-talarico",
+      "name_fa": "جیمز تالاریکو",
+      "party": "D",
+      "state": "TX",
+      "confidence": "بالا",
+      "war": "مخالف ادامه جنگ",
+      "war_power": "مهار مداخله نظامی",
+      "sanctions": "فشار اقتصادی/دیپلماسی",
+      "israel": "کمک دفاعی؛ مخالف فروش تسلیحات تهاجمی",
+      "trump": "مخالف",
+      "summary_fa": "خواهان پایان جنگ ایران؛ می‌گوید جلوگیری از سلاح هسته‌ای باید با دیپلماسی، متحدان و ابزار اقتصادی دنبال شود.",
+      "source": "Texas Tribune / American Jewish Congress",
+      "asof": "2026-10-06",
+      "timeline": [
+        {
+          "date": "2026-05",
+          "text_fa": "مقایسه خطر جنگ ایران با تجربه عراق؛ درخواست پایان سیاست نظامی پرریسک"
+        },
+        {
+          "date": "2026-10",
+          "text_fa": "موضع ضد ادامه جنگ در ایران‌متر"
+        }
+      ]
+    },
+    {
+      "handle": "ken-paxton",
+      "name_fa": "کن پکستون",
+      "party": "R",
+      "state": "TX",
+      "confidence": "متوسط",
+      "war": "حمایت اولیه از عملیات",
+      "war_power": "نامشخص",
+      "sanctions": "نامشخص",
+      "israel": "همسو با جناح جمهوری‌خواه حامی اسرائیل",
+      "trump": "نزدیک",
+      "summary_fa": "در آغاز جنگ کنار ترامپ ایستاد و گفت انتظار جنگ بی‌پایان ندارد؛ برای محورهای دیگر داده این نسخه کافی نیست.",
+      "source": "Texas Tribune / AP",
+      "asof": "2026-10-06",
+      "timeline": [
+        {
+          "date": "2026-02",
+          "text_fa": "حمایت اولیه از عملیات دولت ترامپ"
+        },
+        {
+          "date": "2026-09",
+          "text_fa": "ابراز نگرانی خصوصی از اثر جنگ و قیمت سوخت بر رقابت انتخاباتی"
+        }
+      ]
+    },
+    {
+      "handle": "mike-rogers",
+      "name_fa": "مایک راجرز",
+      "party": "R",
+      "state": "MI",
+      "confidence": "بالا",
+      "war": "خواهان پایان سریع",
+      "war_power": "قبلاً حامی اختیار حمله؛ اکنون فاصله گرفته",
+      "sanctions": "نامشخص",
+      "israel": "نامشخص",
+      "trump": "فاصله در موضوع ایران",
+      "summary_fa": "در رقابت نزدیک میشیگان خواهان پایان سریع جنگ شده؛ Reuters این تغییر را فاصله‌گیری از ترامپ بر سر ایران توصیف کرده است.",
+      "source": "Reuters",
+      "asof": "2026-09-21",
+      "timeline": [
+        {
+          "date": "2025-06",
+          "text_fa": "حمایت از حمله به تأسیسات هسته‌ای ایران"
+        },
+        {
+          "date": "2026-07",
+          "text_fa": "مخالفت با محدودکردن اختیار ترامپ در میانه مذاکره"
+        },
+        {
+          "date": "2026-09-21",
+          "text_fa": "چرخش: درخواست پایان سریع جنگ به دلیل فشار هزینه انرژی"
+        }
+      ]
+    },
+    {
+      "handle": "john-sununu",
+      "name_fa": "جان ای. سانونو",
+      "party": "R",
+      "state": "NH",
+      "confidence": "بالا",
+      "war": "منتقد آغاز جنگ",
+      "war_power": "خواهان بازپس‌گیری نقش کنگره؛ موضع قطعنامه مبهم",
+      "sanctions": "نامشخص",
+      "israel": "جنگ را موجب تضعیف ایران دانسته",
+      "trump": "فاصله در ایران و تعرفه کانادا",
+      "summary_fa": "گفته ترامپ در آغاز جنگ اشتباه کرد و کنگره باید قدرت بیشتری پس بگیرد، اما همزمان نتایج نظامی جنگ علیه ایران را ستوده است.",
+      "source": "Washington Post",
+      "asof": "2026-10-03",
+      "timeline": [
+        {
+          "date": "2026",
+          "text_fa": "دفاع اولیه از نتایج عملیات و تضعیف ایران"
+        },
+        {
+          "date": "2026-10",
+          "text_fa": "فاصله‌گذاری از تصمیم آغاز جنگ و تأکید بیشتر بر نقش کنگره"
+        }
+      ]
+    },
+    {
+      "handle": "sherrod-brown",
+      "name_fa": "شرود براون",
+      "party": "D",
+      "state": "OH",
+      "confidence": "متوسط",
+      "war": "رقابت در بستری شدیداً ضد جنگ",
+      "war_power": "نامشخص در این نسخه",
+      "sanctions": "نامشخص",
+      "israel": "نامشخص",
+      "trump": "مخالف",
+      "summary_fa": "جنگ ایران و قیمت انرژی از مسائل محوری رقابت اوهایو هستند؛ برای نسبت‌دادن موضع جزئی‌تر به براون، داده مستقیم بیشتری لازم است.",
+      "source": "Reuters",
+      "asof": "2026-10-06",
+      "timeline": [
+        {
+          "date": "2026-05",
+          "text_fa": "قرار دادن جنگ ایران و اثر آن بر قیمت سوخت و کود در مرکز پیام انتخاباتی"
+        },
+        {
+          "date": "2026-10",
+          "text_fa": "ادامه پیام ضد جنگ در رقابت اوهایو"
+        }
+      ]
+    },
+    {
+      "handle": "jon-husted",
+      "name_fa": "جان هاستد",
+      "party": "R",
+      "state": "OH",
+      "confidence": "متوسط",
+      "war": "نامشخص",
+      "war_power": "نامشخص",
+      "sanctions": "نامشخص",
+      "israel": "نامشخص",
+      "trump": "جمهوری‌خواه همسو؛ جزئیات ایران نیازمند داده",
+      "summary_fa": "رادار عمداً خانه‌های بدون شاهد مستقیم را پر نمی‌کند؛ این پرونده با داده تازه تکمیل خواهد شد.",
+      "source": "Reuters / Pendar review",
+      "asof": "2026-10-07",
+      "timeline": [
+        {
+          "date": "2026-09",
+          "text_fa": "تمرکز انتخاباتی بر بحران هزینه زندگی؛ داده مستقیم موضع جنگ هنوز ناکافی است"
+        }
+      ]
+    },
+    {
+      "handle": "adam-hamilton",
+      "name_fa": "آدام همیلتون",
+      "party": "D",
+      "state": "KS",
+      "confidence": "متوسط",
+      "war": "منتقد جنگ",
+      "war_power": "نامشخص",
+      "sanctions": "نامشخص",
+      "israel": "نامشخص",
+      "trump": "مخالف",
+      "summary_fa": "کارزار او جنگ ایران و هزینه‌های ناشی از آن را یکی از محورهای انتقاد از راجر مارشال و دولت ترامپ کرده است.",
+      "source": "Guardian / AP",
+      "source_url": "https://www.theguardian.com/us-news/2026/aug/25/democrat-adam-hamilton-kansas-senate",
+      "asof": "2026-10-07",
+      "timeline": [
+        {
+          "date": "2026-08",
+          "text_fa": "انتقاد انتخاباتی از حمایت مارشال از جنگ ایران"
+        },
+        {
+          "date": "2026-10",
+          "text_fa": "رقابت کانزاس به Toss Up منتقل شد؛ جنگ و هزینه زندگی از زمینه‌های اصلی فشار بر GOP"
+        }
+      ]
+    },
+    {
+      "handle": "roger-marshall",
+      "name_fa": "راجر مارشال",
+      "party": "R",
+      "state": "KS",
+      "confidence": "بالا",
+      "war": "حامی ترامپ؛ مخالف جنگ بی‌پایان",
+      "war_power": "همسو با دولت",
+      "sanctions": "فشار بر ایران همراه با مذاکره",
+      "israel": "نامشخص",
+      "trump": "نزدیک",
+      "summary_fa": "از رویکرد ترامپ در ایران دفاع کرده، اما همزمان بر «نه به جنگ بی‌پایان»، جلوگیری از ایران هسته‌ای و کاهش هزینه انرژی تأکید دارد.",
+      "source": "Office of Sen. Roger Marshall",
+      "source_url": "https://www.marshall.senate.gov/newsroom/press-releases/senator-marshall-im-standing-with-the-president-on-iran/",
+      "asof": "2026-10-07",
+      "timeline": [
+        {
+          "date": "2026-07",
+          "text_fa": "اعلام صریح همراهی با رئیس‌جمهور در پرونده ایران"
+        },
+        {
+          "date": "2026-07",
+          "text_fa": "تأکید همزمان بر «نه به جنگ بی‌پایان» و مسیر توافق"
+        }
+      ]
+    },
+    {
+      "handle": "chris-pappas",
+      "name_fa": "کریس پاپاس",
+      "party": "D",
+      "state": "NH",
+      "confidence": "بالا",
+      "war": "خواهان پایان جنگ",
+      "war_power": "حامی نقش کنگره",
+      "sanctions": "نامشخص",
+      "israel": "نامشخص",
+      "trump": "مخالف",
+      "summary_fa": "پاپاس بارها خواهان پایان جنگ شده و موضوع هزینه سوخت و فشار بر خانواده‌های نیوهمپشایر را به جنگ ایران پیوند داده است.",
+      "source": "Reuters / voting record",
+      "source_url": "https://www.reuters.com/legal/litigation/northeast-democrats-urge-trump-administration-action-heating-oil-costs-surge-2026-10-06/",
+      "asof": "2026-10-07",
+      "timeline": [
+        {
+          "date": "2026",
+          "text_fa": "رأی‌ها و مواضع مکرر برای پایان جنگ"
+        },
+        {
+          "date": "2026-10-06",
+          "text_fa": "فشار برای پایان جنگ در متن بحران قیمت سوخت گرمایشی نیوانگلند"
+        }
+      ]
+    },
+    {
+      "handle": "roy-cooper",
+      "name_fa": "روی کوپر",
+      "party": "D",
+      "state": "NC",
+      "confidence": "بالا",
+      "war": "مخالف",
+      "war_power": "بازگرداندن اختیار به کنگره",
+      "sanctions": "نامشخص",
+      "israel": "نامشخص",
+      "trump": "مخالف",
+      "summary_fa": "درباره دلیل ورود آمریکا به جنگ و راه خروج ابراز نگرانی کرده و بر بازپس‌گیری اختیار قانون اساسی کنگره در اعلان جنگ تأکید دارد.",
+      "source": "Guides.vote candidate guide",
+      "source_url": "https://guides.vote/guide/2026-north-carolina-us-senate-voters-guide/",
+      "asof": "2026-10-07",
+      "timeline": [
+        {
+          "date": "2026",
+          "text_fa": "مخالفت با جنگ و پرسش درباره راهبرد خروج"
+        },
+        {
+          "date": "2026",
+          "text_fa": "تأکید بر بازگرداندن اختیار اعلان جنگ به کنگره"
+        }
+      ]
+    },
+    {
+      "handle": "michael-whatley",
+      "name_fa": "مایکل واتلی",
+      "party": "R",
+      "state": "NC",
+      "confidence": "بالا",
+      "war": "حامی",
+      "war_power": "نامشخص",
+      "sanctions": "فشار بر ایران",
+      "israel": "نامشخص",
+      "trump": "نزدیک",
+      "summary_fa": "حتی با وجود هزینه اقتصادی داخلی از جنگ حمایت کرده و جلوگیری از سلاح هسته‌ای ایران و مقابله با صدور تروریسم را دلیل امنیت ملی دانسته است.",
+      "source": "Guides.vote candidate guide",
+      "source_url": "https://guides.vote/guide/2026-north-carolina-us-senate-voters-guide/",
+      "asof": "2026-10-07",
+      "timeline": [
+        {
+          "date": "2026",
+          "text_fa": "حمایت از جنگ حتی با وجود هزینه اقتصادی؛ استدلال امنیت ملی و منع ایران هسته‌ای"
+        }
+      ]
+    },
+    {
+      "handle": "abdul-el-sayed",
+      "name_fa": "عبدال السید",
+      "party": "D",
+      "state": "MI",
+      "confidence": "بالا",
+      "war": "مخالف؛ پایان فوری",
+      "war_power": "مخالف ادامه مداخله",
+      "sanctions": "نامشخص",
+      "israel": "خواهان تحریم تسلیحاتی",
+      "trump": "مخالف",
+      "summary_fa": "مخالف جنگ ایران است و پایان فوری درگیری را می‌خواهد؛ در سیاست منطقه‌ای نیز خواهان توقف کمک نظامی مستقیم و تحریم تسلیحاتی اسرائیل شده است.",
+      "source": "Campaign positions / Reuters context",
+      "source_url": "https://www.reuters.com/world/us/two-republican-senate-candidates-call-swift-end-iran-war-diverging-trump-2026-09-21/",
+      "asof": "2026-10-07",
+      "timeline": [
+        {
+          "date": "2026",
+          "text_fa": "مخالفت با جنگ ایران و درخواست پایان فوری"
+        },
+        {
+          "date": "2026-09",
+          "text_fa": "انتقاد از چرخش دیرهنگام مایک راجرز پس از افزایش قیمت سوخت"
+        }
+      ]
+    }
+  ],
+  "iran_signals": [
+    {
+      "value": "۱۲",
+      "label_fa": "رقابت رقابتی",
+      "note_fa": "که Reuters اختلاف جمهوری‌خواهان با ترامپ را مشخصاً حول جنگ ایران یافته است."
+    },
+    {
+      "value": "۴۱/۶۲",
+      "label_fa": "نامزد جمهوری‌خواه",
+      "note_fa": "در رقابت‌های رقابتی روی سیاست یا نمایش ارتباط با ترامپ فاصله گرفته‌اند."
+    },
+    {
+      "value": "۴۹–۵۰",
+      "label_fa": "رأی War Powers",
+      "note_fa": "قطعنامه مهار حملات بیشتر به ایران در سنا با یک رأی شکست خورد؛ ۴ جمهوری‌خواه به آن پیوستند."
+    },
+    {
+      "value": "۳۲٪",
+      "label_fa": "تأیید ترامپ",
+      "note_fa": "Reuters/Ipsos؛ فشار انتخاباتی بر نامزدهای جمهوری‌خواه را بیشتر کرده است."
+    }
+  ],
+  "race_hubs": [
+    {
+      "code": "KS",
+      "state": "کانزاس",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "ایالتی که از ۱۹۳۲ دموکرات به سنا نفرستاده، حالا به Toss Up رسیده.",
+      "candidates": [
+        "adam-hamilton",
+        "roger-marshall"
+      ],
+      "poll": "Hamilton +3",
+      "iran": "جنگ ایران و هزینه زندگی به نقطه فشار علیه مارشال تبدیل شده.",
+      "changed": "۶ اکتبر: Cook از Lean R به Toss Up"
+    },
+    {
+      "code": "NH",
+      "state": "نیوهمپشایر",
+      "rating": "Lean D",
+      "race": "سنای آمریکا",
+      "why": "کرسی باز دموکرات‌ها؛ جمهوری‌خواهان امیدوار بودند آن را پس بگیرند.",
+      "candidates": [
+        "chris-pappas",
+        "john-sununu"
+      ],
+      "poll": "Pappas +8",
+      "iran": "سانونو از تصمیم آغاز جنگ فاصله گرفته؛ پاپاس خواهان پایان جنگ است.",
+      "changed": "۶ اکتبر: Cook از Toss Up به Lean D"
+    },
+    {
+      "code": "NC",
+      "state": "کارولینای شمالی",
+      "rating": "Likely D",
+      "race": "سنای آمریکا",
+      "why": "یکی از مهم‌ترین فرصت‌های pickup دموکرات‌ها.",
+      "candidates": [
+        "roy-cooper",
+        "michael-whatley"
+      ],
+      "poll": "Cooper ahead",
+      "iran": "کوپر بر نقش کنگره و مخالفت با جنگ تأکید دارد؛ واتلی از جنگ دفاع کرده.",
+      "changed": "۶ اکتبر: Cook از Lean D به Likely D"
+    },
+    {
+      "code": "TX",
+      "state": "تگزاس",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "تگزاس از ایالت امن جمهوری‌خواهان به یکی از میدان‌های اصلی تبدیل شده.",
+      "candidates": [
+        "james-talarico",
+        "ken-paxton"
+      ],
+      "poll": "Talarico +6",
+      "iran": "تالاریکو خواهان پایان جنگ و دیپلماسی است؛ پکستون از آغاز عملیات حمایت کرد.",
+      "changed": "Toss Up؛ هزینه جنگ یکی از متغیرهای مهم"
+    },
+    {
+      "code": "MI",
+      "state": "میشیگان",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "کرسی باز و رقابت تقریباً مساوی؛ برای اکثریت سنا حیاتی است.",
+      "candidates": [
+        "abdul-el-sayed",
+        "mike-rogers"
+      ],
+      "poll": "El-Sayed +1",
+      "iran": "هر دو اکنون پایان جنگ را می‌خواهند؛ راجرز نسبت به موضع قبلی‌اش چرخیده.",
+      "changed": "راجرز ۲۱ سپتامبر خواهان پایان سریع جنگ شد"
+    },
+    {
+      "code": "OH",
+      "state": "اوهایو",
+      "rating": "Toss Up",
+      "race": "سنای ویژه",
+      "why": "بازگشت احتمالی شرود براون می‌تواند یک pickup کلیدی برای دموکرات‌ها باشد.",
+      "candidates": [
+        "sherrod-brown",
+        "jon-husted"
+      ],
+      "poll": "Brown +4",
+      "iran": "جنگ، بنزین و هزینه زندگی در پیام انتخاباتی اوهایو برجسته شده.",
+      "changed": "رقابت همچنان بسیار نزدیک"
+    },
+    {
+      "code": "IA",
+      "state": "آیووا",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "اقتصاد کشاورزی آیووا به جهش قیمت دیزل حساس است.",
+      "candidates": [],
+      "poll": "Close",
+      "iran": "جنگ ایران و دیزل مستقیماً وارد رقابت شده؛ Hinson خواهان پایان سریع جنگ شده.",
+      "changed": "از Lean R به Toss Up"
+    },
+    {
+      "code": "ME",
+      "state": "مین",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "یکی از کرسی‌های اصلی مسیر دموکرات‌ها برای اکثریت.",
+      "candidates": [],
+      "poll": "Close",
+      "iran": "War Powers و استقلال از ترامپ برای رأی‌دهندگان میانه‌رو مهم است.",
+      "changed": "Toss Up"
+    },
+    {
+      "code": "AK",
+      "state": "آلاسکا",
+      "rating": "Toss Up",
+      "race": "سنای آمریکا",
+      "why": "Mary Peltola یک ایالت معمولاً جمهوری‌خواه را رقابتی کرده است.",
+      "candidates": [],
+      "poll": "Competitive",
+      "iran": "هزینه انرژی و سیاست خارجی بخشی از فضای ملی رقابت است.",
+      "changed": "Toss Up"
+    }
+  ],
+  "radar_news": [
+    {
+      "date": "2026-10-07",
+      "tag": "ایران",
+      "headline": "۱۲ رقابت بر سر جنگ ایران از ترامپ فاصله گرفته‌اند",
+      "summary": "Reuters در بررسی ۶۲ رقابت رقابتی، جنگ ایران را یکی از مهم‌ترین نقاط فاصله‌گیری جمهوری‌خواهان آسیب‌پذیر از ترامپ یافت.",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/world/us/most-republicans-tight-midterm-distance-themselves-trump-reuters-review-finds-2026-10-07/"
+    },
+    {
+      "date": "2026-10-06",
+      "tag": "Rating",
+      "headline": "کانزاس Toss Up شد",
+      "summary": "Cook کانزاس را به Toss Up، نیوهمپشایر را Lean D و کارولینای شمالی را Likely D منتقل کرد.",
+      "source": "Cook / Washington Post",
+      "url": "https://www.cookpolitical.com/analysis/senate/senate-overview"
+    },
+    {
+      "date": "2026-09-21",
+      "tag": "ایران",
+      "headline": "مایک راجرز خواهان پایان سریع جنگ شد",
+      "summary": "نامزد جمهوری‌خواه میشیگان پس از حمایت قبلی از اختیار ترامپ، خواهان پایان سریع جنگ ایران شد.",
+      "source": "Reuters",
+      "url": "https://www.investing.com/news/politics-news/two-republican-senate-candidates-call-for-swift-end-to-iran-war-diverging-from-trump-4909742"
+    }
+  ]
+}
