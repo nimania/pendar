@@ -393,5 +393,40 @@
         "url": ""
       }
     ]
+  },
+  {
+    "profile": {
+      "handle": "alireza-meybodi",
+      "name_fa": "علیرضا میبدی",
+      "aliases": [
+        "Alireza Meybodi"
+      ],
+      "role_fa": "روزنامه‌نگار و مجری رادیو و تلویزیون",
+      "field": "media",
+      "field_fa": "رسانه و تحلیل",
+      "external": true,
+      "directory": true,
+      "avatar": "/figures/alireza-meybodi-user.jpg",
+      "social": [],
+      "posts": []
+    },
+    "posts": [
+      {
+        "id": "interview-meybodi-holakouee-iran-months-ahead",
+        "handle": "alireza-meybodi",
+        "name_fa": "علیرضا میبدی",
+        "kind": "analysis",
+        "platform": "interview",
+        "topic_fa": "گفت‌وگو با فرهنگ هلاکویی: ایران در چند ماه آینده",
+        "summary_fa": "علیرضا میبدی در این برنامه میزبانِ تحلیلِ فرهنگ هلاکویی دربارهٔ وضعیت اقتصادی ایران، آتش‌بسِ نانوشته تا انتخابات آمریکا و احتمالِ درگیریِ نظامی در ماه‌های پیش‌رو بود.",
+        "source_name": "کانال رسمی دکتر فرهنگ هلاکویی (یوتیوب)",
+        "source_note_fa": "این مورد گفت‌وگویی است که علیرضا میبدی میزبانِ آن بوده؛ تحلیل‌ها و پیش‌بینی‌ها دیدگاهِ فرهنگ هلاکویی‌ست. متنِ کاملِ نقل‌قول‌های هلاکویی در صفحهٔ او آمده است.",
+        "host_name_fa": "علیرضا میبدی",
+        "guest_name_fa": "فرهنگ هلاکویی",
+        "published_at": null,
+        "recorded_at": "2026-10-08T18:41:15Z",
+        "url": "https://www.youtube.com/watch?v=ZTDWWQJ9DGg"
+      }
+    ]
   }
 ]
