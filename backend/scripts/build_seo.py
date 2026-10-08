@@ -28,8 +28,8 @@ def build(site):
                 figure_data.setdefault('figures',[]).append(profile.copy())
         for figure in figure_data.get('figures',[]):
             if str(figure.get('handle','')).lower() not in {h.lower() for h in entry['handles']}: continue
-            post={k:v for k,v in entry.items() if k!='handles'}
-            post.update(handle=figure['handle'],avatar=figure.get('avatar',''),role_fa=entry.get('source_name','گفت‌وگو'),published_at=entry['recorded_at'])
+            post={k:v for k,v in entry.items() if k not in ('handles','profiles')}
+            post.update(handle=figure['handle'],avatar=figure.get('avatar',''),role_fa=entry.get('source_name','گفت‌وگو'),published_at=entry.get('published_at') or entry['recorded_at'])
             figure['posts']=[post]+[p for p in figure.get('posts',[]) if p.get('id')!=entry['id']]
     if editorial:
         (data/'figures.json').write_text(json.dumps(figure_data,ensure_ascii=False),encoding='utf-8')
