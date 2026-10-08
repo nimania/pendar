@@ -463,7 +463,7 @@ jobs:
 
       - name: Ensure Future Observatory direct paths
         run: |
-          for route in future future/transition future/transition/fattahi; do
+          for route in future future/method future/transition future/transition/fattahi; do
             mkdir -p "site/$route"
             cp site/index.html "site/$route/index.html"
           done
