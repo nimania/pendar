@@ -406,6 +406,7 @@ jobs:
           node --check web-static/loaders.js
           node --check web-static/figures-profile.js
           node backend/tests/test_figure_works_ui.js
+          node backend/tests/test_editorial_views_ui.js
           node --check web-static/router.js
           node --check web-static/event-trends.js
           node backend/tests/test_event_trends.js

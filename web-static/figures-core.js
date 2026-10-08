@@ -28,6 +28,15 @@ function statementCardAttrs(p) {
 function figureSourceNote(p) {
   return p.source_note_fa ? `<p class="muted fig-note">${esc(p.source_name || "")} · ${esc(p.source_note_fa)}</p>` : "";
 }
+// Registration is an activity signal, never a substitute for the source date.
+function figureActivityTime(p, now = Date.now()) {
+  return Math.max(0, ...[p.published_at, p.editorial ? p.recorded_at : null]
+    .map(value => Date.parse(value || "")).filter(time => Number.isFinite(time) && time <= now));
+}
+function figureTextParagraphs(p, className = "") {
+  return String(p.summary_fa || "").split(/\n\s*\n/).filter(part => part.trim())
+    .map(part => `<p${className ? ` class="${esc(className)}"` : ""}>${esc(part.trim())}</p>`).join("");
+}
 function figureCard(p, withName, detail = false) {
   const party = p.kind === "party_claim"
     ? `<span class="cstatus st-warn" title="این شخص خودش طرفِ این ماجراست">${KIND_NOTE.party_claim}</span>` : "";
@@ -35,7 +44,7 @@ function figureCard(p, withName, detail = false) {
     ? `<div class="v-h">${figureProfileLink(p, avatar(p, "sm"))}<div class="fig-id"><a class="v-name" href="#/figure/${esc(p.handle)}" onclick="event.preventDefault();${p._newsPerson ? "openNewsPerson" : "openFigure"}('${esc(p.handle)}')">${esc(p.name_fa)}</a><span class="fig-role">${esc(p.role_fa)}</span></div><span class="spacer" style="flex:1"></span>${party}</div>`
     : `<div class="v-h"><span class="fig-topic">${esc(p.topic_fa || "")}</span><span class="spacer" style="flex:1"></span>${party}</div>`;
   return `<div class="view fig-view" ${detail ? "" : statementCardAttrs(p)}>${head}
-    <p>${esc(p.summary_fa || "")}</p>${figureSourceNote(p)}
+    ${figureTextParagraphs(p)}${figureSourceNote(p)}
     <div class="fig-foot"><button class="fig-profile-link" onclick="openStatement(\'${statementKey(p)}\')">صفحهٔ این گفته</button><span class="muted">${relTime(p.published_at)}${p.source_language && p.source_language !== "fa" ? " · " + esc(p.translation_label_fa || ("ترجمه از " + p.source_language)) : ""}</span>
       ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${p.kind === "news_statement" ? "منبع این گفته" : p.platform === "truthsocial" ? "پست اصلی در تروث سوشیال" : p.platform === "youtube" ? "ویدئو در یوتیوب" : "متن کامل در " + (String(p.url || "").includes("ble.ir/") ? "بله" : "تلگرام")} ↗</a>` : ""}</div></div>`;
 }
@@ -74,7 +83,7 @@ async function renderFigureTimeline() {
     field_fa: f.field_fa || fields[f.field] || "",
     avatar: p.avatar || f.avatar,
     _newsPerson: isNewsMode
-  }))).sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
+  }))).sort((a, b) => figureActivityTime(b) - figureActivityTime(a));
   const follows = figureFollows();
   if (isNewsMode) posts = posts.filter(p => p.kind === "news_statement");
   if (_figTimelineMode === "following") posts = posts.filter(p => follows.has(String(p.handle).toLowerCase()));
@@ -90,7 +99,7 @@ async function renderFigureTimeline() {
       field_fa: f.field_fa || fields[f.field] || "",
       avatar: p.avatar || f.avatar,
       _newsPerson: false
-    }))).sort((a,b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
+    }))).sort((a,b) => figureActivityTime(b) - figureActivityTime(a));
   }
   const controls = `<div class="fig-tl-controls">
     <div class="imp-filter">
@@ -119,12 +128,12 @@ async function renderFigureTimeline() {
       </div>
       ${p.kind === "news_statement" ? `<div class="x-figure-context">گفته در خبر · ${esc(p.source_name || "منبع خبری")}</div>` : ""}
       ${p.topic_fa ? `<h2 class="x-figure-topic">${esc(p.topic_fa)}</h2>` : ""}
-      <p class="x-figure-text">${esc(p.summary_fa || "")}</p>
+      ${figureTextParagraphs(p, "x-figure-text")}${figureSourceNote(p)}
       ${telegramEmbed(p)}
       <div class="x-figure-actions">
         <button onclick="${p._newsPerson ? "openNewsPerson" : "openFigure"}('${esc(p.handle)}')">◯ <span>پروفایل</span></button>
         <button onclick="openStatement('${statementKey(p)}')">▢ <span>صفحهٔ گفته</span></button>
-        <a href="${esc(p.url)}" target="_blank" rel="noopener">↗ <span>متن اصلی</span></a>
+        ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">↗ <span>متن اصلی</span></a>` : ""}
       </div>
     </div>
   </article>`).join("") + `</div>`;

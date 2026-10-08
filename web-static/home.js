@@ -72,6 +72,9 @@ async function renderHomeGlance() {
 const HOME_FIGURE_EXCLUDE=new Set(["mostafatajzadeh", "masih_alinejad"]);
 const HOME_FIGURE_PRIORITY = ["mehdimotaharnia1344", "garajetadayoni", "abbas-souri", "iranemana_official", "darwinsabouri"];
 function homeFigurePriority(f, now = Date.now()) {
+  // Newly registered interview views deserve discovery even without a source date.
+  if ((f.posts || []).some(p => p.editorial && p.platform === "transcript" &&
+    figureActivityTime(p, now) > 0 && now - figureActivityTime(p, now) <= 48 * 60 * 60 * 1000)) return -1;
   const fresh = (f.posts || []).some(p => {
     const time = Date.parse(p.published_at || "");
     return Number.isFinite(time) && time <= now && now - time <= 24 * 60 * 60 * 1000;
@@ -109,7 +112,7 @@ async function renderHomePeople(){
       if(person.type==="person"&&person.meta?.handle)peopleByHandle.set(String(person.meta.handle).toLowerCase(),person);
     }
     const eligible=(d.figures||[])
-      .filter(f=>f && f.avatar &&
+      .filter(f=>f &&
         !f.us_radar && !f.israel_radar && !peopleByHandle.get(String(f.handle||"").toLowerCase())?.meta?.us_radar &&
         !(typeof USR_FALLBACK!=="undefined"?USR_FALLBACK.candidates:[]).some(c=>c.handle===f.handle) &&
         f.field!=="news" &&
@@ -118,18 +121,18 @@ async function renderHomePeople(){
       .map(f=>({
         ...f,
         _recentVideo:homeHasRecentVideo(f,peopleByHandle.get(String(f.handle||"").toLowerCase())?.meta||{}),
-        _latest:(f.posts||[]).map(p=>String(p.published_at||"")).sort().slice(-1)[0]||""
+        _latest:Math.max(0,...(f.posts||[]).map(p=>figureActivityTime(p)))
       }))
-      .sort((a,b)=>String(b._latest).localeCompare(String(a._latest)))
+      .sort((a,b)=>b._latest-a._latest)
       ;
     const priority = eligible.filter(f => homeFigurePriority(f) < HOME_FIGURE_PRIORITY.length)
-      .sort((a,b) => homeFigurePriority(a) - homeFigurePriority(b));
+      .sort((a,b) => homeFigurePriority(a) - homeFigurePriority(b) || b._latest-a._latest);
     const remaining = eligible.filter(f => homeFigurePriority(f) === HOME_FIGURE_PRIORITY.length);
     const figures = [...priority, ...remaining].slice(0,14);
     if(!figures.length){ section.style.display="none"; return; }
     el.innerHTML=figures.map(f=>`
       <button class="home-person" onclick="openFigure('${esc(f.handle)}')" aria-label="${esc(f.name_fa||"")}${f._recentVideo?" — ویدئوی تازه در ۴۸ ساعت گذشته":""}"${f._recentVideo?' title="ویدئوی تازه در ۴۸ ساعت گذشته"':""}>
-        <span class="home-person-ring${f._recentVideo?" has-recent-video":""}"><img src="${esc(f.avatar)}" alt="" loading="lazy" onerror="this.closest('.home-person')?.remove()"></span>
+        <span class="home-person-ring${f._recentVideo?" has-recent-video":""}"><span class="home-person-initial" aria-hidden="true">${esc(String(f.name_fa||"؟").slice(0,1))}</span>${f.avatar?`<img src="${esc(f.avatar)}" alt="" loading="lazy" onerror="this.remove()">`:""}</span>
         <span class="home-person-name">${esc(f.name_fa||"")}</span>
       </button>`).join("");
     section.style.display="";

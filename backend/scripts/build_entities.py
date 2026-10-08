@@ -620,7 +620,17 @@ def merge_editorial_views(data_dir: Path) -> dict:
         ids = {p["id"] for p in posts}
         person["posts"] = posts + [p for p in person.get("posts", []) if p.get("id") not in ids]
         person["count"] = len(person["posts"])
-    if entries:
+    portraits_source = data_dir / "pendar-figure-portraits.json"
+    if not portraits_source.exists():
+        portraits_source = Path(__file__).resolve().parents[2] / "web-static/data/pendar-figure-portraits.json"
+    portraits = read_json(portraits_source, {})
+    for person in figures.get("figures", []):
+        portrait = portraits.get(str(person.get("handle", "")).lower())
+        if portrait:
+            person["avatar"] = portrait
+            for post in person.get("posts", []):
+                post["avatar"] = portrait
+    if entries or portraits:
         data_dir.mkdir(parents=True, exist_ok=True)
         (data_dir / "figures.json").write_text(json.dumps(figures, ensure_ascii=False), encoding="utf-8")
     return figures
