@@ -21,7 +21,7 @@ on:
       - "web-static/data/book-curation.json"
       - ".github/workflows/books-commerce.yml"
   schedule:
-    - cron: "23 */6 * * *"
+    - cron: "23 2,14 * * *"
 
 permissions:
   actions: read
