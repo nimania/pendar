@@ -308,6 +308,7 @@ async function loadFigures() {
   for (const fallback of _US_RADAR_FIGURE_FALLBACKS) {
     if (!_FIG.figures.some(f => String(f.handle||"").toLowerCase() === fallback.handle)) _FIG.figures.push(fallback);
   }
+  try { const radar=await loadISRadar(); for(const p of radar.people||[]) { const existing=_FIG.figures.find(f=>f.handle===p.handle); if(existing) { existing.israel_radar=true;existing.avatar=existing.avatar||p.avatar; } else _FIG.figures.push(p); } } catch(_) {}
   // Keep the selected portrait visible until the next dataset rebuild.
   for (const figure of _FIG.figures) {
     if (String(figure.handle || "").toLowerCase() === "donald-trump") {

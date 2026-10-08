@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="tv-guide.css">
   <link rel="stylesheet" href="home-polish.css">
   <link rel="stylesheet" href="us-radar.css">
+  <link rel="stylesheet" href="israel-radar.css">
 </head>
 <body>
   <header class="top">
@@ -57,7 +58,7 @@
         </div>
       </div>
       <a class="icon-btn meshki-header-link" href="https://nimania.github.io/meshkimedia/" target="_blank" rel="noopener" aria-label="مشکی‌مدیا — سریال‌های ترکی" title="مشکی‌مدیا — سریال‌های ترکی"><img src="assets/meshki-media-logo.png" width="28" height="28" alt=""></a>
-      <a class="icon-btn section-header-link" href="/us-radar/" aria-label="رادار آمریکا — انتخابات آمریکا" title="رادار آمریکا — انتخابات آمریکا"><img src="assets/us-election-logo.svg" width="28" height="28" alt=""></a>
+      <a class="icon-btn section-header-link" href="/radar/" aria-label="رادارهای پندار — آمریکا و اسرائیل" title="رادارهای پندار — آمریکا و اسرائیل"><img src="assets/radar-logo.svg" width="28" height="28" alt=""></a>
       <a class="icon-btn section-header-link" href="/badbadak/" aria-label="بادبادک" title="بادبادک"><img src="assets/badbadak-header.png" width="28" height="28" alt=""></a>
       <button class="icon-btn" onclick="showKnowledge()" aria-label="دانش پندار" title="دانش پندار — تاریخ، فرهنگ، آیین‌ها و نهادها"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5v-16Z"/></svg></button>
       <button class="icon-btn" onclick="showTech()" aria-label="فناوری و طراحی" title="فناوری و طراحی">
@@ -315,6 +316,8 @@
       </div>
       <div class="faq" id="faq"></div>
     </section>
+  <section class="trends-view" id="israel-radar-view" style="display:none"><div id="israel-radar-content"></div></section>
+  <section class="trends-view" id="radar-view" style="display:none"><div id="radar-content"></div></section>
   <section class="trends-view" id="us-radar-view" style="display:none"><div id="us-radar-content"></div></section>
   <section class="trends-view" id="badbadak-view" style="display:none"><div id="badbadak-content"></div></section>
   </main>
@@ -395,6 +398,7 @@
   <script defer src="book-app.js"></script>
   <script defer src="badbadak.js"></script>
   <script defer src="us-radar.js"></script>
+  <script defer src="israel-radar.js"></script>
   <script defer src="app.js"></script>
 </body>
 </html>

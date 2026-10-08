@@ -110,7 +110,7 @@ async function renderHomePeople(){
     }
     const eligible=(d.figures||[])
       .filter(f=>f && f.avatar &&
-        !f.us_radar && !peopleByHandle.get(String(f.handle||"").toLowerCase())?.meta?.us_radar &&
+        !f.us_radar && !f.israel_radar && !peopleByHandle.get(String(f.handle||"").toLowerCase())?.meta?.us_radar &&
         !(typeof USR_FALLBACK!=="undefined"?USR_FALLBACK.candidates:[]).some(c=>c.handle===f.handle) &&
         f.field!=="news" &&
         !String(f.handle||"").startsWith("news-") &&

@@ -1,0 +1,470 @@
+{
+  "updated_at": "2026-10-08T12:03:18.720867+00:00",
+  "election_date": "2026-10-27",
+  "election_source": "https://www.gov.il/apps/moin/bocharim/en",
+  "total_seats": 120,
+  "majority": 61,
+  "threshold": 3.25,
+  "system_source": "https://www.gov.il/en/pages/election-about-info",
+  "poll": {
+    "date": "2026-10-04",
+    "publisher": "کان ۱۱؛ رادیو و تلویزیون عمومی اسرائیل",
+    "pollster": "کانتار؛ دودی حسید",
+    "sample": 554,
+    "url": "https://www.kan.org.il/content/kan-news/politic/1105927/",
+    "kind": "نظرسنجی؛ نه نتیجه انتخابات"
+  },
+  "parties": [
+    {
+      "id": "yashar",
+      "name_fa": "یاشار",
+      "name_he": "ישר!",
+      "seats": 23,
+      "leader_fa": "گادی آیزنکوت",
+      "orientation_fa": "مرکز؛ با محوریت چهره‌های امنیتی",
+      "color": "#3977b9",
+      "handles": [
+        "gadi-eisenkot"
+      ]
+    },
+    {
+      "id": "likud",
+      "name_fa": "لیکود",
+      "name_he": "הליכוד",
+      "seats": 21,
+      "leader_fa": "بنیامین نتانیاهو",
+      "orientation_fa": "راست",
+      "color": "#244c97",
+      "handles": [
+        "benjamin-netanyahu"
+      ]
+    },
+    {
+      "id": "together",
+      "name_fa": "باهم؛ بنت و لاپید",
+      "name_he": "ביחד",
+      "seats": 12,
+      "leader_fa": "نفتالی بنت و یائیر لاپید",
+      "orientation_fa": "فهرست مشترک مخالفان نتانیاهو",
+      "color": "#18a3aa",
+      "handles": [
+        "naftali-bennett",
+        "yair-lapid"
+      ]
+    },
+    {
+      "id": "beitenu",
+      "name_fa": "اسرائیل خانه ما",
+      "name_he": "ישראל ביתנו",
+      "seats": 9,
+      "leader_fa": "آویگدور لیبرمن",
+      "orientation_fa": "راست سکولار",
+      "color": "#985eb8",
+      "handles": [
+        "avigdor-lieberman"
+      ]
+    },
+    {
+      "id": "democrats",
+      "name_fa": "دموکرات‌ها",
+      "name_he": "הדמוקרטים",
+      "seats": 8,
+      "leader_fa": "یائیر گولان",
+      "orientation_fa": "چپ و میانه‌چپ",
+      "color": "#cf4b58",
+      "handles": [
+        "yair-golan"
+      ]
+    },
+    {
+      "id": "otzma",
+      "name_fa": "قدرت یهودی",
+      "name_he": "עוצמה יהודית",
+      "seats": 8,
+      "leader_fa": "ایتمار بن‌گویر",
+      "orientation_fa": "راست افراطی",
+      "color": "#a27432",
+      "handles": [
+        "itamar-ben-gvir"
+      ]
+    },
+    {
+      "id": "shas",
+      "name_fa": "شاس",
+      "name_he": "ש״ס",
+      "seats": 8,
+      "leader_fa": "آریه درعی",
+      "orientation_fa": "مذهبی؛ حریدی سفاردی",
+      "color": "#667ca9",
+      "handles": [
+        "aryeh-deri"
+      ]
+    },
+    {
+      "id": "utj",
+      "name_fa": "یهودیت متحد تورات",
+      "name_he": "יהדות התורה",
+      "seats": 8,
+      "leader_fa": "فهرست مشترک حریدی",
+      "orientation_fa": "مذهبی؛ حریدی اشکنازی",
+      "color": "#596777",
+      "handles": []
+    },
+    {
+      "id": "joint",
+      "name_fa": "فهرست مشترک",
+      "name_he": "הרשימה המשותפת",
+      "seats": 8,
+      "leader_fa": "ائتلاف احزاب عربی",
+      "orientation_fa": "احزاب عربی",
+      "color": "#569562",
+      "handles": []
+    },
+    {
+      "id": "religious",
+      "name_fa": "صهیونیسم مذهبی–زهوت",
+      "name_he": "הציונות הדתית–זהות",
+      "seats": 6,
+      "leader_fa": "اسموتریچ و موشه فایگلین",
+      "orientation_fa": "راست مذهبی",
+      "color": "#9c793d",
+      "handles": [
+        "bezalel-smotrich"
+      ]
+    },
+    {
+      "id": "raam",
+      "name_fa": "رعام؛ فهرست متحد عربی",
+      "name_he": "רע״ם",
+      "seats": 5,
+      "leader_fa": "منصور عباس",
+      "orientation_fa": "حزب عربی اسلامی",
+      "color": "#47865d",
+      "handles": [
+        "mansour-abbas"
+      ]
+    },
+    {
+      "id": "reservists",
+      "name_fa": "ذخیره‌ها–اقتصادی",
+      "name_he": "המילואימניקים–הכלכלית",
+      "seats": 4,
+      "leader_fa": "یوعاز هندل و یارون زلیخا",
+      "orientation_fa": "فهرست مشترک؛ امنیت و اقتصاد",
+      "color": "#82919c",
+      "handles": []
+    }
+  ],
+  "people": [
+    {
+      "handle": "benjamin-netanyahu",
+      "name_fa": "بنیامین نتانیاهو",
+      "name": "Benjamin Netanyahu",
+      "name_en": "Benjamin Netanyahu",
+      "role_fa": "نخست‌وزیر و رهبر لیکود",
+      "bio_fa": "بنیامین نتانیاهو، نخست‌وزیر و رهبر لیکود، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Benjamin_Netanyahu%2C_February_2023.jpg/960px-Benjamin_Netanyahu%2C_February_2023.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Benjamin_Netanyahu",
+      "party_id": "likud",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "بنیامین نتانیاهو",
+        "Benjamin Netanyahu"
+      ]
+    },
+    {
+      "handle": "gadi-eisenkot",
+      "name_fa": "گادی آیزنکوت",
+      "name": "Gadi Eisenkot",
+      "name_en": "Gadi Eisenkot",
+      "role_fa": "رئیس پیشین ستاد ارتش و رهبر یاشار",
+      "bio_fa": "گادی آیزنکوت، رئیس پیشین ستاد ارتش و رهبر یاشار، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Gadi_Eisenkot_2_%28cropped%29.jpg/1280px-Gadi_Eisenkot_2_%28cropped%29.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Gadi_Eisenkot",
+      "party_id": "yashar",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "گادی آیزنکوت",
+        "Gadi Eisenkot",
+        "گادی ایزنکوت",
+        "گادی آیزنکوت",
+        "گادی آیزنکات"
+      ]
+    },
+    {
+      "handle": "naftali-bennett",
+      "name_fa": "نفتالی بنت",
+      "name": "Naftali Bennett",
+      "name_en": "Naftali Bennett",
+      "role_fa": "نخست‌وزیر پیشین و رهبر فهرست مشترک باهم",
+      "bio_fa": "نفتالی بنت، نخست‌وزیر پیشین و رهبر فهرست مشترک باهم، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Naftali_Bennett_official_portrait.jpg/960px-Naftali_Bennett_official_portrait.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Naftali_Bennett",
+      "party_id": "together",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "نفتالی بنت",
+        "Naftali Bennett"
+      ]
+    },
+    {
+      "handle": "yair-lapid",
+      "name_fa": "یائیر لاپید",
+      "name": "Yair Lapid",
+      "name_en": "Yair Lapid",
+      "role_fa": "نخست‌وزیر پیشین؛ شریک فهرست مشترک باهم",
+      "bio_fa": "یائیر لاپید، نخست‌وزیر پیشین؛ شریک فهرست مشترک باهم، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Yair_Lapid_%28D1237-011%29.jpg/960px-Yair_Lapid_%28D1237-011%29.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Yair_Lapid",
+      "party_id": "together",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "یائیر لاپید",
+        "Yair Lapid"
+      ]
+    },
+    {
+      "handle": "yair-golan",
+      "name_fa": "یائیر گولان",
+      "name": "Yair Golan",
+      "name_en": "Yair Golan",
+      "role_fa": "رهبر دموکرات‌ها",
+      "bio_fa": "یائیر گولان، رهبر دموکرات‌ها، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/Yair_Golan_%28SHL_9404%29.jpg/960px-Yair_Golan_%28SHL_9404%29.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Yair_Golan",
+      "party_id": "democrats",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "یائیر گولان",
+        "Yair Golan"
+      ]
+    },
+    {
+      "handle": "avigdor-lieberman",
+      "name_fa": "آویگدور لیبرمن",
+      "name": "Avigdor Lieberman",
+      "name_en": "Avigdor Lieberman",
+      "role_fa": "رهبر اسرائیل خانه ما؛ وزیر دفاع پیشین",
+      "bio_fa": "آویگدور لیبرمن، رهبر اسرائیل خانه ما؛ وزیر دفاع پیشین، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://upload.wikimedia.org/wikipedia/commons/0/06/Avigdor_Lieberman_2017.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Avigdor_Lieberman",
+      "party_id": "beitenu",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "آویگدور لیبرمن",
+        "Avigdor Lieberman"
+      ]
+    },
+    {
+      "handle": "itamar-ben-gvir",
+      "name_fa": "ایتمار بن‌گویر",
+      "name": "Itamar Ben-Gvir",
+      "name_en": "Itamar Ben-Gvir",
+      "role_fa": "رهبر قدرت یهودی",
+      "bio_fa": "ایتمار بن‌گویر، رهبر قدرت یهودی، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Itamar_Ben_Gvir_3_%28cropped%29.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Itamar_Ben-Gvir",
+      "party_id": "otzma",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "ایتمار بن‌گویر",
+        "Itamar Ben-Gvir",
+        "ایتمار بن گویر",
+        "ایتامار بن گویر",
+        "ایتامار بن‌گویر"
+      ]
+    },
+    {
+      "handle": "bezalel-smotrich",
+      "name_fa": "بتسلئل اسموتریچ",
+      "name": "Bezalel Smotrich",
+      "name_en": "Bezalel Smotrich",
+      "role_fa": "رهبر صهیونیسم مذهبی",
+      "bio_fa": "بتسلئل اسموتریچ، رهبر صهیونیسم مذهبی، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Bezalel_Smotrich.jpg/960px-Bezalel_Smotrich.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Bezalel_Smotrich",
+      "party_id": "religious",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "بتسلئل اسموتریچ",
+        "Bezalel Smotrich"
+      ]
+    },
+    {
+      "handle": "mansour-abbas",
+      "name_fa": "منصور عباس",
+      "name": "Mansour Abbas",
+      "name_en": "Mansour Abbas",
+      "role_fa": "رهبر رعام؛ فهرست متحد عربی",
+      "bio_fa": "منصور عباس، رهبر رعام؛ فهرست متحد عربی، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mansour_Abbas%2C_April_3_2023_%28cropped%29.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Mansour_Abbas",
+      "party_id": "raam",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "منصور عباس",
+        "Mansour Abbas"
+      ]
+    },
+    {
+      "handle": "aryeh-deri",
+      "name_fa": "آریه درعی",
+      "name": "Aryeh Deri",
+      "name_en": "Aryeh Deri",
+      "role_fa": "رهبر شاس",
+      "bio_fa": "آریه درعی، رهبر شاس، از چهره‌های رقابت پارلمانی اسرائیل است. معرفی حزب، خبرهای مرتبط و نقشه کرسی‌ها را در رادار اسرائیل پندار دنبال کنید.",
+      "avatar": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/%D7%90%D7%A8%D7%99%D7%94_%D7%93%D7%A8%D7%A2%D7%99_2.jpg/960px-%D7%90%D7%A8%D7%99%D7%94_%D7%93%D7%A8%D7%A2%D7%99_2.jpg",
+      "portrait_source": "https://en.wikipedia.org/wiki/Aryeh_Deri",
+      "party_id": "shas",
+      "field": "politics",
+      "field_fa": "سیاست اسرائیل",
+      "external": true,
+      "israel_radar": true,
+      "posts": [],
+      "social": [
+        {
+          "kind": "website",
+          "label": "رادار اسرائیل در پندار",
+          "url": "https://pendar.io/israel-radar/"
+        }
+      ],
+      "aliases": [
+        "آریه درعی",
+        "Aryeh Deri"
+      ]
+    }
+  ],
+  "iran_positions": [
+    {
+      "handle": "benjamin-netanyahu",
+      "date": "2026-09-24",
+      "summary_fa": "نتانیاهو در سخنرانی سازمان ملل، جلوگیری از دستیابی جمهوری اسلامی به سلاح هسته‌ای را هدف خود خواند و از تغییر سیاسی در ایران سخن گفت. این بیان موضع اوست.",
+      "source": "دفتر نخست‌وزیر؛ متن سخنرانی سازمان ملل",
+      "url": "https://www.gov.il/en/pages/event-un240926"
+    },
+    {
+      "handle": "naftali-bennett",
+      "date": "2026-08-19",
+      "summary_fa": "بنت در معرفی برنامه امنیتی خود گفت هزینه فشار را مستقیماً متوجه حکومت ایران می‌کند و به راهبرد موسوم به «اختاپوس» بازمی‌گردد؛ موضع یک چهره را نباید به همه اعضای فهرست مشترکش تعمیم داد.",
+      "source": "والا؛ گزارش معرفی برنامه امنیتی بنت",
+      "url": "https://www.walla.co.il/news/politics/3865375"
+    }
+  ],
+  "news": [
+    {
+      "id": "israel-radar-kan-20261004",
+      "headline_fa": "آیزنکوت در نظرسنجی کان پیشتاز است",
+      "summary_fa": "یاشار ۲۳ و لیکود ۲۱ کرسی دارند؛ هیچ‌کدام به‌تنهایی اکثریت ندارند. این نظرسنجی ۴ اکتبر است، نه نتیجه انتخابات.",
+      "published_at": "2026-10-04T20:00:00+03:00",
+      "source_name": "کان ۱۱",
+      "url": "https://www.kan.org.il/content/kan-news/politic/1105927/"
+    },
+    {
+      "id": "israel-radar-date-2026",
+      "headline_fa": "انتخابات کنست در ۲۷ اکتبر",
+      "summary_fa": "رأی‌گیری برای انتخاب ۱۲۰ نماینده برگزار می‌شود. انتخاب نخست‌وزیر به ترکیب پارلمان و روند تشکیل دولت وابسته است.",
+      "published_at": "2026-10-08T12:00:00Z",
+      "source_name": "وزارت کشور اسرائیل؛ اطلاعات انتخابات",
+      "url": "https://www.gov.il/apps/moin/bocharim/en"
+    }
+  ]
+}

@@ -189,6 +189,8 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const base = (d.figures || []).find(f => f.handle.toLowerCase() === String(handle).toLowerCase()||(canonicalFigure?.refs||[]).some(r=>r.dataset==="figures"&&String(r.key)===String(f.handle)));
   const x=canonicalFigure?_personFigureRecord(canonicalFigure,base):base;
   if (!x) { el.innerHTML = `<div class="state"><div class="big">این چهره پیدا نشد</div></div>`; return; }
+  let israelSection="";
+  if(x.israel_radar||ISR?.people?.some(p=>p.handle===x.handle)){try{await loadISRadar();await loadISRNews();israelSection=isrProfileSection(x.handle);}catch(_){}}
   const direct = (x.posts || []).filter(p => p.kind !== "news_statement");
   const news = (x.posts || []).filter(p => p.kind === "news_statement");
   const nameNorm=s=>String(s||"").replace(/ي/g,"ی").replace(/ى/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim();
@@ -265,6 +267,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     ${_figureProfileFilter==="official"?officialSection:""}
     ${sourceLinks}
     ${candidateFeed?.news_updated_at?'<small class="muted">آخرین بررسی خبرها: '+esc(relTime(candidateFeed.news_updated_at))+'</small>':""}
+    ${israelSection}
     ${_figureProfileFilter==="usradar"?usRadarSection:""}\n    ${_figureProfileFilter==="about"?aboutSection:""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos"||_figureProfileFilter==="usradar"||_figureProfileFilter==="official"||_figureProfileFilter==="about"||(_figureProfileFilter==="all"&&!shown.length)) ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
   </div>`;

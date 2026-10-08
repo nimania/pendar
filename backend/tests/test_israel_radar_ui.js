@@ -1,0 +1,19 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const path=require('node:path');
+const root=path.resolve(__dirname,'../..');
+const data=JSON.parse(fs.readFileSync(path.join(root,'web-static/data/pendar-israel-radar.json'),'utf8'));
+const nodes=Object.fromEntries(['israel-radar-content','isr-coalition-total','isr-coalition-progress','isr-news','radar-content'].map(id=>[id,{innerHTML:'',style:{}}]));
+const context=vm.createContext({document:{getElementById:id=>nodes[id]},Date,Math,Set,esc:v=>String(v??''),faN:v=>String(v),console,show:()=>{},setTab:()=>{},setHash:()=>{}});
+vm.runInContext(fs.readFileSync(path.join(root,'web-static/israel-radar.js'),'utf8'),context);
+context.data=data;vm.runInContext('ISR=data;renderIsraelRadar()',context);
+assert.equal(data.parties.reduce((n,p)=>n+p.seats,0),120);
+assert.equal((nodes['israel-radar-content'].innerHTML.match(/<i style="background:/g)||[]).length,132); // 120 seat marks plus 12 party keys
+assert.equal((nodes['israel-radar-content'].innerHTML.match(/class="isr-person"/g)||[]).length,10);
+vm.runInContext("['yashar','likud','together','raam'].forEach(id=>isrToggleParty(id,true))",context);
+assert.match(nodes['isr-coalition-total'].innerHTML,/<b>61<\/b>/);
+vm.runInContext("isrToggleParty('raam',false)",context);assert.match(nodes['isr-coalition-total'].innerHTML,/<b>56<\/b>/);
+assert.equal(vm.runInContext("isrNewsMatches({headline_fa:'قیمت ارز در تهران'})",context),false);
+assert.equal(vm.runInContext("isrNewsMatches({headline_fa:'انتخابات کنست اسرائیل'})",context),true);
+assert.equal(vm.runInContext("isrNewsMatches({headline_fa:'سرکوب اعتراض‌ها'},ISR.people[0])",context),false);
+vm.runInContext('showRadarHub()',context);assert.match(nodes['radar-content'].innerHTML,/href="\/israel-radar\/"/);
+console.log('120 seats, exact majority, removal, person matching and radar navigation passed');

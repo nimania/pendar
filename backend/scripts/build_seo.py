@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import quote, unquote
 
 ORIGIN = 'https://pendar.io'
-SECTIONS = {'us-radar':'رادار آمریکا؛ انتخابات و پیامدها برای ایران','badbadak':'بادبادک؛ چهره‌ها، سبک زندگی و سرگرمی','headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
+SECTIONS = {'radar':'رادارهای پندار؛ آمریکا و اسرائیل','israel-radar':'رادار اسرائیل؛ انتخابات و پیامدها برای ایران','us-radar':'رادار آمریکا؛ انتخابات و پیامدها برای ایران','badbadak':'بادبادک؛ چهره‌ها، سبک زندگی و سرگرمی','headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
 def text(value):
     if isinstance(value, dict): return str(value.get('text') or value.get('summary_fa') or value.get('name_fa') or value.get('name') or value.get('title_fa') or value.get('title') or '')
     if isinstance(value, list): return '\n'.join(text(x) for x in value)
@@ -22,6 +22,13 @@ def build(site):
     # Reviewed editorial recaps survive both full and UI-only rebuilds.
     editorial=read(Path(__file__).resolve().parents[1]/'data'/'editorial-recaps.json',[])
     figure_data=read(data/'figures.json',{'figures':[]})
+    israel=read(data/'pendar-israel-radar.json',{})
+    for profile in israel.get('people',[]):
+        existing=next((f for f in figure_data.get('figures',[]) if str(f.get('handle','')).lower()==profile['handle'].lower()),None)
+        if existing:
+            existing['israel_radar']=True
+            existing['avatar']=existing.get('avatar') or profile.get('avatar','')
+        else: figure_data.setdefault('figures',[]).append(profile.copy())
     for entry in editorial:
         for profile in entry.get('profiles',[]):
             if not any(str(f.get('handle','')).lower()==profile['handle'].lower() for f in figure_data.get('figures',[])):
@@ -31,7 +38,7 @@ def build(site):
             post={k:v for k,v in entry.items() if k not in ('handles','profiles')}
             post.update(handle=figure['handle'],avatar=figure.get('avatar',''),role_fa=entry.get('source_name','گفت‌وگو'),published_at=entry.get('published_at') or entry['recorded_at'])
             figure['posts']=[post]+[p for p in figure.get('posts',[]) if p.get('id')!=entry['id']]
-    if editorial:
+    if editorial or israel:
         (data/'figures.json').write_text(json.dumps(figure_data,ensure_ascii=False),encoding='utf-8')
     # Old generated pages are removed so deleted content becomes a real 404.
     prior=read(data/'seo-manifest.json',{})
@@ -248,7 +255,18 @@ def build(site):
         for n,chunk in enumerate(chunks,1):
             url=route(kind) if n==1 else route(kind,'page/'+str(n))
             paging=links([(route(kind) if i==1 else route(kind,'page/'+str(i)), 'صفحهٔ '+str(i)) for i in range(1,len(chunks)+1)]) if len(chunks)>1 else ''
-            pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak','us-radar'],'schema_type':'CollectionPage'}
+            pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak','us-radar','israel-radar','radar'],'schema_type':'CollectionPage'}
+    if '/radar/' in pages:
+        pages['/radar/']['body']='<p>رقابت‌های سیاسی جهان و پیامدهایشان برای ایران؛ خبر، چهره و داده در یک جا.</p>'+links([('/us-radar/','رادار آمریکا'),('/israel-radar/','رادار اسرائیل')])
+    if israel and '/israel-radar/' in pages:
+        page=pages['/israel-radar/']
+        page['body']='<p>انتخابات اسرائیل در '+esc(israel.get('election_date'))+'؛ رقابت احزاب برای ۱۲۰ کرسی کنست. ۶۱ کرسی معیار اکثریت مطلق و حد نصاب ورود فهرست‌ها ۳٫۲۵ درصد است.</p>'
+        poll=israel.get('poll',{})
+        page['body']+='<h2>نقشه کرسی‌ها؛ نظرسنجی '+esc(poll.get('publisher'))+'، '+esc(poll.get('date'))+'</h2><p>نظرسنجی است، نه نتیجه انتخابات. '+esc(poll.get('pollster'))+'؛ '+esc(poll.get('sample'))+' پاسخ‌دهنده.</p><ul>'+''.join('<li>'+esc(p['name_fa'])+'؛ '+esc(p['seats'])+' کرسی</li>' for p in israel.get('parties',[]))+'</ul><a href="'+esc(poll.get('url'))+'">منبع نظرسنجی</a>'
+        page['body']+='<h2>چهره‌ها</h2>'+links([(route('figure',p['handle']),p['name_fa']) for p in israel.get('people',[])])
+        for pos in israel.get('iran_positions',[]):
+            page['body']+=paragraphs(pos['summary_fa'])+'<a href="'+esc(pos['url'])+'">'+esc(pos['source'])+'؛ '+esc(pos['date'])+'</a>'
+        page['body']+='<h2>خبرهای تازه پندار</h2>'+links([(route('story',s['id']),s.get('headline_fa','')) for s in stories if re.search(r'اسرائیل|نتانیاهو|کنست|لیکود',text(s.get('headline_fa'))+' '+text(s.get('summary_fa')))][:30])
     if '/headlines/' in pages:
         pages['/headlines/']['body']='<h2>ماجراهای ترند</h2>'+links(catalogs['trends'][:3])+'<h2>چهره‌ها و گفته‌ها</h2>'+links([(route('figures'),'چهره‌ها و گفته‌ها'),(route('videos','recaps'),'جان کلام ویدئوها')])+pages['/headlines/']['body']
     if '/badbadak/' in pages:
@@ -276,7 +294,9 @@ def build(site):
     (data/'person-handles.json').write_text(json.dumps(handles,ensure_ascii=False),encoding='utf-8')
     (data/'person-handles.js').write_text('window.PENDAR_HANDLES='+json.dumps(handles,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf-8')
     for url,page in pages.items():
-        if url.startswith('/us-radar/'): continue
+        if url.startswith(('/us-radar/','/israel-radar/','/radar/')): continue
+        if re.search(r'اسرائیل|نتانیاهو|کنست|لیکود',page['title']+' '+page['body']):
+            page['body']+='<aside><a href="/israel-radar/"><strong>رادار اسرائیل</strong> — انتخابات، احزاب و پیامدهایشان برای ایران ←</a></aside>'
         if re.search(r'آمریکا|امریکا|ایالات متحده|کنگره|ترامپ',page.get('title','')+' '+text(page.get('body',''))):
             page['body']+='<aside><a href="/us-radar/"><img src="/assets/us-election-logo.svg" alt="" width="48" height="48"><strong>رادار آمریکا</strong> — انتخابات، رقابت‌ها و پیامدهایشان برای ایران ←</a></aside>'
     pages['/']={'title':'پندار؛ خبر، چهره‌ها، کتاب، فیلم و سریال','description':'پندار؛ خبر و اندیشه، دیدگاه چهره‌ها، پیشخوان کتاب و جراید، فیلم و سریال و راهنمای تماشا.','body':links([(route(k),v) for k,v in SECTIONS.items()])+ '<h2>تازه‌ترین خبرها</h2>'+links(catalogs['headlines'][:20]),'canonical':'/','indexable':True,'schema_type':'WebSite'}

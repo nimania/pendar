@@ -105,6 +105,8 @@ async function route() {
   if (kind === "book-person" && arg) return openBookPerson(arg);
   if (kind === "badbadak") return arg === "crossword" ? showBadbadakCrossword() : showBadbadak();
   if (kind === "us-radar") return showUSRadar();
+  if (kind === "israel-radar") return showIsraelRadar();
+  if (kind === "radar") return showRadarHub();
   if (kind === "tech") return showTech();
   if (kind === "figure" && arg) return openFigure(arg);
   if (kind === "news-person" && arg) return openNewsPerson(arg);
@@ -117,7 +119,7 @@ window.addEventListener("hashchange",()=>{if(!_navLock){const h=location.hash;hi
 window.addEventListener("popstate",()=>{window.__PENDAR_ROUTE="";route();updateRouteSeo(location.pathname);});
 // Existing hash URLs remain valid, but acquire a real canonical path.
 if(location.hash||routeURL(location.pathname)!==location.pathname){const path=routeURL(location.hash||location.pathname);history.replaceState(null,"",path+location.search);updateRouteSeo(path);}
-const PUBLIC_ROUTES=new Set(["headlines","home","story","person","topic","trend","event","source","province","day","trends","fact","iran","topics","market","weather","faq","figures","videos","studio-recaps","finance","studio-recap","press","press-source","press-article","books","book","movies","movie","master-movie","tv","knowledge","entity","graph","profile","system","publisher","book-person","tech","figure","news-person","statement","badbadak","us-radar"]);
+const PUBLIC_ROUTES=new Set(["headlines","home","story","person","topic","trend","event","source","province","day","trends","fact","iran","topics","market","weather","faq","figures","videos","studio-recaps","finance","studio-recap","press","press-source","press-article","books","book","movies","movie","master-movie","tv","knowledge","entity","graph","profile","system","publisher","book-person","tech","figure","news-person","statement","badbadak","us-radar","israel-radar","radar"]);
 function cleanInternalLinks(root){
   const links=root.matches?.("a[href]")?[root]:[...root.querySelectorAll?.("a[href]")||[]];
   for(const a of links){const h=a.getAttribute("href");if(h?.startsWith("#/"))a.setAttribute("href",routeURL(h));else if(h?.startsWith("/")&&!h.startsWith("//")){const clean=routeURL(h);if(clean!==h&&(window.PENDAR_HANDLES?.routes?.[decodeURIComponent(h.replace(/^\/+|\/+$/g,""))]||window.PENDAR_HANDLES?.entities?.[decodeURIComponent(h.replace(/^\/+|\/+$/g,""))]))a.setAttribute("href",clean);}}

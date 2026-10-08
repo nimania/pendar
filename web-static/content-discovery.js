@@ -1,3 +1,9 @@
+function israelRadarBanner(context){
+ const text=[context.headline_fa,context.topic_fa,context.summary_fa,context.recap_fa,...(context.topics||[]).map(t=>t.name_fa||t.slug||'')].filter(Boolean).join(' ');
+ if(!/اسرائیل|نتانیاهو|نفتالی بنت|آیزنکوت|ایزنکوت|کنست|لیکود/.test(text))return '';
+ return '<a class="isr-context-banner" href="/israel-radar/"><span style="font-size:32px" aria-hidden="true">◉</span><span><b>رادار اسرائیل</b><p>انتخابات، احزاب و پیامدهایشان برای ایران</p></span><i>←</i></a>';
+}
+function radarContextBanners(context){return usRadarBanner(context)+israelRadarBanner(context);}
 function usRadarBanner(context){
  const text=[context.headline_fa,context.topic_fa,context.summary_fa,context.recap_fa,...(context.topics||[]).map(t=>t.name_fa||t.slug||"")].filter(Boolean).join(" ");
  if(!/(آمریکا|امریکا|ایالات متحده|انتخابات میان.?دوره|کنگره|ترامپ|US elections|United States)/i.test(text))return "";
@@ -28,7 +34,7 @@ function discoveryCard(kind,row,label){
 }
 function discoverySection(title,body){return body?`<section class="discovery-section"><div class="rule"><span>${esc(title)}</span><span class="l"></span></div>${body}</section>`:'';}
 async function renderContentDiscovery(el,context,person=null,expectedRoute=currentRoute()){
-  el.innerHTML=usRadarBanner(context);
+  el.innerHTML=radarContextBanners(context);
   try{
     if(!ALL.length)ALL=await getJSON(`${DATA}/stories.json`);
     const [figures,events]=await Promise.all([loadFigures().catch(()=>({figures:[]})),loadEventTrends().catch(()=>[])]);
@@ -43,12 +49,12 @@ async function renderContentDiscovery(el,context,person=null,expectedRoute=curre
     const used=new Set(samePerson.map(p=>String(p.id)));
     const posts=linked.filter(p=>!used.has(String(p.id))).slice(0,3);
     const topics=(context.topics||[]).filter(t=>t.slug).slice(0,4);
-    el.innerHTML=usRadarBanner(context)+discoverySection('ماجرا را دنبال کنید',eventRows.map((g,i)=>eventCard(g,i,true)).join(''))+
+    el.innerHTML=radarContextBanners(context)+discoverySection('ماجرا را دنبال کنید',eventRows.map((g,i)=>eventCard(g,i,true)).join(''))+
       discoverySection('گزارش‌های مرتبط',`<div class="discovery-grid">${related.map(s=>discoveryCard('story',s,'ارتباط موضوعی')).join('')}</div>`.replace('<div class="discovery-grid"></div>',''))+
       discoverySection('گفته‌ها و تحلیل‌های مرتبط',posts.length?`<div class="discovery-grid">${posts.map(p=>discoveryCard('statement',p,p._person.name_fa||'چهره')).join('')}</div>`:'')+
       discoverySection('از همین چهره',samePerson.length?`<a class="discovery-person" href="#/figure/${encodeURIComponent(person.handle)}">همهٔ گفته‌های ${esc(person.name_fa)} ←</a><div class="discovery-grid">${samePerson.map(p=>discoveryCard('statement',p,person.name_fa)).join('')}</div>`:'')+
       `<nav class="discovery-paths" aria-label="مسیرهای بیشتر در پندار">${topics.map(t=>`<a href="#/topic/${encodeURIComponent(t.slug)}">${esc(t.name_fa||t.slug)} ←</a>`).join('')}<a href="#/trends">ماجراهای ترند ←</a><a href="#/headlines">سرخط خبرها ←</a><a href="#/figures">چهره‌ها و گفته‌ها ←</a></nav>`;
-  }catch(_){if(document.contains(el)&&currentRoute()===expectedRoute)el.innerHTML='<nav class="discovery-paths"><a href="#/trends">ماجراهای ترند ←</a><a href="#/headlines">سرخط خبرها ←</a></nav>';}
+  }catch(_){if(document.contains(el)&&currentRoute()===expectedRoute)el.innerHTML=radarContextBanners(context)+'<nav class="discovery-paths"><a href="#/trends">ماجراهای ترند ←</a><a href="#/headlines">سرخط خبرها ←</a></nav>';}
 }
 async function renderHeadlinesDiscovery(){
   const el=document.getElementById('headlines-discovery');if(!el)return;
