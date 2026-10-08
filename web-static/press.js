@@ -132,6 +132,10 @@ const PRESS_SOURCES = [
   {name:"ایران‌شناسی", aliases:["ایران شناسی"], domain:"fis-iran.org", scope:"diaspora", lang:"fa", type:"فصلنامه ایران‌شناسی خارج از ایران"},
 
   // فارسی‌زبان خارج از ایران
+  {name:"خبرگزاری ایرانشهر", domain:"iranshahrnewsagency.com", scope:"diaspora", lang:"fa", type:"خبرگزاری"},
+  {name:"استکهلمیان", domain:"stockholmian.com", scope:"diaspora", lang:"fa", type:"رسانه ایرانیان سوئد"},
+  {name:"پرژن میرور", domain:"persianmirror.ca", scope:"diaspora", lang:"fa", type:"رسانه ایرانیان کانادا"},
+  {name:"مجله جوانان", domain:"javanan.com", scope:"diaspora", lang:"fa", type:"مجله فارسی‌زبان خارج از ایران"},
   {name:"بی‌بی‌سی فارسی", aliases:["بی‌بی‌سی فارسی (BBC Persian)"], domain:"bbc.com", scope:"diaspora", lang:"fa", type:"رسانه بین‌المللی"},
   {name:"رادیو فردا", domain:"radiofarda.com", scope:"diaspora", lang:"fa", type:"رادیو/آنلاین"},
   {name:"ایران اینترنشنال", aliases:["ایران اینترنشنال (Iran International)"], domain:"iranintl.com", scope:"diaspora", lang:"fa", type:"تلویزیون/آنلاین"},
