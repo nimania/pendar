@@ -19,6 +19,17 @@ def paragraphs(value): return ''.join('<p>'+esc(p)+'</p>' for p in text(value).s
 def links(rows): return '<ul>'+''.join('<li><a href="'+esc(url)+'">'+esc(title)+'</a></li>' for url,title in rows)+'</ul>'
 def build(site):
     site=Path(site); data=site/'data'; template=(site/'index.html').read_text()
+    # Reviewed editorial recaps survive both full and UI-only rebuilds.
+    editorial=read(Path(__file__).resolve().parents[1]/'data'/'editorial-recaps.json',[])
+    figure_data=read(data/'figures.json',{'figures':[]})
+    for entry in editorial:
+        for figure in figure_data.get('figures',[]):
+            if str(figure.get('handle','')).lower() not in {h.lower() for h in entry['handles']}: continue
+            post={k:v for k,v in entry.items() if k!='handles'}
+            post.update(handle=figure['handle'],avatar=figure.get('avatar',''),role_fa='گفت‌وگو با سیمرغ طلایی',published_at=entry['recorded_at'])
+            figure['posts']=[post]+[p for p in figure.get('posts',[]) if p.get('id')!=entry['id']]
+    if editorial:
+        (data/'figures.json').write_text(json.dumps(figure_data,ensure_ascii=False),encoding='utf-8')
     # Old generated pages are removed so deleted content becomes a real 404.
     prior=read(data/'seo-manifest.json',{})
     for path in prior.get('generated_paths',[]):
@@ -261,6 +272,10 @@ def build(site):
                 handles['entities'][unquote(old.strip('/'))]=clean
     (data/'person-handles.json').write_text(json.dumps(handles,ensure_ascii=False),encoding='utf-8')
     (data/'person-handles.js').write_text('window.PENDAR_HANDLES='+json.dumps(handles,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf-8')
+    for url,page in pages.items():
+        if url.startswith('/us-radar/'): continue
+        if re.search(r'آمریکا|امریکا|ایالات متحده|کنگره|ترامپ',page.get('title','')+' '+text(page.get('body',''))):
+            page['body']+='<aside><a href="/us-radar/"><img src="/assets/us-election-logo.svg" alt="" width="48" height="48"><strong>رادار آمریکا</strong> — انتخابات، رقابت‌ها و پیامدهایشان برای ایران ←</a></aside>'
     pages['/']={'title':'پندار؛ خبر، چهره‌ها، کتاب، فیلم و سریال','description':'پندار؛ خبر و اندیشه، دیدگاه چهره‌ها، پیشخوان کتاب و جراید، فیلم و سریال و راهنمای تماشا.','body':links([(route(k),v) for k,v in SECTIONS.items()])+ '<h2>تازه‌ترین خبرها</h2>'+links(catalogs['headlines'][:20]),'canonical':'/','indexable':True,'schema_type':'WebSite'}
     generated=[]; sitemap=[]
     for url,page in pages.items():
