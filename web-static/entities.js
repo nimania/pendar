@@ -17,6 +17,16 @@ function _canonicalNorm(v) {
 }
 const _LOCAL_ENTITY_FALLBACKS = [
   {
+    id:"person:taraneh-mokarram",
+    type:"person",
+    name_fa:"ترانه مکرم",
+    aliases:["Taraneh Mokarram","Taraneh Mokaram"],
+    roles:["figure","ترانه‌سرا"],
+    refs:[{dataset:"figures",key:"taraneh-mokarram"}],
+    routes:{figure:"taraneh-mokarram"},
+    meta:{role_fa:"ترانه‌سرا",field_fa:"فرهنگ و هنر",avatar:"assets/pendar/figures/taraneh-mokarram.svg",summary:"ترانه‌سرای موسیقی پاپ ایران؛ روایت تجربه‌های حرفه‌ای، همکاری با خوانندگان، تبعیض جنسیتی، حقوق ترانه‌سرا و ممنوع‌الکاری در گفت‌وگو با زهرا عاملی."}
+  },
+  {
     id:"person:nima-afshar-naderi",
     type:"person",
     name_fa:"نیما افشارنادری",
