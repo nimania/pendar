@@ -163,6 +163,7 @@ PRESS_FEEDS.update({
 
 PRESS_REGISTRY = [
     # Iran — agencies / news portals
+    ("رسانه رهبر انقلاب اسلامی","https://rahbar.ir/","fa","iran-agency"),
     ("ایرنا","https://www.irna.ir","fa","iran-agency"),
     ("ایسنا","https://www.isna.ir","fa","iran-agency"),
     ("مهر","https://www.mehrnews.com","fa","iran-agency"),
