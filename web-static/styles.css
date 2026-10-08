@@ -4,6 +4,7 @@
     --line:#e1e3dc; --line-strong:#cdd0c8;
     --accent:#155a4f; --accent-2:#0e3f38; --accent-soft:#d6e6e1;
     --brass:#9c6f16;
+    --quote-bg:#f7f0e1; --quote-border:#e6d6ae;
     --fact:#1a6a55; --fact-bg:#dbefe6;
     --warn:#8f6410; --warn-bg:#f2e7cd;
     --agree:#2a577f; --agree-bg:#dae6f1;
@@ -27,6 +28,7 @@
       --line:#2a302c; --line-strong:#39413b;
       --accent:#57b7a5; --accent-2:#7dc9ba; --accent-soft:#16332d;
       --brass:#d3a24a;
+      --quote-bg:#221d14; --quote-border:#3b3220;
       --fact:#6cc0a3; --fact-bg:#153029;
       --warn:#d2a851; --warn-bg:#33290f;
       --agree:#7ba6d5; --agree-bg:#16273a;
@@ -43,6 +45,7 @@
     --line:#2a302c; --line-strong:#39413b;
     --accent:#57b7a5; --accent-2:#7dc9ba; --accent-soft:#16332d;
     --brass:#d3a24a;
+    --quote-bg:#221d14; --quote-border:#3b3220;
     --fact:#6cc0a3; --fact-bg:#153029;
     --warn:#d2a851; --warn-bg:#33290f;
     --agree:#7ba6d5; --agree-bg:#16273a;
@@ -604,6 +607,10 @@
 
 /* ---- جان‌کلام چهره‌ها ---- */
 .fig-view .v-name{color:var(--ink)}
+/* نقل‌قول‌های ویرایش‌شده از متن سخنرانی/گفتگو — پس‌زمینهٔ گرم و متمایز از بقیهٔ دیدگاه‌ها */
+.fig-view.fig-quote{background:var(--quote-bg); border-color:var(--quote-border)}
+.x-post.is-quote,.x-figure-post.is-quote{background:var(--quote-bg)}
+.x-post.is-quote:hover,.x-figure-post.is-quote:hover{background:color-mix(in srgb,var(--quote-border) 45%,var(--quote-bg))}
 .fig-role{font-size:12.5px; color:var(--ink-faint)}
 .fig-topic{font-size:13px; font-weight:600; color:var(--accent)}
 .fig-foot{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:8px; font-size:13px}

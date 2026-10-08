@@ -37,13 +37,19 @@ function figureTextParagraphs(p, className = "") {
   return String(p.summary_fa || "").split(/\n\s*\n/).filter(part => part.trim())
     .map(part => `<p${className ? ` class="${esc(className)}"` : ""}>${esc(part.trim())}</p>`).join("");
 }
+/* Editorial/transcript quotes (reviewed نقل‌قول‌ها merged from
+   pendar-editorial-views.json) get a distinct card background so they read
+   apart from the regular Telegram/news دیدگاه‌ها. */
+function isEditorialQuote(p) {
+  return !!(p && (p.editorial || p.platform === "transcript"));
+}
 function figureCard(p, withName, detail = false) {
   const party = p.kind === "party_claim"
     ? `<span class="cstatus st-warn" title="این شخص خودش طرفِ این ماجراست">${KIND_NOTE.party_claim}</span>` : "";
   const head = withName
     ? `<div class="v-h">${figureProfileLink(p, avatar(p, "sm"))}<div class="fig-id"><a class="v-name" href="#/figure/${esc(p.handle)}" onclick="event.preventDefault();${p._newsPerson ? "openNewsPerson" : "openFigure"}('${esc(p.handle)}')">${esc(p.name_fa)}</a><span class="fig-role">${esc(p.role_fa)}</span></div><span class="spacer" style="flex:1"></span>${party}</div>`
     : `<div class="v-h"><span class="fig-topic">${esc(p.topic_fa || "")}</span><span class="spacer" style="flex:1"></span>${party}</div>`;
-  return `<div class="view fig-view" ${detail ? "" : statementCardAttrs(p)}>${head}
+  return `<div class="view fig-view${isEditorialQuote(p) ? " fig-quote" : ""}" ${detail ? "" : statementCardAttrs(p)}>${head}
     ${figureTextParagraphs(p)}${figureSourceNote(p)}
     <div class="fig-foot"><button class="fig-profile-link" onclick="openStatement(\'${statementKey(p)}\')">صفحهٔ این گفته</button><span class="muted">${relTime(p.published_at)}${p.source_language && p.source_language !== "fa" ? " · " + esc(p.translation_label_fa || ("ترجمه از " + p.source_language)) : ""}</span>
       ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${p.kind === "news_statement" ? "منبع این گفته" : p.platform === "truthsocial" ? "پست اصلی در تروث سوشیال" : p.platform === "youtube" ? "ویدئو در یوتیوب" : "متن کامل در " + (String(p.url || "").includes("ble.ir/") ? "بله" : "تلگرام")} ↗</a>` : ""}</div></div>`;
@@ -119,7 +125,7 @@ async function renderFigureTimeline() {
     el.innerHTML = controls + `<div class="state"><div class="big">${msg}</div></div>`;
     return;
   }
-  el.innerHTML = controls + `<div class="x-figure-stream">` + posts.slice(0, 40).map(p => `<article class="x-figure-post" ${statementCardAttrs(p)}>
+  el.innerHTML = controls + `<div class="x-figure-stream">` + posts.slice(0, 40).map(p => `<article class="x-figure-post${isEditorialQuote(p) ? " is-quote" : ""}" ${statementCardAttrs(p)}>
     <div class="x-figure-avatar">${figureProfileLink(p, avatar(p, "sm"))}</div>
     <div class="x-figure-content">
       <div class="x-figure-head">

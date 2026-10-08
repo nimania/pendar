@@ -231,7 +231,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const candidateSources=(candidateFeed?.sources||[]).filter(r=>_figureWorkUrl(r.url));
   const sourceLinks=candidateSources.length?'<div class="candidate-source-links">'+candidateSources.map(r=>'<a href="'+esc(_figureWorkUrl(r.url))+'" target="_blank" rel="noopener">'+esc(r.label)+'</a>').join("")+'</div>':"";
   const aboutSection='<section class="x-profile-feed"><p class="x-bio">'+esc(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||"معرفی تکمیلی هنوز ثبت نشده است.")+'</p>'+(canonicalFigure?.meta?.birthday?'<p class="x-bio">تولد: '+esc(faN(canonicalFigure.meta.birthday))+'</p>':"")+(canonicalFigure?.meta?.deathday?'<p class="x-bio">درگذشت: '+esc(faN(canonicalFigure.meta.deathday))+'</p>':"")+(canonicalFigure?.meta?.picture_source?'<p class="x-bio"><a href="'+esc(_figureWorkUrl(canonicalFigure.meta.picture_source))+'" target="_blank" rel="noopener">منبع و مجوز عکس ↗</a></p>':"")+'</section>';
-  const postRow = p => `<article class="x-post" ${statementCardAttrs(p)}>
+  const postRow = p => `<article class="x-post${isEditorialQuote(p) ? " is-quote" : ""}" ${statementCardAttrs(p)}>
     <div class="x-post-rail">${figureProfileLink(x,avatar(x,"sm"))}</div>
     <div class="x-post-body">
       <div class="x-post-meta"><b>${figureProfileLink(x,esc(x.name_fa))}</b><span>·</span><time>${relTime(p.published_at)}</time></div>
