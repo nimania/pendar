@@ -558,7 +558,7 @@
     }
   ],
   "generic_date": "2026-10-05",
-  "generic_source_url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.7%20release_0.pdf",
+  "generic_source_url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.8%20release_0.pdf",
   "generic_polls": [
     {
       "date": "2026-08-03",
@@ -584,9 +584,9 @@
         "d": 44,
         "r": 37
       },
-      "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.7%20release_0.pdf",
+      "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.8%20release_0.pdf",
       "source": "Reuters/Ipsos"
     }
   ],
-  "generic_reviewed_at": "2026-10-08T15:04:49.120053+00:00"
+  "generic_reviewed_at": "2026-10-08T15:31:41.203919+00:00"
 }
