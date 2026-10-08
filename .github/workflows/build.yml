@@ -278,6 +278,11 @@ jobs:
             python backend/scripts/collect_candidate_feeds.py --out backend/public/data/candidate-feeds.json
           fi
 
+      - name: Collect Bartarinha entertainment feed for Badbadak
+        continue-on-error: true
+        run: python -m scripts.collect_bartarinha --out public/data/bartarinha-feed.json
+        working-directory: backend
+
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir backend/public/data
 

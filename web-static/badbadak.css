@@ -309,6 +309,21 @@
   flex-shrink: 0;
 }
 
+/* == SOURCE TAG (external content badge) == */
+.bb-source-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--bb-blue, #1a6fb5);
+  color: #fff;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+.bb-cell-dark .bb-source-tag { background: var(--bb-yellow); color: #1a1a1a; }
+.bb-cell-yellow .bb-source-tag { background: #1a1a1a; color: var(--bb-yellow); }
+
 /* == PULL QUOTE == */
 .bb-pull-quote {
   font-size: 1.05rem;
