@@ -42,7 +42,7 @@ permissions:
 concurrency:
   group: pages-ui-${{ github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'success' && github.run_id || 'publish' }}
   # Collector completions queue a fresh build without interrupting a ready deploy.
-  cancel-in-progress: ${{ github.event_name != 'workflow_run' }}
+  cancel-in-progress: false
 
 jobs:
   build-ui:
