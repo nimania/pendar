@@ -28,7 +28,9 @@ def revision(country, data):
 
 def update_country(country, data, old, now):
     point = revision(country, data)
-    material = {k: v for k, v in point.items() if k != 'reviewed_at'}
+    material = {k: v for k, v in point.items() if k not in ('reviewed_at','source','labels')}
+    def signature(p):
+        return {k: v for k, v in p.items() if k not in ('reviewed_at','source','labels','recorded_at')}
     digest = hashlib.sha256(json.dumps(material, sort_keys=True).encode()).hexdigest()
     history = list(old.get('history', []))
     if not history and country=='us':
@@ -36,7 +38,9 @@ def update_country(country, data, old, now):
             if poll['date'] < point['date']:
                 history.append({'date':poll['date'], 'values':poll['values'], 'url':poll['url'], 'source':poll['source'], 'series':point['series'], 'labels':point['labels'], 'recorded_at':now})
     changes = list(old.get('changes', []))
-    if digest != old.get('fingerprint'):
+    history = [p for i,p in enumerate(history) if i==0 or signature(p)!=signature(history[i-1])]
+    changes = [p for i,p in enumerate(changes) if i==0 or (p['date'],p['title_fa'],p['url'])!=(changes[i-1]['date'],changes[i-1]['title_fa'],changes[i-1]['url'])]
+    if not history or signature(history[-1]) != material:
         prev = history[-1] if history else None
         deltas = []
         if prev and prev['series'] == point['series']:
