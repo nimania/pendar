@@ -18,6 +18,9 @@ let pressDirectoryCache = null;
 
 const PRESS_SOURCES = [
   // خبرگزاری‌ها و رسانه‌های خبری داخل ایران
+  {name:"فرادید", domain:"faradeed.ir", scope:"iran-agency", lang:"fa", type:"رسانه فرهنگی و خبری"},
+  {name:"جام‌جم آنلاین", domain:"jamejamonline.ir", scope:"iran-paper", lang:"fa", type:"روزنامه/آنلاین"},
+  {name:"جماران", domain:"jamaran.news", scope:"iran-agency", lang:"fa", type:"رسانه خبری"},
   {name:"ایرنا", aliases:["خبرگزاری ایرنا (IRNA)"], domain:"irna.ir", scope:"iran-agency", lang:"fa", type:"خبرگزاری"},
   {name:"ایسنا", aliases:["خبرگزاری ایسنا (ISNA)"], domain:"isna.ir", scope:"iran-agency", lang:"fa", type:"خبرگزاری"},
   {name:"مهر", aliases:["خبرگزاری مهر (Mehr)"], domain:"mehrnews.com", scope:"iran-agency", lang:"fa", type:"خبرگزاری"},
