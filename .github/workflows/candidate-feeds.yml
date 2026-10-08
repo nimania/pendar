@@ -8,7 +8,7 @@ on:
       - "backend/data/us-candidate-sources.json"
       - ".github/workflows/candidate-feeds.yml"
   schedule:
-    - cron: "11,41 * * * *"
+    - cron: "11 */2 * * *"
 permissions:
   contents: read
 concurrency:
