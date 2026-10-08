@@ -11,7 +11,7 @@ on:
       - 'backend/tests/test_radar_revisions.py'
       - '.github/workflows/us-radar.yml'
   schedule:
-    - cron: '17 5,17 * * *'
+    - cron: '7 * * * *'
 permissions:
   contents: write
 concurrency:
