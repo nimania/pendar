@@ -6,6 +6,7 @@ from build_entities import merge_editorial_views
 
 ORIGIN = 'https://pendar.io'
 SECTIONS = {'radar':'رادارهای پندار؛ آمریکا و اسرائیل','israel-radar':'رادار اسرائیل؛ انتخابات و پیامدها برای ایران','us-radar':'رادار آمریکا؛ انتخابات و پیامدها برای ایران','badbadak':'بادبادک؛ چهره‌ها، سبک زندگی و سرگرمی','headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
+SECTIONS['diner'] = 'داینر نیما؛ رستوران‌داری و کافه‌داری'
 def text(value):
     if isinstance(value, dict): return str(value.get('text') or value.get('summary_fa') or value.get('name_fa') or value.get('name') or value.get('title_fa') or value.get('title') or '')
     if isinstance(value, list): return '\n'.join(text(x) for x in value)
@@ -257,6 +258,13 @@ def build(site):
             url=route(kind) if n==1 else route(kind,'page/'+str(n))
             paging=links([(route(kind) if i==1 else route(kind,'page/'+str(i)), 'صفحهٔ '+str(i)) for i in range(1,len(chunks)+1)]) if len(chunks)>1 else ''
             pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak','us-radar','israel-radar','radar'],'schema_type':'CollectionPage'}
+    pages['/diner/'].update(
+        description='داینر نیما؛ نکته‌های کاربردی مهندسی منو، مدیریت تیم، عملیات، بهداشت، بازاریابی و کافه‌داری، همراه با تماس مستقیم با نیما افشارنادری.',
+        body='<p>نکته‌های کاربردی رستوران‌داری و کافه‌داری از تجربه واقعی؛ مهندسی منو، مدیریت تیم، عملیات، بهداشت و بازاریابی.</p>'+links([('https://t.me/nimaafsharnaderiir','تماس مستقیم با نیما افشارنادری'),('https://www.instagram.com/nimasdiner','اینستاگرام داینر نیما'),('https://t.me/+sNV4qZCjSOQyMzc0','گروه تلگرام داینر نیما')]),
+        indexable=True,
+    )
+    pages['/dinr/']={**pages['/diner/'], 'canonical':'/diner/', 'indexable':False, 'redirect':'/diner/'}
+    aliases['/dinr/']='/diner/'
     radar_status=read(data/'pendar-radar-status.json',{}).get('countries',{})
     if '/radar/' in pages:
         pages['/radar/']['body']='<p>رقابت‌های سیاسی جهان و پیامدهایشان برای ایران؛ خبر، چهره و داده در یک جا.</p>'+links([('/us-radar/','رادار آمریکا'),('/israel-radar/','رادار اسرائیل')])

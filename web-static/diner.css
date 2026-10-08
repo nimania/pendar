@@ -1,17 +1,25 @@
 /* ========================================================
    داینر نیما — Restaurant & Café Tips Section
-   Warm food-industry palette, integrated with Pendar tokens
+   Turquoise, red and checkerboard palette from the diner reference
    ======================================================== */
 
-#dinr-view {
-  --dinr-warm: #c2570a;
-  --dinr-warm-soft: #fdf0e4;
-  --dinr-warm-bg: #fef7f0;
-  --dinr-amber: #b8860b;
-  --dinr-cream: #faf5ed;
-  --dinr-tg: #2aabee;
-  --dinr-ig: #e1306c;
-  --dinr-cta-text: #fff;
+#diner-view {
+  --diner-red: #d60922;
+  --diner-red-soft: #ffe8ec;
+  --diner-turquoise: #7bcbd6;
+  --diner-red-hover: #b0071c;
+  --diner-footer: #d9f2f5;
+  --diner-tg: #126674;
+  --diner-cta-text: #fff;
+  --paper: #eef9fa;
+  --surface: #fff;
+  --surface-2: #d9f2f5;
+  --line: #b2dce1;
+  --line-strong: #7ebfc8;
+  --ink: #242223;
+  --ink-soft: #484345;
+  --ink-faint: #625b5e;
+  background: var(--paper);
   direction: rtl;
   padding: 0 16px 40px;
   max-width: 780px;
@@ -22,60 +30,83 @@
 
 /* Dark-mode overrides */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) #dinr-view {
-    --dinr-warm: #e88a4a;
-    --dinr-warm-soft: #2c1d0e;
-    --dinr-warm-bg: #1e1610;
-    --dinr-amber: #d4a84b;
-    --dinr-cream: #1a1611;
-    --dinr-tg: #4dc1f9;
-    --dinr-ig: #f0527f;
+  :root:not([data-theme="light"]) #diner-view {
+    --diner-red: #ff6377;
+    --diner-red-soft: #3d2028;
+    --diner-red-hover: #b0071c;
+    --diner-footer: #16373d;
+    --diner-tg: #7bcbd6;
+    --paper: #171a1b;
+    --surface: #242729;
+    --surface-2: #16373d;
+    --line: #3d5559;
+    --line-strong: #618c93;
+    --ink: #fff;
+    --ink-soft: #dee8ea;
+    --ink-faint: #b5c8cc;
   }
 }
-:root[data-theme="dark"] #dinr-view {
-  --dinr-warm: #e88a4a;
-  --dinr-warm-soft: #2c1d0e;
-  --dinr-warm-bg: #1e1610;
-  --dinr-amber: #d4a84b;
-  --dinr-cream: #1a1611;
-  --dinr-tg: #4dc1f9;
-  --dinr-ig: #f0527f;
+:root[data-theme="dark"] #diner-view {
+    --diner-red: #ff6377;
+    --diner-red-soft: #3d2028;
+    --diner-red-hover: #b0071c;
+    --diner-footer: #16373d;
+    --diner-tg: #7bcbd6;
+    --paper: #171a1b;
+    --surface: #242729;
+    --surface-2: #16373d;
+    --line: #3d5559;
+    --line-strong: #618c93;
+    --ink: #fff;
+    --ink-soft: #dee8ea;
+    --ink-faint: #b5c8cc;
 }
 
 /* ── Hero ─────────────────────────────────────────────── */
-.dinr-hero {
-  background: var(--dinr-warm-bg);
+.diner-hero {
+  background: var(--diner-turquoise);
   border: 1px solid var(--line, #e1e3dc);
   border-radius: var(--radius, 16px);
   padding: 28px 24px 24px;
   margin-bottom: 20px;
   text-align: center;
+  border-bottom: 8px solid var(--diner-red);
+  position: relative;
+  overflow: hidden;
+}
+.diner-hero::before {
+  content: "";
+  display: block;
+  height: 12px;
+  position: absolute;
+  inset: 0 0 auto;
+  background: repeating-conic-gradient(#242223 0% 25%, #fff 0% 50%) 0 0 / 24px 24px;
 }
 
-.dinr-title {
+.diner-title {
   font-size: 1.6rem;
   font-weight: 900;
   margin: 0 0 6px;
-  color: var(--dinr-warm);
+  color: #242223;
   line-height: 1.4;
 }
 
-.dinr-subtitle {
+.diner-subtitle {
   font-size: 0.92rem;
-  color: var(--ink-soft, #474d49);
+  color: #242223;
   margin: 0 0 18px;
   line-height: 1.7;
 }
 
 /* ── Social buttons ───────────────────────────────────── */
-.dinr-social-row {
+.diner-social-row {
   display: flex;
   gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.dinr-social-btn {
+.diner-social-btn {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -83,27 +114,38 @@
   border-radius: 10px;
   font-size: 0.84rem;
   font-weight: 600;
-  color: var(--dinr-cta-text) !important;
+  color: var(--diner-cta-text) !important;
   text-decoration: none !important;
   transition: opacity 0.15s, transform 0.15s;
 }
-.dinr-social-btn:hover {
+.diner-social-btn:hover {
   opacity: 0.88;
   transform: translateY(-1px);
 }
-.dinr-social-btn svg {
+.diner-social-btn svg {
   flex-shrink: 0;
 }
 
-.dinr-ig {
-  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+.diner-ig {
+  background: #242223;
 }
-.dinr-tg {
-  background: var(--dinr-tg);
+.diner-tg {
+  background: #126674;
+}
+
+.diner-contact {
+  background: #d60922;
+}
+.diner-contact:hover {
+  background: var(--diner-red-hover);
+}
+#diner-view a:focus-visible, #diner-view button:focus-visible {
+  outline: 3px solid var(--diner-tg);
+  outline-offset: 3px;
 }
 
 /* ── Email box ────────────────────────────────────────── */
-.dinr-email-box {
+.diner-email-box {
   background: var(--surface, #fff);
   border: 1px solid var(--line, #e1e3dc);
   border-radius: var(--radius, 16px);
@@ -112,28 +154,28 @@
   text-align: center;
 }
 
-.dinr-email-box h3 {
+.diner-email-box h3 {
   font-size: 1.05rem;
   font-weight: 800;
   margin: 0 0 6px;
   color: var(--ink, #181b19);
 }
 
-.dinr-email-box p {
+.diner-email-box p {
   font-size: 0.84rem;
   color: var(--ink-soft, #474d49);
   margin: 0 0 14px;
   line-height: 1.65;
 }
 
-.dinr-email-form {
+.diner-email-form {
   display: flex;
   gap: 8px;
   max-width: 420px;
   margin: 0 auto;
 }
 
-.dinr-email-form input[type="email"] {
+.diner-email-form input[type="email"] {
   flex: 1;
   padding: 10px 14px;
   border: 1px solid var(--line-strong, #cdd0c8);
@@ -146,14 +188,14 @@
   direction: ltr;
   text-align: left;
 }
-.dinr-email-form input[type="email"]:focus {
-  border-color: var(--dinr-warm);
-  box-shadow: 0 0 0 3px rgba(194, 87, 10, 0.12);
+.diner-email-form input[type="email"]:focus {
+  border-color: var(--diner-red);
+  box-shadow: 0 0 0 3px rgba(123, 203, 214, 0.3);
 }
 
-.dinr-email-form button {
+.diner-email-form button {
   padding: 10px 22px;
-  background: var(--dinr-warm);
+  background: #d60922;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -164,21 +206,21 @@
   white-space: nowrap;
   transition: background 0.15s;
 }
-.dinr-email-form button:hover {
-  background: var(--dinr-amber);
+.diner-email-form button:hover {
+  background: var(--diner-red-hover);
 }
 
-.dinr-email-msg {
+.diner-email-msg {
   font-size: 0.82rem;
   margin-top: 10px;
   min-height: 1.4em;
 }
-.dinr-email-msg.ok {
+.diner-email-msg.ok {
   color: var(--fact, #1a6a55);
 }
 
 /* ── Category chips ───────────────────────────────────── */
-.dinr-cats {
+.diner-cats {
   display: flex;
   gap: 6px;
   overflow-x: auto;
@@ -186,7 +228,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.dinr-cats .fchip {
+.diner-cats .fchip {
   white-space: nowrap;
   padding: 7px 16px;
   border: 1px solid var(--line-strong, #cdd0c8);
@@ -199,55 +241,55 @@
   cursor: pointer;
   transition: background 0.12s, border-color 0.12s;
 }
-.dinr-cats .fchip:hover {
+.diner-cats .fchip:hover {
   background: var(--surface-2, #e9ebe5);
 }
-.dinr-cats .fchip.on {
-  background: var(--dinr-warm);
+.diner-cats .fchip.on {
+  background: #d60922;
   color: #fff;
-  border-color: var(--dinr-warm);
+  border-color: #d60922;
 }
 
 /* ── Tip cards ────────────────────────────────────────── */
-.dinr-tips {
+.diner-tips {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
 }
 
-.dinr-card {
+.diner-card {
   background: var(--surface, #fff);
   border: 1px solid var(--line, #e1e3dc);
   border-radius: var(--radius, 16px);
   padding: 20px 22px;
   transition: box-shadow 0.15s;
 }
-.dinr-card:hover {
+.diner-card:hover {
   box-shadow: var(--shadow, 0 1px 2px rgba(20,30,25,.04), 0 8px 24px -12px rgba(20,40,32,.16));
 }
 
-.dinr-card-head {
+.diner-card-head {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
 }
 
-.dinr-icon {
+.diner-icon {
   font-size: 1.3rem;
   line-height: 1;
 }
 
-.dinr-cat {
-  font-size: 0.72rem;
+.diner-cat {
+  font-size: 0.875rem;
   font-weight: 700;
-  color: var(--dinr-warm);
-  background: var(--dinr-warm-soft);
+  color: var(--diner-red);
+  background: var(--diner-red-soft);
   padding: 3px 10px;
   border-radius: 12px;
 }
 
-.dinr-card-title {
+.diner-card-title {
   font-size: 1rem;
   font-weight: 800;
   margin: 0 0 8px;
@@ -255,18 +297,18 @@
   line-height: 1.55;
 }
 
-.dinr-card-body {
-  font-size: 0.88rem;
+.diner-card-body {
+  font-size: 1rem;
   color: var(--ink-soft, #474d49);
   line-height: 1.8;
   margin: 0;
 }
 
 /* ── Footer CTA ───────────────────────────────────────── */
-.dinr-footer-cta {
+.diner-footer-cta {
   margin-top: 28px;
   padding: 20px 24px;
-  background: var(--dinr-cream);
+  background: var(--diner-footer);
   border: 1px solid var(--line, #e1e3dc);
   border-radius: var(--radius, 16px);
   text-align: center;
@@ -274,26 +316,26 @@
   color: var(--ink-soft, #474d49);
   line-height: 1.75;
 }
-.dinr-footer-cta p {
+.diner-footer-cta p {
   margin: 0 0 6px;
 }
-.dinr-footer-cta p:last-child {
-  margin-bottom: 0;
+.diner-footer-cta p:last-child {
+  margin-bottom: 14px;
 }
-.dinr-footer-cta a {
-  color: var(--dinr-warm);
+.diner-footer-cta a {
+  color: var(--diner-red);
   font-weight: 600;
 }
 
 /* ── Telegram inline CTA (between cards) ──────────────── */
-.dinr-tg-cta {
+.diner-tg-cta {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   padding: 16px 20px;
   background: var(--surface, #fff);
-  border: 2px dashed var(--dinr-tg);
+  border: 2px dashed var(--diner-tg);
   border-radius: var(--radius, 16px);
   text-align: center;
   cursor: pointer;
@@ -301,59 +343,59 @@
   color: var(--ink, #181b19) !important;
   transition: background 0.12s;
 }
-.dinr-tg-cta:hover {
+.diner-tg-cta:hover {
   background: var(--surface-2, #e9ebe5);
 }
-.dinr-tg-cta-text {
+.diner-tg-cta-text {
   font-size: 0.88rem;
   font-weight: 700;
   line-height: 1.5;
 }
-.dinr-tg-cta-sub {
+.diner-tg-cta-sub {
   display: block;
-  font-size: 0.76rem;
+  font-size: 0.875rem;
   font-weight: 400;
   color: var(--ink-faint, #7b817c);
 }
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (min-width: 600px) {
-  .dinr-tips {
+  .diner-tips {
     grid-template-columns: 1fr 1fr;
   }
-  .dinr-tg-cta {
+  .diner-tg-cta {
     grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 420px) {
-  #dinr-view {
+  #diner-view {
     padding: 0 12px 32px;
   }
-  .dinr-hero {
+  .diner-hero {
     padding: 22px 16px 20px;
   }
-  .dinr-title {
+  .diner-title {
     font-size: 1.35rem;
   }
-  .dinr-email-form {
+  .diner-email-form {
     flex-direction: column;
   }
-  .dinr-email-form button {
+  .diner-email-form button {
     width: 100%;
   }
-  .dinr-social-btn {
+  .diner-social-btn {
     padding: 8px 14px;
     font-size: 0.8rem;
   }
-  .dinr-card {
+  .diner-card {
     padding: 16px 18px;
   }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  #dinr-view * {
+  #diner-view * {
     animation: none !important;
     transition: none !important;
   }

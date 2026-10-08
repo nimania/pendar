@@ -1,14 +1,14 @@
-/* Dinr — Nima's Diner: restaurant & café tips inside Pendar.
+/* Diner — Nima's Diner: restaurant & café tips inside Pendar.
    A curated collection of restaurant-industry tips (the online version
    of the nimasdiner Instagram reels) plus CTAs for Telegram, email and
-   Instagram. Content is loaded from data/dinr-tips.json when available,
+   Instagram. Content is loaded from data/diner-tips.json when available,
    with a handful of seed tips baked in for the initial launch. */
 
-let _dinrLoaded = false;
+let _dinerLoaded = false;
 
-/* ── Seed tips (launch batch — replaced by dinr-tips.json when the
+/* ── Seed tips (launch batch — replaced by diner-tips.json when the
       build pipeline generates it) ─────────────────────────────── */
-const DINR_SEED = [
+const DINER_SEED = [
   {
     id: "d001",
     title: "فودکاست چیست و چرا رستوران شما بهش نیاز داره؟",
@@ -95,7 +95,7 @@ const DINR_SEED = [
   }
 ];
 
-const DINR_CATEGORIES = [
+const DINER_CATEGORIES = [
   ["all", "همه"],
   ["مهندسی منو", "مهندسی منو"],
   ["مدیریت تیم", "مدیریت تیم"],
@@ -105,39 +105,40 @@ const DINR_CATEGORIES = [
   ["کافه‌داری", "کافه‌داری"]
 ];
 
-const DINR_TG_GROUP = "https://t.me/+sNV4qZCjSOQyMzc0";
-const DINR_IG = "https://www.instagram.com/nimasdiner";
+const DINER_TG_GROUP = "https://t.me/+sNV4qZCjSOQyMzc0";
+const DINER_CONTACT = "https://t.me/nimaafsharnaderiir";
+const DINER_IG = "https://www.instagram.com/nimasdiner";
 
-let _dinrTips = [];
-let _dinrCategory = "all";
+let _dinerTips = [];
+let _dinerCategory = "all";
 
-async function loadDinrTips() {
-  if (_dinrLoaded) return _dinrTips;
+async function loadDinerTips() {
+  if (_dinerLoaded) return _dinerTips;
   try {
-    const remote = await getJSON(`${DATA}/dinr-tips.json`);
-    _dinrTips = Array.isArray(remote) ? remote : (remote.tips || []);
+    const remote = await getJSON(`${DATA}/diner-tips.json`);
+    _dinerTips = Array.isArray(remote) ? remote : (remote.tips || []);
   } catch (_) {
-    _dinrTips = DINR_SEED;
+    _dinerTips = DINER_SEED;
   }
-  _dinrLoaded = true;
-  return _dinrTips;
+  _dinerLoaded = true;
+  return _dinerTips;
 }
 
-function dinrTipCard(tip) {
-  return `<article class="dinr-card">
-    <div class="dinr-card-head">
-      <span class="dinr-icon">${esc(tip.icon || "💡")}</span>
-      <span class="dinr-cat">${esc(tip.category || "")}</span>
+function dinerTipCard(tip) {
+  return `<article class="diner-card">
+    <div class="diner-card-head">
+      <span class="diner-icon">${esc(tip.icon || "💡")}</span>
+      <span class="diner-cat">${esc(tip.category || "")}</span>
     </div>
-    <h3 class="dinr-card-title">${esc(tip.title)}</h3>
-    <p class="dinr-card-body">${esc(tip.body)}</p>
+    <h3 class="diner-card-title">${esc(tip.title)}</h3>
+    <p class="diner-card-body">${esc(tip.body)}</p>
   </article>`;
 }
 
-function renderDinrTips(tips) {
-  const filtered = _dinrCategory === "all"
+function renderDinerTips(tips) {
+  const filtered = _dinerCategory === "all"
     ? tips
-    : tips.filter(t => t.category === _dinrCategory);
+    : tips.filter(t => t.category === _dinerCategory);
 
   if (!filtered.length)
     return `<div class="state"><div class="big">نکته‌ای در این دسته نیست</div></div>`;
@@ -145,11 +146,11 @@ function renderDinrTips(tips) {
   /* Insert a Telegram CTA after every 4 tips */
   const cards = [];
   filtered.forEach((tip, i) => {
-    cards.push(dinrTipCard(tip));
+    cards.push(dinerTipCard(tip));
     if (i === 3 && filtered.length > 4) {
-      cards.push(`<a class="dinr-tg-cta" href="${DINR_TG_GROUP}" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--dinr-tg)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.57 7.41c-.12.53-.43.66-.87.41l-2.4-1.77-1.16 1.12c-.13.13-.24.24-.49.24l.17-2.44 4.44-4.01c.19-.17-.04-.27-.3-.1l-5.49 3.46-2.37-.74c-.51-.16-.52-.51.11-.76l9.25-3.56c.43-.16.8.1.66.75z"/></svg>
-        <div class="dinr-tg-cta-text">عضو گروه تلگرام داینر نیما شوید<span class="dinr-tg-cta-sub">پرسش و پاسخ، بحث با همکاران صنعت</span></div>
+      cards.push(`<a class="diner-tg-cta" href="${DINER_TG_GROUP}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--diner-tg)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.57 7.41c-.12.53-.43.66-.87.41l-2.4-1.77-1.16 1.12c-.13.13-.24.24-.49.24l.17-2.44 4.44-4.01c.19-.17-.04-.27-.3-.1l-5.49 3.46-2.37-.74c-.51-.16-.52-.51.11-.76l9.25-3.56c.43-.16.8.1.66.75z"/></svg>
+        <div class="diner-tg-cta-text">عضو گروه تلگرام داینر نیما شوید<span class="diner-tg-cta-sub">پرسش و پاسخ، بحث با همکاران صنعت</span></div>
       </a>`);
     }
   });
@@ -157,71 +158,73 @@ function renderDinrTips(tips) {
   return cards.join("");
 }
 
-function dinrCategoryBar() {
-  return `<div class="dinr-cats">${DINR_CATEGORIES.map(([k, label]) =>
-    `<button class="fchip${_dinrCategory === k ? " on" : ""}" onclick="setDinrCategory('${k}')">${esc(label)}</button>`
+function dinerCategoryBar() {
+  return `<div class="diner-cats">${DINER_CATEGORIES.map(([k, label]) =>
+    `<button class="fchip${_dinerCategory === k ? " on" : ""}" onclick="setDinerCategory('${k}')">${esc(label)}</button>`
   ).join("")}</div>`;
 }
 
-function setDinrCategory(cat) {
-  _dinrCategory = cat;
-  document.getElementById("dinr-tips-area").innerHTML = renderDinrTips(_dinrTips);
-  document.getElementById("dinr-cats").innerHTML = dinrCategoryBar();
+function setDinerCategory(cat) {
+  _dinerCategory = cat;
+  document.getElementById("diner-tips-area").innerHTML = renderDinerTips(_dinerTips);
+  document.getElementById("diner-cats").innerHTML = dinerCategoryBar();
 }
 
-async function showDinr(sub) {
-  setHash("#/dinr");
-  show("dinr");
+async function showDiner(sub) {
+  setHash("#/diner");
+  show("diner");
   setTab("");
 
-  const tips = await loadDinrTips();
+  const tips = await loadDinerTips();
 
-  const el = document.getElementById("dinr-content");
+  const el = document.getElementById("diner-content");
   el.innerHTML = `
-    <div class="dinr-hero">
-      <div class="dinr-hero-text">
-        <h1 class="dinr-title">🍽 داینر نیما</h1>
-        <p class="dinr-subtitle">نکته‌های کاربردی رستوران‌داری و کافه‌داری — از تجربه واقعی</p>
-        <div class="dinr-social-row">
-          <a href="${DINR_IG}" target="_blank" rel="noopener" class="dinr-social-btn dinr-ig">
+    <div class="diner-hero">
+      <div class="diner-hero-text">
+        <h1 class="diner-title">🍽 داینر نیما</h1>
+        <p class="diner-subtitle">نکته‌های کاربردی رستوران‌داری و کافه‌داری — از تجربه واقعی</p>
+        <div class="diner-social-row">
+          <a href="${DINER_IG}" target="_blank" rel="noopener" class="diner-social-btn diner-ig">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
             اینستاگرام
           </a>
-          <a href="${DINR_TG_GROUP}" target="_blank" rel="noopener" class="dinr-social-btn dinr-tg">
+          <a href="${DINER_TG_GROUP}" target="_blank" rel="noopener" class="diner-social-btn diner-tg">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.57 7.41c-.12.53-.43.66-.87.41l-2.4-1.77-1.16 1.12c-.13.13-.24.24-.49.24l.17-2.44 4.44-4.01c.19-.17-.04-.27-.3-.1l-5.49 3.46-2.37-.74c-.51-.16-.52-.51.11-.76l9.25-3.56c.43-.16.8.1.66.75z"/></svg>
             عضویت در گروه تلگرام
           </a>
+          <a href="${DINER_CONTACT}" target="_blank" rel="noopener" class="diner-social-btn diner-contact">تماس مستقیم با نیما افشارنادری</a>
         </div>
       </div>
     </div>
 
-    <div class="dinr-email-box" id="dinr-email-box">
+    <div class="diner-email-box" id="diner-email-box">
       <h3>📬 عضو خبرنامه داینر شوید</h3>
       <p>هر هفته یه نکته طلایی رستوران‌داری مستقیم توی ایمیل‌تون.</p>
-      <form class="dinr-email-form" onsubmit="return submitDinrEmail(event)">
-        <input type="email" id="dinr-email-input" placeholder="ایمیل شما" required autocomplete="email" dir="ltr">
+      <form class="diner-email-form" onsubmit="return submitDinerEmail(event)">
+        <input type="email" id="diner-email-input" placeholder="ایمیل شما" required autocomplete="email" dir="ltr">
         <button type="submit">عضویت</button>
       </form>
-      <div id="dinr-email-msg" class="dinr-email-msg"></div>
+      <div id="diner-email-msg" class="diner-email-msg"></div>
     </div>
 
-    <div id="dinr-cats">${dinrCategoryBar()}</div>
-    <div class="dinr-tips" id="dinr-tips-area">
-      ${renderDinrTips(tips)}
+    <div id="diner-cats">${dinerCategoryBar()}</div>
+    <div class="diner-tips" id="diner-tips-area">
+      ${renderDinerTips(tips)}
     </div>
 
-    <div class="dinr-footer-cta">
-      <p>این نکات بر اساس ویدئوهای <a href="${DINR_IG}" target="_blank" rel="noopener">نیما داینز</a> در اینستاگرام تهیه شده.</p>
-      <p>سوالی دارید؟ <a href="${DINR_TG_GROUP}" target="_blank" rel="noopener">توی گروه تلگرام بپرسید</a>.</p>
+    <div class="diner-footer-cta">
+      <p>این نکات بر اساس ویدئوهای <a href="${DINER_IG}" target="_blank" rel="noopener">داینر نیما</a> در اینستاگرام تهیه شده.</p>
+      <p>سوالی دارید؟ <a href="${DINER_TG_GROUP}" target="_blank" rel="noopener">توی گروه تلگرام بپرسید</a>.</p>
+      <a href="${DINER_CONTACT}" target="_blank" rel="noopener" class="diner-social-btn diner-contact">تماس مستقیم با نیما افشارنادری</a>
     </div>
   `;
   document.title = "داینر نیما | پندار";
 }
 
-function submitDinrEmail(e) {
+function submitDinerEmail(e) {
   e.preventDefault();
-  const input = document.getElementById("dinr-email-input");
-  const msg = document.getElementById("dinr-email-msg");
+  const input = document.getElementById("diner-email-input");
+  const msg = document.getElementById("diner-email-msg");
   const email = (input.value || "").trim();
   if (!email) return false;
 

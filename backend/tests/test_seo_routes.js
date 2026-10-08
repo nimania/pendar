@@ -5,6 +5,12 @@ vm.createContext(ctx);vm.runInContext(fs.readFileSync(process.argv[2]||'router.j
 assert.equal(history[0],'/book/title%20one/');
 assert.equal(ctx.routeURL('#/entity/person%3Asomeone'),'/entity/person%3Asomeone/');
 assert.equal(ctx.routeURL('#/'),'/');
+assert.equal(ctx.routeURL('#/dinr'),'/diner/');
+assert.equal(ctx.routeURL('/dinr/'),'/diner/');
+assert.equal(ctx.routeURL('/diner/'),'/diner/');
+let dinerShown=false;ctx.showDiner=()=>dinerShown=true;
+ctx.location.hash='';ctx.location.pathname='/dinr/';ctx.route();
+assert.equal(dinerShown,true);
 ctx.location.hash='';ctx.location.pathname='/movie/yal-2026/';
 assert.equal(ctx.currentRoute(),'movie/yal-2026');
 ctx.setHash('#/books');assert.equal(history.at(-1),'/books/');
