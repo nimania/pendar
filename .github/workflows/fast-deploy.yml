@@ -386,6 +386,17 @@ jobs:
             python backend/scripts/collect_candidate_feeds.py --out site/data/candidate-feeds.json
           fi
 
+      - name: Ensure unlisted Vitrin page and refresh source links
+        continue-on-error: true
+        run: |
+          mkdir -p site/vitrin site/data
+          cp web-static/vitrin/index.html site/vitrin/index.html
+          (cd backend && python -m scripts.build_vitrin)
+          if [ -s backend/public/data/vitrin.json ]; then
+            cp backend/public/data/vitrin.json site/data/vitrin.json
+          fi
+          test -s site/vitrin/index.html
+
       - name: Validate Jan Film JavaScript
         run: |
           node --check web-static/books-hub.js
