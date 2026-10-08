@@ -3,3 +3,6 @@
 
 /* Iran-meter details on canonical person profiles. */
 .profile-us-radar{border:1px solid rgba(143,168,155,.28);border-radius:16px;padding:16px}.profile-us-radar>div{display:flex;align-items:center;gap:10px}.profile-us-radar p{line-height:1.8}.profile-us-radar dl{display:grid;grid-template-columns:130px 1fr;margin:14px 0}.profile-us-radar dt,.profile-us-radar dd{margin:0;padding:7px;border-top:1px solid rgba(143,168,155,.18)}.profile-us-radar dt{opacity:.6}.profile-us-radar small{display:block;opacity:.55;margin-bottom:12px}.profile-us-timeline{margin:14px 0}.profile-us-timeline h3{font-size:14px}.profile-us-timeline>div{display:grid;grid-template-columns:80px 1fr;gap:10px;padding:8px 0;border-top:1px solid rgba(143,168,155,.18)}.profile-us-timeline time{direction:ltr;text-align:left;opacity:.55;font-size:12px}.profile-us-timeline span{line-height:1.7}@media(max-width:600px){.profile-us-radar dl{grid-template-columns:105px 1fr}}
+
+/* Portraits use the same avatar URLs as person profiles. */
+.usr-portrait{width:52px;height:52px;flex:0 0 52px;border-radius:50%;object-fit:cover;border:1px solid rgba(143,168,155,.35)}.usr-matchup button .usr-portrait{display:block;margin:0 auto 8px}.usr-radar-news button .usr-portrait{width:28px;height:28px;vertical-align:middle;margin-inline-end:6px}.usr-meter-card header .usr-portrait{width:44px;height:44px;flex-basis:44px}

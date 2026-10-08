@@ -52,6 +52,13 @@ const USR_FALLBACK={
 };
 let USR=USR_FALLBACK;
 let USR_CANDIDATE_FEEDS={};
+let USR_PORTRAITS={};
+function usPortrait(person){
+ const candidate=(USR.candidates||[]).find(c=>c.handle===person.handle||c.name===person.name_fa||c.en===person.name_en);
+ const handle=person.handle||candidate?.handle;
+ const src=USR_PORTRAITS[String(handle||"").toLowerCase()];
+ return src?`<img class="usr-portrait" src="${esc(src)}" alt="" loading="lazy" onerror="this.style.display='none'">`:"";
+}
 async function loadUSRData(){try{const fresh=await getJSON(`${DATA}/us-radar.json?ts=${Date.now()}`);if(fresh&&fresh.updated)USR={...USR_FALLBACK,...fresh};}catch(_){USR=USR_FALLBACK;}}
 function usDays(){return Math.max(0,Math.ceil((Date.parse("2026-11-03T05:00:00Z")-Date.now())/86400000));}
 function usRatingFa(value){return ({"Toss Up":"رقابت برابر","Lean D":"تمایل به دموکرات‌ها","Lean R":"تمایل به جمهوری‌خواهان","Likely D":"احتمالاً دموکرات","Likely R":"احتمالاً جمهوری‌خواه","Solid D":"برتری قاطع دموکرات‌ها","Solid R":"برتری قاطع جمهوری‌خواهان"})[value]||value;}
@@ -70,14 +77,14 @@ function usGauge(){
 function usCandidateByHandle(h){return (USR.candidates||[]).find(x=>x.handle===h)||null;}
 function usRaceHub(x){
  const cs=(x.candidates||[]).map(usCandidateByHandle).filter(Boolean);
- return `<article class="usr-race-hub" id="usr-hub-${x.code}"><header><div><small>${x.race}</small><h3>${x.state} · ${x.code}</h3></div><span class="usr-hub-rating">${usRatingFa(x.rating)}</span></header><p class="usr-hub-why">${x.why}</p>${cs.length?`<div class="usr-matchup">${cs.map(c=>`<button onclick="openFigure('${c.handle}')"><span class="usr-party ${c.party.toLowerCase()}">${c.party}</span><b>${c.name}</b><small>${c.en}</small></button>`).join('<i>VS</i>')}</div>`:""}<div class="usr-hub-stats"><div><small>آخرین نظرسنجی</small><b>${x.poll}</b></div><div><small>ایران‌متر رقابت</small><span>${x.iran}</span></div></div><footer>${x.changed}</footer></article>`;
+ return `<article class="usr-race-hub" id="usr-hub-${x.code}"><header><div><small>${x.race}</small><h3>${x.state} · ${x.code}</h3></div><span class="usr-hub-rating">${usRatingFa(x.rating)}</span></header><p class="usr-hub-why">${x.why}</p>${cs.length?`<div class="usr-matchup">${cs.map(c=>`<button onclick="openFigure('${c.handle}')">${usPortrait(c)}<span class="usr-party ${c.party.toLowerCase()}">${c.party}</span><b>${c.name}</b><small>${c.en}</small></button>`).join('<i>VS</i>')}</div>`:""}<div class="usr-hub-stats"><div><small>آخرین نظرسنجی</small><b>${x.poll}</b></div><div><small>ایران‌متر رقابت</small><span>${x.iran}</span></div></div><footer>${x.changed}</footer></article>`;
 }
 function usRaceHubs(){return `<div class="usr-race-hubs">${(USR.race_hubs||[]).map(usRaceHub).join("")}</div>`;}
 function usCandidateNews(){
  const rows=Object.entries(USR_CANDIDATE_FEEDS).flatMap(([handle,p])=>(p.news||[]).map(n=>({...n,handle}))).sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)));
  const seen=new Set();const unique=rows.filter(n=>{if(seen.has(n.id))return false;seen.add(n.id);return true}).slice(0,8);
  if(!unique.length)return "";
- return `<section><div class="usr-section-head"><div><h2>تازه‌ترین خبرهای نامزدها</h2></div></div><div class="usr-radar-news">${unique.map(n=>`<article><div><button onclick="openFigure('${n.handle}')">${esc(usCandidateByHandle(n.handle)?.name||n.handle)}</button><time>${esc(relTime(n.published_at))}</time></div><h3><a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title_fa||n.title)}</a></h3><small>${esc(n.source)}</small></article>`).join("")}</div></section>`;
+ return `<section><div class="usr-section-head"><div><h2>تازه‌ترین خبرهای نامزدها</h2></div></div><div class="usr-radar-news">${unique.map(n=>`<article><div><button onclick="openFigure('${n.handle}')">${usPortrait({handle:n.handle})}${esc(usCandidateByHandle(n.handle)?.name||n.handle)}</button><time>${esc(relTime(n.published_at))}</time></div><h3><a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title_fa||n.title)}</a></h3><small>${esc(n.source)}</small></article>`).join("")}</div></section>`;
 }
 function usRadarNews(){return `<div class="usr-radar-news">${(USR.radar_news||[]).map(n=>`<article><div><span>${n.tag}</span><time>${n.date}</time></div><h3>${n.headline}</h3><p>${n.summary}</p><small>${n.source}</small></article>`).join("")}</div>`;}
 function usMap(){
@@ -90,7 +97,7 @@ function usFilter(kind,btn){document.querySelectorAll(".usr-map-tools button").f
 function usIranMeter(){
  const ms=USR.iran_meter||[], sig=USR.iran_signals||[];
  return `<div class="usr-signal-strip">${sig.map(x=>`<article><b>${x.value}</b><strong>${x.label_fa}</strong><p>${x.note_fa}</p></article>`).join("")}</div>
- <div class="usr-meter-grid">${ms.map(x=>`<article class="usr-meter-card"><header><span class="usr-party ${x.party.toLowerCase()}">${x.party}</span><div><h3>${x.name_fa}</h3><small>${x.state} · اطمینان داده: ${x.confidence}</small></div></header><div class="usr-meter-row"><b>جنگ ایران</b><span>${x.war}</span></div><div class="usr-meter-row"><b>اختیارات جنگی</b><span>${x.war_power}</span></div><div class="usr-meter-row"><b>تحریم/دیپلماسی</b><span>${x.sanctions}</span></div><div class="usr-meter-row"><b>اسرائیل</b><span>${x.israel}</span></div><div class="usr-meter-row"><b>نسبت با ترامپ</b><span>${x.trump}</span></div><p class="usr-meter-summary">${x.summary_fa}</p><footer>${x.source} · تا ${x.asof}</footer></article>`).join("")}</div>`;
+ <div class="usr-meter-grid">${ms.map(x=>`<article class="usr-meter-card"><header>${usPortrait(x)}<span class="usr-party ${x.party.toLowerCase()}">${x.party}</span><div><h3>${x.name_fa}</h3><small>${x.state} · اطمینان داده: ${x.confidence}</small></div></header><div class="usr-meter-row"><b>جنگ ایران</b><span>${x.war}</span></div><div class="usr-meter-row"><b>اختیارات جنگی</b><span>${x.war_power}</span></div><div class="usr-meter-row"><b>تحریم/دیپلماسی</b><span>${x.sanctions}</span></div><div class="usr-meter-row"><b>اسرائیل</b><span>${x.israel}</span></div><div class="usr-meter-row"><b>نسبت با ترامپ</b><span>${x.trump}</span></div><p class="usr-meter-summary">${x.summary_fa}</p><footer>${x.source} · تا ${x.asof}</footer></article>`).join("")}</div>`;
 }
 function usCandidate(c){return `<article class="usr-person usr-person-link" id="usr-person-${c.handle}" role="link" tabindex="0" onclick="openFigure(\'${c.handle}\')" onkeydown="if(event.key===\'Enter\')openFigure(\'${c.handle}\')"><span class="usr-party ${c.party.toLowerCase()}">${c.party}</span><div><h3>${c.name}</h3><small>${c.en} · ${c.state} · ${c.role}</small><p>${c.iran}</p><b class="usr-open-person">صفحه چهره ←</b></div></article>`;}
 function usRace(x){return `<article class="usr-race" data-race="${x.code}"><div class="usr-state"><span>${x.code}</span><div><h3>${x.state}</h3><small>سنا ۲۰۲۶</small></div></div><div class="usr-rating">${x.fa}<small>${usRatingFa(x.rating)} ${x.shift}</small></div><p>${x.note}</p><div class="usr-iran"><b>چرا برای ایران مهم است؟</b>${x.iran}</div></article>`;}
@@ -112,4 +119,4 @@ function renderUSRadar(){
  <section><div class="usr-section-head"><div><small>راهنمای سریع</small><h2>اصطلاحات را بلد نیستی؟</h2></div></div><div class="usr-glossary">${USR.glossary.map(g=>`<details><summary>${g[0]}</summary><p>${g[1]}</p></details>`).join("")}</div></section>
  <section class="usr-sources"><b>روش و منابع داده</b><p>Snapshot این نسخه بر پایه رتبه‌بندی‌های Cook Political Report و Inside Elections و نظرسنجی‌های منتشرشده تا ۷ اکتبر ۲۰۲۶ ساخته شده است. رتبه‌بندی رقابت با نتیجه انتخابات یکی نیست و نظرسنجی منفرد نیز پیش‌بینی قطعی محسوب نمی‌شود.</p><div>Cook Political Report · Inside Elections · Reuters/Ipsos · YouGov · CBS News</div></section>`;
 }
-async function showUSRadar(){show("usradar");setTab("");setHash("#/us-radar");document.title="رادار آمریکا ۲۰۲۶ | پندار";await loadUSRData();try{USR_CANDIDATE_FEEDS=(await getJSON(DATA+"/candidate-feeds.json?v="+Date.now())).people||{};}catch(_){}renderUSRadar();}
+async function showUSRadar(){show("usradar");setTab("");setHash("#/us-radar");document.title="رادار آمریکا ۲۰۲۶ | پندار";await loadUSRData();try{const figures=await loadFigures();USR_PORTRAITS=Object.fromEntries((figures.figures||[]).filter(f=>f.avatar).map(f=>[String(f.handle||"").toLowerCase(),f.avatar]));}catch(_){}try{USR_CANDIDATE_FEEDS=(await getJSON(DATA+"/candidate-feeds.json?v="+Date.now())).people||{};}catch(_){}renderUSRadar();}
