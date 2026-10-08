@@ -466,5 +466,44 @@
       "source_name": "وزارت کشور اسرائیل؛ اطلاعات انتخابات",
       "url": "https://www.gov.il/apps/moin/bocharim/en"
     }
-  ]
+  ],
+  "poll_history": [
+    {
+      "date": "2026-09-27",
+      "values": {
+        "yashar": 23,
+        "likud": 21,
+        "together": 11,
+        "beitenu": 9,
+        "democrats": 9,
+        "otzma": 7,
+        "shas": 7,
+        "utj": 7,
+        "joint": 7,
+        "religious": 6,
+        "raam": 5,
+        "reservists": 4,
+        "amcha": 4
+      },
+      "labels": {
+        "yashar": "یاشار",
+        "likud": "لیکود",
+        "together": "باهم؛ بنت و لاپید",
+        "beitenu": "اسرائیل خانه ما",
+        "democrats": "دموکرات‌ها",
+        "otzma": "قدرت یهودی",
+        "shas": "شاس",
+        "utj": "یهودیت متحد تورات",
+        "joint": "فهرست مشترک",
+        "religious": "صهیونیسم مذهبی–زهوت",
+        "raam": "رعام؛ فهرست متحد عربی",
+        "reservists": "ذخیره‌ها–اقتصادی",
+        "amcha": "عمخا اسرائیل"
+      },
+      "source": "کان ۱۱؛ کانتار",
+      "url": "https://www.kan.org.il/media/1c5fio3z/whatsapp-image-2026-09-27-at-194114.jpeg",
+      "sample": 552
+    }
+  ],
+  "poll_reviewed_at": "2026-10-08T15:28:56.048385+00:00"
 }

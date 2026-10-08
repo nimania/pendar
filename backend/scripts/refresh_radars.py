@@ -18,7 +18,7 @@ def revision(country, data):
         return {'date': poll['date'], 'source': poll['publisher'], 'url': poll['url'],
                 'series': 'kan-kantar-seats', 'values': {p['id']: p['seats'] for p in data['parties']},
                 'labels': {p['id']: p['name_fa'] for p in data['parties']},
-                'reviewed_at': data.get('updated_at'), 'election_date': data['election_date']}
+                'reviewed_at': data.get('poll_reviewed_at') or data.get('updated_at'), 'election_date': data['election_date']}
     generic = data['generic']
     return {'date': data.get('generic_date', '2026-10-06'), 'source': generic['label'],
             'url': data.get('generic_source_url', ''), 'series': 'reuters-ipsos-registered-national',
@@ -33,10 +33,13 @@ def update_country(country, data, old, now):
         return {k: v for k, v in p.items() if k not in ('reviewed_at','source','labels','recorded_at')}
     digest = hashlib.sha256(json.dumps(material, sort_keys=True).encode()).hexdigest()
     history = list(old.get('history', []))
-    if not history and country=='us':
-        for poll in data.get('generic_polls', []):
-            if poll['date'] < point['date']:
-                history.append({'date':poll['date'], 'values':poll['values'], 'url':poll['url'], 'source':poll['source'], 'series':point['series'], 'labels':point['labels'], 'recorded_at':now})
+    seeds=data.get('generic_polls' if country=='us' else 'poll_history', [])
+    added_history=False
+    for poll in seeds:
+        if poll['date']<point['date'] and not any(p['date']==poll['date'] and p['series']==point['series'] for p in history):
+            history.append({'date':poll['date'], 'values':poll['values'], 'url':poll['url'], 'source':poll['source'], 'series':point['series'], 'labels':poll.get('labels',point['labels']), 'recorded_at':now})
+            added_history=True
+    history.sort(key=lambda p:(p['date'],p.get('recorded_at','')))
     changes = list(old.get('changes', []))
     history = [p for i,p in enumerate(history) if i==0 or signature(p)!=signature(history[i-1])]
     changes = [p for i,p in enumerate(changes) if i==0 or (p['date'],p['title_fa'],p['url'])!=(changes[i-1]['date'],changes[i-1]['title_fa'],changes[i-1]['url'])]
@@ -55,6 +58,11 @@ def update_country(country, data, old, now):
         history.append({**point, 'recorded_at': now})
         changes.append({'id': digest[:20], 'date': point['date'], 'recorded_at': now,
                         'title_fa': title, 'source': point['source'], 'url': point['url']})
+    if added_history and len(history)>1 and changes and changes[-1]['date']==point['date']:
+        previous=next((p for p in reversed(history) if p['date']<point['date'] and p['series']==point['series']),None)
+        if previous:
+            differences=[f"{point['labels'][key]}: {previous['values'][key]} ← {value}" for key,value in point['values'].items() if key in previous['values'] and previous['values'][key]!=value]
+            if differences: changes[-1]={**changes[-1], 'title_fa':'؛ '.join(differences)}
     return {**old, 'fingerprint': digest, 'reviewed_at': point['reviewed_at'],
             'poll_date': point['date'], 'election_date': point['election_date'],
             'history': history[-180:], 'changes': changes[-100:]}

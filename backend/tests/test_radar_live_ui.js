@@ -7,8 +7,11 @@ assert.match(vm.runInContext("radarCrossCard('us')",context),/رفتن به را
 assert.match(vm.runInContext("radarHubCard('israel')",context),/زمان انتخابات/);
 assert.match(vm.runInContext("radarHubCard('us')",context),/آخرین بازبینی داده/);
 assert.match(vm.runInContext("radarTrend('us')",context),/polyline/);
+assert.match(vm.runInContext("radarTrend('israel')",context),/polyline/);
+assert.match(vm.runInContext("radarTrend('israel')",context),/عمخا اسرائیل/);
+const history=data.countries.israel.history;data.countries.israel.history=history.slice(-1);
 assert.doesNotMatch(vm.runInContext("radarTrend('israel')",context),/polyline/);
-assert.match(vm.runInContext("radarTrend('israel')",context),/فعلاً یک نظرسنجی/);
+assert.match(vm.runInContext("radarTrend('israel')",context),/فعلاً یک نظرسنجی/);data.countries.israel.history=history;
 assert.match(vm.runInContext("radarTrend('israel')",context),/ذخیره‌ها–اقتصادی/); // table retains all parties
 memory['pendar-radar-seen-us']='2026-09-01T00:00:00Z';
 assert.match(vm.runInContext("radarActivity('us')",context),/از آخرین بازدید شما/);

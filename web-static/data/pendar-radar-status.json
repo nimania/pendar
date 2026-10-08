@@ -7,6 +7,21 @@
       "election_date": "2026-11-03",
       "history": [
         {
+          "date": "2026-08-03",
+          "values": {
+            "d": 42,
+            "r": 37
+          },
+          "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-08/Reuters%20Ipsos%20August%20Large%20Sample%20Topline%20Full.pdf",
+          "source": "Reuters/Ipsos",
+          "series": "reuters-ipsos-registered-national",
+          "labels": {
+            "d": "دموکرات",
+            "r": "جمهوری‌خواه"
+          },
+          "recorded_at": "2026-10-08T15:31:09.659510+00:00"
+        },
+        {
           "date": "2026-09-14",
           "values": {
             "d": 44,
@@ -67,10 +82,47 @@
     },
     "israel": {
       "fingerprint": "c98892a53c2b498e28e59f9272c5460f1f309029d0791ea88e50b955400187ca",
-      "reviewed_at": "2026-10-08T12:03:18.720867+00:00",
+      "reviewed_at": "2026-10-08T15:28:56.048385+00:00",
       "poll_date": "2026-10-04",
       "election_date": "2026-10-27",
       "history": [
+        {
+          "date": "2026-09-27",
+          "values": {
+            "yashar": 23,
+            "likud": 21,
+            "together": 11,
+            "beitenu": 9,
+            "democrats": 9,
+            "otzma": 7,
+            "shas": 7,
+            "utj": 7,
+            "joint": 7,
+            "religious": 6,
+            "raam": 5,
+            "reservists": 4,
+            "amcha": 4
+          },
+          "url": "https://www.kan.org.il/media/1c5fio3z/whatsapp-image-2026-09-27-at-194114.jpeg",
+          "source": "کان ۱۱؛ کانتار",
+          "series": "kan-kantar-seats",
+          "labels": {
+            "yashar": "یاشار",
+            "likud": "لیکود",
+            "together": "باهم؛ بنت و لاپید",
+            "beitenu": "اسرائیل خانه ما",
+            "democrats": "دموکرات‌ها",
+            "otzma": "قدرت یهودی",
+            "shas": "شاس",
+            "utj": "یهودیت متحد تورات",
+            "joint": "فهرست مشترک",
+            "religious": "صهیونیسم مذهبی–زهوت",
+            "raam": "رعام؛ فهرست متحد عربی",
+            "reservists": "ذخیره‌ها–اقتصادی",
+            "amcha": "عمخا اسرائیل"
+          },
+          "recorded_at": "2026-10-08T15:29:31.878146+00:00"
+        },
         {
           "date": "2026-10-04",
           "source": "کان ۱۱؛ رادیو و تلویزیون عمومی اسرائیل",
@@ -114,7 +166,7 @@
           "id": "58dcc98222c42740c0f6",
           "date": "2026-10-04",
           "recorded_at": "2026-10-08T15:01:09.658618+00:00",
-          "title_fa": "نظرسنجی کان: یاشار 23 کرسی؛ لیکود 21 کرسی",
+          "title_fa": "باهم؛ بنت و لاپید: 11 ← 12؛ دموکرات‌ها: 9 ← 8؛ قدرت یهودی: 7 ← 8؛ شاس: 7 ← 8؛ یهودیت متحد تورات: 7 ← 8؛ فهرست مشترک: 7 ← 8",
           "source": "کان ۱۱؛ رادیو و تلویزیون عمومی اسرائیل",
           "url": "https://www.kan.org.il/content/kan-news/politic/1105927/"
         }
