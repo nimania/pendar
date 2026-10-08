@@ -28,9 +28,9 @@ def revision(country, data):
 
 def update_country(country, data, old, now):
     point = revision(country, data)
-    material = {k: v for k, v in point.items() if k not in ('reviewed_at','source','labels')}
+    material = {k: point[k] for k in ('date','series','values','ratings','election_date') if k in point}
     def signature(p):
-        return {k: v for k, v in p.items() if k not in ('reviewed_at','source','labels','recorded_at')}
+        return {k: p[k] for k in ('date','series','values','ratings','election_date') if k in p}
     digest = hashlib.sha256(json.dumps(material, sort_keys=True).encode()).hexdigest()
     history = list(old.get('history', []))
     seeds=data.get('generic_polls' if country=='us' else 'poll_history', [])
@@ -42,7 +42,7 @@ def update_country(country, data, old, now):
     history.sort(key=lambda p:(p['date'],p.get('recorded_at','')))
     changes = list(old.get('changes', []))
     history = [p for i,p in enumerate(history) if i==0 or signature(p)!=signature(history[i-1])]
-    changes = [p for i,p in enumerate(changes) if i==0 or (p['date'],p['title_fa'],p['url'])!=(changes[i-1]['date'],changes[i-1]['title_fa'],changes[i-1]['url'])]
+    changes = [p for i,p in enumerate(changes) if i==0 or (p['date'],p['title_fa'])!=(changes[i-1]['date'],changes[i-1]['title_fa'])]
     if not history or signature(history[-1]) != material:
         prev = history[-1] if history else None
         deltas = []
@@ -58,6 +58,8 @@ def update_country(country, data, old, now):
         history.append({**point, 'recorded_at': now})
         changes.append({'id': digest[:20], 'date': point['date'], 'recorded_at': now,
                         'title_fa': title, 'source': point['source'], 'url': point['url']})
+    if history and signature(history[-1])==material:
+        history[-1]={**history[-1], 'url':point['url'], 'source':point['source'], 'reviewed_at':point['reviewed_at']}
     if added_history and len(history)>1 and changes and changes[-1]['date']==point['date']:
         previous=next((p for p in reversed(history) if p['date']<point['date'] and p['series']==point['series']),None)
         if previous:

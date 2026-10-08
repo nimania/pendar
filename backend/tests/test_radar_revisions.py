@@ -26,6 +26,14 @@ class Revisions(unittest.TestCase):
         second=radars.update_country('us',self.data,first,'b')
         self.assertEqual(len(second['history']),1)
         self.assertEqual(second['reviewed_at'],self.data['updated_iso'])
+    def test_new_pdf_release_not_new_poll(self):
+        first=radars.update_country('us',self.data,{},'a')
+        self.data['generic_source_url']='https://www.ipsos.com/new-release.pdf'
+        self.data['generic']['label']='Reuters/Ipsos · 2026-10-05'
+        second=radars.update_country('us',self.data,first,'b')
+        self.assertEqual(len(second['history']),1)
+        self.assertEqual(first['changes'],second['changes'])
+        self.assertEqual(second['history'][-1]['url'],self.data['generic_source_url'])
 class PollTable(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
