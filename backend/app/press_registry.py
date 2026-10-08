@@ -168,6 +168,9 @@ PRESS_FEEDS.update({
 
 PRESS_REGISTRY = [
     # Iran — agencies / news portals
+    ("فرادید","https://faradeed.ir/","fa","iran-agency"),
+    ("جام‌جم آنلاین","https://jamejamonline.ir/","fa","iran-paper"),
+    ("ایران امروز","https://iran-emrooz.net/","fa","diaspora"),
     ("رسانه رهبر انقلاب اسلامی","https://rahbar.ir/","fa","iran-agency"),
     ("ایرنا","https://www.irna.ir","fa","iran-agency"),
     ("ایسنا","https://www.isna.ir","fa","iran-agency"),
