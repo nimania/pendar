@@ -347,6 +347,11 @@ jobs:
           python backend/tests/test_seo.py
           node backend/tests/test_seo_routes.js web-static/router.js
 
+      - name: Refresh unlisted Vitrin links
+        working-directory: backend
+        continue-on-error: true
+        run: python -m scripts.build_vitrin
+
       - name: Generate crawlable HTML and sitemaps
         run: python backend/scripts/build_seo.py --site backend/public
 
