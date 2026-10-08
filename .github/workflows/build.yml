@@ -283,6 +283,11 @@ jobs:
         run: python -m scripts.collect_bartarinha --out public/data/bartarinha-feed.json
         working-directory: backend
 
+      - name: Collect Rokna crime/accident feed for Badbadak
+        continue-on-error: true
+        run: python -m scripts.collect_rokna --out public/data/rokna-feed.json
+        working-directory: backend
+
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir backend/public/data
 
