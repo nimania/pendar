@@ -1,0 +1,360 @@
+/* ========================================================
+   داینر نیما — Restaurant & Café Tips Section
+   Warm food-industry palette, integrated with Pendar tokens
+   ======================================================== */
+
+#dinr-view {
+  --dinr-warm: #c2570a;
+  --dinr-warm-soft: #fdf0e4;
+  --dinr-warm-bg: #fef7f0;
+  --dinr-amber: #b8860b;
+  --dinr-cream: #faf5ed;
+  --dinr-tg: #2aabee;
+  --dinr-ig: #e1306c;
+  --dinr-cta-text: #fff;
+  direction: rtl;
+  padding: 0 16px 40px;
+  max-width: 780px;
+  margin: 0 auto;
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dark-mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #dinr-view {
+    --dinr-warm: #e88a4a;
+    --dinr-warm-soft: #2c1d0e;
+    --dinr-warm-bg: #1e1610;
+    --dinr-amber: #d4a84b;
+    --dinr-cream: #1a1611;
+    --dinr-tg: #4dc1f9;
+    --dinr-ig: #f0527f;
+  }
+}
+:root[data-theme="dark"] #dinr-view {
+  --dinr-warm: #e88a4a;
+  --dinr-warm-soft: #2c1d0e;
+  --dinr-warm-bg: #1e1610;
+  --dinr-amber: #d4a84b;
+  --dinr-cream: #1a1611;
+  --dinr-tg: #4dc1f9;
+  --dinr-ig: #f0527f;
+}
+
+/* ── Hero ─────────────────────────────────────────────── */
+.dinr-hero {
+  background: var(--dinr-warm-bg);
+  border: 1px solid var(--line, #e1e3dc);
+  border-radius: var(--radius, 16px);
+  padding: 28px 24px 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.dinr-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin: 0 0 6px;
+  color: var(--dinr-warm);
+  line-height: 1.4;
+}
+
+.dinr-subtitle {
+  font-size: 0.92rem;
+  color: var(--ink-soft, #474d49);
+  margin: 0 0 18px;
+  line-height: 1.7;
+}
+
+/* ── Social buttons ───────────────────────────────────── */
+.dinr-social-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dinr-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--dinr-cta-text) !important;
+  text-decoration: none !important;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.dinr-social-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.dinr-social-btn svg {
+  flex-shrink: 0;
+}
+
+.dinr-ig {
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+}
+.dinr-tg {
+  background: var(--dinr-tg);
+}
+
+/* ── Email box ────────────────────────────────────────── */
+.dinr-email-box {
+  background: var(--surface, #fff);
+  border: 1px solid var(--line, #e1e3dc);
+  border-radius: var(--radius, 16px);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.dinr-email-box h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: var(--ink, #181b19);
+}
+
+.dinr-email-box p {
+  font-size: 0.84rem;
+  color: var(--ink-soft, #474d49);
+  margin: 0 0 14px;
+  line-height: 1.65;
+}
+
+.dinr-email-form {
+  display: flex;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.dinr-email-form input[type="email"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--line-strong, #cdd0c8);
+  border-radius: 10px;
+  background: var(--paper, #f2f4f0);
+  color: var(--ink, #181b19);
+  font-family: inherit;
+  font-size: 0.88rem;
+  outline: none;
+  direction: ltr;
+  text-align: left;
+}
+.dinr-email-form input[type="email"]:focus {
+  border-color: var(--dinr-warm);
+  box-shadow: 0 0 0 3px rgba(194, 87, 10, 0.12);
+}
+
+.dinr-email-form button {
+  padding: 10px 22px;
+  background: var(--dinr-warm);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.dinr-email-form button:hover {
+  background: var(--dinr-amber);
+}
+
+.dinr-email-msg {
+  font-size: 0.82rem;
+  margin-top: 10px;
+  min-height: 1.4em;
+}
+.dinr-email-msg.ok {
+  color: var(--fact, #1a6a55);
+}
+
+/* ── Category chips ───────────────────────────────────── */
+.dinr-cats {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 0 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dinr-cats .fchip {
+  white-space: nowrap;
+  padding: 7px 16px;
+  border: 1px solid var(--line-strong, #cdd0c8);
+  border-radius: 20px;
+  background: var(--surface, #fff);
+  color: var(--ink, #181b19);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.dinr-cats .fchip:hover {
+  background: var(--surface-2, #e9ebe5);
+}
+.dinr-cats .fchip.on {
+  background: var(--dinr-warm);
+  color: #fff;
+  border-color: var(--dinr-warm);
+}
+
+/* ── Tip cards ────────────────────────────────────────── */
+.dinr-tips {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.dinr-card {
+  background: var(--surface, #fff);
+  border: 1px solid var(--line, #e1e3dc);
+  border-radius: var(--radius, 16px);
+  padding: 20px 22px;
+  transition: box-shadow 0.15s;
+}
+.dinr-card:hover {
+  box-shadow: var(--shadow, 0 1px 2px rgba(20,30,25,.04), 0 8px 24px -12px rgba(20,40,32,.16));
+}
+
+.dinr-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.dinr-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.dinr-cat {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--dinr-warm);
+  background: var(--dinr-warm-soft);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.dinr-card-title {
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: var(--ink, #181b19);
+  line-height: 1.55;
+}
+
+.dinr-card-body {
+  font-size: 0.88rem;
+  color: var(--ink-soft, #474d49);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ── Footer CTA ───────────────────────────────────────── */
+.dinr-footer-cta {
+  margin-top: 28px;
+  padding: 20px 24px;
+  background: var(--dinr-cream);
+  border: 1px solid var(--line, #e1e3dc);
+  border-radius: var(--radius, 16px);
+  text-align: center;
+  font-size: 0.84rem;
+  color: var(--ink-soft, #474d49);
+  line-height: 1.75;
+}
+.dinr-footer-cta p {
+  margin: 0 0 6px;
+}
+.dinr-footer-cta p:last-child {
+  margin-bottom: 0;
+}
+.dinr-footer-cta a {
+  color: var(--dinr-warm);
+  font-weight: 600;
+}
+
+/* ── Telegram inline CTA (between cards) ──────────────── */
+.dinr-tg-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: var(--surface, #fff);
+  border: 2px dashed var(--dinr-tg);
+  border-radius: var(--radius, 16px);
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none !important;
+  color: var(--ink, #181b19) !important;
+  transition: background 0.12s;
+}
+.dinr-tg-cta:hover {
+  background: var(--surface-2, #e9ebe5);
+}
+.dinr-tg-cta-text {
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.dinr-tg-cta-sub {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: var(--ink-faint, #7b817c);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (min-width: 600px) {
+  .dinr-tips {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dinr-tg-cta {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  #dinr-view {
+    padding: 0 12px 32px;
+  }
+  .dinr-hero {
+    padding: 22px 16px 20px;
+  }
+  .dinr-title {
+    font-size: 1.35rem;
+  }
+  .dinr-email-form {
+    flex-direction: column;
+  }
+  .dinr-email-form button {
+    width: 100%;
+  }
+  .dinr-social-btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  .dinr-card {
+    padding: 16px 18px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #dinr-view * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
