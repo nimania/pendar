@@ -14,7 +14,7 @@ on:
       - "backend/scripts/build_books.py"
       - ".github/workflows/periodicals.yml"
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "37 * * * *"
 
 permissions:
   contents: read
