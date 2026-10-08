@@ -1,8 +1,8 @@
 {
   "countries": {
     "us": {
-      "fingerprint": "abd8cee11c96250556fb7c574b91519d3d307a7e182898fb2ebdd3231c32f500",
-      "reviewed_at": "2026-10-08T15:02:46.584438+00:00",
+      "fingerprint": "193d2704c2d8725b507c0cbb8d0a0ec6c141d09b987003a7bea9410c0009161d",
+      "reviewed_at": "2026-10-08T15:04:49.120053+00:00",
       "poll_date": "2026-10-05",
       "election_date": "2026-11-03",
       "history": [
@@ -45,31 +45,6 @@
           "reviewed_at": "2026-10-08T15:01:09.611422+00:00",
           "election_date": "2026-11-03",
           "recorded_at": "2026-10-08T15:01:09.658618+00:00"
-        },
-        {
-          "date": "2026-10-05",
-          "source": "Reuters/Ipsos · 2026-10-05",
-          "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.7%20release_0.pdf",
-          "series": "reuters-ipsos-registered-national",
-          "values": {
-            "d": 44,
-            "r": 37
-          },
-          "labels": {
-            "d": "دموکرات",
-            "r": "جمهوری‌خواه"
-          },
-          "ratings": {
-            "AZ-01": "Lean D",
-            "NC-11": "Toss Up",
-            "FL-22": "Toss Up",
-            "OH-07": "Toss Up",
-            "OH-09": "Toss Up",
-            "IA-01": "Toss Up"
-          },
-          "reviewed_at": "2026-10-08T15:02:46.584438+00:00",
-          "election_date": "2026-11-03",
-          "recorded_at": "2026-10-08T15:02:46.649848+00:00"
         }
       ],
       "changes": [
@@ -80,26 +55,18 @@
           "title_fa": "حمایت ملی: دموکرات‌ها 44٪؛ جمهوری‌خواهان 37٪",
           "source": "Reuters/Ipsos · ۵ اکتبر",
           "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.7%20release_0.pdf"
-        },
-        {
-          "id": "abd8cee11c96250556fb",
-          "date": "2026-10-05",
-          "recorded_at": "2026-10-08T15:02:46.649848+00:00",
-          "title_fa": "حمایت ملی: دموکرات‌ها 44٪؛ جمهوری‌خواهان 37٪",
-          "source": "Reuters/Ipsos · 2026-10-05",
-          "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.7%20release_0.pdf"
         }
       ],
       "source_check": {
-        "checked_at": "2026-10-08T15:02:46.649848+00:00",
+        "checked_at": "2026-10-08T15:04:49.191596+00:00",
         "ok": true,
         "content_hash": "72d648a1109dde9c4e11d23ef21d55e2131b4a5eb1468304217cd0c7241c04b9",
         "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.7%20release_0.pdf",
-        "last_success_at": "2026-10-08T15:02:46.649848+00:00"
+        "last_success_at": "2026-10-08T15:04:49.191596+00:00"
       }
     },
     "israel": {
-      "fingerprint": "58dcc98222c42740c0f619bc54e381963d61c2c7113b6a4c8cce99b370da9e02",
+      "fingerprint": "c98892a53c2b498e28e59f9272c5460f1f309029d0791ea88e50b955400187ca",
       "reviewed_at": "2026-10-08T12:03:18.720867+00:00",
       "poll_date": "2026-10-04",
       "election_date": "2026-10-27",
@@ -153,11 +120,11 @@
         }
       ],
       "source_check": {
-        "checked_at": "2026-10-08T15:02:46.649848+00:00",
+        "checked_at": "2026-10-08T15:04:49.191596+00:00",
         "ok": true,
-        "content_hash": "324768d536f314dc02c177252670550e730e7d302c968d48dfc121926cc8b906",
+        "content_hash": "7940833c6cdb5dc112cc5b7df10aab68497ad60dea67331f4bdca0da9d6a0b16",
         "url": "https://www.kan.org.il/content/kan-news/politic/1105927/",
-        "last_success_at": "2026-10-08T15:02:46.649848+00:00"
+        "last_success_at": "2026-10-08T15:04:49.191596+00:00"
       }
     }
   }
