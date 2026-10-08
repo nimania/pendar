@@ -704,7 +704,7 @@ def run() -> None:
 
     # Generate real entry pages for private-by-navigation Future Observatory routes.
     # These direct URLs load the SPA shell without listing pages in the public sitemap.
-    for future_route in ("future", "future/transition", "future/transition/fattahi"):
+    for future_route in ("future", "future/method", "future/transition", "future/transition/fattahi"):
         _write_text(os.path.join(OUT, future_route, "index.html"),
                     open(os.path.join(WEB_STATIC, "index.html"), encoding="utf-8").read())
 
