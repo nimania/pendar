@@ -341,6 +341,7 @@ jobs:
           mkdir -p site/data
           cp web-static/data/pendar-*.json site/data/
           cp web-static/data/us-radar.json site/data/us-radar.json
+          cp web-static/data/future-*.json site/data/
           # Never let the empty repository seed overwrite a previously healthy
           # Guide when the live EPG refresh failed.
           if [ -s /tmp/tv-guide.json ]; then
@@ -459,6 +460,16 @@ jobs:
 
       - name: Generate crawlable HTML and sitemaps
         run: python backend/scripts/build_seo.py --site site
+
+      - name: Ensure Future Observatory direct paths
+        run: |
+          for route in future future/transition future/transition/fattahi; do
+            mkdir -p "site/$route"
+            cp site/index.html "site/$route/index.html"
+          done
+          test -s site/data/future-research-books.json
+          test -s site/data/future-fattahi-model.json
+          test -s site/future/transition/fattahi/index.html
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
