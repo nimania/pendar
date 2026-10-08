@@ -1,3 +1,13 @@
+function movieMentionHasEvidence(movie,mention){
+ const norm=v=>String(v||"").replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").toLowerCase().replace(/[^0-9a-z\u0600-\u06ff]+/g," ").trim().replace(/\s+/g," ");
+ const text=norm([mention.headline_fa,mention.topic_fa,mention.summary_fa].filter(Boolean).join(" "));
+ return (movie.aliases||[movie.title_fa,movie.original_title]).filter(Boolean).some(alias=>{
+   const title=norm(alias);if(title.length<3)return false;
+   const escaped=title.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+   if(title.split(" ").length>2)return (" "+text+" ").includes(" "+title+" ");
+   return new RegExp("(?:^| )(?:فیلم(?: سینمایی)?|سریال|مستند|انیمیشن|movie|film|series|documentary) (?:به نام |با عنوان |با نام )?"+escaped+"(?: |$)").test(text)||new RegExp("(?:^| )"+escaped+" (?:فیلم|سریال|مستند|movie|film|series)(?: |$)").test(text);
+ });
+}
 /* Pendar — figure directory render + profile/statement openers. Extracted
    from app.js (completes the figures split begun in figures-core.js): the
    figures directory grid (renderFigures), profile openers
@@ -74,7 +84,7 @@ async function openStatement(id) {
   if (!post) { el.innerHTML = '<div class="state"><div class="big">این گفته پیدا نشد</div></div>'; return; }
   const statementBooks=(statementBookData.books||[]).filter(b=>(b.mentions||[]).some(m=>String(m.post_id||"")===String(raw)));
   const statementBooksSection=statementBooks.length?'<div class="rule"><span>کتاب‌های مرتبط با این گفته</span><span class="l"></span></div><div class="press-book-links">'+statementBooks.map(b=>'<button onclick="openBook(\''+esc(b.slug)+'\')"><span>کتاب</span><b>'+esc(b.title_fa||"")+'</b></button>').join("")+'</div>':"";
-  const statementMovies=(statementMovieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>String(mm.post_id||"")===String(raw)));
+  const statementMovies=(statementMovieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>String(mm.post_id||"")===String(raw)&&movieMentionHasEvidence(m,mm)));
   const statementMoviesSection=statementMovies.length?'<div class="rule"><span>فیلم‌ها و سریال‌های مرتبط با این گفته</span><span class="l"></span></div><div class="press-book-links">'+statementMovies.map(m=>'<button onclick="openMovie(\''+esc(m.slug)+'\')"><span>فیلم</span><b>'+esc(m.title_fa||m.original_title||"")+'</b></button>').join("")+'</div>':"";
   setHash("#/statement/" + encodeURIComponent(raw));
   const isYoutube = post.platform === "youtube";
@@ -188,7 +198,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const master=canonicalFigure?.meta?.tmdb_id?await loadMovieMaster():{items:[]};
   const filmography=canonicalFigure?.meta?.filmography||{};
   const mediaWorks=(master.items||[]).filter(m=>Object.prototype.hasOwnProperty.call(filmography,m.pendar_id)).map(_masterMovie);
-  const figureMovies=(movieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>mm.kind==="figure"&&(String(mm.handle||"").toLowerCase()===String(x.handle||"").toLowerCase()||(x.posts||[]).some(p=>String(p.id)===String(mm.post_id)))));
+  const figureMovies=(movieData.movies||[]).filter(m=>(m.mentions||[]).some(mm=>movieMentionHasEvidence(m,mm)&&mm.kind==="figure"&&(String(mm.handle||"").toLowerCase()===String(x.handle||"").toLowerCase()||(x.posts||[]).some(p=>String(p.id)===String(mm.post_id)))));
   const profileMedia=_figureMediaWorks(x,canonicalFigure);
   const localFilmIds=new Set(mediaWorks.map(m=>m.master_id));
   profileMedia.films=profileMedia.films.filter(w=>!w.internal_target||!localFilmIds.has(w.internal_target.id));

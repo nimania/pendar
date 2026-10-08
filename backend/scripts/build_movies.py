@@ -251,10 +251,22 @@ def _sources() -> list[dict]:
 
 def _contains_alias(text: str, aliases: list[str]) -> bool:
     hay = _norm(text)
+    medium = r"(?:فیلم(?: سینمایی)?|سریال|مستند|انیمیشن|movie|film|series|documentary)"
     for alias in aliases:
         needle = _norm(alias)
-        if len(needle) >= 3 and needle in hay:
-            return True
+        if len(needle) < 3:
+            continue
+        title = re.escape(needle)
+        if not re.search(rf"(?<!\\w){title}(?!\\w)", hay):
+            continue
+        # Short names are ordinary words too; require an explicit work reference.
+        if len(needle.split()) <= 2:
+            if re.search(rf"(?<!\\w){medium} (?:به نام |با عنوان |با نام )?{title}(?!\\w)", hay):
+                return True
+            if re.search(rf"(?<!\\w){title} (?:فیلم|سریال|مستند|movie|film|series)(?!\\w)", hay):
+                return True
+            continue
+        return True
     return False
 
 
