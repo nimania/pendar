@@ -1,45 +1,45 @@
-name: US Radar Snapshot
-
+name: Refresh radar sources and revisions
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'web-static/data/us-radar.json'
+      - 'web-static/data/pendar-israel-radar.json'
+      - 'backend/scripts/refresh_radars.py'
+      - 'backend/scripts/collect_radar_polls.py'
+      - 'backend/tests/test_radar_revisions.py'
+      - '.github/workflows/us-radar.yml'
   schedule:
-    - cron: "17 5,17 * * *"
-
+    - cron: '17 5,17 * * *'
 permissions:
   contents: write
-
+concurrency:
+  group: radar-revisions
+  cancel-in-progress: false
 jobs:
   snapshot:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate radar data
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test revision retention and comparability
+        run: python -m unittest discover -s backend/tests -p test_radar_revisions.py
+      - name: Test radar rendering
+        run: node backend/tests/test_radar_live_ui.js
+      - name: Install PDF reader
+        run: pip install pypdf
+      - name: Refresh registered-voter polling from Ipsos
+        run: python backend/scripts/collect_radar_polls.py
+      - name: Check sources and retain actual revisions
+        run: python backend/scripts/refresh_radars.py --out web-static/data/pendar-radar-status.json --check-sources
+      - name: Commit updated radar status
         run: |
-          python - <<'PY'
-          import json
-          p="web-static/data/us-radar.json"
-          d=json.load(open(p,encoding="utf-8"))
-          assert d.get("updated")
-          assert isinstance(d.get("house_races"),list)
-          assert isinstance(d.get("history"),list)
-          print("US Radar data valid:", d["updated"])
-          PY
-      - name: Preserve daily snapshot
-        run: |
-          python - <<'PY'
-          import json, pathlib, datetime
-          src=pathlib.Path("web-static/data/us-radar.json")
-          d=json.loads(src.read_text(encoding="utf-8"))
-          out=pathlib.Path("web-static/data/us-radar-history")
-          out.mkdir(parents=True,exist_ok=True)
-          day=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
-          p=out/f"{day}.json"
-          if not p.exists(): p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-          PY
-      - name: Commit snapshot if changed
-        run: |
-          git config user.name "pendar-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add web-static/data/us-radar.json web-static/data/us-radar-history/
-          git diff --cached --quiet || git commit -m "data: archive US Radar snapshot"
+          git config user.name 'pendar-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add web-static/data/pendar-radar-status.json web-static/data/us-radar.json
+          git diff --cached --quiet || git commit -m 'data: refresh radar source checks and revisions'
+          git pull --rebase origin main
           git push

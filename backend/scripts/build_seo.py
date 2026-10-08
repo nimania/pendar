@@ -256,11 +256,20 @@ def build(site):
             url=route(kind) if n==1 else route(kind,'page/'+str(n))
             paging=links([(route(kind) if i==1 else route(kind,'page/'+str(i)), 'صفحهٔ '+str(i)) for i in range(1,len(chunks)+1)]) if len(chunks)>1 else ''
             pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak','us-radar','israel-radar','radar'],'schema_type':'CollectionPage'}
+    radar_status=read(data/'pendar-radar-status.json',{}).get('countries',{})
     if '/radar/' in pages:
         pages['/radar/']['body']='<p>رقابت‌های سیاسی جهان و پیامدهایشان برای ایران؛ خبر، چهره و داده در یک جا.</p>'+links([('/us-radar/','رادار آمریکا'),('/israel-radar/','رادار اسرائیل')])
+    for country, url in [('us','/us-radar/'),('israel','/israel-radar/')]:
+        status=radar_status.get(country,{})
+        if '/radar/' in pages and status:
+            latest=(status.get('changes') or [{}])[-1]
+            pages['/radar/']['body']+='<h2>'+esc(SECTIONS[url.strip('/')])+'</h2><p>زمان انتخابات: '+esc(status.get('election_date'))+'؛ آخرین تغییر: '+esc(latest.get('title_fa'))+'؛ بازبینی داده: '+esc(status.get('reviewed_at'))+'</p>'
+        if url in pages:
+            other='/israel-radar/' if country=='us' else '/us-radar/'
+            pages[url]['body']+='<aside><a href="'+other+'">رفتن به '+esc(SECTIONS[other.strip('/')])+' ←</a></aside>'
     if israel and '/israel-radar/' in pages:
         page=pages['/israel-radar/']
-        page['body']='<p>انتخابات اسرائیل در '+esc(israel.get('election_date'))+'؛ رقابت احزاب برای ۱۲۰ کرسی کنست. ۶۱ کرسی معیار اکثریت مطلق و حد نصاب ورود فهرست‌ها ۳٫۲۵ درصد است.</p>'
+        page['body']+='<p>انتخابات اسرائیل در '+esc(israel.get('election_date'))+'؛ رقابت احزاب برای ۱۲۰ کرسی کنست. ۶۱ کرسی معیار اکثریت مطلق و حد نصاب ورود فهرست‌ها ۳٫۲۵ درصد است.</p>'
         poll=israel.get('poll',{})
         page['body']+='<h2>نقشه کرسی‌ها؛ نظرسنجی '+esc(poll.get('publisher'))+'، '+esc(poll.get('date'))+'</h2><p>نظرسنجی است، نه نتیجه انتخابات. '+esc(poll.get('pollster'))+'؛ '+esc(poll.get('sample'))+' پاسخ‌دهنده.</p><ul>'+''.join('<li>'+esc(p['name_fa'])+'؛ '+esc(p['seats'])+' کرسی</li>' for p in israel.get('parties',[]))+'</ul><a href="'+esc(poll.get('url'))+'">منبع نظرسنجی</a>'
         page['body']+='<h2>چهره‌ها</h2>'+links([(route('figure',p['handle']),p['name_fa']) for p in israel.get('people',[])])

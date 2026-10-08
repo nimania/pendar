@@ -1,0 +1,117 @@
+{
+  "countries": {
+    "us": {
+      "fingerprint": "08cb43d944f4c92a4686147e85d63c24d0fa6e213d05be0a5902d3bece147501",
+      "reviewed_at": "2026-10-08T15:01:09.611422+00:00",
+      "poll_date": "2026-10-05",
+      "election_date": "2026-11-03",
+      "history": [
+        {
+          "date": "2026-09-14",
+          "values": {
+            "d": 44,
+            "r": 37
+          },
+          "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-09/Reuters%20Ipsos%20Survey%20September%202026%20FULL.pdf",
+          "source": "Reuters/Ipsos",
+          "series": "reuters-ipsos-registered-national",
+          "labels": {
+            "d": "دموکرات",
+            "r": "جمهوری‌خواه"
+          },
+          "recorded_at": "2026-10-08T15:01:09.658618+00:00"
+        },
+        {
+          "date": "2026-10-05",
+          "source": "Reuters/Ipsos · ۵ اکتبر",
+          "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.7%20release_0.pdf",
+          "series": "reuters-ipsos-registered-national",
+          "values": {
+            "d": 44,
+            "r": 37
+          },
+          "labels": {
+            "d": "دموکرات",
+            "r": "جمهوری‌خواه"
+          },
+          "ratings": {
+            "AZ-01": "Lean D",
+            "NC-11": "Toss Up",
+            "FL-22": "Toss Up",
+            "OH-07": "Toss Up",
+            "OH-09": "Toss Up",
+            "IA-01": "Toss Up"
+          },
+          "reviewed_at": "2026-10-08T15:01:09.611422+00:00",
+          "election_date": "2026-11-03",
+          "recorded_at": "2026-10-08T15:01:09.658618+00:00"
+        }
+      ],
+      "changes": [
+        {
+          "id": "08cb43d944f4c92a4686",
+          "date": "2026-10-05",
+          "recorded_at": "2026-10-08T15:01:09.658618+00:00",
+          "title_fa": "حمایت ملی: دموکرات‌ها 44٪؛ جمهوری‌خواهان 37٪",
+          "source": "Reuters/Ipsos · ۵ اکتبر",
+          "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.7%20release_0.pdf"
+        }
+      ]
+    },
+    "israel": {
+      "fingerprint": "58dcc98222c42740c0f619bc54e381963d61c2c7113b6a4c8cce99b370da9e02",
+      "reviewed_at": "2026-10-08T12:03:18.720867+00:00",
+      "poll_date": "2026-10-04",
+      "election_date": "2026-10-27",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "source": "کان ۱۱؛ رادیو و تلویزیون عمومی اسرائیل",
+          "url": "https://www.kan.org.il/content/kan-news/politic/1105927/",
+          "series": "kan-kantar-seats",
+          "values": {
+            "yashar": 23,
+            "likud": 21,
+            "together": 12,
+            "beitenu": 9,
+            "democrats": 8,
+            "otzma": 8,
+            "shas": 8,
+            "utj": 8,
+            "joint": 8,
+            "religious": 6,
+            "raam": 5,
+            "reservists": 4
+          },
+          "labels": {
+            "yashar": "یاشار",
+            "likud": "لیکود",
+            "together": "باهم؛ بنت و لاپید",
+            "beitenu": "اسرائیل خانه ما",
+            "democrats": "دموکرات‌ها",
+            "otzma": "قدرت یهودی",
+            "shas": "شاس",
+            "utj": "یهودیت متحد تورات",
+            "joint": "فهرست مشترک",
+            "religious": "صهیونیسم مذهبی–زهوت",
+            "raam": "رعام؛ فهرست متحد عربی",
+            "reservists": "ذخیره‌ها–اقتصادی"
+          },
+          "reviewed_at": "2026-10-08T12:03:18.720867+00:00",
+          "election_date": "2026-10-27",
+          "recorded_at": "2026-10-08T15:01:09.658618+00:00"
+        }
+      ],
+      "changes": [
+        {
+          "id": "58dcc98222c42740c0f6",
+          "date": "2026-10-04",
+          "recorded_at": "2026-10-08T15:01:09.658618+00:00",
+          "title_fa": "نظرسنجی کان: یاشار 23 کرسی؛ لیکود 21 کرسی",
+          "source": "کان ۱۱؛ رادیو و تلویزیون عمومی اسرائیل",
+          "url": "https://www.kan.org.il/content/kan-news/politic/1105927/"
+        }
+      ]
+    }
+  }
+}

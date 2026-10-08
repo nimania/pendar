@@ -4,6 +4,7 @@ const root=path.resolve(__dirname,'../..');
 const data=JSON.parse(fs.readFileSync(path.join(root,'web-static/data/pendar-israel-radar.json'),'utf8'));
 const nodes=Object.fromEntries(['israel-radar-content','isr-coalition-total','isr-coalition-progress','isr-news','radar-content'].map(id=>[id,{innerHTML:'',style:{}}]));
 const context=vm.createContext({document:{getElementById:id=>nodes[id]},Date,Math,Set,esc:v=>String(v??''),faN:v=>String(v),console,show:()=>{},setTab:()=>{},setHash:()=>{}});
+vm.runInContext(fs.readFileSync(path.join(root,'web-static/radar-live.js'),'utf8'),context);
 vm.runInContext(fs.readFileSync(path.join(root,'web-static/israel-radar.js'),'utf8'),context);
 context.data=data;vm.runInContext('ISR=data;renderIsraelRadar()',context);
 assert.equal(data.parties.reduce((n,p)=>n+p.seats,0),120);
@@ -15,5 +16,5 @@ vm.runInContext("isrToggleParty('raam',false)",context);assert.match(nodes['isr-
 assert.equal(vm.runInContext("isrNewsMatches({headline_fa:'قیمت ارز در تهران'})",context),false);
 assert.equal(vm.runInContext("isrNewsMatches({headline_fa:'انتخابات کنست اسرائیل'})",context),true);
 assert.equal(vm.runInContext("isrNewsMatches({headline_fa:'سرکوب اعتراض‌ها'},ISR.people[0])",context),false);
-vm.runInContext('showRadarHub()',context);assert.match(nodes['radar-content'].innerHTML,/href="\/israel-radar\/"/);
+assert.match(vm.runInContext("radarHubCard('israel')",context),/href="\/israel-radar\/"/);
 console.log('120 seats, exact majority, removal, person matching and radar navigation passed');
