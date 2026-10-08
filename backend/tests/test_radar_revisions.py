@@ -8,6 +8,7 @@ radars=importlib.util.module_from_spec(spec);spec.loader.exec_module(radars)
 class Revisions(unittest.TestCase):
     def setUp(self):
         self.data=json.loads((ROOT/'web-static/data/us-radar.json').read_text());self.data['generic_polls']=[];self.data.pop('generic_reviewed_at',None)
+        self.data['generic']={'d':44,'r':37,'label':'Reuters/Ipsos'};self.data['generic_date']='2026-10-05'
     def test_unchanged_does_not_invent_poll(self):
         first=radars.update_country('us',self.data,{},'2026-10-08T00:00:00Z')
         again=radars.update_country('us',self.data,first,'2026-10-09T00:00:00Z')
