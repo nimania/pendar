@@ -236,11 +236,11 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     <div class="x-post-body">
       <div class="x-post-meta"><b>${figureProfileLink(x,esc(x.name_fa))}</b><span>·</span><time>${relTime(p.published_at)}</time></div>
       ${p.kind === "news_statement" ? `<div class="x-post-context">گفته در خبر · ${esc(p.source_name || "منبع خبری")}</div>` : (p.topic_fa ? `<div class="x-post-topic">${esc(p.topic_fa)}</div>` : "")}
-      <p>${esc(p.summary_fa || "")}</p>
+      <p>${esc(p.summary_fa || "")}</p>${figureSourceNote(p)}
       ${telegramEmbed(p)}
       <div class="x-post-actions">
         <button onclick="openStatement(' ${statementKey(p)}'.trim())" title="صفحهٔ این گفته">◯ <span>صفحهٔ گفته</span></button>
-        <a href="${esc(p.url)}" target="_blank" rel="noopener" title="متن اصلی">↗ <span>متن اصلی</span></a>
+        ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener" title="متن اصلی">↗ <span>متن اصلی</span></a>` : ""}
       </div>
     </div>
   </article>`;

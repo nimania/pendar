@@ -25,6 +25,9 @@ function statementCardAttrs(p) {
   const id = statementKey(p).replace(/'/g, "%27");
   return `tabindex="0" role="link" style="cursor:pointer" aria-label="مشاهدهٔ کامل دیدگاه" onclick="statementCardClick(event,'${id}')" onkeydown="statementCardKey(event,'${id}')"`;
 }
+function figureSourceNote(p) {
+  return p.source_note_fa ? `<p class="muted fig-note">${esc(p.source_name || "")} · ${esc(p.source_note_fa)}</p>` : "";
+}
 function figureCard(p, withName, detail = false) {
   const party = p.kind === "party_claim"
     ? `<span class="cstatus st-warn" title="این شخص خودش طرفِ این ماجراست">${KIND_NOTE.party_claim}</span>` : "";
@@ -32,9 +35,9 @@ function figureCard(p, withName, detail = false) {
     ? `<div class="v-h">${figureProfileLink(p, avatar(p, "sm"))}<div class="fig-id"><a class="v-name" href="#/figure/${esc(p.handle)}" onclick="event.preventDefault();${p._newsPerson ? "openNewsPerson" : "openFigure"}('${esc(p.handle)}')">${esc(p.name_fa)}</a><span class="fig-role">${esc(p.role_fa)}</span></div><span class="spacer" style="flex:1"></span>${party}</div>`
     : `<div class="v-h"><span class="fig-topic">${esc(p.topic_fa || "")}</span><span class="spacer" style="flex:1"></span>${party}</div>`;
   return `<div class="view fig-view" ${detail ? "" : statementCardAttrs(p)}>${head}
-    <p>${esc(p.summary_fa || "")}</p>
+    <p>${esc(p.summary_fa || "")}</p>${figureSourceNote(p)}
     <div class="fig-foot"><button class="fig-profile-link" onclick="openStatement(\'${statementKey(p)}\')">صفحهٔ این گفته</button><span class="muted">${relTime(p.published_at)}${p.source_language && p.source_language !== "fa" ? " · " + esc(p.translation_label_fa || ("ترجمه از " + p.source_language)) : ""}</span>
-      <a href="${esc(p.url)}" target="_blank" rel="noopener">${p.kind === "news_statement" ? "منبع این گفته" : p.platform === "truthsocial" ? "پست اصلی در تروث سوشیال" : p.platform === "youtube" ? "ویدئو در یوتیوب" : "متن کامل در " + (String(p.url || "").includes("ble.ir/") ? "بله" : "تلگرام")} ↗</a></div></div>`;
+      ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${p.kind === "news_statement" ? "منبع این گفته" : p.platform === "truthsocial" ? "پست اصلی در تروث سوشیال" : p.platform === "youtube" ? "ویدئو در یوتیوب" : "متن کامل در " + (String(p.url || "").includes("ble.ir/") ? "بله" : "تلگرام")} ↗</a>` : ""}</div></div>`;
 }
 const FIG_FOLLOW_KEY = "jankalam-figure-follows";
 let _figTimelineMode = "all";

@@ -600,9 +600,35 @@ def compact(reg: Registry) -> dict:
     }
 
 
+def merge_editorial_views(data_dir: Path) -> dict:
+    """Keep reviewed transcript quotes in the profile feed across rebuilds."""
+    source = data_dir / "pendar-editorial-views.json"
+    if not source.exists():
+        source = Path(__file__).resolve().parents[2] / "web-static/data/pendar-editorial-views.json"
+    entries = read_json(source, [])
+    figures = read_json(data_dir / "figures.json", {"figures": []})
+    for entry in entries:
+        profile = entry["profile"]
+        person = next((f for f in figures.setdefault("figures", [])
+                       if str(f.get("handle", "")).lower() == profile["handle"].lower()), None)
+        if person is None:
+            person = {**profile, "posts": []}
+            figures["figures"].append(person)
+        posts = [{**post, "handle": person["handle"], "avatar": person.get("avatar", ""),
+                  "role_fa": person.get("role_fa", ""), "field": person.get("field", "media")}
+                 for post in entry.get("posts", [])]
+        ids = {p["id"] for p in posts}
+        person["posts"] = posts + [p for p in person.get("posts", []) if p.get("id") not in ids]
+        person["count"] = len(person["posts"])
+    if entries:
+        data_dir.mkdir(parents=True, exist_ok=True)
+        (data_dir / "figures.json").write_text(json.dumps(figures, ensure_ascii=False), encoding="utf-8")
+    return figures
+
+
 def build(data_dir: Path) -> dict:
     reg = Registry()
-    add_current_figures(reg, read_json(data_dir / "figures.json", {}))
+    add_current_figures(reg, merge_editorial_views(data_dir))
     add_knowledge_people(reg, as_list(read_json(data_dir / "pendar-people.json", [])), "pendar-people", "knowledge_person")
     add_knowledge_people(reg, as_list(read_json(data_dir / "pendar-figures.json", [])), "pendar-figures", "knowledge_figure")
     add_topics(reg, data_dir)

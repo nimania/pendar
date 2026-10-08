@@ -2,6 +2,7 @@
 import argparse, datetime, hashlib, html, json, re, shutil, subprocess, runpy
 from pathlib import Path
 from urllib.parse import quote, unquote
+from build_entities import merge_editorial_views
 
 ORIGIN = 'https://pendar.io'
 SECTIONS = {'radar':'رادارهای پندار؛ آمریکا و اسرائیل','israel-radar':'رادار اسرائیل؛ انتخابات و پیامدها برای ایران','us-radar':'رادار آمریکا؛ انتخابات و پیامدها برای ایران','badbadak':'بادبادک؛ چهره‌ها، سبک زندگی و سرگرمی','headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
@@ -21,7 +22,7 @@ def build(site):
     site=Path(site); data=site/'data'; template=(site/'index.html').read_text()
     # Reviewed editorial recaps survive both full and UI-only rebuilds.
     editorial=read(Path(__file__).resolve().parents[1]/'data'/'editorial-recaps.json',[])
-    figure_data=read(data/'figures.json',{'figures':[]})
+    figure_data=merge_editorial_views(data)
     israel=read(data/'pendar-israel-radar.json',{})
     for profile in israel.get('people',[]):
         existing=next((f for f in figure_data.get('figures',[]) if str(f.get('handle','')).lower()==profile['handle'].lower()),None)
@@ -132,7 +133,7 @@ def build(site):
         related=[]
         for p in posts:
             title=p.get('topic_fa') or p.get('headline_fa') or p.get('title_fa') or ('دیدگاه '+str(f.get('name_fa','')))
-            add('statement',p.get('id'),title,'\n'.join(filter(None,[text(p.get('recap_fa')),text(p.get('summary_fa')),text(p.get('key_points')),text(p.get('text'))])),schema_type='Article',published=p.get('published_at'))
+            add('statement',p.get('id'),title,'\n'.join(filter(None,[text(p.get('recap_fa')),text(p.get('summary_fa')),text(p.get('key_points')),text(p.get('text')),text(p.get('source_name')) if p.get('editorial') else '',text(p.get('source_note_fa')) if p.get('editorial') else ''])),schema_type='Article',published=p.get('published_at'))
             if p.get('id'):related.append((route('statement',p['id']),title))
         for post in posts:
             statement_url=route('statement',post.get('id',''))
