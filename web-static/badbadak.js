@@ -1,6 +1,6 @@
 /* Badbadak: tabloid newspaper lens over Pendar's existing datasets. */
 const BB_CATEGORIES = [ ['all','همه'], ['celeb','سلبریتی'], ['turkish','سریال‌های ترکی'], ['beauty','آرایش و زیبایی'], ['health','سلامت'], ['style','مُد و استایل'], ['food','خوراکی'], ['buzz','جنجال و حوادث'], ['tech','تکنولوژی'], ['travel','سفر'] ];
-let _badbadakLoaded=false, _bbLoading=null, _bbStories=[], _bbPeople=[], _bbTrends=[], _bbCategory='all', _bbMeshkiNews=[], _bbBartarinha=[], _bbRokna=[], _bbSeries=[], _bbPage='home';
+let _badbadakLoaded=false, _bbLoading=null, _bbStories=[], _bbPeople=[], _bbTrends=[], _bbCategory='all', _bbMeshkiNews=[], _bbBartarinha=[], _bbRokna=[], _bb7sobh=[], _bbSeries=[], _bbPage='home';
 
 function bbCategory(s){
  if(s.bb_category)return s.bb_category;
@@ -76,7 +76,7 @@ async function renderBadbadak(){
  const el=document.getElementById('badbadak-content');el.innerHTML='<div class="state" role="status">در حال آوردن تازه‌های بادبادک…</div>';
  _bbLoading=(async()=>{
  try{
- const results=await Promise.allSettled([ALL.length?Promise.resolve(ALL):getJSON(`${DATA}/stories.json`),getJSON(`${DATA}/figures.json`),getJSON(`${DATA}/entity-registry.json`),getJSON(`${DATA}/trends.json`),getJSON(MESHKI_ROOT+"data/news-feed.json",8000),loadMeshkiSeries(),getJSON(`${DATA}/bartarinha-feed.json`,8000),getJSON(`${DATA}/rokna-feed.json`,8000)]);
+ const results=await Promise.allSettled([ALL.length?Promise.resolve(ALL):getJSON(`${DATA}/stories.json`),getJSON(`${DATA}/figures.json`),getJSON(`${DATA}/entity-registry.json`),getJSON(`${DATA}/trends.json`),getJSON(MESHKI_ROOT+"data/news-feed.json",8000),loadMeshkiSeries(),getJSON(`${DATA}/bartarinha-feed.json`,8000),getJSON(`${DATA}/rokna-feed.json`,8000),getJSON(`${DATA}/7sobh-feed.json`,8000)]);
  if(results[0].status!=='fulfilled'&&results[4].status!=='fulfilled')throw new Error('stories');
  const data=results[0].status==='fulfilled'?results[0].value:[];const stories=Array.isArray(data)?data:data.stories||[];
  const now=Date.now();const age=s=>Math.max(0,(now-Date.parse(s.last_seen||s.published_at||s.first_seen||''))/86400000)||0;
@@ -93,13 +93,16 @@ async function renderBadbadak(){
  const roknaRaw=results[7].status==='fulfilled'?(Array.isArray(results[7].value)?results[7].value:[]):[];
  const rkSeen=new Set();
  _bbRokna=roknaRaw.filter(n=>n.title&&n.url).filter(n=>{const key=n.title.replace(/[\s‌،؛«»]/g,'');if(rkSeen.has(key))return false;rkSeen.add(key);return true;}).sort((a,b)=>String(b.published||'').localeCompare(String(a.published||''))).slice(0,15).map(n=>({id:n.id||n.url,headline_fa:n.title,summary_fa:n.summary||'',image_url:n.image||'',published_at:n.published||'',source_count:1,bb_category:bbCategory({headline_fa:n.title})||'buzz',bb_url:n.url,bb_source:'رکنا'}));
+ const sobhRaw=results[8].status==='fulfilled'?(Array.isArray(results[8].value)?results[8].value:[]):[];
+ const shSeen=new Set();
+ _bb7sobh=sobhRaw.filter(n=>n.title&&n.url).filter(n=>{const key=n.title.replace(/[\s‌،؛«»]/g,'');if(shSeen.has(key))return false;shSeen.add(key);return true;}).sort((a,b)=>String(b.published||'').localeCompare(String(a.published||''))).slice(0,15).map(n=>({id:n.id||n.url,headline_fa:n.title,summary_fa:n.summary||'',image_url:n.image||'',published_at:n.published||'',source_count:1,bb_category:bbCategory({headline_fa:n.title})||'buzz',bb_url:n.url,bb_source:'هفت صبح'}));
  _bbSeries=(results[5].status==='fulfilled'?results[5].value.rows:[]).filter(r=>r.status==='در حال پخش'&&bbSafeImage(r.hero)).slice(0,10);
  for(const story of _bbStories){
   const names=(story.entities||[]).map(e=>e.name_fa).filter(Boolean);
   const person=entities.find(e=>e.type==='person'&&names.includes(e.name_fa)&&bbSafeImage(e.meta?.avatar));
   if(person)story.bb_fallback_image=person.meta.avatar;
  }
- const names=[..._bbStories,..._bbMeshkiNews,..._bbBartarinha,..._bbRokna].map(s=>s.headline_fa||'').join(' ');
+ const names=[..._bbStories,..._bbMeshkiNews,..._bbBartarinha,..._bbRokna,..._bb7sobh].map(s=>s.headline_fa||'').join(' ');
  _bbPeople=[...(figures.figures||[]).map(f=>({...f,bbURL:routeURL('#/figure/'+encodeURIComponent(f.handle))})),...entities.filter(e=>e.type==='person'||e.kind==='person').map(e=>({...e,name_fa:e.name_fa||e.title,avatar:e.meta?.avatar||e.image_url||e.avatar||e.image?.path,bbURL:routeURL('#/entity/'+encodeURIComponent(e.id))}))].filter(p=>p.name_fa&&bbSafeImage(p.avatar)&&names.includes(p.name_fa)).filter((p,i,arr)=>arr.findIndex(x=>x.name_fa===p.name_fa)===i).slice(0,14);
  const trends=results[3].status==='fulfilled'?results[3].value:[];_bbTrends=(Array.isArray(trends)?trends:trends.trends||[]).filter(t=>t.id&&bbCategory(t)).slice(0,4);
  _badbadakLoaded=true;if(_bbPage==='home')bbRender();
@@ -141,7 +144,7 @@ function bbNumberedItem(s, num){
 /* === MAIN RENDER === */
 function bbRender(){
  if(_bbPage!=='home')return;
- const _extNews=[..._bbMeshkiNews,..._bbBartarinha,..._bbRokna].sort((a,b)=>String(b.published_at||'').localeCompare(String(a.published_at||'')));
+ const _extNews=[..._bbMeshkiNews,..._bbBartarinha,..._bbRokna,..._bb7sobh].sort((a,b)=>String(b.published_at||'').localeCompare(String(a.published_at||'')));
  const combined=_bbStories.flatMap((s,i)=>_extNews[i]?[s,_extNews[i]]:[s]).concat(_extNews.slice(_bbStories.length));
  const stories=combined.filter(s=>_bbCategory==='all'||bbCategory(s)===_bbCategory);
  const hero=stories[0];
