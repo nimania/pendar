@@ -3,7 +3,7 @@ name: Pendar Movie Master
 on:
   workflow_dispatch:
   schedule:
-    - cron: "20 */6 * * *"
+    - cron: "20 3 * * *"
   push:
     branches: [main]
     paths:
