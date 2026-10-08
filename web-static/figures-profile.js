@@ -190,7 +190,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const x=canonicalFigure?_personFigureRecord(canonicalFigure,base):base;
   if (!x) { el.innerHTML = `<div class="state"><div class="big">این چهره پیدا نشد</div></div>`; return; }
   let israelSection="";
-  if(x.israel_radar||ISR?.people?.some(p=>p.handle===x.handle)){try{await loadISRadar();await loadISRNews();israelSection=isrProfileSection(x.handle);}catch(_){}}
+  if(x.israel_radar||(typeof ISR!=="undefined"&&ISR?.people?.some(p=>p.handle===x.handle))){try{await loadISRadar();await loadISRNews();israelSection=isrProfileSection(x.handle);}catch(_){}}
   const direct = (x.posts || []).filter(p => p.kind !== "news_statement");
   const news = (x.posts || []).filter(p => p.kind === "news_statement");
   const nameNorm=s=>String(s||"").replace(/ي/g,"ی").replace(/ى/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim();
