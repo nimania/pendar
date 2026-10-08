@@ -240,7 +240,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       ${telegramEmbed(p)}
       <div class="x-post-actions">
         <button onclick="openStatement(' ${statementKey(p)}'.trim())" title="صفحهٔ این گفته">◯ <span>صفحهٔ گفته</span></button>
-        ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener" title="متن اصلی">↗ <span>متن اصلی</span></a>` : ""}
+        ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener" title="${sourceLinkLabel(p)}">↗ <span>${sourceLinkLabel(p)}</span></a>` : ""}
       </div>
     </div>
   </article>`;

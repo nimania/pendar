@@ -43,6 +43,17 @@ function figureTextParagraphs(p, className = "") {
 function isEditorialQuote(p) {
   return !!(p && (p.editorial || p.platform === "transcript"));
 }
+// Label the "source" link by the URL/platform, so a video source reads right
+// even on an editorial/transcript post (whose platform isn't "youtube").
+function sourceLinkLabel(p) {
+  const u = String(p.url || "");
+  if (p.kind === "news_statement") return "منبع این گفته";
+  if (/(youtube\.com|youtu\.be)/i.test(u)) return "ویدئو در یوتیوب";
+  if (p.platform === "truthsocial") return "پست اصلی در تروث سوشیال";
+  if (p.platform === "youtube") return "ویدئو در یوتیوب";
+  if (u.includes("ble.ir/")) return "متن کامل در بله";
+  return "متن کامل در تلگرام";
+}
 function figureCard(p, withName, detail = false) {
   const party = p.kind === "party_claim"
     ? `<span class="cstatus st-warn" title="این شخص خودش طرفِ این ماجراست">${KIND_NOTE.party_claim}</span>` : "";
@@ -52,7 +63,7 @@ function figureCard(p, withName, detail = false) {
   return `<div class="view fig-view${isEditorialQuote(p) ? " fig-quote" : ""}" ${detail ? "" : statementCardAttrs(p)}>${head}
     ${figureTextParagraphs(p)}${figureSourceNote(p)}
     <div class="fig-foot"><button class="fig-profile-link" onclick="openStatement(\'${statementKey(p)}\')">صفحهٔ این گفته</button><span class="muted">${relTime(p.published_at)}${p.source_language && p.source_language !== "fa" ? " · " + esc(p.translation_label_fa || ("ترجمه از " + p.source_language)) : ""}</span>
-      ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${p.kind === "news_statement" ? "منبع این گفته" : p.platform === "truthsocial" ? "پست اصلی در تروث سوشیال" : p.platform === "youtube" ? "ویدئو در یوتیوب" : "متن کامل در " + (String(p.url || "").includes("ble.ir/") ? "بله" : "تلگرام")} ↗</a>` : ""}</div></div>`;
+      ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${sourceLinkLabel(p)} ↗</a>` : ""}</div></div>`;
 }
 const FIG_FOLLOW_KEY = "jankalam-figure-follows";
 let _figTimelineMode = "all";
@@ -139,7 +150,7 @@ async function renderFigureTimeline() {
       <div class="x-figure-actions">
         <button onclick="${p._newsPerson ? "openNewsPerson" : "openFigure"}('${esc(p.handle)}')">◯ <span>پروفایل</span></button>
         <button onclick="openStatement('${statementKey(p)}')">▢ <span>صفحهٔ گفته</span></button>
-        ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">↗ <span>متن اصلی</span></a>` : ""}
+        ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">↗ <span>${sourceLinkLabel(p)}</span></a>` : ""}
       </div>
     </div>
   </article>`).join("") + `</div>`;
