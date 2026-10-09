@@ -7,6 +7,35 @@
    Uses app.js/other-module helpers (credBadge, geoBadge, impInfo,
    figuresSection, groupedByCategory) at runtime. No behavior change. */
 
+
+// Trial only: shortlist at most ten top-ranked Iran-related news items.
+// Keyword matching creates a review candidate, NEVER a verified impact or score.
+const FUTURE_NEWS_PILOT=[
+ {name:"انتقال قدرت و نهادها",words:["انتقال قدرت","جانشینی","رهبری","اصولگرایان","مجلس","قوه قضاییه","دولت موقت"],why:"ممکن است برای پیگیری انسجام نهادها یا تغییر موازنه قدرت مهم باشد."},
+ {name:"امنیت و روابط خارجی",words:["جنگ","حمله نظامی","آتش بس","مذاکره","تحریم","اسرائیل","آمریکا"],why:"ممکن است بر سناریوهای تنش یا کاهش تنش و تصمیم‌های سیاست خارجی اثر بگذارد."},
+ {name:"اقتصاد و خدمات",words:["تورم","ارز","بودجه","برق","گاز","بحران اقتصادی"],why:"ممکن است نشانه‌ای برای بررسی پایداری اقتصادی و خدمات عمومی باشد."},
+ {name:"جامعه و مشارکت",words:["اعتراض","اعتصاب","انتخابات","مشارکت سیاسی","جامعه مدنی"],why:"ممکن است برای رصد تغییر رفتار جمعی و مشارکت اجتماعی مرتبط باشد."}
+];
+function futureNewsPilot(s){
+ if(!s || !s.id || !["high","direct","major"].includes(String(s.iran_relevance||"").toLowerCase()) && !/ایران|تهران|جمهوری اسلامی/.test(String(s.headline_fa||"")))return null;
+ const title=String(s.headline_fa||"");
+ const hit=FUTURE_NEWS_PILOT.find(t=>t.words.some(w=>title.includes(w)));
+ if(!hit)return null;
+ const sorted=ALL.filter(x=>x&&x.id).slice().sort((a,b)=>(Number(b.importance_score)||0)-(Number(a.importance_score)||0));
+ const eligible=sorted.filter(x=>/ایران|تهران|جمهوری اسلامی/.test(String(x.headline_fa||""))||["high","direct","major"].includes(String(x.iran_relevance||"").toLowerCase())).filter(x=>FUTURE_NEWS_PILOT.some(t=>t.words.some(w=>String(x.headline_fa||"").includes(w)))).slice(0,10);
+ return eligible.some(x=>String(x.id)===String(s.id))?hit:null;
+}
+function futureNewsTrialBadge(s){
+ return futureNewsPilot(s)?'<span class="future-pilot-badge" title="نامزد بررسی تحریری؛ نه اثر تأییدشده">اثر بر آینده · آزمایشی</span>':"";
+}
+function futureNewsTrialDetail(s){
+ const t=futureNewsPilot(s);if(!t)return "";
+ return '<section class="layers future-pilot-panel"><h3 class="section-h">اثر بر آینده <span class="n">آزمایشی · نامزد بررسی</span></h3>'+
+ '<p><strong>حوزهٔ مرتبط: '+esc(t.name)+'</strong></p><p>'+esc(t.why)+'</p>'+
+ '<p>این ارتباط فقط بر پایهٔ واژه‌های تیتر شناسایی شده است. نه جهت اثر تأیید شده، نه شاخص یا احتمال سناریویی تغییر کرده است. برای نتیجه‌گیری، ارزیابی منابع و پیگیری خبرهای بعدی ضروری است.</p>'+
+ '<a href="/future/transition/watch/">دیده‌بان گذار ←</a></section>';
+}
+
 function feedCard(s, homepage = false) {
   const imp = impInfo(s.importance_score);
   const badges = (s.source_names || []).slice(0, 4).map(x => `<span class="src-badge clickable" data-src="${esc(x)}" onclick="event.stopPropagation();openSource(this.dataset.src)">${esc(x)}</span>`).join("");
@@ -17,7 +46,7 @@ function feedCard(s, homepage = false) {
     : miniMap(s);
   return `<button class="card" onclick="openStory('${s.id}')">
     <div class="meta"><span class="chip">${CAT_FA[s.category] || "خبر"}</span>
-      <span class="dot"></span><span class="muted">${relTime(s.published_at)}</span>${geoBadge(s.geo)}${trendBadge(s.trend)}
+      <span class="dot"></span><span class="muted">${relTime(s.published_at)}</span>${geoBadge(s.geo)}${trendBadge(s.trend)}${homepage ? futureNewsTrialBadge(s) : ""}
       <span class="imp ${imp.cls}"><span class="bars"><i></i><i></i><i></i></span><span class="lbl">${imp.lbl}</span></span></div>
     <div style="display:flex;gap:12px;align-items:flex-start">
       <div style="flex:1;min-width:0">
