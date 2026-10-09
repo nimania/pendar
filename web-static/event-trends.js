@@ -65,8 +65,10 @@ async function renderEventTrends() {
   const el=document.getElementById('event-trends');
   if(!el) return;
   try {
-    const groups=await loadEventTrends();
-    el.innerHTML=`<div class="rule"><span>ماجراهای ترند</span><span class="l"></span></div>
+    const [res,eds]=await Promise.all([loadEventTrends().then(v=>({ok:true,v}),e=>({ok:false,e})),loadEditorialTrends()]);
+    if(!res.ok&&!eds.length)throw res.e;
+    const groups=res.ok?res.v:[];
+    el.innerHTML=(eds.length?`<div class="rule"><span>ویژهٔ پندار</span><span class="l"></span></div><div class="editorial-board">${eds.map(editorialCard).join('')}</div>`:'')+`<div class="rule"><span>ماجراهای ترند</span><span class="l"></span></div>
       <p class="muted">هر ماجرا، گزارش‌های مرتبط با یک رویداد مشخص است. روی آن بزنید تا توضیح، تازه‌ترین گزارش‌ها و سیر ماجرا را بخوانید.</p>
       <div class="event-board">${groups.map((g,i)=>eventCard(g,i)).join('')||'<p class="muted">هنوز ماجرای تازه با پوشش چند رسانه ثبت نشده است.</p>'}</div>`;
   } catch (_) {el.innerHTML='<p class="muted">ماجراهای ترند فعلاً بارگذاری نشد. <button onclick="renderEventTrends()">تلاش دوباره</button></p>';}
@@ -74,9 +76,11 @@ async function renderEventTrends() {
 async function renderHomeEvents() {
   const el=document.getElementById('home-events'); if(!el)return;
   try {
-    const groups=(await loadEventTrends()).filter(g=>g.items.some(PendarEvents.isIranStory));
+    const [res,eds]=await Promise.all([loadEventTrends().then(v=>({ok:true,v}),e=>({ok:false,e})),loadEditorialTrends()]);
+    if(!res.ok&&!eds.length)throw res.e;
+    const groups=(res.ok?res.v:[]).filter(g=>g.items.some(PendarEvents.isIranStory));
     el.innerHTML=`<div class="home-panel-title"><b>ماجراهای ترند ایران</b><div class="home-event-tools"><a href="#/trends">همهٔ ماجراها ←</a><button type="button" aria-label="ماجراهای قبلی" onclick="scrollHomeEvents(-1)">→</button><button type="button" aria-label="ماجراهای بعدی" onclick="scrollHomeEvents(1)">←</button></div></div>
-      <div class="home-event-rail" aria-label="مرور ماجراهای ترند">${groups.slice(0,6).map(homeEventCard).join('')||'<p class="muted">هنوز ماجرای تازه با پوشش چند رسانه ثبت نشده است.</p>'}</div>`;
+      <div class="home-event-rail" aria-label="مرور ماجراهای ترند">${eds.map(homeEditorialTile).join('')}${groups.slice(0,6).map(homeEventCard).join('')||(eds.length?'':'<p class="muted">هنوز ماجرای تازه با پوشش چند رسانه ثبت نشده است.</p>')}</div>`;
   }catch(_){el.innerHTML='<p class="muted">ماجراهای ترند فعلاً در دسترس نیست.</p>';}
 }
 function homeEventCard(g,rank) {
@@ -98,6 +102,7 @@ async function openEventDossier(id) {
   document.getElementById('ta-title').textContent='ماجرا';
   document.getElementById('ta-sub').textContent='';
   const el=document.getElementById('ta-feed');el.innerHTML='<div class="spinner"></div>';
+  if(String(id).startsWith('editorial-'))return openEditorialDossier(id,request,el);
   try {
     const groups=await loadEventTrends();
     let g=groups.find(x=>x.id===id);
@@ -131,4 +136,83 @@ function setEventTab(k) {
   if(k==='analysis')items=items.filter(s=>s.content_type==='analysis'||s.kind==='analysis'||/تحلیل|یادداشت|گفتگو|گفت‌وگو/.test(s.headline_fa||''));
   items.sort(k==='latest'?(a,b)=>PendarEvents.stamp(b.published_at)-PendarEvents.stamp(a.published_at):(a,b)=>(b.importance_score||0)-(a.importance_score||0)||(b.source_count||0)-(a.source_count||0));
   document.getElementById('event-feed').innerHTML=items.length?`<div class="feed">${items.map(feedCard).join('')}</div>`:'<p class="muted">هنوز تحلیل جداگانه‌ای برای این ماجرا ثبت نشده است.</p>';
+}
+
+/* «ماجرای ویژهٔ پندار»: hand-written, source-attributed explainers pinned above
+   the automatic event board. Same editorial contract as stories — facts, views,
+   synthesis and uncertainty kept apart; summaries + links, never copied articles.
+   Data: data/pendar-editorial-trends.json (edit that file to publish/retire). */
+let _editorialCache=null;
+async function loadEditorialTrends() {
+  if(_editorialCache)return _editorialCache;
+  const d=await getJSON(`${DATA}/pendar-editorial-trends.json`,15000).catch(()=>({items:[]}));
+  const now=Date.now();
+  _editorialCache=(d.items||[]).filter(x=>x&&x.id&&x.title&&x.status!=='draft'&&(!x.expires_at||PendarEvents.stamp(x.expires_at)>now))
+    .sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)||PendarEvents.stamp(b.updated_at||b.published_at)-PendarEvents.stamp(a.updated_at||a.published_at));
+  return _editorialCache;
+}
+function editorialImage(d,eager=false) {
+  if(!d.image)return '';
+  const fallback=d.image_fallback||d.image;
+  return `<picture>${d.image_fallback?`<source srcset="${esc(d.image)}" type="image/webp">`:''}<img src="${esc(fallback)}" alt="${esc(d.image_alt||'')}" ${eager?'fetchpriority="high"':'loading="lazy"'} onerror="this.closest('picture').remove()"></picture>`;
+}
+function editorialMeta(d) {
+  return `${faN((d.sources||[]).length)} منبع · به‌روزرسانی ${relTime(d.updated_at||d.published_at)}`;
+}
+function editorialCard(d) {
+  return `<a class="editorial-card" href="#/event/${encodeURIComponent(d.id)}">
+    <span class="editorial-media">${editorialImage(d)}</span>
+    <span class="editorial-copy"><small class="editorial-kicker">${esc(d.kicker||'ماجرای ویژه')}</small>
+    <b>${esc(d.title)}</b>${d.dek?`<p>${esc(d.dek)}</p>`:''}<small>${editorialMeta(d)}</small></span><span class="event-arrow">←</span></a>`;
+}
+function homeEditorialTile(d) {
+  return `<a class="home-event-tile home-editorial-tile" href="#/event/${encodeURIComponent(d.id)}" title="${esc(d.title)}">
+    <span class="home-event-photo">${editorialImage(d)}<span class="home-event-number home-editorial-badge">ویژه</span></span>
+    <span class="home-event-caption"><b>${esc(d.title)}</b><small>${esc(d.kicker||'ماجرای ویژه')} <span>· ${relTime(d.updated_at||d.published_at)}</span></small></span></a>`;
+}
+function editorialRefs(d,ids) {
+  const list=d.sources||[];
+  return (ids||[]).map(id=>{const i=list.findIndex(x=>x.id===id);if(i<0)return '';const x=list[i];
+    return `<a class="src-ref" href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.name+' — '+x.title)}">${faN(i+1)}</a>`;}).join('');
+}
+function editorialSection(d,sec) {
+  const head=`<div class="rule"><span>${esc(sec.title||'')}</span><span class="l"></span></div>`;
+  const items=(sec.items||[]).map(it=>`<li>${it.who?`<b>${esc(it.who)}: </b>`:''}${esc(it.text)}${it.src?`<span class="src-refs">${editorialRefs(d,it.src)}</span>`:''}</li>`).join('');
+  const paras=(sec.paragraphs||[]).map(p=>`<p class="kalam">${esc(p)}</p>`).join('');
+  return `<section class="editorial-section editorial-${esc(sec.kind||'text')}">${head}${paras}${items?`<ul class="editorial-list">${items}</ul>`:''}</section>`;
+}
+function editorialOutlook(d) {
+  if(!(d.outlook||[]).length)return '';
+  const rows=d.outlook.map(o=>{const lv=Math.max(0,Math.min(5,Number(o.level)||0));
+    return `<div class="outlook-row"><div class="outlook-label"><b>${esc(o.label)}</b>${o.note?`<small>${esc(o.note)}</small>`:''}</div>
+      <div class="outlook-meter" role="img" aria-label="${esc(o.level_fa||'')}">${Array.from({length:5},(_,i)=>`<i class="${i<lv?'on':''}"></i>`).join('')}<span>${esc(o.level_fa||'')}</span></div></div>`;}).join('');
+  return `<section class="editorial-section"><div class="rule"><span>احتمال‌ها در یک نگاه</span><span class="l"></span></div><div class="editorial-outlook">${rows}</div>${d.outlook_note?`<p class="muted">${esc(d.outlook_note)}</p>`:''}</section>`;
+}
+async function openEditorialDossier(id,request,el) {
+  try {
+    const d=(await loadEditorialTrends()).find(x=>x.id===id);
+    if(request!==_eventRequest || currentRoute()!=='event/'+id)return;
+    if(!d){el.innerHTML='<div class="state"><div class="big">این ماجرا پیدا نشد</div><a href="#/trends">ماجراهای تازه ←</a></div>';return;}
+    _activeEvent=null;
+    document.title=d.title+' | پندار';
+    document.getElementById('ta-title').textContent=d.title;
+    document.getElementById('ta-sub').textContent=`${d.kicker||'ماجرای ویژه'} · ${editorialMeta(d)}`;
+    const terms=(d.match_terms||[]).map(t=>PendarEvents.norm(t).toLowerCase()).filter(Boolean);
+    if(!ALL.length){try{ALL=await getJSON(`${DATA}/stories.json`);}catch(_){}}
+    if(request!==_eventRequest)return;
+    const related=terms.length?ALL.filter(s=>{const h=PendarEvents.norm((s.headline_fa||'')+' '+(s.summary_fa||'')).toLowerCase();return terms.some(t=>h.includes(t));})
+      .sort((a,b)=>PendarEvents.stamp(b.published_at)-PendarEvents.stamp(a.published_at)).slice(0,8):[];
+    const sources=(d.sources||[]).map((x,i)=>`<li><span class="src-n">${faN(i+1)}</span><a href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(x.name)}</b><span>${esc(x.title)}</span></a>${x.date?`<small>${esc(x.date)}</small>`:''}</li>`).join('');
+    el.innerHTML=`<div class="event-layout editorial-dossier"><div>
+      ${d.image?`<figure class="editorial-hero">${editorialImage(d,true)}${d.image_credit?`<figcaption>${esc(d.image_credit)}</figcaption>`:''}</figure>`:''}
+      ${d.dek?`<p class="editorial-dek">${esc(d.dek)}</p>`:''}
+      ${d.short_answer?`<section class="editorial-section editorial-answer"><div class="rule"><span>پاسخ کوتاه</span><span class="l"></span></div><p class="kalam">${esc(d.short_answer)}</p></section>`:''}
+      ${editorialOutlook(d)}
+      ${(d.sections||[]).map(sec=>editorialSection(d,sec)).join('')}
+      ${related.length?`<section class="editorial-section"><div class="rule"><span>تازه‌ترین گزارش‌های مرتبط در پندار</span><span class="l"></span></div><div class="feed">${related.map(feedCard).join('')}</div></section>`:''}
+      <p class="muted editorial-note">این توضیح را تحریریهٔ پندار از گزارش‌های منابع فهرست‌شده گردآوری کرده است؛ واقعیت، روایت طرف‌ها، جمع‌بندی و نامعلوم‌ها جدا آمده‌اند و از متن منابع فقط خلاصه و پیوند آمده است. شماره‌های کنار هر بند به منبع آن اشاره دارد.</p>
+      </div><aside class="event-aside">
+      ${(d.watch||[]).length?`<div class="rule"><span>چه چیزهایی را دنبال کنیم؟</span><span class="l"></span></div><ul class="editorial-watch">${d.watch.map(w=>`<li>${esc(w)}</li>`).join('')}</ul>`:''}
+      <div class="rule"><span>منابع</span><span class="l"></span></div><ol class="editorial-sources">${sources}</ol></aside></div>`;
+  }catch(_){if(request===_eventRequest)el.innerHTML='<p class="muted">ماجرا بارگذاری نشد. <a href="#/trends">بازگشت به ماجراها</a></p>';}
 }
