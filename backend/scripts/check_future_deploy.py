@@ -11,12 +11,14 @@ root = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else pathlib.Path("site")
 routes = [
     "future", "future/method", "future/transition",
     "future/transition/fattahi", "future/transition/watch",
+    "future/transition/editor",
 ] + [
     "future/transition/institution/" + key for key in
     ("authority", "executive", "justice", "mahestan", "security", "economy", "watch", "assembly")
 ]
 assets = [
     "future-live.js",
+    "future-editor.js",
     "data/stories.json",
     "data/future-methodology.json",
     "data/future-research-books.json",
