@@ -1,0 +1,46 @@
+{
+  "id": "editorial-SLUG",
+  "slug": "SLUG",
+  "status": "draft",
+  "pinned": false,
+  "origin": "manual",
+  "sensitivity": "normal",
+  "kicker": "ماجرای ویژهٔ پندار",
+  "category": "tech",
+  "title": "عنوان به شکل پرسش؟",
+  "question": "یک پرسش محوری که این ویژه به آن جواب می‌دهد؟",
+  "dek": "یک جمله که بگوید خواننده در این ویژه چه می‌خواند.",
+  "published_at": "2026-01-01T09:00:00+03:30",
+  "updated_at": "2026-01-01T09:00:00+03:30",
+  "image": "assets/pendar/editorial/SLUG.webp",
+  "image_fallback": "assets/pendar/editorial/SLUG.jpg",
+  "image_alt": "تصویرسازی: توضیح کوتاه تصویر",
+  "image_credit": "تصویرسازی: پندار",
+  "match_terms": ["کلیدواژه ۱", "کلیدواژه ۲"],
+  "short_answer": "جواب کوتاه در ۲ تا ۴ جمله: اول خود جواب، بعد قیدها.",
+  "outlook": [
+    {"label": "حالت اول", "level": 3, "level_fa": "متوسط", "note": "چرا این سطح، با اشاره به شواهد."}
+  ],
+  "outlook_note": "این سنجه برداشت تحریریهٔ پندار از شواهد همین صفحه است، نه پیش‌بینی آماری.",
+  "sections": [
+    {"kind": "fact", "title": "واقعیت‌ها: الان کجا ایستاده‌ایم؟", "items": [
+      {"text": "یک واقعیت با تاریخ و عدد.", "src": ["source-1"]}
+    ]},
+    {"kind": "views", "title": "روایت‌ها: هر طرف چه می‌گوید؟", "items": [
+      {"who": "طرف اول", "text": "موضع طرف اول، با نام و تاریخ.", "src": ["source-1"]},
+      {"who": "طرف دوم", "text": "موضع طرف دوم.", "src": ["source-2"]}
+    ]},
+    {"kind": "synthesis", "title": "جمع‌بندی پندار", "paragraphs": [
+      "جمع‌بندی تحریریه؛ برداشت است و باید از واقعیت‌ها جدا بماند."
+    ]},
+    {"kind": "uncertainty", "title": "آنچه هنوز نمی‌دانیم", "items": [
+      {"text": "چیزی که هنوز معلوم نیست و چرا.", "src": ["source-3"]}
+    ]}
+  ],
+  "watch": ["نشانهٔ اول", "نشانهٔ دوم", "نشانهٔ سوم"],
+  "sources": [
+    {"id": "source-1", "name": "نام رسانه", "title": "عنوان مطلب", "url": "https://example.com/1", "date": "2026-01-01"},
+    {"id": "source-2", "name": "نام رسانه", "title": "عنوان مطلب", "url": "https://example.com/2", "date": "2026-01-01"},
+    {"id": "source-3", "name": "نام رسانه", "title": "عنوان مطلب", "url": "https://example.com/3", "date": "2026-01-01"}
+  ]
+}

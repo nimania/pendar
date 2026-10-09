@@ -13,6 +13,8 @@ on:
       - "backend/scripts/build_seo.py"
       - "backend/scripts/build_event_trends.js"
       - "backend/tests/test_event_trends.js"
+      - "backend/scripts/validate_specials.py"
+      - "backend/tests/test_specials_validator.py"
       - "backend/tests/test_seo*"
       - "backend/scripts/build_tv_guide.py"
       - "backend/scripts/build_streaming_availability.py"
@@ -411,6 +413,8 @@ jobs:
           node --check web-static/router.js
           node --check web-static/event-trends.js
           node backend/tests/test_event_trends.js
+          python backend/tests/test_specials_validator.py
+          python backend/scripts/validate_specials.py
 
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir site/data

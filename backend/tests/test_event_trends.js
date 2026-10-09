@@ -22,3 +22,14 @@ assert.equal(isIranStory({headline_fa:'حادثه برای نفتکش در تن�
 assert.equal(isIranStory({headline_fa:'احضار سفیر در تهران'}),true);
 assert.equal(isIranStory({headline_fa:'اعطای جایزه نوبل فیزیک',iran_relevance:'none'}),false);
 console.log('Homepage Iran relevance: 5 checks passed.');
+
+const {editorialVisible}=require('../../web-static/event-trends.js');
+const sp={id:'editorial-x',title:'آیا؟',status:'live'};
+assert.equal(editorialVisible(sp,now),true);
+assert.equal(editorialVisible({...sp,status:'draft'},now),false);
+assert.equal(editorialVisible({...sp,status:'archived'},now),false);
+assert.equal(editorialVisible({...sp,origin:'auto'},now),false,'auto special needs human approval');
+assert.equal(editorialVisible({...sp,origin:'auto',review:'pending'},now),false);
+assert.equal(editorialVisible({...sp,origin:'auto',review:'approved'},now),true);
+assert.equal(editorialVisible({...sp,expires_at:'2026-10-01T00:00:00Z'},now),false);
+console.log('Specials visibility: 7 checks passed.');

@@ -44,7 +44,15 @@
         sourceCount:sources.length,summary:lead.summary_fa||'',rising:g.items.some(s=>(s.trend||{}).rising)};
     }).filter(g=>g.sources.length>=2 || g.items.length>=2).sort((a,b)=>b.score-a.score).slice(0,30);
   }
-  root.PendarEvents={build,same,norm,stamp,isIranStory};
+  /* Specials contract (docs/specials.md): drafts never show; an auto-drafted special
+     shows only after a human set review:"approved"; expired ones drop off. */
+  function editorialVisible(x,now){
+    if(!x||!x.id||!x.title)return false;
+    if(x.status!=='live')return false;
+    if(x.origin==='auto'&&x.review!=='approved')return false;
+    return !x.expires_at||stamp(x.expires_at)>now;
+  }
+  root.PendarEvents={build,same,norm,stamp,isIranStory,editorialVisible};
   if(typeof module!=='undefined') module.exports=root.PendarEvents;
 })(typeof window==='undefined'?globalThis:window);
 
@@ -141,13 +149,14 @@ function setEventTab(k) {
 /* «ماجرای ویژهٔ پندار»: hand-written, source-attributed explainers pinned above
    the automatic event board. Same editorial contract as stories — facts, views,
    synthesis and uncertainty kept apart; summaries + links, never copied articles.
-   Data: data/pendar-editorial-trends.json (edit that file to publish/retire). */
+   Data: data/pendar-editorial-trends.json (edit that file to publish/retire).
+   Contract + checks: docs/specials.md, backend/scripts/validate_specials.py. */
 let _editorialCache=null;
 async function loadEditorialTrends() {
   if(_editorialCache)return _editorialCache;
   const d=await getJSON(`${DATA}/pendar-editorial-trends.json`,15000).catch(()=>({items:[]}));
   const now=Date.now();
-  _editorialCache=(d.items||[]).filter(x=>x&&x.id&&x.title&&x.status!=='draft'&&(!x.expires_at||PendarEvents.stamp(x.expires_at)>now))
+  _editorialCache=(d.items||[]).filter(x=>PendarEvents.editorialVisible(x,now))
     .sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)||PendarEvents.stamp(b.updated_at||b.published_at)-PendarEvents.stamp(a.updated_at||a.published_at));
   return _editorialCache;
 }
@@ -157,7 +166,7 @@ function editorialImage(d,eager=false) {
   return `<picture>${d.image_fallback?`<source srcset="${esc(d.image)}" type="image/webp">`:''}<img src="${esc(fallback)}" alt="${esc(d.image_alt||'')}" ${eager?'fetchpriority="high"':'loading="lazy"'} onerror="this.closest('picture').remove()"></picture>`;
 }
 function editorialMeta(d) {
-  return `${faN((d.sources||[]).length)} منبع · به‌روزرسانی ${relTime(d.updated_at||d.published_at)}`;
+  return `${d.origin==='auto'?'تهیهٔ خودکار پندار، بازبینی‌شده · ':''}${faN((d.sources||[]).length)} منبع · به‌روزرسانی ${relTime(d.updated_at||d.published_at)}`;
 }
 function editorialCard(d) {
   return `<a class="editorial-card" href="#/event/${encodeURIComponent(d.id)}">
