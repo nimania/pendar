@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T13:33:29.744835+00:00",
+  "generated_at": "2026-10-09T13:20:18.524642+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -264,6 +264,222 @@
       "group": "series",
       "confidence": "aggregated",
       "logo": "https://image.tmdb.org/t/p/w185/2uy2ZWcplrSObIyt4x0Y9rkG6qO.png"
+    },
+    {
+      "id": "tmdb-network-1",
+      "name_fa": "Fuji TV",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/4x4GsmRmSLLL0RVNKsoqAVH43tz.png"
+    },
+    {
+      "id": "tmdb-network-879",
+      "name_fa": "Tokai Television Broadcasting",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/pX3gDCsG8WcQvQbCNJ37t5w0HyG.png"
+    },
+    {
+      "id": "tmdb-network-1163",
+      "name_fa": "Kansai TV",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/1J33ZvSff1VOEt3aC8CyKmj9GEy.png"
+    },
+    {
+      "id": "tmdb-network-3535",
+      "name_fa": "Fukui TV",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/sces9gh6ih1DaD54WXvqHeLMScE.png"
+    },
+    {
+      "id": "tmdb-network-3721",
+      "name_fa": "Hokkaido Cultural Broadcasting",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/vkOmMDoyA8Jj8gDJOyP6CjD06Kj.png"
+    },
+    {
+      "id": "tmdb-network-4799",
+      "name_fa": "Iwate Menkoi Television",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/y1F9WoEjz7MhzjN56im3tVKTd1r.png"
+    },
+    {
+      "id": "tmdb-network-4829",
+      "name_fa": "Sendai Television",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/qHGklsa90XMreAdYm7AZl6eeaCL.png"
+    },
+    {
+      "id": "tmdb-network-4839",
+      "name_fa": "SAGA TV",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/pRhoUkllLEe3U9341NUCeKdQ7to.png"
+    },
+    {
+      "id": "tmdb-network-4841",
+      "name_fa": "Ishikawa TV",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/7QZ9b8bIpNUU5AjdaW6BXcMziY6.png"
+    },
+    {
+      "id": "tmdb-network-4850",
+      "name_fa": "TNC",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/thh0SqE1oh7oOH08ISphk6cRghq.png"
+    },
+    {
+      "id": "tmdb-network-4851",
+      "name_fa": "OHK",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/wd94E8WjZwEbu1PLxhNNH0Ny3VT.png"
+    },
+    {
+      "id": "tmdb-network-4855",
+      "name_fa": "Kochi Sun Sun Broadcasting",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/vRWtsyWIcIrtw0PXbCbjC4xvXtw.png"
+    },
+    {
+      "id": "tmdb-network-4970",
+      "name_fa": "Television Shin Hiroshima System",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/6hrEhIW5lIUKeX78BNTzMQ0e8aK.png"
+    },
+    {
+      "id": "tmdb-network-5644",
+      "name_fa": "TV Shizuoka",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/832SJcpnozaNWKto6hPSpYvDYQU.png"
+    },
+    {
+      "id": "tmdb-network-6156",
+      "name_fa": "UMK TV Miyazaki",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/gxpzF98cV1DHpXzJmXf2Ew6sQvV.png"
+    },
+    {
+      "id": "tmdb-network-6209",
+      "name_fa": "NST",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/fjenNun3vCLtnHHsTpAgVYkubMl.png"
+    },
+    {
+      "id": "tmdb-network-6210",
+      "name_fa": "NBS",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/kCNJcIxnOXI4fkc8oZLOk1BZb0o.png"
+    },
+    {
+      "id": "tmdb-network-6211",
+      "name_fa": "Sakuranbo TV",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/mFM7fx4yt3FOa6leUbBbd8iGZIi.png"
+    },
+    {
+      "id": "tmdb-network-6212",
+      "name_fa": "TSK",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/eAaH52WuIH4XNlqYSonXZRPRnGE.png"
+    },
+    {
+      "id": "tmdb-network-6213",
+      "name_fa": "Ehime Broadcasting",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/np5gbKJvysVLnJKg8g1OxhiA6Qa.png"
+    },
+    {
+      "id": "tmdb-network-6214",
+      "name_fa": "KTS",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/fF4u5E7SBK4qOoIUOVmr5FbYk2g.png"
+    },
+    {
+      "id": "tmdb-network-6666",
+      "name_fa": "Fukushima TV",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/rCdk5TWd3RPKTZU1zlhDCEFuzsI.png"
+    },
+    {
+      "id": "tmdb-network-6819",
+      "name_fa": "AKT",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/hNbCO6N6F4o09DCGAoz7g0G2E9F.png"
+    },
+    {
+      "id": "tmdb-network-6821",
+      "name_fa": "Toyama Television",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/mkTZDdapxuLVS4gzSCwD01DFkbw.png"
+    },
+    {
+      "id": "tmdb-network-6822",
+      "name_fa": "TV Kumamoto",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/lquU1iSzXNKMWohDVIE91pxDzhE.png"
+    },
+    {
+      "id": "tmdb-network-6823",
+      "name_fa": "Okinawa Television Broadcasting",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/gRUUO3lBYddcSqQPfFruXVDAlv2.png"
+    },
+    {
+      "id": "tmdb-network-8446",
+      "name_fa": "KTN",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/dHp09KNT493NE46Wt8pnPyL84Ef.png"
     }
   ],
   "programmes": [
@@ -279,16 +495,6 @@
       "desc_fa": "آغاز پخش؛ ساعت انتشار اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "قانون و نظم: واحد قربانیان ویژه",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2734",
-      "icon": "https://image.tmdb.org/t/p/w500/qRVm0gh4xCLxCr1Ayw0l1CYbylR.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1 از فصل 28؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-156",
       "title_fa": "런닝맨",
       "start": "2026-10-11T00:00:00+03:30",
@@ -297,16 +503,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/15SMnscZqd7HZ0bzruatOcKUlOV.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 822 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "قانون و نظم",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/549",
-      "icon": "https://image.tmdb.org/t/p/w500/haJ9eHytVO3H3JooMJG1DiWwDNm.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-4330",
@@ -389,16 +585,6 @@
       "desc_fa": "قسمت 41 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-88",
-      "title_fa": "داستان ترسناک آمریکایی",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/1413",
-      "icon": "https://image.tmdb.org/t/p/w500/yCkPLQ10qKIUgRBXmQVVMF1h96d.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 13؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-103",
       "title_fa": "仮面ライダー",
       "start": "2026-10-11T00:00:00+03:30",
@@ -456,7 +642,7 @@
       "source_url": "https://www.themoviedb.org/tv/70672",
       "icon": "https://image.tmdb.org/t/p/w500/zak7mqMxJGnnWplSdbjDtV7bg2Y.jpg",
       "quality_score": 85,
-      "desc_fa": "قسمت 547 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+      "desc_fa": "قسمت 546 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-6",
@@ -670,16 +856,6 @@
     },
     {
       "channel_id": "digital-world",
-      "title_fa": "Matchbox the Movie",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1148365",
-      "icon": "https://image.tmdb.org/t/p/w500/lFKA4GMz36dImEy3DQPdPF7G4V9.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "مرد گرگ نما",
       "start": "2026-10-18T00:00:00+03:30",
       "date_only": true,
@@ -709,36 +885,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-74",
-      "title_fa": "Watch What Happens Live with Andy Cohen",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/22980",
-      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 35 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "نمایش امشب با اجرای جیمی فالون",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/59941",
-      "icon": "https://image.tmdb.org/t/p/w500/1N4o5PmmqhlVDrcdJ2RlCFWbLGX.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 12 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "آخر شب با ست مایرز",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/61818",
-      "icon": "https://image.tmdb.org/t/p/w500/qKFP9Se7LJtBaxrMS41iu63dtK3.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 12 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-2",
       "title_fa": "کالبدشناسی گری",
       "start": "2026-10-15T00:00:00+03:30",
@@ -749,56 +895,6 @@
       "desc_fa": "قسمت 1 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-274",
-      "title_fa": "Goede Tijden, Slechte Tijden",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/11890",
-      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 24 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1334",
-      "title_fa": "Goede Tijden, Slechte Tijden",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/11890",
-      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 24 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-47",
-      "title_fa": "نمایش روزانه",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2224",
-      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 114 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 94 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-10-08T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 94 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-2552",
       "title_fa": "اسب‌های آرام",
       "start": "2026-10-14T00:00:00+03:30",
@@ -807,6 +903,406 @@
       "icon": "https://image.tmdb.org/t/p/w500/A64zXamcdfnA04gNZUmtvC4hBwS.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 5 از فصل 6؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 162 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "قانون و نظم: واحد قربانیان ویژه",
+      "start": "2026-10-15T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2734",
+      "icon": "https://image.tmdb.org/t/p/w500/qRVm0gh4xCLxCr1Ayw0l1CYbylR.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 2 از فصل 28؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "قانون و نظم",
+      "start": "2026-10-15T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/549",
+      "icon": "https://image.tmdb.org/t/p/w500/haJ9eHytVO3H3JooMJG1DiWwDNm.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 2 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-274",
+      "title_fa": "Goede Tijden, Slechte Tijden",
+      "start": "2026-10-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/11890",
+      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 25 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1334",
+      "title_fa": "Goede Tijden, Slechte Tijden",
+      "start": "2026-10-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/11890",
+      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 25 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 95 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 95 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-88",
+      "title_fa": "داستان ترسناک آمریکایی",
+      "start": "2026-10-15T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/1413",
+      "icon": "https://image.tmdb.org/t/p/w500/yCkPLQ10qKIUgRBXmQVVMF1h96d.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 9 از فصل 13؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9",
+      "title_fa": "Coronation Street",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/291",
+      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 186 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-879",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1163",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-3535",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-3721",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4799",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4829",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4839",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4841",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4850",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4851",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4855",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4970",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-5644",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6156",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6209",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6210",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6211",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6212",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6213",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6214",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6666",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6819",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6821",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6822",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6823",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-8446",
+      "title_fa": "ちびまる子ちゃん",
+      "start": "2026-10-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/57775",
+      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "اداره پلیس شیکاگو",
+      "start": "2026-10-14T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/58841",
+      "icon": "https://image.tmdb.org/t/p/w500/w7R4ooo2IbOfBKOoMDwaiMGsNQf.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 2 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "دعوت.",
+      "start": "2026-10-23T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/950028",
+      "icon": "https://image.tmdb.org/t/p/w500/uWMfbzKGYgVrzvmLAEgUZcT1g6S.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "عروس!",
+      "start": "2026-10-23T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1159831",
+      "icon": "https://image.tmdb.org/t/p/w500/w12Aixd29gd1Mrq613HQCsPvhkP.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "The Florist",
+      "start": "2026-10-09T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1476746",
+      "icon": "https://image.tmdb.org/t/p/w500/1etZaDkyHpaRz2cTvH2evgQm19J.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
   ]
 }

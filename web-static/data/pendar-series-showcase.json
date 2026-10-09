@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-08",
+  "checked_at": "2026-10-09",
   "sources": [
     {
       "name": "فیلیمو",
@@ -134,17 +134,15 @@
       "reason": "رتبهٔ جهانی FlixPatrol"
     },
     {
-      "title": "یل",
+      "title": "یَلْ",
       "platform": "فیلم‌نت",
       "region": "iran",
+      "checked_at": "2026-10-09",
+      "published_at": "2026-10-09",
       "release_date": "2026-10-09",
-      "release_source": "https://t.me/s/filmnetofficial?before=10891",
-      "source_url": "https://t.me/s/filmnetofficial?before=10891",
-      "checked_at": "2026-10-06",
-      "reason": "به‌زودی؛ شروع پخش ۱۷ مهر",
-      "upcoming": true,
-      "slug": "yal-2026",
-      "poster_url": "assets/yal-2026.png"
+      "source_url": "https://t.me/filmnetofficial/10900",
+      "reason": "اعلان تازه در کانال رسمی",
+      "poster_url": "https://cdn4.telesco.pe/file/hskxShFQNTRnLsRnNtE0w1zqahG84ac7lp_0_NhhSmyS3dGOk_orieKRXg9XNZp78UW5GzNq-KKoZ5OtZjvKuwQRweg_kUBY_G-tEfMJO-3AwxZBW38ryBXxo6OPCzX-bfukaMWRHpoYKAf7iDkR6E9q4QyhWahlv8dQkjcAlU47ACMuSiT7qQgD-O2UCByiX7Z9VYBZOYD4hFOcmMHvHfRg8zZpzkQ3ldiGXznqCFzTvgSNTlYhrlpROUK0qm7EgT0WB-xjsf6tQZ7Gilm0MLJxkka2MQQJckME8kRb1gIVnipweo8vBTqXAMtx4-ihdb7-lgg0EPQm3IVCmWSA2Q.jpg"
     }
   ]
 }
