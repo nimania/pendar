@@ -160,6 +160,7 @@ async function openStory(id) {
     ${storyBooksSection}
     <div class="twocol"><div class="qa"><h3>چه اتفاقی افتاد؟</h3><p>${esc(s.what_happened_fa || "—")}</p></div>
       <div class="qa"><h3>چرا اهمیت دارد؟</h3><p>${esc(s.why_it_matters_fa || "—")}</p></div></div>
+    ${futureNewsTrialDetail(s)}
     ${known}
     ${cred}
     ${trendSec}
