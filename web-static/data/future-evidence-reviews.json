@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "policy": "No automatic verification; records must be reviewed by an editor. Empty records do not imply absence of evidence.",
+  "updated": "2026-10-09",
+  "statuses": {
+    "unreviewed": "بررسی‌نشده",
+    "under_review": "در دست بررسی",
+    "corroborated": "دارای پشتوانه چندمنبعی",
+    "disputed": "مورد اختلاف منابع",
+    "rejected": "ردشده پس از بررسی"
+  },
+  "records": [],
+  "required_fields": [
+    "story_id",
+    "axis",
+    "status",
+    "claim",
+    "primary_sources",
+    "independent_sources",
+    "contradicting_evidence",
+    "reviewer",
+    "reviewed_at",
+    "rationale",
+    "revision"
+  ],
+  "history_policy": "Every edit to a record should append a new version; old records must not be silently overwritten."
+}
