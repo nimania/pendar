@@ -480,6 +480,9 @@ jobs:
           test -s site/data/future-fattahi-model.json
           test -s site/future/transition/fattahi/index.html
 
+      - name: Validate Future Observatory artifact
+        run: python backend/scripts/check_future_deploy.py site
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
