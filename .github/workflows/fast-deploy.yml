@@ -474,7 +474,7 @@ jobs:
           if [ -d web-static/future ]; then
             rsync -a web-static/future/ site/future/
           fi
-          for route in future future/method future/transition future/transition/fattahi future/transition/watch; do
+          for route in future future/method future/transition future/transition/fattahi future/transition/watch future/transition/editor; do
             test -s "site/$route/index.html" || { echo "::error::Missing future route $route"; exit 1; }
           done
           for institution in authority executive justice mahestan security economy watch assembly; do
