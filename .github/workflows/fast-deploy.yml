@@ -463,9 +463,15 @@ jobs:
 
       - name: Ensure Future Observatory direct paths
         run: |
+          # Preserve independently authored HTML, instead of replacing it with
+          # the SPA shell; this permits direct links even if the router breaks.
           for route in future future/method future/transition future/transition/fattahi; do
             mkdir -p "site/$route"
-            cp site/index.html "site/$route/index.html"
+            if [ -f "web-static/$route/index.html" ]; then
+              cp "web-static/$route/index.html" "site/$route/index.html"
+            else
+              cp site/index.html "site/$route/index.html"
+            fi
           done
           test -s site/data/future-research-books.json
           test -s site/data/future-fattahi-model.json
