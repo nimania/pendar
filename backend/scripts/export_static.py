@@ -705,8 +705,12 @@ def run() -> None:
     # Generate real entry pages for private-by-navigation Future Observatory routes.
     # These direct URLs load the SPA shell without listing pages in the public sitemap.
     for future_route in ("future", "future/method", "future/transition", "future/transition/fattahi"):
-        _write_text(os.path.join(OUT, future_route, "index.html"),
-                    open(os.path.join(WEB_STATIC, "index.html"), encoding="utf-8").read())
+        authored = os.path.join(WEB_STATIC, future_route, "index.html")
+        if os.path.isfile(authored):
+            shutil.copy2(authored, os.path.join(OUT, future_route, "index.html"))
+        else:
+            _write_text(os.path.join(OUT, future_route, "index.html"),
+                        open(os.path.join(WEB_STATIC, "index.html"), encoding="utf-8").read())
 
     # Version the shell so a new deploy is fetched immediately (not stale-cached).
     app_v = _cache_bust()
