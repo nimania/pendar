@@ -23,7 +23,7 @@ async function renderMeshkiMovies(el){
   const note=document.getElementById("movie-grid-note");
   if(note)note.innerHTML='<a href="'+MESHKI_ROOT+'" target="_blank" rel="noopener">با اطلاعات مشکی‌مدیا · Powered by Meshki Media ↗</a> · '+faN(selected.length)+' سریال'+(live?' · دریافت از مشکی‌مدیا':' · نسخهٔ ذخیره‌شده: ۱۴ مهر ۱۴۰۵');
   el.innerHTML=selected.slice(0,movieState.visible).map(s=>{
-    const net=MESHKI_NETWORKS[s.network],url=MESHKI_ROOT+"dizi/"+encodeURIComponent(s.slug)+"/";
+    const net=MESHKI_NETWORKS[s.network],url=s.slug==="tuzlu-kahve"?"/dizi/tuzlu-kahve/":MESHKI_ROOT+"dizi/"+encodeURIComponent(s.slug)+"/";
     const cast=(s.cast||[]).map(p=>p.nameFa||p.name).filter(Boolean).slice(0,8).join("، ");
     return '<article class="meshki-card"><a href="'+esc(url)+'" target="_blank" rel="noopener">'+(s.hero?'<img class="meshki-hero" src="'+esc(s.hero)+'" alt="'+esc(s.titleFa||"")+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">':'')+'<h3>'+esc(s.titleFa||s.titleTr||"")+'</h3><small dir="ltr">'+esc(s.titleTr||"")+'</small></a><p class="meshki-meta">'+esc(s.status||"")+' · '+esc(s.airing||s.day||"")+'</p><small>'+esc(net?.nameFa||net?.name||s.network||"")+(s.year?' · '+faN(s.year):'')+'</small><details><summary>خلاصه و بازیگران</summary><p>'+esc(s.synopsis||"خلاصه هنوز ثبت نشده است.")+'</p>'+(cast?'<p>'+esc(cast)+'</p>':'')+'</details><a class="meshki-credit" href="'+esc(url)+'" target="_blank" rel="noopener">قسمت‌ها، تقویم و ریتینگ در مشکی‌مدیا ↗</a></article>';
   }).join("")+(selected.length>movieState.visible?'<button class="movie-load-more" onclick="_movieLoadMore()">نمایش بیشتر</button>':'')||'<div class="state">سریالی با این فیلتر پیدا نشد.</div>';
