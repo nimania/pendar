@@ -465,13 +465,16 @@ jobs:
         run: |
           # Preserve independently authored HTML, instead of replacing it with
           # the SPA shell; this permits direct links even if the router breaks.
-          for route in future future/method future/transition future/transition/fattahi; do
-            mkdir -p "site/$route"
-            if [ -f "web-static/$route/index.html" ]; then
-              cp "web-static/$route/index.html" "site/$route/index.html"
-            else
-              cp site/index.html "site/$route/index.html"
-            fi
+          # Publish every authored Future Observatory dossier, including
+          # watch/ and all institutional deep links.
+          if [ -d web-static/future ]; then
+            rsync -a web-static/future/ site/future/
+          fi
+          for route in future future/method future/transition future/transition/fattahi future/transition/watch; do
+            test -s "site/$route/index.html" || { echo "::error::Missing future route $route"; exit 1; }
+          done
+          for institution in authority executive justice mahestan security economy watch assembly; do
+            test -s "site/future/transition/institution/$institution/index.html" || { echo "::error::Missing dossier $institution"; exit 1; }
           done
           test -s site/data/future-research-books.json
           test -s site/data/future-fattahi-model.json
