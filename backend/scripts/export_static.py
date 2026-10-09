@@ -704,7 +704,7 @@ def run() -> None:
 
     # Generate real entry pages for private-by-navigation Future Observatory routes.
     # These direct URLs load the SPA shell without listing pages in the public sitemap.
-    for future_route in ("future", "future/method", "future/transition", "future/transition/fattahi", "future/transition/watch", "future/transition/editor", "future/transition/institution/authority", "future/transition/institution/executive", "future/transition/institution/justice", "future/transition/institution/mahestan", "future/transition/institution/security", "future/transition/institution/economy", "future/transition/institution/watch", "future/transition/institution/assembly"):
+    for future_route in ("future", "future/method", "future/transition", "future/transition/fattahi", "future/transition/watch", "future/transition/editor", "future/guide", "future/transition/institution/authority", "future/transition/institution/executive", "future/transition/institution/justice", "future/transition/institution/mahestan", "future/transition/institution/security", "future/transition/institution/economy", "future/transition/institution/watch", "future/transition/institution/assembly"):
         authored = os.path.join(WEB_STATIC, future_route, "index.html")
         if os.path.isfile(authored):
             shutil.copy2(authored, os.path.join(OUT, future_route, "index.html"))
