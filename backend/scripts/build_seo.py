@@ -265,6 +265,13 @@ def build(site):
     )
     pages['/dinr/']={**pages['/diner/'], 'canonical':'/diner/', 'indexable':False, 'redirect':'/diner/'}
     aliases['/dinr/']='/diner/'
+    pages['/diner/']['body']+=links([('/diner/retro/','نمونه‌کار: هات‌داگ رترو؛ از ایده تا اجرا')])
+    pages['/diner/retro/']={
+        'title':'هات‌داگ رترو؛ نمونه‌کار ایده‌پردازی، راه‌اندازی و اجرا | داینر نیما',
+        'description':'پروندهٔ هات‌داگ رترو در نوشهر؛ فست‌کژوالی با حال‌وهوای دهه‌های ۵۰ و ۶۰ میلادی، از ایده‌پردازی نیما افشارنادری و صوفیا عبداللهی تا افتتاح در مهر ۱۴۰۳.',
+        'body':'<p>هات‌داگ رترو فست‌کژوالی نوستالژیک در خیابان قدرتی نوشهر است که ایده‌اش در اواخر ۱۴۰۱ توسط نیما افشارنادری و صوفیا عبداللهی شکل گرفت و در مهر ۱۴۰۳ افتتاح شد: ۸۵ متر مربع، ظرفیت ۳۵ نفر، ۱۸ آیتم منو و ۶ سس امضادار صوفیا. برندینگ، مهندسی منو، طراحی فضا و نئون، آشپزخانه صنعتی و آموزش پرسنل بخش‌های این پروژه بودند؛ هات‌داگ بندری، کاری‌وورست و قهوهٔ دمی از نوآوری‌های منوی آن است. چاپ و بسته‌بندی با وینگ استودیو انجام شد و ساورکرات هات‌داگ نیویورکی، سس کاری‌وورست و رلیش‌های ویژه از سس‌های صوفیا (Soufia\'s Secret Recipe) عرضه شد.</p>'+links([('/@nima-afshar-naderi/','نیما افشارنادری'),('/@soufia-abdollahi/','صوفیا عبداللهی'),('https://www.youtube.com/@HotdogRetro','یوتیوب هات‌داگ رترو'),('https://www.instagram.com/hotdog.retro','اینستاگرام hotdog.retro'),('https://www.instagram.com/retro_hotdog_','اینستاگرام retro_hotdog_'),('https://www.instagram.com/wingstudio.ca/','وینگ استودیو'),('https://www.instagram.com/soufia.recipe/',"Soufia's Secret Recipe"),('/diner/','داینر نیما')]),
+        'kind':'diner','section':'diner','canonical':'/diner/retro/','indexable':True,'schema_type':'WebPage',
+    }
     radar_status=read(data/'pendar-radar-status.json',{}).get('countries',{})
     if '/radar/' in pages:
         pages['/radar/']['body']='<p>رقابت‌های سیاسی جهان و پیامدهایشان برای ایران؛ خبر، چهره و داده در یک جا.</p>'+links([('/us-radar/','رادار آمریکا'),('/israel-radar/','رادار اسرائیل')])

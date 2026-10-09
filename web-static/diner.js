@@ -170,7 +170,189 @@ function setDinerCategory(cat) {
   document.getElementById("diner-cats").innerHTML = dinerCategoryBar();
 }
 
+/* ── Portfolio: Hot Dog Retro ─────────────────────────────────
+   Case study of a casual fast-food project, served at /diner/retro/.
+   Photos live in assets/retro/ and are listed in RETRO_PHOTOS; the
+   gallery stays hidden until at least one photo is listed. */
+
+const RETRO_PHOTOS = [
+  /* { src: "assets/retro/01.jpg", caption: "روز اول — تخریب و زیرسازی", phase: "ساخت" }, */
+];
+
+const RETRO_STATS = [
+  ["۸۵", "متر مربع", "سالن و آشپزخانه صنعتی"],
+  ["۳۵", "نفر", "ظرفیت هم‌زمان پذیرایی"],
+  ["۱۸", "آیتم منو", "هات‌داگ، برگر، سیب‌زمینی و رترو کیدز"],
+  ["۶", "سس امضادار", "سس‌های صوفیا، تولید روزانه"],
+  ["۲–۳", "ماه", "از تخریب تا آخرین لوله نئون"],
+];
+
+const RETRO_PHASES = [
+  {
+    when: "اواخر ۱۴۰۱",
+    title: "ایده‌پردازی",
+    body: "ایده از عشق مشترک به حال‌وهوای دهه‌های ۵۰ و ۶۰ میلادی آمد: دوران طلایی داینرها، راک‌اندرول، کاپشن چرمی و نور نئون. هدف، پیوند طعم‌های اصیل و خیابانی هات‌داگ با یک اتمسفر نوستالژیک بود، بومی‌شده برای ذائقه و خاطرهٔ مخاطب ایرانی؛ یعنی زنده کردن فرهنگ «کژوالِ باکیفیت» در قالب برندی با داستان خودش.",
+  },
+  {
+    when: "پیش از ساخت",
+    title: "سرمایه‌گذاری شعبهٔ نخست",
+    body: "با همراهی مهدی محمدی به‌عنوان سرمایه‌گذار شعبهٔ نخست، ایده وارد مسیر اجرا شد.",
+  },
+  {
+    when: "برندینگ",
+    title: "هویت بصری و کاراکترها",
+    body: "طراحی لوگوی اصلی با فونت سرخ و خامه‌ای رترو و فلش‌های کلاسیک، و خلق دو مسکات اختصاصی: «پسرِ باحالِ گریزر» با موی پمپادور و کاپشن چرمی و «دخترِ رترو» با پیش‌بند فست‌کژوال. چاپ و بسته‌بندی با همکاری آژانس وینگ استودیو انجام شد.",
+  },
+  {
+    when: "منو و طعم",
+    title: "مهندسی منو و دستور پخت",
+    body: "تک‌تک آیتم‌های منو مهندسی شد و سس‌های امضادار صوفیا به شناسنامهٔ طعم رترو تبدیل شدند؛ از سس کاری‌وورست تا رلیش‌های ویژه و ساورکرات هات‌داگ نیویورکی که از برند Soufia's Secret Recipe عرضه شدند.",
+  },
+  {
+    when: "ساخت",
+    title: "فضا، دکور و نئون",
+    body: "کاشی شطرنجی قرمز و سفید، مبل‌های دورهمی (Booth)، صندلی‌های بارِ کروم و زرد، تابلوی نئونی بزرگ و سرخ «هات‌داگ رترو» در نما و تابلوهای داخلی. بخش بزرگی از اجرا با کار شبانه‌روزی موحد شکیبا و ابراهیم گرانپایه به ثمر نشست، با راهنمایی‌های ارزشمند عیسی بهزادی، بنیان‌گذار برگر و کافه باروک نوشهر.",
+  },
+  {
+    when: "تجهیز",
+    title: "آشپزخانه و تجهیزات",
+    body: "طراحی صنعتی و جانمایی آشپزخانه برای سرعت بالای سرویس فست‌کژوال؛ انتخاب گریل، فر و سرخ‌کن‌هایی که نان برشته و سوسیس آبدار تحویل بدهند.",
+  },
+  {
+    when: "پیش از افتتاح",
+    title: "آموزش پرسنل و استانداردسازی",
+    body: "تدوین دستورالعمل‌های استاندارد (SOP) آماده‌سازی، پخت و سرویس، همراه با آموزش حضوری پرسنل برای سرعت، کیفیت و انرژیِ رترویی در برخورد با مشتری.",
+  },
+  {
+    when: "مهر ۱۴۰۳",
+    title: "افتتاح و اجرا",
+    body: "رترو در خیابان قدرتی نوشهر افتتاح شد و دکور زنده و تنوع هات‌داگ‌های تخصصی‌اش با استقبال گسترده روبه‌رو شد. امروز یکی از پرطرفدارترین پاتوق‌های فست‌کژوال منطقه است؛ پر از موسیقی قدیمی و بوی هات‌داگ گریل‌شده.",
+  },
+];
+
+const RETRO_FIRSTS = [
+  ["🌶", "هات‌داگ بندری", "طعم و امضای بندری روی هات‌داگ، برای پیوند با ذائقهٔ ایرانی."],
+  ["🌭", "کاری‌وورست", "بشقاب سوسیس محبوب آلمانی، با سس‌های امضادار صوفیا."],
+  ["☕", "قهوهٔ دمی", "قهوهٔ دمیِ نسل سوم به‌جای قهوه‌های رایج اسپرسوپایه، در فضای فست‌کژوال."],
+];
+
+const RETRO_TEAM = [
+  { name: "نیما افشارنادری", role: "ایده‌پردازی، طراحی و راه‌اندازی", href: "/@nima-afshar-naderi/" },
+  { name: "صوفیا عبداللهی", role: "ایده‌پردازی و سس‌های امضادار", href: "/@soufia-abdollahi/" },
+  { name: "مهدی محمدی", role: "سرمایه‌گذار شعبهٔ نخست" },
+  { name: "موحد شکیبا", role: "اجرای فضا و دکور" },
+  { name: "ابراهیم گرانپایه", role: "اجرای فضا و دکور" },
+  { name: "عیسی بهزادی", role: "مشاور؛ بنیان‌گذار برگر و کافه باروک نوشهر" },
+  { name: "وینگ استودیو", role: "چاپ و بسته‌بندی", href: "https://www.instagram.com/wingstudio.ca/" },
+  { name: "Soufia's Secret Recipe", role: "محصولات تخمیری، سس‌های اختصاصی و رلیش‌ها", href: "https://www.instagram.com/soufia.recipe/" },
+];
+
+const RETRO_LINKS = [
+  ["یوتیوب هات‌داگ رترو", "https://www.youtube.com/@HotdogRetro"],
+  ["اینستاگرام hotdog.retro", "https://www.instagram.com/hotdog.retro"],
+  ["اینستاگرام retro_hotdog_", "https://www.instagram.com/retro_hotdog_"],
+];
+
+function dinerPortfolioCard() {
+  return `<a class="retro-card" href="/diner/retro/">
+    <span class="retro-card-tag">نمونه‌کار</span>
+    <span class="retro-card-title">هات‌داگ رترو</span>
+    <span class="retro-card-sub">از ایده تا افتتاح یک فست‌کژوال نوستالژیک در نوشهر — ۸۵ متر، ۱۸ آیتم منو، ۶ سس امضادار</span>
+    <span class="retro-card-go">دیدن پرونده ←</span>
+  </a>`;
+}
+
+function retroPersonLink(p) {
+  const ext = /^https?:/.test(p.href || "");
+  const name = p.href
+    ? `<a href="${esc(p.href)}"${ext ? ' target="_blank" rel="noopener"' : ""}>${esc(p.name)}</a>`
+    : esc(p.name);
+  return `<li><strong>${name}</strong><span>${esc(p.role)}</span></li>`;
+}
+
+function renderRetro() {
+  const gallery = RETRO_PHOTOS.length ? `
+    <section class="retro-block">
+      <h2 class="retro-h2">از روز اول تا افتتاح</h2>
+      <div class="retro-gallery">${RETRO_PHOTOS.map(p => `
+        <figure>
+          <img src="${esc(p.src)}" alt="${esc(p.caption || "هات‌داگ رترو")}" loading="lazy">
+          ${p.caption ? `<figcaption>${p.phase ? `<b>${esc(p.phase)}</b> ` : ""}${esc(p.caption)}</figcaption>` : ""}
+        </figure>`).join("")}
+      </div>
+    </section>` : "";
+
+  return `
+    <a class="retro-back" href="/diner/">→ بازگشت به داینر نیما</a>
+
+    <header class="retro-hero">
+      <span class="retro-eyebrow">نمونه‌کار داینر نیما · ایده‌پردازی، راه‌اندازی و اجرا</span>
+      <h1 class="retro-neon">هات‌داگ رترو</h1>
+      <p class="retro-lead">یک ماشین زمان به دهه‌های ۵۰ و ۶۰ میلادی: فست‌کژوالی با هات‌داگ‌های تخصصی، سس‌های امضادار و نئون سرخ، در قلب نوشهر.</p>
+      <p class="retro-meta">نوشهر، خیابان قدرتی، بعد از میدان دهخدا · افتتاح مهر ۱۴۰۳</p>
+    </header>
+
+    <div class="retro-stats">${RETRO_STATS.map(([n, unit, note]) => `
+      <div class="retro-stat"><b>${n}</b><span>${esc(unit)}</span><small>${esc(note)}</small></div>`).join("")}
+    </div>
+
+    ${gallery}
+
+    <section class="retro-block">
+      <h2 class="retro-h2">مسیر پروژه</h2>
+      <ol class="retro-timeline">${RETRO_PHASES.map(ph => `
+        <li><span class="retro-when">${esc(ph.when)}</span><h3>${esc(ph.title)}</h3><p>${esc(ph.body)}</p></li>`).join("")}
+      </ol>
+    </section>
+
+    <section class="retro-block">
+      <h2 class="retro-h2">نوآوری‌های منو</h2>
+      <p class="retro-note">به روایت تیم رترو، این سه طعم برای نخستین بار در ایران عرضه شدند.</p>
+      <div class="retro-firsts">${RETRO_FIRSTS.map(([icon, t, d]) => `
+        <div class="retro-first"><span>${icon}</span><h3>${esc(t)}</h3><p>${esc(d)}</p></div>`).join("")}
+      </div>
+      <p class="retro-note">ترکیب منو: ۴ مدل سیب‌زمینی خاص، ۷ مدل هات‌داگ معمولی و ایالتی، ۳ مدل برگر نوستالژیک، بشقاب‌های ویژهٔ سوخاری و چوریتسو، سالاد و منوی کودکان «رترو کیدز».</p>
+    </section>
+
+    <section class="retro-block retro-soufia">
+      <img src="assets/retro/soufia-logo.jpg" alt="لوگوی Soufia's Secret Recipe" width="120" height="120" loading="lazy">
+      <div>
+        <span class="retro-eyebrow-dark">همکار طعم رترو</span>
+        <h2 class="retro-h2">سس‌های صوفیا · Soufia's Secret Recipe</h2>
+        <p>برندی که کارش تهیهٔ محصولات تخمیری، سس‌های اختصاصی و رلیش‌های ویژه است. از ابتدای فعالیت هات‌داگ رترو، ساورکراتِ هات‌داگ نیویورکی، سس کاری‌وورست و رلیش‌های منو از سس‌های صوفیا عرضه شد.</p>
+        <a class="diner-social-btn diner-ig" href="https://www.instagram.com/soufia.recipe" target="_blank" rel="noopener">اینستاگرام soufia.recipe</a>
+      </div>
+    </section>
+
+    <section class="retro-block">
+      <h2 class="retro-h2">تیم و همکاران</h2>
+      <ul class="retro-team">${RETRO_TEAM.map(retroPersonLink).join("")}</ul>
+    </section>
+
+    <section class="retro-block retro-links">
+      <h2 class="retro-h2">رترو را دنبال کنید</h2>
+      <div class="diner-social-row">${RETRO_LINKS.map(([label, url]) =>
+        `<a class="diner-social-btn diner-ig" href="${url}" target="_blank" rel="noopener">${esc(label)}</a>`).join("")}
+      </div>
+    </section>
+
+    <div class="diner-footer-cta">
+      <p>برای ایده‌پردازی، راه‌اندازی یا بازطراحی رستوران و فست‌فود خودتان مشاوره می‌خواهید؟</p>
+      <a href="${DINER_CONTACT}" target="_blank" rel="noopener" class="diner-social-btn diner-contact">تماس مستقیم با نیما افشارنادری</a>
+    </div>
+  `;
+}
+
 async function showDiner(sub) {
+  if (sub === "retro") {
+    setHash("#/diner/retro");
+    show("diner");
+    setTab("");
+    document.getElementById("diner-content").innerHTML = renderRetro();
+    document.title = "هات‌داگ رترو؛ نمونه‌کار ایده‌پردازی تا اجرا | داینر نیما";
+    window.scrollTo(0, 0);
+    return;
+  }
   setHash("#/diner");
   show("diner");
   setTab("");
@@ -206,6 +388,9 @@ async function showDiner(sub) {
       </form>
       <div id="diner-email-msg" class="diner-email-msg"></div>
     </div>
+
+    <h2 class="retro-h2 diner-portfolio-h">نمونه‌کارها</h2>
+    ${dinerPortfolioCard()}
 
     <div id="diner-cats">${dinerCategoryBar()}</div>
     <div class="diner-tips" id="diner-tips-area">

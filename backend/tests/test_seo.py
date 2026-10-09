@@ -40,6 +40,8 @@ class SeoTests(unittest.TestCase):
             self.assertNotIn('https://pendar.io/dinr/',sitemap)
             self.assertIn('0;url=/diner/',(site/'dinr/index.html').read_text())
             self.assertIn('https://t.me/nimaafsharnaderiir',(site/'diner/index.html').read_text())
+            self.assertIn('https://pendar.io/diner/retro/',sitemap)
+            self.assertIn('هات‌داگ رترو',(site/'diner/retro/index.html').read_text())
             self.assertNotIn('/figure/someone/',sitemap)
             self.assertIn('0;url=/@someone/',(site/'entity/person:someone/index.html').read_text())
             handles=json.loads((data/'person-handles.json').read_text())
