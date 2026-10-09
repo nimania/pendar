@@ -16,14 +16,25 @@ const FUTURE_NEWS_PILOT=[
  {name:"اقتصاد و خدمات",words:["تورم","ارز","بودجه","برق","گاز","بحران اقتصادی"],why:"ممکن است نشانه‌ای برای بررسی پایداری اقتصادی و خدمات عمومی باشد."},
  {name:"جامعه و مشارکت",words:["اعتراض","اعتصاب","انتخابات","مشارکت سیاسی","جامعه مدنی"],why:"ممکن است برای رصد تغییر رفتار جمعی و مشارکت اجتماعی مرتبط باشد."}
 ];
+const futureNewsNorm = value => String(value || "").replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ").replace(/\s+/g," ").trim();
+let _futureNewsFeed = null;
+let _futureNewsCandidates = new Map();
 function futureNewsPilot(s){
- if(!s || !s.id || !["high","direct","major"].includes(String(s.iran_relevance||"").toLowerCase()) && !/ایران|تهران|جمهوری اسلامی/.test(String(s.headline_fa||"")))return null;
- const title=String(s.headline_fa||"");
- const hit=FUTURE_NEWS_PILOT.find(t=>t.words.some(w=>title.includes(w)));
- if(!hit)return null;
- const sorted=ALL.filter(x=>x&&x.id).slice().sort((a,b)=>(Number(b.importance_score)||0)-(Number(a.importance_score)||0));
- const eligible=sorted.filter(x=>/ایران|تهران|جمهوری اسلامی/.test(String(x.headline_fa||""))||["high","direct","major"].includes(String(x.iran_relevance||"").toLowerCase())).filter(x=>FUTURE_NEWS_PILOT.some(t=>t.words.some(w=>String(x.headline_fa||"").includes(w)))).slice(0,10);
- return eligible.some(x=>String(x.id)===String(s.id))?hit:null;
+ if(!s || !s.id)return null;
+ // Cache the shortlist for this feed snapshot; never sort or mutate ALL.
+ if(_futureNewsFeed !== ALL){
+  _futureNewsFeed = ALL;
+  _futureNewsCandidates = new Map();
+  const sorted=ALL.filter(x=>x&&x.id).slice().sort((a,b)=>(Number(b.importance_score)||0)-(Number(a.importance_score)||0));
+  for(const item of sorted){
+   const title=futureNewsNorm(item.headline_fa);
+   if(!["high","direct","major"].includes(String(item.iran_relevance||"").toLowerCase()) && !/ایران|تهران|جمهوری اسلامی/.test(title))continue;
+   const hit=FUTURE_NEWS_PILOT.find(t=>t.words.some(w=>title.includes(futureNewsNorm(w))));
+   if(hit)_futureNewsCandidates.set(String(item.id),hit);
+   if(_futureNewsCandidates.size===10)break;
+  }
+ }
+ return _futureNewsCandidates.get(String(s.id)) || null;
 }
 function futureNewsTrialBadge(s){
  return futureNewsPilot(s)?'<span class="future-pilot-badge" title="نامزد بررسی تحریری؛ نه اثر تأییدشده">اثر بر آینده · آزمایشی</span>':"";
@@ -32,8 +43,9 @@ function futureNewsTrialDetail(s){
  const t=futureNewsPilot(s);if(!t)return "";
  return '<section class="layers future-pilot-panel"><h3 class="section-h">اثر بر آینده <span class="n">آزمایشی · نامزد بررسی</span></h3>'+
  '<p><strong>حوزهٔ مرتبط: '+esc(t.name)+'</strong></p><p>'+esc(t.why)+'</p>'+
- '<p>این ارتباط فقط بر پایهٔ واژه‌های تیتر شناسایی شده است. نه جهت اثر تأیید شده، نه شاخص یا احتمال سناریویی تغییر کرده است. برای نتیجه‌گیری، ارزیابی منابع و پیگیری خبرهای بعدی ضروری است.</p>'+
- '<a href="/future/transition/watch/">دیده‌بان گذار ←</a></section>';
+ '<p class="future-pilot-status">وضعیت: در انتظار ارزیابی منابع · جهت اثر: هنوز تعیین نشده</p>'+
+ '<p>این ارتباط از تیتر خبر شناسایی شده است. برای تعیین اثر، باید منابع همین خبر و شواهد موافق و مخالف بررسی شوند. شاخص‌ها و احتمال سناریوها در این مرحله تغییر نمی‌کنند.</p>'+
+ '<nav class="future-pilot-links" aria-label="پیگیری اثر خبر"><a href="/future/">آینده‌بان ←</a><a href="/future/transition/watch/">دیده‌بان گذار ←</a></nav></section>';
 }
 
 function feedCard(s, homepage = false) {
@@ -62,12 +74,16 @@ function feedCard(s, homepage = false) {
 }
 
 let ALL = [];
+let _feedRequest = null;
 let tier = "all";
 let feedRange = "all";
 async function loadFeed(renderHome = true) {
   const el = document.getElementById("feed");
   try {
-    ALL = await getJSON(`${DATA}/stories.json`);
+    if (!_feedRequest) {
+      _feedRequest = getJSON(`${DATA}/stories.json`).finally(() => { _feedRequest = null; });
+    }
+    ALL = await _feedRequest;
     if (renderHome) {
       renderFeed();
       renderDayChips();
