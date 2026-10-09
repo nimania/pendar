@@ -16,6 +16,8 @@ const MAX_AGE=90*24*60*60*1000;
 const norm=s=>String(s||"").toLowerCase().replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ").replace(/\s+/g," ").trim();
 const iso=s=>{const x=new Date(s||"");return Number.isNaN(+x)?null:x};
 const safeId=id=>typeof id==="string" && /^[a-z0-9_-]{8,100}$/i.test(id)?id:null;
+let reviewIndexPromise=null;
+async function loadReviews(){if(!reviewIndexPromise)reviewIndexPromise=fetch("/data/future-evidence-reviews.json",{cache:"no-store"}).then(r=>r.ok?r.json():{records:[]}).then(d=>new Map((d.records||[]).map(x=>[String(x.story_id)+"|"+x.axis,x]))).catch(()=>new Map());return reviewIndexPromise}
 function candidate(s,axis){
  const title=String(s.headline_fa||s.title_fa||s.title||"").trim();
  const published=iso(s.published_at||s.date);
@@ -33,14 +35,14 @@ async function render(target,axis,limit){
   const r=await fetch("/data/stories.json",{cache:"no-store"});if(!r.ok)throw Error("HTTP "+r.status);
   const d=await r.json();const rows=Array.isArray(d)?d:Array.isArray(d.stories)?d.stories:null;
   if(!rows)throw Error("فرمت مجموعه خبرها شناخته نشد");
-  const seen=new Set();const matched=rows.map(x=>candidate(x,axis)).filter(Boolean).sort((a,b)=>b.published.localeCompare(a.published)).filter(x=>{if(seen.has(x.id))return false;seen.add(x.id);return true}).slice(0,limit);
+  const reviews=await loadReviews();const seen=new Set();const matched=rows.map(x=>candidate(x,axis)).filter(Boolean).sort((a,b)=>b.published.localeCompare(a.published)).filter(x=>{if(seen.has(x.id))return false;seen.add(x.id);return true}).slice(0,limit);
   target.replaceChildren();
   const pre=el("p","future-live-disclaimer","موارد زیر فقط نامزد بررسی‌اند؛ با تطبیق عبارت در تیتر پیدا شده‌اند، نه با تأیید تحریریه. تعداد منابع، معیار مستقلی برای اعتبار نیست.");target.append(pre);
   if(!matched.length){target.append(el("p","future-live-status","در خبرهای ۹۰ روز اخیر این مجموعه، مورد منطبق یافت نشد. این به معنی نبود رویداد مرتبط نیست."));return}
   const ul=el("ul","future-live-list");for(const x of matched){
    const li=el("li","future-live-item");const a=el("a","",x.title);a.href="/s/"+encodeURIComponent(x.id)+"/";
-   const stamp=el("small","",new Date(x.published).toLocaleDateString("fa-IR")+" · عبارت منطبق: "+x.matched.join("، ")+" · شمار منبع در پندار: "+x.source_count);
-   li.append(a,stamp);ul.append(li)
+   const record=reviews.get(x.id+"|"+axis);const labels={unreviewed:"بررسی‌نشده",under_review:"در دست بررسی",corroborated:"چندمنبعی؛ نیازمند مطالعه شواهد",disputed:"مورد اختلاف",rejected:"ردشده"};const state=record?.status||"unreviewed";const stamp=el("small","",new Date(x.published).toLocaleDateString("fa-IR")+" · عبارت منطبق: "+x.matched.join("، ")+" · شمار منبع در پندار: "+x.source_count+" · وضعیت: "+labels[state]);
+   li.append(a,stamp);if(record){const note=el("p","future-review-note","دلیل بررسی: "+(record.rationale||"ثبت نشده")+" · آخرین بازبینی: "+(record.reviewed_at||"نامشخص"));li.append(note);if(Array.isArray(record.history)&&record.history.length){const history=el("details","future-review-history"),summary=el("summary","","تاریخچه ارزیابی ("+record.history.length+" نسخه)");history.append(summary);for(const rev of record.history){history.append(el("p","",String(rev.at||"")+" — "+String(rev.status||"")+" — "+String(rev.rationale||"")))}li.append(history)}}ul.append(li)
   }target.append(ul);
  }catch(_){setStatus(target,"دریافت داده‌های خبری انجام نشد. شاخص‌ها و پرونده‌های پژوهشی همچنان مستقل از این اتصال قابل مشاهده‌اند.")}
 }
