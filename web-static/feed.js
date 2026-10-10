@@ -44,20 +44,59 @@ function futureNewsBadge(s){
  const c=futureNewsContext(s);if(!c)return "";
  return `<span class="future-impact-badge future-impact-${c.primary.key}" title="پیامدهای احتمالی و مسیر پیگیری این خبر">اثر بر آینده · ${esc(c.primary.name)}</span>`;
 }
+
+const FUTURE_EVIDENCE_POLICY={
+ security:["تشخیص اقدام واقعی از تهدید یا اظهارنظر","احتمال محدودماندن رویداد یا کاهش تنش","تصمیم رسمی، شواهد میدانی و واکنش طرف دیگر"],
+ diplomacy:["تمایز موضع‌گیری از توافق و اجرای تعهد","ممکن است موضع اعلامی بدون تغییر سیاست باقی بماند","متن توافق، زمان اجرا و نشانه‌های پایبندی"],
+ economy:["بررسی سازوکار انتقال به قیمت، عرضه یا قدرت خرید","تغییر ممکن است نوسان کوتاه‌مدت یا نتیجه عوامل دیگر باشد","سری زمانی معتبر، تصمیم اجرایی و اثر قابل اندازه‌گیری"],
+ services:["سنجش وسعت، طول مدت و گروه‌های آسیب‌دیده","اختلال ممکن است موقتی و محلی باشد","گستره جغرافیایی، مدت اختلال و شواهد رفع آن"],
+ politics:["بررسی تبدیل اختلاف به تصمیم نهادی یا جابه‌جایی قدرت","اختلاف می‌تواند در همان ساختار مهار شود و نشانه بحران نباشد","اسناد رسمی، واکنش جناح‌ها و تکرار موارد مشابه"],
+ society:["بررسی تبدیل رویداد به تغییر رفتار جمعی یا سیاست عمومی","رخداد منفرد ممکن است نماینده روند عمومی نباشد","استمرار، گستره و پاسخ قابل مشاهده نهادها"],
+ environment:["بررسی سازوکار اثر بر منابع، سلامت یا سکونت","پیامدها ممکن است محدود و قابل جبران باشند","اندازه‌گیری مستقل و گستره آسیب"],
+ technology:["تفاوت اعلام نوآوری با پذیرش و اثرگذاری عملی","تغییر ممکن است در حد معرفی محصول باقی بماند","میزان استفاده، هزینه و نتیجه عملی"]
+};
+const FUTURE_DOSSIER_LINKS={politics:"authority",security:"security",society:"assembly",economy:"economy",services:"executive"};
+function futureImpactSignals(s){
+ const sources=Array.isArray(s.sources)?s.sources:[];
+ const real=sources.filter(x=>x&&x.article_url&&x.source_name);
+ return {sources:real.length,independent:Number(s.credibility?.independent_sources)||0};
+}
+function futureImpactArchive(s,c){
+ // A shared topic file is a navigational dossier, NOT a record of a reviewed forecast.
+ const axis=FUTURE_DOSSIER_LINKS[c.primary.key]||c.primary.axis;
+ return c.iran&&axis?'/future/transition/institution/'+encodeURIComponent(axis)+'/':'/future/';
+}
 function futureNewsDetail(s){
  const c=futureNewsContext(s);if(!c)return "";
  const t=c.primary;
- const axis=c.iran?(t.axis||c.secondary?.axis):null;
- const report=String(s.what_happened_fa||s.summary_fa||" ").trim();
- const excerpt=report.length>240?report.slice(0,240)+"…":report;
- const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5 5-3Z"/></svg>';
- return `<section class="future-impact-panel future-impact-${t.key}" aria-label="اثر بر آینده">
-  <div class="future-impact-heading"><span class="future-impact-icon">${icon}</span><div><span class="future-impact-eyebrow">از خبر امروز تا پیامدهای فردا</span><h2>اثر بر آینده</h2></div><span class="future-impact-topic">${esc(t.name)}</span></div>
-  ${excerpt?`<div class="future-impact-start"><h3>نقطهٔ شروع این خبر</h3><p>${esc(excerpt)}</p></div>`:""}
-  <div class="future-impact-grid"><div><h3>چه پیامدی ممکن است داشته باشد؟</h3><p>${esc(t.effect)}</p></div><div><h3>چه چیزی را پیگیری کنیم؟</h3><p>${esc(t.watch)}</p></div></div>
-  ${c.secondary?`<p class="future-impact-related">حوزهٔ مرتبط دیگر: <strong>${esc(c.secondary.name)}</strong></p>`:""}
-  <div class="future-impact-footer"><small>برداشت اولیه بر پایهٔ ${c.basis}؛ رنگ نشان‌دهندهٔ حوزه است. نتیجه با شواهد بعدی روشن‌تر می‌شود.</small><nav aria-label="پیگیری در آینده‌بان"><a href="/future/">آینده‌بان ←</a>${axis?`<a href="/future/transition/watch/">دیده‌بان گذار ←</a><a href="/future/transition/institution/${axis}/">پروندهٔ مرتبط ←</a>`:""}</nav></div>
- </section>`;
+ const evidence=futureImpactSignals(s);
+ const policy=FUTURE_EVIDENCE_POLICY[t.key]||[
+  "بررسی وقوع و دامنه رویداد پیش از استنتاج پیامد",
+  "ممکن است رویداد منفرد به روند گسترده تبدیل نشود",
+  "تکرار خبر، شواهد مستقل و تصمیم‌های اجرایی مرتبط"
+ ];
+ const report=String(s.what_happened_fa||s.summary_fa||"").trim();
+ const short=report.length>260?report.slice(0,257).replace(/\s+\S*$/,"")+"…":report;
+ const dossier=futureImpactArchive(s,c);
+ const sources=(Array.isArray(s.sources)?s.sources:[]).filter(x=>x&&x.article_url&&/^https?:\/\//.test(x.article_url)).slice(0,3);
+ const sourceHTML=sources.map(x=>'<a href="'+esc(x.article_url)+'" target="_blank" rel="noopener noreferrer">'+esc(x.source_name||"منبع خبر")+' ↗</a>').join(" · ");
+ const explanation='<p>این یک فرضیهٔ موضوعی برآمده از '+esc(c.basis)+' است، نه تحلیل اختصاصیِ تأییدشدهٔ این رویداد. اطلاعات موجود هنوز امکان تعیین جهت اثر یا تغییر احتمال سناریو را نمی‌دهد.</p>';
+ const test='<strong>شرط تقویت فرضیه:</strong> انتشار شواهد مستقل از تغییر پایدار و قابل مشاهده. <strong>شرط تضعیف:</strong> روشن شدن محدودبودن رویداد، تکذیب معتبر یا نبود پیامد اجرایی.';
+ const detailsId='impact-'+String(s.id).replace(/[^a-zA-Z0-9-]/g,"").slice(0,45);
+ return '<section class="future-impact-panel" aria-label="اثر بر آینده">'+
+ '<div class="future-impact-heading"><span class="future-impact-icon" aria-hidden="true">◎</span><div><span class="future-impact-eyebrow">خوانش اولیه؛ قابل بازبینی</span><h2>اثر بر آینده</h2></div><span class="future-impact-topic">'+esc(t.name)+'</span></div>'+
+ '<p class="future-impact-question">آیا این رویداد می‌تواند روند «'+esc(t.name)+'» را تغییر دهد؟</p>'+
+ '<p class="future-impact-status">وضعیت: نامزد بررسی · شواهد کافی برای نتیجه‌گیری تحلیلی وجود ندارد</p>'+
+ '<div class="future-impact-grid"><div><h3>چه چیزی گزارش شده؟</h3><p>'+esc(short||s.headline_fa||"")+'</p></div><div><h3>اثر احتمالی چیست؟</h3><p>'+esc(t.effect)+'</p></div></div>'+
+ '<div class="future-impact-watch"><h3>چه چیزی را زیر نظر بگیریم؟</h3><p>'+esc(t.watch)+'</p></div>'+
+ '<details class="future-impact-deep" id="'+detailsId+'"><summary>تحلیل عمیق‌تر، تفسیر رقیب و آزمون فرضیه</summary>'+
+ '<div class="future-impact-deep-grid"><div><h3>سازوکار احتمالی</h3><p>'+esc(policy[0])+'</p>'+explanation+'</div>'+
+ '<div><h3>توضیح رقیب</h3><p>'+esc(policy[1])+'</p></div>'+
+ '<div><h3>شواهد لازم برای داوری</h3><p>'+esc(policy[2])+'</p><p>'+test+'</p></div>'+
+ '<div><h3>وضعیت منابع</h3><p>پیوندهای منبع در این پرونده: '+esc(evidence.sources)+' · منابع مستقل گزارش‌شده: '+esc(evidence.independent)+'. شمار منابع به‌تنهایی صحت خبر یا تفسیر را اثبات نمی‌کند.</p>'+
+ (sourceHTML?'<p class="future-impact-sources">'+sourceHTML+'</p>':'<p>پیوند منبع معتبر در دادهٔ حاضر در دسترس نیست.</p>')+'</div></div>'+
+ '<p class="future-impact-audit">بازبینی پیش‌بینی: هنوز ارزیابی زمان‌دار و ثبت‌شده‌ای برای این خبر موجود نیست. نتیجهٔ گذشته ساخته یا حدس زده نمی‌شود.</p></details>'+
+ '<div class="future-impact-footer"><small>شاخص‌ها و سناریوها تغییری نکرده‌اند؛ ارتباط موضوعی از '+esc(c.basis)+' تشخیص داده شده است.</small><nav><a href="'+esc(dossier)+'">پرونده روند ←</a><a href="/future/transition/watch/">دیده‌بان گذار ←</a></nav></div></section>';
 }
 
 function feedCard(s, homepage = false) {
