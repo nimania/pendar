@@ -162,7 +162,7 @@ jobs:
           assert 1 <= len(stories) <= 60 and len(stories)>=len(previous)*0.8, "News integrity guard: homepage feed empty or dropped"
           import shutil
           dst.mkdir(parents=True,exist_ok=True)
-          for name in ("stories.json","topics.json","entities.json","trends.json","stats.json","meta.json","press-stats.json","press-source-stories.json","press-source-health.json","press-source-repair-queue.json","factchecks.json","geo.json"):
+          for name in ("stories.json","topics.json","entities.json","trends.json","stats.json","meta.json","press-stats.json","press-source-stories.json","press-source-health.json","press-source-repair-queue.json","factchecks.json","geo.json","news-health.json"):
               shutil.copy2(src/name,dst/name)
           if (src/"story").is_dir():
               shutil.copytree(src/"story",dst/"story",dirs_exist_ok=True)
