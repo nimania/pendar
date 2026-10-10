@@ -1,6 +1,7 @@
 name: Build & Deploy Pendar (static)
 
 # Runs OUTSIDE Iran on GitHub's servers, so it can reach news sources and the AI.
+# Freshness watchdog: .github/workflows/news-freshness-watchdog.yml checks successful builds hourly.
 # A push to main also republishes front-end changes such as the figures timeline.
 # It generates the news and publishes a static site to GitHub Pages — free.
 on:
