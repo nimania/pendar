@@ -555,6 +555,14 @@ jobs:
           # Diagnostic artifact is already uploaded separately; never serve it publicly.
           rm -f site/data/creator-work-audit.json
 
+      - name: Exclude heavyweight optional pages from priority news deployment
+        run: |
+          # Remove generated public copies only, retaining source data and collections.
+          # News, figure profiles, search indices, TV/book landing pages stay intact.
+          du -sh site/master-movie site/graph site/book 2>/dev/null || true
+          rm -rf -- site/master-movie site/graph site/book
+          echo "Optional movie archive, graph and standalone book routes excluded from Pages payload."
+
       - name: Audit GitHub Pages payload size
         run: python backend/scripts/audit_pages_size.py site 750000000
 
