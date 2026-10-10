@@ -548,5 +548,54 @@
       "posts": []
     },
     "posts": []
+  },
+  {
+    "profile": {
+      "handle": "jadi-mirmirani",
+      "name_fa": "جادی میرمیرانی",
+      "aliases": [
+        "Jadi",
+        "جادی"
+      ],
+      "role_fa": "آموزشگر برنامه‌نویسی و فناوری",
+      "field": "technology",
+      "field_fa": "فناوری و هوش مصنوعی",
+      "channel_url": "https://t.me/jadivarlog",
+      "external": true,
+      "directory": true,
+      "social": [
+        {
+          "kind": "telegram",
+          "label": "تلگرام",
+          "url": "https://t.me/jadivarlog"
+        }
+      ],
+      "posts": []
+    },
+    "posts": []
+  },
+  {
+    "profile": {
+      "handle": "ali-sharifi-zarchi",
+      "name_fa": "علی شریفی زارچی",
+      "aliases": [
+        "Ali Sharifi Zarchi"
+      ],
+      "role_fa": "پژوهشگر و مدرس هوش مصنوعی",
+      "field": "technology",
+      "field_fa": "فناوری و هوش مصنوعی",
+      "channel_url": "https://t.me/SharifiZarchi",
+      "external": true,
+      "directory": true,
+      "social": [
+        {
+          "kind": "telegram",
+          "label": "تلگرام",
+          "url": "https://t.me/SharifiZarchi"
+        }
+      ],
+      "posts": []
+    },
+    "posts": []
   }
 ]
