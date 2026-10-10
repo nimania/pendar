@@ -404,6 +404,9 @@ jobs:
         run: |
           node --check web-static/books-hub.js
           node --check web-static/movies-hub.js
+          node --check web-static/feed.js
+          node --check web-static/story-detail.js
+          node backend/tests/test_future_news.js
           node --check web-static/app.js
           node --check web-static/entities.js
           node --check web-static/loaders.js

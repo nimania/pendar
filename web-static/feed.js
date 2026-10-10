@@ -8,59 +8,53 @@
    figuresSection, groupedByCategory) at runtime. No behavior change. */
 
 
-// Trial only: shortlist at most ten top-ranked Iran-related news items.
-// Keyword matching creates a review candidate, NEVER a verified impact or score.
-const FUTURE_NEWS_PILOT=[
- {name:"انتقال قدرت و نهادها",words:["انتقال قدرت","جانشینی","رهبری","اصولگرایان","مجلس","قوه قضاییه","دولت موقت"],why:"ممکن است برای پیگیری انسجام نهادها یا تغییر موازنه قدرت مهم باشد."},
- {name:"امنیت و روابط خارجی",words:["جنگ","حمله نظامی","آتش بس","مذاکره","تحریم","اسرائیل","آمریکا"],why:"ممکن است بر سناریوهای تنش یا کاهش تنش و تصمیم‌های سیاست خارجی اثر بگذارد."},
- {name:"اقتصاد و خدمات",words:["تورم","ارز","بودجه","برق","گاز","بحران اقتصادی"],why:"ممکن است نشانه‌ای برای بررسی پایداری اقتصادی و خدمات عمومی باشد."},
- {name:"جامعه و مشارکت",words:["اعتراض","اعتصاب","انتخابات","مشارکت سیاسی","جامعه مدنی"],why:"ممکن است برای رصد تغییر رفتار جمعی و مشارکت اجتماعی مرتبط باشد."}
+// Topic-based future context for every news item, including archived deep links.
+// These are conditional reading guides, not verified forecasts or risk scores.
+const FUTURE_NEWS_CONTEXT = [
+ {key:"security",name:"امنیت و تنش",axis:"security",words:["جنگ","حمله نظامی","درگیری","عملیات نظامی","موشک","تلفات","آتش بس","نیروهای مسلح"],effect:"اگر دامنه درگیری یا تصمیم‌های نظامی تغییر کند، مسیر امنیت منطقه، رفت‌وآمد و فعالیت اقتصادی هم می‌تواند تغییر کند. تداوم تنش و کاهش آن دو مسیر متفاوت برای پیگیری‌اند.",watch:"دامنه و تکرار رویداد، تصمیم رسمی طرف‌ها، اجرای آتش‌بس و گزارش‌های مستقل از وضعیت میدانی."},
+ {key:"diplomacy",name:"روابط خارجی",words:["تحریم","مذاکره","مذاکرات","توافق","دیپلماسی","سیاست خارجی","NPT","کرملین"],effect:"اگر موضع‌گیری‌ها به توافق، محدودیت یا اقدام اجرایی برسند، روابط کشورها و امکان تجارت و همکاری می‌تواند تغییر کند. اظهارنظر به‌تنهایی نشان‌دهنده اجرای تصمیم نیست.",watch:"متن رسمی تصمیم یا توافق، زمان اجرا، واکنش طرف مقابل و شواهد عملی از تغییر سیاست."},
+ {key:"economy",name:"اقتصاد و معیشت",axis:"economy",words:["تورم","نرخ ارز","بودجه","بازار انرژی","قیمت نفت","نفت ایران","حامل گاز","گاز مایع","بانک","دارایی","رمزارز","قیمت","بازار سهام"],effect:"اگر این رویداد بر عرضه، هزینه‌ها یا دسترسی به منابع مالی اثر ماندگار بگذارد، می‌تواند به قیمت‌ها، قدرت خرید و تصمیم‌های کسب‌وکار منتقل شود. باید تغییر پایدار را از نوسان کوتاه‌مدت جدا کرد.",watch:"روند قیمت و عرضه، آمار رسمی، تصمیم‌های اجرایی و اثر قابل مشاهده بر خانوارها و کسب‌وکارها."},
+ {key:"services",name:"خدمات و زندگی روزمره",axis:"executive",words:["قطع برق","قطعی برق","کمبود آب","خدمات عمومی","اختلال خدمات","حمل و نقل","مدرسه","بیمارستان"],effect:"اگر اختلال یا تغییر خدمات ادامه پیدا کند، زندگی روزمره، هزینه‌ها و توان اداره امور تحت تأثیر قرار می‌گیرد. اگر رفع شود، اثر آن می‌تواند محدود و موقت بماند.",watch:"مدت و گستره تغییر، برنامه رفع مشکل، اجرای وعده‌ها و وضعیت واقعی دسترسی به خدمات."},
+ {key:"politics",name:"قدرت و نهادها",axis:"authority",words:["انتقال قدرت","جانشینی","رهبری","اصولگرایان","دولت موقت","حکومت موقت","قانون اساسی","قوه قضاییه","مجلس","انتخابات"],effect:"اگر این خبر به تغییر قانون، ترکیب نهادها یا رفتار تصمیم‌گیران برسد، موازنه قدرت و مسیر تصمیم‌های بعدی می‌تواند تغییر کند. برای سنجش اثر، نتیجه اجرایی مهم‌تر از موضع‌گیری اولیه است.",watch:"تصمیم و سند رسمی، تغییر ائتلاف‌ها یا ترکیب نهادها، زمان اجرا و شواهد پاسخگویی."},
+ {key:"society",name:"جامعه و مشارکت",axis:"assembly",words:["اعتراض","اعتصاب","مشارکت سیاسی","جامعه مدنی","حقوق بشر","مهاجرت","کودک سرباز"],effect:"اگر واکنش‌ها تداوم یابند یا به تغییر سیاست و رفتار جمعی برسند، این خبر می‌تواند بر مشارکت، اعتماد اجتماعی و مطالبات عمومی اثر بگذارد. یک مورد منفرد برای نتیجه‌گیری درباره روند کل جامعه کافی نیست.",watch:"تداوم و گستره واکنش‌ها، پاسخ نهادها، تغییر سیاست و داده‌های قابل مقایسه در طول زمان."},
+ {key:"environment",name:"محیط‌زیست و منابع",words:["اقلیم","محیط زیست","خشکسالی","آلودگی","زلزله","سیل","جنگل"],effect:"اگر پیامدها تکرار یا تشدید شوند، می‌توانند بر سلامت، سکونت، منابع طبیعی و هزینه اداره شهرها اثر بگذارند. میزان اثر به گستره رویداد و کیفیت پاسخ وابسته است.",watch:"داده‌های اندازه‌گیری، تکرار رویداد، گستره آسیب و اجرای اقدامات پیشگیری و جبران."},
+ {key:"technology",name:"فناوری و کار",words:["هوش مصنوعی","فناوری","اینترنت","استارلینک","نرم افزار"],effect:"اگر این فناوری یا تصمیم در عمل گسترش پیدا کند، شیوه کار، دسترسی به اطلاعات و هزینه خدمات می‌تواند تغییر کند. معرفی یک محصول با استفاده گسترده از آن فاصله دارد.",watch:"دسترسی واقعی، هزینه، میزان استفاده، محدودیت‌ها و نتیجه قابل سنجش در کاربردهای روزمره."},
+ {key:"health",name:"سلامت و دانش",words:["سلامت","درمان","واکسن","بیماری","پژوهش علمی"],effect:"اگر نتیجه گزارش با شواهد معتبر تأیید و در عمل به کار گرفته شود، می‌تواند بر دانش، خدمات سلامت یا کیفیت زندگی اثر بگذارد. مرحله پژوهش و میزان تأیید مستقل در ارزیابی اثر تعیین‌کننده‌اند.",watch:"منبع اصلی پژوهش یا تصمیم، تأیید مستقل، مرحله اجرا و داده‌های مربوط به نتیجه."},
+ {key:"culture",name:"فرهنگ و رسانه",words:["سینما","سریال","کتاب","موسیقی","نوبل","جایزه"],effect:"اثر این خبر ممکن است ابتدا در توجه مخاطبان، دیده‌شدن آثار و فرصت‌های فرهنگی ظاهر شود. اثر گسترده‌تر زمانی روشن می‌شود که استقبال یا تغییرهای نهادی تداوم پیدا کنند.",watch:"استقبال مخاطبان، دسترسی به اثر، واکنش حرفه‌ای و تغییر قابل مشاهده در تولید یا توزیع."},
+ {key:"sport",name:"ورزش و رقابت",words:["ورزشی","فوتبال","پاراآسیایی","المپیک"],effect:"اثر این خبر می‌تواند بر مسیر رقابت، فرصت ورزشکاران و تصمیم‌های مدیریتی متمرکز باشد. از یک نتیجه ورزشی به‌تنهایی نمی‌توان پیامد گسترده اجتماعی یا سیاسی نتیجه گرفت.",watch:"نتیجه رقابت‌های بعدی، تصمیم فدراسیون‌ها، برنامه آماده‌سازی و تغییر شرایط ورزشکاران."},
+ {key:"general",name:"پیگیری خبر",words:[],effect:"از اطلاعات فعلی این خبر، پیامد بلندمدت مشخصی نمی‌توان تعیین کرد. اگر رویداد تکرار شود، دامنه آن گسترش یابد یا به تصمیم اجرایی برسد، ارزیابی اثر آن روشن‌تر می‌شود.",watch:"خبرهای تأییدکننده، تکرار رویداد، دامنه پیامدها و تصمیم‌های رسمی مرتبط."}
 ];
-const futureNewsNorm = value => String(value || "").replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ").replace(/\s+/g," ").trim();
-let _futureNewsFeed = null;
-let _futureNewsCandidates = new Map();
-function futureNewsPilot(s){
+const futureNewsNorm = value => String(value || "").toLowerCase().replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ").replace(/\s+/g," ").trim();
+const FUTURE_NEWS_CATEGORY = {iran:"politics",politics:"politics",world:"diplomacy",economy:"economy",technology:"technology",ai:"technology",science:"health",health:"health",environment:"environment",culture:"culture",entertainment:"culture",sport:"sport"};
+function futureNewsContext(s){
  if(!s || !s.id)return null;
- // Cache the shortlist for this feed snapshot; never sort or mutate ALL.
- if(_futureNewsFeed !== ALL){
-  _futureNewsFeed = ALL;
-  _futureNewsCandidates = new Map();
-  const sorted=ALL.filter(x=>x&&x.id).slice().sort((a,b)=>(Number(b.importance_score)||0)-(Number(a.importance_score)||0));
-  for(const item of sorted){
-   const title=futureNewsNorm(item.headline_fa);
-   if(!["high","direct","major"].includes(String(item.iran_relevance||"").toLowerCase()) && !/ایران|تهران|جمهوری اسلامی/.test(title))continue;
-   const hit=FUTURE_NEWS_PILOT.find(t=>t.words.some(w=>title.includes(futureNewsNorm(w))));
-   if(hit)_futureNewsCandidates.set(String(item.id),hit);
-   if(_futureNewsCandidates.size===10)break;
-  }
- }
- return _futureNewsCandidates.get(String(s.id)) || null;
+ const title=futureNewsNorm(s.headline_fa);
+ const matches=text=>FUTURE_NEWS_CONTEXT.filter(t=>t.words.some(w=>text.includes(futureNewsNorm(w))));
+ const hits=matches(title);
+ // Prefer explicit headline topics; summaries help only when the title has no match.
+ const summaryHits=hits.length?[]:matches(futureNewsNorm(s.summary_fa));
+ const primary=hits[0]||summaryHits[0]||FUTURE_NEWS_CONTEXT.find(t=>t.key===FUTURE_NEWS_CATEGORY[s.category])||FUTURE_NEWS_CONTEXT[FUTURE_NEWS_CONTEXT.length-1];
+ const iran=["high","direct","major"].includes(String(s.iran_relevance||"").toLowerCase())||/ایران|تهران|جمهوری اسلامی/.test(title);
+ return {primary,secondary:hits.find(t=>t.key!==primary.key)||null,iran,basis:hits.length?"تیتر خبر":summaryHits.length?"خلاصه خبر":"موضوع خبر"};
 }
-function futureNewsTrialBadge(s){
- const t=futureNewsPilot(s);
- return t?'<span class="future-pilot-badge" title="نامزد ارزیابی تحریری؛ اثر تأیید نشده">◌ اثر احتمالی بر آینده</span>':"";
+function futureNewsBadge(s){
+ const c=futureNewsContext(s);if(!c)return "";
+ return `<span class="future-impact-badge future-impact-${c.primary.key}" title="پیامدهای احتمالی و مسیر پیگیری این خبر">اثر بر آینده · ${esc(c.primary.name)}</span>`;
 }
-function futureNewsTrialDetail(s){
- const t=futureNewsPilot(s);if(!t)return "";
- // A headline alone is not sufficient evidence for a confirmed change.
- const watch={
- "انتقال قدرت و نهادها":"آیا تصمیم‌ها یا جابه‌جایی‌های نهادی دیگری رخ می‌دهد؟ آیا واکنش بازیگران اصلی مستند می‌شود؟",
- "امنیت و روابط خارجی":"آیا اقدام یا اعلام موضع رسمی تازه‌ای ثبت می‌شود؟ آیا طرف‌های دیگر آن را تأیید می‌کنند؟",
- "اقتصاد و خدمات":"آیا داده رسمی یا گزارش مستقلِ دیگری تغییر وضعیت را تأیید می‌کند؟ آیا اختلال ادامه پیدا می‌کند؟",
- "جامعه و مشارکت":"آیا شواهد مستقلی از تداوم، گسترش یا کاهش مشارکت و کنش جمعی به دست می‌آید؟"
- }[t.name]||"چه شواهد مستقلی در روزهای بعد منتشر می‌شود؟";
- const title=String(s.headline_fa||"").trim();
- const report=String(s.what_happened_fa||s.summary_fa||"").trim();
- const excerpt=report.length>220?report.slice(0,217).replace(/\\s+\\S*$/,"")+"…":report;
- return '<section class="layers future-pilot-panel" aria-label="اثر احتمالی بر آینده">'+
- '<div class="future-pilot-top"><span class="future-pilot-icon" aria-hidden="true">◎</span><h3>اثر بر آینده</h3><span class="future-pilot-label">آزمایشی · نامزد بررسی</span></div>'+
- '<h4 class="future-pilot-question">این رویداد چه اثری بر «'+esc(t.name)+'» می‌تواند داشته باشد؟</h4>'+
- '<div class="future-pilot-steps"><div><strong><span aria-hidden="true">◷</span> چه چیزی تغییر کرده؟</strong><p>'+esc(excerpt||title)+'</p><small>خلاصه گزارش خبر؛ وقوع و دامنه تغییر نیازمند بررسی منابع است.</small></div>'+
- '<div><strong><span aria-hidden="true">↗</span> اثر احتمالی بر آینده</strong><p>'+esc(t.why)+'</p><small>فرضیه موضوعی برآمده از تیتر، نه نتیجه‌گیری مستقل.</small></div>'+
- '<div class="future-pilot-watch"><strong><span aria-hidden="true">◉</span> از این به بعد چه چیزی را زیر نظر بگیریم؟</strong><p>'+esc(watch)+'</p></div></div>'+
- '<p class="future-pilot-status">وضعیت شواهد: در انتظار ارزیابی مستقل · جهت و میزان اثر تعیین نشده</p>'+
- '<p class="future-pilot-caveat">این کارت به‌صورت آزمایشی از ارتباط موضوعی تیتر ساخته شده است. شاخص‌ها و احتمال سناریوها تغییر نکرده‌اند.</p>'+
- '<nav class="future-pilot-links" aria-label="پیگیری اثر خبر"><a href="/future/transition/watch/">پیگیری در دیده‌بان گذار ←</a><a href="/future/">آینده‌بان ←</a></nav></section>';
+function futureNewsDetail(s){
+ const c=futureNewsContext(s);if(!c)return "";
+ const t=c.primary;
+ const axis=c.iran?(t.axis||c.secondary?.axis):null;
+ const report=String(s.what_happened_fa||s.summary_fa||" ").trim();
+ const excerpt=report.length>240?report.slice(0,240)+"…":report;
+ const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5 5-3Z"/></svg>';
+ return `<section class="future-impact-panel future-impact-${t.key}" aria-label="اثر بر آینده">
+  <div class="future-impact-heading"><span class="future-impact-icon">${icon}</span><div><span class="future-impact-eyebrow">از خبر امروز تا پیامدهای فردا</span><h2>اثر بر آینده</h2></div><span class="future-impact-topic">${esc(t.name)}</span></div>
+  ${excerpt?`<div class="future-impact-start"><h3>نقطهٔ شروع این خبر</h3><p>${esc(excerpt)}</p></div>`:""}
+  <div class="future-impact-grid"><div><h3>چه پیامدی ممکن است داشته باشد؟</h3><p>${esc(t.effect)}</p></div><div><h3>چه چیزی را پیگیری کنیم؟</h3><p>${esc(t.watch)}</p></div></div>
+  ${c.secondary?`<p class="future-impact-related">حوزهٔ مرتبط دیگر: <strong>${esc(c.secondary.name)}</strong></p>`:""}
+  <div class="future-impact-footer"><small>برداشت اولیه بر پایهٔ ${c.basis}؛ رنگ نشان‌دهندهٔ حوزه است. نتیجه با شواهد بعدی روشن‌تر می‌شود.</small><nav aria-label="پیگیری در آینده‌بان"><a href="/future/">آینده‌بان ←</a>${axis?`<a href="/future/transition/watch/">دیده‌بان گذار ←</a><a href="/future/transition/institution/${axis}/">پروندهٔ مرتبط ←</a>`:""}</nav></div>
+ </section>`;
 }
 
 function feedCard(s, homepage = false) {
@@ -73,7 +67,7 @@ function feedCard(s, homepage = false) {
     : miniMap(s);
   return `<button class="card" onclick="openStory('${s.id}')">
     <div class="meta"><span class="chip">${CAT_FA[s.category] || "خبر"}</span>
-      <span class="dot"></span><span class="muted">${relTime(s.published_at)}</span>${geoBadge(s.geo)}${trendBadge(s.trend)}${homepage ? futureNewsTrialBadge(s) : ""}
+      <span class="dot"></span><span class="muted">${relTime(s.published_at)}</span>${geoBadge(s.geo)}${trendBadge(s.trend)}${futureNewsBadge(s)}
       <span class="imp ${imp.cls}"><span class="bars"><i></i><i></i><i></i></span><span class="lbl">${imp.lbl}</span></span></div>
     <div style="display:flex;gap:12px;align-items:flex-start">
       <div style="flex:1;min-width:0">

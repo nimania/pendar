@@ -82,9 +82,7 @@ async function openStory(id) {
   }
 
   const imp = impInfo(s.importance_score);
-  // Direct story links can finish before the background feed. The pilot must
-  // use the same shortlist here as it does in Headlines.
-  const [peopleSuggestions, storyBookData] = await Promise.all([storyPeopleSuggestions(s), loadBooks(), ALL.length ? Promise.resolve() : loadFeed(false)]);
+  const [peopleSuggestions, storyBookData] = await Promise.all([storyPeopleSuggestions(s), loadBooks()]);
   const storyBooks=(storyBookData.books||[]).filter(b=>(b.mentions||[]).some(m=>String(m.story_id||"")===String(cleanId)));
   const storyBooksSection=storyBooks.length?`<section class="story-books"><div class="rule"><span>کتاب‌های مرتبط با این خبر</span><span class="l"></span></div><div class="press-book-links">${storyBooks.map(b=>`<button onclick="openBook('${esc(b.slug)}')"><span>کتاب</span><b>${esc(b.title_fa||"")}</b></button>`).join("")}</div></section>`:"";
   const li = a => (a || []).map(x => `<li>${esc(x)}</li>`).join("");
@@ -162,7 +160,7 @@ async function openStory(id) {
     ${storyBooksSection}
     <div class="twocol"><div class="qa"><h3>چه اتفاقی افتاد؟</h3><p>${esc(s.what_happened_fa || "—")}</p></div>
       <div class="qa"><h3>چرا اهمیت دارد؟</h3><p>${esc(s.why_it_matters_fa || "—")}</p></div></div>
-    ${futureNewsTrialDetail(s)}
+    ${futureNewsDetail(s)}
     ${known}
     ${cred}
     ${trendSec}
