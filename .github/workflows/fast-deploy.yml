@@ -127,6 +127,17 @@ jobs:
             tar -xf /tmp/prev-fast/artifact.tar -C site
           fi
 
+      - name: Validate market data and display contracts
+        run: |
+          python -m unittest discover -s backend/tests -p test_nabzesh_market.py
+          node backend/tests/test_nabzesh_market_ui.js
+
+      - name: Refresh market snapshot from Nabzesh
+        continue-on-error: true
+        env:
+          NABZESH_API_KEY: ${{ secrets.NABZESH_API_KEY }}
+        run: python backend/scripts/refresh_market.py --output site/data/market-nabzesh.json
+
       - name: Overlay freshest Jan-e Jaraid generated data
         env:
           GH_TOKEN: ${{ github.token }}
@@ -355,7 +366,7 @@ jobs:
           import hashlib, pathlib, re
           root = pathlib.Path("site")
           versions = {}
-          for name in ("feed.js", "diner.js", "diner.css", "radar-live.js", "us-radar.js", "israel-radar.js", "israel-radar.css", "meshki-series.js", "home.js", "home-polish.css", "event-trends.js", "content-discovery.js", "story-detail.js", "secondary-views.js", "series-showcase.js", "app.js", "router.js", "entities.js", "loaders.js", "figures-core.js", "figures-profile.js", "search.js", "book-app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "tv-guide.js", "tv-guide.css", "knowledge-hub.js"):
+          for name in ("market-nabzesh.js", "market-weather.js", "feed.js", "diner.js", "diner.css", "radar-live.js", "us-radar.js", "israel-radar.js", "israel-radar.css", "meshki-series.js", "home.js", "home-polish.css", "event-trends.js", "content-discovery.js", "story-detail.js", "secondary-views.js", "series-showcase.js", "app.js", "router.js", "entities.js", "loaders.js", "figures-core.js", "figures-profile.js", "search.js", "book-app.js", "styles.css", "books-hub.js", "books-hub.css", "book-curation.js", "book-directory.js", "book-market-ui.js", "book-places.js", "book-radar-ui.js", "book-radar-data.js", "iran-provinces.js", "data/press-directory.js", "data/books.js", "movies-hub.js", "movies-hub.css", "movies-data.js", "data/movies.js", "tv-guide.js", "tv-guide.css", "knowledge-hub.js"):
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]

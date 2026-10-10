@@ -11,10 +11,12 @@ function showMarket() { show("market"); setTab("feed"); renderMarket(); setHash(
 async function renderMarket() {
   const el = document.getElementById("market");
   try {
-    const [prices, crypto] = await Promise.all([
+    const [prices, crypto, nabzesh] = await Promise.all([
       getJSON(`${DATA}/prices.json`).catch(() => []),
       getJSON(`${DATA}/crypto.json`).catch(() => []),
+      getJSON(`${DATA}/market-nabzesh.json`).catch(() => null),
     ]);
+    const richMarket = typeof marketNabzeshBoard === "function" ? marketNabzeshBoard(nabzesh) : "";
 
     const MARKET_ASSET_META={
       "دلار آمریکا":{icon:"🇺🇸",short:"دلار"},
@@ -60,6 +62,11 @@ async function renderMarket() {
     const cryptoUnits = (crypto || []).filter(p => Number(p.value) > 0 && usdToman > 0)
       .map(p => ({ id: "crypto:" + p.symbol, label: p.label_fa + " (" + p.symbol + ")", toman: Number(p.value) * usdToman }));
     window.JK_MARKET_UNITS = [{id:"toman",label:"تومان",toman:1}, ...fiatUnits, ...cryptoUnits];
+    if (richMarket) {
+      window.JK_MARKET_UNITS = [{id:"toman",label:"تومان",toman:1}, ...pendarMarketSnapshot.rows
+        .filter(p => ["currency","crypto"].includes(p.group) && p.quote === "IRT" && p.value > 0 && !p.is_stale)
+        .map(p => ({id:p.ticker,label:p.label_fa,toman:p.value}))];
+    }
 
     el.innerHTML = `<style>
       .market-hero{padding:4px 0 8px}.market-hero-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:6px 0 14px}.market-hero-head h1{font-family:"Noto Naskh Arabic",serif;font-size:clamp(30px,5vw,48px);margin:0}.market-hero-head p{margin:3px 0 0;color:var(--muted);font-size:.72rem}
@@ -72,7 +79,7 @@ async function renderMarket() {
     </style>
     <section class="market-hero">
       <div class="market-hero-head"><div><span class="press-kicker">پنداربازار</span><h1>بازار در یک نگاه</h1><p>ارز، طلا، سکه و سپس رادار صنعت غذا</p></div></div>
-      ${priceRows?`<div class="market-assets">${priceRows}</div>`:""}
+      ${richMarket || (priceRows?`<div class="market-assets">${priceRows}</div>`:"")}
     </section>
     <section class="market-tools">
       <div class="rule"><span>تبدیل واحد مالی</span><span class="l"></span></div>
@@ -84,11 +91,12 @@ async function renderMarket() {
         <div class="mc-result" id="mc-result">—</div>
       </div>
     </section>
-    ${cryptoRows?`<section><div class="rule"><span>رمزارزها</span><span class="l"></span></div><div class="market-crypto-strip">${cryptoRows}</div></section>`:""}
-    <p class="market-source-note">ارز و طلا: TGJU · رمزارزها: CoinGecko. تغییرات نمایش‌داده‌شده مطابق آخرین دادهٔ ذخیره‌شده‌اند.</p>
+    ${!richMarket && cryptoRows?`<section><div class="rule"><span>رمزارزها</span><span class="l"></span></div><div class="market-crypto-strip">${cryptoRows}</div></section>`:""}
+    <p class="market-source-note">${richMarket?"منبع: نبضش · قیمت‌های مرجع و زمان ثبت منابع؛ تبدیل مالی بر پایهٔ همین نرخ‌هاست.":"ارز و طلا: TGJU · رمزارزها: CoinGecko. تغییرات نمایش‌داده‌شده مطابق آخرین دادهٔ ذخیره‌شده‌اند."}</p>
     <div id="market-food"><p class="muted">در حال دریافت رادار بازار غذا…</p></div>`;
 
     setupMarketConverter();
+    if (richMarket) selectMarketGroup(nabzesh.groups.find(g => nabzesh.rows.some(r => r.group === g.id)).id);
     renderMarketFood();
   } catch (e) { el.innerHTML = `<div class="state"><div class="big">پنداربازار بارگذاری نشد</div></div>`; }
 }
