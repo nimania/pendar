@@ -563,7 +563,10 @@
         "subject_names": [
           "هوش مصنوعی"
         ],
-        "editorial": false
+        "editorial": false,
+        "source_review_status": "needs_exact_permalink",
+        "date_review_status": "date_not_verified",
+        "content_type": "sourced_summary"
       }
     ]
   },
@@ -606,7 +609,10 @@
         "editorial": false,
         "subject_names": [
           "هوش مصنوعی"
-        ]
+        ],
+        "source_review_status": "link_requires_content_verification",
+        "date_review_status": "date_not_verified",
+        "content_type": "sourced_summary"
       },
       {
         "id": "ai-jadi-ai-trading",
@@ -623,7 +629,10 @@
         "editorial": false,
         "subject_names": [
           "هوش مصنوعی"
-        ]
+        ],
+        "source_review_status": "link_requires_content_verification",
+        "date_review_status": "date_not_verified",
+        "content_type": "sourced_summary"
       }
     ]
   },
@@ -665,7 +674,10 @@
         "editorial": false,
         "subject_names": [
           "هوش مصنوعی"
-        ]
+        ],
+        "source_review_status": "needs_exact_permalink",
+        "date_review_status": "date_not_verified",
+        "content_type": "sourced_summary"
       },
       {
         "id": "ai-zarchi-ai-agent",
@@ -682,7 +694,10 @@
         "editorial": false,
         "subject_names": [
           "هوش مصنوعی"
-        ]
+        ],
+        "source_review_status": "link_requires_content_verification",
+        "date_review_status": "date_not_verified",
+        "content_type": "sourced_summary"
       }
     ]
   },
@@ -723,7 +738,10 @@
         "subject_names": [
           "هوش مصنوعی"
         ],
-        "editorial": false
+        "editorial": false,
+        "source_review_status": "needs_exact_permalink",
+        "date_review_status": "date_not_verified",
+        "content_type": "sourced_summary"
       }
     ]
   },
@@ -764,7 +782,10 @@
         "subject_names": [
           "هوش مصنوعی"
         ],
-        "editorial": false
+        "editorial": false,
+        "source_review_status": "needs_exact_permalink",
+        "date_review_status": "date_not_verified",
+        "content_type": "project_update"
       }
     ]
   },
@@ -799,7 +820,10 @@
         "editorial": false,
         "subject_names": [
           "هوش مصنوعی"
-        ]
+        ],
+        "source_review_status": "link_requires_content_verification",
+        "date_review_status": "date_requires_verification",
+        "content_type": "sourced_summary"
       }
     ]
   },
@@ -834,7 +858,10 @@
         "subject_names": [
           "هوش مصنوعی"
         ],
-        "editorial": false
+        "editorial": false,
+        "source_review_status": "link_requires_content_verification",
+        "date_review_status": "date_requires_verification",
+        "content_type": "sourced_summary"
       }
     ]
   },
@@ -869,7 +896,10 @@
         "subject_names": [
           "هوش مصنوعی"
         ],
-        "editorial": false
+        "editorial": false,
+        "source_review_status": "link_requires_content_verification",
+        "date_review_status": "date_requires_verification",
+        "content_type": "sourced_summary"
       }
     ]
   },
@@ -904,7 +934,10 @@
         "subject_names": [
           "هوش مصنوعی"
         ],
-        "editorial": false
+        "editorial": false,
+        "source_review_status": "link_requires_content_verification",
+        "date_review_status": "date_not_verified",
+        "content_type": "sourced_summary"
       }
     ]
   }
