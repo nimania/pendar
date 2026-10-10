@@ -563,6 +563,9 @@ jobs:
           rm -rf -- site/master-movie site/graph site/book
           echo "Optional movie archive, graph and standalone book routes excluded from Pages payload."
 
+      - name: Apply temporary news-and-figures publication profile
+        run: python backend/scripts/prepare_priority_site.py site
+
       - name: Audit GitHub Pages payload size
         run: python backend/scripts/audit_pages_size.py site 750000000
 
