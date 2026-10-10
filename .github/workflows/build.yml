@@ -343,6 +343,32 @@ jobs:
             gh run download "$prev_id" -n latest-static-site -D /tmp/previous-site || true
             python backend/scripts/unpack_site_artifact.py /tmp/previous-site
           fi
+          # Preserve the last verified press directory if the separate press
+          # collector has not delivered a refreshed one in this build.
+          # Never fabricate empty data or relax the integrity thresholds.
+          python - <<'PY'
+          import json
+          import shutil
+          from pathlib import Path
+          destination = Path("backend/public/data")
+          previous = Path("/tmp/previous-site/data")
+          current = destination / "press-directory.json"
+          old = previous / "press-directory.json"
+          def valid(path):
+              try:
+                  data = json.loads(path.read_text(encoding="utf-8"))
+                  return isinstance(data, list) and len(data) >= 20
+              except (OSError, ValueError):
+                  return False
+          if not valid(current) and valid(old):
+              shutil.copy2(old, current)
+              old_js = previous / "press-directory.js"
+              if old_js.is_file():
+                  shutil.copy2(old_js, destination / "press-directory.js")
+              print("Restored previously published, validated press directory.")
+          elif not valid(current):
+              print("::error::Press directory is missing or too small; no verified backup available.")
+          PY
           python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
 
       - name: Validate static SEO routes
