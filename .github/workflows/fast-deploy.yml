@@ -419,6 +419,9 @@ jobs:
           python backend/tests/test_specials_validator.py
           python backend/scripts/validate_specials.py
 
+      - name: Build future impact evidence queue
+        run: python backend/scripts/build_future_impacts.py --data-dir site/data
+
       - name: Build canonical entity registry
         run: python backend/scripts/build_entities.py --data-dir site/data
 
