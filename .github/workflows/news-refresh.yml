@@ -9,6 +9,7 @@ on:
     paths:
       - ".github/workflows/news-refresh.yml"
 
+# Manual retry requested after Gemini quota increase; preserve existing pipeline.
 permissions:
   contents: read
   actions: read
