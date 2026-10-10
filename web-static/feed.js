@@ -75,18 +75,19 @@ function futureNewsDetail(s){
   "ممکن است رویداد منفرد به روند گسترده تبدیل نشود",
   "تکرار خبر، شواهد مستقل و تصمیم‌های اجرایی مرتبط"
  ];
- const report=String(s.what_happened_fa||s.summary_fa||"").trim();
+ const verified=s.future_impact&&typeof s.future_impact==="object"?s.future_impact:null;
+ const report=String(verified?.reported_change||s.what_happened_fa||s.summary_fa||"").trim();
  const short=report.length>260?report.slice(0,257).replace(/\s+\S*$/,"")+"…":report;
  const dossier=futureImpactArchive(s,c);
  const sources=(Array.isArray(s.sources)?s.sources:[]).filter(x=>x&&x.article_url&&/^https?:\/\//.test(x.article_url)).slice(0,3);
- const sourceHTML=sources.map(x=>'<a href="'+esc(x.article_url)+'" target="_blank" rel="noopener noreferrer">'+esc(x.source_name||"منبع خبر")+' ↗</a>').join(" · ");
+ const sourceHTML=(verified?.source_links?.length?verified.source_links.map(x=>({article_url:x.url,source_name:x.name})):sources).map(x=>'<a href="'+esc(x.article_url)+'" target="_blank" rel="noopener noreferrer">'+esc(x.source_name||"منبع خبر")+' ↗</a>').join(" · ");
  const explanation='<p>این یک فرضیهٔ موضوعی برآمده از '+esc(c.basis)+' است، نه تحلیل اختصاصیِ تأییدشدهٔ این رویداد. اطلاعات موجود هنوز امکان تعیین جهت اثر یا تغییر احتمال سناریو را نمی‌دهد.</p>';
  const test='<strong>شرط تقویت فرضیه:</strong> انتشار شواهد مستقل از تغییر پایدار و قابل مشاهده. <strong>شرط تضعیف:</strong> روشن شدن محدودبودن رویداد، تکذیب معتبر یا نبود پیامد اجرایی.';
  const detailsId='impact-'+String(s.id).replace(/[^a-zA-Z0-9-]/g,"").slice(0,45);
  return '<section class="future-impact-panel" aria-label="اثر بر آینده">'+
  '<div class="future-impact-heading"><span class="future-impact-icon" aria-hidden="true">◎</span><div><span class="future-impact-eyebrow">خوانش اولیه؛ قابل بازبینی</span><h2>اثر بر آینده</h2></div><span class="future-impact-topic">'+esc(t.name)+'</span></div>'+
  '<p class="future-impact-question">آیا این رویداد می‌تواند روند «'+esc(t.name)+'» را تغییر دهد؟</p>'+
- '<p class="future-impact-status">وضعیت: نامزد بررسی · شواهد کافی برای نتیجه‌گیری تحلیلی وجود ندارد</p>'+
+ '<p class="future-impact-status">وضعیت: '+esc(verified?.status_fa||'نامزد بررسی')+' · جهت اثر هنوز تأیید نشده</p>'+
  '<div class="future-impact-grid"><div><h3>چه چیزی گزارش شده؟</h3><p>'+esc(short||s.headline_fa||"")+'</p></div><div><h3>اثر احتمالی چیست؟</h3><p>'+esc(t.effect)+'</p></div></div>'+
  '<div class="future-impact-watch"><h3>چه چیزی را زیر نظر بگیریم؟</h3><p>'+esc(t.watch)+'</p></div>'+
  '<details class="future-impact-deep" id="'+detailsId+'"><summary>تحلیل عمیق‌تر، تفسیر رقیب و آزمون فرضیه</summary>'+
@@ -95,7 +96,7 @@ function futureNewsDetail(s){
  '<div><h3>شواهد لازم برای داوری</h3><p>'+esc(policy[2])+'</p><p>'+test+'</p></div>'+
  '<div><h3>وضعیت منابع</h3><p>پیوندهای منبع در این پرونده: '+esc(evidence.sources)+' · منابع مستقل گزارش‌شده: '+esc(evidence.independent)+'. شمار منابع به‌تنهایی صحت خبر یا تفسیر را اثبات نمی‌کند.</p>'+
  (sourceHTML?'<p class="future-impact-sources">'+sourceHTML+'</p>':'<p>پیوند منبع معتبر در دادهٔ حاضر در دسترس نیست.</p>')+'</div></div>'+
- '<p class="future-impact-audit">بازبینی پیش‌بینی: هنوز ارزیابی زمان‌دار و ثبت‌شده‌ای برای این خبر موجود نیست. نتیجهٔ گذشته ساخته یا حدس زده نمی‌شود.</p></details>'+
+ '<p class="future-impact-audit">'+(verified?.review_history?.length?'تاریخچه: '+esc(verified.review_history.map(x=>x.date+": "+x.note).join('؛ ')):'بازبینی پیش‌بینی: هنوز ارزیابی زمان‌دار و ثبت‌شده‌ای برای این خبر موجود نیست.')+'</p></details>'+
  '<div class="future-impact-footer"><small>شاخص‌ها و سناریوها تغییری نکرده‌اند؛ ارتباط موضوعی از '+esc(c.basis)+' تشخیص داده شده است.</small><nav><a href="'+esc(dossier)+'">پرونده روند ←</a><a href="/future/transition/watch/">دیده‌بان گذار ←</a></nav></div></section>';
 }
 
