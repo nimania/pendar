@@ -1,0 +1,26 @@
+/* Shared Pendar identity for standalone /future/ research pages. */
+:root{--future-ink:#232426;--future-red:#bb2638;--future-border:#dededb;--future-paper:#f8f8f6;--future-card:#fff}
+html{scroll-padding-top:75px}
+body{font-family:Vazirmatn,Tahoma,Arial,sans-serif!important;background:var(--future-paper)!important;color:var(--future-ink)!important;line-height:1.85}
+body>a:first-child{color:var(--future-red)}
+body>header:not(.pendar-future-header){display:none}
+.pendar-future-header{position:relative;z-index:5;background:#161719;color:#fff;border-bottom:3px solid #bc2435}
+.pendar-future-header .inner{max-width:1150px;margin:auto;display:flex;align-items:center;gap:18px;padding:11px 20px}
+.pendar-future-header a{color:#f6f6f6;text-decoration:none}
+.pendar-future-header .logo{display:flex;align-items:center;gap:9px;min-width:100px;font-weight:900}
+.pendar-future-header img{width:108px;max-height:36px;object-fit:contain}
+.pendar-future-header .links{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-inline-start:auto;font-size:13px;font-weight:650}
+.pendar-future-header .links a:hover{color:#ffbfc6}
+.pendar-future-breadcrumb{max-width:1100px;margin:12px auto 0;padding:0 20px;font-size:12px;color:#6d6b69}
+.pendar-future-breadcrumb a{color:#ad2737}
+body main{max-width:1100px!important;margin-left:auto!important;margin-right:auto!important}
+body main h1{font-weight:900;letter-spacing:-.03em}
+body main h2{color:inherit}
+body main a:not(.card):not(.visual-story):not(.home-event-tile){text-underline-offset:3px}
+body main .card{border-radius:15px;border-color:var(--future-border);box-shadow:0 1px 3px #00000008}
+body main .tag{color:var(--future-red)}
+body main nav{display:flex;flex-wrap:wrap;gap:9px;margin:4px 0 17px}
+body main nav a{padding:4px 10px;border:1px solid var(--future-border);border-radius:18px}
+body main .notice{border-inline-start:3px solid var(--future-red)}
+@media(max-width:690px){.pendar-future-header .inner{align-items:flex-start;flex-wrap:wrap;gap:8px}.pendar-future-header .links{width:100%;justify-content:space-between;gap:8px;font-size:12px}.pendar-future-header img{width:93px}body main{padding-left:14px!important;padding-right:14px!important}}
+@media(prefers-color-scheme:dark){:root{--future-ink:#ededeb;--future-paper:#151719;--future-card:#252729;--future-border:#414345}.pendar-future-breadcrumb{color:#c0c0c0}.pendar-future-breadcrumb a{color:#fa9ba6}body main .card{background:var(--future-card);color:var(--future-ink)}}
