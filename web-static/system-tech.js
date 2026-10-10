@@ -43,7 +43,7 @@ async function renderSystem() {
   const safe = async (name, fallback) => {
     try { return await getJSON(`${DATA}/${name}`, 20000); } catch (_) { return fallback; }
   };
-  const [health, stats, meta, pressHealth, tv, weather, periodicals, entityRegistry] = await Promise.all([
+  const [health, stats, meta, pressHealth, tv, weather, periodicals, entityRegistry, newsHealth] = await Promise.all([
     safe("system-health.json", null),
     safe("stats.json", {}),
     safe("meta.json", {}),
@@ -51,7 +51,8 @@ async function renderSystem() {
     safe("tv-guide.json", {}),
     safe("weather.json", []),
     safe("periodicals.json", []),
-    safe("entity-registry.json", {})
+    safe("entity-registry.json", {}),
+    safe("news-health.json", null)
   ]);
 
   const hc = (health && health.counts) || {};
@@ -138,6 +139,17 @@ async function renderSystem() {
       <div><span class="home-eyebrow">آخرین نسخهٔ منتشرشده</span><h2>${esc(gateLabel)}</h2>
         <p>این صفحه سلامت آخرین نسخه‌ای را نشان می‌دهد که اجازهٔ انتشار گرفته؛ build ردشده جای نسخهٔ سالم را نمی‌گیرد.</p></div>
       <div class="sys-gate"><span class="sys-dot"></span><b>${gateOk===true?"PASS":gateOk===false?"BLOCKED":"UNKNOWN"}</b></div>
+    </section>
+    <section class="sys-panel">
+      <div class="sys-panel-head"><div><span class="home-eyebrow">News & Gemini</span><h3>سلامت پردازش خبر و هوش مصنوعی</h3></div><span class="sys-pill ${newsHealth?.status==="ok"?"ok":newsHealth?.status==="warning"?"warn":"muted"}">${newsHealth?.status==="ok"?"گزارش موجود":newsHealth?.status==="warning"?"خطای API ثبت شده":"داده موجود نیست"}</span></div>
+      <div class="sys-detail-row"><span>آخرین گزارش سلامت</span><b>${_sysTime(newsHealth?.generated_at)}</b></div>
+      <div class="sys-detail-row"><span>خبرهای منتشرشده در ۲۴ ساعت</span><b>${_sysNum(newsHealth?.news?.published_24h)}</b></div>
+      <div class="sys-detail-row"><span>درخواست‌های موفق AI در ۲۴ ساعت</span><b>${_sysNum(newsHealth?.ai?.success)}</b></div>
+      <div class="sys-detail-row"><span>خطاهای ارائه‌دهنده / سهمیه</span><b>${_sysNum(newsHealth?.ai?.provider_errors)} / ${_sysNum(newsHealth?.ai?.quota_errors)}</b></div>
+      <div class="sys-detail-row"><span>خطاهای اعتبارسنجی پاسخ</span><b>${_sysNum(newsHealth?.ai?.validation_errors)}</b></div>
+      <div class="sys-detail-row"><span>آخرین پردازش موفق AI</span><b>${_sysTime(newsHealth?.ai?.latest_success)}</b></div>
+      <div class="sys-detail-row"><span>تأخیر بازبینی</span><b>${meta?.built_iso && Date.now()-new Date(meta.built_iso).getTime()>3600000?"بیش از یک ساعت":meta?.built_iso?"کمتر از یک ساعت":"نامشخص"}</b></div>
+      <p>این آمار از پایگاه دادهٔ اجرا استخراج می‌شود. سبز بودن GitHub Actions به‌تنهایی نشانهٔ موفقیت Gemini نیست.</p>
     </section>
     <div class="sys-grid">${metrics}</div>\n    <div class="sys-admin-actions"><button onclick="showEntityQA()">Entity QA / Merge Console</button><span>بررسی duplicateها، aliasها و overrideهای canonical</span></div>
 
