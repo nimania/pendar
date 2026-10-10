@@ -1,0 +1,75 @@
+name: Pendar News Freshness Watchdog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 * * * *"
+
+permissions:
+  actions: read
+  issues: write
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check latest successful news build and raise or resolve alert
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import subprocess
+          import sys
+
+          repo = os.environ["REPO"]
+          def gh(*args):
+              p = subprocess.run(["gh", "api", *args], capture_output=True, text=True)
+              if p.returncode:
+                  raise RuntimeError(p.stderr.strip())
+              return json.loads(p.stdout)
+
+          now = dt.datetime.now(dt.timezone.utc)
+          runs = gh(f"repos/{repo}/actions/workflows/build.yml/runs?per_page=30").get("workflow_runs", [])
+          successful = next((r for r in runs if r.get("conclusion") == "success"), None)
+          ongoing = [r for r in runs if r.get("status") in ("queued", "in_progress", "waiting", "pending")]
+          if successful:
+              completed = dt.datetime.fromisoformat(successful["updated_at"].replace("Z", "+00:00"))
+              age = (now - completed).total_seconds() / 60
+              print(f"Last successful news build: {successful['html_url']} ({age:.0f} minutes old)")
+          else:
+              age = float("inf")
+              print("No successful news build found in latest 30 runs")
+          stale = age > 60
+          # Issues opened by this watchdog use a stable title for de-duplication.
+          title = "[Pendar] News freshness stalled"
+          issues = gh(f"repos/{repo}/issues?state=open&per_page=100")
+          existing = next((i for i in issues if i.get("title") == title and not i.get("pull_request")), None)
+          if stale:
+              recent = runs[0] if runs else None
+              url = recent.get("html_url") if recent else f"https://github.com/{repo}/actions/workflows/build.yml"
+              body = (f"News build has not completed successfully for **{age:.0f} minutes**.\n\n"
+                      f"Latest run: {url}\n"
+                      f"Last success: {successful['html_url'] if successful else 'not found'}\n"
+                      f"Currently queued/running: {len(ongoing)}\n\n"
+                      "Inspect the failed job logs and preserve the previous healthy publication. "
+                      "This issue is managed by the freshness watchdog.")
+              if not existing:
+                  subprocess.run(["gh", "api", f"repos/{repo}/issues", "--method", "POST",
+                                  "-f", f"title={title}", "-f", f"body={body}"], check=True)
+                  print("Opened news freshness alert")
+              else:
+                  print(f"Existing alert: {existing['html_url']}")
+              sys.exit(1)
+          if existing:
+              subprocess.run(["gh", "api", f"repos/{repo}/issues/{existing['number']}",
+                              "--method", "PATCH", "-f", "state=closed",
+                              "-f", "state_reason=completed"], check=True)
+              print("Closed recovered news freshness alert")
+          print("News build freshness OK")
+          PY
