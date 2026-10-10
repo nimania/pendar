@@ -21,14 +21,8 @@ on:
         description: "Build an opt-in recording script for this YouTube video ID"
         required: false
         type: string
-  push:
-    branches: [main]
-    paths:
-      - "backend/**"
-      - ".github/workflows/build.yml"
-  schedule:
-    - cron: "*/15 * * * *"            # every 15 minutes (the build DB is cached, so each
-                                    # run only synthesizes genuinely NEW stories)
+  # Temporarily manual-only: prioritize independent news and figure collectors.
+  # Restore a schedule after the GitHub Pages payload falls below the safe limit.
 
 permissions:
   actions: read
