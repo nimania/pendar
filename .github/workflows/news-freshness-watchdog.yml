@@ -14,7 +14,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Check latest successful news build and raise or resolve alert
+      - name: Check latest successful news collection and raise or resolve alert
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -35,16 +35,16 @@ jobs:
               return json.loads(p.stdout)
 
           now = dt.datetime.now(dt.timezone.utc)
-          runs = gh(f"repos/{repo}/actions/workflows/build.yml/runs?per_page=30").get("workflow_runs", [])
+          runs = gh(f"repos/{repo}/actions/workflows/news-refresh.yml/runs?per_page=30").get("workflow_runs", [])
           successful = next((r for r in runs if r.get("conclusion") == "success"), None)
           ongoing = [r for r in runs if r.get("status") in ("queued", "in_progress", "waiting", "pending")]
           if successful:
               completed = dt.datetime.fromisoformat(successful["updated_at"].replace("Z", "+00:00"))
               age = (now - completed).total_seconds() / 60
-              print(f"Last successful news build: {successful['html_url']} ({age:.0f} minutes old)")
+              print(f"Last successful news collection: {successful['html_url']} ({age:.0f} minutes old)")
           else:
               age = float("inf")
-              print("No successful news build found in latest 30 runs")
+              print("No successful news collection found in latest 30 runs")
           stale = age > 60
           # Issues opened by this watchdog use a stable title for de-duplication.
           title = "[Pendar] News freshness stalled"
@@ -52,8 +52,8 @@ jobs:
           existing = next((i for i in issues if i.get("title") == title and not i.get("pull_request")), None)
           if stale:
               recent = runs[0] if runs else None
-              url = recent.get("html_url") if recent else f"https://github.com/{repo}/actions/workflows/build.yml"
-              body = (f"News build has not completed successfully for **{age:.0f} minutes**.\n\n"
+              url = recent.get("html_url") if recent else f"https://github.com/{repo}/actions/workflows/news-refresh.yml"
+              body = (f"News collection has not completed successfully for **{age:.0f} minutes**.\n\n"
                       f"Latest run: {url}\n"
                       f"Last success: {successful['html_url'] if successful else 'not found'}\n"
                       f"Currently queued/running: {len(ongoing)}\n\n"
@@ -71,5 +71,5 @@ jobs:
                               "--method", "PATCH", "-f", "state=closed",
                               "-f", "state_reason=completed"], check=True)
               print("Closed recovered news freshness alert")
-          print("News build freshness OK")
+          print("News collection freshness OK")
           PY
