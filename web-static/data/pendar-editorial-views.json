@@ -1123,5 +1123,24 @@
         "editorial": true
       }
     ]
+  },
+  {
+    "profile": {
+      "handle": "hossein-marashi",
+      "name_fa": "حسین مرعشی",
+      "aliases": [
+        "Hossein Marashi",
+        "Hosein Marashi",
+        "حسین مرعشی"
+      ],
+      "role_fa": "سیاستمدار ایرانی؛ دبیرکل حزب کارگزاران سازندگی",
+      "field": "politics",
+      "field_fa": "سیاست و حکمرانی",
+      "external": true,
+      "directory": true,
+      "social": [],
+      "posts": []
+    },
+    "posts": []
   }
 ]
