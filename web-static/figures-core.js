@@ -87,23 +87,26 @@ function figureFollowBtn(handle, compact) {
 }
 const FIGURE_TIMELINE_TOPICS = [
   {id:"all", label:"همهٔ موضوع‌ها"},
-  {id:"ai", label:"فناوری و هوش مصنوعی", fields:["technology"], terms:["هوش مصنوعی","مدل زبانی","یادگیری ماشین","فناوری","تکنولوژی","chatgpt","openai","claude","gemini","deepseek","artificial intelligence"]},
-  {id:"politics", label:"سیاست و ایران", fields:["politics"], terms:["انتخابات","حکومت","دولت","گذار سیاسی","جمهوری اسلامی","دموکراسی","مجلس","سیاست ایران"]},
-  {id:"economy", label:"اقتصاد", fields:["economy","business"], terms:["اقتصاد","تورم","بازار","بودجه","سرمایه‌گذاری","ارز","تجارت"]},
-  {id:"culture", label:"فرهنگ و هنر", fields:["culture","arts","media"], terms:["سینما","موسیقی","ادبیات","کتاب","هنر","فرهنگ","فیلم"]},
-  {id:"society", label:"جامعه", fields:["society"], terms:["جامعه","آموزش","حقوق بشر","زنان","دانشگاه","مهاجرت"]}
+  {id:"ai", label:"فناوری و هوش مصنوعی", terms:["هوش مصنوعی","مدل زبانی","یادگیری ماشین","فناوری","تکنولوژی","chatgpt","openai","claude","gemini","deepseek","artificial intelligence"]},
+  {id:"politics", label:"سیاست و ایران", terms:["انتخابات","حکومت","دولت","گذار سیاسی","جمهوری اسلامی","دموکراسی","مجلس","سیاست ایران"]},
+  {id:"economy", label:"اقتصاد", terms:["اقتصاد","تورم","بازار","بودجه","سرمایه‌گذاری","ارز","تجارت"]},
+  {id:"culture", label:"فرهنگ و هنر", terms:["سینما","موسیقی","ادبیات","کتاب","هنر","فرهنگ","فیلم"]},
+  {id:"society", label:"جامعه", terms:["جامعه","آموزش","حقوق بشر","زنان","دانشگاه","مهاجرت"]}
 ];
 let _figTimelineTopic = "all";
 function figureMatchesTopic(post, topic) {
   if(topic.id === "all") return true;
-  const normalized = value => String(value || "").toLowerCase().replace(/[يى]/g,"ی").replace(/ك/g,"ک");
-  const field = normalized(post.field);
-  const fieldName = normalized(post.field_fa);
-  if((topic.fields||[]).includes(field)) return true;
-  // Match the content, not just a person's profession.
-  const haystack = normalized([post.topic_fa,post.summary_fa,post.source_name].join(" "));
-  return topic.terms.some(term => haystack.includes(normalized(term))) ||
-    (topic.id === "ai" && fieldName.includes("هوش مصنوعی"));
+  // Topic labels belong to individual posts, never to their authors.
+  const assigned = [post.topic_ids,post.topics,post.subject_topics]
+    .flatMap(v => Array.isArray(v) ? v : typeof v === "string" ? [v] : [])
+    .map(v => typeof v === "string" ? v : v && (v.id || v.slug) || "")
+    .map(v => String(v).toLowerCase());
+  if(assigned.length) return assigned.includes(topic.id);
+  const normalized = value => String(value || "").toLowerCase()
+    .replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ").replace(/\s+/g," ");
+  const haystack = normalized([post.topic_fa,post.summary_fa,post.headline_fa,post.quote_fa]
+    .filter(Boolean).join(" "));
+  return topic.terms.some(term => haystack.includes(normalized(term)));
 }
 function setFigureTimelineTopic(topic) {
   if(!FIGURE_TIMELINE_TOPICS.some(x=>x.id===topic)) return;
