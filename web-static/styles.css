@@ -1716,3 +1716,19 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 @media(max-width:600px){.future-impact-panel{padding:16px;border-radius:14px}.future-impact-grid{grid-template-columns:1fr;gap:16px}.future-impact-grid>div+div{border-inline-start:0;padding-inline-start:0;border-top:1px solid var(--line);padding-top:14px}.future-impact-heading h2{font-size:21px}.future-impact-topic{margin-inline-start:0}.future-impact-footer{align-items:flex-start}}
 
 .future-impact-start{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}.future-impact-start h3{font-size:12px;color:var(--ink-soft);margin:0 0 6px}.future-impact-start p{font-size:14px;line-height:1.85;margin:0;overflow-wrap:anywhere}
+
+
+/* Future impact 2: progressive disclosure and evidence caveats */
+.future-impact-question{font-size:1.08rem;font-weight:700;line-height:1.8;margin:10px 0}
+.future-impact-status{font-size:.82rem;padding:9px 12px;border-radius:9px;background:rgba(152,124,79,.10);border:1px solid rgba(152,124,79,.3);margin:10px 0}
+.future-impact-watch{margin-top:12px;padding:13px 16px;background:rgba(114,120,130,.09);border-radius:12px}
+.future-impact-watch h3{margin:0 0 5px;font-size:1rem}.future-impact-watch p{margin:0;line-height:1.9}
+.future-impact-deep{margin:15px 0 0;border:1px solid var(--border,#d8d8d8);border-radius:12px;overflow:hidden}
+.future-impact-deep summary{cursor:pointer;padding:14px 16px;font-weight:700;list-style:revert;line-height:1.8}
+.future-impact-deep summary:focus-visible{outline:2px solid #a52534;outline-offset:-3px}
+.future-impact-deep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:12px;padding:12px}
+.future-impact-deep-grid>div{background:rgba(120,120,120,.06);border-radius:9px;padding:13px}
+.future-impact-deep-grid h3{font-size:.94rem;margin:0 0 8px}.future-impact-deep-grid p{line-height:1.95;margin:5px 0}
+.future-impact-audit{font-size:.8rem;opacity:.8;border-top:1px solid var(--border,#ddd);margin:0 15px;padding:11px 0}
+.future-impact-sources a{display:inline-block;line-height:2}
+@media(max-width:600px){.future-impact-deep-grid{grid-template-columns:1fr}.future-impact-heading{flex-wrap:wrap}}
