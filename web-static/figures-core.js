@@ -134,7 +134,7 @@ async function renderFigureTimeline() {
   if(!isNewsMode) posts = posts.filter(p => figureMatchesTopic(p,selectedTopic));
   // Self-heal stale/removed field values left behind by an older deployment.
   // This also protects deep links after the exported field taxonomy changes.
-  if (!posts.length && _figTimelineMode === "all" && _figTimelineField !== "all") {
+  if (!posts.length && _figTimelineMode === "all" && _figTimelineField !== "all" && _figTimelineTopic === "all") {
     _figTimelineField = "all";
     posts = (d.figures || []).flatMap(f => (f.posts || []).map(p => ({
       ...p, field: f.field,
