@@ -87,7 +87,7 @@ def main():
             for post in entry.get("posts", []):
                 link = str(post.get("url") or "")
                 if link:
-                    seen.add(hashlib.sha256((entry.get("profile", {}).get("handle", "") + "\\n" + link).encode()).hexdigest()[:20])
+                    seen.add(hashlib.sha256((entry.get("profile", {}).get("handle", "") + chr(10) + link).encode()).hexdigest()[:20])
     for source in sources:
         try:
             for item in collect(source):
