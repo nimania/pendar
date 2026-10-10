@@ -105,7 +105,7 @@ def build(site):
             body_parts.append(section.get('title'))
             body_parts.extend(section.get('paragraphs') or [])
             body_parts.extend(item.get('text') for item in section.get('items') or [] if isinstance(item,dict))
-        add('event',dossier['id'],dossier.get('title'),'\\n\\n'.join(text(x) for x in body_parts if text(x)),
+        add('event',dossier['id'],dossier.get('title'),chr(10).join(text(x) for x in body_parts if text(x)),
             image=dossier.get('image'),schema_type='Article',published=dossier.get('updated_at') or dossier.get('published_at'))
         event_url=route('event',dossier['id'])
         if event_url in pages:
