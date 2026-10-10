@@ -617,9 +617,36 @@ def merge_editorial_views(data_dir: Path) -> dict:
         posts = [{**post, "handle": person["handle"], "avatar": person.get("avatar", ""),
                   "role_fa": person.get("role_fa", ""), "field": person.get("field", "media")}
                  for post in entry.get("posts", [])]
-        ids = {p["id"] for p in posts}
-        person["posts"] = posts + [p for p in person.get("posts", []) if p.get("id") not in ids]
-        person["count"] = len(person["posts"])
+        # Prefer curated posts; deduplicate by ID and canonical URL.
+        from urllib.parse import urlsplit, parse_qsl, urlencode
+        def source_key(post):
+            url = str(post.get("url") or "").strip()
+            if not url:
+                return None
+            try:
+                parts = urlsplit(url)
+                if parts.scheme not in ("http", "https") or not parts.netloc:
+                    return None
+                qs = urlencode(sorted((k, v) for k, v in parse_qsl(parts.query)
+                                       if not k.lower().startswith("utm_")
+                                       and k.lower() not in ("fbclid", "gclid")))
+                return (parts.netloc.lower().removeprefix("www."),
+                        parts.path.rstrip("/") or "/", qs)
+            except ValueError:
+                return None
+        seen_ids, seen_sources, deduped = set(), set(), []
+        for post in posts + person.get("posts", []):
+            pid = str(post.get("id") or "").strip()
+            key = source_key(post)
+            if (pid and pid in seen_ids) or (key and key in seen_sources):
+                continue
+            if pid:
+                seen_ids.add(pid)
+            if key:
+                seen_sources.add(key)
+            deduped.append(post)
+        person["posts"] = deduped
+        person["count"] = len(deduped)
     portraits_source = data_dir / "pendar-figure-portraits.json"
     if not portraits_source.exists():
         portraits_source = Path(__file__).resolve().parents[2] / "web-static/data/pendar-figure-portraits.json"
