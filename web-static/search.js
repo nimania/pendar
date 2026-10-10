@@ -6,7 +6,7 @@
    runtime, after every script has loaded. No behavior change. */
 
 // Header smart search — natural-language, cross-dataset local retrieval.
-let _smartSearchTimer=null, _smartSearchDocs=null;
+let _smartSearchTimer=null, _smartSearchDocs=null, _smartSearchBuiltAt=0, _smartSearchPending=null;
 function toggleSmartSearch(force){
   const box=document.getElementById("smart-search");
   const open=typeof force==="boolean"?force:!box.classList.contains("open");
@@ -81,7 +81,15 @@ function _ssHumanRoles(roles){
 }
 
 async function _buildSmartSearchDocs(){
-  if(_smartSearchDocs) return _smartSearchDocs;
+  // Keep live headlines searchable after a feed refresh; avoid repeat downloads
+  // for consecutive keystrokes and coalesce simultaneous searches.
+  if(_smartSearchDocs && Date.now()-_smartSearchBuiltAt<5*60*1000) return _smartSearchDocs;
+  if(_smartSearchPending) return _smartSearchPending;
+  _smartSearchPending=_collectSmartSearchDocs();
+  try { return await _smartSearchPending; }
+  finally { _smartSearchPending=null; }
+}
+async function _collectSmartSearchDocs(){
   const docs=[];
   try{
     const f=await loadFigures();
@@ -163,7 +171,7 @@ async function _buildSmartSearchDocs(){
   // Canonical registry entries are deliberately omitted from public search.
   // Users should see actual people, books, articles and sections — not internal
   // identity records or implementation labels.
-  _smartSearchDocs=docs; return docs;
+  _smartSearchDocs=docs; _smartSearchBuiltAt=Date.now(); return docs;
 }
 function _ssExcerpt(s,Q){
   const x=String(s||"").trim(); if(!x)return "";
@@ -230,20 +238,21 @@ async function smartSearch(q){
 
     if(profileHits.length){
       const handles=new Set(profileHits.map(x=>x.d.handle).filter(Boolean));
-      const related=[];
-      const seen=new Set();
+      const related=[], news=[], seen=new Set();
       for(const x of ranked){
         if(x.d.kind==="چهره") continue;
-        // For a named-person search, prefer that person's own statements first.
-        if(handles.size && x.d.handle && !handles.has(x.d.handle) && related.length<3) continue;
         const key=[x.d.kind,_sq(x.d.title),_sq(x.d.sub),_sq((x.d.snippet||"").slice(0,90))].join("|");
         if(seen.has(key)) continue;
-        seen.add(key); related.push(x);
-        if(related.length>=3) break;
+        seen.add(key);
+        // News has its own section: statements and books must not crowd it out.
+        if(x.d.kind==="خبر"){ if(news.length<3) news.push(x); continue; }
+        if(handles.size && x.d.handle && !handles.has(x.d.handle) && related.length<3) continue;
+        if(related.length<3) related.push(x);
       }
       out.innerHTML=
         `<div class="ss-answer"><strong>چهره</strong><small>پروفایل اصلی</small></div>`+
         profileHits.map(x=>_ssRenderRow(x.d,Q,x.d.count?`چهره · ${faN(x.d.count)} گفته`:"چهره")).join("")+
+        (news.length?`<div class="ss-divider">سرخط‌های مرتبط</div>${news.map(x=>_ssRenderRow(x.d,Q,"سرخط")).join("")}`:"")+
         (related.length?`<div class="ss-divider">چند نتیجهٔ مرتبط</div>${related.map(x=>_ssRenderRow(x.d,Q)).join("")}`:"");
       return;
     }
@@ -260,7 +269,12 @@ async function smartSearch(q){
       seen.add(key); perTitle.set(bucket,n+1); compact.push(x);
       if(compact.length>=8) break;
     }
-    out.innerHTML=compact.length?compact.map(x=>_ssRenderRow(x.d,Q)).join(""):'<div class="smart-search-hint">نتیجه‌ای پیدا نشد. عبارت را طبیعی‌تر یا کوتاه‌تر امتحان کن.</div>';
+    // Reserve space for recent headlines even when other collections rank higher.
+    const headlines=ranked.filter(x=>x.d.kind==="خبر").slice(0,3);
+    const headlineKeys=new Set(headlines.map(x=>x.d.go));
+    const others=compact.filter(x=>!headlineKeys.has(x.d.go)).slice(0,6);
+    const visible=headlines.concat(others);
+    out.innerHTML=visible.length?(headlines.length?`<div class="ss-divider">سرخط‌های مرتبط</div>${headlines.map(x=>_ssRenderRow(x.d,Q,"سرخط")).join("")}`:"")+(others.length?`${headlines.length?'<div class="ss-divider">سایر نتایج</div>':""}${others.map(x=>_ssRenderRow(x.d,Q)).join("")}`:""):'<div class="smart-search-hint">نتیجه‌ای پیدا نشد. عبارت را طبیعی‌تر یا کوتاه‌تر امتحان کن.</div>';
   },140);
 }
 document.addEventListener("click",e=>{const box=document.getElementById("smart-search");if(box?.classList.contains("open")&&!box.contains(e.target))toggleSmartSearch(false)});
