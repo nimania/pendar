@@ -2,7 +2,7 @@
   "countries": {
     "us": {
       "fingerprint": "57359ccd6b8686f02b3a5b85bc00fbef0c0062eba9bc1c4e4eba8fcbfd84dd0d",
-      "reviewed_at": "2026-10-10T01:43:27.573842+00:00",
+      "reviewed_at": "2026-10-10T08:25:41.994912+00:00",
       "poll_date": "2026-10-05",
       "election_date": "2026-11-03",
       "history": [
@@ -57,7 +57,7 @@
             "OH-09": "Toss Up",
             "IA-01": "Toss Up"
           },
-          "reviewed_at": "2026-10-10T01:43:27.573842+00:00",
+          "reviewed_at": "2026-10-10T08:25:41.994912+00:00",
           "election_date": "2026-11-03",
           "recorded_at": "2026-10-08T15:01:09.658618+00:00"
         }
@@ -73,11 +73,11 @@
         }
       ],
       "source_check": {
-        "checked_at": "2026-10-10T01:43:27.649799+00:00",
+        "checked_at": "2026-10-10T08:25:42.084341+00:00",
         "ok": true,
         "content_hash": "38ce3c1eadc3265cc5af4b70c5428c16b761dde7be01d4c0ecd8202f09f00512",
         "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline%2010.9_0.pdf",
-        "last_success_at": "2026-10-10T01:43:27.649799+00:00"
+        "last_success_at": "2026-10-10T08:25:42.084341+00:00"
       }
     },
     "israel": {
@@ -172,11 +172,11 @@
         }
       ],
       "source_check": {
-        "checked_at": "2026-10-10T01:43:27.649799+00:00",
+        "checked_at": "2026-10-10T08:25:42.084341+00:00",
         "ok": true,
-        "content_hash": "34750b1750b8d9dc6364b640df6a6f52230b0b974ee8ed515dced451f765a639",
+        "content_hash": "83ce472fbfe02d598d3f00d9cabcb7c67a0a871b1109dde175f2ef83505eab38",
         "url": "https://www.kan.org.il/content/kan-news/politic/1105927/",
-        "last_success_at": "2026-10-10T01:43:27.649799+00:00"
+        "last_success_at": "2026-10-10T08:25:42.084341+00:00"
       }
     }
   }
