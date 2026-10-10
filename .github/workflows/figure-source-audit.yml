@@ -1,0 +1,30 @@
+name: Audit figure sources
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 5 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'web-static/data/pendar-editorial-views.json'
+      - 'backend/scripts/audit_figure_sources.py'
+      - '.github/workflows/figure-source-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate source quality report
+        run: python backend/scripts/audit_figure_sources.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: figure-source-audit
+          path: web-static/data/figure-source-audit.json
+          retention-days: 14
