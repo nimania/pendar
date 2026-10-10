@@ -1732,3 +1732,8 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 .future-impact-audit{font-size:.8rem;opacity:.8;border-top:1px solid var(--border,#ddd);margin:0 15px;padding:11px 0}
 .future-impact-sources a{display:inline-block;line-height:2}
 @media(max-width:600px){.future-impact-deep-grid{grid-template-columns:1fr}.future-impact-heading{flex-wrap:wrap}}
+
+/* Topic timelines inside the existing figures stream. */
+.fig-topic-filters{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0 2px;align-items:center}
+.fig-topic-filters .fchip{white-space:nowrap}
+@media(max-width:600px){.fig-topic-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px;scrollbar-width:thin}}
