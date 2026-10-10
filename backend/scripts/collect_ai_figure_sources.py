@@ -45,6 +45,16 @@ class TelegramParser(HTMLParser):
             self.capture -= 1
         # All published messages are finalized when a new message begins or parsing ends.
 
+AI_TERMS = ("هوش مصنوعی", "یادگیری ماشین", "مدل زبانی", "مدل‌های زبانی",
+            "یادگیری عمیق", "شبکه عصبی", "عامل هوشمند", "چت‌بات",
+            "machine learning", "deep learning", "artificial intelligence",
+            "llm", "openai", "chatgpt", "claude", "gemini", "deepseek",
+            "qwen", "transformer", "agentic", "agents", "copilot")
+
+def relevant_ai(text):
+    normalized = " ".join(text.casefold().replace("ي", "ی").replace("ك", "ک").split())
+    return any(term in normalized for term in AI_TERMS)
+
 def collect(source, timeout=15):
     url = source["url"]
     if not re.fullmatch(r"https://t[.]me/s/[A-Za-z0-9_]+", url):
@@ -71,7 +81,9 @@ def collect(source, timeout=15):
         result.append({"id": fingerprint, "figure": source["figure"],
                        "source": source["label"], "url": message_url,
                        "published_at": date, "text": body,
-                       "status": "pending_editorial_review"})
+                       "status": "pending_editorial_review",
+                       "ai_relevance": "candidate" if relevant_ai(body) else "other_topic",
+                       "needs_human_topic_review": True})
     return result
 
 def main():
@@ -97,7 +109,9 @@ def main():
         except Exception as exc:
             errors.append({"figure": source["figure"], "error": str(exc)[:200]})
     report = {"checked_at": datetime.now(timezone.utc).isoformat(),
-              "publication_enabled": False, "pending": pending, "errors": errors}
+              "publication_enabled": False,
+              "ai_candidates": sum(x["ai_relevance"] == "candidate" for x in pending),
+              "pending": pending, "errors": errors}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Queued {len(pending)} public posts; {len(errors)} source errors. No publication.")
