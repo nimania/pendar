@@ -524,5 +524,29 @@
         "url": ""
       }
     ]
+  },
+  {
+    "profile": {
+      "handle": "ali-rashedi",
+      "name_fa": "علی راشدی",
+      "aliases": [
+        "Ali Rashedi"
+      ],
+      "role_fa": "",
+      "field": "society",
+      "field_fa": "جامعه",
+      "external": true,
+      "directory": true,
+      "channel_url": "https://t.me/AliRashedi1",
+      "social": [
+        {
+          "kind": "telegram",
+          "label": "تلگرام",
+          "url": "https://t.me/AliRashedi1"
+        }
+      ],
+      "posts": []
+    },
+    "posts": []
   }
 ]
