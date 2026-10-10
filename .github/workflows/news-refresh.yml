@@ -61,9 +61,10 @@ jobs:
           meta = json.loads((root / "meta.json").read_text())
           assert isinstance(stories, list), "News export is not an array"
           print(f"News diagnostic: exported={len(stories)}, built={meta.get('built_iso')}", flush=True)
-          assert len(stories) >= 100, f"Refusing empty or truncated news: exported={len(stories)}, minimum=100"
+          assert 1 <= len(stories) <= 60, f"Invalid home feed count: exported={len(stories)}, expected=1..60"
           assert meta.get("built_iso"), "No export timestamp"
           assert (root / "stats.json").is_file(), "Missing news stats"
+          assert len(list((root / "story").glob("*.json"))) >= len(stories), "Missing story detail exports"
           print(f"Validated {len(stories)} stories at {meta['built_iso']}")
           PY
       - name: Save independent news database
