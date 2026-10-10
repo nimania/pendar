@@ -490,3 +490,12 @@
 .retro-soufia p { font-size: .9rem; line-height: 2; margin: 0 0 12px; color: #2a1715; }
 .retro-eyebrow-dark { font-size: .75rem; font-weight: 700; color: #ca0408; }
 @media (max-width: 480px) { .retro-soufia { flex-direction: column; align-items: center; text-align: center; } }
+
+/* Retro portfolio: portrait Shorts embeds */
+.retro-video-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:16px; }
+.retro-video-item { margin:0; min-width:0; }
+.retro-video-frame { position:relative; width:min(100%,330px); margin-inline:auto; aspect-ratio:9/16; overflow:hidden; border-radius:16px; background:#151515; box-shadow:0 8px 26px rgba(0,0,0,.14); }
+.retro-video-frame iframe { display:block; width:100%; height:100%; border:0; }
+.retro-video-item figcaption { margin-top:9px; text-align:center; font-size:.82rem; color:var(--ink-soft); }
+.retro-video-item figcaption a { color:var(--diner-red); }
+@media (max-width:570px) { .retro-video-grid { grid-template-columns:1fr; gap:24px; } }
