@@ -80,6 +80,14 @@ def main():
     args = ap.parse_args()
     sources = json.loads(SOURCES.read_text(encoding="utf-8"))["sources"]
     pending, errors, seen = [], [], set()
+    # Exclude links that have already passed through the curated figure archive.
+    curated_path = ROOT / "web-static/data/pendar-editorial-views.json"
+    if curated_path.exists():
+        for entry in json.loads(curated_path.read_text(encoding="utf-8")):
+            for post in entry.get("posts", []):
+                link = str(post.get("url") or "")
+                if link:
+                    seen.add(hashlib.sha256((entry.get("profile", {}).get("handle", "") + "\\n" + link).encode()).hexdigest()[:20])
     for source in sources:
         try:
             for item in collect(source):
