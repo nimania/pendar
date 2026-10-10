@@ -51,7 +51,7 @@ jobs:
           python -m scripts.seed
           python -c "from app.tasks.scheduler import run_full_cycle; print(run_full_cycle())"
           python -m scripts.export_static
-          python scripts/export_news_health.py
+          NEWS_DB_PATH=build.db NEWS_HEALTH_OUT=public/data/news-health.json python scripts/export_news_health.py
       - name: Validate independently generated news
         run: |
           python - <<'PY'
