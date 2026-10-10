@@ -4,7 +4,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Collect Pendar News (independent)", "Build & Deploy Pendar (static)", "Pendar Movie Master", "Collect & publish periodicals", "Refresh book radar and commerce", "Refresh weather and air quality", "Refresh series showcases", "Refresh US candidate feeds", "Refresh radar sources and revisions"]
+    workflows: ["Collect Pendar News (independent)", "Build & Deploy Pendar (static)"]
     types: [completed]
   push:
     branches: [main]
