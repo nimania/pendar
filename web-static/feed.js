@@ -37,15 +37,30 @@ function futureNewsPilot(s){
  return _futureNewsCandidates.get(String(s.id)) || null;
 }
 function futureNewsTrialBadge(s){
- return futureNewsPilot(s)?'<span class="future-pilot-badge" title="نامزد بررسی تحریری؛ نه اثر تأییدشده">اثر بر آینده · آزمایشی</span>':"";
+ const t=futureNewsPilot(s);
+ return t?'<span class="future-pilot-badge" title="نامزد ارزیابی تحریری؛ اثر تأیید نشده">◌ اثر احتمالی بر آینده</span>':"";
 }
 function futureNewsTrialDetail(s){
  const t=futureNewsPilot(s);if(!t)return "";
- return '<section class="layers future-pilot-panel"><h3 class="section-h">اثر بر آینده <span class="n">آزمایشی · نامزد بررسی</span></h3>'+
- '<p><strong>حوزهٔ مرتبط: '+esc(t.name)+'</strong></p><p>'+esc(t.why)+'</p>'+
- '<p class="future-pilot-status">وضعیت: در انتظار ارزیابی منابع · جهت اثر: هنوز تعیین نشده</p>'+
- '<p>این ارتباط از تیتر خبر شناسایی شده است. برای تعیین اثر، باید منابع همین خبر و شواهد موافق و مخالف بررسی شوند. شاخص‌ها و احتمال سناریوها در این مرحله تغییر نمی‌کنند.</p>'+
- '<nav class="future-pilot-links" aria-label="پیگیری اثر خبر"><a href="/future/">آینده‌بان ←</a><a href="/future/transition/watch/">دیده‌بان گذار ←</a></nav></section>';
+ // A headline alone is not sufficient evidence for a confirmed change.
+ const watch={
+ "انتقال قدرت و نهادها":"آیا تصمیم‌ها یا جابه‌جایی‌های نهادی دیگری رخ می‌دهد؟ آیا واکنش بازیگران اصلی مستند می‌شود؟",
+ "امنیت و روابط خارجی":"آیا اقدام یا اعلام موضع رسمی تازه‌ای ثبت می‌شود؟ آیا طرف‌های دیگر آن را تأیید می‌کنند؟",
+ "اقتصاد و خدمات":"آیا داده رسمی یا گزارش مستقلِ دیگری تغییر وضعیت را تأیید می‌کند؟ آیا اختلال ادامه پیدا می‌کند؟",
+ "جامعه و مشارکت":"آیا شواهد مستقلی از تداوم، گسترش یا کاهش مشارکت و کنش جمعی به دست می‌آید؟"
+ }[t.name]||"چه شواهد مستقلی در روزهای بعد منتشر می‌شود؟";
+ const title=String(s.headline_fa||"").trim();
+ const report=String(s.what_happened_fa||s.summary_fa||"").trim();
+ const excerpt=report.length>220?report.slice(0,217).replace(/\\s+\\S*$/,"")+"…":report;
+ return '<section class="layers future-pilot-panel" aria-label="اثر احتمالی بر آینده">'+
+ '<div class="future-pilot-top"><span class="future-pilot-icon" aria-hidden="true">◎</span><h3>اثر بر آینده</h3><span class="future-pilot-label">آزمایشی · نامزد بررسی</span></div>'+
+ '<h4 class="future-pilot-question">این رویداد چه اثری بر «'+esc(t.name)+'» می‌تواند داشته باشد؟</h4>'+
+ '<div class="future-pilot-steps"><div><strong><span aria-hidden="true">◷</span> چه چیزی تغییر کرده؟</strong><p>'+esc(excerpt||title)+'</p><small>خلاصه گزارش خبر؛ وقوع و دامنه تغییر نیازمند بررسی منابع است.</small></div>'+
+ '<div><strong><span aria-hidden="true">↗</span> اثر احتمالی بر آینده</strong><p>'+esc(t.why)+'</p><small>فرضیه موضوعی برآمده از تیتر، نه نتیجه‌گیری مستقل.</small></div>'+
+ '<div class="future-pilot-watch"><strong><span aria-hidden="true">◉</span> از این به بعد چه چیزی را زیر نظر بگیریم؟</strong><p>'+esc(watch)+'</p></div></div>'+
+ '<p class="future-pilot-status">وضعیت شواهد: در انتظار ارزیابی مستقل · جهت و میزان اثر تعیین نشده</p>'+
+ '<p class="future-pilot-caveat">این کارت به‌صورت آزمایشی از ارتباط موضوعی تیتر ساخته شده است. شاخص‌ها و احتمال سناریوها تغییر نکرده‌اند.</p>'+
+ '<nav class="future-pilot-links" aria-label="پیگیری اثر خبر"><a href="/future/transition/watch/">پیگیری در دیده‌بان گذار ←</a><a href="/future/">آینده‌بان ←</a></nav></section>';
 }
 
 function feedCard(s, homepage = false) {
