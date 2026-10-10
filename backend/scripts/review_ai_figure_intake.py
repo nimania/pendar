@@ -35,9 +35,11 @@ def main():
         summary = str(decision.get("summary_fa", "")).strip()
         topic = str(decision.get("topic_fa", "")).strip()
         reviewer = str(decision.get("reviewer", "")).strip()
+        source_verified = decision.get("source_verified") is True
+        date_verified = decision.get("date_verified") is True
         url = str(source.get("url", ""))
         parts = urlsplit(url)
-        if not (reviewer and len(summary) >= 80 and topic and parts.scheme == "https"
+        if not (reviewer and source_verified and len(summary) >= 80 and topic and parts.scheme == "https"
                 and parts.netloc == "t.me"
                 and re.fullmatch(r"/[A-Za-z0-9_]+/[0-9]+", parts.path)):
             skipped.append({"id": key, "reason": "insufficient review, summary, or direct permalink"})
@@ -53,11 +55,12 @@ def main():
             "topic_fa": topic, "summary_fa": summary,
             "source_name": source.get("source", "تلگرام"),
             "source_note_fa": "خلاصهٔ تحریریه پس از بررسی منبع؛ نقل‌قول مستقیم نیست.",
-            "published_at": source.get("published_at"),
+            "published_at": source.get("published_at") if date_verified else None,
             "url": url, "editorial": False,
             "source_review_status": "verified_exact_source",
-            "date_review_status": "verified" if source.get("published_at") else "date_not_verified",
+            "date_review_status": "verified" if date_verified and source.get("published_at") else "date_not_verified",
             "content_type": "sourced_summary", "reviewed_by": reviewer,
+            "ai_relevance": source.get("ai_relevance", "unclassified"),
         }
         prepared.append(post)
         existing.add((handle, url))
