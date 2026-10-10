@@ -131,6 +131,32 @@ async function renderFigureTimeline() {
   const el = document.getElementById("figure-timeline");
   if (!el) return;
   const d = await loadFigures();
+  // Data freshness is based on original statement timestamps, never on page deploy time.
+  const freshness = document.getElementById("figure-freshness");
+  if (freshness) {
+    const now = Date.now();
+    const all = (d.figures || []).flatMap(f => (f.posts || []).map(p => ({p, f})));
+    const dated = all.map(x => ({...x, t: Date.parse(x.p.published_at || "")}))
+      .filter(x => Number.isFinite(x.t) && x.t <= now + 3600000);
+    const recent = dated.filter(x => x.t >= now - 86400000);
+    const latest = dated.reduce((a,b) => !a || b.t>a.t ? b : a, null);
+    const fmt = t => t == null ? "نامشخص" : new Intl.DateTimeFormat("fa-IR",{
+      dateStyle:"medium", timeStyle:"short", timeZone:"Asia/Tehran"
+    }).format(new Date(t));
+    const built = Date.parse(d.generated_at || d.built_at || d.updated_at || "");
+    const hasBuilt = Number.isFinite(built) && built <= now + 3600000;
+    const stale = !recent.length;
+    freshness.innerHTML = '<div style="font-weight:700;margin-bottom:10px">وضعیت تازگی چهره‌ها</div>'
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px">'
+      + '<div><small>آخرین تولید دادهٔ چهره‌ها</small><div>'+ (hasBuilt ? fmt(built) : 'ثبت نشده') +'</div></div>'
+      + '<div><small>تازه‌ترین گفتهٔ ثبت‌شده</small><div>'+fmt(latest && latest.t)+'</div></div>'
+      + '<div><small>گفته‌های ۲۴ ساعت اخیر</small><div>'+recent.length.toLocaleString("fa-IR")+'</div></div>'
+      + '<div><small>چهره‌های فعال ۲۴ ساعت اخیر</small><div>'+new Set(recent.map(x => x.f.handle || x.f.name_fa)).size.toLocaleString("fa-IR")+'</div></div></div>'
+      + '<p style="margin:10px 0 0;font-size:12px;opacity:.8">'
+      + (stale ? '⚠️ هیچ گفته‌ای با تاریخ معتبر در ۲۴ ساعت اخیر ثبت نشده است. ' : 'گفته‌های اخیر براساس تاریخ انتشار اصلی شمارش شده‌اند. ')
+      + 'زمان آخرین بررسی منابع فقط پس از ثبت مستقل گزارش گردآوری قابل نمایش است؛ زمان انتشار سایت معادل بررسی منابع نیست.</p>';
+  }
+
   const isNewsMode = _figTimelineMode === "news";
   const fields = d.fields || {};
   let posts = (d.figures || []).flatMap(f => (f.posts || []).map(p => ({
