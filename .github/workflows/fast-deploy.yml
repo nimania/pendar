@@ -132,12 +132,6 @@ jobs:
           python -m unittest discover -s backend/tests -p test_nabzesh_market.py
           node backend/tests/test_nabzesh_market_ui.js
 
-      - name: Refresh market snapshot from Nabzesh
-        continue-on-error: true
-        env:
-          NABZESH_API_KEY: ${{ secrets.NABZESH_API_KEY }}
-        run: python backend/scripts/refresh_market.py --output site/data/market-nabzesh.json
-
       - name: Overlay freshest Jan-e Jaraid generated data
         env:
           GH_TOKEN: ${{ github.token }}
@@ -506,6 +500,12 @@ jobs:
 
       - name: Validate Future Observatory artifact
         run: python backend/scripts/check_future_deploy.py site
+
+      - name: Refresh market snapshot from Nabzesh
+        continue-on-error: true
+        env:
+          NABZESH_API_KEY: ${{ secrets.NABZESH_API_KEY }}
+        run: python backend/scripts/refresh_market.py --output site/data/market-nabzesh.json
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
