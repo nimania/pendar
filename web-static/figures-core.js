@@ -94,19 +94,35 @@ const FIGURE_TIMELINE_TOPICS = [
   {id:"society", label:"جامعه", terms:["جامعه","آموزش","حقوق بشر","زنان","دانشگاه","مهاجرت"]}
 ];
 let _figTimelineTopic = "all";
+function figureTopicScores(post) {
+  const normalize = value => String(value || "").toLowerCase()
+    .replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ")
+    .replace(/[^a-z0-9\u0600-\u06ff]+/g," ").replace(/\s+/g," ").trim();
+  const title = normalize([post.topic_fa,post.headline_fa].filter(Boolean).join(" "));
+  const body = normalize([post.summary_fa,post.quote_fa].filter(Boolean).join(" "));
+  const scores = FIGURE_TIMELINE_TOPICS.filter(t => t.id !== "all").map(topic => {
+    const terms = topic.terms.map(normalize);
+    let score = 0;
+    for (const term of terms) {
+      if (!term) continue;
+      const contains = (text) => (" " + text + " ").includes(" " + term + " ");
+      if (contains(title)) score += 3;
+      if (contains(body)) score += 1;
+    }
+    return {id:topic.id, score};
+  }).sort((a,b)=>b.score-a.score);
+  const best = scores[0]?.score || 0;
+  // Title matches have more weight; secondary topics must have their own evidence.
+  return scores.filter(x => x.score >= 2 && x.score >= best * 0.4).slice(0,3);
+}
 function figureMatchesTopic(post, topic) {
   if(topic.id === "all") return true;
-  // Topic labels belong to individual posts, never to their authors.
   const assigned = [post.topic_ids,post.topics,post.subject_topics]
     .flatMap(v => Array.isArray(v) ? v : typeof v === "string" ? [v] : [])
     .map(v => typeof v === "string" ? v : v && (v.id || v.slug) || "")
     .map(v => String(v).toLowerCase());
   if(assigned.length) return assigned.includes(topic.id);
-  const normalized = value => String(value || "").toLowerCase()
-    .replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ").replace(/\s+/g," ");
-  const haystack = normalized([post.topic_fa,post.summary_fa,post.headline_fa,post.quote_fa]
-    .filter(Boolean).join(" "));
-  return topic.terms.some(term => haystack.includes(normalized(term)));
+  return figureTopicScores(post).some(x => x.id === topic.id);
 }
 function setFigureTimelineTopic(topic) {
   if(!FIGURE_TIMELINE_TOPICS.some(x=>x.id===topic)) return;
