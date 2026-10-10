@@ -51,6 +51,7 @@ jobs:
           python -m scripts.seed
           python -c "from app.tasks.scheduler import run_full_cycle; print(run_full_cycle())"
           python -m scripts.export_static
+          python scripts/export_news_health.py
       - name: Validate independently generated news
         run: |
           python - <<'PY'
@@ -76,7 +77,7 @@ jobs:
       - name: Package news-only data
         run: |
           mkdir -p news-payload/data
-          for file in stories.json topics.json entities.json trends.json stats.json meta.json press-stats.json press-source-stories.json press-source-health.json press-source-repair-queue.json factchecks.json geo.json; do
+          for file in stories.json topics.json entities.json trends.json stats.json meta.json press-stats.json press-source-stories.json press-source-health.json press-source-repair-queue.json factchecks.json geo.json news-health.json; do
             test -s "backend/public/data/$file"
             cp "backend/public/data/$file" "news-payload/data/$file"
           done
