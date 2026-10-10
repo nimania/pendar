@@ -85,6 +85,31 @@ function figureFollowBtn(handle, compact) {
   const on = isFigureFollowed(handle);
   return `<button class="fig-follow ${on ? "on" : ""} ${compact ? "compact" : ""}" onclick="toggleFigureFollow('${esc(handle)}',event)" aria-label="${on ? "دنبال نکردن" : "دنبال کردن"}">${on ? "★ دنبال می‌کنم" : "☆ دنبال کن"}</button>`;
 }
+const FIGURE_TIMELINE_TOPICS = [
+  {id:"all", label:"همهٔ موضوع‌ها"},
+  {id:"ai", label:"فناوری و هوش مصنوعی", fields:["technology"], terms:["هوش مصنوعی","مدل زبانی","یادگیری ماشین","فناوری","تکنولوژی","chatgpt","openai","claude","gemini","deepseek","artificial intelligence"]},
+  {id:"politics", label:"سیاست و ایران", fields:["politics"], terms:["انتخابات","حکومت","دولت","گذار سیاسی","جمهوری اسلامی","دموکراسی","مجلس","سیاست ایران"]},
+  {id:"economy", label:"اقتصاد", fields:["economy","business"], terms:["اقتصاد","تورم","بازار","بودجه","سرمایه‌گذاری","ارز","تجارت"]},
+  {id:"culture", label:"فرهنگ و هنر", fields:["culture","arts","media"], terms:["سینما","موسیقی","ادبیات","کتاب","هنر","فرهنگ","فیلم"]},
+  {id:"society", label:"جامعه", fields:["society"], terms:["جامعه","آموزش","حقوق بشر","زنان","دانشگاه","مهاجرت"]}
+];
+let _figTimelineTopic = "all";
+function figureMatchesTopic(post, topic) {
+  if(topic.id === "all") return true;
+  const normalized = value => String(value || "").toLowerCase().replace(/[يى]/g,"ی").replace(/ك/g,"ک");
+  const field = normalized(post.field);
+  const fieldName = normalized(post.field_fa);
+  if((topic.fields||[]).includes(field)) return true;
+  // Match the content, not just a person's profession.
+  const haystack = normalized([post.topic_fa,post.summary_fa,post.source_name].join(" "));
+  return topic.terms.some(term => haystack.includes(normalized(term))) ||
+    (topic.id === "ai" && fieldName.includes("هوش مصنوعی"));
+}
+function setFigureTimelineTopic(topic) {
+  if(!FIGURE_TIMELINE_TOPICS.some(x=>x.id===topic)) return;
+  _figTimelineTopic = topic;
+  renderFigureTimeline();
+}
 function setFigureTimelineMode(mode) { _figTimelineMode = mode; renderFigureTimeline(); }
 function setFigureTimelineField(field) { _figTimelineField = field; renderFigureTimeline(); }
 async function renderFigureTimeline() {
@@ -105,6 +130,8 @@ async function renderFigureTimeline() {
   if (isNewsMode) posts = posts.filter(p => p.kind === "news_statement");
   if (_figTimelineMode === "following") posts = posts.filter(p => follows.has(String(p.handle).toLowerCase()));
   if (_figTimelineField !== "all" && !isNewsMode) posts = posts.filter(p => p.field === _figTimelineField);
+  const selectedTopic = FIGURE_TIMELINE_TOPICS.find(t => t.id === _figTimelineTopic) || FIGURE_TIMELINE_TOPICS[0];
+  if(!isNewsMode) posts = posts.filter(p => figureMatchesTopic(p,selectedTopic));
   // Self-heal stale/removed field values left behind by an older deployment.
   // This also protects deep links after the exported field taxonomy changes.
   if (!posts.length && _figTimelineMode === "all" && _figTimelineField !== "all") {
@@ -123,6 +150,9 @@ async function renderFigureTimeline() {
       <button class="fchip ${_figTimelineMode === "all" ? "on" : ""}" onclick="setFigureTimelineMode('all')">همه</button>
       <button class="fchip ${_figTimelineMode === "following" ? "on" : ""}" onclick="setFigureTimelineMode('following')">★ دنبال‌شده‌ها ${follows.size ? '<span class="chip-n">'+faN(follows.size)+'</span>' : ""}</button>
       ${(d.figures || []).some(f => (f.posts || []).some(p => p.kind === "news_statement")) ? `<button class="fchip ${_figTimelineMode === "news" ? "on" : ""}" onclick="setFigureTimelineMode('news')">چهره‌های خبر</button>` : ""}
+    </div>
+    <div class="fig-topic-filters" role="group" aria-label="تایم‌لاین‌های موضوعی">
+      ${FIGURE_TIMELINE_TOPICS.map(t => `<button class="fchip ${_figTimelineTopic===t.id?"on":""}" onclick="setFigureTimelineTopic('${t.id}')" aria-pressed="${_figTimelineTopic===t.id}">${t.label}</button>`).join("")}
     </div>
     <select class="fig-field-select" onchange="setFigureTimelineField(this.value)" aria-label="فیلتر حوزه" ${isNewsMode ? "disabled" : ""}>
       <option value="all">همهٔ حوزه‌ها</option>
