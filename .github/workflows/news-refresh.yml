@@ -1,0 +1,84 @@
+name: Collect Pendar News (independent)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/news-refresh.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: pendar-news-collector
+  cancel-in-progress: false
+
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install news dependencies
+        run: pip install -r backend/requirements.txt
+      - name: Restore persistent news database
+        uses: actions/cache/restore@v4
+        with:
+          path: backend/build.db
+          key: pendar-news-db-${{ github.run_id }}
+          restore-keys: |
+            pendar-news-db-
+            jankalam-db-
+      - name: Collect, cluster, synthesize and export news
+        working-directory: backend
+        env:
+          DATABASE_URL: "sqlite:///./build.db"
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
+        run: |
+          python -m scripts.seed
+          python -c "from app.tasks.scheduler import run_full_cycle; print(run_full_cycle())"
+          python -m scripts.export_static
+      - name: Validate independently generated news
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("backend/public/data")
+          stories = json.loads((root / "stories.json").read_text())
+          meta = json.loads((root / "meta.json").read_text())
+          assert isinstance(stories, list) and len(stories) >= 100, "Refusing empty or truncated news"
+          assert meta.get("built_iso"), "No export timestamp"
+          assert (root / "stats.json").is_file(), "Missing news stats"
+          print(f"Validated {len(stories)} stories at {meta['built_iso']}")
+          PY
+      - name: Save independent news database
+        uses: actions/cache/save@v4
+        with:
+          path: backend/build.db
+          key: pendar-news-db-${{ github.run_id }}
+      - name: Package news-only data
+        run: |
+          mkdir -p news-payload/data
+          for file in stories.json topics.json entities.json trends.json stats.json meta.json press-stats.json press-source-stories.json press-source-health.json press-source-repair-queue.json factchecks.json geo.json; do
+            test -s "backend/public/data/$file"
+            cp "backend/public/data/$file" "news-payload/data/$file"
+          done
+          cp -a backend/public/data/story news-payload/data/story
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pendar-news-data
+          path: news-payload/
+          retention-days: 3
+          if-no-files-found: error
