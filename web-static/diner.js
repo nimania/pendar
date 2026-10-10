@@ -176,7 +176,61 @@ function setDinerCategory(cat) {
    gallery stays hidden until at least one photo is listed. */
 
 const RETRO_PHOTOS = [
-  /* { src: "assets/retro/01.jpg", caption: "روز اول — تخریب و زیرسازی", phase: "ساخت" }, */
+  {
+    "src": "assets/retro/01-construction.jpg",
+    "caption": "آغاز بازسازی و آماده‌سازی سالن",
+    "phase": "ساخت"
+  },
+  {
+    "src": "assets/retro/02-counter.jpg",
+    "caption": "ساخت کانتر چوبی و کاشی‌کاری دیوار",
+    "phase": "ساخت"
+  },
+  {
+    "src": "assets/retro/03-neon-sign.jpg",
+    "caption": "تابلوی نئون قرمز و فیروزه‌ای نمای رترو",
+    "phase": "هویت بصری"
+  },
+  {
+    "src": "assets/retro/04-counter-finished.jpg",
+    "caption": "کانتر و نورپردازی داخلی پس از تکمیل",
+    "phase": "فضای نهایی"
+  },
+  {
+    "src": "assets/retro/05-diner-interior.jpg",
+    "caption": "سالن با کف شطرنجی و صندلی‌های قرمز",
+    "phase": "فضای نهایی"
+  },
+  {
+    "src": "assets/retro/06-red-seating.jpg",
+    "caption": "نشیمن قرمز و دیوار فیروزه‌ای",
+    "phase": "فضای نهایی"
+  },
+  {
+    "src": "assets/retro/07-storefront.jpg",
+    "caption": "نمای شب و سردر هات‌داگ رترو",
+    "phase": "افتتاح"
+  },
+  {
+    "src": "assets/retro/08-glass-door.jpg",
+    "caption": "هویت بصری روی شیشهٔ ورودی",
+    "phase": "هویت بصری"
+  },
+  {
+    "src": "assets/retro/09-packaging.jpg",
+    "caption": "جعبه‌های بسته‌بندی و نان‌های آمادهٔ سرو",
+    "phase": "عملیات"
+  },
+  {
+    "src": "assets/retro/10-artwork.jpg",
+    "caption": "نقاشی دست‌ساز با حال‌وهوای رترو",
+    "phase": "جزئیات"
+  },
+  {
+    "src": "assets/retro/11-menu.jpg",
+    "caption": "منوی تصویری هات‌داگ، برگر و سیب‌زمینی",
+    "phase": "منو"
+  }
 ];
 
 const RETRO_STATS = [
@@ -276,7 +330,7 @@ function renderRetro() {
       <h2 class="retro-h2">از روز اول تا افتتاح</h2>
       <div class="retro-gallery">${RETRO_PHOTOS.map(p => `
         <figure>
-          <img src="${esc(p.src)}" alt="${esc(p.caption || "هات‌داگ رترو")}" loading="lazy">
+          <img src="${esc(p.src)}" alt="${esc(p.caption || "هات‌داگ رترو")}" loading="lazy" onerror="this.closest(\'figure\').remove()">
           ${p.caption ? `<figcaption>${p.phase ? `<b>${esc(p.phase)}</b> ` : ""}${esc(p.caption)}</figcaption>` : ""}
         </figure>`).join("")}
       </div>
