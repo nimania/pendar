@@ -29,7 +29,10 @@ const FUTURE_NEWS_CATEGORY = {iran:"politics",politics:"politics",world:"diploma
 function futureNewsContext(s){
  if(!s || !s.id)return null;
  const title=futureNewsNorm(s.headline_fa);
- const matches=text=>FUTURE_NEWS_CONTEXT.filter(t=>t.words.some(w=>text.includes(futureNewsNorm(w))));
+ const matches=text=>FUTURE_NEWS_CONTEXT.filter(t=>t.words.some(w=>{
+  const word=futureNewsNorm(w).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  return new RegExp("(^|[^\\p{L}\\p{N}])"+word+"(?=$|[^\\p{L}\\p{N}])","u").test(text);
+ }));
  const hits=matches(title);
  // Prefer explicit headline topics; summaries help only when the title has no match.
  const summaryHits=hits.length?[]:matches(futureNewsNorm(s.summary_fa));

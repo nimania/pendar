@@ -10,7 +10,7 @@ const run = code => vm.runInContext(code,ctx);
 const cases = [
  ['security','آتش‌بس ایران'],['diplomacy','مذاکرات جدید'],['economy','قیمت نفت'],
  ['services','قطعی برق'],['politics','انتخابات مجلس'],['society','اعتصاب کارگران'],
- ['environment','خشکسالی'],['technology','هوش مصنوعی'],['health','واکسن جدید'],
+ ['environment','جنگل'],['environment','خشکسالی'],['technology','هوش مصنوعی'],['health','واکسن جدید'],
  ['culture','جایزه ادبی'],['sport','فوتبال'],['general','رویدادی دیگر']
 ];
 for(const [key,title] of cases){
@@ -34,6 +34,9 @@ assert.match(run('futureNewsDetail(story)'),/اقتصاد و معیشت/);
 assert.equal(JSON.stringify(ctx.story),before);
 ctx.story={id:'s',headline_fa:'آتش بس ايران',iran_relevance:'high'};
 assert.equal(run('futureNewsContext(story).primary.key'),'security');
+ctx.story={id:'s',headline_fa:'خبر',summary_fa:'<img src=x onerror=alert(1)>'};
+assert(!run('futureNewsDetail(story)').includes('<img'));
+assert.match(run('futureNewsDetail(story)'), /&lt;img/);
 const detail=fs.readFileSync(path.join(root,'web-static/story-detail.js'),'utf8');
 assert(detail.includes('${futureNewsDetail(s)}'));
 assert(!detail.includes('loadFeed(false)')); // archived article never waits for the feed
