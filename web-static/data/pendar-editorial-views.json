@@ -597,5 +597,119 @@
       "posts": []
     },
     "posts": []
+  },
+  {
+    "profile": {
+      "handle": "arsam-sabbagh",
+      "name_fa": "آرسام صباغ",
+      "aliases": [
+        "Arsam Sabbagh"
+      ],
+      "role_fa": "پژوهشگر هوش مصنوعی و مهندس مدل‌های زبانی",
+      "field": "technology",
+      "field_fa": "فناوری و هوش مصنوعی",
+      "social": [
+        {
+          "kind": "website",
+          "label": "وب‌سایت شخصی",
+          "url": "https://www.asabbagh.com/"
+        }
+      ],
+      "external": true,
+      "directory": true,
+      "posts": []
+    },
+    "posts": []
+  },
+  {
+    "profile": {
+      "handle": "nima-naserahmadi",
+      "name_fa": "نیما ناصراحمدی",
+      "aliases": [
+        "Nima Naserahmadi"
+      ],
+      "role_fa": "توسعه‌دهندهٔ نرم‌افزار و هوش مصنوعی",
+      "field": "technology",
+      "field_fa": "فناوری و هوش مصنوعی",
+      "social": [
+        {
+          "kind": "website",
+          "label": "وب‌سایت شخصی",
+          "url": "https://nimy.work/fa"
+        }
+      ],
+      "external": true,
+      "directory": true,
+      "posts": []
+    },
+    "posts": []
+  },
+  {
+    "profile": {
+      "handle": "sam-altman",
+      "name_fa": "سم آلتمن",
+      "aliases": [
+        "Sam Altman"
+      ],
+      "role_fa": "فعال و مدیر صنعت هوش مصنوعی",
+      "field": "technology",
+      "field_fa": "فناوری و هوش مصنوعی",
+      "external": true,
+      "directory": true,
+      "social": [],
+      "posts": []
+    },
+    "posts": []
+  },
+  {
+    "profile": {
+      "handle": "demis-hassabis",
+      "name_fa": "دمیس هسابیس",
+      "aliases": [
+        "Demis Hassabis"
+      ],
+      "role_fa": "پژوهشگر هوش مصنوعی",
+      "field": "technology",
+      "field_fa": "فناوری و هوش مصنوعی",
+      "external": true,
+      "directory": true,
+      "social": [],
+      "posts": []
+    },
+    "posts": []
+  },
+  {
+    "profile": {
+      "handle": "dario-amodei",
+      "name_fa": "داریو آمودی",
+      "aliases": [
+        "Dario Amodei"
+      ],
+      "role_fa": "پژوهشگر و مدیر صنعت هوش مصنوعی",
+      "field": "technology",
+      "field_fa": "فناوری و هوش مصنوعی",
+      "external": true,
+      "directory": true,
+      "social": [],
+      "posts": []
+    },
+    "posts": []
+  },
+  {
+    "profile": {
+      "handle": "fei-fei-li",
+      "name_fa": "فی‌فی لی",
+      "aliases": [
+        "Fei-Fei Li"
+      ],
+      "role_fa": "پژوهشگر بینایی ماشین و هوش مصنوعی",
+      "field": "technology",
+      "field_fa": "فناوری و هوش مصنوعی",
+      "external": true,
+      "directory": true,
+      "social": [],
+      "posts": []
+    },
+    "posts": []
   }
 ]
