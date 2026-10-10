@@ -395,6 +395,11 @@ jobs:
           NABZESH_API_KEY: ${{ secrets.NABZESH_API_KEY }}
         run: python backend/scripts/refresh_market.py --output backend/public/data/market-nabzesh.json
 
+      - name: Exclude internal creator audit from public Pages payload
+        run: |
+          # Diagnostic artifact is already uploaded separately; never serve it publicly.
+          rm -f backend/public/data/creator-work-audit.json
+
       - name: Audit GitHub Pages payload size
         run: python backend/scripts/audit_pages_size.py backend/public 750000000
 
