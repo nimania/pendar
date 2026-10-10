@@ -47,7 +47,7 @@ class TelegramParser(HTMLParser):
 
 def collect(source, timeout=15):
     url = source["url"]
-    if not re.fullmatch(r"https://t\\.me/s/[A-Za-z0-9_]+", url):
+    if not re.fullmatch(r"https://t[.]me/s/[A-Za-z0-9_]+", url):
         raise ValueError("Unapproved Telegram endpoint")
     req = urllib.request.Request(url, headers={"User-Agent": "PendarFigureIntake/1.0 (public source review)"})
     with urllib.request.urlopen(req, timeout=timeout) as response:
