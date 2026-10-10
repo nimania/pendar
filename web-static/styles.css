@@ -1686,3 +1686,15 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 .future-pilot-status{color:var(--muted);font-size:12px}
 .future-pilot-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
 .future-pilot-links a{color:var(--accent);font-size:13px;text-decoration:underline;text-underline-offset:4px}
+
+
+/* Future relevance trial: compact headline mark and layered news explanation */
+.future-pilot-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #bd9f9f;border-radius:20px;color:#87333d;background:rgba(160,45,61,.07);font-size:11px;font-weight:650;padding:2px 8px;white-space:nowrap}
+.future-pilot-panel{border:1px solid #d8c9c6;border-right:4px solid #a52534;border-radius:15px;padding:19px;margin:22px 0;background:var(--card-bg,#fff);color:inherit}
+.future-pilot-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}.future-pilot-top h3{font-size:19px;margin:0}.future-pilot-icon{font-size:25px;color:#a52534}.future-pilot-label{font-size:11px;color:#7b5356;border:1px solid #cbbbbb;border-radius:20px;padding:2px 8px}
+.future-pilot-question{font-size:18px;line-height:1.8;margin:12px 0 17px}
+.future-pilot-steps{display:grid;gap:12px}.future-pilot-steps>div{padding:12px 0;border-top:1px solid #ddd4d1}.future-pilot-steps strong{display:block;font-size:15px}.future-pilot-steps p{margin:5px 0;line-height:2}.future-pilot-steps small{color:#777;font-size:12px;line-height:1.8}
+.future-pilot-steps .future-pilot-watch{padding:14px;border:0;border-radius:11px;background:rgba(130,112,103,.10)}
+.future-pilot-status{font-weight:650;font-size:13px;margin:15px 0 5px}.future-pilot-caveat{font-size:12px;opacity:.75;margin:5px 0 12px}
+.future-pilot-links{border-top:1px solid #d6ceca;padding-top:12px;display:flex;gap:18px;flex-wrap:wrap}.future-pilot-links a{font-size:13px;font-weight:700;color:#a52534}
+@media(prefers-color-scheme:dark){.future-pilot-badge{background:rgba(165,37,52,.16);color:#e9a5ac;border-color:#71444c}.future-pilot-panel{border-color:#665054;border-right-color:#d85d6b;background:#252629}.future-pilot-label{color:#e6c2c4;border-color:#665054}.future-pilot-steps>div{border-top-color:#504b4b}.future-pilot-steps .future-pilot-watch{background:#393434}.future-pilot-links{border-top-color:#504b4b}.future-pilot-links a{color:#ef9ba6}}
