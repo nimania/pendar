@@ -4,7 +4,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Build & Deploy Pendar (static)", "Pendar Movie Master", "Collect & publish periodicals", "Refresh book radar and commerce", "Refresh weather and air quality", "Refresh series showcases", "Refresh US candidate feeds", "Refresh radar sources and revisions"]
+    workflows: ["Collect Pendar News (independent)", "Build & Deploy Pendar (static)", "Pendar Movie Master", "Collect & publish periodicals", "Refresh book radar and commerce", "Refresh weather and air quality", "Refresh series showcases", "Refresh US candidate feeds", "Refresh radar sources and revisions"]
     types: [completed]
   push:
     branches: [main]
@@ -126,6 +126,48 @@ jobs:
             test -f /tmp/prev-fast/artifact.tar
             tar -xf /tmp/prev-fast/artifact.tar -C site
           fi
+
+      - name: Overlay freshest independently collected news
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          news_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/news-refresh.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
+          if [ -z "$news_run" ]; then
+            echo "::warning::No successful standalone news collection; retaining last healthy news."
+            exit 0
+          fi
+          rm -rf /tmp/new-news && mkdir -p /tmp/new-news
+          if ! gh run download "$news_run" -n pendar-news-data -D /tmp/new-news; then
+            echo "::warning::News artifact missing; retaining healthy news."
+            exit 0
+          fi
+          python - <<'PY'
+          import json
+          from datetime import datetime,timezone
+          from pathlib import Path
+          src=Path("/tmp/new-news/data")
+          dst=Path("site/data")
+          fresh=json.loads((src/"meta.json").read_text(encoding="utf-8"))
+          old=json.loads((dst/"meta.json").read_text(encoding="utf-8")) if (dst/"meta.json").exists() else {}
+          def stamp(meta):
+              value=str(meta.get("built_iso") or "")
+              try: return datetime.fromisoformat(value.replace("Z","+00:00")).astimezone(timezone.utc)
+              except ValueError: return datetime.min.replace(tzinfo=timezone.utc)
+          assert stamp(fresh)>datetime.min.replace(tzinfo=timezone.utc)
+          if stamp(fresh)<=stamp(old):
+              print("Keeping existing newer/equal news snapshot")
+              raise SystemExit(0)
+          stories=json.loads((src/"stories.json").read_text(encoding="utf-8"))
+          previous=json.loads((dst/"stories.json").read_text(encoding="utf-8")) if (dst/"stories.json").exists() else []
+          assert len(stories)>=100 and len(stories)>=len(previous)*0.8, "News integrity guard: story count dropped"
+          import shutil
+          dst.mkdir(parents=True,exist_ok=True)
+          for name in ("stories.json","topics.json","entities.json","trends.json","stats.json","meta.json","press-stats.json","press-source-stories.json","press-source-health.json","press-source-repair-queue.json","factchecks.json","geo.json"):
+              shutil.copy2(src/name,dst/name)
+          if (src/"story").is_dir():
+              shutil.copytree(src/"story",dst/"story",dirs_exist_ok=True)
+          print(f"Overlaid independently collected news: {len(stories)} stories; {fresh['built_iso']}")
+          PY
 
       - name: Validate market data and display contracts
         run: |
