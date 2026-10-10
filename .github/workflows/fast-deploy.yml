@@ -550,6 +550,9 @@ jobs:
           NABZESH_API_KEY: ${{ secrets.NABZESH_API_KEY }}
         run: python backend/scripts/refresh_market.py --output site/data/market-nabzesh.json
 
+      - name: Audit GitHub Pages payload size
+        run: python backend/scripts/audit_pages_size.py site 750000000
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
