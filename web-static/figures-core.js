@@ -158,8 +158,8 @@ async function renderFigureTimeline() {
     <div class="fig-topic-filters" role="group" aria-label="تایم‌لاین‌های موضوعی">
       ${FIGURE_TIMELINE_TOPICS.map(t => `<button class="fchip ${_figTimelineTopic===t.id?"on":""}" onclick="setFigureTimelineTopic('${t.id}')" aria-pressed="${_figTimelineTopic===t.id}">${t.label}</button>`).join("")}
     </div>
-    <select class="fig-field-select" onchange="setFigureTimelineField(this.value)" aria-label="فیلتر حوزه" ${isNewsMode ? "disabled" : ""}>
-      <option value="all">همهٔ حوزه‌ها</option>
+    <select class="fig-field-select" onchange="setFigureTimelineField(this.value)" aria-label="حوزهٔ فعالیت چهره (مستقل از موضوع مطلب)" ${isNewsMode ? "disabled" : ""}>
+      <option value="all">همهٔ تخصص‌ها</option>
       ${Object.entries(fields).map(([k,v]) => `<option value="${esc(k)}" ${_figTimelineField===k?"selected":""}>${esc(v)}</option>`).join("")}
     </select>
   </div>`;
