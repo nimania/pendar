@@ -15,4 +15,8 @@ assert.equal(check({field:"politics",topic_fa:"هوش مصنوعی و آینده
 assert.equal(check({field:"technology",topic_fa:"دستور پخت غذا",summary_fa:"طرز تهیهٔ نان"}, {id:"ai"}), false);
 assert.equal(check({topic_ids:["ai","politics"],topic_fa:"موضوع متفاوت"}, {id:"politics"}), true);
 assert.equal(check({topic_ids:["culture"],topic_fa:"هوش مصنوعی"}, {id:"ai"}), false, "Curated tags outrank heuristics");
+assert.equal(check({field:"technology",topic_fa:"انتخابات مجلس",summary_fa:"تحلیل نتایج"}, {id:"ai"}), false);
+assert.equal(check({topic_fa:"هوش مصنوعی در جنگ",summary_fa:"نقش سامانه‌های هوشمند در جنگ"}, {id:"security"}), true);
+assert.equal(check({topic_fa:"مطلب بدون کلیدواژه",summary_fa:"گفته‌ای عمومی"}, {id:"unclassified"}), true);
+assert.equal(check({topic_fa:"دربارهٔ اقتصاد و تورم",summary_fa:"بررسی بازار"}, {id:"economy"}), true);
 console.log("Figure topic regression tests passed");
