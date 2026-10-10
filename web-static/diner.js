@@ -298,6 +298,25 @@ function renderRetro() {
 
     ${gallery}
 
+    <section class="retro-block retro-video-block">
+      <h2 class="retro-h2">رترو در قاب ویدئو</h2>
+      <p class="retro-note">دو روایت ویدئویی از هات‌داگ رترو؛ بدون خروج از صفحه تماشا کنید.</p>
+      <div class="retro-video-grid">
+        <figure class="retro-video-item">
+          <div class="retro-video-frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/g0H4SjlYFGs" title="ویدئوی هات‌داگ رترو ـ شمارهٔ یک" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <figcaption>ویدئوی اول · <a href="https://www.youtube.com/shorts/g0H4SjlYFGs" target="_blank" rel="noopener noreferrer">تماشا در یوتیوب ↗</a></figcaption>
+        </figure>
+        <figure class="retro-video-item">
+          <div class="retro-video-frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/6c6k_pMvneM" title="ویدئوی هات‌داگ رترو ـ شمارهٔ دو" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <figcaption>ویدئوی دوم · <a href="https://www.youtube.com/shorts/6c6k_pMvneM" target="_blank" rel="noopener noreferrer">تماشا در یوتیوب ↗</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section class="retro-block">
       <h2 class="retro-h2">مسیر پروژه</h2>
       <ol class="retro-timeline">${RETRO_PHASES.map(ph => `
