@@ -45,6 +45,7 @@ async function renderMarket() {
         <div class="market-asset-head"><span class="market-asset-icon">${meta.icon}</span><span><b>${esc(meta.short)}</b><small>${esc(p.label_fa)}</small></span></div>
         <div class="market-asset-value">${faN(grp(p.value))}<small>${esc(p.unit_fa||"")}</small></div>
         <div class="market-asset-change ${cls}"><span>${arrow} ${faN(delta)}٪</span><i><em style="width:${width}%"></em></i></div>
+        <p class="market-source-note">منبع: ${marketSourceLink('https://www.tgju.org','TGJU')} · ${marketSourceLink('https://call.tgju.org/ajax.json','API')}${p.source_key?` · شناسهٔ داده: ${esc(p.source_key)}`:''}</p>
       </article>`;
     }).join("");
 
@@ -53,7 +54,8 @@ async function renderMarket() {
       const arrow = p.dir === "up" ? "▲" : p.dir === "down" ? "▼" : "—";
       const value = p.value >= 1000 ? grp(Math.round(p.value)) : Number(p.value).toLocaleString("en-US", {maximumFractionDigits: p.value < 1 ? 4 : 2});
       const icon={BTC:"₿",ETH:"Ξ",USDT:"₮",BNB:"B",SOL:"◎",XRP:"X"}[String(p.symbol||"").toUpperCase()]||"◈";
-      return `<article class="market-crypto-card"><span class="market-crypto-icon">${icon}</span><div><b>${esc(p.label_fa)}</b><small>${esc(p.symbol||"")}</small></div><strong>$ ${faN(value)}</strong><span class="${cls}">${arrow} ${faN(Math.abs(p.dp||0))}٪</span></article>`;
+      const api=p.source_api||`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${encodeURIComponent(p.id||'')}&price_change_percentage=24h&sparkline=false`;
+      return `<article class="market-crypto-card"><span class="market-crypto-icon">${icon}</span><div><b>${esc(p.label_fa)}</b><small>${esc(p.symbol||"")}</small></div><strong>$ ${faN(value)}</strong><span class="${cls}">${arrow} ${faN(Math.abs(p.dp||0))}٪</span><p class="market-crypto-credit">داده‌ها: ${marketSourceLink(p.source_url||'https://www.coingecko.com','CoinGecko')} · ${marketSourceLink(api,'API')}${p.updated_at?` · ${esc(marketTime(p.updated_at))}`:''}</p></article>`;
     }).join("");
 
     const fiatUnits = (prices || []).filter(p => ["دلار آمریکا","یورو","پوند","لیر ترکیه","درهم امارات"].includes(p.label_fa))
@@ -75,6 +77,7 @@ async function renderMarket() {
       .market-asset-value{font-size:1.05rem;font-weight:800;margin:12px 0 9px;white-space:nowrap}.market-asset-value small{font-size:.53rem;font-weight:500;color:var(--muted);margin-inline-start:4px}.market-asset-change{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:7px;font-size:.62rem}.market-asset-change i{height:3px;border-radius:99px;background:var(--line);overflow:hidden}.market-asset-change i em{display:block;height:100%;background:currentColor;border-radius:99px}
       .market-crypto-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}.market-crypto-card{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.market-crypto-icon{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);font-weight:800}.market-crypto-card div{display:flex;flex-direction:column;min-width:0}.market-crypto-card b{font-size:.66rem}.market-crypto-card small{font-size:.52rem;color:var(--muted)}.market-crypto-card strong{font-size:.7rem}.market-crypto-card>span:last-child{grid-column:3;font-size:.57rem}
       .market-tools{margin:20px 0 26px}.market-source-note{font-size:.61rem;color:var(--muted);margin:10px 0 26px}
+      .market-crypto-credit{grid-column:1/-1;margin:2px 0 0;font-size:.53rem;color:var(--muted);line-height:1.8}.market-crypto-credit a,.market-source-note a{color:var(--accent)}
       @media(max-width:980px){.market-assets{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:620px){.market-assets{grid-template-columns:repeat(2,minmax(0,1fr))}.market-hero-head{align-items:flex-start;flex-direction:column}.market-asset{padding:11px}}
     </style>
     <section class="market-hero">
@@ -92,7 +95,7 @@ async function renderMarket() {
       </div>
     </section>
     ${cryptoRows?`<section><div class="rule"><span>رمزارزها به دلار</span><span class="l"></span></div><div class="market-crypto-strip">${cryptoRows}</div></section>`:""}
-    <p class="market-source-note">${richMarket?"تابلوی بازار: نبضش · رمزارزهای دلاری: CoinGecko. زمان ثبت نرخ‌های نبضش روی کارت‌ها آمده است؛ تبدیل مالی بر پایهٔ همین نرخ‌هاست.":"ارز و طلا: TGJU · رمزارزها: CoinGecko. تغییرات نمایش‌داده‌شده مطابق آخرین دادهٔ ذخیره‌شده‌اند."}</p>
+    <p class="market-source-note">${richMarket?`تابلوی بازار: ${marketSourceLink('https://api.nabzesh.ir/docs','نبضش')}. تبدیل مالی با نرخ‌های تازهٔ همین تابلو و فرمول «مقدار × نرخ مبدأ ÷ نرخ مقصد» در پندار محاسبه می‌شود.`:`ارز و طلا: ${marketSourceLink('https://www.tgju.org','TGJU')} · ${marketSourceLink('https://call.tgju.org/ajax.json','API')}. نرخ‌های ریالی TGJU با تقسیم بر ۱۰ به تومان تبدیل شده‌اند. تبدیل رمزارز به تومان با ضرب قیمت دلاری در نرخ دلار توسط پندار محاسبه می‌شود.`} رمزارزهای دلاری: ${marketSourceLink('https://www.coingecko.com','CoinGecko')} · ${marketSourceLink('https://docs.coingecko.com/reference/coins-markets','مستندات API')}. تغییرات مطابق آخرین دادهٔ ذخیره‌شده‌اند.</p>
     <div id="market-food"><p class="muted">در حال دریافت رادار بازار غذا…</p></div>`;
 
     setupMarketConverter();
@@ -192,6 +195,25 @@ const MARKET_FOOD_LABELS={qsr_fast_food:'فست‌فود و سرویس سریع'
 
 const MARKET_FOOD_BASE='https://nimania.github.io/restaurant-intelligence/food-intel/';
 let marketFoodCache;
+let marketFoodPending;
+async function loadMarketFoodData() {
+  if(marketFoodCache)return marketFoodCache;
+  if(!marketFoodPending)marketFoodPending=(async()=>{
+    const r=await fetch(MARKET_FOOD_BASE+'data/news.json',{signal:AbortSignal.timeout(15000),cache:'no-cache'});
+    if(!r.ok)throw Error('food');
+    const data=await r.json();if(!Array.isArray(data.items))throw Error('food format');
+    marketFoodCache=data;return data;
+  })().finally(()=>{marketFoodPending=null});
+  return marketFoodPending;
+}
+function mfPublishedNews(data,days=7,now=Date.now()) {
+  const seen=new Set();
+  return (data.items||[]).filter(x=>{
+    const t=Date.parse(x.published_at),key=x.url||x.id;
+    if(!x.title_fa||!key||['retry','block'].includes(x.translation_quality?.status)||!Number.isFinite(t)||t>now||now-t>days*86400000||seen.has(key))return false;
+    seen.add(key);return true;
+  }).sort((a,b)=>Date.parse(b.published_at)-Date.parse(a.published_at));
+}
 function mfUrl(value){try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}}
 function mfLogo(b){const url=mfUrl(b.logo_url)||(MF_brandLogoSlugs[b.id]?'https://cdn.simpleicons.org/'+MF_brandLogoSlugs[b.id]:MF_brandLogoDomains[b.id]?'https://www.google.com/s2/favicons?domain='+encodeURIComponent(MF_brandLogoDomains[b.id])+'&sz=128':'');return `<span class="mf-logo"><span aria-hidden="true">${esc((b.fa||b.name||'?').slice(0,1))}</span>${url?`<img src="${esc(url)}" alt="لوگوی ${esc(b.fa||b.name||'برند')}" loading="lazy" onerror="this.remove()">`:''}</span>`}
 function mfChart(rows){const values=Array(7).fill(0),end=new Date();end.setHours(0,0,0,0);for(const x of rows){const d=new Date(x.published_at);d.setHours(0,0,0,0);const age=Math.round((end-d)/86400000);if(age>=0&&age<7)values[6-age]++}const max=Math.max(1,...values);return `<svg class="mf-chart" viewBox="0 0 210 62" role="img" aria-label="تعداد خبرها در هفت روز، از قدیم به جدید: ${esc(values.join('، '))}"><path d="M 0 57 H 210" stroke="currentColor" opacity=".2"/>${values.map((v,i)=>`<rect x="${i*30+5}" y="${57-v/max*48}" width="20" height="${v/max*48}" rx="4" fill="currentColor" opacity="${.35+i*.1}"/>`).join('')}</svg><small>فعالیت خبری ۷روزه · قدیم ← جدید</small>`}
@@ -205,15 +227,9 @@ async function renderMarketFood() {
   const link=x=>MARKET_FOOD_BASE+'story.html?id='+encodeURIComponent(x.id);
   const empty='<p class="muted">در هفت روز اخیر دادهٔ کافی ثبت نشده است.</p>';
   try {
-    const data=marketFoodCache || await (async()=>{const r=await fetch(MARKET_FOOD_BASE+'data/news.json',{signal:AbortSignal.timeout(15000),cache:'no-cache'});if(!r.ok)throw Error('food');return r.json()})();
-    marketFoodCache=data;
+    const data=await loadMarketFoodData();
     if(!host.isConnected)return;
-    const now=Date.now(),day=86400000, seen=new Set();
-    const rows=(data.items||[]).filter(x=>{
-      const t=Date.parse(x.published_at),key=x.url||x.id;
-      if(!x.title_fa||['retry','block'].includes(x.translation_quality?.status)||!Number.isFinite(t)||t>now||now-t>7*day||seen.has(key))return false;
-      seen.add(key);return true;
-    }).sort((a,b)=>Date.parse(b.published_at)-Date.parse(a.published_at));
+    const rows=mfPublishedNews(data);
 
     const topics=new Map(),brands=new Map(),sources=new Set();
     for(const x of rows){
@@ -275,7 +291,7 @@ async function renderMarketFood() {
       ${section('نقشهٔ جغرافیایی رادار','توزیع سیگنال‌های این ویترین بر اساس بازار هدف',`<div class="mf-regions"><div class="mf-region-card"><b>${faN(regionCounts.iran)}</b><span>ایران</span></div><div class="mf-region-card"><b>${faN(regionCounts.turkey)}</b><span>ترکیه</span></div><div class="mf-region-card"><b>${faN(regionCounts.world)}</b><span>جهان</span></div></div>`)}
 
       ${lead?section('آخرین سیگنال','تازه‌ترین مورد ثبت‌شده در Food Intel',story(lead)):""}
-      <p class="mf-note">این بخش شاخص فروش یا سهم بازار نیست؛ یک رادار خبری است. اعداد بر پایهٔ تعداد خبرها و اشاره‌های قابل انتشار در Food Intel طی هفت روز اخیر محاسبه می‌شوند. «Top Movers» تغییر نرخ اشارهٔ خبری را نشان می‌دهد، نه رشد فروش.</p>
+      <p class="mf-note">گردآوری و ترجمه: <a href="${MARKET_FOOD_BASE}" target="_blank" rel="noopener noreferrer">Food Intel</a> · <a href="${MARKET_FOOD_BASE}data/news.json" target="_blank" rel="noopener noreferrer">خوراک JSON خبرها</a>. نام رسانه روی هر خبر آمده و صفحهٔ خبر به متن اصلی پیوند دارد. این بخش شاخص فروش یا سهم بازار نیست؛ اعداد بر پایهٔ خبرهای قابل انتشار طی هفت روز اخیر محاسبه می‌شوند. «Top Movers» تغییر نرخ اشارهٔ خبری را نشان می‌دهد، نه رشد فروش.</p>
     </div>`;
   } catch(e) {
     if(host.isConnected)host.innerHTML=`<div class="mf-dashboard"><div class="mf-hero-main"><h2>بازار غذا</h2><p class="muted">داده‌های Food Intel فعلاً دریافت نشد.</p><button onclick="renderMarketFood()">تلاش دوباره</button> <a href="${MARKET_FOOD_BASE}" target="_blank" rel="noopener noreferrer">مشاهدهٔ Food Intel ↗</a></div></div>`;

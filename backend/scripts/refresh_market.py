@@ -19,6 +19,8 @@ def refresh(output):
     if output.exists():
         try:
             previous = json.loads(output.read_text(encoding="utf-8"))
+            # Keep credits for preserved rows, or if the provider catalog fails.
+            snapshot["providers"] = {**previous.get("providers", {}), **snapshot.get("providers", {})}
             seen = {(r["ticker"], r["quote"]) for r in snapshot["rows"]}
             for old in previous.get("rows", []):
                 if (old["ticker"], old["quote"]) not in seen:

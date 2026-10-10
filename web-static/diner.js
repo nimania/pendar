@@ -112,6 +112,51 @@ const DINER_IG = "https://www.instagram.com/nimasdiner";
 let _dinerTips = [];
 let _dinerCategory = "all";
 
+const DINER_NEWS_FILTERS=[['all','همهٔ خبرها'],['restaurant','رستوران‌داری'],['cafe','کافه و نوشیدنی'],['menu','منو و مهندسی منو'],['ai','هوش مصنوعی و فناوری'],['operations','عملیات و مدیریت']];
+const DINER_NEWS_TOPICS=new Set(['qsr_fast_food','fast_casual','restaurant_operations','restaurant_industry','menu_product_innovation','restaurant_technology_ai','equipment_automation','food_cost_pricing','supply_chain','food_safety','labor_management','franchising','delivery_drive_thru','consumer_behavior','marketing_branding','restaurant_design_decor','beverage','ingredients_rd']);
+let _dinerNewsRows=[],_dinerNewsFilter='all',_dinerNewsLimit=12;
+function dinerNewsMatches(row,filter='all') {
+  const cats=new Set(row.categories||[]),text=[row.title_fa,row.title_en,row.title,row.summary_fa,row.summary].filter(x=>typeof x==='string').join(' ');
+  const has=values=>values.some(c=>cats.has(c));
+  const cafe=/کافه|کافی.?شاپ|قهوه|باریستا|اسپرسو|\b(caf[eé]|coffee|barista|espresso)\b/i.test(text);
+  const menu=/مهندسی.?منو|\bmenu\b|منو|بهای.?تمام|حاشیه.?سود|food.?cost/i.test(text);
+  const ai=cats.has('restaurant_technology_ai')||/هوش.?مصنوعی|\bAI\b|artificial intelligence|machine learning/i.test(text);
+  const relevant=has([...DINER_NEWS_TOPICS])||cafe||menu||ai;
+  if(!relevant)return false;
+  if(filter==='all')return true;
+  if(filter==='cafe')return cafe||cats.has('beverage');
+  if(filter==='menu')return menu||has(['menu_product_innovation','food_cost_pricing']);
+  if(filter==='ai')return ai||cats.has('equipment_automation');
+  if(filter==='restaurant')return has(['qsr_fast_food','fast_casual','restaurant_operations','restaurant_industry','franchising','delivery_drive_thru']);
+  if(filter==='operations')return has(['restaurant_operations','labor_management','food_safety','equipment_automation','supply_chain','food_cost_pricing']);
+  return false;
+}
+function dinerNewsCard(row) {
+  const story=MARKET_FOOD_BASE+'story.html?id='+encodeURIComponent(row.id),original=mfUrl(row.url);
+  const topics=(row.categories||[]).filter(c=>MARKET_FOOD_LABELS[c]).slice(0,3);
+  return `<article class="diner-news-card"><div class="diner-news-meta"><span>${esc(row.source?.name||'نام رسانه در خوراک مشخص نیست')}</span><time datetime="${esc(row.published_at)}">${esc(new Date(row.published_at).toLocaleDateString('fa-IR',{timeZone:'Asia/Tehran'}))}</time></div><h3><a href="${esc(story)}" target="_blank" rel="noopener noreferrer">${esc(row.title_fa)}</a></h3><div class="diner-news-topics">${topics.map(c=>`<span>${esc(MARKET_FOOD_LABELS[c])}</span>`).join('')}</div><div class="diner-news-links"><a href="${esc(story)}" target="_blank" rel="noopener noreferrer">مشاهدهٔ خبر و ترجمه ↗</a>${original?`<a href="${esc(original)}" target="_blank" rel="noopener noreferrer">خبر اصلی ↗</a>`:''}</div></article>`;
+}
+function renderDinerNewsList() {
+  const host=document.getElementById('diner-news');if(!host)return;
+  const rows=_dinerNewsRows.filter(r=>dinerNewsMatches(r,_dinerNewsFilter));
+  host.innerHTML=`<div class="diner-news-head"><div><span class="retro-eyebrow-dark">رادار خبرهای صنعت</span><h2 class="retro-h2">خبرهای رستوران، کافه، منو و فناوری</h2><p>خبرهای قابل انتشار در ۳۰ روز اخیر · ${esc(faN(rows.length))} خبر در این فهرست</p></div><a href="${MARKET_FOOD_BASE}explore.html#feed" target="_blank" rel="noopener noreferrer">رادار کامل Food Intel ↗</a></div><nav class="diner-news-filters" aria-label="موضوع خبرهای داینر">${DINER_NEWS_FILTERS.map(([id,label])=>`<button type="button" aria-pressed="${id===_dinerNewsFilter}" onclick="setDinerNewsFilter('${id}')">${esc(label)}</button>`).join('')}</nav><div class="diner-news-list">${rows.slice(0,_dinerNewsLimit).map(dinerNewsCard).join('')||'<p class="muted">در این موضوع خبر تازهٔ قابل انتشار ثبت نشده است.</p>'}</div>${rows.length>_dinerNewsLimit?'<button type="button" class="diner-news-more" onclick="showMoreDinerNews()">نمایش خبرهای بیشتر</button>':''}<p class="diner-news-credit">گردآوری و ترجمه: <a href="${MARKET_FOOD_BASE}" target="_blank" rel="noopener noreferrer">Food Intel</a> · <a href="${MARKET_FOOD_BASE}data/news.json" target="_blank" rel="noopener noreferrer">خوراک JSON</a>. نام رسانه، تاریخ و لینک خبر اصلی همراه هر خبر آمده است.</p>`;
+}
+function setDinerNewsFilter(filter) {
+  if(!DINER_NEWS_FILTERS.some(([id])=>id===filter))return;
+  _dinerNewsFilter=filter;_dinerNewsLimit=12;renderDinerNewsList();
+}
+function showMoreDinerNews() { _dinerNewsLimit+=12;renderDinerNewsList(); }
+async function renderDinerNews() {
+  const host=document.getElementById('diner-news');if(!host)return;
+  try {
+    const data=await loadMarketFoodData();if(!host.isConnected)return;
+    _dinerNewsRows=mfPublishedNews(data,30).filter(r=>dinerNewsMatches(r));
+    renderDinerNewsList();
+  } catch {
+    if(host.isConnected)host.innerHTML=`<h2 class="retro-h2">خبرهای رستوران و کافه</h2><p>خبرها فعلاً دریافت نشدند.</p><button type="button" class="diner-news-more" onclick="renderDinerNews()">تلاش دوباره</button> <a href="${MARKET_FOOD_BASE}explore.html#feed" target="_blank" rel="noopener noreferrer">مشاهدهٔ رادار خبرها ↗</a>`;
+  }
+}
+
 async function loadDinerTips() {
   if (_dinerLoaded) return _dinerTips;
   try {
@@ -393,6 +438,7 @@ function renderRetro() {
         <span class="retro-eyebrow-dark">همکار طعم رترو</span>
         <h2 class="retro-h2">سس‌های صوفیا · Soufia's Secret Recipe</h2>
         <p>برندی که کارش تهیهٔ محصولات تخمیری، سس‌های اختصاصی و رلیش‌های ویژه است. از ابتدای فعالیت هات‌داگ رترو، ساورکراتِ هات‌داگ نیویورکی، سس کاری‌وورست و رلیش‌های منو از سس‌های صوفیا عرضه شد.</p>
+        <a class="diner-profile-feature" href="/@soufia-abdollahi/"><span>صوفیا عبداللهی در پندار</span><strong>پروفایل، فعالیت‌ها و مطالب صوفیا ←</strong></a>
         <a class="diner-social-btn diner-ig" href="https://www.instagram.com/soufia.recipe" target="_blank" rel="noopener">اینستاگرام soufia.recipe</a>
       </div>
     </section>
@@ -438,6 +484,7 @@ async function showDiner(sub) {
       <div class="diner-hero-text">
         <h1 class="diner-title">🍽 داینر نیما</h1>
         <p class="diner-subtitle">نکته‌های کاربردی رستوران‌داری و کافه‌داری — از تجربه واقعی</p>
+        <a class="diner-profile-feature" href="/@nima-afshar-naderi/"><span>نیما افشارنادری در پندار</span><strong>پروفایل، فعالیت‌ها و مطالب نیما ←</strong></a>
         <div class="diner-social-row">
           <a href="${DINER_IG}" target="_blank" rel="noopener" class="diner-social-btn diner-ig">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
@@ -452,6 +499,8 @@ async function showDiner(sub) {
       </div>
     </div>
 
+    <section class="diner-news" id="diner-news" aria-live="polite"><h2 class="retro-h2">خبرهای رستوران، کافه، منو و فناوری</h2><p class="muted">در حال دریافت خبرها…</p></section>
+
     <div class="diner-email-box" id="diner-email-box">
       <h3>📬 عضو خبرنامه داینر شوید</h3>
       <p>هر هفته یه نکته طلایی رستوران‌داری مستقیم توی ایمیل‌تون.</p>
@@ -464,6 +513,7 @@ async function showDiner(sub) {
 
     <h2 class="retro-h2 diner-portfolio-h">نمونه‌کارها</h2>
     ${dinerPortfolioCard()}
+    <section class="diner-soufia-credit"><h2 class="retro-h2">سس‌های صوفیا</h2><p>محصولات تخمیری، سس‌های اختصاصی و رلیش‌های ویژهٔ صوفیا عبداللهی؛ همکار طعم هات‌داگ رترو.</p><a class="diner-profile-feature" href="/@soufia-abdollahi/"><span>صوفیا عبداللهی در پندار</span><strong>پروفایل، فعالیت‌ها و مطالب صوفیا ←</strong></a></section>
 
     <div id="diner-cats">${dinerCategoryBar()}</div>
     <div class="diner-tips" id="diner-tips-area">
@@ -477,6 +527,7 @@ async function showDiner(sub) {
     </div>
   `;
   document.title = "داینر نیما | پندار";
+  renderDinerNews();
 }
 
 function submitDinerEmail(e) {

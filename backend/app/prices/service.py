@@ -9,6 +9,7 @@ simply hides — never blocks the build.
 from __future__ import annotations
 
 import httpx
+from urllib.parse import urlencode
 
 from app.core.logging import get_logger
 
@@ -83,6 +84,8 @@ def fetch_prices(timeout: float = 20.0) -> list[dict]:
         out.append({
             "label_fa": label, "value": val, "unit_fa": unit,
             "dp": dp, "dir": direction, "delta24": delta24,
+            "source_name": "TGJU", "source_url": "https://www.tgju.org",
+            "source_api": URL, "source_key": k,
         })
     logger.info("fetched %d price rows", len(out))
     return out
@@ -126,5 +129,9 @@ def fetch_crypto_prices(timeout: float = 20.0) -> list[dict]:
             "dir": "up" if (change or 0) > 0 else "down" if (change or 0) < 0 else "flat",
             "market_cap": row.get("market_cap"),
             "volume_24h": row.get("total_volume"),
+            "updated_at": row.get("last_updated"),
+            "source_name": "CoinGecko", "source_url": "https://www.coingecko.com/en/coins/" + coin_id,
+            "source_api": CRYPTO_URL + "?" + urlencode({"vs_currency": "usd", "ids": coin_id,
+                "price_change_percentage": "24h", "sparkline": "false"}),
         }
     return [found[x[0]] for x in _CRYPTO if x[0] in found]

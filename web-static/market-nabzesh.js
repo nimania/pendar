@@ -1,5 +1,26 @@
 /* Rich static market snapshots. Prices are never fetched with a visitor's API key. */
 let pendarMarketSnapshot;
+function marketSourceLink(url,label) {
+  try { const parsed=new URL(url); if(!['https:','http:'].includes(parsed.protocol)||parsed.username||parsed.password)return esc(label); }
+  catch { return esc(label); }
+  return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+}
+function marketProviderName(slug) { return pendarMarketSnapshot?.providers?.[slug]?.name_fa||slug; }
+function marketApiCredit(url,label) {
+  let path='';try { path=new URL(url).pathname; } catch {}
+  return `${marketSourceLink(url,label)}${path?` <code dir="ltr">${esc(path)}</code>`:''}`;
+}
+function marketProviderCredit(slug) {
+  const provider=pendarMarketSnapshot?.providers?.[slug];
+  return `${marketSourceLink(provider?.website_url,marketProviderName(slug))}${provider?.api_url?` (${marketSourceLink(provider.api_url, 'معرفی منبع در نبضش')})`:''}`;
+}
+function marketAttribution(row) {
+  const method={median:'میانهٔ نرخ منابع',average:'میانگین نرخ منابع',min:'کمترین نرخ',max:'بیشترین نرخ',recent:'تازه‌ترین نرخ',credibility:'بر اساس اعتبار منبع',weighted:'میانگین وزنی'}[row.strategy]||'روش تجمیع در دادهٔ منبع مشخص نشده است';
+  const api=row.api||{},fallback=`https://api.nabzesh.ir/v1/rates?tickers=${encodeURIComponent(row.ticker)}&quote=${encodeURIComponent(row.quote)}&compare=24h&strategy=median`;
+  const apiLinks=[['price','استعلام قیمت همین نماد'],['price_batch','درخواست گروهی پندار'],['stats','آمار و تغییرات'],['chart','نمودار روزانه'],['spread','اختلاف نرخ منابع']].filter(([key])=>api[key]||key==='price').map(([key,label])=>marketApiCredit(api[key]||(key==='price'?fallback:null),label)).join(' · ');
+  const hops=(row.source_hops||[]).filter(h=>h.sources?.length).map(h=>`<div class="market-nb-hop"><p>مرحلهٔ محاسبه: <b dir="ltr">${esc(h.from||'?')} → ${esc(h.to||'?')}</b></p><ul>${h.sources.map(s=>`<li><span>${marketProviderCredit(s.provider)}<small> · ${esc(marketTime(s.updated_at))}${s.is_stale?' · دادهٔ قدیمی':''}</small></span><span dir="ltr">${esc(s.price_decimal??'—')} ${esc(h.to||'')}</span></li>`).join('')}</ul></div>`).join('');
+  return `<div class="market-nb-credit"><p><b>گردآوری و محاسبه:</b> ${marketSourceLink('https://api.nabzesh.ir/docs','نبضش · مستندات API')} · نمایش: پندار.</p><p><b>منابع اصلیِ استفاده‌شده در نرخ فعلی:</b> ${(row.sources||[]).map(marketProviderCredit).join('، ')||'API نام منبع را ارائه نکرده است.'}</p><p><b>روش:</b> ${esc(method)}. واحد خروجی: ${esc(row.quote)} (${esc(row.unit_fa)}).${row.path?.length?` مسیر گزارش‌شده: <span dir="ltr">${esc(row.path.join(' → '))}</span>.`:''}</p><p>زمان قدیمی‌ترین نرخ استفاده‌شده: ${esc(marketTime(row.updated_at))} · زمان محاسبهٔ نبضش: ${esc(marketTime(row.as_of))}.</p><details class="market-nb-sources"><summary>APIها و زنجیرهٔ منابع این داده</summary><p>${apiLinks}</p><p class="market-nb-note">قیمت‌ها از نبضش دریافت می‌شوند. پیوند معرفی منبع نیز API نبضش است؛ پندار از API داخلی آن تأمین‌کننده دریافت مستقیم ندارد.</p>${hops||'<p>جزئیات مراحل محاسبه در این نسخهٔ داده موجود نیست.</p>'}${row.chart||row.stats?'<p>منبع نمودار و آمار: نبضش. این API نام تأمین‌کنندهٔ هر نقطهٔ تاریخی را ارائه نمی‌کند؛ منابع نرخ فعلی را نمی‌توان به همهٔ نقاط تاریخچه نسبت داد.</p>':''}</details></div>`;
+}
 function marketNumber(value, digits=4) {
   if(value===null||value===undefined||value===""||!Number.isFinite(Number(value)))return "—";
   return Number(value).toLocaleString("fa-IR",{maximumFractionDigits:digits});
@@ -18,7 +39,8 @@ function marketAssetCard(row) {
     <span class="market-nb-name">${esc(row.label_fa)}<small dir="ltr">${esc(row.ticker)}</small></span>
     <strong>${marketNumber(row.value,row.quote==="IRT"?0:4)} <small>${esc(row.unit_fa)}</small></strong>
     <span class="market-nb-move">${marketMove(row.dp)}${row.is_stale?'<em>دادهٔ قدیمی</em>':""}</span>
-    <time>${esc(marketTime(row.updated_at))}</time>
+    <time title="زمان قدیمی‌ترین نرخ استفاده‌شده توسط نبضش">${esc(marketTime(row.updated_at))}</time>
+    <span class="market-nb-card-credit">منبع: نبضش${row.sources?.length?` · ${esc(row.sources.slice(0,2).map(marketProviderName).join('، '))}${row.sources.length>2?` و ${marketNumber(row.sources.length-2,0)} منبع دیگر`:''}`:''}</span>
   </button>`;
 }
 function marketNabzeshBoard(snapshot) {
@@ -38,13 +60,15 @@ function marketNabzeshBoard(snapshot) {
     .market-nb-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.market-nb-tabs button{border:1px solid var(--line);border-radius:99px;padding:6px 12px;background:var(--surface);color:var(--ink);font:inherit;font-size:.65rem;cursor:pointer}.market-nb-tabs button[aria-pressed=true]{background:var(--ink);color:var(--surface)}
     .market-nb-note{font-size:.65rem;color:var(--muted);line-height:1.9}.market-nb-detail{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}.market-nb-detail h2{margin:0 0 6px;font-size:1.05rem}.market-nb-detail-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}.market-nb-detail-head strong{font-size:1.12rem}.market-nb-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:13px 0}.market-nb-stats>div{padding:9px;background:var(--surface-2);border-radius:9px;display:flex;flex-direction:column;gap:4px;font-size:.67rem}.market-nb-stats small{font-size:.53rem;color:var(--muted)}
     .market-nb-chart{width:100%;height:160px;color:var(--accent)}.market-nb-axis{direction:ltr;display:flex;justify-content:space-between;font-size:.57rem;color:var(--muted)}.market-nb-sources{margin:12px 0 0;font-size:.61rem;color:var(--muted);line-height:1.9}.market-nb-sources ul{padding:0;list-style:none}.market-nb-sources li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:5px 0}
+    .market-nb-card-credit{font-size:.53rem;color:var(--muted);line-height:1.8}.market-nb-credit{font-size:.65rem;line-height:2;border-top:1px solid var(--line);margin-top:16px;padding-top:9px;overflow-wrap:anywhere}.market-nb-credit p{margin:5px 0}.market-nb-credit a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}.market-nb-hop{margin:10px 0}.market-nb-sources li{flex-wrap:wrap}.market-nb-sources summary{cursor:pointer}
     @media(max-width:980px){.market-nb-featured,.market-nb-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:620px){.market-nb-featured,.market-nb-grid,.market-nb-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.market-nb-card{padding:11px}}
   </style>
+  <p class="market-nb-note">داده‌ها با گردآوری و محاسبهٔ ${marketSourceLink('https://api.nabzesh.ir/docs','نبضش')} و با ذکر منابع اصلی در جزئیات هر نماد منتشر می‌شوند.</p>
   <div class="market-nb-featured">${featured.map(marketAssetCard).join("")}</div>
   <nav class="market-nb-tabs" aria-label="بازارها">${groups.map(g=>`<button type="button" data-market-group="${esc(g.id)}" aria-pressed="false" onclick="selectMarketGroup('${esc(g.id)}')">${esc(g.label_fa)}</button>`).join("")}</nav>
   <p id="market-nb-group-note" class="market-nb-note"></p><div class="market-nb-grid" id="market-nb-grid"></div>
   <section class="market-nb-detail" id="market-nb-detail" aria-live="polite"></section>
-  <p class="market-nb-note">آخرین دریافت پندار: ${esc(marketTime(snapshot.generated_at))} · زمان هر قیمت روی کارت آمده است. «دادهٔ قدیمی» آخرین نرخ موجود در منبع است.</p>`;
+  <p class="market-nb-note">آخرین دریافت پندار: ${esc(marketTime(snapshot.generated_at))} · زمان قدیمی‌ترین نرخ استفاده‌شده روی کارت آمده است. «دادهٔ قدیمی» یعنی نرخ منبع یا نسخهٔ ذخیره‌شدهٔ پندار از بازهٔ تازگی گذشته است؛ ممکن است نرخ فعلی بازار تغییر کرده باشد.</p>`;
 }
 function selectMarketGroup(group) {
   const rows=(pendarMarketSnapshot?.rows||[]).filter(r=>r.group===group);
@@ -76,6 +100,7 @@ function selectMarketAsset(ticker) {
     <div class="market-nb-stats">${changes}<div><small>کمینه / بیشینهٔ ۲۴ ساعت</small><span>${marketNumber(day?.low,row.quote==="IRT"?0:4)} / ${marketNumber(day?.high,row.quote==="IRT"?0:4)}</span></div></div>
     ${stats?.isStale?'<p class="market-nb-note">آمار تغییرات منبع نیز قدیمی است.</p>':""}
     ${marketChart(row)}
-    <details class="market-nb-sources"><summary>منابع قیمت و اختلاف نرخ</summary><p>منابع استفاده‌شده: ${esc((row.sources||[]).join("، ")||"نامشخص")} · نرخ نمایش‌داده‌شده: میانهٔ منابع نبضش.</p>
-    ${providers.length?`<p>زمان مقایسهٔ منابع: ${esc(marketTime(spread.asOf))} · ${providers.length>1?`فاصلهٔ کمترین و بیشترین: ${marketNumber(spread.spread)} ${esc(row.unit_fa)} (${marketNumber(spread.spreadPercent,2)}٪)`:'فقط یک منبع برای مقایسه موجود است.'}</p><ul>${providers.map(p=>`<li><span>${esc(p.provider)}${p.isStale?' · قدیمی':''}<small> · ${esc(marketTime(p.time))}</small></span><b>${marketNumber(p.price,row.quote==="IRT"?0:4)} ${esc(row.unit_fa)}</b></li>`).join("")}</ul>`:'<p>جدول مقایسهٔ نرخ منابع در دسترس نیست.</p>'}</details>`;
+    ${marketAttribution(row)}
+    <details class="market-nb-sources"><summary>اختلاف نرخ منابع</summary>
+    ${providers.length?`<p>زمان مقایسهٔ منابع: ${esc(marketTime(spread.asOf))} · ${providers.length>1?`فاصلهٔ کمترین و بیشترین: ${marketNumber(spread.spread)} ${esc(row.unit_fa)} (${marketNumber(spread.spreadPercent,2)}٪)`:'فقط یک منبع برای مقایسه موجود است.'}</p><ul>${providers.map(p=>`<li><span>${marketProviderCredit(p.provider)}${p.isStale?' · قدیمی':''}<small> · ${esc(marketTime(p.time))}</small></span><b>${marketNumber(p.price,row.quote==="IRT"?0:4)} ${esc(row.unit_fa)}</b></li>`).join("")}</ul>`:'<p>جدول مقایسهٔ نرخ منابع در دسترس نیست.</p>'}</details>`;
 }

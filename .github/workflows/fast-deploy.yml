@@ -131,6 +131,7 @@ jobs:
         run: |
           python -m unittest discover -s backend/tests -p test_nabzesh_market.py
           node backend/tests/test_nabzesh_market_ui.js
+          node backend/tests/test_diner_news.js
 
       - name: Overlay freshest Jan-e Jaraid generated data
         env:

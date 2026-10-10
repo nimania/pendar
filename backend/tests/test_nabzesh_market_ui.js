@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const elements=new Map();
 function el(id){if(!elements.has(id))elements.set(id,{innerHTML:'',textContent:'',value:''});return elements.get(id)}
-const ctx={console,window:{},Date,Number,Promise,document:{getElementById:el,querySelectorAll:()=>[]},DATA:'data',esc:s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'),faN:String,grp:String};
+const ctx={console,window:{},Date,Number,Promise,URL,document:{getElementById:el,querySelectorAll:()=>[]},DATA:'data',esc:s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'),faN:String,grp:String};
 vm.createContext(ctx);
 vm.runInContext(fs.readFileSync('web-static/market-nabzesh.js','utf8'),ctx);
 vm.runInContext(fs.readFileSync('web-static/market-weather.js','utf8'),ctx);
@@ -12,7 +12,7 @@ const rows=[{ticker:'USD',group:'currency',label_fa:'دلار آمریکا',quot
  {ticker:'TEDPIX',group:'indexes',label_fa:'شاخص',quote:'POINT',value:8000000},
  {ticker:'COFFEE_US',group:'food',label_fa:'قهوه · پوند',quote:'USD',unit_fa:'دلار',value:2.8517}];
 const groups=[{id:'currency',label_fa:'ارزها'},{id:'food',label_fa:'غذا'},{id:'indexes',label_fa:'شاخص'}];
-let snapshot={rows,groups,generated_at:new Date().toISOString()};
+let snapshot={rows,groups,generated_at:new Date().toISOString(),providers:{one:{name_fa:'منبع اصلی',website_url:'https://example.org',api_url:'https://api.nabzesh.ir/v1/providers/one'}}};
 ctx.getJSON=async url=>url.includes('market-nabzesh')?snapshot:[];
 (async()=>{
  assert.match(ctx.marketMove(null),/نامشخص/);
@@ -22,6 +22,13 @@ ctx.getJSON=async url=>url.includes('market-nabzesh')?snapshot:[];
  assert.deepEqual(Array.from(ctx.window.JK_MARKET_UNITS,u=>u.id),['toman','USD']);
  ctx.selectMarketGroup('food');assert.match(el('market-nb-group-note').textContent,/قیمت خرید مواد اولیه در ایران نیستند/);
  ctx.selectMarketAsset('USD');assert.match(el('market-nb-detail').innerHTML,/تغییر نامشخص/);
+ assert.match(el('market-nb-detail').innerHTML,/منبع اصلی/);
+ assert.match(el('market-nb-detail').innerHTML,/href="https:\/\/example.org"/);
+ assert.match(el('market-nb-detail').innerHTML,/v1\/rates\?tickers=USD&amp;quote=IRT/);
+ assert.doesNotMatch(ctx.marketSourceLink('javascript:alert(1)','خطر'),/href=/);
+ const attribution=ctx.marketAttribution({...rows[0],strategy:'average',chart:{points:[]}});
+ assert.match(attribution,/میانگین نرخ منابع/);assert.doesNotMatch(attribution,/میانهٔ نرخ منابع/);
+ assert.match(attribution,/منابع نرخ فعلی را نمی‌توان به همهٔ نقاط تاریخچه نسبت داد/);
  const chart=ctx.marketChart({label_fa:'دلار',unit_fa:'تومان',chart:{points:[{time:'2026-10-01T00:00:00Z',close:'1'},{time:'2026-10-02T00:00:00Z',close:'2'},{time:'2026-10-09T00:00:00Z',close:'3'}]}});
  assert.match(chart,/L/);assert.equal((chart.match(/M[\d.]+,/g)||[]).length,2);
  snapshot={...snapshot,generated_at:'2000-01-01T00:00:00Z'};await ctx.renderMarket();

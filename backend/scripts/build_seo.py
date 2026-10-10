@@ -259,13 +259,13 @@ def build(site):
             paging=links([(route(kind) if i==1 else route(kind,'page/'+str(i)), 'صفحهٔ '+str(i)) for i in range(1,len(chunks)+1)]) if len(chunks)>1 else ''
             pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak','us-radar','israel-radar','radar'],'schema_type':'CollectionPage'}
     pages['/diner/'].update(
-        description='داینر نیما؛ نکته‌های کاربردی مهندسی منو، مدیریت تیم، عملیات، بهداشت، بازاریابی و کافه‌داری، همراه با تماس مستقیم با نیما افشارنادری.',
-        body='<p>نکته‌های کاربردی رستوران‌داری و کافه‌داری از تجربه واقعی؛ مهندسی منو، مدیریت تیم، عملیات، بهداشت و بازاریابی.</p>'+links([('https://t.me/nimaafsharnaderiir','تماس مستقیم با نیما افشارنادری'),('https://www.instagram.com/nimasdiner','اینستاگرام داینر نیما'),('https://t.me/+sNV4qZCjSOQyMzc0','گروه تلگرام داینر نیما')]),
+        description='داینر نیما؛ خبرهای رستوران‌داری، کافه‌داری، هوش مصنوعی و غذا، منو و مهندسی منو، همراه با نکته‌های مدیریت تیم و عملیات و پروفایل نیما افشارنادری.',
+        body='<p>نکته‌های کاربردی رستوران‌داری و کافه‌داری از تجربه واقعی؛ مهندسی منو، مدیریت تیم، عملیات، بهداشت و بازاریابی. فهرست خبرهای رستوران، کافه، منو و فناوری از Food Intel با ذکر رسانه و پیوند خبر اصلی در همین صفحه نمایش داده می‌شود.</p>'+links([('/@nima-afshar-naderi/','پروفایل نیما افشارنادری در پندار'),('https://nimania.github.io/restaurant-intelligence/food-intel/explore.html#feed','رادار خبرهای رستوران و غذا در Food Intel'),('https://t.me/nimaafsharnaderiir','تماس مستقیم با نیما افشارنادری'),('https://www.instagram.com/nimasdiner','اینستاگرام داینر نیما'),('https://t.me/+sNV4qZCjSOQyMzc0','گروه تلگرام داینر نیما')]),
         indexable=True,
     )
     pages['/dinr/']={**pages['/diner/'], 'canonical':'/diner/', 'indexable':False, 'redirect':'/diner/'}
     aliases['/dinr/']='/diner/'
-    pages['/diner/']['body']+=links([('/diner/retro/','نمونه‌کار: هات‌داگ رترو؛ از ایده تا اجرا')])
+    pages['/diner/']['body']+=links([('/diner/retro/','نمونه‌کار: هات‌داگ رترو؛ از ایده تا اجرا'),('/@soufia-abdollahi/','سس‌های صوفیا؛ پروفایل صوفیا عبداللهی در پندار')])
     pages['/diner/retro/']={
         'title':'هات‌داگ رترو؛ نمونه‌کار ایده‌پردازی، راه‌اندازی و اجرا | داینر نیما',
         'description':'پروندهٔ هات‌داگ رترو در نوشهر؛ فست‌کژوالی با حال‌وهوای دهه‌های ۵۰ و ۶۰ میلادی، از ایده‌پردازی نیما افشارنادری و صوفیا عبداللهی تا افتتاح در مهر ۱۴۰۳.',

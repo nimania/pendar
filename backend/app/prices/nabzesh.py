@@ -8,7 +8,7 @@ import math
 import os
 import time
 from urllib.error import HTTPError
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote as quote_path, urlsplit
 from urllib.request import Request, urlopen
 
 BASE = "https://api.nabzesh.ir"
@@ -57,6 +57,28 @@ DETAILS = [("USD", "IRT"), ("GOLD18", "IRT"), ("COIN_EMAMI", "IRT"),
            ("USDT", "IRT"), ("BRENT", "USD"), ("COFFEE_US", "USD")]
 
 
+def api_url(path, **params):
+    return BASE + path + ("?" + urlencode(params) if params else "")
+
+
+def provider_metadata(provider):
+    """Credit only metadata supplied by Nabzesh, never guess an upstream API."""
+    slug = provider.get("slug")
+    if not isinstance(slug, str) or not slug:
+        return None
+    website = provider.get("websiteUrl")
+    try:
+        parsed = urlsplit(website or "")
+        if parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.username or parsed.password:
+            website = None
+    except ValueError:
+        website = None
+    names = provider.get("name") or {}
+    return {"slug": slug, "name_fa": names.get("fa") or names.get("en") or slug,
+            "website_url": website, "role": provider.get("role"),
+            "api_url": api_url("/v1/providers/" + quote_path(slug, safe=""))}
+
+
 def number(value):
     """Missing comparisons must remain missing; never manufacture a zero move."""
     if value is None or isinstance(value, bool):
@@ -102,6 +124,11 @@ def normalize(ticker, label, group, quote, unit, price):
     change = price.get("change") or {}
     sources = sorted({s["provider"] for hop in price.get("hops", [])
                       for s in hop.get("sources", []) if s.get("used") and s.get("provider")})
+    source_hops = [{"from": hop.get("from"), "to": hop.get("to"),
+                    "sources": [{"provider": s["provider"], "price_decimal": s.get("price"),
+                                 "updated_at": s.get("time"), "is_stale": s.get("isStale", True)}
+                                for s in hop.get("sources", []) if s.get("used") and s.get("provider")]}
+                   for hop in price.get("hops", [])]
     return {
         "ticker": ticker, "label_fa": label, "group": group, "quote": quote,
         "value": value, "price_decimal": price["price"], "unit_fa": unit,
@@ -109,6 +136,8 @@ def normalize(ticker, label, group, quote, unit, price):
         "dir": change.get("direction"), "updated_at": price.get("updatedAt"),
         "as_of": price.get("asOf"), "is_stale": price.get("isStale", True),
         "sources": sources, "path": price.get("path", []), "strategy": price.get("strategy"),
+        "source_hops": source_hops,
+        "api": {"price": api_url("/v1/rates", tickers=ticker, quote=quote, compare="24h", strategy="median")},
     }
 
 
@@ -121,12 +150,14 @@ def fetch_snapshot(client=None):
         specs = [(g, u, ticker, label) for g, _, q, u, items in GROUPS if q == quote
                  for ticker, label in items]
         try:
-            data = client.get("/v1/rates", tickers=",".join(x[2] for x in specs),
-                              quote=quote, compare="24h")
+            params = {"tickers": ",".join(x[2] for x in specs), "quote": quote,
+                      "compare": "24h", "strategy": "median"}
+            data = client.get("/v1/rates", **params)
             found = {r.get("ticker"): r.get("price") for r in data.get("data", [])}
             for group, unit, ticker, label in specs:
                 row = normalize(ticker, label, group, quote, unit, found.get(ticker))
                 if row:
+                    row["api"]["price_batch"] = api_url("/v1/rates", **params)
                     rows.append(row)
                 else:
                     errors.append({"ticker": ticker, "kind": "price_unavailable"})
@@ -140,12 +171,13 @@ def fetch_snapshot(client=None):
             continue
         for endpoint in ("stats", "chart"):
             try:
-                params = {"quote": quote}
+                params = {"quote": quote, "strategy": "median"}
                 if endpoint == "chart":
                     params.update(interval="1d", **{"from": (now - timedelta(days=30)).isoformat(), "to": now.isoformat()})
                 result = client.get(f"/v1/currencies/{ticker}/{endpoint}", **params)
                 if result.get("base") == ticker and result.get("quote") == quote:
                     row[endpoint] = result
+                    row["api"][endpoint] = api_url(f"/v1/currencies/{ticker}/{endpoint}", **params)
             except Exception:
                 errors.append({"ticker": ticker, "kind": endpoint + "_unavailable"})
         if ticker in ("USD", "GOLD18", "USDT"):
@@ -153,10 +185,22 @@ def fetch_snapshot(client=None):
                 result = client.get(f"/v1/currencies/{ticker}/spread", quote=quote)
                 if result.get("base") == ticker and result.get("quote") == quote:
                     row["spread"] = result
+                    row["api"]["spread"] = api_url(f"/v1/currencies/{ticker}/spread", quote=quote)
             except Exception:
                 errors.append({"ticker": ticker, "kind": "spread_unavailable"})
 
-    return {"schema_version": 1, "source": "نبضش", "source_url": BASE + "/docs",
+    providers = {}
+    try:
+        catalog = client.get("/v1/providers")
+        for provider in catalog.get("data", []):
+            metadata = provider_metadata(provider)
+            if metadata:
+                providers[metadata["slug"]] = metadata
+    except Exception:
+        errors.append({"kind": "provider_metadata_unavailable"})
+
+    return {"schema_version": 2, "source": "نبضش", "source_url": BASE + "/docs",
             "generated_at": now.isoformat(), "strategy": "median", "rows": rows,
+            "providers": providers, "providers_api_url": api_url("/v1/providers"),
             "groups": [{"id": g, "label_fa": label} for g, label, *_ in GROUPS],
             "errors": errors}
