@@ -621,7 +621,8 @@ def merge_editorial_views(data_dir: Path) -> dict:
         from urllib.parse import urlsplit, parse_qsl, urlencode
         def source_key(post):
             url = str(post.get("url") or "").strip()
-            if not url:
+            # Generic channel/profile pages cannot identify a unique post.
+            if not url or post.get("source_review_status") in ("needs_exact_permalink", "link_requires_content_verification"):
                 return None
             try:
                 parts = urlsplit(url)
