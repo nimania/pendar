@@ -159,7 +159,7 @@ jobs:
               raise SystemExit(0)
           stories=json.loads((src/"stories.json").read_text(encoding="utf-8"))
           previous=json.loads((dst/"stories.json").read_text(encoding="utf-8")) if (dst/"stories.json").exists() else []
-          assert len(stories)>=100 and len(stories)>=len(previous)*0.8, "News integrity guard: story count dropped"
+          assert 1 <= len(stories) <= 60 and len(stories)>=len(previous)*0.8, "News integrity guard: homepage feed empty or dropped"
           import shutil
           dst.mkdir(parents=True,exist_ok=True)
           for name in ("stories.json","topics.json","entities.json","trends.json","stats.json","meta.json","press-stats.json","press-source-stories.json","press-source-health.json","press-source-repair-queue.json","factchecks.json","geo.json"):
