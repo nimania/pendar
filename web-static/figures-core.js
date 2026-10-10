@@ -160,6 +160,8 @@ async function renderFigureTimeline() {
       _newsPerson: false
     }))).sort((a,b) => figureActivityTime(b) - figureActivityTime(a));
   }
+  const topicCounts = Object.fromEntries(FIGURE_TIMELINE_TOPICS.map(t => [t.id, (d.figures || []).reduce((sum, f) =>
+    sum + (f.posts || []).filter(p => figureMatchesTopic(p,t)).length, 0)]));
   const controls = `<div class="fig-tl-controls">
     <div class="imp-filter">
       <button class="fchip ${_figTimelineMode === "all" ? "on" : ""}" onclick="setFigureTimelineMode('all')">همه</button>
@@ -167,7 +169,7 @@ async function renderFigureTimeline() {
       ${(d.figures || []).some(f => (f.posts || []).some(p => p.kind === "news_statement")) ? `<button class="fchip ${_figTimelineMode === "news" ? "on" : ""}" onclick="setFigureTimelineMode('news')">چهره‌های خبر</button>` : ""}
     </div>
     <div class="fig-topic-filters" role="group" aria-label="تایم‌لاین‌های موضوعی">
-      ${FIGURE_TIMELINE_TOPICS.map(t => `<button class="fchip ${_figTimelineTopic===t.id?"on":""}" onclick="setFigureTimelineTopic('${t.id}')" aria-pressed="${_figTimelineTopic===t.id}">${t.label}</button>`).join("")}
+      ${FIGURE_TIMELINE_TOPICS.map(t => `<button class="fchip ${_figTimelineTopic===t.id?"on":""}" onclick="setFigureTimelineTopic('${t.id}')" aria-pressed="${_figTimelineTopic===t.id}">${t.label}<span class="chip-n">${faN(topicCounts[t.id]||0)}</span></button>`).join("")}
     </div>
     <select class="fig-field-select" onchange="setFigureTimelineField(this.value)" aria-label="حوزهٔ فعالیت چهره (مستقل از موضوع مطلب)" ${isNewsMode ? "disabled" : ""}>
       <option value="all">همهٔ تخصص‌ها</option>
