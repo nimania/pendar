@@ -92,6 +92,29 @@ def build(site):
                 story_url=route('story',item.get('id',''))
                 if story_url in pages:
                     pages[story_url]['body']+='<h2>ماجرا را دنبال کنید</h2>'+links([(key,event.get('title',''))])
+    # Editorial dossiers are a separate data source from automatically grouped
+    # event-trends. Their direct /event/<id>/ URLs must resolve on refresh.
+    for dossier in array(read(data/'pendar-editorial-trends.json',{}),'items'):
+        if not isinstance(dossier,dict) or not str(dossier.get('id','')).startswith('editorial-'):
+            continue
+        if dossier.get('status') not in ('live','published'):
+            continue
+        body_parts=[dossier.get('dek'),dossier.get('short_answer')]
+        for section in dossier.get('sections') or []:
+            if not isinstance(section,dict): continue
+            body_parts.append(section.get('title'))
+            body_parts.extend(section.get('paragraphs') or [])
+            body_parts.extend(item.get('text') for item in section.get('items') or [] if isinstance(item,dict))
+        add('event',dossier['id'],dossier.get('title'),'\\n\\n'.join(text(x) for x in body_parts if text(x)),
+            image=dossier.get('image'),schema_type='Article',published=dossier.get('updated_at') or dossier.get('published_at'))
+        event_url=route('event',dossier['id'])
+        if event_url in pages:
+            pages[event_url]['section']='trends'
+            refs=[(src.get('url'),src.get('title') or src.get('name') or 'منبع')
+                  for src in dossier.get('sources') or [] if isinstance(src,dict)
+                  and str(src.get('url','')).startswith(('https://','http://'))]
+            pages[event_url]['body']+='<h2>منابع پرونده</h2>'+links(refs) if refs else ''
+            catalogs['trends'].append((event_url,dossier.get('title','')))
     # News archives and programme pages also need real refreshable URLs.
     topic_rows={}; source_rows={}; person_rows={}; day_rows={}
     for s in stories:
