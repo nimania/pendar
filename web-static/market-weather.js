@@ -91,8 +91,8 @@ async function renderMarket() {
         <div class="mc-result" id="mc-result">—</div>
       </div>
     </section>
-    ${!richMarket && cryptoRows?`<section><div class="rule"><span>رمزارزها</span><span class="l"></span></div><div class="market-crypto-strip">${cryptoRows}</div></section>`:""}
-    <p class="market-source-note">${richMarket?"منبع: نبضش · قیمت‌های مرجع و زمان ثبت منابع؛ تبدیل مالی بر پایهٔ همین نرخ‌هاست.":"ارز و طلا: TGJU · رمزارزها: CoinGecko. تغییرات نمایش‌داده‌شده مطابق آخرین دادهٔ ذخیره‌شده‌اند."}</p>
+    ${cryptoRows?`<section><div class="rule"><span>رمزارزها به دلار</span><span class="l"></span></div><div class="market-crypto-strip">${cryptoRows}</div></section>`:""}
+    <p class="market-source-note">${richMarket?"تابلوی بازار: نبضش · رمزارزهای دلاری: CoinGecko. زمان ثبت نرخ‌های نبضش روی کارت‌ها آمده است؛ تبدیل مالی بر پایهٔ همین نرخ‌هاست.":"ارز و طلا: TGJU · رمزارزها: CoinGecko. تغییرات نمایش‌داده‌شده مطابق آخرین دادهٔ ذخیره‌شده‌اند."}</p>
     <div id="market-food"><p class="muted">در حال دریافت رادار بازار غذا…</p></div>`;
 
     setupMarketConverter();
