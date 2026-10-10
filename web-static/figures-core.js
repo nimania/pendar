@@ -108,9 +108,10 @@ function figureMatchesTopic(post, topic) {
 function setFigureTimelineTopic(topic) {
   if(!FIGURE_TIMELINE_TOPICS.some(x=>x.id===topic)) return;
   _figTimelineTopic = topic;
+  _figTimelineField = "all";
   renderFigureTimeline();
 }
-function setFigureTimelineMode(mode) { _figTimelineMode = mode; renderFigureTimeline(); }
+function setFigureTimelineMode(mode) { _figTimelineMode = mode; if(mode === "news") _figTimelineTopic = "all"; renderFigureTimeline(); }
 function setFigureTimelineField(field) { _figTimelineField = field; renderFigureTimeline(); }
 async function renderFigureTimeline() {
   const el = document.getElementById("figure-timeline");
