@@ -85,45 +85,40 @@ function figureFollowBtn(handle, compact) {
   const on = isFigureFollowed(handle);
   return `<button class="fig-follow ${on ? "on" : ""} ${compact ? "compact" : ""}" onclick="toggleFigureFollow('${esc(handle)}',event)" aria-label="${on ? "دنبال نکردن" : "دنبال کردن"}">${on ? "★ دنبال می‌کنم" : "☆ دنبال کن"}</button>`;
 }
-const FIGURE_TIMELINE_TOPICS = [
-  {id:"all", label:"همهٔ موضوع‌ها"},
-  {id:"ai", label:"فناوری و هوش مصنوعی", terms:["هوش مصنوعی","مدل زبانی","یادگیری ماشین","فناوری","تکنولوژی","chatgpt","openai","claude","gemini","deepseek","artificial intelligence"]},
-  {id:"politics", label:"سیاست و ایران", terms:["انتخابات","حکومت","دولت","گذار سیاسی","جمهوری اسلامی","دموکراسی","مجلس","سیاست ایران"]},
-  {id:"economy", label:"اقتصاد", terms:["اقتصاد","تورم","بازار","بودجه","سرمایه‌گذاری","ارز","تجارت"]},
-  {id:"culture", label:"فرهنگ و هنر", terms:["سینما","موسیقی","ادبیات","کتاب","هنر","فرهنگ","فیلم"]},
-  {id:"society", label:"جامعه", terms:["جامعه","آموزش","حقوق بشر","زنان","دانشگاه","مهاجرت"]}
-];
+const FIGURE_TIMELINE_TOPICS = [{"id":"all","label":"همهٔ موضوع‌ها","terms":[]},{"id":"politics","label":"سیاست و حکمرانی","terms":["انتخابات","حکومت","دولت","مجلس","سیاست","دموکراسی","اپوزیسیون","پارلمان","قانون اساسی"]},{"id":"iran","label":"ایران و گذار","terms":["ایران","جمهوری اسلامی","گذار","پهلوی","اعتراضات ایران","آینده ایران","حاکمیت ایران"]},{"id":"world","label":"جهان و روابط بین‌الملل","terms":["ژئوپلیتیک","روابط بین الملل","سیاست خارجی","آمریکا","روسیه","چین","اروپا","سازمان ملل","دیپلماسی"]},{"id":"security","label":"جنگ و امنیت","terms":["جنگ","نبرد","نیروهای مسلح","دفاعی","موشک","امنیت ملی","حمله نظامی","ارتش"]},{"id":"economy","label":"اقتصاد و کسب‌وکار","terms":["اقتصاد","تورم","رکود","بودجه","سرمایه گذاری","بازار سرمایه","تجارت","کارآفرینی","قیمت گذاری","کسب و کار"]},{"id":"ai","label":"فناوری و هوش مصنوعی","terms":["هوش مصنوعی","مدل زبانی","یادگیری ماشین","فناوری","تکنولوژی","چت بات","عامل هوشمند","برنامه نویسی","chatgpt","openai","claude","gemini","deepseek","artificial intelligence","machine learning","llm"]},{"id":"society","label":"جامعه و حقوق","terms":["جامعه","حقوق بشر","حقوق زنان","زنان","نابرابری","مهاجرت","عدالت اجتماعی","حقوق شهروندی"]},{"id":"culture","label":"فرهنگ و هنر","terms":["سینما","موسیقی","ادبیات","کتاب","هنر","فرهنگ","تئاتر","شعر"]},{"id":"science","label":"علم و آموزش","terms":["پژوهش","دانشگاه","آموزش","مدرسه","علم","دانشمند","زیست شناسی","فیزیک","پزشکی"]},{"id":"environment","label":"محیط زیست و انرژی","terms":["محیط زیست","اقلیم","آلودگی هوا","خشکسالی","انرژی","برق","نفت","گاز","آب و هوا"]},{"id":"media","label":"رسانه و ارتباطات","terms":["رسانه","روزنامه نگاری","خبرنگاری","سانسور","شبکه اجتماعی","تلویزیون","اطلاع رسانی"]},{"id":"unclassified","label":"موضوع نامشخص","terms":[]}];
 let _figTimelineTopic = "all";
+function figureAssignedTopics(post) {
+  return [post.topic_ids,post.topics,post.subject_topics]
+    .flatMap(v => Array.isArray(v) ? v : typeof v === "string" ? [v] : [])
+    .map(v => typeof v === "string" ? v : v && (v.id || v.slug) || "")
+    .map(v => String(v).toLowerCase()).filter(Boolean);
+}
 function figureTopicScores(post) {
   const normalize = value => String(value || "").toLowerCase()
     .replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ")
     .replace(/[^a-z0-9\u0600-\u06ff]+/g," ").replace(/\s+/g," ").trim();
   const title = normalize([post.topic_fa,post.headline_fa].filter(Boolean).join(" "));
   const body = normalize([post.summary_fa,post.quote_fa].filter(Boolean).join(" "));
-  const scores = FIGURE_TIMELINE_TOPICS.filter(t => t.id !== "all").map(topic => {
-    const terms = topic.terms.map(normalize);
+  const scores = FIGURE_TIMELINE_TOPICS.filter(t => t.id !== "all" && t.id !== "unclassified").map(topic => {
     let score = 0;
-    for (const term of terms) {
-      if (!term) continue;
-      const contains = (text) => (" " + text + " ").includes(" " + term + " ");
-      if (contains(title)) score += 3;
-      if (contains(body)) score += 1;
+    for(const term of topic.terms.map(normalize)) {
+      if(!term) continue;
+      const contains = text => (" "+text+" ").includes(" "+term+" ");
+      if(contains(title)) score += 3;
+      if(contains(body)) score += 1;
     }
-    return {id:topic.id, score};
+    return {id:topic.id,score};
   }).sort((a,b)=>b.score-a.score);
-  const best = scores[0]?.score || 0;
-  // Title matches have more weight; secondary topics must have their own evidence.
-  return scores.filter(x => x.score >= 2 && x.score >= best * 0.4).slice(0,3);
+  const highest = scores[0]?.score || 0;
+  return scores.filter(x => x.score >= 2 && x.score >= highest * 0.4).slice(0,3);
 }
 function figureMatchesTopic(post, topic) {
   if(topic.id === "all") return true;
-  const assigned = [post.topic_ids,post.topics,post.subject_topics]
-    .flatMap(v => Array.isArray(v) ? v : typeof v === "string" ? [v] : [])
-    .map(v => typeof v === "string" ? v : v && (v.id || v.slug) || "")
-    .map(v => String(v).toLowerCase());
-  if(assigned.length) return assigned.includes(topic.id);
-  return figureTopicScores(post).some(x => x.id === topic.id);
+  const assigned = figureAssignedTopics(post);
+  const matches = assigned.length ? assigned : figureTopicScores(post).map(x=>x.id);
+  return topic.id === "unclassified" ? !matches.length : matches.includes(topic.id);
 }
+
 function setFigureTimelineTopic(topic) {
   if(!FIGURE_TIMELINE_TOPICS.some(x=>x.id===topic)) return;
   _figTimelineTopic = topic;
