@@ -1,0 +1,92 @@
+name: Collect Pendar Figures (independent)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "11,41 * * * *"
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: pendar-figures-refresh
+  cancel-in-progress: false
+jobs:
+  figures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r backend/requirements.txt
+      - name: Restore news database
+        uses: actions/cache/restore@v4
+        with:
+          path: backend/build.db
+          key: pendar-news-db-figures-${{ github.run_id }}
+          restore-keys: |
+            pendar-news-db-
+            jankalam-db-
+      - name: Restore external figure history
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            backend/data/external-figure-posts.json
+            backend/data/youtube-videos.json
+            backend/data/youtube-recap-state.json
+            backend/data/youtube-transcripts.json
+          key: pendar-figure-history-${{ github.run_id }}
+          restore-keys: |
+            pendar-figure-history-
+            jankalam-extfig-
+      - name: Collect and export figure statements
+        working-directory: backend
+        env:
+          DATABASE_URL: "sqlite:///./build.db"
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
+          DOWNSUB_API_KEY: ${{ secrets.DOWNSUB_API_KEY }}
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
+        run: |
+          python -m scripts.seed
+          python -m scripts.collect_external_figures
+          python -m scripts.export_static
+      - name: Validate and package figures
+        run: |
+          python - <<'PY'
+          import json,datetime,pathlib,shutil
+          src=pathlib.Path('backend/public/data/figures.json')
+          d=json.loads(src.read_text(encoding='utf-8'))
+          people=d.get('figures',[]) if isinstance(d,dict) else []
+          assert len(people)>=100, f'Figure index unexpectedly small: {len(people)}'
+          stamps=[str(p.get('published_at') or '') for f in people for p in f.get('posts',[]) if isinstance(p,dict)]
+          assert len(stamps)>=100, f'Figure statements unexpectedly small: {len(stamps)}'
+          dst=pathlib.Path('figure-payload/data')
+          dst.mkdir(parents=True,exist_ok=True)
+          now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+          d['generated_at']=now
+          (dst/'figures.json').write_text(json.dumps(d,ensure_ascii=False),encoding='utf-8')
+          meta={'last_checked_at':now,'published_statements':len(stamps),'figures':len(people),'latest_post_at':max(stamps) if stamps else None}
+          (dst/'figures-health.json').write_text(json.dumps(meta,ensure_ascii=False),encoding='utf-8')
+          print(meta,flush=True)
+          PY
+      - name: Save figure history for next run
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            backend/data/external-figure-posts.json
+            backend/data/youtube-videos.json
+            backend/data/youtube-recap-state.json
+            backend/data/youtube-transcripts.json
+          key: pendar-figure-history-${{ github.run_id }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pendar-figures-data
+          path: figure-payload/
+          retention-days: 3
+          if-no-files-found: error
