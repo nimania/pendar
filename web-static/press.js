@@ -642,7 +642,7 @@ async function showBBCPersianIdentity(){
         <div class="bbc-handle">@bbc-persian</div>
         <p class="bbc-profile-description">بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است؛ تأمین مالی عمومی لزوماً به معنای کنترل مستقیم دولتی نیست.</p>
         <div class="bbc-profile-links"><a href="/press/">پیشخوان جراید ↗</a><a href="/tv/">راهنمای تماشا ↗</a><span>رسانهٔ فارسی‌زبان</span></div>
-        <nav class="bbc-profile-tabs" aria-label="بخش‌های نمایه"><a href="#bbc-identity-press">مطالب</a><a href="#bbc-identity-tv">تلویزیون</a><a href="https://www.bbc.com/persian" target="_blank" rel="noopener">دربارهٔ رسانه ↗</a></nav>
+        <nav class="bbc-profile-tabs" aria-label="بخش‌های نمایه"><a href="/@bbc-persian/" onclick="event.preventDefault();document.getElementById('bbc-identity-press')?.scrollIntoView({behavior:'smooth'})">مطالب</a><a href="/@bbc-persian/" onclick="event.preventDefault();document.getElementById('bbc-identity-tv')?.scrollIntoView({behavior:'smooth'})">تلویزیون</a><a href="https://www.bbc.com/persian" target="_blank" rel="noopener">دربارهٔ رسانه ↗</a></nav>
         <section class="bbc-profile-section"><h2>مطالب ثبت‌شده</h2><div id="bbc-identity-press">در حال بررسی آرشیو ذخیره‌شده…</div></section>
         <section class="bbc-profile-section"><h2>شبکه‌ها و برنامه‌ها</h2><div id="bbc-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div></section>
       </div>
