@@ -108,7 +108,13 @@
       </aside>
 
       <!-- Independent sandboxed frames isolate Adsterra atOptions between placements. -->
-      <aside class="pendar-sponsored-wide" aria-label="آگهی تبلیغاتی"><div class="pendar-ad-label">آگهی · محتوای تبلیغاتی</div><iframe title="آگهی افقی" loading="lazy" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin-when-cross-origin" width="728" height="90" scrolling="no" style="border:0;display:block;margin:auto;max-width:100%" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body style=&quot;margin:0;overflow:hidden&quot;&gt;&lt;script&gt;var atOptions={key:'6efc34d69af7f7de064af76a35e3c040',format:'iframe',height:90,width:728,params:{}};&lt;/script&gt;&lt;script src=&quot;https://www.highrevenueformat.com/6efc34d69af7f7de064af76a35e3c040/invoke.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></aside>
+      <aside class="pendar-sponsored-wide" aria-label="آگهی تبلیغاتی"><div class="pendar-ad-label">آگهی · محتوای تبلیغاتی</div>
+        <!-- Direct Adsterra 728x90 integration test. Do not wrap inside a sandboxed iframe. -->
+        <div class="pendar-ad-direct-test" style="width:728px;min-height:90px;max-width:100%;margin:0 auto;overflow:hidden">
+          <script>atOptions = {'key':'6efc34d69af7f7de064af76a35e3c040','format':'iframe','height':90,'width':728,'params':{}};</script>
+          <script src="https://www.highrevenueformat.com/6efc34d69af7f7de064af76a35e3c040/invoke.js"></script>
+        </div>
+      </aside>
       <aside class="pendar-sponsored-mobile" aria-label="آگهی تبلیغاتی"><div class="pendar-ad-label">آگهی · محتوای تبلیغاتی</div><iframe title="آگهی موبایل" loading="lazy" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin-when-cross-origin" width="320" height="50" scrolling="no" style="border:0;display:block;margin:auto;max-width:100%" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body style=&quot;margin:0;overflow:hidden&quot;&gt;&lt;script&gt;var atOptions={key:'5753b84d84fd726c73ffad8f06df1340',format:'iframe',height:50,width:320,params:{}};&lt;/script&gt;&lt;script src=&quot;https://www.highrevenueformat.com/5753b84d84fd726c73ffad8f06df1340/invoke.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></aside>
       <style>.pendar-sponsored-wide,.pendar-sponsored-mobile,.pendar-sponsored-side{max-width:100%;margin:16px auto 24px;text-align:center}.pendar-ad-label{font-size:11px;color:var(--muted,#777);margin-bottom:7px}.pendar-sponsored-mobile{display:none}@media(max-width:799px){.pendar-sponsored-wide{display:none}.pendar-sponsored-mobile{display:block}}@media(max-width:649px){.pendar-sponsored-side{display:none}}</style>
 
