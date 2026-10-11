@@ -628,11 +628,11 @@ async function showBBCPersianIdentity(){
       .bbc-profile-links{display:flex;gap:15px;flex-wrap:wrap;font-size:13px;margin-bottom:18px}
       .bbc-profile-tabs{display:flex;border-top:1px solid var(--border,#9994);border-bottom:1px solid var(--border,#9994);margin:0 -24px;padding:0 14px;overflow:auto}
       .bbc-profile-tabs a{padding:13px 16px;white-space:nowrap;text-decoration:none;font-weight:600}
-      .bbc-profile-tabs a:hover{box-shadow:inset 0 -3px #b51b22}
+      .bbc-profile-tabs .bbc-content-tab{border:0;background:transparent;color:inherit;cursor:pointer;font:inherit;padding:14px 22px;white-space:nowrap;font-weight:650;opacity:.65}.bbc-profile-tabs .bbc-content-tab[aria-selected="true"]{opacity:1;box-shadow:inset 0 -3px #b51b22}.bbc-profile-tabs .bbc-content-tab:hover{opacity:1}.bbc-profile-section[hidden]{display:none!important}
       .bbc-profile-section{padding:22px 0 7px;border-bottom:1px solid var(--border,#9994)}
       .bbc-profile-section h2{font-size:21px;margin:0 0 14px}
       .bbc-profile-section ul{padding-right:20px;line-height:2}
-      @media(max-width:600px){.bbc-cover{height:125px}.bbc-profile-body{padding:0 15px 16px}.bbc-avatar{height:90px;width:90px;margin-top:-45px;font-size:18px}.bbc-profile-tabs{margin:0 -15px}.bbc-profile-tabs a{padding:12px}}
+      @media(max-width:600px){.bbc-cover{height:125px}.bbc-profile-body{padding:0 15px 16px}.bbc-avatar{height:90px;width:90px;margin-top:-45px;font-size:18px}.bbc-profile-tabs{margin:0 -15px}.bbc-profile-tabs .bbc-content-tab{padding:12px 18px}}
     </style>
     <article class="bbc-profile">
       <div class="bbc-cover" role="img" aria-label="کاور گرافیکی رسانهٔ بی‌بی‌سی فارسی"></div>
@@ -642,12 +642,28 @@ async function showBBCPersianIdentity(){
         <div class="bbc-handle">@bbc-persian</div>
         <p class="bbc-profile-description">بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است؛ تأمین مالی عمومی لزوماً به معنای کنترل مستقیم دولتی نیست.</p>
         <div class="bbc-profile-links"><a href="/press/">پیشخوان جراید ↗</a><a href="/tv/">راهنمای تماشا ↗</a><span>رسانهٔ فارسی‌زبان</span></div>
-        <nav class="bbc-profile-tabs" aria-label="بخش‌های نمایه"><a href="/@bbc-persian/" onclick="event.preventDefault();document.getElementById('bbc-identity-press')?.scrollIntoView({behavior:'smooth'})">مطالب</a><a href="/@bbc-persian/" onclick="event.preventDefault();document.getElementById('bbc-identity-tv')?.scrollIntoView({behavior:'smooth'})">تلویزیون</a><a href="https://www.bbc.com/persian" target="_blank" rel="noopener">دربارهٔ رسانه ↗</a></nav>
-        <section class="bbc-profile-section"><h2>مطالب ثبت‌شده</h2><div id="bbc-identity-press">در حال بررسی آرشیو ذخیره‌شده…</div></section>
-        <section class="bbc-profile-section"><h2>شبکه‌ها و برنامه‌ها</h2><div id="bbc-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div></section>
+        <nav class="bbc-profile-tabs" role="tablist" aria-label="محتوای رسانه">
+          <button type="button" role="tab" class="bbc-content-tab" id="bbc-tab-press" aria-selected="true" aria-controls="bbc-panel-press" data-bbc-tab="press">مطالب</button>
+          <button type="button" role="tab" class="bbc-content-tab" id="bbc-tab-tv" aria-selected="false" aria-controls="bbc-panel-tv" data-bbc-tab="tv">شبکه‌ها</button>
+          <button type="button" role="tab" class="bbc-content-tab" id="bbc-tab-programmes" aria-selected="false" aria-controls="bbc-panel-programmes" data-bbc-tab="programmes">برنامه‌ها</button>
+        </nav>
+        <section class="bbc-profile-section" id="bbc-panel-press" role="tabpanel" aria-labelledby="bbc-tab-press"><div id="bbc-identity-press">در حال بررسی آرشیو ذخیره‌شده…</div></section>
+        <section class="bbc-profile-section" id="bbc-panel-tv" role="tabpanel" aria-labelledby="bbc-tab-tv" hidden><div id="bbc-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div></section>
+        <section class="bbc-profile-section" id="bbc-panel-programmes" role="tabpanel" aria-labelledby="bbc-tab-programmes" hidden><div id="bbc-identity-programmes">در حال بررسی برنامه‌های ذخیره‌شده…</div></section>
       </div>
     </article>`+articleDisplayAdMarkup();
   loadArticleDisplayAd();
+  const tabButtons=Array.from(el.querySelectorAll("[data-bbc-tab]"));
+  const chooseTab=(id)=>{
+    for(const btn of tabButtons){
+      const selected=btn.dataset.bbcTab===id;
+      btn.setAttribute("aria-selected",String(selected));
+      const panel=el.querySelector("#bbc-panel-"+btn.dataset.bbcTab);
+      if(panel)panel.hidden=!selected;
+    }
+  };
+  for(const btn of tabButtons)btn.addEventListener("click",()=>chooseTab(btn.dataset.bbcTab));
+  chooseTab("press");
   const [pr,tr]=await Promise.allSettled([loadPeriodicals(),loadTVGuide()]);
   if(location.pathname!=="/@bbc-persian/"||document.getElementById("press-content")!==el)return;
   const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>/بی[‌ -]?بی[‌ -]?سی|bbc/i.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
@@ -657,4 +673,8 @@ async function showBBCPersianIdentity(){
   const channels=(guide.channels||[]).filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug==="bbc-persian").slice(0,5);
   const tb=document.getElementById("bbc-identity-tv");
   if(tb)tb.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>در داده‌های فعلی راهنمای تماشا، شبکهٔ منطبق یافت نشد.</p>';
+  const programmeBox=document.getElementById("bbc-identity-programmes");
+  const ids=new Set(channels.map(c=>String(c.id)));
+  const programmes=(guide.programmes||[]).filter(p=>ids.has(String(p.channel_id))).slice(0,5);
+  if(programmeBox)programmeBox.innerHTML=programmes.length?'<ul>'+programmes.map(p=>'<li>'+esc(p.title_fa||p.title||"برنامه")+'</li>').join("")+'</ul>':'<p>برنامه‌ای برای شبکه‌های مرتبط در داده‌های فعلی ثبت نشده است.</p>';
 }
