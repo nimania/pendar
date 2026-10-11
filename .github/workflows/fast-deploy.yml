@@ -194,7 +194,20 @@ jobs:
                   dest.parent.mkdir(parents=True,exist_ok=True)
                   shutil.copy2(shell,dest)
                   made+=1
-          print("Ensured",len(stories),"news entry pages; newly created",made,flush=True)
+          # Event dossier IDs are anchored to story UUIDs; create direct route entry
+          # files for all retained story details, including older event anchors.
+          import re
+          ids=[p.stem for p in (root/"data/story").glob("*.json")
+               if re.fullmatch(r"[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}",p.stem)]
+          for sid in ids:
+              dest=root/"event"/("event-"+sid)/"index.html"
+              if not dest.is_file():
+                  dest.parent.mkdir(parents=True,exist_ok=True)
+                  shutil.copy2(shell,dest)
+          # Fallback keeps SPA routing available for less common generated paths.
+          shutil.copy2(shell,root/"404.html")
+          print("Ensured",len(stories),"news entry pages; newly created",made,
+                "; event dossiers",len(ids),flush=True)
           PY
       - name: Preserve validated lightweight news and figures only
         run: |
