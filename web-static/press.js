@@ -718,7 +718,7 @@ async function showPendarMediaIdentity(slug){
   })();
   const [pr,tr]=await Promise.allSettled([loadPeriodicals(),loadTVGuide()]);
   if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
-  const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>config.pattern.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
+  const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>config.pattern.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" ")));
   const pressBox=el.querySelector("#media-data-press");
   const mediaCards=(items,type)=>{
     if(!items.length)return '<p>در آرشیو منتشرشدهٔ فعلی مطلبی از این رسانه یافت نشد.</p>';
@@ -762,8 +762,19 @@ async function showPendarMediaIdentity(slug){
     const seen=new Set();
     const combined=[...rows.map(x=>({...x,__mediaType:"periodical"})),...feed.map(x=>({...x,__mediaType:"story"}))]
       .filter(x=>x?.id&&!seen.has(String(x.__mediaType)+":"+String(x.id))&&seen.add(String(x.__mediaType)+":"+String(x.id)))
-      .sort((a,b)=>String(b.published_at||b.pub_date||b.date||"").localeCompare(String(a.published_at||a.pub_date||a.date||""))).slice(0,20);
-    if(pressBox)pressBox.innerHTML=mediaCards(combined,"story");
+      .sort((a,b)=>String(b.published_at||b.pub_date||b.date||"").localeCompare(String(a.published_at||a.pub_date||a.date||"")));
+    const cutoff=Date.now()-30*86400000;
+    const timestamp=x=>{const t=Date.parse(x.published_at||x.pub_date||x.date||"");return Number.isFinite(t)?t:null;};
+    const recent30=combined.filter(x=>{const t=timestamp(x);return t!==null&&t>=cutoff&&t<=Date.now();});
+    const noDate=combined.filter(x=>timestamp(x)===null).length;
+    const visible=combined.slice(0,20);
+    if(pressBox){
+      pressBox.innerHTML='<div style="border-bottom:1px solid var(--line,#9994);margin:0 0 16px;padding:0 0 12px;font-size:13px;line-height:1.9">'+
+        '<strong>وضعیت آرشیو این رسانه</strong><div>مطالب قابل‌شناسایی در داده‌های منتشرشده: <b>'+faN(combined.length)+'</b> · مربوط به ۳۰ روز اخیر: <b>'+faN(recent30.length)+'</b> · نمایش داده‌شده: <b>'+faN(visible.length)+'</b></div>'+
+        (noDate?'<div>مطالب بدون تاریخ قابل‌تشخیص: '+faN(noDate)+'</div>':"")+
+        '<small style="color:var(--muted,#777)">این اعداد فقط داده‌های در دسترسِ سایت را می‌شمارند؛ تعداد کل اخبار دریافت‌شده از منبع در این بازه در این نمایه قابل‌اندازه‌گیری نیست.</small></div>'+
+        mediaCards(visible,"story");
+    }
   }
   const guide=tr.status==="fulfilled"?tr.value:{channels:[],programmes:[]};
   const allChannels=Array.isArray(guide.channels)?guide.channels:[];
