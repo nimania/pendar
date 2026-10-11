@@ -78,6 +78,7 @@ async function route() {
     };
     const slug=decodeURIComponent(raw.slice(1)).toLowerCase();
     const alias=aliases[slug];
+    if(slug==="bbc-persian")return showBBCPersianIdentity();
     if(alias?.kind==="press"){
       await showPress(alias.name);
       history.replaceState(null,"","/@"+slug+"/"+location.search);
