@@ -37,7 +37,8 @@ for item in list(root.iterdir()):
         removed += 1
 if data.is_dir():
     for item in list(data.iterdir()):
-        if item.is_dir():
+        if item.is_dir() and item.name not in {"story"}:
+            # Keep data/story/<id>.json: news detail pages fetch these directly.
             # Hefty generated data/people/* pages are redundant with people-index.
             # UI retrieves entity/figure information from preserved root-level datasets.
             shutil.rmtree(item)
