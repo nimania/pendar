@@ -662,9 +662,11 @@ function pendarMediaIdentityShell(slug,config){
       <nav class="media-profile-tabs" role="tablist" aria-label="محتوای رسانه">
         <button role="tab" type="button" id="media-tab-press" data-media-tab="press" aria-selected="true" aria-controls="media-panel-press">آخرین مطالب</button>
         <button role="tab" type="button" id="media-tab-programmes" data-media-tab="programmes" aria-selected="false" aria-controls="media-panel-programmes" hidden>برنامه‌ها و جدول پخش</button>
+        <button role="tab" type="button" id="media-tab-people" data-media-tab="people" aria-selected="false" aria-controls="media-panel-people" hidden>چهره‌های مرتبط</button>
       </nav>
       <section class="media-profile-panel" id="media-panel-press" role="tabpanel" aria-labelledby="media-tab-press"><div id="media-data-press">در حال بررسی آرشیو…</div></section>
       <section class="media-profile-panel" id="media-panel-programmes" role="tabpanel" aria-labelledby="media-tab-programmes" hidden><div id="media-data-programmes">در حال بررسی برنامه‌ها…</div></section>
+      <section class="media-profile-panel" id="media-panel-people" role="tabpanel" aria-labelledby="media-tab-people" hidden><div id="media-data-people"></div></section>
     </div>
   </article>`;
 }
@@ -692,6 +694,28 @@ async function showPendarMediaIdentity(slug){
   };
   buttons.forEach(btn=>btn.addEventListener("click",()=>choose(btn.dataset.mediaTab)));
   choose("press");
+  // Cache-only figure association: shared video IDs, not inferred employment.
+  const peopleTask=(async()=>{
+    try{
+      const meta=typeof _pressFindSource==="function"?_pressFindSource(config.name):null;
+      if(!meta)return;
+      const figureData=await loadFigures();
+      const related=_pressMediaData(meta,figureData).people.slice(0,18);
+      if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
+      const tab=el.querySelector("#media-tab-people");
+      const body=el.querySelector("#media-data-people");
+      if(!tab||!body||!related.length)return;
+      tab.hidden=false;
+      body.innerHTML='<p style="font-size:12px;color:var(--muted,#777)">این افراد بر اساس حضور در ویدئوهای ثبت‌شدهٔ مرتبط با رسانه نمایش داده می‌شوند. حضور در برنامه به معنای استخدام، عضویت یا وابستگی سازمانی نیست.</p>'+
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">'+related.map(p=>{
+          const name=esc(p.name_fa||"چهره");
+          const handle=String(p.handle||"").replace(/^@/,"");
+          const href=handle?"/@"+encodeURIComponent(handle)+"/":"/figures/";
+          const photo=p.avatar?'<img src="'+esc(p.avatar)+'" alt="" loading="lazy" style="width:50px;height:50px;border-radius:50%;object-fit:cover" onerror="this.remove()">':"";
+          return '<a href="'+href+'" style="display:flex;gap:10px;align-items:center;border:1px solid var(--line,#9994);border-radius:12px;padding:10px">'+photo+'<span><strong>'+name+'</strong><small style="display:block;color:var(--muted,#777)">حضور در '+faN(p.count)+' ویدئوی مرتبط</small></span></a>';
+        }).join("")+'</div>';
+    }catch(_){}
+  })();
   const [pr,tr]=await Promise.allSettled([loadPeriodicals(),loadTVGuide()]);
   if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
   const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>config.pattern.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
