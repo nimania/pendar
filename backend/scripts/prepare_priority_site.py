@@ -33,7 +33,7 @@ keep_data_prefixes = (
 data = root / "data"
 removed = 0
 for item in list(root.iterdir()):
-    if item.is_dir() and item.name not in keep_dirs and item.name not in {"@irna", "@isna", "@filimo"}:
+    if item.is_dir() and item.name not in keep_dirs and item.name not in {"@irna", "@isna", "@filimo", "@mehr-news", "@fars-news", "@khabaronline", "@radio-farda", "@bbc-persian", "@iran-international", "@euronews-persian", "@kayhan-london", "@independent-persian", "@radio-zamaneh"}:
         shutil.rmtree(item)
         removed += 1
 if data.is_dir():
