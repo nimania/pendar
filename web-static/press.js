@@ -738,24 +738,47 @@ async function showPendarMediaIdentity(slug){
   const tvBox=el.querySelector("#media-data-tv");
   if(tvBox)tvBox.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های ذخیره‌شده یافت نشد.</p>';
   const ids=new Set(channels.map(c=>String(c.id)));
-  const programmes=(Array.isArray(guide.programmes)?guide.programmes:[])
-    .filter(p=>ids.has(String(p.channel_id)))
-    .sort((a,b)=>String(b.start||"").localeCompare(String(a.start||"")))
-    .slice(0,8);
   const programmeBox=el.querySelector("#media-data-programmes");
   const dateTime=v=>{
     if(!v||!Number.isFinite(new Date(v).getTime()))return "";
     return new Intl.DateTimeFormat("fa-IR",{timeZone:"Asia/Tehran",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(v));
   };
-  if(programmeBox)programmeBox.innerHTML=programmes.length?'<ul>'+programmes.map(p=>{
-    const title=esc(p.title_fa||p.title_en||p.title||"برنامه");
-    const key=typeof _tvProgrammeKey==="function"?_tvProgrammeKey(p):"";
-    const heading=key?'<a href="/tv/program/'+encodeURIComponent(key)+'/">'+title+'</a>':title;
-    const when=dateTime(p.start);
-    return '<li>'+heading+(when?' <small style="color:var(--muted,#777)">زمان ثبت‌شدهٔ پخش: '+esc(when)+' (تهران)</small>':'')+'</li>';
-  }).join("")+'</ul>':'<p>برنامه‌ای در داده‌های ذخیره‌شده برای شبکه‌های مرتبط یافت نشد.</p>';
-  const updatedAt=dateTime(guide.generated_at);
-  if(updatedAt&&programmeBox)programmeBox.insertAdjacentHTML("beforeend",'<p style="font-size:12px;color:var(--muted,#777)">آخرین ثبت راهنمای تماشا: '+esc(updatedAt)+' (تهران). زمان‌های بالا الزاماً برنامهٔ امروز نیستند.</p>');
+  const clock=v=>{
+    if(!v||!Number.isFinite(new Date(v).getTime()))return "";
+    return new Intl.DateTimeFormat("fa-IR",{timeZone:"Asia/Tehran",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(v));
+  };
+  const allProgrammes=(Array.isArray(guide.programmes)?guide.programmes:[])
+    .filter(p=>ids.has(String(p.channel_id))&&p.start&&Number.isFinite(new Date(p.start).getTime()))
+    .sort((a,b)=>new Date(a.start)-new Date(b.start));
+  const today=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tehran",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+  const dayKey=v=>new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tehran",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date(v));
+  const todayProgrammes=allProgrammes.filter(p=>dayKey(p.start)===today);
+  // If today's guide is unavailable, show explicitly dated archive entries,
+  // never label an old schedule as today's broadcast.
+  const displayed=(todayProgrammes.length?todayProgrammes:allProgrammes.slice(-12));
+  const channelMap=new Map(channels.map(c=>[String(c.id),c]));
+  const now=Date.now();
+  if(programmeBox){
+    const groupLabel=todayProgrammes.length?"جدول پخش امروز":"آخرین جدول پخش ذخیره‌شده (ممکن است قدیمی باشد)";
+    programmeBox.innerHTML=displayed.length?
+      '<h3 style="font-size:17px;margin:0 0 12px">'+groupLabel+'</h3>'+
+      '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;text-align:right"><thead><tr><th style="padding:10px;border-bottom:1px solid var(--line,#9994)">ساعت تهران</th><th style="padding:10px;border-bottom:1px solid var(--line,#9994)">برنامه</th><th style="padding:10px;border-bottom:1px solid var(--line,#9994)">شبکه</th></tr></thead><tbody>'+
+      displayed.map(p=>{
+        const key=typeof _tvProgrammeKey==="function"?_tvProgrammeKey(p):"";
+        const title=esc(p.title_fa||p.title_en||p.title||"برنامه");
+        const heading=key?'<a href="/tv/program/'+encodeURIComponent(key)+'/">'+title+'</a>':title;
+        const channel=channelMap.get(String(p.channel_id));
+        const name=esc(channel?.name_fa||channel?.name||"شبکه");
+        const channelLink='<a href="/tv/channel/'+encodeURIComponent(String(p.channel_id))+'/">'+name+'</a>';
+        const start=new Date(p.start).getTime(),stop=p.stop?new Date(p.stop).getTime():NaN;
+        const onAir=Number.isFinite(stop)&&start<=now&&now<stop;
+        const schedule=(todayProgrammes.length?"":'<div style="font-size:11px;color:var(--muted,#777)">'+esc(dateTime(p.start))+'</div>');
+        return '<tr><td style="padding:10px;border-bottom:1px solid var(--line,#9993);white-space:nowrap" dir="ltr">'+esc(clock(p.start))+(p.stop?' – '+esc(clock(p.stop)):'')+schedule+'</td><td style="padding:10px;border-bottom:1px solid var(--line,#9993)">'+heading+(onAir?' <strong style="color:#c52432;font-size:12px">در حال پخش</strong>':'')+'</td><td style="padding:10px;border-bottom:1px solid var(--line,#9993)">'+channelLink+'</td></tr>';
+      }).join("")+'</tbody></table></div>'
+      :'<p>جدول پخشی در داده‌های ذخیره‌شده برای این رسانه موجود نیست.</p>';
+    const updatedAt=dateTime(guide.generated_at);
+    if(updatedAt)programmeBox.insertAdjacentHTML("beforeend",'<p style="font-size:12px;color:var(--muted,#777)">آخرین ثبت راهنمای تماشا: '+esc(updatedAt)+' (تهران). فقط برنامه‌های دارای زمان ثبت‌شده نمایش داده می‌شوند.</p>');
+  }
 }
 function showBBCPersianIdentity(){return showPendarMediaIdentity("bbc-persian");}
 function showMediaIdentity_iran_international(){return showPendarMediaIdentity("iran-international");}
