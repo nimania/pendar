@@ -118,6 +118,35 @@
       <aside class="pendar-sponsored-mobile" aria-label="آگهی تبلیغاتی"><div class="pendar-ad-label">آگهی · محتوای تبلیغاتی</div><iframe title="آگهی موبایل" loading="lazy" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin-when-cross-origin" width="320" height="50" scrolling="no" style="border:0;display:block;margin:auto;max-width:100%" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body style=&quot;margin:0;overflow:hidden&quot;&gt;&lt;script&gt;var atOptions={key:'5753b84d84fd726c73ffad8f06df1340',format:'iframe',height:50,width:320,params:{}};&lt;/script&gt;&lt;script src=&quot;https://www.highrevenueformat.com/5753b84d84fd726c73ffad8f06df1340/invoke.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></aside>
       <style>.pendar-sponsored-wide,.pendar-sponsored-mobile,.pendar-sponsored-side{max-width:100%;margin:16px auto 24px;text-align:center}.pendar-ad-label{font-size:11px;color:var(--muted,#777);margin-bottom:7px}.pendar-sponsored-mobile{display:none}@media(max-width:799px){.pendar-sponsored-wide{display:none}.pendar-sponsored-mobile{display:block}}@media(max-width:649px){.pendar-sponsored-side{display:none}}</style>
 
+      <!-- Priority news + figures mode: avoid presenting unmaintained culture panels as empty content. -->
+      <style id="pendar-priority-home">
+        #home-daily .home-culture-panel {display:none!important}
+        #home-daily .home-daily-grid {grid-template-columns:minmax(0,1fr)!important}
+        .pendar-sponsored-native:not(.pendar-ad-loaded),
+        .pendar-sponsored-wide:not(.pendar-ad-loaded),
+        .pendar-sponsored-mobile:not(.pendar-ad-loaded),
+        .pendar-sponsored-side:not(.pendar-ad-loaded) {display:none!important}
+      </style>
+      <script>
+      (function(){
+        // Do not reserve large empty rectangles when the ad network returns no creative.
+        function observeAds(){
+          document.querySelectorAll('.pendar-sponsored-native,.pendar-sponsored-wide,.pendar-sponsored-mobile,.pendar-sponsored-side').forEach(function(box){
+            var label=box.querySelector('.pendar-ad-label')||box.firstElementChild;
+            var hasCreative=function(){
+              var n=box.querySelector('[id^="container-"],.pendar-ad-direct-test');
+              var children=n&&n.querySelector('iframe,img,a,video');
+              var f=box.querySelector('iframe:not([srcdoc])');
+              return !!(children||f);
+            };
+            if(hasCreative())box.classList.add('pendar-ad-loaded');
+            new MutationObserver(function(){if(hasCreative())box.classList.add('pendar-ad-loaded')}).observe(box,{childList:true,subtree:true});
+          });
+        }
+        if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',observeAds);
+        else observeAds();
+      })();
+      </script>
       <section class="home-daily" id="home-daily" aria-label="خبر، فرهنگ و سرگرمی">
         <div class="home-daily-grid">
           <section class="home-daily-panel home-news-panel">
