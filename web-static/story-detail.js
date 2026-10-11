@@ -1,20 +1,22 @@
 
-// Single test Native Banner inside the body of a story. No popunder or social bar.
-function articleNativeAdMarkup() {
+// One experimental 300x250 in-article display banner; no Native/Popunder/Social Bar.
+function articleDisplayAdMarkup() {
   return '<aside class="story-inline-sponsor" aria-label="آگهی تبلیغاتی"'
-    + ' style="margin:24px auto;padding:12px;border-top:1px solid #8884;border-bottom:1px solid #8884;max-width:100%">'
+    + ' style="margin:24px auto;padding:12px;border-top:1px solid #8884;border-bottom:1px solid #8884;max-width:100%;text-align:center">'
     + '<div style="font-size:11px;opacity:.65;margin-bottom:9px">آگهی · محتوای تبلیغاتی</div>'
-    + '<div id="container-528ad69dc7176bd8a8545ad083e76bc9"></div></aside>';
+    + '<div id="pendar-article-display-ad" style="width:300px;max-width:100%;min-height:250px;margin:0 auto"></div>'
+    + '</aside>';
 }
-function loadArticleNativeAd() {
-  const container=document.getElementById("container-528ad69dc7176bd8a8545ad083e76bc9");
-  if (!container || document.getElementById("pendar-story-native-script")) return;
+function loadArticleDisplayAd() {
+  const slot=document.getElementById("pendar-article-display-ad");
+  if (!slot || slot.dataset.requested==="1") return;
+  slot.dataset.requested="1";
+  // Set Adsterra options immediately before invoking the display tag.
+  window.atOptions={key:"184394f0e43c2ef26ae4cfc176de3f42",format:"iframe",height:250,width:300,params:{}};
   const script=document.createElement("script");
-  script.id="pendar-story-native-script";
   script.async=true;
-  script.setAttribute("data-cfasync","false");
-  script.src="https://pl31759532.profitableratecpmnetwork.com/528ad69dc7176bd8a8545ad083e76bc9/invoke.js";
-  document.head.appendChild(script);
+  script.src="https://www.highrevenueformat.com/184394f0e43c2ef26ae4cfc176de3f42/invoke.js";
+  slot.appendChild(script);
 }
 
 /* Pendar — story detail: the single-story page (openStory) and its helpers —
@@ -179,7 +181,7 @@ async function openStory(id) {
     ${storyBooksSection}
     <div class="twocol"><div class="qa"><h3>چه اتفاقی افتاد؟</h3><p>${esc(s.what_happened_fa || "—")}</p></div>
       <div class="qa"><h3>چرا اهمیت دارد؟</h3><p>${esc(s.why_it_matters_fa || "—")}</p></div></div>
-    ${articleNativeAdMarkup()}
+    ${articleDisplayAdMarkup()}
     ${futureNewsDetail(s)}
     ${known}
     ${cred}
@@ -194,7 +196,7 @@ async function openStory(id) {
       <div class="answer" id="answer"><div class="a-bubble" id="a-bubble"></div>
         <div class="grounded"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> مبتنی بر منابع همین خبر</div></div>
     </div><div id="story-discovery"></div>`;
-  loadArticleNativeAd();
+  loadArticleDisplayAd();
   renderContentDiscovery(document.getElementById("story-discovery"),s);
 }
 function showAsk(i) {
