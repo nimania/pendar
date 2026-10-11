@@ -68,8 +68,16 @@ async function route() {
     };
     const slug=decodeURIComponent(raw.slice(1)).toLowerCase();
     const alias=aliases[slug];
-    if(alias?.kind==="press")return showPress(alias.name);
-    if(alias?.kind==="tv")return openTVChannel(alias.channel);
+    if(alias?.kind==="press"){
+      await showPress(alias.name);
+      history.replaceState(null,"","/@"+slug+"/"+location.search);
+      return;
+    }
+    if(alias?.kind==="tv"){
+      await openTVChannel(alias.channel);
+      history.replaceState(null,"","/@"+slug+"/"+location.search);
+      return;
+    }
     show("entity");setTab("");document.getElementById("entity-content").textContent="این هویت پیدا نشد";return;
   }
   const i = raw.indexOf("/");
