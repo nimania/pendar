@@ -122,10 +122,12 @@
       <style id="pendar-priority-home">
         #home-daily .home-culture-panel {display:none!important}
         #home-daily .home-daily-grid {grid-template-columns:minmax(0,1fr)!important}
-        .pendar-sponsored-native:not(.pendar-ad-loaded),
-        .pendar-sponsored-wide:not(.pendar-ad-loaded),
+        /* The network's scripts may require a visible container to fill an ad.
+           Keep native and 728x90 test slots visible; prevent unverified small slots
+           from reserving space. */
         .pendar-sponsored-mobile:not(.pendar-ad-loaded),
         .pendar-sponsored-side:not(.pendar-ad-loaded) {display:none!important}
+        .pendar-sponsored-native,.pendar-sponsored-wide {min-height:0}
       </style>
       <script>
       (function(){
