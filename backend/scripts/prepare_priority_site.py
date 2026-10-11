@@ -13,7 +13,7 @@ assert (root / "index.html").is_file(), "Refusing to trim a non-site folder"
 # Keep the SPA shell and all root-level JS/CSS; pages for news and people only.
 keep_dirs = {
     "assets", "data", "story", "stories", "figure", "figures",
-    "person", "people", "news", "search", "topic", "topics", "event", "books", "movies", "tv",
+    "person", "people", "news", "search", "topic", "topics", "event", "books", "movies", "tv" "press",
 }
 # Root-level data consumed by news feeds, archive, entity/figure views and search.
 keep_data_names = {
@@ -23,6 +23,7 @@ keep_data_names = {
     "search-index.json", "search.json", "news-health.json",
     "trends.json", "clusters.json", "sources.json",
     "news-index.json", "latest.json", "topics.json",
+    "periodicals.json", "press-directory.json", "press-stats.json",
 }
 keep_data_prefixes = (
     "figure", "news-", "curated-", "source-", "story-", "search-",
@@ -44,6 +45,10 @@ if data.is_dir():
             shutil.rmtree(item)
             removed += 1
         elif item.is_file():
+            if item.name == "periodicals.json" and item.stat().st_size > 5_000_000:
+                item.unlink()
+                removed += 1
+                continue
             if item.name not in keep_data_names and not item.name.startswith(keep_data_prefixes):
                 item.unlink()
                 removed += 1
