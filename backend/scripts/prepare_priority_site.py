@@ -33,7 +33,7 @@ keep_data_prefixes = (
 data = root / "data"
 removed = 0
 for item in list(root.iterdir()):
-    if item.is_dir() and item.name not in keep_dirs:
+    if item.is_dir() and item.name not in keep_dirs and item.name not in {"@irna", "@isna", "@filimo"}:
         shutil.rmtree(item)
         removed += 1
 if data.is_dir():
