@@ -597,39 +597,28 @@ async function openPressArticle(id) {
 
 /* BBC Persian: cached, bounded identity pilot. No collectors or API integrations. */
 async function showBBCPersianIdentity(){
-  await showPress("بی‌بی‌سی فارسی");
-  await renderPress("بی‌بی‌سی فارسی");
-  history.replaceState(null,"","/@bbc-persian/"+location.search);
+  if(window.__bbcIdentityObserver){window.__bbcIdentityObserver.disconnect();window.__bbcIdentityObserver=null;}
+  show("press");setTab("press");
   const el=document.getElementById("press-content");
   if(!el)return;
-  const meta=_pressFindSource("بی‌بی‌سی فارسی");
-  const escape=typeof esc==="function"?esc:(x=>String(x??""));
-  const rows=(await loadPeriodicals()).filter(x=>/بی[‌ -]?بی[‌ -]?سی|bbc/i.test(String(x.publisher||x.source_name||""))).slice(0,6);
-  let channels=[];
-  try{
-    const guide=await loadTVGuide();
-    channels=(guide.channels||[]).filter(c=>_tvMediaIdentity(c)?.slug==="bbc-persian").slice(0,5);
-  }catch(_){}
-  const info='<section class="press-identity-summary" style="margin:16px 0;padding:18px;border:1px solid #8884;border-radius:14px">'
-    +'<h2>بی‌بی‌سی فارسی · شناسهٔ رسانه</h2>'
-    +'<p>نمایهٔ یکپارچهٔ آزمایشی در پندار؛ اطلاعات از آرشیو موجود پیشخوان جراید و راهنمای تماشا خوانده می‌شود.</p>'
-    +'<p><a href="/press/">پیشخوان جراید</a> · <a href="/tv/">راهنمای تلویزیون</a></p>'
-    +'<h3>مطالب ثبت‌شده</h3>'
-    +(rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+escape(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>مطلبی در آرشیو ذخیره‌شدهٔ فعلی یافت نشد.</p>')
-    +'<h3>شبکه‌های مرتبط</h3>'
-    +(channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+escape(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های فعلی راهنمای تلویزیون یافت نشد.</p>')
-    +'</section>';
-  // Press health/stats may repaint this container asynchronously. Reattach the
-  // identity section after those repaints, without triggering additional fetches.
-  const attach=()=>{
-    if(location.pathname!=="/@bbc-persian/")return;
-    if(!el.querySelector(".press-identity-summary")){
-      el.insertAdjacentHTML("afterbegin",info);
-    }
-    document.title="بی‌بی‌سی فارسی | هویت رسانه‌ای پندار";
-  };
-  attach();
-  if(window.__bbcIdentityObserver)window.__bbcIdentityObserver.disconnect();
-  window.__bbcIdentityObserver=new MutationObserver(attach);
-  window.__bbcIdentityObserver.observe(el,{childList:true});
+  document.title="بی‌بی‌سی فارسی | پندار";
+  const badge='<span title="رسانهٔ عمومی با تأمین مالی عمومی؛ نه به معنای کنترل مستقیم دولت" style="display:inline-flex;align-items:center;gap:5px;border:1px solid #aaa;border-radius:16px;padding:3px 9px;background:#ddd;color:#444;font-size:12px">✓ رسانهٔ عمومی</span>';
+  el.innerHTML='<section class="press-identity-summary" style="margin:14px auto 28px;max-width:1050px;padding:24px;border:1px solid #8884;border-radius:14px">'
+   +'<div class="press-kicker">نمایهٔ رسانه در پندار · @bbc-persian</div>'
+   +'<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><img src="https://www.google.com/s2/favicons?domain=bbc.com&sz=128" width="60" height="60" alt="لوگوی بی‌بی‌سی"><h1>بی‌بی‌سی فارسی</h1>'+badge+'</div>'
+   +'<p>بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است. تأمین مالی عمومی لزوماً به معنای کنترل مستقیم دولتی نیست.</p>'
+   +'<p><a href="https://www.bbc.com/persian" target="_blank" rel="noopener">وب‌سایت رسمی ↗</a> · <a href="/press/">پیشخوان جراید</a> · <a href="/tv/">راهنمای تلویزیون</a></p>'
+   +'<h2>مطالب ثبت‌شده</h2><div id="bbc-identity-press">در حال بررسی داده‌های ذخیره‌شده…</div>'
+   +'<h2>شبکه‌های مرتبط</h2><div id="bbc-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div>'
+   +'</section>'+articleDisplayAdMarkup();
+  loadArticleDisplayAd();
+  const [pr,tr]=await Promise.allSettled([loadPeriodicals(),loadTVGuide()]);
+  if(location.pathname!=="/@bbc-persian/"||document.getElementById("press-content")!==el)return;
+  const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>/بی[‌ -]?بی[‌ -]?سی|bbc/i.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
+  const pb=document.getElementById("bbc-identity-press");
+  if(pb)pb.innerHTML=rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+esc(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>در آرشیو منتشرشدهٔ فعلی، مطلبی از این رسانه یافت نشد.</p>';
+  const guide=tr.status==="fulfilled"?tr.value:{channels:[]};
+  const channels=(guide.channels||[]).filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug==="bbc-persian").slice(0,5);
+  const tb=document.getElementById("bbc-identity-tv");
+  if(tb)tb.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>در داده‌های فعلی راهنمای تماشا، شبکهٔ منطبق یافت نشد.</p>';
 }
