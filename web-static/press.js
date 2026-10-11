@@ -720,7 +720,21 @@ async function showPendarMediaIdentity(slug){
   if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
   const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>config.pattern.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
   const pressBox=el.querySelector("#media-data-press");
-  if(pressBox)pressBox.innerHTML=rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+esc(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>در حال بررسی خبرهای ذخیره‌شدهٔ این رسانه…</p>';
+  const mediaCards=(items,type)=>{
+    if(!items.length)return '<p>در آرشیو منتشرشدهٔ فعلی مطلبی از این رسانه یافت نشد.</p>';
+    return '<div class="media-article-cards" style="display:grid;gap:12px">'+items.map(x=>{
+      const title=esc(x.title_fa||x.headline_fa||x.title_original||x.title||"مطلب");
+      const url=type==="periodical"?'/press-article/'+encodeURIComponent(String(x.id))+'/':'/story/'+encodeURIComponent(String(x.id))+'/';
+      const summary=String(x.summary_fa||x.summary||x.description_fa||"").trim().slice(0,230);
+      const dt=x.published_at||x.pub_date||x.date||"";
+      let date="";
+      if(dt&&Number.isFinite(new Date(dt).getTime()))date=new Intl.DateTimeFormat("fa-IR",{year:"numeric",month:"short",day:"numeric",timeZone:"Asia/Tehran"}).format(new Date(dt));
+      const imageUrl=String(x.image_url||x.image||x.thumbnail||"");
+      const img=/^https:\/\//i.test(imageUrl)?'<img src="'+esc(imageUrl)+'" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:112px;height:82px;object-fit:cover;border-radius:9px;flex-shrink:0" onerror="this.remove()">':"";
+      return '<article style="display:flex;align-items:start;gap:12px;padding:12px;border:1px solid var(--line,#9994);border-radius:12px">'+img+'<div style="min-width:0"><a href="'+url+'" style="font-weight:700;line-height:1.7">'+title+'</a>'+(summary?'<p style="margin:5px 0;font-size:13px;line-height:1.7">'+esc(summary)+'</p>':"")+(date?'<small style="color:var(--muted,#777)">'+esc(date)+' · '+esc(config.name)+'</small>':"")+'</div></article>';
+    }).join("")+'</div>';
+  };
+  if(pressBox)pressBox.innerHTML=rows.length?mediaCards(rows,"periodical"):"<p>در حال بررسی خبرهای ذخیره‌شدهٔ این رسانه…</p>";
   if(!rows.length){
     // The light Pages build retains press-source-stories.json, while periodicals.json
     // can legitimately be absent. Reuse exactly the same published archive as Press.
@@ -747,7 +761,7 @@ async function showPendarMediaIdentity(slug){
     if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
     const seen=new Set();
     feed=feed.filter(x=>x?.id&&!seen.has(String(x.id))&&seen.add(String(x.id))).sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||""))).slice(0,8);
-    if(pressBox)pressBox.innerHTML=feed.length?'<ul>'+feed.map(x=>'<li><a href="/story/'+encodeURIComponent(String(x.id))+'/">'+esc(x.title_fa||x.headline_fa||x.title||"خبر")+'</a></li>').join("")+'</ul>':'<p>در آرشیو منتشرشدهٔ فعلی مطلبی از این رسانه یافت نشد.</p>';
+    if(pressBox)pressBox.innerHTML=mediaCards(feed,"story");
   }
   const guide=tr.status==="fulfilled"?tr.value:{channels:[],programmes:[]};
   const allChannels=Array.isArray(guide.channels)?guide.channels:[];
