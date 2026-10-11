@@ -814,7 +814,7 @@
 .x-profile-top{height:58px;display:flex;align-items:center;gap:18px;padding:0 16px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:8;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px)}
 .x-profile-top b{display:block;font-size:17px}.x-profile-top small{display:block;color:var(--ink-faint);font-size:11px;margin-top:1px}
 .x-back{border:0;background:transparent;color:var(--text);font-size:24px;cursor:pointer;width:34px;height:34px;border-radius:50%}.x-back:hover{background:var(--surface-2)}
-.x-cover{height:190px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 18%,var(--card)),var(--card) 62%,color-mix(in srgb,var(--accent) 7%,var(--bg)))}
+.x-cover{height:190px;min-height:190px;background:linear-gradient(135deg,#203b51,#31728b 54%,#24343e)!important;color:#fff;border-radius:12px 12px 0 0}.x-cover strong{color:#fff!important}.x-cover span{color:#fff!important}.x-profile{border-radius:12px 12px 0 0;overflow:clip}.x-profile-main{min-height:140px}
 .x-profile-main{position:relative;padding:78px 20px 16px}
 .x-avatar-wrap{position:absolute;top:-72px;right:20px;width:142px;height:142px;border-radius:50%;border:5px solid var(--bg);overflow:hidden;background:var(--card)}
 .x-avatar-wrap .fig-avatar{width:100%;height:100%;font-size:42px}.x-avatar-wrap .fig-avatar img{width:100%;height:100%;object-fit:cover}
@@ -828,7 +828,7 @@
 .x-post-rail .fig-avatar{width:44px;height:44px}.x-post-body{min-width:0}.x-post-meta{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--ink-faint)}.x-post-meta b{color:var(--text);font-size:14px}.x-post-context{font-size:11px;color:var(--ink-faint);margin:5px 0}.x-post-topic{font-size:15px;font-weight:700;margin:7px 0 3px}.x-post-body p{font-size:15px;line-height:1.9;margin:4px 0 10px}
 .x-post-actions{display:flex;justify-content:space-between;max-width:360px}.x-post-actions button,.x-post-actions a{border:0;background:transparent;color:var(--ink-faint);font:inherit;font-size:11px;text-decoration:none;cursor:pointer;padding:4px 0}.x-post-actions button:hover,.x-post-actions a:hover{color:var(--accent)}
 .x-profile-note{padding:14px 18px;margin:0}
-@media(max-width:620px){.x-profile{margin-inline:-14px;border-inline:0}.x-cover{height:145px}.x-profile-main{padding:62px 16px 14px}.x-avatar-wrap{width:116px;height:116px;top:-59px;right:16px;border-width:4px}.x-profile-actions{left:16px;top:12px}.x-profile-main h1{font-size:21px}.x-post{grid-template-columns:40px minmax(0,1fr);padding:12px}.x-post-rail .fig-avatar{width:38px;height:38px}.x-post-actions span{display:none}}
+@media(max-width:620px){.x-profile{margin-inline:-14px;border-inline:0}.x-cover{height:145px;min-height:145px}.x-profile-main{padding:62px 16px 14px}.x-avatar-wrap{width:116px;height:116px;top:-59px;right:16px;border-width:4px}.x-profile-actions{left:16px;top:12px}.x-profile-main h1{font-size:21px}.x-post{grid-template-columns:40px minmax(0,1fr);padding:12px}.x-post-rail .fig-avatar{width:38px;height:38px}.x-post-actions span{display:none}}
 
 /* Compact figure profile header: remove dead cover/profile space */
 .x-cover{height:104px}
