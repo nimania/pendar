@@ -296,7 +296,7 @@ jobs:
           import shutil
           root=Path("site")
           shell=root/"index.html"
-          handles=("irna","isna","filimo")
+          handles=("irna","isna","filimo","mehr-news","fars-news","khabaronline","radio-farda","bbc-persian","iran-international","euronews-persian","kayhan-london","independent-persian","radio-zamaneh")
           # Existing figure handles have precedence. Do not overwrite their pages.
           for slug in handles:
               target=root/("@"+slug)/"index.html"
@@ -305,7 +305,7 @@ jobs:
                   continue
               target.parent.mkdir(parents=True,exist_ok=True)
               shutil.copy2(shell,target)
-          print("Non-person handle pilot: three static paths, no new API requests")
+          print("Non-person handle pilot: thirteen static paths, no new API requests")
           PY
       - name: Preserve validated lightweight news and figures only
         run: |
