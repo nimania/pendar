@@ -81,6 +81,7 @@ async function route() {
     if(slug==="bbc-persian")return showBBCPersianIdentity();
     if(slug==="iran-international")return showMediaIdentity_iran_international();
     if(slug==="radio-farda")return showMediaIdentity_radio_farda();
+    if(alias?.kind==="press"&&typeof PENDAR_MEDIA_PROFILES!=="undefined"&&PENDAR_MEDIA_PROFILES[slug])return showPendarMediaIdentity(slug);
     if(alias?.kind==="press"){
       await showPress(alias.name);
       history.replaceState(null,"","/@"+slug+"/"+location.search);
