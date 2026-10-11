@@ -31,6 +31,17 @@ function _toman(v){
   const n=Number(v);
   return Number.isFinite(n)&&n>0 ? n.toLocaleString("fa-IR")+" تومان" : "—";
 }
+function _booksForPublisher(d,p){
+  // Prefer explicit registry relationships, then corroborate against actual
+  // publisher references on book records and individual editions.
+  const slug=String(p?.slug||"");
+  const declared=new Set(p?.book_slugs||[]);
+  return (d.books||[]).filter(b=>{
+    if(declared.has(b.slug))return true;
+    const refs=[b.publisher,...(b.editions||[]).map(e=>e.publisher)].filter(Boolean);
+    return refs.some(pub=>String(pub.slug||"")===slug);
+  });
+}
 async function openPublisher(slug, canonicalId=null){
   const canonicalPub=canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByRef("books.publishers",slug);
   canonicalId=canonicalPub?.id||canonicalId;
@@ -39,7 +50,7 @@ async function openPublisher(slug, canonicalId=null){
   const el=document.getElementById("books-content"); el.innerHTML='<div class="spinner"></div>';
   const d=await loadBooks(), p=(d.publishers||[]).find(x=>x.slug===slug);
   if(!p){el.innerHTML='<div class="state"><div class="big">ناشر پیدا نشد</div></div>';return}
-  const books=(p.book_slugs||[]).map(s=>_bookBySlug(d,s)).filter(Boolean);
+  const books=_booksForPublisher(d,p);
   el.innerHTML=`<button class="back" onclick="showBooks('publishers')">بازگشت به ناشرها</button>${_bookPublisherProfile(p,books)}${canonicalPub?canonicalStrip(canonicalPub):""}<div class="books-grid">${books.map(_bookCard).join("")}</div>`;
   document.title=p.name_fa+" | ناشرهای جانِ کتاب";
   setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/publisher/"+encodeURIComponent(slug));
