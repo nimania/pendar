@@ -214,6 +214,22 @@ jobs:
           print("Ensured",len(stories),"news entry pages; newly created",made,
                 "; event dossiers",len(ids),flush=True)
           PY
+      - name: Restore cached book shelf entry only (no collectors)
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          root=Path("site")
+          cached=root/"books-data.js"
+          if not cached.is_file() or cached.stat().st_size<1000 or cached.stat().st_size>2000000:
+              print("::warning::Cached book data unavailable or over 2MB; skipping book shelf activation.")
+          else:
+              target=root/"books"/"index.html"
+              target.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copy2(root/"index.html",target)
+              assert target.is_file()
+              print(f"Cached book shelf entry enabled; data bytes={cached.stat().st_size}; zero new API calls")
+          PY
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
