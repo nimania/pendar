@@ -599,6 +599,10 @@ async function openPressArticle(id) {
 async function showBBCPersianIdentity(){
   if(window.__bbcIdentityObserver){window.__bbcIdentityObserver.disconnect();window.__bbcIdentityObserver=null;}
   show("press");setTab("press");
+  const lede=document.querySelector("#press-view > .press-lede");
+  if(lede){
+    lede.innerHTML='<nav aria-label="بخش‌های پندار" style="display:flex;flex-wrap:wrap;gap:15px;align-items:center;padding:10px 0;font-size:13px"><a href="/press/">پیشخوان جراید</a><a href="/tv/">راهنمای تلویزیون</a><a href="/books/">پیشخوان کتاب</a><a href="/movies/">جان فیلم</a></nav>';
+  }
   const el=document.getElementById("press-content");
   if(!el)return;
   document.title="بی‌بی‌سی فارسی | پندار";
