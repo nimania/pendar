@@ -344,3 +344,20 @@ function _personDigits(value){return String(value).replace(/\d/g,d=>"۰۱۲۳۴�
 async function _loadMoviePersonRatings(){try{const r=await getJSON(DATA+"/movie-ratings.json?v=person1",15000);personMediaRatings=(r&&r.items)||{}}catch(_){}}
 
 
+
+/* Reused display banner for cached movie pages; no API collector. */
+(function(){
+  function attachMovieAd(){
+    const el=document.getElementById("movies-content");
+    if(!el||!el.querySelector("#pendar-article-display-ad"))return;
+    loadArticleDisplayAd();
+  }
+  function init(){
+    const el=document.getElementById("movies-content");
+    if(!el)return;
+    new MutationObserver(attachMovieAd).observe(el,{childList:true,subtree:false});
+    attachMovieAd();
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);
+  else init();
+})();
