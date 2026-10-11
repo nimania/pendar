@@ -698,7 +698,23 @@ async function showPendarMediaIdentity(slug){
   if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
   const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>config.pattern.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
   const pressBox=el.querySelector("#media-data-press");
-  if(pressBox)pressBox.innerHTML=rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+esc(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>مطلبی در آرشیو منتشرشدهٔ فعلی یافت نشد.</p>';
+  if(pressBox)pressBox.innerHTML=rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+esc(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>در حال بررسی خبرهای ذخیره‌شدهٔ این رسانه…</p>';
+  if(!rows.length){
+    // The light Pages build retains press-source-stories.json, while periodicals.json
+    // can legitimately be absent. Reuse exactly the same published archive as Press.
+    let feed=[];
+    try{
+      const archive=await getJSON(DATA+"/press-source-stories.json",5000);
+      const source=typeof _pressFindSource==="function"?_pressFindSource(config.name):null;
+      const names=[config.name,...(source?.aliases||[])];
+      feed=names.flatMap(n=>Array.isArray(archive?.[n])?archive[n]:[]);
+      if(!feed.length)feed=Object.entries(archive||{}).filter(([name])=>config.pattern.test(name)).flatMap(([,items])=>Array.isArray(items)?items:[]);
+    }catch(_){}
+    if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
+    const seen=new Set();
+    feed=feed.filter(x=>x?.id&&!seen.has(String(x.id))&&seen.add(String(x.id))).sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||""))).slice(0,8);
+    if(pressBox)pressBox.innerHTML=feed.length?'<ul>'+feed.map(x=>'<li><a href="/story/'+encodeURIComponent(String(x.id))+'/">'+esc(x.title_fa||x.headline_fa||x.title||"خبر")+'</a></li>').join("")+'</ul>':'<p>در آرشیو منتشرشدهٔ فعلی مطلبی از این رسانه یافت نشد.</p>';
+  }
   const guide=tr.status==="fulfilled"?tr.value:{channels:[],programmes:[]};
   const channels=(guide.channels||[]).filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug===slug).slice(0,5);
   const tvBox=el.querySelector("#media-data-tv");
