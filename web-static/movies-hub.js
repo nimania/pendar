@@ -340,33 +340,55 @@ async function _masterMovieById(id){
 
 async function openMasterMovie(pendarId){show("movies");setTab("");var el=document.getElementById("movies-content");el.innerHTML='<div class="spinner"></div>';var raw=await _masterMovieById(pendarId);if(!raw){el.innerHTML='<div class="state"><div class="big">عنوان پیدا نشد</div></div>';return}const relatedPeople=await _creatorWorkPeople("movie",pendarId),credits=raw.credits||[],extraPeople=relatedPeople.filter(p=>!credits.some(c=>c.person_id===p.person_id||(p.tmdb_person_id&&Number(c.id)===Number(p.tmdb_person_id))));await _loadMoviePersonRatings();var m=_masterMovie(raw),links=_movieIdentityLinks(m),genres=(m.genres_fa||[]).join(" · ");document.title=(m.title_fa||m.original_title||"جان فیلم")+" | پندار";el.innerHTML='<button class="back" onclick="showMovies()">بازگشت به جانِ فیلم</button>'+articleDisplayAdMarkup()+'<article class="movie-detail"><div class="movie-hero"><div class="movie-poster movie-poster-lg">'+_moviePoster(m,true)+'</div><div class="movie-hero-copy"><span class="press-kicker">'+(m.type==="series"?"سریال":"فیلم")+' · '+esc(m.year||"")+'</span><h1>'+esc(m.title_fa||m.original_title||"")+'</h1>'+(m.original_title&&m.original_title!==m.title_fa?'<p class="movie-original" dir="ltr">'+esc(m.original_title)+'</p>':"")+'<p class="movie-master-genre">'+esc(genres)+'</p><div class="movie-external">'+links+'</div></div></div>'+_movieJanKalamSection(m)+_movieMasterDetails(raw,m)+_creatorWorkPeopleSection(extraPeople)+await _masterMovieConnections(m)+'<section class="movie-provenance"><div class="book-section-title"><h2>هویت Master</h2><span>بدون fuzzy match</span></div><div class="movie-prov-card"><strong>TMDB Movie Master</strong><p>این رکورد مستقیماً با TMDB ID رسمی ساخته شده و در صورت موجود بودن، IMDb و Wikidata نیز از همان هویت دریافت شده‌اند.</p></div></section></article>';setHash("#/master-movie/"+encodeURIComponent(pendarId))}
 
+// Curated handles are exact person identities, never inferred by name similarity.
+const PENDAR_CINEMA_HANDLES={
+ 'the-lives-of-others-2006:director:0':'florian-henckel-von-donnersmarck',
+ 'the-lives-of-others-2006:cast:0':'ulrich-muhe',
+ 'the-lives-of-others-2006:cast:1':'martina-gedeck',
+ 'the-lives-of-others-2006:cast:2':'sebastian-koch',
+ 'a-separation-2011:director:0':'asghar-farhadi',
+ 'a-separation-2011:cast:0':'peyman-maadi',
+ 'a-separation-2011:cast:1':'leila-hatami',
+ 'a-separation-2011:cast:2':'sareh-bayat',
+ 'a-separation-2011:cast:3':'shahab-hosseini'
+};
+function _cinemaHandle(slug,kind,index){
+  const key=slug+':'+kind+':'+index;
+  // Uncurated credits remain distinct pending a stable official person ID.
+  return PENDAR_CINEMA_HANDLES[key]||('cinema-'+slug+'-'+kind+'-'+index);
+}
 function _legacyMovieCredit(m,kind,index){
   const person=kind==='director'?m.director:(m.cast||[])[index];
   const name=typeof person==='string'?person:(person?.name_fa||person?.name||'');
   if(!name)return '';
-  const destination='#/movie-credit/'+encodeURIComponent(m.slug)+'/'+kind+'/'+index;
-  return '<a class="movie-credit-name" href="'+destination+'">'+esc(name)+'</a>';
+  return '<a class="movie-credit-name" href="/@'+encodeURIComponent(_cinemaHandle(m.slug,kind,index))+'/">'+esc(name)+'</a>';
 }
-async function openLegacyMovieCredit(slug,kind,index){
-  const d=await loadMovies(),m=_movieBySlug(d,slug),i=Number(index);
-  const valid=kind==='director'?i===0:kind==='cast'&&Number.isSafeInteger(i)&&i>=0&&i<(m?.cast||[]).length;
-  const raw=valid?(kind==='director'?m?.director:m?.cast[i]):null;
-  const name=typeof raw==='string'?raw:(raw?.name_fa||raw?.name||'');
+async function openCinemaHandle(handle){
+  const d=await loadMovies();
+  const entries=[];
+  for(const m of d.movies||[]){
+    if(m.director?.name_fa&&_cinemaHandle(m.slug,'director',0)===handle)entries.push({m,role:'کارگردان',person:m.director});
+    (m.cast||[]).forEach((person,i)=>{
+      if(_cinemaHandle(m.slug,'cast',i)===handle)entries.push({m,role:'بازیگر',person});
+    });
+  }
+  if(!entries.length)return false;
+  const first=entries[0],name=typeof first.person==='string'?first.person:(first.person.name_fa||first.person.name);
+  const direct=String(first.person?.person_id||'');
+  if(/^person:[a-z0-9][a-z0-9:_-]*$/i.test(direct)){
+    const entity=await canonicalEntityById(direct).catch(()=>null);
+    if(entity?.type==='person'){await openCanonicalEntity(entity.id);return true}
+  }
   show('movies');setTab('');
   const el=document.getElementById('movies-content');
-  if(!m||!name){el.innerHTML='<div class="state"><div class="big">اطلاعات این شخص پیدا نشد</div></div>';return}
-  // Only resolve explicitly indexed identities; never merge two people by name.
-  const direct=String(raw?.person_id||'');
-  const canonical=/^person:[a-z0-9][a-z0-9:_-]*$/i.test(direct)
-    ? await canonicalEntityById(direct).catch(()=>null):null;
-  if(canonical?.type==='person')return openCanonicalEntity(canonical.id);
-  const label=kind==='director'?'کارگردان':'بازیگر';
-  document.title=name+' | چهره‌های سینمایی پندار';
-  el.innerHTML='<button class="back" onclick="openMovie('+JSON.stringify(slug)+')">بازگشت به فیلم</button>'
-    +'<article class="movie-detail"><div class="movie-hero-copy"><span class="press-kicker">چهرهٔ سینمایی · '+label+'</span><h1>'+esc(name)+'</h1>'
-    +'<p class="movie-method">این صفحهٔ داخلی، اطلاعات مستندِ نقش این شخص در اثر زیر را نمایش می‌دهد. تا زمان ثبت شناسهٔ هویتی قطعی، آثار افراد هم‌نام ادغام نمی‌شوند.</p></div>'
-    +'<section class="movie-evidence"><h2>اثر مرتبط</h2><button class="movie-mention" onclick="openMovie('+JSON.stringify(slug)+')"><strong>'+esc(m.title_fa||m.original_title||'')+'</strong><span>'+label+' · '+esc(m.year||'')+'</span></button></section></article>';
-  setHash('#/movie-credit/'+encodeURIComponent(slug)+'/'+kind+'/'+i);
+  document.title=name+' | چهره‌های پندار';
+  el.innerHTML='<article class="movie-detail"><div class="movie-hero-copy"><span class="press-kicker">چهره‌های پندار · سینما</span><h1>'+esc(name)+'</h1><p class="movie-method">آثار زیر فقط بر اساس ارتباط ثبت‌شده با این هویت گردآوری شده‌اند. اطلاعات سایر آثار پس از تأیید شناسهٔ شخص افزوده می‌شود.</p></div><section class="movie-evidence"><h2>آثار مرتبط</h2>'+entries.map(e=>'<button class="movie-mention" onclick="openMovie('+JSON.stringify(e.m.slug)+')"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><span>'+esc(e.role)+' · '+esc(e.m.year||'')+'</span></button>').join('')+'</section></article>';
+  if(location.pathname!=='/@'+handle+'/')setHash('#/@'+handle);
+  return true;
+}
+async function openLegacyMovieCredit(slug,kind,index){
+  const handle=_cinemaHandle(slug,kind,Number(index));
+  return openCinemaHandle(handle);
 }
 async function openMovie(slug,canonicalId=null){const catalog=await loadMovies(),master=await loadMovieMaster(),candidate=_movieBySlug(catalog,slug),identity=candidate&&_movieExactKey(candidate),match=identity&&(master.items||[]).find(x=>_movieExactKey(_masterMovie(x))===identity);if(match)return openMasterMovie(match.pendar_id);var canonicalMovie=canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByRef('movies',slug);canonicalId=canonicalMovie&&canonicalMovie.id||canonicalId;show("movies");setTab("");var el=document.getElementById("movies-content");el.innerHTML='<div class="spinner"></div>';var loaded=await Promise.all([loadMovies(),loadStreamingAvailability()]),d=loaded[0],streaming=loaded[1],m=_movieBySlug(d,slug);if(!m){el.innerHTML='<div class="state"><div class="big">فیلم پیدا نشد</div></div>';return}document.title=(m.title_fa||m.original_title)+" | جانِ فیلم";var mentions=(m.mentions||[]).map(function(x){var fn=x.article_id?"openPressArticle":x.story_id?"openStory":x.post_id?"openStatement":null,id=x.article_id||x.story_id||x.post_id;var body='<span>'+esc(x.source_name||"جان‌کلام")+'</span><strong>'+esc(x.headline_fa||x.topic_fa||"اشاره به این اثر")+'</strong>'+(x.summary_fa?'<p>'+esc(_movieDescriptionText(x.summary_fa))+'</p>':"");return fn?'<button class="movie-mention" onclick="'+fn+'(\''+esc(id)+'\')">'+body+'</button>':'<div class="movie-mention">'+body+'</div>'}).join("");var ext=Object.entries(m.external||{}).filter(function(x){return /^https:\/\//.test(x[1])}).map(function(x){return '<a href="'+esc(x[1])+'" target="_blank" rel="noopener noreferrer">'+x[0].toUpperCase()+' ↗</a>'}).join("");var r=m.ratings||{};el.innerHTML='<button class="back" onclick="showMovies()">بازگشت به جانِ فیلم</button>'+articleDisplayAdMarkup()+'<article class="movie-detail"><div class="movie-hero"><div class="movie-poster movie-poster-lg">'+_moviePoster(m,true)+'</div><div class="movie-hero-copy"><span class="press-kicker">'+(m.type==="series"?"سریال":"فیلم")+' · '+esc(m.year||"")+'</span><h1>'+esc(m.title_fa||m.original_title||"")+'</h1>'+(m.original_title?'<p class="movie-original" dir="ltr">'+esc(m.original_title)+'</p>':"")+'<p class="movie-overview">'+esc(_movieDescriptionText(m.overview_fa))+'</p><div class="movie-ratings">'+_movieRating("IMDb",r.imdb)+_movieRating("Rotten Tomatoes",r.rotten_tomatoes,"%")+_movieRating("Metacritic",r.metacritic)+'</div><div class="movie-facts">'+(m.director&&m.director.name_fa?'<span><small>کارگردان</small><b>'+_legacyMovieCredit(m,'director',0)+'</b></span>':"")+(m.runtime_min?'<span><small>مدت</small><b>'+faN(m.runtime_min)+' دقیقه</b></span>':"")+(m.country_fa?'<span><small>محصول</small><b>'+esc(m.country_fa)+'</b></span>':"")+'</div>'+(m.cast&&m.cast.length?'<p class="movie-cast"><b>بازیگران:</b> '+m.cast.map((x,i)=>_legacyMovieCredit(m,'cast',i)).join("، ")+'</p>':"")+'<div class="movie-external">'+ext+'</div></div></div>'+_movieJanKalamSection(m)+(canonicalMovie?canonicalStrip(canonicalMovie):'')+_movieProvenance(streaming,m)+_movieWatchSection(streaming,m)+'<section class="movie-evidence"><div class="book-section-title"><h2>در جان‌کلام</h2><span>'+faN(_movieMentionCount(m))+' اشاره</span></div><p class="movie-method">هر بار که این اثر در گفتهٔ یک چهره، خبر یا مطلب جریده شناسایی شود، پیوند آن اینجا ثبت می‌شود.</p><div class="movie-mentions">'+(mentions||'<div class="movie-empty-evidence">هنوز اشارهٔ مستندی برای این اثر ثبت نشده است.</div>')+'</div></section></article>';setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/movie/"+encodeURIComponent(slug))}
 
