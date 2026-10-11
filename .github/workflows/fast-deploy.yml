@@ -300,7 +300,7 @@ jobs:
           import shutil
           root=Path("site")
           shell=root/"index.html"
-          handles=("irna","isna","filimo","mehr-news","fars-news","khabaronline","radio-farda","bbc-persian","iran-international","euronews-persian","kayhan-london","independent-persian","radio-zamaneh")
+          handles=("irna","isna","filimo","mehr-news","fars-news","khabaronline","radio-farda","bbc-persian","iran-international","euronews-persian","kayhan-london","independent-persian","radio-zamaneh","florian-henckel-von-donnersmarck","ulrich-muhe","martina-gedeck","sebastian-koch","asghar-farhadi","peyman-maadi","leila-hatami","sareh-bayat","shahab-hosseini")
           # Existing figure handles have precedence. Do not overwrite their pages.
           for slug in handles:
               target=root/("@"+slug)/"index.html"
