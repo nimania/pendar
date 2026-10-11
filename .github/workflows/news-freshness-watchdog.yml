@@ -45,7 +45,44 @@ jobs:
           else:
               age = float("inf")
               print("No successful news collection found in latest 30 runs")
-          stale = age > 60
+          # A green Actions run only proves the job exited successfully.
+          # Independently inspect the published, lightweight news JSON files.
+          # Never trigger collection or mutate the news archive here.
+          from urllib.request import Request, urlopen
+          def published_json(name):
+              req = Request(f"https://pendar.io/data/{name}", headers={"User-Agent":"PendarNewsWatchdog/1.0","Cache-Control":"no-cache"})
+              with urlopen(req, timeout=15) as response:
+                  return json.load(response)
+          publish_age = float("inf")
+          story_age = float("inf")
+          site_error = None
+          try:
+              meta = published_json("meta.json")
+              cards = published_json("stories.json")
+              stamp = str(meta.get("built_iso") or "")
+              published = dt.datetime.fromisoformat(stamp.replace("Z","+00:00"))
+              publish_age = (now-published).total_seconds()/60
+              dates = []
+              for card in cards if isinstance(cards,list) else []:
+                  try:
+                      value = str(card.get("published_at") or "")
+                      parsed = dt.datetime.fromisoformat(value.replace("Z","+00:00"))
+                      if parsed.tzinfo and parsed <= now + dt.timedelta(minutes=15):
+                          dates.append(parsed)
+                  except (TypeError, ValueError):
+                      pass
+              if dates:
+                  story_age = (now-max(dates)).total_seconds()/60
+              print(f"Published build age: {publish_age:.0f} min; newest headline age: {story_age:.0f} min; items: {len(cards) if isinstance(cards,list) else 'invalid'}")
+          except Exception as exc:
+              site_error = str(exc)
+              print(f"::warning::Could not read published news status: {site_error}")
+          stale = age > 60 or publish_age > 120 or story_age > 180
+          reasons = []
+          if age > 60: reasons.append(f"Collector last success: {age:.0f} minutes ago")
+          if publish_age > 120: reasons.append(f"Published build: {publish_age:.0f} minutes ago")
+          if story_age > 180: reasons.append(f"Newest headline: {story_age:.0f} minutes ago")
+          if site_error: reasons.append(f"Website status check unavailable: {site_error}")
           # Issues opened by this watchdog use a stable title for de-duplication.
           title = "[Pendar] News freshness stalled"
           issues = gh(f"repos/{repo}/issues?state=open&per_page=100")
@@ -53,10 +90,10 @@ jobs:
           if stale:
               recent = runs[0] if runs else None
               url = recent.get("html_url") if recent else f"https://github.com/{repo}/actions/workflows/news-refresh.yml"
-              body = (f"News collection has not completed successfully for **{age:.0f} minutes**.\n\n"
+              body = (f"News freshness warning (collector, published build, or newest headline).\\n\\n"
                       f"Latest run: {url}\n"
                       f"Last success: {successful['html_url'] if successful else 'not found'}\n"
-                      f"Currently queued/running: {len(ongoing)}\n\n"
+                      f"Currently queued/running: {len(ongoing)}\\n"\n                      + "\\n".join(reasons) + "\\n\\n"
                       "Inspect the failed job logs and preserve the previous healthy publication. "
                       "This issue is managed by the freshness watchdog.")
               if not existing:
