@@ -177,7 +177,10 @@ jobs:
           stories=json.loads((root/'stories.json').read_text(encoding='utf-8'))
           assert len(figures.get('figures',[])) >= 100, 'Figure corpus unexpectedly small'
           assert 1 <= len(stories) <= 60, 'News headline feed invalid'
-          print('Fast publish validated:',len(stories),'headlines and',len(figures['figures']),'figures')
+          missing=[str(row.get('id')) for row in stories if isinstance(row,dict) and row.get('id') and not (root/'story'/(str(row['id'])+'.json')).is_file()]
+          if missing:
+              raise SystemExit('::error::Missing story detail JSON for published headlines: '+', '.join(missing[:8]))
+          print('Fast publish validated:',len(stories),'headlines and',len(figures['figures']),'figures; all story details available')
           PY
       - name: Report published figure freshness
         run: |
