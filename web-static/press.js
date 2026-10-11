@@ -633,11 +633,14 @@ async function showBBCPersianIdentity(){
       .bbc-profile-section h2{font-size:21px;margin:0 0 14px}
       .bbc-profile-section ul{padding-right:20px;line-height:2}
       @media(max-width:600px){.bbc-cover{height:125px}.bbc-profile-body{padding:0 15px 16px}.bbc-avatar{flex:0 0 78px!important;width:78px!important;height:78px!important;min-width:78px;max-width:78px;min-height:78px;max-height:78px;margin-top:-30px!important;font-size:14px}.bbc-profile-tabs{margin:0 -15px}.bbc-profile-tabs .bbc-content-tab{padding:12px 18px}}
+      .bbc-avatar{background:#fff!important;color:#ba151a!important}
+      .iran-international-avatar{background:#fff!important;color:#ba151a!important}
+      .radio-farda-avatar{background:#fff!important;color:#ba151a!important}
     </style>
     <article class="bbc-profile">
       <div class="bbc-cover" role="img" aria-label="کاور گرافیکی رسانهٔ بی‌بی‌سی فارسی"></div>
       <div class="bbc-profile-body">
-        <div class="bbc-profile-top"><div class="bbc-avatar" aria-label="BBC NEWS">BBC<br>NEWS</div><a href="https://www.bbc.com/persian" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
+        <div class="bbc-profile-top"><div class="bbc-avatar" aria-label="BBC NEWS"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/BBC_Persian_logo_2021.svg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" style="width:86%;height:86%;object-fit:contain;object-position:center;display:block" onerror="this.remove();this.parentElement.querySelector('.media-logo-fallback').hidden=false"><span class="media-logo-fallback" hidden>BBC<br>NEWS</span></div><a href="https://www.bbc.com/persian" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
         <div class="bbc-profile-title"><h1>بی‌بی‌سی فارسی</h1>${badge}</div>
         <div class="bbc-handle">@bbc-persian</div>
         <p class="bbc-profile-description">بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است؛ تأمین مالی عمومی لزوماً به معنای کنترل مستقیم دولتی نیست.</p>
@@ -716,7 +719,7 @@ async function showMediaIdentity_iran_international(){
     <article class="iran-international-profile">
       <div class="iran-international-cover" role="img" aria-label="کاور گرافیکی رسانهٔ ایران اینترنشنال"></div>
       <div class="iran-international-profile-body">
-        <div class="iran-international-profile-top"><div class="iran-international-avatar" aria-label="Iran International">IRAN<br>INTL</div><a href="https://www.iranintl.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
+        <div class="iran-international-profile-top"><div class="iran-international-avatar" aria-label="Iran International"><img src="https://www.iranintl.com/images/ii/ii-logo-fa.svg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" style="width:86%;height:86%;object-fit:contain;object-position:center;display:block" onerror="this.remove();this.parentElement.querySelector('.media-logo-fallback').hidden=false"><span class="media-logo-fallback" hidden>IRAN<br>INTL</span></div><a href="https://www.iranintl.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
         <div class="iran-international-profile-title"><h1>ایران اینترنشنال</h1>${badge}</div>
         <div class="iran-international-handle">@iran-international</div>
         <p class="iran-international-profile-description">رسانهٔ خبری فارسی‌زبان</p>
@@ -795,7 +798,7 @@ async function showMediaIdentity_radio_farda(){
     <article class="radio-farda-profile">
       <div class="radio-farda-cover" role="img" aria-label="کاور گرافیکی رسانهٔ رادیو فردا"></div>
       <div class="radio-farda-profile-body">
-        <div class="radio-farda-profile-top"><div class="radio-farda-avatar" aria-label="Radio Farda">RADIO<br>FARDA</div><a href="https://www.radiofarda.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
+        <div class="radio-farda-profile-top"><div class="radio-farda-avatar" aria-label="Radio Farda"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Radio_Farda_logo.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" style="width:86%;height:86%;object-fit:contain;object-position:center;display:block" onerror="this.remove();this.parentElement.querySelector('.media-logo-fallback').hidden=false"><span class="media-logo-fallback" hidden>RADIO<br>FARDA</span></div><a href="https://www.radiofarda.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
         <div class="radio-farda-profile-title"><h1>رادیو فردا</h1>${badge}</div>
         <div class="radio-farda-handle">@radio-farda</div>
         <p class="radio-farda-profile-description">رسانهٔ فارسی‌زبان با تأمین مالی عمومی ایالات متحده</p>
