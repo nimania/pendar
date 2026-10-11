@@ -91,11 +91,12 @@ jobs:
               recent = runs[0] if runs else None
               url = recent.get("html_url") if recent else f"https://github.com/{repo}/actions/workflows/news-refresh.yml"
               body = (f"News freshness warning (collector, published build, or newest headline).\\n\\n"
-                      f"Latest run: {url}\n"
-                      f"Last success: {successful['html_url'] if successful else 'not found'}\n"
-                      f"Currently queued/running: {len(ongoing)}\\n"\n                      + "\\n".join(reasons) + "\\n\\n"
-                      "Inspect the failed job logs and preserve the previous healthy publication. "
-                      "This issue is managed by the freshness watchdog.")
+                      f"Latest run: {url}\\n"
+                      f"Last success: {successful['html_url'] if successful else 'not found'}\\n"
+                      f"Currently queued/running: {len(ongoing)}\\n"
+                      + "\\n".join(reasons) + "\\n\\n"
+                      + "Inspect news collection and preserve the previous healthy publication. "
+                      + "This issue is managed by the freshness watchdog.")
               if not existing:
                   subprocess.run(["gh", "api", f"repos/{repo}/issues", "--method", "POST",
                                   "-f", f"title={title}", "-f", f"body={body}"], check=True)
