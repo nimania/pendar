@@ -615,9 +615,9 @@ async function showBBCPersianIdentity(){
     +'<p>نمایهٔ یکپارچهٔ آزمایشی در پندار؛ اطلاعات از آرشیو موجود پیشخوان جراید و راهنمای تماشا خوانده می‌شود.</p>'
     +'<p><a href="/press/">پیشخوان جراید</a> · <a href="/tv/">راهنمای تلویزیون</a></p>'
     +'<h3>مطالب ثبت‌شده</h3>'
-    +(rows.length?'<ul>'+rows.map(x=>'<li><button type="button" onclick="openPressArticle('+JSON.stringify(String(x.id))+')">'+escape(x.headline_fa||x.title_original||"مطلب")+'</button></li>').join("")+'</ul>':'<p>مطلبی در آرشیو ذخیره‌شدهٔ فعلی یافت نشد.</p>')
+    +(rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+escape(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>مطلبی در آرشیو ذخیره‌شدهٔ فعلی یافت نشد.</p>')
     +'<h3>شبکه‌های مرتبط</h3>'
-    +(channels.length?'<ul>'+channels.map(c=>'<li><button type="button" onclick="openTVChannel('+JSON.stringify(String(c.id))+')">'+escape(c.name_fa||c.name||"شبکه")+'</button></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های فعلی راهنمای تلویزیون یافت نشد.</p>')
+    +(channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+escape(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های فعلی راهنمای تلویزیون یافت نشد.</p>')
     +'</section>';
   if(location.pathname!=="/@bbc-persian/")return;
   el.insertAdjacentHTML("afterbegin",info);
