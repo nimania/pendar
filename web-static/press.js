@@ -611,15 +611,42 @@ async function showBBCPersianIdentity(){
   const el=document.getElementById("press-content");
   if(!el)return;
   document.title="بی‌بی‌سی فارسی | پندار";
-  const badge='<span title="رسانهٔ عمومی با تأمین مالی عمومی؛ نه به معنای کنترل مستقیم دولت" style="display:inline-flex;align-items:center;gap:5px;border:1px solid #aaa;border-radius:16px;padding:3px 9px;background:#ddd;color:#444;font-size:12px">✓ رسانهٔ عمومی</span>';
-  el.innerHTML='<section class="press-identity-summary" style="margin:14px auto 28px;max-width:1050px;padding:24px;border:1px solid #8884;border-radius:14px">'
-   +'<div class="press-kicker">نمایهٔ رسانه در پندار · @bbc-persian</div>'
-   +'<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><img src="https://www.google.com/s2/favicons?domain=bbc.com&sz=128" width="60" height="60" alt="لوگوی بی‌بی‌سی"><h1>بی‌بی‌سی فارسی</h1>'+badge+'</div>'
-   +'<p>بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است. تأمین مالی عمومی لزوماً به معنای کنترل مستقیم دولتی نیست.</p>'
-   +'<p><a href="https://www.bbc.com/persian" target="_blank" rel="noopener">وب‌سایت رسمی ↗</a> · <a href="/press/">پیشخوان جراید</a> · <a href="/tv/">راهنمای تلویزیون</a></p>'
-   +'<h2>مطالب ثبت‌شده</h2><div id="bbc-identity-press">در حال بررسی داده‌های ذخیره‌شده…</div>'
-   +'<h2>شبکه‌های مرتبط</h2><div id="bbc-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div>'
-   +'</section>'+articleDisplayAdMarkup();
+  const badge='<span class="bbc-public-badge" title="رسانهٔ عمومی با تأمین مالی عمومی؛ نه به معنای کنترل مستقیم دولت" aria-label="رسانهٔ عمومی">✓ رسانهٔ عمومی</span>';
+  el.innerHTML=`
+    <style>
+      .bbc-profile{margin:8px auto 25px;max-width:1040px;border:1px solid var(--border,#9994);border-radius:16px;overflow:hidden;background:var(--card-bg,transparent)}
+      .bbc-cover{height:180px;background:linear-gradient(132deg,#6c1115 0%,#c42027 55%,#303035 100%);position:relative}
+      .bbc-cover:after{content:"BBC  NEWS  فارسی";position:absolute;left:22px;top:25px;color:#fff8;font-size:clamp(18px,4vw,42px);font-weight:800;letter-spacing:2px;direction:ltr}
+      .bbc-profile-body{padding:0 24px 22px}
+      .bbc-avatar{width:112px;height:112px;margin-top:-57px;position:relative;border:5px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:grid;place-items:center;text-align:center;line-height:1.1;font-weight:900;font-size:23px;direction:ltr;box-shadow:0 2px 12px #0002}
+      .bbc-profile-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+      .bbc-profile-title{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+      .bbc-profile-title h1{font-size:clamp(25px,4vw,36px);margin:0}
+      .bbc-public-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #a1a1a1;border-radius:16px;padding:4px 10px;background:#dedede;color:#444;font-size:12px;white-space:nowrap}
+      .bbc-handle{color:var(--muted,#777);font-size:14px;direction:ltr;text-align:right;margin-top:4px}
+      .bbc-profile-description{line-height:1.9;margin:14px 0}
+      .bbc-profile-links{display:flex;gap:15px;flex-wrap:wrap;font-size:13px;margin-bottom:18px}
+      .bbc-profile-tabs{display:flex;border-top:1px solid var(--border,#9994);border-bottom:1px solid var(--border,#9994);margin:0 -24px;padding:0 14px;overflow:auto}
+      .bbc-profile-tabs a{padding:13px 16px;white-space:nowrap;text-decoration:none;font-weight:600}
+      .bbc-profile-tabs a:hover{box-shadow:inset 0 -3px #b51b22}
+      .bbc-profile-section{padding:22px 0 7px;border-bottom:1px solid var(--border,#9994)}
+      .bbc-profile-section h2{font-size:21px;margin:0 0 14px}
+      .bbc-profile-section ul{padding-right:20px;line-height:2}
+      @media(max-width:600px){.bbc-cover{height:125px}.bbc-profile-body{padding:0 15px 16px}.bbc-avatar{height:90px;width:90px;margin-top:-45px;font-size:18px}.bbc-profile-tabs{margin:0 -15px}.bbc-profile-tabs a{padding:12px}}
+    </style>
+    <article class="bbc-profile">
+      <div class="bbc-cover" role="img" aria-label="کاور گرافیکی رسانهٔ بی‌بی‌سی فارسی"></div>
+      <div class="bbc-profile-body">
+        <div class="bbc-profile-top"><div class="bbc-avatar" aria-label="BBC NEWS">BBC<br>NEWS</div><a href="https://www.bbc.com/persian" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
+        <div class="bbc-profile-title"><h1>بی‌بی‌سی فارسی</h1>${badge}</div>
+        <div class="bbc-handle">@bbc-persian</div>
+        <p class="bbc-profile-description">بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است؛ تأمین مالی عمومی لزوماً به معنای کنترل مستقیم دولتی نیست.</p>
+        <div class="bbc-profile-links"><a href="/press/">پیشخوان جراید ↗</a><a href="/tv/">راهنمای تماشا ↗</a><span>رسانهٔ فارسی‌زبان</span></div>
+        <nav class="bbc-profile-tabs" aria-label="بخش‌های نمایه"><a href="#bbc-identity-press">مطالب</a><a href="#bbc-identity-tv">تلویزیون</a><a href="https://www.bbc.com/persian" target="_blank" rel="noopener">دربارهٔ رسانه ↗</a></nav>
+        <section class="bbc-profile-section"><h2>مطالب ثبت‌شده</h2><div id="bbc-identity-press">در حال بررسی آرشیو ذخیره‌شده…</div></section>
+        <section class="bbc-profile-section"><h2>شبکه‌ها و برنامه‌ها</h2><div id="bbc-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div></section>
+      </div>
+    </article>`+articleDisplayAdMarkup();
   loadArticleDisplayAd();
   const [pr,tr]=await Promise.allSettled([loadPeriodicals(),loadTVGuide()]);
   if(location.pathname!=="/@bbc-persian/"||document.getElementById("press-content")!==el)return;
