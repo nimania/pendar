@@ -272,6 +272,23 @@ jobs:
                   print("::warning::Press archive not present; directory-only mode, no fetching.")
               print("Press directory entrance restored; no RSS/PDF calls.")
           PY
+      - name: Restore static future research pages (no AI processing)
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          root=Path('site')
+          if not (root/'future.js').is_file():
+              print('::warning::Future UI unavailable; skipping static entry.')
+          else:
+              for route in ('future','future/method','future/transition',
+                            'future/transition/watch','future/transition/fattahi'):
+                  target=root/route/'index.html'
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  if not target.is_file():
+                      shutil.copy2(root/'index.html',target)
+              print('Static future routes restored; no AI jobs or source collection.')
+          PY
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
