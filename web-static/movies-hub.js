@@ -366,7 +366,11 @@ function _legacyMovieCredit(m,kind,index){
 async function openCinemaHandle(handle){
   const d=await loadMovies();
   const entries=[];
-  for(const m of d.movies||[]){
+  const cached=[...(d.movies||[]),...(window.__MOVIES_DATA__?.movies||[])];
+  const seen=new Set();
+  for(const m of cached){
+    if(seen.has(m.slug))continue;
+    seen.add(m.slug);
     if(m.director?.name_fa&&_cinemaHandle(m.slug,'director',0)===handle)entries.push({m,role:'کارگردان',person:m.director});
     (m.cast||[]).forEach((person,i)=>{
       if(_cinemaHandle(m.slug,'cast',i)===handle)entries.push({m,role:'بازیگر',person});
@@ -384,8 +388,11 @@ async function openCinemaHandle(handle){
   const timeline=document.getElementById('figure-timeline');if(timeline)timeline.innerHTML='';
   const el=document.getElementById('figures');
   document.title=name+' | چهره‌های پندار';
-  const picture=first.person?.profile_path&&/^\\/[\\w/-]+\\.(jpg|jpeg|png|webp)$/i.test(first.person.profile_path)
-    ?'<img src="https://image.tmdb.org/t/p/w185'+esc(first.person.profile_path)+'" alt="'+esc(name)+'">'
+  const profilePath=String(first.person?.profile_path||'');
+  const validPortrait=profilePath.startsWith('/') && /\\.(jpg|jpeg|png|webp)$/i.test(profilePath)
+    && !profilePath.includes('..') && !profilePath.includes('//');
+  const picture=validPortrait
+    ?'<img src="https://image.tmdb.org/t/p/w185'+esc(profilePath)+'" alt="'+esc(name)+'">'
     :'<span class="movie-poster-fallback" aria-hidden="true">👤</span>';
   const x={name_fa:name,handle:handle,profile_handle:handle,role_fa:entries.map(e=>e.role).filter((v,i,a)=>a.indexOf(v)===i).join(' · '),posts:[]};
   el.innerHTML='<div class="x-profile">'
