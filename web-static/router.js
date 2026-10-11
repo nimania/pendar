@@ -92,6 +92,7 @@ async function route() {
       history.replaceState(null,"","/@"+slug+"/"+location.search);
       return;
     }
+    if(typeof openCinemaHandle==="function" && await openCinemaHandle(slug))return;
     show("entity");setTab("");document.getElementById("entity-content").textContent="این هویت پیدا نشد";return;
   }
   const i = raw.indexOf("/");
