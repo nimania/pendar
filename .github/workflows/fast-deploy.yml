@@ -289,6 +289,24 @@ jobs:
                       shutil.copy2(root/'index.html',target)
               print('Static future routes restored; no AI jobs or source collection.')
           PY
+      - name: Publish three lightweight entity handles
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          root=Path("site")
+          shell=root/"index.html"
+          handles=("irna","isna","filimo")
+          # Existing figure handles have precedence. Do not overwrite their pages.
+          for slug in handles:
+              target=root/("@"+slug)/"index.html"
+              if target.exists():
+                  print("::warning::Existing identity retains @"+slug)
+                  continue
+              target.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copy2(shell,target)
+          print("Non-person handle pilot: three static paths, no new API requests")
+          PY
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
