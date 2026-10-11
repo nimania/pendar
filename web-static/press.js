@@ -724,7 +724,7 @@ async function showPendarMediaIdentity(slug){
     if(!items.length)return '<p>در آرشیو منتشرشدهٔ فعلی مطلبی از این رسانه یافت نشد.</p>';
     return '<div class="media-article-cards" style="display:grid;gap:12px">'+items.map(x=>{
       const title=esc(x.title_fa||x.headline_fa||x.title_original||x.title||"مطلب");
-      const url=type==="periodical"?'/press-article/'+encodeURIComponent(String(x.id))+'/':'/story/'+encodeURIComponent(String(x.id))+'/';
+      const url=(x.__mediaType||type)==="periodical"?'/press-article/'+encodeURIComponent(String(x.id))+'/':'/story/'+encodeURIComponent(String(x.id))+'/';
       const summary=String(x.summary_fa||x.summary||x.description_fa||"").trim().slice(0,230);
       const dt=x.published_at||x.pub_date||x.date||"";
       let date="";
@@ -735,7 +735,7 @@ async function showPendarMediaIdentity(slug){
     }).join("")+'</div>';
   };
   if(pressBox)pressBox.innerHTML=rows.length?mediaCards(rows,"periodical"):"<p>در حال بررسی خبرهای ذخیره‌شدهٔ این رسانه…</p>";
-  if(!rows.length){
+  {
     // The light Pages build retains press-source-stories.json, while periodicals.json
     // can legitimately be absent. Reuse exactly the same published archive as Press.
     let feed=[];
@@ -746,22 +746,24 @@ async function showPendarMediaIdentity(slug){
       feed=names.flatMap(n=>Array.isArray(archive?.[n])?archive[n]:[]);
       if(!feed.length)feed=Object.entries(archive||{}).filter(([name])=>config.pattern.test(name)).flatMap(([,items])=>Array.isArray(items)?items:[]);
     }catch(_){}
-    if(!feed.length){
+    {
       // Reuse the latest independently refreshed headline archive only when
       // Press's per-source index has no match. No new collection is started.
       try{
         const recent=await getJSON(DATA+"/stories.json",5000);
         const items=Array.isArray(recent)?recent:Array.isArray(recent?.stories)?recent.stories:[];
-        feed=items.filter(x=>{
+        feed=feed.concat(items.filter(x=>{
           const sourceFields=[...(Array.isArray(x.source_names)?x.source_names:[]),x.source_name,x.publisher,x.source].filter(v=>typeof v==="string");
           return sourceFields.some(v=>config.pattern.test(v));
-        });
+        }));
       }catch(_){}
     }
     if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
     const seen=new Set();
-    feed=feed.filter(x=>x?.id&&!seen.has(String(x.id))&&seen.add(String(x.id))).sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||""))).slice(0,8);
-    if(pressBox)pressBox.innerHTML=mediaCards(feed,"story");
+    const combined=[...rows.map(x=>({...x,__mediaType:"periodical"})),...feed.map(x=>({...x,__mediaType:"story"}))]
+      .filter(x=>x?.id&&!seen.has(String(x.__mediaType)+":"+String(x.id))&&seen.add(String(x.__mediaType)+":"+String(x.id)))
+      .sort((a,b)=>String(b.published_at||b.pub_date||b.date||"").localeCompare(String(a.published_at||a.pub_date||a.date||""))).slice(0,20);
+    if(pressBox)pressBox.innerHTML=mediaCards(combined,"story");
   }
   const guide=tr.status==="fulfilled"?tr.value:{channels:[],programmes:[]};
   const allChannels=Array.isArray(guide.channels)?guide.channels:[];
