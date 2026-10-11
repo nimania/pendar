@@ -146,6 +146,18 @@ async function renderFigureTimeline() {
     const built = Date.parse(d.generated_at || d.built_at || d.updated_at || "");
     const hasBuilt = Number.isFinite(built) && built <= now + 3600000;
     const stale = !recent.length;
+    // Read collector status separately: a successful deploy is not a successful source check.
+    getJSON(DATA+"/figures-health.json",12000).then(function(h){
+      if (!h || !h.last_checked_at) return;
+      var checked = Date.parse(h.last_checked_at);
+      var stamp = Number.isFinite(checked) ? fmt(checked) : "نامشخص";
+      var note = document.getElementById("figure-source-check-status");
+      if (note) {
+        note.textContent = "آخرین اجرای ثبت‌شدهٔ گردآورنده: "+stamp+
+          " | گفته‌های ۲۴ ساعت اخیر در خروجی گردآورنده: "+(Number(h.statements_24h)||0).toLocaleString("fa-IR")+
+          " | توجه: اجرای موفق لزوماً به معنی دریافت گفتهٔ جدید از منابع نیست.";
+      }
+    }).catch(function(){});
     freshness.innerHTML = '<div style="font-weight:700;margin-bottom:10px">وضعیت تازگی چهره‌ها</div>'
       + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px">'
       + '<div><small>آخرین تولید دادهٔ چهره‌ها</small><div>'+ (hasBuilt ? fmt(built) : 'ثبت نشده') +'</div></div>'
@@ -154,7 +166,7 @@ async function renderFigureTimeline() {
       + '<div><small>چهره‌های فعال ۲۴ ساعت اخیر</small><div>'+new Set(recent.map(x => x.f.handle || x.f.name_fa)).size.toLocaleString("fa-IR")+'</div></div></div>'
       + '<p style="margin:10px 0 0;font-size:12px;opacity:.8">'
       + (stale ? '⚠️ هیچ گفته‌ای با تاریخ معتبر در ۲۴ ساعت اخیر ثبت نشده است. ' : 'گفته‌های اخیر براساس تاریخ انتشار اصلی شمارش شده‌اند. ')
-      + 'زمان آخرین بررسی منابع فقط پس از ثبت مستقل گزارش گردآوری قابل نمایش است؛ زمان انتشار سایت معادل بررسی منابع نیست.</p>';
+      + 'زمان انتشار سایت معادل بررسی منابع نیست.</p>' + '<p id="figure-source-check-status" style="font-size:12px;margin-top:8px">گزارش مستقل گردآورنده در دسترس نیست.</p>';
   }
 
   const isNewsMode = _figTimelineMode === "news";
