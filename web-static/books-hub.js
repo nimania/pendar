@@ -109,7 +109,7 @@ function _bookQuote(b){
 function _bookLinks(b){return [...(b.purchase_links||[]),...(b.editions||[]).flatMap(e=>(e.purchase_links||[]).map(l=>({...l,edition_label_fa:l.edition_label_fa||e.label_fa,edition_isbn:e.isbn||''})))] .filter(l=>l.exact===true&&_bookUrl(l.url))}
 function _bookHasFormat(b,fmt){return !fmt||_bookLinks(b).some(l=>_bookFormat(l)===fmt)||(fmt==='print'&&b.torob?.matched)}
 function _bookCover(b,detail=false){
-  const source=String(b.cover_url||'');const safe=/^assets\/books\/[\w.-]+$/.test(source)||_bookUrl(source);
+  const source=String(b.cover_url||b.cover?.url||b.cover?.src||'');const safe=/^assets\/books\/[\w.-]+$/.test(source)||_bookUrl(source);
   return `<span class="book-cover-placeholder">${esc(b.title_fa||'کتاب')}</span>${safe?`<img class="book-cover" src="${esc(source)}" alt="جلد ${esc(b.title_fa||'کتاب')}" ${detail?'':'loading="lazy"'} referrerpolicy="no-referrer" onerror="this.remove()">`:''}`;
 }
 function _bookCard(b){
@@ -123,7 +123,7 @@ function renderBookLibrary(){
   const s=bookLibraryState,saved=new Set(_bookSaved());
   let books=(booksCache.books||[]).filter(b=>s.query.trim()||s.sort==='title'||(b.mention_count||0)>0||b.radar).filter(b=>s.query.trim()||_bookRadarMatches(b,s)).filter(b=>!s.saved||saved.has(b.slug)).filter(b=>!s.category||b.category_fa===s.category).filter(b=>_bookHasFormat(b,s.format));
   const tokens=_bookNorm(s.query).split(' ').filter(Boolean);
-  books=books.filter(b=>{const hay=_bookNorm([b.title_fa,b.subtitle_fa,b.original_title,b.category_fa,b.isbn,(b.creators||[]).map(c=>c.name_fa).join(' '),(b.editions||[]).flatMap(e=>(e.creators||[]).map(c=>c.name_fa)).join(' '),b.publisher?.name_fa,(b.editions||[]).map(e=>e.publisher?.name_fa||'').join(' ')].join(' '));return tokens.every(t=>hay.includes(t))});
+  books=books.filter(b=>{const hay=_bookNorm([b.title_fa,b.subtitle_fa,b.original_title,b.category_fa,b.isbn,(b.creators||[]).map(c=>c.name_fa).join(' '),(b.editions||[]).flatMap(e=>(e.creators||[]).map(c=>c.name_fa)).join(' '),b.publisher?.name_fa,(b.editions||[]).map(e=>e.publisher?.name_fa||'').join(' '),(b.editions||[]).map(e=>[e.isbn,e.label_fa,e.publication_year_fa].filter(Boolean).join(' ')).join(' ')].join(' '));return tokens.every(t=>hay.includes(t))});
   books.sort((a,b)=>s.sort==='radar'?_bookRadarScore(b)-_bookRadarScore(a):s.sort==='rising'?_bookRadarChange(b)-_bookRadarChange(a):s.sort==='mentions'?(b.mention_count||0)-(a.mention_count||0):s.sort==='price'?(_bookQuote(a)?.price??Infinity)-(_bookQuote(b)?.price??Infinity):s.sort==='title'?String(a.title_fa).localeCompare(String(b.title_fa),'fa'):_bookStats(b).latest-_bookStats(a).latest);
   grid.innerHTML=books.length?books.slice(0,bookLibraryLimit).map(_bookCard).join(''):`<div class="state book-empty"><div class="big">${s.signal==='rising'?'مقایسهٔ هفتگی در حال شکل‌گیری است':'کتابی با این انتخاب پیدا نشد'}</div><p>${s.signal==='rising'?'رشد فقط با مشاهدهٔ واقعی جایگاه همان کتاب در همان فهرست طی دو هفته نمایش داده می‌شود.':'عبارت کوتاه‌تری بنویس یا فیلترها را تغییر بده.'}</p></div>`;
   const more=document.getElementById('book-library-more');if(more)more.hidden=books.length<=bookLibraryLimit;document.querySelectorAll('[data-book-source]').forEach(el=>el.classList.toggle('on',el.dataset.bookSource===s.source));
