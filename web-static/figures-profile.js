@@ -249,6 +249,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   el.innerHTML = `<div class="x-profile">
     ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length+profileMedia.books.length ? `<span><b>${faN(figureBooks.length+profileMedia.books.length)}</b> کتاب</span>` : ""}${mediaWorks.length+profileMedia.films.length ? `<span><b>${faN(mediaWorks.length+profileMedia.films.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
+    ${articleDisplayAdMarkup()}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
       ${direct.length?`<button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>`:""}
@@ -273,6 +274,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     ${_figureProfileFilter==="usradar"?usRadarSection:""}\n    ${_figureProfileFilter==="about"?aboutSection:""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos"||_figureProfileFilter==="usradar"||_figureProfileFilter==="official"||_figureProfileFilter==="about"||(_figureProfileFilter==="all"&&!shown.length)) ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
   </div>`;
+  loadArticleDisplayAd();
 }
 
 /* Figures directory: the directory mode state (_figDirectoryMode), its
