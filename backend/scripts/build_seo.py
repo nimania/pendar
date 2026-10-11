@@ -281,6 +281,44 @@ def build(site):
             url=route(kind) if n==1 else route(kind,'page/'+str(n))
             paging=links([(route(kind) if i==1 else route(kind,'page/'+str(i)), 'صفحهٔ '+str(i)) for i in range(1,len(chunks)+1)]) if len(chunks)>1 else ''
             pages[url]={'title':title+(' — صفحهٔ '+str(n) if n>1 else ''),'description':title+' در پندار؛ مطالب، مشخصات و پیوندهای مرتبط.','body':'<p>'+esc(title+' در پندار')+'</p>'+links(chunk)+paging,'kind':kind,'canonical':url,'indexable':bool(rows) or kind in ['tv','knowledge','faq','badbadak','us-radar','israel-radar','radar'],'schema_type':'CollectionPage'}
+    # The public /figures/ URL is a standalone SEO page, not the SPA route.
+    # Report factual statement freshness here as well as in the JS timeline.
+    if '/figures/' in pages:
+        now = datetime.datetime.now(datetime.timezone.utc)
+        recent = []
+        all_dated = []
+        for person in figure_data.get('figures', []):
+            if not isinstance(person, dict):
+                continue
+            for post in person.get('posts', []):
+                if not isinstance(post, dict):
+                    continue
+                raw = str(post.get('published_at') or '')
+                try:
+                    stamp = datetime.datetime.fromisoformat(raw.replace('Z', '+00:00'))
+                    if stamp.tzinfo is None:
+                        stamp = stamp.replace(tzinfo=datetime.timezone.utc)
+                    if stamp > now + datetime.timedelta(hours=1):
+                        continue
+                    all_dated.append(stamp)
+                    if stamp >= now - datetime.timedelta(hours=24):
+                        recent.append(str(person.get('handle') or person.get('name_fa') or ''))
+                except (ValueError, TypeError):
+                    continue
+        latest = max(all_dated).strftime('%Y-%m-%d %H:%M UTC') if all_dated else 'نامشخص'
+        count = sum(1 for t in all_dated if t >= now - datetime.timedelta(hours=24))
+        status = ('هشدار: هیچ گفتهٔ تازه‌ای در ۲۴ ساعت اخیر ثبت نشده است.' if not recent
+                  else 'تاریخ‌ها از زمان انتشار گفته‌ها محاسبه شده‌اند.')
+        pages['/figures/']['body'] = (
+            '<section aria-label="وضعیت تازگی چهره‌ها" style="border:1px solid #aaa;border-radius:12px;padding:16px;margin:16px 0">'
+            '<h2>وضعیت به‌روزرسانی چهره‌ها</h2>'
+            '<p>تازه‌ترین گفتهٔ ثبت‌شده: '+esc(latest)+'</p>'
+            '<p>گفته‌های ۲۴ ساعت اخیر: '+str(count)+'</p>'
+            '<p>چهره‌های فعال ۲۴ ساعت اخیر: '+str(len(set(recent)))+'</p>'
+            '<p>'+esc(status)+'</p>'
+            '<p>زمان بررسی منابع به‌طور مستقل ثبت نشده است؛ زمان انتشار سایت معیار تازگی داده‌ها نیست.</p>'
+            '</section>' + pages['/figures/']['body']
+        )
     pages['/diner/'].update(
         description='داینر نیما؛ خبرهای رستوران‌داری، کافه‌داری، هوش مصنوعی و غذا، منو و مهندسی منو، همراه با نکته‌های مدیریت تیم و عملیات و پروفایل نیما افشارنادری.',
         body='<p>نکته‌های کاربردی رستوران‌داری و کافه‌داری از تجربه واقعی؛ مهندسی منو، مدیریت تیم، عملیات، بهداشت و بازاریابی. فهرست خبرهای رستوران، کافه، منو و فناوری از Food Intel با ذکر رسانه و پیوند خبر اصلی در همین صفحه نمایش داده می‌شود.</p>'+links([('/@nima-afshar-naderi/','پروفایل نیما افشارنادری در پندار'),('https://nimania.github.io/restaurant-intelligence/food-intel/explore.html#feed','رادار خبرهای رستوران و غذا در Food Intel'),('https://t.me/nimaafsharnaderiir','تماس مستقیم با نیما افشارنادری'),('https://www.instagram.com/nimasdiner','اینستاگرام داینر نیما'),('https://t.me/+sNV4qZCjSOQyMzc0','گروه تلگرام داینر نیما')]),
