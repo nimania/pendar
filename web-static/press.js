@@ -599,249 +599,101 @@ async function openPressArticle(id) {
   setHash("#/press-article/"+encodeURIComponent(id));
 }
 
-/* BBC Persian: cached, bounded identity pilot. No collectors or API integrations. */
-async function showBBCPersianIdentity(){
-  if(window.__bbcIdentityObserver){window.__bbcIdentityObserver.disconnect();window.__bbcIdentityObserver=null;}
+
+/* Shared, cache-only media identity presentation. Figure tabs remain independent. */
+const PENDAR_MEDIA_PROFILES={
+  "bbc-persian":{name:"بی‌بی‌سی فارسی",label:"رسانهٔ عمومی فارسی‌زبان بریتانیا",description:"بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است.",site:"https://www.bbc.com/persian",cover:["#6c1115","#c42027","#303035"],logo:"https://commons.wikimedia.org/wiki/Special:FilePath/BBC_Persian_logo_2021.svg",fallback:"BBC NEWS",badge:"رسانهٔ عمومی",badgeTitle:"رسانهٔ عمومی با تأمین مالی عمومی؛ به معنی کنترل مستقیم دولت نیست",pattern:/بی[‌ -]?بی[‌ -]?سی|bbc/i},
+  "iran-international":{name:"ایران اینترنشنال",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ خبری فارسی‌زبان.",site:"https://www.iranintl.com/",cover:["#123944","#168b98","#213039"],logo:"https://www.iranintl.com/images/ii/ii-logo-fa.svg",fallback:"IRAN INTL",pattern:/ایران[‌ -]?اینترنشنال|iran international/i},
+  "radio-farda":{name:"رادیو فردا",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ فارسی‌زبان با تأمین مالی عمومی ایالات متحده.",site:"https://www.radiofarda.com/",cover:["#1a3452","#387fa8","#233142"],logo:"https://commons.wikimedia.org/wiki/Special:FilePath/Radio_Farda_logo.png",fallback:"RADIO FARDA",pattern:/رادیو فردا|radio farda/i}
+};
+function pendarMediaIdentityShell(slug,config){
+  const id="media-identity";
+  const badge=config.badge?'<span class="media-public-badge" title="'+esc(config.badgeTitle||config.badge)+'">✓ '+esc(config.badge)+'</span>':"";
+  const cover='linear-gradient(132deg,'+config.cover.join(",")+')';
+  return `<style>
+    .media-profile{max-width:1040px;margin:8px auto 25px;border:1px solid var(--border,#9994);border-radius:16px;overflow:hidden;background:var(--card-bg,transparent)}
+    .media-cover{height:185px;background:${cover};padding:25px;box-sizing:border-box;color:#fff}
+    .media-cover strong{display:block;font-size:clamp(24px,4vw,44px);opacity:.84}
+    .media-cover small{display:block;font-size:clamp(12px,1.6vw,17px);margin-top:6px;color:#fff;opacity:.9}
+    .media-profile-body{padding:0 24px 22px}
+    .media-avatar{box-sizing:border-box;width:100px;height:100px;flex:0 0 100px;margin-top:-42px;position:relative;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 9px #0002;color:#303030;font-weight:800;text-align:center;direction:ltr}
+    .media-avatar img{width:88%;height:88%;object-fit:contain;object-position:center}
+    .media-public-badge{border-radius:16px;border:1px solid #aaa;background:#ddd;color:#444;padding:4px 10px;font-size:12px;white-space:nowrap}
+    .media-profile-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .media-profile-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .media-profile-title h1{font-size:clamp(26px,4vw,36px);margin:0}
+    .media-handle{font-size:14px;color:var(--muted,#777);direction:ltr;text-align:right}
+    .media-profile-description{line-height:1.9;margin:14px 0}
+    .media-profile-links{display:flex;gap:15px;flex-wrap:wrap;font-size:13px;margin:0 0 20px}
+    .media-profile-tabs{display:flex;border-block:1px solid var(--border,#9994);margin:0 -24px;padding:0 14px;overflow-x:auto}
+    .media-profile-tabs button{border:0;background:transparent;color:inherit;cursor:pointer;font:inherit;font-weight:650;opacity:.65;padding:14px 22px;white-space:nowrap}
+    .media-profile-tabs button[aria-selected="true"]{box-shadow:inset 0 -3px #b51b22;opacity:1}
+    .media-profile-tabs button:hover{opacity:1}
+    .media-profile-panel{padding:20px 0;line-height:1.85}
+    .media-profile-panel[hidden]{display:none!important}
+    .media-profile-panel ul{padding-right:20px}
+    @media(max-width:600px){.media-cover{height:130px;padding:15px}.media-avatar{width:80px;height:80px;flex-basis:80px;margin-top:-32px}.media-profile-body{padding:0 15px 16px}.media-profile-tabs{margin:0 -15px}.media-profile-tabs button{padding:12px 18px}}
+  </style>
+  <article class="media-profile">
+    <header class="media-cover"><strong>${esc(config.name)}</strong><small>${esc(config.label)}</small></header>
+    <div class="media-profile-body">
+      <div class="media-profile-top">
+        <div class="media-avatar"><img src="${esc(config.logo)}" alt="لوگوی ${esc(config.name)}" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span hidden>${esc(config.fallback)}</span></div>
+        <a href="${esc(config.site)}" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a>
+      </div>
+      <div class="media-profile-title"><h1>${esc(config.name)}</h1>${badge}</div>
+      <div class="media-handle">@${esc(slug)}</div>
+      <p class="media-profile-description">${esc(config.description)}</p>
+      <div class="media-profile-links"><a href="/press/">پیشخوان جراید ↗</a><a href="/tv/">راهنمای تماشا ↗</a></div>
+      <nav class="media-profile-tabs" role="tablist" aria-label="محتوای رسانه">
+        <button role="tab" type="button" id="media-tab-press" data-media-tab="press" aria-selected="true" aria-controls="media-panel-press">مطالب</button>
+        <button role="tab" type="button" id="media-tab-tv" data-media-tab="tv" aria-selected="false" aria-controls="media-panel-tv">شبکه‌ها</button>
+        <button role="tab" type="button" id="media-tab-programmes" data-media-tab="programmes" aria-selected="false" aria-controls="media-panel-programmes">برنامه‌ها</button>
+      </nav>
+      <section class="media-profile-panel" id="media-panel-press" role="tabpanel" aria-labelledby="media-tab-press"><div id="media-data-press">در حال بررسی آرشیو…</div></section>
+      <section class="media-profile-panel" id="media-panel-tv" role="tabpanel" aria-labelledby="media-tab-tv" hidden><div id="media-data-tv">در حال بررسی شبکه‌ها…</div></section>
+      <section class="media-profile-panel" id="media-panel-programmes" role="tabpanel" aria-labelledby="media-tab-programmes" hidden><div id="media-data-programmes">در حال بررسی برنامه‌ها…</div></section>
+    </div>
+  </article>`;
+}
+async function showPendarMediaIdentity(slug){
+  const config=PENDAR_MEDIA_PROFILES[slug];
+  if(!config)return;
   show("press");setTab("press");
   const lede=document.querySelector("#press-view > .press-lede");
   if(lede){
     if(!lede.dataset.bbcOriginalLede)lede.dataset.bbcOriginalLede=lede.innerHTML;
     lede.innerHTML='<nav aria-label="بخش‌های پندار" style="display:flex;flex-wrap:wrap;gap:15px;align-items:center;padding:10px 0;font-size:13px"><a href="/press/">پیشخوان جراید</a><a href="/tv/">راهنمای تلویزیون</a><a href="/books/">پیشخوان کتاب</a><a href="/movies/">جان فیلم</a></nav>';
   }
-  const el=document.getElementById("press-content");
-  if(!el)return;
-  document.title="بی‌بی‌سی فارسی | پندار";
-  const badge='<span class="bbc-public-badge" title="رسانهٔ عمومی با تأمین مالی عمومی؛ نه به معنای کنترل مستقیم دولت" aria-label="رسانهٔ عمومی">✓ رسانهٔ عمومی</span>';
-  el.innerHTML=`
-    <style>
-      .bbc-profile{margin:8px auto 25px;max-width:1040px;border:1px solid var(--border,#9994);border-radius:16px;overflow:hidden;background:var(--card-bg,transparent)}
-      .bbc-cover{height:180px;background:linear-gradient(132deg,#6c1115 0%,#c42027 55%,#303035 100%);position:relative}
-      .bbc-cover:after{content:"BBC  NEWS  فارسی";position:absolute;left:22px;top:25px;color:#fff8;font-size:clamp(18px,4vw,42px);font-weight:800;letter-spacing:2px;direction:ltr}
-      .bbc-cover:before{content:"رسانهٔ عمومی فارسی‌زبان بریتانیا";position:absolute;left:22px;top:88px;color:rgba(255,255,255,.85);font-size:clamp(12px,1.6vw,17px);font-weight:450;direction:rtl;text-align:left;max-width:calc(100% - 44px);line-height:1.6}
-
-      .bbc-profile-body{padding:0 24px 22px}
-      .bbc-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}
-      .bbc-profile-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
-      .bbc-profile-title{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
-      .bbc-profile-title h1{font-size:clamp(25px,4vw,36px);margin:0}
-      .bbc-public-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #a1a1a1;border-radius:16px;padding:4px 10px;background:#dedede;color:#444;font-size:12px;white-space:nowrap}
-      .bbc-handle{color:var(--muted,#777);font-size:14px;direction:ltr;text-align:right;margin-top:4px}
-      .bbc-profile-description{line-height:1.9;margin:14px 0}
-      .bbc-profile-links{display:flex;gap:15px;flex-wrap:wrap;font-size:13px;margin-bottom:18px}
-      .bbc-profile-tabs{display:flex;border-top:1px solid var(--border,#9994);border-bottom:1px solid var(--border,#9994);margin:0 -24px;padding:0 14px;overflow:auto}
-      .bbc-profile-tabs a{padding:13px 16px;white-space:nowrap;text-decoration:none;font-weight:600}
-      .bbc-profile-tabs .bbc-content-tab{border:0;background:transparent;color:inherit;cursor:pointer;font:inherit;padding:14px 22px;white-space:nowrap;font-weight:650;opacity:.65}.bbc-profile-tabs .bbc-content-tab[aria-selected="true"]{opacity:1;box-shadow:inset 0 -3px #b51b22}.bbc-profile-tabs .bbc-content-tab:hover{opacity:1}.bbc-profile-section[hidden]{display:none!important}
-      .bbc-profile-section{padding:22px 0 7px;border-bottom:1px solid var(--border,#9994)}
-      .bbc-profile-section h2{font-size:21px;margin:0 0 14px}
-      .bbc-profile-section ul{padding-right:20px;line-height:2}
-      @media(max-width:600px){.bbc-cover{height:125px}.bbc-cover:before{top:69px;left:14px;font-size:12px}.bbc-profile-body{padding:0 15px 16px}.bbc-avatar{flex:0 0 78px!important;width:78px!important;height:78px!important;min-width:78px;max-width:78px;min-height:78px;max-height:78px;margin-top:-30px!important;font-size:14px}.bbc-profile-tabs{margin:0 -15px}.bbc-profile-tabs .bbc-content-tab{padding:12px 18px}}
-      .bbc-avatar{background:#fff!important;color:#ba151a!important}
-      .iran-international-avatar{background:#fff!important;color:#ba151a!important}
-      .radio-farda-avatar{background:#fff!important;color:#ba151a!important}
-    </style>
-    <article class="bbc-profile">
-      <div class="bbc-cover" role="img" aria-label="کاور گرافیکی رسانهٔ بی‌بی‌سی فارسی"></div>
-      <div class="bbc-profile-body">
-        <div class="bbc-profile-top"><div class="bbc-avatar" aria-label="BBC NEWS"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/BBC_Persian_logo_2021.svg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" style="width:86%;height:86%;object-fit:contain;object-position:center;display:block" onerror="this.remove();this.parentElement.querySelector('.media-logo-fallback').hidden=false"><span class="media-logo-fallback" hidden>BBC<br>NEWS</span></div><a href="https://www.bbc.com/persian" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
-        <div class="bbc-profile-title"><h1>بی‌بی‌سی فارسی</h1>${badge}</div>
-        <div class="bbc-handle">@bbc-persian</div>
-        <p class="bbc-profile-description">بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است؛ تأمین مالی عمومی لزوماً به معنای کنترل مستقیم دولتی نیست.</p>
-        <div class="bbc-profile-links"><a href="/press/">پیشخوان جراید ↗</a><a href="/tv/">راهنمای تماشا ↗</a><span>رسانهٔ فارسی‌زبان</span></div>
-        <nav class="bbc-profile-tabs" role="tablist" aria-label="محتوای رسانه">
-          <button type="button" role="tab" class="bbc-content-tab" id="bbc-tab-press" aria-selected="true" aria-controls="bbc-panel-press" data-bbc-tab="press">مطالب</button>
-          <button type="button" role="tab" class="bbc-content-tab" id="bbc-tab-tv" aria-selected="false" aria-controls="bbc-panel-tv" data-bbc-tab="tv">شبکه‌ها</button>
-          <button type="button" role="tab" class="bbc-content-tab" id="bbc-tab-programmes" aria-selected="false" aria-controls="bbc-panel-programmes" data-bbc-tab="programmes">برنامه‌ها</button>
-        </nav>
-        <section class="bbc-profile-section" id="bbc-panel-press" role="tabpanel" aria-labelledby="bbc-tab-press"><div id="bbc-identity-press">در حال بررسی آرشیو ذخیره‌شده…</div></section>
-        <section class="bbc-profile-section" id="bbc-panel-tv" role="tabpanel" aria-labelledby="bbc-tab-tv" hidden><div id="bbc-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div></section>
-        <section class="bbc-profile-section" id="bbc-panel-programmes" role="tabpanel" aria-labelledby="bbc-tab-programmes" hidden><div id="bbc-identity-programmes">در حال بررسی برنامه‌های ذخیره‌شده…</div></section>
-      </div>
-    </article>`+articleDisplayAdMarkup();
+  const el=document.getElementById("press-content");if(!el)return;
+  document.title=config.name+" | پندار";
+  el.innerHTML=pendarMediaIdentityShell(slug,config)+articleDisplayAdMarkup();
   loadArticleDisplayAd();
-  const tabButtons=Array.from(el.querySelectorAll("[data-bbc-tab]"));
-  const chooseTab=(id)=>{
-    for(const btn of tabButtons){
-      const selected=btn.dataset.bbcTab===id;
-      btn.setAttribute("aria-selected",String(selected));
-      const panel=el.querySelector("#bbc-panel-"+btn.dataset.bbcTab);
-      if(panel)panel.hidden=!selected;
+  const buttons=Array.from(el.querySelectorAll("[data-media-tab]"));
+  const choose=tab=>{
+    for(const btn of buttons){
+      const active=btn.dataset.mediaTab===tab;
+      btn.setAttribute("aria-selected",String(active));
+      const panel=el.querySelector("#media-panel-"+btn.dataset.mediaTab);
+      if(panel)panel.hidden=!active;
     }
   };
-  for(const btn of tabButtons)btn.addEventListener("click",()=>chooseTab(btn.dataset.bbcTab));
-  chooseTab("press");
+  buttons.forEach(btn=>btn.addEventListener("click",()=>choose(btn.dataset.mediaTab)));
+  choose("press");
   const [pr,tr]=await Promise.allSettled([loadPeriodicals(),loadTVGuide()]);
-  if(location.pathname!=="/@bbc-persian/"||document.getElementById("press-content")!==el)return;
-  const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>/بی[‌ -]?بی[‌ -]?سی|bbc/i.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
-  const pb=document.getElementById("bbc-identity-press");
-  if(pb)pb.innerHTML=rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+esc(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>در آرشیو منتشرشدهٔ فعلی، مطلبی از این رسانه یافت نشد.</p>';
-  const guide=tr.status==="fulfilled"?tr.value:{channels:[]};
-  const channels=(guide.channels||[]).filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug==="bbc-persian").slice(0,5);
-  const tb=document.getElementById("bbc-identity-tv");
-  if(tb)tb.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>در داده‌های فعلی راهنمای تماشا، شبکهٔ منطبق یافت نشد.</p>';
-  const programmeBox=document.getElementById("bbc-identity-programmes");
+  if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
+  const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>config.pattern.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
+  const pressBox=el.querySelector("#media-data-press");
+  if(pressBox)pressBox.innerHTML=rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+esc(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>مطلبی در آرشیو منتشرشدهٔ فعلی یافت نشد.</p>';
+  const guide=tr.status==="fulfilled"?tr.value:{channels:[],programmes:[]};
+  const channels=(guide.channels||[]).filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug===slug).slice(0,5);
+  const tvBox=el.querySelector("#media-data-tv");
+  if(tvBox)tvBox.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های فعلی یافت نشد.</p>';
   const ids=new Set(channels.map(c=>String(c.id)));
   const programmes=(guide.programmes||[]).filter(p=>ids.has(String(p.channel_id))).slice(0,5);
-  if(programmeBox)programmeBox.innerHTML=programmes.length?'<ul>'+programmes.map(p=>'<li>'+esc(p.title_fa||p.title||"برنامه")+'</li>').join("")+'</ul>':'<p>برنامه‌ای برای شبکه‌های مرتبط در داده‌های فعلی ثبت نشده است.</p>';
+  const programmeBox=el.querySelector("#media-data-programmes");
+  if(programmeBox)programmeBox.innerHTML=programmes.length?'<ul>'+programmes.map(p=>'<li>'+esc(p.title_fa||p.title||"برنامه")+'</li>').join("")+'</ul>':'<p>برنامه‌ای در داده‌های فعلی ثبت نشده است.</p>';
 }
-
-async function showMediaIdentity_iran_international(){
-  if(window.__mediaIdentityObserver){window.__mediaIdentityObserver.disconnect();window.__mediaIdentityObserver=null;}
-  show("press");setTab("press");
-  const lede=document.querySelector("#press-view > .press-lede");
-  if(lede){
-    if(!lede.dataset.bbcOriginalLede)lede.dataset.bbcOriginalLede=lede.innerHTML;
-    lede.innerHTML='<nav aria-label="بخش‌های پندار" style="display:flex;flex-wrap:wrap;gap:15px;align-items:center;padding:10px 0;font-size:13px"><a href="/press/">پیشخوان جراید</a><a href="/tv/">راهنمای تلویزیون</a><a href="/books/">پیشخوان کتاب</a><a href="/movies/">جان فیلم</a></nav>';
-  }
-  const el=document.getElementById("press-content");
-  if(!el)return;
-  document.title="ایران اینترنشنال | پندار";
-  const badge='';
-  el.innerHTML=`
-    <style>
-      .iran-international-profile{margin:8px auto 25px;max-width:1040px;border:1px solid var(--border,#9994);border-radius:16px;overflow:hidden;background:var(--card-bg,transparent)}
-      .iran-international-cover{height:180px;background:linear-gradient(135deg,#123944,#168b98,#213039);position:relative}
-      .iran-international-cover:after{content:"ایران اینترنشنال";position:absolute;left:22px;top:25px;color:#fff8;font-size:clamp(18px,4vw,42px);font-weight:800;letter-spacing:2px;direction:ltr}
-      .iran-international-cover:before{content:"رسانهٔ خبری فارسی‌زبان";position:absolute;left:22px;top:88px;color:rgba(255,255,255,.85);font-size:clamp(12px,1.6vw,17px);font-weight:450;direction:rtl;text-align:left;max-width:calc(100% - 44px);line-height:1.6}
-
-      .iran-international-profile-body{padding:0 24px 22px}
-      .iran-international-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#167f8d;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}
-      .iran-international-profile-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
-      .iran-international-profile-title{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
-      .iran-international-profile-title h1{font-size:clamp(25px,4vw,36px);margin:0}
-      .iran-international-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #a1a1a1;border-radius:16px;padding:4px 10px;background:#dedede;color:#444;font-size:12px;white-space:nowrap}
-      .iran-international-handle{color:var(--muted,#777);font-size:14px;direction:ltr;text-align:right;margin-top:4px}
-      .iran-international-profile-description{line-height:1.9;margin:14px 0}
-      .iran-international-profile-links{display:flex;gap:15px;flex-wrap:wrap;font-size:13px;margin-bottom:18px}
-      .iran-international-profile-tabs{display:flex;border-top:1px solid var(--border,#9994);border-bottom:1px solid var(--border,#9994);margin:0 -24px;padding:0 14px;overflow:auto}
-      .iran-international-profile-tabs a{padding:13px 16px;white-space:nowrap;text-decoration:none;font-weight:600}
-      .iran-international-profile-tabs .iran-international-content-tab{border:0;background:transparent;color:inherit;cursor:pointer;font:inherit;padding:14px 22px;white-space:nowrap;font-weight:650;opacity:.65}.iran-international-profile-tabs .iran-international-content-tab[aria-selected="true"]{opacity:1;box-shadow:inset 0 -3px #b51b22}.iran-international-profile-tabs .iran-international-content-tab:hover{opacity:1}.iran-international-profile-section[hidden]{display:none!important}
-      .iran-international-profile-section{padding:22px 0 7px;border-bottom:1px solid var(--border,#9994)}
-      .iran-international-profile-section h2{font-size:21px;margin:0 0 14px}
-      .iran-international-profile-section ul{padding-right:20px;line-height:2}
-      @media(max-width:600px){.iran-international-cover{height:125px}.iran-international-cover:before{top:69px;left:14px;font-size:12px}.iran-international-profile-body{padding:0 15px 16px}.iran-international-avatar{flex:0 0 78px!important;width:78px!important;height:78px!important;min-width:78px;max-width:78px;min-height:78px;max-height:78px;margin-top:-30px!important;font-size:14px}.iran-international-profile-tabs{margin:0 -15px}.iran-international-profile-tabs .iran-international-content-tab{padding:12px 18px}}
-    </style>
-    <article class="iran-international-profile">
-      <div class="iran-international-cover" role="img" aria-label="کاور گرافیکی رسانهٔ ایران اینترنشنال"></div>
-      <div class="iran-international-profile-body">
-        <div class="iran-international-profile-top"><div class="iran-international-avatar" aria-label="Iran International"><img src="https://www.iranintl.com/images/ii/ii-logo-fa.svg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" style="width:86%;height:86%;object-fit:contain;object-position:center;display:block" onerror="this.remove();this.parentElement.querySelector('.media-logo-fallback').hidden=false"><span class="media-logo-fallback" hidden>IRAN<br>INTL</span></div><a href="https://www.iranintl.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
-        <div class="iran-international-profile-title"><h1>ایران اینترنشنال</h1>${badge}</div>
-        <div class="iran-international-handle">@iran-international</div>
-        <p class="iran-international-profile-description">رسانهٔ خبری فارسی‌زبان</p>
-        <div class="iran-international-profile-links"><a href="/press/">پیشخوان جراید ↗</a><a href="/tv/">راهنمای تماشا ↗</a><span>رسانهٔ فارسی‌زبان</span></div>
-        <nav class="iran-international-profile-tabs" role="tablist" aria-label="محتوای رسانه">
-          <button type="button" role="tab" class="iran-international-content-tab" id="iran-international-tab-press" aria-selected="true" aria-controls="iran-international-panel-press" data-iran-international-tab="press">مطالب</button>
-          <button type="button" role="tab" class="iran-international-content-tab" id="iran-international-tab-tv" aria-selected="false" aria-controls="iran-international-panel-tv" data-iran-international-tab="tv">شبکه‌ها</button>
-          <button type="button" role="tab" class="iran-international-content-tab" id="iran-international-tab-programmes" aria-selected="false" aria-controls="iran-international-panel-programmes" data-iran-international-tab="programmes">برنامه‌ها</button>
-        </nav>
-        <section class="iran-international-profile-section" id="iran-international-panel-press" role="tabpanel" aria-labelledby="iran-international-tab-press"><div id="iran-international-identity-press">در حال بررسی آرشیو ذخیره‌شده…</div></section>
-        <section class="iran-international-profile-section" id="iran-international-panel-tv" role="tabpanel" aria-labelledby="iran-international-tab-tv" hidden><div id="iran-international-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div></section>
-        <section class="iran-international-profile-section" id="iran-international-panel-programmes" role="tabpanel" aria-labelledby="iran-international-tab-programmes" hidden><div id="iran-international-identity-programmes">در حال بررسی برنامه‌های ذخیره‌شده…</div></section>
-      </div>
-    </article>`+articleDisplayAdMarkup();
-  loadArticleDisplayAd();
-  const tabButtons=Array.from(el.querySelectorAll("[data-iran-international-tab]"));
-  const chooseTab=(id)=>{
-    for(const btn of tabButtons){
-      const selected=btn.dataset.bbcTab===id;
-      btn.setAttribute("aria-selected",String(selected));
-      const panel=el.querySelector("#iran-international-panel-"+btn.dataset.bbcTab);
-      if(panel)panel.hidden=!selected;
-    }
-  };
-  for(const btn of tabButtons)btn.addEventListener("click",()=>chooseTab(btn.dataset.bbcTab));
-  chooseTab("press");
-  const [pr,tr]=await Promise.allSettled([loadPeriodicals(),loadTVGuide()]);
-  if(location.pathname!=="/@iran-international/"||document.getElementById("press-content")!==el)return;
-  const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>/ایران[‌ -]?اینترنشنال|iran international/i.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
-  const pb=document.getElementById("iran-international-identity-press");
-  if(pb)pb.innerHTML=rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+esc(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>در آرشیو منتشرشدهٔ فعلی، مطلبی از این رسانه یافت نشد.</p>';
-  const guide=tr.status==="fulfilled"?tr.value:{channels:[]};
-  const channels=(guide.channels||[]).filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug==="iran-international").slice(0,5);
-  const tb=document.getElementById("iran-international-identity-tv");
-  if(tb)tb.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>در داده‌های فعلی راهنمای تماشا، شبکهٔ منطبق یافت نشد.</p>';
-  const programmeBox=document.getElementById("iran-international-identity-programmes");
-  const ids=new Set(channels.map(c=>String(c.id)));
-  const programmes=(guide.programmes||[]).filter(p=>ids.has(String(p.channel_id))).slice(0,5);
-  if(programmeBox)programmeBox.innerHTML=programmes.length?'<ul>'+programmes.map(p=>'<li>'+esc(p.title_fa||p.title||"برنامه")+'</li>').join("")+'</ul>':'<p>برنامه‌ای برای شبکه‌های مرتبط در داده‌های فعلی ثبت نشده است.</p>';
-}
-
-async function showMediaIdentity_radio_farda(){
-  if(window.__mediaIdentityObserver){window.__mediaIdentityObserver.disconnect();window.__mediaIdentityObserver=null;}
-  show("press");setTab("press");
-  const lede=document.querySelector("#press-view > .press-lede");
-  if(lede){
-    if(!lede.dataset.bbcOriginalLede)lede.dataset.bbcOriginalLede=lede.innerHTML;
-    lede.innerHTML='<nav aria-label="بخش‌های پندار" style="display:flex;flex-wrap:wrap;gap:15px;align-items:center;padding:10px 0;font-size:13px"><a href="/press/">پیشخوان جراید</a><a href="/tv/">راهنمای تلویزیون</a><a href="/books/">پیشخوان کتاب</a><a href="/movies/">جان فیلم</a></nav>';
-  }
-  const el=document.getElementById("press-content");
-  if(!el)return;
-  document.title="رادیو فردا | پندار";
-  const badge='';
-  el.innerHTML=`
-    <style>
-      .radio-farda-profile{margin:8px auto 25px;max-width:1040px;border:1px solid var(--border,#9994);border-radius:16px;overflow:hidden;background:var(--card-bg,transparent)}
-      .radio-farda-cover{height:180px;background:linear-gradient(135deg,#1a3452,#387fa8,#233142);position:relative}
-      .radio-farda-cover:after{content:"رادیو فردا";position:absolute;left:22px;top:25px;color:#fff8;font-size:clamp(18px,4vw,42px);font-weight:800;letter-spacing:2px;direction:ltr}
-      .radio-farda-cover:before{content:"رسانهٔ خبری فارسی‌زبان";position:absolute;left:22px;top:88px;color:rgba(255,255,255,.85);font-size:clamp(12px,1.6vw,17px);font-weight:450;direction:rtl;text-align:left;max-width:calc(100% - 44px);line-height:1.6}
-
-      .radio-farda-profile-body{padding:0 24px 22px}
-      .radio-farda-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}
-      .radio-farda-profile-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
-      .radio-farda-profile-title{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
-      .radio-farda-profile-title h1{font-size:clamp(25px,4vw,36px);margin:0}
-      .radio-farda-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #a1a1a1;border-radius:16px;padding:4px 10px;background:#dedede;color:#444;font-size:12px;white-space:nowrap}
-      .radio-farda-handle{color:var(--muted,#777);font-size:14px;direction:ltr;text-align:right;margin-top:4px}
-      .radio-farda-profile-description{line-height:1.9;margin:14px 0}
-      .radio-farda-profile-links{display:flex;gap:15px;flex-wrap:wrap;font-size:13px;margin-bottom:18px}
-      .radio-farda-profile-tabs{display:flex;border-top:1px solid var(--border,#9994);border-bottom:1px solid var(--border,#9994);margin:0 -24px;padding:0 14px;overflow:auto}
-      .radio-farda-profile-tabs a{padding:13px 16px;white-space:nowrap;text-decoration:none;font-weight:600}
-      .radio-farda-profile-tabs .radio-farda-content-tab{border:0;background:transparent;color:inherit;cursor:pointer;font:inherit;padding:14px 22px;white-space:nowrap;font-weight:650;opacity:.65}.radio-farda-profile-tabs .radio-farda-content-tab[aria-selected="true"]{opacity:1;box-shadow:inset 0 -3px #b51b22}.radio-farda-profile-tabs .radio-farda-content-tab:hover{opacity:1}.radio-farda-profile-section[hidden]{display:none!important}
-      .radio-farda-profile-section{padding:22px 0 7px;border-bottom:1px solid var(--border,#9994)}
-      .radio-farda-profile-section h2{font-size:21px;margin:0 0 14px}
-      .radio-farda-profile-section ul{padding-right:20px;line-height:2}
-      @media(max-width:600px){.radio-farda-cover{height:125px}.radio-farda-cover:before{top:69px;left:14px;font-size:12px}.radio-farda-profile-body{padding:0 15px 16px}.radio-farda-avatar{flex:0 0 78px!important;width:78px!important;height:78px!important;min-width:78px;max-width:78px;min-height:78px;max-height:78px;margin-top:-30px!important;font-size:14px}.radio-farda-profile-tabs{margin:0 -15px}.radio-farda-profile-tabs .radio-farda-content-tab{padding:12px 18px}}
-    </style>
-    <article class="radio-farda-profile">
-      <div class="radio-farda-cover" role="img" aria-label="کاور گرافیکی رسانهٔ رادیو فردا"></div>
-      <div class="radio-farda-profile-body">
-        <div class="radio-farda-profile-top"><div class="radio-farda-avatar" aria-label="Radio Farda"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Radio_Farda_logo.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" style="width:86%;height:86%;object-fit:contain;object-position:center;display:block" onerror="this.remove();this.parentElement.querySelector('.media-logo-fallback').hidden=false"><span class="media-logo-fallback" hidden>RADIO<br>FARDA</span></div><a href="https://www.radiofarda.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
-        <div class="radio-farda-profile-title"><h1>رادیو فردا</h1>${badge}</div>
-        <div class="radio-farda-handle">@radio-farda</div>
-        <p class="radio-farda-profile-description">رسانهٔ فارسی‌زبان با تأمین مالی عمومی ایالات متحده</p>
-        <div class="radio-farda-profile-links"><a href="/press/">پیشخوان جراید ↗</a><a href="/tv/">راهنمای تماشا ↗</a><span>رسانهٔ فارسی‌زبان</span></div>
-        <nav class="radio-farda-profile-tabs" role="tablist" aria-label="محتوای رسانه">
-          <button type="button" role="tab" class="radio-farda-content-tab" id="radio-farda-tab-press" aria-selected="true" aria-controls="radio-farda-panel-press" data-radio-farda-tab="press">مطالب</button>
-          <button type="button" role="tab" class="radio-farda-content-tab" id="radio-farda-tab-tv" aria-selected="false" aria-controls="radio-farda-panel-tv" data-radio-farda-tab="tv">شبکه‌ها</button>
-          <button type="button" role="tab" class="radio-farda-content-tab" id="radio-farda-tab-programmes" aria-selected="false" aria-controls="radio-farda-panel-programmes" data-radio-farda-tab="programmes">برنامه‌ها</button>
-        </nav>
-        <section class="radio-farda-profile-section" id="radio-farda-panel-press" role="tabpanel" aria-labelledby="radio-farda-tab-press"><div id="radio-farda-identity-press">در حال بررسی آرشیو ذخیره‌شده…</div></section>
-        <section class="radio-farda-profile-section" id="radio-farda-panel-tv" role="tabpanel" aria-labelledby="radio-farda-tab-tv" hidden><div id="radio-farda-identity-tv">در حال بررسی داده‌های ذخیره‌شده…</div></section>
-        <section class="radio-farda-profile-section" id="radio-farda-panel-programmes" role="tabpanel" aria-labelledby="radio-farda-tab-programmes" hidden><div id="radio-farda-identity-programmes">در حال بررسی برنامه‌های ذخیره‌شده…</div></section>
-      </div>
-    </article>`+articleDisplayAdMarkup();
-  loadArticleDisplayAd();
-  const tabButtons=Array.from(el.querySelectorAll("[data-radio-farda-tab]"));
-  const chooseTab=(id)=>{
-    for(const btn of tabButtons){
-      const selected=btn.dataset.bbcTab===id;
-      btn.setAttribute("aria-selected",String(selected));
-      const panel=el.querySelector("#radio-farda-panel-"+btn.dataset.bbcTab);
-      if(panel)panel.hidden=!selected;
-    }
-  };
-  for(const btn of tabButtons)btn.addEventListener("click",()=>chooseTab(btn.dataset.bbcTab));
-  chooseTab("press");
-  const [pr,tr]=await Promise.allSettled([loadPeriodicals(),loadTVGuide()]);
-  if(location.pathname!=="/@radio-farda/"||document.getElementById("press-content")!==el)return;
-  const rows=(pr.status==="fulfilled"?pr.value:[]).filter(x=>/رادیو فردا|radio farda/i.test([x.publisher,x.source_name,x.source_key].filter(Boolean).join(" "))).slice(0,8);
-  const pb=document.getElementById("radio-farda-identity-press");
-  if(pb)pb.innerHTML=rows.length?'<ul>'+rows.map(x=>'<li><a href="/press-article/'+encodeURIComponent(String(x.id))+'/">'+esc(x.headline_fa||x.title_original||"مطلب")+'</a></li>').join("")+'</ul>':'<p>در آرشیو منتشرشدهٔ فعلی، مطلبی از این رسانه یافت نشد.</p>';
-  const guide=tr.status==="fulfilled"?tr.value:{channels:[]};
-  const channels=(guide.channels||[]).filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug==="radio-farda").slice(0,5);
-  const tb=document.getElementById("radio-farda-identity-tv");
-  if(tb)tb.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>در داده‌های فعلی راهنمای تماشا، شبکهٔ منطبق یافت نشد.</p>';
-  const programmeBox=document.getElementById("radio-farda-identity-programmes");
-  const ids=new Set(channels.map(c=>String(c.id)));
-  const programmes=(guide.programmes||[]).filter(p=>ids.has(String(p.channel_id))).slice(0,5);
-  if(programmeBox)programmeBox.innerHTML=programmes.length?'<ul>'+programmes.map(p=>'<li>'+esc(p.title_fa||p.title||"برنامه")+'</li>').join("")+'</ul>':'<p>برنامه‌ای برای شبکه‌های مرتبط در داده‌های فعلی ثبت نشده است.</p>';
-}
+function showBBCPersianIdentity(){return showPendarMediaIdentity("bbc-persian");}
+function showMediaIdentity_iran_international(){return showPendarMediaIdentity("iran-international");}
+function showMediaIdentity_radio_farda(){return showPendarMediaIdentity("radio-farda");}
