@@ -618,7 +618,7 @@ async function showBBCPersianIdentity(){
       .bbc-cover{height:180px;background:linear-gradient(132deg,#6c1115 0%,#c42027 55%,#303035 100%);position:relative}
       .bbc-cover:after{content:"BBC  NEWS  فارسی";position:absolute;left:22px;top:25px;color:#fff8;font-size:clamp(18px,4vw,42px);font-weight:800;letter-spacing:2px;direction:ltr}
       .bbc-profile-body{padding:0 24px 22px}
-      .bbc-avatar{width:112px;height:112px;margin-top:-57px;position:relative;border:5px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:grid;place-items:center;text-align:center;line-height:1.1;font-weight:900;font-size:23px;direction:ltr;box-shadow:0 2px 12px #0002}
+      .bbc-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}
       .bbc-profile-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
       .bbc-profile-title{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
       .bbc-profile-title h1{font-size:clamp(25px,4vw,36px);margin:0}
@@ -632,7 +632,7 @@ async function showBBCPersianIdentity(){
       .bbc-profile-section{padding:22px 0 7px;border-bottom:1px solid var(--border,#9994)}
       .bbc-profile-section h2{font-size:21px;margin:0 0 14px}
       .bbc-profile-section ul{padding-right:20px;line-height:2}
-      @media(max-width:600px){.bbc-cover{height:125px}.bbc-profile-body{padding:0 15px 16px}.bbc-avatar{height:90px;width:90px;margin-top:-45px;font-size:18px}.bbc-profile-tabs{margin:0 -15px}.bbc-profile-tabs .bbc-content-tab{padding:12px 18px}}
+      @media(max-width:600px){.bbc-cover{height:125px}.bbc-profile-body{padding:0 15px 16px}.bbc-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}.bbc-profile-tabs{margin:0 -15px}.bbc-profile-tabs .bbc-content-tab{padding:12px 18px}}
     </style>
     <article class="bbc-profile">
       <div class="bbc-cover" role="img" aria-label="کاور گرافیکی رسانهٔ بی‌بی‌سی فارسی"></div>
@@ -697,7 +697,7 @@ async function showMediaIdentity_iran_international(){
       .iran-international-cover{height:180px;background:linear-gradient(135deg,#123944,#168b98,#213039);position:relative}
       .iran-international-cover:after{content:"ایران اینترنشنال";position:absolute;left:22px;top:25px;color:#fff8;font-size:clamp(18px,4vw,42px);font-weight:800;letter-spacing:2px;direction:ltr}
       .iran-international-profile-body{padding:0 24px 22px}
-      .iran-international-avatar{width:112px;height:112px;margin-top:-57px;position:relative;border:5px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:grid;place-items:center;text-align:center;line-height:1.1;font-weight:900;font-size:23px;direction:ltr;box-shadow:0 2px 12px #0002}
+      .iran-international-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#167f8d;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}
       .iran-international-profile-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
       .iran-international-profile-title{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
       .iran-international-profile-title h1{font-size:clamp(25px,4vw,36px);margin:0}
@@ -711,12 +711,12 @@ async function showMediaIdentity_iran_international(){
       .iran-international-profile-section{padding:22px 0 7px;border-bottom:1px solid var(--border,#9994)}
       .iran-international-profile-section h2{font-size:21px;margin:0 0 14px}
       .iran-international-profile-section ul{padding-right:20px;line-height:2}
-      @media(max-width:600px){.iran-international-cover{height:125px}.iran-international-profile-body{padding:0 15px 16px}.iran-international-avatar{height:90px;width:90px;margin-top:-45px;font-size:18px}.iran-international-profile-tabs{margin:0 -15px}.iran-international-profile-tabs .iran-international-content-tab{padding:12px 18px}}
+      @media(max-width:600px){.iran-international-cover{height:125px}.iran-international-profile-body{padding:0 15px 16px}.iran-international-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#167f8d;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}.iran-international-profile-tabs{margin:0 -15px}.iran-international-profile-tabs .iran-international-content-tab{padding:12px 18px}}
     </style>
     <article class="iran-international-profile">
       <div class="iran-international-cover" role="img" aria-label="کاور گرافیکی رسانهٔ ایران اینترنشنال"></div>
       <div class="iran-international-profile-body">
-        <div class="iran-international-profile-top"><div class="iran-international-avatar" aria-label="BBC NEWS">IRAN<br>INTL</div><a href="https://www.iranintl.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
+        <div class="iran-international-profile-top"><div class="iran-international-avatar" aria-label="Iran International">IRAN<br>INTL</div><a href="https://www.iranintl.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
         <div class="iran-international-profile-title"><h1>ایران اینترنشنال</h1>${badge}</div>
         <div class="iran-international-handle">@iran-international</div>
         <p class="iran-international-profile-description">رسانهٔ خبری فارسی‌زبان</p>
@@ -776,7 +776,7 @@ async function showMediaIdentity_radio_farda(){
       .radio-farda-cover{height:180px;background:linear-gradient(135deg,#1a3452,#387fa8,#233142);position:relative}
       .radio-farda-cover:after{content:"رادیو فردا";position:absolute;left:22px;top:25px;color:#fff8;font-size:clamp(18px,4vw,42px);font-weight:800;letter-spacing:2px;direction:ltr}
       .radio-farda-profile-body{padding:0 24px 22px}
-      .radio-farda-avatar{width:112px;height:112px;margin-top:-57px;position:relative;border:5px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:grid;place-items:center;text-align:center;line-height:1.1;font-weight:900;font-size:23px;direction:ltr;box-shadow:0 2px 12px #0002}
+      .radio-farda-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}
       .radio-farda-profile-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
       .radio-farda-profile-title{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
       .radio-farda-profile-title h1{font-size:clamp(25px,4vw,36px);margin:0}
@@ -790,12 +790,12 @@ async function showMediaIdentity_radio_farda(){
       .radio-farda-profile-section{padding:22px 0 7px;border-bottom:1px solid var(--border,#9994)}
       .radio-farda-profile-section h2{font-size:21px;margin:0 0 14px}
       .radio-farda-profile-section ul{padding-right:20px;line-height:2}
-      @media(max-width:600px){.radio-farda-cover{height:125px}.radio-farda-profile-body{padding:0 15px 16px}.radio-farda-avatar{height:90px;width:90px;margin-top:-45px;font-size:18px}.radio-farda-profile-tabs{margin:0 -15px}.radio-farda-profile-tabs .radio-farda-content-tab{padding:12px 18px}}
+      @media(max-width:600px){.radio-farda-cover{height:125px}.radio-farda-profile-body{padding:0 15px 16px}.radio-farda-avatar{box-sizing:border-box!important;flex:0 0 96px!important;width:96px!important;height:96px!important;min-width:96px;max-width:96px;min-height:96px;max-height:96px;aspect-ratio:1;margin-top:-39px!important;position:relative;z-index:2;overflow:hidden;border:4px solid var(--card-bg,#f4f4f0);border-radius:50%;background:#ba151a;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.15;font-family:Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:0;direction:ltr;box-shadow:0 2px 9px #0002}.radio-farda-profile-tabs{margin:0 -15px}.radio-farda-profile-tabs .radio-farda-content-tab{padding:12px 18px}}
     </style>
     <article class="radio-farda-profile">
       <div class="radio-farda-cover" role="img" aria-label="کاور گرافیکی رسانهٔ رادیو فردا"></div>
       <div class="radio-farda-profile-body">
-        <div class="radio-farda-profile-top"><div class="radio-farda-avatar" aria-label="BBC NEWS">RADIO<br>FARDA</div><a href="https://www.radiofarda.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
+        <div class="radio-farda-profile-top"><div class="radio-farda-avatar" aria-label="Radio Farda">RADIO<br>FARDA</div><a href="https://www.radiofarda.com/" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a></div>
         <div class="radio-farda-profile-title"><h1>رادیو فردا</h1>${badge}</div>
         <div class="radio-farda-handle">@radio-farda</div>
         <p class="radio-farda-profile-description">رسانهٔ فارسی‌زبان با تأمین مالی عمومی ایالات متحده</p>
