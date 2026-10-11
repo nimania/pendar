@@ -710,6 +710,18 @@ async function showPendarMediaIdentity(slug){
       feed=names.flatMap(n=>Array.isArray(archive?.[n])?archive[n]:[]);
       if(!feed.length)feed=Object.entries(archive||{}).filter(([name])=>config.pattern.test(name)).flatMap(([,items])=>Array.isArray(items)?items:[]);
     }catch(_){}
+    if(!feed.length){
+      // Reuse the latest independently refreshed headline archive only when
+      // Press's per-source index has no match. No new collection is started.
+      try{
+        const recent=await getJSON(DATA+"/stories.json",5000);
+        const items=Array.isArray(recent)?recent:Array.isArray(recent?.stories)?recent.stories:[];
+        feed=items.filter(x=>{
+          const sourceFields=[...(Array.isArray(x.source_names)?x.source_names:[]),x.source_name,x.publisher,x.source].filter(v=>typeof v==="string");
+          return sourceFields.some(v=>config.pattern.test(v));
+        });
+      }catch(_){}
+    }
     if(location.pathname!=="/@"+slug+"/"||document.getElementById("press-content")!==el)return;
     const seen=new Set();
     feed=feed.filter(x=>x?.id&&!seen.has(String(x.id))&&seen.add(String(x.id))).sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||""))).slice(0,8);
