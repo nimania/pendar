@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T12:34:58.124606+00:00",
+  "generated_at": "2026-10-11T12:53:21.951876+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -488,6 +488,22 @@
       "group": "series",
       "confidence": "aggregated",
       "logo": "https://image.tmdb.org/t/p/w185/fqsd09CrijoGu6qfoNIdgUQmVGO.png"
+    },
+    {
+      "id": "tmdb-network-19",
+      "name_fa": "FOX",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/1DSpHrWyOORkL9N2QHX7Adt31mQ.png"
+    },
+    {
+      "id": "tmdb-network-97",
+      "name_fa": "MBC",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/pOSCKaZhndUFYtxHXjQOV6xJi1s.png"
     }
   ],
   "programmes": [
@@ -510,16 +526,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/y4fGncqELtnvRQuwSpuH8LncZqU.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 2 از فصل 24؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-103",
-      "title_fa": "ドラえもん",
-      "start": "2026-10-10T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/65733",
-      "icon": "https://image.tmdb.org/t/p/w500/9YqdMXlPTQGLIG67vqZdsPdPC4T.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 937 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-30",
@@ -610,26 +616,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-885",
-      "title_fa": "아는 형님",
-      "start": "2026-10-10T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/70672",
-      "icon": "https://image.tmdb.org/t/p/w500/zak7mqMxJGnnWplSdbjDtV7bg2Y.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 546 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "پخش زنده شنبه شب",
-      "start": "2026-10-10T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/1667",
-      "icon": "https://image.tmdb.org/t/p/w500/s1cZBqbMwAF3w8S3Yo0j5nr2Yuo.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 3 از فصل 52؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-189",
@@ -748,16 +734,6 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1514026",
       "icon": "https://image.tmdb.org/t/p/w500/1BdZbNvl1SfrrX8J9X5tQzN6Ivu.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "Hokum",
-      "start": "2026-10-10T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1430077",
-      "icon": "https://image.tmdb.org/t/p/w500/qMJo0KgPT6Nyi26zfi4iVrZj6eQ.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -1288,6 +1264,66 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1309083",
       "icon": "https://image.tmdb.org/t/p/w500/oJJquv1sg5XMTIyNHxEm0KLo696.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-19",
+      "title_fa": "سیمپسون‌ها",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/456",
+      "icon": "https://image.tmdb.org/t/p/w500/tf0CUEynk6GfmrlHIQKQ5mfFP5P.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 3 از فصل 38؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-885",
+      "title_fa": "아는 형님",
+      "start": "2026-10-17T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/70672",
+      "icon": "https://image.tmdb.org/t/p/w500/zak7mqMxJGnnWplSdbjDtV7bg2Y.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 547 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-97",
+      "title_fa": "라디오스타",
+      "start": "2026-10-14T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65270",
+      "icon": "https://image.tmdb.org/t/p/w500/ofo50w2DTFcPkOm3iguWGU3Y8cw.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 985 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-97",
+      "title_fa": "나 혼자 산다",
+      "start": "2026-10-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65282",
+      "icon": "https://image.tmdb.org/t/p/w500/bq3Emv3pJLUyHvwGqiAXRwJvAmL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 669 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "آتش‌نشانی شیکاگو",
+      "start": "2026-10-14T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/44006",
+      "icon": "https://image.tmdb.org/t/p/w500/iyA6NKz3IcdkSjpjNR7PYCXbgTz.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 2 از فصل 15؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "آخرین نفس",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/972533",
+      "icon": "https://image.tmdb.org/t/p/w500/4EYqYqn3vrhdYi26BuMHCM6FlC1.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
