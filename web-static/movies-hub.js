@@ -379,10 +379,20 @@ async function openCinemaHandle(handle){
     const entity=await canonicalEntityById(direct).catch(()=>null);
     if(entity?.type==='person'){await openCanonicalEntity(entity.id);return true}
   }
-  show('movies');setTab('');
-  const el=document.getElementById('movies-content');
+  show('figures');setTab('');
+  const lede=document.getElementById('figures-lede');if(lede)lede.style.display='none';
+  const timeline=document.getElementById('figure-timeline');if(timeline)timeline.innerHTML='';
+  const el=document.getElementById('figures');
   document.title=name+' | چهره‌های پندار';
-  el.innerHTML='<article class="movie-detail"><div class="movie-hero-copy"><span class="press-kicker">چهره‌های پندار · سینما</span><h1>'+esc(name)+'</h1><p class="movie-method">آثار زیر فقط بر اساس ارتباط ثبت‌شده با این هویت گردآوری شده‌اند. اطلاعات سایر آثار پس از تأیید شناسهٔ شخص افزوده می‌شود.</p></div><section class="movie-evidence"><h2>آثار مرتبط</h2>'+entries.map(e=>'<button class="movie-mention" onclick="openMovie('+JSON.stringify(e.m.slug)+')"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><span>'+esc(e.role)+' · '+esc(e.m.year||'')+'</span></button>').join('')+'</section></article>';
+  const picture=first.person?.profile_path&&/^\\/[\\w/-]+\\.(jpg|jpeg|png|webp)$/i.test(first.person.profile_path)
+    ?'<img src="https://image.tmdb.org/t/p/w185'+esc(first.person.profile_path)+'" alt="'+esc(name)+'">'
+    :'<span class="movie-poster-fallback" aria-hidden="true">👤</span>';
+  const x={name_fa:name,handle:handle,profile_handle:handle,role_fa:entries.map(e=>e.role).filter((v,i,a)=>a.indexOf(v)===i).join(' · '),posts:[]};
+  el.innerHTML='<div class="x-profile">'
+    +renderPersonProfileHeader(x,{avatar:picture,subtitle:'چهرهٔ سینمایی',stats:'<span><b>'+faN(entries.length)+'</b> اثر مرتبط</span>'})
+    +'<nav class="x-profile-tabs" aria-label="بخش‌های پروفایل"><button class="on">آثار</button></nav>'
+    +'<section class="movie-evidence"><h2>آثار مرتبط</h2><p class="movie-method">این آثار از ارتباط ثبت‌شده با این هویت در پندار آمده‌اند. تا تأیید شناسهٔ یکتای شخص، فیلم‌شناسی کامل یا خبرهای هم‌نام‌ها ادغام نمی‌شوند.</p>'
+    +entries.map(e=>'<button class="movie-mention" onclick="openMovie('+JSON.stringify(e.m.slug)+')"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><span>'+esc(e.role)+' · '+esc(e.m.year||'')+'</span></button>').join('')+'</section></div>';
   if(location.pathname!=='/@'+handle+'/')setHash('#/@'+handle);
   return true;
 }
