@@ -716,13 +716,34 @@ async function showPendarMediaIdentity(slug){
     if(pressBox)pressBox.innerHTML=feed.length?'<ul>'+feed.map(x=>'<li><a href="/story/'+encodeURIComponent(String(x.id))+'/">'+esc(x.title_fa||x.headline_fa||x.title||"خبر")+'</a></li>').join("")+'</ul>':'<p>در آرشیو منتشرشدهٔ فعلی مطلبی از این رسانه یافت نشد.</p>';
   }
   const guide=tr.status==="fulfilled"?tr.value:{channels:[],programmes:[]};
-  const channels=(guide.channels||[]).filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug===slug).slice(0,5);
+  const allChannels=Array.isArray(guide.channels)?guide.channels:[];
+  const knownChannels=allChannels.filter(c=>typeof _tvMediaIdentity==="function"&&_tvMediaIdentity(c)?.slug===slug);
+  // Use the same media identity mapping as the TV guide, with conservative
+  // fallback to known source fields; never infer affiliation from a programme title.
+  const channels=(knownChannels.length?knownChannels:allChannels.filter(c=>
+    config.pattern.test([c.name_fa,c.name,c.source_name].filter(Boolean).join(" "))
+  )).slice(0,12);
   const tvBox=el.querySelector("#media-data-tv");
-  if(tvBox)tvBox.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های فعلی یافت نشد.</p>';
+  if(tvBox)tvBox.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های ذخیره‌شده یافت نشد.</p>';
   const ids=new Set(channels.map(c=>String(c.id)));
-  const programmes=(guide.programmes||[]).filter(p=>ids.has(String(p.channel_id))).slice(0,5);
+  const programmes=(Array.isArray(guide.programmes)?guide.programmes:[])
+    .filter(p=>ids.has(String(p.channel_id)))
+    .sort((a,b)=>String(b.start||"").localeCompare(String(a.start||"")))
+    .slice(0,8);
   const programmeBox=el.querySelector("#media-data-programmes");
-  if(programmeBox)programmeBox.innerHTML=programmes.length?'<ul>'+programmes.map(p=>'<li>'+esc(p.title_fa||p.title||"برنامه")+'</li>').join("")+'</ul>':'<p>برنامه‌ای در داده‌های فعلی ثبت نشده است.</p>';
+  const dateTime=v=>{
+    if(!v||!Number.isFinite(new Date(v).getTime()))return "";
+    return new Intl.DateTimeFormat("fa-IR",{timeZone:"Asia/Tehran",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(v));
+  };
+  if(programmeBox)programmeBox.innerHTML=programmes.length?'<ul>'+programmes.map(p=>{
+    const title=esc(p.title_fa||p.title_en||p.title||"برنامه");
+    const key=typeof _tvProgrammeKey==="function"?_tvProgrammeKey(p):"";
+    const heading=key?'<a href="/tv/program/'+encodeURIComponent(key)+'/">'+title+'</a>':title;
+    const when=dateTime(p.start);
+    return '<li>'+heading+(when?' <small style="color:var(--muted,#777)">زمان ثبت‌شدهٔ پخش: '+esc(when)+' (تهران)</small>':'')+'</li>';
+  }).join("")+'</ul>':'<p>برنامه‌ای در داده‌های ذخیره‌شده برای شبکه‌های مرتبط یافت نشد.</p>';
+  const updatedAt=dateTime(guide.generated_at);
+  if(updatedAt&&programmeBox)programmeBox.insertAdjacentHTML("beforeend",'<p style="font-size:12px;color:var(--muted,#777)">آخرین ثبت راهنمای تماشا: '+esc(updatedAt)+' (تهران). زمان‌های بالا الزاماً برنامهٔ امروز نیستند.</p>');
 }
 function showBBCPersianIdentity(){return showPendarMediaIdentity("bbc-persian");}
 function showMediaIdentity_iran_international(){return showPendarMediaIdentity("iran-international");}
