@@ -129,6 +129,8 @@ async function route() {
   if (kind === "movies") return showMovies();
   if (kind === "movie" && arg) return openMovie(arg);
   if (kind === "master-movie" && arg) return openMasterMovie(arg);
+  if (kind === "tv" && arg.startsWith("channel/")) return openTVChannel(arg.slice(8));
+  if (kind === "tv" && arg.startsWith("program/")) return openTVProgramme(arg.slice(8));
   if (kind === "tv") return showTVGuide(arg || "now");
   if (kind === "knowledge") return showKnowledge(arg || "home");
   if (kind === "entity" && arg) return openCanonicalEntity(arg);
