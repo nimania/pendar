@@ -199,6 +199,9 @@ jobs:
           import re
           ids=[p.stem for p in (root/"data/story").glob("*.json")
                if re.fullmatch(r"[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}",p.stem)]
+          # Include previously shared event URLs, even if the anchor story aged
+          # out of the latest compact feed. The SPA will offer an archive fallback.
+          ids=sorted(set(ids+["9883cb58-e3da-4f35-8684-3ec9a6b70a37"]))
           for sid in ids:
               dest=root/"event"/("event-"+sid)/"index.html"
               if not dest.is_file():
@@ -206,6 +209,8 @@ jobs:
                   shutil.copy2(shell,dest)
           # Fallback keeps SPA routing available for less common generated paths.
           shutil.copy2(shell,root/"404.html")
+          assert (root/"event"/"event-9883cb58-e3da-4f35-8684-3ec9a6b70a37"/"index.html").is_file()
+          assert (root/"404.html").is_file()
           print("Ensured",len(stories),"news entry pages; newly created",made,
                 "; event dossiers",len(ids),flush=True)
           PY
