@@ -10,7 +10,7 @@ function articleSafeAd() {
   const doc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head>'
     + '<body style="margin:0;overflow:hidden;background:transparent"><script>'
     + 'var atOptions={key:"'+key+'",format:"iframe",height:'+height+',width:'+width+',params:{}};'
-    + '<\\/script><script src="'+source+'"><\\/script></body></html>';
+    + '</script><script src="'+source+'"></script></body></html>';
   const encoded = doc.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   return '<aside class="story-inline-sponsor" aria-label="آگهی تبلیغاتی"'
     + ' style="margin:24px auto;padding:12px 0;border-top:1px solid #8884;border-bottom:1px solid #8884;text-align:center;max-width:100%">'
