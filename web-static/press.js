@@ -619,7 +619,17 @@ async function showBBCPersianIdentity(){
     +'<h3>شبکه‌های مرتبط</h3>'
     +(channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+escape(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های فعلی راهنمای تلویزیون یافت نشد.</p>')
     +'</section>';
-  if(location.pathname!=="/@bbc-persian/")return;
-  el.insertAdjacentHTML("afterbegin",info);
-  document.title="بی‌بی‌سی فارسی | هویت رسانه‌ای پندار";
+  // Press health/stats may repaint this container asynchronously. Reattach the
+  // identity section after those repaints, without triggering additional fetches.
+  const attach=()=>{
+    if(location.pathname!=="/@bbc-persian/")return;
+    if(!el.querySelector(".press-identity-summary")){
+      el.insertAdjacentHTML("afterbegin",info);
+    }
+    document.title="بی‌بی‌سی فارسی | هویت رسانه‌ای پندار";
+  };
+  attach();
+  if(window.__bbcIdentityObserver)window.__bbcIdentityObserver.disconnect();
+  window.__bbcIdentityObserver=new MutationObserver(attach);
+  window.__bbcIdentityObserver.observe(el,{childList:true});
 }
