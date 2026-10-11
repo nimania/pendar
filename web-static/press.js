@@ -594,3 +594,30 @@ async function openPressArticle(id) {
   loadArticleDisplayAd();
   setHash("#/press-article/"+encodeURIComponent(id));
 }
+
+/* BBC Persian: cached, bounded identity pilot. No collectors or API integrations. */
+async function showBBCPersianIdentity(){
+  await showPress("بی‌بی‌سی فارسی");
+  const el=document.getElementById("press-content");
+  if(!el)return;
+  const meta=_pressFindSource("بی‌بی‌سی فارسی");
+  const escape=typeof esc==="function"?esc:(x=>String(x??""));
+  const rows=(await loadPeriodicals()).filter(x=>/بی[‌ -]?بی[‌ -]?سی|bbc/i.test(String(x.publisher||x.source_name||""))).slice(0,6);
+  let channels=[];
+  try{
+    const guide=await loadTVGuide();
+    channels=(guide.channels||[]).filter(c=>_tvMediaIdentity(c)?.slug==="bbc-persian").slice(0,5);
+  }catch(_){}
+  const info='<section class="press-identity-summary" style="margin:16px 0;padding:18px;border:1px solid #8884;border-radius:14px">'
+    +'<h2>بی‌بی‌سی فارسی · شناسهٔ رسانه</h2>'
+    +'<p>نمایهٔ یکپارچهٔ آزمایشی در پندار؛ اطلاعات از آرشیو موجود پیشخوان جراید و راهنمای تماشا خوانده می‌شود.</p>'
+    +'<p><a href="/press/">پیشخوان جراید</a> · <a href="/tv/">راهنمای تلویزیون</a></p>'
+    +'<h3>مطالب ثبت‌شده</h3>'
+    +(rows.length?'<ul>'+rows.map(x=>'<li><button type="button" onclick="openPressArticle('+JSON.stringify(String(x.id))+')">'+escape(x.headline_fa||x.title_original||"مطلب")+'</button></li>').join("")+'</ul>':'<p>مطلبی در آرشیو ذخیره‌شدهٔ فعلی یافت نشد.</p>')
+    +'<h3>شبکه‌های مرتبط</h3>'
+    +(channels.length?'<ul>'+channels.map(c=>'<li><button type="button" onclick="openTVChannel('+JSON.stringify(String(c.id))+')">'+escape(c.name_fa||c.name||"شبکه")+'</button></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های فعلی راهنمای تلویزیون یافت نشد.</p>')
+    +'</section>';
+  if(location.pathname!=="/@bbc-persian/")return;
+  el.insertAdjacentHTML("afterbegin",info);
+  document.title="بی‌بی‌سی فارسی | هویت رسانه‌ای پندار";
+}
