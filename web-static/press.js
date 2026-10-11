@@ -288,6 +288,10 @@ function _pressMediaData(meta, figureData){
 }
 
 async function showPress(sourceName, canonicalId=null) {
+  const pressLede=document.querySelector("#press-view > .press-lede");
+  if(pressLede&&pressLede.dataset.bbcOriginalLede){
+    pressLede.innerHTML=pressLede.dataset.bbcOriginalLede;
+  }
   if((sourceName||"")!==pressSourceCurrent){ pressSourceCurrent=sourceName||""; pressSourceTab="latest"; }
   let canonicalSource=sourceName?(canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByName("source",sourceName)):null;
   if(sourceName&&!canonicalSource){
@@ -601,6 +605,7 @@ async function showBBCPersianIdentity(){
   show("press");setTab("press");
   const lede=document.querySelector("#press-view > .press-lede");
   if(lede){
+    if(!lede.dataset.bbcOriginalLede)lede.dataset.bbcOriginalLede=lede.innerHTML;
     lede.innerHTML='<nav aria-label="بخش‌های پندار" style="display:flex;flex-wrap:wrap;gap:15px;align-items:center;padding:10px 0;font-size:13px"><a href="/press/">پیشخوان جراید</a><a href="/tv/">راهنمای تلویزیون</a><a href="/books/">پیشخوان کتاب</a><a href="/movies/">جان فیلم</a></nav>';
   }
   const el=document.getElementById("press-content");
