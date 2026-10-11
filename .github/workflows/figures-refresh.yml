@@ -70,7 +70,21 @@ jobs:
           now=datetime.datetime.now(datetime.timezone.utc).isoformat()
           d['generated_at']=now
           (dst/'figures.json').write_text(json.dumps(d,ensure_ascii=False),encoding='utf-8')
-          meta={'last_checked_at':now,'published_statements':len(stamps),'figures':len(people),'latest_post_at':max(stamps) if stamps else None}
+          valid=[]
+          for f in people:
+              for p in f.get('posts',[]):
+                  try:
+                      stamp=datetime.datetime.fromisoformat(str(p.get('published_at') or '').replace('Z','+00:00'))
+                      if stamp.tzinfo is None:stamp=stamp.replace(tzinfo=datetime.timezone.utc)
+                      if stamp <= datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(hours=1):
+                          valid.append((stamp,str(f.get('handle') or f.get('name_fa') or '')))
+                  except (ValueError,TypeError):pass
+          cutoff=datetime.datetime.now(datetime.timezone.utc)-datetime.timedelta(hours=24)
+          fresh=[(t,h) for t,h in valid if t >= cutoff]
+          meta={'last_checked_at':now,'published_statements':len(stamps),'figures':len(people),
+                'latest_post_at':max((t.isoformat() for t,h in valid),default=None),
+                'statements_24h':len(fresh),'active_figures_24h':len({h for t,h in fresh}),
+                'external_collector_note':'Success means export completed; it does not guarantee new source statements.'}
           (dst/'figures-health.json').write_text(json.dumps(meta,ensure_ascii=False),encoding='utf-8')
           print(meta,flush=True)
           PY
