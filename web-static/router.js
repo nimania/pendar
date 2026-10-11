@@ -59,7 +59,18 @@ async function route() {
     const person=window.PENDAR_HANDLES?.people?.[decodeURIComponent(raw.slice(1)).toLowerCase()];
     if(person?.id)return openCanonicalEntity(person.id);
     if(person?.figure)return openFigure(person.figure);
-    show("entity");setTab("");document.getElementById("entity-content").textContent="این چهره پیدا نشد";return;
+    // Carefully curated non-person handles. Existing person handles always win.
+    // Static mapping: no new registry queries, collectors or database joins.
+    const aliases={
+      "irna":{kind:"press",name:"ایرنا"},
+      "isna":{kind:"press",name:"ایسنا"},
+      "filimo":{kind:"tv",channel:"stream-filimo"}
+    };
+    const slug=decodeURIComponent(raw.slice(1)).toLowerCase();
+    const alias=aliases[slug];
+    if(alias?.kind==="press")return showPress(alias.name);
+    if(alias?.kind==="tv")return openTVChannel(alias.channel);
+    show("entity");setTab("");document.getElementById("entity-content").textContent="این هویت پیدا نشد";return;
   }
   const i = raw.indexOf("/");
   const kind = i < 0 ? raw : raw.slice(0, i);
