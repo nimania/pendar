@@ -189,6 +189,7 @@ async function openStory(id) {
     ${relSection}
     <div class="layers"><h3 class="section-h">منابع چه می‌گویند <span class="n">دیدگاه هر منبع، جدا از واقعیت</span></h3><div class="views">${views || '<p class="muted">—</p>'}</div>${consensus}</div>
     ${figuresSection(s.figures)}
+    ${((String(s.what_happened_fa||"")+String(s.why_it_matters_fa||"")+String(s.summary_fa||"")).length >= 900 && (s.sources||[]).length >= 3) ? articleDisplayAdMarkup().replaceAll("pendar-article-display-ad","pendar-article-display-ad-second") : ""}
     <div class="layers"><h3 class="section-h">منابع</h3><div class="cites">${cites}</div></div>
     <div class="ask"><div class="a-h"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" style="color:var(--accent)"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z" stroke-linejoin="round"/></svg> دربارهٔ این خبر بپرس</div>
       <p class="a-sub">پاسخ‌های آماده از روی همین خبر.</p>
@@ -197,6 +198,21 @@ async function openStory(id) {
         <div class="grounded"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> مبتنی بر منابع همین خبر</div></div>
     </div><div id="story-discovery"></div>`;
   loadArticleDisplayAd();
+  // Second placement only on substantial news stories; delay avoids competing
+  // global atOptions mutations from the two network invocations.
+  if(document.getElementById("pendar-article-display-ad-second")) {
+    setTimeout(function(){
+      if(!document.getElementById("pendar-article-display-ad-second"))return;
+      const slot=document.getElementById("pendar-article-display-ad-second");
+      if(slot.dataset.requested)return;
+      slot.dataset.requested="1";
+      window.atOptions={key:"184394f0e43c2ef26ae4cfc176de3f42",format:"iframe",height:250,width:300,params:{}};
+      const js=document.createElement("script");
+      js.async=true;
+      js.src="https://www.highrevenueformat.com/184394f0e43c2ef26ae4cfc176de3f42/invoke.js";
+      slot.appendChild(js);
+    },2500);
+  }
   renderContentDiscovery(document.getElementById("story-discovery"),s);
 }
 function showAsk(i) {
