@@ -230,6 +230,23 @@ jobs:
               assert target.is_file()
               print(f"Cached book shelf entry enabled; data bytes={cached.stat().st_size}; zero new API calls")
           PY
+      - name: Restore cached film and television entrances (no API refresh)
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          root=Path('site')
+          shell=root/'index.html'
+          cached=root/'movies-data.js'
+          if cached.is_file() and 1000 < cached.stat().st_size < 2000000:
+              for section in ('movies','tv'):
+                  dest=root/section/'index.html'
+                  dest.parent.mkdir(parents=True,exist_ok=True)
+                  shutil.copy2(shell,dest)
+              print(f'Static movie and TV entry pages restored; cached film JS: {cached.stat().st_size} bytes; no API calls.')
+          else:
+              print('::warning::Cached movie catalog missing or above 2MB; film and TV entrances not enabled.')
+          PY
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
