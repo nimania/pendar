@@ -419,12 +419,13 @@ async function renderPress(sourceName, canonicalSource=null) {
     const known=new Set(PRESS_SOURCES.flatMap(s=>[s.name,...(s.aliases||[])]));
     const extra=manifest.filter(x=>x&&x.source_name&&Number(x.count||0)>0&&!known.has(String(x.source_name))).map(x=>[String(x.source_name),Number(x.count||0)]);
     const activeCount=PRESS_SOURCES.filter(s=>sourceDirRow(s).count>0).length;
-    el.innerHTML=`<section class="press-directory-hero"><span class="press-kicker">دایرکتوری منابع پندار</span><h1>منابع</h1><p>روزنامه‌ها، خبرگزاری‌ها، مجلات، پادکست‌ها و رسانه‌های ویدئویی در یک فهرست واحد؛ هر منبع صفحهٔ مستقل خودش را دارد.</p><div class="press-directory-stats"><span><b>${faN(PRESS_SOURCES.length)}</b> منبع ثبت‌شده</span><span><b>${faN(activeCount)}</b> دارای محتوای پردازش‌شده</span><span><b>${faN(PRESS_SOURCES.filter(s=>s.scope==="youtube").length)}</b> منبع ویدئویی</span></div></section>
+    el.innerHTML=`${articleDisplayAdMarkup()}<section class="press-directory-hero"><span class="press-kicker">دایرکتوری منابع پندار</span><h1>منابع</h1><p>روزنامه‌ها، خبرگزاری‌ها، مجلات، پادکست‌ها و رسانه‌های ویدئویی در یک فهرست واحد؛ هر منبع صفحهٔ مستقل خودش را دارد.</p><div class="press-directory-stats"><span><b>${faN(PRESS_SOURCES.length)}</b> منبع ثبت‌شده</span><span><b>${faN(activeCount)}</b> دارای محتوای پردازش‌شده</span><span><b>${faN(PRESS_SOURCES.filter(s=>s.scope==="youtube").length)}</b> منبع ویدئویی</span></div></section>
       <div class="press-kind-filter">${kindControls}</div>
       <div class="press-filter-row press-langs">${langControls}</div>
       ${cards?`<div class="press-grid press-directory-grid">${cards}</div>`:`<div class="state"><div class="big">منبعی با این فیلتر پیدا نشد</div></div>`}
       ${extra.length?`<div class="rule"><span>منابع تازهٔ پردازش‌شده</span><span class="l"></span></div><div class="press-grid">${extra.map(([name,count])=>`<button class="press-source" onclick="showPress('${esc(name)}')"><span class="press-mark">ج</span><strong>${esc(name)}</strong><small>${faN(count)} مطلب</small></button>`).join("")}</div>`:""}`;
 
+    loadArticleDisplayAd();
     return;
   }
 
@@ -466,9 +467,11 @@ async function renderPress(sourceName, canonicalSource=null) {
     el.innerHTML=`<div class="press-source-head"><button class="back" onclick="showPress()">همهٔ منابع</button>${meta?pressLogo(meta):""}<div><span class="press-kicker">${esc(meta?.type||"رسانه")}</span><h2>${esc(meta?.name||sourceName)} ${pressHealthBadge(h)}</h2>${meta?`<p>${PRESS_LANG_FA[meta.lang]||meta.lang}${st.iran_story_count?` · ${faN(st.iran_story_count)} خبر مرتبط با ایران`:""}${st.latest_at?` · آخرین خبر: ${relTime(st.latest_at)}`:""}${h&&h.last_run?` · آخرین پایش: ${relTime(h.last_run)}`:""}</p>`:""}</div></div>
       ${canonicalSource?canonicalStrip(canonicalSource):""}
       ${tabsHtml}
+      ${articleDisplayAdMarkup()}
       <div class="press-source-tab-body">${body}</div>`;
   };
   renderSourcePage([]);
+  loadArticleDisplayAd();
 
   (async()=>{
     let feedItems=[];
@@ -555,7 +558,7 @@ async function openPressArticle(id) {
   const eventCard=pressEventCard(x);
   const relatedBooks=(bookData.books||[]).filter(b=>(b.mentions||[]).some(m=>String(m.article_id||"")===String(id)));
   const bookStrip=relatedBooks.length?`<section class="press-books"><div class="press-box-label">کتاب‌های این مطلب</div><div class="press-book-links">${relatedBooks.map(b=>`<button onclick="openBook('${esc(b.slug)}')"><span>کتاب</span><b>${esc(b.title_fa||"")}</b></button>`).join("")}</div></section>`:"";
-  el.innerHTML=`<article class="press-detail press-longread">
+  el.innerHTML=`${articleDisplayAdMarkup()}<article class="press-detail press-longread">
     <button class="back press-article-back" onclick="showPress('${esc(x.publisher||"")}')">بازگشت به ${esc(x.publisher||"نشریه")}</button>
     <header class="press-longread-head">
       <div class="press-kicker-row"><span class="press-kicker">پیشخوان جراید</span><span class="press-source-name">${esc(x.publisher||"نشریه")}</span>${x.section_fa?`<span class="press-section-dot">•</span><span class="press-section-name">${esc(x.section_fa)}</span>`:""}</div>
@@ -574,5 +577,6 @@ async function openPressArticle(id) {
       ${originalUrl?`<a class="press-source-link" href="${esc(originalUrl)}" target="_blank" rel="noopener">مشاهدهٔ منبع اصلی ↗</a>`:""}
     </footer>
   </article>`;
+  loadArticleDisplayAd();
   setHash("#/press-article/"+encodeURIComponent(id));
 }
