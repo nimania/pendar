@@ -13,7 +13,7 @@ assert (root / "index.html").is_file(), "Refusing to trim a non-site folder"
 # Keep the SPA shell and all root-level JS/CSS; pages for news and people only.
 keep_dirs = {
     "assets", "data", "story", "stories", "figure", "figures",
-    "person", "people", "news", "search", "topic", "topics", "event",
+    "person", "people", "news", "search", "topic", "topics", "event", "books",
 }
 # Root-level data consumed by news feeds, archive, entity/figure views and search.
 keep_data_names = {
