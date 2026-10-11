@@ -76,9 +76,20 @@ jobs:
               try: return datetime.fromisoformat(value.replace("Z","+00:00")).astimezone(timezone.utc)
               except ValueError: return datetime.min.replace(tzinfo=timezone.utc)
           assert stamp(fresh)>datetime.min.replace(tzinfo=timezone.utc)
-          if stamp(fresh)<=stamp(old):
-              print("Keeping existing newer/equal news snapshot")
+          def complete(cards, folder):
+              return bool(cards) and all(
+                  isinstance(row,dict) and row.get("id") and
+                  (folder/"story"/(str(row["id"])+".json")).is_file()
+                  for row in cards
+              )
+          candidate=json.loads((src/"stories.json").read_text(encoding="utf-8"))
+          current=json.loads((dst/"stories.json").read_text(encoding="utf-8")) if (dst/"stories.json").exists() else []
+          assert complete(candidate,src), "Independent news payload has missing detail files"
+          if stamp(fresh)<=stamp(old) and complete(current,dst):
+              print("Keeping existing newer/equal news snapshot with complete details")
               raise SystemExit(0)
+          if stamp(fresh)<=stamp(old):
+              print("::warning::Repairing incomplete published news using last complete independent snapshot")
           stories=json.loads((src/"stories.json").read_text(encoding="utf-8"))
           previous=json.loads((dst/"stories.json").read_text(encoding="utf-8")) if (dst/"stories.json").exists() else []
           assert 1 <= len(stories) <= 60 and len(stories)>=len(previous)*0.8, "News integrity guard: homepage feed empty or dropped"
