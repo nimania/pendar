@@ -100,86 +100,12 @@
 
       <section id="home-events" class="home-events" aria-label="ماجراهای ترند"></section>
 
-      <!-- Adsterra Native Banner; homepage only. Distinctly labeled sponsored content. -->
-      <aside class="pendar-sponsored-native" aria-label="آگهی تبلیغاتی" style="max-width:100%;margin:18px 0 24px;padding:10px 12px;border:1px solid var(--border,#d8d8d8);border-radius:12px;overflow:hidden">
-        <div style="font-size:11px;letter-spacing:.02em;color:var(--muted,#777);margin-bottom:6px">آگهی · محتوای تبلیغاتی</div>
-        <script async="async" data-cfasync="false" src="https://pl31759532.profitableratecpmnetwork.com/528ad69dc7176bd8a8545ad083e76bc9/invoke.js"></script>
-        <div id="container-528ad69dc7176bd8a8545ad083e76bc9"></div>
-      </aside>
-
-      <!-- Independent sandboxed frames isolate Adsterra atOptions between placements. -->
-      <aside class="pendar-sponsored-wide" aria-label="آگهی تبلیغاتی"><div class="pendar-ad-label">آگهی · محتوای تبلیغاتی</div>
-        <!-- Direct Adsterra 728x90 integration test. Do not wrap inside a sandboxed iframe. -->
-        <div class="pendar-ad-direct-test" style="width:728px;min-height:90px;max-width:100%;margin:0 auto;overflow:hidden">
-          <script>atOptions = {'key':'6efc34d69af7f7de064af76a35e3c040','format':'iframe','height':90,'width':728,'params':{}};</script>
-          <script src="https://www.highrevenueformat.com/6efc34d69af7f7de064af76a35e3c040/invoke.js"></script>
-        </div>
-      </aside>
-      <aside class="pendar-sponsored-mobile" aria-label="آگهی تبلیغاتی"><div class="pendar-ad-label">آگهی · محتوای تبلیغاتی</div><iframe title="آگهی موبایل" loading="lazy" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin-when-cross-origin" width="320" height="50" scrolling="no" style="border:0;display:block;margin:auto;max-width:100%" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body style=&quot;margin:0;overflow:hidden&quot;&gt;&lt;script&gt;var atOptions={key:'5753b84d84fd726c73ffad8f06df1340',format:'iframe',height:50,width:320,params:{}};&lt;/script&gt;&lt;script src=&quot;https://www.highrevenueformat.com/5753b84d84fd726c73ffad8f06df1340/invoke.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></aside>
-      <style>.pendar-sponsored-wide,.pendar-sponsored-mobile,.pendar-sponsored-side{max-width:100%;margin:16px auto 24px;text-align:center}.pendar-ad-label{font-size:11px;color:var(--muted,#777);margin-bottom:7px}.pendar-sponsored-mobile{display:none}@media(max-width:799px){.pendar-sponsored-wide{display:none}.pendar-sponsored-mobile{display:block}}@media(max-width:649px){.pendar-sponsored-side{display:none}}</style>
-
-      <!-- Priority news + figures mode: avoid presenting unmaintained culture panels as empty content. -->
+      <!-- Adsterra temporarily disabled: intrusive mobile pop-ups and redirects.
+           Never load third-party advertising scripts until a safe format is verified. -->
       <style id="pendar-priority-home">
         #home-daily .home-culture-panel {display:none!important}
         #home-daily .home-daily-grid {grid-template-columns:minmax(0,1fr)!important}
-        /* The network's scripts may require a visible container to fill an ad.
-           Keep native and 728x90 test slots visible; prevent unverified small slots
-           from reserving space. */
-        .pendar-sponsored-mobile:not(.pendar-ad-loaded),
-        .pendar-sponsored-side:not(.pendar-ad-loaded) {display:none!important}
-        .pendar-sponsored-native,.pendar-sponsored-wide {min-height:0}
       </style>
-      <script>
-      (function(){
-        // Do not reserve large empty rectangles when the ad network returns no creative.
-        function observeAds(){
-          document.querySelectorAll('.pendar-sponsored-native,.pendar-sponsored-wide,.pendar-sponsored-mobile,.pendar-sponsored-side').forEach(function(box){
-            var label=box.querySelector('.pendar-ad-label')||box.firstElementChild;
-            var hasCreative=function(){
-              var n=box.querySelector('[id^="container-"],.pendar-ad-direct-test');
-              var children=n&&n.querySelector('iframe,img,a,video');
-              var f=box.querySelector('iframe:not([srcdoc])');
-              return !!(children||f);
-            };
-            if(hasCreative())box.classList.add('pendar-ad-loaded');
-            new MutationObserver(function(){if(hasCreative())box.classList.add('pendar-ad-loaded')}).observe(box,{childList:true,subtree:true});
-          });
-        }
-        if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',observeAds);
-        else observeAds();
-      })();
-      </script>
-      <script>
-      (function(){
-        if(new URLSearchParams(location.search).get("ad_debug")!=="1")return;
-        function run(){
-          var panel=document.createElement("section");
-          panel.setAttribute("dir","rtl");
-          panel.style.cssText="background:#fff;color:#222;border:2px solid #ae5724;border-radius:10px;padding:14px;margin:20px auto;max-width:980px;font:14px/2 sans-serif";
-          panel.innerHTML="<strong>آزمایش نمایش تبلیغات پندار (فقط برای این نشانی)</strong><div id='pendar-ad-diag'></div>";
-          var target=document.querySelector(".pendar-sponsored-native")||document.querySelector("#home-daily");
-          if(target&&target.parentNode)target.parentNode.insertBefore(panel,target);
-          function report(){
-            var names=[["Native",".pendar-sponsored-native"],["افقی 728×90",".pendar-sponsored-wide"],["موبایل 320×50",".pendar-sponsored-mobile"],["عمودی 160×300",".pendar-sponsored-side"]];
-            var lines=names.map(function(entry){
-              var el=document.querySelector(entry[1]);
-              if(!el)return entry[0]+": جایگاه پیدا نشد";
-              var scripts=Array.from(el.querySelectorAll("script[src]"));
-              var frames=el.querySelectorAll("iframe").length;
-              var direct=el.querySelector('[id^="container-"],.pendar-ad-direct-test');
-              var nodes=direct?direct.children.length:0;
-              var visible=!!(el.offsetWidth&&el.offsetHeight);
-              return entry[0]+": "+(visible?"قابل مشاهده":"پنهان")+
-                " | اسکریپت خارجی: "+scripts.length+" | iframe: "+frames+" | عناصر تبلیغ: "+nodes;
-            });
-            var area=document.getElementById("pendar-ad-diag");
-            if(area)area.textContent=lines.join(" ؛ ");
-          }
-          report();setTimeout(report,2500);setTimeout(report,9000);
-        }
-        if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
-      })();
-      </script>
       <section class="home-daily" id="home-daily" aria-label="خبر، فرهنگ و سرگرمی">
         <div class="home-daily-grid">
           <section class="home-daily-panel home-news-panel">
@@ -195,7 +121,7 @@
           <section class="home-daily-panel home-culture-panel" id="home-culture-panel" aria-label="ویترین فرهنگ و سرگرمی">
             <div class="home-panel-title home-panel-title-rich"><span><b id="home-culture-title">ویترین امروز</b><small>کتاب و پیشنهادهای تماشای امروز</small></span><a href="/books/">پیشخوان کتاب ←</a></div>
             <div class="home-dashboard-strip" id="home-culture-dashboard" aria-label="وضعیت فرهنگی پندار"></div>
-            <aside class="pendar-sponsored-side" aria-label="آگهی تبلیغاتی"><div class="pendar-ad-label">آگهی · محتوای تبلیغاتی</div><iframe title="آگهی عمودی" loading="lazy" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin-when-cross-origin" width="160" height="300" scrolling="no" style="border:0;display:block;margin:auto;max-width:100%" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&lt;/head&gt;&lt;body style=&quot;margin:0;overflow:hidden&quot;&gt;&lt;script&gt;var atOptions={key:'0a514ce6c8de4b886c97888e86133394',format:'iframe',height:300,width:160,params:{}};&lt;/script&gt;&lt;script src=&quot;https://www.highrevenueformat.com/0a514ce6c8de4b886c97888e86133394/invoke.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></aside>
+
             <div class="home-panel-tabs home-culture-tabs" role="tablist" aria-label="ویترین فرهنگ و سرگرمی">
               <button class="on" role="tab" aria-selected="true" data-home-culture="books" onclick="setHomeCultureMode('books')">کتاب</button>
               <button role="tab" aria-selected="false" data-home-culture="turkish" onclick="setHomeCultureMode('turkish')">سریال‌های ترکی امشب</button>
