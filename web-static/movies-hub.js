@@ -347,7 +347,17 @@ async function openMovie(slug,canonicalId=null){const catalog=await loadMovies()
 const PERSON_ROLE_FA={Director:"کارگردان",Writer:"نویسنده",Screenplay:"فیلمنامه‌نویس",Creator:"خالق",Producer:"تهیه‌کننده","Executive Producer":"تهیه‌کننده اجرایی",Story:"داستان","Director of Photography":"مدیر فیلم‌برداری",Editor:"تدوینگر","Original Music Composer":"آهنگساز",Casting:"انتخاب بازیگر"};
 const MOVIE_LANGUAGE_FA={fa:"فارسی",en:"انگلیسی",tr:"ترکی",fr:"فرانسوی",de:"آلمانی",ja:"ژاپنی",ko:"کره‌ای",es:"اسپانیایی",it:"ایتالیایی",ar:"عربی",hi:"هندی",ru:"روسی",zh:"چینی",pt:"پرتغالی"};
 let personMediaRatings={};
-function _moviePersonCredit(x){const p=x,name=p.name_fa||p.name||x.name||"",role=x.kind==="cast"?"بازیگر":PERSON_ROLE_FA[x.role]||"عوامل";return '<a class="movie-credit" href="#/entity/'+encodeURIComponent(x.person_id||('person:tmdb-'+Number(x.id)))+'">'+(p.profile_path?'<img width="48" height="64" loading="lazy" alt="" src="https://image.tmdb.org/t/p/w185'+esc(p.profile_path)+'">':"")+'<b>'+esc(name)+'</b><small>'+esc(role)+'</small></a>'}
+function _moviePersonCredit(x){
+  const name=x.name_fa||x.name||"",role=x.kind==="cast"?"بازیگر":PERSON_ROLE_FA[x.role]||"عوامل";
+  const canonical=typeof x.person_id==="string"&&/^person:[a-z0-9][a-z0-9:_-]*$/i.test(x.person_id)?x.person_id:"";
+  const tmdb=Number(x.id);
+  const id=canonical||(Number.isSafeInteger(tmdb)&&tmdb>0?"person:tmdb-"+tmdb:"");
+  const portrait=/^\/[a-zA-Z0-9/_-]+\.(?:jpg|jpeg|png|webp)$/.test(String(x.profile_path||""))
+    ?'<img width="48" height="64" loading="lazy" alt="" src="https://image.tmdb.org/t/p/w185'+esc(x.profile_path)+'">':"";
+  const content=portrait+'<b>'+esc(name)+'</b><small>'+esc(role)+'</small>';
+  return id?'<a class="movie-credit" href="#/entity/'+encodeURIComponent(id)+'">'+content+'</a>'
+    :'<span class="movie-credit">'+content+'</span>';
+}
 function _moviePersonRatings(raw){const r=personMediaRatings[raw.imdb_id]||{};return (r.imdb?_movieRating("IMDb · "+faN(r.imdb.votes)+" رأی",faN(r.imdb.value))+_movieRatingSource(r.imdb):"")+(r.rotten_tomatoes?_movieRating("راتن‌تومیتوز · منتقدان",faN(r.rotten_tomatoes.value),"٪")+_movieRatingSource(r.rotten_tomatoes):"")}
 function _movieRatingSource(r){return '<small class="movie-method">'+esc(r.source.startsWith("https:")?"دادهٔ رسمی IMDb":r.source)+' · '+esc(_personDigits(String(r.updated_at||"").slice(0,10)))+'</small>'}
 function _movieExactKey(m){const match=String((m.external||{}).tmdb||"").match(/themoviedb\.org\/(movie|tv)\/(\d+)/);return match?match[1]+"/"+match[2]:null}
