@@ -409,8 +409,9 @@ async function renderTVGuide(){
   el.innerHTML='<header class="tv-hero">'+
     '<div><span class="press-kicker">راهنمای یکپارچهٔ تماشای فارسی</span><h1>'+(mode==="streaming"?"چی ببینم و کجا؟":"الان چی پخش می‌شه؟")+'</h1><p>'+(mode==="streaming"?"فیلم و سریال را بین سرویس‌های فارسی جست‌وجو کن و فقط موجودی تأییدشده را ببین.":"تلویزیون، شبکه‌های فارسی‌زبان، ورزش و سرویس‌های استریمینگ؛ همه در یک راهنمای واحد.")+'</p></div>'+
     '<div class="tv-status-card"><b>'+faN((d.channels||[]).length)+'</b><span>شبکهٔ دارای داده</span><small>'+faN(active)+' منبع متصل'+(Number(linkStats.linked_programmes||0)?' · '+faN(linkStats.linked_programmes)+' برنامه متصل به جان فیلم':"")+' · آخرین ساخت '+esc(generated)+'</small></div>'+
-  '</header><p><a href="#/movies">ویترین سریال‌های ایران و جهان در جان فیلم ←</a></p>'+_tvTabs()+controls+body+
+  '</header><p><a href="#/movies">ویترین سریال‌های ایران و جهان در جان فیلم ←</a></p>'+_tvTabs()+articleDisplayAdMarkup()+controls+body+
   '<div class="tv-footer-note">زمان‌ها بر اساس ساعت ایران نمایش داده می‌شوند. رکوردهای فنی، تبلیغاتی، placeholder و زمان‌بندی‌های هم‌پوشان پیش از نمایش فیلتر می‌شوند.</div>';
+  loadArticleDisplayAd();
 }
 
 async function mergeWatchSchedule(d){
