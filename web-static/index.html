@@ -149,6 +149,37 @@
         else observeAds();
       })();
       </script>
+      <script>
+      (function(){
+        if(new URLSearchParams(location.search).get("ad_debug")!=="1")return;
+        function run(){
+          var panel=document.createElement("section");
+          panel.setAttribute("dir","rtl");
+          panel.style.cssText="background:#fff;color:#222;border:2px solid #ae5724;border-radius:10px;padding:14px;margin:20px auto;max-width:980px;font:14px/2 sans-serif";
+          panel.innerHTML="<strong>آزمایش نمایش تبلیغات پندار (فقط برای این نشانی)</strong><div id='pendar-ad-diag'></div>";
+          var target=document.querySelector(".pendar-sponsored-native")||document.querySelector("#home-daily");
+          if(target&&target.parentNode)target.parentNode.insertBefore(panel,target);
+          function report(){
+            var names=[["Native",".pendar-sponsored-native"],["افقی 728×90",".pendar-sponsored-wide"],["موبایل 320×50",".pendar-sponsored-mobile"],["عمودی 160×300",".pendar-sponsored-side"]];
+            var lines=names.map(function(entry){
+              var el=document.querySelector(entry[1]);
+              if(!el)return entry[0]+": جایگاه پیدا نشد";
+              var scripts=Array.from(el.querySelectorAll("script[src]"));
+              var frames=el.querySelectorAll("iframe").length;
+              var direct=el.querySelector('[id^="container-"],.pendar-ad-direct-test');
+              var nodes=direct?direct.children.length:0;
+              var visible=!!(el.offsetWidth&&el.offsetHeight);
+              return entry[0]+": "+(visible?"قابل مشاهده":"پنهان")+
+                " | اسکریپت خارجی: "+scripts.length+" | iframe: "+frames+" | عناصر تبلیغ: "+nodes;
+            });
+            var area=document.getElementById("pendar-ad-diag");
+            if(area)area.textContent=lines.join(" ؛ ");
+          }
+          report();setTimeout(report,2500);setTimeout(report,9000);
+        }
+        if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
+      })();
+      </script>
       <section class="home-daily" id="home-daily" aria-label="خبر، فرهنگ و سرگرمی">
         <div class="home-daily-grid">
           <section class="home-daily-panel home-news-panel">
