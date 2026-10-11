@@ -598,6 +598,8 @@ async function openPressArticle(id) {
 /* BBC Persian: cached, bounded identity pilot. No collectors or API integrations. */
 async function showBBCPersianIdentity(){
   await showPress("بی‌بی‌سی فارسی");
+  await renderPress("بی‌بی‌سی فارسی");
+  history.replaceState(null,"","/@bbc-persian/"+location.search);
   const el=document.getElementById("press-content");
   if(!el)return;
   const meta=_pressFindSource("بی‌بی‌سی فارسی");
