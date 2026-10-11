@@ -4,7 +4,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Collect Pendar News (independent)", "Build & Deploy Pendar (static)"]
+    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Build & Deploy Pendar (static)"]
     types: [completed]
   push:
     branches: [main]
@@ -125,6 +125,36 @@ jobs:
             gh run download "$prev_fast_id" -n "$artifact_name" -D /tmp/prev-fast
             test -f /tmp/prev-fast/artifact.tar
             tar -xf /tmp/prev-fast/artifact.tar -C site
+          fi
+
+      - name: Overlay verified independently collected figures
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          figure_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/figures-refresh.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
+          if [ -n "$figure_run" ]; then
+            rm -rf /tmp/new-figures && mkdir -p /tmp/new-figures
+            if gh run download "$figure_run" -n pendar-figures-data -D /tmp/new-figures; then
+              python - <<'PY'
+          import json,shutil
+          from pathlib import Path
+          src=Path('/tmp/new-figures/data')
+          dst=Path('site/data')
+          try:
+              new=json.loads((src/'figures.json').read_text(encoding='utf-8'))
+              old=json.loads((dst/'figures.json').read_text(encoding='utf-8')) if (dst/'figures.json').exists() else {}
+              newer=str(new.get('generated_at') or '') > str(old.get('generated_at') or '')
+              if len(new.get('figures',[]))>=100 and newer:
+                  dst.mkdir(parents=True,exist_ok=True)
+                  shutil.copy2(src/'figures.json',dst/'figures.json')
+                  shutil.copy2(src/'figures-health.json',dst/'figures-health.json')
+                  print('Published independently refreshed figures:',len(new['figures']))
+              else:
+                  print('Kept existing figure data: candidate not newer or below validation threshold.')
+          except (OSError,ValueError,KeyError) as e:
+              print('::warning::Figure overlay skipped:',e)
+          PY
+            fi
           fi
 
       - name: Overlay freshest independently collected news
