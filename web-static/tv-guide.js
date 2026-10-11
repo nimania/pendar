@@ -89,6 +89,17 @@ function _tvQualityBadge(p,c){
   const label=q>=90?"اعتماد بالا":q>=75?"قابل اتکا":"محدود";
   return '<span class="tv-quality-badge" title="امتیاز کیفیت '+faN(q)+' از ۱۰۰">'+label+'</span>';
 }
+function _tvMediaIdentity(c){
+  const label=[c?.name_fa,c?.name,c?.source_name].filter(Boolean).join(" ").toLowerCase();
+  if(/bbc|بی[‌ -]?بی[‌ -]?سی/.test(label) && /persian|فارسی/.test(label))return {slug:"bbc-persian",name:"بی‌بی‌سی فارسی"};
+  if(/iran international|ایران اینترنشنال|ایران‌اینترنشنال/.test(label))return {slug:"iran-international",name:"ایران اینترنشنال"};
+  if(/radio farda|رادیو فردا/.test(label))return {slug:"radio-farda",name:"رادیو فردا"};
+  return null;
+}
+function _tvMediaIdentityLink(c){
+  const identity=_tvMediaIdentity(c);
+  return identity?'<p class="tv-identity-link"><a href="/@'+identity.slug+'/">نمایهٔ مشترک '+esc(identity.name)+' در پندار ↗</a></p>':'';
+}
 function _tvChannelLogo(c){
   if(c&&c.logo)return '<img src="'+esc(c.logo)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">';
   return '<b>'+esc(String(c?.name_fa||c?.name||"TV").slice(0,2))+'</b>';
@@ -225,7 +236,7 @@ async function openTVChannel(channelId){
     '<button class="back" onclick="showTVGuide(\'channels\')">بازگشت به شبکه‌ها</button>'+
     '<section class="tv-entity-hero"><div class="tv-entity-logo">'+_tvChannelLogo(c)+'</div><div class="tv-entity-copy"><span class="press-kicker">شبکهٔ تلویزیونی</span><h1>'+esc(c.name_fa||c.name||c.id)+'</h1>'+
       (c.name&&c.name!==c.name_fa?'<div class="tv-entity-en" dir="ltr">'+esc(c.name)+'</div>':"")+
-      '<p>'+esc(desc)+'</p><div class="tv-entity-meta"><span>'+esc(_tvGroupLabel(c.group))+'</span><span>'+esc(c.source_name||"منبع ثبت نشده")+'</span>'+_tvSourceBadge(c.confidence||"aggregated")+(c.trust_score?'<span>اعتماد '+faN(c.trust_score)+'/۱۰۰</span>':"")+'</div></div></section>'+
+      '<p>'+esc(desc)+'</p>'+_tvMediaIdentityLink(c)+'<div class="tv-entity-meta"><span>'+esc(_tvGroupLabel(c.group))+'</span><span>'+esc(c.source_name||"منبع ثبت نشده")+'</span>'+_tvSourceBadge(c.confidence||"aggregated")+(c.trust_score?'<span>اعتماد '+faN(c.trust_score)+'/۱۰۰</span>':"")+'</div></div></section>'+
     (cats.length?'<div class="tv-tag-row">'+cats.map(x=>'<span>'+esc(x)+'</span>').join("")+'</div>':"")+
     (current?'<section class="tv-entity-section"><div class="tv-list-head"><h2>در حال پخش</h2></div>'+_tvProgrammeCard(current,c,now)+'</section>':"")+
     '<section class="tv-entity-section"><div class="tv-list-head"><h2>جدول پخش</h2><span>'+faN(future.length)+' برنامهٔ آینده</span></div>'+
