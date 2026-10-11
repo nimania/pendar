@@ -1,131 +1,53 @@
 name: Fast Deploy Pendar UI
-# Also publishes seeded Jan-e Jaraid data under web-static/data.
-
+# Lightweight news + figures publication. Heavy catalog rebuilding is manual-only.
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Build & Deploy Pendar (static)"]
+    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)"]
     types: [completed]
   push:
     branches: [main]
     paths:
       - "web-static/**"
-      - "backend/scripts/build_seo.py"
-      - "backend/scripts/build_event_trends.js"
-      - "backend/tests/test_event_trends.js"
-      - "backend/scripts/validate_specials.py"
-      - "backend/tests/test_specials_validator.py"
-      - "backend/tests/test_seo*"
-      - "backend/scripts/build_tv_guide.py"
-      - "backend/scripts/build_streaming_availability.py"
-      - "backend/scripts/build_movies.py"
-      - "backend/scripts/link_tv_guide_movies.py"
-      - "backend/scripts/enrich_movies_from_epg.py"
-      - "backend/scripts/collect_30nama_archive.py"
-      - "backend/scripts/enrich_imdb_ids.py"
-      - "backend/scripts/build_entities.py"
-      - "backend/scripts/build_people.py"
-      - "backend/scripts/enrich_creator_catalog.py"
-      - "backend/data/creator-*.json"
-      - "backend/scripts/merge_people.py"
-      - "backend/scripts/reconcile_creator_works.py"
-      - "backend/scripts/link_creator_works.py"
-      - "backend/scripts/materialize_creator_books.py"
-      - "backend/scripts/finalize_entity_registry.py"
-      - "backend/data/entity-overrides.json"
       - ".github/workflows/fast-deploy.yml"
-
+      - "backend/scripts/prepare_priority_site.py"
+      - "backend/scripts/audit_pages_size.py"
 permissions:
   actions: read
   contents: read
   pages: write
   id-token: write
-
 concurrency:
-  group: pages-ui-${{ github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'success' && github.run_id || 'publish' }}
-  # Collector completions queue a fresh build without interrupting a ready deploy.
+  group: pendar-pages-fast
   cancel-in-progress: false
-
 jobs:
   build-ui:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Refresh TV Guide EPG safely
-        id: tv_refresh
-        continue-on-error: true
-        run: |
-          rm -f /tmp/tv-guide.json
-          python backend/scripts/build_tv_guide.py --output /tmp/tv-guide.json
-          python - <<'PY'
-          import json, pathlib
-          p=pathlib.Path("/tmp/tv-guide.json")
-          d=json.loads(p.read_text(encoding="utf-8"))
-          channels=d.get("channels") or []
-          programmes=d.get("programmes") or []
-          assert channels, "TV Guide has no channels"
-          assert programmes, "TV Guide has no programmes"
-          print(f"Validated fresh TV Guide: {len(channels)} channels / {len(programmes)} programmes")
-          PY
-
-      - name: Find latest healthy build and auxiliary runs
-        id: refresh
+      - name: Restore last successful light Pages artifact
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          build_id=""
-          for candidate in $(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=10" --jq '.workflow_runs[].id'); do
-            artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$candidate/artifacts" --jq '[.artifacts[] | select(.expired==false and .name=="latest-static-site")][0].id // empty')"
-            if [ -n "$artifact_id" ]; then
-              rm -rf /tmp/healthcheck && mkdir -p /tmp/healthcheck
-              if gh run download "$candidate" -n latest-static-site -D /tmp/healthcheck >/dev/null 2>&1; then
-                python backend/scripts/unpack_site_artifact.py /tmp/healthcheck
-                news="$(python -c 'import json,pathlib; p=pathlib.Path("/tmp/healthcheck/data/stats.json"); print(int(json.loads(p.read_text(encoding="utf-8")).get("total") or 0) if p.is_file() else 0)' 2>/dev/null || echo 0)"
-                figures="$(python -c 'import json,pathlib; p=pathlib.Path("/tmp/healthcheck/data/figures.json"); d=json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}; print(len(d.get("figures", [])) if isinstance(d, dict) else 0)' 2>/dev/null || echo 0)"
-                if [ "$news" -ge 10000 ] && [ "$figures" -ge 100 ]; then
-                  build_id="$candidate"
-                  echo "Selected healthy full build $candidate ($news news, $figures figures)"
-                  break
-                fi
-              fi
-            fi
-          done
-          if [ -z "$build_id" ]; then
-            echo "::warning::No qualifying full-build artifact found; Fast Deploy will fall back to the latest successful Fast Deploy artifact."
+          mkdir -p site
+          old_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/fast-deploy.yml/runs?status=success&per_page=10" --jq '[.workflow_runs[] | select(.id != '${GITHUB_RUN_ID}')][0].id // empty')"
+          if [ -z "$old_id" ]; then
+            echo "::error::No previously successful light Pages artifact. Use a verified recovery build."
+            exit 1
           fi
-          press_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/periodicals.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          weather_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          commerce_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/books-commerce.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          movie_master_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/movie-master.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          echo "build_id=$build_id" >> "$GITHUB_OUTPUT"
-          echo "press_id=$press_id" >> "$GITHUB_OUTPUT"
-          echo "weather_id=$weather_id" >> "$GITHUB_OUTPUT"
-          echo "commerce_id=$commerce_id" >> "$GITHUB_OUTPUT"
-          echo "movie_master_id=$movie_master_id" >> "$GITHUB_OUTPUT"
-
-      - name: Download latest complete static site
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BUILD_ID: ${{ steps.refresh.outputs.build_id }}
-        run: |
-          rm -rf site && mkdir -p site
-          if [ -n "$BUILD_ID" ] && gh run download "$BUILD_ID" -n latest-static-site -D site; then
-            python backend/scripts/unpack_site_artifact.py site
-            echo "Using latest full-build site artifact."
-          else
-            echo "::warning::latest-static-site unavailable; falling back to the most recent successful Fast Deploy artifact."
-            prev_fast_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/fast-deploy.yml/runs?status=success&per_page=5" --jq '[.workflow_runs[] | select(.id != '${GITHUB_RUN_ID}')][0].id // empty')"
-            test -n "$prev_fast_id"
-            artifact_name="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$prev_fast_id/artifacts" --jq '[.artifacts[] | select(.expired==false and (.name|startswith("github-pages")))] | .[0].name // empty')"
-            test -n "$artifact_name"
-            rm -rf /tmp/prev-fast && mkdir -p /tmp/prev-fast
-            gh run download "$prev_fast_id" -n "$artifact_name" -D /tmp/prev-fast
-            test -f /tmp/prev-fast/artifact.tar
-            tar -xf /tmp/prev-fast/artifact.tar -C site
-          fi
+          artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$old_id/artifacts" --jq '[.artifacts[] | select(.expired==false and (.name|startswith("github-pages")))] | .[0].name // empty')"
+          test -n "$artifact" || { echo "::error::No existing Pages artifact found"; exit 1; }
+          mkdir -p /tmp/base-pages
+          gh run download "$old_id" -n "$artifact" -D /tmp/base-pages
+          test -s /tmp/base-pages/artifact.tar
+          tar -xf /tmp/base-pages/artifact.tar -C site
+          test -s site/index.html
+          test -s site/data/figures.json
+          test -s site/data/stories.json
 
       - name: Overlay freshest independently collected news
         env:
@@ -169,219 +91,37 @@ jobs:
           print(f"Overlaid independently collected news: {len(stories)} stories; {fresh['built_iso']}")
           PY
 
-      - name: Validate market data and display contracts
-        run: |
-          python -m unittest discover -s backend/tests -p test_nabzesh_market.py
-          node backend/tests/test_nabzesh_market_ui.js
-          node backend/tests/test_diner_news.js
 
-      - name: Overlay freshest Jan-e Jaraid generated data
+      - name: Overlay verified independently collected figures
         env:
           GH_TOKEN: ${{ github.token }}
-          PRESS_ID: ${{ steps.refresh.outputs.press_id }}
         run: |
-          if [ -z "$PRESS_ID" ]; then
-            echo "::warning::No successful periodicals run found; keeping build data."
-            exit 0
-          fi
-          rm -rf /tmp/press-pages && mkdir -p /tmp/press-pages
-          if gh run download "$PRESS_ID" -n github-pages -D /tmp/press-pages && [ -f /tmp/press-pages/artifact.tar ]; then
-            rm -rf /tmp/press-site && mkdir -p /tmp/press-site
-            tar -xf /tmp/press-pages/artifact.tar -C /tmp/press-site
-            mkdir -p site/data
-            for name in periodicals.json press-directory.json press-directory.js books.json books.js movies.json movies.js press-registry-health.json; do
-              if [ -f "/tmp/press-site/data/$name" ]; then
-                cp "/tmp/press-site/data/$name" "site/data/$name"
-              fi
-            done
-            if [ -d /tmp/press-site/assets/periodicals ]; then
-              mkdir -p site/assets/periodicals
-              rsync -a /tmp/press-site/assets/periodicals/ site/assets/periodicals/
-            fi
-          else
-            echo "::warning::Could not download latest periodicals Pages artifact; keeping build data."
-          fi
-          # Guarantee a synchronous manifest even when the selected historical
-          # periodicals artifact predates press-directory.js.
-          if [ -f site/data/press-directory.json ]; then
-            python - <<'PY'
-          import json, pathlib
-          p=pathlib.Path("site/data/press-directory.json")
-          rows=json.loads(p.read_text(encoding="utf-8"))
-          pathlib.Path("site/data/press-directory.js").write_text(
-              "window.__PRESS_DIRECTORY__="+json.dumps(rows,ensure_ascii=False,separators=(",",":"))+";\n",
-              encoding="utf-8",
-          )
+          figure_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/figures-refresh.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
+          if [ -n "$figure_run" ]; then
+            rm -rf /tmp/new-figures && mkdir -p /tmp/new-figures
+            if gh run download "$figure_run" -n pendar-figures-data -D /tmp/new-figures; then
+              python - <<'PY'
+          import json,shutil
+          from pathlib import Path
+          src=Path('/tmp/new-figures/data')
+          dst=Path('site/data')
+          try:
+              new=json.loads((src/'figures.json').read_text(encoding='utf-8'))
+              old=json.loads((dst/'figures.json').read_text(encoding='utf-8')) if (dst/'figures.json').exists() else {}
+              newer=str(new.get('generated_at') or '') > str(old.get('generated_at') or '')
+              if len(new.get('figures',[]))>=100 and newer:
+                  dst.mkdir(parents=True,exist_ok=True)
+                  shutil.copy2(src/'figures.json',dst/'figures.json')
+                  shutil.copy2(src/'figures-health.json',dst/'figures-health.json')
+                  print('Published independently refreshed figures:',len(new['figures']))
+              else:
+                  print('Kept existing figure data: candidate not newer or below validation threshold.')
+          except (OSError,ValueError,KeyError) as e:
+              print('::warning::Figure overlay skipped:',e)
           PY
-          fi
-
-      - name: Overlay freshest Movie Master indexes
-        env:
-          GH_TOKEN: ${{ github.token }}
-          MOVIE_MASTER_ID: ${{ steps.refresh.outputs.movie_master_id }}
-        run: |
-          if [ -z "$MOVIE_MASTER_ID" ]; then
-            echo "::warning::No successful Movie Master run found."
-          else
-            rm -rf /tmp/movie-master && mkdir -p /tmp/movie-master
-            if gh run download "$MOVIE_MASTER_ID" -n pendar-movie-master-indexes -D /tmp/movie-master; then
-              mkdir -p site/data
-              find /tmp/movie-master -type f \( -name 'movie-master-summary.json' -o -name 'movie-master-top.json' \) -exec cp {} site/data/ \;
-              details="$(find /tmp/movie-master -type d -name movie-master-details | head -1)"
-              if [ -n "$details" ]; then
-                mkdir -p site/data/movie-master-details
-                rsync -a "$details/" site/data/movie-master-details/
-              fi
             fi
           fi
 
-      - name: Restore movie identity cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            backend/data/movie_identity_cache.json
-            backend/data/movie_seen_cache.json
-            backend/data/movie_imdb_cache.json
-          key: pendar-movie-identity-fast-${{ github.run_id }}
-          restore-keys: |
-            pendar-movie-identity-
-            pendar-movie-identity-fast-
-
-      - name: Refresh canonical movie catalog
-        continue-on-error: true
-        run: |
-          mkdir -p backend/public/data
-          for name in periodicals.json stories.json figures.json; do
-            if [ -f "site/data/$name" ]; then cp "site/data/$name" "backend/public/data/$name"; fi
-          done
-          python backend/scripts/build_movies.py
-          if [ -f backend/public/data/movies.json ]; then
-            cp backend/public/data/movies.json site/data/movies.json
-          fi
-          if [ -f backend/public/data/movies.js ]; then
-            cp backend/public/data/movies.js site/data/movies.js
-          fi
-
-      - name: Enrich film catalog from EPG
-        continue-on-error: true
-        run: |
-          if [ -f web-static/data/tv-guide.json ] && [ -f site/data/movies.json ]; then
-            python backend/scripts/enrich_movies_from_epg.py --tv web-static/data/tv-guide.json --movies site/data/movies.json --movies-js site/data/movies.js
-          fi
-
-      - name: Enrich IMDb IDs
-        continue-on-error: true
-        run: |
-          if [ -f site/data/movies.json ]; then
-            python backend/scripts/enrich_imdb_ids.py --movies site/data/movies.json --movies-js site/data/movies.js --cache backend/data/movie_imdb_cache.json
-          fi
-
-      - name: Collect 30nama public archive
-        continue-on-error: true
-        run: |
-          if [ -f site/data/movies.json ]; then
-            python backend/scripts/collect_30nama_archive.py --output site/data/30nama.json --movies site/data/movies.json --movies-js site/data/movies.js
-          fi
-
-      - name: Restore existing profile labels for migration
-        uses: actions/cache/restore@v4
-        with:
-          path: backend/data/cinema-people-cache.json
-          key: cinema-people-migration-${{ github.run_id }}
-          restore-keys: cinema-people-
-
-      - name: Restore person profile cache
-        uses: actions/cache@v4
-        with:
-          path: backend/data/people-profile-cache.json
-          key: people-profile-${{ github.run_id }}
-          restore-keys: people-profile-
-
-      - name: Overlay freshest book commerce
-        env:
-          GH_TOKEN: ${{ github.token }}
-          COMMERCE_ID: ${{ steps.refresh.outputs.commerce_id }}
-        run: |
-          if [ -n "$COMMERCE_ID" ] && [ -f site/data/books.json ]; then
-            rm -rf /tmp/book-commerce && mkdir -p /tmp/book-commerce
-            if gh run download "$COMMERCE_ID" -n books-commerce-data -D /tmp/book-commerce; then
-              src="$(find /tmp/book-commerce -type f -name books.json | head -1)"
-              if [ -n "$src" ]; then
-                python backend/scripts/merge_book_commerce.py --source "$src" --target site/data/books.json --target-js site/data/books.js
-              fi
-              assets="$(find /tmp/book-commerce -type d -path '*/assets/books' | head -1)"
-              if [ -n "$assets" ]; then
-                mkdir -p site/assets/books
-                rsync -a "$assets/" site/assets/books/
-              fi
-            fi
-          fi
-
-      - name: Restore creator catalog cache
-        uses: actions/cache@v4
-        with:
-          path: backend/data/creator-catalog-cache.json
-          key: creator-catalog-${{ github.run_id }}
-          restore-keys: creator-catalog-
-
-      - name: Test creator identities and relationships
-        run: python backend/tests/test_creator_catalog.py
-
-      - name: Enrich verified book and film creators
-        run: python backend/scripts/enrich_creator_catalog.py --data-dir site/data
-
-      - name: Create sourced internal book pages
-        run: |
-          python backend/tests/test_materialize_creator_books.py
-          python backend/scripts/materialize_creator_books.py --data-dir site/data
-
-      - name: Build people and sourced ratings
-        env:
-          TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
-          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
-        run: python backend/scripts/build_people.py --data-dir site/data
-
-
-      - name: Overlay freshest weather and air quality
-        env:
-          GH_TOKEN: ${{ github.token }}
-          WEATHER_ID: ${{ steps.refresh.outputs.weather_id }}
-        run: |
-          if [ -z "$WEATHER_ID" ]; then
-            echo "::warning::No successful weather run found; keeping build data."
-            exit 0
-          fi
-          rm -rf /tmp/weather && mkdir -p /tmp/weather
-          if gh run download "$WEATHER_ID" -n weather-data -D /tmp/weather && [ -f /tmp/weather/weather.json ]; then
-            mkdir -p site/data
-            cp /tmp/weather/weather.json site/data/weather.json
-          else
-            echo "::warning::Could not download latest weather artifact; keeping build data."
-          fi
-
-      - name: Refresh streaming availability
-        continue-on-error: true
-        run: |
-          if [ -f site/data/movies.json ]; then
-            python backend/scripts/build_streaming_availability.py --movies site/data/movies.json --output site/data/streaming.json
-          fi
-
-      - name: Link TV Guide to canonical movies
-        continue-on-error: true
-        run: |
-          tv="site/data/tv-guide.json"
-          if [ -s /tmp/tv-guide.json ]; then tv="/tmp/tv-guide.json"; fi
-          if [ -f "$tv" ] && [ -f site/data/movies.json ] && [ -f site/data/streaming.json ]; then
-            python backend/scripts/link_tv_guide_movies.py --tv "$tv" --movies site/data/movies.json --streaming site/data/streaming.json
-          fi
-
-      - name: Refresh sourced watch release calendar
-        continue-on-error: true
-        env:
-          TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
-        run: |
-          pip install beautifulsoup4
-          python backend/scripts/refresh_watch_schedule.py
 
       - name: Overlay current UI without overwriting generated data
         run: |
@@ -425,186 +165,25 @@ jobs:
               s = re.sub(r'const V = "[^"]*";', f'const V = "pendar-{bundle_v}";', s, count=1)
               sw.write_text(s, encoding="utf-8")
           PY
-      - name: Overlay latest candidate news and official archives
-        env:
-          GH_TOKEN: ${{ github.token }}
+
+      - name: Preserve validated lightweight news and figures only
         run: |
-          candidate_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/candidate-feeds.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
-          mkdir -p /tmp/candidate-data site/data
-          if [ -n "$candidate_run" ] && gh run download "$candidate_run" -n candidate-feeds -D /tmp/candidate-data; then
-            cp /tmp/candidate-data/candidate-feeds.json site/data/candidate-feeds.json
-          else
-            python backend/scripts/collect_candidate_feeds.py --out site/data/candidate-feeds.json
-          fi
-
-      - name: Ensure unlisted Vitrin page and refresh source links
-        continue-on-error: true
-        run: |
-          mkdir -p site/vitrin site/data
-          cp web-static/vitrin/index.html site/vitrin/index.html
-          (cd backend && python -m scripts.build_vitrin)
-          if [ -s backend/public/data/vitrin.json ]; then
-            cp backend/public/data/vitrin.json site/data/vitrin.json
-          fi
-          test -s site/vitrin/index.html
-
-      - name: Validate Jan Film JavaScript
-        run: |
-          node --check web-static/books-hub.js
-          node --check web-static/movies-hub.js
-          node --check web-static/feed.js
-          node --check web-static/story-detail.js
-          node backend/tests/test_future_news.js
-          node --check web-static/app.js
-          node --check web-static/entities.js
-          node --check web-static/loaders.js
-          node --check web-static/figures-profile.js
-          node backend/tests/test_figure_works_ui.js
-          node backend/tests/test_editorial_views_ui.js
-          node --check web-static/router.js
-          node --check web-static/event-trends.js
-          node backend/tests/test_event_trends.js
-          python backend/tests/test_specials_validator.py
-          python backend/scripts/validate_specials.py
-
-      - name: Build future impact evidence queue
-        run: python backend/scripts/build_future_impacts.py --data-dir site/data
-
-      - name: Build canonical entity registry
-        run: python backend/scripts/build_entities.py --data-dir site/data
-
-      - name: Finalize canonical entity registry
-        run: python backend/scripts/finalize_entity_registry.py --registry site/data/entity-registry.json --overrides backend/data/entity-overrides.json --qa-output site/data/entity-qa.json
-
-      - name: Merge all people into canonical registry
-        run: |
-          python backend/scripts/merge_people.py --data-dir site/data
-          rm -rf site/data/cinema-people site/data/cinema-people-index.json
-
-      - name: Audit creator works against the entire master catalog
-        env:
-          GH_TOKEN: ${{ github.token }}
-          MOVIE_MASTER_ID: ${{ steps.refresh.outputs.movie_master_id }}
-        run: |
-          rm -rf /tmp/work-audit-db && mkdir -p /tmp/work-audit-db
-          test -n "$MOVIE_MASTER_ID"
-          gh run download "$MOVIE_MASTER_ID" -n pendar-movie-master-db -D /tmp/work-audit-db
-          src="$(find /tmp/work-audit-db -type f -name movie-master.sqlite.gz | head -1)"
-          test -n "$src"
-          gzip -dc "$src" > /tmp/work-audit-db/master.sqlite
-          python backend/tests/test_reconcile_creator_works.py
-          python backend/scripts/reconcile_creator_works.py --data-dir site/data --master-db /tmp/work-audit-db/master.sqlite
-          python backend/tests/test_link_creator_works.py
-          node backend/tests/test_creator_work_links.js
-          python backend/scripts/link_creator_works.py --data-dir site/data
-
-      - name: Save creator work reconciliation report
-        uses: actions/upload-artifact@v4
-        with:
-          name: creator-work-reconciliation
-          path: site/data/creator-work-audit.json
-          retention-days: 30
-
-      - name: Verify every canonical person profile is publishable
-        run: python backend/scripts/validate_person_profiles.py --data-dir site/data
-
-      - name: Validate Pendar data integrity before publish
-        run: python backend/scripts/validate_site_integrity.py --site site
-
-      - name: Validate static SEO routes
-        run: |
-          python backend/tests/test_seo.py
-          node backend/tests/test_seo_routes.js web-static/router.js
-
-      - name: Overlay verified independently collected figures
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          figure_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/figures-refresh.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
-          if [ -n "$figure_run" ]; then
-            rm -rf /tmp/new-figures && mkdir -p /tmp/new-figures
-            if gh run download "$figure_run" -n pendar-figures-data -D /tmp/new-figures; then
-              python - <<'PY'
-          import json,shutil
-          from pathlib import Path
-          src=Path('/tmp/new-figures/data')
-          dst=Path('site/data')
-          try:
-              new=json.loads((src/'figures.json').read_text(encoding='utf-8'))
-              old=json.loads((dst/'figures.json').read_text(encoding='utf-8')) if (dst/'figures.json').exists() else {}
-              newer=str(new.get('generated_at') or '') > str(old.get('generated_at') or '')
-              if len(new.get('figures',[]))>=100 and newer:
-                  dst.mkdir(parents=True,exist_ok=True)
-                  shutil.copy2(src/'figures.json',dst/'figures.json')
-                  shutil.copy2(src/'figures-health.json',dst/'figures-health.json')
-                  print('Published independently refreshed figures:',len(new['figures']))
-              else:
-                  print('Kept existing figure data: candidate not newer or below validation threshold.')
-          except (OSError,ValueError,KeyError) as e:
-              print('::warning::Figure overlay skipped:',e)
+          python backend/scripts/prepare_priority_site.py site
+          python backend/scripts/audit_pages_size.py site 750000000
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('site/data')
+          figures=json.loads((root/'figures.json').read_text(encoding='utf-8'))
+          stories=json.loads((root/'stories.json').read_text(encoding='utf-8'))
+          assert len(figures.get('figures',[])) >= 100, 'Figure corpus unexpectedly small'
+          assert 1 <= len(stories) <= 60, 'News headline feed invalid'
+          print('Fast publish validated:',len(stories),'headlines and',len(figures['figures']),'figures')
           PY
-            fi
-          fi
-
-      - name: Generate crawlable HTML and sitemaps
-        run: python backend/scripts/build_seo.py --site site
-
-      - name: Ensure Future Observatory direct paths
-        run: |
-          # Preserve independently authored HTML, instead of replacing it with
-          # the SPA shell; this permits direct links even if the router breaks.
-          # Publish every authored Future Observatory dossier, including
-          # watch/ and all institutional deep links.
-          if [ -d web-static/future ]; then
-            rsync -a web-static/future/ site/future/
-          fi
-          for route in future future/method future/transition future/transition/fattahi future/transition/watch future/transition/editor future/guide; do
-            test -s "site/$route/index.html" || { echo "::error::Missing future route $route"; exit 1; }
-          done
-          for institution in authority executive justice mahestan security economy watch assembly; do
-            test -s "site/future/transition/institution/$institution/index.html" || { echo "::error::Missing dossier $institution"; exit 1; }
-          done
-          test -s site/data/future-research-books.json
-          test -s site/data/future-fattahi-model.json
-          test -s site/future/transition/fattahi/index.html
-
-      - name: Validate published editorial evidence reviews
-        run: python backend/scripts/validate_future_reviews.py site/data/future-evidence-reviews.json
-
-      - name: Validate Future Observatory artifact
-        run: python backend/scripts/check_future_deploy.py site
-
-      - name: Refresh market snapshot from Nabzesh
-        continue-on-error: true
-        env:
-          NABZESH_API_KEY: ${{ secrets.NABZESH_API_KEY }}
-        run: python backend/scripts/refresh_market.py --output site/data/market-nabzesh.json
-
-      - name: Exclude internal creator audit from public Pages payload
-        run: |
-          # Diagnostic artifact is already uploaded separately; never serve it publicly.
-          rm -f site/data/creator-work-audit.json
-
-      - name: Exclude heavyweight optional pages from priority news deployment
-        run: |
-          # Remove generated public copies only, retaining source data and collections.
-          # News, figure profiles, search indices, TV/book landing pages stay intact.
-          du -sh site/master-movie site/graph site/book 2>/dev/null || true
-          rm -rf -- site/master-movie site/graph site/book
-          echo "Optional movie archive, graph and standalone book routes excluded from Pages payload."
-
-      - name: Apply temporary news-and-figures publication profile
-        run: python backend/scripts/prepare_priority_site.py site
-
-      - name: Audit GitHub Pages payload size
-        run: python backend/scripts/audit_pages_size.py site 750000000
-
-      - name: Upload site
+      - name: Upload light Pages site
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages-${{ github.run_attempt }}
           path: site
-
   deploy:
     needs: build-ui
     runs-on: ubuntu-latest
@@ -612,14 +191,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy news and figures to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_attempt }}
-
-
-
-
-
-
