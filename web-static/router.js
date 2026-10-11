@@ -128,6 +128,11 @@ async function route() {
   if (kind === "book" && arg) return openBook(arg);
   if (kind === "movies") return showMovies();
   if (kind === "movie" && arg) return openMovie(arg);
+  if (kind === "movie-credit" && arg) {
+    const parts=arg.split("/");
+    if(parts.length===3&&["director","cast"].includes(parts[1])&&/^\d+$/.test(parts[2]))
+      return openLegacyMovieCredit(parts[0],parts[1],Number(parts[2]));
+  }
   if (kind === "master-movie" && arg) return openMasterMovie(arg);
   if (kind === "tv" && arg.startsWith("channel/")) return openTVChannel(arg.slice(8));
   if (kind === "tv" && arg.startsWith("program/")) return openTVProgramme(arg.slice(8));
