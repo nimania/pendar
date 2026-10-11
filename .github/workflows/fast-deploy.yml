@@ -177,6 +177,25 @@ jobs:
               sw.write_text(s, encoding="utf-8")
           PY
 
+      - name: Ensure direct news links have static entry pages
+        run: |
+          python - <<'PY'
+          import json,pathlib,shutil
+          root=pathlib.Path("site")
+          stories=json.loads((root/"data/stories.json").read_text(encoding="utf-8"))
+          shell=root/"index.html"
+          made=0
+          for story in stories:
+              sid=str(story.get("id",""))
+              if not sid or not (root/"data/story"/(sid+".json")).is_file():
+                  raise SystemExit("::error::Missing story data for "+sid)
+              dest=root/"story"/sid/"index.html"
+              if not dest.exists():
+                  dest.parent.mkdir(parents=True,exist_ok=True)
+                  shutil.copy2(shell,dest)
+                  made+=1
+          print("Ensured",len(stories),"news entry pages; newly created",made,flush=True)
+          PY
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
