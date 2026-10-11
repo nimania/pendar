@@ -106,7 +106,7 @@ function _bookQuote(b){
   const date=_bookDate(checked),stale=!date||Date.now()-date>48*36e5;
   return {price:min,offers,checked,stale};
 }
-function _bookLinks(b){return [...(b.purchase_links||[]),...(b.editions||[]).flatMap(e=>(e.purchase_links||[]).map(l=>({...l,edition_label_fa:e.label_fa})))] .filter(l=>l.exact&&_bookUrl(l.url))}
+function _bookLinks(b){return [...(b.purchase_links||[]),...(b.editions||[]).flatMap(e=>(e.purchase_links||[]).map(l=>({...l,edition_label_fa:l.edition_label_fa||e.label_fa,edition_isbn:e.isbn||''})))] .filter(l=>l.exact===true&&_bookUrl(l.url))}
 function _bookHasFormat(b,fmt){return !fmt||_bookLinks(b).some(l=>_bookFormat(l)===fmt)||(fmt==='print'&&b.torob?.matched)}
 function _bookCover(b,detail=false){
   const source=String(b.cover_url||'');const safe=/^assets\/books\/[\w.-]+$/.test(source)||_bookUrl(source);
@@ -162,10 +162,10 @@ function filterBookDirectory(value){const q=_bookNorm(value);document.querySelec
 function _bookCommerceRow(l){
   const price=Number(l.price),currency=l.currency||'',available=l.availability;
   const value=Number.isFinite(price)&&price>0?(currency==='IRT'?_toman(price):price.toLocaleString('fa-IR')+' '+esc(currency)):'';
-  return `<a class="book-store-row" href="${esc(_bookUrl(l.url))}" target="_blank" rel="noopener noreferrer"><span class="book-store-icon">${_bookSourceIcon(l.store)}</span><span class="book-store-copy"><b>${esc(l.store||'فروشگاه')}</b><small>${esc(l.edition_label_fa||l.format_fa||BOOK_FORMATS[_bookFormat(l)])}</small>${l.last_checked?`<small>بررسی لینک: ${_bookChecked(l.last_checked)}</small>`:''}</span><span class="book-store-end"><b>${value||'دیدن قیمت ↗'}</b><small>${available==='out_of_stock'?'ناموجود':available==='in_stock'?'موجود':available==='available'?'موجود':'صفحهٔ تأییدشدهٔ کتاب'}</small></span></a>`;
+  return `<a class="book-store-row" href="${esc(_bookUrl(l.url))}" target="_blank" rel="noopener noreferrer"><span class="book-store-icon">${_bookSourceIcon(l.store)}</span><span class="book-store-copy"><b>${esc(l.store||'فروشگاه')}</b><small>${esc(l.edition_label_fa||l.format_fa||BOOK_FORMATS[_bookFormat(l)])}</small>${l.edition_isbn?`<small>شابک نسخه: ${esc(l.edition_isbn)}</small>`:''}${l.last_checked?`<small>آخرین بررسی ثبت‌شده: ${_bookChecked(l.last_checked)}</small>`:''}</span><span class="book-store-end"><b>${value||'دیدن قیمت ↗'}</b><small>${available==='out_of_stock'?'ناموجود':available==='in_stock'?'موجود':available==='available'?'موجود' :'پیوند ثبت‌شدهٔ این کتاب؛ موجودی را در فروشگاه بررسی کن'}</small></span></a>`;
 }
 function _bookCommerce(b){
-  const links=[...new Map(_bookLinks(b).map(l=>[l.url,l])).values()],t=b.torob?.matched?b.torob:null,q=_bookQuote(b);
+  const links=[...new Map(_bookLinks(b).map(l=>[l.url+'|'+(l.edition_isbn||l.edition_label_fa||'')+'|'+_bookFormat(l),l])).values()],t=b.torob?.matched?b.torob:null,q=_bookQuote(b);
   const offers=(t?.offers||[]).filter(o=>_bookUrl(o.url)).slice().sort((a,b)=>Number(a.available!==true)-Number(b.available!==true)||Number(!!a.price_unreliable)-Number(!!b.price_unreliable)||(Number(a.price_toman)||Infinity)-(Number(b.price_toman)||Infinity));
   return `<section class="book-commerce" id="book-commerce"><div class="book-section-title"><h2>خرید و مطالعه</h2><span>چاپی، الکترونیکی و صوتی</span></div><div class="book-commerce-tabs" role="group" aria-label="فیلتر نسخه‌های کتاب"><button class="on" data-commerce-format="all" onclick="filterBookCommerce('all')">همه</button>${['print','ebook','audio'].map(f=>`<button data-commerce-format="${f}" onclick="filterBookCommerce('${f}')">${BOOK_FORMATS[f]}</button>`).join('')}</div>
     ${links.length?['print','ebook','audio'].map(f=>{const rows=links.filter(l=>_bookFormat(l)===f);return rows.length?`<div class="book-commerce-group" data-offer-format="${f}"><h3>${BOOK_FORMATS[f]}</h3>${rows.map(_bookCommerceRow).join('')}</div>`:''}).join(''):''}
