@@ -1,3 +1,27 @@
+
+// One non-intrusive, isolated display placement per article.
+// Sandbox deliberately omits allow-popups and allow-top-navigation.
+// Never use popunder/social-bar/direct-link advertisements inside news stories.
+function articleSafeAd() {
+  const mobile = window.matchMedia("(max-width: 799px)").matches;
+  const width = mobile ? 320 : 728, height = mobile ? 50 : 90;
+  const key = mobile ? "5753b84d84fd726c73ffad8f06df1340" : "6efc34d69af7f7de064af76a35e3c040";
+  const source = "https://www.highrevenueformat.com/" + key + "/invoke.js";
+  const doc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head>'
+    + '<body style="margin:0;overflow:hidden;background:transparent"><script>'
+    + 'var atOptions={key:"'+key+'",format:"iframe",height:'+height+',width:'+width+',params:{}};'
+    + '<\\/script><script src="'+source+'"><\\/script></body></html>';
+  const encoded = doc.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return '<aside class="story-inline-sponsor" aria-label="آگهی تبلیغاتی"'
+    + ' style="margin:24px auto;padding:12px 0;border-top:1px solid #8884;border-bottom:1px solid #8884;text-align:center;max-width:100%">'
+    + '<div style="font-size:11px;opacity:.65;margin-bottom:9px">آگهی · محتوای تبلیغاتی</div>'
+    + '<iframe title="تبلیغ نمایشی محدودشده" sandbox="allow-scripts" loading="lazy"'
+    + ' referrerpolicy="strict-origin-when-cross-origin" scrolling="no"'
+    + ' width="'+width+'" height="'+height+'" srcdoc="'+encoded+'"'
+    + ' style="border:0;display:block;max-width:100%;margin:0 auto"></iframe>'
+    + '</aside>';
+}
+
 /* Pendar — story detail: the single-story page (openStory) and its helpers —
    relatedStories (the thread around a story), timelineSection,
    storyPeopleSuggestions and the ask/answer chips (showAsk, window._asks).
@@ -160,6 +184,7 @@ async function openStory(id) {
     ${storyBooksSection}
     <div class="twocol"><div class="qa"><h3>چه اتفاقی افتاد؟</h3><p>${esc(s.what_happened_fa || "—")}</p></div>
       <div class="qa"><h3>چرا اهمیت دارد؟</h3><p>${esc(s.why_it_matters_fa || "—")}</p></div></div>
+    ${articleSafeAd()}
     ${futureNewsDetail(s)}
     ${known}
     ${cred}
