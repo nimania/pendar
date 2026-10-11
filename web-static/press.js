@@ -604,10 +604,24 @@ async function openPressArticle(id) {
 const PENDAR_MEDIA_PROFILES={
   "bbc-persian":{name:"بی‌بی‌سی فارسی",label:"رسانهٔ عمومی فارسی‌زبان بریتانیا",description:"بخش فارسی بی‌بی‌سی، متعلق به سازمان رسانه‌ای عمومی بریتانیا. بی‌بی‌سی طبق منشور خود دارای استقلال تحریریه است.",site:"https://www.bbc.com/persian",cover:["#6c1115","#c42027","#303035"],logo:"https://commons.wikimedia.org/wiki/Special:FilePath/BBC_Persian_logo_2021.svg",fallback:"BBC NEWS",badge:"رسانهٔ عمومی",badgeTitle:"رسانهٔ عمومی با تأمین مالی عمومی؛ به معنی کنترل مستقیم دولت نیست",pattern:/بی[‌ -]?بی[‌ -]?سی|bbc/i},
   "iran-international":{name:"ایران اینترنشنال",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ خبری فارسی‌زبان.",site:"https://www.iranintl.com/",cover:["#123944","#168b98","#213039"],logo:"https://www.iranintl.com/images/ii/ii-logo-fa.svg",fallback:"IRAN INTL",pattern:/ایران[‌ -]?اینترنشنال|iran international/i},
-  "radio-farda":{name:"رادیو فردا",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ فارسی‌زبان با تأمین مالی عمومی ایالات متحده.",site:"https://www.radiofarda.com/",cover:["#1a3452","#387fa8","#233142"],logo:"https://commons.wikimedia.org/wiki/Special:FilePath/Radio_Farda_logo.png",fallback:"RADIO FARDA",pattern:/رادیو فردا|radio farda/i}
+  "radio-farda":{name:"رادیو فردا",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ فارسی‌زبان با تأمین مالی عمومی ایالات متحده.",site:"https://www.radiofarda.com/",cover:["#1a3452","#387fa8","#233142"],logo:"https://commons.wikimedia.org/wiki/Special:FilePath/Radio_Farda_logo.png",fallback:"RADIO FARDA",pattern:/رادیو فردا|radio farda/i},
+  "irna":{name:"ایرنا",label:"خبرگزاری ایرانی",description:"خبرگزاری ایرانی؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#164b63","#197f87","#232e36"],fallback:"IRNA",pattern:new RegExp("ایرنا","i")},
+  "isna":{name:"ایسنا",label:"خبرگزاری ایرانی",description:"خبرگزاری ایرانی؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#213c64","#5972ae","#232e36"],fallback:"ISNA",pattern:new RegExp("ایسنا","i")},
+  "mehr-news":{name:"مهر",label:"خبرگزاری ایرانی",description:"خبرگزاری ایرانی؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#502031","#b24b4f","#232e36"],fallback:"MEHR",pattern:new RegExp("مهر","i")},
+  "fars-news":{name:"فارس",label:"خبرگزاری ایرانی",description:"خبرگزاری ایرانی؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#214863","#347ca7","#232e36"],fallback:"FARS",pattern:new RegExp("فارس","i")},
+  "khabaronline":{name:"خبرآنلاین",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ خبری فارسی‌زبان؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#19364e","#477894","#232e36"],fallback:"خبرآنلاین",pattern:new RegExp("خبرآنلاین","i")},
+  "euronews-persian":{name:"یورونیوز فارسی",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ خبری فارسی‌زبان؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#143c5c","#347ca4","#232e36"],fallback:"EURONEWS",pattern:new RegExp("یورونیوز فارسی","i")},
+  "kayhan-london":{name:"کیهان لندن",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ خبری فارسی‌زبان؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#45343b","#82515d","#232e36"],fallback:"کیهان لندن",pattern:new RegExp("کیهان لندن","i")},
+  "independent-persian":{name:"ایندیپندنت فارسی",label:"رسانهٔ خبری فارسی‌زبان",description:"رسانهٔ خبری فارسی‌زبان؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#222933","#555c65","#232e36"],fallback:"INDEPENDENT",pattern:new RegExp("ایندیپندنت فارسی","i")},
+  "radio-zamaneh":{name:"رادیو زمانه",label:"رسانهٔ فارسی‌زبان",description:"رسانهٔ فارسی‌زبان؛ این نمایه از اطلاعات ذخیره‌شدهٔ پندار استفاده می‌کند.",cover:["#494126","#8e7b46","#232e36"],fallback:"زمانه",pattern:new RegExp("رادیو زمانه","i")}
 };
 function pendarMediaIdentityShell(slug,config){
   const id="media-identity";
+  // Existing Press source registry is the authority for website/logo domain.
+  const source=typeof _pressFindSource==="function"?_pressFindSource(config.name):null;
+  const domain=String(source?.domain||"").replace(/[^a-zA-Z0-9.-]/g,"");
+  const logo=config.logo||(domain?"https://www.google.com/s2/favicons?domain="+encodeURIComponent(domain)+"&sz=128":null);
+  const site=config.site||(domain?"https://"+domain+"/":"/press/");
   const badge=config.badge?'<span class="media-public-badge" title="'+esc(config.badgeTitle||config.badge)+'">✓ '+esc(config.badge)+'</span>':"";
   const cover='linear-gradient(132deg,'+config.cover.join(",")+')';
   return `<style>
@@ -638,8 +652,8 @@ function pendarMediaIdentityShell(slug,config){
     <header class="media-cover"><strong>${esc(config.name)}</strong><small>${esc(config.label)}</small></header>
     <div class="media-profile-body">
       <div class="media-profile-top">
-        <div class="media-avatar"><img src="${esc(config.logo)}" alt="لوگوی ${esc(config.name)}" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span hidden>${esc(config.fallback)}</span></div>
-        <a href="${esc(config.site)}" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a>
+        <div class="media-avatar">${logo?`<img src="${esc(logo)}" alt="لوگوی ${esc(config.name)}" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false">`:""}<span ${logo?"hidden":""}>${esc(config.fallback)}</span></div>
+        <a href="${esc(site)}" target="_blank" rel="noopener" style="padding:9px 16px;border:1px solid var(--border,#9996);border-radius:22px;margin-top:12px">وب‌سایت رسمی ↗</a>
       </div>
       <div class="media-profile-title"><h1>${esc(config.name)}</h1>${badge}</div>
       <div class="media-handle">@${esc(slug)}</div>
