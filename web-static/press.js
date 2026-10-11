@@ -249,6 +249,19 @@ function pressMatchesScope(s, scope){
 }
 const PRESS_LANG_FA = {all:"همه زبان‌ها", fa:"فارسی", en:"انگلیسی", es:"اسپانیایی", fr:"فرانسوی", tr:"ترکی", ar:"عربی", de:"آلمانی"};
 
+const PENDAR_MEDIA_PILOT_HANDLES={"بی‌بی‌سی فارسی":"bbc-persian","ایران اینترنشنال":"iran-international","رادیو فردا":"radio-farda"};
+function pendarMediaHandle(name){
+  const slug=PENDAR_MEDIA_PILOT_HANDLES[String(name||"").trim()];
+  return slug?'/@'+slug+'/':null;
+}
+function pendarMediaIdentityLinks(name){
+  const uri=pendarMediaHandle(name);
+  if(!uri)return "";
+  return '<nav class="press-identity-links" aria-label="پیوندهای هویت رسانه" style="margin:8px 0 14px;display:flex;gap:12px;flex-wrap:wrap">'
+    +'<a href="'+uri+'">شناسهٔ رسانه: '+uri+'</a>'
+    +'<a href="/tv/channels/">برنامه‌ها و شبکه‌های تلویزیونی ↗</a>'
+    +'</nav>';
+}
 function pressLogo(s) {
   const src = "https://www.google.com/s2/favicons?domain=" + encodeURIComponent(s.domain) + "&sz=128";
   return `<span class="press-logo"><img src="${src}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><b style="display:none">${esc((s.name||"ج").slice(0,1))}</b></span>`;
@@ -465,6 +478,7 @@ async function renderPress(sourceName, canonicalSource=null) {
     const tabsHtml=`<div class="press-source-tabs">${tabs.map(([k,label])=>`<button class="${pressSourceTab===k?"on":""}" onclick="setPressSourceTab('${esc(meta?.name||sourceName)}','${k}')">${label}${k==="videos"&&mediaData.videos.length?` <b>${faN(mediaData.videos.length)}</b>`:""}${k==="people"&&mediaData.people.length?` <b>${faN(mediaData.people.length)}</b>`:""}</button>`).join("")}</div>`;
     const body=pressSourceTab==="videos"?videosHtml:pressSourceTab==="people"?peopleHtml:pressSourceTab==="about"?aboutHtml:latestHtml;
     el.innerHTML=`<div class="press-source-head"><button class="back" onclick="showPress()">همهٔ منابع</button>${meta?pressLogo(meta):""}<div><span class="press-kicker">${esc(meta?.type||"رسانه")}</span><h2>${esc(meta?.name||sourceName)} ${pressHealthBadge(h)}</h2>${meta?`<p>${PRESS_LANG_FA[meta.lang]||meta.lang}${st.iran_story_count?` · ${faN(st.iran_story_count)} خبر مرتبط با ایران`:""}${st.latest_at?` · آخرین خبر: ${relTime(st.latest_at)}`:""}${h&&h.last_run?` · آخرین پایش: ${relTime(h.last_run)}`:""}</p>`:""}</div></div>
+      ${pendarMediaIdentityLinks(meta?.name||sourceName)}
       ${canonicalSource?canonicalStrip(canonicalSource):""}
       ${tabsHtml}
       ${articleDisplayAdMarkup()}
