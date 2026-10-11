@@ -310,7 +310,12 @@ function renderPersonProfileHeader(x,options={}){
   const name=x.name_fa||x.name||"";
   return `<div class="x-profile-top"><button class="x-back" onclick="showFigures()" aria-label="بازگشت">←</button><div><b>${esc(name)}</b><small>${options.subtitle||faN((x.posts||[]).length)+" گفته"}</small></div></div>
     <div class="figure-profile-search"><div class="figure-profile-search-box"><span aria-hidden="true">⌕</span><input type="search" placeholder="جستجو میان چهره‌ها…" autocomplete="off" oninput="searchFigureProfiles(this.value)" onfocus="if(this.value)searchFigureProfiles(this.value)"></div><div id="figure-profile-search-results" class="figure-profile-search-results"></div></div>
-    <div class="x-cover"></div><div class="x-profile-main"><div class="x-avatar-wrap">${options.avatar||avatar(x,"lg")}</div><div class="x-profile-actions">${options.actions||""}</div>
+    <div class="x-cover" style="position:relative;overflow:hidden">
+      <div style="position:absolute;top:clamp(14px,3vw,30px);right:clamp(14px,3vw,30px);left:14px;z-index:1;pointer-events:none;text-align:right;text-shadow:0 1px 5px #0007">
+        <strong style="display:block;color:#fff;font-size:clamp(19px,3vw,30px);line-height:1.4">${esc(name)}</strong>
+        ${x.role_fa?`<span style="display:block;margin-top:5px;color:#fffe;font-size:clamp(12px,1.5vw,16px);line-height:1.5;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(x.role_fa)}</span>`:""}
+      </div>
+    </div><div class="x-profile-main"><div class="x-avatar-wrap">${options.avatar||avatar(x,"lg")}</div><div class="x-profile-actions">${options.actions||""}</div>
     <h1>${esc(name)}${x.verified?'<span class="profile-verified" title="هویت تأییدشده">✓</span>':""}</h1>
     ${x.claimed?'<div class="profile-claimed">این پروفایل توسط خود فرد تأیید و مدیریت می‌شود.</div>':""}
     ${(x.profile_handle===undefined?x.handle:x.profile_handle)?'<div class="x-handle">@'+esc(x.profile_handle===undefined?x.handle:x.profile_handle)+'</div>':x.name&&x.name!==name?'<div class="x-handle" dir="ltr">'+esc(x.name)+'</div>':""}
