@@ -179,6 +179,26 @@ jobs:
           assert 1 <= len(stories) <= 60, 'News headline feed invalid'
           print('Fast publish validated:',len(stories),'headlines and',len(figures['figures']),'figures')
           PY
+      - name: Report published figure freshness
+        run: |
+          python - <<'PY'
+          import json,datetime,pathlib
+          root=pathlib.Path("site/data")
+          d=json.loads((root/"figures.json").read_text(encoding="utf-8"))
+          now=datetime.datetime.now(datetime.timezone.utc)
+          dates=[]
+          for figure in d.get("figures",[]):
+              for post in figure.get("posts",[]):
+                  try:
+                      dt=datetime.datetime.fromisoformat(str(post.get("published_at","")).replace("Z","+00:00"))
+                      if dt.tzinfo is None:dt=dt.replace(tzinfo=datetime.timezone.utc)
+                      dates.append(dt.astimezone(datetime.timezone.utc))
+                  except ValueError:pass
+          recent=sum(now-datetime.timedelta(hours=24)<=t<=now for t in dates)
+          last=max(dates).isoformat() if dates else "none"
+          print(f"Published figures: {len(d.get('figures',[]))}; valid statements: {len(dates)}; 24h: {recent}; latest: {last}; generated_at: {d.get('generated_at','missing')}",flush=True)
+          if not dates:raise SystemExit("::error::No dated figure statements in publish payload")
+          PY
       - name: Upload light Pages site
         uses: actions/upload-pages-artifact@v3
         with:
