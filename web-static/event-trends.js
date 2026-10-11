@@ -128,10 +128,11 @@ async function openEventDossier(id) {
       <div class="rule"><span>جانِ ماجرا</span><span class="l"></span></div>
       ${paragraphs.length?paragraphs.map((s,i)=>`<p class="kalam">${i?'<b>در گزارش مرتبط: </b>':''}${esc(s.summary_fa)} <a href="#/story/${encodeURIComponent(s.id)}">گزارش و منابع ←</a></p>`).join(''):'<p class="kalam">توضیح تفصیلی در گزارش اصلی این ماجرا در دسترس است.</p>'}
       <p class="muted">این توضیح از خلاصهٔ گزارش‌های پندار گردآوری شده و با گزارش‌های تازه تغییر می‌کند. تعداد رسانه‌ها بر اساس نام‌های یکتای ثبت‌شده است.</p>
-      </section><div class="home-panel-tabs" role="tablist" aria-label="گزارش‌های ماجرا">
+      </section>${articleDisplayAdMarkup()}<div class="home-panel-tabs" role="tablist" aria-label="گزارش‌های ماجرا">
       ${[['selected','برگزیده'],['latest','تازه‌ترین'],['analysis','تحلیل‌ها']].map(([k,n])=>`<button role="tab" data-event-tab="${k}" aria-selected="false" onclick="setEventTab('${k}')">${n}</button>`).join('')}</div><div id="event-feed"></div></div>
       <aside class="event-aside"><div id="event-people"></div><div class="rule"><span>رسانه‌های پوشش‌دهنده</span><span class="l"></span></div><div class="event-sources">${g.sources.map(n=>`<span class="chip">${esc(n)}</span>`).join('')}</div>
       <div class="rule"><span>سیر ماجرا</span><span class="l"></span></div><div class="timeline">${g.items.slice().reverse().map(s=>`<a class="tl-item" href="#/story/${encodeURIComponent(s.id)}"><span class="tl-dot"></span><span class="tl-body"><small class="tl-time">${relTime(s.published_at)}</small><span class="tl-h">${esc(s.headline_fa)}</span></span></a>`).join('')}</div></aside></div>`;
+    loadArticleDisplayAd();
     setEventTab('selected');
     const people=await storyPeopleSuggestions({...g.lead,entities:[...new Map(g.items.flatMap(s=>s.entities||[]).map(e=>[e.slug,e])).values()]});
     if(request===_eventRequest && document.getElementById('event-people'))document.getElementById('event-people').innerHTML=people;
