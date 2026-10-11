@@ -64,7 +64,17 @@ async function route() {
     const aliases={
       "irna":{kind:"press",name:"ایرنا"},
       "isna":{kind:"press",name:"ایسنا"},
-      "filimo":{kind:"tv",channel:"stream-filimo"}
+      "filimo":{kind:"tv",channel:"stream-filimo"},
+      "mehr-news":{kind:"press",name:"مهر"},
+      "fars-news":{kind:"press",name:"فارس"},
+      "khabaronline":{kind:"press",name:"خبرآنلاین"},
+      "radio-farda":{kind:"press",name:"رادیو فردا"},
+      "bbc-persian":{kind:"press",name:"بی‌بی‌سی فارسی"},
+      "iran-international":{kind:"press",name:"ایران اینترنشنال"},
+      "euronews-persian":{kind:"press",name:"یورونیوز فارسی"},
+      "kayhan-london":{kind:"press",name:"کیهان لندن"},
+      "independent-persian":{kind:"press",name:"ایندیپندنت فارسی"},
+      "radio-zamaneh":{kind:"press",name:"رادیو زمانه"}
     };
     const slug=decodeURIComponent(raw.slice(1)).toLowerCase();
     const alias=aliases[slug];
