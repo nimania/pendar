@@ -24,6 +24,10 @@ keep_data_names = {
     "trends.json", "clusters.json", "sources.json",
     "news-index.json", "latest.json", "topics.json",
     "periodicals.json", "press-directory.json", "press-stats.json",
+    # Restore already-cached book, cinema and TV datasets; no collection or rebuild.
+    "books.json", "movies.json", "streaming.json", "movie-ratings.json",
+    "movie-master-summary.json", "movie-master-top.json", "tv-guide.json",
+    "pendar-watch-schedule.json",
 }
 keep_data_prefixes = (
     "figure", "news-", "curated-", "source-", "story-", "search-",
@@ -48,6 +52,17 @@ if data.is_dir():
             if item.name == "periodicals.json" and item.stat().st_size > 5_000_000:
                 item.unlink()
                 removed += 1
+                continue
+            # Optional catalog snapshots have an individual size cap; never let a
+            # single legacy dataset enlarge the lightweight deployment unchecked.
+            optional_catalog = {"books.json", "movies.json", "streaming.json",
+                                "movie-ratings.json", "movie-master-summary.json",
+                                "movie-master-top.json", "tv-guide.json",
+                                "pendar-watch-schedule.json"}
+            if item.name in optional_catalog and item.stat().st_size > 5_000_000:
+                item.unlink()
+                removed += 1
+                print(f"Skipped oversized optional catalog: {item.name}")
                 continue
             if item.name not in keep_data_names and not item.name.startswith(keep_data_prefixes):
                 item.unlink()
