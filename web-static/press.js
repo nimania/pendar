@@ -660,12 +660,10 @@ function pendarMediaIdentityShell(slug,config){
       <p class="media-profile-description">${esc(config.description)}</p>
       <div class="media-profile-links"><a href="/press/">پیشخوان جراید ↗</a><a href="/tv/">راهنمای تماشا ↗</a></div>
       <nav class="media-profile-tabs" role="tablist" aria-label="محتوای رسانه">
-        <button role="tab" type="button" id="media-tab-press" data-media-tab="press" aria-selected="true" aria-controls="media-panel-press">مطالب</button>
-        <button role="tab" type="button" id="media-tab-tv" data-media-tab="tv" aria-selected="false" aria-controls="media-panel-tv">شبکه‌ها</button>
-        <button role="tab" type="button" id="media-tab-programmes" data-media-tab="programmes" aria-selected="false" aria-controls="media-panel-programmes">برنامه‌ها</button>
+        <button role="tab" type="button" id="media-tab-press" data-media-tab="press" aria-selected="true" aria-controls="media-panel-press">آخرین مطالب</button>
+        <button role="tab" type="button" id="media-tab-programmes" data-media-tab="programmes" aria-selected="false" aria-controls="media-panel-programmes" hidden>برنامه‌ها و جدول پخش</button>
       </nav>
       <section class="media-profile-panel" id="media-panel-press" role="tabpanel" aria-labelledby="media-tab-press"><div id="media-data-press">در حال بررسی آرشیو…</div></section>
-      <section class="media-profile-panel" id="media-panel-tv" role="tabpanel" aria-labelledby="media-tab-tv" hidden><div id="media-data-tv">در حال بررسی شبکه‌ها…</div></section>
       <section class="media-profile-panel" id="media-panel-programmes" role="tabpanel" aria-labelledby="media-tab-programmes" hidden><div id="media-data-programmes">در حال بررسی برنامه‌ها…</div></section>
     </div>
   </article>`;
@@ -735,8 +733,7 @@ async function showPendarMediaIdentity(slug){
   const channels=(knownChannels.length?knownChannels:allChannels.filter(c=>
     config.pattern.test([c.name_fa,c.name,c.source_name].filter(Boolean).join(" "))
   )).slice(0,12);
-  const tvBox=el.querySelector("#media-data-tv");
-  if(tvBox)tvBox.innerHTML=channels.length?'<ul>'+channels.map(c=>'<li><a href="/tv/channel/'+encodeURIComponent(String(c.id))+'/">'+esc(c.name_fa||c.name||"شبکه")+'</a></li>').join("")+'</ul>':'<p>شبکهٔ منطبق در داده‌های ذخیره‌شده یافت نشد.</p>';
+  // Channel identities are shown within programme schedules, not as an empty standalone tab.
   const ids=new Set(channels.map(c=>String(c.id)));
   const programmeBox=el.querySelector("#media-data-programmes");
   const dateTime=v=>{
@@ -758,6 +755,9 @@ async function showPendarMediaIdentity(slug){
   const displayed=(todayProgrammes.length?todayProgrammes:allProgrammes.slice(-12));
   const channelMap=new Map(channels.map(c=>[String(c.id),c]));
   const now=Date.now();
+  // Do not expose an empty TV tab on press-only outlets.
+  const programmeTab=el.querySelector('#media-tab-programmes');
+  if(programmeTab)programmeTab.hidden=!(channels.length||allProgrammes.length);
   if(programmeBox){
     const groupLabel=todayProgrammes.length?"جدول پخش امروز":"آخرین جدول پخش ذخیره‌شده (ممکن است قدیمی باشد)";
     programmeBox.innerHTML=displayed.length?
