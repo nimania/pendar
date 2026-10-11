@@ -247,6 +247,31 @@ jobs:
           else:
               print('::warning::Cached movie catalog missing or above 2MB; film and TV entrances not enabled.')
           PY
+      - name: Restore cached press directory only (no RSS or PDF collection)
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil,json
+          root=Path("site")
+          static_manifest=root/"data/press-directory.js"
+          if not static_manifest.is_file():
+              print("::warning::Press source directory unavailable; skip press entry.")
+          else:
+              dest=root/"press"/"index.html"
+              dest.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copy2(root/"index.html",dest)
+              archive=root/"data/periodicals.json"
+              if archive.is_file() and archive.stat().st_size<=5000000:
+                  try:
+                      data=json.loads(archive.read_text(encoding="utf-8"))
+                      rows=data if isinstance(data,list) else data.get("articles",[])
+                      print("Cached press entries:",len(rows))
+                  except (ValueError,OSError) as e:
+                      print("::warning::Cached press archive invalid:",e)
+              else:
+                  print("::warning::Press archive not present; directory-only mode, no fetching.")
+              print("Press directory entrance restored; no RSS/PDF calls.")
+          PY
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
