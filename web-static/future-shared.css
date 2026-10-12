@@ -24,3 +24,10 @@ body main nav a{padding:4px 10px;border:1px solid var(--future-border);border-ra
 body main .notice{border-inline-start:3px solid var(--future-red)}
 @media(max-width:690px){.pendar-future-header .inner{align-items:flex-start;flex-wrap:wrap;gap:8px}.pendar-future-header .links{width:100%;justify-content:space-between;gap:8px;font-size:12px}.pendar-future-header img{width:93px}body main{padding-left:14px!important;padding-right:14px!important}}
 @media(prefers-color-scheme:dark){:root{--future-ink:#ededeb;--future-paper:#151719;--future-card:#252729;--future-border:#414345}.pendar-future-breadcrumb{color:#c0c0c0}.pendar-future-breadcrumb a{color:#fa9ba6}body main .card{background:var(--future-card);color:var(--future-ink)}}
+
+/* Common editorial subnavigation across future research pages. */
+.pendar-future-sections{max-width:1100px;margin:12px auto 4px;padding:0 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pendar-future-sections a{display:inline-flex;align-items:center;min-height:34px;padding:5px 12px;border:1px solid var(--future-border);border-radius:8px;background:var(--future-card);color:var(--future-ink);font-size:13px;font-weight:700;text-decoration:none}
+.pendar-future-sections a:hover{border-color:var(--future-red);color:var(--future-red)}
+.pendar-future-sections a[aria-current="page"]{background:var(--future-red);border-color:var(--future-red);color:#fff}
+@media(max-width:690px){.pendar-future-sections{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:7px}.pendar-future-sections a{flex-shrink:0;white-space:nowrap}}
