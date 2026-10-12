@@ -297,7 +297,7 @@ async function renderHomeRecaps(){
     }
     rows.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
     el.innerHTML=rows.slice(0,20).map(r=>{
-      const photo=typeof r.avatar==="string"&&/^https?:\\/\\//.test(r.avatar)?r.avatar:"";
+      const photo=typeof r.avatar==="string"&&/^https?:\/\//.test(r.avatar)?r.avatar:"";
       return `<a class="home-recap-item" href="/statement/${encodeURIComponent(r.id)}/" aria-label="${esc(r.title)}">
         <span class="home-recap-avatar">${photo?`<img src="${esc(photo)}" alt="" loading="lazy" onerror="this.remove()">`:`<span>${esc(r.name.slice(0,1)||"پ")}</span>`}</span>
         <span class="home-recap-copy"><b>${esc(r.title)}</b><small>${esc(r.name)}${r.date?" · "+esc(relTime(r.date)):""}</small></span>
