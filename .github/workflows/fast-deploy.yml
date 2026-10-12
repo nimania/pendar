@@ -184,15 +184,16 @@ jobs:
               p = root / name
               if p.exists():
                   versions[name] = hashlib.md5(p.read_bytes()).hexdigest()[:8]
-          idx = root / "index.html"
-          text = idx.read_text(encoding="utf-8")
-          for name, version in versions.items():
-              text = re.sub(
-                  r'((?:src|href)="' + re.escape(name) + r')(?:\?v=[0-9a-f]+)?(")',
-                  r'\1?v=' + version + r'\2',
-                  text,
-              )
-          idx.write_text(text, encoding="utf-8")
+          # Retained deep-link pages must load the same fresh modules as home.
+          for idx in root.rglob("*.html"):
+              text = idx.read_text(encoding="utf-8")
+              for name, version in versions.items():
+                  text = re.sub(
+                      r'((?:src|href)="' + re.escape(name) + r')(?:\?v=[0-9a-f]+)?(")',
+                      r'\1?v=' + version + r'\2',
+                      text,
+                  )
+              idx.write_text(text, encoding="utf-8")
           sw = root / "sw.js"
           if sw.exists() and versions:
               bundle_v = hashlib.md5(
