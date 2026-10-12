@@ -10,6 +10,7 @@ on:
       - ".github/workflows/news-refresh.yml"
 
 # 2026-10-10 Gemini API billing retry; preserve existing pipeline.
+# Manual recovery request 2026-10-12: push only to trigger the existing independent collector.
 permissions:
   contents: read
   actions: read
