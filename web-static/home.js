@@ -199,7 +199,7 @@ function renderHomeCulture(){
 // Two independent homepage windows: headlines and culture.
 let homeNewsMode="latest";
 function setHomeNewsMode(mode){
-  if(!["selected","latest","hot","rising","recaps","events"].includes(mode))return;
+  if(!["selected","latest","hot","rising","recaps","events","people"].includes(mode))return;
   homeNewsMode=mode;
   document.querySelectorAll("[data-home-news]").forEach(button=>{
     const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
@@ -251,13 +251,15 @@ function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
   if(!storyEl)return;
   const title=document.getElementById("home-news-title");
-  if(title)title.textContent=homeNewsMode==="recaps"?"جان کلام":homeNewsMode==="events"?"ماجراها و ترندها":"نبض امروز";
+  if(title)title.textContent=homeNewsMode==="recaps"?"جان کلام":homeNewsMode==="events"?"ماجراها و ترندها":homeNewsMode==="people"?"چهره‌ها":"نبض امروز";
   const dashboard=document.getElementById("home-news-dashboard");
   const freshness=document.getElementById("home-news-freshness");
-  if(dashboard)dashboard.style.display=["recaps","events"].includes(homeNewsMode)?"none":"";
-  if(freshness)freshness.style.display=homeNewsMode==="recaps"?"none":"";
+  if(dashboard)dashboard.style.display=["recaps","events","people"].includes(homeNewsMode)?"none":"";
+  if(freshness)freshness.style.display=["recaps","events","people"].includes(homeNewsMode)?"none":"";
   storyEl.classList.toggle("home-recaps-list",homeNewsMode==="recaps");
   storyEl.classList.toggle("home-events-in-table",homeNewsMode==="events");
+  storyEl.classList.toggle("home-people-in-table",homeNewsMode==="people");
+  if(homeNewsMode==="people"){renderHomePeopleDirectory();return;}
   if(homeNewsMode==="events"){renderHomeEvents();return;}
   if(homeNewsMode==="recaps"){renderHomeRecaps();return;}
   const score=s=>{
@@ -349,6 +351,28 @@ async function renderHomeRecaps(){
   }catch(_){
     if(homeNewsMode==="recaps")el.innerHTML='<div class="state"><div class="big">دریافت جان کلام ممکن نشد</div><button class="fchip on" onclick="renderHomeRecaps()">تلاش دوباره</button></div>';
   }
+}
+
+async function renderHomePeopleDirectory(){
+  if(homeNewsMode!=="people")return;
+  const el=document.getElementById("home-daily-stories");if(!el)return;
+  el.innerHTML='<div class="spinner"></div>';
+  try{
+    const d=await loadFigures();
+    if(homeNewsMode!=="people")return;
+    const rows=(d.figures||[]).filter(f=>f.handle&&f.name_fa&&f.avatar&&!f.us_radar&&!f.israel_radar&&!String(f.handle).startsWith("news-")&&!HOME_FIGURE_EXCLUDE.has(String(f.handle).toLowerCase()))
+      .map(f=>({...f,_latest:Math.max(0,...(f.posts||[]).map(p=>figureActivityTime(p)))}))
+      .sort((a,b)=>b._latest-a._latest).slice(0,36);
+    el.innerHTML='<div class="home-person-directory">'+rows.map(f=>{
+      const avatarUrl=/^https?:\/\//i.test(f.avatar||"")?f.avatar:"";
+      const count=(f.posts||[]).length;
+      const role=String(f.role_fa||f.field_fa||f.bio_fa||"").slice(0,105);
+      return '<button type="button" class="home-person-directory-card" onclick="openFigure('+JSON.stringify(String(f.handle)).replace(/"/g,"&quot;")+')">'+
+        '<span class="home-person-directory-photo">'+(avatarUrl?'<img src="'+esc(avatarUrl)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'</span>'+
+        '<span class="home-person-directory-copy"><b>'+esc(f.name_fa)+'</b><small>'+esc(role)+'</small><span>'+faN(count)+' گفته و مطلب مرتبط</span></span><span aria-hidden="true">←</span></button>';
+    }).join("")+'</div><div class="home-person-directory-footer"><a href="/figures/">مشاهدهٔ همهٔ چهره‌ها ←</a></div>';
+    if(!rows.length)el.innerHTML='<div class="state">چهرهٔ عکس‌دار برای نمایش پیدا نشد.</div>';
+  }catch(_){if(homeNewsMode==="people")el.innerHTML='<div class="state">دریافت چهره‌ها ممکن نشد.</div>';}
 }
 
 // Homepage Jan-e Majra: a compact window into the strongest current topic dossiers.
