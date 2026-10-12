@@ -111,7 +111,7 @@ function newsPublisherSources(story, limit=4){
     const name=String(obj.source_name||obj.name||obj.title||"").trim();
     if(!name)continue;
     const link=String(obj.article_url||obj.homepage_url||obj.source_url||obj.url||"");
-    const match=link.match(/^https?:\/\/(?:[^/@\\s]+@)?([a-z0-9.-]+)(?::\d+)?(?:[/?#]|$)/i);
+    const match=link.match(/^https?:\/\/([a-z0-9.-]+)(?::\d+)?(?:[/?#]|$)/i);
     const domain=match?match[1].replace(/^www\./i,"").toLowerCase():"";
     const key=name.toLocaleLowerCase("fa");
     const candidate={name,domain};
