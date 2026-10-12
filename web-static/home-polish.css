@@ -138,3 +138,19 @@
 .home-person-directory-footer{padding:16px;text-align:center}
 .home-person-directory-footer a{color:var(--accent);text-decoration:none}
 @media(max-width:700px){.home-person-directory{grid-template-columns:1fr}.home-person-directory-card:nth-child(odd){border-left:0}#home-daily-stories.home-events-in-table .home-event-vertical .home-event-photo{width:85px;min-width:85px;max-width:85px;height:65px;min-height:65px;max-height:65px;flex-basis:85px}}
+
+/* A scannable vertical dossier feed, consistent with other homepage tabs. */
+#home-daily-stories.home-events-in-table .home-event-list{display:flex;flex-direction:column;width:100%}
+#home-daily-stories.home-events-in-table .home-event-list-item{display:flex;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;min-width:0}
+#home-daily-stories.home-events-in-table .home-event-list-item:hover{background:var(--surface-2)}
+#home-daily-stories.home-events-in-table .home-event-thumb{width:88px;height:64px;flex:0 0 88px;max-width:88px;max-height:64px;overflow:hidden;background:var(--surface-2);border-radius:9px;display:grid;place-items:center;border:1px solid var(--line)}
+#home-daily-stories.home-events-in-table .home-event-thumb img{width:100%!important;height:100%!important;object-fit:cover!important;display:block}
+#home-daily-stories.home-events-in-table .home-event-placeholder{font-size:11px;color:var(--ink-soft)}
+#home-daily-stories.home-events-in-table .home-event-copy{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
+#home-daily-stories.home-events-in-table .home-event-copy b{font-size:15px;line-height:1.65}
+#home-daily-stories.home-events-in-table .home-event-copy small{font-size:11px;color:var(--ink-soft)}
+#home-daily-stories.home-events-in-table .home-event-badge{font-size:10px;color:var(--accent);font-weight:700}
+#home-daily-stories.home-events-in-table .home-event-arrow{color:var(--accent);flex:0 0 auto}
+#home-daily-stories.home-events-in-table .home-events-more{padding:16px;text-align:center}
+#home-daily-stories.home-events-in-table .home-events-more button{font:inherit;cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--accent);padding:10px 18px}
+@media(max-width:600px){#home-daily-stories.home-events-in-table .home-event-thumb{width:72px;height:54px;flex-basis:72px;max-width:72px;max-height:54px}#home-daily-stories.home-events-in-table .home-event-list-item{gap:9px;padding:10px}}
