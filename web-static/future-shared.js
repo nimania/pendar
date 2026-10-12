@@ -18,13 +18,14 @@
       ["/future/transition/fattahi/","مدل فتاحی"],
       ["/future/transition/watch/","دیده‌بان گذار"]
     ];
-    const path=location.pathname.replace(/\\/index\\.html$/,"").replace(/\\/?$/,"/");
+    const path=location.pathname.endsWith("index.html")?location.pathname.slice(0,-10):location.pathname;
+    const normalized=path.endsWith("/")?path:path+"/";
     const sectionNav=document.createElement("nav");
     sectionNav.className="pendar-future-sections";
     sectionNav.setAttribute("aria-label","بخش‌های آینده‌بان");
     for(const [href,label] of sections){
       const a=document.createElement("a");a.href=href;a.textContent=label;
-      if(path===href){a.setAttribute("aria-current","page");}
+      if(normalized===href){a.setAttribute("aria-current","page");}
       sectionNav.append(a);
     }
     crumb.after(sectionNav);
