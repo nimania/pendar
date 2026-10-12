@@ -165,3 +165,14 @@
 #home-people-strip .home-statement-copy small{font-size:11px;color:var(--ink-soft);line-height:1.5}
 #home-people-strip .home-statement-copy b{font-size:13px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 @media(max-width:600px){#home-people-strip .home-statement-card{flex-basis:225px}}
+
+/* One latest statement per row, continuous vertical feed. */
+#home-people-strip .home-people-list{display:flex;flex-direction:column;gap:0;overflow:visible;scroll-snap-type:none;padding:0}
+#home-people-strip .home-statement-card{display:flex;align-items:center;flex:0 0 auto;width:100%;min-height:84px;padding:14px 16px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;scroll-snap-align:none;box-sizing:border-box}
+#home-people-strip .home-statement-card:hover{background:var(--surface-2)}
+#home-people-strip .home-statement-copy b{-webkit-line-clamp:2;font-size:15px}
+#home-people-strip .home-statement-avatar{width:50px;height:50px;flex-basis:50px}
+#home-people-strip .home-statement-arrow{color:var(--accent);flex:0 0 auto}
+#home-people-strip .home-statements-more{padding:14px;text-align:center}
+#home-people-strip .home-statements-more button{cursor:pointer;font:inherit;padding:10px 16px;color:var(--accent);background:var(--surface-2);border:1px solid var(--line);border-radius:10px}
+@media(max-width:600px){#home-people-strip .home-statement-card{padding:11px 9px;min-height:72px}#home-people-strip .home-statement-copy b{font-size:13px}#home-people-strip .home-statement-avatar{width:43px;height:43px;flex-basis:43px}}
