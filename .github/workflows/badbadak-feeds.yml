@@ -1,0 +1,50 @@
+name: Refresh Badbadak independent feeds
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 5,17 * * *"
+permissions:
+  contents: read
+concurrency:
+  group: badbadak-feeds
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Collect lightweight entertainment feeds
+        run: |
+          mkdir -p badbadak-payload/data
+          python backend/scripts/collect_bartarinha.py --out badbadak-payload/data/bartarinha-feed.json
+          python backend/scripts/collect_rokna.py --out badbadak-payload/data/rokna-feed.json
+          python backend/scripts/collect_7sobh.py --out badbadak-payload/data/7sobh-feed.json
+      - name: Require at least one nonempty, sourced feed
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("badbadak-payload/data")
+          valid=0
+          for name in ("bartarinha-feed.json","rokna-feed.json","7sobh-feed.json"):
+              path=root/name
+              if not path.is_file():continue
+              rows=json.loads(path.read_text(encoding="utf-8"))
+              if isinstance(rows,list) and len(rows)>=3 and all(isinstance(r,dict) and r.get("title") and r.get("url") for r in rows):
+                  valid+=1
+                  print(f"{name}: {len(rows)} sourced items")
+              else:
+                  path.unlink()
+                  print(f"::warning::{name}: too few valid items; preserving existing published feed")
+          assert valid, "No valid independent Badbadak feeds collected"
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: badbadak-feeds
+          path: badbadak-payload/
+          retention-days: 3
+          if-no-files-found: error
