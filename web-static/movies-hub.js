@@ -363,6 +363,13 @@ const PENDAR_CINEMA_DISPLAY_NAMES={
   'sareh-bayat':'ساره بیات',
   'shahab-hosseini':'شهاب حسینی'
 };
+const PENDAR_CINEMA_PHOTOS={
+  'peyman-maadi':{
+    url:'https://commons.wikimedia.org/wiki/Special:FilePath/Payman_maadi_(cropped).jpg',
+    credit:'مهدی دلخواسته · CC BY-SA 3.0',
+    source:'https://commons.wikimedia.org/wiki/File:Payman_maadi_(cropped).jpg'
+  }
+};
 function _cinemaHandle(slug,kind,index){
   const key=slug+':'+kind+':'+index;
   // Uncurated credits remain distinct pending a stable official person ID.
@@ -434,13 +441,17 @@ async function openCinemaHandle(handle){
   const profilePath=String(first.person?.profile_path||'');
   const validPortrait=profilePath.startsWith('/') && /\.(jpg|jpeg|png|webp)$/i.test(profilePath)
     && !profilePath.includes('..') && !profilePath.includes('//');
-  const picture=validPortrait
+  const curatedPhoto=PENDAR_CINEMA_PHOTOS[handle];
+  const picture=curatedPhoto
+    ?'<img src="'+esc(curatedPhoto.url)+'" alt="تصویر '+esc(name)+'" loading="eager" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'">'
+    :validPortrait
     ?'<img src="https://image.tmdb.org/t/p/w185'+esc(profilePath)+'" alt="'+esc(name)+'">'
     :'<span class="movie-poster-fallback" aria-hidden="true">👤</span>';
   const roles=[...new Set(entries.map(e=>e.role))];
   const x={name_fa:name,name:originalName!==name?originalName:'',handle:handle,profile_handle:handle,role_fa:roles.join(' · '),posts:[]};
   el.innerHTML='<div class="x-profile">'
     +renderPersonProfileHeader(x,{avatar:picture,subtitle:'چهرهٔ سینمایی',stats:'<span><b>'+faN(entries.length)+'</b> اثر مرتبط</span>'})
+    +(curatedPhoto?'<p class="cinema-photo-credit">تصویر: <a href="'+esc(curatedPhoto.source)+'" target="_blank" rel="noopener noreferrer">'+esc(curatedPhoto.credit)+'</a></p>':'')
     +'<nav class="x-profile-tabs" aria-label="بخش‌های پروفایل"><button class="on">آثار</button></nav>'
     +'<section class="cinema-profile-identity"><h2>شناسنامهٔ سینمایی</h2>'
     +(originalName&&originalName!==name?'<p><b>نام ثبت‌شده در منبع:</b> <span dir="auto">'+esc(originalName)+'</span></p>':'')
