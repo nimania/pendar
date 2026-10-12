@@ -67,7 +67,9 @@ jobs:
                   try:
                       value = str(card.get("published_at") or "")
                       parsed = dt.datetime.fromisoformat(value.replace("Z","+00:00"))
-                      if parsed.tzinfo and parsed <= now + dt.timedelta(minutes=15):
+                      if parsed.tzinfo is None:
+                          parsed = parsed.replace(tzinfo=dt.timezone.utc)
+                      if parsed <= now + dt.timedelta(minutes=15):
                           dates.append(parsed)
                   except (TypeError, ValueError):
                       pass

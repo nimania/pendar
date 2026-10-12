@@ -1,4 +1,4 @@
-"""Temporary news-and-figures-only GitHub Pages publishing profile.
+"""Lightweight GitHub Pages profile preserving the core UI data contracts.
 
 Operates solely on generated deployment directory. Never touches source archives.
 Run AFTER SEO generation/validation and BEFORE Pages upload.
@@ -8,13 +8,13 @@ import shutil
 import sys
 from pathlib import Path
 
-root = Path(sys.argv[1]).resolve()
-assert (root / "index.html").is_file(), "Refusing to trim a non-site folder"
 # Keep the SPA shell and all root-level JS/CSS; pages for news and people only.
 keep_dirs = {
     "assets", "data", "story", "stories", "figure", "figures",
     "person", "people", "news", "search", "topic", "topics", "event", "books", "movies", "tv", "press", "future",
-    "market", "weather", "system", "diner",
+    "market", "weather", "system", "diner", "icons",
+    "entity", "movie", "book", "publisher", "book-person", "cinema-person",
+    "studio", "recaps", "videos", "radar", "badbadak",
 }
 # Root-level data consumed by news feeds, archive, entity/figure views and search.
 keep_data_names = {
@@ -29,47 +29,53 @@ keep_data_names = {
     # Restore already-cached book, cinema and TV datasets; no collection or rebuild.
     "books.json", "movies.json", "streaming.json", "movie-ratings.json",
     "movie-master-summary.json", "movie-master-top.json", "tv-guide.json",
-    "pendar-watch-schedule.json",
+    "pendar-watch-schedule.json", "entities.json", "factchecks.json", "geo.json",
+    "books.js", "movies.js", "press-directory.js", "studio-recaps.json",
+    "youtube-videos.json", "prices.json", "crypto.json", "candidate-feeds.json",
+    "project-finance.json",
 }
 keep_data_prefixes = (
     "figure", "news-", "curated-", "source-", "story-", "search-",
     "quote-", "person-", "people-", "headline-", "topic-",
+    "pendar-", "future-", "press-", "book-", "us-radar",
 )
-# Keep the data files required by the core UI without giant per-person shards.
-data = root / "data"
-removed = 0
-for item in list(root.iterdir()):
-    if item.is_dir() and item.name not in keep_dirs and item.name not in {"@irna", "@isna", "@filimo", "@mehr-news", "@fars-news", "@khabaronline", "@radio-farda", "@bbc-persian", "@iran-international", "@euronews-persian", "@kayhan-london", "@independent-persian", "@radio-zamaneh", "@florian-henckel-von-donnersmarck", "@ulrich-muhe", "@martina-gedeck", "@sebastian-koch", "@asghar-farhadi", "@peyman-maadi", "@leila-hatami", "@sareh-bayat", "@shahab-hosseini"}:
-        shutil.rmtree(item)
-        removed += 1
-if data.is_dir():
-    for item in list(data.iterdir()):
-        if item.is_dir() and item.name not in {"story"}:
-            # Keep data/story/<id>.json: news detail pages fetch these directly.
-            # Hefty generated data/people/* pages are redundant with people-index.
-            # UI retrieves entity/figure information from preserved root-level datasets.
+# Partitioned person records are used by canonicalEntityById and name lookup.
+# The index alone cannot render their profiles. Movie details are also fetched.
+keep_data_dirs = {"story", "people", "person-aliases", "movie-details", "us-radar-history"}
+required_data = ("stories.json", "figures.json", "people-index.json",
+                 "books.json", "movies.json", "tv-guide.json",
+                 "press-directory.json", "entity-registry.json", "entity-qa.json")
+
+
+def keep_data_file(name):
+    return name in keep_data_names or name.startswith(keep_data_prefixes)
+
+
+def prepare(root):
+    root = Path(root).resolve()
+    assert (root / "index.html").is_file(), "Refusing to trim a non-site folder"
+    data = root / "data"
+    # Fail before modifying the payload. system-health is produced by the
+    # integrity gate AFTER trimming; an old report is not a prerequisite.
+    for name in required_data:
+        if not (data / name).is_file():
+            raise SystemExit(f"::error::Missing required core dataset data/{name}")
+    removed = 0
+    for item in list(root.iterdir()):
+        if item.is_dir() and item.name not in keep_dirs and not item.name.startswith("@"):
             shutil.rmtree(item)
             removed += 1
-        elif item.is_file():
-            if item.name == "periodicals.json" and item.stat().st_size > 5_000_000:
-                item.unlink()
-                removed += 1
-                continue
-            # Optional catalog snapshots have an individual size cap; never let a
-            # single legacy dataset enlarge the lightweight deployment unchecked.
-            optional_catalog = {"books.json", "movies.json", "streaming.json",
-                                "movie-ratings.json", "movie-master-summary.json",
-                                "movie-master-top.json", "tv-guide.json",
-                                "pendar-watch-schedule.json"}
-            if item.name in optional_catalog and item.stat().st_size > 5_000_000:
-                item.unlink()
-                removed += 1
-                print(f"Skipped oversized optional catalog: {item.name}")
-                continue
-            if item.name not in keep_data_names and not item.name.startswith(keep_data_prefixes):
-                item.unlink()
-                removed += 1
-print(f"News + figures public profile: excluded {removed} optional items.")
-for required in ("data/stories.json", "data/figures.json", "data/people-index.json", "data/system-health.json", "data/books.json", "data/movies.json", "data/tv-guide.json"):
-    if not (root / required).is_file():
-        raise SystemExit(f"::error::Missing required news/figure dataset {required}")
+    for item in list(data.iterdir()):
+        if item.is_dir() and item.name not in keep_data_dirs:
+            shutil.rmtree(item)
+            removed += 1
+        elif item.is_file() and not keep_data_file(item.name):
+            item.unlink()
+            removed += 1
+    # Never delete a required catalog merely because it exceeds 5 MB. The
+    # separate overall size gate blocks oversized uploads without data loss.
+    print(f"Core public profile: excluded {removed} optional items.")
+
+
+if __name__ == "__main__":
+    prepare(sys.argv[1])

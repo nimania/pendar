@@ -12,6 +12,8 @@ on:
       - ".github/workflows/fast-deploy.yml"
       - "backend/scripts/prepare_priority_site.py"
       - "backend/scripts/audit_pages_size.py"
+      - "backend/scripts/restore_core_site_data.py"
+      - "backend/scripts/validate_site_integrity.py"
 permissions:
   actions: read
   contents: read
@@ -29,6 +31,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+      - name: Verify core recovery contracts
+        run: python -m unittest discover -s backend/tests -p test_core_site_recovery.py -v
       - name: Restore last successful light Pages artifact
         env:
           GH_TOKEN: ${{ github.token }}
@@ -48,6 +52,20 @@ jobs:
           test -s site/index.html
           test -s site/data/figures.json
           test -s site/data/stories.json
+
+      - name: Recover missing core data from the last complete build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if python backend/scripts/restore_core_site_data.py --site site --check; then
+            echo "Core data already present; no recovery download needed."
+          else
+            complete_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+            test -n "$complete_id" || { echo "::error::No successful complete build for recovery"; exit 1; }
+            mkdir -p /tmp/core-recovery
+            gh run download "$complete_id" -n latest-static-site -D /tmp/core-recovery
+            python backend/scripts/restore_core_site_data.py --site site --archive /tmp/core-recovery/latest-static-site.tar
+          fi
 
       - name: Overlay freshest independently collected news
         env:
@@ -143,6 +161,8 @@ jobs:
           cp web-static/data/pendar-*.json site/data/
           cp web-static/data/us-radar.json site/data/us-radar.json
           cp web-static/data/future-*.json site/data/
+          test -s site/data/press-directory.js || cp web-static/data/press-directory.js site/data/press-directory.js
+          cp web-static/data/book-{curation,directory,places}.json site/data/
           # Never let the empty repository seed overwrite a previously healthy
           # Guide when the live EPG refresh failed.
           if [ -s /tmp/tv-guide.json ]; then
@@ -314,6 +334,7 @@ jobs:
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
+          python backend/scripts/validate_site_integrity.py --site site
           python backend/scripts/audit_pages_size.py site 750000000
           python - <<'PY'
           import json,pathlib

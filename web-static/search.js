@@ -113,7 +113,7 @@ async function _collectSmartSearchDocs(){
     });
   }catch(_){}
   try{
-    const feed=await getJSON(`${DATA}/feed.json`), arr=Array.isArray(feed)?feed:(feed.items||[]);
+    const feed=await getJSON(`${DATA}/stories.json`), arr=Array.isArray(feed)?feed:(feed.items||[]);
     arr.forEach(x=>docs.push({kind:"خبر",title:x.headline_fa||x.title_fa||x.title||"",sub:(x.source_names||[]).slice(0,3).join(" · "),go:`openStory('${x.id}')`,text:[x.headline_fa,x.summary_fa,x.what_happened_fa,(x.source_names||[]).join(" ")].join(" "),snippet:x.summary_fa||x.what_happened_fa||""}));
   }catch(_){}
   const visiblePressNames=new Set();

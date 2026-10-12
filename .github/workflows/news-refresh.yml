@@ -66,7 +66,7 @@ jobs:
           assert 1 <= len(stories) <= 60, f"Invalid home feed count: exported={len(stories)}, expected=1..60"
           assert meta.get("built_iso"), "No export timestamp"
           assert (root / "stats.json").is_file(), "Missing news stats"
-          assert len(list((root / "story").glob("*.json"))) >= len(stories), "Missing story detail exports"
+          assert all(isinstance(row, dict) and row.get("id") and (root / "story" / (str(row["id"]) + ".json")).is_file() for row in stories), "Missing published story detail exports"
           print(f"Validated {len(stories)} stories at {meta['built_iso']}")
           PY
       - name: Save independent news database
