@@ -142,9 +142,23 @@ function newsPublisherNorm(value){
   return String(value||"").toLocaleLowerCase("fa").replace(/[يى]/g,"ی").replace(/ك/g,"ک")
     .replace(/[()،,]/g," ").replace(/\s+/g," ").trim();
 }
+const NEWS_PUBLISHER_DOMAIN_ALIASES={
+  "خبرگزاری ایرنا irna":"irna.ir",
+  "خبرگزاری ایسنا isna":"isna.ir",
+  "خبرگزاری مهر mehr":"mehrnews.com",
+  "دویچه‌وله فارسی dw persian":"dw.com",
+  "اقتصاد آنلاین":"eghtesadonline.com",
+  "خبرورزشی":"khabarvarzeshi.com",
+  "axios":"axios.com"
+};
 function newsPublisherKnownDomain(name){
   const key=newsPublisherNorm(name);
-  const variants=[key,key.replace(/^خبرگزاری\s+/,""),key.replace(/\s*[—–-].*$/,"")];
+  if(NEWS_PUBLISHER_DOMAIN_ALIASES[key])return NEWS_PUBLISHER_DOMAIN_ALIASES[key];
+  const variants=[
+    key,key.replace(/^خبرگزاری\s+/,""),key.replace(/\s*[—–-].*$/,""),
+    key.replace(/\s+(?:irna|isna|mehr)$/i,""),
+    key.replace(/\s+dw persian$/i,"")
+  ];
   for(const variant of variants)if(NEWS_PUBLISHER_DOMAINS[variant])return NEWS_PUBLISHER_DOMAINS[variant];
   return "";
 }
