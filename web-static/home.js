@@ -199,7 +199,7 @@ function renderHomeCulture(){
 // Two independent homepage windows: headlines and culture.
 let homeNewsMode="latest";
 function setHomeNewsMode(mode){
-  if(!["selected","latest"].includes(mode))return;
+  if(!["selected","latest","hot","rising"].includes(mode))return;
   homeNewsMode=mode;
   document.querySelectorAll("[data-home-news]").forEach(button=>{
     const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
@@ -250,7 +250,8 @@ function renderHomeDaily(){
     return imp+sources+figures+hot+Math.max(0,18-Math.min(age,18));
   };
   const time=s=>Date.parse(s.published_at||s.last_seen_at||"")||0;
-  const stories=(ALL||[]).slice().sort(homeNewsMode==="latest"?(a,b)=>time(b)-time(a):(a,b)=>score(b)-score(a)||time(b)-time(a)).slice(0,20);
+  const pool=(ALL||[]).filter(s=>homeNewsMode==="hot"?Boolean(s.trend?.hot):homeNewsMode==="rising"?Boolean(s.trend?.rising):true);
+  const stories=pool.slice().sort(homeNewsMode==="latest"?(a,b)=>time(b)-time(a):(a,b)=>score(b)-score(a)||time(b)-time(a)).slice(0,20);
   renderHomeNewsDashboard(stories);
   storyEl.innerHTML=stories.length?stories.map((s,i)=>{
     const state=s.trend?.hot?"داغ":s.trend?.rising?"در حال رشد":"";
@@ -265,7 +266,7 @@ function renderHomeDaily(){
       </span>
       <span class="home-intel-go">←</span>
     </button>`;
-  }).join(''):'<div class="state"><div class="big">هنوز سرخطی ثبت نشده</div></div>';
+  }).join('') :`<div class="state"><div class="big">${homeNewsMode==="hot"?"فعلاً خبر داغی ثبت نشده":homeNewsMode==="rising"?"فعلاً خبر در حال رشدی ثبت نشده":"هنوز سرخطی ثبت نشده"}</div></div>`;
 }
 
 // Homepage Jan-e Majra: a compact window into the strongest current topic dossiers.
