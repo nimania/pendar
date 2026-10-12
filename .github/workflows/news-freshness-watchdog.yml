@@ -79,7 +79,8 @@ jobs:
           except Exception as exc:
               site_error = str(exc)
               print(f"::warning::Could not read published news status: {site_error}")
-          stale = age > 60 or publish_age > 120 or story_age > 180
+          # Unreachable or malformed published data must fail the health check, even if collection succeeded.
+          stale = bool(site_error) or age > 60 or publish_age > 120 or story_age > 180
           reasons = []
           if age > 60: reasons.append(f"Collector last success: {age:.0f} minutes ago")
           if publish_age > 120: reasons.append(f"Published build: {publish_age:.0f} minutes ago")
