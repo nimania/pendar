@@ -113,7 +113,7 @@ function paintHomeStatements(){
     const photo=typeof f.avatar==='string'&&f.avatar.startsWith('https://')?f.avatar:'';
     return `<a class="home-statement-card" href="/statement/${id}/" aria-label="${esc(f.name_fa||'')} — ${esc(title)}">
       <span class="home-statement-avatar">${photo?`<img src="${esc(photo)}" loading="lazy" alt="" onerror="this.remove()">`:`<span>${esc(String(f.name_fa||'؟').slice(0,1))}</span>`}</span>
-      <span class="home-statement-copy"><small>${esc(f.name_fa||'')}${date?' · '+esc(relTime(date)):''}</small><b>${esc(title)}</b></span><span class="home-statement-arrow">←</span>
+      <span class="home-statement-copy"><span class="home-statement-meta"><strong>${esc(f.name_fa||'')}</strong>${date?`<time class="home-statement-time" datetime="${esc(date)}">${esc(relTime(date))}</time>`:''}</span><b>${esc(title)}</b></span><span class="home-statement-arrow" aria-hidden="true">←</span>
     </a>`;
   }).join('')+(homeStatementsCache.length>rows.length?`<div class="home-statements-more"><button type="button" onclick="showMoreHomeStatements()">نمایش گفته‌های بیشتر · ${faN(homeStatementsCache.length-rows.length)} مورد دیگر ↓</button></div>`:'');
 }
