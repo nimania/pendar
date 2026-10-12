@@ -352,6 +352,17 @@ const PENDAR_CINEMA_HANDLES={
  'a-separation-2011:cast:2':'sareh-bayat',
  'a-separation-2011:cast:3':'shahab-hosseini'
 };
+const PENDAR_CINEMA_DISPLAY_NAMES={
+  'florian-henckel-von-donnersmarck':'فلوریان هنکل فون دونرسمارک',
+  'ulrich-muhe':'اولریش موهه',
+  'martina-gedeck':'مارتینا گدک',
+  'sebastian-koch':'سباستیان کخ',
+  'asghar-farhadi':'اصغر فرهادی',
+  'peyman-maadi':'پیمان معادی',
+  'leila-hatami':'لیلا حاتمی',
+  'sareh-bayat':'ساره بیات',
+  'shahab-hosseini':'شهاب حسینی'
+};
 function _cinemaHandle(slug,kind,index){
   const key=slug+':'+kind+':'+index;
   // Uncurated credits remain distinct pending a stable official person ID.
@@ -379,7 +390,8 @@ async function openCinemaHandle(handle){
     });
   }
   if(!entries.length)return false;
-  const first=entries[0],name=typeof first.person==='string'?first.person:(first.person.name_fa||first.person.name);
+  const first=entries[0],originalName=typeof first.person==='string'?first.person:(first.person.name_fa||first.person.name);
+  const name=PENDAR_CINEMA_DISPLAY_NAMES[handle]||originalName;
   const direct=String(first.person?.person_id||'');
   if(/^person:[a-z0-9][a-z0-9:_-]*$/i.test(direct)){
     const entity=await canonicalEntityById(direct).catch(()=>null);
@@ -396,7 +408,7 @@ async function openCinemaHandle(handle){
   const picture=validPortrait
     ?'<img src="https://image.tmdb.org/t/p/w185'+esc(profilePath)+'" alt="'+esc(name)+'">'
     :'<span class="movie-poster-fallback" aria-hidden="true">👤</span>';
-  const x={name_fa:name,handle:handle,profile_handle:handle,role_fa:entries.map(e=>e.role).filter((v,i,a)=>a.indexOf(v)===i).join(' · '),posts:[]};
+  const x={name_fa:name,name:originalName!==name?originalName:'',handle:handle,profile_handle:handle,role_fa:entries.map(e=>e.role).filter((v,i,a)=>a.indexOf(v)===i).join(' · '),posts:[]};
   el.innerHTML='<div class="x-profile">'
     +renderPersonProfileHeader(x,{avatar:picture,subtitle:'چهرهٔ سینمایی',stats:'<span><b>'+faN(entries.length)+'</b> اثر مرتبط</span>'})
     +'<nav class="x-profile-tabs" aria-label="بخش‌های پروفایل"><button class="on">آثار</button></nav>'
