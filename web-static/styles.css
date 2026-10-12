@@ -1754,3 +1754,9 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 .cinema-profile-work-link{color:var(--accent,#b83a38);font-size:13px;font-weight:700}
 .cinema-profile-work-note{margin:16px 0 0}
 @media(max-width:620px){.cinema-profile-work-card{padding:12px}.cinema-profile-work-poster{width:66px;min-width:66px}}
+
+/* Verified-only cinema identity facts within the shared figure profile. */
+.x-profile .cinema-profile-identity{margin:18px clamp(16px,3vw,30px) 0;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);text-align:right}
+.cinema-profile-identity h2{font-size:18px;margin:0 0 12px}
+.cinema-profile-identity p{margin:8px 0;line-height:1.9;font-size:14px}
+.cinema-profile-identity p b{font-weight:700}
