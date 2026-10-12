@@ -176,3 +176,29 @@
 #home-people-strip .home-statements-more{padding:14px;text-align:center}
 #home-people-strip .home-statements-more button{cursor:pointer;font:inherit;padding:10px 16px;color:var(--accent);background:var(--surface-2);border:1px solid var(--line);border-radius:10px}
 @media(max-width:600px){#home-people-strip .home-statement-card{padding:11px 9px;min-height:72px}#home-people-strip .home-statement-copy b{font-size:13px}#home-people-strip .home-statement-avatar{width:43px;height:43px;flex-basis:43px}}
+
+/* Persian RTL statement timeline: portrait on the right and a quiet continuous spine. */
+#home-people-strip .home-people-list{position:relative;direction:rtl;padding:7px 0 12px;gap:0;overflow:visible}
+#home-people-strip .home-people-list::before{content:"";position:absolute;right:25px;top:24px;bottom:36px;width:2px;background:linear-gradient(180deg,transparent,var(--accent) 9%,var(--line) 55%,var(--line) 90%,transparent);opacity:.55;pointer-events:none}
+#home-people-strip .home-statement-card{position:relative;display:flex;flex-direction:row;align-items:center;text-align:right;gap:14px;margin:0 54px 0 10px;width:auto;min-height:106px;padding:16px 18px;flex:0 0 auto;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}
+#home-people-strip .home-statement-card::before{content:"";position:absolute;right:-36px;top:50%;transform:translateY(-50%);width:10px;height:10px;border:2px solid var(--accent);border-radius:50%;background:var(--surface);box-shadow:0 0 0 5px var(--surface);box-sizing:border-box}
+#home-people-strip .home-statement-card:hover{background:var(--surface-2);border-radius:10px}
+#home-people-strip .home-statement-avatar{width:58px;height:58px;min-width:58px;max-width:58px;flex:0 0 58px;border:2px solid var(--line);background:var(--surface-2)}
+#home-people-strip .home-statement-avatar img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:cover!important}
+#home-people-strip .home-statement-copy{gap:7px;min-width:0;flex:1}
+#home-people-strip .home-statement-meta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:12px;line-height:1.5;color:var(--ink-soft)}
+#home-people-strip .home-statement-meta strong{color:var(--accent);font-size:13px;font-weight:700}
+#home-people-strip .home-statement-time{font-size:11px;color:var(--ink-soft)}
+#home-people-strip .home-statement-time::before{content:"·";margin-left:8px}
+#home-people-strip .home-statement-copy b{font-size:15px;line-height:1.85;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+#home-people-strip .home-statement-arrow{font-size:18px;opacity:.72}
+#home-people-strip .home-statements-more{position:relative;background:var(--surface);margin-right:54px}
+@media(max-width:600px){
+ #home-people-strip .home-people-list::before{right:16px}
+ #home-people-strip .home-statement-card{margin:0 35px 0 3px;gap:10px;min-height:91px;padding:12px 7px}
+ #home-people-strip .home-statement-card::before{right:-24px;width:9px;height:9px}
+ #home-people-strip .home-statement-avatar{width:45px;height:45px;min-width:45px;max-width:45px;flex-basis:45px}
+ #home-people-strip .home-statement-copy b{font-size:13px;line-height:1.75}
+ #home-people-strip .home-statement-meta strong{font-size:12px}
+ #home-people-strip .home-statements-more{margin-right:35px}
+}
