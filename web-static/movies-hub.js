@@ -412,8 +412,9 @@ async function openCinemaHandle(handle){
   el.innerHTML='<div class="x-profile">'
     +renderPersonProfileHeader(x,{avatar:picture,subtitle:'چهرهٔ سینمایی',stats:'<span><b>'+faN(entries.length)+'</b> اثر مرتبط</span>'})
     +'<nav class="x-profile-tabs" aria-label="بخش‌های پروفایل"><button class="on">آثار</button></nav>'
-    +'<section class="movie-evidence"><h2>آثار مرتبط</h2><p class="movie-method">این آثار از ارتباط ثبت‌شده با این هویت در پندار آمده‌اند. تا تأیید شناسهٔ یکتای شخص، فیلم‌شناسی کامل یا خبرهای هم‌نام‌ها ادغام نمی‌شوند.</p>'
-    +entries.map(e=>'<button class="movie-mention" onclick="openMovie('+JSON.stringify(e.m.slug)+')"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><span>'+esc(e.role)+' · '+esc(e.m.year||'')+'</span></button>').join('')+'</section></div>';
+    +'<section class="cinema-profile-works" aria-label="آثار سینمایی"><div class="cinema-profile-works-head"><h2>آثار مرتبط</h2><small>'+faN(entries.length)+' اثر ثبت‌شده</small></div><div class="cinema-profile-works-grid">'
+    +entries.map(e=>'<a class="cinema-profile-work-card" href="/movie/'+encodeURIComponent(e.m.slug)+'/"><span class="cinema-profile-work-poster">'+_moviePoster(e.m,false)+'</span><span class="cinema-profile-work-copy"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><small>'+esc(e.role)+' · '+esc(e.m.year||'')+'</small><span class="cinema-profile-work-link">مشاهدهٔ صفحهٔ فیلم ←</span></span></a>').join('')
+    +'</div><p class="cinema-profile-work-note">فقط آثار دارای ارتباط ثبت‌شده نمایش داده شده‌اند؛ فیلم‌شناسی کامل پس از تأیید شناسهٔ یکتای شخص تکمیل می‌شود.</p></section></div>';
   if(location.pathname!=='/@'+handle+'/')setHash('#/@'+handle);
   return true;
 }
