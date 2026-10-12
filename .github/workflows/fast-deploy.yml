@@ -158,6 +158,47 @@ jobs:
           fi
 
 
+      - name: Restore reviewed editorial recaps to published figures
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          figures_path=Path('site/data/figures.json')
+          editorial_path=Path('backend/data/editorial-recaps.json')
+          if not figures_path.is_file() or not editorial_path.is_file():
+              raise SystemExit('Missing figures or editorial recap input')
+          data=json.loads(figures_path.read_text(encoding='utf-8'))
+          recaps=json.loads(editorial_path.read_text(encoding='utf-8'))
+          figures=data.get('figures',[])
+          by_handle={str(f.get('handle','')).lower():f for f in figures}
+          merged=0
+          for entry in recaps:
+              if not entry.get('id') or not str(entry.get('recap_fa') or '').strip():
+                  continue
+              for profile in entry.get('profiles',[]):
+                  handle=str(profile.get('handle','')).lower()
+                  if handle and handle not in by_handle:
+                      new=profile.copy()
+                      new.setdefault('posts',[])
+                      figures.append(new)
+                      by_handle[handle]=new
+              for handle in entry.get('handles',[]):
+                  figure=by_handle.get(str(handle).lower())
+                  if not figure:
+                      continue
+                  post={k:v for k,v in entry.items() if k not in ('handles','profiles')}
+                  post.update(handle=figure['handle'],avatar=figure.get('avatar',''),
+                              role_fa=entry.get('source_name','گفت‌وگو'),
+                              published_at=entry.get('published_at') or entry.get('recorded_at'))
+                  posts=figure.setdefault('posts',[])
+                  posts[:]=[p for p in posts if str(p.get('id'))!=str(entry['id'])]
+                  posts.insert(0,post)
+                  merged+=1
+          figures_path.write_text(json.dumps(data,ensure_ascii=False),encoding='utf-8')
+          print(f'Restored {merged} editorial recap placements in published figure data')
+          assert merged>0, 'No reviewed editorial recaps matched published figures'
+          PY
+
       - name: Overlay independently collected weather when newer
         env:
           GH_TOKEN: ${{ github.token }}
