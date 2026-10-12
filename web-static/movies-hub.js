@@ -452,6 +452,22 @@ async function openCinemaHandle(handle){
       }
     }
   }
+  // Add only already-indexed master films whose credit explicitly carries
+  // this person's verified TMDB ID; never match on names or cast order.
+  const verifiedTmdbId=Number(PENDAR_CINEMA_IDENTITIES[handle]?.tmdbId);
+  if(Number.isSafeInteger(verifiedTmdbId)&&verifiedTmdbId>0){
+    const master=await loadMovieMaster();
+    const existingKeys=new Set(entries.map(e=>_movieExactKey(e.m)).filter(Boolean));
+    for(const item of master.items||[]){
+      if(!Array.isArray(item.credits)||!item.credits.length)continue;
+      const movie=_masterMovie(item),key=_movieExactKey(movie);
+      if(!key||existingKeys.has(key))continue;
+      const credit=item.credits.find(c=>Number(c.id)===verifiedTmdbId&&c.kind==='cast');
+      if(!credit)continue;
+      entries.push({m:movie,role:'بازیگر',person:credit,masterId:item.pendar_id});
+      existingKeys.add(key);
+    }
+  }
   entries.sort((a,b)=>Number(b.m.year||0)-Number(a.m.year||0));
   if(!entries.length)return false;
   const first=entries[0],originalName=typeof first.person==='string'?first.person:(first.person.name_fa||first.person.name);
@@ -489,7 +505,7 @@ async function openCinemaHandle(handle){
     +(cinemaIdentity?'<p><b>شناسهٔ سینمایی:</b> <a href="'+esc(cinemaIdentity.source)+'" target="_blank" rel="noopener noreferrer">TMDB '+faN(cinemaIdentity.tmdbId)+' ↗</a> · <a href="https://www.imdb.com/name/'+esc(cinemaIdentity.imdbId)+'/" target="_blank" rel="noopener noreferrer">IMDb ↗</a></p>':'')
     +'<p class="cinema-profile-work-note">این شناسنامه فقط از پیوندهای ثبت‌شدهٔ آثار تشکیل شده است. تصویر، اخبار و زندگینامه صرفاً پس از تطبیق هویت معتبر افزوده می‌شوند.</p></section>'
     +'<section class="cinema-profile-works" aria-label="آثار سینمایی"><div class="cinema-profile-works-head"><h2>آثار مرتبط</h2><small>'+faN(entries.length)+' اثر ثبت‌شده</small></div><div class="cinema-profile-works-grid">'
-    +entries.map(e=>'<a class="cinema-profile-work-card" href="/movie/'+encodeURIComponent(e.m.slug)+'/"><span class="cinema-profile-work-poster">'+_moviePoster(e.m,false)+'</span><span class="cinema-profile-work-copy"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><small>'+esc(e.role)+' · '+esc(e.m.year||'')+'</small><span class="cinema-profile-work-link">مشاهدهٔ صفحهٔ فیلم ←</span></span></a>').join('')
+    +entries.map(e=>'<a class="cinema-profile-work-card" href="'+(e.masterId?'/master-movie/'+encodeURIComponent(e.masterId)+'/':'/movie/'+encodeURIComponent(e.m.slug)+'/')+'"><span class="cinema-profile-work-poster">'+_moviePoster(e.m,false)+'</span><span class="cinema-profile-work-copy"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><small>'+esc(e.role)+' · '+esc(e.m.year||'')+'</small><span class="cinema-profile-work-link">مشاهدهٔ صفحهٔ فیلم ←</span></span></a>').join('')
     +'</div><p class="cinema-profile-work-note">فقط آثار دارای ارتباط ثبت‌شده نمایش داده شده‌اند؛ فیلم‌شناسی کامل پس از تأیید شناسهٔ یکتای شخص تکمیل می‌شود.</p></section></div>';
   if(location.pathname!=='/@'+handle+'/')setHash('#/@'+handle);
   return true;
