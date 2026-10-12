@@ -312,6 +312,7 @@ if (_isDeepLink) {
   renderHomePeople();
   renderHomeCulture();
   renderHomeEvents();
+  renderHomeRecaps();
 }
 updateMineBadge();
 
