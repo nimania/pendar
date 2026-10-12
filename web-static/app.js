@@ -77,7 +77,7 @@ function showHome() {
   show("home"); setTab("home"); setHash("");
   document.title="پندار | خبر، چهره‌ها، کتاب، فیلم و سریال";
   renderHomeStats(); renderHomeGlance(); renderHomePrices(); renderHomeWeather();
-  renderHomePeople(); renderHomeCulture(); renderHomeEvents(); renderHomeRecaps();
+  renderHomeCulture(); renderHomeEvents(); renderHomeRecaps();
   if (ALL.length) renderHomeDaily(); else loadFeed(true);
 }
 async function showFeed() {
@@ -309,7 +309,6 @@ if (_isDeepLink) {
   renderHomeGlance();
   renderHomePrices();
   renderHomeWeather();
-  renderHomePeople();
   renderHomeCulture();
   renderHomeEvents();
   renderHomeRecaps();
