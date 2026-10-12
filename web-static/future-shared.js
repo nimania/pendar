@@ -11,6 +11,23 @@
     const current=document.createElement("span");current.textContent=document.title.replace(/\s*[|｜]\s*پندار\s*$/,"");
     crumb.append(home,document.createTextNode(" / "),future,document.createTextNode(" / "),current);
     head.after(crumb);
+    const sections=[
+      ["/future/","آینده‌بان"],
+      ["/future/evidence/","رادار شواهد"],
+      ["/future/transition/","اطلس گذار"],
+      ["/future/transition/fattahi/","مدل فتاحی"],
+      ["/future/transition/watch/","دیده‌بان گذار"]
+    ];
+    const path=location.pathname.replace(/\\/index\\.html$/,"").replace(/\\/?$/,"/");
+    const sectionNav=document.createElement("nav");
+    sectionNav.className="pendar-future-sections";
+    sectionNav.setAttribute("aria-label","بخش‌های آینده‌بان");
+    for(const [href,label] of sections){
+      const a=document.createElement("a");a.href=href;a.textContent=label;
+      if(path===href){a.setAttribute("aria-current","page");}
+      sectionNav.append(a);
+    }
+    crumb.after(sectionNav);
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
 })();
