@@ -409,6 +409,17 @@ function _legacyMovieCredit(m,kind,index){
   if(!name)return '';
   return '<a class="movie-credit-name" href="/@'+encodeURIComponent(_cinemaHandle(m.slug,kind,index))+'/">'+esc(name)+'</a>';
 }
+function setCinemaProfileTab(tab){
+  const root=document.querySelector('#figures .x-profile');
+  if(!root)return;
+  for(const button of root.querySelectorAll('.x-profile-tabs button[data-cinema-tab]')){
+    button.classList.toggle('on',button.dataset.cinemaTab===tab);
+  }
+  for(const section of root.querySelectorAll('[data-cinema-panel]')){
+    section.hidden=section.dataset.cinemaPanel!==tab;
+    section.style.display=section.hidden?'none':'';
+  }
+}
 async function openCinemaHandle(handle){
   const d=await loadMovies();
   const entries=[];
@@ -494,11 +505,22 @@ async function openCinemaHandle(handle){
   const cinemaIdentity=PENDAR_CINEMA_IDENTITIES[handle]||null;
   const roles=[...new Set(entries.map(e=>e.role))];
   const x={name_fa:name,name:originalName!==name?originalName:'',handle:handle,profile_handle:handle,role_fa:roles.join(' · '),posts:[]};
+  // Only stories with an explicit stable person identity are eligible.
+  // A person's name merely appearing in an article is insufficient evidence.
+  const acceptedIds=new Set(['person:'+handle]);
+  if(cinemaIdentity?.tmdbId)acceptedIds.add('person:tmdb-'+cinemaIdentity.tmdbId);
+  const linkedStories=(typeof ALL!=='undefined'&&Array.isArray(ALL)?ALL:[])
+    .filter(story=>(story.entities||[]).some(entity=>
+      entity&&entity.type==='person'&&acceptedIds.has(String(entity.id||entity.person_id||''))))
+    .slice(0,25);
+  const cinemaNewsMarkup=linkedStories.length
+    ?groupedFeed(linkedStories)
+    :'<p class="cinema-profile-work-note">هنوز خبر یا مصاحبه‌ای با شناسهٔ هویتی تأییدشده برای این چهره ثبت نشده است. صرفِ اشاره به نام فرد، برای اتصال خبر کافی نیست.</p>';
   el.innerHTML='<div class="x-profile">'
     +renderPersonProfileHeader(x,{avatar:picture,subtitle:'چهرهٔ سینمایی',stats:'<span><b>'+faN(entries.length)+'</b> اثر مرتبط</span>'})
     +(curatedPhoto?'<p class="cinema-photo-credit">تصویر: <a href="'+esc(curatedPhoto.source)+'" target="_blank" rel="noopener noreferrer">'+esc(curatedPhoto.credit)+'</a></p>':'')
-    +'<nav class="x-profile-tabs" aria-label="بخش‌های پروفایل"><button class="on">آثار</button></nav>'
-    +'<section class="cinema-profile-identity"><h2>شناسنامهٔ سینمایی</h2>'
+    +'<nav class="x-profile-tabs" aria-label="بخش‌های پروفایل"><button class="on" data-cinema-tab="works" onclick="setCinemaProfileTab(\'works\')">آثار</button><button data-cinema-tab="news" onclick="setCinemaProfileTab(\'news\')">اخبار و مصاحبه‌ها</button></nav>'
+    +'<div data-cinema-panel="works"><section class="cinema-profile-identity"><h2>شناسنامهٔ سینمایی</h2>'
     +(originalName&&originalName!==name?'<p><b>نام ثبت‌شده در منبع:</b> <span dir="auto">'+esc(originalName)+'</span></p>':'')
     +'<p><b>حوزهٔ فعالیت:</b> '+esc(roles.join('، '))+'</p>'
     +'<p><b>آثار مستند در پندار:</b> '+faN(entries.length)+'</p>'
@@ -506,7 +528,8 @@ async function openCinemaHandle(handle){
     +'<p class="cinema-profile-work-note">این شناسنامه فقط از پیوندهای ثبت‌شدهٔ آثار تشکیل شده است. تصویر، اخبار و زندگینامه صرفاً پس از تطبیق هویت معتبر افزوده می‌شوند.</p></section>'
     +'<section class="cinema-profile-works" aria-label="آثار سینمایی"><div class="cinema-profile-works-head"><h2>آثار مرتبط</h2><small>'+faN(entries.length)+' اثر ثبت‌شده</small></div><div class="cinema-profile-works-grid">'
     +entries.map(e=>'<a class="cinema-profile-work-card" href="'+(e.masterId?'/master-movie/'+encodeURIComponent(e.masterId)+'/':'/movie/'+encodeURIComponent(e.m.slug)+'/')+'"><span class="cinema-profile-work-poster">'+_moviePoster(e.m,false)+'</span><span class="cinema-profile-work-copy"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><small>'+esc(e.role)+' · '+esc(e.m.year||'')+'</small><span class="cinema-profile-work-link">مشاهدهٔ صفحهٔ فیلم ←</span></span></a>').join('')
-    +'</div><p class="cinema-profile-work-note">فقط آثار دارای ارتباط ثبت‌شده نمایش داده شده‌اند؛ فیلم‌شناسی کامل پس از تأیید شناسهٔ یکتای شخص تکمیل می‌شود.</p></section></div>';
+    +'</div><p class="cinema-profile-work-note">فقط آثار دارای ارتباط ثبت‌شده نمایش داده شده‌اند؛ فیلم‌شناسی کامل پس از تأیید شناسهٔ یکتای شخص تکمیل می‌شود.</p></section></div>'
+    +'<section class="x-profile-feed" data-cinema-panel="news" style="display:none" hidden><h2>اخبار و مصاحبه‌ها</h2>'+cinemaNewsMarkup+'</section></div>';
   if(location.pathname!=='/@'+handle+'/')setHash('#/@'+handle);
   return true;
 }
