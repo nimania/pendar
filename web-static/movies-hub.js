@@ -136,7 +136,7 @@ let movieState={query:"",kind:"all",genre:"all",sort:"editorial",source:"curated
 function _movieNorm(v){return String(v||"").replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").replace(/\s+/g," ").trim().toLowerCase()}
 function _movieBySlug(d,slug){return (d.movies||[]).find(function(x){return String(x.slug)===String(slug)})}
 function _movieMentionCount(m){return Array.isArray(m.mentions)?m.mentions.length:0}
-function _moviePoster(m,large){if(!m.poster_url)return '<span class="movie-poster-fallback">🎬</span>';return '<img src="'+esc(m.poster_url)+'" alt="'+esc(m.title_fa||m.original_title||"")+'" loading="'+(large?"eager":"lazy")+'" referrerpolicy="no-referrer" onerror="this.remove()">'}
+function _moviePoster(m,large){const fallback='<span class="movie-poster-fallback" role="img" aria-label="جلد موجود نیست">'+esc(m.title_fa||m.original_title||'🎬')+'</span>';if(!m.poster_url)return fallback;return '<img src="'+esc(m.poster_url)+'" alt="پوستر '+esc(m.title_fa||m.original_title||'')+'" loading="'+(large?'eager':'lazy')+'" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<span class=&quot;movie-poster-fallback&quot;>🎬</span>\'">'}
 function _movieRating(label,value,suffix){if(value===undefined||value===null)return "";return '<span class="movie-rating"><b>'+esc(String(value))+(suffix||"")+'</b><small>'+esc(label)+'</small></span>'}
 function _movieVerificationMeta(m){
   const v=m&&m.verification||{},level=String(v.level||"");
