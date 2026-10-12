@@ -108,8 +108,8 @@ async function openStory(id) {
   const storyBooksSection=storyBooks.length?`<section class="story-books"><div class="rule"><span>کتاب‌های مرتبط با این خبر</span><span class="l"></span></div><div class="press-book-links">${storyBooks.map(b=>`<button onclick="openBook('${esc(b.slug)}')"><span>کتاب</span><b>${esc(b.title_fa||"")}</b></button>`).join("")}</div></section>`:"";
   const li = a => (a || []).map(x => `<li>${esc(x)}</li>`).join("");
   const views = (s.source_views || []).map(sv => `<div class="view"><div class="v-h"><span class="v-name">${esc(sv.source_name)}</span></div><p>${esc(sv.viewpoint_fa || "")}</p></div>`).join("");
-  const cites = (s.sources || []).map(c => `<a class="cite" href="${c.article_url || "#"}" target="_blank" rel="noopener">
-      <div class="c-body"><div class="c-src">${esc(c.source_name)}</div><div class="c-title">${esc(c.original_headline || "")}</div></div>
+  const cites = (s.sources || []).map(c => `<a class="cite" href="${esc(c.article_url || "#")}" target="_blank" rel="noopener noreferrer">
+      <div class="c-body"><div class="c-src news-citation-publisher">${newsPublisherIcon(newsPublisherSources({sources:[c]},1)[0]||{name:c.source_name||"منبع",domain:""})}<span>${esc(c.source_name||"منبع")}</span></div><div class="c-title">${esc(c.original_headline || "")}</div></div>
       <span class="c-time">${relTime(c.published_at)}</span>
       <span class="ext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>`).join("");
   const quotedPeople = (s.person_statements || []).length ? `
