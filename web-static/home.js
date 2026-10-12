@@ -199,7 +199,7 @@ function renderHomeCulture(){
 // Two independent homepage windows: headlines and culture.
 let homeNewsMode="latest";
 function setHomeNewsMode(mode){
-  if(!["selected","latest","hot","rising","recaps"].includes(mode))return;
+  if(!["selected","latest","hot","rising","recaps","events"].includes(mode))return;
   homeNewsMode=mode;
   document.querySelectorAll("[data-home-news]").forEach(button=>{
     const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
@@ -251,12 +251,14 @@ function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
   if(!storyEl)return;
   const title=document.getElementById("home-news-title");
-  if(title)title.textContent=homeNewsMode==="recaps"?"جان کلام":"نبض امروز";
+  if(title)title.textContent=homeNewsMode==="recaps"?"جان کلام":homeNewsMode==="events"?"ماجراها و ترندها":"نبض امروز";
   const dashboard=document.getElementById("home-news-dashboard");
   const freshness=document.getElementById("home-news-freshness");
-  if(dashboard)dashboard.style.display=homeNewsMode==="recaps"?"none":"";
+  if(dashboard)dashboard.style.display=["recaps","events"].includes(homeNewsMode)?"none":"";
   if(freshness)freshness.style.display=homeNewsMode==="recaps"?"none":"";
   storyEl.classList.toggle("home-recaps-list",homeNewsMode==="recaps");
+  storyEl.classList.toggle("home-events-in-table",homeNewsMode==="events");
+  if(homeNewsMode==="events"){renderHomeEvents();return;}
   if(homeNewsMode==="recaps"){renderHomeRecaps();return;}
   const score=s=>{
     const imp=Number(s.importance_score||0);
