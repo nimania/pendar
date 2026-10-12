@@ -269,6 +269,41 @@ function renderHomeDaily(){
   }).join('') :`<div class="state"><div class="big">${homeNewsMode==="hot"?"فعلاً خبر داغی ثبت نشده":homeNewsMode==="rising"?"فعلاً خبر در حال رشدی ثبت نشده":"هنوز سرخطی ثبت نشده"}</div></div>`;
 }
 
+
+/* Public homepage recaps: only statements with an actual recap text,
+   never private studio recording drafts. */
+async function renderHomeRecaps(){
+  const el=document.getElementById("home-recaps-list");
+  if(!el)return;
+  try{
+    const d=await loadFigures();
+    const rows=[];
+    const seen=new Set();
+    for(const f of d.figures||[]){
+      for(const p of f.posts||[]){
+        if(!p.id||!String(p.recap_fa||"").trim()||seen.has(String(p.id)))continue;
+        if(p.status&&["draft","pending","private"].includes(String(p.status).toLowerCase()))continue;
+        seen.add(String(p.id));
+        rows.push({id:String(p.id),title:p.topic_fa||p.video_title||"جان کلام",name:f.name_fa||p.name_fa||"",avatar:f.avatar||"",summary:p.summary_fa||"",date:p.published_at||p.recorded_at||""});
+      }
+    }
+    rows.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+    const items=rows.slice(0,6);
+    const section=document.getElementById("home-recaps");
+    if(!items.length){if(section)section.hidden=true;return;}
+    if(section)section.hidden=false;
+    el.innerHTML=items.map(r=>{
+      const pid=encodeURIComponent(r.id);
+      const photo=typeof r.avatar==="string"&&/^https?:\\/\\//.test(r.avatar)?r.avatar:"";
+      return `<a class="home-recap-item" href="/statement/${pid}/" aria-label="${esc(r.title)}">
+        <span class="home-recap-avatar">${photo?`<img src="${esc(photo)}" alt="" loading="lazy" onerror="this.remove()">`:`<span>${esc(r.name.slice(0,1)||"پ")}</span>`}</span>
+        <span class="home-recap-copy"><b>${esc(r.title)}</b><small>${esc(r.name)}${r.date?" · "+esc(relTime(r.date)):""}</small></span>
+        <span aria-hidden="true">←</span>
+      </a>`;
+    }).join("");
+  }catch(_){const section=document.getElementById("home-recaps");if(section)section.hidden=true;}
+}
+
 // Homepage Jan-e Majra: a compact window into the strongest current topic dossiers.
 function scrollHomeMajra(dir) {
   const el = document.getElementById("home-majra-cards");
