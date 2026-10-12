@@ -366,7 +366,9 @@ function _legacyMovieCredit(m,kind,index){
 async function openCinemaHandle(handle){
   const d=await loadMovies();
   const entries=[];
-  const cached=[...(d.movies||[]),...(window.__MOVIES_DATA__?.movies||[])];
+  // Curated credit handles are tied to the original named cast positions. Prefer
+  // that verified static record over a refreshed catalog with a different order.
+  const cached=[...(window.__MOVIES_DATA__?.movies||[]),...(d.movies||[])];
   const seen=new Set();
   for(const m of cached){
     if(seen.has(m.slug))continue;
@@ -389,7 +391,7 @@ async function openCinemaHandle(handle){
   const el=document.getElementById('figures');
   document.title=name+' | چهره‌های پندار';
   const profilePath=String(first.person?.profile_path||'');
-  const validPortrait=profilePath.startsWith('/') && /\\.(jpg|jpeg|png|webp)$/i.test(profilePath)
+  const validPortrait=profilePath.startsWith('/') && /\.(jpg|jpeg|png|webp)$/i.test(profilePath)
     && !profilePath.includes('..') && !profilePath.includes('//');
   const picture=validPortrait
     ?'<img src="https://image.tmdb.org/t/p/w185'+esc(profilePath)+'" alt="'+esc(name)+'">'
