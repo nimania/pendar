@@ -14,4 +14,6 @@ for n,p in files:
     dirs[str(rel.parts[0]) if rel.parts else "."]+=n
 print("Top root directories:",flush=True)
 for name,n in sorted(dirs.items(),key=lambda x:-x[1])[:18]:print(f"  {n/1e6:9.2f} MB  {name}",flush=True)
+if total>600_000_000:
+    print(f"::warning::Pages footprint {total/1e6:.1f} MB exceeds the 600 MB early-warning threshold; inspect archive growth.",flush=True)
 if total>limit:sys.exit(f"::error::Publish exceeds {limit/1e6:.0f} MB safe limit; see largest files above.")
