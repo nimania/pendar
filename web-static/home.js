@@ -258,15 +258,12 @@ function renderHomeNewsDashboard(stories){
   </div><div class="home-dashboard-foot"><span>رادار خبری · ۲۴ ساعت اخیر</span>${homeMiniBars(bins)}</div>`;
 }
 function homeStorySourceBadges(story){
-  const sources=(Array.isArray(story.sources)?story.sources:[]).filter(x=>x&&typeof x==="object"&&x.source_name&&/^https?:\/\//i.test(x.article_url||""));
-  const unique=new Map();
-  for(const src of sources){
-    let domain;try{domain=new URL(src.article_url).hostname.replace(/^www\./,"");}catch(_){continue;}
-    if(!domain||unique.has(domain))continue;
-    unique.set(domain,{name:String(src.source_name).slice(0,45),domain});
-    if(unique.size>=2)break;
-  }
-  return [...unique.values()].map(x=>`<span class="home-news-source"><img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(x.domain)}&sz=32" alt="" loading="lazy" width="15" height="15" onerror="this.remove()"><span>${esc(x.name)}</span></span>`).join("");
+  const sources=newsPublisherSources(story,4);
+  if(!sources.length)return "";
+  const count=Math.max(0,Number(story.source_count||0)-sources.length);
+  return '<span class="home-news-source-label">رسانه‌ها</span>'+
+    sources.map(newsPublisherIdentity).join("")+
+    (count?'<span class="home-news-source-more" title="منابع بیشتر در متن خبر">+'+faN(count)+'</span>':"");
 }
 function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
