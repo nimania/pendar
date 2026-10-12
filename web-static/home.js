@@ -125,16 +125,29 @@ async function renderHomePeople(){
       }))
       .sort((a,b)=>b._latest-a._latest)
       ;
-    const priority = eligible.filter(f => homeFigurePriority(f) < HOME_FIGURE_PRIORITY.length)
-      .sort((a,b) => homeFigurePriority(a) - homeFigurePriority(b) || b._latest-a._latest);
-    const remaining = eligible.filter(f => homeFigurePriority(f) === HOME_FIGURE_PRIORITY.length);
-    const figures = [...priority, ...remaining].slice(0,14);
-    if(!figures.length){ section.style.display="none"; return; }
-    el.innerHTML=figures.map(f=>`
-      <button class="home-person" onclick="openFigure('${esc(f.handle)}')" aria-label="${esc(f.name_fa||"")}${f._recentVideo?" — ویدئوی تازه در ۴۸ ساعت گذشته":""}"${f._recentVideo?' title="ویدئوی تازه در ۴۸ ساعت گذشته"':""}>
-        <span class="home-person-ring${f._recentVideo?" has-recent-video":""}"><span class="home-person-initial" aria-hidden="true">${esc(String(f.name_fa||"؟").slice(0,1))}</span>${f.avatar?`<img src="${esc(f.avatar)}" alt="" loading="lazy" onerror="this.remove()">`:""}</span>
-        <span class="home-person-name">${esc(f.name_fa||"")}</span>
-      </button>`).join("");
+    const statements=[];
+    const used=new Set();
+    for(const f of eligible){
+      const posts=(f.posts||[]).filter(p=>p&&p.id&&(p.topic_fa||p.summary_fa||p.text||p.recap_fa)&&!["draft","private","pending"].includes(String(p.status||"").toLowerCase()));
+      posts.sort((a,b)=>figureActivityTime(b)-figureActivityTime(a));
+      const post=posts[0];
+      if(!post||used.has(String(post.id)))continue;
+      used.add(String(post.id));
+      statements.push({person:f,post,time:figureActivityTime(post)});
+    }
+    statements.sort((a,b)=>b.time-a.time);
+    const rows=statements.slice(0,12);
+    if(!rows.length){section.style.display="none";return;}
+    el.innerHTML=rows.map(({person:f,post:p})=>{
+      const title=String(p.topic_fa||p.headline_fa||p.summary_fa||p.recap_fa||p.text||"").trim().slice(0,170);
+      const date=p.published_at||p.recorded_at||"";
+      const id=encodeURIComponent(String(p.id));
+      const photo=typeof f.avatar==="string"&&f.avatar.startsWith("https://")?f.avatar:"";
+      return `<a class="home-statement-card" href="/statement/${id}/" aria-label="${esc(f.name_fa||"")} — ${esc(title)}">
+        <span class="home-statement-avatar">${photo?`<img src="${esc(photo)}" loading="lazy" alt="" onerror="this.remove()">`:`<span>${esc(String(f.name_fa||"؟").slice(0,1))}</span>`}</span>
+        <span class="home-statement-copy"><small>${esc(f.name_fa||"")}${date?" · "+esc(relTime(date)):""}</small><b>${esc(title)}</b></span>
+      </a>`;
+    }).join("");
     section.style.display="";
   }catch(_){
     section.style.display="none";
