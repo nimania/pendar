@@ -384,7 +384,7 @@ function paintHomePeopleTimeline(){
     const image=typeof f.avatar==="string"&&(/^(https?:\/\/|\/|assets\/|data\/)/i.test(f.avatar))?f.avatar:"";
     const link="/statement/"+encodeURIComponent(String(p.id))+"/";
     return '<article class="home-people-timeline-row">'+
-      '<div class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove();this.parentElement.textContent='+JSON.stringify("؟")+'">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</div>'+
+      '<div class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</div>'+
       '<div class="home-people-timeline-copy"><div class="home-people-timeline-meta"><strong>'+esc(f.name_fa||"")+'</strong>'+(date?'<time datetime="'+esc(date)+'">'+esc(relTime(date))+'</time>':'')+'</div>'+
       (headline?'<a class="home-people-timeline-title" href="'+link+'">'+esc(headline)+'</a>':'')+
       (excerpt?'<p class="home-people-timeline-excerpt">'+esc(excerpt)+(original.length>460?'…':'')+'</p>':'')+
