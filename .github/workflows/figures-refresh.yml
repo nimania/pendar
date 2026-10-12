@@ -115,3 +115,5 @@ jobs:
           path: figure-payload/
           retention-days: 3
           if-no-files-found: error
+
+# Recovery trigger: refresh collector after extended schedule gap on 2026-10-12.
