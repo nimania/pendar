@@ -305,6 +305,8 @@ function setHomeRecapQuery(value){
 function paintHomeRecaps(){
   if(homeNewsMode!=="recaps")return;
   const el=document.getElementById("home-daily-stories");if(!el)return;
+  const editing=document.activeElement?.matches?.(".home-recap-search input")===true;
+  const caret=editing?document.activeElement.selectionStart:null;
   const people=[...new Set(homeRecapRows.map(x=>x.name).filter(Boolean))];
   const filters=[["all","همهٔ جان کلام‌ها"],...people.slice(0,5).map(x=>[x,x])];
   const matches=homeRecapRows.filter(x=>(homeRecapFilter==="all"||x.name===homeRecapFilter)&&(!homeRecapQuery||[x.title,x.name,x.summary,x.source].join(" ").toLocaleLowerCase("fa").includes(homeRecapQuery)));
@@ -319,6 +321,7 @@ function paintHomeRecaps(){
       (r.source?'<small class="home-recap-source">منبع: '+esc(r.source)+'</small>':'')+'</span><span class="home-recap-arrow" aria-hidden="true">←</span></a>';
   }).join("");
   el.innerHTML=controls+'<div class="home-recap-results">'+(cards||'<div class="state"><div class="big">موردی مطابق این فیلتر پیدا نشد.</div></div>')+'</div>';
+  if(editing){const field=el.querySelector(".home-recap-search input");field?.focus();if(field&&caret!==null)field.setSelectionRange(caret,caret);}
 }
 async function renderHomeRecaps(){
   if(homeNewsMode!=="recaps")return;
