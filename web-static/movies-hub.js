@@ -369,6 +369,18 @@ const PENDAR_CINEMA_PHOTOS={
     credit:'مهدی دلخواسته · CC BY-SA 3.0',
     source:'https://commons.wikimedia.org/wiki/File:Payman_maadi_(cropped).jpg',
     objectPosition:'50% 32%'
+  },
+  'ulrich-muhe':{
+    url:'https://commons.wikimedia.org/wiki/Special:FilePath/Ulrich%20M%C3%BChe.jpg',
+    credit:'Edmond Frederik · CC BY-SA 3.0',
+    source:'https://commons.wikimedia.org/wiki/File:Ulrich_M%C3%BChe.jpg',
+    objectPosition:'50% 35%'
+  },
+  'leila-hatami':{
+    url:'https://commons.wikimedia.org/wiki/Special:FilePath/Leila%20Hatami.jpg',
+    credit:'Christophe Delorme · CC BY-SA 4.0',
+    source:'https://commons.wikimedia.org/wiki/File:Leila_Hatami.jpg',
+    objectPosition:'50% 34%'
   }
 };
 function _cinemaHandle(slug,kind,index){
