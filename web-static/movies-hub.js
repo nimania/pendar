@@ -505,15 +505,19 @@ async function openMovie(slug,canonicalId=null){const catalog=await loadMovies()
 const PERSON_ROLE_FA={Director:"کارگردان",Writer:"نویسنده",Screenplay:"فیلمنامه‌نویس",Creator:"خالق",Producer:"تهیه‌کننده","Executive Producer":"تهیه‌کننده اجرایی",Story:"داستان","Director of Photography":"مدیر فیلم‌برداری",Editor:"تدوینگر","Original Music Composer":"آهنگساز",Casting:"انتخاب بازیگر"};
 const MOVIE_LANGUAGE_FA={fa:"فارسی",en:"انگلیسی",tr:"ترکی",fr:"فرانسوی",de:"آلمانی",ja:"ژاپنی",ko:"کره‌ای",es:"اسپانیایی",it:"ایتالیایی",ar:"عربی",hi:"هندی",ru:"روسی",zh:"چینی",pt:"پرتغالی"};
 let personMediaRatings={};
+// Exact TMDB identifiers shared by the movie-master credits and verified Pendar profiles.
+const MOVIE_PERSON_PROFILE_HANDLES={559566:'peyman-maadi'};
 function _moviePersonCredit(x){
   const name=x.name_fa||x.name||"",role=x.kind==="cast"?"بازیگر":PERSON_ROLE_FA[x.role]||"عوامل";
   const canonical=typeof x.person_id==="string"&&/^person:[a-z0-9][a-z0-9:_-]*$/i.test(x.person_id)?x.person_id:"";
   const tmdb=Number(x.id);
   const id=canonical||(Number.isSafeInteger(tmdb)&&tmdb>0?"person:tmdb-"+tmdb:"");
+  const profileHandle=Number.isSafeInteger(tmdb)&&tmdb>0?MOVIE_PERSON_PROFILE_HANDLES[tmdb]:null;
   const portrait=/^\/[a-zA-Z0-9/_-]+\.(?:jpg|jpeg|png|webp)$/.test(String(x.profile_path||""))
     ?'<img width="48" height="64" loading="lazy" alt="" src="https://image.tmdb.org/t/p/w185'+esc(x.profile_path)+'">':"";
   const content=portrait+'<b>'+esc(name)+'</b><small>'+esc(role)+'</small>';
-  return id?'<a class="movie-credit" href="#/entity/'+encodeURIComponent(id)+'">'+content+'</a>'
+  return profileHandle?'<a class="movie-credit" href="/@'+encodeURIComponent(profileHandle)+'/">'+content+'</a>'
+    :id?'<a class="movie-credit" href="#/entity/'+encodeURIComponent(id)+'">'+content+'</a>'
     :'<span class="movie-credit">'+content+'</span>';
 }
 function _moviePersonRatings(raw){const r=personMediaRatings[raw.imdb_id]||{};return (r.imdb?_movieRating("IMDb · "+faN(r.imdb.votes)+" رأی",faN(r.imdb.value))+_movieRatingSource(r.imdb):"")+(r.rotten_tomatoes?_movieRating("راتن‌تومیتوز · منتقدان",faN(r.rotten_tomatoes.value),"٪")+_movieRatingSource(r.rotten_tomatoes):"")}
