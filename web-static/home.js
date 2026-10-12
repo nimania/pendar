@@ -381,7 +381,7 @@ function paintHomePeopleTimeline(){
     const original=String(p.text||p.recap_fa||p.summary_fa||p.content_fa||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
     const excerpt=original.slice(0,460);
     const date=p.published_at||p.recorded_at||"";
-    const image=typeof f.avatar==="string"&&(/^(https?:\/\/|\/|assets\/|data\/)/i.test(f.avatar))?f.avatar:"";
+    const image=typeof f.avatar==="string"&&(/^(https?:\/\/|\/|assets\/|figures\/|data\/)/i.test(f.avatar))?f.avatar:"";
     const link="/statement/"+encodeURIComponent(String(p.id))+"/";
     return '<article class="home-people-timeline-row">'+
       '<div class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</div>'+
