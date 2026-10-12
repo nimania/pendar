@@ -331,7 +331,7 @@ async function _creatorWorkPeople(kind,id){
   }catch(_){creatorWorkBuckets.delete(bucket);return []}
 }
 function _creatorWorkPeopleSection(rows){
-  return rows.length?'<section class="movie-evidence"><h2>چهره‌های مرتبط با اثر</h2><div class="movie-credit-grid">'+rows.map(p=>'<a class="movie-credit" href="#/entity/'+encodeURIComponent(p.person_id)+'"><b>'+esc(p.name_fa||'')+'</b><small>'+esc(p.role_fa||'پدیدآورنده / حضور در اثر')+'</small></a>').join('')+'</div></section>':'';
+  return rows.length?'<section class="movie-evidence"><h2>چهره‌های مرتبط با اثر</h2><div class="movie-credit-grid">'+rows.map(p=>'<a class="movie-credit" href="/entity/'+encodeURIComponent(p.person_id)+'/"><b>'+esc(p.name_fa||'')+'</b><small>'+esc(p.role_fa||'پدیدآورنده / حضور در اثر')+'</small></a>').join('')+'</div></section>':'';
 }
 async function _masterMovieById(id){
   const master=await loadMovieMaster(),known=(master.items||[]).find(x=>String(x.pendar_id)===String(id));
@@ -413,7 +413,9 @@ function _legacyMovieCredit(m,kind,index){
   const person=kind==='director'?m.director:(m.cast||[])[index];
   const name=typeof person==='string'?person:(person?.name_fa||person?.name||'');
   if(!name)return '';
-  return '<a class="movie-credit-name" href="/@'+encodeURIComponent(_cinemaHandle(m.slug,kind,index))+'/">'+esc(name)+'</a>';
+  const canonical=person&&typeof person==='object'&&/^person:[a-z0-9][a-z0-9:_-]*$/i.test(String(person.person_id||''))?person.person_id:null;
+  const href=canonical?'/entity/'+encodeURIComponent(canonical)+'/':'/@'+encodeURIComponent(_cinemaHandle(m.slug,kind,index))+'/';
+  return '<a class="movie-credit-name" href="'+href+'">'+esc(name)+'</a>';
 }
 function setCinemaProfileTab(tab){
   const root=document.querySelector('#figures .x-profile');
