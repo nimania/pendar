@@ -1737,3 +1737,20 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 .fig-topic-filters{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0 2px;align-items:center}
 .fig-topic-filters .fchip{white-space:nowrap}
 @media(max-width:600px){.fig-topic-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px;scrollbar-width:thin}}
+
+/* Cinema profiles share the figure shell, but film links use full-width work cards. */
+.x-profile .cinema-profile-works{padding:22px clamp(16px,3vw,30px) 30px;min-width:0}
+.cinema-profile-works-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
+.cinema-profile-works-head h2{margin:0;font-size:clamp(18px,2vw,24px)}
+.cinema-profile-works-head small{color:var(--ink-soft)}
+.cinema-profile-works-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.cinema-profile-work-card{display:flex;align-items:center;gap:16px;min-width:0;padding:14px;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--text);background:var(--surface-2);transition:border-color .15s,transform .15s}
+.cinema-profile-work-card:hover,.cinema-profile-work-card:focus-visible{border-color:var(--accent,#b83a38);transform:translateY(-2px)}
+.cinema-profile-work-poster{width:80px;min-width:80px;aspect-ratio:2/3;overflow:hidden;border-radius:9px;background:var(--surface);display:flex;align-items:center;justify-content:center}
+.cinema-profile-work-poster img{width:100%;height:100%;object-fit:cover}
+.cinema-profile-work-copy{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0}
+.cinema-profile-work-copy strong{font-size:16px;line-height:1.6;text-align:right}
+.cinema-profile-work-copy small,.cinema-profile-work-note{color:var(--ink-soft);font-size:12px;line-height:1.8}
+.cinema-profile-work-link{color:var(--accent,#b83a38);font-size:13px;font-weight:700}
+.cinema-profile-work-note{margin:16px 0 0}
+@media(max-width:620px){.cinema-profile-work-card{padding:12px}.cinema-profile-work-poster{width:66px;min-width:66px}}
