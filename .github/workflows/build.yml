@@ -411,6 +411,9 @@ jobs:
       - name: Apply temporary news-and-figures publication profile
         run: python backend/scripts/prepare_priority_site.py backend/public
 
+      - name: Validate final lightweight site after trimming
+        run: python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
+
       - name: Audit GitHub Pages payload size
         run: python backend/scripts/audit_pages_size.py backend/public 750000000
 
