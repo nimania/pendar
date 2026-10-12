@@ -31,3 +31,25 @@ body main .notice{border-inline-start:3px solid var(--future-red)}
 .pendar-future-sections a:hover{border-color:var(--future-red);color:var(--future-red)}
 .pendar-future-sections a[aria-current="page"]{background:var(--future-red);border-color:var(--future-red);color:#fff}
 @media(max-width:690px){.pendar-future-sections{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:7px}.pendar-future-sections a{flex-shrink:0;white-space:nowrap}}
+
+/* Future Observatory editorial design system: scoped to the research pages. */
+body{font-size:15px;letter-spacing:0}
+body main{width:min(100%,1100px);padding-top:24px!important;padding-bottom:72px!important}
+body main h1{font-size:clamp(29px,4vw,46px)!important;line-height:1.5!important;margin-block:12px 20px!important;color:var(--future-ink)}
+body main h2{font-size:clamp(19px,2.2vw,25px);line-height:1.55;font-weight:850}
+body main h3{font-size:17px;line-height:1.6}
+body main p{line-height:1.95}
+body main .grid{gap:16px}
+body main .card,body main .visual-story{border:1px solid var(--future-border);border-radius:13px;background:var(--future-card);box-shadow:0 1px 3px #00000008}
+body main .card{padding:clamp(16px,2vw,24px)}
+body main .card h2:first-child,body main .card h3:first-child{margin-top:0}
+body main .card a{color:var(--future-red)}
+body main .tag{font-size:12px;font-weight:800;letter-spacing:.01em}
+body main .muted,body main .card small{color:#686d70}
+body main .notice{border-radius:10px;background:#fff4f2;padding:16px 20px}
+body main button,body main select{font-family:inherit}
+body main button:focus-visible,body main a:focus-visible,body main select:focus-visible,.pendar-future-sections a:focus-visible{outline:2px solid var(--future-red);outline-offset:3px}
+body main .filters button[aria-pressed="true"]{background:var(--future-red);border-color:var(--future-red);color:#fff}
+body main footer{border-top:1px solid var(--future-border);margin-top:42px;padding-top:20px;color:#727477}
+@media(max-width:690px){body main{padding-top:16px!important;padding-bottom:46px!important}body main .grid{grid-template-columns:1fr;gap:12px}body main .card{padding:15px}body main h1{font-size:29px!important}}
+@media(prefers-color-scheme:dark){body main .muted,body main .card small,body main footer{color:#b9b9b9}body main .notice{background:#36262a}body main .visual-story{background:var(--future-card)}}
