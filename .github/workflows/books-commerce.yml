@@ -50,29 +50,45 @@ jobs:
           node backend/tests/test_book_radar_ui.js
           node backend/tests/test_book_market_ui.js
 
-      - name: Find latest complete periodicals site and weather
+      - name: Find recent published site and weather
         id: base
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          press_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/periodicals.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          weather_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          commerce_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/books-commerce.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
-          test -n "$press_id"
-          echo "press_id=$press_id" >> "$GITHUB_OUTPUT"
+          # The Pages deployment is authoritative; old periodicals artifacts may expire.
+          weather_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
           echo "weather_id=$weather_id" >> "$GITHUB_OUTPUT"
-          echo "commerce_id=$commerce_id" >> "$GITHUB_OUTPUT"
 
-      - name: Download latest complete periodicals site
+      - name: Restore current published site with full-build fallback
         env:
           GH_TOKEN: ${{ github.token }}
-          PRESS_ID: ${{ steps.base.outputs.press_id }}
         run: |
-          rm -rf site /tmp/press-pages
-          mkdir -p site /tmp/press-pages
-          gh run download "$PRESS_ID" -n github-pages -D /tmp/press-pages
-          test -f /tmp/press-pages/artifact.tar
-          tar -xf /tmp/press-pages/artifact.tar -C site
+          rm -rf site /tmp/book-pages
+          mkdir -p site /tmp/book-pages
+          restored=0
+          mapfile -t runs < <(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/fast-deploy.yml/runs?status=success&per_page=5" --jq '.workflow_runs[].id' 2>/dev/null || true)
+          for run_id in "${runs[@]}"; do
+            artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$run_id/artifacts" --jq '[.artifacts[] | select(.expired==false and (.name|startswith("github-pages")))] | .[0].name // empty' 2>/dev/null || true)"
+            [ -n "$artifact" ] || continue
+            rm -rf /tmp/book-pages && mkdir -p /tmp/book-pages
+            if gh run download "$run_id" -n "$artifact" -D /tmp/book-pages && [ -s /tmp/book-pages/artifact.tar ]; then
+              tar -xf /tmp/book-pages/artifact.tar -C site
+              if [ -s site/index.html ] && [ -s site/data/books.json ]; then
+                restored=1
+                break
+              fi
+            fi
+          done
+          if [ "$restored" -ne 1 ]; then
+            echo "::warning::Published Pages snapshot unavailable; trying the last complete build."
+            complete_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+            test -n "$complete_id"
+            rm -rf site && mkdir -p site
+            gh run download "$complete_id" -n latest-static-site -D site
+            python backend/scripts/unpack_site_artifact.py site
+          fi
+          test -s site/index.html
+          test -s site/data/books.json
 
       - name: Restore recent Torob snapshots
         env:
