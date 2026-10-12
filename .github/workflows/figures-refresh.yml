@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [".github/workflows/figures-refresh.yml"]
+    paths: [".github/workflows/figures-refresh.yml", "backend/scripts/collect_figure_sources.py"]
   schedule:
     - cron: "11,41 * * * *"
 permissions:
@@ -27,9 +27,10 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: backend/build.db
-          key: pendar-news-db-figures-${{ github.run_id }}
+          key: pendar-figures-db-${{ github.run_id }}
           restore-keys: |
             pendar-news-db-
+            pendar-figures-db-
             jankalam-db-
       - name: Restore external figure history
         uses: actions/cache/restore@v4
@@ -56,6 +57,7 @@ jobs:
           TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
         run: |
           python -m scripts.seed
+          python -m scripts.collect_figure_sources
           python -m scripts.collect_external_figures
           python -m scripts.export_static
       - name: Validate and package figures
@@ -91,6 +93,12 @@ jobs:
           (dst/'figures-health.json').write_text(json.dumps(meta,ensure_ascii=False),encoding='utf-8')
           print(meta,flush=True)
           PY
+      - name: Save independent figure database
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: backend/build.db
+          key: pendar-figures-db-${{ github.run_id }}
       - name: Save figure history for next run
         if: always()
         uses: actions/cache/save@v4

@@ -138,13 +138,19 @@ jobs:
               new=json.loads((src/'figures.json').read_text(encoding='utf-8'))
               old=json.loads((dst/'figures.json').read_text(encoding='utf-8')) if (dst/'figures.json').exists() else {}
               newer=str(new.get('generated_at') or '') > str(old.get('generated_at') or '')
-              if len(new.get('figures',[]))>=100 and newer:
+              def latest(snapshot):
+                  return max((str(p.get('published_at') or '') for f in snapshot.get('figures',[]) for p in f.get('posts',[])), default='')
+              def size(snapshot):
+                  return sum(len(f.get('posts',[])) for f in snapshot.get('figures',[]))
+              substantive = latest(new)>latest(old) or (len(new.get('figures',[]))>=len(old.get('figures',[])) and size(new)>=size(old))
+              if len(new.get('figures',[]))>=100 and newer and substantive:
                   dst.mkdir(parents=True,exist_ok=True)
                   shutil.copy2(src/'figures.json',dst/'figures.json')
-                  shutil.copy2(src/'figures-health.json',dst/'figures-health.json')
                   print('Published independently refreshed figures:',len(new['figures']))
               else:
-                  print('Kept existing figure data: candidate not newer or below validation threshold.')
+                  print('Kept existing figure data: no newer statements or candidate below validation threshold.')
+              if len(new.get('figures',[]))>=100 and (src/'figures-health.json').is_file():
+                  shutil.copy2(src/'figures-health.json',dst/'figures-health.json')
           except (OSError,ValueError,KeyError) as e:
               print('::warning::Figure overlay skipped:',e)
           PY
