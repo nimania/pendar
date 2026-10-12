@@ -100,6 +100,23 @@ function homeHasRecentVideo(person, meta={}, now=Date.now()){
     return Number.isFinite(time)&&time<=now&&now-time<=48*60*60*1000;
   });
 }
+let homeStatementsLimit=24;
+let homeStatementsCache=[];
+function showMoreHomeStatements(){homeStatementsLimit+=24;paintHomeStatements();}
+function paintHomeStatements(){
+  const el=document.getElementById('home-people-list');if(!el)return;
+  const rows=homeStatementsCache.slice(0,homeStatementsLimit);
+  el.innerHTML=rows.map(({person:f,post:p})=>{
+    const title=String(p.topic_fa||p.headline_fa||p.summary_fa||p.recap_fa||p.text||'').trim().slice(0,220);
+    const date=p.published_at||p.recorded_at||'';
+    const id=encodeURIComponent(String(p.id));
+    const photo=typeof f.avatar==='string'&&f.avatar.startsWith('https://')?f.avatar:'';
+    return `<a class="home-statement-card" href="/statement/${id}/" aria-label="${esc(f.name_fa||'')} — ${esc(title)}">
+      <span class="home-statement-avatar">${photo?`<img src="${esc(photo)}" loading="lazy" alt="" onerror="this.remove()">`:`<span>${esc(String(f.name_fa||'؟').slice(0,1))}</span>`}</span>
+      <span class="home-statement-copy"><small>${esc(f.name_fa||'')}${date?' · '+esc(relTime(date)):''}</small><b>${esc(title)}</b></span><span class="home-statement-arrow">←</span>
+    </a>`;
+  }).join('')+(homeStatementsCache.length>rows.length?`<div class="home-statements-more"><button type="button" onclick="showMoreHomeStatements()">نمایش گفته‌های بیشتر · ${faN(homeStatementsCache.length-rows.length)} مورد دیگر ↓</button></div>`:'');
+}
 async function renderHomePeople(){
   const section=document.getElementById("home-people-strip");
   const el=document.getElementById("home-people-list");
@@ -136,18 +153,9 @@ async function renderHomePeople(){
       statements.push({person:f,post,time:figureActivityTime(post)});
     }
     statements.sort((a,b)=>b.time-a.time);
-    const rows=statements.slice(0,12);
-    if(!rows.length){section.style.display="none";return;}
-    el.innerHTML=rows.map(({person:f,post:p})=>{
-      const title=String(p.topic_fa||p.headline_fa||p.summary_fa||p.recap_fa||p.text||"").trim().slice(0,170);
-      const date=p.published_at||p.recorded_at||"";
-      const id=encodeURIComponent(String(p.id));
-      const photo=typeof f.avatar==="string"&&f.avatar.startsWith("https://")?f.avatar:"";
-      return `<a class="home-statement-card" href="/statement/${id}/" aria-label="${esc(f.name_fa||"")} — ${esc(title)}">
-        <span class="home-statement-avatar">${photo?`<img src="${esc(photo)}" loading="lazy" alt="" onerror="this.remove()">`:`<span>${esc(String(f.name_fa||"؟").slice(0,1))}</span>`}</span>
-        <span class="home-statement-copy"><small>${esc(f.name_fa||"")}${date?" · "+esc(relTime(date)):""}</small><b>${esc(title)}</b></span>
-      </a>`;
-    }).join("");
+    homeStatementsCache=statements;
+    if(!statements.length){section.style.display='none';return;}
+    paintHomeStatements();
     section.style.display="";
   }catch(_){
     section.style.display="none";
