@@ -1309,10 +1309,18 @@ def run() -> int:
         fresh.extend(collect_truth(provider, old))
     except Exception as exc:
         print(f"truth collector: keeping existing data ({type(exc).__name__})")
-    try:
-        fresh.extend(collect_youtube(provider, old, catalog))
-    except Exception as exc:
-        print(f"youtube collector: keeping existing data ({type(exc).__name__})")
+    # Temporary restoration safeguard: keep video discovery and the existing recap
+    # archive available, but do not request transcripts or generate AI recaps on
+    # scheduled figure runs. A selected studio build can still be run manually.
+    automatic_recaps = os.environ.get("PENDAR_AUTO_VIDEO_RECAPS", "0").strip().lower() in ("1", "true", "yes")
+    selected_video = bool(os.environ.get("PREMIUM_VIDEO_ID", "").strip())
+    if automatic_recaps or selected_video:
+        try:
+            fresh.extend(collect_youtube(provider, old, catalog))
+        except Exception as exc:
+            print(f"youtube collector: keeping existing data ({type(exc).__name__})")
+    else:
+        print("youtube: automatic transcripts and AI recaps paused; catalog and previous recaps retained")
 
     by_id = {
         str(x.get("id")): x
