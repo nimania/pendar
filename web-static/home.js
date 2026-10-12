@@ -199,7 +199,7 @@ function renderHomeCulture(){
 // Two independent homepage windows: headlines and culture.
 let homeNewsMode="latest";
 function setHomeNewsMode(mode){
-  if(!["selected","latest","hot","rising"].includes(mode))return;
+  if(!["selected","latest","hot","rising","recaps"].includes(mode))return;
   homeNewsMode=mode;
   document.querySelectorAll("[data-home-news]").forEach(button=>{
     const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
@@ -240,7 +240,13 @@ function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
   if(!storyEl)return;
   const title=document.getElementById("home-news-title");
-  if(title)title.textContent="نبض امروز";
+  if(title)title.textContent=homeNewsMode==="recaps"?"جان کلام":"نبض امروز";
+  const dashboard=document.getElementById("home-news-dashboard");
+  const freshness=document.getElementById("home-news-freshness");
+  if(dashboard)dashboard.style.display=homeNewsMode==="recaps"?"none":"";
+  if(freshness)freshness.style.display=homeNewsMode==="recaps"?"none":"";
+  storyEl.classList.toggle("home-recaps-list",homeNewsMode==="recaps");
+  if(homeNewsMode==="recaps"){renderHomeRecaps();return;}
   const score=s=>{
     const imp=Number(s.importance_score||0);
     const sources=Math.min(Number(s.source_count||0),8)*3;
@@ -273,35 +279,34 @@ function renderHomeDaily(){
 /* Public homepage recaps: only statements with an actual recap text,
    never private studio recording drafts. */
 async function renderHomeRecaps(){
-  const el=document.getElementById("home-recaps-list");
+  if(homeNewsMode!=="recaps")return;
+  const el=document.getElementById("home-daily-stories");
   if(!el)return;
+  el.innerHTML='<div class="spinner"></div>';
   try{
     const d=await loadFigures();
-    const rows=[];
-    const seen=new Set();
+    if(homeNewsMode!=="recaps")return;
+    const rows=[],seen=new Set();
     for(const f of d.figures||[]){
       for(const p of f.posts||[]){
         if(!p.id||!String(p.recap_fa||"").trim()||seen.has(String(p.id)))continue;
         if(p.status&&["draft","pending","private"].includes(String(p.status).toLowerCase()))continue;
         seen.add(String(p.id));
-        rows.push({id:String(p.id),title:p.topic_fa||p.video_title||"جان کلام",name:f.name_fa||p.name_fa||"",avatar:f.avatar||"",summary:p.summary_fa||"",date:p.published_at||p.recorded_at||""});
+        rows.push({id:String(p.id),title:p.topic_fa||p.video_title||"جان کلام",name:f.name_fa||p.name_fa||"",avatar:f.avatar||"",date:p.published_at||p.recorded_at||""});
       }
     }
     rows.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
-    const items=rows.slice(0,6);
-    const section=document.getElementById("home-recaps");
-    if(!items.length){if(section)section.hidden=true;return;}
-    if(section)section.hidden=false;
-    el.innerHTML=items.map(r=>{
-      const pid=encodeURIComponent(r.id);
-      const photo=typeof r.avatar==="string"&&/^https?:\/\//.test(r.avatar)?r.avatar:"";
-      return `<a class="home-recap-item" href="/statement/${pid}/" aria-label="${esc(r.title)}">
+    el.innerHTML=rows.slice(0,20).map(r=>{
+      const photo=typeof r.avatar==="string"&&/^https?:\\/\\//.test(r.avatar)?r.avatar:"";
+      return `<a class="home-recap-item" href="/statement/${encodeURIComponent(r.id)}/" aria-label="${esc(r.title)}">
         <span class="home-recap-avatar">${photo?`<img src="${esc(photo)}" alt="" loading="lazy" onerror="this.remove()">`:`<span>${esc(r.name.slice(0,1)||"پ")}</span>`}</span>
         <span class="home-recap-copy"><b>${esc(r.title)}</b><small>${esc(r.name)}${r.date?" · "+esc(relTime(r.date)):""}</small></span>
         <span aria-hidden="true">←</span>
       </a>`;
-    }).join("");
-  }catch(_){const section=document.getElementById("home-recaps");if(section)section.hidden=true;}
+    }).join("")||'<div class="state"><div class="big">هنوز جان کلام منتشرشده‌ای ثبت نشده</div></div>';
+  }catch(_){
+    if(homeNewsMode==="recaps")el.innerHTML='<div class="state"><div class="big">دریافت جان کلام ممکن نشد</div><button class="fchip on" onclick="renderHomeRecaps()">تلاش دوباره</button></div>';
+  }
 }
 
 // Homepage Jan-e Majra: a compact window into the strongest current topic dossiers.
