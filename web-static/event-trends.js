@@ -90,8 +90,8 @@ async function renderHomeEvents() {
     if(homeNewsMode!=="events")return;
     if(!res.ok&&!eds.length)throw res.e;
     const groups=(res.ok?res.v:[]).filter(g=>g.items.some(PendarEvents.isIranStory));
-    const cards=[...eds.map(homeEditorialTile),...groups.slice(0,12).map(homeEventCard)];
-    el.innerHTML='<div class="home-event-rail" aria-label="ماجراها و ترندهای پندار">'+(cards.join("")||'<p class="muted">هنوز ماجرای تازه‌ای ثبت نشده است.</p>')+'</div>';
+    const cards=[...eds.map(homeEditorialTile),...groups.slice(0,36).map(homeEventCard)];
+    el.innerHTML='<div class="home-event-rail home-event-vertical" aria-label="ماجراها و ترندهای پندار">'+(cards.join("")||'<p class="muted">هنوز ماجرای تازه‌ای ثبت نشده است.</p>')+'</div>';
   }catch(_){
     if(homeNewsMode==="events")el.innerHTML='<p class="muted">ماجراها فعلاً در دسترس نیستند. <button onclick="renderHomeEvents()">تلاش دوباره</button></p>';
   }
