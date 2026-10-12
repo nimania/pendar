@@ -389,6 +389,35 @@ async function openCinemaHandle(handle){
       if(_cinemaHandle(m.slug,'cast',i)===handle)entries.push({m,role:'بازیگر',person});
     });
   }
+  // Expand filmography only through a stable person identifier. Never infer
+  // identity from a matching name, display spelling or unverified cast position.
+  if(entries.length){
+    const identity=entries.map(e=>e.person).find(person=>
+      person&&typeof person==='object'&&
+      (typeof person.person_id==='string'&&/^person:[a-z0-9][a-z0-9:_-]*$/i.test(person.person_id)||
+       Number.isSafeInteger(Number(person.id))&&Number(person.id)>0));
+    const canonicalId=identity?.person_id&&/^person:[a-z0-9][a-z0-9:_-]*$/i.test(identity.person_id)?identity.person_id:null;
+    const tmdbId=Number(identity?.id);
+    if(canonicalId||(Number.isSafeInteger(tmdbId)&&tmdbId>0)){
+      const known=new Set(entries.map(e=>e.m.slug+':'+e.role));
+      for(const m of cached){
+        const credits=[
+          ...(m.director?[{person:m.director,role:'کارگردان'}]:[]),
+          ...(m.cast||[]).map(person=>({person,role:'بازیگر'}))
+        ];
+        for(const credit of credits){
+          const person=credit.person;
+          if(!person||typeof person!=='object')continue;
+          const match=canonicalId
+            ? person.person_id===canonicalId
+            : Number(person.id)===tmdbId&&Number.isSafeInteger(Number(person.id));
+          const key=m.slug+':'+credit.role;
+          if(match&&!known.has(key)){entries.push({m,role:credit.role,person});known.add(key)}
+        }
+      }
+    }
+  }
+  entries.sort((a,b)=>Number(b.m.year||0)-Number(a.m.year||0));
   if(!entries.length)return false;
   const first=entries[0],originalName=typeof first.person==='string'?first.person:(first.person.name_fa||first.person.name);
   const name=PENDAR_CINEMA_DISPLAY_NAMES[handle]||originalName;
