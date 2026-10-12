@@ -82,3 +82,10 @@
 .home-recap-copy b{font-size:14px;line-height:1.6}
 .home-recap-copy small{font-size:11px;color:var(--ink-soft)}
 @media(max-width:700px){.home-recaps-list{grid-template-columns:1fr}.home-recap-item:nth-child(odd){border-left:0}}
+
+/* Publisher identities on homepage news rows, inspired by news aggregators. */
+.home-news-source-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:5px;min-height:16px}
+.home-news-source-line:empty{display:none}
+.home-news-source{display:inline-flex;align-items:center;gap:4px;min-width:0;max-width:180px;color:var(--ink-soft);font-size:11px;line-height:1.4}
+.home-news-source img{display:block;width:15px!important;height:15px!important;max-width:15px!important;max-height:15px!important;flex:0 0 15px;object-fit:contain;border-radius:3px}
+.home-news-source span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
