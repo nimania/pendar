@@ -364,6 +364,18 @@ const PENDAR_CINEMA_DISPLAY_NAMES={
   'shahab-hosseini':'شهاب حسینی'
 };
 const PENDAR_CINEMA_PHOTOS={
+  'asghar-farhadi':{
+    url:'https://commons.wikimedia.org/wiki/Special:FilePath/Asghar_Farhadi_in_2018-2_(cropped).jpg',
+    credit:'Frankie Fouganthin · CC BY-SA 4.0',
+    source:'https://commons.wikimedia.org/wiki/File:Asghar_Farhadi_in_2018-2_(cropped).jpg',
+    objectPosition:'50% 34%'
+  },
+  'shahab-hosseini':{
+    url:'https://commons.wikimedia.org/wiki/Special:FilePath/Shahab_Hosseini_in_The_Salesman%27s_press_conference_in_Tehran.jpg',
+    credit:'Hamed Malekpour / خبرگزاری تسنیم · CC BY 4.0',
+    source:'https://commons.wikimedia.org/wiki/File:Shahab_Hosseini_in_The_Salesman%27s_press_conference_in_Tehran.jpg',
+    objectPosition:'50% 30%'
+  },
   'peyman-maadi':{
     url:'https://commons.wikimedia.org/wiki/Special:FilePath/Payman_maadi_(cropped).jpg',
     credit:'مهدی دلخواسته · CC BY-SA 3.0',
