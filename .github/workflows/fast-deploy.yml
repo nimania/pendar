@@ -406,6 +406,8 @@ jobs:
               shutil.copy2(shell,target)
           print("Non-person handle pilot: thirteen static paths, no new API requests")
           PY
+      - name: Build compact radar client data
+        run: python backend/scripts/build_radar_view_data.py --site site
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
