@@ -3,7 +3,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)"]
+    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Refresh weather and air quality"]
     types: [completed]
   push:
     branches: [main]
@@ -157,6 +157,41 @@ jobs:
             fi
           fi
 
+
+      - name: Overlay independently collected weather when newer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          weather_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/weather.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
+          if [ -z "$weather_run" ]; then
+            echo "::warning::No successful weather collection; retaining published data."
+            exit 0
+          fi
+          mkdir -p /tmp/fresh-weather
+          if ! gh run download "$weather_run" -n weather-data -D /tmp/fresh-weather; then
+            echo "::warning::Weather artifact unavailable; retaining published data."
+            exit 0
+          fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          new_path = Path("/tmp/fresh-weather/weather.json")
+          target = Path("site/data/weather.json")
+          if not new_path.is_file():
+              print("::warning::No weather.json in artifact; preserving published weather")
+              raise SystemExit(0)
+          new = json.loads(new_path.read_text(encoding="utf-8"))
+          if not isinstance(new, (dict, list)) or not new:
+              raise SystemExit("::error::Weather artifact is empty or invalid")
+          if target.is_file():
+              old = json.loads(target.read_text(encoding="utf-8"))
+              if old == new:
+                  print("Weather data unchanged; keeping existing snapshot")
+                  raise SystemExit(0)
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_bytes(new_path.read_bytes())
+          print("Weather data overlaid without rebuilding the site")
+          PY
 
       - name: Overlay current UI without overwriting generated data
         run: |
