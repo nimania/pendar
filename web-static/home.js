@@ -384,7 +384,7 @@ function paintHomePeopleTimeline(){
     const image=typeof f.avatar==="string"&&(/^(https?:\/\/|\/|assets\/|data\/)/i.test(f.avatar))?f.avatar:"";
     const link="/statement/"+encodeURIComponent(String(p.id))+"/";
     return '<article class="home-people-timeline-row">'+
-      '<div class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</div>'+
+      '<div class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove();this.parentElement.textContent='+JSON.stringify("؟")+'">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</div>'+
       '<div class="home-people-timeline-copy"><div class="home-people-timeline-meta"><strong>'+esc(f.name_fa||"")+'</strong>'+(date?'<time datetime="'+esc(date)+'">'+esc(relTime(date))+'</time>':'')+'</div>'+
       (headline?'<a class="home-people-timeline-title" href="'+link+'">'+esc(headline)+'</a>':'')+
       (excerpt?'<p class="home-people-timeline-excerpt">'+esc(excerpt)+(original.length>460?'…':'')+'</p>':'')+
@@ -401,10 +401,11 @@ async function renderHomePeopleDirectory(){
   try{
     const [d,registry]=await Promise.all([loadFigures(),loadCanonicalEntities().catch(()=>({entities:[]}))]);
     if(homeNewsMode!=="people")return;
-    const portraitByHandle=new Map();
+    const portraitByHandle=new Map(),portraitByName=new Map();
     for(const entity of registry.entities||[]){
       const portrait=entity.meta?.avatar||entity.meta?.image||entity.avatar||"";
       if(!portrait)continue;
+      if(entity.name_fa)portraitByName.set(String(entity.name_fa).trim().replace(/ي/g,"ی").replace(/ك/g,"ک"),portrait);
       for(const ref of entity.refs||[])if(ref.dataset==="figures")portraitByHandle.set(String(ref.key).toLowerCase(),portrait);
       if(entity.meta?.handle)portraitByHandle.set(String(entity.meta.handle).toLowerCase(),portrait);
     }
@@ -414,7 +415,9 @@ async function renderHomePeopleDirectory(){
       const posts=(f.posts||[]).filter(p=>p&&p.id&&(p.topic_fa||p.headline_fa||p.summary_fa||p.text||p.recap_fa)&&!["draft","pending","private"].includes(String(p.status||"").toLowerCase())).sort((a,b)=>figureActivityTime(b)-figureActivityTime(a));
       if(!posts.length)continue;
       const p=posts[0];if(seen.has(String(p.id)))continue;seen.add(String(p.id));
-      const enriched={...f,avatar:f.avatar||p.avatar||p.profile_image_url||portraitByHandle.get(String(f.handle).toLowerCase())||""};
+      const name=String(f.name_fa||"").trim().replace(/ي/g,"ی").replace(/ك/g,"ک");
+      const portrait=[f.avatar,p.avatar,p.profile_image_url,f.image_url,f.photo_url,f.profile_image,portraitByHandle.get(String(f.handle).toLowerCase()),portraitByName.get(name)].find(v=>typeof v==="string"&&v.trim())||"";
+      const enriched={...f,avatar:portrait};
       rows.push({f:enriched,p,time:figureActivityTime(p)});
     }
     homePeopleTimelineRows=rows.sort((a,b)=>b.time-a.time);
