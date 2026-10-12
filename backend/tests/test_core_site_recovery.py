@@ -1,4 +1,5 @@
 import io
+import gzip
 import sys
 import tarfile
 import tempfile
@@ -39,11 +40,14 @@ class CoreRecoveryTests(unittest.TestCase):
             restore(site, archive)
             self.assertEqual(missing(site), [])
             prepare(site)
+            self.assertEqual(missing(site), [])
             self.assertEqual((site / "data/stories.json").read_text(), '[{"id":"current"}]')
             self.assertGreater((site / "data/books.json").stat().st_size, 5_000_000)
-            for path in ("people/0.json", "person-aliases/63.json", "press-directory.js",
+            for path in ("people/0.json.gz", "person-aliases/63.json.gz", "press-directory.js",
                          "studio-recaps.json", "movie-details/pm_1.json", "entities.json"):
                 self.assertTrue((site / "data" / path).is_file(), path)
+            self.assertEqual(gzip.decompress((site / "data/people/0.json.gz").read_bytes()), b"{}")
+            self.assertFalse((site / "data/people/0.json").exists())
             self.assertFalse((site / "data/creator-work-audit.json").exists())
             self.assertFalse((root / "escaped.txt").exists())
             # Integrity validation creates the health report after preparation.

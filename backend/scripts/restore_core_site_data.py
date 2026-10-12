@@ -16,7 +16,8 @@ def missing(root):
     # Every bucket is generated, including empty ones, for exact identity lookup.
     for folder in ("people", "person-aliases"):
         paths.extend(f"{folder}/{i}.json" for i in range(64)
-                     if not (data / folder / f"{i}.json").is_file())
+                     if not (data / folder / f"{i}.json").is_file()
+                     and not (data / folder / f"{i}.json.gz").is_file())
     return paths
 
 
@@ -34,7 +35,7 @@ def restore(root, archive):
             selected = (len(parts) == 2 and keep_data_file(parts[1])) or (
                 len(parts) == 3 and parts[1] in keep_data_dirs and parts[1] != "story")
             target = root.joinpath(*parts)
-            if not selected or target.exists():
+            if not selected or target.exists() or target.with_suffix(target.suffix + ".gz").is_file():
                 continue
             target.parent.mkdir(parents=True, exist_ok=True)
             with tar.extractfile(member) as src, target.open("wb") as dst:

@@ -53,6 +53,18 @@ async function getJSON(path, timeoutMs = 12000) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), timeoutMs);
   try {
+    // Large person partitions retain every field, stored losslessly as gzip.
+    // Fall back to plain JSON for earlier deployments during a rollout.
+    const partition = /(?:^|\/)(people|person-aliases)\/\d+\.json(?:[?#]|$)/.test(path);
+    if (partition && typeof DecompressionStream !== "undefined") {
+      const compressed = path.replace(/\.json(?=[?#]|$)/, ".json.gz");
+      const response = await fetch(compressed, {cache: "no-cache", signal: ctl.signal});
+      if (response.ok) {
+        const stream = response.body.pipeThrough(new DecompressionStream("gzip"));
+        return await new Response(stream).json();
+      }
+      if (response.status !== 404) throw new Error("HTTP " + response.status);
+    }
     const r = await fetch(path, { cache: "no-cache", signal: ctl.signal });
     if (!r.ok) throw new Error("HTTP " + r.status);
     return await r.json();

@@ -6,6 +6,7 @@ Run AFTER SEO generation/validation and BEFORE Pages upload.
 from __future__ import annotations
 import shutil
 import sys
+import gzip
 from pathlib import Path
 
 # Keep the SPA shell and all root-level JS/CSS; pages for news and people only.
@@ -72,6 +73,19 @@ def prepare(root):
         elif item.is_file() and not keep_data_file(item.name):
             item.unlink()
             removed += 1
+    before = after = 0
+    for folder in ("people", "person-aliases"):
+        for source in (data / folder).glob("*.json"):
+            destination = source.with_suffix(".json.gz")
+            temporary = destination.with_suffix(".gz.tmp")
+            before += source.stat().st_size
+            with source.open("rb") as src, temporary.open("wb") as out:
+                with gzip.GzipFile(filename="", fileobj=out, mode="wb", mtime=0) as dst:
+                    shutil.copyfileobj(src, dst)
+            temporary.replace(destination)
+            after += destination.stat().st_size
+            source.unlink()
+    print(f"Lossless person partitions: {before:,} -> {after:,} bytes.")
     # Never delete a required catalog merely because it exceeds 5 MB. The
     # separate overall size gate blocks oversized uploads without data loss.
     print(f"Core public profile: excluded {removed} optional items.")
