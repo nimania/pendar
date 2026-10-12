@@ -363,6 +363,9 @@ const PENDAR_CINEMA_DISPLAY_NAMES={
   'sareh-bayat':'ساره بیات',
   'shahab-hosseini':'شهاب حسینی'
 };
+const PENDAR_CINEMA_IDENTITIES={
+  'peyman-maadi':{tmdbId:559566,imdbId:'nm1818216',source:'https://www.themoviedb.org/person/559566'}
+};
 const PENDAR_CINEMA_PHOTOS={
   'asghar-farhadi':{
     url:'https://commons.wikimedia.org/wiki/Special:FilePath/Asghar_Farhadi_in_2018-2_(cropped).jpg',
@@ -472,6 +475,7 @@ async function openCinemaHandle(handle){
     :validPortrait
     ?'<img src="https://image.tmdb.org/t/p/w185'+esc(profilePath)+'" alt="'+esc(name)+'">'
     :'<span class="movie-poster-fallback" aria-hidden="true">👤</span>';
+  const cinemaIdentity=PENDAR_CINEMA_IDENTITIES[handle]||null;
   const roles=[...new Set(entries.map(e=>e.role))];
   const x={name_fa:name,name:originalName!==name?originalName:'',handle:handle,profile_handle:handle,role_fa:roles.join(' · '),posts:[]};
   el.innerHTML='<div class="x-profile">'
@@ -482,6 +486,7 @@ async function openCinemaHandle(handle){
     +(originalName&&originalName!==name?'<p><b>نام ثبت‌شده در منبع:</b> <span dir="auto">'+esc(originalName)+'</span></p>':'')
     +'<p><b>حوزهٔ فعالیت:</b> '+esc(roles.join('، '))+'</p>'
     +'<p><b>آثار مستند در پندار:</b> '+faN(entries.length)+'</p>'
+    +(cinemaIdentity?'<p><b>شناسهٔ سینمایی:</b> <a href="'+esc(cinemaIdentity.source)+'" target="_blank" rel="noopener noreferrer">TMDB '+faN(cinemaIdentity.tmdbId)+' ↗</a> · <a href="https://www.imdb.com/name/'+esc(cinemaIdentity.imdbId)+'/" target="_blank" rel="noopener noreferrer">IMDb ↗</a></p>':'')
     +'<p class="cinema-profile-work-note">این شناسنامه فقط از پیوندهای ثبت‌شدهٔ آثار تشکیل شده است. تصویر، اخبار و زندگینامه صرفاً پس از تطبیق هویت معتبر افزوده می‌شوند.</p></section>'
     +'<section class="cinema-profile-works" aria-label="آثار سینمایی"><div class="cinema-profile-works-head"><h2>آثار مرتبط</h2><small>'+faN(entries.length)+' اثر ثبت‌شده</small></div><div class="cinema-profile-works-grid">'
     +entries.map(e=>'<a class="cinema-profile-work-card" href="/movie/'+encodeURIComponent(e.m.slug)+'/"><span class="cinema-profile-work-poster">'+_moviePoster(e.m,false)+'</span><span class="cinema-profile-work-copy"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><small>'+esc(e.role)+' · '+esc(e.m.year||'')+'</small><span class="cinema-profile-work-link">مشاهدهٔ صفحهٔ فیلم ←</span></span></a>').join('')
