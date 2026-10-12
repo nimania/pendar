@@ -100,9 +100,43 @@ function futureNewsDetail(s){
  '<div class="future-impact-footer"><small>شاخص‌ها و سناریوها تغییری نکرده‌اند؛ ارتباط موضوعی از '+esc(c.basis)+' تشخیص داده شده است.</small><nav><a href="'+esc(dossier)+'">پرونده روند ←</a><a href="/future/transition/watch/">دیده‌بان گذار ←</a></nav></div></section>';
 }
 
+/* Shared source identities for headline rows, feed cards and story citations.
+   Some compact news records only carry source_names; never invent a logo/domain. */
+function newsPublisherSources(story, limit=4){
+  const sources=Array.isArray(story?.sources)?story.sources:[];
+  const names=Array.isArray(story?.source_names)?story.source_names:[];
+  const entries=[...sources,...names],found=new Map();
+  for(const item of entries){
+    const obj=item&&typeof item==="object"?item:{source_name:item};
+    const name=String(obj.source_name||obj.name||obj.title||"").trim();
+    if(!name)continue;
+    const link=String(obj.article_url||obj.homepage_url||obj.source_url||obj.url||"");
+    let domain="";
+    try{const url=new URL(link);if(["https:","http:"].includes(url.protocol))domain=url.hostname.replace(/^www\./,"").toLowerCase();}catch(_){}
+    const key=name.toLocaleLowerCase("fa");
+    const candidate={name,domain};
+    if(!found.has(key)||(!found.get(key).domain&&domain))found.set(key,candidate);
+  }
+  const items=[...found.values()],unique=[],domains=new Set();
+  for(const item of items){
+    if(item.domain&&domains.has(item.domain))continue;
+    if(item.domain)domains.add(item.domain);
+    unique.push(item);
+  }
+  return unique.slice(0,Math.max(0,limit));
+}
+function newsPublisherIcon(source){
+  const first=esc((source.name||"؟").trim().slice(0,1));
+  const image=source.domain?'<img src="https://www.google.com/s2/favicons?domain='+encodeURIComponent(source.domain)+'&sz=32" alt="" loading="lazy" width="16" height="16" onerror="this.remove()">':"";
+  return '<span class="news-publisher-icon" aria-hidden="true"><span>'+first+'</span>'+image+'</span>';
+}
+function newsPublisherIdentity(source){
+  return '<span class="news-publisher" title="'+esc(source.name)+'">'+newsPublisherIcon(source)+'<span class="news-publisher-name">'+esc(source.name)+'</span></span>';
+}
+
 function feedCard(s, homepage = false) {
   const imp = impInfo(s.importance_score);
-  const badges = (s.source_names || []).slice(0, 4).map(x => `<span class="src-badge clickable" data-src="${esc(x)}" onclick="event.stopPropagation();openSource(this.dataset.src)">${esc(x)}</span>`).join("");
+  const badges = newsPublisherSources(s,4).map(x => `<span class="src-badge clickable news-source-badge" data-src="${esc(x.name)}" onclick="event.stopPropagation();openSource(this.dataset.src)">${newsPublisherIcon(x)}<span>${esc(x.name)}</span></span>`).join("");
   // Show the article's image when the outlet's RSS provided one; otherwise
   // fall back to the mini-map (so every card has a visual anchor).
   const thumb = s.image_url
