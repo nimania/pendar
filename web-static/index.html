@@ -37,7 +37,16 @@
   <link rel="stylesheet" href="books-hub.css">
   <link rel="stylesheet" href="movies-hub.css">
   <link rel="stylesheet" href="tv-guide.css">
-  <link rel="stylesheet" href="home-polish.css">
+  <link rel="stylesheet" href="home-polish.css?v=20261012-thumbfix">
+  <style id="homepage-news-image-safety">
+    /* Critical sizing stays in the document even if a cached stylesheet is stale. */
+    #home-daily-stories .home-intel-row-rich{display:flex;align-items:center;flex-wrap:nowrap}
+    #home-daily-stories .home-news-thumb{display:block;position:relative;box-sizing:border-box;width:88px;min-width:88px;max-width:88px;height:62px;min-height:62px;max-height:62px;flex:0 0 88px;overflow:hidden;border-radius:8px;background:var(--surface-2)}
+    #home-daily-stories .home-news-thumb img{display:block!important;width:100%!important;max-width:100%!important;height:100%!important;max-height:100%!important;object-fit:cover!important}
+    #home-daily-stories .home-intel-copy{min-width:0;flex:1}
+    #home-daily-stories .home-news-thumb-fallback{display:grid;place-items:center;height:100%;font-size:11px}
+    @media(max-width:600px){#home-daily-stories .home-news-thumb{width:72px;min-width:72px;max-width:72px;height:54px;min-height:54px;max-height:54px;flex-basis:72px}}
+  </style>
   <link rel="stylesheet" href="us-radar.css">
   <link rel="stylesheet" href="israel-radar.css">
   <link rel="stylesheet" href="diner.css">
@@ -403,7 +412,7 @@
   <script defer src="market-weather.js"></script>
   <script defer src="iran.js"></script>
   <script defer src="series-showcase.js"></script>
-  <script defer src="home.js"></script>
+  <script defer src="home.js?v=20261012-thumbfix"></script>
   <script defer src="event-trends.js"></script>
   <script defer src="content-discovery.js"></script>
   <script defer src="secondary-views.js"></script>
