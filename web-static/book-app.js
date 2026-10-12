@@ -37,9 +37,13 @@ function _booksForPublisher(d,p){
   const slug=String(p?.slug||"");
   const declared=new Set(p?.book_slugs||[]);
   return (d.books||[]).filter(b=>{
-    if(declared.has(b.slug))return true;
     const refs=[b.publisher,...(b.editions||[]).map(e=>e.publisher)].filter(Boolean);
-    return refs.some(pub=>String(pub.slug||"")===slug);
+    const identified=refs.map(pub=>String(pub.slug||"").trim()).filter(Boolean);
+    // Book/edition attribution takes precedence over a potentially stale
+    // publisher-side book_slugs index. Keep the index as a fallback only when
+    // no identified publisher is recorded on this book or its editions.
+    if(identified.length)return identified.includes(slug);
+    return declared.has(b.slug);
   });
 }
 async function openPublisher(slug, canonicalId=null){
