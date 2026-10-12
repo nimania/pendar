@@ -374,6 +374,21 @@ async function renderHomeRecaps(){
   }
 }
 
+let homePeopleTimelineLimit=24,homePeopleTimelineRows=[];
+function moreHomePeopleTimeline(){homePeopleTimelineLimit+=24;paintHomePeopleTimeline();}
+function paintHomePeopleTimeline(){
+  if(homeNewsMode!=="people")return;
+  const el=document.getElementById("home-daily-stories");if(!el)return;
+  const rows=homePeopleTimelineRows.slice(0,homePeopleTimelineLimit);
+  el.innerHTML='<div class="home-people-timeline">'+rows.map(({f,p})=>{
+    const title=String(p.topic_fa||p.headline_fa||p.summary_fa||p.text||p.recap_fa||"").trim().slice(0,360);
+    const date=p.published_at||p.recorded_at||"";
+    const image=/^https?:\/\//i.test(f.avatar||"")?f.avatar:"";
+    return '<a class="home-people-timeline-row" href="/statement/'+encodeURIComponent(String(p.id))+'/">'+
+      '<span class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</span>'+
+      '<span class="home-people-timeline-copy"><span class="home-people-timeline-meta"><strong>'+esc(f.name_fa||"")+'</strong>'+(date?'<time datetime="'+esc(date)+'">'+esc(relTime(date))+'</time>':'')+'</span><b>'+esc(title)+'</b></span><span class="home-people-timeline-arrow">←</span></a>';
+  }).join("")+'</div>'+(homePeopleTimelineRows.length>rows.length?'<div class="home-people-timeline-more"><button type="button" onclick="moreHomePeopleTimeline()">نمایش گفته‌های بیشتر · '+faN(homePeopleTimelineRows.length-rows.length)+' مورد دیگر ↓</button></div>':'')+'<div class="home-person-directory-footer"><a href="/figures/">همهٔ چهره‌ها ←</a></div>';
+}
 async function renderHomePeopleDirectory(){
   if(homeNewsMode!=="people")return;
   const el=document.getElementById("home-daily-stories");if(!el)return;
@@ -381,19 +396,17 @@ async function renderHomePeopleDirectory(){
   try{
     const d=await loadFigures();
     if(homeNewsMode!=="people")return;
-    const rows=(d.figures||[]).filter(f=>f.handle&&f.name_fa&&f.avatar&&!f.us_radar&&!f.israel_radar&&!String(f.handle).startsWith("news-")&&!HOME_FIGURE_EXCLUDE.has(String(f.handle).toLowerCase()))
-      .map(f=>({...f,_latest:Math.max(0,...(f.posts||[]).map(p=>figureActivityTime(p)))}))
-      .sort((a,b)=>b._latest-a._latest).slice(0,36);
-    el.innerHTML='<div class="home-person-directory">'+rows.map(f=>{
-      const avatarUrl=/^https?:\/\//i.test(f.avatar||"")?f.avatar:"";
-      const count=(f.posts||[]).length;
-      const role=String(f.role_fa||f.field_fa||f.bio_fa||"").slice(0,105);
-      return '<button type="button" class="home-person-directory-card" onclick="openFigure('+JSON.stringify(String(f.handle)).replace(/"/g,"&quot;")+')">'+
-        '<span class="home-person-directory-photo">'+(avatarUrl?'<img src="'+esc(avatarUrl)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'</span>'+
-        '<span class="home-person-directory-copy"><b>'+esc(f.name_fa)+'</b><small>'+esc(role)+'</small><span>'+faN(count)+' گفته و مطلب مرتبط</span></span><span aria-hidden="true">←</span></button>';
-    }).join("")+'</div><div class="home-person-directory-footer"><a href="/figures/">مشاهدهٔ همهٔ چهره‌ها ←</a></div>';
-    if(!rows.length)el.innerHTML='<div class="state">چهرهٔ عکس‌دار برای نمایش پیدا نشد.</div>';
-  }catch(_){if(homeNewsMode==="people")el.innerHTML='<div class="state">دریافت چهره‌ها ممکن نشد.</div>';}
+    const people=(d.figures||[]).filter(f=>f&&f.handle&&f.name_fa&&!f.us_radar&&!f.israel_radar&&!String(f.handle).startsWith("news-")&&!HOME_FIGURE_EXCLUDE.has(String(f.handle).toLowerCase()));
+    const seen=new Set(),rows=[];
+    for(const f of people){
+      const posts=(f.posts||[]).filter(p=>p&&p.id&&(p.topic_fa||p.headline_fa||p.summary_fa||p.text||p.recap_fa)&&!["draft","pending","private"].includes(String(p.status||"").toLowerCase())).sort((a,b)=>figureActivityTime(b)-figureActivityTime(a));
+      if(!posts.length)continue;
+      const p=posts[0];if(seen.has(String(p.id)))continue;seen.add(String(p.id));
+      rows.push({f,p,time:figureActivityTime(p)});
+    }
+    homePeopleTimelineRows=rows.sort((a,b)=>b.time-a.time);
+    paintHomePeopleTimeline();
+  }catch(_){if(homeNewsMode==="people")el.innerHTML='<div class="state">دریافت آخرین گفته‌ها ممکن نشد.</div>';}
 }
 
 // Homepage Jan-e Majra: a compact window into the strongest current topic dossiers.
