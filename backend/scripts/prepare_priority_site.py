@@ -14,6 +14,7 @@ assert (root / "index.html").is_file(), "Refusing to trim a non-site folder"
 keep_dirs = {
     "assets", "data", "story", "stories", "figure", "figures",
     "person", "people", "news", "search", "topic", "topics", "event", "books", "movies", "tv", "press", "future",
+    "market", "weather", "system", "diner",
 }
 # Root-level data consumed by news feeds, archive, entity/figure views and search.
 keep_data_names = {
@@ -23,6 +24,7 @@ keep_data_names = {
     "search-index.json", "search.json", "news-health.json",
     "trends.json", "clusters.json", "sources.json",
     "news-index.json", "latest.json", "topics.json",
+    "system-health.json", "weather.json", "market-nabzesh.json", "market.json",
     "periodicals.json", "press-directory.json", "press-stats.json",
     # Restore already-cached book, cinema and TV datasets; no collection or rebuild.
     "books.json", "movies.json", "streaming.json", "movie-ratings.json",
@@ -68,6 +70,6 @@ if data.is_dir():
                 item.unlink()
                 removed += 1
 print(f"News + figures public profile: excluded {removed} optional items.")
-for required in ("data/stories.json", "data/figures.json", "data/people-index.json"):
+for required in ("data/stories.json", "data/figures.json", "data/people-index.json", "data/system-health.json", "data/books.json", "data/movies.json", "data/tv-guide.json"):
     if not (root / required).is_file():
         raise SystemExit(f"::error::Missing required news/figure dataset {required}")
