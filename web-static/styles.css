@@ -138,6 +138,16 @@
     font-size:11.5px; font-weight:500; padding:2px 8px; border-radius:7px;
     background:var(--surface-2); color:var(--ink-soft); border:1px solid var(--line);
   }
+  .news-publisher{display:inline-flex;align-items:center;vertical-align:middle;line-height:1}
+  .news-publisher-icon{display:inline-flex;align-items:center;justify-content:center;position:relative;flex:0 0 28px;width:28px;height:28px;border-radius:8px;background:var(--surface-2);color:var(--ink-soft);font-size:12px;font-weight:700;overflow:hidden}
+  .news-publisher-icon>span{display:inline-flex;align-items:center;justify-content:center}
+  .news-publisher-icon.has-logo:not(.is-fallback)>span{display:none}
+  .news-publisher-image{display:block;width:24px;height:24px;object-fit:contain;border-radius:5px}
+  .source-logo-badge{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;padding:2px;overflow:hidden}
+  .source-logo-badge .news-publisher-icon{width:28px;height:28px;flex-basis:28px;background:transparent}
+  .news-citation-publisher{display:inline-flex;align-items:center;gap:7px}
+  .news-citation-publisher .news-publisher-icon{width:25px;height:25px;flex-basis:25px}
+  .news-citation-publisher .news-publisher-image{width:21px;height:21px}
   /* importance meter */
   .imp{display:flex; align-items:center; gap:7px; margin-inline-start:auto}
   .imp .bars{display:flex; gap:3px}
