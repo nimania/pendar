@@ -380,14 +380,23 @@ function paintHomePeopleTimeline(){
   if(homeNewsMode!=="people")return;
   const el=document.getElementById("home-daily-stories");if(!el)return;
   const rows=homePeopleTimelineRows.slice(0,homePeopleTimelineLimit);
-  el.innerHTML='<div class="home-people-timeline">'+rows.map(({f,p})=>{
-    const title=String(p.topic_fa||p.headline_fa||p.summary_fa||p.text||p.recap_fa||"").trim().slice(0,360);
+  const cards=rows.map(({f,p})=>{
+    const headline=String(p.topic_fa||p.headline_fa||"").trim();
+    const original=String(p.text||p.recap_fa||p.summary_fa||p.content_fa||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
+    const excerpt=original.slice(0,460);
     const date=p.published_at||p.recorded_at||"";
     const image=/^https?:\/\//i.test(f.avatar||"")?f.avatar:"";
-    return '<a class="home-people-timeline-row" href="/statement/'+encodeURIComponent(String(p.id))+'/">'+
-      '<span class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</span>'+
-      '<span class="home-people-timeline-copy"><span class="home-people-timeline-meta"><strong>'+esc(f.name_fa||"")+'</strong>'+(date?'<time datetime="'+esc(date)+'">'+esc(relTime(date))+'</time>':'')+'</span><b>'+esc(title)+'</b></span><span class="home-people-timeline-arrow">←</span></a>';
-  }).join("")+'</div>'+(homePeopleTimelineRows.length>rows.length?'<div class="home-people-timeline-more"><button type="button" onclick="moreHomePeopleTimeline()">نمایش گفته‌های بیشتر · '+faN(homePeopleTimelineRows.length-rows.length)+' مورد دیگر ↓</button></div>':'')+'<div class="home-person-directory-footer"><a href="/figures/">همهٔ چهره‌ها ←</a></div>';
+    const link="/statement/"+encodeURIComponent(String(p.id))+"/";
+    return '<article class="home-people-timeline-row">'+
+      '<div class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</div>'+
+      '<div class="home-people-timeline-copy"><div class="home-people-timeline-meta"><strong>'+esc(f.name_fa||"")+'</strong>'+(date?'<time datetime="'+esc(date)+'">'+esc(relTime(date))+'</time>':'')+'</div>'+
+      (headline?'<a class="home-people-timeline-title" href="'+link+'">'+esc(headline)+'</a>':'')+
+      (excerpt?'<p class="home-people-timeline-excerpt">'+esc(excerpt)+(original.length>460?'…':'')+'</p>':'')+
+      '<a class="home-people-timeline-read" href="'+link+'">خواندن گفتهٔ کامل ←</a></div></article>';
+  }).join("");
+  el.innerHTML='<div class="home-people-timeline">'+(cards||'<div class="state">هنوز گفته‌ای برای نمایش ثبت نشده است.</div>')+'</div>'+
+    (homePeopleTimelineRows.length>rows.length?'<div class="home-people-timeline-more"><button type="button" onclick="moreHomePeopleTimeline()">نمایش گفته‌های بیشتر · '+faN(homePeopleTimelineRows.length-rows.length)+' مورد دیگر ↓</button></div>':'')+
+    '<div class="home-person-directory-footer"><a href="/figures/">همهٔ چهره‌ها ←</a></div>';
 }
 async function renderHomePeopleDirectory(){
   if(homeNewsMode!=="people")return;
