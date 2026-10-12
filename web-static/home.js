@@ -399,15 +399,15 @@ async function renderHomePeopleDirectory(){
   const el=document.getElementById("home-daily-stories");if(!el)return;
   el.innerHTML='<div class="spinner"></div>';
   try{
-    const [d,registry]=await Promise.all([loadFigures(),loadCanonicalEntities().catch(()=>({entities:[]}))]);
+    const [d,directory]=await Promise.all([loadFigures(),loadPersonDirectory()]);
     if(homeNewsMode!=="people")return;
-    const portraitByHandle=new Map(),portraitByName=new Map();
-    for(const entity of registry.entities||[]){
-      const portrait=entity.meta?.avatar||entity.meta?.image||entity.avatar||"";
-      if(!portrait)continue;
-      if(entity.name_fa)portraitByName.set(String(entity.name_fa).trim().replace(/ي/g,"ی").replace(/ك/g,"ک"),portrait);
-      for(const ref of entity.refs||[])if(ref.dataset==="figures")portraitByHandle.set(String(ref.key).toLowerCase(),portrait);
-      if(entity.meta?.handle)portraitByHandle.set(String(entity.meta.handle).toLowerCase(),portrait);
+    const profileByHandle=new Map(),profileByName=new Map();
+    const normalize=v=>String(v||"").trim().replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/\s+/g," ");
+    for(const row of directory){
+      if(!row.avatar)continue;
+      const handles=[row.handle,row.profile_handle,...(row.refs||[]).filter(x=>x.dataset==="figures").map(x=>x.key)];
+      for(const h of handles)if(h)profileByHandle.set(String(h).toLowerCase(),row.avatar);
+      if(row.name_fa)profileByName.set(normalize(row.name_fa),row.avatar);
     }
     const people=(d.figures||[]).filter(f=>f&&f.handle&&f.name_fa&&!f.us_radar&&!f.israel_radar&&!String(f.handle).startsWith("news-")&&!HOME_FIGURE_EXCLUDE.has(String(f.handle).toLowerCase()));
     const seen=new Set(),rows=[];
@@ -415,8 +415,7 @@ async function renderHomePeopleDirectory(){
       const posts=(f.posts||[]).filter(p=>p&&p.id&&(p.topic_fa||p.headline_fa||p.summary_fa||p.text||p.recap_fa)&&!["draft","pending","private"].includes(String(p.status||"").toLowerCase())).sort((a,b)=>figureActivityTime(b)-figureActivityTime(a));
       if(!posts.length)continue;
       const p=posts[0];if(seen.has(String(p.id)))continue;seen.add(String(p.id));
-      const name=String(f.name_fa||"").trim().replace(/ي/g,"ی").replace(/ك/g,"ک");
-      const portrait=[f.avatar,p.avatar,p.profile_image_url,f.image_url,f.photo_url,f.profile_image,portraitByHandle.get(String(f.handle).toLowerCase()),portraitByName.get(name)].find(v=>typeof v==="string"&&v.trim())||"";
+      const portrait=profileByHandle.get(String(f.handle).toLowerCase())||profileByName.get(normalize(f.name_fa))||f.avatar||p.avatar||"";
       const enriched={...f,avatar:portrait};
       rows.push({f:enriched,p,time:figureActivityTime(p)});
     }
