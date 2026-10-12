@@ -197,7 +197,7 @@ function renderHomeCulture(){
 }
 
 // Two independent homepage windows: headlines and culture.
-let homeNewsMode="selected";
+let homeNewsMode="latest";
 function setHomeNewsMode(mode){
   if(!["selected","latest"].includes(mode))return;
   homeNewsMode=mode;
@@ -250,7 +250,7 @@ function renderHomeDaily(){
     return imp+sources+figures+hot+Math.max(0,18-Math.min(age,18));
   };
   const time=s=>Date.parse(s.published_at||s.last_seen_at||"")||0;
-  const stories=(ALL||[]).slice().sort(homeNewsMode==="latest"?(a,b)=>time(b)-time(a):(a,b)=>score(b)-score(a)||time(b)-time(a)).slice(0,5);
+  const stories=(ALL||[]).slice().sort(homeNewsMode==="latest"?(a,b)=>time(b)-time(a):(a,b)=>score(b)-score(a)||time(b)-time(a)).slice(0,20);
   renderHomeNewsDashboard(stories);
   storyEl.innerHTML=stories.length?stories.map((s,i)=>{
     const state=s.trend?.hot?"داغ":s.trend?.rising?"در حال رشد":"";
