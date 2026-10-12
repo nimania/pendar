@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T12:53:21.951876+00:00",
+  "generated_at": "2026-10-12T15:29:42.393207+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -508,16 +508,6 @@
   ],
   "programmes": [
     {
-      "channel_id": "tmdb-network-156",
-      "title_fa": "런닝맨",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/33238",
-      "icon": "https://image.tmdb.org/t/p/w500/15SMnscZqd7HZ0bzruatOcKUlOV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 822 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-16",
       "title_fa": "NCIS (سرویس تحقیقات جنایی نیروی دریایی آمریکا)",
       "start": "2026-10-13T00:00:00+03:30",
@@ -566,96 +556,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 41 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-103",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-160",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-2171",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-7068",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-9332",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 6 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-189",
-      "title_fa": "صحنه جرم",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/3034",
-      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 20 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-308",
-      "title_fa": "صحنه جرم",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/3034",
-      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 20 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-571",
-      "title_fa": "صحنه جرم",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/3034",
-      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 20 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-2118",
-      "title_fa": "صحنه جرم",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/3034",
-      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 20 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -828,16 +728,6 @@
       "desc_fa": "قسمت 5 از فصل 6؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-74",
-      "title_fa": "Watch What Happens Live with Andy Cohen",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/22980",
-      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 162 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-6",
       "title_fa": "قانون و نظم: واحد قربانیان ویژه",
       "start": "2026-10-15T00:00:00+03:30",
@@ -886,276 +776,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/yCkPLQ10qKIUgRBXmQVVMF1h96d.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 9 از فصل 13؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-879",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1163",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-3535",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-3721",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4799",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4829",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4839",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4841",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4850",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4851",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4855",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4970",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-5644",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6156",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6209",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6210",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6211",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6212",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6213",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6214",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6666",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6819",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6821",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6822",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6823",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-8446",
-      "title_fa": "ちびまる子ちゃん",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/57775",
-      "icon": "https://image.tmdb.org/t/p/w500/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1551 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-6",
@@ -1226,16 +846,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 96 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-9",
-      "title_fa": "Coronation Street",
-      "start": "2026-10-11T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/291",
-      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 187 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-290",
@@ -1324,6 +934,106 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/972533",
       "icon": "https://image.tmdb.org/t/p/w500/4EYqYqn3vrhdYi26BuMHCM6FlC1.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-10-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 163 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-156",
+      "title_fa": "런닝맨",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/33238",
+      "icon": "https://image.tmdb.org/t/p/w500/15SMnscZqd7HZ0bzruatOcKUlOV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 823 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-47",
+      "title_fa": "نمایش روزانه",
+      "start": "2026-10-19T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2224",
+      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 115 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-103",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-160",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2171",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-7068",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9332",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9",
+      "title_fa": "Coronation Street",
+      "start": "2026-10-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/291",
+      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 188 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "1992",
+      "start": "2026-10-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/413846",
+      "icon": "https://image.tmdb.org/t/p/w500/tPvFmQZM5HMspryyYbrtW02NR0G.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
