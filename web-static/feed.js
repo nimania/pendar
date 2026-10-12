@@ -112,7 +112,7 @@ function newsPublisherSources(story, limit=4){
     if(!name)continue;
     const link=String(obj.article_url||obj.homepage_url||obj.source_url||obj.url||"");
     const match=link.match(/^https?:\/\/([a-z0-9.-]+)(?::\d+)?(?:[/?#]|$)/i);
-    const domain=match?match[1].replace(/^www\./i,"").toLowerCase():"";
+    const domain=(match?match[1].replace(/^www\./i,"").toLowerCase():"")||newsPublisherKnownDomain(name);
     const key=name.toLocaleLowerCase("fa");
     const candidate={name,domain};
     if(!found.has(key)||(!found.get(key).domain&&domain))found.set(key,candidate);
@@ -137,6 +137,44 @@ function newsPublisherIdentity(source){
     ? '<span class="news-publisher has-logo" title="'+name+'" aria-label="'+name+'">'+newsPublisherIcon(source)+'</span>'
     : '<span class="news-publisher" title="'+name+'">'+name+'</span>';
 }
+const NEWS_PUBLISHER_DOMAINS=Object.create(null);
+function newsPublisherNorm(value){
+  return String(value||"").toLocaleLowerCase("fa").replace(/[يى]/g,"ی").replace(/ك/g,"ک")
+    .replace(/[()،,]/g," ").replace(/\s+/g," ").trim();
+}
+function newsPublisherKnownDomain(name){
+  const key=newsPublisherNorm(name);
+  const variants=[key,key.replace(/^خبرگزاری\s+/,""),key.replace(/\s*[—–-].*$/,"")];
+  for(const variant of variants)if(NEWS_PUBLISHER_DOMAINS[variant])return NEWS_PUBLISHER_DOMAINS[variant];
+  return "";
+}
+function newsPublisherHydrateExisting(){
+  document.querySelectorAll(".news-publisher:not(.has-logo)").forEach(el=>{
+    const name=el.getAttribute("aria-label")||el.getAttribute("title")||el.textContent.trim();
+    const domain=newsPublisherKnownDomain(name);if(!domain)return;
+    el.classList.add("has-logo");el.setAttribute("aria-label",name);el.setAttribute("title",name);
+    el.innerHTML=newsPublisherIcon({name,domain});
+  });
+  document.querySelectorAll(".news-source-badge:not(.source-logo-badge)").forEach(el=>{
+    const name=el.dataset.src||el.textContent.trim(),domain=newsPublisherKnownDomain(name);if(!domain)return;
+    el.classList.add("source-logo-badge");el.innerHTML=newsPublisherIcon({name,domain});
+  });
+}
+getJSON(`${DATA}/press-registry-health.json`,8000).then(rows=>{
+  (Array.isArray(rows)?rows:[]).forEach(item=>{
+    const homepage=String(item?.homepage||item?.homepage_url||"");
+    try{
+      const domain=new URL(homepage).hostname.replace(/^www\./i,"").toLowerCase();
+      if(domain&&item?.source_name){
+        const name=newsPublisherNorm(item.source_name);
+        NEWS_PUBLISHER_DOMAINS[name]=domain;
+        NEWS_PUBLISHER_DOMAINS[name.replace(/^خبرگزاری\s+/,"")]=domain;
+        NEWS_PUBLISHER_DOMAINS[name.replace(/\s*\([^)]*\)\s*/g," ").replace(/\s+/g," ").trim()]=domain;
+      }
+    }catch(_){}
+  });
+  newsPublisherHydrateExisting();
+}).catch(()=>{});
 
 function feedCard(s, homepage = false) {
   const imp = impInfo(s.importance_score);
