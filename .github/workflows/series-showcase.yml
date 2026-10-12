@@ -21,6 +21,23 @@ jobs:
       - run: python backend/scripts/refresh_watch_schedule.py
         env:
           TMDB_READ_TOKEN: ${{ secrets.TMDB_READ_TOKEN }}
+      - name: Validate sourced TV and series snapshot
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          schedule = json.loads(Path("web-static/data/pendar-watch-schedule.json").read_text(encoding="utf-8"))
+          showcase = json.loads(Path("web-static/data/pendar-series-showcase.json").read_text(encoding="utf-8"))
+          channels = schedule.get("channels", [])
+          programmes = schedule.get("programmes", [])
+          items = showcase.get("items", [])
+          assert isinstance(channels, list) and len(channels) >= 10, "TV channels snapshot unexpectedly small"
+          assert isinstance(programmes, list) and len(programmes) >= 10, "TV schedule unexpectedly small"
+          assert isinstance(items, list) and len(items) >= 5, "Series showcase unexpectedly small"
+          assert all(isinstance(p, dict) and p.get("channel_id") and p.get("source_url") for p in programmes), "Unattributed TV schedule item"
+          assert all(isinstance(x, dict) and x.get("source_url") for x in items), "Unattributed showcase item"
+          print(f"Validated TV schedule: {len(channels)} channels, {len(programmes)} programmes; {len(items)} showcases")
+          PY
       - name: Save sourced snapshot
         run: |
           git config user.name "github-actions[bot]"
