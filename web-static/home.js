@@ -294,7 +294,7 @@ async function renderHomeRecaps(){
     if(section)section.hidden=false;
     el.innerHTML=items.map(r=>{
       const pid=encodeURIComponent(r.id);
-      const photo=typeof r.avatar==="string"&&/^https?:\\/\\//.test(r.avatar)?r.avatar:"";
+      const photo=typeof r.avatar==="string"&&/^https?:\/\//.test(r.avatar)?r.avatar:"";
       return `<a class="home-recap-item" href="/statement/${pid}/" aria-label="${esc(r.title)}">
         <span class="home-recap-avatar">${photo?`<img src="${esc(photo)}" alt="" loading="lazy" onerror="this.remove()">`:`<span>${esc(r.name.slice(0,1)||"پ")}</span>`}</span>
         <span class="home-recap-copy"><b>${esc(r.title)}</b><small>${esc(r.name)}${r.date?" · "+esc(relTime(r.date)):""}</small></span>
