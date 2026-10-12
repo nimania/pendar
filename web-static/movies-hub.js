@@ -367,7 +367,8 @@ const PENDAR_CINEMA_PHOTOS={
   'peyman-maadi':{
     url:'https://commons.wikimedia.org/wiki/Special:FilePath/Payman_maadi_(cropped).jpg',
     credit:'مهدی دلخواسته · CC BY-SA 3.0',
-    source:'https://commons.wikimedia.org/wiki/File:Payman_maadi_(cropped).jpg'
+    source:'https://commons.wikimedia.org/wiki/File:Payman_maadi_(cropped).jpg',
+    objectPosition:'50% 32%'
   }
 };
 function _cinemaHandle(slug,kind,index){
@@ -443,7 +444,7 @@ async function openCinemaHandle(handle){
     && !profilePath.includes('..') && !profilePath.includes('//');
   const curatedPhoto=PENDAR_CINEMA_PHOTOS[handle];
   const picture=curatedPhoto
-    ?'<img src="'+esc(curatedPhoto.url)+'" alt="تصویر '+esc(name)+'" loading="eager" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'">'
+    ?'<img src="'+esc(curatedPhoto.url)+'" alt="تصویر '+esc(name)+'" loading="eager" referrerpolicy="no-referrer" style="display:block;width:100%;height:100%;object-fit:cover;object-position:'+esc(curatedPhoto.objectPosition||'50% 50%')+';" onerror="this.style.display=\'none\'">'
     :validPortrait
     ?'<img src="https://image.tmdb.org/t/p/w185'+esc(profilePath)+'" alt="'+esc(name)+'">'
     :'<span class="movie-poster-fallback" aria-hidden="true">👤</span>';
