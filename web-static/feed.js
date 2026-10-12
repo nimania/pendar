@@ -127,16 +127,20 @@ function newsPublisherSources(story, limit=4){
 }
 function newsPublisherIcon(source){
   const first=esc((source.name||"؟").trim().slice(0,1));
-  const image=source.domain?'<img src="https://www.google.com/s2/favicons?domain='+encodeURIComponent(source.domain)+'&sz=32" alt="" loading="lazy" width="16" height="16" onerror="this.remove()">':"";
-  return '<span class="news-publisher-icon" aria-hidden="true"><span>'+first+'</span>'+image+'</span>';
+  const hasLogo=!!source.domain;
+  const image=hasLogo?'<img class="news-publisher-image" src="https://www.google.com/s2/favicons?domain='+encodeURIComponent(source.domain)+'&sz=64" alt="" loading="lazy" width="24" height="24" onerror="this.remove();this.parentElement.classList.add(\'is-fallback\')">':"";
+  return '<span class="news-publisher-icon'+(hasLogo?' has-logo':'')+'" aria-hidden="true"><span>'+first+'</span>'+image+'</span>';
 }
 function newsPublisherIdentity(source){
-  return '<span class="news-publisher" title="'+esc(source.name)+'">'+newsPublisherIcon(source)+'<span class="news-publisher-name">'+esc(source.name)+'</span></span>';
+  const name=esc(source.name||"منبع");
+  return source.domain
+    ? '<span class="news-publisher has-logo" title="'+name+'" aria-label="'+name+'">'+newsPublisherIcon(source)+'</span>'
+    : '<span class="news-publisher" title="'+name+'">'+name+'</span>';
 }
 
 function feedCard(s, homepage = false) {
   const imp = impInfo(s.importance_score);
-  const badges = newsPublisherSources(s,4).map(x => `<span class="src-badge clickable news-source-badge" data-src="${esc(x.name)}" onclick="event.stopPropagation();openSource(this.dataset.src)">${newsPublisherIcon(x)}<span>${esc(x.name)}</span></span>`).join("");
+  const badges = newsPublisherSources(s,4).map(x => `<span class="src-badge clickable news-source-badge${x.domain?" source-logo-badge":""}" title="${esc(x.name)}" aria-label="${esc(x.name)}" data-src="${esc(x.name)}" onclick="event.stopPropagation();openSource(this.dataset.src)">${x.domain?newsPublisherIcon(x):esc(x.name)}</span>`).join("");
   // Show the article's image when the outlet's RSS provided one; otherwise
   // fall back to the mini-map (so every card has a visual anchor).
   const thumb = s.image_url
