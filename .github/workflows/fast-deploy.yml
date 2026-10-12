@@ -3,7 +3,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Refresh weather and air quality", "Refresh Badbadak independent feeds"]
+    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Refresh weather and air quality"]
     types: [completed]
   push:
     branches: [main]
