@@ -292,32 +292,57 @@ function renderHomeDaily(){
 
 /* Public homepage recaps: only statements with an actual recap text,
    never private studio recording drafts. */
+let homeRecapFilter="all",homeRecapQuery="";
+let homeRecapRows=[];
+function setHomeRecapFilter(value){
+  homeRecapFilter=value;
+  paintHomeRecaps();
+}
+function setHomeRecapQuery(value){
+  homeRecapQuery=String(value||"").trim().toLocaleLowerCase("fa");
+  paintHomeRecaps();
+}
+function paintHomeRecaps(){
+  if(homeNewsMode!=="recaps")return;
+  const el=document.getElementById("home-daily-stories");if(!el)return;
+  const people=[...new Set(homeRecapRows.map(x=>x.name).filter(Boolean))];
+  const filters=[["all","همهٔ جان کلام‌ها"],...people.slice(0,5).map(x=>[x,x])];
+  const matches=homeRecapRows.filter(x=>(homeRecapFilter==="all"||x.name===homeRecapFilter)&&(!homeRecapQuery||[x.title,x.name,x.summary,x.source].join(" ").toLocaleLowerCase("fa").includes(homeRecapQuery)));
+  const controls='<div class="home-recap-controls"><div class="home-recap-filters">'+filters.map(([key,label])=>'<button type="button" class="'+(key===homeRecapFilter?'on':'')+'" onclick="setHomeRecapFilter('+JSON.stringify(key).replace(/"/g,"&quot;")+')">'+esc(label)+'</button>').join("")+'</div><label class="home-recap-search"><span>جست‌وجو در جان کلام</span><input type="search" placeholder="عنوان یا نام گوینده" aria-label="جست‌وجوی جان کلام" value="'+esc(homeRecapQuery)+'" oninput="setHomeRecapQuery(this.value)"></label><small>'+faN(matches.length)+' جان کلام</small></div>';
+  const cards=matches.slice(0,30).map(r=>{
+    const photo=typeof r.avatar==="string"&&/^https?:\/\//i.test(r.avatar)?r.avatar:"";
+    const mins=Math.max(1,Math.ceil(r.words/160));
+    return '<a class="home-recap-item" href="/statement/'+encodeURIComponent(r.id)+'/" aria-label="'+esc(r.title)+'">'+
+      '<span class="home-recap-avatar">'+(photo?'<img src="'+esc(photo)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(r.name.slice(0,1)||"پ")+'</span>')+'</span>'+
+      '<span class="home-recap-copy"><b>'+esc(r.title)+'</b><small class="home-recap-byline">'+esc(r.name)+(r.date?' · '+esc(relTime(r.date)):'')+' · حدود '+faN(mins)+' دقیقه مطالعه</small>'+
+      (r.summary?'<span class="home-recap-summary">'+esc(r.summary)+'</span>':'')+
+      (r.source?'<small class="home-recap-source">منبع: '+esc(r.source)+'</small>':'')+'</span><span class="home-recap-arrow" aria-hidden="true">←</span></a>';
+  }).join("");
+  el.innerHTML=controls+'<div class="home-recap-results">'+(cards||'<div class="state"><div class="big">موردی مطابق این فیلتر پیدا نشد.</div></div>')+'</div>';
+}
 async function renderHomeRecaps(){
   if(homeNewsMode!=="recaps")return;
-  const el=document.getElementById("home-daily-stories");
-  if(!el)return;
+  const el=document.getElementById("home-daily-stories");if(!el)return;
   el.innerHTML='<div class="spinner"></div>';
   try{
     const d=await loadFigures();
     if(homeNewsMode!=="recaps")return;
-    const rows=[],seen=new Set();
+    const seen=new Map();
     for(const f of d.figures||[]){
       for(const p of f.posts||[]){
-        if(!p.id||!String(p.recap_fa||"").trim()||seen.has(String(p.id)))continue;
-        if(p.status&&["draft","pending","private"].includes(String(p.status).toLowerCase()))continue;
-        seen.add(String(p.id));
-        rows.push({id:String(p.id),title:p.topic_fa||p.video_title||"جان کلام",name:f.name_fa||p.name_fa||"",avatar:f.avatar||"",date:p.published_at||p.recorded_at||""});
+        const id=String(p.id||"");
+        const recap=String(p.recap_fa||"").trim();
+        if(!id||recap.length<120)continue;
+        if(["draft","pending","private"].includes(String(p.status||"").toLowerCase()))continue;
+        const title=String(p.topic_fa||p.video_title||"جان کلام").trim();
+        const name=String(f.name_fa||p.name_fa||"").trim();
+        const summary=String(p.summary_fa||"").trim().slice(0,220);
+        const candidate={id,title,name,avatar:f.avatar||p.avatar||"",date:p.published_at||p.recorded_at||"",summary,source:String(p.source_name||"").trim(),words:recap.split(/\s+/).length};
+        if(!seen.has(id)||(!seen.get(id).avatar&&candidate.avatar))seen.set(id,candidate);
       }
     }
-    rows.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
-    el.innerHTML=rows.slice(0,20).map(r=>{
-      const photo=typeof r.avatar==="string"&&/^https?:\/\//.test(r.avatar)?r.avatar:"";
-      return `<a class="home-recap-item" href="/statement/${encodeURIComponent(r.id)}/" aria-label="${esc(r.title)}">
-        <span class="home-recap-avatar">${photo?`<img src="${esc(photo)}" alt="" loading="lazy" onerror="this.remove()">`:`<span>${esc(r.name.slice(0,1)||"پ")}</span>`}</span>
-        <span class="home-recap-copy"><b>${esc(r.title)}</b><small>${esc(r.name)}${r.date?" · "+esc(relTime(r.date)):""}</small></span>
-        <span aria-hidden="true">←</span>
-      </a>`;
-    }).join("")||'<div class="state"><div class="big">هنوز جان کلام منتشرشده‌ای ثبت نشده</div></div>';
+    homeRecapRows=[...seen.values()].sort((a,b)=>String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title,"fa"));
+    paintHomeRecaps();
   }catch(_){
     if(homeNewsMode==="recaps")el.innerHTML='<div class="state"><div class="big">دریافت جان کلام ممکن نشد</div><button class="fchip on" onclick="renderHomeRecaps()">تلاش دوباره</button></div>';
   }
