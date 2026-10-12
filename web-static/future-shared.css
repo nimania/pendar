@@ -53,3 +53,32 @@ body main .filters button[aria-pressed="true"]{background:var(--future-red);bord
 body main footer{border-top:1px solid var(--future-border);margin-top:42px;padding-top:20px;color:#727477}
 @media(max-width:690px){body main{padding-top:16px!important;padding-bottom:46px!important}body main .grid{grid-template-columns:1fr;gap:12px}body main .card{padding:15px}body main h1{font-size:29px!important}}
 @media(prefers-color-scheme:dark){body main .muted,body main .card small,body main footer{color:#b9b9b9}body main .notice{background:#36262a}body main .visual-story{background:var(--future-card)}}
+
+/* Pendar site-family shell: explicit masthead, editorial section banner, and card language. */
+:root{--future-paper:#f2f4f0;--future-card:#fff;--future-ink:#181b19;--future-border:#e1e3dc;--future-red:#a72d37}
+body{background:var(--future-paper)!important}
+.pendar-future-header{background:#fff;color:#181b19;border-bottom:1px solid #e1e3dc;box-shadow:0 1px 2px #1015100c}
+.pendar-future-header .inner{max-width:1180px;min-height:64px;padding:9px 20px;gap:15px}
+.pendar-future-header .logo img{width:119px;max-height:43px}
+.pendar-future-header .masthead-spacer{flex:1}
+.pendar-future-header .masthead-actions{display:flex;align-items:center;gap:7px;font-size:12px}
+.pendar-future-header .masthead-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:35px;padding:6px 10px;border-radius:9px;color:#343b37;font-weight:700}
+.pendar-future-header .masthead-actions a:hover{background:#f0f2ee;color:#a72d37}
+.pendar-future-header .masthead-actions img{width:24px;height:24px;object-fit:contain}
+.pendar-future-breadcrumb{max-width:1100px;margin-top:14px;color:#777e79}
+.pendar-future-identity{max-width:1100px;margin:16px auto 12px;padding:20px 24px;background:#191c1a;color:#fff;border-radius:13px;display:flex;align-items:center;justify-content:space-between;gap:15px;border-right:4px solid #b92c3b}
+.pendar-future-identity>div{display:flex;flex-direction:column;gap:2px}
+.pendar-future-identity .eyebrow{font-size:11px;color:#d3aaa9;font-weight:750}
+.pendar-future-identity strong{font-size:27px;line-height:1.3;font-weight:900}
+.pendar-future-identity small{font-size:12px;color:#d1d6d1}
+.pendar-future-identity>a{border:1px solid #ffffff4d;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;white-space:nowrap}
+.pendar-future-sections{margin-top:0;margin-bottom:18px;padding-top:0}
+.pendar-future-sections a{background:#fff;border-color:#e0e3dc;border-radius:8px;min-height:37px}
+.pendar-future-sections a[aria-current="page"]{color:#fff;background:#a72d37;border-color:#a72d37}
+body main{background:transparent!important}
+body main>.tag:first-child,body main>p.tag:first-child{display:inline-flex;background:#f5e4e5;padding:4px 12px;border-radius:5px}
+body main .card{border:1px solid #e1e3dc;border-radius:12px;box-shadow:0 1px 2px #00000009,0 8px 24px -18px #0003}
+body main a.card:hover,body main a.visual-story:hover{border-color:#b9aaa6;box-shadow:0 5px 19px -13px #0005;transform:translateY(-1px)}
+body main .section-head{border-bottom:1px solid var(--future-border);padding-bottom:10px}
+@media(max-width:760px){.pendar-future-header .inner{min-height:57px}.pendar-future-header .masthead-actions{gap:0}.pendar-future-header .masthead-actions a{padding:5px 6px;font-size:11px}.pendar-future-header .masthead-actions a:nth-child(3),.pendar-future-header .masthead-actions a:nth-child(4){display:none}.pendar-future-identity{margin:13px 14px;padding:17px}.pendar-future-identity strong{font-size:23px}.pendar-future-sections{margin-inline:14px;padding-inline:0}}
+@media(prefers-color-scheme:dark){:root{--future-paper:#131614;--future-card:#1b1f1d;--future-ink:#e8eae5;--future-border:#2a302c}.pendar-future-header{background:#1b1f1d;color:#e8eae5;border-color:#2a302c}.pendar-future-header .masthead-actions a{color:#e8eae5}.pendar-future-header .masthead-actions a:hover{background:#2a302c}.pendar-future-identity{background:#202422}.pendar-future-sections a{background:#1b1f1d;color:#e8eae5;border-color:#39413b}body main .card{border-color:#39413b}}
