@@ -82,15 +82,21 @@ async function renderEventTrends() {
   } catch (_) {el.innerHTML='<p class="muted">ماجراهای ترند فعلاً بارگذاری نشد. <button onclick="renderEventTrends()">تلاش دوباره</button></p>';}
 }
 async function renderHomeEvents() {
-  const el=document.getElementById('home-events'); if(!el)return;
+  if(typeof homeNewsMode==="undefined"||homeNewsMode!=="events")return;
+  const el=document.getElementById("home-daily-stories");if(!el)return;
+  el.innerHTML='<div class="spinner"></div>';
   try {
     const [res,eds]=await Promise.all([loadEventTrends().then(v=>({ok:true,v}),e=>({ok:false,e})),loadEditorialTrends()]);
+    if(homeNewsMode!=="events")return;
     if(!res.ok&&!eds.length)throw res.e;
     const groups=(res.ok?res.v:[]).filter(g=>g.items.some(PendarEvents.isIranStory));
-    el.innerHTML=`<div class="home-panel-title"><b>ماجراهای ترند ایران</b><div class="home-event-tools"><a href="#/trends">همهٔ ماجراها ←</a><button type="button" aria-label="ماجراهای قبلی" onclick="scrollHomeEvents(-1)">→</button><button type="button" aria-label="ماجراهای بعدی" onclick="scrollHomeEvents(1)">←</button></div></div>
-      <div class="home-event-rail" aria-label="مرور ماجراهای ترند">${eds.map(homeEditorialTile).join('')}${groups.slice(0,6).map(homeEventCard).join('')||(eds.length?'':'<p class="muted">هنوز ماجرای تازه با پوشش چند رسانه ثبت نشده است.</p>')}</div>`;
-  }catch(_){el.innerHTML='<p class="muted">ماجراهای ترند فعلاً در دسترس نیست.</p>';}
+    const cards=[...eds.map(homeEditorialTile),...groups.slice(0,12).map(homeEventCard)];
+    el.innerHTML='<div class="home-event-rail" aria-label="ماجراها و ترندهای پندار">'+(cards.join("")||'<p class="muted">هنوز ماجرای تازه‌ای ثبت نشده است.</p>')+'</div>';
+  }catch(_){
+    if(homeNewsMode==="events")el.innerHTML='<p class="muted">ماجراها فعلاً در دسترس نیستند. <button onclick="renderHomeEvents()">تلاش دوباره</button></p>';
+  }
 }
+
 function homeEventCard(g,rank) {
   const image=g.lead?.image_url||g.items.find(s=>s.image_url)?.image_url;
   return `<a class="home-event-tile" href="#/event/${encodeURIComponent(g.id)}" title="${esc(g.title)}">
