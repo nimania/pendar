@@ -382,7 +382,7 @@ function paintHomePeopleTimeline(){
     const original=String(p.text||p.recap_fa||p.summary_fa||p.content_fa||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
     const excerpt=original.slice(0,460);
     const date=p.published_at||p.recorded_at||"";
-    const image=/^https?:\/\//i.test(f.avatar||"")?f.avatar:"";
+    const image=typeof f.avatar==="string"&&(/^(https?:\/\/|\/|assets\/|data\/)/i.test(f.avatar))?f.avatar:"";
     const link="/statement/"+encodeURIComponent(String(p.id))+"/";
     return '<article class="home-people-timeline-row">'+
       '<div class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</div>'+
@@ -400,15 +400,23 @@ async function renderHomePeopleDirectory(){
   const el=document.getElementById("home-daily-stories");if(!el)return;
   el.innerHTML='<div class="spinner"></div>';
   try{
-    const d=await loadFigures();
+    const [d,registry]=await Promise.all([loadFigures(),loadCanonicalEntities().catch(()=>({entities:[]}))]);
     if(homeNewsMode!=="people")return;
+    const portraitByHandle=new Map();
+    for(const entity of registry.entities||[]){
+      const portrait=entity.meta?.avatar||entity.meta?.image||entity.avatar||"";
+      if(!portrait)continue;
+      for(const ref of entity.refs||[])if(ref.dataset==="figures")portraitByHandle.set(String(ref.key).toLowerCase(),portrait);
+      if(entity.meta?.handle)portraitByHandle.set(String(entity.meta.handle).toLowerCase(),portrait);
+    }
     const people=(d.figures||[]).filter(f=>f&&f.handle&&f.name_fa&&!f.us_radar&&!f.israel_radar&&!String(f.handle).startsWith("news-")&&!HOME_FIGURE_EXCLUDE.has(String(f.handle).toLowerCase()));
     const seen=new Set(),rows=[];
     for(const f of people){
       const posts=(f.posts||[]).filter(p=>p&&p.id&&(p.topic_fa||p.headline_fa||p.summary_fa||p.text||p.recap_fa)&&!["draft","pending","private"].includes(String(p.status||"").toLowerCase())).sort((a,b)=>figureActivityTime(b)-figureActivityTime(a));
       if(!posts.length)continue;
       const p=posts[0];if(seen.has(String(p.id)))continue;seen.add(String(p.id));
-      rows.push({f,p,time:figureActivityTime(p)});
+      const enriched={...f,avatar:f.avatar||p.avatar||p.profile_image_url||portraitByHandle.get(String(f.handle).toLowerCase())||""};
+      rows.push({f:enriched,p,time:figureActivityTime(p)});
     }
     homePeopleTimelineRows=rows.sort((a,b)=>b.time-a.time);
     paintHomePeopleTimeline();
