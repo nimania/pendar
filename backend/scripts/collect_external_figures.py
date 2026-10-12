@@ -41,6 +41,8 @@ YOUTUBE_TRANSCRIPT_CHARS = 32000  # legacy public-recap limit; studio mode uses 
 VIDEO_CHUNK_CHARS = 18000
 VIDEO_CHUNK_OVERLAP = 700
 DOWNSUB_ENDPOINT = "https://api.downsub.com/download"
+# Stop repeat requests for the rest of this run if DownSub rejects authorization.
+_DOWNSUB_AUTH_DENIED = False
 YOUTUBE_RECAP_STATE_OUT = HERE.parent / "data" / "youtube-recap-state.json"
 YOUTUBE_TRANSCRIPT_CACHE_OUT = HERE.parent / "data" / "youtube-transcripts.json"
 PROJECT_FINANCE_OUT = HERE.parent / "data" / "project-finance.json"
@@ -711,8 +713,9 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
     The parser is intentionally tolerant because DownSub may return either
     transcript text directly or metadata containing downloadable subtitle URLs.
     """
+    global _DOWNSUB_AUTH_DENIED
     key = os.environ.get("DOWNSUB_API_KEY", "").strip()
-    if not key:
+    if not key or _DOWNSUB_AUTH_DENIED:
         return "", ""
     video_url = f"https://www.youtube.com/watch?v={video_id}"
     try:
@@ -726,6 +729,9 @@ def _downsub_transcript(client: httpx.Client, video_id: str) -> tuple[str, str]:
         print(f"youtube: DownSub request failed {video_id} ({type(exc).__name__})")
         return "", ""
     _record_downsub_request(video_id, r.status_code)
+    if r.status_code in (401, 403):
+        _DOWNSUB_AUTH_DENIED = True
+        print("::warning::DownSub rejected authorization; skipping further DownSub requests in this run")
     if r.status_code != 200:
         print(f"youtube: DownSub HTTP {r.status_code} for {video_id}")
         return "", ""
