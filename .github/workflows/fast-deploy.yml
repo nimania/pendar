@@ -3,7 +3,7 @@ name: Fast Deploy Pendar UI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Refresh weather and air quality"]
+    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Refresh weather and air quality", "Refresh Badbadak independent feeds"]
     types: [completed]
   push:
     branches: [main]
@@ -191,6 +191,39 @@ jobs:
           target.parent.mkdir(parents=True, exist_ok=True)
           target.write_bytes(new_path.read_bytes())
           print("Weather data overlaid without rebuilding the site")
+          PY
+
+      - name: Overlay verified independent Badbadak feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          feed_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/badbadak-feeds.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
+          if [ -z "$feed_run" ]; then
+            echo "::warning::No independent Badbadak feed snapshot; retaining existing feeds."
+            exit 0
+          fi
+          mkdir -p /tmp/badbadak-feeds
+          if ! gh run download "$feed_run" -n badbadak-feeds -D /tmp/badbadak-feeds; then
+            echo "::warning::Badbadak artifact unavailable; retaining existing feeds."
+            exit 0
+          fi
+          python - <<'PY'
+          import json, shutil
+          from pathlib import Path
+          src=Path("/tmp/badbadak-feeds/data")
+          dst=Path("site/data")
+          dst.mkdir(parents=True,exist_ok=True)
+          for name in ("bartarinha-feed.json","rokna-feed.json","7sobh-feed.json"):
+              file=src/name
+              if not file.is_file():continue
+              try:
+                  rows=json.loads(file.read_text(encoding="utf-8"))
+                  if not isinstance(rows,list) or len(rows)<3 or not all(isinstance(x,dict) and x.get("title") and x.get("url") for x in rows):
+                      raise ValueError("invalid rows")
+                  shutil.copy2(file,dst/name)
+                  print(f"Badbadak {name}: {len(rows)} sourced items overlaid")
+              except (ValueError, OSError) as exc:
+                  print(f"::warning::Keeping previous {name}: {exc}")
           PY
 
       - name: Overlay current UI without overwriting generated data
