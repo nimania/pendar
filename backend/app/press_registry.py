@@ -48,11 +48,6 @@ PRESS_FEEDS = {
     "شفقنا فارسی": "https://fa.shafaqna.com/feed/",
 
     # Persian-language international / diaspora
-    ("خبرگزاری ایرانشهر","https://www.iranshahrnewsagency.com/","fa","diaspora"),
-    ("اپک تایمز فارسی","https://persianepochtimes.com/","fa","diaspora"),
-    ("استکهلمیان","https://www.stockholmian.com/","fa","diaspora"),
-    ("پرژن میرور","https://www.persianmirror.ca/","fa","diaspora"),
-    ("مجله جوانان","https://javanan.com/","fa","diaspora"),
     "اخبار روز": "https://akhbar-rooz.com/feed/",
     "رادیو زمانه": "http://radiozamaneh.com/rss.xml",
     "رادیو فردا": "https://www.radiofarda.com/api/zrttpol-vomx-tpeoogpi",
@@ -167,6 +162,12 @@ PRESS_FEEDS.update({
 })
 
 PRESS_REGISTRY = [
+    # Diaspora sources without verified RSS belong in the source registry, not PRESS_FEEDS.
+    ("خبرگزاری ایرانشهر","https://www.iranshahrnewsagency.com/","fa","diaspora"),
+    ("اپک تایمز فارسی","https://persianepochtimes.com/","fa","diaspora"),
+    ("استکهلمیان","https://www.stockholmian.com/","fa","diaspora"),
+    ("پرژن میرور","https://www.persianmirror.ca/","fa","diaspora"),
+    ("مجله جوانان","https://javanan.com/","fa","diaspora"),
     # Iran — agencies / news portals
     ("فرادید","https://faradeed.ir/","fa","iran-agency"),
     ("جام‌جم آنلاین","https://jamejamonline.ir/","fa","iran-paper"),
