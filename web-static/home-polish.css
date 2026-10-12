@@ -60,3 +60,10 @@
 .editorial-sources small{color:var(--ink-faint,var(--ink-soft));direction:ltr;text-align:right}
 .editorial-note{font-size:12px;line-height:1.9}
 @media(max-width:700px){.editorial-card{grid-template-columns:1fr}.editorial-media{min-height:0;aspect-ratio:16/9}.editorial-copy{padding:0 14px 14px}.editorial-card .event-arrow{display:none}.outlook-row{grid-template-columns:1fr}.editorial-dek{font-size:16px}}
+
+/* Compact images for the existing twenty-row homepage news list. */
+.home-news-thumb{width:88px;height:62px;flex:0 0 88px;border-radius:9px;overflow:hidden;background:var(--surface-2);display:grid;place-items:center;border:1px solid var(--line)}
+.home-news-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.home-news-thumb-fallback,.home-news-thumb.is-empty::after{content:"پندار";font-size:11px;font-weight:800;color:var(--ink-faint);letter-spacing:0}
+.home-intel-row-rich .home-intel-copy{min-width:0;flex:1}
+@media(max-width:600px){.home-news-thumb{width:72px;height:54px;flex-basis:72px}.home-intel-row-rich{gap:8px;padding:9px 7px}}
