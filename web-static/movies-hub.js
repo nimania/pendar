@@ -437,10 +437,16 @@ async function openCinemaHandle(handle){
   const picture=validPortrait
     ?'<img src="https://image.tmdb.org/t/p/w185'+esc(profilePath)+'" alt="'+esc(name)+'">'
     :'<span class="movie-poster-fallback" aria-hidden="true">👤</span>';
-  const x={name_fa:name,name:originalName!==name?originalName:'',handle:handle,profile_handle:handle,role_fa:entries.map(e=>e.role).filter((v,i,a)=>a.indexOf(v)===i).join(' · '),posts:[]};
+  const roles=[...new Set(entries.map(e=>e.role))];
+  const x={name_fa:name,name:originalName!==name?originalName:'',handle:handle,profile_handle:handle,role_fa:roles.join(' · '),posts:[]};
   el.innerHTML='<div class="x-profile">'
     +renderPersonProfileHeader(x,{avatar:picture,subtitle:'چهرهٔ سینمایی',stats:'<span><b>'+faN(entries.length)+'</b> اثر مرتبط</span>'})
     +'<nav class="x-profile-tabs" aria-label="بخش‌های پروفایل"><button class="on">آثار</button></nav>'
+    +'<section class="cinema-profile-identity"><h2>شناسنامهٔ سینمایی</h2>'
+    +(originalName&&originalName!==name?'<p><b>نام ثبت‌شده در منبع:</b> <span dir="auto">'+esc(originalName)+'</span></p>':'')
+    +'<p><b>حوزهٔ فعالیت:</b> '+esc(roles.join('، '))+'</p>'
+    +'<p><b>آثار مستند در پندار:</b> '+faN(entries.length)+'</p>'
+    +'<p class="cinema-profile-work-note">این شناسنامه فقط از پیوندهای ثبت‌شدهٔ آثار تشکیل شده است. تصویر، اخبار و زندگینامه صرفاً پس از تطبیق هویت معتبر افزوده می‌شوند.</p></section>'
     +'<section class="cinema-profile-works" aria-label="آثار سینمایی"><div class="cinema-profile-works-head"><h2>آثار مرتبط</h2><small>'+faN(entries.length)+' اثر ثبت‌شده</small></div><div class="cinema-profile-works-grid">'
     +entries.map(e=>'<a class="cinema-profile-work-card" href="/movie/'+encodeURIComponent(e.m.slug)+'/"><span class="cinema-profile-work-poster">'+_moviePoster(e.m,false)+'</span><span class="cinema-profile-work-copy"><strong>'+esc(e.m.title_fa||e.m.original_title||'')+'</strong><small>'+esc(e.role)+' · '+esc(e.m.year||'')+'</small><span class="cinema-profile-work-link">مشاهدهٔ صفحهٔ فیلم ←</span></span></a>').join('')
     +'</div><p class="cinema-profile-work-note">فقط آثار دارای ارتباط ثبت‌شده نمایش داده شده‌اند؛ فیلم‌شناسی کامل پس از تأیید شناسهٔ یکتای شخص تکمیل می‌شود.</p></section></div>';
