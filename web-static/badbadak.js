@@ -77,7 +77,7 @@ async function renderBadbadak(){
  _bbLoading=(async()=>{
  try{
  const results=await Promise.allSettled([ALL.length?Promise.resolve(ALL):getJSON(`${DATA}/stories.json`),getJSON(`${DATA}/figures.json`),getJSON(`${DATA}/entity-registry.json`),getJSON(`${DATA}/trends.json`),getJSON(MESHKI_ROOT+"data/news-feed.json",8000),loadMeshkiSeries(),getJSON(`${DATA}/bartarinha-feed.json`,8000),getJSON(`${DATA}/rokna-feed.json`,8000),getJSON(`${DATA}/7sobh-feed.json`,8000)]);
- if(results[0].status!=='fulfilled'&&results[4].status!=='fulfilled')throw new Error('stories');
+ if(results[0].status!=='fulfilled'&&results[4].status!=='fulfilled'&&![6,7,8].some(i=>results[i].status==='fulfilled'&&Array.isArray(results[i].value)&&results[i].value.length))throw new Error('stories');
  const data=results[0].status==='fulfilled'?results[0].value:[];const stories=Array.isArray(data)?data:data.stories||[];
  const now=Date.now();const age=s=>Math.max(0,(now-Date.parse(s.last_seen||s.published_at||s.first_seen||''))/86400000)||0;
  _bbStories=stories.filter(s=>s.id&&bbCategory(s)).sort((a,b)=>(Math.log2(1+(b.source_count||1))*3-age(b)+(bbCategory(b)==='celeb'?5:0))-(Math.log2(1+(a.source_count||1))*3-age(a)+(bbCategory(a)==='celeb'?5:0))).slice(0,120);
