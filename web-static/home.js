@@ -261,8 +261,7 @@ function homeStorySourceBadges(story){
   const sources=newsPublisherSources(story,4);
   if(!sources.length)return "";
   const count=Math.max(0,Number(story.source_count||0)-sources.length);
-  return 
-    sources.map(newsPublisherIdentity).join("")+
+  return sources.map(newsPublisherIdentity).join("")+
     (count?'<span class="home-news-source-more" title="منابع بیشتر در متن خبر">+'+faN(count)+'</span>':"");
 }
 function renderHomeDaily(){
