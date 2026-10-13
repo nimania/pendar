@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; object-src 'none'; form-action 'none'">
+<title>آزمایشگاه رسپی داینر | پندار</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ee;color:#26211e;font:15px/1.9 Tahoma,Arial,sans-serif}
+header{background:#201b1a;color:#fff;padding:26px max(20px,calc((100vw - 1100px)/2));border-bottom:4px solid #a72e27}
+header h1{margin:0;font-size:26px;font-weight:700}header p{margin:3px 0 0;color:#d4c8c1;font-size:13px}
+main{max-width:1100px;margin:0 auto;padding:28px 18px}.panel{background:#fff;border:1px solid #e9e1d6;border-radius:14px;box-shadow:0 2px 18px #00000008}
+.unlock{max-width:530px;margin:38px auto;padding:32px}.unlock h2{font-size:22px;margin:0 0 5px}.unlock p{margin:5px 0 20px;color:#746c65}
+label{display:block;font-weight:700;margin:8px 0}input{width:100%;padding:13px;border:1px solid #d4cbc2;border-radius:9px;font:inherit;direction:rtl}
+input:focus,button:focus-visible{outline:2px solid #b0473f;outline-offset:2px}
+button{cursor:pointer;font:inherit}button.primary{border:0;background:#a6322b;color:white;padding:11px 20px;border-radius:9px;font-weight:700}
+button.secondary{border:1px solid #d9d2c9;background:white;padding:9px 14px;border-radius:9px}
+button:disabled{opacity:.5;cursor:wait}.info{font-size:12px!important;color:#777!important;margin-top:16px!important}
+.error{color:#a22b23;font-weight:700}.hidden{display:none!important}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.stat{padding:13px 20px}.stat strong{font-size:25px;display:block}.stat small{color:#777}
+.tabs{display:flex;gap:7px;margin-bottom:14px}.tabs button{border:1px solid #d9d2c9;background:white;padding:9px 16px;border-radius:9px}
+.tabs button.active{background:#27221f;color:white}
+.search{margin-bottom:12px}.layout{display:grid;grid-template-columns:330px 1fr;gap:16px}
+.list{max-height:70vh;overflow:auto}.list button{width:100%;background:white;border:0;border-bottom:1px solid #f0ebe6;text-align:right;padding:14px 17px}
+.list button.selected,.list button:hover{background:#fdf0e6}.list small{color:#78716c;display:block}
+.detail{padding:24px;min-height:370px}.detail h2{margin:0;font-size:24px}.detail h3{font-size:16px;margin:23px 0 6px}
+.muted{color:#777;font-size:13px}.pill{display:inline-block;background:#fff0d8;color:#87461c;padding:2px 10px;border-radius:20px;font-size:12px;margin-bottom:9px}
+table{width:100%;border-collapse:collapse}td,th{padding:8px;text-align:right;border-bottom:1px solid #eee}
+th{color:#777;font-size:12px}.boxnote{background:#faf7f2;padding:14px;border-radius:8px}
+.source{padding:13px 18px;border-bottom:1px solid #efebe6}.source b{display:block}.source small{color:#78716c}
+footer{font-size:12px;color:#8b8176;max-width:1100px;margin:10px auto 30px;padding:0 18px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.list{max-height:240px}.cards{gap:7px}.stat{padding:12px}.stat strong{font-size:22px}.detail{padding:17px}.unlock{margin:10px auto;padding:24px}}
+@media print{header,footer,.toolbar,.cards,.tabs,.search,.list,.printbtn{display:none!important}main{padding:0}.layout{display:block}.detail{border:0;padding:0;box-shadow:none}}
+</style>
+</head>
+<body>
+<header><h1>آزمایشگاه رسپی داینر</h1><p>بانک دانش آشپزی ایران · بخشی از پندار</p></header>
+<main>
+<section id="lock" class="panel unlock">
+<h2>ورود به نسخه پژوهشی</h2>
+<p>رسپی‌ها و مشخصات کتاب‌ها به‌صورت رمزگذاری‌شده نگهداری می‌شوند. برای بازکردن کتابخانه، کلید اختصاصی را وارد کن.</p>
+<form id="form">
+<label for="secret">کلید دسترسی</label>
+<input id="secret" type="password" autocomplete="off" spellcheck="false" placeholder="کلید اختصاصی Recipe Lab" required>
+<div style="margin-top:16px"><button id="unlock" type="submit" class="primary">بازکردن کتابخانه</button></div>
+</form>
+<p id="message" role="status" aria-live="polite"></p>
+<p class="info">کلید در مرورگر ذخیره یا به سرور ارسال نمی‌شود. این روش رمزگذاریِ نسخه آزمایشی است، نه سامانه کامل حساب کاربری.</p>
+</section>
+<section id="content" class="hidden">
+<div class="toolbar"><div><strong>کتابخانه خصوصی</strong><div class="muted">پژوهشی · بدون تأیید آزمون عملی</div></div><button id="logout" class="secondary">بستن کتابخانه</button></div>
+<div class="cards"><div class="panel stat"><strong id="nSources">۰</strong><small>منبع</small></div><div class="panel stat"><strong id="nRecipes">۰</strong><small>رسپی</small></div><div class="panel stat"><strong>۰</strong><small>آزمون‌شده</small></div></div>
+<div class="tabs"><button id="tabRecipes" class="active" type="button">رسپی‌کارت‌ها</button><button id="tabBooks" type="button">منابع و کتاب‌ها</button></div>
+<section id="recipeArea"><input id="search" class="search" placeholder="نام غذا یا ماده اولیه را جست‌وجو کن" aria-label="جست‌وجوی رسپی‌ها"><div class="layout"><nav id="recipeList" class="panel list" aria-label="فهرست رسپی‌ها"></nav><article id="detail" class="panel detail"></article></div></section>
+<section id="bookArea" class="panel hidden"></section>
+</section>
+</main>
+<footer>دستورها برای پژوهش ثبت شده‌اند و لزوماً کامل یا قابل اجرای تجاری نیستند. فایل‌های کامل کتاب در وب‌سایت قرار ندارند.</footer>
+<script>
+'use strict';
+let library=null, selected=0;
+const el=id=>document.getElementById(id);
+const fa=x=>Number(x).toLocaleString('fa-IR');
+const b64=x=>{const s=x.replace(/-/g,'+').replace(/_/g,'/');const padded=s+'='.repeat((4-s.length%4)%4);return Uint8Array.from(atob(padded),c=>c.charCodeAt(0))};
+function make(tag,txt,cls){const e=document.createElement(tag);if(txt!==undefined)e.textContent=String(txt);if(cls)e.className=cls;return e}
+function source(id){return library.sources.find(s=>s.id===id)?.title||id}
+async function unlock(event){
+ event.preventDefault();
+ const value=el('secret').value.trim();el('unlock').disabled=true;el('message').textContent='در حال بازکردن داده‌ها…';el('message').className='';
+ try{
+  const keyBytes=b64(value);if(keyBytes.length!==32)throw Error('bad key');
+  const r=await fetch('./data.enc.json',{cache:'no-store'});if(!r.ok)throw Error('unavailable');
+  const enc=await r.json();if(enc.v!==1||enc.alg!=='AES-256-GCM'||enc.compression!=='deflate')throw Error('unsupported');
+  const key=await crypto.subtle.importKey('raw',keyBytes,{name:'AES-GCM'},false,['decrypt']);
+  const plaintext=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(enc.nonce),additionalData:new TextEncoder().encode('pendar-recipe-lab-v1'),tagLength:128},key,b64(enc.ciphertext));
+  const text=await new Response(new Blob([plaintext]).stream().pipeThrough(new DecompressionStream('deflate'))).text();
+  const data=JSON.parse(text);
+  if(!Array.isArray(data.sources)||!Array.isArray(data.recipes))throw Error('invalid');
+  library=data;el('secret').value='';el('lock').classList.add('hidden');el('content').classList.remove('hidden');render();
+ }catch(e){el('message').textContent='کلید نادرست است یا داده‌های رمزگذاری‌شده در دسترس نیستند.';el('message').className='error'}
+ finally{el('unlock').disabled=false}
+}
+function tab(type){el('recipeArea').classList.toggle('hidden',type!=='recipes');el('bookArea').classList.toggle('hidden',type!=='books');el('tabRecipes').classList.toggle('active',type==='recipes');el('tabBooks').classList.toggle('active',type==='books')}
+function render(){
+ el('nSources').textContent=fa(library.sources.length);el('nRecipes').textContent=fa(library.recipes.length);
+ const area=el('bookArea');area.replaceChildren();
+ for(const item of library.sources){const row=make('div',undefined,'source');row.append(make('b',item.title),make('small',item.author+' · '+fa(item.pages)+' صفحه · '+item.id));area.append(row)}
+ drawList();show(0)
+}
+function drawList(){
+ const list=el('recipeList');list.replaceChildren();
+ const query=el('search').value.trim();
+ library.recipes.forEach((r,i)=>{
+  const haystack=[r.name,r.method,...r.ingredients.map(x=>x[0]),source(r.source)].join(' ');
+  if(query&&!haystack.includes(query))return;
+  const b=make('button',undefined,i===selected?'selected':'');b.type='button';b.append(make('b',r.name),make('small',source(r.source)));b.addEventListener('click',()=>show(i));list.append(b)
+ });
+ if(!list.children.length)list.append(make('div','نتیجه‌ای پیدا نشد.','source'))
+}
+function show(i){
+ const r=library.recipes[i];if(!r)return;
+ selected=i;drawList();const detail=el('detail');detail.replaceChildren();
+ detail.append(make('span',r.status,'pill'),make('h2',r.name),make('p',source(r.source)+' · '+r.pages,'muted'),make('h3','مواد اولیه'));
+ const table=make('table'),thead=make('thead'),tr=make('tr');tr.append(make('th','ماده'),make('th','مقدار'));thead.append(tr);table.append(thead);
+ const tbody=make('tbody');
+ for(const ing of r.ingredients){const row=make('tr');row.append(make('td',ing[0]),make('td',ing[1]));tbody.append(row)}
+ table.append(tbody);detail.append(table,make('h3','خلاصه روش تهیه'),make('p',r.method),make('h3','یادداشت کیفیت'),make('p',r.notes,'boxnote'));
+ const print=make('button','چاپ کارت','secondary printbtn');print.type='button';print.addEventListener('click',()=>window.print());detail.append(print)
+}
+el('form').addEventListener('submit',unlock);
+el('tabRecipes').addEventListener('click',()=>tab('recipes'));
+el('tabBooks').addEventListener('click',()=>tab('books'));
+el('search').addEventListener('input',drawList);
+el('logout').addEventListener('click',()=>{library=null;selected=0;el('search').value='';el('content').classList.add('hidden');el('lock').classList.remove('hidden');el('message').textContent='';el('secret').focus()});
+</script>
+</body></html>
