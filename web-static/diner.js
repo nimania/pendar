@@ -499,6 +499,22 @@ async function showDiner(sub) {
       </div>
     </div>
 
+    <section class="diner-reel" aria-labelledby="diner-reel-h">
+      <div class="diner-reel-video">
+        <video controls playsinline preload="none" poster="assets/diner/foodcost-pizza.jpg" width="720" height="1280">
+          <source src="assets/diner/foodcost-pizza.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="diner-reel-text">
+        <span class="diner-reel-tag">ویدئوی تازهٔ داینر</span>
+        <h2 id="diner-reel-h" class="retro-h2">پیتزای ۱٬۱۵۰٬۰۰۰ تومنی، چقدر سود داره؟</h2>
+        <p>پیتزا رو ۱٬۱۵۰٬۰۰۰ تومن می‌فروشی و مواد اولیه‌ش ۴۰۰ هزار تومن درمیاد. اون ۷۵۰ هزار تومن سود خالص نیست؛ هنوز اجاره، حقوق و بیمه، آب و برق و گاز، بسته‌بندی، ضایعات، استهلاک و کمیسیون پلتفرم‌های آنلاین مونده.</p>
+        <p class="diner-reel-formula"><span style="white-space:nowrap">فودکاست٪ =</span> هزینه مواد اولیه ÷ <span style="white-space:nowrap">قیمت فروش × ۱۰۰</span><br>۴۰۰٬۰۰۰ ÷ ۱٬۱۵۰٬۰۰۰ ≈ ۳۵٪</p>
+        <p>فودکاست پایین به‌تنهایی سود نمیاره: یه رستوران با فودکاست ۳۰٪ ممکنه ضرر بده و یکی دیگه با ۴۰٪ سودآور باشه. <strong>فروش بالا لزوماً یعنی سود بالا نیست.</strong></p>
+        <a href="${DINER_IG}" target="_blank" rel="noopener" class="diner-social-btn diner-ig">ویدئوهای بیشتر در اینستاگرام</a>
+      </div>
+    </section>
+
     <section class="diner-news" id="diner-news" aria-live="polite"><h2 class="retro-h2">خبرهای رستوران، کافه، منو و فناوری</h2><p class="muted">در حال دریافت خبرها…</p></section>
 
     <div class="diner-email-box" id="diner-email-box">
