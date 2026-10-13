@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.api.v1.router import api_router
+from app.recipe_lab import router as recipe_lab_router
 from app.core.config import settings
 from app.core.logging import configure_logging
 
@@ -29,6 +30,7 @@ app.add_middleware(
 )
 
 app.include_router(api_router, prefix=settings.api_v1_prefix)
+app.include_router(recipe_lab_router)
 
 
 @app.get("/api", tags=["meta"])
