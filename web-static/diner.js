@@ -586,7 +586,10 @@ async function showDinerRecipes(){
   const list=document.createElement("nav");list.className="diner-recipes-list";list.setAttribute("aria-label","فهرست غذاها");
   const detail=document.createElement("article");detail.className="diner-recipes-detail";
   const stats=document.createElement("p");stats.className="diner-recipes-note";stats.textContent="در حال بارگذاری…";
-  panels.append(list,detail);wrap.append(link,heading,description,stats,input,panels);root.append(wrap);
+  const filters=document.createElement("div");filters.className="diner-recipe-filters";
+  const categoryFilter=document.createElement("select"),sourceFilter=document.createElement("select"),regionFilter=document.createElement("select");
+  for(const [control,label] of [[categoryFilter,"همه انواع غذا"],[sourceFilter,"همه منابع"],[regionFilter,"همه مناطق منبع"]]){control.setAttribute("aria-label",label);const opt=document.createElement("option");opt.value="";opt.textContent=label;control.append(opt);filters.append(control)}
+  panels.append(list,detail);wrap.append(link,heading,description,stats,input,filters,panels);root.append(wrap);
   const make=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);return n};
   try {
     // Public data is updated independently; the bundled fallback keeps the view usable.
@@ -603,12 +606,18 @@ async function showDinerRecipes(){
     if(!Array.isArray(db.sources)||!Array.isArray(db.recipes))throw new Error("Invalid catalog");
     const source=id=>db.sources.find(s=>s.id===id)?.title||id;
     stats.textContent=db.sources.length.toLocaleString("fa-IR")+" منبع · "+db.recipes.length.toLocaleString("fa-IR")+" دستور پژوهشی · صفر دستور آزمون‌شده";
+    const addOptions=(control,values)=>{for(const value of [...new Set(values)].sort((a,b)=>a.localeCompare(b,"fa"))){const opt=document.createElement("option");opt.value=value;opt.textContent=value;control.append(opt)}};
+    addOptions(categoryFilter,db.recipes.map(r=>r.category||"سایر / نیازمند بررسی"));
+    addOptions(sourceFilter,db.recipes.map(r=>r.source));
+    for(const opt of sourceFilter.options){if(opt.value)opt.textContent=source(opt.value)}
+    addOptions(regionFilter,db.recipes.map(r=>r.source_region||"منبع نامشخص"));
+    categoryFilter.onchange=sourceFilter.onchange=regionFilter.onchange=renderList;
     let selected=0;
     function showRecipe(i){
       selected=i;const r=db.recipes[i];if(!r)return;
       detail.replaceChildren();
       const label=make("span",r.status);label.className="diner-recipe-pill";
-      detail.append(label,make("h2",r.name),make("p",source(r.source)+" — "+r.pages),make("h3","مواد اولیه"));
+      detail.append(label,make("h2",r.name),make("p",(r.category||"سایر / نیازمند بررسی")+" · "+(r.source_region||"منبع نامشخص")+" · "+source(r.source)+" — "+r.pages),make("h3","مواد اولیه"));
       const table=make("table");const tbody=make("tbody");
       for(const ing of r.ingredients){const tr=make("tr");tr.append(make("td",ing[0]),make("td",ing[1]));tbody.append(tr)}
       table.append(tbody);
@@ -621,6 +630,9 @@ async function showDinerRecipes(){
       db.recipes.forEach((r,i)=>{
         const match=[r.name,r.method,source(r.source),...r.ingredients.map(x=>x[0])].join(" ");
         if(q&&!match.includes(q))return;
+        if(categoryFilter.value&&(r.category||"سایر / نیازمند بررسی")!==categoryFilter.value)return;
+        if(sourceFilter.value&&r.source!==sourceFilter.value)return;
+        if(regionFilter.value&&(r.source_region||"منبع نامشخص")!==regionFilter.value)return;
         const btn=make("button",r.name);btn.type="button";btn.className=i===selected?"selected":"";
         const subtitle=make("small",source(r.source));btn.append(subtitle);btn.onclick=()=>showRecipe(i);list.append(btn);
       });
