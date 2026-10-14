@@ -6,8 +6,6 @@ from __future__ import annotations
 
 import hmac
 import os
-import secrets
-from html import escape
 
 import httpx
 from fastapi import APIRouter, Depends, HTTPException
@@ -63,7 +61,7 @@ fetch('/recipes/api/data',{credentials:'same-origin',cache:'no-store'}).then(r=>
 
 @router.get("/", dependencies=[Depends(auth)], response_class=HTMLResponse)
 async def dashboard():
-    return HTMLResponse(PAGE, headers={"Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow"})
+    return HTMLResponse(PAGE, headers={"Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer"})
 
 
 async def private_json(client: httpx.AsyncClient, path: str):
@@ -95,4 +93,4 @@ async def data():
         except (httpx.HTTPError, ValueError, KeyError) as exc:
             raise HTTPException(502, "Recipe source unavailable") from exc
     return JSONResponse({"sources": catalog["sources"], "recipes": recipes},
-        headers={"Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow"})
+        headers={"Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow", "X-Content-Type-Options": "nosniff"})
