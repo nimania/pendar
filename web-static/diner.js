@@ -483,7 +483,7 @@ async function showDiner(sub) {
   el.innerHTML = `
     <div class="diner-hero">
       <div class="diner-hero-text">
-        <h1 class="diner-title">🍽 داینر نیما</h1><p><a class="diner-social-btn diner-contact" href="/diner/recipes/">📖 کتابخانه رسپی داینر ←</a></p>
+        <h1 class="diner-title">🍽 داینر نیما</h1><p><a class="diner-social-btn diner-contact" href="/diner/recipes/" onclick="event.preventDefault();showDinerRecipes()">📖 کتابخانه رسپی داینر ←</a></p>
         <p class="diner-subtitle">نکته‌های کاربردی رستوران‌داری و کافه‌داری — از تجربه واقعی</p>
         <a class="diner-profile-feature" href="/@nima-afshar-naderi/"><span>نیما افشارنادری در پندار</span><strong>پروفایل، فعالیت‌ها و مطالب نیما ←</strong></a>
         <div class="diner-social-row">
