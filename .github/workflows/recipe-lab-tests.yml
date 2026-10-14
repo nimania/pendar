@@ -20,4 +20,4 @@ jobs:
       - name: Test private route, no server secrets needed
         env:
           PYTHONPATH: backend
-        run: python -m pytest backend/tests/test_recipe_lab_auth.py -q
+        run: python -m pytest backend/tests/test_recipe_lab_auth.py -q --confcutdir=backend/tests
