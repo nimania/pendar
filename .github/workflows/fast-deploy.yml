@@ -275,6 +275,8 @@ jobs:
           mkdir -p site/data
           cp web-static/data/pendar-*.json site/data/
           cp web-static/data/us-radar.json site/data/us-radar.json
+          # Static Recipe Lab dataset only: no collectors, API calls or heavy rebuilds.
+          cp web-static/data/recipe-lab-public.json site/data/recipe-lab-public.json
           cp web-static/data/future-*.json site/data/
           test -s site/data/press-directory.js || cp web-static/data/press-directory.js site/data/press-directory.js
           cp web-static/data/book-{curation,directory,places}.json site/data/
