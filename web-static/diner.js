@@ -463,6 +463,7 @@ function renderRetro() {
 }
 
 async function showDiner(sub) {
+  if (sub === "recipes") return showDinerRecipes();
   if (sub === "retro") {
     setHash("#/diner/retro");
     show("diner");
@@ -482,7 +483,7 @@ async function showDiner(sub) {
   el.innerHTML = `
     <div class="diner-hero">
       <div class="diner-hero-text">
-        <h1 class="diner-title">🍽 داینر نیما</h1>
+        <h1 class="diner-title">🍽 داینر نیما</h1><p><a class="diner-social-btn diner-contact" href="/diner/recipes/">📖 کتابخانه رسپی داینر ←</a></p>
         <p class="diner-subtitle">نکته‌های کاربردی رستوران‌داری و کافه‌داری — از تجربه واقعی</p>
         <a class="diner-profile-feature" href="/@nima-afshar-naderi/"><span>نیما افشارنادری در پندار</span><strong>پروفایل، فعالیت‌ها و مطالب نیما ←</strong></a>
         <div class="diner-social-row">
@@ -566,4 +567,58 @@ function submitDinerEmail(e) {
   msg.classList.add("ok");
   input.value = "";
   return false;
+}
+
+/* Public, integrated recipe catalog — intentionally separate from private source PDFs. */
+async function showDinerRecipes(){
+  setHash("#/diner/recipes");
+  show("diner");
+  setTab("");
+  document.title="کتابخانه رسپی داینر | پندار";
+  const root=document.getElementById("diner-content");
+  root.replaceChildren();
+  const wrap=document.createElement("div");wrap.className="diner-recipe-lab";
+  const heading=document.createElement("h1");heading.textContent="کتابخانه رسپی داینر";
+  const description=document.createElement("p");description.textContent="دستورهای پژوهشی همراه منابع، مواد اولیه و توضیح وضعیت اعتبارسنجی؛ هنوز آزمون آشپزخانه نشده‌اند.";
+  const link=document.createElement("a");link.href="/diner/";link.textContent="← بازگشت به داینر نیما";
+  const input=document.createElement("input");input.type="search";input.placeholder="جست‌وجوی غذا و مواد اولیه…";input.setAttribute("aria-label","جست‌وجوی رسپی");
+  const panels=document.createElement("div");panels.className="diner-recipes-grid";
+  const list=document.createElement("nav");list.className="diner-recipes-list";list.setAttribute("aria-label","فهرست غذاها");
+  const detail=document.createElement("article");detail.className="diner-recipes-detail";
+  const stats=document.createElement("p");stats.className="diner-recipes-note";stats.textContent="در حال بارگذاری…";
+  panels.append(list,detail);wrap.append(link,heading,description,stats,input,panels);root.append(wrap);
+  const make=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);return n};
+  try {
+    const response=await fetch("/data/recipe-lab-public.json",{cache:"no-store"});
+    if(!response.ok)throw new Error("HTTP "+response.status);
+    const db=await response.json();
+    if(!Array.isArray(db.sources)||!Array.isArray(db.recipes))throw new Error("Invalid catalog");
+    const source=id=>db.sources.find(s=>s.id===id)?.title||id;
+    stats.textContent=db.sources.length.toLocaleString("fa-IR")+" منبع · "+db.recipes.length.toLocaleString("fa-IR")+" دستور پژوهشی · صفر دستور آزمون‌شده";
+    let selected=0;
+    function showRecipe(i){
+      selected=i;const r=db.recipes[i];if(!r)return;
+      detail.replaceChildren();
+      const label=make("span",r.status);label.className="diner-recipe-pill";
+      detail.append(label,make("h2",r.name),make("p",source(r.source)+" — "+r.pages),make("h3","مواد اولیه"));
+      const table=make("table");const tbody=make("tbody");
+      for(const ing of r.ingredients){const tr=make("tr");tr.append(make("td",ing[0]),make("td",ing[1]));tbody.append(tr)}
+      table.append(tbody);
+      detail.append(table,make("h3","خلاصه روش تهیه"),make("p",r.method),make("h3","نکته پژوهشی"),make("p",r.notes));
+      const btn=make("button","چاپ رسپی‌کارت");btn.type="button";btn.onclick=()=>window.print();detail.append(btn);
+      renderList();
+    }
+    function renderList(){
+      list.replaceChildren();const q=input.value.trim();
+      db.recipes.forEach((r,i)=>{
+        const match=[r.name,r.method,source(r.source),...r.ingredients.map(x=>x[0])].join(" ");
+        if(q&&!match.includes(q))return;
+        const btn=make("button",r.name);btn.type="button";btn.className=i===selected?"selected":"";
+        const subtitle=make("small",source(r.source));btn.append(subtitle);btn.onclick=()=>showRecipe(i);list.append(btn);
+      });
+      if(!list.children.length)list.append(make("p","نتیجه‌ای یافت نشد."));
+    }
+    input.oninput=renderList;showRecipe(0);
+  } catch(e){stats.textContent="بارگذاری رسپی‌ها انجام نشد. لطفاً دوباره تلاش کنید.";console.warn("Recipe Lab:",e)}
+  window.scrollTo(0,0);
 }
