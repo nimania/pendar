@@ -1,6 +1,10 @@
 """Private Recipe Lab access regression tests. No network or credentials required."""
 from fastapi.testclient import TestClient
-from app.main import app
+from fastapi import FastAPI
+from app.recipe_lab import router
+
+app = FastAPI()
+app.include_router(router)
 
 client = TestClient(app, follow_redirects=False)
 
