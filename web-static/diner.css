@@ -532,3 +532,8 @@
 .diner-recipes-note{opacity:.75}
 @media(max-width:720px){.diner-recipes-grid{grid-template-columns:1fr}.diner-recipes-list{max-height:230px;overflow:auto}.diner-recipes-detail{padding:16px}}
 @media print{.diner-recipe-lab>input,.diner-recipes-list,.diner-recipe-lab>a{display:none}.diner-recipes-grid{display:block}.diner-recipes-detail{border:0}}
+
+.diner-recipe-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 18px}
+.diner-recipe-filters select{width:100%;min-width:0;background:var(--surface,#fff);color:inherit;border:1px solid var(--line,#d7d1c9);border-radius:9px;padding:11px;font:inherit}
+@media(max-width:720px){.diner-recipe-filters{grid-template-columns:1fr}}
+@media print{.diner-recipe-filters{display:none}}
