@@ -622,7 +622,8 @@ async function showDinerRecipes(){
       detail.append(label,make("h2",r.name),make("p",(r.category||"سایر / نیازمند بررسی")+" · "+(r.source_region||"منبع نامشخص")+" · "+source(r.source)+" — "+r.pages));
       const portionPanel=document.createElement("div");portionPanel.className="diner-recipe-portions";
       let ratio=1;
-      const documented=Number.isInteger(r.yield_portions)&&r.yield_portions>0;
+      const isIndexOnly=r.review_level==="index_only";
+      const documented=!isIndexOnly&&Number.isInteger(r.yield_portions)&&r.yield_portions>0;
       if(documented){
         const portionsLabel=make("label","تعداد پرس موردنظر (مبنای منبع: "+r.yield_portions.toLocaleString("fa-IR")+" پرس)");
         const portionsInput=document.createElement("input");portionsInput.type="number";portionsInput.min="1";portionsInput.max="100";portionsInput.step="1";portionsInput.value=String(r.yield_portions);
@@ -632,7 +633,9 @@ async function showDinerRecipes(){
       }else{
         portionPanel.append(make("p",r.yield_range?"منبع تعداد پرس را به‌صورت بازه بیان کرده است؛ تبدیل خودکار فعال نیست.":r.yield_volume_l?"خروجی برحسب حجم است، نه پرس؛ تبدیل خودکار فعال نیست.":"تعداد پرس در منبع مشخص نیست؛ تبدیل خودکار فعال نیست."));
       }
-      detail.append(portionPanel,make("h3","مواد اولیه"));
+      if(!isIndexOnly)detail.append(portionPanel);
+      else detail.append(make("p","این مدخل فقط نمایه اولیه است؛ مقادیر و روش تهیه هنوز بازبینی نشده‌اند. برای پخت یا قیمت‌گذاری استفاده نشود."));
+      detail.append(make("h3",isIndexOnly?"مواد شناسایی‌شده (تأییدنشده)":"مواد اولیه"));
       const table=make("table");const tbody=make("tbody");
       const normaliseDigits=text=>String(text).replace(/[۰-۹]/g,c=>String("۰۱۲۳۴۵۶۷۸۹".indexOf(c))).replace(/[٠-٩]/g,c=>String("٠١٢٣٤٥٦٧٨٩".indexOf(c)));
       const scaledAmount=(raw)=>{
@@ -660,8 +663,8 @@ async function showDinerRecipes(){
       costBox.append(make("p","قیمت هر کیلوگرم را به تومان وارد کنید. فقط مواد دارای وزن دقیق و قیمت واردشده محاسبه می‌شوند؛ این جمع، بهای تمام‌شده کامل غذا نیست."));
       const costRows=[],costTable=make("table"),costBody=make("tbody");
       const total=make("p","هنوز قیمتی وارد نشده است.");total.className="diner-recipe-cost-total";
-      for(const ing of r.ingredients){
-        const amount=normaliseDigits(ing[1]).trim().match(/^(\\d+(?:[.,]\\d+)?)\\s*(گرم|کیلوگرم)$/);
+      for(const ing of isIndexOnly?[]:r.ingredients){
+        const amount=normaliseDigits(ing[1]).trim().match(/^(\d+(?:[.,]\d+)?)\s*(گرم|کیلوگرم)$/);
         if(!amount)continue;
         const quantityKg=Number(amount[1].replace(",","."))*(amount[2]==="گرم"?0.001:1);
         if(!Number.isFinite(quantityKg)||quantityKg<=0)continue;
@@ -684,8 +687,9 @@ async function showDinerRecipes(){
       costRows.forEach(x=>x.price.oninput=recalcCost);
       if(costRows.length){costTable.append(costBody);costBox.append(costTable,total)}
       else costBox.append(make("p","این رسپی مقدار وزنی دقیق قابل قیمت‌گذاری ندارد."));
-      detail.append(costBox,make("h3","خلاصه روش تهیه"),make("p",r.method),make("h3","نکته پژوهشی"),make("p",r.notes));
-      const btn=make("button","چاپ رسپی‌کارت");btn.type="button";btn.onclick=()=>window.print();detail.append(btn);
+      if(!isIndexOnly)detail.append(costBox);
+      detail.append(make("h3",isIndexOnly?"وضعیت استخراج":"خلاصه روش تهیه"),make("p",r.method),make("h3","نکته پژوهشی"),make("p",r.notes));
+      if(!isIndexOnly){const btn=make("button","چاپ رسپی‌کارت پژوهشی");btn.type="button";btn.onclick=()=>window.print();detail.append(btn)}
       renderList();
     }
     function renderList(){
@@ -697,7 +701,7 @@ async function showDinerRecipes(){
         if(sourceFilter.value&&r.source!==sourceFilter.value)return;
         if(regionFilter.value&&(r.source_region||"منبع نامشخص")!==regionFilter.value)return;
         const btn=make("button",r.name);btn.type="button";btn.className=i===selected?"selected":"";
-        const subtitle=make("small",source(r.source));btn.append(subtitle);btn.onclick=()=>showRecipe(i);list.append(btn);
+        const subtitle=make("small",(r.review_level==="index_only"?"نمایه اولیه · ":"پژوهشی · ")+source(r.source));btn.append(subtitle);btn.onclick=()=>showRecipe(i);list.append(btn);
       });
       if(!list.children.length)list.append(make("p","نتیجه‌ای یافت نشد."));
     }
