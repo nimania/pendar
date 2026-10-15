@@ -46,7 +46,7 @@ safe_name = NAME.replace("'", "\\'")
 existing = drive.files().list(
     q=f"'{FOLDER_ID}' in parents and name = '{safe_name}' and trashed = false",
     fields="files(id,name,md5Checksum,webViewLink),nextPageToken",
-    page_size=100,
+    pageSize=100,
 ).execute().get("files", [])
 if existing:
     print("ALREADY EXISTS:", existing[0].get("id"), existing[0].get("webViewLink", ""))
