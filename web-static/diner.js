@@ -462,6 +462,97 @@ function renderRetro() {
   `;
 }
 
+/* ── Reels: each Instagram reel gets its own page at /diner/<slug>/ ──
+   Data lives in data/diner-reels.json (newest first); build_seo.py reads
+   the same file to emit crawlable HTML + VideoObject schema per reel. */
+let _dinerReels = null;
+async function loadDinerReels() {
+  if (_dinerReels) return _dinerReels;
+  try {
+    const d = await getJSON(`${DATA}/diner-reels.json`);
+    _dinerReels = Array.isArray(d) ? d : (d.reels || []);
+  } catch (e) { _dinerReels = []; }
+  return _dinerReels;
+}
+const reelText = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+const reelURL = r => `/diner/${r.slug}/`;
+function reelDate(iso) {
+  try { return new Date(iso + "T12:00:00").toLocaleDateString("fa-IR", { year: "numeric", month: "long", day: "numeric" }); }
+  catch (e) { return iso; }
+}
+function reelLink(r, cls, label) {
+  return `<a class="${cls}" href="${reelURL(r)}" onclick="event.preventDefault();showDiner('${r.slug}')">${label}</a>`;
+}
+function dinerFollowBox(context) {
+  return `<aside class="diner-follow" aria-label="دنبال کردن داینر نیما در اینستاگرام">
+    <div class="diner-follow-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+    <div class="diner-follow-text">
+      <strong>${context === "reel" ? "این ویدئو به کارت اومد؟" : "نکته‌های تازه، اول در اینستاگرام"}</strong>
+      <p>هر روز یه نکتهٔ کوتاه و کاربردی دربارهٔ قیمت‌گذاری، هزینه و مهندسی منو. داینر نیما رو در اینستاگرام فالو کن تا قسمت بعدی رو از دست ندی.</p>
+    </div>
+    <a class="diner-follow-btn" href="${DINER_IG}" target="_blank" rel="noopener">فالو در اینستاگرام <span dir="ltr">@nimasdiner</span></a>
+  </aside>`;
+}
+function dinerReelCard(r) {
+  return `<a class="diner-reel-card" href="${reelURL(r)}" onclick="event.preventDefault();showDiner('${r.slug}')">
+    <img src="${esc(r.poster)}" alt="" loading="lazy" width="720" height="1280">
+    <span class="diner-reel-card-body"><span class="diner-reel-tag">${esc(r.part)} · ${esc(r.series)}</span>
+    <span class="diner-reel-card-title">${esc(r.title)}</span>
+    <span class="diner-reel-card-date">${esc(reelDate(r.date))}</span></span>
+  </a>`;
+}
+function dinerReelsHome(reels) {
+  if (!reels || !reels.length) return "";
+  const r = reels[0];
+  return `<section class="diner-reel" aria-labelledby="diner-reel-h">
+      <div class="diner-reel-video">
+        <video controls playsinline preload="none" poster="${esc(r.poster)}" width="720" height="1280"><source src="${esc(r.video)}" type="video/mp4"></video>
+      </div>
+      <div class="diner-reel-text">
+        <span class="diner-reel-tag">ویدئوی تازهٔ داینر · ${esc(r.part)}</span>
+        <h2 id="diner-reel-h" class="retro-h2">${reelLink(r, "diner-reel-title-link", esc(r.title))}</h2>
+        <p>${esc(r.description)}</p>
+        <p class="diner-reel-formula">${r.formula.map(esc).join("<br>")}</p>
+        <div class="diner-reel-actions">${reelLink(r, "diner-social-btn diner-contact", "متن کامل و فرمول‌ها ←")}
+          <a href="${DINER_IG}" target="_blank" rel="noopener" class="diner-social-btn diner-ig">فالو در اینستاگرام</a></div>
+      </div>
+    </section>
+    ${reels.length > 1 ? `<section class="diner-reel-list-wrap" aria-labelledby="diner-reels-h"><h2 id="diner-reels-h" class="retro-h2">همهٔ ویدئوهای داینر</h2><div class="diner-reel-list">${reels.map(dinerReelCard).join("")}</div></section>` : ""}`;
+}
+function showDinerReel(r, reels) {
+  setHash(`#/diner/${r.slug}`);
+  show("diner");
+  setTab("");
+  const i = reels.indexOf(r), newer = reels[i - 1], older = reels[i + 1];
+  document.getElementById("diner-content").innerHTML = `
+    <article class="diner-reel-page">
+      <nav class="diner-crumbs"><a href="/diner/" onclick="event.preventDefault();showDiner()">داینر نیما</a> › <span>ویدئوها</span></nav>
+      <header class="diner-reel-page-head">
+        <span class="diner-reel-tag">${esc(r.part)} · ${esc(r.series)}</span>
+        <h1 class="diner-reel-page-title">${esc(r.title)}</h1>
+        <p class="diner-reel-page-meta">نیما افشارنادری · <time datetime="${esc(r.date)}">${esc(reelDate(r.date))}</time></p>
+      </header>
+      <div class="diner-reel diner-reel-solo">
+        <div class="diner-reel-video">
+          <video controls playsinline preload="metadata" poster="${esc(r.poster)}" width="720" height="1280"><source src="${esc(r.video)}" type="video/mp4"></video>
+        </div>
+        <div class="diner-reel-text">
+          ${r.paragraphs.map(p => `<p>${reelText(p)}</p>`).join("")}
+          <p class="diner-reel-formula">${r.formula.map(esc).join("<br>")}</p>
+          ${r.takeaway ? `<p class="diner-reel-takeaway">${reelText(r.takeaway)}</p>` : ""}
+        </div>
+      </div>
+      ${dinerFollowBox("reel")}
+      <nav class="diner-reel-nav" aria-label="ویدئوهای دیگر">
+        ${older ? reelLink(older, "diner-reel-nav-a", `<small>قسمت قبلی</small>${esc(older.title)}`) : "<span></span>"}
+        ${newer ? reelLink(newer, "diner-reel-nav-a diner-reel-nav-next", `<small>قسمت بعدی</small>${esc(newer.title)}`) : ""}
+      </nav>
+      <p class="diner-reel-back">${`<a href="/diner/" onclick="event.preventDefault();showDiner()">← همهٔ نکته‌ها و ویدئوهای داینر نیما</a>`}</p>
+    </article>`;
+  document.title = `${r.title} | داینر نیما`;
+  window.scrollTo(0, 0);
+}
+
 async function showDiner(sub) {
   if (sub === "recipes") return showDinerRecipes();
   if (sub === "retro") {
@@ -473,11 +564,16 @@ async function showDiner(sub) {
     window.scrollTo(0, 0);
     return;
   }
+  if (sub) {
+    const reels = await loadDinerReels();
+    const reel = reels.find(r => r.slug === sub);
+    if (reel) return showDinerReel(reel, reels);
+  }
   setHash("#/diner");
   show("diner");
   setTab("");
 
-  const tips = await loadDinerTips();
+  const [tips, reels] = await Promise.all([loadDinerTips(), loadDinerReels()]);
 
   const el = document.getElementById("diner-content");
   el.innerHTML = `
@@ -500,39 +596,7 @@ async function showDiner(sub) {
       </div>
     </div>
 
-    <section class="diner-reel" aria-labelledby="diner-reel2-h">
-      <div class="diner-reel-video">
-        <video controls playsinline preload="none" poster="assets/diner/overhead-pizza.jpg" width="720" height="1280">
-          <source src="assets/diner/overhead-pizza.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="diner-reel-text">
-        <span class="diner-reel-tag">ویدئوی تازهٔ داینر · قسمت ۲</span>
-        <h2 id="diner-reel2-h" class="retro-h2">سربار هر غذا رو چطور حساب کنیم؟</h2>
-        <p>قسمت قبل فقط مواد اولیه رو حساب کردیم. ولی سؤال خیلی‌هاتون توی کامنت‌ها این بود: پس اجاره و حقوق و قبض چی؟ جوابش <strong>سربار</strong>ه، یعنی سهم هر سفارش از هزینه‌های ثابتِ ماه.</p>
-        <p>روش ساده‌ش سه قدمه: همه‌ی هزینه‌های ثابت ماه رو، جز مواد اولیه، جمع کن (اجاره، حقوق پرسنل، برق و گاز و آب، اینترنت، بسته‌بندی، استهلاک تجهیزات). تعداد کل سفارش‌های ماه رو حساب کن. بعد اولی رو تقسیم بر دومی کن.</p>
-        <p class="diner-reel-formula"><span style="white-space:nowrap">سربار هر سفارش =</span> هزینه‌های ثابت ماه ÷ <span style="white-space:nowrap">تعداد سفارش‌ها</span><br>۱۸۰٬۰۰۰٬۰۰۰ ÷ ۱٬۸۰۰ = ۱۰۰٬۰۰۰ تومن</p>
-        <p>پیتزایی که ۵۰۰ هزار تومن مواد اولیه داره و ۱٬۱۵۰٬۰۰۰ تومن فروخته می‌شه، به‌ظاهر ۶۵۰ هزار تومن سود داره. با ۱۰۰ هزار تومن سربار، هزینه‌ی واقعی‌ش ۶۰۰ هزار تومن می‌شه و <strong>سود واقعی ۵۵۰ هزار تومنه.</strong></p>
-        <p>این ساده‌ترین روشه که سربار رو مساوی بین همه‌ی سفارش‌ها پخش می‌کنه؛ دقیق‌ترش اینه که غذای پرزحمت‌تر سهم بیشتری برداره. ولی برای شروع، همین تقسیم ساده خیلی بهتر از اینه که اصلاً حسابش نکنی.</p>
-        <a href="${DINER_IG}" target="_blank" rel="noopener" class="diner-social-btn diner-ig">ویدئوهای بیشتر در اینستاگرام</a>
-      </div>
-    </section>
-
-    <section class="diner-reel" aria-labelledby="diner-reel-h">
-      <div class="diner-reel-video">
-        <video controls playsinline preload="none" poster="assets/diner/foodcost-pizza.jpg" width="720" height="1280">
-          <source src="assets/diner/foodcost-pizza.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="diner-reel-text">
-        <span class="diner-reel-tag">قسمت ۱ · فودکاست</span>
-        <h2 id="diner-reel-h" class="retro-h2">پیتزای ۱٬۱۵۰٬۰۰۰ تومنی، چقدر سود داره؟</h2>
-        <p>پیتزا رو ۱٬۱۵۰٬۰۰۰ تومن می‌فروشی و مواد اولیه‌ش ۴۰۰ هزار تومن درمیاد. اون ۷۵۰ هزار تومن سود خالص نیست؛ هنوز اجاره، حقوق و بیمه، آب و برق و گاز، بسته‌بندی، ضایعات، استهلاک و کمیسیون پلتفرم‌های آنلاین مونده.</p>
-        <p class="diner-reel-formula"><span style="white-space:nowrap">فودکاست٪ =</span> هزینه مواد اولیه ÷ <span style="white-space:nowrap">قیمت فروش × ۱۰۰</span><br>۴۰۰٬۰۰۰ ÷ ۱٬۱۵۰٬۰۰۰ ≈ ۳۵٪</p>
-        <p>فودکاست پایین به‌تنهایی سود نمیاره: یه رستوران با فودکاست ۳۰٪ ممکنه ضرر بده و یکی دیگه با ۴۰٪ سودآور باشه. <strong>فروش بالا لزوماً یعنی سود بالا نیست.</strong></p>
-        <a href="${DINER_IG}" target="_blank" rel="noopener" class="diner-social-btn diner-ig">ویدئوهای بیشتر در اینستاگرام</a>
-      </div>
-    </section>
+    ${dinerReelsHome(reels)}
 
     <section class="diner-news" id="diner-news" aria-live="polite"><h2 class="retro-h2">خبرهای رستوران، کافه، منو و فناوری</h2><p class="muted">در حال دریافت خبرها…</p></section>
 

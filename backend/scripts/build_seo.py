@@ -326,7 +326,21 @@ def build(site):
     )
     pages['/dinr/']={**pages['/diner/'], 'canonical':'/diner/', 'indexable':False, 'redirect':'/diner/'}
     aliases['/dinr/']='/diner/'
-    pages['/diner/']['body']+='<h2>سربار هر غذا رو چطور حساب کنیم؟</h2><p>ویدئوی قسمت دوم داینر: سربار هر سفارش برابر است با هزینه‌های ثابت ماه تقسیم بر تعداد سفارش‌ها؛ برای نمونه ۱۸۰ میلیون تومان ÷ ۱٬۸۰۰ سفارش = ۱۰۰ هزار تومان. پیتزایی با ۵۰۰ هزار تومان مواد اولیه و قیمت فروش ۱٬۱۵۰٬۰۰۰ تومان، با احتساب سربار ۵۵۰ هزار تومان سود واقعی دارد، نه ۶۵۰ هزار تومان.</p>'
+    reels=read(Path(__file__).resolve().parents[2]/'web-static'/'data'/'diner-reels.json',{}).get('reels',[])
+    def reel_html(t): return re.sub(r'\*\*(.+?)\*\*',r'<strong>\1</strong>',esc(t))
+    for r in reels:
+        url='/diner/'+r['slug']+'/'
+        ig='<p><strong>این نکته از اینستاگرام داینر نیماست.</strong> برای نکته‌های روزانهٔ رستوران‌داری، قیمت‌گذاری و مهندسی منو، <a href="https://www.instagram.com/nimasdiner">داینر نیما را در اینستاگرام دنبال کنید (@nimasdiner)</a>.</p>'
+        pages[url]={
+            'title':r['seo_title'],'description':r['description'],
+            'body':'<p>'+esc(r['part']+' · '+r['series']+' · ویدئوی داینر نیما')+'</p>'+''.join('<p>'+reel_html(x)+'</p>' for x in r['paragraphs'])
+                   +'<p><strong>'+'<br>'.join(esc(x) for x in r['formula'])+'</strong></p>'+('<p>'+reel_html(r['takeaway'])+'</p>' if r.get('takeaway') else '')
+                   +'<p><a href="/'+esc(r['video'])+'">تماشای ویدئو</a></p>'+ig+links([('/diner/','همهٔ نکته‌ها و ویدئوهای داینر نیما'),('/@nima-afshar-naderi/','نیما افشارنادری در پندار')]),
+            'kind':'diner','section':'diner','canonical':url,'indexable':True,'schema_type':'VideoObject',
+            'image':r['poster'],'published':r['date'],
+            'video':{'contentUrl':ORIGIN+'/'+r['video'],'thumbnailUrl':ORIGIN+'/'+r['poster'],'uploadDate':r['date']+'T12:00:00+03:30','duration':r.get('duration')},
+        }
+    if reels:pages['/diner/']['body']+='<h2>ویدئوهای داینر</h2>'+links([('/diner/'+r['slug']+'/',r['title']) for r in reels])
     pages['/diner/']['body']+=links([('/diner/retro/','نمونه‌کار: هات‌داگ رترو؛ از ایده تا اجرا'),('/@soufia-abdollahi/','سس‌های صوفیا؛ پروفایل صوفیا عبداللهی در پندار')])
     pages['/diner/retro/']={
         'title':'هات‌داگ رترو؛ نمونه‌کار ایده‌پردازی، راه‌اندازی و اجرا | داینر نیما',
@@ -396,10 +410,12 @@ def build(site):
         if page.get('image'):schema['image']=page['image'] if page['image'].startswith('https://') else ORIGIN+'/'+page['image']
         # ProfilePage requires a mainEntity; keep a valid WebPage otherwise.
         if schema['@type']=='ProfilePage':schema['mainEntity']={'@type':'Person','name':page['title']}
+        if page.get('video'):schema.update({k:v for k,v in page['video'].items() if v});schema['author']={'@type':'Person','name':'نیما افشارنادری'}
         schema={'@context':'https://schema.org','@graph':[schema,{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'پندار','item':ORIGIN+'/'},{'@type':'ListItem','position':2,'name':page['title'],'item':canonical}]}]}
         schema_text=json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')
         head='<link rel="canonical" href="'+esc(canonical)+'"><meta name="robots" content="'+('index,follow,max-image-preview:large' if page['indexable'] else 'noindex,follow')+'"><meta property="og:type" content="'+('article' if page['schema_type']=='Article' else 'website')+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(desc)+'"><meta property="og:url" content="'+esc(canonical)+'"><meta name="twitter:card" content="summary_large_image">'
         if schema['@graph'][0].get('image'):head+='<meta property="og:image" content="'+esc(schema['@graph'][0]['image'])+'">'
+        if page.get('video'):head+='<meta property="og:video" content="'+esc(page['video']['contentUrl'])+'"><meta property="og:video:type" content="video/mp4">'
         if page.get('redirect'):head+='<meta http-equiv="refresh" content="0;url='+esc(page['redirect'])+'">'
         head+='<script type="application/ld+json" id="seo-schema">'+schema_text+'</script>'
         out=re.sub(r'<title>.*?</title>',lambda _: '<title>'+esc(title)+'</title>',template,count=1)

@@ -547,3 +547,40 @@
 .diner-recipe-cost>p{font-size:13px;opacity:.85}.diner-recipe-cost input{width:170px;max-width:100%;padding:8px;border:1px solid var(--line,#ccc);border-radius:7px;background:var(--surface,#fff);color:inherit;font:inherit}
 .diner-recipe-cost-total{font-weight:700;opacity:1!important}
 @media print{.diner-recipe-cost{display:none}}
+
+/* ── Reel pages (/diner/<slug>/) and reel list ── */
+.diner-reel-title-link{color:inherit;text-decoration:none}
+.diner-reel-title-link:hover{color:var(--diner-red)}
+.diner-reel-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.diner-reel-list-wrap{margin:22px 0 8px}
+.diner-reel-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.diner-reel-card{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper);transition:transform .15s,box-shadow .15s}
+.diner-reel-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.diner-reel-card img{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;background:#151515}
+.diner-reel-card-body{display:flex;flex-direction:column;gap:6px;padding:0 10px 12px;min-width:0}
+.diner-reel-card-body .diner-reel-tag{align-self:flex-start}
+.diner-reel-card-title{font-weight:900;font-size:.95rem;line-height:1.7}
+.diner-reel-card-date{font-size:.75rem;color:var(--ink-soft)}
+.diner-reel-page{max-width:980px;margin-inline:auto}
+.diner-crumbs{font-size:.85rem;color:var(--ink-soft);margin:6px 0 10px}
+.diner-crumbs a{color:var(--diner-tg)}
+.diner-reel-page-head{margin-bottom:6px}
+.diner-reel-page-title{font-size:clamp(1.45rem,4.2vw,2rem);font-weight:900;line-height:1.5;margin:10px 0 6px;text-wrap:balance}
+.diner-reel-page-meta{font-size:.85rem;color:var(--ink-soft);margin:0}
+.diner-reel-solo{align-items:start}
+.diner-reel-takeaway{border-inline-start:4px solid var(--diner-red);padding-inline-start:12px;font-weight:700}
+.diner-follow{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:22px 0;padding:18px 20px;border-radius:18px;color:#fff;background:linear-gradient(120deg,#833ab4,#d6246e 55%,#f77737)}
+.diner-follow-ic{flex:none;width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center}
+.diner-follow-text{flex:1 1 260px;min-width:0}
+.diner-follow-text strong{display:block;font-size:1.1rem;margin-bottom:4px}
+.diner-follow-text p{margin:0;line-height:1.9;font-size:.92rem;opacity:.95}
+.diner-follow-btn{flex:none;background:#fff;color:#c1235f;font-weight:900;text-decoration:none;padding:11px 18px;border-radius:999px}
+.diner-follow-btn:hover{background:#fff1f6}
+.diner-reel-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 14px}
+.diner-reel-nav-a{display:block;border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--ink);font-weight:700;line-height:1.7;background:var(--paper)}
+.diner-reel-nav-a small{display:block;font-weight:400;font-size:.75rem;color:var(--ink-soft)}
+.diner-reel-nav-next{text-align:left}
+.diner-reel-back{margin:0 0 20px}
+.diner-reel-back a{color:var(--diner-tg);font-weight:700}
+@media(max-width:680px){.diner-reel-nav{grid-template-columns:1fr}.diner-reel-nav-next{text-align:right}.diner-follow{padding:16px}.diner-follow-btn{width:100%;text-align:center}}
+@media(prefers-reduced-motion:reduce){.diner-reel-card{transition:none}.diner-reel-card:hover{transform:none}}
