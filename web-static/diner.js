@@ -605,7 +605,9 @@ async function showDinerRecipes(){
 
     if(!Array.isArray(db.sources)||!Array.isArray(db.recipes))throw new Error("Invalid catalog");
     const source=id=>db.sources.find(s=>s.id===id)?.title||id;
-    stats.textContent=db.sources.length.toLocaleString("fa-IR")+" منبع · "+db.recipes.length.toLocaleString("fa-IR")+" دستور پژوهشی · صفر دستور آزمون‌شده";
+    const preliminary=db.recipes.filter(r=>r.review_level==="index_only").length;
+    const reviewed=db.recipes.length-preliminary;
+    stats.textContent=db.sources.length.toLocaleString("fa-IR")+" منبع · "+db.recipes.length.toLocaleString("fa-IR")+" مدخل ("+reviewed.toLocaleString("fa-IR")+" رسپی پژوهشی، "+preliminary.toLocaleString("fa-IR")+" نمایه اولیه) · صفر دستور آزمون‌شده";
     const addOptions=(control,values)=>{for(const value of [...new Set(values)].sort((a,b)=>a.localeCompare(b,"fa"))){const opt=document.createElement("option");opt.value=value;opt.textContent=value;control.append(opt)}};
     addOptions(categoryFilter,db.recipes.map(r=>r.category||"سایر / نیازمند بررسی"));
     addOptions(sourceFilter,db.recipes.map(r=>r.source));
