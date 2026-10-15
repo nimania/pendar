@@ -8,6 +8,11 @@ venv/
 .env
 .pytest_cache/
 
+# Private YouTube OAuth credentials and token (never commit)
+credentials.json
+youtube-oauth-token.json
+client_secret*.json
+
 # update bundle (safe to delete)
 _jk_v2.tgz
 _jk_v3.tgz
