@@ -635,7 +635,7 @@ async function showDinerRecipes(){
       const normaliseDigits=text=>String(text).replace(/[۰-۹]/g,c=>String("۰۱۲۳۴۵۶۷۸۹".indexOf(c))).replace(/[٠-٩]/g,c=>String("٠١٢٣٤٥٦٧٨٩".indexOf(c)));
       const scaledAmount=(raw)=>{
         // Only convert exact weights and volumes; never guess counts, ranges, cups or "as needed".
-        const m=normaliseDigits(raw).trim().match(/^(\\d+(?:[.,]\\d+)?)\\s*(گرم|کیلوگرم|لیتر|میلی‌لیتر)$/);
+        const m=normaliseDigits(raw).trim().match(/^(\d+(?:[.,]\d+)?)\s*(گرم|کیلوگرم|لیتر|میلی‌لیتر)$/);
         if(!m)return null;
         const quantity=Number(m[1].replace(",","."));
         if(!Number.isFinite(quantity))return null;
