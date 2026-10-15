@@ -606,20 +606,22 @@ async function showDinerRecipes(){
     if(!Array.isArray(db.sources)||!Array.isArray(db.recipes))throw new Error("Invalid catalog");
     const source=id=>db.sources.find(s=>s.id===id)?.title||id;
     const preliminary=db.recipes.filter(r=>r.review_level==="index_only").length;
-    const reviewed=db.recipes.length-preliminary;
-    stats.textContent=db.sources.length.toLocaleString("fa-IR")+" منبع · "+db.recipes.length.toLocaleString("fa-IR")+" مدخل ("+reviewed.toLocaleString("fa-IR")+" رسپی پژوهشی، "+preliminary.toLocaleString("fa-IR")+" نمایه اولیه) · صفر دستور آزمون‌شده";
+    const readyForReview=db.recipes.filter(r=>r.review_level==="research_complete").length;
+    const incomplete=db.recipes.length-preliminary-readyForReview;
+    stats.textContent=db.sources.length.toLocaleString("fa-IR")+" منبع · "+db.recipes.length.toLocaleString("fa-IR")+" مدخل ("+readyForReview.toLocaleString("fa-IR")+" پژوهشی با فیلدهای کامل، "+incomplete.toLocaleString("fa-IR")+" پژوهشی ناقص، "+preliminary.toLocaleString("fa-IR")+" نمایه اولیه) · صفر دستور آزمون‌شده";
     const addOptions=(control,values)=>{for(const value of [...new Set(values)].sort((a,b)=>a.localeCompare(b,"fa"))){const opt=document.createElement("option");opt.value=value;opt.textContent=value;control.append(opt)}};
     addOptions(categoryFilter,db.recipes.map(r=>r.category||"سایر / نیازمند بررسی"));
     addOptions(sourceFilter,db.recipes.map(r=>r.source));
     for(const opt of sourceFilter.options){if(opt.value)opt.textContent=source(opt.value)}
     addOptions(regionFilter,db.recipes.map(r=>r.source_region||"منبع نامشخص"));
-    addOptions(stageFilter,["رسپی پژوهشی","نمایه اولیه"]);
+    addOptions(stageFilter,["پژوهشی با فیلدهای کامل","پژوهشی ناقص","نمایه اولیه"]);
     stageFilter.onchange=categoryFilter.onchange=sourceFilter.onchange=regionFilter.onchange=renderList;
     let selected=0;
     function showRecipe(i){
       selected=i;const r=db.recipes[i];if(!r)return;
       detail.replaceChildren();
       const label=make("span",r.status);label.className="diner-recipe-pill";
+      if(r.review_level==="research_complete")label.textContent="فیلدهای پژوهشی کامل · نیازمند تطبیق با منبع و آزمون";
       detail.append(label,make("h2",r.name),make("p",(r.category||"سایر / نیازمند بررسی")+" · "+(r.source_region||"منبع نامشخص")+" · "+source(r.source)+" — "+r.pages));
       const portionPanel=document.createElement("div");portionPanel.className="diner-recipe-portions";
       let ratio=1;
@@ -698,12 +700,12 @@ async function showDinerRecipes(){
       db.recipes.forEach((r,i)=>{
         const match=[r.name,r.method,source(r.source),...r.ingredients.map(x=>x[0])].join(" ");
         if(q&&!match.includes(q))return;
-        if(stageFilter.value&&(r.review_level==="index_only"?"نمایه اولیه":"رسپی پژوهشی")!==stageFilter.value)return;
+        if(stageFilter.value&&(r.review_level==="index_only"?"نمایه اولیه":r.review_level==="research_complete"?"پژوهشی با فیلدهای کامل":"پژوهشی ناقص")!==stageFilter.value)return;
         if(categoryFilter.value&&(r.category||"سایر / نیازمند بررسی")!==categoryFilter.value)return;
         if(sourceFilter.value&&r.source!==sourceFilter.value)return;
         if(regionFilter.value&&(r.source_region||"منبع نامشخص")!==regionFilter.value)return;
         const btn=make("button",r.name);btn.type="button";btn.className=i===selected?"selected":"";
-        const subtitle=make("small",(r.review_level==="index_only"?"نمایه اولیه · ":"پژوهشی · ")+source(r.source));btn.append(subtitle);btn.onclick=()=>showRecipe(i);list.append(btn);
+        const subtitle=make("small",(r.review_level==="index_only"?"نمایه اولیه · ":r.review_level==="research_complete"?"فیلدهای کامل، بدون آزمون · ":"پژوهشی ناقص · ")+source(r.source));btn.append(subtitle);btn.onclick=()=>showRecipe(i);list.append(btn);
       });
       if(!list.children.length)list.append(make("p","نتیجه‌ای یافت نشد."));
     }
