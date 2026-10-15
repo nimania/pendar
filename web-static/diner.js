@@ -617,10 +617,40 @@ async function showDinerRecipes(){
       selected=i;const r=db.recipes[i];if(!r)return;
       detail.replaceChildren();
       const label=make("span",r.status);label.className="diner-recipe-pill";
-      detail.append(label,make("h2",r.name),make("p",(r.category||"سایر / نیازمند بررسی")+" · "+(r.source_region||"منبع نامشخص")+" · "+source(r.source)+" — "+r.pages),make("h3","مواد اولیه"));
+      detail.append(label,make("h2",r.name),make("p",(r.category||"سایر / نیازمند بررسی")+" · "+(r.source_region||"منبع نامشخص")+" · "+source(r.source)+" — "+r.pages));
+      const portionPanel=document.createElement("div");portionPanel.className="diner-recipe-portions";
+      let ratio=1;
+      const documented=Number.isInteger(r.yield_portions)&&r.yield_portions>0;
+      if(documented){
+        const portionsLabel=make("label","تعداد پرس موردنظر (مبنای منبع: "+r.yield_portions.toLocaleString("fa-IR")+" پرس)");
+        const portionsInput=document.createElement("input");portionsInput.type="number";portionsInput.min="1";portionsInput.max="100";portionsInput.step="1";portionsInput.value=String(r.yield_portions);
+        portionsInput.setAttribute("aria-label","تعداد پرس");
+        portionPanel.append(portionsLabel,portionsInput);
+        portionsInput.oninput=()=>{const n=Number(portionsInput.value);ratio=Number.isInteger(n)&&n>=1&&n<=100?n/r.yield_portions:1;updateIngredients()};
+      }else{
+        portionPanel.append(make("p",r.yield_range?"منبع تعداد پرس را به‌صورت بازه بیان کرده است؛ تبدیل خودکار فعال نیست.":r.yield_volume_l?"خروجی برحسب حجم است، نه پرس؛ تبدیل خودکار فعال نیست.":"تعداد پرس در منبع مشخص نیست؛ تبدیل خودکار فعال نیست."));
+      }
+      detail.append(portionPanel,make("h3","مواد اولیه"));
       const table=make("table");const tbody=make("tbody");
-      for(const ing of r.ingredients){const tr=make("tr");tr.append(make("td",ing[0]),make("td",ing[1]));tbody.append(tr)}
-      table.append(tbody);
+      const normaliseDigits=text=>String(text).replace(/[۰-۹]/g,c=>String("۰۱۲۳۴۵۶۷۸۹".indexOf(c))).replace(/[٠-٩]/g,c=>String("٠١٢٣٤٥٦٧٨٩".indexOf(c)));
+      const scaledAmount=(raw)=>{
+        // Only convert exact weights and volumes; never guess counts, ranges, cups or "as needed".
+        const m=normaliseDigits(raw).trim().match(/^(\\d+(?:[.,]\\d+)?)\\s*(گرم|کیلوگرم|لیتر|میلی‌لیتر)$/);
+        if(!m)return null;
+        const quantity=Number(m[1].replace(",","."));
+        if(!Number.isFinite(quantity))return null;
+        const value=Math.round(quantity*ratio*100)/100;
+        return value.toLocaleString("fa-IR",{maximumFractionDigits:2})+" "+m[2];
+      };
+      function updateIngredients(){
+        tbody.replaceChildren();
+        for(const ing of r.ingredients){
+          const tr=make("tr"),changed=documented&&ratio!==1?scaledAmount(ing[1]):null;
+          tr.append(make("td",ing[0]),make("td",changed||ing[1]+(documented&&ratio!==1?" (بدون تبدیل)":"")));
+          tbody.append(tr);
+        }
+      }
+      updateIngredients();table.append(tbody);
       detail.append(table,make("h3","خلاصه روش تهیه"),make("p",r.method),make("h3","نکته پژوهشی"),make("p",r.notes));
       const btn=make("button","چاپ رسپی‌کارت");btn.type="button";btn.onclick=()=>window.print();detail.append(btn);
       renderList();
