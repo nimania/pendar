@@ -542,3 +542,8 @@
 .diner-recipe-portions label{display:block;margin-bottom:8px;font-size:14px}
 .diner-recipe-portions input{width:110px;max-width:100%;padding:7px 10px;border:1px solid var(--line,#d7d1c9);border-radius:8px;background:var(--surface,#fff);color:inherit;font:inherit}
 .diner-recipe-portions p{margin:0;font-size:13px;opacity:.8}
+
+.diner-recipe-cost{margin:20px 0;padding:16px;border:1px solid var(--line,#ccc);border-radius:12px;background:var(--surface-2,#f5f3ef)}
+.diner-recipe-cost>p{font-size:13px;opacity:.85}.diner-recipe-cost input{width:170px;max-width:100%;padding:8px;border:1px solid var(--line,#ccc);border-radius:7px;background:var(--surface,#fff);color:inherit;font:inherit}
+.diner-recipe-cost-total{font-weight:700;opacity:1!important}
+@media print{.diner-recipe-cost{display:none}}
