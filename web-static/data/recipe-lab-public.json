@@ -1662,7 +1662,7 @@
       "name": "قیمه و سیب‌زمینی",
       "source": "S004",
       "pages": "صفحه PDF 89",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "گوشت چرخ‌کرده",
@@ -1678,7 +1678,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "سایر / نیازمند بررسی",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1689,13 +1689,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "قیمه و کدو",
       "source": "S004",
       "pages": "صفحه PDF 90",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "گوشت چرخ‌کرده",
@@ -1711,7 +1717,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "سایر / نیازمند بررسی",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1722,13 +1728,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "کاپلوش",
       "source": "S004",
       "pages": "صفحه PDF 91",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "دوغ خشک",
@@ -1752,7 +1764,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "سایر / نیازمند بررسی",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1763,13 +1775,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "کوفته‌ریزه",
       "source": "S004",
       "pages": "صفحه PDF 92",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "گوشت چرخ‌کرده",
@@ -1789,7 +1807,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "خوراک",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1800,13 +1818,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "کوفته محلی",
       "source": "S004",
       "pages": "صفحه PDF 93",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "گوشت با استخوان",
@@ -1826,7 +1850,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "خوراک",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1837,13 +1861,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "کوکوی سبزی",
       "source": "S004",
       "pages": "صفحه PDF 94",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "سبزی کوکو",
@@ -1863,7 +1893,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "خوراک",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1874,13 +1904,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "کوکوی سیب‌زمینی",
       "source": "S004",
       "pages": "صفحه PDF 95",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "سیب‌زمینی",
@@ -1900,7 +1936,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "خوراک",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1911,13 +1947,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "کوکوی قیمه",
       "source": "S004",
       "pages": "صفحه PDF 96",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "گوشت چرخ‌کرده",
@@ -1933,7 +1975,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "خوراک",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1944,13 +1986,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "کوکوی کنگر",
       "source": "S004",
       "pages": "صفحه PDF 97",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "کنگر",
@@ -1970,7 +2018,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "خوراک",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -1981,13 +2029,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "کوکوی مغز",
       "source": "S004",
       "pages": "صفحه PDF 98",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "مغز گوساله",
@@ -2003,7 +2057,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "خوراک",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -2014,13 +2068,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "نان روغنی محلی",
       "source": "S004",
       "pages": "صفحه PDF 99",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "آرد",
@@ -2040,7 +2100,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "نان",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -2051,13 +2111,19 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     },
     {
       "name": "نان روغنی محلی کوردی",
       "source": "S004",
       "pages": "صفحه PDF 100",
-      "status": "استخراج اولیه · نیازمند بازبینی",
+      "status": "نمایه اولیه · ارجاع نیازمند تطبیق",
       "ingredients": [
         [
           "آرد",
@@ -2073,7 +2139,7 @@
         ]
       ],
       "method": "روش تهیه در صفحه منبع وجود دارد؛ بازنویسی جزئیات و کنترل ترتیب مراحل هنوز تکمیل نشده است.",
-      "notes": "این مدخل از بررسی تصویری عنوان و جدول مواد صفحه منبع ایجاد شده است؛ برای طبخ، محاسبه هزینه و تغییر تعداد پرس قابل استفاده نیست.",
+      "notes": "عنوان و اقلام این مدخل هنوز با صفحه اصلی کتاب در بررسی مجدد تطبیق داده نشده‌اند. برای پخت، قیمت‌گذاری یا استناد پژوهشی قابل اتکا نیست.",
       "category": "نان",
       "source_region": "منبع منطقه‌ای: کردستان",
       "yield_status": "unverified",
@@ -2084,6 +2150,12 @@
         "all_ingredient_amounts_clear": false,
         "method_summary_present": false,
         "kitchen_tested": false
+      },
+      "source_audit": "page_not_reverified",
+      "review_queue": {
+        "priority": "normal",
+        "task": "Recheck page title, ingredient rows, quantities and cooking steps against original PDF",
+        "verified_page": null
       }
     }
   ]
