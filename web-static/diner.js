@@ -626,7 +626,7 @@ async function showDinerRecipes(){
         const portionsInput=document.createElement("input");portionsInput.type="number";portionsInput.min="1";portionsInput.max="100";portionsInput.step="1";portionsInput.value=String(r.yield_portions);
         portionsInput.setAttribute("aria-label","تعداد پرس");
         portionPanel.append(portionsLabel,portionsInput);
-        portionsInput.oninput=()=>{const n=Number(portionsInput.value);ratio=Number.isInteger(n)&&n>=1&&n<=100?n/r.yield_portions:1;updateIngredients()};
+        portionsInput.oninput=()=>{const n=Number(portionsInput.value);ratio=Number.isInteger(n)&&n>=1&&n<=100?n/r.yield_portions:1;updateIngredients();recalcCost()};
       }else{
         portionPanel.append(make("p",r.yield_range?"منبع تعداد پرس را به‌صورت بازه بیان کرده است؛ تبدیل خودکار فعال نیست.":r.yield_volume_l?"خروجی برحسب حجم است، نه پرس؛ تبدیل خودکار فعال نیست.":"تعداد پرس در منبع مشخص نیست؛ تبدیل خودکار فعال نیست."));
       }
@@ -651,7 +651,38 @@ async function showDinerRecipes(){
         }
       }
       updateIngredients();table.append(tbody);
-      detail.append(table,make("h3","خلاصه روش تهیه"),make("p",r.method),make("h3","نکته پژوهشی"),make("p",r.notes));
+      detail.append(table);
+      // Optional manual costing: no external prices, no persistence and no guessed costs.
+      const costBox=make("section");costBox.className="diner-recipe-cost";
+      costBox.append(make("h3","برآورد اختیاری بهای مواد"));
+      costBox.append(make("p","قیمت هر کیلوگرم را به تومان وارد کنید. فقط مواد دارای وزن دقیق و قیمت واردشده محاسبه می‌شوند؛ این جمع، بهای تمام‌شده کامل غذا نیست."));
+      const costRows=[],costTable=make("table"),costBody=make("tbody");
+      const total=make("p","هنوز قیمتی وارد نشده است.");total.className="diner-recipe-cost-total";
+      for(const ing of r.ingredients){
+        const amount=normaliseDigits(ing[1]).trim().match(/^(\\d+(?:[.,]\\d+)?)\\s*(گرم|کیلوگرم)$/);
+        if(!amount)continue;
+        const quantityKg=Number(amount[1].replace(",","."))*(amount[2]==="گرم"?0.001:1);
+        if(!Number.isFinite(quantityKg)||quantityKg<=0)continue;
+        const tr=make("tr"),cell=make("td",ing[0]+" ("+ing[1]+")"),priceCell=make("td");
+        const price=document.createElement("input");price.type="number";price.min="0";price.step="any";price.placeholder="تومان / کیلو";price.setAttribute("aria-label","قیمت هر کیلو "+ing[0]);
+        priceCell.append(price);tr.append(cell,priceCell);costBody.append(tr);costRows.push({price,quantityKg});
+      }
+      function recalcCost(){
+        let sum=0,count=0;
+        for(const row of costRows){
+          const raw=row.price.value.trim();if(!raw)continue;
+          const val=Number(raw);if(!Number.isFinite(val)||val<0)continue;
+          sum+=val*row.quantityKg*ratio;count++;
+        }
+        const fmt=n=>Math.round(n).toLocaleString("fa-IR");
+        if(!count){total.textContent="هنوز قیمتی وارد نشده است.";return}
+        const partial=count<r.ingredients.length;
+        total.textContent="جمع مواد قیمت‌گذاری‌شده: "+fmt(sum)+" تومان"+(documented?" · به‌ازای هر پرس: "+fmt(sum/(r.yield_portions*ratio))+" تومان":"")+(partial?" · محاسبه ناقص است.":"");
+      }
+      costRows.forEach(x=>x.price.oninput=recalcCost);
+      if(costRows.length){costTable.append(costBody);costBox.append(costTable,total)}
+      else costBox.append(make("p","این رسپی مقدار وزنی دقیق قابل قیمت‌گذاری ندارد."));
+      detail.append(costBox,make("h3","خلاصه روش تهیه"),make("p",r.method),make("h3","نکته پژوهشی"),make("p",r.notes));
       const btn=make("button","چاپ رسپی‌کارت");btn.type="button";btn.onclick=()=>window.print();detail.append(btn);
       renderList();
     }
