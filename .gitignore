@@ -11,6 +11,8 @@ venv/
 # Private YouTube OAuth credentials and token (never commit)
 credentials.json
 youtube-oauth-token.json
+drive-oauth-token.json
+local-transcripts/
 client_secret*.json
 
 # update bundle (safe to delete)
