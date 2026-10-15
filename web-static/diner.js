@@ -587,8 +587,8 @@ async function showDinerRecipes(){
   const detail=document.createElement("article");detail.className="diner-recipes-detail";
   const stats=document.createElement("p");stats.className="diner-recipes-note";stats.textContent="در حال بارگذاری…";
   const filters=document.createElement("div");filters.className="diner-recipe-filters";
-  const categoryFilter=document.createElement("select"),sourceFilter=document.createElement("select"),regionFilter=document.createElement("select");
-  for(const [control,label] of [[categoryFilter,"همه انواع غذا"],[sourceFilter,"همه منابع"],[regionFilter,"همه مناطق منبع"]]){control.setAttribute("aria-label",label);const opt=document.createElement("option");opt.value="";opt.textContent=label;control.append(opt);filters.append(control)}
+  const categoryFilter=document.createElement("select"),sourceFilter=document.createElement("select"),regionFilter=document.createElement("select"),stageFilter=document.createElement("select");
+  for(const [control,label] of [[stageFilter,"همه مراحل بررسی"],[categoryFilter,"همه انواع غذا"],[sourceFilter,"همه منابع"],[regionFilter,"همه مناطق منبع"]]){control.setAttribute("aria-label",label);const opt=document.createElement("option");opt.value="";opt.textContent=label;control.append(opt);filters.append(control)}
   panels.append(list,detail);wrap.append(link,heading,description,stats,input,filters,panels);root.append(wrap);
   const make=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);return n};
   try {
@@ -613,7 +613,8 @@ async function showDinerRecipes(){
     addOptions(sourceFilter,db.recipes.map(r=>r.source));
     for(const opt of sourceFilter.options){if(opt.value)opt.textContent=source(opt.value)}
     addOptions(regionFilter,db.recipes.map(r=>r.source_region||"منبع نامشخص"));
-    categoryFilter.onchange=sourceFilter.onchange=regionFilter.onchange=renderList;
+    addOptions(stageFilter,["رسپی پژوهشی","نمایه اولیه"]);
+    stageFilter.onchange=categoryFilter.onchange=sourceFilter.onchange=regionFilter.onchange=renderList;
     let selected=0;
     function showRecipe(i){
       selected=i;const r=db.recipes[i];if(!r)return;
@@ -697,6 +698,7 @@ async function showDinerRecipes(){
       db.recipes.forEach((r,i)=>{
         const match=[r.name,r.method,source(r.source),...r.ingredients.map(x=>x[0])].join(" ");
         if(q&&!match.includes(q))return;
+        if(stageFilter.value&&(r.review_level==="index_only"?"نمایه اولیه":"رسپی پژوهشی")!==stageFilter.value)return;
         if(categoryFilter.value&&(r.category||"سایر / نیازمند بررسی")!==categoryFilter.value)return;
         if(sourceFilter.value&&r.source!==sourceFilter.value)return;
         if(regionFilter.value&&(r.source_region||"منبع نامشخص")!==regionFilter.value)return;
