@@ -275,12 +275,42 @@ jobs:
           mkdir -p site/data
           cp web-static/data/pendar-*.json site/data/
           cp web-static/data/us-radar.json site/data/us-radar.json
-          # Static Recipe Lab dataset only: no collectors, API calls or heavy rebuilds.
-          if [ -s web-static/data/recipe-lab-public.json ] && python -m json.tool web-static/data/recipe-lab-public.json >/dev/null; then
-            cp web-static/data/recipe-lab-public.json site/data/recipe-lab-public.json
-          else
-            echo "::warning::Recipe Lab data missing or invalid; retaining any previous site data. Other sections continue."
-          fi
+          # Validate and overlay Recipe Lab only. Fail open for unrelated Pendar sections.
+          python - <<'PY_RECIPE_LAB'
+          import json, shutil
+          from pathlib import Path
+          src=Path("web-static/data/recipe-lab-public.json")
+          dst=Path("site/data/recipe-lab-public.json")
+          try:
+              data=json.loads(src.read_text(encoding="utf-8"))
+              sources=data["sources"]
+              recipes=data["recipes"]
+              if not isinstance(sources,list) or not isinstance(recipes,list) or not sources or not recipes:
+                  raise ValueError("catalog requires nonempty source and recipe lists")
+              ids=[x["id"] for x in sources]
+              if len(ids)!=len(set(ids)):
+                  raise ValueError("duplicate source ids")
+              names=[x["name"] for x in recipes]
+              if len(names)!=len(set(names)):
+                  raise ValueError("duplicate recipe names")
+              for i,r in enumerate(recipes):
+                  if not isinstance(r.get("ingredients"),list) or not r["ingredients"] or not r.get("method"):
+                      raise ValueError(f"incomplete recipe at index {i}")
+                  if r.get("source") not in ids:
+                      raise ValueError(f"unknown source on recipe {i}")
+              if dst.exists():
+                  try:
+                      prev=json.loads(dst.read_text(encoding="utf-8"))
+                      if len(recipes)<len(prev.get("recipes",[])):
+                          raise ValueError("recipe count regression vs previous deployed dataset")
+                  except json.JSONDecodeError:
+                      pass
+              dst.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copy2(src,dst)
+              print(f"Recipe Lab validated and overlaid: {len(sources)} sources, {len(recipes)} research records")
+          except (OSError, ValueError, TypeError, KeyError) as exc:
+              print(f"::warning::Recipe Lab update skipped ({exc}); other sections continue")
+          PY_RECIPE_LAB
           cp web-static/data/future-*.json site/data/
           test -s site/data/press-directory.js || cp web-static/data/press-directory.js site/data/press-directory.js
           cp web-static/data/book-{curation,directory,places}.json site/data/
