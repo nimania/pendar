@@ -2,6 +2,10 @@ name: Jan Kalam transcript pilot
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'tools/jankalam_transcript_pilot.py'
+      - '.github/workflows/jankalam-transcript-pilot.yml'
 
 permissions:
   contents: read
