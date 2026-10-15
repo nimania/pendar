@@ -500,6 +500,24 @@ async function showDiner(sub) {
       </div>
     </div>
 
+    <section class="diner-reel" aria-labelledby="diner-reel2-h">
+      <div class="diner-reel-video">
+        <video controls playsinline preload="none" poster="assets/diner/overhead-pizza.jpg" width="720" height="1280">
+          <source src="assets/diner/overhead-pizza.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="diner-reel-text">
+        <span class="diner-reel-tag">ویدئوی تازهٔ داینر · قسمت ۲</span>
+        <h2 id="diner-reel2-h" class="retro-h2">سربار هر غذا رو چطور حساب کنیم؟</h2>
+        <p>قسمت قبل فقط مواد اولیه رو حساب کردیم. ولی سؤال خیلی‌هاتون توی کامنت‌ها این بود: پس اجاره و حقوق و قبض چی؟ جوابش <strong>سربار</strong>ه، یعنی سهم هر سفارش از هزینه‌های ثابتِ ماه.</p>
+        <p>روش ساده‌ش سه قدمه: همه‌ی هزینه‌های ثابت ماه رو، جز مواد اولیه، جمع کن (اجاره، حقوق پرسنل، برق و گاز و آب، اینترنت، بسته‌بندی، استهلاک تجهیزات). تعداد کل سفارش‌های ماه رو حساب کن. بعد اولی رو تقسیم بر دومی کن.</p>
+        <p class="diner-reel-formula"><span style="white-space:nowrap">سربار هر سفارش =</span> هزینه‌های ثابت ماه ÷ <span style="white-space:nowrap">تعداد سفارش‌ها</span><br>۱۸۰٬۰۰۰٬۰۰۰ ÷ ۱٬۸۰۰ = ۱۰۰٬۰۰۰ تومن</p>
+        <p>پیتزایی که ۵۰۰ هزار تومن مواد اولیه داره و ۱٬۱۵۰٬۰۰۰ تومن فروخته می‌شه، به‌ظاهر ۶۵۰ هزار تومن سود داره. با ۱۰۰ هزار تومن سربار، هزینه‌ی واقعی‌ش ۶۰۰ هزار تومن می‌شه و <strong>سود واقعی ۵۵۰ هزار تومنه.</strong></p>
+        <p>این ساده‌ترین روشه که سربار رو مساوی بین همه‌ی سفارش‌ها پخش می‌کنه؛ دقیق‌ترش اینه که غذای پرزحمت‌تر سهم بیشتری برداره. ولی برای شروع، همین تقسیم ساده خیلی بهتر از اینه که اصلاً حسابش نکنی.</p>
+        <a href="${DINER_IG}" target="_blank" rel="noopener" class="diner-social-btn diner-ig">ویدئوهای بیشتر در اینستاگرام</a>
+      </div>
+    </section>
+
     <section class="diner-reel" aria-labelledby="diner-reel-h">
       <div class="diner-reel-video">
         <video controls playsinline preload="none" poster="assets/diner/foodcost-pizza.jpg" width="720" height="1280">
@@ -507,7 +525,7 @@ async function showDiner(sub) {
         </video>
       </div>
       <div class="diner-reel-text">
-        <span class="diner-reel-tag">ویدئوی تازهٔ داینر</span>
+        <span class="diner-reel-tag">قسمت ۱ · فودکاست</span>
         <h2 id="diner-reel-h" class="retro-h2">پیتزای ۱٬۱۵۰٬۰۰۰ تومنی، چقدر سود داره؟</h2>
         <p>پیتزا رو ۱٬۱۵۰٬۰۰۰ تومن می‌فروشی و مواد اولیه‌ش ۴۰۰ هزار تومن درمیاد. اون ۷۵۰ هزار تومن سود خالص نیست؛ هنوز اجاره، حقوق و بیمه، آب و برق و گاز، بسته‌بندی، ضایعات، استهلاک و کمیسیون پلتفرم‌های آنلاین مونده.</p>
         <p class="diner-reel-formula"><span style="white-space:nowrap">فودکاست٪ =</span> هزینه مواد اولیه ÷ <span style="white-space:nowrap">قیمت فروش × ۱۰۰</span><br>۴۰۰٬۰۰۰ ÷ ۱٬۱۵۰٬۰۰۰ ≈ ۳۵٪</p>
