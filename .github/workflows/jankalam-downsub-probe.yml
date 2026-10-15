@@ -1,0 +1,26 @@
+
+name: Jan Kalam DownSub Probe
+
+on:
+  pull_request:
+    paths:
+      - 'tools/jankalam_downsub_probe.py'
+      - '.github/workflows/jankalam-downsub-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install httpx
+      - name: Test DownSub
+        env:
+          DOWNSUB_API_KEY: ${{ secrets.DOWNSUB_API_KEY }}
+        run: python tools/jankalam_downsub_probe.py
