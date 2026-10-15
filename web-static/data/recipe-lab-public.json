@@ -1469,7 +1469,7 @@
     {
       "name": "شلغم پخته",
       "source": "S004",
-      "pages": "صفحه PDF 77",
+      "pages": "ارجاع صفحه نامعتبر · در انتظار شناسایی صفحه صحیح",
       "status": "نیازمند اصلاح ارجاع منبع",
       "ingredients": [
         [
@@ -1490,12 +1490,18 @@
         "method_summary_present": false,
         "kitchen_tested": false
       },
-      "source_audit": "page_title_mismatch_confirmed"
+      "source_audit": "page_title_mismatch_confirmed",
+      "invalid_page_reference": "صفحه PDF 77",
+      "review_queue": {
+        "priority": "high",
+        "task": "Find correct printed/PDF page and re-extract title, ingredients, measurements, method",
+        "verified_page": null
+      }
     },
     {
       "name": "قلیه پیاز",
       "source": "S004",
-      "pages": "صفحه PDF 78",
+      "pages": "ارجاع صفحه نامعتبر · در انتظار شناسایی صفحه صحیح",
       "status": "نیازمند اصلاح ارجاع منبع",
       "ingredients": [
         [
@@ -1516,12 +1522,18 @@
         "method_summary_present": false,
         "kitchen_tested": false
       },
-      "source_audit": "page_title_mismatch_confirmed"
+      "source_audit": "page_title_mismatch_confirmed",
+      "invalid_page_reference": "صفحه PDF 78",
+      "review_queue": {
+        "priority": "high",
+        "task": "Find correct printed/PDF page and re-extract title, ingredients, measurements, method",
+        "verified_page": null
+      }
     },
     {
       "name": "شیر برنج",
       "source": "S004",
-      "pages": "صفحه PDF 79",
+      "pages": "ارجاع صفحه نامعتبر · در انتظار شناسایی صفحه صحیح",
       "status": "نیازمند اصلاح ارجاع منبع",
       "ingredients": [
         [
@@ -1542,12 +1554,18 @@
         "method_summary_present": false,
         "kitchen_tested": false
       },
-      "source_audit": "page_title_mismatch_confirmed"
+      "source_audit": "page_title_mismatch_confirmed",
+      "invalid_page_reference": "صفحه PDF 79",
+      "review_queue": {
+        "priority": "high",
+        "task": "Find correct printed/PDF page and re-extract title, ingredients, measurements, method",
+        "verified_page": null
+      }
     },
     {
       "name": "آش شلغم",
       "source": "S004",
-      "pages": "صفحه PDF 80",
+      "pages": "ارجاع صفحه نامعتبر · در انتظار شناسایی صفحه صحیح",
       "status": "نیازمند اصلاح ارجاع منبع",
       "ingredients": [
         [
@@ -1568,12 +1586,18 @@
         "method_summary_present": false,
         "kitchen_tested": false
       },
-      "source_audit": "page_title_mismatch_confirmed"
+      "source_audit": "page_title_mismatch_confirmed",
+      "invalid_page_reference": "صفحه PDF 80",
+      "review_queue": {
+        "priority": "high",
+        "task": "Find correct printed/PDF page and re-extract title, ingredients, measurements, method",
+        "verified_page": null
+      }
     },
     {
       "name": "فرنی",
       "source": "S004",
-      "pages": "صفحه PDF 81",
+      "pages": "ارجاع صفحه نامعتبر · در انتظار شناسایی صفحه صحیح",
       "status": "نیازمند اصلاح ارجاع منبع",
       "ingredients": [
         [
@@ -1594,12 +1618,18 @@
         "method_summary_present": false,
         "kitchen_tested": false
       },
-      "source_audit": "page_title_mismatch_confirmed"
+      "source_audit": "page_title_mismatch_confirmed",
+      "invalid_page_reference": "صفحه PDF 81",
+      "review_queue": {
+        "priority": "high",
+        "task": "Find correct printed/PDF page and re-extract title, ingredients, measurements, method",
+        "verified_page": null
+      }
     },
     {
       "name": "آبگوشت مرغ",
       "source": "S004",
-      "pages": "صفحه PDF 82",
+      "pages": "ارجاع صفحه نامعتبر · در انتظار شناسایی صفحه صحیح",
       "status": "نیازمند اصلاح ارجاع منبع",
       "ingredients": [
         [
@@ -1620,7 +1650,13 @@
         "method_summary_present": false,
         "kitchen_tested": false
       },
-      "source_audit": "page_title_mismatch_confirmed"
+      "source_audit": "page_title_mismatch_confirmed",
+      "invalid_page_reference": "صفحه PDF 82",
+      "review_queue": {
+        "priority": "high",
+        "task": "Find correct printed/PDF page and re-extract title, ingredients, measurements, method",
+        "verified_page": null
+      }
     },
     {
       "name": "قیمه و سیب‌زمینی",
