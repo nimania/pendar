@@ -26,10 +26,10 @@ function text(row){return clean(row.summary_fa||row.recap_fa||row.text||row.topi
 function published(row){const t=Date.parse(row.published_at||"");return Number.isFinite(t)?t:0}
 function date(t){return t?new Date(t).toLocaleDateString("fa-IR"):"تاریخ نامشخص"}
 function safeHref(u){try{const p=new URL(u);return ["https:","http:"].includes(p.protocol)?p.href:""}catch{return ""}}
-function calculate(){const chosen=entries.filter(e=>selection.has(e.key));$("counter").textContent=chosen.length+" گفته از "+new Set(chosen.map(e=>e.handle)).size+" چهره انتخاب شده"}
+function calculate(){const chosen=entries.filter(e=>selection.has(e.key));const people=new Set(chosen.map(e=>e.handle)).size;$("counter").textContent=chosen.length+" گفته از "+people+" چهره انتخاب شده"+(chosen.length>0&&people<3?" · برای برنامه چندصدایی دست‌کم ۳ چهره پیشنهاد می‌شود":"")}
 async function load(){
  try{const response=await fetch("/data/figures.json",{cache:"no-store"});if(!response.ok)throw Error("HTTP "+response.status);const data=await response.json();
- entries=(data.figures||[]).flatMap(f=>(f.posts||[]).map((p,i)=>({key:String(f.handle||f.name_fa)+"::"+String(p.id||i),handle:String(f.handle||f.name_fa),name:f.name_fa||"چهره نامشخص",role:f.role_fa||"",post:p,stamp:published(p),url:safeHref(p.url)}))).filter(e=>e.url&&text(e.post)).sort((a,b)=>b.stamp-a.stamp);
+ entries=(data.figures||[]).flatMap(f=>(f.posts||[]).map((p,i)=>({key:String(f.handle||f.name_fa)+"::"+String(p.id||i),handle:String(f.handle||f.name_fa),name:f.name_fa||"چهره نامشخص",role:f.role_fa||"",post:p,stamp:published(p),url:safeHref(p.url)}))).filter(e=>e.url&&text(e.post)&&e.stamp>0).sort((a,b)=>b.stamp-a.stamp);
  $("state").textContent=entries.length+" گفته دارای منبع بارگذاری شد.";render();
  }catch(e){$("state").textContent="دریافت داده ممکن نشد: "+e.message}
 }
@@ -45,12 +45,12 @@ function render(){
  const button=document.createElement("button");button.className=selection.has(e.key)?"secondary":"";button.textContent=selection.has(e.key)?"حذف از برنامه":"افزودن به برنامه";
  button.addEventListener("click",()=>{selection.has(e.key)?selection.delete(e.key):selection.add(e.key);render();calculate()});
  block.append(title,info,paragraph,link,document.createTextNode("  "),button);parent.append(block)});
- $("state").textContent=hits.length+" نتیجه نمایشی از "+entries.length+" گفته معتبرِ لینک‌دار؛ برای تطبیق دقیق حتماً منبع اصلی را بخوانید.";
+ $("state").textContent=hits.length+" نتیجه نمایشی از "+entries.length+" گفته دارای لینک و تاریخ انتشار؛ اعتبار محتوایی و صحت انتساب هنوز بررسی نشده است.";
  calculate();
 }
 function compose(){
  const chosen=entries.filter(e=>selection.has(e.key)).sort((a,b)=>b.stamp-a.stamp);
- if(!chosen.length){$("state").textContent="ابتدا دست‌کم یک گفته انتخاب کنید.";return}
+ if(!chosen.length){$("state").textContent="ابتدا دست‌کم یک گفته انتخاب کنید.";return} $("state").textContent="پیش‌نویس مونتاژ شد؛ منابع را پیش از ضبط یک‌به‌یک بررسی کنید.";
  const subject=clean($("headline").value||$("topic").value)||"موضوع منتخب";
  let lines=["جان کلام چندصدایی | "+subject,"","[آغاز پیشنهادی]","در این برنامه، چند دیدگاه درباره «"+subject+"» را از منابع منتشرشده مرور می‌کنیم. انتساب هر دیدگاه را با لینک منبع بررسی کنید.",""];
  chosen.forEach((e,i)=>{lines.push("بخش "+(i+1)+" — "+e.name, "بر اساس خلاصه ثبت‌شده در پندار: "+text(e.post), "منبع: "+e.url,"تاریخ: "+date(e.stamp),"[گذار تحریریه: نسبت این دیدگاه با گفته بعدی را پس از مطالعه منابع مشخص کنید.]","")});
