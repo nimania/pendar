@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T11:32:53.260956+00:00",
+  "generated_at": "2026-10-16T11:27:37.946789+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -557,16 +557,6 @@
     },
     {
       "channel_id": "digital-world",
-      "title_fa": "Transformers One",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/698687",
-      "icon": "https://image.tmdb.org/t/p/w500/AcHj5s73g6vIDUAJVaXShUmMVQO.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "By Any Means",
       "start": "2026-10-20T00:00:00+03:30",
       "date_only": true,
@@ -624,46 +614,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/kAZS6wbDlCU0crWSLpnQoJcFHCx.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "tmdb-network-2",
-      "title_fa": "کالبدشناسی گری",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/1416",
-      "icon": "https://image.tmdb.org/t/p/w500/3hziWXnnbTwoao6p3q26YeTansO.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "قانون و نظم: واحد قربانیان ویژه",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2734",
-      "icon": "https://image.tmdb.org/t/p/w500/qRVm0gh4xCLxCr1Ayw0l1CYbylR.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 2 از فصل 28؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "قانون و نظم",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/549",
-      "icon": "https://image.tmdb.org/t/p/w500/hmd2tEtjolLWpNLCTvXS2PO5VCi.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 2 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-88",
-      "title_fa": "داستان ترسناک آمریکایی",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/1413",
-      "icon": "https://image.tmdb.org/t/p/w500/yCkPLQ10qKIUgRBXmQVVMF1h96d.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 9 از فصل 13؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -936,16 +886,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-74",
-      "title_fa": "Watch What Happens Live with Andy Cohen",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/22980",
-      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 166 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-2739",
       "title_fa": "ویژن‌کوئست",
       "start": "2026-10-20T00:00:00+03:30",
@@ -964,36 +904,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/iyA6NKz3IcdkSjpjNR7PYCXbgTz.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 3 از فصل 15؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 99 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 99 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-9",
-      "title_fa": "Coronation Street",
-      "start": "2026-10-15T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/291",
-      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 191 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-2552",
@@ -1022,6 +932,116 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1561726",
       "icon": "https://image.tmdb.org/t/p/w500/5xmXVd7nCK3tAo34XkO58SxUCip.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-10-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 167 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "قانون و نظم: واحد قربانیان ویژه",
+      "start": "2026-10-22T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2734",
+      "icon": "https://image.tmdb.org/t/p/w500/qRVm0gh4xCLxCr1Ayw0l1CYbylR.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 3 از فصل 28؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "قانون و نظم",
+      "start": "2026-10-22T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/549",
+      "icon": "https://image.tmdb.org/t/p/w500/hmd2tEtjolLWpNLCTvXS2PO5VCi.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 3 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2",
+      "title_fa": "کالبدشناسی گری",
+      "start": "2026-10-22T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/1416",
+      "icon": "https://image.tmdb.org/t/p/w500/3hziWXnnbTwoao6p3q26YeTansO.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 2 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "فردا از آنِ ماست",
+      "start": "2026-10-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/72879",
+      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 35 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-10-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 100 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-10-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 100 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-88",
+      "title_fa": "داستان ترسناک آمریکایی",
+      "start": "2026-10-22T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/1413",
+      "icon": "https://image.tmdb.org/t/p/w500/yCkPLQ10qKIUgRBXmQVVMF1h96d.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 11 از فصل 13؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9",
+      "title_fa": "Coronation Street",
+      "start": "2026-10-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/291",
+      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 192 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "جزیره فراموش‌شده",
+      "start": "2026-10-27T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1465063",
+      "icon": "https://image.tmdb.org/t/p/w500/myd1K3gefdNAWFsGNRDdMeiK9Qg.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "The Cycle",
+      "start": "2026-10-23T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1290418",
+      "icon": "https://image.tmdb.org/t/p/w500/n5gSNf55KWfDc9hqP4H1KCCSutE.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
