@@ -1,0 +1,88 @@
+name: Pendar Safe Collector Recovery
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "49 * * * *"
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: pendar-safe-collector-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Recover stalled collectors with cooldown
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import subprocess
+          import time
+
+          repo = os.environ["REPO"]
+          now = dt.datetime.now(dt.timezone.utc)
+          active_states = {"queued", "in_progress", "waiting", "pending", "requested"}
+
+          def api(endpoint, method="GET", fields=None):
+              cmd = ["gh", "api", f"repos/{repo}/{endpoint}"]
+              if method != "GET":
+                  cmd += ["--method", method]
+              for k, v in (fields or {}).items():
+                  cmd += ["-f", f"{k}={v}"]
+              r = subprocess.run(cmd, text=True, capture_output=True, check=True)
+              return json.loads(r.stdout) if r.stdout.strip() else {}
+
+          def date(value):
+              return dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+          # Only collector liveness is actionable. Content age alone is NOT a
+          # reason to restart ingestion: a quiet news cycle can be legitimate.
+          # One automatic dispatch per collector per 6 hours. Never restart
+          # running/queued jobs, or dispatch when workflow history is ambiguous.
+          for workflow, maximum_age in (
+              ("news-refresh.yml", 75),
+              ("figures-refresh.yml", 120),
+          ):
+              runs = api(f"actions/workflows/{workflow}/runs?per_page=100").get("workflow_runs", [])
+              if not runs:
+                  print(f"::warning::{workflow}: no run history; manual investigation required")
+                  continue
+              runs.sort(key=lambda r: r.get("created_at", ""), reverse=True)
+              if any(r.get("status") in active_states for r in runs):
+                  print(f"{workflow}: a run is active; skipping")
+                  continue
+              success = next((r for r in runs if r.get("conclusion") == "success"), None)
+              if success is None:
+                  print(f"::warning::{workflow}: no recent successful run; manual investigation required")
+                  continue
+              minutes_since_success = (now - date(success["updated_at"])).total_seconds()/60
+              if minutes_since_success <= maximum_age:
+                  print(f"{workflow}: recent success ({minutes_since_success:.0f}m); healthy")
+                  continue
+              # A recent dispatch, even one that failed, consumes the cooldown.
+              # This ensures a persistent failure does not create a retry storm.
+              recent_dispatch = next((r for r in runs if r.get("event") == "workflow_dispatch"), None)
+              if recent_dispatch and (now - date(recent_dispatch["created_at"])).total_seconds() < 6*3600:
+                  print(f"{workflow}: dispatch attempted within 6 hours; cooldown active")
+                  continue
+              latest = runs[0]
+              # If GitHub is currently delivering the scheduled run, let it finish.
+              if (now - date(latest["created_at"])).total_seconds() < 20*60:
+                  print(f"{workflow}: run started recently; allowing normal schedule to recover")
+                  continue
+              print(f"::warning::{workflow}: no success for {minutes_since_success:.0f}m; requesting one recovery run")
+              api(f"actions/workflows/{workflow}/dispatches", "POST", {"ref": "main"})
+              print(f"{workflow}: recovery dispatch accepted")
+              time.sleep(1)
+          PY
