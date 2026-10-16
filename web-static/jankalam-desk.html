@@ -21,7 +21,7 @@
 "use strict";
 const $=id=>document.getElementById(id);
 let entries=[],selection=new Set();
-function clean(value){return String(value||"").replace(/\\s+/g," ").trim()}
+function clean(value){return String(value||"").replace(/\s+/g," ").trim()}
 function text(row){return clean(row.summary_fa||row.recap_fa||row.text||row.topic_fa)}
 function published(row){const t=Date.parse(row.published_at||"");return Number.isFinite(t)?t:0}
 function date(t){return t?new Date(t).toLocaleDateString("fa-IR"):"تاریخ نامشخص"}
