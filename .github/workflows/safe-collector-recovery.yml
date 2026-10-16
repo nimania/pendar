@@ -76,11 +76,8 @@ jobs:
               if recent_dispatch and (now - date(recent_dispatch["created_at"])).total_seconds() < 6*3600:
                   print(f"{workflow}: dispatch attempted within 6 hours; cooldown active")
                   continue
-              latest = runs[0]
-              # If GitHub is currently delivering the scheduled run, let it finish.
-              if (now - date(latest["created_at"])).total_seconds() < 20*60:
-                  print(f"{workflow}: run started recently; allowing normal schedule to recover")
-                  continue
+              # Active executions were already excluded. A recent completed
+              # *failed* scheduled run must not suppress recovery indefinitely.
               print(f"::warning::{workflow}: no success for {minutes_since_success:.0f}m; requesting one recovery run")
               api(f"actions/workflows/{workflow}/dispatches", "POST", {"ref": "main"})
               print(f"{workflow}: recovery dispatch accepted")
