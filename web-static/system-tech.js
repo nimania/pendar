@@ -43,7 +43,7 @@ async function renderSystem() {
   const safe = async (name, fallback) => {
     try { return await getJSON(`${DATA}/${name}`, 20000); } catch (_) { return fallback; }
   };
-  const [health, stats, meta, pressHealth, tv, weather, periodicals, entityRegistry, newsHealth] = await Promise.all([
+  const [health, stats, meta, pressHealth, tv, weather, periodicals, entityRegistry, newsHealth, figuresHealth] = await Promise.all([
     safe("system-health.json", null),
     safe("stats.json", {}),
     safe("meta.json", {}),
@@ -52,9 +52,33 @@ async function renderSystem() {
     safe("weather.json", []),
     safe("periodicals.json", []),
     safe("entity-registry.json", {}),
-    safe("news-health.json", null)
+    safe("news-health.json", null),
+    safe("figures-health.json", null)
   ]);
 
+  // Collection, publication and source activity are independent signals.
+  // A quiet news cycle is not necessarily a failed collector.
+  const statusAge = iso => {
+    if (!iso) return null;
+    const t = Date.parse(iso);
+    return Number.isFinite(t) && t <= Date.now() + 3600000 ? (Date.now() - t) / 60000 : null;
+  };
+  const freshnessPill = (iso, limit) => {
+    const age = statusAge(iso);
+    return age === null ? '<span class="sys-pill muted">نامشخص</span>'
+      : '<span class="sys-pill '+(age <= limit ? 'ok' : 'warn')+'">'+(age <= limit ? 'تازه' : 'قدیمی')+'</span>';
+  };
+  const operationalLinks = [
+    ['گردآوری خبر','news-refresh.yml'],
+    ['گردآوری چهره‌ها','figures-refresh.yml'],
+    ['انتشار سریع','fast-deploy.yml'],
+    ['پایش اخبار','news-freshness-watchdog.yml'],
+    ['پایش چهره‌ها','figures-freshness-watchdog.yml'],
+    ['بازیابی خودکار','safe-collector-recovery.yml']
+  ];
+  const operationalHtml = operationalLinks.map(([title,file]) =>
+    '<a href="https://github.com/nimania/pendar/actions/workflows/'+encodeURIComponent(file)+'" target="_blank" rel="noopener">'+esc(title)+' ↗</a>'
+  ).join(' · ');
   const hc = (health && health.counts) || {};
   const thresholds = (health && health.thresholds) || {};
   const github = (health && health.github) || {};
@@ -139,6 +163,18 @@ async function renderSystem() {
       <div><span class="home-eyebrow">آخرین نسخهٔ منتشرشده</span><h2>${esc(gateLabel)}</h2>
         <p>این صفحه سلامت آخرین نسخه‌ای را نشان می‌دهد که اجازهٔ انتشار گرفته؛ build ردشده جای نسخهٔ سالم را نمی‌گیرد.</p></div>
       <div class="sys-gate"><span class="sys-dot"></span><b>${gateOk===true?"PASS":gateOk===false?"BLOCKED":"UNKNOWN"}</b></div>
+    </section>
+    <section class="sys-panel">
+      <div class="sys-panel-head"><div><span class="home-eyebrow">Operations</span><h3>مرکز کنترل گردآوری و انتشار</h3></div></div>
+      <div class="sys-detail-row"><span>آخرین تولید بستهٔ خبر</span><b>${_sysTime(meta?.built_iso)} ${freshnessPill(meta?.built_iso, 120)}</b></div>
+      <div class="sys-detail-row"><span>تازه‌ترین خبر ثبت‌شده</span><b>${_sysTime(newsHealth?.news?.latest_published)}</b></div>
+      <div class="sys-detail-row"><span>آخرین گزارش پردازش خبر</span><b>${_sysTime(newsHealth?.generated_at)} ${freshnessPill(newsHealth?.generated_at, 120)}</b></div>
+      <div class="sys-detail-row"><span>آخرین بررسی گردآوری چهره‌ها</span><b>${_sysTime(figuresHealth?.last_checked_at)} ${freshnessPill(figuresHealth?.last_checked_at, 150)}</b></div>
+      <div class="sys-detail-row"><span>تازه‌ترین گفتهٔ چهره‌ها</span><b>${_sysTime(figuresHealth?.latest_post_at)}</b></div>
+      <div class="sys-detail-row"><span>گفته‌ها / چهره‌های فعال در ۲۴ ساعت</span><b>${figuresHealth?.statements_24h == null ? "نامشخص" : _sysNum(figuresHealth.statements_24h)} / ${figuresHealth?.active_figures_24h == null ? "نامشخص" : _sysNum(figuresHealth.active_figures_24h)}</b></div>
+      <p>«تازه» در این بخش تنها به زمان فایل منتشرشده اشاره دارد؛ موفقیت اجرای GitHub یا دریافت محتوای جدید را تضمین نمی‌کند. نبود گفتهٔ جدید لزوماً خرابی نیست.</p>
+      <div class="sys-admin-actions">${operationalHtml}</div>
+      <p>برای دیدن اجرای واقعی، هشدارها و تلاش‌های بازیابی، پیوندهای GitHub را باز کنید. این صفحه بدون دادهٔ اجرای GitHub، وضعیت بازیابی را موفق اعلام نمی‌کند.</p>
     </section>
     <section class="sys-panel">
       <div class="sys-panel-head"><div><span class="home-eyebrow">News & Gemini</span><h3>سلامت پردازش خبر و هوش مصنوعی</h3></div><span class="sys-pill ${newsHealth?.status==="ok"?"ok":newsHealth?.status==="warning"?"warn":"muted"}">${newsHealth?.status==="ok"?"گزارش موجود":newsHealth?.status==="warning"?"خطای API ثبت شده":"داده موجود نیست"}</span></div>
