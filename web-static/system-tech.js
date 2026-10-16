@@ -171,7 +171,7 @@ async function renderSystem() {
       <div class="sys-detail-row"><span>آخرین گزارش پردازش خبر</span><b>${_sysTime(newsHealth?.generated_at)} ${freshnessPill(newsHealth?.generated_at, 120)}</b></div>
       <div class="sys-detail-row"><span>آخرین بررسی گردآوری چهره‌ها</span><b>${_sysTime(figuresHealth?.last_checked_at)} ${freshnessPill(figuresHealth?.last_checked_at, 150)}</b></div>
       <div class="sys-detail-row"><span>تازه‌ترین گفتهٔ چهره‌ها</span><b>${_sysTime(figuresHealth?.latest_post_at)}</b></div>
-      <div class="sys-detail-row"><span>گفته‌ها / چهره‌های فعال در ۲۴ ساعت</span><b>${_sysNum(figuresHealth?.statements_24h)} / ${_sysNum(figuresHealth?.active_figures_24h)}</b></div>
+      <div class="sys-detail-row"><span>گفته‌ها / چهره‌های فعال در ۲۴ ساعت</span><b>${figuresHealth?.statements_24h == null ? "نامشخص" : _sysNum(figuresHealth.statements_24h)} / ${figuresHealth?.active_figures_24h == null ? "نامشخص" : _sysNum(figuresHealth.active_figures_24h)}</b></div>
       <p>«تازه» در این بخش تنها به زمان فایل منتشرشده اشاره دارد؛ موفقیت اجرای GitHub یا دریافت محتوای جدید را تضمین نمی‌کند. نبود گفتهٔ جدید لزوماً خرابی نیست.</p>
       <div class="sys-admin-actions">${operationalHtml}</div>
       <p>برای دیدن اجرای واقعی، هشدارها و تلاش‌های بازیابی، پیوندهای GitHub را باز کنید. این صفحه بدون دادهٔ اجرای GitHub، وضعیت بازیابی را موفق اعلام نمی‌کند.</p>
