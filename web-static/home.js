@@ -218,9 +218,9 @@ function renderHomeCulture(){
 }
 
 // Two independent homepage windows: headlines and culture.
-let homeNewsMode="latest";
+let homeNewsMode="events";
 function setHomeNewsMode(mode){
-  if(!["selected","latest","hot","rising","recaps","events","people"].includes(mode))return;
+  if(!["events","people","latest","selected","viral"].includes(mode))return;
   homeNewsMode=mode;
   document.querySelectorAll("[data-home-news]").forEach(button=>{
     const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
@@ -268,11 +268,9 @@ function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
   if(!storyEl)return;
   const title=document.getElementById("home-news-title");
-  if(title)title.textContent=homeNewsMode==="recaps"?"جان کلام":homeNewsMode==="events"?"ماجراها و ترندها":homeNewsMode==="people"?"چهره‌ها":"نبض امروز";
-  const dashboard=document.getElementById("home-news-dashboard");
-  const freshness=document.getElementById("home-news-freshness");
-  if(dashboard)dashboard.style.display=["recaps","events","people"].includes(homeNewsMode)?"none":"";
-  if(freshness)freshness.style.display=["recaps","events","people"].includes(homeNewsMode)?"none":"";
+  if(title)title.textContent=homeNewsMode==="events"?"ماجراها و ترندها":homeNewsMode==="people"?"چهره‌ها و جان کلام":homeNewsMode==="latest"?"سرخط‌های تازه":homeNewsMode==="selected"?"سرخط‌های برگزیده":"وایرال";
+  // The independent site-activity section stays visible at the bottom on every tab.
+  renderHomeNewsDashboard(ALL||[]);
   storyEl.classList.toggle("home-recaps-list",homeNewsMode==="recaps");
   storyEl.classList.toggle("home-events-in-table",homeNewsMode==="events");
   storyEl.classList.toggle("home-people-in-table",homeNewsMode==="people");
@@ -288,7 +286,7 @@ function renderHomeDaily(){
     return imp+sources+figures+hot+Math.max(0,18-Math.min(age,18));
   };
   const time=s=>Date.parse(s.published_at||s.last_seen_at||"")||0;
-  const pool=(ALL||[]).filter(s=>homeNewsMode==="hot"?Boolean(s.trend?.hot):homeNewsMode==="rising"?Boolean(s.trend?.rising):true);
+  const pool=(ALL||[]).filter(s=>homeNewsMode==="viral"?Boolean(s.trend?.hot||s.trend?.rising):true);
   const stories=pool.slice().sort(homeNewsMode==="latest"?(a,b)=>time(b)-time(a):(a,b)=>score(b)-score(a)||time(b)-time(a)).slice(0,20);
   renderHomeNewsDashboard(stories);
   storyEl.innerHTML=stories.length?stories.map((s,i)=>{
@@ -305,7 +303,7 @@ function renderHomeDaily(){
       </span>
       <span class="home-intel-go">←</span>
     </button>`;
-  }).join('') :`<div class="state"><div class="big">${homeNewsMode==="hot"?"فعلاً خبر داغی ثبت نشده":homeNewsMode==="rising"?"فعلاً خبر در حال رشدی ثبت نشده":"هنوز سرخطی ثبت نشده"}</div></div>`;
+  }).join('') :`<div class="state"><div class="big">${homeNewsMode==="viral"?"فعلاً خبر داغ یا رو به رشدی ثبت نشده":"هنوز سرخطی ثبت نشده"}</div></div>`;
 }
 
 
@@ -377,15 +375,16 @@ function paintHomePeopleTimeline(){
   const el=document.getElementById("home-daily-stories");if(!el)return;
   const rows=homePeopleTimelineRows.slice(0,homePeopleTimelineLimit);
   const cards=rows.map(({f,p})=>{
-    const headline=String(p.topic_fa||p.headline_fa||"").trim();
-    const original=String(p.text||p.recap_fa||p.summary_fa||p.content_fa||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
+    const isRecap=String(p.recap_fa||"").trim().length>=120;
+    const headline=String(p.topic_fa||p.video_title||p.headline_fa||(isRecap?"جان کلام":"گفتهٔ تازه")).trim();
+    const original=String((isRecap?(p.summary_fa||p.recap_fa):(p.text||p.summary_fa||p.content_fa||p.recap_fa))||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
     const excerpt=original.slice(0,460);
     const date=p.published_at||p.recorded_at||"";
     const image=typeof f.avatar==="string"&&(/^(https?:\/\/|\/|assets\/|figures\/|data\/)/i.test(f.avatar))?f.avatar:"";
     const link="/statement/"+encodeURIComponent(String(p.id))+"/";
     return '<article class="home-people-timeline-row">'+
       '<div class="home-people-timeline-avatar">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa||"؟").slice(0,1))+'</span>')+'</div>'+
-      '<div class="home-people-timeline-copy"><div class="home-people-timeline-meta"><strong>'+esc(f.name_fa||"")+'</strong>'+(date?'<time datetime="'+esc(date)+'">'+esc(relTime(date))+'</time>':'')+'</div>'+
+      '<div class="home-people-timeline-copy"><div class="home-people-timeline-meta"><strong>'+esc(f.name_fa||"")+'</strong>'+(isRecap?'<span class="home-people-recap-chip">جان کلام</span>':'')+(date?'<time datetime="'+esc(date)+'">'+esc(relTime(date))+'</time>':'')+'</div>'+
       (headline?'<a class="home-people-timeline-title" href="'+link+'">'+esc(headline)+'</a>':'')+
       (excerpt?'<p class="home-people-timeline-excerpt">'+esc(excerpt)+(original.length>460?'…':'')+'</p>':'')+
       '<a class="home-people-timeline-read" href="'+link+'">خواندن گفتهٔ کامل ←</a></div></article>';
@@ -412,12 +411,15 @@ async function renderHomePeopleDirectory(){
     const people=(d.figures||[]).filter(f=>f&&f.handle&&f.name_fa&&!f.us_radar&&!f.israel_radar&&!String(f.handle).startsWith("news-")&&!HOME_FIGURE_EXCLUDE.has(String(f.handle).toLowerCase()));
     const seen=new Set(),rows=[];
     for(const f of people){
-      const posts=(f.posts||[]).filter(p=>p&&p.id&&(p.topic_fa||p.headline_fa||p.summary_fa||p.text||p.recap_fa)&&!["draft","pending","private"].includes(String(p.status||"").toLowerCase())).sort((a,b)=>figureActivityTime(b)-figureActivityTime(a));
-      if(!posts.length)continue;
-      const p=posts[0];if(seen.has(String(p.id)))continue;seen.add(String(p.id));
-      const portrait=profileByHandle.get(String(f.handle).toLowerCase())||profileByName.get(normalize(f.name_fa))||f.avatar||p.avatar||"";
-      const enriched={...f,avatar:portrait};
-      rows.push({f:enriched,p,time:figureActivityTime(p)});
+      const posts=(f.posts||[]).filter(p=>p&&p.id&&(p.topic_fa||p.video_title||p.headline_fa||p.summary_fa||p.text||p.recap_fa)&&!["draft","pending","private"].includes(String(p.status||"").toLowerCase())).sort((a,b)=>figureActivityTime(b)-figureActivityTime(a));
+      // A single unified, chronological timeline: statements and published recaps.
+      for(const p of posts){
+        if(seen.has(String(p.id)))continue;
+        const time=figureActivityTime(p);if(!time)continue;
+        seen.add(String(p.id));
+        const portrait=profileByHandle.get(String(f.handle).toLowerCase())||profileByName.get(normalize(f.name_fa))||f.avatar||p.avatar||"";
+        rows.push({f:{...f,avatar:portrait},p,time});
+      }
     }
     homePeopleTimelineRows=rows.sort((a,b)=>b.time-a.time);
     paintHomePeopleTimeline();
