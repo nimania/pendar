@@ -13,6 +13,7 @@ on:
       - "backend/scripts/prepare_priority_site.py"
       - "backend/scripts/audit_pages_size.py"
       - "backend/scripts/build_iran_scenario_radar.py"
+      - "backend/scripts/build_iran_scenario_pages.py"
       - "backend/scripts/publish_iran_radar_live.py"
       - "backend/scripts/configure_iran_radar_live.py"
       - "backend/scripts/restore_core_site_data.py"
