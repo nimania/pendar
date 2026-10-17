@@ -40,7 +40,7 @@ def parse_html_news(raw: str | bytes, source: Source) -> list[NormalizedItem]:
         clean_url = urlunsplit((parts.scheme, parts.netloc, parts.path, "", ""))
         if clean_url in seen:
             continue
-        title = re.sub(r"\\s+", " ", anchor.get_text(" ", strip=True)).strip()
+        title = re.sub(r"\s+", " ", anchor.get_text(" ", strip=True)).strip()
         if not (15 <= len(title) <= 220):
             continue
         seen.add(clean_url)
