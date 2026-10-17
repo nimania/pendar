@@ -1821,3 +1821,8 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
   #home-daily .home-main-tabs{gap:3px;padding:8px 7px}
   #home-daily .home-main-tabs button{font-size:12px;min-height:34px;padding:6px 9px}
 }
+
+/* Unified Future Observatory header entry */
+.top .future-header-link{width:auto!important;min-width:90px;display:flex;align-items:center;justify-content:center;gap:6px;padding:5px 10px;text-decoration:none;font:700 12px/1.4 "Vazirmatn",sans-serif;white-space:nowrap}
+.top .future-header-link img{width:25px;height:25px;flex:0 0 25px}
+@media(max-width:560px){.top .future-header-link{min-width:75px;padding:4px 6px;font-size:11px}.top .future-header-link img{width:21px;height:21px;flex-basis:21px}}
