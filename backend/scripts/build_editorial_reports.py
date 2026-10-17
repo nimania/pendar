@@ -27,11 +27,12 @@ STOP = set("""
 WORD_RE = re.compile(r"[\u0600-\u06ffA-Za-z0-9]{3,}")
 URL_RE = re.compile(r"^https?://[^\s]+$", re.I)
 UUID_RE = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", re.I)
-VERSION = "report-v1-history-20261017"
+VERSION = "report-v2-precise-history-20261017"
 
 
 def normalize(text: str) -> str:
     return (str(text or "").lower().replace("ي", "ی").replace("ك", "ک")
+            .replace("سوپرنفتکش", "نفتکش").replace("ابرنفتکش", "نفتکش")
             .replace("\u200c", " ").replace("\u0640", ""))
 
 
@@ -70,6 +71,11 @@ def related_news(story: dict, archive: list[dict], *, max_before: int = 4, max_a
         c_body = c_head | terms(candidate.get("summary_fa") or "")
         shared_head = head & c_head
         shared_all = body & c_body
+        # Location and generic organization terms alone cannot establish a
+        # historical relationship (e.g. tanker versus drone near Hormuz).
+        generic = {"تنگه", "هرمز", "دریایی", "نیروی", "سپاه", "امنیت", "دولت", "دومین", "نظامی"}
+        if not (shared_head - generic):
+            continue
         # Two distinctive headline terms (or three mixed terms with one headline
         # anchor). Headline terms are essential; unrelated records must not pass
         # on generic category or entity co-occurrence alone.
@@ -85,7 +91,7 @@ def related_news(story: dict, archive: list[dict], *, max_before: int = 4, max_a
         # Prefer useful earlier developments rather than near-simultaneous
         # duplicate coverage of the current event.
         gap = (timestamp-date).total_seconds()/3600
-        if abs(gap) < 8:
+        if abs(gap) < 36:
             continue
         row = {
             "id": sid,
