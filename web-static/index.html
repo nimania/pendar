@@ -9,6 +9,13 @@
   <link rel="canonical" href="https://pendar.io/"><meta name="theme-color" content="#3c3938">
   <script>
     document.documentElement.classList.add("js-enabled");
+    // Restore an explicit appearance preference before styles render.
+    try {
+      const preferred = localStorage.getItem("pendar-theme");
+      if (preferred === "dark" || preferred === "light") {
+        document.documentElement.setAttribute("data-theme", preferred);
+      }
+    } catch (_) {}
     // Canonical domain routes have no legacy language prefix.
     if (location.pathname === "/fa" || location.pathname.startsWith("/fa/")) {
       location.replace((location.pathname.replace(/^\/fa(?=\/|$)/,"")||"/") + location.search + (["#", "#/"].includes(location.hash) ? "" : location.hash));
@@ -100,6 +107,10 @@
           <div class="smart-search-results" id="smart-search-results"><div class="smart-search-hint">مثلاً «نامه‌های کمال‌الملک»، «مونا برزویی»، «بخارا» یا «هوش مصنوعی»</div></div>
         </div>
       </div>
+      <button class="icon-btn header-theme-toggle" type="button" id="theme" aria-label="حالت تیره" aria-pressed="false" title="تغییر حالت روشن / تیره">
+        <svg class="theme-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5 8.5 8.5 0 1 0 20.5 14.3Z"/></svg>
+        <svg class="theme-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
       <a class="icon-btn meshki-header-link" href="https://nimania.github.io/meshkimedia/" target="_blank" rel="noopener" aria-label="مشکی‌مدیا — سریال‌های ترکی" title="مشکی‌مدیا — سریال‌های ترکی"><img src="assets/meshki-media-logo.png" width="28" height="28" alt=""></a>
       <a class="icon-btn section-header-link" href="/future/" aria-label="آینده‌بان پندار — رادار و سناریوها" title="آینده‌بان — رادار و سناریوها"><img src="assets/radar-logo.svg" width="28" height="28" alt=""></a>
       <a class="icon-btn section-header-link" href="/badbadak/" aria-label="بادبادک" title="بادبادک"><img src="assets/badbadak-header.png" width="28" height="28" alt=""></a>
@@ -359,7 +370,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>پندار · ایران، خبر، اندیشه و فرهنگ</p>
-      <div class="footer-links"><button onclick="showDiner()">داینر</button><a href="/badbadak/">بادبادک</a><a href="/future/">آینده‌بان</a><button onclick="showLatestVideos()">آخرین ویدئوها</button><button onclick="showBooks()">پیشخوان کتاب</button><button onclick="showMovies()">جان فیلم</button><button onclick="showTVGuide('now')">راهنمای تماشا</button><button onclick="showPress()">پیشخوان جراید</button><button onclick="showFigures()">چهره‌ها</button><button onclick="showTech()">فناوری و طراحی</button><button onclick="showSystem()">وضعیت سیستم</button><button onclick="showFaq()">روش کار</button><button type="button" id="theme" aria-label="تغییر پوستهٔ سایت" title="روشن / تیره">روشن / تیره</button><a href="https://vibefarsi.ir/" target="_blank" rel="noopener">VibeFarsi ↗</a></div>
+      <div class="footer-links"><button onclick="showDiner()">داینر</button><a href="/badbadak/">بادبادک</a><a href="/future/">آینده‌بان</a><button onclick="showLatestVideos()">آخرین ویدئوها</button><button onclick="showBooks()">پیشخوان کتاب</button><button onclick="showMovies()">جان فیلم</button><button onclick="showTVGuide('now')">راهنمای تماشا</button><button onclick="showPress()">پیشخوان جراید</button><button onclick="showFigures()">چهره‌ها</button><button onclick="showTech()">فناوری و طراحی</button><button onclick="showSystem()">وضعیت سیستم</button><button onclick="showFaq()">روش کار</button><a href="https://vibefarsi.ir/" target="_blank" rel="noopener">VibeFarsi ↗</a></div>
     </div>
   </footer>
 
