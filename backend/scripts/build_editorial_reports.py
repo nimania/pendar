@@ -235,9 +235,10 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
         except sqlite3.Error:
             if cx:cx.close()
             cx=None
-    # Export related archive information for all 60 public stories. Generate at
-    # most four previously uncached AI reports per news cycle.
-    for row in cards:
+    # Enrich every exported archive page (up to 500), not just the 60-card feed.
+    # Paid editorial generation stays bounded to current headline candidates.
+    active_ids={str(c.get("id") or "") for c in cards}
+    for row in archive:
         sid=str(row.get("id") or "")
         if not UUID_RE.fullmatch(sid):continue
         fpath=data_dir/"story"/(sid+".json")
@@ -257,7 +258,7 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
                 try:report=json.loads(hit[0]);reused+=1
                 except ValueError:pass
         enough=bool(sources) and len(str(detail.get("what_happened_fa") or ""))>=90 and len(str(detail.get("summary_fa") or ""))>=80
-        if report is None and is_ai and enough and attempted<max_generate:
+        if report is None and sid in active_ids and is_ai and enough and attempted<max_generate:
             attempted+=1
             try:
                 result=provider.generate(system=SYSTEM,user=json.dumps(prompt_data,ensure_ascii=False),context={"editorial":prompt_data})
