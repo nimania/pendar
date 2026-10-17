@@ -168,3 +168,21 @@ def test_bartarinha_html_ingestion_keeps_only_actual_articles(db):
     second = ingest_source(db, site, raw_content=raw)
     assert second.new == 0
     assert second.duplicates == 2
+
+
+def test_four_requested_pendar_news_sources():
+    """Regression guard: all four requested publications remain in news ingestion."""
+    from scripts.seed import SOURCES, HTML_NEWS_SOURCES, TELEGRAM_NEWS_SOURCES
+
+    by_name = {
+        name: (homepage, feed, region)
+        for name, homepage, feed, region, reliability in SOURCES
+    }
+    assert {"رکنا", "هفت صبح", "برترین‌ها", "بیلبورد فارسی"} <= set(by_name)
+    assert by_name["رکنا"][0] == "https://www.rokna.net"
+    assert by_name["هفت صبح"][0] == "https://7sobh.com"
+    assert by_name["برترین‌ها"][0] == "https://www.bartarinha.ir"
+    assert by_name["بیلبورد فارسی"][0] == "https://billboard-persian.com/"
+    assert "برترین‌ها" in HTML_NEWS_SOURCES
+    assert "بیلبورد فارسی" in TELEGRAM_NEWS_SOURCES
+    assert by_name["بیلبورد فارسی"][1] == "https://t.me/s/billboardpersianofficial"
