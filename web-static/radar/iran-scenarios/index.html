@@ -294,6 +294,14 @@
     "کریم سجادپور":"karim-sadjadpour","علی واعظ":"ali-vaez",
     "ولی نصر":"vali-nasr","صنم وکیل":"sanam-vakil","حسن احمدیان":"hassan-ahmadian"
   };
+  var FAMILY_TAG_SUB_SLUGS={
+    deal:["motaharnia-deal","zagros-surrender","holakouee-truce","zeidabadi-negotiation"],
+    regroup:["silent-fortress","fattahi-reconstitution"],
+    war:["return-to-fire","zagros-air-strikes","two-month-window","fattahi-combined"],
+    transition:["sudden-fall","fattahi-internal","motaharnia-great-change","sabouri-institutions"],
+    attrition:["fattahi-stalemate","motaharnia-narrowing-orbit"],
+    recovery:["zagros-post-trump",""]
+  };
   var ANALYST_SUB_SLUGS=[
     ["motaharnia-deal","silent-fortress","return-to-fire","motaharnia-great-change"],
     ["zagros-surrender","sudden-fall","tragic-transition","zagros-post-trump","zagros-air-strikes"],
@@ -480,7 +488,7 @@
       span.style.width=Math.round(pct/2)+"%";
       bar.appendChild(span); card.appendChild(bar);
       var tags=el("div","tags");
-      f.who.forEach(function(w){
+      f.who.forEach(function(w,i){
         var tag=el("span","tag");var pieces=w.split(":");var person=pieces[0].trim();
         if(person==="الگوی چین (خاتمی/قالیباف)"){
           tag.appendChild(el("span",null,"الگوی چین ("));
@@ -489,7 +497,7 @@
           addPersonLink(tag,person);
           if(pieces.length>1){
             tag.appendChild(el("span",null,": "));
-            subLink(tag,pieces.slice(1).join(":").trim(),"",f.key);
+            subLink(tag,pieces.slice(1).join(":").trim(),(FAMILY_TAG_SUB_SLUGS[f.key]||[])[i],f.key);
           }
         }
         tags.appendChild(tag);
