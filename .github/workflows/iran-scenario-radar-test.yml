@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'backend/scripts/build_iran_scenario_radar.py'
+      - 'backend/data/iran-future-analysts.json'
       - 'backend/scripts/prepare_priority_site.py'
       - 'backend/tests/test_iran_scenario_radar.py'
       - 'web-static/radar/iran-scenarios/index.html'
