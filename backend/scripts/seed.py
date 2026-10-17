@@ -179,7 +179,6 @@ TELEGRAM_NEWS_SOURCES = {"آشیان سیمرغ", "خبرآنلاین — تلگ
 HTML_NEWS_SOURCES = {"برترین‌ها"}
 
 SOURCE_CATEGORIES = {
-    "برترین‌ها": Category.entertainment,
     "بیلبورد فارسی": Category.culture,
     "پیوست": Category.technology,
     "ایبنا": Category.culture,
