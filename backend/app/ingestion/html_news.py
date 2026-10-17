@@ -24,7 +24,7 @@ def parse_html_news(raw: str | bytes, source: Source) -> list[NormalizedItem]:
         raise ValueError("Unsupported public HTML news source")
 
     soup = BeautifulSoup(raw, "html.parser")
-    for tag in soup.select("script, style, nav, footer, header, aside"):
+    for tag in soup.select("script, style, nav, footer"):
         tag.decompose()
 
     items: list[NormalizedItem] = []
