@@ -163,7 +163,12 @@ SOURCES = [
     ("ایندیپندنت فارسی", "https://www.independentpersian.com", "https://www.independentpersian.com/rss.xml", "iran-intl", 0.65),
     ("صدای آمریکا فارسی", "https://ir.voanews.com", "https://ir.voanews.com/api/zmgqoe$mvi", "iran-intl", 0.7),
     ("العربیه فارسی", "https://farsi.alarabiya.net", "https://farsi.alarabiya.net/tools/rss", "iran-intl", 0.65),
+    # Public Telegram news feed; articles retain original post URLs and brief excerpts.
+    ("آشیان سیمرغ", "https://t.me/simorghdata369", "https://t.me/s/simorghdata369", "iran", 0.45),
 ]
+
+# Public Telegram news is ingested as news, not as a commentator's opinions.
+TELEGRAM_NEWS_SOURCES = {"آشیان سیمرغ"}
 
 SOURCE_CATEGORIES = {
     "پیوست": Category.technology,
@@ -213,25 +218,26 @@ def run() -> None:
                 existing.region = region
                 existing.language = lang
                 existing.reliability_score = rel
+                existing.feed_type = FeedType.telegram if name in TELEGRAM_NEWS_SOURCES else FeedType.rss
                 existing.enabled = True
                 existing.default_category = SOURCE_CATEGORIES.get(name)
                 # RSS thumbnails (media:thumbnail / media:content) are published by
                 # the outlet FOR redistribution — safe to keep. We still never
                 # store full article body or scraped page images.
-                existing.allow_image = True
+                existing.allow_image = name not in TELEGRAM_NEWS_SOURCES
                 by_name[name] = existing
                 continue
             s = Source(
                 name=name,
                 homepage_url=home,
                 feed_url=feed,
-                feed_type=FeedType.rss,
+                feed_type=FeedType.telegram if name in TELEGRAM_NEWS_SOURCES else FeedType.rss,
                 region=region,
                 language=lang,
                 reliability_score=rel,
                 default_category=SOURCE_CATEGORIES.get(name),
                 attribution_required=True,
-                allow_image=True,
+                allow_image=name not in TELEGRAM_NEWS_SOURCES,
             )
             db.add(s)
             by_name[name] = s
