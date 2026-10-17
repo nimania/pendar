@@ -32,8 +32,10 @@ function loadArticleDisplayAd() {
    Only show an authored article when the exported model output has passed the
    server's citation and quality checks; otherwise retain existing summary. */
 function pendarEditorialReport(s){
-  const report=s?.editorial_report;
-  if(!report || report.status!=="ai_draft" || !Array.isArray(report.paragraphs) || report.paragraphs.length<3)return "";
+  const preview=window.PendarEditorialPilots?.[String(s?.id||"")];
+  const report=s?.editorial_report||preview;
+  if(!report || !["ai_draft","pilot_draft"].includes(report.status) || !Array.isArray(report.paragraphs) || report.paragraphs.length<3)return "";
+  const pilot=report.status==="pilot_draft";
   const rows=report.paragraphs.map((block)=>{
     if(!block || typeof block.text_fa!=="string" || !Array.isArray(block.citations))return "";
     const refs=block.citations.filter(c=>c && typeof c.url==="string" && (/^https?:\/\//i.test(c.url)||/^\/story\/[a-f0-9-]{36}\/$/i.test(c.url)));
@@ -46,7 +48,7 @@ function pendarEditorialReport(s){
   }).filter(Boolean).join("");
   if(!rows)return "";
   return '<article class="story-editorial" aria-labelledby="story-report-title">'
-    +'<div class="story-editorial-kicker">گزارش پندار <span>بر اساس منابع این پرونده</span></div>'
+    +'<div class="story-editorial-kicker">گزارش پندار <span>'+(pilot?'نسخهٔ آزمایشی · نیازمند تأیید تحریریه':'بر اساس منابع این پرونده')+'</span></div>'
     +'<h2 id="story-report-title">'+esc(report.title_fa||s.headline_fa||"")+'</h2>'
     +'<p class="story-editorial-lead">'+esc(report.lead_fa||"")+'</p>'
     +'<div class="story-editorial-body">'+rows+'</div>'
