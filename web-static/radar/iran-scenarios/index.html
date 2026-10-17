@@ -517,7 +517,7 @@
       var dcls=dnum>0?"up":dnum<0?"down":"flat";
       var dtxt=dnum>0?("تقویت +"+(s.weight||1)):dnum<0?("تضعیف −"+(s.weight||1)):"خنثی";
       meta.appendChild(el("span","dir "+dcls,dtxt));
-      if(s.analyst_priority&&dnum&&s.score_kind==="analyst_view")meta.appendChild(el("span","date","گروه آینده ایران · وزن تحلیلی ۲"));
+      if(s.analyst_priority&&dnum&&s.score_kind==="analyst_view")meta.appendChild(el("span","date","گروه آینده ایران · وزن پایه ۲ (پیش از سقف روزانه)"));
       li.appendChild(meta);
       li.appendChild(el("p","txt",s.text||""));
       if(s.speaker){
@@ -540,7 +540,9 @@
         disclosure.appendChild(el("div","smalllabel","وجود نقل‌قول به معنای تأیید مستقل خبر توسط این افراد نیست."));
         li.appendChild(disclosure);
       }
-      if(s.score_reason){
+      if(s.score_kind==="capped"){
+        li.appendChild(el("div","signal-reason","بدون امتیاز: "+(s.review_note||"سقف روزانهٔ تحلیل‌گران")));
+      }else if(s.score_reason){
         li.appendChild(el("div","signal-reason","دلیل امتیاز: "+s.score_reason));
       }else if(s.review_note){
         li.appendChild(el("div","signal-reason","وضعیت شاهد: "+s.review_note));
@@ -559,7 +561,7 @@
         li.appendChild(el("div","smalllabel","پیوند استنادِ قابل بررسی برای این سیگنالِ تاریخی ثبت نشده است."));
       }
       li.appendChild(el("div","by",s.by==="pendar-auto"
-        ?(s.direction?(s.score_kind==="analyst_view"?"دیدگاه منتسب · امتیاز خودکار":"رویداد گزارش‌شده · امتیاز خودکار"):"خبر یا نظر مبهم · بدون امتیاز")
+        ?(s.score_kind==="capped"?"سقف روزانه · بدون امتیاز":s.direction?(s.score_kind==="analyst_view"?"دیدگاه منتسب · امتیاز خودکار":"رویداد گزارش‌شده · امتیاز خودکار"):"خبر یا نظر مبهم · بدون امتیاز")
         +" · راستی‌آزمایی مستقل نشده"
         :(s.by==="claude"?"ثبت اولیه؛ بدون راستی‌آزمایی مستقل":"ثبت غیرخودکار")));
       host.appendChild(li);
