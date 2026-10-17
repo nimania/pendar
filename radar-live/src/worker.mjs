@@ -125,7 +125,7 @@ export class RadarRoom extends DurableObject {
       for(const signal of rows){
         if(!signal.text||!signal.source_links.length)continue;
         const payload=JSON.stringify(signal);
-        const existing=this.ctx.storage.sql.exec("SELECT payload FROM signals WHERE id=?",signal.id).one();
+        const existing=this.ctx.storage.sql.exec("SELECT payload FROM signals WHERE id=?",signal.id).toArray()[0];
         if(existing?.payload===payload)continue;
         this.ctx.storage.sql.exec(
           "INSERT INTO signals(id,ts,payload) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET ts=excluded.ts,payload=excluded.payload",
