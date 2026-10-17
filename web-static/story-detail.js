@@ -74,6 +74,35 @@ function pendarHistoricalContext(s){
     +'</section>';
 }
 
+/* Historical fallback for stories exported before editorial_context was added. */
+async function loadPendarHistoricalFallback(s){
+ if(s && s.editorial_context)return;
+ const host=document.getElementById("story-history-fallback");if(!host)return;
+ try{
+  const source=await getJSON(DATA+"/press-source-stories.json");
+  if(document.getElementById("story-history-fallback")!==host)return;
+  const entries=new Map();
+  for(const group of Object.values(source||{}))if(Array.isArray(group))for(const row of group)if(row&&row.id)entries.set(row.id,row);
+  const stop=new Set("این آن برای درباره گزارش خبری اخبار ایران ایرانی تهران خبر که در از با به را و یا امروز روز تازه جدید است شده بود گفت اعلام منتشر رسانه خبرگزاری بررسی کشور منطقه".split(" "));
+  const words=t=>new Set((String(t||"").toLowerCase().replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").match(/[\u0600-\u06ffA-Za-z0-9]{4,}/g)||[]).filter(w=>!stop.has(w)));
+  const title=words(s.headline_fa),body=new Set([...title,...words(s.summary_fa)]);
+  const anchor=Date.parse(s.published_at||"");if(title.size<2||!Number.isFinite(anchor))return;
+  const earlier=[],later=[];
+  for(const c of entries.values()){
+   if(c.id===s.id||!/^[0-9a-f-]{36}$/i.test(c.id))continue;
+   const date=Date.parse(c.published_at||"");
+   if(!Number.isFinite(date)||Math.abs(anchor-date)>540*864e5||Math.abs(anchor-date)<8*36e5)continue;
+   const heading=words(c.headline_fa),other=new Set([...heading,...words(c.summary_fa)]);
+   const common=[...title].filter(w=>heading.has(w)).length,all=[...body].filter(w=>other.has(w)).length;
+   if(common<2&&!(common>=1&&all>=3))continue;
+   if(all<2||all/Math.max(1,Math.min(body.size,other.size))<.22)continue;
+   (date<anchor?earlier:later).push({id:c.id,headline_fa:c.headline_fa,published_at:c.published_at,score:common*5+all*2});
+  }
+  const pick=(a,n)=>a.sort((x,y)=>y.score-x.score).slice(0,n).sort((x,y)=>String(x.published_at).localeCompare(String(y.published_at))).map(({score,...row})=>row);
+  host.innerHTML=pendarHistoricalContext({editorial_context:{background:pick(earlier,4),later:pick(later,2)}});
+ }catch(_){/* No unsupported context if archive is unavailable. */}
+}
+
 // stories that share figures / topics with this one — the thread around it
 function relatedStories(s) {
   const ents = new Set((s.entities || []).map(e => e.slug));
@@ -250,7 +279,9 @@ async function openStory(id) {
     ${s.image_url ? `<img class="hero-img" src="${esc(s.image_url)}" alt="" loading="lazy" onerror="this.parentElement.querySelector('.hero-credit')?.remove();this.remove()">` : ''}
     ${s.image_url && s.image_credit ? `<div class="hero-credit">عکس از: ${esc(s.image_credit)}</div>` : ''}
     ${pendarEditorialReport(s)}\n    <div class="kalam-box"><span class="eyebrow">جان‌کلام <span class="ai">ترکیب هوش مصنوعی</span></span><p>${esc(s.summary_fa || "")}</p></div>
-    ${pendarHistoricalContext(s)}\n    ${detailGeoStrip(s)}
+    ${pendarHistoricalContext(s)}
+    <div id="story-history-fallback"></div>
+    ${detailGeoStrip(s)}
     ${peopleRow(s.entities)}
     ${peopleSuggestions}
     ${storyBooksSection}
@@ -273,6 +304,7 @@ async function openStory(id) {
       <div class="answer" id="answer"><div class="a-bubble" id="a-bubble"></div>
         <div class="grounded"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> مبتنی بر منابع همین خبر</div></div>
     </div><div id="story-discovery"></div>`;
+  loadPendarHistoricalFallback(s);
   loadArticleDisplayAd();
   // Second placement only on substantial news stories; delay avoids competing
   // global atOptions mutations from the two network invocations.
