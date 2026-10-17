@@ -168,7 +168,7 @@ def report_input(detail: dict, context: dict, sources: list[dict]) -> dict:
             "agreements":(detail.get("agreements") or [])[:4],
             "disagreements":(detail.get("disagreements") or [])[:4],
             "statements":(detail.get("person_statements") or [])[:5],
-            "source_views":(detail.get("source_views") or [])[:8],
+            "source_views":[v for v in (detail.get("source_views") or []) if isinstance(v,dict) and str(v.get("article_url") or "") in {ref["url"] for ref in sources}][:8],
             "published_at":detail.get("published_at"),
         },
         "current_sources":sources,
