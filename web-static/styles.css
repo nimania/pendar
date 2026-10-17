@@ -1777,14 +1777,14 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 
 /* 2026-10 homepage header consolidation and five editorial tabs */
 .top .header-quicklinks{display:flex;align-items:center;gap:5px;min-width:0}
-.top .header-quicklinks>button,.top .header-quicklinks summary{
+.top .header-quicklinks>button,.top .header-quicklinks>a,.top .header-quicklinks summary{
   display:flex;align-items:center;justify-content:center;min-height:34px;box-sizing:border-box;
   border:1px solid #ffffff27;border-radius:9px;background:#ffffff0c;
   color:#efe9e6;font:600 12px/1.4 "Vazirmatn",sans-serif;
   white-space:nowrap;padding:6px 9px;cursor:pointer;list-style:none
 }
 .top .header-quicklinks summary::-webkit-details-marker{display:none}
-.top .header-quicklinks button:hover,.top .header-quicklinks summary:hover{background:#ffffff1f;color:#fff}
+.top .header-quicklinks button:hover,.top .header-quicklinks>a:hover,.top .header-quicklinks summary:hover{background:#ffffff1f;color:#fff}
 .top .header-quick-group{position:relative}
 .top .header-quick-group[open]>summary{background:#ffffff23}
 .top .header-quick-menu{
@@ -1817,7 +1817,7 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 }
 @media(max-width:560px){
   .top .header-quicklinks{gap:4px}
-  .top .header-quicklinks>button,.top .header-quicklinks summary{font-size:11px;min-height:31px;padding:5px 7px}
+  .top .header-quicklinks>button,.top .header-quicklinks>a,.top .header-quicklinks summary{font-size:11px;min-height:31px;padding:5px 7px}
   #home-daily .home-main-tabs{gap:3px;padding:8px 7px}
   #home-daily .home-main-tabs button{font-size:12px;min-height:34px;padding:6px 9px}
 }
@@ -1826,3 +1826,6 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 .top .future-header-link{width:auto!important;min-width:90px;display:flex;align-items:center;justify-content:center;gap:6px;padding:5px 10px;text-decoration:none;font:700 12px/1.4 "Vazirmatn",sans-serif;white-space:nowrap}
 .top .future-header-link img{width:25px;height:25px;flex:0 0 25px}
 @media(max-width:560px){.top .future-header-link{min-width:75px;padding:4px 6px;font-size:11px}.top .future-header-link img{width:21px;height:21px;flex-basis:21px}}
+
+/* Header archive shortcut styled consistently with adjacent controls. */
+.top .header-quicklinks>a{text-decoration:none}
