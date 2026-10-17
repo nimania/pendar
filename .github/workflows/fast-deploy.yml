@@ -491,6 +491,8 @@ jobs:
       - name: Extend and score Iran scenarios from published Pendar data
         continue-on-error: true
         run: python backend/scripts/build_iran_scenario_radar.py --site site
+      - name: Publish linkable Iran scenario families and subscenarios
+        run: python backend/scripts/build_iran_scenario_pages.py --site site
       - name: Install optional live radar browser configuration
         env:
           RADAR_LIVE_ORIGIN: ${{ vars.RADAR_LIVE_ORIGIN }}
