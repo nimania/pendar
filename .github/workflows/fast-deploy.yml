@@ -487,6 +487,7 @@ jobs:
       - name: Build compact radar client data
         run: python backend/scripts/build_radar_view_data.py --site site
       - name: Extend and score Iran scenarios from published Pendar data
+        continue-on-error: true
         run: python backend/scripts/build_iran_scenario_radar.py --site site
       - name: Preserve validated lightweight news and figures only
         run: |
