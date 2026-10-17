@@ -24,7 +24,7 @@ TERMS = {
     "recovery": (r"چرخش\s*به\s*شرق", r"پساترامپ", r"بازسازی\s*اقتصاد", r"وام\s*روسیه", r"تفاهم\s*با\s*چین"),
 }
 IRAN = re.compile(r"ایران|ایرانی|جمهوری\s*اسلامی|تهران|ریال|سپاه|حکومت\s*اسلامی")
-MAX_NEW_PER_RUN = 30
+MAX_NEW_PER_RUN = 120
 MAX_AUTO_HISTORY = 5000
 MAX_INPUT_AGE = timedelta(days=14)
 
@@ -121,7 +121,7 @@ CLAIM_OPPOSE = re.compile(
     r"منتفی|بعید|نامحتمل|رد کرد|کنار گذاشته|اتفاق نمی افتد|رخ نمی دهد|"
     r"نخواهد شد|کاهش احتمال|پایان یافته"
 )
-DAILY_SCORE_CAP = {"story": 4, "figure": 2}
+DAILY_SCORE_CAP = {"story": 4, "figure": 2, "statement": 2}
 
 
 def assess_signal(text, family, kind):
@@ -150,7 +150,14 @@ def apply_daily_caps(records):
     """Prevent many headlines/analysts in one day from manufacturing momentum."""
     used = {}
     for item in sorted(records, key=lambda x: (int(x.get("ts") or 0), str(x.get("id") or "")), reverse=True):
-        if item.get("by") != "pendar-auto" or not item.get("direction"):
+        if item.get("by") != "pendar-auto":
+            continue
+        if "raw_direction" in item:
+            item["direction"] = int(item.get("raw_direction") or 0)
+            item["weight"] = int(item.get("raw_weight") or 1)
+            if item.get("direction") and item.get("score_kind") == "capped":
+                item["score_kind"] = ("reported_event" if item.get("source_type") == "story" else "analyst_view")
+        if not item.get("direction"):
             continue
         kind = item.get("source_type")
         if kind not in DAILY_SCORE_CAP:
@@ -214,6 +221,64 @@ def build_history(records, now):
 
 
 
+
+def public_link(url):
+    """Safe navigable citation URLs. Never invent references."""
+    from urllib.parse import urlsplit
+    url = str(url or "").strip()
+    if url.startswith("/story/") and re.fullmatch(r"/story/[0-9a-fA-F-]{8,64}/", url):
+        return url
+    if re.fullmatch(r"/@[A-Za-z0-9_-]{2,80}/?", url):
+        return url
+    if url.startswith("https://"):
+        parsed = urlsplit(url)
+        if parsed.hostname and not parsed.username and not parsed.password:
+            return url[:1400]
+    return ""
+
+
+def links_from_detail(detail, story_url):
+    links = []
+    if story_url:
+        links.append({"label": "پروندهٔ خبر در پندار", "url": story_url, "kind": "pendar"})
+    for source in (detail.get("sources") or []):
+        if not isinstance(source, dict):
+            continue
+        url = public_link(source.get("article_url"))
+        name = normalize(source.get("source_name") or "منبع اصلی")[:100]
+        if url and not any(x["url"] == url for x in links):
+            links.append({"label": name, "url": url, "kind": "original"})
+        if len(links) >= 9:
+            break
+    return links
+
+
+def match_directional_phrase(text, family, kind):
+    """Human-readable rule explanation, quoting *only* text in the input."""
+    value = normalize(text)
+    if kind == "story":
+        patterns = EVENT_RULES[family]
+        direction = assess_signal(value, family, kind)[0]
+        if direction:
+            for pattern in patterns[0 if direction > 0 else 1]:
+                match = re.search(pattern, value)
+                if match:
+                    return match.group(0)[:120]
+    else:
+        for pattern in (CLAIM_OPPOSE.pattern, CLAIM_SUPPORT.pattern):
+            match = re.search(pattern, value)
+            if match:
+                return match.group(0)[:120]
+    return ""
+
+
+def from_story_detail(story, data):
+    identity = str(story.get("id") or "")
+    if not re.fullmatch(r"[0-9a-fA-F-]{8,64}", identity):
+        return {}
+    return read_json(data / "story" / (identity + ".json"), {})
+
+
 def make_candidate(row, kind, now):
     raw = row.get("published_at") or row.get("date")
     parsed = date_and_ms(raw)
@@ -222,38 +287,121 @@ def make_candidate(row, kind, now):
     date, ts, moment = parsed
     if moment > now + timedelta(hours=1) or now - moment > MAX_INPUT_AGE:
         return None
-    if kind == "figure":
-        if row.get("kind") not in ("analysis", "party_claim"):
+    speaker = ""
+    speaker_role = ""
+    speaker_url = ""
+    related_people = []
+    uncertainty = ""
+    source_links = []
+    source_doc_id = str(row.get("id") or "")
+    if kind in ("figure", "statement"):
+        if kind == "figure" and row.get("kind") not in ("analysis", "party_claim"):
             return None
-        text = normalize(row.get("summary_fa") or row.get("topic_fa"))
-        url = str(row.get("url") or "")
-        name = normalize(row.get("person_name_fa") or row.get("name_fa") or row.get("_figure_name"))
-        source = name or "دیدگاه ثبت‌شده در پندار"
-        label = "دیدگاه تحلیل‌گر؛ تأیید رویداد نیست"
-        identity = url or str(row.get("id") or "")
+        text = normalize(row.get("statement_fa") if kind == "statement"
+                         else (row.get("summary_fa") or row.get("topic_fa")))
+        speaker = normalize(row.get("person_name_fa") or row.get("name_fa") or row.get("_figure_name"))
+        speaker_role = normalize(row.get("role_fa") or row.get("_figure_role"))
+        profile_handle = str(row.get("_figure_handle") or row.get("handle") or "").lstrip("@")
+        if kind == "figure":
+            speaker_url = public_link("/@" + profile_handle) if profile_handle else ""
+        else:
+            speaker_url = ""
+        original = public_link(row.get("article_url") or row.get("url"))
+        news_link = public_link(row.get("_story_url"))
+        if original:
+            source_links.append({"label": "منبع اصلی اظهارنظر", "url": original, "kind": "original"})
+        if news_link:
+            source_links.append({"label": "خبر مرتبط در پندار", "url": news_link, "kind": "pendar"})
+        if speaker_url:
+            source_links.append({"label": "صفحهٔ چهره در پندار", "url": speaker_url, "kind": "figure"})
+        source = speaker or "اظهارنظر ثبت‌شده در پندار"
+        identity = (str(row.get("id") or original) if kind == "figure"
+                    else source_doc_id + "|" + speaker + "|" + text)
+        label = "دیدگاه منتسب؛ وقوع رویداد را اثبات نمی‌کند"
     else:
         text = normalize(row.get("headline_fa") or row.get("title_fa") or row.get("title"))
-        summary = normalize(row.get("summary_fa"))
-        name_list = row.get("source_names")
-        source = "، ".join(str(x) for x in name_list[:3]) if isinstance(name_list, list) else "خبر ثبت‌شده در پندار"
-        label = "سرخط گردآوری‌شده؛ راستی‌آزمایی مستقل نشده"
-        identity = str(row.get("id") or "")
-        url = "/story/" + identity + "/" if re.fullmatch(r"[0-9a-fA-F-]{8,64}", identity) else ""
-    family = classify(text + " " + (summary if kind == "story" else ""))
+        source = normalize("، ".join(str(x) for x in row.get("source_names", [])[:3])
+                           if isinstance(row.get("source_names"), list) else "خبر ثبت‌شده در پندار")
+        detail = row.get("_detail") if isinstance(row.get("_detail"), dict) else {}
+        identity = source_doc_id
+        story_url = ("/story/" + identity + "/" if re.fullmatch(r"[0-9a-fA-F-]{8,64}", identity) else "")
+        source_links = links_from_detail(detail, story_url)
+        related_people = [
+            {"name": normalize(p.get("person_name_fa"))[:100],
+             "role": normalize(p.get("role_fa"))[:100],
+             "source_url": public_link(p.get("article_url"))}
+            for p in detail.get("person_statements", [])[:12] if isinstance(p, dict)
+            and normalize(p.get("person_name_fa"))
+        ]
+        uncertainty = normalize("؛ ".join(str(x) for x in detail.get("uncertainties", [])[:2]))[:320]
+        label = "خبر گردآوری‌شده؛ اصالت ادعاها مستقلاً راستی‌آزمایی نشده است"
+        speaker = ""
+        speaker_role = ""
+    family = classify(text)
+    if kind == "story" and not family:
+        family = classify(text + " " + normalize(row.get("summary_fa")))
     if not family or not text or not identity:
         return None
     fingerprint = hashlib.sha256((kind + "|" + identity + "|" + family).encode("utf-8")).hexdigest()[:18]
-    direction, weight, score_kind, note = assess_signal(
-        text + (" " + summary if kind == "story" else ""), family, kind)
+    direction, weight, score_kind, note = assess_signal(text, family,
+                                      "story" if kind == "story" else "figure")
+    # An unsourced news card must not generate a seemingly factual score.
+    if kind == "story" and not any(link["kind"] == "original" for link in source_links) and direction:
+        direction, weight, score_kind = 0, 1, "unscored"
+        note = "منبع اصلی قابل پیوند نیست؛ بدون امتیاز تا تکمیل استناد"
+    # A named person's claim requires a reference, not only an unlinked summary.
+    if kind in ("figure", "statement") and not any(link["kind"] == "original" for link in source_links) and direction:
+        direction, weight, score_kind = 0, 1, "unscored"
+        note = "لینک اظهارنظر اصلی در دسترس نیست؛ بدون امتیاز"
+    matched = match_directional_phrase(text, family, "story" if kind == "story" else "figure")
+    reason = ("عبارت شناسایی‌شده: «" + matched + "»؛ " + note) if matched and direction else note
     return {
         "id": "auto-" + fingerprint, "date": date, "ts": ts,
         "family": family, "direction": direction, "weight": weight,
+        "raw_direction": direction, "raw_weight": weight,
         "text": text[:500], "source": source[:180],
-        "source_url": url, "source_type": kind, "by": "pendar-auto",
-        "score_kind": score_kind, "review_status": "auto_unverified",
+        "source_url": source_links[0]["url"] if source_links else "",
+        "source_links": source_links,
+        "source_type": kind, "source_doc_id": source_doc_id,
+        "speaker": speaker, "speaker_role": speaker_role,
+        "speaker_url": speaker_url,
+        "related_people": related_people, "uncertainty": uncertainty,
+        "evidence_phrase": matched if direction else "",
+        "score_reason": reason[:400],
+        "by": "pendar-auto", "score_kind": score_kind,
+        "review_status": "auto_unverified",
         "review_note": label + "؛ " + note,
     }
 
+
+def update_snapshots(data, records, now):
+    """Append an observation whenever *published evidence or score* changes."""
+    path = data / "iran-scenario-snapshots.json"
+    previous = read_json(path, {})
+    if not isinstance(previous, dict):
+        previous = {}
+    snapshots = previous.get("snapshots", [])
+    if not isinstance(snapshots, list):
+        snapshots = []
+    scores = {family: sum(int(x.get("direction") or 0) * int(x.get("weight") or 1)
+              for x in records if x.get("family") == family) for family in FAMILIES}
+    signatures = sorted((str(x.get("id")), int(x.get("direction") or 0),
+                         int(x.get("weight") or 1), str(x.get("score_reason") or ""))
+                        for x in records)
+    digest = hashlib.sha256(json.dumps(signatures, ensure_ascii=False,
+                             separators=(",", ":")).encode("utf-8")).hexdigest()[:24]
+    recent = snapshots[-1] if snapshots else {}
+    if recent.get("digest") != digest:
+        changes = {family: scores[family] -
+                   int((recent.get("scores") or {}).get(family) or 0) for family in FAMILIES}
+        snapshots.append({"at": now.isoformat(), "digest": digest, "scores": scores,
+                          "changes": changes, "signal_count": len(records),
+                          "recent_signal_ids": [x["id"] for x in records[:15]]})
+    payload = {"version": 1, "generated_at": now.isoformat(),
+               "score_is_probability": False, "snapshots": snapshots[-2000:]}
+    path.write_text(json.dumps(payload, ensure_ascii=False,
+                    separators=(",", ":")) + "\n", encoding="utf-8")
+    return payload
 
 def build(site: Path, seed: Path, now=None):
     now = now or datetime.now(timezone.utc)
@@ -276,8 +424,24 @@ def build(site: Path, seed: Path, now=None):
             combined[str(entry["id"])] = entry
     candidates = []
     for story in stories:
-        if isinstance(story, dict):
-            candidate = make_candidate(story, "story", now)
+        if not isinstance(story, dict):
+            continue
+        detail = from_story_detail(story, data)
+        prepared = {**story, "_detail": detail}
+        candidate = make_candidate(prepared, "story", now)
+        if candidate:
+            candidates.append(candidate)
+        # Story-level named statements are separate, attributed evidence,
+        # never disguised as events. Every scored statement needs its source URL.
+        story_id = str(story.get("id") or "")
+        news_url = "/story/" + story_id + "/" if re.fullmatch(r"[0-9a-fA-F-]{8,64}", story_id) else ""
+        for statement in detail.get("person_statements", [])[:12]:
+            if not isinstance(statement, dict):
+                continue
+            statement_row = {**statement, "id": story_id,
+                             "_story_url": news_url,
+                             "published_at": statement.get("published_at") or story.get("published_at")}
+            candidate = make_candidate(statement_row, "statement", now)
             if candidate:
                 candidates.append(candidate)
     for figure in figures.get("figures", []):
@@ -285,7 +449,9 @@ def build(site: Path, seed: Path, now=None):
             continue
         for post in figure.get("posts", []):
             if isinstance(post, dict):
-                record = {**post, "_figure_name": figure.get("name_fa")}
+                record = {**post, "_figure_name": figure.get("name_fa"),
+                          "_figure_role": figure.get("role_fa"),
+                          "_figure_handle": figure.get("handle")}
                 candidate = make_candidate(record, "figure", now)
                 if candidate:
                     candidates.append(candidate)
@@ -310,6 +476,7 @@ def build(site: Path, seed: Path, now=None):
     destination = data / "iran-scenario-signals.json"
     destination.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     history = build_history(result, now)
+    snapshots = update_snapshots(data, result, now)
     (data / "iran-scenario-history.json").write_text(
         json.dumps(history, ensure_ascii=False, separators=(",", ":")) + "\n",
         encoding="utf-8")
@@ -319,7 +486,11 @@ def build(site: Path, seed: Path, now=None):
             "new_candidates": added, "auto_scored": scored,
             "auto_direction_policy": "conservative_rules_with_daily_caps_unverified",
             "sources": ["Pendar published headlines", "Pendar attributed figure posts"],
-            "history_points": len(history["points"]), "history_file": "iran-scenario-history.json"}
+            "history_points": len(history["points"]), "history_file": "iran-scenario-history.json",
+            "snapshots_file": "iran-scenario-snapshots.json",
+            "last_observed_change": (snapshots["snapshots"][-1]["at"] if snapshots["snapshots"] else None),
+            "poll_interval_seconds": 60, "upstream_news_schedule_minutes": 15,
+            "upstream_figure_schedule_minutes": 30}
     (data / "iran-scenario-meta.json").write_text(
         json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Iran scenario ledger: {len(result)} records, {added} new unreviewed candidates")
