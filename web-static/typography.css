@@ -192,3 +192,109 @@ button,input,select,textarea{font-family:var(--type-ui)}
   #home-daily .home-main-tabs button{font-size:13px}
   #home-view .home-kpis span{font-size:11px}
 }
+
+/* Homepage visual scale: a modest 15–20% thumbnail increase */
+/* Cards for تازه‌ها / برگزیده / وایرال. Keep the image-to-title ratio
+   readable and preserve image crop without changing feed ordering. */
+#home-daily-stories .home-intel-row-rich{
+  gap:14px;
+  min-height:108px;
+}
+#home-daily-stories .home-news-thumb{
+  width:104px;
+  min-width:104px;
+  max-width:104px;
+  height:76px;
+  min-height:76px;
+  max-height:76px;
+  flex:0 0 104px;
+  border-radius:10px;
+}
+#home-daily-stories .home-news-thumb img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+}
+#home-daily-stories .home-intel-copy>b{
+  font-size:19px;
+  line-height:1.8;
+  -webkit-line-clamp:3;
+}
+#home-daily-stories .home-intel-copy>small{font-size:12.5px}
+
+/* Trend dossiers have the same image footprint as editorial headlines. */
+#home-daily-stories.home-events-in-table .home-event-thumb{
+  width:104px;
+  min-width:104px;
+  max-width:104px;
+  height:76px;
+  min-height:76px;
+  max-height:76px;
+  flex:0 0 104px;
+  border-radius:10px;
+}
+#home-daily-stories.home-events-in-table .home-event-copy>b,
+#home-daily-stories.home-events-in-table .home-event-list-item b{
+  font-size:18px;
+  line-height:1.8;
+}
+#home-daily-stories.home-events-in-table .home-event-list-item{
+  min-height:108px;
+}
+
+/* Figure timeline: slightly larger portraits and stronger headlines. */
+#home-daily-stories.home-people-in-table .home-people-timeline-avatar{
+  width:60px;
+  height:60px;
+  flex:0 0 60px;
+}
+#home-daily-stories.home-people-in-table .home-people-timeline-title{
+  font-size:19px;
+  line-height:1.75;
+}
+@media(max-width:600px){
+  #home-daily-stories .home-intel-row-rich{
+    min-height:96px;
+    gap:9px;
+  }
+  #home-daily-stories .home-news-thumb{
+    width:84px;
+    min-width:84px;
+    max-width:84px;
+    height:62px;
+    min-height:62px;
+    max-height:62px;
+    flex:0 0 84px;
+  }
+  #home-daily-stories .home-intel-copy>b{
+    font-size:17px;
+    line-height:1.8;
+    -webkit-line-clamp:3;
+  }
+  #home-daily-stories.home-events-in-table .home-event-thumb{
+    width:84px;
+    min-width:84px;
+    max-width:84px;
+    height:62px;
+    min-height:62px;
+    max-height:62px;
+    flex:0 0 84px;
+  }
+  #home-daily-stories.home-events-in-table .home-event-list-item{
+    min-height:96px;
+  }
+  #home-daily-stories.home-events-in-table .home-event-copy>b,
+  #home-daily-stories.home-events-in-table .home-event-list-item b{
+    font-size:17px;
+    line-height:1.75;
+  }
+  #home-daily-stories.home-people-in-table .home-people-timeline-avatar{
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
+  }
+  #home-daily-stories.home-people-in-table .home-people-timeline-title{
+    font-size:17px;
+    line-height:1.8;
+  }
+}
