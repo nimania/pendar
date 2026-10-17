@@ -39,6 +39,8 @@ jobs:
         run: python -m unittest discover -s backend/tests -p test_core_site_recovery.py -v
       - name: Check editorial Python syntax before publication
         run: python -m py_compile backend/scripts/build_editorial_reports.py
+      - name: Verify visible Pendar reports and source links
+        run: node backend/tests/test_editorial_report_ui.js
       - name: Restore last successful light Pages artifact
         env:
           GH_TOKEN: ${{ github.token }}
