@@ -3,6 +3,11 @@ on:
   pull_request:
     paths:
       - 'backend/scripts/build_iran_scenario_radar.py'
+      - 'backend/scripts/build_iran_scenario_pages.py'
+      - 'backend/tests/test_iran_scenario_pages.py'
+      - 'web-static/data/iran-scenario-catalog.json'
+      - 'web-static/radar/iran-scenarios/scenario-template.html'
+      - 'web-static/radar/iran-scenarios/scenario/reader.js'
       - 'backend/data/iran-future-analysts.json'
       - 'backend/scripts/prepare_priority_site.py'
       - 'backend/tests/test_iran_scenario_radar.py'
@@ -24,8 +29,9 @@ jobs:
           python-version: '3.11'
       - name: Check Python syntax and run deterministic tests
         run: |
-          python -m py_compile backend/scripts/build_iran_scenario_radar.py
+          python -m py_compile backend/scripts/build_iran_scenario_radar.py backend/scripts/build_iran_scenario_pages.py
           python -m unittest discover -s backend/tests -p 'test_iran_scenario_radar.py' -v
+          python -m unittest discover -s backend/tests -p 'test_iran_scenario_pages.py' -v
       - name: Check scenario seed and public data contract
         run: |
           python - <<'PY'
