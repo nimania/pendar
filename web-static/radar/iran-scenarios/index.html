@@ -74,6 +74,8 @@
   .fam a,.an a,.sigitem a{color:var(--accent);text-underline-offset:3px}
   .fam .scenario-open{display:inline-block;margin-top:auto;font-size:.84rem;font-weight:800;text-decoration:underline}
   .fam .tag a{font-size:inherit;text-decoration:underline}
+  .scenario-chart-link,.scenario-filter-link{font-size:.72rem;color:var(--accent);margin:0 3px;align-self:center}
+  .scorerow a{color:var(--accent);text-decoration:underline}
 
   .analysts{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
   .an{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:8px}
@@ -516,6 +518,7 @@
       var c=el("button","chip"+(filterKey===f.key?" on":""),shortTitle(f.title)); c.type="button";
       c.addEventListener("click",function(){ filterKey=f.key; renderFamilies(); renderFilter(); renderLog(); });
       host.appendChild(c);
+      var go=el("a","scenario-filter-link","پرونده ↗");go.href=scenarioUrl(f.key);host.appendChild(go);
     });
   }
 
@@ -698,7 +701,7 @@
     host.innerHTML="";
     entries.forEach(function(entry){
       var line=el("div","scorerow");line.style.setProperty("--fc",entry.color);
-      line.appendChild(el("span",null,entry.label));
+      var lbl=el("a",null,entry.label);lbl.href=scenarioUrl(entry.key);line.appendChild(lbl);
       var track=el("div","scoretrack"),fill=el("span");
       fill.style.width=(Math.abs(entry.value)/Math.max(1,maxVal)*100)+"%";
       if(entry.value<0){fill.style.background="var(--down)";}
@@ -766,6 +769,7 @@
       b.appendChild(el("span","key"));b.appendChild(document.createTextNode(shortFam(f.title)));
       b.addEventListener("click",function(){selectedFamilies[f.key]=!selectedFamilies[f.key];renderCharts();});
       legend.appendChild(b);
+      var open=el("a","scenario-chart-link","پروندهٔ "+shortFam(f.title)+" ↗");open.href=scenarioUrl(f.key);legend.appendChild(open);
     });
     var all=series(), rows=slicePeriod(all), last=all[all.length-1];
     renderTrend();
