@@ -415,6 +415,8 @@ jobs:
             cp /tmp/previous-site/data/iran-scenario-signals.json backend/public/data/iran-scenario-signals.json
           fi
           python backend/scripts/build_iran_scenario_radar.py --site backend/public
+      - name: Publish linkable Iran scenario families and subscenarios
+        run: python backend/scripts/build_iran_scenario_pages.py --site backend/public
       - name: Apply temporary news-and-figures publication profile
         run: python backend/scripts/prepare_priority_site.py backend/public
 
