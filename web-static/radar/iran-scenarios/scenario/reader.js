@@ -6,7 +6,7 @@
   const subKey=document.body.dataset.scenario||"";
   const root=document.getElementById("scenario-content");
   const status=document.getElementById("status");
-  let catalog=null,base=[],edge=[],news=[],figures=[],meta={},filterText="",limit=35,lastVersion="";
+  let catalog=null,base=[],edge=[],news=[],figures=[],editorial=[],meta={},filterText="",limit=35,lastVersion="";
   let family=null,sub=null;
   const safePath=/^\/(?:story\/[a-zA-Z0-9-]+\/|@[a-zA-Z0-9_-]+\/?|radar\/iran-scenarios\/[a-zA-Z0-9_-]+\/(?:[a-zA-Z0-9_-]+\/)?)$/;
   const norm=s=>String(s||"").replace(/[ي]/g,"ی").replace(/[ك]/g,"ک").replace(/[\u200c\u200f]/g," ").replace(/\s+/g," ").trim().toLowerCase();
@@ -42,7 +42,7 @@
     if(!key)return "";
     const curated=(catalog?.people||[]).find(x=>norm(x.name)===key);
     if(curated)return "/@"+curated.handle+"/";
-    const stored=figures.find(x=>norm(x.name_fa)===key);
+    const stored=figures.find(x=>norm(x.name_fa)===key||(x.aliases||[]).some(a=>norm(a)===key));
     return stored?.handle?"/@"+stored.handle+"/":"";
   };
   const speakerHref=row=>{
@@ -136,7 +136,8 @@
   const figureArchive=()=>{
     const seen=new Set();
     const items=[];
-    figures.forEach(f=>{
+    const sources=figures.concat(editorial.map(item=>({name_fa:item.profile?.name_fa,handle:item.profile?.handle,posts:item.posts||[]})));
+    sources.forEach(f=>{
       if(!f||!Array.isArray(f.posts))return;
       f.posts.forEach(p=>{
         if(!p||!["analysis","party_claim"].includes(p.kind||""))return;
@@ -155,7 +156,7 @@
           }[familyKey];
           if(!re||!re.test(norm(text))||!has(text,"ایران")&&!has(text,"تهران")&&!sub) return;
         }
-        const id=url||String(p.id||"");
+        const id=String(p.id||"")||url;
         if(!id||seen.has(id))return;
         seen.add(id);
         items.push({speaker:f.name_fa||p.name_fa||"",handle:f.handle||"",
@@ -297,12 +298,14 @@
       getJSON("/data/iran-scenario-signals.json"),
       getJSON("/data/iran-scenario-meta.json"),
       getJSON("/data/stories.json"),
-      getJSON("/data/figures.json")
+      getJSON("/data/figures.json"),
+      getJSON("/data/pendar-editorial-views.json")
     ]);
     if(results[0].status==="fulfilled"&&Array.isArray(results[0].value))base=results[0].value;
     if(results[1].status==="fulfilled")meta=results[1].value||{};
     if(results[2].status==="fulfilled"&&Array.isArray(results[2].value))news=results[2].value;
     if(results[3].status==="fulfilled")figures=results[3].value?.figures||[];
+    if(results[4].status==="fulfilled"&&Array.isArray(results[4].value))editorial=results[4].value;
     // Optional event-driven edge uses the same upstream state as the radar.
     // Missing edge or invalid configuration keeps published evidence visible.
     try{
