@@ -298,7 +298,7 @@ function renderHomeDaily(){
     return `<button class="home-intel-row home-intel-row-rich" onclick="openStory('${esc(s.id)}')">
       <span class="home-intel-rank">${faN(i+1)}</span>
       <span class="home-news-thumb">${photo?`<img src="${esc(photo)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-empty');this.remove()">`:`<span class="home-news-thumb-fallback">پندار</span>`}</span>
-      <span class="home-intel-copy"><b>${esc(homeEditorialText(s.headline_fa||""))}</b>
+      <span class="home-intel-copy"><b>${esc(homeEditorialText(s.headline_fa||""))}</b>${s.has_editorial_report?'<span class="home-report-pill">گزارش پندار</span>':""}
         <span class="home-news-source-line">${homeStorySourceBadges(s)}</span>
         <small>${[relTime(s.published_at),s.source_count?faN(s.source_count)+" منبع":"",s.figure_count?faN(s.figure_count)+" چهره":"",state].filter(Boolean).join(" · ")}</small>
         <span class="home-intel-meter"><i style="width:${strength}%"></i></span>
