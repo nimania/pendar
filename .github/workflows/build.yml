@@ -51,6 +51,9 @@ jobs:
       - name: Install dependencies
         working-directory: backend
         run: pip install -r requirements.txt
+      - name: Verify editorial history and report safeguards
+        working-directory: backend
+        run: python -m unittest discover -s tests -p test_editorial_reports.py -v
       - name: Check Telegram publishing
         run: python -m unittest discover -s tests -p 'test_telegram_publish.py'
       - name: Check Telegram digest
