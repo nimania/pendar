@@ -1,0 +1,61 @@
+name: Deploy Pendar Live Radar Edge
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "radar-live/**"
+      - ".github/workflows/radar-live-deploy.yml"
+permissions:
+  contents: read
+concurrency:
+  group: pendar-radar-edge
+  cancel-in-progress: false
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate optional edge collector and scoring contracts
+        run: node --test radar-live/tests/*.test.mjs
+      - name: Validate front-end JavaScript syntax
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'), vm=require('vm');
+          const html=fs.readFileSync('web-static/radar/iran-scenarios/index.html','utf8');
+          const match=html.match(/<script>([\s\S]*?)<\/script>/);
+          if(!match)throw Error('Inline radar controller missing');
+          new vm.Script(match[1]);
+          console.log('Radar browser JavaScript parses correctly');
+          NODE
+  deploy:
+    needs: tests
+    if: ${{ vars.CLOUDFLARE_ACCOUNT_ID != '' }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Require Cloudflare connection and matching publisher secret
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          RADAR_LIVE_INGEST_TOKEN: ${{ secrets.RADAR_LIVE_INGEST_TOKEN }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "::error::Missing CLOUDFLARE_API_TOKEN"; exit 1; }
+          test -n "$RADAR_LIVE_INGEST_TOKEN" || { echo "::error::Missing RADAR_LIVE_INGEST_TOKEN"; exit 1; }
+      - name: Deploy SQLite-backed Durable Object Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 deploy --config radar-live/wrangler.toml
+      - name: Install private authenticated collector token
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          RADAR_LIVE_INGEST_TOKEN: ${{ secrets.RADAR_LIVE_INGEST_TOKEN }}
+        run: printf '%s' "$RADAR_LIVE_INGEST_TOKEN" | npx --yes wrangler@4 secret put INGEST_TOKEN --config radar-live/wrangler.toml
