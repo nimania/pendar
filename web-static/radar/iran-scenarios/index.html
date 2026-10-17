@@ -467,7 +467,7 @@
   function derivedHistory(){
     var byDay={}, dates=[];
     signals.forEach(function(s){
-      if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(s.date||"") || !FAMBYKEY[s.family]) return;
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(s.date||"") || !FAMBYKEY[s.family]) return;
       if(!byDay[s.date]){byDay[s.date]=[];dates.push(s.date);}
       byDay[s.date].push(s);
     });
