@@ -44,6 +44,11 @@ SOURCES = [
 
     ("هفت صبح", "https://7sobh.com", "https://7sobh.com/feed/", "iran", 0.55),
     ("رکنا", "https://www.rokna.net", "https://www.rokna.net/feed/", "iran", 0.5),
+    # No verified working RSS endpoint. Parse public homepage article links as HTML.
+    ("برترین‌ها", "https://www.bartarinha.ir", "https://www.bartarinha.ir/", "iran", 0.55),
+    # The publication's website was inaccessible during validation; use its
+    # publicly readable Telegram channel, retaining the website as attribution.
+    ("بیلبورد فارسی", "https://billboard-persian.com/", "https://t.me/s/billboardpersianofficial", "iran", 0.55),
 
     ("پیوست", "https://peivast.com", "https://peivast.com/feed", "iran", 0.65),
     ("ایبنا", "https://www.ibna.ir", "https://www.ibna.ir/rss", "iran", 0.65),
@@ -170,9 +175,12 @@ SOURCES = [
 ]
 
 # Public Telegram news is ingested as news, not as a commentator's opinions.
-TELEGRAM_NEWS_SOURCES = {"آشیان سیمرغ", "خبرآنلاین — تلگرام"}
+TELEGRAM_NEWS_SOURCES = {"آشیان سیمرغ", "خبرآنلاین — تلگرام", "بیلبورد فارسی"}
+HTML_NEWS_SOURCES = {"برترین‌ها"}
 
 SOURCE_CATEGORIES = {
+    "برترین‌ها": Category.entertainment,
+    "بیلبورد فارسی": Category.culture,
     "پیوست": Category.technology,
     "ایبنا": Category.culture,
     "خبرورزشی": Category.sport,
@@ -220,26 +228,30 @@ def run() -> None:
                 existing.region = region
                 existing.language = lang
                 existing.reliability_score = rel
-                existing.feed_type = FeedType.telegram if name in TELEGRAM_NEWS_SOURCES else FeedType.rss
+                existing.feed_type = (FeedType.telegram if name in TELEGRAM_NEWS_SOURCES
+                                      else FeedType.html if name in HTML_NEWS_SOURCES
+                                      else FeedType.rss)
                 existing.enabled = True
                 existing.default_category = SOURCE_CATEGORIES.get(name)
                 # RSS thumbnails (media:thumbnail / media:content) are published by
                 # the outlet FOR redistribution — safe to keep. We still never
                 # store full article body or scraped page images.
-                existing.allow_image = name not in TELEGRAM_NEWS_SOURCES
+                existing.allow_image = name not in (TELEGRAM_NEWS_SOURCES | HTML_NEWS_SOURCES)
                 by_name[name] = existing
                 continue
             s = Source(
                 name=name,
                 homepage_url=home,
                 feed_url=feed,
-                feed_type=FeedType.telegram if name in TELEGRAM_NEWS_SOURCES else FeedType.rss,
+                feed_type=(FeedType.telegram if name in TELEGRAM_NEWS_SOURCES
+                           else FeedType.html if name in HTML_NEWS_SOURCES
+                           else FeedType.rss),
                 region=region,
                 language=lang,
                 reliability_score=rel,
                 default_category=SOURCE_CATEGORIES.get(name),
                 attribution_required=True,
-                allow_image=name not in TELEGRAM_NEWS_SOURCES,
+                allow_image=name not in (TELEGRAM_NEWS_SOURCES | HTML_NEWS_SOURCES),
             )
             db.add(s)
             by_name[name] = s
