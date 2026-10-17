@@ -41,6 +41,24 @@ def normalize(value):
                   .replace("ك", "ک").replace("\u200c", " ")).strip()
 
 
+def priority_analyst(speaker, handle=""):
+    """Match a person by a known profile or exact name, never by affiliation alone."""
+    registry = read_json(Path(__file__).resolve().parents[1] /
+                         "data" / "iran-future-analysts.json", {})
+    subject = normalize(speaker).casefold()
+    profile_handle = normalize(handle).lstrip("@").casefold()
+    for person in registry.get("people", []):
+        if not isinstance(person, dict) or not person.get("active"):
+            continue
+        names = {normalize(person.get("name_fa")).casefold(),
+                 normalize(person.get("name_en")).casefold()}
+        names.update(normalize(alias).casefold() for alias in person.get("aliases", []))
+        if (subject and subject in names) or (profile_handle and
+                 profile_handle == str(person.get("handle", "")).casefold()):
+            return person
+    return None
+
+
 def date_and_ms(value):
     if not value:
         return None
@@ -122,6 +140,10 @@ CLAIM_OPPOSE = re.compile(
     r"نخواهد شد|کاهش احتمال|پایان یافته"
 )
 DAILY_SCORE_CAP = {"story": 4, "figure": 2, "statement": 2}
+# Named, linkable expert views are weighted in the analyst component ONLY.
+# A second mention of the same person must not manufacture extra momentum.
+MAX_ANALYST_FAMILY_DAILY = 3
+MAX_PER_SPEAKER_FAMILY_DAILY = 2
 
 
 def assess_signal(text, family, kind):
@@ -149,6 +171,8 @@ def assess_signal(text, family, kind):
 def apply_daily_caps(records):
     """Prevent many headlines/analysts in one day from manufacturing momentum."""
     used = {}
+    analyst_total = {}
+    speaker_total = {}
     for item in sorted(records, key=lambda x: (int(x.get("ts") or 0), str(x.get("id") or "")), reverse=True):
         if item.get("by") != "pendar-auto":
             continue
@@ -168,6 +192,17 @@ def apply_daily_caps(records):
         key = (item.get("date"), item.get("family"), kind)
         magnitude = abs(int(item.get("direction", 0)) * int(item.get("weight", 1)))
         remaining = DAILY_SCORE_CAP[kind] - used.get(key, 0)
+        speaker_key = None
+        if kind in ("figure", "statement"):
+            analyst_key = (item.get("date"), item.get("family"))
+            remaining = min(remaining, MAX_ANALYST_FAMILY_DAILY -
+                            analyst_total.get(analyst_key, 0))
+            speaker = normalize(item.get("speaker")).casefold()
+            identity = str(item.get("analyst_handle") or speaker).casefold()
+            if identity:
+                speaker_key = (item.get("date"), item.get("family"), identity)
+                remaining = min(remaining, MAX_PER_SPEAKER_FAMILY_DAILY -
+                                speaker_total.get(speaker_key, 0))
         if remaining <= 0:
             item["direction"] = 0
             item["score_kind"] = "capped"
@@ -175,6 +210,10 @@ def apply_daily_caps(records):
         else:
             item["weight"] = min(magnitude, remaining)
             used[key] = used.get(key, 0) + item["weight"]
+            if kind in ("figure", "statement"):
+                analyst_total[analyst_key] = analyst_total.get(analyst_key, 0) + item["weight"]
+                if speaker_key is not None:
+                    speaker_total[speaker_key] = speaker_total.get(speaker_key, 0) + item["weight"]
 
 
 def build_history(records, now):
@@ -355,6 +394,15 @@ def make_candidate(row, kind, now):
     if kind in ("figure", "statement") and not any(link["kind"] == "original" for link in source_links) and direction:
         direction, weight, score_kind = 0, 1, "unscored"
         note = "لینک اظهارنظر اصلی در دسترس نیست؛ بدون امتیاز"
+    expert = priority_analyst(speaker, profile_handle if kind == "figure" else "")
+             if kind in ("figure", "statement") else None
+    # Priority requires a traceable ORIGINAL statement and explicit directional
+    # language. It cannot turn an ambiguous opinion into a real-world event.
+    if expert and direction and score_kind == "analyst_view":
+        weight = 2
+        note += "؛ وزن ۲ برای دیدگاه مستندِ گروه آینده ایران، نه تأیید مستقل رویداد"
+        if not speaker_url:
+            speaker_url = public_link("/@" + str(expert["handle"]))
     matched = match_directional_phrase(text, family, "story" if kind == "story" else "figure")
     reason = ("عبارت شناسایی‌شده: «" + matched + "»؛ " + note) if matched and direction else note
     return {
@@ -366,6 +414,9 @@ def make_candidate(row, kind, now):
         "source_links": source_links,
         "source_type": kind, "source_doc_id": source_doc_id,
         "speaker": speaker, "speaker_role": speaker_role,
+        "analyst_priority": bool(expert and direction and score_kind == "analyst_view"),
+        "analyst_handle": str(expert["handle"]) if expert else "",
+        "analyst_group": "iran_future_expert_views" if expert else "",
         "speaker_url": speaker_url,
         "related_people": related_people, "uncertainty": uncertainty,
         "evidence_phrase": matched if direction else "",
@@ -487,6 +538,18 @@ def build(site: Path, seed: Path, now=None):
             "automatic_candidates": min(len(automatic), MAX_AUTO_HISTORY),
             "new_candidates": added, "auto_scored": scored,
             "auto_direction_policy": "conservative_rules_with_daily_caps_unverified",
+            "priority_analyst_policy": {
+                "group": "iran_future_expert_views", "named_analysts": 10,
+                "linked_directional_view_points": 2,
+                "ordinary_directional_view_points": 1,
+                "per_speaker_per_family_daily_cap": MAX_PER_SPEAKER_FAMILY_DAILY,
+                "all_analysts_per_family_daily_cap": MAX_ANALYST_FAMILY_DAILY,
+                "only_analyst_component": True, "not_probability": True,
+            },
+            "priority_scored_views": sum(
+                1 for x in result if x.get("analyst_priority")
+                and x.get("score_kind") == "analyst_view" and x.get("direction")
+            ),
             "sources": ["Pendar published headlines", "Pendar attributed figure posts"],
             "history_points": len(history["points"]), "history_file": "iran-scenario-history.json",
             "snapshots_file": "iran-scenario-snapshots.json",
