@@ -765,7 +765,7 @@
     try{
       var meta=await fetchFresh("iran-scenario-meta.json");
       if(!meta||!meta.generated_at)throw Error("missing generation time");
-      if(!force&&lastPublishedVersion===meta.generated_at&&signals.length){
+      if(lastPublishedVersion===meta.generated_at&&signals.length){
         lastMeta=meta;lastGoodRead=new Date();
         updateLiveIndicator("اتصال برقرار · نسخهٔ منتشرشده تغییری نکرده است",false);
         return;
@@ -784,7 +784,7 @@
       boot(datasets[0],datasets[1],datasets[2]);
       updateLiveIndicator("متصل به داده‌های منتشرشدهٔ پندار · بررسی خودکار هر ۶۰ ثانیه",false);
     }catch(e){
-      if(!signals.length)boot(EMBEDDED_SIGNALS,derivedHistory(),{snapshots:[]});
+      if(!signals.length)boot(EMBEDDED_SIGNALS,null,{snapshots:[]});
       updateLiveIndicator("نسخهٔ آنلاین در دسترس نیست؛ دادهٔ موجود نمایش داده می‌شود",true);
       document.getElementById("liveage").textContent=lastGoodRead?"آخرین دریافت موفق: "+formatLocalDate(lastGoodRead):"نسخهٔ اولیهٔ آفلاین";
     }finally{liveBusy=false;button.disabled=false;}
