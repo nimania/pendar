@@ -1,0 +1,104 @@
+/* Editorial report, chronology and visible provenance on story detail pages.
+   Newsroom-inspired without imitating a legacy site. */
+#detail-view .story-editorial{
+  margin:24px 0 30px;
+  padding:24px 24px 20px;
+  border:1px solid var(--line);
+  border-top:3px solid var(--accent);
+  border-radius:12px;
+  background:var(--surface);
+  box-shadow:var(--shadow-soft);
+  text-align:right;
+}
+#detail-view .story-editorial-kicker{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  color:var(--accent);
+  font:800 13px/1.6 "Vazirmatn",sans-serif;
+  margin-bottom:10px;
+}
+#detail-view .story-editorial-kicker span{
+  font-weight:450;font-size:12px;color:var(--ink-soft);
+}
+#detail-view .story-editorial h2{
+  margin:0 0 16px;
+  font:750 clamp(21px,3.1vw,27px)/1.65 "Vazirmatn",sans-serif;
+  color:var(--ink);
+  overflow-wrap:anywhere;
+}
+#detail-view .story-editorial-lead{
+  font:650 17px/2 "Vazirmatn",sans-serif;
+  color:var(--ink);
+  padding:0 0 14px;margin:0 0 16px;
+  border-bottom:1px solid var(--line);
+}
+#detail-view .story-editorial-body p{
+  font:400 16px/2.15 "Vazirmatn",sans-serif;
+  margin:0 0 17px;color:var(--ink);
+}
+#detail-view .story-editorial-note{
+  font:450 12.5px/1.9 "Vazirmatn",sans-serif;
+  color:var(--ink-soft);
+  border-top:1px solid var(--line);
+  margin:14px 0 0;padding-top:12px;
+}
+#detail-view .story-report-cites{
+  display:inline-flex;gap:4px;align-items:baseline;direction:ltr;
+  vertical-align:super;margin-inline:4px;
+}
+#detail-view .story-report-cite{
+  display:inline-grid;place-items:center;
+  border:1px solid var(--line);
+  background:var(--surface-2);color:var(--accent);
+  min-width:24px;height:22px;border-radius:5px;
+  font:700 11px/1 "Vazirmatn",sans-serif;
+  text-decoration:none;
+}
+#detail-view .story-report-cite:hover{border-color:var(--accent)}
+#detail-view .story-history{
+  margin:20px 0 28px;
+  padding:18px 20px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+#detail-view .story-history h2{
+  margin:0 0 8px;
+  font:750 19px/1.8 "Vazirmatn",sans-serif;
+}
+#detail-view .story-history h3{
+  font:700 13px/1.8 "Vazirmatn",sans-serif;
+  color:var(--ink-soft);
+  margin:17px 0 4px;
+}
+#detail-view .story-history-caveat{
+  color:var(--ink-soft);
+  font:400 12.5px/1.9 "Vazirmatn",sans-serif;
+  margin:0;
+}
+#detail-view .story-history ol{
+  list-style:none;margin:0;padding:0;
+  display:grid;gap:0;
+}
+#detail-view .story-history li+li{border-top:1px solid var(--line)}
+#detail-view .story-history li a{
+  display:flex;align-items:baseline;gap:11px;
+  padding:9px 0;color:var(--ink);
+  font:600 14px/1.85 "Vazirmatn",sans-serif;
+  text-decoration:none;
+}
+#detail-view .story-history li a:hover span{color:var(--accent)}
+#detail-view .story-history li time{
+  flex:0 0 auto;white-space:nowrap;direction:ltr;
+  font-size:11.5px;color:var(--ink-soft);
+  font-weight:450;
+}
+@media(max-width:600px){
+  #detail-view .story-editorial{margin:18px 0 22px;padding:17px 15px}
+  #detail-view .story-editorial h2{font-size:21px;line-height:1.75}
+  #detail-view .story-editorial-lead{font-size:16px;line-height:2}
+  #detail-view .story-editorial-body p{font-size:15px;line-height:2.1}
+  #detail-view .story-history{padding:15px 13px}
+  #detail-view .story-history li a{display:grid;gap:1px;font-size:14px}
+  #detail-view .story-history li time{font-size:11px}
+}
