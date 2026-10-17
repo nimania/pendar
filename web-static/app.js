@@ -262,10 +262,35 @@ const VIEWBOX = (typeof window !== "undefined" && window.IRAN_VIEWBOX) || "0 0 9
 // hitProvFollow) now lives in iran.js, loaded before this file.
 
 const root = document.documentElement;
-document.getElementById("theme").addEventListener("click", () => {
-  const cur = root.getAttribute("data-theme"), sysDark = matchMedia("(prefers-color-scheme:dark)").matches;
-  root.setAttribute("data-theme", (cur === "dark" || (!cur && sysDark)) ? "light" : "dark");
-});
+const themeButton = document.getElementById("theme");
+const themeMedia = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+function isDarkTheme(){
+  const chosen = root.getAttribute("data-theme");
+  return chosen === "dark" || (chosen !== "light" && Boolean(themeMedia?.matches));
+}
+function syncThemeButton(){
+  if(!themeButton)return;
+  const dark = isDarkTheme();
+  themeButton.setAttribute("aria-pressed",String(dark));
+  themeButton.setAttribute("aria-label","حالت تیره");
+  themeButton.title = dark ? "تغییر به حالت روشن (Light Mode)" : "تغییر به حالت تیره (Dark Mode)";
+  const moon = themeButton.querySelector(".theme-moon-icon");
+  const sun = themeButton.querySelector(".theme-sun-icon");
+  if(moon)moon.hidden = dark;
+  if(sun)sun.hidden = !dark;
+}
+if(themeButton){
+  themeButton.addEventListener("click",()=>{
+    const next = isDarkTheme() ? "light" : "dark";
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem("pendar-theme",next);}catch(_){}
+    syncThemeButton();
+  });
+  themeMedia?.addEventListener?.("change",()=>{
+    if(!root.hasAttribute("data-theme"))syncThemeButton();
+  });
+  syncThemeButton();
+}
 if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 
 // freshness line: when the SYSTEM last checked, and how old the NEWEST story is
