@@ -24,6 +24,7 @@ from app.models.story import SourceView, Statement, Story, StoryArticle
 from app.models.news_person_statement import NewsPersonStatement
 from app.news_people import is_named_person_name
 from app.models.usage_log import UsageLog
+from app.source_identity import publisher_identity
 
 NEWS_PEOPLE_BACKFILL_STAGE = "news_people_v1"
 
@@ -130,7 +131,7 @@ def _apply(db: Session, story: Story, out: JanKalamOutput, articles: list) -> No
     story.why_it_matters_fa = out.why_it_matters_fa
     story.confidence_score = out.confidence
     story.iran_relevance = IranRelevance(out.iran_relevance)
-    story.source_count = len({a.source_id for a in articles})
+    story.source_count = len({publisher_identity(a) for a in articles})
     story.status = StoryStatus.published
     story.published_at = datetime.now(timezone.utc)
 
