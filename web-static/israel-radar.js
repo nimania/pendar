@@ -48,4 +48,20 @@ function renderIsraelRadar(){
  <section class="isr-guide"><h2>انتخابات اسرائیل در چند دقیقه</h2><details open><summary>کنست چیست و رأی به چه کسی داده می‌شود؟</summary><p>کنست پارلمان ۱۲۰ نفره اسرائیل است. رأی‌دهندگان به فهرست‌های حزبی رأی می‌دهند. کرسی‌ها میان فهرست‌هایی که حداقل ۳٫۲۵ درصد آرای معتبر را گرفته‌اند توزیع می‌شود.</p></details><details><summary>حزب اول الزاماً نخست‌وزیر می‌شود؟</summary><p>خیر؛ توان تشکیل دولت و جلب حمایت پارلمان تعیین‌کننده است. احزاب معمولاً برای این کار ائتلاف می‌کنند. عدد ۶۱ در این صفحه معیار اکثریت مطلق کرسی‌هاست.</p></details><details><summary>چرا برای ایران مهم است؟</summary><p>ترکیب دولت می‌تواند بر تصمیم‌های امنیتی، رابطه با آمریکا، دیپلماسی و برخورد با جمهوری اسلامی اثر بگذارد. از عدد نظرسنجی نمی‌توان نتیجه قطعی درباره جنگ یا مذاکره گرفت.</p></details><a href="${esc(ISR.system_source)}" target="_blank" rel="noopener">راهنمای رسمی انتخابات ↗</a></section>`;
  isrRefreshCoalition();isrRenderNews();
 }
-async function showRadarHub(){show('radar');setTab('');setHash('#/radar');document.title='رادارهای پندار | آمریکا و اسرائیل';const root=document.getElementById('radar-content');root.innerHTML='<div class="spinner"></div>';await loadRadarStatus();root.innerHTML=`<header class="isr-hero"><div><small>PENDAR · RADARS</small><h1>رادارهای پندار</h1><p>رقابت‌های سیاسی جهان و پیامدهایشان برای ایران؛ خبر، چهره و داده در یک جا.</p></div></header><div class="isr-hub-grid">${radarHubCard('us')}${radarHubCard('israel')}</div>`;}
+async function showRadarHub(){
+ show('radar');setTab('');setHash('#/radar');
+ document.title='رادار جهان | آینده‌بان پندار';
+ const root=document.getElementById('radar-content');
+ root.innerHTML='<div class="spinner"></div>';
+ await loadRadarStatus();
+ root.innerHTML=`<div class="future-radar-context"><a href="/future/">آینده‌بان ←</a><span> / رادار جهان</span></div>
+ <header class="isr-hero"><div><small>PENDAR · FUTURE OBSERVATORY</small><h1>رادار جهان</h1>
+ <p>رادارهای کشورها زیرمجموعهٔ آینده‌بان‌اند؛ انتخابات، نظرسنجی‌ها، سیگنال‌های ثبت‌شده و منابع مرتبط با آینده ایران.</p></div></header>
+ <div class="isr-hub-grid">${radarHubCard('us')}${radarHubCard('israel')}</div>
+ <section class="future-radar-context-links" aria-label="بخش‌های مرتبط آینده‌بان">
+ <a href="/radar/iran-scenarios/">سناریوهای ایران ←</a>
+ <a href="/future/evidence/">رادار شواهد ←</a>
+ <a href="/future/transition/">اطلس گذار ←</a>
+ <a href="/future/">نمای کلی آینده‌بان ←</a>
+ </section>`;
+}
