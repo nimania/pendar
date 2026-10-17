@@ -314,6 +314,23 @@
     var a=el("a",null,name);a.href="/@"+h+"/";host.appendChild(a);
   }
   function subLink(host,title,slug,family){var a=el("a",null,title);a.href=subUrl(slug,family);host.appendChild(a);}
+  function linkedMentions(host,content){
+    var value=String(content||""),tokens=[];
+    Object.keys(PERSON_HANDLES).filter(function(n){return n.length>=4;}).forEach(function(name){tokens.push({term:name,url:"/@" + PERSON_HANDLES[name] + "/"});});
+    scenarioCatalog.scenarios.forEach(function(z){tokens.push({term:z.title,url:subUrl(z.slug,z.family)});});
+    tokens.sort(function(a,b){return b.term.length-a.term.length;});
+    var cursor=0,guard=0;
+    while(cursor<value.length&&guard++<120){
+      var earliest=null;
+      tokens.forEach(function(t){var at=value.indexOf(t.term,cursor);
+        if(at>=0&&(!earliest||at<earliest.at||(at===earliest.at&&t.term.length>earliest.term.length)))earliest={at:at,term:t.term,url:t.url};
+      });
+      if(!earliest){host.appendChild(document.createTextNode(value.slice(cursor)));break;}
+      if(earliest.at>cursor)host.appendChild(document.createTextNode(value.slice(cursor,earliest.at)));
+      var a=el("a",null,earliest.term);a.href=earliest.url;host.appendChild(a);
+      cursor=earliest.at+earliest.term.length;
+    }
+  }
 
 
   var ANALYSTS = [
@@ -584,7 +601,7 @@
       meta.appendChild(el("span","dir "+dcls,dtxt));
       if(s.analyst_priority&&dnum&&s.score_kind==="analyst_view")meta.appendChild(el("span","date","گروه آینده ایران · وزن پایه ۲ (پیش از سقف روزانه)"));
       li.appendChild(meta);
-      li.appendChild(el("p","txt",s.text||""));
+      var excerpt=el("p","txt");linkedMentions(excerpt,s.text||"");li.appendChild(excerpt);
       if(s.analyst_handle&&s.speaker) {
         var sl=el("div","smalllabel");
         var scoped=scenarioCatalog.scenarios.filter(function(z){return z.family===f.key&&z.proponent.handle===s.analyst_handle;});
@@ -621,7 +638,7 @@
         li.appendChild(el("div","signal-reason","وضعیت شاهد: "+s.review_note));
       }
       if(s.uncertainty)li.appendChild(el("div","smalllabel","عدم‌قطعیت: "+s.uncertainty));
-      if(s.source)li.appendChild(el("div","src","منبع/ناشر: "+s.source));
+      if(s.source){var pub=el("div","src");pub.appendChild(el("span",null,"منبع/ناشر: "));linkedMentions(pub,s.source);li.appendChild(pub);}
       var references=Array.isArray(s.source_links)?s.source_links:[];
       if(!references.length&&s.source_url)references=[{label:"منبع ثبت‌شده",url:s.source_url}];
       if(references.length){
