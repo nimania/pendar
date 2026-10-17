@@ -244,7 +244,13 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
     # Enrich every exported archive page (up to 500), not just the 60-card feed.
     # Paid editorial generation stays bounded to current headline candidates.
     active_ids={str(c.get("id") or "") for c in cards}
-    for row in archive:
+    # Prioritize the first user-selected pilot even if it has moved out of the
+    # front-page feed. The environment variable can later be cleared or changed.
+    priority=set(filter(None,(v.strip() for v in os.environ.get(
+        "PENDAR_EDITORIAL_PRIORITY_STORY_IDS",
+        "b4efb62f-9240-4e90-ba4f-4664e608fa97").split(","))))
+    ordered=sorted(archive,key=lambda row: 0 if str(row.get("id") or "") in priority else 1)
+    for row in ordered:
         sid=str(row.get("id") or "")
         if not UUID_RE.fullmatch(sid):continue
         fpath=data_dir/"story"/(sid+".json")
@@ -264,7 +270,7 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
                 try:report=json.loads(hit[0]);reused+=1
                 except ValueError:pass
         enough=bool(sources) and len(str(detail.get("what_happened_fa") or ""))>=90 and len(str(detail.get("summary_fa") or ""))>=80
-        if report is None and sid in active_ids and is_ai and enough and attempted<max_generate:
+        if report is None and (sid in active_ids or sid in priority) and is_ai and enough and attempted<max_generate:
             attempted+=1
             try:
                 result=provider.generate(system=SYSTEM,user=json.dumps(prompt_data,ensure_ascii=False),context={"editorial":prompt_data})
