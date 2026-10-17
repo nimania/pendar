@@ -78,6 +78,35 @@ async function storyPeopleSuggestions(s) {
     </article>`).join("")}</div></div>`;
 }
 
+async function loadRelatedIranScenarioLinks(story) {
+  const host=document.getElementById("story-scenarios");
+  if(!host)return;
+  const text=[story.headline_fa,story.summary_fa,story.what_happened_fa].join(" ");
+  if(!/ایران|تهران|جمهوری\s*اسلامی|ریال/.test(text))return;
+  let catalog;
+  try{catalog=await getJSON(`${DATA}/iran-scenario-catalog.json`);}
+  catch(_){return;}
+  const normalized=v=>String(v||"").replace(/[ي]/g,"ی").replace(/[ك]/g,"ک").replace(/‌/g," ").toLowerCase();
+  const hay=normalized(text);
+  const rules={
+    deal:/مذاکر|توافق|آتش.?بس|دیپلماسی|ترک مخاصمه/,
+    regroup:/سرکوب|بازداشت|انقباض|اقتدارگرا/,
+    war:/جنگ|بمباران|حمله|درگیری|موشک/,
+    transition:/گذار|سرنگونی|فروپاشی|دولت موقت|انتقال قدرت/,
+    attrition:/تورم|تحریم|ریال|فرسایش|رکود/,
+    recovery:/چین|روسیه|سرمایه.?گذاری|وام/
+  };
+  const selected=(catalog.families||[]).filter(f=>rules[f.key]&&rules[f.key].test(hay)).slice(0,3);
+  if(!selected.length)return;
+  const subs=(catalog.scenarios||[]).filter(s=>selected.some(f=>f.key===s.family)&&
+    (s.match_terms||[]).some(term=>normalized(term).length>=7&&hay.includes(normalized(term)))).slice(0,5);
+  const htmlLinks=selected.map(f=>'<a href="/radar/iran-scenarios/'+esc(f.key)+'/">'+esc(f.title)+' ↗</a>').join(" · ");
+  const subLinks=subs.map(s=>'<a href="/radar/iran-scenarios/'+esc(s.family)+'/'+esc(s.slug)+'/">'+esc(s.title)+' ↗</a>').join(" · ");
+  host.innerHTML='<div class="layers"><h3 class="section-h">سناریوهای مرتبط در رادار پندار <span class="n">پیوند موضوعی؛ نه تأیید پیش‌بینی</span></h3>'+
+     '<div class="views"><div class="view"><p>'+htmlLinks+'</p>'+(subLinks?'<p>'+subLinks+'</p>':"")+
+     '<p class="muted">این پیوندها از تطبیق موضوع خبر با سناریوها به‌دست آمده‌اند؛ برای بررسی استدلال هر تحلیل‌گر و شواهد اصلی، پروندهٔ سناریو را باز کنید.</p></div></div></div>';
+}
+
 async function openStory(id) {
   // Defensive normalization for copied/encoded deep links.  A stray control
   // character (e.g. %01 before a UUID) previously produced a valid-looking
@@ -183,6 +212,7 @@ async function openStory(id) {
       <div class="qa"><h3>چرا اهمیت دارد؟</h3><p>${esc(s.why_it_matters_fa || "—")}</p></div></div>
     ${articleDisplayAdMarkup()}
     ${futureNewsDetail(s)}
+    <div id="story-scenarios"></div>
     ${known}
     ${cred}
     ${trendSec}
@@ -214,6 +244,7 @@ async function openStory(id) {
     },2500);
   }
   renderContentDiscovery(document.getElementById("story-discovery"),s);
+  loadRelatedIranScenarioLinks(s).catch(()=>{});
 }
 function showAsk(i) {
   document.querySelectorAll(".qchip").forEach(c => c.classList.remove("on"));
