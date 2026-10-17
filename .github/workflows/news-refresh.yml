@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/news-refresh.yml"
+      - "backend/scripts/build_editorial_reports.py"
 
 # 2026-10-10 Gemini API billing retry; preserve existing pipeline.
 # Manual recovery request 2026-10-12: push only to trigger the existing independent collector.
@@ -52,6 +53,7 @@ jobs:
           python -m scripts.seed
           python -c "from app.tasks.scheduler import run_full_cycle; print(run_full_cycle())"
           python -m scripts.export_static
+          python -m scripts.build_editorial_reports
           NEWS_DB_PATH=build.db NEWS_HEALTH_OUT=public/data/news-health.json python scripts/export_news_health.py
       - name: Validate independently generated news
         run: |
