@@ -415,7 +415,7 @@ async function renderHomePeopleDirectory(){
       // A single unified, chronological timeline: statements and published recaps.
       for(const p of posts){
         if(seen.has(String(p.id)))continue;
-        const time=figureActivityTime(p);if(!time)continue;
+        const time=figureActivityTime(p); // Undated published items remain available after dated posts.
         seen.add(String(p.id));
         const portrait=profileByHandle.get(String(f.handle).toLowerCase())||profileByName.get(normalize(f.name_fa))||f.avatar||p.avatar||"";
         rows.push({f:{...f,avatar:portrait},p,time});
