@@ -50,6 +50,27 @@
     if(direct&&safePath.test(direct))return direct;
     return profile(row.speaker);
   };
+  const appendLinkedMentions=(host,content)=>{
+    const value=String(content||"");
+    if(!catalog||!value){host.textContent=value;return;}
+    const tokens=[];
+    (catalog.people||[]).forEach(p=>{if(p.name&&p.handle)tokens.push({word:p.name,url:"/@" + p.handle + "/"});});
+    (catalog.scenarios||[]).forEach(s=>{if(s.title)tokens.push({word:s.title,url:subUrl(s)});});
+    tokens.sort((a,b)=>b.word.length-a.word.length);
+    let cursor=0,guard=0;
+    while(cursor<value.length&&guard++<120){
+      let found=null;
+      tokens.forEach(t=>{
+        const at=value.indexOf(t.word,cursor);
+        if(at<0)return;
+        if(!found||at<found.at||(at===found.at&&t.word.length>found.t.word.length))found={at,t};
+      });
+      if(!found){host.append(document.createTextNode(value.slice(cursor)));break;}
+      if(found.at>cursor)host.append(document.createTextNode(value.slice(cursor,found.at)));
+      host.append(link(found.t.word,found.t.url));
+      cursor=found.at+found.t.word.length;
+    }
+  };
   const signalId=x=>String(x.id||"").replace(/[^A-Za-z0-9_-]/g,"");
   const matchesSub=(row,s)=>{
     const text=[row.text,row.summary_fa,row.headline_fa,row.title_fa,row.title,row.topic_fa].join(" ");
@@ -83,7 +104,7 @@
     const speaker=row.speaker||"";
     if(speaker){const by=node("div","row");by.append(node("span","muted","گوینده: "),link(speaker,speakerHref(row),"person"));
       if(row.speaker_role)by.append(node("small","",row.speaker_role));x.append(by);}
-    const p=node("p","",row.text||"");x.append(p);
+    const p=node("p","");appendLinkedMentions(p,row.text||"");x.append(p);
     if(Array.isArray(row.related_people)&&row.related_people.length){
       const people=node("div","");
       row.related_people.forEach(person=>{
@@ -152,7 +173,7 @@
     h.append(link(item.speaker,"/@" + item.handle+"/","person"));
     if(item.title)h.append(node("span","pill",item.title));
     e.append(h);
-    e.append(node("p","",String(item.text).slice(0,1200)));
+    const body=node("p","");appendLinkedMentions(body,String(item.text).slice(0,1200));e.append(body);
     e.append(node("small","", "منبع درج‌شده: "+item.source+" · تطبیق موضوعی؛ نه الزاماً تأیید سناریو"));
     if(item.url)e.append(node("div","links")).append(link("مشاهدهٔ متن یا ویدئوی اصلی ↗",item.url));
     else e.append(node("small","","لینک مدرک اولیه ثبت نشده؛ انتساب نیازمند بررسی است."));
