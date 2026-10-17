@@ -118,6 +118,10 @@ def parse_feed(raw: str | bytes, source: Source) -> list[NormalizedItem]:
     """Dispatch by the source's declared feed type."""
     if source.feed_type.value == "json":
         return parse_json_feed(raw, source)
+    if source.feed_type.value == "html":
+        from app.ingestion.html_news import parse_html_news
+
+        return parse_html_news(raw, source)
     if source.feed_type.value == "telegram":
         from app.ingestion.telegram import parse_telegram_channel
 
