@@ -55,6 +55,11 @@ jobs:
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
+          # Instagram Business Discovery remains off when secrets or allowlist are absent.
+          PENDAR_IG_USER_ID: ${{ secrets.PENDAR_IG_USER_ID }}
+          PENDAR_IG_ACCESS_TOKEN: ${{ secrets.PENDAR_IG_ACCESS_TOKEN }}
+          PENDAR_IG_GRAPH_VERSION: v26.0
+          PENDAR_IG_ALLOWLIST: ${{ vars.PENDAR_IG_ALLOWLIST }}
         run: |
           python -m scripts.seed
           python -m scripts.collect_figure_sources
