@@ -170,6 +170,7 @@
     <span id="livepulse" class="livepulse"></span>
     <span id="livestate">دریافت دادهٔ منتشرشده...</span>
     <span id="liveage" class="smalllabel"></span>
+    <span id="edge-status" class="smalllabel">کانال رویدادمحور: در حال بررسی پیکربندی</span>
     <button type="button" id="refresh-live">بررسی دوباره ↻</button>
   </div>
 
@@ -753,7 +754,9 @@
       li.appendChild(el("strong",null,formatLocalDate(snapshot.at)));
       var deltas=FAMILIES.filter(function(f){return snapshot.changes&&snapshot.changes[f.key];})
         .map(function(f){var n=Number(snapshot.changes[f.key]);return shortFam(f.title)+" "+signed(n);});
-      li.appendChild(el("div",null,deltas.length?deltas.join(" · "):"تغییر در شواهد ثبت شد؛ امتیاز ثابت ماند."));
+      li.appendChild(el("div",null,snapshot.source==="edge"
+        ?"دریافت رویداد مستقل · "+Number(snapshot.changed||0)+" رکورد جدید یا تغییرکرده"
+        :(deltas.length?deltas.join(" · "):"تغییر در شواهد ثبت شد؛ امتیاز ثابت ماند.")));
       li.appendChild(el("small",null,"وضعیت منتشرشده · "+Number(snapshot.signal_count||0)+" سیگنال در دفتر"));
       var ids=Array.isArray(snapshot.recent_signal_ids)?snapshot.recent_signal_ids:[];
       if(ids.length){
@@ -803,6 +806,126 @@
   }
 
 
+
+  // ---------- independent event-driven live edge ----------
+  // No ingest secret is ever sent to the browser. A missing/unhealthy service
+  // leaves GitHub Pages charts and existing fallback unchanged.
+  var edgeOrigin="";
+  var edgeSocket=null;
+  var edgeVersion=-1;
+  var edgeSignals=[];
+  var edgeObservations=[];
+  var edgeReconnectMs=3000;
+  var edgeReconnectTimer=null;
+  var baseSignals=[];
+  var baseHistory=null;
+  var baseSnapshots=null;
+  var edgeBusy=false;
+  function edgeStatus(message){
+    var node=document.getElementById("edge-status");
+    if(node)node.textContent="کانال لحظه‌ای: "+message;
+  }
+  function mergeEvidence(base,overlay){
+    var map=new Map();
+    (Array.isArray(base)?base:[]).forEach(function(s){if(s&&s.id)map.set(s.id,s);});
+    (Array.isArray(overlay)?overlay:[]).forEach(function(s){if(s&&s.id)map.set(s.id,s);});
+    return Array.from(map.values()).sort(function(a,b){return (b.ts||0)-(a.ts||0);});
+  }
+  function updateMergedDashboard(){
+    signals=mergeEvidence(baseSignals,edgeSignals);
+    timeline=edgeSignals.length?derivedHistory():(baseHistory&&Array.isArray(baseHistory.points)?baseHistory:derivedHistory());
+    var published=baseSnapshots&&Array.isArray(baseSnapshots.snapshots)?baseSnapshots.snapshots:[];
+    var streamed=edgeObservations.map(function(o){
+      return {at:o.at,source:"edge",changed:o.changed,signal_count:edgeSignals.length};
+    });
+    snapshotsData={snapshots:published.concat(streamed).sort(function(a,b){
+      return String(a.at||"").localeCompare(String(b.at||""));
+    }).slice(-2000)};
+    renderFamilies();renderAnalysts();renderFilter();renderLog();renderMaint();
+    renderCharts();renderAudit();
+    setStatus(signals.length+" سند و سیگنال ثبت‌شده · "+edgeSignals.length+" رکورد در کانال رویدادمحور");
+  }
+  async function loadEdgeState(){
+    if(!edgeOrigin||edgeBusy)return;
+    edgeBusy=true;
+    try{
+      var response=await fetch(edgeOrigin+"/v1/state?v="+Date.now(),{cache:"no-store"});
+      if(!response.ok)throw new Error("edge state unavailable");
+      var data=await response.json();
+      if(!data||!Array.isArray(data.signals))throw new Error("invalid edge JSON");
+      if(data.version===edgeVersion&&edgeSignals.length)return;
+      edgeVersion=Number(data.version)||0;
+      edgeSignals=data.signals;
+      edgeObservations=Array.isArray(data.observations)?data.observations:[];
+      updateMergedDashboard();
+      edgeStatus("متصل · "+edgeSignals.length+" سند · نسخه "+edgeVersion);
+    }catch(_){edgeStatus("اختلال در دریافت داده؛ نمایش آخرین نسخهٔ معتبر");}
+    finally{edgeBusy=false;}
+  }
+  function scheduleEdgeRetry(){
+    if(edgeReconnectTimer||!edgeOrigin)return;
+    edgeReconnectTimer=setTimeout(function(){
+      edgeReconnectTimer=null;
+      connectEdgeSocket();
+    },edgeReconnectMs);
+    edgeReconnectMs=Math.min(60000,Math.round(edgeReconnectMs*1.7));
+  }
+  function connectEdgeSocket(){
+    if(!edgeOrigin)return;
+    if(edgeSocket){try{edgeSocket.close();}catch(_){ }edgeSocket=null;}
+    try{
+      var wsUrl=edgeOrigin.replace(/^https:\/\//,"wss://")+"/v1/ws";
+      var socket=new WebSocket(wsUrl);
+      edgeSocket=socket;
+      socket.addEventListener("open",function(){
+        if(edgeSocket!==socket)return;
+        edgeReconnectMs=3000;edgeStatus("ارتباط WebSocket برقرار");
+        loadEdgeState();
+      });
+      socket.addEventListener("message",function(event){
+        if(edgeSocket!==socket)return;
+        try{
+          var msg=JSON.parse(event.data);
+          if(msg&&["ready","changed"].includes(msg.type))loadEdgeState();
+        }catch(_){}
+      });
+      socket.addEventListener("close",function(){
+        if(edgeSocket!==socket)return;
+        edgeSocket=null;edgeStatus("ارتباط قطع شده؛ تلاش مجدد، نمایش دادهٔ ذخیره‌شده");
+        scheduleEdgeRetry();
+      });
+      socket.addEventListener("error",function(){
+        if(edgeSocket!==socket)return;
+        edgeStatus("ارتباط زنده در دسترس نیست؛ استفاده از دادهٔ منتشرشده");
+        try{socket.close();}catch(_){}
+      });
+    }catch(_){edgeStatus("خطای اتصال به کانال");scheduleEdgeRetry();}
+  }
+  async function initializeEdge(){
+    try{
+      var response=await fetch("/data/iran-scenario-live-config.json?v="+Date.now(),
+        {cache:"no-store"});
+      if(!response.ok)throw new Error("no config");
+      var data=await response.json();
+      var origin=String(data.origin||"").replace(/\/$/,"");
+      var parsed=new URL(origin);
+      if(parsed.protocol!=="https:"||parsed.pathname!=="/"||parsed.username||parsed.password)
+        throw new Error("unconfigured");
+      edgeOrigin=parsed.origin;
+      connectEdgeSocket();
+    }catch(_){edgeStatus("هنوز راه‌اندازی نشده · رادار منتشرشده فعال است");}
+  }
+  setInterval(function(){
+    if(document.visibilityState!=="hidden"&&edgeOrigin){
+      if(edgeSocket&&edgeSocket.readyState===WebSocket.OPEN){
+        try{edgeSocket.send("ping");}catch(_){}
+      }else if(!edgeSocket&&!edgeReconnectTimer){scheduleEdgeRetry();}
+    }
+  },40000);
+  document.addEventListener("visibilitychange",function(){
+    if(document.visibilityState==="visible"&&edgeOrigin)loadEdgeState();
+  });
+
   // ---------- tabs ----------
   var tf=document.getElementById("tab-fam"), ta=document.getElementById("tab-an");
   function selectTab(which){
@@ -818,15 +941,14 @@
   // ---------- boot ----------
 
   function boot(data,history,snapshots){
-    signals=Array.isArray(data)?data:[];
-    timeline=history&&Array.isArray(history.points)?history:derivedHistory();
-    snapshotsData=snapshots||{snapshots:[]};
-    renderFamilies();renderAnalysts();renderFilter();renderLog();renderMaint();
-    renderCharts();renderAudit();
-    setStatus(signals.length?signals.length+" سیگنال · آخرین خبر: "+((signals[0]||{}).date||"—"):"سیگنالی ثبت نشده است.");
+    baseSignals=Array.isArray(data)?data:[];
+    baseHistory=history;
+    baseSnapshots=snapshots||{snapshots:[]};
+    updateMergedDashboard();
   }
   document.getElementById("refresh-live").addEventListener("click",function(){refreshLive(true);});
   refreshLive(true);
+  initializeEdge();
   setInterval(function(){
     if(document.visibilityState!=="hidden")refreshLive(false);
   },60000);
