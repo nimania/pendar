@@ -34,13 +34,17 @@ jobs:
           assert len(rows)==8
           assert len({x['id'] for x in rows})==len(rows)
           html=Path('web-static/radar/iran-scenarios/index.html').read_text(encoding='utf-8')
-          assert '/data/iran-scenario-signals.json' in html
-          assert '/data/iran-scenario-history.json' in html
+          assert 'iran-scenario-signals.json' in html
+          assert 'iran-scenario-history.json' in html
           assert 'trendplot' in html and 'componentscores' in html
+          assert 'iran-scenario-snapshots.json' in html
+          assert 'source_links' in html and 'score_reason' in html
+          assert '60000' in html
           from sys import path
           path.insert(0,'backend/scripts')
           from prepare_priority_site import keep_data_file
           assert keep_data_file('iran-scenario-signals.json')
           assert keep_data_file('iran-scenario-meta.json')
           assert keep_data_file('iran-scenario-history.json')
+          assert keep_data_file('iran-scenario-snapshots.json')
           PY
