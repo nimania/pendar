@@ -112,6 +112,52 @@
     subset.slice(0,limit).forEach(x=>rowCard(list,x,tag));parent.append(list);
     if(subset.length>limit){const b=node("button","","نمایش موارد بیشتر ("+(subset.length-limit)+")");b.addEventListener("click",()=>{limit+=40;render();});parent.append(b);}
   };
+  const figureArchive=()=>{
+    const seen=new Set();
+    const items=[];
+    figures.forEach(f=>{
+      if(!f||!Array.isArray(f.posts))return;
+      f.posts.forEach(p=>{
+        if(!p||!["analysis","party_claim"].includes(p.kind||""))return;
+        const url=String(p.url||p.article_url||"");
+        const text=[p.topic_fa,p.summary_fa,p.quote_fa,p.statement_fa].join(" ");
+        if(!text.trim())return;
+        if(sub&&!matchesSub({text:text},sub))return;
+        if(!sub){
+          const re={
+            deal:/مذاکر|آتش.?بس|توافق|دیپلماسی/,
+            regroup:/بازداشت|سرکوب|انقباض|قلعه خاموش/,
+            war:/جنگ|بمباران|حمله|درگیری|موشک/,
+            transition:/گذار|سقوط|فروپاشی|انتقال قدرت/,
+            attrition:/تحریم|تورم|ریال|فرسایش|بن بست/,
+            recovery:/چین|روسیه|وام|پساترامپ|بازیابی/
+          }[familyKey];
+          if(!re||!re.test(norm(text))||!has(text,"ایران")&&!has(text,"تهران")&&!sub) return;
+        }
+        const id=url||String(p.id||"");
+        if(!id||seen.has(id))return;
+        seen.add(id);
+        items.push({speaker:f.name_fa||p.name_fa||"",handle:f.handle||"",
+          role:f.role_fa||"",text:p.summary_fa||p.statement_fa||p.topic_fa||"",
+          title:p.topic_fa||"",published:p.published_at||p.recorded_at||"",
+          url:url,source:p.source_name||p.platform||"چهره‌های پندار"});
+      });
+    });
+    return items.sort((a,b)=>String(b.published||"").localeCompare(String(a.published||"")));
+  };
+  const drawFigurePost=(container,item)=>{
+    const e=node("article","entry");
+    e.append(node("small","",fmt(item.published)));
+    const h=node("div","row");
+    h.append(link(item.speaker,"/@" + item.handle+"/","person"));
+    if(item.title)h.append(node("span","pill",item.title));
+    e.append(h);
+    e.append(node("p","",String(item.text).slice(0,1200)));
+    e.append(node("small","", "منبع درج‌شده: "+item.source+" · تطبیق موضوعی؛ نه الزاماً تأیید سناریو"));
+    if(item.url)e.append(node("div","links")).append(link("مشاهدهٔ متن یا ویدئوی اصلی ↗",item.url));
+    else e.append(node("small","","لینک مدرک اولیه ثبت نشده؛ انتساب نیازمند بررسی است."));
+    container.append(e);
+  };
   const newsUrl=item=>{
     const id=String(item.id||"");
     return /^[a-f0-9-]{8,64}$/i.test(id)?"/story/"+id+"/":"";
@@ -182,6 +228,18 @@
     if(sub){
       const broader=section(root,"سایر شواهد و رخدادهای خانوادهٔ سناریو","این مطالب مربوط به خانوادهٔ کلان‌اند و به‌تنهایی شاهد اختصاصی تأیید زیرسناریوی انتخاب‌شده نیستند.");
       showRows(broader,records.filter(x=>!sameTopic(x)).slice(0,70),"زمینهٔ مرتبط");
+    }
+    const posts=figureArchive();
+    const authorPosts=sub?posts.filter(p=>norm(p.speaker)===norm(sub.proponent.name)):posts;
+    const archived=section(root,sub?"آرشیو گفتار و ویدئوهای مرتبطِ مطرح‌کننده":"آرشیو موضوعی گفته‌های چهره‌ها",
+      "مطالب مستقیماً از پروفایل‌های منتشرشدهٔ پندار استخراج می‌شوند. شباهت موضوعی به معنی تأیید یا پیش‌بینی وقوع نیست.");
+    if(!authorPosts.length)archived.append(node("div","empty","گفته یا ویدئوی منطبق با این موضوع در آرشیو پروفایل‌ها پیدا نشد."));
+    authorPosts.slice(0,35).forEach(p=>drawFigurePost(archived,p));
+    if(sub){
+      const peerPosts=posts.filter(p=>norm(p.speaker)!==norm(sub.proponent.name));
+      const peers=section(root,"گفتار موضوعاً مشابهِ دیگر تحلیل‌گران","این افراد الزاماً موافق مطرح‌کننده نیستند؛ متن و استناد هر شخص را جداگانه بررسی کنید.");
+      if(!peerPosts.length)peers.append(node("div","empty","گفتار دیگری با تطبیق متنی مشخص پیدا نشد."));
+      peerPosts.slice(0,35).forEach(p=>drawFigurePost(peers,p));
     }
     const headlines=relatedNews();
     const newsSection=section(root,"آخرین خبرهای مرتبط از سرخط پندار",
