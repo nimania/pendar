@@ -1,6 +1,14 @@
 name: Deploy Pendar Live Radar Edge
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - "radar-live/**"
+      - "web-static/radar/iran-scenarios/index.html"
+      - ".github/workflows/radar-live-deploy.yml"
+      - "backend/scripts/publish_iran_radar_live.py"
+      - "backend/scripts/configure_iran_radar_live.py"
+      - "backend/tests/test_iran_radar_live_publisher.py"
   push:
     branches: [main]
     paths:
@@ -33,7 +41,7 @@ jobs:
           NODE
   deploy:
     needs: tests
-    if: ${{ vars.CLOUDFLARE_ACCOUNT_ID != '' }}
+    if: ${{ github.event_name != 'pull_request' && vars.CLOUDFLARE_ACCOUNT_ID != '' }}
     runs-on: ubuntu-latest
     environment: production
     steps:
