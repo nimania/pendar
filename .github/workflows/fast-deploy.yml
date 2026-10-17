@@ -13,6 +13,8 @@ on:
       - "backend/scripts/prepare_priority_site.py"
       - "backend/scripts/audit_pages_size.py"
       - "backend/scripts/build_iran_scenario_radar.py"
+      - "backend/scripts/publish_iran_radar_live.py"
+      - "backend/scripts/configure_iran_radar_live.py"
       - "backend/scripts/restore_core_site_data.py"
       - "backend/scripts/validate_site_integrity.py"
 permissions:
@@ -489,6 +491,16 @@ jobs:
       - name: Extend and score Iran scenarios from published Pendar data
         continue-on-error: true
         run: python backend/scripts/build_iran_scenario_radar.py --site site
+      - name: Install optional live radar browser configuration
+        env:
+          RADAR_LIVE_ORIGIN: ${{ vars.RADAR_LIVE_ORIGIN }}
+        run: python backend/scripts/configure_iran_radar_live.py --site site
+      - name: Send verified-source scenario signals to optional live edge
+        continue-on-error: true
+        env:
+          RADAR_LIVE_ORIGIN: ${{ vars.RADAR_LIVE_ORIGIN }}
+          RADAR_LIVE_INGEST_TOKEN: ${{ secrets.RADAR_LIVE_INGEST_TOKEN }}
+        run: python backend/scripts/publish_iran_radar_live.py --site site
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
