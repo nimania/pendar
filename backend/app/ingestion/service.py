@@ -127,6 +127,19 @@ def ingest_source(
             logger.warning("Bale mirror failed for %s: %s", source.name, exc)
             result.message = "bale_mirror_failed"
 
+    # Opt-in Instagram Business Discovery for verified, manually allowlisted
+    # figure identities. Instagram is another distribution channel of the SAME
+    # person/source; never count it as a second independent news publisher.
+    # Passing raw_content (offline tests) must never trigger a live API request.
+    if raw_content is None and source.region == FIGURE_REGION:
+        try:
+            from app.ingestion.instagram_discovery import fetch_configured_figure_instagram
+            items.extend(fetch_configured_figure_instagram(source))
+        except Exception as exc:
+            logger.warning("Instagram discovery failed for %s: %s", source.name, type(exc).__name__)
+            result.errors += 1
+            result.message = "instagram_discovery_failed"
+
     result.fetched = len(items)
     since = datetime.now(timezone.utc) - timedelta(days=3)
     existing_articles = db.execute(
