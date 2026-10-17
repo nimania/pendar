@@ -165,10 +165,12 @@ SOURCES = [
     ("العربیه فارسی", "https://farsi.alarabiya.net", "https://farsi.alarabiya.net/tools/rss", "iran-intl", 0.65),
     # Public Telegram news feed; articles retain original post URLs and brief excerpts.
     ("آشیان سیمرغ", "https://t.me/simorghdata369", "https://t.me/s/simorghdata369", "iran", 0.45),
+    # Distinct distribution channel, same publisher as the existing خبرآنلاین RSS.
+    ("خبرآنلاین — تلگرام", "https://t.me/khabaronline_ir", "https://t.me/s/khabaronline_ir", "iran", 0.6),
 ]
 
 # Public Telegram news is ingested as news, not as a commentator's opinions.
-TELEGRAM_NEWS_SOURCES = {"آشیان سیمرغ"}
+TELEGRAM_NEWS_SOURCES = {"آشیان سیمرغ", "خبرآنلاین — تلگرام"}
 
 SOURCE_CATEGORIES = {
     "پیوست": Category.technology,
