@@ -458,6 +458,7 @@
 
 
   var filterDate=null;
+  var filterSignalIds=null;
   var logLimit=80;
   function permittedUrl(v){
     var u=String(v||"");
@@ -471,12 +472,20 @@
     return a;
   }
   function selectLogDate(date){
-    filterDate=date;logLimit=80;
+    filterDate=date;filterSignalIds=null;logLimit=80;
     renderLog();
     document.getElementById("evidence-board").scrollIntoView({behavior:"smooth",block:"start"});
   }
   function renderSelectedDay(){
     var host=document.getElementById("dayselection");host.innerHTML="";
+    if(filterSignalIds){
+      var box=el("div","day-summary");
+      box.appendChild(el("h3",null,"اسناد منتخب از تاریخچهٔ رصد"));
+      var clear=el("button","signal-clear","نمایش همهٔ اسناد");clear.type="button";
+      clear.addEventListener("click",function(){filterSignalIds=null;renderLog();});
+      box.appendChild(clear);host.appendChild(box);
+      return;
+    }
     if(!filterDate)return;
     var box=el("div","day-summary");
     box.appendChild(el("h3",null,"اسناد و تغییرات روز "+filterDate));
@@ -495,6 +504,7 @@
     var rows=signals.slice().sort(function(a,b){return (b.ts||0)-(a.ts||0);});
     if(filterKey)rows=rows.filter(function(s){return s.family===filterKey;});
     if(filterDate)rows=rows.filter(function(s){return s.date===filterDate;});
+    if(filterSignalIds)rows=rows.filter(function(s){return filterSignalIds.indexOf(s.id)>=0;});
     if(!rows.length){host.appendChild(el("div","empty","سیگنالی برای نمایش نیست."));return;}
     rows.slice(0,logLimit).forEach(function(s){
       var f=FAMBYKEY[s.family]||FAMILIES[0];
@@ -647,6 +657,14 @@
       circ.appendChild(svgEl("title",{},f.title+" / "+last.date+" / "+signed(Number(last.scores[f.key]||0))));
       svg.appendChild(circ);
     });
+    svg.style.cursor="crosshair";
+    svg.addEventListener("click",function(event){
+      var rect=svg.getBoundingClientRect();
+      var px=(event.clientX-rect.left)*w/rect.width;
+      var index=Math.max(0,Math.min(rows.length-1,Math.round(
+        (px-padL)/Math.max(1,w-padL-padR)*(rows.length-1))));
+      selectLogDate(rows[index].date);
+    });
     host.appendChild(svg);
   }
   function renderCharts(){
@@ -682,11 +700,94 @@
     document.getElementById("chartstatus").textContent=
       "بازه: "+(rows[0]?rows[0].date:"—")+" تا "+last.date+" · "+all.length+" روز ثبت تاریخچه · امتیازها شاخص سیگنال‌اند، نه احتمال.";
   }
-  function loadHistory(){
-    fetch("/data/iran-scenario-history.json",{cache:"no-store"})
-      .then(function(r){if(!r.ok)throw Error("not found");return r.json();})
-      .then(function(d){if(!d||!Array.isArray(d.points)||!d.points.length)throw Error("invalid");timeline=d;renderCharts();})
-      .catch(function(){timeline=derivedHistory();renderCharts();});
+
+  // ---------- live publication polling ----------
+  // GitHub Pages serves snapshots: current collector cadence is 15m news/30m figures.
+  // Polling updates the open tab within ~60s of a SUCCESSFUL Pages deployment.
+  var lastPublishedVersion="";
+  var liveBusy=false;
+  var lastMeta=null;
+  var lastGoodRead=null;
+  var snapshotsData=null;
+  function fetchFresh(name){
+    return fetch("/data/"+name+"?v="+Date.now(),{cache:"no-store"})
+      .then(function(r){if(!r.ok)throw Error("HTTP "+r.status+" / "+name);return r.json();});
+  }
+  function formatLocalDate(value){
+    var d=new Date(value);
+    if(!value||isNaN(d.getTime()))return "نامعلوم";
+    return d.toLocaleString("fa-IR",{dateStyle:"medium",timeStyle:"short"});
+  }
+  function updateLiveIndicator(message,stale){
+    var label=document.getElementById("livestate");
+    var dot=document.getElementById("livepulse");
+    label.textContent=message;
+    dot.className="livepulse "+(stale?"stale":"fresh");
+    var age=document.getElementById("liveage");
+    if(!lastMeta){age.textContent="";return;}
+    var t=new Date(lastMeta.generated_at).getTime();
+    var minutes=isFinite(t)?Math.round(Math.max(0,Date.now()-t)/60000):NaN;
+    age.textContent="آخرین ساخت رادار: "+formatLocalDate(lastMeta.generated_at)+
+      (isFinite(minutes)?" · "+minutes+" دقیقه قبل":"");
+    if(isFinite(minutes)&&minutes>75){dot.className="livepulse stale";
+      label.textContent="داده‌های رادار قدیمی است؛ احتمال تأخیر در گردآوری یا انتشار";}
+  }
+  function renderAudit(){
+    var list=document.getElementById("audit-list");list.innerHTML="";
+    var arr=snapshotsData&&Array.isArray(snapshotsData.snapshots)?snapshotsData.snapshots:[];
+    if(!arr.length){list.appendChild(el("li",null,"هنوز اولین تاریخچهٔ تغییر منتشر نشده است."));return;}
+    arr.slice(-12).reverse().forEach(function(snapshot){
+      var li=el("li");
+      li.appendChild(el("strong",null,formatLocalDate(snapshot.at)));
+      var deltas=FAMILIES.filter(function(f){return snapshot.changes&&snapshot.changes[f.key];})
+        .map(function(f){var n=Number(snapshot.changes[f.key]);return shortFam(f.title)+" "+signed(n);});
+      li.appendChild(el("div",null,deltas.length?deltas.join(" · "):"تغییر در شواهد ثبت شد؛ امتیاز ثابت ماند."));
+      li.appendChild(el("small",null,"وضعیت منتشرشده · "+Number(snapshot.signal_count||0)+" سیگنال در دفتر"));
+      var ids=Array.isArray(snapshot.recent_signal_ids)?snapshot.recent_signal_ids:[];
+      if(ids.length){
+        var b=el("button","signal-clear","مشاهدهٔ اسناد این رصد");
+        b.type="button";b.style.marginTop="7px";
+        b.addEventListener("click",function(){
+          filterSignalIds=ids;filterKey=null;filterDate=null;logLimit=80;
+          renderFamilies();renderFilter();renderLog();
+          document.getElementById("evidence-board").scrollIntoView({behavior:"smooth"});
+        });
+        li.appendChild(b);
+      }
+      list.appendChild(li);
+    });
+  }
+  async function refreshLive(force){
+    if(liveBusy)return;
+    liveBusy=true;
+    var button=document.getElementById("refresh-live");
+    button.disabled=true;
+    try{
+      var meta=await fetchFresh("iran-scenario-meta.json");
+      if(!meta||!meta.generated_at)throw Error("missing generation time");
+      if(!force&&lastPublishedVersion===meta.generated_at&&signals.length){
+        lastMeta=meta;lastGoodRead=new Date();
+        updateLiveIndicator("اتصال برقرار · نسخهٔ منتشرشده تغییری نکرده است",false);
+        return;
+      }
+      var datasets=await Promise.all([
+        fetchFresh("iran-scenario-signals.json"),
+        fetchFresh("iran-scenario-history.json"),
+        fetchFresh("iran-scenario-snapshots.json").catch(function(){return {snapshots:[]};})
+      ]);
+      if(!Array.isArray(datasets[0])||!datasets[1]||!Array.isArray(datasets[1].points))
+        throw Error("invalid evidence bundle");
+      lastMeta=meta;
+      lastPublishedVersion=meta.generated_at;
+      lastGoodRead=new Date();
+      filterSignalIds=null;
+      boot(datasets[0],datasets[1],datasets[2]);
+      updateLiveIndicator("متصل به داده‌های منتشرشدهٔ پندار · بررسی خودکار هر ۶۰ ثانیه",false);
+    }catch(e){
+      if(!signals.length)boot(EMBEDDED_SIGNALS,derivedHistory(),{snapshots:[]});
+      updateLiveIndicator("نسخهٔ آنلاین در دسترس نیست؛ دادهٔ موجود نمایش داده می‌شود",true);
+      document.getElementById("liveage").textContent=lastGoodRead?"آخرین دریافت موفق: "+formatLocalDate(lastGoodRead):"نسخهٔ اولیهٔ آفلاین";
+    }finally{liveBusy=false;button.disabled=false;}
   }
 
 
@@ -703,22 +804,24 @@
   ta.addEventListener("click",function(){selectTab("an");});
 
   // ---------- boot ----------
-  function boot(data){
-    signals = Array.isArray(data) ? data : [];
-    renderFamilies(); renderAnalysts(); renderFilter(); renderLog(); renderMaint();
-    timeline=derivedHistory(); renderCharts(); loadHistory();
-    setStatus(signals.length ? (signals.length + " سیگنال · آخرین به‌روزرسانی: " + (signals[0] && signals[0].date || "—")) : "سیگنالی ثبت نشده.");
-  }
 
-  // Try the external file first (works on any web host); fall back to embedded data (works on file:// too).
-  var ok=false;
-  try{
-    fetch("/data/iran-scenario-signals.json",{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(d){ ok=true; boot(d); })
-      .catch(function(){ if(!ok) boot(EMBEDDED_SIGNALS); });
-  }catch(e){ boot(EMBEDDED_SIGNALS); }
-  // safety: if fetch never resolves (rare), show embedded after a tick
-  setTimeout(function(){ if(!signals.length && !ok) boot(EMBEDDED_SIGNALS); }, 1200);
+  function boot(data,history,snapshots){
+    signals=Array.isArray(data)?data:[];
+    timeline=history&&Array.isArray(history.points)?history:derivedHistory();
+    snapshotsData=snapshots||{snapshots:[]};
+    renderFamilies();renderAnalysts();renderFilter();renderLog();renderMaint();
+    renderCharts();renderAudit();
+    setStatus(signals.length?signals.length+" سیگنال · آخرین خبر: "+((signals[0]||{}).date||"—"):"سیگنالی ثبت نشده است.");
+  }
+  document.getElementById("refresh-live").addEventListener("click",function(){refreshLive(true);});
+  refreshLive(true);
+  setInterval(function(){
+    if(document.visibilityState!=="hidden")refreshLive(false);
+  },60000);
+  document.addEventListener("visibilitychange",function(){
+    if(document.visibilityState==="visible")refreshLive(false);
+  });
+
 })();
 </script>
 </body>
