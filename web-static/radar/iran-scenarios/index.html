@@ -524,7 +524,19 @@
         if(profile)sp.appendChild(profile);
         li.appendChild(sp);
       }else if(s.related_people&&s.related_people.length){
-        li.appendChild(el("div","smalllabel","اشخاص نقل‌شده در خبر: "+s.related_people.map(function(p){return p.name;}).join("، ")+" (تأییدکنندهٔ خبر محسوب نمی‌شوند)"));
+        var disclosure=el("details","quoted-people");
+        var summary=el("summary","smalllabel","گفته‌های "+s.related_people.length+" فرد نقل‌شده در این خبر · نمایش جزئیات");
+        disclosure.appendChild(summary);
+        s.related_people.forEach(function(person){
+          var part=el("div","signal-reason");
+          part.appendChild(el("strong",null,person.name+(person.role?" · "+person.role:"")));
+          part.appendChild(el("div",null,(person.direct_quote?"نقل‌قول ثبت‌شده: ":"بازگویی منتسب در پندار: ")+(person.statement||"متن نقل‌قول در دادهٔ خبر موجود نیست")));
+          var original=referenceLink({label:"استناد به گفتهٔ فرد ↗",url:person.source_url});
+          if(original)part.appendChild(original);
+          disclosure.appendChild(part);
+        });
+        disclosure.appendChild(el("div","smalllabel","وجود نقل‌قول به معنای تأیید مستقل خبر توسط این افراد نیست."));
+        li.appendChild(disclosure);
       }
       if(s.score_reason){
         li.appendChild(el("div","signal-reason","دلیل امتیاز: "+s.score_reason));
