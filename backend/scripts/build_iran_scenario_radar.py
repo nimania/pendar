@@ -394,8 +394,8 @@ def make_candidate(row, kind, now):
     if kind in ("figure", "statement") and not any(link["kind"] == "original" for link in source_links) and direction:
         direction, weight, score_kind = 0, 1, "unscored"
         note = "لینک اظهارنظر اصلی در دسترس نیست؛ بدون امتیاز"
-    expert = priority_analyst(speaker, profile_handle if kind == "figure" else "")
-             if kind in ("figure", "statement") else None
+    expert = (priority_analyst(speaker, profile_handle if kind == "figure" else "")
+              if kind in ("figure", "statement") else None)
     # Priority requires a traceable ORIGINAL statement and explicit directional
     # language. It cannot turn an ambiguous opinion into a real-world event.
     if expert and direction and score_kind == "analyst_view":
