@@ -39,6 +39,7 @@ keep_data_prefixes = (
     "figure", "news-", "curated-", "source-", "story-", "search-",
     "quote-", "person-", "people-", "headline-", "topic-",
     "pendar-", "future-", "press-", "book-", "us-radar",
+    "iran-scenario-",
 )
 # Partitioned person records are used by canonicalEntityById and name lookup.
 # The index alone cannot render their profiles. Movie details are also fetched.
