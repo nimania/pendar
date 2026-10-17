@@ -104,5 +104,175 @@
       "aliases": [],
       "active": true
     }
-  ]
+  ],
+  "source_endpoints": [
+    {
+      "person_handle": "karim-sadjadpour",
+      "platform": "X (Twitter)",
+      "url": "https://x.com/ksadjadpour",
+      "status": "verified",
+      "note": "اکانت رسمی؛ پیش از ایمپورت بررسی چشمی",
+      "ingest_eligible": true,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "karim-sadjadpour",
+      "platform": "institution",
+      "url": "https://carnegieendowment.org/en/people/karim-sadjadpour",
+      "status": "verified",
+      "note": "صفحه رسمی کارنگی",
+      "ingest_eligible": true,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "ali-vaez",
+      "platform": "X (Twitter)",
+      "url": "https://x.com/AliVaez",
+      "status": "verified",
+      "note": "مدیر پروژه ایران در Crisis Group طبق فهرست ارسالی",
+      "ingest_eligible": true,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "ali-vaez",
+      "platform": "institution",
+      "url": "https://www.crisisgroup.org",
+      "status": "verified",
+      "note": "وب‌سایت نهاد؛ صفحه فرد از دامنه استخراج شود",
+      "ingest_eligible": true,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "vali-nasr",
+      "platform": "X (Twitter)",
+      "url": "https://x.com/vali_nasr",
+      "status": "verified",
+      "note": "اکانت منتسب به ولی نصر در فایل ارسالی",
+      "ingest_eligible": true,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "vali-nasr",
+      "platform": "institution",
+      "url": "https://sais.jhu.edu",
+      "status": "verified",
+      "note": "وب‌سایت SAIS؛ صفحه فرد بررسی شود",
+      "ingest_eligible": true,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "sanam-vakil",
+      "platform": "X (Twitter)",
+      "url": "https://x.com/SanamVakil",
+      "status": "verified",
+      "note": "اکانت منتسب به صنم وکیل در فایل ارسالی",
+      "ingest_eligible": true,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "sanam-vakil",
+      "platform": "institution",
+      "url": "https://www.chathamhouse.org/about-us/our-people/sanam-vakil",
+      "status": "verified",
+      "note": "صفحه رسمی Chatham House",
+      "ingest_eligible": true,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "hassan-ahmadian",
+      "platform": "institution",
+      "url": "https://www.belfercenter.org",
+      "status": "institutional-verified",
+      "note": "صفحه فرد از دامنه نهاد؛ اکانت شخصی تأییدنشده",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "abdiabbas",
+      "platform": "telegram",
+      "url": null,
+      "status": "unverified",
+      "note": "هندل را پیش از افزودن از منبع رسمی تأیید کنید",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "abdiabbas",
+      "platform": "press",
+      "url": null,
+      "status": "manual",
+      "note": "یادداشت‌های مطبوعاتی؛ انتساب هر مورد باید منبع داشته باشد",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "ahmadzeidabad",
+      "platform": "telegram",
+      "url": null,
+      "status": "unverified",
+      "note": "هندل را از منبع رسمی تأیید کنید",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "ahmadzeidabad",
+      "platform": "press",
+      "url": null,
+      "status": "manual",
+      "note": "مطبوعات از جمله اعتماد",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "sadeghzibakalam",
+      "platform": "instagram",
+      "url": null,
+      "status": "unverified",
+      "note": "هندل معتبر باید بررسی شود",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "sadeghzibakalam",
+      "platform": "telegram",
+      "url": null,
+      "status": "unverified",
+      "note": "هندل معتبر باید بررسی شود",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "sadeghzibakalam",
+      "platform": "X (Twitter) old",
+      "url": null,
+      "status": "COMPROMISED",
+      "note": "هشدار CSV: اکانت قدیمی ممکن است از کنترل شخص خارج باشد؛ ممنوع از گردآوری",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "mfarasatkhah",
+      "platform": "website/social",
+      "url": null,
+      "status": "unverified",
+      "note": "حساب شخصی باید بررسی شود",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    },
+    {
+      "person_handle": "saeed-laylaz",
+      "platform": "press/interview",
+      "url": null,
+      "status": "no-personal-account",
+      "note": "پیگیری از طریق مصاحبه‌های قابل انتساب",
+      "ingest_eligible": false,
+      "source_status": "user_supplied_not_live_verified"
+    }
+  ],
+  "source_policy": {
+    "url_required_for_automatic_ingestion": true,
+    "do_not_auto_ingest_unverified_or_compromised": true,
+    "unverified_sources_in_registry_only": true,
+    "source_identity_and_post_original_are_separate_checks": true
+  }
 }
