@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "group": "iran_future_expert_views",
+  "description": "Attribution-first weighting of named analytical views in Iran scenario radar; NOT a factual corroboration, probability, or political preference.",
+  "submitted_source": "pendar-sources-iran-future.csv",
+  "policy": {
+    "ordinary_attributed_view_weight": 1,
+    "priority_attributed_view_weight": 2,
+    "max_per_person_per_family_per_day": 2,
+    "max_all_analyst_views_per_family_per_day": 3,
+    "requires_original_source_link": true,
+    "requires_explicit_direction": true,
+    "lookback_days": 14,
+    "score_component": "analyst"
+  },
+  "people": [
+    {
+      "handle": "karim-sadjadpour",
+      "name_fa": "کریم سجادپور",
+      "name_en": "Karim Sadjadpour",
+      "vantage": "international",
+      "field": "foreign",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "ali-vaez",
+      "name_fa": "علی واعظ",
+      "name_en": "Ali Vaez",
+      "vantage": "international",
+      "field": "foreign",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "vali-nasr",
+      "name_fa": "ولی نصر",
+      "name_en": "Vali Nasr",
+      "vantage": "international",
+      "field": "foreign",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "sanam-vakil",
+      "name_fa": "صنم وکیل",
+      "name_en": "Sanam Vakil",
+      "vantage": "international",
+      "field": "foreign",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "hassan-ahmadian",
+      "name_fa": "حسن احمدیان",
+      "name_en": "Hassan Ahmadian",
+      "vantage": "international",
+      "field": "foreign",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "abdiabbas",
+      "name_fa": "عباس عبدی",
+      "name_en": "Abbas Abdi",
+      "vantage": "domestic",
+      "field": "politics",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "ahmadzeidabad",
+      "name_fa": "احمد زیدآبادی",
+      "name_en": "Ahmad Zeidabadi",
+      "vantage": "domestic",
+      "field": "politics",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "sadeghzibakalam",
+      "name_fa": "صادق زیباکلام",
+      "name_en": "Sadegh Zibakalam",
+      "vantage": "domestic",
+      "field": "politics",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "mfarasatkhah",
+      "name_fa": "مقصود فراستخواه",
+      "name_en": "Maghsoud Farasatkhah",
+      "vantage": "domestic",
+      "field": "society",
+      "aliases": [],
+      "active": true
+    },
+    {
+      "handle": "saeed-laylaz",
+      "name_fa": "سعید لیلاز",
+      "name_en": "Saeed Leylaz",
+      "vantage": "domestic",
+      "field": "economy",
+      "aliases": [],
+      "active": true
+    }
+  ]
+}
