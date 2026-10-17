@@ -231,3 +231,124 @@
   #home-daily .home-main-tabs button,
   #home-daily-stories .home-intel-row-rich{transition:none}
 }
+
+/* Homepage editorial modes — visual identity, phase 2 */
+/* Accent signatures stay subdued and are emphasized only on the active tab.
+   No mode is presented as intrinsically more trustworthy than the others. */
+#home-daily .home-main-tabs button[data-home-news="events"]{--home-tab-accent:#367d72}
+#home-daily .home-main-tabs button[data-home-news="people"]{--home-tab-accent:#656b92}
+#home-daily .home-main-tabs button[data-home-news="latest"]{--home-tab-accent:var(--accent)}
+#home-daily .home-main-tabs button[data-home-news="selected"]{--home-tab-accent:#8b6b38}
+#home-daily .home-main-tabs button[data-home-news="viral"]{--home-tab-accent:#a15b60}
+
+#home-daily .home-main-tabs button.on,
+#home-daily .home-main-tabs button[aria-selected="true"]{
+  color:var(--home-tab-accent,var(--accent));
+  background:color-mix(in srgb,var(--home-tab-accent,var(--accent)) 10%,var(--surface));
+  border-color:color-mix(in srgb,var(--home-tab-accent,var(--accent)) 24%,var(--surface));
+  box-shadow:inset 0 -3px 0 var(--home-tab-accent,var(--accent));
+}
+#home-daily .home-main-tabs button:not(.on):not([aria-selected="true"]){
+  box-shadow:none;
+}
+
+/* Trends: a subtle editorial rail. Figure views retain their existing
+   vertical timeline and video recency marker. */
+#home-daily-stories[data-home-mode="events"] .home-event-list-item:hover{
+  box-shadow:inset -3px 0 0 #367d72;
+}
+#home-daily-stories[data-home-mode="events"] .home-event-badge{
+  color:#367d72;
+}
+#home-daily-stories.home-people-in-table[data-home-mode="people"] .home-people-timeline::before{
+  background:color-mix(in srgb,#656b92 38%,var(--line));
+}
+#home-daily-stories.home-people-in-table[data-home-mode="people"] .home-people-timeline-row::before{
+  border-color:#656b92;
+}
+#home-daily-stories[data-home-mode="people"] .home-people-timeline-meta strong{
+  color:var(--ink);
+}
+#home-daily-stories[data-home-mode="people"] .home-people-timeline-read{
+  color:#656b92;
+}
+
+/* Curated headlines: restrained ochre indexing. Viral: red only for a
+   separate editorial mode, not an implied reliability/safety indication. */
+#home-daily-stories[data-home-mode="selected"] .home-intel-rank{
+  background:color-mix(in srgb,#8b6b38 12%,var(--surface));
+  color:#8b6b38;
+  border-radius:8px;
+}
+#home-daily-stories[data-home-mode="viral"] .home-intel-rank{
+  background:color-mix(in srgb,#a15b60 12%,var(--surface));
+  color:#a15b60;
+}
+#home-daily-stories[data-home-mode="latest"] .home-intel-rank{
+  background:var(--accent-soft);
+  color:var(--accent);
+}
+
+/* Header appearance control, aligned with the search and other icons.
+   The button lives in the masthead; no duplicate footer control. */
+.top .header-theme-toggle{
+  appearance:none;
+  display:grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  min-width:42px;
+  flex:0 0 42px;
+  padding:9px;
+  color:#e9e9e7;
+  border:1px solid #ffffff29;
+  background:#ffffff09;
+  border-radius:12px;
+  cursor:pointer;
+}
+.top .header-theme-toggle:hover{
+  color:#fff;
+  border-color:#ffffff55;
+  background:#ffffff18;
+}
+.top .header-theme-toggle:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+}
+.top .header-theme-toggle svg{
+  display:block;
+  width:22px;
+  height:22px;
+  grid-area:1/1;
+  pointer-events:none;
+}
+.top .header-theme-toggle svg[hidden]{display:none!important}
+@media(max-width:560px){
+  .top .header-theme-toggle{
+    width:36px;
+    height:36px;
+    min-width:36px;
+    flex-basis:36px;
+    padding:7px;
+    border-radius:10px;
+  }
+  .top .header-theme-toggle svg{width:19px;height:19px}
+}
+:root[data-theme="dark"] #home-daily .home-main-tabs button[data-home-news="events"]{--home-tab-accent:#70b6a7}
+:root[data-theme="dark"] #home-daily .home-main-tabs button[data-home-news="people"]{--home-tab-accent:#a9b0d8}
+:root[data-theme="dark"] #home-daily .home-main-tabs button[data-home-news="selected"]{--home-tab-accent:#d4ad6b}
+:root[data-theme="dark"] #home-daily .home-main-tabs button[data-home-news="viral"]{--home-tab-accent:#df9fa4}
+:root[data-theme="dark"] #home-daily-stories[data-home-mode="people"] .home-people-timeline-read{color:#a9b0d8}
+:root[data-theme="dark"] #home-daily-stories[data-home-mode="selected"] .home-intel-rank{color:#d4ad6b}
+:root[data-theme="dark"] #home-daily-stories[data-home-mode="viral"] .home-intel-rank{color:#df9fa4}
+:root[data-theme="dark"] #home-daily-stories[data-home-mode="events"] .home-event-badge{color:#70b6a7}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) #home-daily .home-main-tabs button[data-home-news="events"]{--home-tab-accent:#70b6a7}
+  :root:not([data-theme="light"]) #home-daily .home-main-tabs button[data-home-news="people"]{--home-tab-accent:#a9b0d8}
+  :root:not([data-theme="light"]) #home-daily .home-main-tabs button[data-home-news="selected"]{--home-tab-accent:#d4ad6b}
+  :root:not([data-theme="light"]) #home-daily .home-main-tabs button[data-home-news="viral"]{--home-tab-accent:#df9fa4}
+  :root:not([data-theme="light"]) #home-daily-stories[data-home-mode="people"] .home-people-timeline-read{color:#a9b0d8}
+  :root:not([data-theme="light"]) #home-daily-stories[data-home-mode="selected"] .home-intel-rank{color:#d4ad6b}
+  :root:not([data-theme="light"]) #home-daily-stories[data-home-mode="viral"] .home-intel-rank{color:#df9fa4}
+  :root:not([data-theme="light"]) #home-daily-stories[data-home-mode="events"] .home-event-badge{color:#70b6a7}
+}
