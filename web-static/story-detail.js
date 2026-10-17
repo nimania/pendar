@@ -28,6 +28,52 @@ function loadArticleDisplayAd() {
    peopleRow, referenceStrip, setArticleSeo), figures-core (figuresSection) and
    entities (canonicalStrip) at runtime. No behavior change. */
 
+/* Linked and sourced Pendar editorial reports (build-time, never on page load).
+   Only show an authored article when the exported model output has passed the
+   server's citation and quality checks; otherwise retain existing summary. */
+function pendarEditorialReport(s){
+  const report=s?.editorial_report;
+  if(!report || report.status!=="ai_draft" || !Array.isArray(report.paragraphs) || report.paragraphs.length<3)return "";
+  const rows=report.paragraphs.map((block)=>{
+    if(!block || typeof block.text_fa!=="string" || !Array.isArray(block.citations))return "";
+    const refs=block.citations.filter(c=>c && typeof c.url==="string" && (/^https?:\/\//i.test(c.url)||/^\/story\/[a-f0-9-]{36}\/$/i.test(c.url)));
+    const citations=refs.map(c=>{
+      const href=c.url.startsWith("/story/")?"#/story/"+c.url.split("/")[2]:c.url;
+      const ext=!c.url.startsWith("/story/");
+      return '<a class="story-report-cite" href="'+esc(href)+'"'+(ext?' target="_blank" rel="noopener noreferrer"':"")+' aria-label="باز کردن استناد '+esc(c.id||"")+'">'+esc(c.id||"منبع")+'</a>';
+    }).join("");
+    return '<p>'+esc(block.text_fa)+' '+(citations?'<span class="story-report-cites">'+citations+'</span>':"")+'</p>';
+  }).filter(Boolean).join("");
+  if(!rows)return "";
+  return '<article class="story-editorial" aria-labelledby="story-report-title">'
+    +'<div class="story-editorial-kicker">گزارش پندار <span>بر اساس منابع این پرونده</span></div>'
+    +'<h2 id="story-report-title">'+esc(report.title_fa||s.headline_fa||"")+'</h2>'
+    +'<p class="story-editorial-lead">'+esc(report.lead_fa||"")+'</p>'
+    +'<div class="story-editorial-body">'+rows+'</div>'
+    +'<p class="story-editorial-note">'+esc(report.notice_fa||"گزارش خودکار؛ بررسی ادعاها از طریق منابع اصلی ضروری است.")+'</p>'
+    +'</article>';
+}
+function pendarHistoricalContext(s){
+  const context=s?.editorial_context;
+  if(!context)return "";
+  const past=Array.isArray(context.background)?context.background:[];
+  const future=Array.isArray(context.later)?context.later:[];
+  const all=past.concat(future);
+  if(!all.length)return "";
+  const render=(items)=>items.map(item=>{
+    if(!item||typeof item.id!=="string"||!/^[a-f0-9-]{36}$/i.test(item.id))return "";
+    const date=String(item.published_at||"").slice(0,10);
+    return '<li><a href="#/story/'+esc(item.id)+'"><time datetime="'+esc(date)+'">'+esc(date)+'</time>'
+      +'<span>'+esc(item.headline_fa||"خبر مرتبط")+'</span></a></li>';
+  }).join("");
+  return '<section class="story-history" aria-labelledby="story-history-heading">'
+    +'<h2 id="story-history-heading">پیشینهٔ ماجرا و خبرهای مرتبط</h2>'
+    +'<p class="story-history-caveat">ارتباط این خبرها بر پایهٔ اشتراک موضوعی است؛ لزوماً دنباله یا علت یکدیگر نیستند.</p>'
+    +(past.length?'<h3>پیش از این خبر</h3><ol>'+render(past)+'</ol>':"")
+    +(future.length?'<h3>تحولات مرتبط پس از این خبر</h3><ol>'+render(future)+'</ol>':"")
+    +'</section>';
+}
+
 // stories that share figures / topics with this one — the thread around it
 function relatedStories(s) {
   const ents = new Set((s.entities || []).map(e => e.slug));
@@ -203,8 +249,8 @@ async function openStory(id) {
         <span class="dot"></span><span class="muted">${IRAN_FA[s.iran_relevance] || ""}</span></div></div>
     ${s.image_url ? `<img class="hero-img" src="${esc(s.image_url)}" alt="" loading="lazy" onerror="this.parentElement.querySelector('.hero-credit')?.remove();this.remove()">` : ''}
     ${s.image_url && s.image_credit ? `<div class="hero-credit">عکس از: ${esc(s.image_credit)}</div>` : ''}
-    <div class="kalam-box"><span class="eyebrow">جان‌کلام <span class="ai">ترکیب هوش مصنوعی</span></span><p>${esc(s.summary_fa || "")}</p></div>
-    ${detailGeoStrip(s)}
+    ${pendarEditorialReport(s)}\n    <div class="kalam-box"><span class="eyebrow">جان‌کلام <span class="ai">ترکیب هوش مصنوعی</span></span><p>${esc(s.summary_fa || "")}</p></div>
+    ${pendarHistoricalContext(s)}\n    ${detailGeoStrip(s)}
     ${peopleRow(s.entities)}
     ${peopleSuggestions}
     ${storyBooksSection}
