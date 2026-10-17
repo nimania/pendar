@@ -1053,6 +1053,13 @@
   fetch("/data/iran-scenario-catalog.json").then(function(r){if(!r.ok)throw Error("missing catalog");return r.json();})
     .then(function(data){if(data&&Array.isArray(data.scenarios)){scenarioCatalog=data;renderFamilies();renderAnalysts();renderLog();}})
     .catch(function(){});
+  fetch("/data/figures.json").then(function(r){if(!r.ok)throw Error("figure registry unavailable");return r.json();})
+    .then(function(d){(d.figures||[]).forEach(function(f){
+      if(!f||!f.handle||!/^[A-Za-z0-9_-]{2,80}$/.test(f.handle))return;
+      var names=[f.name_fa].concat(Array.isArray(f.aliases)?f.aliases:[]);
+      names.forEach(function(n){if(n&&!PERSON_HANDLES[n])PERSON_HANDLES[n]=f.handle;});
+    });renderFamilies();renderAnalysts();renderLog();})
+    .catch(function(){});
   initializeEdge();
   setInterval(function(){
     if(document.visibilityState!=="hidden")refreshLive(false);
