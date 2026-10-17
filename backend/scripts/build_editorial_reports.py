@@ -14,6 +14,7 @@ import json
 import os
 import re
 import sqlite3
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -210,7 +211,7 @@ def _db_path()->str:
     return ""
 
 
-def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generate:int=4)->dict:
+def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generate:int=10)->dict:
     from app.ai.providers import get_provider
     from app.core.config import settings
 
@@ -227,7 +228,7 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
                     if isinstance(row,dict) and row.get("id"):
                         all_cards.setdefault(str(row["id"]),row)
     archive=list(all_cards.values())
-    generated=0; enriched=0; reused=0; attempted=0
+    generated=0; enriched=0; reused=0; attempted=0; cooldown_skipped=0
     provider=provider or get_provider()
     is_ai=getattr(provider,"name","mock")!="mock" and bool(settings.ai_api_key)
     cx=None
@@ -236,6 +237,7 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
         try:
             cx=sqlite3.connect(dbfile,timeout=15)
             cx.execute("CREATE TABLE IF NOT EXISTS pendar_editorial_cache (story_id TEXT PRIMARY KEY, digest TEXT NOT NULL, report_json TEXT NOT NULL, updated_at TEXT NOT NULL)")
+            cx.execute("CREATE TABLE IF NOT EXISTS pendar_editorial_failures (story_id TEXT PRIMARY KEY, digest TEXT NOT NULL, attempted_at REAL NOT NULL)")
             cx.commit()
         except sqlite3.Error:
             if cx:cx.close()
@@ -269,32 +271,47 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
                 try:report=json.loads(hit[0]);reused+=1
                 except ValueError:pass
         enough=bool(sources) and len(str(detail.get("what_happened_fa") or ""))>=90 and len(str(detail.get("summary_fa") or ""))>=80
-        if report is None and (sid in active_ids or sid in priority) and is_ai and enough and attempted<max_generate:
+        cooldown=False
+        if cx and report is None:
+            failed=cx.execute("SELECT attempted_at FROM pendar_editorial_failures WHERE story_id=? AND digest=?",(sid,digest)).fetchone()
+            cooldown=bool(failed and time.time()-float(failed[0])<6*3600)
+            if cooldown:cooldown_skipped+=1
+        if report is None and not cooldown and (sid in active_ids or sid in priority) and is_ai and enough and attempted<max_generate:
             attempted+=1
             try:
                 result=provider.generate(system=SYSTEM,user=json.dumps(prompt_data,ensure_ascii=False),context={"editorial":prompt_data})
                 report=valid_report(result.data,sources,context)
             except Exception as exc:
                 print(f"editorial report skipped {sid}: {type(exc).__name__}: {str(exc)[:100]}")
+            if cx:
+                if report:
+                    cx.execute("DELETE FROM pendar_editorial_failures WHERE story_id=?",(sid,))
+                else:
+                    cx.execute("INSERT OR REPLACE INTO pendar_editorial_failures VALUES (?,?,?)",(sid,digest,time.time()))
+                cx.commit()
             if report and cx:
                 cx.execute("INSERT OR REPLACE INTO pendar_editorial_cache VALUES (?,?,?,?)",
                            (sid,digest,json.dumps(report,ensure_ascii=False),datetime.now(timezone.utc).isoformat()))
                 cx.commit()
         if report:
             detail["editorial_report"]=report
+            row["has_editorial_report"]=True
             generated+=1
         # If no valid article was generated, keep the existing verified-looking
         # factual sections; do not label stitched excerpts as a new report.
         fpath.write_text(json.dumps(detail,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
         enriched+=1
+    # Surface reports in the existing news tabs, without introducing a new
+    # homepage category or changing headline rankings.
+    cards_path.write_text(json.dumps(cards,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
     if cx:cx.close()
-    return {"enriched":enriched,"reports":generated,"cached":reused,"attempted":attempted,"archive":len(archive),"ai_available":is_ai}
+    return {"enriched":enriched,"reports":generated,"cached":reused,"attempted":attempted,"cooldown_skipped":cooldown_skipped,"archive":len(archive),"ai_available":is_ai}
 
 
 def main():
     data_dir=Path(os.environ.get("EDITORIAL_DATA_DIR","public/data"))
-    limit=int(os.environ.get("PENDAR_REPORT_MAX_PER_RUN","4"))
-    result=build(data_dir,max_generate=max(0,min(limit,8)))
+    limit=int(os.environ.get("PENDAR_REPORT_MAX_PER_RUN","10"))
+    result=build(data_dir,max_generate=max(0,min(limit,16)))
     print("Pendar editorial:",json.dumps(result,ensure_ascii=False))
 
 
