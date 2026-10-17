@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://pendar.io__PATH__">
+<meta name="description" content="__DESCRIPTION__">
+<meta property="og:title" content="__TITLE__ | پندار">
+<meta property="og:description" content="__DESCRIPTION__">
+<meta property="og:url" content="https://pendar.io__PATH__">
+<title>__TITLE__ | رادار سناریوهای ایران — پندار</title>
+<style>
+:root{color-scheme:light dark;font-family:system-ui,-apple-system,Tahoma,sans-serif;--bg:#f1f3f5;--surface:#fff;--ink:#202a32;--muted:#60717e;--line:#dce3e6;--link:#146b79;--soft:#ebf3f5}
+@media(prefers-color-scheme:dark){:root{--bg:#111a20;--surface:#1b2932;--ink:#ecf2f5;--muted:#acbeca;--line:#364550;--link:#8de1e7;--soft:#253944}}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--ink);margin:0;line-height:1.95}
+a{color:var(--link);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}
+.wrap{width:min(1040px,100%);margin:auto;padding:24px 18px 70px}
+nav.crumb{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:9px;margin-bottom:24px}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.45;margin:8px 0}
+h2{font-size:1.22rem;margin:0 0 13px}h3{font-size:1.03rem;margin:0 0 8px}
+p{margin:8px 0}small,.muted{color:var(--muted)}
+.kicker{color:var(--link);font-weight:700;font-size:.83rem}
+.note{border-inline-start:3px solid var(--link);padding:9px 13px;background:var(--soft);font-size:.86rem;border-radius:6px;margin-top:12px}
+section.panel{margin-top:18px;padding:20px;border:1px solid var(--line);background:var(--surface);border-radius:14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.tile{padding:15px;background:var(--soft);border:1px solid var(--line);border-radius:10px}
+.tile h3 a{text-decoration:none}.tile p{font-size:.87rem;color:var(--muted)}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pill{font-size:.74rem;border-radius:20px;border:1px solid var(--line);padding:3px 9px;color:var(--muted)}
+.stat{display:inline-flex;gap:7px;background:var(--soft);padding:5px 10px;border-radius:8px;margin:4px 0}
+.entry{padding:13px 0;border-top:1px solid var(--line)}
+.entry:first-of-type{border-top:none}.entry h3{margin:0}
+.entry p{font-size:.92rem}.links{display:flex;gap:10px;flex-wrap:wrap;font-size:.81rem}
+.person{font-weight:700}
+input[type=search],select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:8px 12px;border-radius:8px;max-width:100%}
+button{font:inherit;cursor:pointer;border:1px solid var(--link);color:var(--link);border-radius:9px;padding:7px 13px;background:var(--surface)}
+.status{font-size:.81rem;color:var(--muted)}
+.empty{padding:14px;background:var(--soft);border-radius:9px;color:var(--muted)}
+footer{padding:20px 0;margin-top:28px;border-top:1px solid var(--line);color:var(--muted)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}section.panel{padding:14px}}
+</style>
+<script defer src="/radar/iran-scenarios/scenario/reader.js"></script>
+</head>
+<body data-family="__FAMILY__" data-scenario="__SUB__">
+<main class="wrap">
+<nav class="crumb"><a href="/">پندار</a><span>›</span><a href="/radar/iran-scenarios/">رادار سناریوهای ایران</a><span>›</span><a href="/radar/iran-scenarios/__FAMILY__/">__FAMILY_TITLE__</a><span id="crumb-tail">__SHORT_TITLE__</span></nav>
+<header><div class="kicker">پروندهٔ __TYPE__ · رصد شواهد و دیدگاه‌ها</div><h1 id="page-title">__TITLE__</h1><p id="lead">__DESCRIPTION__</p>
+<div class="note">این پرونده سناریو و دیدگاه‌های منتسب را شرح می‌دهد، نه پیش‌بینی قطعی. امتیازهای رادار احتمال وقوع نیستند و اخبار دارای ارتباط موضوعی الزاماً شاهد تأیید این سناریو نیستند.</div></header>
+<div id="overview">__STATIC_INTRO__</div>
+<div id="status" class="status" role="status" aria-live="polite">در حال دریافت آخرین آرشیو منتشرشدهٔ پندار…</div>
+<div id="scenario-content"></div>
+<footer>آخرین دادهٔ موفقِ منتشرشده ملاک نمایش است؛ تاریخ، گوینده و سند اصلی را برای ارزیابی هر ادعا جداگانه بررسی کنید. · <a href="/radar/iran-scenarios/">بازگشت به رادار</a></footer>
+</main></body></html>
