@@ -49,6 +49,11 @@ FIGURES: list[Figure] = [
            (("x", "https://x.com/Abas_Suri"),), external=True,
            aliases=("عباس سوري", "Abbas Souri", "Abas Suri")),
     Figure("abdiabbas", "عباس عبدی", "روزنامه‌نگار و پژوهشگر اجتماعی", "politics", bale="ayandeha"),
+    # Verified existing public channel; user-supplied Robonay handle is pending validation.
+    Figure("abbas-akhoundi", "عباس آخوندی", "استاد دانشگاه تهران و وزیر پیشین راه و شهرسازی",
+           "politics", (("website", "https://AbbasAkhoundi.ir"),),
+           external=True, aliases=("Abbas Akhoundi",),
+           telegram_handle="AbbasAkhoundi"),
     Figure("fazeli_mohammad", "محمد فاضلی", "جامعه‌شناس", "politics",
            (("website", "https://mohammadfazeli.ir"),)),
     Figure("miladdokhanchi", "میلاد دخانچی", "پژوهشگر مطالعات فرهنگی", "politics"),
