@@ -329,6 +329,8 @@ def make_candidate(row, kind, now):
         related_people = [
             {"name": normalize(p.get("person_name_fa"))[:100],
              "role": normalize(p.get("role_fa"))[:100],
+             "statement": normalize(p.get("statement_fa"))[:500],
+             "direct_quote": bool(p.get("direct_quote")),
              "source_url": public_link(p.get("article_url"))}
             for p in detail.get("person_statements", [])[:12] if isinstance(p, dict)
             and normalize(p.get("person_name_fa"))
