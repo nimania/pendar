@@ -1,0 +1,20 @@
+name = "pendar-iran-radar-live"
+main = "src/worker.mjs"
+compatibility_date = "2026-09-30"
+workers_dev = true
+
+[triggers]
+crons = ["* * * * *"]
+
+[[durable_objects.bindings]]
+name = "RADAR_ROOM"
+class_name = "RadarRoom"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RadarRoom"]
+
+[vars]
+SITE_ORIGIN = "https://pendar.io"
+# Configure the bearer INGEST_TOKEN using 'npx wrangler secret put INGEST_TOKEN'.
+# The secret is used only for trusted collector POST requests, never the browser.
