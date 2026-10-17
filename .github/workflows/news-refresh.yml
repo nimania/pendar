@@ -31,6 +31,9 @@ jobs:
           python-version: "3.11"
       - name: Install news dependencies
         run: pip install -r backend/requirements.txt
+      - name: Verify editorial history and report safeguards
+        working-directory: backend
+        run: python -m unittest discover -s tests -p test_editorial_reports.py -v
       - name: Restore persistent news database
         uses: actions/cache/restore@v4
         with:
