@@ -55,6 +55,34 @@ def test_three_sources_one_event_collapse_to_one_story(db):
     assert counts == [1, 3]  # 3-source event + 1-source event
 
 
+def test_khabaronline_website_and_telegram_are_one_publisher(db):
+    website = make_source(db, name="خبرآنلاین")
+    telegram = make_source(db, name="خبرآنلاین — تلگرام")
+    independent = make_source(db, name="BBC")
+    title = "Iran Tehran Hormuz shipping update"
+    _article(db, website, title, "https://khabaronline.ir/example")
+    _article(db, telegram, title, "https://t.me/khabaronline_ir/99999")
+
+    cluster_articles(db)
+    stories = db.query(Story).all()
+    assert len(stories) == 1
+    story = stories[0]
+    assert len(story.article_links) == 2  # both distinct posts retained
+    assert story.source_count == 1         # but one publisher
+
+    rank_stories(db)
+    db.refresh(story)
+    assert story.source_count == 1
+
+    _article(db, independent, title, "https://bbc.test/hormuz")
+    cluster_articles(db)
+    db.refresh(story)
+    assert story.source_count == 2
+    rank_stories(db)
+    db.refresh(story)
+    assert story.source_count == 2
+
+
 def test_clustering_is_idempotent(db):
     s1 = make_source(db, name="Reuters")
     s2 = make_source(db, name="BBC")
