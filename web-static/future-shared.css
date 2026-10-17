@@ -82,3 +82,39 @@ body main a.card:hover,body main a.visual-story:hover{border-color:#b9aaa6;box-s
 body main .section-head{border-bottom:1px solid var(--future-border);padding-bottom:10px}
 @media(max-width:760px){.pendar-future-header .inner{min-height:57px}.pendar-future-header .masthead-actions{gap:0}.pendar-future-header .masthead-actions a{padding:5px 6px;font-size:11px}.pendar-future-header .masthead-actions a:nth-child(3),.pendar-future-header .masthead-actions a:nth-child(4){display:none}.pendar-future-identity{margin:13px 14px;padding:17px}.pendar-future-identity strong{font-size:23px}.pendar-future-sections{margin-inline:14px;padding-inline:0}}
 @media(prefers-color-scheme:dark){:root{--future-paper:#131614;--future-card:#1b1f1d;--future-ink:#e8eae5;--future-border:#2a302c}.pendar-future-header{background:#1b1f1d;color:#e8eae5;border-color:#2a302c}.pendar-future-header .masthead-actions a{color:#e8eae5}.pendar-future-header .masthead-actions a:hover{background:#2a302c}.pendar-future-identity{background:#202422}.pendar-future-sections a{background:#1b1f1d;color:#e8eae5;border-color:#39413b}body main .card{border-color:#39413b}}
+
+
+/* 2026-10 unified readable type for standalone Future Observatory */
+:root{
+  --future-type-ui:"Vazirmatn",Tahoma,Arial,sans-serif;
+  --future-ink-soft:#535c55;
+}
+body{
+  font-family:var(--future-type-ui)!important;
+  font-size:16px;
+  line-height:1.9;
+}
+body main h1,body main h2,body main h3,
+.pendar-future-identity strong,.pendar-future-header .masthead-actions a{
+  font-family:var(--future-type-ui);
+  letter-spacing:normal;
+}
+body main h1{font-weight:800!important;line-height:1.5!important}
+body main h2{font-weight:750;line-height:1.65}
+body main h3{font-weight:700;line-height:1.7}
+body main p,body main li,body main article{font-size:15.5px;line-height:1.95}
+body main .card p,body main .notice{font-size:15px;line-height:1.95}
+body main .muted,body main .card small,body main footer,
+.pendar-future-breadcrumb{font-size:12.5px;line-height:1.8;color:var(--future-ink-soft)}
+.pendar-future-sections a{font-size:13.5px;font-weight:650;line-height:1.65}
+.pendar-future-identity strong{font-size:27px;line-height:1.5}
+@media(max-width:690px){
+  body main p,body main li,body main article{font-size:15px}
+  body main h1{font-size:29px!important;line-height:1.55!important}
+  body main h2{font-size:20px;line-height:1.7}
+  body main .card p{font-size:14.5px;line-height:1.9}
+  .pendar-future-sections a{font-size:13px}
+}
+@media(prefers-color-scheme:dark){
+  :root{--future-ink-soft:#bbc4bc}
+}
