@@ -228,16 +228,16 @@ class ScenarioRadarTests(unittest.TestCase):
     def test_priority_experts_share_daily_family_cap_without_overriding_events(self):
         from build_iran_scenario_radar import make_candidate
 
-        now = datetime.now(timezone.utc).replace(microsecond=0)
+        now = datetime(2026, 10, 17, 12, tzinfo=timezone.utc)
         records = []
-        for name, ident, kind in [
+        for i, (name, ident, kind) in enumerate([
             ("علی واعظ", "figure-vaez", "figure"),
+            ("ولی نصر", "statement-nasr", "statement"),
             ("علی واعظ", "statement-vaez", "statement"),
-            ("ولی نصر", "figure-nasr", "figure"),
             ("پژوهشگر دیگر", "figure-other", "figure"),
-        ]:
+        ]):
             record = {
-                "id": ident, "published_at": now.isoformat(),
+                "id": ident, "published_at": (now - timedelta(minutes=i)).isoformat(),
                 "url": "https://example.org/" + ident,
                 "article_url": "https://example.org/" + ident,
             }
