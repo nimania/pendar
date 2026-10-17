@@ -20,6 +20,7 @@ from app.models.article import Article
 from app.models.enums import StoryStatus
 from app.models.source import Source
 from app.models.story import Story, StoryArticle
+from app.source_identity import publisher_identity
 
 logger = get_logger("clustering")
 
@@ -48,7 +49,7 @@ def _load_open_clusters(db: Session) -> list[_Cluster]:
             if not a:
                 continue
             tokens |= tokenize(a.title, a.description)
-            sources.add(a.source_id)
+            sources.add(publisher_identity(a))
             if a.published_at and (latest is None or a.published_at > latest):
                 latest = a.published_at
         clusters.append(_Cluster(story=st, tokens=tokens, latest_time=latest, source_ids=sources))
@@ -90,7 +91,7 @@ def cluster_articles(
         if best is not None and best_score >= threshold:
             db.add(StoryArticle(story_id=best.story.id, article_id=art.id))
             best.tokens |= a_tokens
-            best.source_ids.add(art.source_id)
+            best.source_ids.add(publisher_identity(art))
             if art.published_at and (best.latest_time is None or art.published_at > best.latest_time):
                 best.latest_time = art.published_at
             best.story.source_count = len(best.source_ids)
@@ -107,7 +108,7 @@ def cluster_articles(
             db.add(StoryArticle(story_id=story.id, article_id=art.id, is_primary=True))
             clusters.append(
                 _Cluster(story=story, tokens=set(a_tokens),
-                         latest_time=art.published_at, source_ids={art.source_id})
+                         latest_time=art.published_at, source_ids={publisher_identity(art)})
             )
             new_stories += 1
 
