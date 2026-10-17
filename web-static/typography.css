@@ -1,0 +1,194 @@
+/* Pendar typography system — 2026-10.
+ * Reading-first defaults for the main SPA. Editorial body copy, traditional
+ * poetry and long-form documents may intentionally keep Noto Naskh Arabic.
+ * Does not change ranking, article content or source presentation logic.
+ */
+:root{
+  --type-ui:"Vazirmatn",Tahoma,Arial,sans-serif;
+  --type-reading:"Noto Naskh Arabic","Vazirmatn",serif;
+  --type-news-title:18px;
+  --type-news-body:15px;
+  --type-meta:12.5px;
+  --type-tab:14px;
+  --ink-faint:#606a62;
+}
+:root[data-theme="dark"]{
+  --ink-faint:#b5bfb6;
+  --ink-soft:#c0c9c0;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink-faint:#b5bfb6;
+    --ink-soft:#c0c9c0;
+  }
+}
+body{
+  font-family:var(--type-ui);
+  font-weight:400;
+  line-height:1.85;
+  font-size:16px;
+}
+button,input,select,textarea{font-family:var(--type-ui)}
+/* Navigational/UI headings use a single contemporary Persian typeface. */
+.brand .logo,.lede h1,.card h2,.d-head h1,.section-h,
+.ask .a-h,.followbar .big,.topic .t-fa,.state .big,
+.faq-item summary,.wx-city,.fig-head-body h1,.hm-strip-copy strong,
+.press-source-head h2,.press-article h2,.press-detail h1,
+.book-card-copy strong,.book-detail-copy h1,.book-person-head h1,
+.press-book-links b,.air-overview-head h2,.book-edition-head h3,
+.trend-head h2,.home-majra-head h2,.home-intel-copy b,.sys-hero h2,
+.canonical-profile>h1,.entity-graph-hero h1,.qa-hero h1,
+.p360-identity h1,.press-directory-hero h1,
+.book-hub-hero h1,.book-hub-heading h1,.book-hub-brand-name,
+.tv-hero h1{
+  font-family:var(--type-ui);
+  letter-spacing:normal;
+}
+.lede h1,.fig-head-body h1,.book-person-head h1{line-height:1.6}
+.d-head h1,.press-detail h1{
+  font-family:var(--type-ui);
+  font-weight:700;
+  font-size:clamp(27px,4vw,35px);
+  line-height:1.65;
+  letter-spacing:normal;
+}
+.section-h,.press-source-head h2{
+  font-size:21px;
+  line-height:1.7;
+  font-weight:700;
+}
+.feed .card h2,.press-article h2{
+  font-family:var(--type-ui);
+  font-size:19px;
+  font-weight:700;
+  line-height:1.7;
+  letter-spacing:normal;
+}
+.feed .card .kalam,.qa p,.editorial-copy p{
+  font-size:var(--type-news-body);
+  line-height:1.95;
+}
+.muted,.sources-mini,.src-badge,.card .meta,.card .foot,
+.d-meta,.feed .card .foot,.feed .card .sources-mini{
+  font-size:var(--type-meta);
+  line-height:1.75;
+}
+.src-badge,.chip{font-size:12px;line-height:1.6}
+/* Traditional long-form and poetry remain in a reading face, deliberately. */
+.kalam-box p,.press-body p,.curated-poem-text,.book-desc{
+  font-family:var(--type-reading);
+  line-height:2.05;
+}
+.kalam-box p{font-size:18px}
+.press-body p{font-size:18px}
+
+/* Unified source hierarchy on the homepage. */
+#home-daily .home-main-tabs button{
+  font-family:var(--type-ui);
+  font-size:var(--type-tab);
+  font-weight:650;
+  line-height:1.6;
+}
+#home-daily-stories .home-intel-copy>b{
+  font-family:var(--type-ui);
+  font-size:var(--type-news-title);
+  font-weight:700;
+  line-height:1.8;
+  letter-spacing:normal;
+}
+#home-daily-stories .home-intel-copy>small,
+#home-daily-stories .home-news-source-line,
+#home-daily-stories .home-news-source,
+#home-daily-stories .home-event-copy small{
+  font-family:var(--type-ui);
+  font-size:var(--type-meta);
+  line-height:1.7;
+  color:var(--ink-faint);
+}
+#home-daily-stories.home-events-in-table .home-event-copy>b,
+#home-daily-stories.home-events-in-table .home-event-list-item b{
+  font-family:var(--type-ui);
+  font-size:17px;
+  font-weight:700;
+  line-height:1.8;
+}
+#home-daily-stories.home-people-in-table .home-people-timeline-title{
+  font-family:var(--type-ui);
+  font-size:18px;
+  font-weight:700;
+  line-height:1.8;
+}
+#home-daily-stories.home-people-in-table .home-people-timeline-excerpt{
+  font-family:var(--type-ui);
+  font-size:15px;
+  line-height:1.95;
+}
+#home-daily-stories.home-people-in-table .home-people-timeline-meta,
+#home-daily-stories.home-people-in-table .home-people-timeline-read,
+#home-daily-stories .home-event-badge{
+  font-family:var(--type-ui);
+  font-size:var(--type-meta);
+  line-height:1.8;
+}
+#home-daily-stories .home-recap-copy b,
+#home-daily-stories .home-person-directory-copy b{font-family:var(--type-ui);font-size:16px;line-height:1.8}
+#home-daily-stories .home-recap-summary{font-size:14px;line-height:1.9}
+#home-daily-stories .home-recap-source{font-size:12px;line-height:1.75}
+#home-daily .home-kpis span,
+#home-view .home-kpis span,
+#home-view .home-freshness-item small{
+  font-size:12px;
+  line-height:1.75;
+  color:var(--ink-faint);
+}
+#home-view .home-freshness-item b{
+  font-size:13px;
+  line-height:1.7;
+}
+/* Headlines/figure and cultural listings: clear titles, legible metadata. */
+.home-panel-title b,.home-culture-panel .trend-title{
+  font-family:var(--type-ui);
+  font-size:16px;
+  line-height:1.75;
+  font-weight:700;
+}
+.home-panel-title span,.home-panel-title span small,
+.home-culture-panel .trend-author,.home-culture-panel .series-platform{
+  font-size:12.5px;
+  line-height:1.7;
+}
+.press-source strong,.press-book-links b,.book-card-copy strong{font-family:var(--type-ui)}
+.book-hub-hero h1,.tv-hero h1,.press-directory-hero h1{line-height:1.45}
+.book-section-title>span,.book-results-line,
+.book-trend small,.book-method,.book-store-copy small,
+.tv-channel-name,.tv-desc,.tv-program-top .tv-time{
+  font-size:12.5px;
+  line-height:1.8;
+  color:var(--ink-faint);
+}
+.hub-book-card .book-card-copy strong{font-size:18px;line-height:1.8}
+
+/* Keep text legible at narrow widths without enlarging image rows. */
+@media(max-width:600px){
+  :root{--type-news-title:16px;--type-news-body:14.5px;--type-meta:12px;--type-tab:13px}
+  .feed .card h2,.press-article h2{font-size:17px;line-height:1.8}
+  .feed .card .kalam,.qa p{font-size:14px;line-height:1.9}
+  .d-head h1,.press-detail h1{font-size:clamp(25px,6vw,31px);line-height:1.65}
+  #home-daily-stories .home-intel-copy>b{
+    font-size:16px;
+    line-height:1.85;
+  }
+  #home-daily-stories.home-events-in-table .home-event-copy>b,
+  #home-daily-stories.home-events-in-table .home-event-list-item b{
+    font-size:16px;
+    line-height:1.8;
+  }
+  #home-daily-stories.home-people-in-table .home-people-timeline-title{
+    font-size:16px;
+    line-height:1.8;
+  }
+  #home-daily-stories.home-people-in-table .home-people-timeline-excerpt{font-size:14px;line-height:1.9}
+  .kalam-box p,.press-body p{font-size:17px;line-height:2}
+  #home-daily .home-main-tabs button{font-size:13px}
+  #home-view .home-kpis span{font-size:11px}
+}
