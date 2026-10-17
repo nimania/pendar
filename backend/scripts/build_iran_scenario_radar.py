@@ -11,6 +11,7 @@ import argparse
 from datetime import datetime, timedelta, timezone
 import hashlib
 import json
+from functools import lru_cache
 from pathlib import Path
 import re
 
@@ -41,13 +42,19 @@ def normalize(value):
                   .replace("ك", "ک").replace("\u200c", " ")).strip()
 
 
-def priority_analyst(speaker, handle=""):
-    """Match a person by a known profile or exact name, never by affiliation alone."""
+@lru_cache(maxsize=1)
+def priority_analyst_roster():
+    """Read the small human-curated analyst registry once per generator run."""
     registry = read_json(Path(__file__).resolve().parents[1] /
                          "data" / "iran-future-analysts.json", {})
+    return registry.get("people", []) if isinstance(registry, dict) else []
+
+
+def priority_analyst(speaker, handle=""):
+    """Match a person by a known profile or exact name, never by affiliation alone."""
     subject = normalize(speaker).casefold()
     profile_handle = normalize(handle).lstrip("@").casefold()
-    for person in registry.get("people", []):
+    for person in priority_analyst_roster():
         if not isinstance(person, dict) or not person.get("active"):
             continue
         names = {normalize(person.get("name_fa")).casefold(),
