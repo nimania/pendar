@@ -1,8 +1,8 @@
 """Create the Iran scenario candidate ledger from Pendar's published news and figure views.
 
-Only reuses inputs already collected by Pendar. Automatic candidates are explicitly
-unreviewed and neutral (direction=0); mention frequency is NOT a probability,
-verification, or directional signal. Preserve the user's legacy ledger and the
+Only reuses inputs already collected by Pendar. Only explicitly directional patterns are scored automatically, with smaller weights
+for attributed analysis; ambiguous stories remain neutral. Scores are not probabilities
+or independently verified facts. Preserve the user's legacy ledger and the
 previously published automatic records across fast GitHub Pages deployments.
 """
 from __future__ import annotations
@@ -311,7 +311,7 @@ def build(site: Path, seed: Path, now=None):
     destination.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     history = build_history(result, now)
     (data / "iran-scenario-history.json").write_text(
-        json.dumps(history, ensure_ascii=False, separators=(",", ":")) + "\\n",
+        json.dumps(history, ensure_ascii=False, separators=(",", ":")) + "\n",
         encoding="utf-8")
     scored = sum(x.get("by") == "pendar-auto" and bool(x.get("direction")) for x in result)
     meta = {"generated_at": now.isoformat(), "total": len(result),
