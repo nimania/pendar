@@ -12,6 +12,7 @@ on:
       - ".github/workflows/fast-deploy.yml"
       - "backend/scripts/prepare_priority_site.py"
       - "backend/scripts/audit_pages_size.py"
+      - "backend/scripts/build_iran_scenario_radar.py"
       - "backend/scripts/restore_core_site_data.py"
       - "backend/scripts/validate_site_integrity.py"
 permissions:
@@ -485,8 +486,7 @@ jobs:
           PY
       - name: Build compact radar client data
         run: python backend/scripts/build_radar_view_data.py --site site
-      - name: Extend Iran scenario ledger from already collected Pendar data
-        continue-on-error: true
+      - name: Extend and score Iran scenarios from published Pendar data
         run: python backend/scripts/build_iran_scenario_radar.py --site site
       - name: Preserve validated lightweight news and figures only
         run: |

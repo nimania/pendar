@@ -9,7 +9,7 @@ from tempfile import TemporaryDirectory
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from build_iran_scenario_radar import build, classify
+from build_iran_scenario_radar import build, classify, assess_signal, build_history, apply_daily_caps
 
 
 class ScenarioRadarTests(unittest.TestCase):
@@ -61,7 +61,51 @@ class ScenarioRadarTests(unittest.TestCase):
             self.assertEqual(authored["direction"],
                              next(x for x in result if x["id"] == "seed-1")["direction"])
             meta = json.loads((data / "iran-scenario-meta.json").read_text())
-            self.assertEqual(meta["auto_direction_policy"], "neutral_until_editorial_review")
+            self.assertEqual(meta["auto_direction_policy"], "conservative_rules_with_daily_caps_unverified")
+            history = json.loads((data / "iran-scenario-history.json").read_text())
+            self.assertTrue(history["points"])
+            self.assertEqual(set(history["points"][-1]["scores"]), set(history["families"]))
+
+
+    def test_directional_news_versus_attributed_predictions(self):
+        self.assertEqual(assess_signal("حملات موشکی به ایران آغاز شد", "war", "story")[:3],
+                         (1, 2, "reported_event"))
+        self.assertEqual(assess_signal("حملات موشکی به ایران متوقف شد", "war", "story")[:3],
+                         (-1, 2, "reported_event"))
+        self.assertEqual(assess_signal("احتمال حملات موشکی به ایران مطرح شد", "war", "story")[0], 0)
+        self.assertEqual(assess_signal("حمله ایران", "war", "story")[0], 0)
+        self.assertEqual(assess_signal("جنگ ایران در آستانه وقوع است", "war", "figure")[:3],
+                         (1, 1, "analyst_view"))
+        self.assertEqual(assess_signal("جنگ ایران منتفی است", "war", "figure")[:3],
+                         (-1, 1, "analyst_view"))
+        self.assertEqual(assess_signal("جنگ ایران نزدیک است ولی بعید است", "war", "figure")[0], 0)
+
+    def test_daily_scoring_cap_and_historical_points(self):
+        from datetime import datetime, timezone
+        day = "2026-10-17"
+        records = [{
+            "id": f"auto-{i}", "date": day, "ts": 1000+i,
+            "family": "war", "by": "pendar-auto",
+            "direction": 1, "weight": 2, "source_type": "story",
+            "score_kind": "reported_event",
+        } for i in range(6)]
+        records.append({
+            "id": "authored-1", "date": "2026-10-16", "ts": 20,
+            "family": "attrition", "by": "claude", "direction": 1, "weight": 3,
+        })
+        apply_daily_caps(records)
+        self.assertEqual(sum(x["direction"]*x["weight"] for x in records if x["family"]=="war"), 4)
+        hist = build_history(records, datetime(2026, 10, 17, tzinfo=timezone.utc))
+        self.assertEqual(len(hist["points"]), 2)
+        self.assertEqual(hist["points"][-1]["scores"]["war"], 4)
+        self.assertEqual(hist["points"][-1]["components"]["event"]["war"], 4)
+        self.assertEqual(hist["points"][-1]["components"]["legacy"]["attrition"], 3)
+
+    def test_negative_news_moves_a_family_down(self):
+        self.assertEqual(assess_signal("توافق ایران لغو شد", "deal", "story")[:3],
+                         (-1, 2, "reported_event"))
+        self.assertEqual(assess_signal("نرخ تورم افزایش یافت و ایران با تحریم روبروست",
+                                       "attrition", "story")[:3], (1, 2, "reported_event"))
 
     def test_stale_items_are_not_automatically_added(self):
         self.assertIsNone(classify("ریاست جمهوری آمریکا"))
