@@ -24,6 +24,7 @@ class FeedType(str, enum.Enum):
     rss = "rss"
     atom = "atom"
     json = "json"
+    html = "html"  # site homepages with article links and no verified RSS
     api = "api"
     telegram = "telegram"  # public channel web preview (t.me/s/<handle>)
 
