@@ -141,3 +141,30 @@ def test_admin_ingestion_logs_endpoint(client, db):
     r = client.get("/api/v1/admin/ingestion-logs")
     assert r.status_code == 200
     assert any(row["source_name"] == "Logged Src" and row["new"] == 2 for row in r.json())
+
+
+def test_bartarinha_html_ingestion_keeps_only_actual_articles(db):
+    site = Source(
+        name="برترین‌ها", homepage_url="https://www.bartarinha.ir/",
+        feed_url="https://www.bartarinha.ir/", feed_type=FeedType.html,
+        region="iran", language="fa",
+    )
+    db.add(site)
+    db.commit()
+    raw = """<html><body>
+        <nav><a href="/بخش-اخبار-روز-20/1621843-ignored">This is navigation only</a></nav>
+        <div class="news">
+          <a href="/بخش-اخبار-روز-20/1621843-تراستی-متواری">تراستی متواری در نیوزیلند دیده شد</a>
+          <a href="/بخش-اخبار-روز-20/1621843-تراستی-متواری?utm_source=home">تراستی متواری در نیوزیلند دیده شد</a>
+          <a href="https://other-site.test/بخش-خبر-3/1621844-advert">تبلیغات خارجی در صفحه اول سایت</a>
+          <a href="/بخش-اجتماعی-6">صفحه اجتماعی برترین ها</a>
+          <a href="/بخش-فرهنگ-20/1621842-خبر-دیگر">خبر واقعی دیگر از فرهنگ و هنر</a>
+        </div>
+    </body></html>"""
+    first = ingest_source(db, site, raw_content=raw)
+    assert first.status == "ok"
+    assert first.new == 2
+    assert all(x.raw_content_if_permitted is None for x in db.query(Article).all())
+    second = ingest_source(db, site, raw_content=raw)
+    assert second.new == 0
+    assert second.duplicates == 2
