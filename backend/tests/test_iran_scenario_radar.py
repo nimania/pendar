@@ -177,6 +177,104 @@ class ScenarioRadarTests(unittest.TestCase):
         self.assertEqual(public_link("javascript:alert(1)"), "")
         self.assertEqual(public_link("https://me:password@example.org/bad"), "")
 
+    def test_future_expert_weight_requires_attributed_directional_original(self):
+        from build_iran_scenario_radar import make_candidate, priority_analyst
+
+        now = datetime.now(timezone.utc).replace(microsecond=0)
+        self.assertIsNotNone(priority_analyst("علی واعظ"))
+        self.assertIsNotNone(priority_analyst("Sanam Vakil"))
+        self.assertIsNotNone(priority_analyst("عباس عبدی"))
+        self.assertIsNone(priority_analyst("تحلیلگر تصادفی"))
+
+        opinion = {
+            "id": "future-expert-view-1", "kind": "analysis",
+            "name_fa": "علی واعظ", "handle": "ali-vaez",
+            "published_at": now.isoformat(),
+            "summary_fa": "جنگ ایران در آستانه وقوع است",
+            "url": "https://example.org/ali-vaez/1",
+        }
+        expert = make_candidate(opinion, "figure", now)
+        self.assertEqual((expert["direction"], expert["weight"], expert["score_kind"]),
+                         (1, 2, "analyst_view"))
+        self.assertTrue(expert["analyst_priority"])
+        self.assertEqual(expert["analyst_handle"], "ali-vaez")
+
+        other = make_candidate({**opinion, "id": "ordinary-view-1",
+                                "name_fa": "پژوهشگر نمونه", "handle": "sample-person"},
+                               "figure", now)
+        self.assertEqual((other["direction"], other["weight"]), (1, 1))
+        self.assertFalse(other["analyst_priority"])
+
+        no_original = make_candidate({**opinion, "id": "view-unlinked", "url": ""},
+                                     "figure", now)
+        self.assertEqual((no_original["direction"], no_original["weight"]), (0, 1))
+        self.assertFalse(no_original["analyst_priority"])
+
+        ambiguous = make_candidate({**opinion, "id": "view-ambiguous",
+                                    "summary_fa": "پیچیدگی جنگ ایران و احتمال مذاکره"},
+                                   "figure", now)
+        self.assertIsNone(ambiguous)
+
+        quote = make_candidate({
+            "id": "named-statement-1",
+            "person_name_fa": "ولی نصر",
+            "statement_fa": "جنگ ایران در آستانه وقوع است",
+            "article_url": "https://example.org/story/nasr-1",
+            "published_at": now.isoformat(),
+        }, "statement", now)
+        self.assertEqual((quote["direction"], quote["weight"]), (1, 2))
+        self.assertEqual(quote["speaker_url"], "/@vali-nasr")
+
+    def test_priority_experts_share_daily_family_cap_without_overriding_events(self):
+        from build_iran_scenario_radar import make_candidate
+
+        now = datetime.now(timezone.utc).replace(microsecond=0)
+        records = []
+        for name, ident, kind in [
+            ("علی واعظ", "figure-vaez", "figure"),
+            ("علی واعظ", "statement-vaez", "statement"),
+            ("ولی نصر", "figure-nasr", "figure"),
+            ("پژوهشگر دیگر", "figure-other", "figure"),
+        ]:
+            record = {
+                "id": ident, "published_at": now.isoformat(),
+                "url": "https://example.org/" + ident,
+                "article_url": "https://example.org/" + ident,
+            }
+            if kind == "figure":
+                record.update({"kind": "analysis", "name_fa": name,
+                               "summary_fa": "جنگ ایران در آستانه وقوع است"})
+            else:
+                record.update({"person_name_fa": name,
+                               "statement_fa": "جنگ ایران در آستانه وقوع است"})
+            candidate = make_candidate(record, kind, now)
+            self.assertEqual(candidate["direction"], 1)
+            records.append(candidate)
+
+        news = make_candidate({
+            "id": "9883cb58-e3da-4f35-8684-3ec9a6b70a37",
+            "published_at": now.isoformat(),
+            "headline_fa": "حملات موشکی به ایران آغاز شد",
+            "_detail": {"sources": [
+                {"source_name": "خبرگزاری نمونه",
+                 "article_url": "https://example.org/iran-news"}
+            ]},
+        }, "story", now)
+        records.append(news)
+        apply_daily_caps(records)
+
+        self.assertEqual(sum(x["direction"] * x["weight"] for x in records
+                             if x["source_type"] in ("figure", "statement")), 3)
+        self.assertEqual(sum(x["direction"] * x["weight"] for x in records
+                             if x["speaker"] == "علی واعظ"), 2)
+        self.assertEqual((news["direction"], news["weight"]), (1, 2))
+        self.assertEqual(sum(1 for x in records if x["score_kind"] == "capped"), 2)
+
+        previous = [(x["id"], x["direction"], x["weight"]) for x in records]
+        apply_daily_caps(records)
+        self.assertEqual([(x["id"], x["direction"], x["weight"]) for x in records], previous)
+
+
     def test_stale_items_are_not_automatically_added(self):
         self.assertIsNone(classify("ریاست جمهوری آمریکا"))
 
