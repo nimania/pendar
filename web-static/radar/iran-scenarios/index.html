@@ -102,6 +102,33 @@
   .empty{color:var(--muted); font-size:.88rem; text-align:center; padding:22px}
   .status{font-size:.78rem; color:var(--muted); margin-top:8px; min-height:1em}
 
+
+  /* Dated, source-separated indexes: do not portray them as probabilities. */
+  .charts{margin-top:22px;display:grid;gap:16px}
+  .chartcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .chartcard h3{font-size:1.05rem;margin:0 0 5px}
+  .chartnote{font-size:.8rem;color:var(--muted);margin:0 0 12px}
+  .charttools{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:10px 0 14px}
+  .period,.legendbtn{font:inherit;color:var(--fg);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;cursor:pointer}
+  .period{padding:5px 13px;font-size:.8rem}
+  .period[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:white}
+  .legendbtn{padding:5px 10px;font-size:.78rem;opacity:.46}
+  .legendbtn[aria-pressed=true]{opacity:1;border-color:var(--lc)}
+  .legendbtn .key{display:inline-block;background:var(--lc);width:9px;height:9px;border-radius:50%;margin-left:5px}
+  .plot{overflow-x:auto}
+  .plot svg{display:block;width:100%;min-width:530px;height:auto}
+  .plot text{font:12px var(--body);fill:var(--muted)}
+  .scoretable{display:grid;gap:10px}
+  .scorerow{display:grid;grid-template-columns:minmax(135px,1.4fr) minmax(85px,3fr) 60px;gap:10px;align-items:center;font-size:.83rem}
+  .scorerow .value{text-align:left;font-variant-numeric:tabular-nums;font-weight:800}
+  .scoretrack{height:11px;background:var(--surface-2);border-radius:7px;overflow:hidden;position:relative}
+  .scoretrack span{display:block;height:100%;background:var(--fc);border-radius:7px;min-width:0}
+  .chartgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .componentkey{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.75rem}
+  .componentkey b{font-weight:800}
+  .smalllabel{color:var(--muted);font-size:.75rem}
+  @media(max-width:700px){.chartgrid{grid-template-columns:1fr}.scorerow{grid-template-columns:minmax(100px,1.4fr) minmax(75px,2fr) 55px}.chartcard{padding:12px}}
+
   footer{margin-top:30px; color:var(--muted); font-size:.8rem; border-top:1px solid var(--line); padding-top:14px}
 
   @media (max-width:640px){
@@ -124,7 +151,7 @@
 
   <section id="view-fam">
     <h2 class="section">خانواده‌های سناریو</h2>
-    <p class="section-note">روی هر خانواده بزنید تا دفترِ سیگنال فقط همان را نشان دهد. امتیازها احتمال وقوع نیستند؛ نامزدهای خودکار تا پیش از بررسی خنثی می‌مانند.</p>
+    <p class="section-note">روی هر خانواده بزنید تا دفترِ سیگنال فقط همان را نشان دهد. امتیازها احتمال وقوع نیستند؛ نامزدهای دارای شواهدِ روشن با قواعد محافظه‌کارانه امتیاز می‌گیرند؛ بقیه خنثی می‌مانند.</p>
     <div class="families" id="families"></div>
   </section>
 
@@ -132,6 +159,36 @@
     <h2 class="section">به تفکیکِ تحلیل‌گر</h2>
     <p class="section-note">رنگِ هر نقطه نشان می‌دهد سناریو به کدام خانواده تعلق دارد.</p>
     <div class="analysts" id="analysts"></div>
+  </section>
+
+
+  <section class="charts" id="scenario-charts" aria-label="نمودارهای زمانی سناریوها">
+    <div class="chartcard">
+      <h2 class="section" style="margin:0 0 4px">روند تاریخی سناریوها</h2>
+      <p class="chartnote">شاخص تجمعی سیگنال‌ها، نه درصد احتمال. از زمان نخستین سیگنال ثبت‌شده؛ روزهای بدون سیگنال به صورت خط افقی نمایش داده می‌شوند.</p>
+      <div class="charttools" id="periods" aria-label="بازه زمانی"></div>
+      <div class="charttools" id="chartlegend" aria-label="انتخاب سناریوها"></div>
+      <div class="plot" id="trendplot" role="img" aria-label="نمودار خطی مقایسه تاریخی شش خانواده سناریو"></div>
+      <div id="chartstatus" class="status" aria-live="polite"></div>
+    </div>
+    <div class="chartgrid">
+      <div class="chartcard">
+        <h3>امتیاز فعلی خانواده‌ها</h3>
+        <p class="chartnote">جمعِ جهت‌دار سیگنال‌ها تا آخرین به‌روزرسانی</p>
+        <div class="scoretable" id="currentscores"></div>
+      </div>
+      <div class="chartcard">
+        <h3>تغییرات بازه انتخابی</h3>
+        <p class="chartnote">اختلاف امتیاز انتهای بازه با امتیاز پیش از آغاز آن</p>
+        <div class="scoretable" id="periodchanges"></div>
+      </div>
+    </div>
+    <div class="chartcard">
+      <h3>تفکیک جنس سیگنال</h3>
+      <p class="chartnote">«رویداد خبریِ تشخیص‌داده‌شده»، «دیدگاه تحلیل‌گر» و «داده‌های اولیهٔ راستی‌آزمایی‌نشده» جدا نمایش داده می‌شوند.</p>
+      <div class="componentkey"><span><b>رویداد:</b> الگوی متنی خبر، نه تأیید مستقل</span><span><b>دیدگاه:</b> پیش‌بینیِ منتسب به فرد</span><span><b>اولیه:</b> ثبت‌های قدیمی بدون بررسی مستقل</span></div>
+      <div class="scoretable" id="componentscores" style="margin-top:14px"></div>
+    </div>
   </section>
 
   <section class="logwrap">
@@ -380,6 +437,7 @@
       meta.appendChild(el("span","dir "+dcls,dtxt));
       li.appendChild(meta);
       li.appendChild(el("p","txt",s.text||""));
+      if(s.review_note&&s.by==="pendar-auto")li.appendChild(el("div","smalllabel",s.review_note));
       if(s.source){
          var source=el("div","src","منبع: "+s.source);
          var url=String(s.source_url||"");
@@ -388,7 +446,7 @@
          }
          li.appendChild(source);
        }
-      li.appendChild(el("div","by",s.by==="pendar-auto"?"شناسایی خودکار از پندار · بدون امتیاز تا بررسی":(s.by==="claude"?"ثبت اولیه (راستی‌آزمایی‌نشده)":"ثبت دستی")));
+      li.appendChild(el("div","by",s.by==="pendar-auto"?(s.direction?"امتیازدهی قاعده‌محور · "+(s.score_kind==="analyst_view"?"دیدگاه منتسب":"رویداد گزارش‌شده")+" · راستی‌آزمایی مستقل نشده":"شناسایی خودکار · خنثی / نیازمند بررسی"):(s.by==="claude"?"ثبت اولیه (راستی‌آزمایی‌نشده)":"ثبت دستی")));
       host.appendChild(li);
     });
   }
@@ -397,8 +455,141 @@
 
   function renderMaint(){
     var m=document.getElementById("maint");
-    m.textContent="این رادار با هر انتشار تازهٔ پندار، از سرخط‌ها و دیدگاه‌های ثبت‌شده نامزدهای مرتبط را شناسایی می‌کند. نامزدهای ماشینی با برچسب «بررسی‌نشده» و جهت خنثی وارد دفتر می‌شوند؛ صرفِ تکرار یک موضوع، سند تقویت سناریو نیست. سیگنال‌های اولیه برای حفظ تاریخچه نمایش داده می‌شوند، اما ادعاهای آن‌ها نیز الزاماً راستی‌آزمایی مستقل نشده‌اند. مومنتوم یک شاخص قراردادی از موارد جهت‌دارِ ثبت‌شده است، نه درصد احتمال یا پیش‌بینی قطعی.";
+    m.textContent="این رادار با هر انتشار تازهٔ پندار، از سرخط‌ها و دیدگاه‌های ثبت‌شده نامزدهای مرتبط را شناسایی می‌کند. سیگنال‌های ماشینی با قواعد متنیِ محافظه‌کارانه و سقف امتیاز روزانه می‌توانند مثبت یا منفی شوند؛ موارد مبهم خنثی می‌مانند. امتیاز خبری از دیدگاه چهره‌ها و داده‌های اولیه جداست؛ صرفِ تکرار یک موضوع، سند تقویت سناریو نیست. سیگنال‌های اولیه برای حفظ تاریخچه نمایش داده می‌شوند، اما ادعاهای آن‌ها نیز الزاماً راستی‌آزمایی مستقل نشده‌اند. مومنتوم یک شاخص قراردادی از موارد جهت‌دارِ ثبت‌شده است، نه درصد احتمال یا پیش‌بینی قطعی.";
   }
+
+
+  // ---------- historical comparison ----------
+  var timeline = null;
+  var selectedFamilies = {};
+  var selectedPeriod = "all";
+  FAMILIES.forEach(function(f){selectedFamilies[f.key]=true;});
+  function derivedHistory(){
+    var byDay={}, dates=[];
+    signals.forEach(function(s){
+      if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(s.date||"") || !FAMBYKEY[s.family]) return;
+      if(!byDay[s.date]){byDay[s.date]=[];dates.push(s.date);}
+      byDay[s.date].push(s);
+    });
+    dates.sort();
+    if(!dates.length)return {points:[]};
+    var totals={}, parts={event:{},analyst:{},legacy:{}};
+    FAMILIES.forEach(function(f){totals[f.key]=0;["event","analyst","legacy"].forEach(function(k){parts[k][f.key]=0;});});
+    var start=new Date(dates[0]+"T00:00:00Z"), end=new Date();
+    end.setUTCHours(0,0,0,0);
+    var points=[];
+    for(var d=new Date(start),n=0;d<=end&&n<1826;d.setUTCDate(d.getUTCDate()+1),n++){
+      var day=d.toISOString().slice(0,10),daily={};
+      FAMILIES.forEach(function(f){daily[f.key]=0;});
+      (byDay[day]||[]).forEach(function(s){
+        var value=(Number(s.direction)||0)*(Number(s.weight)||1);
+        var mode=s.score_kind==="reported_event"?"event":s.score_kind==="analyst_view"?"analyst":s.by==="pendar-auto"?"unscored":"legacy";
+        totals[s.family]+=value;daily[s.family]+=value;
+        if(parts[mode])parts[mode][s.family]+=value;
+      });
+      points.push({date:day,scores:Object.assign({},totals),daily:daily,
+        components:{event:Object.assign({},parts.event),analyst:Object.assign({},parts.analyst),legacy:Object.assign({},parts.legacy)}});
+    }
+    return {points:points,method:"Derived from published signal ledger"};
+  }
+  function series(){return timeline&&Array.isArray(timeline.points)?timeline.points:[];}
+  function slicePeriod(rows){
+    var span=Number(selectedPeriod);
+    return selectedPeriod==="all"||!span?rows:rows.slice(-span);
+  }
+  function signed(n){return (n>0?"+":"")+n;}
+  function shortFam(name){return name.split(" / ")[0];}
+  function makeBar(host, entries, maxVal){
+    host.innerHTML="";
+    entries.forEach(function(entry){
+      var line=el("div","scorerow");line.style.setProperty("--fc",entry.color);
+      line.appendChild(el("span",null,entry.label));
+      var track=el("div","scoretrack"),fill=el("span");
+      fill.style.width=(Math.abs(entry.value)/Math.max(1,maxVal)*100)+"%";
+      if(entry.value<0){fill.style.background="var(--down)";}
+      track.appendChild(fill);line.appendChild(track);
+      line.appendChild(el("span","value",signed(entry.value)));
+      host.appendChild(line);
+    });
+  }
+  function svgEl(tag,attrs,txt){
+    var node=document.createElementNS("http://www.w3.org/2000/svg",tag);
+    Object.keys(attrs||{}).forEach(function(key){node.setAttribute(key,attrs[key]);});
+    if(txt!=null)node.textContent=txt;
+    return node;
+  }
+  function renderTrend(){
+    var host=document.getElementById("trendplot");host.innerHTML="";
+    var rows=slicePeriod(series());
+    if(!rows.length){host.textContent="هنوز تاریخچه‌ای برای ترسیم موجود نیست.";return;}
+    var enabled=FAMILIES.filter(function(f){return selectedFamilies[f.key];});
+    if(!enabled.length){host.textContent="حداقل یک سناریو را انتخاب کنید.";return;}
+    var w=920,h=330,padL=46,padR=16,padT=16,padB=42;
+    var values=[0];
+    rows.forEach(function(p){enabled.forEach(function(f){values.push(Number(p.scores[f.key]||0));});});
+    var lo=Math.min.apply(null,values),hi=Math.max.apply(null,values),range=hi-lo||1;
+    var y=function(v){return padT+(hi-v)/range*(h-padT-padB);};
+    var x=function(i){return padL+(rows.length===1?0:i/(rows.length-1))*(w-padL-padR);};
+    var svg=svgEl("svg",{viewBox:"0 0 "+w+" "+h,role:"img","aria-label":"تغییرات امتیاز سناریوها از "+rows[0].date+" تا "+rows[rows.length-1].date});
+    for(var i=0;i<=4;i++){
+      var v=lo+(hi-lo)*i/4,yy=y(v);
+      svg.appendChild(svgEl("line",{x1:padL,y1:yy,x2:w-padR,y2:yy,stroke:"var(--line)","stroke-width":"1"}));
+      svg.appendChild(svgEl("text",{x:padL-8,y:yy+4,"text-anchor":"end"},String(Math.round(v*10)/10)));
+    }
+    if(lo<0&&hi>0)svg.appendChild(svgEl("line",{x1:padL,y1:y(0),x2:w-padR,y2:y(0),stroke:"var(--muted)","stroke-dasharray":"5 5"}));
+    [0,Math.floor((rows.length-1)/2),rows.length-1].filter(function(v,i,arr){return arr.indexOf(v)===i;}).forEach(function(index){
+      svg.appendChild(svgEl("text",{x:x(index),y:h-14,"text-anchor":index===0?"start":index===rows.length-1?"end":"middle"},rows[index].date));
+    });
+    enabled.forEach(function(f){
+      var points=rows.map(function(p,i){return x(i).toFixed(2)+","+y(Number(p.scores[f.key]||0)).toFixed(2);}).join(" ");
+      var color="var("+f.color+")";
+      svg.appendChild(svgEl("polyline",{points:points,fill:"none",stroke:color,"stroke-width":"2.8","stroke-linejoin":"round","stroke-linecap":"round"}));
+      var last=rows[rows.length-1],circ=svgEl("circle",{cx:x(rows.length-1),cy:y(Number(last.scores[f.key]||0)),r:4,fill:color});
+      circ.appendChild(svgEl("title",{},f.title+" / "+last.date+" / "+signed(Number(last.scores[f.key]||0))));
+      svg.appendChild(circ);
+    });
+    host.appendChild(svg);
+  }
+  function renderCharts(){
+    var periods=document.getElementById("periods"),legend=document.getElementById("chartlegend");
+    periods.innerHTML="";legend.innerHTML="";
+    [{key:"7",label:"۷ روز"},{key:"30",label:"۳۰ روز"},{key:"90",label:"۹۰ روز"},{key:"all",label:"کل تاریخچه"}].forEach(function(p){
+      var b=el("button","period",p.label);b.type="button";b.setAttribute("aria-pressed",String(selectedPeriod===p.key));
+      b.addEventListener("click",function(){selectedPeriod=p.key;renderCharts();});periods.appendChild(b);
+    });
+    FAMILIES.forEach(function(f){
+      var b=el("button","legendbtn");b.type="button";b.style.setProperty("--lc","var("+f.color+")");
+      b.setAttribute("aria-pressed",String(selectedFamilies[f.key]));
+      b.appendChild(el("span","key"));b.appendChild(document.createTextNode(shortFam(f.title)));
+      b.addEventListener("click",function(){selectedFamilies[f.key]=!selectedFamilies[f.key];renderCharts();});
+      legend.appendChild(b);
+    });
+    var all=series(), rows=slicePeriod(all), last=all[all.length-1];
+    renderTrend();
+    if(!last)return;
+    var before=all.length>rows.length?all[all.length-rows.length-1]:null;
+    var entries=FAMILIES.map(function(f){return {key:f.key,label:shortFam(f.title),color:"var("+f.color+")",value:Number(last.scores[f.key]||0)};});
+    var max=Math.max.apply(null,entries.map(function(e){return Math.abs(e.value);}));
+    makeBar(document.getElementById("currentscores"),entries.slice().sort(function(a,b){return b.value-a.value;}),max);
+    var changes=entries.map(function(e){return Object.assign({},e,{value:e.value-Number(before&&before.scores[e.key]||0)});});
+    var maxChange=Math.max.apply(null,changes.map(function(e){return Math.abs(e.value);}));
+    makeBar(document.getElementById("periodchanges"),changes.slice().sort(function(a,b){return b.value-a.value;}),maxChange);
+    var comps=document.getElementById("componentscores");comps.innerHTML="";
+    [{kind:"event",label:"خبر / رویداد"},{kind:"analyst",label:"دیدگاه چهره‌ها"},{kind:"legacy",label:"ثبت اولیه"}].forEach(function(section){
+      comps.appendChild(el("h4","smalllabel",section.label));
+      var list=entries.map(function(e){return Object.assign({},e,{value:Number(last.components&&last.components[section.kind]&&last.components[section.kind][e.key]||0)});});
+      makeBar((function(){var div=el("div","scoretable");comps.appendChild(div);return div;})(),list,Math.max.apply(null,list.map(function(e){return Math.abs(e.value);}).concat([1])));
+    });
+    document.getElementById("chartstatus").textContent=
+      "بازه: "+(rows[0]?rows[0].date:"—")+" تا "+last.date+" · "+all.length+" روز ثبت تاریخچه · امتیازها شاخص سیگنال‌اند، نه احتمال.";
+  }
+  function loadHistory(){
+    fetch("/data/iran-scenario-history.json",{cache:"no-store"})
+      .then(function(r){if(!r.ok)throw Error("not found");return r.json();})
+      .then(function(d){if(!d||!Array.isArray(d.points)||!d.points.length)throw Error("invalid");timeline=d;renderCharts();})
+      .catch(function(){timeline=derivedHistory();renderCharts();});
+  }
+
 
   // ---------- tabs ----------
   var tf=document.getElementById("tab-fam"), ta=document.getElementById("tab-an");
@@ -416,6 +607,7 @@
   function boot(data){
     signals = Array.isArray(data) ? data : [];
     renderFamilies(); renderAnalysts(); renderFilter(); renderLog(); renderMaint();
+    timeline=derivedHistory(); renderCharts(); loadHistory();
     setStatus(signals.length ? (signals.length + " سیگنال · آخرین به‌روزرسانی: " + (signals[0] && signals[0].date || "—")) : "سیگنالی ثبت نشده.");
   }
 
