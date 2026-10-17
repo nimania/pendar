@@ -494,6 +494,10 @@ jobs:
         run: python backend/scripts/build_iran_scenario_radar.py --site site
       - name: Publish linkable Iran scenario families and subscenarios
         run: python backend/scripts/build_iran_scenario_pages.py --site site
+      - name: Verify nested scenario page contracts
+        run: |
+          python -m py_compile backend/scripts/build_iran_scenario_pages.py
+          python -m unittest discover -s backend/tests -p 'test_iran_scenario_pages.py' -v
       - name: Install optional live radar browser configuration
         env:
           RADAR_LIVE_ORIGIN: ${{ vars.RADAR_LIVE_ORIGIN }}
