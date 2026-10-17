@@ -84,16 +84,19 @@ async function loadPendarHistoricalFallback(s){
   const entries=new Map();
   for(const group of Object.values(source||{}))if(Array.isArray(group))for(const row of group)if(row&&row.id)entries.set(row.id,row);
   const stop=new Set("این آن برای درباره گزارش خبری اخبار ایران ایرانی تهران خبر که در از با به را و یا امروز روز تازه جدید است شده بود گفت اعلام منتشر رسانه خبرگزاری بررسی کشور منطقه".split(" "));
-  const words=t=>new Set((String(t||"").toLowerCase().replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ").match(/[\u0600-\u06ffA-Za-z0-9]{4,}/g)||[]).filter(w=>!stop.has(w)));
+  const words=t=>new Set((String(t||"").toLowerCase().replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/سوپرنفتکش|ابرنفتکش/g,"نفتکش").replace(/‌/g," ").match(/[\u0600-\u06ffA-Za-z0-9]{4,}/g)||[]).filter(w=>!stop.has(w)));
   const title=words(s.headline_fa),body=new Set([...title,...words(s.summary_fa)]);
   const anchor=Date.parse(s.published_at||"");if(title.size<2||!Number.isFinite(anchor))return;
   const earlier=[],later=[];
   for(const c of entries.values()){
    if(c.id===s.id||!/^[0-9a-f-]{36}$/i.test(c.id))continue;
    const date=Date.parse(c.published_at||"");
-   if(!Number.isFinite(date)||Math.abs(anchor-date)>540*864e5||Math.abs(anchor-date)<8*36e5)continue;
+   if(!Number.isFinite(date)||Math.abs(anchor-date)>540*864e5||Math.abs(anchor-date)<36*36e5)continue;
    const heading=words(c.headline_fa),other=new Set([...heading,...words(c.summary_fa)]);
-   const common=[...title].filter(w=>heading.has(w)).length,all=[...body].filter(w=>other.has(w)).length;
+   const sharedHead=[...title].filter(w=>heading.has(w));
+   const generic=new Set(["تنگه","هرمز","دریایی","نیروی","سپاه","امنیت","دولت","دومین","نظامی"]);
+   if(!sharedHead.some(w=>!generic.has(w)))continue;
+   const common=sharedHead.length,all=[...body].filter(w=>other.has(w)).length;
    if(common<2&&!(common>=1&&all>=3))continue;
    if(all<2||all/Math.max(1,Math.min(body.size,other.size))<.22)continue;
    (date<anchor?earlier:later).push({id:c.id,headline_fa:c.headline_fa,published_at:c.published_at,score:common*5+all*2});
