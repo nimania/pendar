@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "description": "Submitted public Telegram handles awaiting endpoint/identity verification. Candidates are not ingested or displayed until verified.",
+  "candidates": [
+    {
+      "handle": "AbbasAkhoundiRobonay",
+      "url": "https://t.me/AbbasAkhoundiRobonay",
+      "intended_figure": "abbas-akhoundi",
+      "submitted_at": "2026-10-17",
+      "status": "pending_endpoint_verification",
+      "note": "Supplied as Abbas Akhoundi channel; its public Telegram preview could not be verified. The verified @AbbasAkhoundi feed remains the active figure source."
+    }
+  ]
+}
