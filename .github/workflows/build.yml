@@ -408,6 +408,13 @@ jobs:
           rm -rf -- backend/public/master-movie backend/public/graph backend/public/book
           echo "Optional movie archive, graph and standalone book routes excluded from Pages payload."
 
+      - name: Extend Iran scenario ledger from already collected Pendar data
+        continue-on-error: true
+        run: |
+          if [ -s /tmp/previous-site/data/iran-scenario-signals.json ]; then
+            cp /tmp/previous-site/data/iran-scenario-signals.json backend/public/data/iran-scenario-signals.json
+          fi
+          python backend/scripts/build_iran_scenario_radar.py --site backend/public
       - name: Apply temporary news-and-figures publication profile
         run: python backend/scripts/prepare_priority_site.py backend/public
 
