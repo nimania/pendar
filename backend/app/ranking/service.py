@@ -12,6 +12,7 @@ from app.core.logging import get_logger
 from app.models.enums import IranRelevance, StoryStatus
 from app.models.source import Source
 from app.models.story import Story, StoryArticle
+from app.source_identity import publisher_identity
 from app.ranking.importance import (
     count_iran_hits,
     iran_relevance_label,
@@ -38,7 +39,7 @@ def rank_stories(db: Session) -> dict:
         articles = [l.article for l in st.article_links if l.article]
         if not articles:
             continue
-        source_ids = {a.source_id for a in articles}
+        source_ids = {publisher_identity(a) for a in articles}
         rels = [reliabilities.get(a.source_id, 0.5) for a in articles]
         avg_rel = sum(rels) / len(rels) if rels else 0.5
         times = [a.published_at for a in articles if a.published_at]
