@@ -352,3 +352,18 @@
   :root:not([data-theme="light"]) #home-daily-stories[data-home-mode="viral"] .home-intel-rank{color:#df9fa4}
   :root:not([data-theme="light"]) #home-daily-stories[data-home-mode="events"] .home-event-badge{color:#70b6a7}
 }
+
+/* Mark only actually generated editorial reports in the existing news tabs. */
+#home-daily-stories .home-report-pill{
+  display:inline-flex;align-items:center;align-self:flex-start;
+  width:max-content;max-width:100%;
+  margin-top:2px;padding:2px 8px;
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  background:var(--accent-soft);
+  color:var(--accent);
+  border-radius:6px;
+  font:700 11.5px/1.8 "Vazirmatn",sans-serif;
+}
+@media(max-width:600px){
+  #home-daily-stories .home-report-pill{font-size:11px;padding:1px 7px;}
+}
