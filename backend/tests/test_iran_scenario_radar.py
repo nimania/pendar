@@ -153,7 +153,7 @@ class ScenarioRadarTests(unittest.TestCase):
             self.assertIn("https://example.org/original/123",
                           [x["url"] for x in story["source_links"]])
             self.assertEqual((figure["direction"], figure["weight"]), (-1, 1))
-            self.assertEqual(figure["speaker"], "آینده‌پژوه نمونه")
+            self.assertEqual(figure["speaker"], "آینده پژوه نمونه")
             self.assertEqual(figure["speaker_url"], "/@future-researcher")
             self.assertEqual((statement["direction"], statement["weight"]), (1, 1))
             self.assertEqual(statement["speaker"], "تحلیلگر آزمایشی")
