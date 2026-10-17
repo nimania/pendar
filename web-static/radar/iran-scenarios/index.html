@@ -129,6 +129,28 @@
   .smalllabel{color:var(--muted);font-size:.75rem}
   @media(max-width:700px){.chartgrid{grid-template-columns:1fr}.scorerow{grid-template-columns:minmax(100px,1.4fr) minmax(75px,2fr) 55px}.chartcard{padding:12px}}
 
+
+  .livebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 13px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:18px;font-size:.82rem}
+  .livepulse{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--flat);flex:0 0 auto}
+  .livepulse.fresh{background:var(--up)}.livepulse.stale{background:var(--down)}
+  .livebar button,.evidence-links a,.signal-clear{font:inherit;font-size:.78rem;border:1px solid var(--line);background:var(--surface-2);color:var(--fg);border-radius:8px;padding:5px 9px;text-decoration:none;cursor:pointer}
+  .livebar button{margin-right:auto}
+  .evidence-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:9px}
+  .evidence-links a{color:var(--accent);border-color:var(--accent)}
+  .signal-reason{border-right:3px solid var(--accent);padding:5px 9px;margin:8px 0;background:var(--surface);font-size:.82rem}
+  .signal-person{font-size:.81rem;margin-top:6px;font-weight:700}
+  .signal-person a{color:var(--accent)}
+  .sigitem.focused{outline:2px solid var(--accent)}
+  .day-summary{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:12px;margin:12px 0}
+  .day-summary h3{margin:0;font-size:.93rem}
+  .day-summary p{margin:4px 0 8px;font-size:.82rem;color:var(--muted)}
+  .day-summary .signal-clear{display:inline-block}
+  .sig-more{font:inherit;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;color:var(--accent);margin-top:12px}
+  .audit-timeline{font-size:.81rem;max-height:250px;overflow:auto;padding:0;margin:8px 0;list-style:none}
+  .audit-timeline li{padding:8px 2px;border-bottom:1px solid var(--line)}
+  .audit-timeline small{color:var(--muted);display:block}
+  .metricstrip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:7px}
+
   footer{margin-top:30px; color:var(--muted); font-size:.8rem; border-top:1px solid var(--line); padding-top:14px}
 
   @media (max-width:640px){
@@ -143,6 +165,13 @@
     <h1>نقشه‌ی سناریوهای ایران</h1>
     <p class="sub">سناریوهایی که تحلیل‌گرانِ مختلف درباره‌ی آینده‌ی ایران مطرح کرده‌اند، در دو نما؛ و یک دفترِ سیگنال که هر روز نشانه‌های تازه در آن ثبت می‌شود تا ببینیم کفه‌ی کدام سناریو سنگین‌تر می‌شود. «مومنتوم» هر خانواده از جمعِ وزنیِ سیگنال‌های تقویت‌کننده و تضعیف‌کننده به دست می‌آید.</p>
   </header>
+
+  <div class="livebar" role="status" aria-live="polite">
+    <span id="livepulse" class="livepulse"></span>
+    <span id="livestate">دریافت دادهٔ منتشرشده...</span>
+    <span id="liveage" class="smalllabel"></span>
+    <button type="button" id="refresh-live">بررسی دوباره ↻</button>
+  </div>
 
   <div class="tabs" role="tablist">
     <button class="tab" role="tab" aria-selected="true" id="tab-fam">خانواده‌های سناریو</button>
@@ -170,6 +199,7 @@
       <div class="charttools" id="chartlegend" aria-label="انتخاب سناریوها"></div>
       <div class="plot" id="trendplot" role="img" aria-label="نمودار خطی مقایسه تاریخی شش خانواده سناریو"></div>
       <div id="chartstatus" class="status" aria-live="polite"></div>
+      <p class="chartnote">برای دیدن شواهد مربوط به یک روز، روی نمودار همان روز کلیک کنید.</p>
     </div>
     <div class="chartgrid">
       <div class="chartcard">
@@ -191,10 +221,17 @@
     </div>
   </section>
 
-  <section class="logwrap">
+  <section class="chartcard" id="change-audit" style="margin-top:16px">
+    <h3>تاریخچهٔ تغییرات رادار</h3>
+    <p class="chartnote">زمانی که سامانه یک مجموعه داده یا امتیاز جدید را منتشر کرده است؛ تاریخ انتشار خود خبر ممکن است قدیمی‌تر باشد.</p>
+    <ul id="audit-list" class="audit-timeline"><li>هنوز سابقهٔ رصد منتشر نشده است.</li></ul>
+  </section>
+
+  <section class="logwrap" id="evidence-board">
     <div class="panel">
       <h3>دفترِ سیگنال‌ها</h3>
       <div class="logfilter" id="logfilter"></div>
+      <div id="dayselection"></div>
       <ul class="loglist" id="loglist"></ul>
       <div class="status" id="logstatus"></div>
     </div>
@@ -419,36 +456,98 @@
     });
   }
 
+
+  var filterDate=null;
+  var logLimit=80;
+  function permittedUrl(v){
+    var u=String(v||"");
+    return (/^https:\/\/[^\s]+$/i.test(u)||/^\/story\/[a-zA-Z0-9-]+\/$/.test(u)||/^\/@[a-zA-Z0-9_-]+\/?$/.test(u))?u:"";
+  }
+  function referenceLink(info){
+    var href=permittedUrl(info&&info.url);
+    if(!href)return null;
+    var a=el("a",null,info.label||"بازکردن منبع");
+    a.href=href;a.target="_blank";a.rel="noopener noreferrer";
+    return a;
+  }
+  function selectLogDate(date){
+    filterDate=date;logLimit=80;
+    renderLog();
+    document.getElementById("evidence-board").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  function renderSelectedDay(){
+    var host=document.getElementById("dayselection");host.innerHTML="";
+    if(!filterDate)return;
+    var box=el("div","day-summary");
+    box.appendChild(el("h3",null,"اسناد و تغییرات روز "+filterDate));
+    var items=signals.filter(function(x){return x.date===filterDate&&(!filterKey||x.family===filterKey);});
+    box.appendChild(el("p",null,items.length+" سیگنال ثبت‌شده؛ روایت‌ها و رویدادها را با استناد بررسی کنید."));
+    var b=el("button","signal-clear","نمایش همهٔ تاریخ‌ها");
+    b.type="button";b.addEventListener("click",function(){filterDate=null;logLimit=80;renderLog();});
+    box.appendChild(b);host.appendChild(box);
+  }
+
   // ---------- log list ----------
+
   function renderLog(){
-    var host=document.getElementById("loglist"); host.innerHTML="";
-    var rows=signals.slice().sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+    var host=document.getElementById("loglist");host.innerHTML="";
+    renderSelectedDay();
+    var rows=signals.slice().sort(function(a,b){return (b.ts||0)-(a.ts||0);});
     if(filterKey)rows=rows.filter(function(s){return s.family===filterKey;});
-    if(!rows.length){ host.appendChild(el("div","empty","سیگنالی برای نمایش نیست.")); return; }
-    rows.forEach(function(s){
+    if(filterDate)rows=rows.filter(function(s){return s.date===filterDate;});
+    if(!rows.length){host.appendChild(el("div","empty","سیگنالی برای نمایش نیست."));return;}
+    rows.slice(0,logLimit).forEach(function(s){
       var f=FAMBYKEY[s.family]||FAMILIES[0];
-      var li=el("li","sigitem"); li.style.setProperty("--fc",famVar(f.key));
+      var li=el("li","sigitem");li.style.setProperty("--fc",famVar(f.key));li.id="signal-"+String(s.id||"").replace(/[^A-Za-z0-9_-]/g,"");
       var meta=el("div","meta");
       meta.appendChild(el("span","fam-chip",shortTitle(f.title)));
       meta.appendChild(el("span","date",s.date||""));
       var dnum=Number(s.direction)||0;
-      var dcls=dnum>0?"up":(dnum<0?"down":"flat");
-      var dtxt=dnum>0?("تقویت +"+(s.weight||1)):(dnum<0?("تضعیف −"+(s.weight||1)):"خنثی");
+      var dcls=dnum>0?"up":dnum<0?"down":"flat";
+      var dtxt=dnum>0?("تقویت +"+(s.weight||1)):dnum<0?("تضعیف −"+(s.weight||1)):"خنثی";
       meta.appendChild(el("span","dir "+dcls,dtxt));
       li.appendChild(meta);
       li.appendChild(el("p","txt",s.text||""));
-      if(s.review_note&&s.by==="pendar-auto")li.appendChild(el("div","smalllabel",s.review_note));
-      if(s.source){
-         var source=el("div","src","منبع: "+s.source);
-         var url=String(s.source_url||"");
-         if(/^https:\/\//i.test(url)||/^\/story\/[a-zA-Z0-9-]+\/$/.test(url)){
-           var link=el("a",null," · مشاهده منبع ↗");link.href=url;link.target="_blank";link.rel="noopener noreferrer";source.appendChild(link);
-         }
-         li.appendChild(source);
-       }
-      li.appendChild(el("div","by",s.by==="pendar-auto"?(s.direction?"امتیازدهی قاعده‌محور · "+(s.score_kind==="analyst_view"?"دیدگاه منتسب":"رویداد گزارش‌شده")+" · راستی‌آزمایی مستقل نشده":"شناسایی خودکار · خنثی / نیازمند بررسی"):(s.by==="claude"?"ثبت اولیه (راستی‌آزمایی‌نشده)":"ثبت دستی")));
+      if(s.speaker){
+        var sp=el("div","signal-person","گوینده: "+s.speaker+(s.speaker_role?" · "+s.speaker_role:""));
+        var profile=referenceLink({label:" · پروفایل چهره",url:s.speaker_url});
+        if(profile)sp.appendChild(profile);
+        li.appendChild(sp);
+      }else if(s.related_people&&s.related_people.length){
+        li.appendChild(el("div","smalllabel","اشخاص نقل‌شده در خبر: "+s.related_people.map(function(p){return p.name;}).join("، ")+" (تأییدکنندهٔ خبر محسوب نمی‌شوند)"));
+      }
+      if(s.score_reason){
+        li.appendChild(el("div","signal-reason","دلیل امتیاز: "+s.score_reason));
+      }else if(s.review_note){
+        li.appendChild(el("div","signal-reason","وضعیت شاهد: "+s.review_note));
+      }
+      if(s.uncertainty)li.appendChild(el("div","smalllabel","عدم‌قطعیت: "+s.uncertainty));
+      if(s.source)li.appendChild(el("div","src","منبع/ناشر: "+s.source));
+      var references=Array.isArray(s.source_links)?s.source_links:[];
+      if(!references.length&&s.source_url)references=[{label:"منبع ثبت‌شده",url:s.source_url}];
+      if(references.length){
+        var box=el("div","evidence-links");
+        references.slice(0,9).forEach(function(ref){
+          var a=referenceLink(ref);if(a)box.appendChild(a);
+        });
+        if(box.children.length)li.appendChild(box);
+      }else{
+        li.appendChild(el("div","smalllabel","پیوند استنادِ قابل بررسی برای این سیگنالِ تاریخی ثبت نشده است."));
+      }
+      li.appendChild(el("div","by",s.by==="pendar-auto"
+        ?(s.direction?(s.score_kind==="analyst_view"?"دیدگاه منتسب · امتیاز خودکار":"رویداد گزارش‌شده · امتیاز خودکار"):"خبر یا نظر مبهم · بدون امتیاز")
+        +" · راستی‌آزمایی مستقل نشده"
+        :(s.by==="claude"?"ثبت اولیه؛ بدون راستی‌آزمایی مستقل":"ثبت غیرخودکار")));
       host.appendChild(li);
     });
+    var more=host.parentNode.querySelector(".sig-more");
+    if(more)more.remove();
+    if(rows.length>logLimit){
+      more=el("button","sig-more","نمایش "+Math.min(80,rows.length-logLimit)+" سیگنال دیگر");
+      more.type="button";more.addEventListener("click",function(){logLimit+=80;renderLog();});
+      host.parentNode.appendChild(more);
+    }
+    setStatus(rows.length+" سیگنال منطبق با فیلتر · "+signals.length+" سیگنال در دفتر کل");
   }
 
   function setStatus(t){ var s=document.getElementById("logstatus"); if(s)s.textContent=t; }
