@@ -3,6 +3,13 @@
 .future-hub-status{border:1px solid #7776;border-radius:15px;padding:12px 18px;margin:20px 0 28px}
 .future-hub-status h2{font-size:17px;margin:2px 0 12px}.future-hub-status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .future-hub-status-grid p{font-size:13px;margin:0;border-inline-start:2px solid #b3424e;padding:7px 11px;line-height:1.9}
+.future-hub-signals{padding:7px 0 21px}.future-hub-signals h2{margin:10px 0 6px;font-size:20px}
+.future-hub-signal-list{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.future-hub-signal-list li{border:1px solid #8885;border-radius:10px;padding:12px 15px;min-width:0}
+.future-hub-signal-list li a:first-child{display:block;color:inherit;font-weight:700;line-height:1.9}
+.future-hub-signal-list small{display:block;font-size:12px;opacity:.72;margin:4px 0}
+.future-hub-signal-list .future-hub-source{font-size:12px}
+@media(max-width:650px){.future-hub-signal-list{grid-template-columns:1fr}}
 .future-hub-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.future-hub-grid .card{min-width:0;text-decoration:none;transition:border-color .2s}
 .future-hub-grid .card:hover{border-color:#b3424e}.future-hub-grid .card h3{font-size:20px;margin:9px 0}.future-hub-grid .card p{font-size:14px}
 .future-hub-grid .card strong{color:#b93244;font-size:13px}.future-hub-links{display:flex;gap:15px;flex-wrap:wrap;padding:17px 0 24px}
@@ -22,6 +29,11 @@
     <p id="future-us-status">رادار آمریکا: در حال دریافت زمان بازبینی…</p>
     <p id="future-israel-status">رادار اسرائیل: در حال دریافت زمان بازبینی…</p>
   </div>
+</section>
+<section class="future-hub-signals" aria-label="جدیدترین نامزدهای ثبت‌شده در دفتر سیگنال">
+  <h2>جدیدترین سیگنال‌های سناریویی</h2>
+  <p class="muted">موارد این فهرست خروجی ثبت ماشینی یا اولیه‌اند؛ تا پیش از راستی‌آزمایی مستقل، تأیید خبر یا تقویت واقعی سناریو محسوب نمی‌شوند.</p>
+  <div id="future-recent-signals" role="status">در حال دریافت دفتر سیگنال‌ها…</div>
 </section>
 <section aria-labelledby="future-hub-sections">
   <h2 id="future-hub-sections">بخش‌های آینده‌بان</h2>
@@ -44,8 +56,9 @@
   function put(id,value){const el=document.getElementById(id);if(el)el.textContent=value;}
   Promise.allSettled([
     fetch("/data/iran-scenario-catalog.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}),
-    fetch("/data/pendar-radar-status.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()})
-  ]).then(([catalog,status])=>{
+    fetch("/data/pendar-radar-status.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}),
+    fetch("/data/iran-scenario-signals.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()})
+  ]).then(([catalog,status,signals])=>{
     if(catalog.status==="fulfilled"&&Array.isArray(catalog.value.families)&&Array.isArray(catalog.value.scenarios))
       put("future-scenario-status","سناریوهای ایران: "+fa(catalog.value.families.length)+" خانواده، "+fa(catalog.value.scenarios.length)+" زیرسناریو · فهرست پژوهشی");
     else put("future-scenario-status","سناریوهای ایران: دریافت فهرست ممکن نشد؛ پرونده‌ها همچنان در دسترس‌اند");
@@ -53,6 +66,33 @@
       const d=status.status==="fulfilled"?status.value.countries?.[key]:null;
       put(id,"رادار "+label+": "+(d?"آخرین بازبینی "+formatDate(d.reviewed_at):"وضعیت بازبینی فعلاً در دسترس نیست"));
     }
+    const host=document.getElementById("future-recent-signals");
+    if(!host)return;
+    if(signals.status!=="fulfilled"||!Array.isArray(signals.value)){
+      host.textContent="دفتر سیگنال‌ها فعلاً در دسترس نیست؛ نمودارهای سناریو از آخرین نسخه موفق داده استفاده می‌کنند.";
+      return;
+    }
+    const rows=signals.value.filter(r=>r&&typeof r.family==="string"&&/^[a-z-]{2,30}$/.test(r.family))
+      .sort((a,b)=>Number(b.ts||0)-Number(a.ts||0)).slice(0,5);
+    if(!rows.length){host.textContent="سیگنالی برای نمایش ثبت نشده است.";return;}
+    const list=document.createElement("ul");list.className="future-hub-signal-list";
+    rows.forEach(row=>{
+      const item=document.createElement("li");
+      const family=document.createElement("a");
+      family.href="/radar/iran-scenarios/"+row.family+"/";
+      family.textContent=String(row.text||"سیگنال بدون شرح").slice(0,145);
+      const meta=document.createElement("small");
+      meta.textContent=(row.date||"تاریخ نامشخص")+" · "+(row.speaker||row.source||"داده پندار")+" · نامزد بررسی";
+      item.append(family,meta);
+      if(typeof row.source_url==="string"&&/^https?:\/\//.test(row.source_url)){
+        const source=document.createElement("a");
+        source.href=row.source_url;source.textContent="منبع ↗";
+        source.target="_blank";source.rel="noopener noreferrer";source.className="future-hub-source";
+        item.append(source);
+      }
+      list.append(item);
+    });
+    host.replaceChildren(list);
   });
 })();
 </script></body></html>
