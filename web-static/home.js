@@ -267,6 +267,8 @@ function homeStorySourceBadges(story){
 function renderHomeDaily(){
   const storyEl=document.getElementById("home-daily-stories");
   if(!storyEl)return;
+  // A presentation hook for mode-specific editorial styling; no data change.
+  storyEl.dataset.homeMode=homeNewsMode;
   const title=document.getElementById("home-news-title");
   if(title)title.textContent=homeNewsMode==="events"?"ماجراها و ترندها":homeNewsMode==="people"?"چهره‌ها و جان کلام":homeNewsMode==="latest"?"سرخط‌های تازه":homeNewsMode==="selected"?"سرخط‌های برگزیده":"وایرال";
   // The independent site-activity section stays visible at the bottom on every tab.
