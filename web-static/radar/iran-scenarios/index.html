@@ -71,6 +71,9 @@
   .tags{display:flex; flex-wrap:wrap; gap:5px}
   .tag{font-size:.72rem; color:var(--muted); background:var(--surface-2); border-radius:6px; padding:2px 7px}
   .fam .count{font-size:.74rem; color:var(--muted)}
+  .fam a,.an a,.sigitem a{color:var(--accent);text-underline-offset:3px}
+  .fam .scenario-open{display:inline-block;margin-top:auto;font-size:.84rem;font-weight:800;text-decoration:underline}
+  .fam .tag a{font-size:inherit;text-decoration:underline}
 
   .analysts{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
   .an{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:8px}
@@ -273,6 +276,43 @@
      who:["زاگرس: بازیابیِ پساترامپ","الگوی چین (خاتمی/قالیباف)"]}
   ];
   var FAMBYKEY = {}; FAMILIES.forEach(function(f){FAMBYKEY[f.key]=f;});
+  var SCENARIO_ROOT="/radar/iran-scenarios/";
+  var scenarioCatalog={scenarios:[],people:[]};
+  var PERSON_HANDLES={
+    "مطهرنیا":"MehdiMotaharnia1344","مهدی مطهرنیا":"MehdiMotaharnia1344",
+    "زاگرس":"zagros-rashidi","زاگرس رشیدی":"zagros-rashidi",
+    "فتاحی":"iranemana_official","سجاد فتاحی":"iranemana_official",
+    "سوری":"abbas-souri","عباس سوری":"abbas-souri",
+    "هلاکویی":"bahadaf","فرهنگ هلاکویی":"bahadaf",
+    "صبوری":"darwinsabouri","داروین صبوری":"darwinsabouri",
+    "زیدآبادی":"ahmadzeidabad","احمد زیدآبادی":"ahmadzeidabad",
+    "خاتمی":"mohammad-khatami","سیدمحمد خاتمی":"mohammad-khatami",
+    "عباس عبدی":"abdiabbas","صادق زیباکلام":"sadeghzibakalam",
+    "مقصود فراستخواه":"mfarasatkhah","سعید لیلاز":"saeed-laylaz",
+    "کریم سجادپور":"karim-sadjadpour","علی واعظ":"ali-vaez",
+    "ولی نصر":"vali-nasr","صنم وکیل":"sanam-vakil","حسن احمدیان":"hassan-ahmadian"
+  };
+  var ANALYST_SUB_SLUGS=[
+    ["motaharnia-deal","silent-fortress","return-to-fire","motaharnia-great-change"],
+    ["zagros-surrender","sudden-fall","tragic-transition","zagros-post-trump","zagros-air-strikes"],
+    ["fattahi-controlled-deal","fattahi-reconstitution","fattahi-stalemate","fattahi-internal","fattahi-combined"],
+    ["two-month-window","holakouee-truce","holakouee-expectation-gap"],
+    ["sabouri-historical-leadership","sabouri-institutions"],
+    ["zeidabadi-negotiation","zeidabadi-after-bombardment"]
+  ];
+  function scenarioUrl(key){return SCENARIO_ROOT+key+"/";}
+  function subScenario(slug){return scenarioCatalog.scenarios.find(function(s){return s.slug===slug;});}
+  function subUrl(slug,family){var found=subScenario(slug);return found?scenarioUrl(found.family)+found.slug+"/":scenarioUrl(family);}
+  function personHandle(name){var n=String(name||"").replace(/\u200c/g," ").replace(/\s+/g," ").trim();
+    if(PERSON_HANDLES[n])return PERSON_HANDLES[n];
+    var found=scenarioCatalog.people.find(function(p){return p.name===n;});
+    return found?found.handle:"";
+  }
+  function addPersonLink(host,name){var h=personHandle(name);if(!h){host.appendChild(el("span",null,name));return;}
+    var a=el("a",null,name);a.href="/@"+h+"/";host.appendChild(a);
+  }
+  function subLink(host,title,slug,family){var a=el("a",null,title);a.href=subUrl(slug,family);host.appendChild(a);}
+
 
   var ANALYSTS = [
     {name:"مهدی مطهرنیا", role:"آینده‌پژوه و استراتژیست", items:[
@@ -403,7 +443,9 @@
     FAMILIES.forEach(function(f){ var m=momentum(f.key); if(Math.abs(m.net)>maxAbs)maxAbs=Math.abs(m.net); });
     FAMILIES.forEach(function(f){
       var m=momentum(f.key);
-      var card=el("button","fam"); card.style.setProperty("--fc",famVar(f.key)); card.setAttribute("type","button");
+      var card=el("article","fam"); card.style.setProperty("--fc",famVar(f.key));
+      card.setAttribute("role","link");card.setAttribute("tabindex","0");
+      card.setAttribute("aria-label","بازکردن پروندهٔ سناریو: "+f.title);
       if(filterKey===f.key)card.classList.add("active");
       var top=el("div","top");
       top.appendChild(el("h3",null,f.title));
@@ -418,10 +460,26 @@
       if(m.net>=0){span.style.right="50%";}else{span.style.left="50%";}
       span.style.width=Math.round(pct/2)+"%";
       bar.appendChild(span); card.appendChild(bar);
-      var tags=el("div","tags"); f.who.forEach(function(w){ tags.appendChild(el("span","tag",w)); });
+      var tags=el("div","tags");
+      f.who.forEach(function(w){
+        var tag=el("span","tag");var pieces=w.split(":");var person=pieces[0].trim();
+        if(person==="الگوی چین (خاتمی/قالیباف)"){
+          tag.appendChild(el("span",null,"الگوی چین ("));
+          addPersonLink(tag,"خاتمی");tag.appendChild(el("span",null," / قالیباف)"));
+        }else{
+          addPersonLink(tag,person);
+          if(pieces.length>1){
+            tag.appendChild(el("span",null,": "));
+            subLink(tag,pieces.slice(1).join(":").trim(),"",f.key);
+          }
+        }
+        tags.appendChild(tag);
+      });
       card.appendChild(tags);
       card.appendChild(el("div","count", m.n+" سیگنال ثبت‌شده"));
-      card.addEventListener("click",function(){ filterKey=(filterKey===f.key)?null:f.key; renderFamilies(); renderFilter(); renderLog(); });
+      var open=el("a","scenario-open","بازکردن پروندهٔ کامل و زیرسناریوها ↗");open.href=scenarioUrl(f.key);card.appendChild(open);
+      card.addEventListener("click",function(event){if(event.target.closest("a"))return;window.location.href=scenarioUrl(f.key);});
+      card.addEventListener("keydown",function(event){if((event.key==="Enter"||event.key===" ")&&event.target===card){event.preventDefault();window.location.href=scenarioUrl(f.key);}});
       host.appendChild(card);
     });
   }
@@ -429,15 +487,19 @@
   // ---------- render analysts ----------
   function renderAnalysts(){
     var host=document.getElementById("analysts"); host.innerHTML="";
-    ANALYSTS.forEach(function(a){
+    ANALYSTS.forEach(function(a,index){
       var c=el("div","an");
-      c.appendChild(el("h3",null,a.name));
+      var heading=el("h3",null);
+      var mainName=a.name.split(" (")[0];addPersonLink(heading,mainName);
+      if(a.name.indexOf("عباس سوری")>=0){heading.appendChild(el("span",null," (با "));addPersonLink(heading,"عباس سوری");heading.appendChild(el("span",null,")"));}
+      c.appendChild(heading);
       c.appendChild(el("div","role",a.role));
       var ul=el("ul");
-      a.items.forEach(function(it){
+      a.items.forEach(function(it,i){
         var li=el("li");
         var d=el("span","dotf"); d.style.setProperty("--fc",famVar(it[1]));
-        li.appendChild(d); li.appendChild(el("span",null,it[0]));
+        li.appendChild(d);
+        subLink(li,it[0],(ANALYST_SUB_SLUGS[index]||[])[i],it[1]);
         ul.appendChild(li);
       });
       c.appendChild(ul); host.appendChild(c);
@@ -511,7 +573,7 @@
       var f=FAMBYKEY[s.family]||FAMILIES[0];
       var li=el("li","sigitem");li.style.setProperty("--fc",famVar(f.key));li.id="signal-"+String(s.id||"").replace(/[^A-Za-z0-9_-]/g,"");
       var meta=el("div","meta");
-      meta.appendChild(el("span","fam-chip",shortTitle(f.title)));
+      var famLink=el("a","fam-chip",shortTitle(f.title)+" ↗");famLink.href=scenarioUrl(f.key);meta.appendChild(famLink);
       meta.appendChild(el("span","date",s.date||""));
       var dnum=Number(s.direction)||0;
       var dcls=dnum>0?"up":dnum<0?"down":"flat";
@@ -520,8 +582,16 @@
       if(s.analyst_priority&&dnum&&s.score_kind==="analyst_view")meta.appendChild(el("span","date","گروه آینده ایران · وزن پایه ۲ (پیش از سقف روزانه)"));
       li.appendChild(meta);
       li.appendChild(el("p","txt",s.text||""));
+      if(s.analyst_handle&&s.speaker) {
+        var sl=el("div","smalllabel");
+        var scoped=scenarioCatalog.scenarios.filter(function(z){return z.family===f.key&&z.proponent.handle===s.analyst_handle;});
+        scoped.slice(0,3).forEach(function(z){var l=el("a",null,"پروندهٔ مرتبط: "+z.title+" ↗");l.href=subUrl(z.slug,f.key);sl.appendChild(l);sl.appendChild(el("span",null," · "));});
+        if(sl.children.length)li.appendChild(sl);
+      }
       if(s.speaker){
-        var sp=el("div","signal-person","گوینده: "+s.speaker+(s.speaker_role?" · "+s.speaker_role:""));
+        var sp=el("div","signal-person","گوینده: ");
+        addPersonLink(sp,s.speaker);
+        if(s.speaker_role)sp.appendChild(el("span",null," · "+s.speaker_role));
         var profile=referenceLink({label:" · پروفایل چهره",url:s.speaker_url});
         if(profile)sp.appendChild(profile);
         li.appendChild(sp);
@@ -531,7 +601,7 @@
         disclosure.appendChild(summary);
         s.related_people.forEach(function(person){
           var part=el("div","signal-reason");
-          part.appendChild(el("strong",null,person.name+(person.role?" · "+person.role:"")));
+          var who=el("strong",null);addPersonLink(who,person.name);if(person.role)who.appendChild(el("span",null," · "+person.role));part.appendChild(who);
           part.appendChild(el("div",null,(person.direct_quote?"نقل‌قول ثبت‌شده: ":"بازگویی منتسب در پندار: ")+(person.statement||"متن نقل‌قول در دادهٔ خبر موجود نیست")));
           var original=referenceLink({label:"استناد به گفتهٔ فرد ↗",url:person.source_url});
           if(original)part.appendChild(original);
@@ -951,6 +1021,9 @@
   }
   document.getElementById("refresh-live").addEventListener("click",function(){refreshLive(true);});
   refreshLive(true);
+  fetch("/data/iran-scenario-catalog.json").then(function(r){if(!r.ok)throw Error("missing catalog");return r.json();})
+    .then(function(data){if(data&&Array.isArray(data.scenarios)){scenarioCatalog=data;renderFamilies();renderAnalysts();renderLog();}})
+    .catch(function(){});
   initializeEdge();
   setInterval(function(){
     if(document.visibilityState!=="hidden")refreshLive(false);
