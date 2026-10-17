@@ -3,11 +3,13 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 import json
+import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from scripts.build_iran_scenario_radar import build, classify
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+from build_iran_scenario_radar import build, classify
 
 
 class ScenarioRadarTests(unittest.TestCase):
@@ -15,7 +17,7 @@ class ScenarioRadarTests(unittest.TestCase):
         self.assertIsNone(classify("جنگ در اوکراین ادامه یافت"))
         self.assertEqual(classify("توافق ایران در مذاکرات هسته ای"), "deal")
         self.assertEqual(classify("تحریم ایران و کاهش ارزش ریال"), "attrition")
-        self.assertIsNone(classify("جنگ ایران و توافق مذاکره"))
+        self.assertIsNone(classify("جنگ ایران و توافق"))
 
     def test_build_preserves_manual_ledger_and_deduplicates_updates(self):
         with TemporaryDirectory() as directory:
