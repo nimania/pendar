@@ -125,9 +125,8 @@ def source_refs(detail:dict)->list[dict]:
         # source clustering. Foreign-language titles may be retained as sources,
         # but never treated as proof of factual independence.
         words = terms(title)
-        if len(words) >= 3 and any("\u0600" <= c <= "\u06ff" for c in title):
-            if not (head & words):
-                continue
+        if any("\u0600" <= c <= "\u06ff" for c in title) and not (head & words):
+            continue
         out.append({"id":"s"+str(len(out)+1),"url":url,
                     "source_name":str(item.get("source_name") or "")[:100],
                     "headline":title[:300]})
