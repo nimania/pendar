@@ -107,6 +107,7 @@ jobs:
           python -m scripts.seed
           python -c "from app.tasks.scheduler import run_full_cycle; print(run_full_cycle())"
           python -m scripts.export_static
+          python -m scripts.build_editorial_reports
           python -m scripts.build_periodicals
       - name: Overlay freshest Jan-e Jaraid data before publishing
         env:
