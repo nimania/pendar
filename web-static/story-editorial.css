@@ -164,3 +164,29 @@
   .editorial-author-header{grid-template-columns:1fr;gap:14px;padding:18px}
   .editorial-author-avatar{width:88px;height:88px}
 }
+
+/* Central newsroom archive — the source data contains only completed articles. */
+.editorial-archive-view{max-width:1080px;margin:0 auto 64px}
+.editorial-library-header{padding:28px 0 22px;border-bottom:1px solid var(--line)}
+.editorial-library-return{display:inline-block;color:var(--accent);font-size:13px;text-decoration:none;margin-bottom:18px}
+.editorial-library-eyebrow{color:var(--accent);font:750 13px/1.8 "Vazirmatn",sans-serif}
+.editorial-library-header h1{font:850 clamp(26px,4vw,36px)/1.65 "Vazirmatn",sans-serif;margin:6px 0 12px;color:var(--ink)}
+.editorial-library-header p{margin:0;color:var(--ink-soft);max-width:760px;font:450 15px/2 "Vazirmatn",sans-serif}
+.editorial-library-controls{padding:18px 0 4px}
+.editorial-library-filters{display:flex;flex-wrap:wrap;gap:7px}
+.editorial-library-filter{font:650 12.5px/1.9 "Vazirmatn",sans-serif;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:5px 10px;cursor:pointer}
+.editorial-library-filter.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.editorial-library-filter small{margin-inline-start:5px;font-weight:550;opacity:.7}
+.editorial-library-search-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:17px 0;color:var(--ink-soft);font-size:12px}
+.editorial-library-search-row input{flex:1;min-width:180px;max-width:420px;padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:400 13px/1.7 "Vazirmatn",sans-serif}
+.editorial-library-search-row span{margin-inline-start:auto;white-space:nowrap}
+.editorial-library-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.editorial-library-item{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px 20px;min-width:0}
+.editorial-library-item-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--ink-soft);font-size:12px}
+.editorial-library-item-meta a{text-decoration:none;color:var(--accent);font-weight:700}
+.editorial-library-item h2{font:750 19px/1.75 "Vazirmatn",sans-serif;margin:10px 0 8px;overflow-wrap:anywhere}
+.editorial-library-item h2 a{text-decoration:none;color:var(--ink)}
+.editorial-library-item h2 a:hover{color:var(--accent)}
+.editorial-library-item p{margin:0;font:400 13.5px/1.95 "Vazirmatn",sans-serif;color:var(--ink-soft)}
+.editorial-library-empty{padding:30px 12px;color:var(--ink-soft);font:450 14px/1.85 "Vazirmatn",sans-serif}
+@media(max-width:680px){.editorial-library-list{grid-template-columns:minmax(0,1fr)}.editorial-library-item{padding:16px}.editorial-library-header{padding:18px 0}.editorial-library-search-row{align-items:stretch}.editorial-library-search-row input{min-width:100%;max-width:100%}}
