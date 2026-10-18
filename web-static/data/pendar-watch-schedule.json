@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T10:47:35.511228+00:00",
+  "generated_at": "2026-10-18T11:09:32.361628+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -537,16 +537,6 @@
     },
     {
       "channel_id": "digital-world",
-      "title_fa": "آماتور",
-      "start": "2026-10-17T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1087891",
-      "icon": "https://image.tmdb.org/t/p/w500/3yje6jj1mBXGRPcikDsONs78Lz7.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "By Any Means",
       "start": "2026-10-20T00:00:00+03:30",
       "date_only": true,
@@ -634,16 +624,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/tf0CUEynk6GfmrlHIQKQ5mfFP5P.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 3 از فصل 38؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-885",
-      "title_fa": "아는 형님",
-      "start": "2026-10-17T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/70672",
-      "icon": "https://image.tmdb.org/t/p/w500/zak7mqMxJGnnWplSdbjDtV7bg2Y.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 547 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -1022,6 +1002,36 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1025231",
       "icon": "https://image.tmdb.org/t/p/w500/2eZwRvxLENG4QmawVCR48LlT3xL.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-103",
+      "title_fa": "ドラえもん",
+      "start": "2026-10-24T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65733",
+      "icon": "https://image.tmdb.org/t/p/w500/9YqdMXlPTQGLIG67vqZdsPdPC4T.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 939 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "The Weight",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1433583",
+      "icon": "https://image.tmdb.org/t/p/w500/8i5iZV50CoEtmDCFM7RSxCkpE8h.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Finding Emily",
+      "start": "2026-10-23T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1339588",
+      "icon": "https://image.tmdb.org/t/p/w500/xVt0fu4q1P3rYMz7ichgf5BGx0S.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
