@@ -57,6 +57,21 @@ function pendarAuthorAvatar(id,cls){
   return '<span class="'+safeClass+'" aria-hidden="true"'+(css?' style="'+css+'"':"")+'>'
     +(css?"":"پ")+'</span>';
 }
+// Stable, human-readable editorial URLs. Legacy /editorial-author/:id/
+// remains available; changing the display URLs does not invalidate backlinks.
+const PENDAR_WRITER_SLUGS={
+  diplomacy:"arman-shayegan",politics:"bahar-dadfar",
+  economy:"saman-farahmand",society:"taraneh-nikroush",
+  environment:"mahtab-sarvestani",culture:"mana-radfar",
+  technology:"parsa-mehrayin"
+};
+function pendarWriterURL(id){
+  const slug=PENDAR_WRITER_SLUGS[id];
+  return slug?"/writers/"+slug+"/":"/editorial-author/"+encodeURIComponent(id||"desk")+"/";
+}
+function pendarWriterIdFromSlug(slug){
+  return Object.keys(PENDAR_WRITER_SLUGS).find(id=>PENDAR_WRITER_SLUGS[id]===slug)||"";
+}
 function pendarAuthorName(id){
   const catalog=window.PENDAR_EDITORIAL_AUTHORS;
   const a=catalog?.authors?.find(x=>x.id===id);
@@ -65,14 +80,18 @@ function pendarAuthorName(id){
 function pendarAuthorByline(story,report){
   const id=report?.author_id||story?.editorial_author_id||(report?.status==="pilot_draft"?"diplomacy":pendarEditorialAuthorId(story));
   const name=pendarAuthorName(id);
-  const href="/editorial-author/"+encodeURIComponent(id)+"/";
+  const href=pendarWriterURL(id);
   const avatar=pendarAuthorAvatar(id,"story-author-monogram");
   return '<div class="story-author-byline"><a class="story-author-avatar-link" href="'+esc(href)+'" aria-label="آرشیو مطالب '+esc(name)+'">'+avatar+'</a>'
     +'<span class="story-author-credit"><a href="'+esc(href)+'">'+esc(name)+'</a>'
     +'<small>'+esc(story?.published_at?new Date(story.published_at).toLocaleDateString("fa-IR"):"")+'</small></span></div>';
 }
-async function showPendarEditorialAuthor(slug){
-  show("editorialauthor");setTab("");setHash("#/editorial-author/"+slug);
+async function showPendarEditorialAuthor(slug,preservePrettyURL){
+  // Resolve the new readable slug back to the same approved internal author ID.
+  const authorId=pendarWriterIdFromSlug(slug)||slug;
+  show("editorialauthor");setTab("");
+  if(!preservePrettyURL)setHash("#/editorial-author/"+authorId);
+  slug=authorId;
   const target=document.getElementById("editorial-author-view");
   target.innerHTML='<div class="spinner"></div>';
   try{
