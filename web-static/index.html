@@ -9,6 +9,13 @@
   <link rel="canonical" href="https://pendar.io/"><meta name="theme-color" content="#3c3938">
   <script>
     document.documentElement.classList.add("js-enabled");
+    // First paint: never show the legacy homepage before the magazine mounts.
+    // Only the root route receives this guard. Deep links retain normal SPA boot.
+    (function () {
+      var homePath = location.pathname === "/" || location.pathname === "";
+      var homeHash = !location.hash || location.hash === "#" || location.hash === "#/";
+      if (homePath && homeHash) document.documentElement.classList.add("heritage-booting");
+    })();
     // Restore an explicit appearance preference before styles render.
     try {
       const preferred = localStorage.getItem("pendar-theme");
@@ -31,6 +38,25 @@
   </script>
   <style id="heritage-live-visibility">
     #heritage-live-host[hidden]{display:none!important}
+    /* The bootstrap class is attached synchronously in <head> before first paint. */
+    html.heritage-booting body>header.top,
+    html.heritage-booting body>main.wrap,
+    html.heritage-booting body>footer.site-footer,
+    html.heritage-booting body>nav.tabbar{display:none!important}
+    html.heritage-booting body{margin:0;padding:0;background:#eceeeb}
+    html.heritage-booting #heritage-live-host[hidden]{display:block!important}
+    #heritage-live-host.heritage-ready>.heritage-first-paint{display:none!important}
+    .heritage-first-paint{min-height:100vh;background:#eceeeb;color:#25312d;font:500 15px/1.8 "Vazirmatn",Tahoma,sans-serif}
+    .heritage-first-paint-header{background:#2a2928;min-height:96px;display:flex;align-items:center;padding:12px max(22px,calc((100vw - 1180px)/2))}
+    .heritage-first-paint-header img{width:96px;height:auto;max-height:72px;object-fit:contain}
+    .heritage-first-paint-nav{height:52px;background:#403d3c;display:flex;gap:26px;align-items:center;padding:0 max(22px,calc((100vw - 1180px)/2));color:#eee;font-size:13px}
+    .heritage-first-paint-content{width:min(1180px,calc(100% - 40px));margin:25px auto}
+    .heritage-first-paint-ticker{height:90px;background:#fff;border-right:110px solid #df651c;margin-bottom:20px}
+    .heritage-first-paint-columns{display:grid;grid-template-columns:minmax(0,1.88fr) minmax(285px,.92fr);gap:20px}
+    .heritage-first-paint-feature,.heritage-first-paint-sidebar{background:#fff;min-height:385px}
+    .heritage-first-paint-feature{border-top:4px solid #df651c;background:linear-gradient(#f9faf9 0 48px,#e0e7e2 48px 320px,#fff 320px)}
+    .heritage-first-paint-sidebar{border-top:4px solid #df651c;background:repeating-linear-gradient(#fff 0 70px,#e3e7e3 70px 71px)}
+    @media(max-width:720px){.heritage-first-paint-header{min-height:77px}.heritage-first-paint-nav{gap:18px;font-size:12px;overflow:hidden;white-space:nowrap}.heritage-first-paint-content{width:calc(100% - 20px)}.heritage-first-paint-ticker{height:81px;border-right-width:75px}.heritage-first-paint-columns{grid-template-columns:1fr}.heritage-first-paint-sidebar{display:none}.heritage-first-paint-feature{min-height:350px}}
     html.heritage-live-active body>header.top,
     html.heritage-live-active body>main.wrap,
     html.heritage-live-active body>footer.site-footer,
@@ -185,7 +211,16 @@
 </head>
 <body>
   <!-- New heritage magazine homepage; the original SPA remains for all other routes. -->
-  <div id="heritage-live-host" hidden aria-label="صفحهٔ اول مجله‌ای پندار"></div>
+  <div id="heritage-live-host" hidden aria-label="صفحهٔ اول مجله‌ای پندار">
+    <div class="heritage-first-paint" aria-hidden="true">
+      <div class="heritage-first-paint-header"><img src="/assets/pendar-logo.svg" alt=""></div>
+      <div class="heritage-first-paint-nav"><span>خانه</span><span>گزارش‌ها</span><span>سرخط</span><span>چهره‌ها</span><span>فرهنگ و زندگی</span></div>
+      <div class="heritage-first-paint-content">
+        <div class="heritage-first-paint-ticker"></div>
+        <div class="heritage-first-paint-columns"><div class="heritage-first-paint-feature"></div><div class="heritage-first-paint-sidebar"></div></div>
+      </div>
+    </div>
+  </div>
   <header class="top">
     <div class="wrap">
       <a class="brand" href="https://pendar.io" aria-label="پندار">
@@ -562,7 +597,7 @@
   <script defer src="diner.js?v=recipe-lab-source-audit-4"></script>
   <script defer src="future.js?v=20261017"></script>
   <script defer src="app.js?v=20261018-library-1"></script>
-  <script defer src="heritage-live.js?v=20261018-home-launch-1"></script>
+  <script defer src="heritage-live.js?v=20261018-no-flash-1" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
 </body>
 </html>
 
