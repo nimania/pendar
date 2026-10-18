@@ -280,27 +280,56 @@ async function openStory(id) {
   window._asks = s.asks || [];
   const relSection = timelineSection(s, relatedStories(s));
 
+  // Magazine sidebar uses only relevant items with a source image.
+  const magazineRelated=relatedStories(s).filter(item=>item && /^https?:\/\//.test(String(item.image_url||""))).slice(0,6);
+  const magazineSideStories=magazineRelated.map(item=>
+    '<a class="magazine-side-story" href="/story/'+encodeURIComponent(item.id)+'/">'
+    +'<span class="magazine-side-picture"><img src="'+esc(item.image_url)+'" alt="" loading="lazy" decoding="async" onerror="this.closest(&quot;.magazine-side-story&quot;).remove()"></span>'
+    +'<span class="magazine-side-story-title">'+esc(item.headline_fa||"")+'</span></a>'
+  ).join("");
+
+
   v.innerHTML = `
-    <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به سرخط</button>
+    <div class="magazine-reader">
+      <header class="magazine-masthead"><div class="magazine-container magazine-masthead-inner">
+        <a class="magazine-brand" href="/" aria-label="خانهٔ پندار"><img src="/assets/pendar-logo.svg" alt="پندار"></a>
+        <span class="magazine-masthead-tagline">خبر، اندیشه و فرهنگ</span>
+        <a class="magazine-masthead-back" href="/">بازگشت به صفحهٔ اول ←</a>
+      </div></header>
+      <nav class="magazine-topnav" aria-label="بخش‌های پندار"><div class="magazine-container magazine-topnav-links">
+        <a href="/">خانه</a><a href="/reports/">گزارش‌ها</a><a href="/headlines/">سرخط</a><a href="/figures/">چهره‌ها</a>
+        <a href="/books/">کتاب</a><a href="/movies/">جان فیلم</a><a href="/press/">پیشخوان جراید</a>
+      </div></nav>
+      <div class="magazine-container magazine-article-container">
+        <nav class="magazine-breadcrumb" aria-label="موقعیت صفحه"><a href="/">پندار</a><span>/</span>
+          <a href="${editorial?"/reports/":"/headlines/"}">${editorial?"گزارش‌ها":"سرخط"}</a><span>/</span>
+          <span>${esc(CAT_FA[s.category]||"خبر")}</span>
+        </nav>
+        <div class="magazine-article-layout">
+          <article class="magazine-article-paper">
+    <button class="back" onclick="showFeed()"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به سرخط</button>
     <div class="d-head"><div class="meta"><span class="chip">${CAT_FA[s.category] || "خبر"}</span><span class="dot"></span><span class="muted">${relTime(s.published_at)}</span>${trendBadge(s.trend)}<span class="spacer" style="flex:1"></span>${saveBtn(s.id)}</div>
       <h1>${esc(articleTitle || "")}</h1>
       <div class="d-meta" ${editorial?'hidden':""}><span class="imp ${imp.cls}"><span class="bars"><i></i><i></i><i></i></span><span class="lbl">${imp.lbl}</span></span>
         <span class="dot"></span><span class="muted">${faN(s.source_count || 0)} منبع</span>
         <span class="dot"></span><span class="muted">${IRAN_FA[s.iran_relevance] || ""}</span></div></div>
-    ${!editorial && s.image_url ? `<img class="hero-img" src="${esc(s.image_url)}" alt="${esc(s.headline_fa||"")}" loading="eager" referrerpolicy="no-referrer">` : ''}
+    ${!editorial && s.summary_fa ? `<p class="magazine-article-lead">${esc(s.summary_fa)}</p>` : ""}
+    ${!editorial && s.image_url ? `<figure class="magazine-article-photo"><img class="hero-img" src="${esc(s.image_url)}" alt="" loading="eager" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"></figure>` : ''}
     ${!editorial && s.image_url && s.image_credit ? `<div class="hero-credit">عکس از: ${esc(s.image_credit)}</div>` : ''}
     ${pendarEditorialReport(s)}
-    ${editorial?'<details class="story-examination"><summary><span>زیر ذره‌بین پندار<small class="story-examination-description">منابع، پیشینه، دیدگاه‌ها و پرسش‌وپاسخ</small></span></summary><div class="story-examination-body">':""}
-    ${!editorial?'<div class="kalam-box"><span class="eyebrow">جان‌کلام</span><p>'+esc(s.summary_fa||"")+'</p></div>':""}
+    ${!editorial?'<div class="magazine-news-narrative">'
+       +(s.what_happened_fa&&s.what_happened_fa!==s.summary_fa?'<h2>چه اتفاقی افتاد؟</h2><p>'+esc(s.what_happened_fa)+'</p>':'')
+       +(s.why_it_matters_fa&&s.why_it_matters_fa!==s.summary_fa&&s.why_it_matters_fa!==s.what_happened_fa?'<h2>چرا اهمیت دارد؟</h2><p>'+esc(s.why_it_matters_fa)+'</p>':'')
+       +'</div>':""}
+    ${!editorial?articleDisplayAdMarkup():""}
+    <details class="story-examination"><summary><span>زیر ذره‌بین پندار<small class="story-examination-description">منابع، پیشینه، دیدگاه‌ها و پرسش‌وپاسخ</small></span></summary><div class="story-examination-body">
     ${pendarHistoricalContext(s)}
     <div id="story-history-fallback"></div>
     ${detailGeoStrip(s)}
     ${peopleRow(s.entities)}
     ${peopleSuggestions}
     ${storyBooksSection}
-    <div class="twocol"><div class="qa"><h3>چه اتفاقی افتاد؟</h3><p>${esc(s.what_happened_fa || "—")}</p></div>
-      <div class="qa"><h3>چرا اهمیت دارد؟</h3><p>${esc(s.why_it_matters_fa || "—")}</p></div></div>
-    ${!editorial?articleDisplayAdMarkup():""}
+
     ${futureNewsDetail(s)}
     <div id="story-scenarios"></div>
     ${known}
@@ -318,8 +347,27 @@ async function openStory(id) {
       <div class="answer" id="answer"><div class="a-bubble" id="a-bubble"></div>
         <div class="grounded"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> مبتنی بر منابع همین خبر</div></div>
     </div>
-    ${editorial?"</div></details>":""}
-    <div id="story-discovery"></div>`;
+    </div></details>
+    <div id="story-discovery"></div>
+          </article>
+          <aside class="magazine-article-rail" aria-label="مطالب مرتبط">
+            <section class="magazine-rail-box">
+              <div class="magazine-rail-heading"><h2>در همین موضوع</h2><a href="/headlines/">بیشتر ←</a></div>
+              ${magazineSideStories||'<p class="magazine-rail-empty">خبرهای مرتبط در آرشیو پندار</p>'}
+            </section>
+            <section class="magazine-rail-nav"><h2>بیشتر در پندار</h2>
+              <a href="/reports/">گزارش‌های تحریریه ←</a>
+              <a href="/figures/">چهره‌ها و دیدگاه‌ها ←</a>
+              <a href="/press/">پیشخوان جراید ←</a>
+            </section>
+          </aside>
+        </div>
+      </div>
+      <footer class="magazine-article-footer"><div class="magazine-container">
+        <a href="/">پندار</a><span>خبر، اندیشه و فرهنگ</span>
+        <nav aria-label="پیوندهای پایین صفحه"><a href="/reports/">گزارش‌ها</a><a href="/headlines/">سرخط</a><a href="/books/">کتاب</a><a href="/movies/">فیلم و سریال</a></nav>
+      </div></footer>
+    </div>`;
   loadPendarHistoricalFallback(s);
   loadArticleDisplayAd();
   // Second placement only on substantial news stories; delay avoids competing
