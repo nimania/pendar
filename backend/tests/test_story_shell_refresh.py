@@ -59,13 +59,17 @@ class StoryShellRefreshTest(unittest.TestCase):
         shell = (Path(__file__).resolve().parents[2] / "web-static" / "index.html").read_text(encoding="utf-8")
         compacted = compact_story_shell(shell)
         delta = len(shell.encode("utf-8")) - len(compacted.encode("utf-8"))
-        self.assertGreaterEqual(delta, 9000, "Direct article pages should not repeat bulky homepage CSS")
+        self.assertGreaterEqual(delta, 9800, "Direct article pages should not repeat bulky homepage CSS")
         for style_id in SHARED_HOME_STYLE_IDS:
             self.assertNotIn('<style id="' + style_id + '">', compacted)
         self.assertIn('id="detail-view"', compacted)
         self.assertIn('story-detail.js?v=', compacted)
         self.assertIn('heritage-article.css?v=', compacted)
         self.assertIn('id="story-editorial-critical"', compacted)
+        critical = compacted.split('<style id="story-editorial-critical">',1)[1].split('</style>',1)[0]
+        self.assertIn('#detail-view .story-editorial', critical)
+        self.assertNotIn('/*', critical)
+        self.assertNotIn('  ', critical)
 
     def test_refresh_preserves_explicit_article_html_between_tags(self):
         story = OLD_SEO_STORY.replace(
