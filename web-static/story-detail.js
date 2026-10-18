@@ -214,9 +214,10 @@ async function openStory(id) {
   }
 
   const imp = impInfo(s.importance_score);
-  const editorial=!!(s.editorial_report && ["ai_draft","pilot_draft"].includes(s.editorial_report.status) && Array.isArray(s.editorial_report.paragraphs) && s.editorial_report.paragraphs.length>=3) || !!window.PendarEditorialPilots?.[String(s.id||"")];
-  const articleTitle=editorial?(s.editorial_report?.title_fa||window.PendarEditorialPilots?.[String(s.id||"")]?.title_fa||s.headline_fa):s.headline_fa;
-  if(typeof setArticleSeo==="function")setArticleSeo({...s,headline_fa:articleTitle,seo_title_fa:articleTitle,meta_description_fa:editorial?(s.editorial_report?.lead_fa||s.summary_fa):s.summary_fa});
+  const report=s.editorial_report||window.PendarEditorialPilots?.[String(s.id||"")];
+  const editorial=!!(report && ["ai_draft","pilot_draft"].includes(report.status) && Array.isArray(report.paragraphs) && report.paragraphs.length>=3);
+  const articleTitle=editorial?(report?.title_fa||s.headline_fa):s.headline_fa;
+  if(typeof setArticleSeo==="function")setArticleSeo({...s,headline_fa:articleTitle,seo_title_fa:articleTitle,meta_description_fa:editorial?(report?.lead_fa||s.summary_fa):s.summary_fa});
   const [peopleSuggestions, storyBookData] = await Promise.all([storyPeopleSuggestions(s), loadBooks(), loadPendarEditorialAuthors().catch(()=>null)]);
   const storyBooks=(storyBookData.books||[]).filter(b=>(b.mentions||[]).some(m=>String(m.story_id||"")===String(cleanId)));
   const storyBooksSection=storyBooks.length?`<section class="story-books"><div class="rule"><span>کتاب‌های مرتبط با این خبر</span><span class="l"></span></div><div class="press-book-links">${storyBooks.map(b=>`<button onclick="openBook('${esc(b.slug)}')"><span>کتاب</span><b>${esc(b.title_fa||"")}</b></button>`).join("")}</div></section>`:"";
@@ -290,7 +291,7 @@ async function openStory(id) {
     ${!editorial && s.image_url && s.image_credit ? `<div class="hero-credit">عکس از: ${esc(s.image_credit)}</div>` : ''}
     ${pendarEditorialReport(s)}
     ${editorial?'<details class="story-examination"><summary><span>زیر ذره‌بین پندار<small class="story-examination-description">منابع، پیشینه، دیدگاه‌ها و بررسی دقیق‌تر خبر</small></span></summary><div class="story-examination-body">':""}
-    <div class="kalam-box"><span class="eyebrow">جان‌کلام <span class="ai">ترکیب هوش مصنوعی</span></span><p>${esc(s.summary_fa || "")}</p></div>
+    ${!editorial?'<div class="kalam-box"><span class="eyebrow">جان‌کلام</span><p>'+esc(s.summary_fa||"")+'</p></div>':""}
     ${pendarHistoricalContext(s)}
     <div id="story-history-fallback"></div>
     ${detailGeoStrip(s)}
@@ -299,7 +300,7 @@ async function openStory(id) {
     ${storyBooksSection}
     <div class="twocol"><div class="qa"><h3>چه اتفاقی افتاد؟</h3><p>${esc(s.what_happened_fa || "—")}</p></div>
       <div class="qa"><h3>چرا اهمیت دارد؟</h3><p>${esc(s.why_it_matters_fa || "—")}</p></div></div>
-    ${articleDisplayAdMarkup()}
+    ${!editorial?articleDisplayAdMarkup():""}
     ${futureNewsDetail(s)}
     <div id="story-scenarios"></div>
     ${known}
