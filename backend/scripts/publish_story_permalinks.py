@@ -231,10 +231,25 @@ def run(site: Path, limit: int = 60) -> dict:
         if old_html != source.read_text(encoding="utf-8"):
             source.write_text(old_html,encoding="utf-8")
         old_seo = source.parent/"seo.json"
-        if old_seo.is_file():
-            update_seo_json(old_seo,new)
-            target_seo = alias.parent/"seo.json"
-            target_seo.write_bytes(old_seo.read_bytes())
+        if not old_seo.is_file():
+            detail=read_json(data/"story"/(sid+".json"),{})
+            row=next((item for key,item in choices if key==sid),{})
+            report=detail.get("editorial_report") or {}
+            title=text(report.get("title_fa") or row.get("title_fa") or
+                       detail.get("headline_fa") or row.get("headline_fa"))
+            description=text(report.get("lead_fa") or detail.get("summary_fa") or row.get("summary_fa"))[:170]
+            old_seo.write_text(json.dumps({
+                "title":title+" | پندار","canonical":new,
+                "schema":{"@context":"https://schema.org","@graph":[{
+                    "@type":"Article","headline":title,"url":new,"description":description,
+                    "publisher":{"@type":"Organization","name":"پندار","url":ORIGIN}}]},
+                "tags":{"description":description,"robots":"index,follow,max-image-preview:large",
+                        "og:title":title+" | پندار","og:description":description,"og:url":new,
+                        "og:type":"article"}
+            },ensure_ascii=False),encoding="utf-8")
+        update_seo_json(old_seo,new)
+        target_seo = alias.parent/"seo.json"
+        target_seo.write_bytes(old_seo.read_bytes())
         effective[sid]=slug
     rev={slug:sid for sid,slug in effective.items()}
     payload={"version":1,"id_to_slug":effective,"slug_to_id":rev}
