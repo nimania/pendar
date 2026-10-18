@@ -163,6 +163,15 @@
       #detail-view .story-history{padding:15px 13px}
       #detail-view .story-history li a{display:grid;gap:1px}
     }
+
+    /* Unified article overrides: match external story-editorial.css. */
+    #detail-view .story-editorial{margin:12px 0 26px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+    #detail-view .story-report-cites{display:none!important}
+    #detail-view .story-editorial-kicker{display:none}
+    #detail-view .story-editorial-lead{border-bottom:0;padding-bottom:0;margin:0 0 18px}
+    #detail-view .story-author-monogram{width:64px;height:64px}
+    #detail-view .d-meta[hidden]{display:none!important}
+    @media(max-width:600px){#detail-view .story-author-monogram{width:56px;height:56px}}
   </style>
 </head>
 <body>
@@ -534,7 +543,7 @@
   <script defer src="editorial-authors.js?v=20261018-final-1"></script>
   <script defer src="editorial-archive.js?v=20261018-library-1"></script>
   <script defer src="story-editorial-pilots.js?v=20261018-short-headline-1"></script>
-  <script defer src="story-detail.js?v=20261018-final-1"></script>
+  <script defer src="story-detail.js?v=20261018-reading-fix-2"></script>
   <script defer src="nav.js"></script>
   <script defer src="book-app.js"></script>
   <script defer src="badbadak.js"></script>

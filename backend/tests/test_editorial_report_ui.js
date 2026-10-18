@@ -55,6 +55,9 @@ assert(index.indexOf('story-editorial-pilots.js')<index.indexOf('story-detail.js
 assert(detail.includes('${pendarEditorialReport(s)}'));
 assert(detail.includes('${pendarHistoricalContext(s)}'));
 assert(home.includes('s.has_editorial_report'));
+assert(detail.includes('زیر ذره‌بین پندار'));
+assert(detail.includes('const articleTitle=editorial?'));
+assert(detail.includes('!editorial?'),"machine summary must be hidden for editorial reports");
 new Function(detail);
 new Function(home);
 const win={};
@@ -67,13 +70,13 @@ const render=new Function("window","esc","pendarAuthorByline",detail.slice(start
 const id="b4efb62f-9240-4e90-ba4f-4664e608fa97";
 const sample=render({id});
 assert(sample.includes('class="story-editorial"'));
-assert(sample.includes("نسخهٔ آزمایشی"));
-assert(sample.includes("نیازمند تأیید"));
+assert(!sample.includes("نسخهٔ آزمایشی"),"no draft label in the public article header");
+assert(!sample.includes("نیازمند تأیید"),"no machine metadata displayed in reader mode");
 assert(sample.includes("سپاه: برخورد نفتکش با مین در هرمز"));
 assert(sample.includes("story-report-cite"));
 assert(sample.includes("story-author-byline"));
 assert.equal(render({id:"11111111-1111-4111-8111-111111111111"}),"");
 const generated=render({id,editorial_report:{status:"ai_draft",title_fa:"گزارش تازه",lead_fa:"مقدمهٔ مستند",paragraphs:Array.from({length:3},()=>({text_fa:"متن گزارش",citations:[{id:"s1",url:"https://example.com"}]}))}});
-assert(generated.includes("گزارش تازه"),"real report must supersede sample");
+assert(generated.includes("مقدمهٔ مستند"),"real report must supersede sample");
 assert(!generated.includes("نسخهٔ آزمایشی"),"valid generated report overrides pilot");
 console.log("PASS: editorial article, marked preview, citations, order, generated override, badge, fallback");
