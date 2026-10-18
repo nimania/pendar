@@ -283,7 +283,6 @@ async function openStory(id) {
     <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به سرخط</button>
     <div class="d-head"><div class="meta"><span class="chip">${CAT_FA[s.category] || "خبر"}</span><span class="dot"></span><span class="muted">${relTime(s.published_at)}</span>${trendBadge(s.trend)}<span class="spacer" style="flex:1"></span>${saveBtn(s.id)}</div>
       <h1>${esc(articleTitle || "")}</h1>
-      ${editorial && s.editorial_report?.lead_fa?'<p class="story-editorial-subtitle">'+esc(s.editorial_report.lead_fa)+'</p>':""}
       <div class="d-meta" ${editorial?'hidden':""}><span class="imp ${imp.cls}"><span class="bars"><i></i><i></i><i></i></span><span class="lbl">${imp.lbl}</span></span>
         <span class="dot"></span><span class="muted">${faN(s.source_count || 0)} منبع</span>
         <span class="dot"></span><span class="muted">${IRAN_FA[s.iran_relevance] || ""}</span></div></div>
@@ -308,6 +307,7 @@ async function openStory(id) {
     ${trendSec}
     ${relSection}
     <div class="layers"><h3 class="section-h">منابع چه می‌گویند <span class="n">دیدگاه هر منبع، جدا از واقعیت</span></h3><div class="views">${views || '<p class="muted">—</p>'}</div>${consensus}</div>
+    ${quotedPeople}
     ${figuresSection(s.figures)}
     ${!editorial && ((String(s.what_happened_fa||"")+String(s.why_it_matters_fa||"")+String(s.summary_fa||"")).length >= 900 && (s.sources||[]).length >= 3) ? articleDisplayAdMarkup().replaceAll("pendar-article-display-ad","pendar-article-display-ad-second") : ""}
     <div class="layers"><h3 class="section-h">منابع و اطلاعات پرونده</h3><div class="d-meta"><span>${faN(s.source_count||0)} منبع</span> · <span>${esc(IRAN_FA[s.iran_relevance]||"")}</span></div><div class="cites">${cites}</div></div>
