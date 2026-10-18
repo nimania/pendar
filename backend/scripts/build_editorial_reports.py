@@ -402,6 +402,8 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
                 "lead_fa":str(report.get("lead_fa") or "")[:650],
                 "published_at":detail.get("published_at") or row.get("published_at"),
                 "category":row.get("category") or detail.get("category"),
+                "image_url":detail.get("image_url") or row.get("image_url") or "",
+                "image_credit":detail.get("image_credit") or "",
                 "status":"ai_draft",
             })
             generated+=1
