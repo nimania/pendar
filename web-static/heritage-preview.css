@@ -71,3 +71,12 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
   .latest-ticker h2{min-width:70px;padding:0 11px}
   .latest-ticker .ticker-story{flex-basis:205px;max-width:205px}
 }
+
+/* In the live SPA, all magazine styles live in a shadow root.
+   Establish palette, readable type, and background inside that boundary. */
+:host{display:block;color:#212423;font-family:Vazirmatn,Tahoma,sans-serif;--charcoal:#2a2928;--charcoal2:#403d3c;--paper:#fff;--canvas:#eceeeb;--ink:#212423;--soft:#616a66;--line:#dce2de;--orange:#df651c;--turquoise:#178e99;--turq-pale:#e8f3f2}
+.heritage-root{min-height:100vh;color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed 3px,#e8ebe8 3px,#e8ebe8 4px)}
+.heritage-root *{box-sizing:border-box}
+.heritage-root .brand img,.heritage-root .footer-identity img{width:94px;max-height:80px;object-fit:contain}
+.heritage-root .footer-identity img{width:72px}
+.heritage-root .masthead-right:empty{display:none}
