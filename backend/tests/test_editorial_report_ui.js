@@ -130,6 +130,17 @@ assert(index.indexOf('data/story-permalinks.js?v=')<index.indexOf('router.js?v='
 assert(detail.includes('window.pendarStoryURL(cleanId)'),"story route must use stable readable permalink when available");
 assert(heritagePreview.includes('window.pendarStoryURL(id)'),"homepage story links must use readable URLs");
 assert(magazineCollections.includes('window.pendarStoryURL(id)'),"archive article links must use readable URLs");
+const routePrelude=router.slice(0,router.indexOf("let _seoRequest"));
+assert(routePrelude.includes("function routeURL"),"story permalink router test needs route URL helper");
+const resolvedRoute=new Function("window",routePrelude+"return routeURL;")({
+  PENDAR_STORY_PERMALINKS:{id_to_slug:{"01234567-89ab-4cde-8123-456789abcdef":"iran-hormuz-negotiations"}}
+});
+assert(resolvedRoute("#/story/01234567-89ab-4cde-8123-456789abcdef")==="/story/iran-hormuz-negotiations/",
+       "known UUID routes must resolve to readable links");
+assert(resolvedRoute("/story/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa/")==="/story/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa/",
+       "unmapped older UUID routes must remain supported");
+assert(detail.includes("const directlyOnOldStory"),"old links must not create Back-button loops");
+assert(index.includes("/story\\/(?:[0-9a-f-]{36}|[a-z0-9]"),"slug article routes must use magazine first paint");
 const magazineCssLink=index.match(/<link\s+rel="stylesheet"\s+href="(heritage-article\.css\?v=[^"]+)">/);
 assert(magazineCssLink,"magazine article CSS must be loaded");
 assert(index.indexOf(magazineCssLink[0])>index.indexOf('id="story-editorial-critical"'),"magazine article rules must override legacy critical CSS");
