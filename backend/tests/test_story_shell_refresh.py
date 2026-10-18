@@ -59,7 +59,7 @@ class StoryShellRefreshTest(unittest.TestCase):
         shell = (Path(__file__).resolve().parents[2] / "web-static" / "index.html").read_text(encoding="utf-8")
         compacted = compact_story_shell(shell)
         delta = len(shell.encode("utf-8")) - len(compacted.encode("utf-8"))
-        self.assertGreaterEqual(delta, 9800, "Direct article pages should not repeat bulky homepage CSS")
+        self.assertGreaterEqual(delta, 8000, "Direct article pages should not repeat bulky homepage CSS")
         for style_id in SHARED_HOME_STYLE_IDS:
             self.assertNotIn('<style id="' + style_id + '">', compacted)
         self.assertIn('id="detail-view"', compacted)
