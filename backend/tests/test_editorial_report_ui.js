@@ -58,7 +58,15 @@ assert(home.includes('s.has_editorial_report'));
 assert(home.includes('home-report-lead'),"homepage reports should display an editorial teaser");
 assert(home.includes('row.lead_fa'),"homepage teaser must come from source-backed report lead");
 assert(!home.includes("esc(author)+' · '"),"homepage report cards should not show author and date");
-assert(index.includes('story-detail.js?v=20261018-microscope-ask-1'));
+assert(index.includes('story-detail.js?v=20261018-magazine-1'));
+assert(index.includes('heritage-article.css?v=20261018-reader-1'),"magazine article CSS must be loaded");
+assert(index.indexOf('heritage-article.css?v=')>index.indexOf('id="story-editorial-critical"'),"magazine article rules must override legacy critical CSS");
+assert(detail.includes('class="magazine-article-layout"'),"full magazine reader must replace the old standalone detail card");
+assert(detail.includes('class="magazine-masthead"'),"magazine article must share the new site identity");
+assert(detail.includes('class="magazine-article-rail"'),"article needs a contextual related-story rail");
+assert(detail.includes('class="story-examination"'),"research disclosure must remain accessible");
+assert(detail.includes('magazine-news-narrative'),"ordinary news still needs readable narrative content");
+assert(!detail.includes('${editorial?"</div></details>":""}'),"microscope must be available for all articles");
 assert(index.includes('home.js?v=20261018-report-leads-1'));
 
 assert(detail.includes('زیر ذره‌بین پندار'));
