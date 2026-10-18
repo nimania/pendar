@@ -3,7 +3,8 @@
 (function(){
   "use strict";
   var UUID=/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
-  var el=function(id){return document.getElementById(id);};
+  var mountRoot=document;
+  var el=function(id){return mountRoot.getElementById(id);};
   var esc=function(value){return String(value==null?"":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});};
   var norm=function(value){return String(value==null?"":value).replace(/\s+/g," ").trim();};
   var excerpt=function(value,limit){
@@ -20,7 +21,7 @@
     var s=String(url||"").trim();
     return (/^https?:\/\/[^\s"<>]+$/i.test(s)||/^\/(?!\/)[^\s"<>]+$/.test(s))?s:"";
   };
-  var slugUrl=function(r){return r&&UUID.test(String(r.id||""))?"/heritage-preview.html?story="+encodeURIComponent(r.id):"/reports/";};
+  var slugUrl=function(r){return r&&UUID.test(String(r.id||""))?(window.PENDAR_HERITAGE_EMBED?"/story/"+encodeURIComponent(r.id)+"/":"/heritage-preview.html?story="+encodeURIComponent(r.id)):"/reports/";};
   var finalStoryUrl=function(id){return UUID.test(String(id||""))?"/story/"+id+"/":"/reports/";};
   var fetchJson=async function(path){
     var response=await fetch(path,{credentials:"same-origin"});
@@ -170,8 +171,10 @@
     var related=data.reports.filter(function(r){return r.id!==id;}).slice(0,6);
     put("related-reports",related.map(function(r){return railRow(r,Boolean(photo(r)));}).join("")||'<p class="empty-state">گزارش دیگری برای نمایش یافت نشد.</p>');
   }
-  async function boot(){
-    var params=new URLSearchParams(location.search), storyId=params.get("story")||"";
+  async function boot(options){
+    options=options||{};
+    mountRoot=options.root||document;
+    var params=new URLSearchParams(location.search), storyId=options.homeOnly?"":params.get("story")||"";
     var storyMode=UUID.test(storyId);
     el("home-page").hidden=storyMode;el("article-page").hidden=!storyMode;
     try{
@@ -201,5 +204,13 @@
       if(typeof console!=="undefined")console.warn("Pendar heritage preview:",err);
     }
   }
-  boot();
+  if(window.PENDAR_HERITAGE_EMBED){
+    // Production homepage can mount this renderer inside an isolated root.
+    // The standalone preview still works unmodified at its own URL.
+    window.PendarHeritage={
+      mount:function(root){return boot({root:root,homeOnly:true});}
+    };
+  }else{
+    boot();
+  }
 })();
