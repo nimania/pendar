@@ -5,7 +5,7 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from refresh_story_shells import refresh_shell, run
+from refresh_story_shells import refresh_shell, compact_story_shell, SHARED_HOME_STYLE_IDS, run
 
 ARTICLE_ID = "b4efb62f-9240-4e90-ba4f-4664e608fa97"
 
@@ -55,10 +55,33 @@ class StoryShellRefreshTest(unittest.TestCase):
         self.assertNotIn('seo-static', output)
         self.assertEqual(output.count('<base href="/">'), 1)
 
+    def test_compact_real_shell_saves_at_least_nine_kb_per_article(self):
+        shell = (Path(__file__).resolve().parents[2] / "web-static" / "index.html").read_text(encoding="utf-8")
+        compacted = compact_story_shell(shell)
+        delta = len(shell.encode("utf-8")) - len(compacted.encode("utf-8"))
+        self.assertGreaterEqual(delta, 9000, "Direct article pages should not repeat bulky homepage CSS")
+        for style_id in SHARED_HOME_STYLE_IDS:
+            self.assertNotIn('<style id="' + style_id + '">', compacted)
+        self.assertIn('id="detail-view"', compacted)
+        self.assertIn('story-detail.js?v=', compacted)
+        self.assertIn('heritage-article.css?v=', compacted)
+        self.assertIn('id="story-editorial-critical"', compacted)
+
+    def test_refresh_preserves_explicit_article_html_between_tags(self):
+        story = OLD_SEO_STORY.replace(
+            'متن کامل و اختصاصی همان مقاله برای جست‌وجو',
+            'سطر اول\nسطر دوم از همان گزارش و متن پیش‌رندرشده'
+        )
+        refreshed = refresh_shell(FRESH_SHELL, story)
+        self.assertIn('سطر اول\nسطر دوم از همان گزارش و متن پیش‌رندرشده', refreshed)
+        self.assertEqual(refreshed.count('id="seo-static"'), 1)
+
     def test_refreshes_existing_entry_on_disk(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             (root / "index.html").write_text(FRESH_SHELL, encoding="utf-8")
+            shared = Path(__file__).resolve().parents[2] / "web-static" / "heritage-article.css"
+            (root / "heritage-article.css").write_text(shared.read_text(encoding="utf-8"), encoding="utf-8")
             target = root / "story" / ARTICLE_ID / "index.html"
             target.parent.mkdir(parents=True)
             target.write_text(OLD_SEO_STORY, encoding="utf-8")
