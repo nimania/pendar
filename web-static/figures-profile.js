@@ -20,7 +20,7 @@ function movieMentionHasEvidence(movie,mention){
    avatar, canonicalStrip, figureCard) at runtime. No behavior change. */
 
 let _personDirectoryQuery="",_personDirectoryVisible=100;
-function showPersonDirectory(){show("figures");setTab("");document.getElementById("figures-view").classList.remove("figure-profile-mode");document.getElementById("figures-view").classList.add("figure-directory-mode");document.getElementById("figure-timeline").innerHTML="";_personDirectoryQuery="";_personDirectoryVisible=100;renderFigures();setHash("#/figures/directory")}
+function showPersonDirectory(){show("figures");setTab("");document.getElementById("figures-view").classList.remove("figure-profile-mode");document.getElementById("figures-view").classList.add("figure-directory-mode");document.getElementById("figures-lede").style.display="";document.getElementById("figure-timeline").innerHTML="";_personDirectoryQuery="";_personDirectoryVisible=100;renderFigures();setHash("#/figures/directory")}
 async function renderFigures(query=_personDirectoryQuery,reset=false) {
   _personDirectoryQuery=query;if(reset)_personDirectoryVisible=100;
   document.getElementById("figures-lede").style.display="";
