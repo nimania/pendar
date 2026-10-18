@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from scripts.build_editorial_reports import (
-    related_news, source_refs, valid_report, build,
+    related_news, source_refs, valid_report, build, editorial_headline_word_count,
 )
 
 NOW="2026-10-17T12:00:00+00:00"
@@ -51,12 +51,26 @@ class EditorialReportTests(unittest.TestCase):
         context={"background":[]}
         paras=[{"text_fa":"این یک متن نمونهٔ نسبتا بلند برای بازنویسی مستند در چهارچوب قوانین نگارش است. "*5,
                 "citation_ids":["s1"]} for _ in range(3)]
-        good={"title_fa":"سپاه درباره حادثه نفتکش در تنگه هرمز گزارش داد",
+        good={"title_fa":"سپاه: برخورد نفتکش با مین در هرمز",
               "lead_fa":"نیروی دریایی سپاه خبر وقوع رویدادی در تنگه هرمز را اعلام کرده و جزئیات آن مستقل بررسی نشده است.",
               "paragraphs":paras}
         self.assertIsNotNone(valid_report(good,refs,context))
         bad=dict(good,paragraphs=[dict(paras[0],citation_ids=["s9"])]+paras[1:])
         self.assertIsNone(valid_report(bad,refs,context))
+
+    def test_editorial_title_is_never_more_than_seven_words(self):
+        self.assertEqual(editorial_headline_word_count("سپاه: برخورد نفتکش با مین در هرمز"),7)
+        self.assertEqual(editorial_headline_word_count("هشدار درباره سیلاب در شمال"),5)
+        refs=[{"id":"s1","url":"https://news.example/real"}]
+        paras=[{"text_fa":"این متن گزارش مستند بر پایه منابع گردآوری شده و باید با ذکر استناد منتشر شود. "*5,
+                "citation_ids":["s1"]} for _ in range(3)]
+        valid={"title_fa":"هشدار درباره سیلاب در شمال",
+               "lead_fa":"مقام‌های مربوط با انتشار گزارشی درباره وقوع بارش‌های شدید و احتمال سیلاب در شمال کشور هشدار داده‌اند.",
+               "paragraphs":paras}
+        self.assertIsNotNone(valid_report(valid,refs,{"background":[]}))
+        invalid=dict(valid,title_fa="هشدار جدید درباره وقوع احتمالی سیلاب در چند استان شمالی کشور")
+        self.assertGreater(editorial_headline_word_count(invalid["title_fa"]),7)
+        self.assertIsNone(valid_report(invalid,refs,{"background":[]}))
 
     def test_archive_enriched_without_ai(self):
         class Mock:
