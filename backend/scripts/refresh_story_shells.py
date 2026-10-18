@@ -32,6 +32,31 @@ REMOVE_META_RE = re.compile(
     r'<(?:meta|link)\b[^>]*(?:rel="canonical"|name="robots"|property="og:[^"]+"|name="twitter:[^"]+")[^>]*>',
     re.I,
 )
+# These first-paint rules are needed on the homepage, not as thousands of
+# inline duplicates in each story entry. The same rules are now retained in
+# the shared heritage-article.css, which story pages already load.
+SHARED_HOME_STYLE_IDS = (
+    "heritage-live-visibility",
+    "figures-timeline-critical",
+    "homepage-news-image-safety",
+    "pendar-priority-home",
+)
+
+
+def compact_story_shell(shell: str) -> str:
+    """Remove redundant home-only inline CSS from a story shell.
+
+    Preserve the editorial CSS, app bootstrap, route DOM, article metadata,
+    and any prerendered text. Only whitespace between line-separated tags in
+    the *template* (not article SEO content) is compacted.
+    """
+    for style_id in SHARED_HOME_STYLE_IDS:
+        pattern = r'<style\s+id="' + re.escape(style_id) + r'">[\s\S]*?</style>[\t ]*\r?\n?'
+        shell = re.sub(pattern, "", shell, count=1, flags=re.I)
+    shell = re.sub(r'>[ \t]*\r?\n[ \t]*<', '><', shell)
+    return shell
+
+
 VISIBILITY_CSS = (
     '<style id="pendar-prerender-visibility">'
     'html:not(.js-enabled) main.wrap{display:none!important}'
@@ -64,6 +89,10 @@ def refresh_shell(shell: str, old: str) -> str:
 
     if '<base href="/">' not in template:
         template = template.replace("<head>", '<head><base href="/">', 1)
+    # Repeated full home CSS makes cached direct article pages exceed the
+    # publication footprint. Compact only the shared SPA wrapper; do NOT
+    # compact the prerendered SEO article body, its tags, or its source links.
+    template = compact_story_shell(template)
     seo_section = SEO_SECTION_RE.search(old)
     if seo_section:
         # The cached body is the authoritative prerendered editorial article
@@ -79,6 +108,10 @@ def run(site: Path) -> tuple[int, int]:
     shell = shell_path.read_text(encoding="utf-8")
     assert 'heritage-article.css?v=' in shell, "Current article CSS absent from root shell"
     assert 'story-detail.js?v=' in shell, "Current article renderer absent from root shell"
+    shared_css = (site / "heritage-article.css").read_text(encoding="utf-8")
+    for style_id in SHARED_HOME_STYLE_IDS:
+        if f"/* {style_id} */" not in shared_css:
+            raise RuntimeError("Missing shared homepage fallback rules: " + style_id)
     refreshed = protected = 0
     for entry in (site / "story").glob("*/index.html"):
         if not UUID_RE.fullmatch(entry.parent.name):
