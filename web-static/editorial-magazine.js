@@ -34,7 +34,7 @@ function pendarMagazineReportCard(row,options){
   const avatar=showAuthor&&typeof pendarAuthorPortraitCSS==="function"?pendarAuthorPortraitCSS(author):"";
   const name=typeof pendarAuthorName==="function"?pendarAuthorName(author):"تحریریه پندار";
   return '<article class="magazine-report-card'+(photo?"":" no-image")+'">'
-    +'<a class="magazine-report-card-link" href="/story/'+esc(id)+'/">'
+    +'<a class="magazine-report-card-link" href="'+esc(typeof window.pendarStoryURL==="function"?window.pendarStoryURL(id):"/story/"+id+"/")+'">'
     +(photo?'<span class="magazine-report-photo"><img src="'+esc(photo)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(&quot;.magazine-report-card&quot;).classList.add(&quot;no-image&quot;);this.closest(&quot;.magazine-report-photo&quot;).remove()"></span>':"")
     +'<span class="magazine-report-card-content"><span class="magazine-report-kicker">گزارش پندار</span>'
     +'<span class="magazine-report-title">'+esc(title)+'</span>'
