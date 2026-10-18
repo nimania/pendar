@@ -53,9 +53,9 @@ function pendarAuthorByline(story,report){
   const href="/editorial-author/"+encodeURIComponent(id)+"/";
   const avatarStyle=pendarAuthorPortraitCSS(id);
   const avatar='<span class="story-author-monogram" aria-hidden="true"'+(avatarStyle?' style="'+avatarStyle+'"':"")+'>'+(avatarStyle?"":"پ")+'</span>';
-  return '<div class="story-author-byline">'+avatar
+  return '<div class="story-author-byline"><a class="story-author-avatar-link" href="'+esc(href)+'" aria-label="آرشیو مطالب '+esc(name)+'">'+avatar+'</a>'
     +'<span class="story-author-credit"><a href="'+esc(href)+'">'+esc(name)+'</a>'
-    +'<small>گزارش پندار · تحریریهٔ پندار</small></span></div>';
+    +'<small>'+esc(story?.published_at?new Date(story.published_at).toLocaleDateString("fa-IR"):"")+'</small></span></div>';
 }
 async function showPendarEditorialAuthor(slug){
   show("editorialauthor");setTab("");setHash("#/editorial-author/"+slug);
