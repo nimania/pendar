@@ -189,6 +189,20 @@
       var backup=data.stories.filter(function(r){return r.has_editorial_report;}).map(function(r){return Object.assign({},r,{title_fa:r.editorial_report_title_fa||r.headline_fa});});
       var byId=new Map(data.stories.filter(function(r){return r&&r.id;}).map(function(r){return [String(r.id),r];}));
       data.reports=limitUnique(archived.concat(backup).map(function(r){var story=byId.get(String(r.id))||{};return Object.assign({},story,r,{image_url:r.image_url||story.image_url||"",lead_fa:r.lead_fa||story.summary_fa||""});}),30);
+      // Older archive entries sometimes lack an image or lead. Resolve a
+      // bounded number from existing story details before building the cover.
+      if(!storyMode){
+        var incomplete=data.reports.slice(0,12).filter(function(r){return !photo(r)||!norm(r.lead_fa);});
+        await Promise.all(incomplete.map(async function(row){
+          try{
+            var detail=await fetchJson("/data/story/"+encodeURIComponent(row.id)+".json");
+            if(!photo(row)&&validImage(detail.image_url))row.image_url=detail.image_url;
+            if(!norm(row.lead_fa)&&detail.editorial_report&&detail.editorial_report.lead_fa)
+              row.lead_fa=detail.editorial_report.lead_fa;
+            if(!norm(row.lead_fa)&&detail.summary_fa)row.lead_fa=detail.summary_fa;
+          }catch(_){}
+        }));
+      }
       if(storyMode){
         var detail=await fetchJson("/data/story/"+encodeURIComponent(storyId)+".json");
         renderArticle(storyId,detail);
