@@ -66,8 +66,8 @@
       fallback("under-hero","گزارشی برای این ویترین پیدا نشد.");
       fallback("rail-reports","آرشیو گزارش‌ها فعلاً دریافت نشد.");
     }else{
-      var ranked=reports.slice().sort(function(a,b){return (Number(Boolean(photo(b)))-Number(Boolean(photo(a))))||String(b.published_at||"").localeCompare(String(a.published_at||""));});
-      var feature=ranked[0];
+      var ranked=reports.slice().sort(function(a,b){return String(b.published_at||"").localeCompare(String(a.published_at||""));});
+      var feature=ranked.slice(0,6).find(function(r){return Boolean(photo(r));})||ranked[0];
       var featured=el("feature-hero");
       featured.href=slugUrl(feature);
       featured.setAttribute("aria-label",headline(feature));
@@ -99,7 +99,14 @@
     document.title=title+" | پندار — پیش‌نمایش";
     put("article-title",esc(title));
     put("article-deck",esc(lead));
-    put("article-byline",'<strong>'+esc(authorName(detail))+'</strong><span>تحریریهٔ پندار</span>');
+    var authorId=String(detail.editorial_author_id||report.author_id||"");
+    var author=data.authors.find(function(a){return a.id===authorId;});
+    var portrait="";
+    if(author&&Number.isInteger(author.portrait_index)&&author.portrait_index>=0&&author.portrait_index<=6&&author.portrait_status==="installed"){
+      var position=(author.portrait_index*100/6).toFixed(4);
+      portrait='<span class="author-avatar" aria-hidden="true" style="background-image:url(/assets/editorial/pendar-authors-sprite.avif);background-size:700% 100%;background-position:'+position+'% center"></span>';
+    }
+    put("article-byline",portrait+'<a class="author-link" href="/editorial-author/'+encodeURIComponent(authorId||"desk")+'/"><strong>'+esc(authorName(detail))+'</strong><span>تحریریهٔ پندار</span></a>');
     var img=validImage(detail.image_url);
     if(img){
       el("article-image").hidden=false;
