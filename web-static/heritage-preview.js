@@ -21,8 +21,8 @@
     var s=String(url||"").trim();
     return (/^https?:\/\/[^\s"<>]+$/i.test(s)||/^\/(?!\/)[^\s"<>]+$/.test(s))?s:"";
   };
-  var slugUrl=function(r){return r&&UUID.test(String(r.id||""))?(window.PENDAR_HERITAGE_EMBED?"/story/"+encodeURIComponent(r.id)+"/":"/heritage-preview.html?story="+encodeURIComponent(r.id)):"/reports/";};
-  var finalStoryUrl=function(id){return UUID.test(String(id||""))?"/story/"+id+"/":"/reports/";};
+  var slugUrl=function(r){return r&&UUID.test(String(r.id||""))?(window.PENDAR_HERITAGE_EMBED?(typeof window.pendarStoryURL==="function"?window.pendarStoryURL(r.id):"/story/"+encodeURIComponent(r.id)+"/"):"/heritage-preview.html?story="+encodeURIComponent(r.id)):"/reports/";};
+  var finalStoryUrl=function(id){return UUID.test(String(id||""))?(typeof window.pendarStoryURL==="function"?window.pendarStoryURL(id):"/story/"+id+"/"):"/reports/";};
   var fetchJson=async function(path){
     var response=await fetch(path,{credentials:"same-origin"});
     if(!response.ok)throw new Error("HTTP "+response.status+" "+path);

@@ -11,7 +11,7 @@
     document.documentElement.classList.add("js-enabled");
     // Pre-apply the magazine article chrome before first paint on deep links.
     // This prevents the legacy top bar from flashing while the SPA router loads.
-    if (/^\/story\/[0-9a-f-]{36}\/?$/i.test(location.pathname)
+    if (/^\/story\/(?:[0-9a-f-]{36}|[a-z0-9][a-z0-9-]{2,75})\/?$/i.test(location.pathname)
         || /^#\/story\/[0-9a-f-]{36}\/?$/i.test(location.hash)) {
       document.documentElement.classList.add("heritage-article-active");
     }
@@ -573,7 +573,8 @@
   <script defer src="core.js"></script>
   <script defer src="loaders.js"></script>
   <script defer src="data/person-handles.js"></script>
-  <script defer src="router.js?v=20261018-library-1"></script>
+  <script defer src="data/story-permalinks.js?v=20261018-pilot-1"></script>
+  <script defer src="router.js?v=20261018-permalinks-1"></script>
   <script defer src="feed.js?v=20261012-publisher-logos3"></script>
   <script defer src="entities.js"></script>
   <script defer src="entity-qa.js"></script>
@@ -613,7 +614,7 @@
   <script defer src="editorial-authors.js?v=20261018-magazine-1"></script>
   <script defer src="editorial-archive.js?v=20261018-newsroom-1"></script>
   <script defer src="story-editorial-pilots.js?v=20261018-short-headline-1"></script>
-  <script defer src="story-detail.js?v=20261018-magazine-1"></script>
+  <script defer src="story-detail.js?v=20261018-permalinks-1"></script>
   <script defer src="nav.js"></script>
   <script defer src="book-app.js"></script>
   <script defer src="badbadak.js"></script>

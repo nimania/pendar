@@ -195,11 +195,17 @@ async function openStory(id) {
   // route that could never match an exported story JSON file.
   const rawId = String(id || "");
   const uuidMatch = rawId.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
-  const cleanId = uuidMatch ? uuidMatch[0] : rawId.replace(/[\\x00-\\x1F\\x7F]/g, "").trim();
-  if (cleanId !== rawId) {
-    history.replaceState(null, "", "#/story/" + encodeURIComponent(cleanId));
+  const cleanId = uuidMatch ? uuidMatch[0] :
+    (window.PENDAR_STORY_PERMALINKS?.slug_to_id?.[rawId] || rawId.replace(/[\\x00-\\x1F\\x7F]/g, "").trim());
+  // Every existing UUID remains valid. For selected stories the stable
+  // readable alias is the canonical public address.
+  const canonicalPath=typeof window.pendarStoryURL==="function"
+    ? window.pendarStoryURL(cleanId) : "/story/"+encodeURIComponent(cleanId)+"/";
+  if (cleanId !== rawId && !window.PENDAR_STORY_PERMALINKS?.slug_to_id?.[rawId]) {
+    history.replaceState(null, "", canonicalPath);
+    updateRouteSeo(canonicalPath);
   } else {
-    setHash("#/story/" + cleanId);
+    setHash(canonicalPath);
   }
   show("detail"); setTab("feed");
   const v = document.getElementById("detail-view");
@@ -283,7 +289,7 @@ async function openStory(id) {
   // Magazine sidebar uses only relevant items with a source image.
   const magazineRelated=relatedStories(s).filter(item=>item && /^https?:\/\//.test(String(item.image_url||""))).slice(0,6);
   const magazineSideStories=magazineRelated.map(item=>
-    '<a class="magazine-side-story" href="/story/'+encodeURIComponent(item.id)+'/">'
+    '<a class="magazine-side-story" href="'+(typeof window.pendarStoryURL==="function"?window.pendarStoryURL(item.id):"/story/"+encodeURIComponent(item.id)+"/")+'">'
     +'<span class="magazine-side-picture"><img src="'+esc(item.image_url)+'" alt="" loading="lazy" decoding="async" onerror="this.closest(&quot;.magazine-side-story&quot;).remove()"></span>'
     +'<span class="magazine-side-story-title">'+esc(item.headline_fa||"")+'</span></a>'
   ).join("");
