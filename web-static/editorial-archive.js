@@ -76,6 +76,18 @@ async function showPendarEditorialArchive(){
     const counts=Object.fromEntries(directory.authors.map(a=>[a.id,0]));
     for(const item of reports)if(item.author_id in counts)counts[item.author_id]++;
     _pendarReportFilter="all";_pendarReportQuery="";
+    // Visual newsroom directory: distinct from story filters. Every portrait
+    // is a direct link to its verified editorial profile and article archive.
+    const authorStories='<section class="magazine-author-stories" aria-label="دبیران تحریریه">'
+      +'<div class="magazine-author-stories-heading"><h2>تحریریهٔ پندار</h2><span>نویسندگان و دبیران گزارش‌ها</span></div>'
+      +'<div class="magazine-author-stories-list">'
+      +directory.authors.slice().sort((a,b)=>(a.order||0)-(b.order||0)).map(a=>{
+        const count=counts[a.id]||0;
+        return '<a class="magazine-author-story" href="/editorial-author/'+encodeURIComponent(a.id)+'/" aria-label="صفحهٔ '+esc(a.display_name_fa)+'">'
+          +'<span class="magazine-author-story-ring">'+pendarAuthorAvatar(a.id,"magazine-author-story-image")+'</span>'
+          +'<strong>'+esc(a.display_name_fa)+'</strong><span class="magazine-author-story-count">'+faN(count)+' گزارش</span></a>';
+      }).join("")
+      +'</div></section>';
     const chips=directory.authors.map(a=>{
       return '<button type="button" class="editorial-library-filter" data-report-author="'+esc(a.id)+'" aria-pressed="false" onclick="filterPendarEditorialArchive(\''+esc(a.id)+'\')">'
         +esc(a.display_name_fa)+' <small>'+faN(counts[a.id])+'</small></button>';
@@ -85,7 +97,7 @@ async function showPendarEditorialArchive(){
       +'<div class="editorial-library-eyebrow">تحریریهٔ پندار / آرشیو</div>'
       +'<h1>گزارش‌های پندار</h1>'
       +'<p>روایت‌های مستند و گزارش‌های تحریریه؛ بخوانید، جست‌وجو کنید و نویسنده‌های هر مطلب را دنبال کنید.</p>'
-      +'</header><div class="editorial-library-controls">'
+      +'</header>'+authorStories+'<div class="editorial-library-controls">'
       +'<div class="editorial-library-filters" aria-label="فیلتر نویسنده"><button type="button" class="editorial-library-filter on" aria-pressed="true" data-report-author="all" onclick="filterPendarEditorialArchive(\'all\')">همه <small>'+faN(reports.length)+'</small></button>'
       +chips+'</div>'
       +'<div class="editorial-library-search-row"><label for="editorial-library-search">جست‌وجو در گزارش‌ها</label>'
