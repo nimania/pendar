@@ -1,4 +1,4 @@
-/* Pendar newsroom: transparent AI editorial desks (names/photos pending approval). */
+/* Pendar newsroom: approved pen names, portraits pending; AI disclosure in profiles. */
 let _pendarAuthorPromise=null;
 async function loadPendarEditorialAuthors(){
   if(window.PENDAR_EDITORIAL_AUTHORS)return window.PENDAR_EDITORIAL_AUTHORS;
@@ -46,7 +46,7 @@ function pendarAuthorByline(story,report){
   const href="/editorial-author/"+encodeURIComponent(id)+"/";
   return '<div class="story-author-byline"><span class="story-author-monogram" aria-hidden="true">پ</span>'
     +'<span class="story-author-credit"><a href="'+esc(href)+'">'+esc(name)+'</a>'
-    +'<small>دبیر مجازی تحریریه · تهیه‌شده با هوش مصنوعی</small></span></div>';
+    +'<small>گزارش پندار · تدوین با کمک هوش مصنوعی</small></span></div>';
 }
 async function showPendarEditorialAuthor(slug){
   show("editorialauthor");setTab("");setHash("#/editorial-author/"+slug);
@@ -78,7 +78,7 @@ async function showPendarEditorialAuthor(slug){
     const avatar=desk.portrait_url?'<img src="'+esc(desk.portrait_url)+'" alt="" loading="lazy">':'<span class="editorial-author-placeholder" aria-hidden="true">پ</span>';
     target.innerHTML='<nav class="editorial-author-back"><a href="/headlines/">← بازگشت به سرخط</a></nav>'
       +'<div class="editorial-author-header"><div class="editorial-author-avatar">'+avatar+'</div>'
-      +'<div><p class="editorial-author-eyebrow">تحریریهٔ پندار · دبیر مجازی</p>'
+      +'<div><p class="editorial-author-eyebrow">'+esc(desk.role_fa||"تحریریه پندار")+' · تحریریهٔ پندار</p>'
       +'<h1>'+esc(desk.display_name_fa)+'</h1>'
       +'<p>'+esc(desk.bio_fa||"")+'</p>'
       +'<p class="editorial-author-disclosure">'+esc(catalog.disclosure_fa||"هویت تحریریه‌ای مبتنی بر هوش مصنوعی")+'</p></div></div>'
