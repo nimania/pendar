@@ -36,24 +36,26 @@ function pendarEditorialReport(s){
   const report=s?.editorial_report||preview;
   if(!report || !["ai_draft","pilot_draft"].includes(report.status) || !Array.isArray(report.paragraphs) || report.paragraphs.length<3)return "";
   const pilot=report.status==="pilot_draft";
-  const rows=report.paragraphs.map((block)=>{
-    if(!block || typeof block.text_fa!=="string" || !Array.isArray(block.citations))return "";
-    const refs=block.citations.filter(c=>c && typeof c.url==="string" && (/^https?:\/\//i.test(c.url)||/^\/story\/[a-f0-9-]{36}\/$/i.test(c.url)));
-    const citations=refs.map(c=>{
+  const renderCitations=(items)=>{
+    const refs=(Array.isArray(items)?items:[]).filter(c=>c && typeof c.url==="string" && (/^https?:\/\//i.test(c.url)||/^\/story\/[a-f0-9-]{36}\/$/i.test(c.url)));
+    const content=refs.map(c=>{
       const href=c.url.startsWith("/story/")?"#/story/"+c.url.split("/")[2]:c.url;
       const ext=!c.url.startsWith("/story/");
       return '<a class="story-report-cite" href="'+esc(href)+'"'+(ext?' target="_blank" rel="noopener noreferrer"':"")+' aria-label="باز کردن استناد '+esc(c.id||"")+'">'+esc(c.id||"منبع")+'</a>';
     }).join("");
-    return '<p>'+esc(block.text_fa)+' '+(citations?'<span class="story-report-cites">'+citations+'</span>':"")+'</p>';
+    return content?'<span class="story-report-cites">'+content+'</span>':"";
+  };
+  const rows=report.paragraphs.map(block=>{
+    if(!block||typeof block.text_fa!=="string"||!Array.isArray(block.citations))return "";
+    return '<p>'+esc(block.text_fa)+' '+renderCitations(block.citations)+'</p>';
   }).filter(Boolean).join("");
   if(!rows)return "";
   return '<article class="story-editorial" aria-labelledby="story-report-title">'
     +'<div class="story-editorial-kicker">گزارش پندار <span>'+(pilot?'نسخهٔ آزمایشی · نیازمند تأیید تحریریه':'بر اساس منابع این پرونده')+'</span></div>'
     +'<h2 id="story-report-title">'+esc(report.title_fa||s.headline_fa||"")+'</h2>'
     +pendarAuthorByline(s,report)
-    +'<p class="story-editorial-lead">'+esc(report.lead_fa||"")+'</p>'
+    +'<p class="story-editorial-lead">'+esc(report.lead_fa||"")+' '+renderCitations(report.lead_citations)+'</p>'
     +'<div class="story-editorial-body">'+rows+'</div>'
-    +'<p class="story-editorial-note">'+esc(report.notice_fa||"گزارش خودکار؛ بررسی ادعاها از طریق منابع اصلی ضروری است.")+'</p>'
     +'</article>';
 }
 function pendarHistoricalContext(s){
