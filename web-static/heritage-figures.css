@@ -129,3 +129,11 @@ html.heritage-figures-active #figures-view{max-width:none;width:100%;padding:0;m
  #figures-view .x-profile-main>h1{font-size:22px}
 }
 @media(prefers-reduced-motion:reduce){#figures-view .x-figure-post,#figures-view .fig-person{transition:none!important}}
+
+/* The provenance/freshness panel belongs to the timeline, not profile or directory. */
+#figures-view.figure-profile-mode #figure-freshness,
+#figures-view.figure-profile-mode .magazine-figures-content>.rule,
+#figures-view.figure-directory-mode #figure-freshness,
+#figures-view.figure-directory-mode .magazine-figures-content>.rule{display:none!important}
+#figures-view.figure-directory-mode #figures-lede p{max-width:85ch}
+#figures-view.figure-profile-mode #figures-lede{display:none!important}
