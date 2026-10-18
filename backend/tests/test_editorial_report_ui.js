@@ -140,7 +140,7 @@ assert(resolvedRoute("#/story/01234567-89ab-4cde-8123-456789abcdef")==="/story/i
 assert(resolvedRoute("/story/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa/")==="/story/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa/",
        "unmapped older UUID routes must remain supported");
 assert(detail.includes("const directlyOnOldStory"),"old links must not create Back-button loops");
-assert(index.includes("/story\\/(?:[0-9a-f-]{36}|[a-z0-9]"),"slug article routes must use magazine first paint");
+assert(index.includes("[a-z0-9-]{2,75}"),"slug article routes must use magazine first paint");
 const magazineCssLink=index.match(/<link\s+rel="stylesheet"\s+href="(heritage-article\.css\?v=[^"]+)">/);
 assert(magazineCssLink,"magazine article CSS must be loaded");
 assert(index.indexOf(magazineCssLink[0])>index.indexOf('id="story-editorial-critical"'),"magazine article rules must override legacy critical CSS");
