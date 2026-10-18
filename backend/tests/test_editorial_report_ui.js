@@ -59,6 +59,9 @@ assert(figureProfile.includes('figure-profile-mode')&&figureProfile.includes('fi
 assert(figureProfile.includes('document.getElementById("figures-lede").style.display=""'),"directory must restore heading");
 assert(figureProfile.includes('||profileMedia.channels.length;'),"works tab must consider available video channels");
 assert(figureProfile.includes('direct.length?')&&figureProfile.includes('news.length?')&&figureProfile.includes('figureStories.length||candidateNews.length?'),"do not render empty tabs");
+assert(figureProfile.includes('const defaultFilter=hasFeed?'),"profiles with no feed must select their first populated section");
+assert(figureProfile.includes('hasFeed?'),"do not display an empty all-content tab");
+assert(figureCore.includes('view.classList.contains("figure-profile-mode")'),"following a person must not navigate out of the profile");
 assert(figureProfile.includes('figureSourceNote(p)'),"original figure source notes must remain attached");
 assert(figureCore.includes('sourceLinkLabel(p)'),"source link should remain available on statement cards");
 assert(figureProfile.includes('setHash(canonicalId?'),"canonical @handles and existing profile URLs must be preserved");
