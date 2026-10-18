@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "disclosure_fa": "این امضا یک هویت تحریریه‌ایِ مبتنی بر هوش مصنوعی است، نه خبرنگار یا شخص حقیقی. محتوای گزارش از منابع پیوندشده تدوین می‌شود.",
-  "status": "pending_names_and_portraits",
+  "disclosure_fa": "این نام‌ها و سال‌های تولد، هویت‌های داستانیِ تحریریهٔ پندار هستند. گزارش‌ها با کمک هوش مصنوعی و بر اساس منابع پیوندشده تدوین می‌شوند؛ هیچ‌یک خبرنگار حقیقی نیستند.",
+  "status": "names_approved_portraits_pending",
   "fallback": {
     "id": "desk",
     "display_name_fa": "تحریریه پندار",
@@ -12,11 +12,11 @@
   "authors": [
     {
       "id": "diplomacy",
-      "role_fa": "دبیر دیپلماسی و امنیت",
-      "bio_fa": "پوشش دیپلماسی، روابط خارجی، مناقشات و تحولات امنیتی؛ با تفکیک مواضع رسمی از واقعیت‌های تأییدشده.",
+      "role_fa": "دبیر دیپلماسی",
+      "bio_fa": "تنظیم گزارش‌های دیپلماسی، مذاکرات و روابط خارجی؛ با تفکیک مواضع رسمی از واقعیت‌های قابل استناد.",
       "topics": [
         "دیپلماسی",
-        "امنیت بین‌الملل"
+        "روابط خارجی"
       ],
       "keywords": [
         "دیپلماسی",
@@ -40,11 +40,14 @@
         "سازمان ملل",
         "روابط خارجی"
       ],
-      "display_name_fa": "دبیر دیپلماسی و امنیت پندار",
-      "name_status": "pending_approval",
+      "display_name_fa": "آرمان شایگان",
+      "name_status": "approved",
       "portrait_url": null,
       "is_ai": true,
-      "order": 1
+      "order": 1,
+      "birth_year_shamsi": 1357,
+      "gender_fa": "مرد",
+      "portrait_status": "awaiting_user_portrait"
     },
     {
       "id": "politics",
@@ -71,11 +74,14 @@
         "پارلمان",
         "احزاب"
       ],
-      "display_name_fa": "دبیر سیاست و حکمرانی پندار",
-      "name_status": "pending_approval",
+      "display_name_fa": "بهار دادفر",
+      "name_status": "approved",
       "portrait_url": null,
       "is_ai": true,
-      "order": 2
+      "order": 2,
+      "birth_year_shamsi": 1363,
+      "gender_fa": "زن",
+      "portrait_status": "awaiting_user_portrait"
     },
     {
       "id": "economy",
@@ -106,11 +112,14 @@
         "کسب و کار",
         "سرمایه"
       ],
-      "display_name_fa": "دبیر اقتصاد و بازار پندار",
-      "name_status": "pending_approval",
+      "display_name_fa": "سامان فرهمند",
+      "name_status": "approved",
       "portrait_url": null,
       "is_ai": true,
-      "order": 3
+      "order": 3,
+      "birth_year_shamsi": 1359,
+      "gender_fa": "مرد",
+      "portrait_status": "awaiting_user_portrait"
     },
     {
       "id": "society",
@@ -138,11 +147,14 @@
         "جمعیت",
         "بیمه"
       ],
-      "display_name_fa": "دبیر جامعه و آموزش پندار",
-      "name_status": "pending_approval",
+      "display_name_fa": "ترانه نیک‌روش",
+      "name_status": "approved",
       "portrait_url": null,
       "is_ai": true,
-      "order": 4
+      "order": 4,
+      "birth_year_shamsi": 1368,
+      "gender_fa": "زن",
+      "portrait_status": "awaiting_user_portrait"
     },
     {
       "id": "environment",
@@ -174,11 +186,14 @@
         "زلزله",
         "منابع آب"
       ],
-      "display_name_fa": "دبیر محیط زیست و اقلیم پندار",
-      "name_status": "pending_approval",
+      "display_name_fa": "مهتاب سروستانی",
+      "name_status": "approved",
       "portrait_url": null,
       "is_ai": true,
-      "order": 5
+      "order": 5,
+      "birth_year_shamsi": 1361,
+      "gender_fa": "زن",
+      "portrait_status": "awaiting_user_portrait"
     },
     {
       "id": "culture",
@@ -208,11 +223,14 @@
         "هنر",
         "جایزه"
       ],
-      "display_name_fa": "دبیر فرهنگ و هنر پندار",
-      "name_status": "pending_approval",
+      "display_name_fa": "مانا رادفر",
+      "name_status": "approved",
       "portrait_url": null,
       "is_ai": true,
-      "order": 6
+      "order": 6,
+      "birth_year_shamsi": 1373,
+      "gender_fa": "زن",
+      "portrait_status": "awaiting_user_portrait"
     },
     {
       "id": "technology",
@@ -242,11 +260,14 @@
         "نرم افزار",
         "نرم‌افزار"
       ],
-      "display_name_fa": "دبیر فناوری و دانش پندار",
-      "name_status": "pending_approval",
+      "display_name_fa": "پارسا مهرآیین",
+      "name_status": "approved",
       "portrait_url": null,
       "is_ai": true,
-      "order": 7
+      "order": 7,
+      "birth_year_shamsi": 1379,
+      "gender_fa": "مرد",
+      "portrait_status": "awaiting_user_portrait"
     }
   ]
 }
