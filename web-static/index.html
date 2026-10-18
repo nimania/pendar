@@ -15,6 +15,10 @@
         || /^#\/story\/[0-9a-f-]{36}\/?$/i.test(location.hash)) {
       document.documentElement.classList.add("heritage-article-active");
     }
+    if (/^\/(?:reports|editorial-author\/[^/]+)\/?$/i.test(location.pathname)
+        || /^#\/(?:reports|editorial-author\/[^/]+)\/?$/i.test(location.hash)) {
+      document.documentElement.classList.add("heritage-collection-active");
+    }
     // First paint: never show the legacy homepage before the magazine mounts.
     // Only the root route receives this guard. Deep links retain normal SPA boot.
     (function () {
@@ -215,6 +219,7 @@
     @media(max-width:600px){#detail-view .story-author-monogram{width:56px;height:56px}}
   </style>
   <link rel="stylesheet" href="heritage-article.css?v=20261018-reader-3">
+  <link rel="stylesheet" href="heritage-collections.css?v=20261018-1">
 </head>
 <body>
   <!-- New heritage magazine homepage; the original SPA remains for all other routes. -->
@@ -591,8 +596,9 @@
   <script defer src="event-trends.js"></script>
   <script defer src="content-discovery.js"></script>
   <script defer src="secondary-views.js"></script>
-  <script defer src="editorial-authors.js?v=20261018-final-1"></script>
-  <script defer src="editorial-archive.js?v=20261018-library-1"></script>
+  <script defer src="editorial-magazine.js?v=20261018-1"></script>
+  <script defer src="editorial-authors.js?v=20261018-magazine-1"></script>
+  <script defer src="editorial-archive.js?v=20261018-magazine-1"></script>
   <script defer src="story-editorial-pilots.js?v=20261018-short-headline-1"></script>
   <script defer src="story-detail.js?v=20261018-magazine-1"></script>
   <script defer src="nav.js"></script>
@@ -603,7 +609,7 @@
   <script defer src="israel-radar.js"></script>
   <script defer src="diner.js?v=recipe-lab-source-audit-4"></script>
   <script defer src="future.js?v=20261017"></script>
-  <script defer src="app.js?v=20261018-magazine-1"></script>
+  <script defer src="app.js?v=20261018-collections-1"></script>
   <script defer src="heritage-live.js?v=20261018-images-required-1" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
 </body>
 </html>
