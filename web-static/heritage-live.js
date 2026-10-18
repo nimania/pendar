@@ -39,6 +39,11 @@
         throw new Error("Heritage template is incomplete");
       }
       shadow=host.shadowRoot||host.attachShadow({mode:"open"});
+      // A shadow root otherwise hides its host's light-DOM children. Project the
+      // magazine-shaped first-paint shell into the new isolated root while data loads.
+      if(!shadow.querySelector("slot")){
+        shadow.appendChild(document.createElement("slot"));
+      }
       // Keep the new DOM invisible until data and its own stylesheet are ready.
       // The matching magazine-shaped first-paint shell stays visible meanwhile.
       var pendingStyle=document.createElement("style");
