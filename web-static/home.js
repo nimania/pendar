@@ -536,7 +536,7 @@ async function renderHomeReports(){
       const id=String(row.id||"");
       const title=row.title_fa||row.editorial_report_title_fa||row.headline_fa||"";
       const author=pendarAuthorName(row.author_id||pendarEditorialAuthorId(row));
-      const img=typeof row.image_url==="string"&&/^https?:\\/\\//.test(row.image_url)?row.image_url:"";
+      const img=typeof row.image_url==="string"&&(row.image_url.startsWith("https://")||row.image_url.startsWith("http://"))?row.image_url:"";
       return '<a class="home-intel-row home-intel-row-rich" href="/story/'+esc(id)+'/">'
         +'<span class="home-intel-rank">'+faN(i+1)+'</span>'
         +'<span class="home-news-thumb">'+(img?'<img src="'+esc(img)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<span class="home-news-thumb-fallback">پندار</span>')+'</span>'
