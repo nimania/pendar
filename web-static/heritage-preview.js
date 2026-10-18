@@ -56,10 +56,49 @@
   function fallback(id,message){
     put(id,'<p class="empty-state">'+esc(message)+' <a href="/reports/" style="color:#178e99">آرشیو پندار ←</a></p>');
   }
+  // The visual ticker revives the 2013 picture-and-headline rhythm without
+  // inventing imagery, changing original headlines, or modifying canonical URLs.
+  function shortTickerTitle(value){
+    var full=norm(value).replace(/\s*[|؛]\s*.*$/,"");
+    if(!full) return "";
+    var words=full.split(/\s+/);
+    if(words.length<=9&&full.length<=66) return full;
+    var chosen=words.slice(0,9).join(" ");
+    if(chosen.length>66){
+      chosen=chosen.slice(0,66);
+      var lastSpace=chosen.lastIndexOf(" ");
+      if(lastSpace>=37) chosen=chosen.slice(0,lastSpace);
+    }
+    return chosen.replace(/[،:؛\s]+$/,"")+(chosen!==full?"…":"");
+  }
+  async function renderVisualTicker(stories){
+    var candidates=stories.slice(0,16).map(function(row){return Object.assign({},row);});
+    var numberOfPhotos=candidates.filter(function(r){return Boolean(photo(r));}).length;
+    if(numberOfPhotos<5){
+      // Some lightweight feed records omit a photograph even though their
+      // full story JSON includes an image. Check only a bounded shortlist.
+      var missing=candidates.filter(function(r){return !photo(r);}).slice(0,Math.min(10,5-numberOfPhotos+4));
+      await Promise.all(missing.map(async function(row){
+        try{
+          var detail=await fetchJson("/data/story/"+encodeURIComponent(row.id)+".json");
+          if(validImage(detail.image_url))row.image_url=detail.image_url;
+        }catch(_){}
+      }));
+    }
+    var illustrated=candidates.filter(function(r){return Boolean(photo(r));}).slice(0,5);
+    var chosen=illustrated.concat(candidates.filter(function(r){return !illustrated.some(function(x){return x.id===r.id;});})).slice(0,5);
+    chosen.sort(function(a,b){return candidates.findIndex(function(r){return r.id===a.id;})-candidates.findIndex(function(r){return r.id===b.id;});});
+    put("ticker",chosen.map(function(r){
+      var original=headline(r), image=photo(r), display=shortTickerTitle(original);
+      return '<a class="ticker-story" href="'+esc(finalStoryUrl(r.id))+'" title="'+esc(original)+'" aria-label="'+esc(original)+'">'
+        +'<span class="ticker-thumb">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.hidden=true">':'<span class="ticker-thumb-empty" aria-hidden="true">پندار</span>')+'</span>'
+        +'<span class="ticker-headline">'+esc(display)+'</span></a>';
+    }).join("")||'<span class="loading">فعلاً خبری برای نمایش در دسترس نیست.</span>');
+  }
   function renderHome(){
     var stories=data.stories.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
     var reports=data.reports.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
-    put("ticker",stories.slice(0,5).map(function(r){return '<a href="'+esc(finalStoryUrl(r.id))+'">'+esc(excerpt(headline(r),85))+'</a>';}).join("")||'<span class="loading">فعلاً خبری برای نمایش در دسترس نیست.</span>');
+    renderVisualTicker(stories);
     put("rail-news",stories.slice(0,7).map(function(r){return railRow(Object.assign({},r,{title_fa:r.headline_fa}),Boolean(photo(r)));}).join("")||'<p class="empty-state">سرخط‌ها فعلاً دریافت نشدند.</p>');
     if(!reports.length){
       put("feature-hero",'<span class="feature-picture"><span class="image-wait">پندار</span></span><span class="feature-caption"><span class="category-flag orange">گزارش‌ها</span><strong>گزارش‌های تحریریهٔ پندار</strong><span>برای خواندن گزارش‌های کامل وارد آرشیو شوید.</span></span>');
