@@ -53,6 +53,14 @@ def compact_story_shell(shell: str) -> str:
     for style_id in SHARED_HOME_STYLE_IDS:
         pattern = r'<style\s+id="' + re.escape(style_id) + r'">[\s\S]*?</style>[\t ]*\r?\n?'
         shell = re.sub(pattern, "", shell, count=1, flags=re.I)
+    # Canonical stories keep critical editorial CSS, but CSS comments and
+    # formatting whitespace need not be repeated in every static HTML file.
+    def compact_critical(match):
+        css = re.sub(r'/\*[\s\S]*?\*/', '', match.group(1))
+        css = re.sub(r'\s+', ' ', css).strip()
+        return '<style id="story-editorial-critical">' + css + '</style>'
+    shell = re.sub(r'<style id="story-editorial-critical">([\s\S]*?)</style>',
+                   compact_critical, shell, count=1, flags=re.I)
     shell = re.sub(r'>[ \t]*\r?\n[ \t]*<', '><', shell)
     return shell
 
