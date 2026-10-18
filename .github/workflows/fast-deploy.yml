@@ -10,6 +10,7 @@ on:
     paths:
       - "web-static/**"
       - ".github/workflows/fast-deploy.yml"
+      - "backend/tests/test_editorial_report_ui.js"
       - "backend/scripts/prepare_priority_site.py"
       - "backend/scripts/audit_pages_size.py"
       - "backend/scripts/build_iran_scenario_radar.py"
