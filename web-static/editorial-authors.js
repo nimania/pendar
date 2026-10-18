@@ -46,7 +46,7 @@ function pendarAuthorByline(story,report){
   const href="/editorial-author/"+encodeURIComponent(id)+"/";
   return '<div class="story-author-byline"><span class="story-author-monogram" aria-hidden="true">پ</span>'
     +'<span class="story-author-credit"><a href="'+esc(href)+'">'+esc(name)+'</a>'
-    +'<small>گزارش پندار · تدوین با کمک هوش مصنوعی</small></span></div>';
+    +'<small>گزارش پندار · تحریریهٔ پندار</small></span></div>';
 }
 async function showPendarEditorialAuthor(slug){
   show("editorialauthor");setTab("");setHash("#/editorial-author/"+slug);
@@ -81,7 +81,7 @@ async function showPendarEditorialAuthor(slug){
       +'<div><p class="editorial-author-eyebrow">'+esc(desk.role_fa||"تحریریه پندار")+' · تحریریهٔ پندار</p>'
       +'<h1>'+esc(desk.display_name_fa)+'</h1>'
       +'<p>'+esc(desk.bio_fa||"")+'</p>'
-      +'<p class="editorial-author-disclosure">'+esc(catalog.disclosure_fa||"هویت تحریریه‌ای مبتنی بر هوش مصنوعی")+'</p></div></div>'
+      +'</div></div>'
       +'<section class="editorial-author-publications"><h2>گزارش‌های تنظیم‌شده</h2>'
       +(listings||'<p class="muted">گزارش واجد شرایط انتشار برای این دبیر هنوز ثبت نشده است.</p>')
       +'</section>';
