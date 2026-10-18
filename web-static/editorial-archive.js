@@ -83,7 +83,7 @@ async function showPendarEditorialArchive(){
       +'<div class="magazine-author-stories-list">'
       +directory.authors.slice().sort((a,b)=>(a.order||0)-(b.order||0)).map(a=>{
         const count=counts[a.id]||0;
-        return '<a class="magazine-author-story" href="/editorial-author/'+encodeURIComponent(a.id)+'/" aria-label="صفحهٔ '+esc(a.display_name_fa)+'">'
+        return '<a class="magazine-author-story" href="'+esc(pendarWriterURL(a.id))+'" aria-label="صفحهٔ '+esc(a.display_name_fa)+'">'
           +'<span class="magazine-author-story-ring">'+pendarAuthorAvatar(a.id,"magazine-author-story-image")+'</span>'
           +'<strong>'+esc(a.display_name_fa)+'</strong><span class="magazine-author-story-count">'+faN(count)+' گزارش</span></a>';
       }).join("")
