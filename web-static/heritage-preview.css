@@ -114,3 +114,21 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
   .heritage-root .story-card.no-image .story-info{padding:11px}
   .heritage-root .story-card.no-image .story-info b{font-size:13px}
 }
+
+
+/* Sourced figures and statements: replaces the duplicated "در جریان" news rail. */
+.figures-rail{overflow:hidden}
+.figure-rail-card{padding:15px 15px 14px;background:#fff;border-bottom:1px solid var(--line)}
+.figure-rail-card:last-child{border-bottom:none}
+.figure-rail-card:hover{background:#f8faf8}
+.figure-rail-person{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.figure-rail-person img{width:56px;height:56px;flex:0 0 56px;object-fit:cover;object-position:center;border-radius:50%;border:2px solid #d8e9e0;background:#e7ede8}
+.figure-rail-person span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.figure-rail-person strong{font:800 14px/1.6 Vazirmatn,Tahoma,sans-serif;color:#23534b}
+.figure-rail-person small{font-size:11px;line-height:1.6;color:#718076;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.figure-rail-statement{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;margin-top:10px;color:#26342e;font:650 13.5px/1.95 Vazirmatn,Tahoma,sans-serif}
+.figure-rail-statement:hover{color:#147c80}
+.figure-rail-meta{display:flex;justify-content:space-between;gap:9px;align-items:center;flex-wrap:wrap;margin-top:9px;color:#7a8980;font-size:10.5px}
+.figure-rail-meta a{color:#13818b;font-weight:700}
+.figure-rail-meta a:hover{text-decoration:underline}
+@media(max-width:700px){.figure-rail-card{padding:14px}.figure-rail-person img{width:52px;height:52px;flex-basis:52px}.figure-rail-statement{font-size:13px}}
