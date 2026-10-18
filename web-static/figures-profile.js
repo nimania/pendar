@@ -229,8 +229,10 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   }}catch(_){}
   const candidateNews=candidateFeed?.news||[],candidateOfficial=candidateFeed?.official||[];
   const hasAbout=!!(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||canonicalFigure?.meta?.birthday||canonicalFigure?.meta?.deathday);
-  const available={all:true,direct:direct.length,news:news.length,stories:figureStories.length+candidateNews.length,works:hasWorks,movies:figureMovies.length,usradar:!!usRadarRecord,official:candidateOfficial.length,about:hasAbout};
-  if(!available[_figureProfileFilter]){_figureProfileFilter="all";shown=x.posts||[];}
+  const hasFeed=(x.posts||[]).length>0||candidateNews.length>0||candidateOfficial.length>0;
+  const defaultFilter=hasFeed?"all":figureStories.length?"stories":hasWorks?"works":hasAbout?"about":"all";
+  const available={all:hasFeed,direct:direct.length,news:news.length,stories:figureStories.length+candidateNews.length,works:hasWorks,movies:figureMovies.length,usradar:!!usRadarRecord,official:candidateOfficial.length,about:hasAbout};
+  if(!available[_figureProfileFilter]){_figureProfileFilter=defaultFilter;shown=defaultFilter==="all"?(x.posts||[]):[];}
   const feedCards=rows=>rows.map(r=>`<article class="candidate-feed-card"><small>${esc(r.source||"")} · ${esc(r.published_at?relTime(r.published_at):"")}</small><h3><a href="${esc(_figureWorkUrl(r.url))}" target="_blank" rel="noopener">${esc(r.title_fa||r.title)}</a></h3></article>`).join("");
   const candidateNewsSection=candidateNews.length?'<section class="candidate-news"><h2>تازه‌ترین خبرهای رسانه‌ها</h2>'+feedCards(candidateNews)+'</section>':"";
   const officialSection=candidateOfficial.length?'<section class="candidate-news"><h2>از زبان خودش</h2>'+feedCards(candidateOfficial)+'</section>':"";
@@ -255,7 +257,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     ${articleDisplayAdMarkup()}
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
-      <button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>
+      ${hasFeed?`<button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>`:""}
       ${direct.length?`<button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>`:""}
       ${news.length?`<button class="${_figureProfileFilter==="news"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','news')">گفته در خبرها</button>`:""}
       ${figureStories.length||candidateNews.length?`<button class="${_figureProfileFilter==="stories"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','stories')">خبرها</button>`:""}
