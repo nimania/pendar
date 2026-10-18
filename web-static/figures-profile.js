@@ -20,7 +20,7 @@ function movieMentionHasEvidence(movie,mention){
    avatar, canonicalStrip, figureCard) at runtime. No behavior change. */
 
 let _personDirectoryQuery="",_personDirectoryVisible=100;
-function showPersonDirectory(){show("figures");setTab("");document.getElementById("figure-timeline").innerHTML="";_personDirectoryQuery="";_personDirectoryVisible=100;renderFigures();setHash("#/figures/directory")}
+function showPersonDirectory(){show("figures");setTab("");document.getElementById("figures-view").classList.remove("figure-profile-mode");document.getElementById("figures-view").classList.add("figure-directory-mode");document.getElementById("figure-timeline").innerHTML="";_personDirectoryQuery="";_personDirectoryVisible=100;renderFigures();setHash("#/figures/directory")}
 async function renderFigures(query=_personDirectoryQuery,reset=false) {
   _personDirectoryQuery=query;if(reset)_personDirectoryVisible=100;
   document.getElementById("figures-lede").style.display="";
@@ -78,6 +78,8 @@ async function openStatement(id) {
   }
   if (post) isNews = post.kind === "news_statement";
   show("figures"); setTab("");
+  document.getElementById("figures-view").classList.add("figure-profile-mode");
+  document.getElementById("figures-view").classList.remove("figure-directory-mode");
   document.getElementById("figures-lede").style.display = "none";
   document.getElementById("figure-timeline").innerHTML = "";
   const el = document.getElementById("figures");
@@ -183,6 +185,8 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   if (resetFilter) _figureProfileFilter = "all";
   setHash(canonicalId?"#/entity/"+encodeURIComponent(canonicalId):"#/figure/" + handle);
   show("figures"); setTab("");
+  document.getElementById("figures-view").classList.add("figure-profile-mode");
+  document.getElementById("figures-view").classList.remove("figure-directory-mode");
   document.getElementById("figures-lede").style.display = "none";
   document.getElementById("figure-timeline").innerHTML = "";
   const el = document.getElementById("figures");
@@ -215,7 +219,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const latest = (x.posts || []).map(p => p.published_at).filter(Boolean).sort().pop();
   const poems = Array.isArray(curatedPoems[x.handle]) ? curatedPoems[x.handle] : [];
   const poemSection = poems.length ? `<section class="curated-poems"><div class="curated-poems-head"><div><span class="curated-kicker">اثر ویژه</span><h2>یک شعر؛ بخش‌های منتشرشده</h2><p>این ${faN(poems.length)} متن، بخش‌های مختلف یک شعر از مونا برزویی‌اند. ترتیب نهایی بخش‌ها هنوز اعلام نشده است؛ شماره‌های زیر فقط برای تفکیک در آرشیو جان کلام‌اند و ترتیب شعر را نشان نمی‌دهند.</p></div><span class="curated-count">${faN(poems.length)} بخش</span></div><div class="curated-poem-list">${poems.map((p,i)=>`<article class="curated-poem"><div class="curated-poem-no" title="شمارهٔ آرشیوی؛ نه ترتیب شعر">بخش ${faN(i+1)}*</div><div class="curated-poem-text">${esc(p.text||"").replace(/\\n/g,"<br>")}</div></article>`).join("")}</div></section>` : "";
-  const hasWorks=figureBooks.length||profileMedia.books.length||mediaWorks.length||profileMedia.films.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length;
+  const hasWorks=figureBooks.length||profileMedia.books.length||mediaWorks.length||profileMedia.films.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length||profileMedia.channels.length;
   const worksSection=figureBooks.length||profileMedia.books.length||mediaWorks.length||profileMedia.films.length||poems.length||youtubeVideos.length||profileMedia.podcasts.length||profileMedia.other.length||profileMedia.channels.length?`<section class="figure-works">${figureBooks.length||profileMedia.books.length?'<h2>کتاب‌ها</h2><div class="books-grid">'+figureBooks.map(_bookCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.books.map(_figureWorkCard).join("")+'</div>':""}${mediaWorks.length||profileMedia.films.length?'<h2>فیلم‌ها و سریال‌ها</h2><div class="movie-grid">'+mediaWorks.map(_movieCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.films.map(_figureWorkCard).join("")+'</div>':""}${profileMedia.podcasts.length?'<h2>پادکست‌ها</h2><div class="figure-work-grid">'+profileMedia.podcasts.map(_figureWorkCard).join("")+'</div>':""}${youtubeVideos.length||profileMedia.channels.length?'<h2>ویدئوها</h2><div class="figure-youtube-grid">'+youtubeVideos.map(_figureVideoCard).join("")+'</div><div class="figure-work-grid">'+profileMedia.channels.map(_figureWorkCard).join("")+'</div>':""}${poemSection}${profileMedia.other.length?'<h2>دیگر آثار</h2><div class="figure-work-grid">'+profileMedia.other.map(_figureWorkCard).join("")+'</div>':""}</section>`:'<div class="state"><div class="big">اثری ثبت نشده است.</div></div>';
   let usRadarRecord=null;try{const radar=await getJSON(DATA+"/us-radar.json?v="+Date.now());usRadarRecord=(radar.iran_meter||[]).find(m=>m.handle===x.handle)||null;}catch(_){}
   const usRadarSection=usRadarRecord?'<section class="x-profile-feed"><div class="rule"><span>رادار آمریکا · انتخابات ۲۰۲۶</span><span class="l"></span></div><div class="profile-us-radar"><div><b>'+esc(usRadarRecord.state||x.us_radar?.state||"")+' · سنا ۲۰۲۶</b><span class="usr-party '+esc(String(usRadarRecord.party||x.us_radar?.party||"").toLowerCase())+'">'+esc(usRadarRecord.party||x.us_radar?.party||"")+'</span></div><p>'+esc(usRadarRecord.summary_fa||"")+'</p><dl><dt>جنگ ایران</dt><dd>'+esc(usRadarRecord.war||"نامشخص")+'</dd><dt>اختیارات جنگی</dt><dd>'+esc(usRadarRecord.war_power||"نامشخص")+'</dd><dt>تحریم/دیپلماسی</dt><dd>'+esc(usRadarRecord.sanctions||"نامشخص")+'</dd><dt>اسرائیل</dt><dd>'+esc(usRadarRecord.israel||"نامشخص")+'</dd><dt>نسبت با ترامپ</dt><dd>'+esc(usRadarRecord.trump||"نامشخص")+'</dd></dl><small>منبع: '+esc(usRadarRecord.source||"")+' · اطمینان داده: '+esc(usRadarRecord.confidence||"")+'</small><button class="fig-profile-link" onclick="showUSRadar()">بازگشت به رادار آمریکا</button></div></section>':"";
@@ -289,6 +293,8 @@ function setFigureDirectoryMode(mode) {
 }
 function showFigures() {
   show("figures"); setTab("");
+  document.getElementById("figures-view").classList.remove("figure-profile-mode","figure-directory-mode");
+  document.getElementById("figures-lede").style.display="";
   document.title="چهره‌ها | پندار";
   document.getElementById("figures-lede").style.display = "";
   document.getElementById("figures").innerHTML = "";
