@@ -80,12 +80,23 @@ async function showPendarEditorialArchive(){
       return '<button type="button" class="editorial-library-filter" data-report-author="'+esc(a.id)+'" aria-pressed="false" onclick="filterPendarEditorialArchive(\''+esc(a.id)+'\')">'
         +esc(a.display_name_fa)+' <small>'+faN(counts[a.id])+'</small></button>';
     }).join("");
+    const authorStories=directory.authors.map(a=>{
+      const count=counts[a.id]||0;
+      const picture=pendarAuthorPortraitCSS(a.id);
+      return '<a class="editorial-story-profile" href="/editorial-author/'+encodeURIComponent(a.id)+'/" title="'+esc(a.role_fa||"")+'">'
+        +'<span class="editorial-story-ring"><span class="editorial-story-face"'+(picture?' style="'+picture+'"':"")+'>'+(picture?"":"پ")+'</span></span>'
+        +'<strong>'+esc(a.display_name_fa)+'</strong><small>'+esc(a.role_fa||"")+'</small>'
+        +'<span class="editorial-story-count">'+faN(count)+' گزارش</span></a>';
+    }).join("");
     host.innerHTML=pendarMagazineCollectionFrame(
       '<header class="editorial-library-header">'
       +'<div class="editorial-library-eyebrow">تحریریهٔ پندار / آرشیو</div>'
       +'<h1>گزارش‌های پندار</h1>'
       +'<p>روایت‌های مستند و گزارش‌های تحریریه؛ بخوانید، جست‌وجو کنید و نویسنده‌های هر مطلب را دنبال کنید.</p>'
-      +'</header><div class="editorial-library-controls">'
+      +'</header><section class="editorial-story-people" aria-label="دبیران تحریریه">'
+      +'<div class="editorial-story-people-heading"><h2>تحریریهٔ پندار</h2><span>برای دیدن پروندهٔ هر دبیر، روی تصویر او بزنید</span></div>'
+      +'<div class="editorial-story-list">'+authorStories+'</div></section>'
+      +'<div class="editorial-library-controls">'
       +'<div class="editorial-library-filters" aria-label="فیلتر نویسنده"><button type="button" class="editorial-library-filter on" aria-pressed="true" data-report-author="all" onclick="filterPendarEditorialArchive(\'all\')">همه <small>'+faN(reports.length)+'</small></button>'
       +chips+'</div>'
       +'<div class="editorial-library-search-row"><label for="editorial-library-search">جست‌وجو در گزارش‌ها</label>'
