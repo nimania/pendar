@@ -11,6 +11,7 @@ on:
       - "web-static/**"
       - ".github/workflows/fast-deploy.yml"
       - "backend/tests/test_editorial_report_ui.js"
+      - "backend/tests/test_heritage_home_quality.js"
       - "backend/scripts/build_writer_pages.py"
       - "backend/tests/test_writer_pages.py"
       - "backend/tests/test_story_shell_refresh.py"
@@ -48,6 +49,8 @@ jobs:
         run: python -m py_compile backend/scripts/build_editorial_reports.py
       - name: Verify visible Pendar reports and source links
         run: node backend/tests/test_editorial_report_ui.js
+      - name: Verify homepage is diverse and never enlarges tiny news photos
+        run: node backend/tests/test_heritage_home_quality.js
       - name: Restore last successful light Pages artifact
         env:
           GH_TOKEN: ${{ github.token }}
