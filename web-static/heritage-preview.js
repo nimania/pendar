@@ -75,6 +75,81 @@
   var data={stories:[],reports:[],authors:[]};
   var redrawHome=null;
   function put(id,html){var x=el(id);if(x)x.innerHTML=html;}
+  // The right rail is reserved exclusively for sourced statements by figures.
+  // This feed is independent of story photo checks and never delays the cover.
+  function figurePortrait(url){
+    return new Promise(function(resolve){
+      if(!url||typeof Image==="undefined"){resolve(false);return;}
+      var img=new Image(),completed=false;
+      var finish=function(ok){if(completed)return;completed=true;clearTimeout(timer);img.onload=img.onerror=null;resolve(ok);};
+      var timer=setTimeout(function(){finish(false);},2400);
+      img.onload=function(){finish(img.naturalWidth>=72&&img.naturalHeight>=72);};
+      img.onerror=function(){finish(false);};
+      img.src=url;
+    });
+  }
+  function statementTime(value){
+    var time=Date.parse(value||"");
+    if(!Number.isFinite(time))return "";
+    return new Intl.DateTimeFormat("fa-IR",{dateStyle:"medium",timeZone:"Asia/Tehran"}).format(new Date(time));
+  }
+  function figureQuoteRow(item){
+    var person=item.person,post=item.post,portrait=item.portrait;
+    var handle=norm(person.handle||"");
+    var url="/figure/"+encodeURIComponent(handle)+"/";
+    var postUrl="/statement/"+encodeURIComponent(String(post.id))+"/";
+    var name=norm(person.name_fa||"");
+    var summary=excerpt(post.summary_fa,155);
+    var when=statementTime(post.published_at);
+    return '<article class="figure-rail-card">'
+      +'<a class="figure-rail-person" href="'+esc(url)+'">'
+      +'<img src="'+esc(portrait)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">'
+      +'<span><strong>'+esc(name)+'</strong>'+(person.role_fa?'<small>'+esc(excerpt(person.role_fa,45))+'</small>':"")+'</span></a>'
+      +'<a class="figure-rail-statement" href="'+esc(postUrl)+'">'+esc(summary)+'</a>'
+      +'<div class="figure-rail-meta"><time datetime="'+esc(post.published_at)+'">'+esc(when)+'</time>'
+      +'<a href="'+esc(post.url)+'" target="_blank" rel="noopener noreferrer">منبع گفته ↗</a></div>'
+      +'</article>';
+  }
+  async function renderFigureHighlights(){
+    var rail=el("rail-figures");
+    if(!rail)return;
+    try{
+      var source=await fetchJson("/data/figures.json");
+      var people=Array.isArray(source.figures)?source.figures:[];
+      var candidates=[];
+      var now=Date.now();
+      for(var f of people){
+        if(!f||!norm(f.handle)||!norm(f.name_fa)||f.directory===false)continue;
+        var portrait=validImage(f.avatar||f.avatar_url||f.image_url||"");
+        if(!portrait)continue;
+        for(var p of (Array.isArray(f.posts)?f.posts:[])){
+          var published=Date.parse(p?.published_at||"");
+          if(!p||!norm(p.id)||!norm(p.summary_fa)||!validLink(p.url)
+             ||!Number.isFinite(published)||published>now+3600000)continue;
+          candidates.push({person:f,post:p,portrait:portrait,time:published});
+        }
+      }
+      candidates.sort(function(a,b){return b.time-a.time;});
+      var unique=[],seen=new Set();
+      for(var row of candidates){
+        var key=String(row.person.handle).toLowerCase();
+        if(seen.has(key))continue;
+        seen.add(key);
+        unique.push(row);
+        if(unique.length>=16)break;
+      }
+      var checks=await Promise.all(unique.map(async function(row){
+        return await figurePortrait(row.portrait)?row:null;
+      }));
+      var ready=checks.filter(Boolean).slice(0,5);
+      rail.innerHTML=ready.length
+        ?ready.map(figureQuoteRow).join("")
+        :'<p class="empty-state">گفتهٔ تصویردارِ دارای منبع برای نمایش پیدا نشد. <a href="/figures/">آرشیو چهره‌ها ←</a></p>';
+    }catch(err){
+      rail.innerHTML='<p class="empty-state">دریافت گفته‌های چهره‌ها فعلاً ممکن نیست. <a href="/figures/">آرشیو چهره‌ها ←</a></p>';
+      if(typeof console!=="undefined")console.warn("Pendar figures rail:",err);
+    }
+  }
   function railRow(item){
     if(!verifiedImage(photo(item)))return "";
     var title=headline(item);
@@ -106,7 +181,7 @@
     // Remove the entire article tile immediately; never leave a text-only card.
     var src=img.getAttribute("src");
     if(src)imageChecks.set(src,false);
-    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.rail-row,.story-card,.visual-card");
+    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.rail-row,.story-card,.visual-card,.figure-rail-card");
     if(tile)tile.remove();
     if(redrawHome)redrawHome();
   }
@@ -177,7 +252,6 @@
         return picked;
       }
       var tickerRows=varied(news,5);
-      var railNewsRows=varied(news,7);
       var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
       var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
       put("ticker",tickerRows.map(function(r){
@@ -186,8 +260,6 @@
           +'<span class="ticker-thumb">'+thumb(r,"")+'</span>'
           +'<span class="ticker-headline">'+esc(shortTickerTitle(title))+'</span></a>';
       }).join("")||'<span class="loading">خبر تصویردار تازه‌ای در دسترس نیست.</span>');
-      put("rail-news",railNewsRows.map(railRow).join("")||
-        '<p class="empty-state">خبر تصویردار تازه‌ای برای نمایش پیدا نشد.</p>');
       var cover=varied(editorial.filter(function(r){return (r._imageWidth||0)>=900;}),1)[0]||varied(news.filter(function(r){return (r._imageWidth||0)>=900;}),1)[0];
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
@@ -315,7 +387,11 @@
       if(storyMode){
         var detail=await fetchJson("/data/story/"+encodeURIComponent(storyId)+".json");
         renderArticle(storyId,detail);
-      }else await renderHome();
+      }else{
+        await renderHome();
+        // Do not delay the rest of the homepage for the figures dataset.
+        void renderFigureHighlights();
+      }
     }catch(err){
       if(storyMode){
         put("article-title","نمایش این مطلب فعلاً ممکن نیست");
@@ -325,7 +401,7 @@
         el("culture").hidden=true;
         el("gallery").hidden=true;
         photoNotice("rail-reports","دریافت تصاویر گزارش‌ها موقتاً ممکن نیست.","/reports/");
-        photoNotice("rail-news","دریافت تصاویر خبرها موقتاً ممکن نیست.","/headlines/");
+        void renderFigureHighlights();
         put("ticker",'<span class="loading">در حال حاضر دریافت خبرها ممکن نیست.</span>');
       }
       if(typeof console!=="undefined")console.warn("Pendar heritage preview:",err);
