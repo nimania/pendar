@@ -1,0 +1,39 @@
+name: Audit Pendar Editorial Archive
+on:
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download most recent successful published Pages artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/fast-deploy.yml/runs?status=success&per_page=20" --jq '.workflow_runs[0].id // empty')"
+          test -n "$run_id" || { echo "::error::No successful Pages workflow run found"; exit 1; }
+          artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$run_id/artifacts" --jq '[.artifacts[] | select(.expired==false and (.name|startswith("github-pages")))] | .[0].name // empty')"
+          test -n "$artifact" || { echo "::error::No valid Pages artifact found"; exit 1; }
+          mkdir -p artifact site
+          gh run download "$run_id" -n "$artifact" -D artifact
+          test -s artifact/artifact.tar
+          tar -xf artifact/artifact.tar -C site
+      - name: Count valid reports and author shortfalls
+        run: |
+          set +e
+          python backend/scripts/audit_editorial_archive.py --site site | tee editorial-audit.json
+          result=${PIPESTATUS[0]}
+          echo "Audit exit code: $result"
+          exit "$result"
+      - name: Upload audit report even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pendar-editorial-audit
+          path: editorial-audit.json
+          if-no-files-found: ignore
