@@ -70,6 +70,7 @@ function show(v) {
   // Keep the 2013-inspired magazine chrome on canonical article routes only.
   document.documentElement.classList.toggle("heritage-article-active", v === "detail");
   document.documentElement.classList.toggle("heritage-collection-active", v === "editorialarchive" || v === "editorialauthor");
+  document.documentElement.classList.toggle("heritage-figures-active", v === "figures");
   document.documentElement.classList.add("app-ready");
   document.documentElement.classList.remove("route-boot");
   for (const [key, id] of Object.entries(VIEWS))
