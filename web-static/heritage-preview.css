@@ -87,3 +87,30 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .heritage-search-box input{padding:11px 12px;border:1px solid #bdcec7;border-radius:5px;flex:1;min-width:200px;font:inherit;font-size:14px;direction:rtl}
 .heritage-root #heritage-search-results{width:100%;display:flex;flex-wrap:wrap;gap:7px 14px}
 .heritage-root #heritage-search-results a{color:#176e70;font-size:13px;font-weight:650;background:#e2ece8;padding:7px 10px;border-radius:4px}
+
+/* Verified-photo treatment: missing and blocked hotlinks never print a broken
+   image icon or long alt text on top of the editorial composition. */
+.heritage-root .feature-picture.is-empty,
+.heritage-root .visual-card.is-empty,
+.heritage-root .mini-feature img[hidden],
+.heritage-root .ticker-thumb.is-empty,
+.heritage-root .rail-row .is-empty{display:none!important}
+.heritage-root .text-only-feature{border-top:4px solid var(--orange);background:#fff}
+.heritage-root .text-only-feature .feature-caption{padding:35px 30px 45px;min-height:235px;justify-content:center}
+.heritage-root .text-only-feature .feature-caption strong{max-width:42ch}
+.heritage-root .mini-feature.no-image{border-right:4px solid var(--orange);min-height:148px;justify-content:center}
+.heritage-root .mini-feature.no-image .caption{padding:20px}
+.heritage-root .story-card.no-image{border-top:4px solid #dbe7e2;min-height:178px;display:flex;align-items:center}
+.heritage-root .story-card.no-image .story-info{padding:18px}
+.heritage-root .story-card.no-image .story-info b{font-size:17px}
+.heritage-root .story-card.no-image .story-info p{display:-webkit-box}
+.heritage-root .image-frame.is-empty{display:none}
+.heritage-root .story-card:has(.image-frame.is-empty){border-top:4px solid #dbe7e2;min-height:178px}
+.heritage-root .ticker-story.ticker-without-photo{background:#f2f6f4;padding:7px 9px;border-radius:5px}
+.heritage-root .visual-grid .loading{grid-column:1/-1}
+@media(max-width:470px){
+  .heritage-root .text-only-feature .feature-caption{min-height:190px;padding:25px 19px}
+  .heritage-root .story-card.no-image{min-height:125px}
+  .heritage-root .story-card.no-image .story-info{padding:11px}
+  .heritage-root .story-card.no-image .story-info b{font-size:13px}
+}
