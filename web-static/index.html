@@ -9,6 +9,12 @@
   <link rel="canonical" href="https://pendar.io/"><meta name="theme-color" content="#3c3938">
   <script>
     document.documentElement.classList.add("js-enabled");
+    // Pre-apply the magazine article chrome before first paint on deep links.
+    // This prevents the legacy top bar from flashing while the SPA router loads.
+    if (/^\/story\/[0-9a-f-]{36}\/?$/i.test(location.pathname)
+        || /^#\/story\/[0-9a-f-]{36}\/?$/i.test(location.hash)) {
+      document.documentElement.classList.add("heritage-article-active");
+    }
     // First paint: never show the legacy homepage before the magazine mounts.
     // Only the root route receives this guard. Deep links retain normal SPA boot.
     (function () {
@@ -208,7 +214,7 @@
     #detail-view .d-meta[hidden]{display:none!important}
     @media(max-width:600px){#detail-view .story-author-monogram{width:56px;height:56px}}
   </style>
-  <link rel="stylesheet" href="heritage-article.css?v=20261018-reader-1">
+  <link rel="stylesheet" href="heritage-article.css?v=20261018-reader-2">
 </head>
 <body>
   <!-- New heritage magazine homepage; the original SPA remains for all other routes. -->
