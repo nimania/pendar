@@ -201,10 +201,14 @@ async function openStory(id) {
   // readable alias is the canonical public address.
   const canonicalPath=typeof window.pendarStoryURL==="function"
     ? window.pendarStoryURL(cleanId) : "/story/"+encodeURIComponent(cleanId)+"/";
-  if (cleanId !== rawId && !window.PENDAR_STORY_PERMALINKS?.slug_to_id?.[rawId]) {
-    history.replaceState(null, "", canonicalPath);
+  // Opening an old direct URL should replace its history entry, not push
+  // another one (which would otherwise trap the Back button in a loop).
+  const directlyOnOldStory=/^\/story\/[^/]+\/?$/.test(location.pathname)&&
+    location.pathname!==canonicalPath&&!location.hash;
+  if(directlyOnOldStory){
+    history.replaceState(null,"",canonicalPath+location.search);
     updateRouteSeo(canonicalPath);
-  } else {
+  }else{
     setHash(canonicalPath);
   }
   show("detail"); setTab("feed");
