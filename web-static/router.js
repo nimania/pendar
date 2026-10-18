@@ -103,6 +103,7 @@ async function route() {
   if (kind === "headlines" || kind === "feed" || kind === "news") return showFeed();
   if (kind === "home") return showHome();
   if (kind === "reports") return showPendarEditorialArchive();
+  if (kind === "writers" && arg) return showPendarEditorialAuthor(arg,true);
   if (kind === "editorial-author" && arg) return showPendarEditorialAuthor(arg);
   if (kind === "story" && arg) return openStory(arg);
   if (kind === "person" && arg) return openEntity(arg);
