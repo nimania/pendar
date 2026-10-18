@@ -78,7 +78,8 @@ function toggleFigureFollow(handle, ev) {
   const key = String(handle).toLowerCase(), s = figureFollows();
   s.has(key) ? s.delete(key) : s.add(key);
   localStorage.setItem(FIG_FOLLOW_KEY, JSON.stringify([...s]));
-  if (document.getElementById("figures-view").style.display === "block" && (location.hash.startsWith("#/figure/")||location.hash.startsWith("#/entity/person"))) openFigure(handle,false);
+  const view=document.getElementById("figures-view");
+  if(view?.style.display==="block"&&view.classList.contains("figure-profile-mode"))openFigure(handle,false);
   else renderFigureTimeline();
 }
 function figureFollowBtn(handle, compact) {
