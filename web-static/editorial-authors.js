@@ -90,18 +90,26 @@ async function showPendarEditorialAuthor(slug){
       }
     }
     const reports=[...unique.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
-    const listings=reports.map(s=>'<a class="editorial-author-item" href="/story/'+esc(s.id)+'/"><strong>'+esc(s.title_fa||s.editorial_report_title_fa||s.headline_fa||"خبر پندار")+'</strong><small>'+esc(String(s.published_at||"").slice(0,10))+' · گزارش پندار</small></a>').join("");
+    const images=new Map((Array.isArray(current)?current:[])
+      .filter(item=>item?.id&&item?.image_url).map(item=>[item.id,item.image_url]));
+    for(const item of reports){
+      if(!item.image_url&&images.has(item.id))item.image_url=images.get(item.id);
+    }
+    const listings=reports.map(s=>pendarMagazineReportCard(s,{showAuthor:false})).join("");
     const avatarStyle=pendarAuthorPortraitCSS(desk.id);
     const avatar='<span class="editorial-author-placeholder" aria-hidden="true"'+(avatarStyle?' style="'+avatarStyle+'"':"")+'>'+(avatarStyle?"":"پ")+'</span>';
-    target.innerHTML='<nav class="editorial-author-back"><a href="/reports/">← آرشیو گزارش‌های پندار</a></nav>'
-      +'<div class="editorial-author-header"><div class="editorial-author-avatar">'+avatar+'</div>'
-      +'<div><p class="editorial-author-eyebrow">'+esc(desk.role_fa||"تحریریه پندار")+' · تحریریهٔ پندار</p>'
+    target.innerHTML=pendarMagazineCollectionFrame(
+      '<nav class="editorial-author-back"><a href="/reports/">← آرشیو گزارش‌های پندار</a></nav>'
+      +'<header class="editorial-author-header"><div class="editorial-author-avatar">'+avatar+'</div>'
+      +'<div><p class="editorial-author-eyebrow">'+esc(desk.role_fa||"تحریریه پندار")+'</p>'
       +'<h1>'+esc(desk.display_name_fa)+'</h1>'
       +'<p>'+esc(desk.bio_fa||"")+'</p>'
-      +'</div></div>'
-      +'<section class="editorial-author-publications"><h2>گزارش‌های تنظیم‌شده</h2>'
-      +(listings||'<p class="muted">گزارش واجد شرایط انتشار برای این دبیر هنوز ثبت نشده است.</p>')
-      +'</section>';
+      +'<p class="editorial-author-total">'+faN(reports.length)+' گزارش در آرشیو</p>'
+      +'</div></header>'
+      +'<section class="editorial-author-publications"><div class="magazine-author-section-heading"><h2>گزارش‌های تنظیم‌شده</h2><a href="/reports/">همهٔ گزارش‌ها ←</a></div>'
+      +'<div class="editorial-author-cards">'+(listings||'<p class="muted">گزارش واجد شرایط انتشار برای این دبیر هنوز ثبت نشده است.</p>')+'</div>'
+      +'</section>'
+    );
     document.title=desk.display_name_fa+" | تحریریه پندار";
   }catch(_){
     target.innerHTML='<div class="state">فهرست دبیران در دسترس نیست؛ لطفاً بعداً دوباره تلاش کنید.</div>';
