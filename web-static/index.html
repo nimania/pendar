@@ -29,6 +29,15 @@
       
     })();
   </script>
+  <style id="heritage-live-visibility">
+    #heritage-live-host[hidden]{display:none!important}
+    html.heritage-live-active body>header.top,
+    html.heritage-live-active body>main.wrap,
+    html.heritage-live-active body>footer.site-footer,
+    html.heritage-live-active body>nav.tabbar{display:none!important}
+    html.heritage-live-active body{margin:0;padding:0;background:#eceeeb}
+    html.heritage-live-active #heritage-live-host{display:block;min-height:100vh}
+  </style>
   <style>
     html.js-enabled #seo-static { display: none; }
     html.route-boot main.wrap { visibility: hidden; }
@@ -175,6 +184,8 @@
   </style>
 </head>
 <body>
+  <!-- New heritage magazine homepage; the original SPA remains for all other routes. -->
+  <div id="heritage-live-host" hidden aria-label="صفحهٔ اول مجله‌ای پندار"></div>
   <header class="top">
     <div class="wrap">
       <a class="brand" href="https://pendar.io" aria-label="پندار">
@@ -551,6 +562,7 @@
   <script defer src="diner.js?v=recipe-lab-source-audit-4"></script>
   <script defer src="future.js?v=20261017"></script>
   <script defer src="app.js?v=20261018-library-1"></script>
+  <script defer src="heritage-live.js?v=20261018-home-launch-1"></script>
 </body>
 </html>
 
