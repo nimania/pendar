@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "status": "names_approved_portraits_pending",
+  "status": "names_and_portraits_approved",
   "fallback": {
     "id": "desk",
     "display_name_fa": "تحریریه پندار",
@@ -41,12 +41,13 @@
       ],
       "display_name_fa": "آرمان شایگان",
       "name_status": "approved",
-      "portrait_url": null,
+      "portrait_url": "/assets/editorial/pendar-authors-sprite.avif",
       "is_ai": true,
       "order": 1,
       "birth_year_shamsi": 1357,
       "gender_fa": "مرد",
-      "portrait_status": "awaiting_user_portrait"
+      "portrait_status": "installed",
+      "portrait_index": 0
     },
     {
       "id": "politics",
@@ -75,12 +76,13 @@
       ],
       "display_name_fa": "بهار دادفر",
       "name_status": "approved",
-      "portrait_url": null,
+      "portrait_url": "/assets/editorial/pendar-authors-sprite.avif",
       "is_ai": true,
       "order": 2,
       "birth_year_shamsi": 1363,
       "gender_fa": "زن",
-      "portrait_status": "awaiting_user_portrait"
+      "portrait_status": "installed",
+      "portrait_index": 1
     },
     {
       "id": "economy",
@@ -113,12 +115,13 @@
       ],
       "display_name_fa": "سامان فرهمند",
       "name_status": "approved",
-      "portrait_url": null,
+      "portrait_url": "/assets/editorial/pendar-authors-sprite.avif",
       "is_ai": true,
       "order": 3,
       "birth_year_shamsi": 1359,
       "gender_fa": "مرد",
-      "portrait_status": "awaiting_user_portrait"
+      "portrait_status": "installed",
+      "portrait_index": 2
     },
     {
       "id": "society",
@@ -148,12 +151,13 @@
       ],
       "display_name_fa": "ترانه نیک‌روش",
       "name_status": "approved",
-      "portrait_url": null,
+      "portrait_url": "/assets/editorial/pendar-authors-sprite.avif",
       "is_ai": true,
       "order": 4,
       "birth_year_shamsi": 1368,
       "gender_fa": "زن",
-      "portrait_status": "awaiting_user_portrait"
+      "portrait_status": "installed",
+      "portrait_index": 3
     },
     {
       "id": "environment",
@@ -187,12 +191,13 @@
       ],
       "display_name_fa": "مهتاب سروستانی",
       "name_status": "approved",
-      "portrait_url": null,
+      "portrait_url": "/assets/editorial/pendar-authors-sprite.avif",
       "is_ai": true,
       "order": 5,
       "birth_year_shamsi": 1361,
       "gender_fa": "زن",
-      "portrait_status": "awaiting_user_portrait"
+      "portrait_status": "installed",
+      "portrait_index": 4
     },
     {
       "id": "culture",
@@ -224,12 +229,13 @@
       ],
       "display_name_fa": "مانا رادفر",
       "name_status": "approved",
-      "portrait_url": null,
+      "portrait_url": "/assets/editorial/pendar-authors-sprite.avif",
       "is_ai": true,
       "order": 6,
       "birth_year_shamsi": 1373,
       "gender_fa": "زن",
-      "portrait_status": "awaiting_user_portrait"
+      "portrait_status": "installed",
+      "portrait_index": 5
     },
     {
       "id": "technology",
@@ -261,12 +267,14 @@
       ],
       "display_name_fa": "پارسا مهرآیین",
       "name_status": "approved",
-      "portrait_url": null,
+      "portrait_url": "/assets/editorial/pendar-authors-sprite.avif",
       "is_ai": true,
       "order": 7,
       "birth_year_shamsi": 1379,
       "gender_fa": "مرد",
-      "portrait_status": "awaiting_user_portrait"
+      "portrait_status": "installed",
+      "portrait_index": 6
     }
-  ]
+  ],
+  "portrait_sprite_layout": "seven_horizontal_112x112"
 }
