@@ -3,7 +3,7 @@ let _pendarAuthorPromise=null;
 async function loadPendarEditorialAuthors(){
   if(window.PENDAR_EDITORIAL_AUTHORS)return window.PENDAR_EDITORIAL_AUTHORS;
   if(!_pendarAuthorPromise){
-    _pendarAuthorPromise=getJSON(DATA+"/pendar-editorial-authors.json").then(data=>{
+    _pendarAuthorPromise=getJSON(DATA+"/pendar-editorial-authors.json?v=20261018-sprite-1").then(data=>{
       if(!Array.isArray(data.authors)||data.authors.length!==7)throw Error("Editorial roster invalid");
       window.PENDAR_EDITORIAL_AUTHORS=data;
       return data;
