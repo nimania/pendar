@@ -122,8 +122,16 @@
     }));
   }
   async function inspectPhotos(items){
-    await Promise.all(items.filter(function(row){return photo(row);})
-      .map(function(row){return checkImage(photo(row));}));
+    await Promise.all(items.map(async function(row){
+      // Prefer the article image; try its matching news-feed image if the
+      // archived report retained a stale URL. Never borrow another topic's photo.
+      var choices=[photo(row)].concat(Array.isArray(row.photo_candidates)?row.photo_candidates:[])
+        .map(validImage).filter(function(url,i,array){return url&&array.indexOf(url)===i;});
+      if(!choices.length)return;
+      var results=await Promise.all(choices.map(checkImage));
+      var good=results.indexOf(true);
+      if(good>=0)row.image_url=choices[good];
+    }));
   }
   function uniquePictured(items,max){
     return limitUnique(items.filter(function(row){return verifiedImage(photo(row));}),max);
@@ -259,7 +267,14 @@
       var archived=Array.isArray(result[1].reports)?result[1].reports.filter(function(r){return r&&r.status==="ai_draft";}):[];
       var backup=data.stories.filter(function(r){return r.has_editorial_report;}).map(function(r){return Object.assign({},r,{title_fa:r.editorial_report_title_fa||r.headline_fa});});
       var byId=new Map(data.stories.filter(function(r){return r&&r.id;}).map(function(r){return [String(r.id),r];}));
-      data.reports=limitUnique(archived.concat(backup).map(function(r){var story=byId.get(String(r.id))||{};return Object.assign({},story,r,{image_url:r.image_url||story.image_url||"",lead_fa:r.lead_fa||story.summary_fa||""});}),75);
+      data.reports=limitUnique(archived.concat(backup).map(function(r){
+        var story=byId.get(String(r.id))||{};
+        return Object.assign({},story,r,{
+          image_url:r.image_url||story.image_url||"",
+          photo_candidates:[r.image_url,story.image_url].filter(Boolean),
+          lead_fa:r.lead_fa||story.summary_fa||""
+        });
+      }),75);
       // Older archive entries sometimes lack an image or lead. Resolve a
       // bounded number from existing story details before building the cover.
       if(!storyMode){
