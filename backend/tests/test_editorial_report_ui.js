@@ -9,6 +9,14 @@ const pilot=fs.readFileSync(path.join(root,"web-static/story-editorial-pilots.js
 const detail=fs.readFileSync(path.join(root,"web-static/story-detail.js"),"utf8");
 const home=fs.readFileSync(path.join(root,"web-static/home.js"),"utf8");
 assert(index.includes('story-editorial.css?v='));
+assert(index.includes('id="story-editorial-critical"'),"inline report style fallback must be in the SPA shell");
+const critical=index.match(/<style id="story-editorial-critical">([\s\S]*?)<\/style>/);
+assert(critical,"critical report style block must be present");
+for(const selector of ["#detail-view .story-editorial{","#detail-view .story-report-cites{","#detail-view .story-history{"]){
+  assert(critical[1].includes(selector),"missing critical CSS "+selector);
+}
+assert(index.indexOf('story-editorial-critical')<index.indexOf('</head>'));
+
 assert(index.indexOf('story-editorial-pilots.js')>=0);
 assert(index.indexOf('story-editorial-pilots.js')<index.indexOf('story-detail.js'));
 assert(detail.includes('${pendarEditorialReport(s)}'));
