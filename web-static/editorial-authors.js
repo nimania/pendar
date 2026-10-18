@@ -35,6 +35,13 @@ function pendarEditorialAuthorId(story){
   if(scored.length>1&&scored[0].total===scored[1].total&&scored[0].terms===scored[1].terms)return "desk";
   return scored[0].id;
 }
+/* One optimized image file holds the seven user-approved portrait crops. */
+function pendarAuthorPortraitCSS(id){
+  const a=window.PENDAR_EDITORIAL_AUTHORS?.authors?.find(person=>person.id===id);
+  if(!a||a.portrait_status!=="installed"||!Number.isInteger(a.portrait_index)||a.portrait_index<0||a.portrait_index>6)return "";
+  const position=(a.portrait_index*100/6).toFixed(4);
+  return "background-image:url('/assets/editorial/pendar-authors-sprite.avif');background-size:700% 100%;background-position:"+position+"% center;background-repeat:no-repeat;";
+}
 function pendarAuthorName(id){
   const catalog=window.PENDAR_EDITORIAL_AUTHORS;
   const a=catalog?.authors?.find(x=>x.id===id);
@@ -44,7 +51,9 @@ function pendarAuthorByline(story,report){
   const id=report?.author_id||story?.editorial_author_id||(report?.status==="pilot_draft"?"diplomacy":pendarEditorialAuthorId(story));
   const name=pendarAuthorName(id);
   const href="/editorial-author/"+encodeURIComponent(id)+"/";
-  return '<div class="story-author-byline"><span class="story-author-monogram" aria-hidden="true">پ</span>'
+  const avatarStyle=pendarAuthorPortraitCSS(id);
+  const avatar='<span class="story-author-monogram" aria-hidden="true"'+(avatarStyle?' style="'+avatarStyle+'"':"")+'>'+(avatarStyle?"":"پ")+'</span>';
+  return '<div class="story-author-byline">'+avatar
     +'<span class="story-author-credit"><a href="'+esc(href)+'">'+esc(name)+'</a>'
     +'<small>گزارش پندار · تحریریهٔ پندار</small></span></div>';
 }
@@ -82,7 +91,8 @@ async function showPendarEditorialAuthor(slug){
     }
     const reports=[...unique.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
     const listings=reports.map(s=>'<a class="editorial-author-item" href="/story/'+esc(s.id)+'/"><strong>'+esc(s.title_fa||s.editorial_report_title_fa||s.headline_fa||"خبر پندار")+'</strong><small>'+esc(String(s.published_at||"").slice(0,10))+' · گزارش پندار</small></a>').join("");
-    const avatar=desk.portrait_url?'<img src="'+esc(desk.portrait_url)+'" alt="" loading="lazy">':'<span class="editorial-author-placeholder" aria-hidden="true">پ</span>';
+    const avatarStyle=pendarAuthorPortraitCSS(desk.id);
+    const avatar='<span class="editorial-author-placeholder" aria-hidden="true"'+(avatarStyle?' style="'+avatarStyle+'"':"")+'>'+(avatarStyle?"":"پ")+'</span>';
     target.innerHTML='<nav class="editorial-author-back"><a href="/reports/">← آرشیو گزارش‌های پندار</a></nav>'
       +'<div class="editorial-author-header"><div class="editorial-author-avatar">'+avatar+'</div>'
       +'<div><p class="editorial-author-eyebrow">'+esc(desk.role_fa||"تحریریه پندار")+' · تحریریهٔ پندار</p>'
