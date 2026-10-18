@@ -65,11 +65,11 @@ class StoryShellRefreshTest(unittest.TestCase):
         self.assertIn('id="detail-view"', compacted)
         self.assertIn('story-detail.js?v=', compacted)
         self.assertIn('heritage-article.css?v=', compacted)
-        self.assertIn('id="story-editorial-critical"', compacted)
-        critical = compacted.split('<style id="story-editorial-critical">',1)[1].split('</style>',1)[0]
-        self.assertIn('#detail-view .story-editorial', critical)
-        self.assertNotIn('/*', critical)
-        self.assertNotIn('  ', critical)
+        self.assertNotIn('id="story-editorial-critical"', compacted)
+        shared = (Path(__file__).resolve().parents[2] / "web-static" / "heritage-article.css").read_text(encoding="utf-8")
+        self.assertIn("/* story-editorial-critical */", shared)
+        self.assertIn("#detail-view .story-editorial", shared)
+        self.assertIn("#detail-view", shared)
 
     def test_refresh_preserves_explicit_article_html_between_tags(self):
         story = OLD_SEO_STORY.replace(
