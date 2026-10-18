@@ -38,6 +38,11 @@
   // External publishers may return blocked, expired or tiny image URLs.
   // Check whether an image actually loads before promoting it to a visual slot.
   var imageChecks=new Map();
+  var imageDimensions=new Map();
+  function imageWideEnough(row,minWidth,minHeight){
+    var url=photo(row),size=imageDimensions.get(url);
+    return verifiedImage(url)&&!!size&&size.width>=minWidth&&size.height>=minHeight;
+  }
   function verifiedImage(url){
     return imageChecks.get(url)===true;
   }
@@ -54,6 +59,7 @@
         if(finished)return;finished=true;
         clearTimeout(timer);
         img.onload=img.onerror=null;
+        if(ok)imageDimensions.set(url,{width:img.naturalWidth,height:img.naturalHeight});
         imageChecks.set(url,Boolean(ok));
         resolve(Boolean(ok));
       };
@@ -125,12 +131,19 @@
     await Promise.all(items.map(async function(row){
       // Prefer the article image; try its matching news-feed image if the
       // archived report retained a stale URL. Never borrow another topic's photo.
-      var choices=[photo(row)].concat(Array.isArray(row.photo_candidates)?row.photo_candidates:[])
+      var choices=[photo(row),row.image_url_large,row.image_url_original,row.image_url_hd]
+        .concat(Array.isArray(row.photo_candidates)?row.photo_candidates:[])
         .map(validImage).filter(function(url,i,array){return url&&array.indexOf(url)===i;});
       if(!choices.length)return;
       var results=await Promise.all(choices.map(checkImage));
-      var good=results.indexOf(true);
-      if(good>=0)row.image_url=choices[good];
+      var good=choices.filter(function(url,i){return results[i]&&imageDimensions.has(url);});
+      // Choose the largest real photo belonging to this SAME story.
+      // Avoid first-match low-resolution thumbnails on large editorial cards.
+      good.sort(function(a,b){
+        var x=imageDimensions.get(a),y=imageDimensions.get(b);
+        return (y.width*y.height)-(x.width*x.height);
+      });
+      if(good.length)row.image_url=good[0];
     }));
   }
   function uniquePictured(items,max){
@@ -161,45 +174,90 @@
     // The backend remains unchanged, and imageless reports still exist in the
     // searchable archive and on their original URL.
     function draw(){
-      var news=uniquePictured(stories,65);
-      var editorial=uniquePictured(reports,65);
-      var all=limitUnique(news.concat(editorial),120);
-      var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
-      var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
-      put("ticker",news.slice(0,5).map(function(r){
+      // A single editorial assignment pass owns the whole homepage. The same
+      // article (and near-identical headlines for one event) cannot silently
+      // reappear under five separate headings.
+      var news=uniquePictured(stories,75).sort(function(a,b){
+        return String(b.published_at||"").localeCompare(String(a.published_at||""));
+      });
+      var editorial=uniquePictured(reports,75);
+      var pool=limitUnique(news.concat(editorial),140);
+      var usedIds=new Set(),usedHeadlines=[];
+      var stopWords=new Set(["برای","درباره","ایران","است","شد","های","این","که","با","در","از","به","و","یک","بر","آن","چه","می","را","پس","تازه"]);
+      function keywords(text){
+        return norm(text).toLocaleLowerCase("fa").replace(/[^\p{L}\p{N}\s]/gu," ")
+          .split(/\s+/).filter(function(w){return w.length>2&&!stopWords.has(w);});
+      }
+      function acceptable(r){
+        if(usedIds.has(r.id)||!verifiedImage(photo(r)))return false;
+        var words=new Set(keywords(headline(r)));
+        if(words.size<3)return true;
+        return !usedHeadlines.some(function(old){
+          var overlap=0;words.forEach(function(word){if(old.has(word))overlap++;});
+          return overlap>=3&&overlap/Math.min(words.size,old.size)>=.83;
+        });
+      }
+      function assign(list,max,minW,minH){
+        var result=[];
+        for(var r of list){
+          if(result.length>=max)break;
+          if(!acceptable(r)||!imageWideEnough(r,minW,minH))continue;
+          usedIds.add(r.id);usedHeadlines.push(new Set(keywords(headline(r))));
+          result.push(r);
+        }
+        return result;
+      }
+      var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانشگاه|دانشجوی|مدرسه|آموزش|محیط زیست|طبیعت|سلامت|ورزش/;
+      var culturePool=pool.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
+      var galleryWords=/گالری|گزارش تصویر|گزارش تصویری|عکس‌ها|عکس های|تصاویر|عکاسی|از دریچه|قاب تصویر|فتوگراف/;
+      var visualPool=pool.slice().sort(function(a,b){
+        var x=Number(galleryWords.test(headline(a))),y=Number(galleryWords.test(headline(b)));
+        if(x!==y)return y-x;
+        var u=imageDimensions.get(photo(a))||{width:0,height:0};
+        var v=imageDimensions.get(photo(b))||{width:0,height:0};
+        return v.width*v.height-u.width*u.height;
+      });
+      var cover=assign(editorial,1,760,410)[0]||
+        assign(editorial,1,640,350)[0]||
+        assign(news,1,760,410)[0];
+      var ticker=assign(news,4,150,100);
+      var extra=assign(editorial.concat(news),2,440,260);
+      var culture=assign(culturePool,5,380,220);
+      var gallery=assign(visualPool,4,700,380);
+      var reportRail=assign(editorial,5,160,95);
+      var newsRail=assign(news,6,160,95);
+
+      put("ticker",ticker.map(function(r){
         var title=headline(r);
         return '<a class="ticker-story" href="'+esc(finalStoryUrl(r.id))+'" title="'+esc(title)+'" aria-label="'+esc(title)+'">'
           +'<span class="ticker-thumb">'+thumb(r,"")+'</span>'
           +'<span class="ticker-headline">'+esc(shortTickerTitle(title))+'</span></a>';
-      }).join("")||'<span class="loading">خبر تصویردار تازه‌ای در دسترس نیست.</span>');
-      put("rail-news",news.slice(0,7).map(railRow).join("")||
-        '<p class="empty-state">خبر تصویردار تازه‌ای برای نمایش پیدا نشد.</p>');
-      var cover=editorial[0]||news[0];
+      }).join("")||'<span class="loading">خبر تازهٔ دارای تصویر معتبر در دسترس نیست.</span>');
+      put("rail-news",newsRail.map(railRow).join("")||
+        '<p class="empty-state">سرخط تصویردار بیشتری در دسترس نیست.</p>');
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
       if(featureSection)featureSection.hidden=!cover;
       if(cover){
-        var report=editorial.some(function(r){return r.id===cover.id;});
+        var isReport=editorial.some(function(r){return r.id===cover.id;});
         heroBox.href=slugUrl(cover);
         heroBox.setAttribute("aria-label",headline(cover));
         heroBox.innerHTML='<span class="feature-picture">'+thumb(cover,"")+'</span>'
-          +'<span class="feature-caption"><span class="category-flag orange">'+(report?"گزارش ویژه":"خبر ویژه")+'</span>'
+          +'<span class="feature-caption"><span class="category-flag orange">'+(isReport?"گزارش ویژه":"خبر ویژه")+'</span>'
           +'<strong>'+esc(headline(cover))+'</strong><span>'+esc(hook(cover))+'</span></span>';
       }
-      var more=limitUnique(editorial.concat(news).filter(function(r){return !cover||r.id!==cover.id;}),70);
-      put("under-hero",more.slice(0,2).map(function(r){
+      put("under-hero",extra.map(function(r){
         return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
           +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
       }).join(""));
-      put("rail-reports",editorial.filter(function(r){return !cover||r.id!==cover.id;}).slice(0,7).map(railRow).join("")||
-        '<p class="empty-state">گزارش تصویردار دیگری در دسترس نیست.</p>');
+      put("rail-reports",reportRail.map(railRow).join("")||
+        '<p class="empty-state">گزارش تصویردار بیشتری در دسترس نیست.</p>');
       var cultureSection=el("culture");
       if(cultureSection)cultureSection.hidden=!culture.length;
-      put("culture-grid",culture.slice(0,6).map(function(r){
+      put("culture-grid",culture.map(function(r){
         return '<a class="story-card" href="'+esc(slugUrl(r))+'"><span class="image-frame">'+thumb(r,"")
           +'</span><span class="story-info"><b>'+esc(headline(r))+'</b><p>'+esc(hook(r))+'</p></span></a>';
       }).join(""));
-      var gallery=all.slice(0,6);
       var gallerySection=el("gallery");
       if(gallerySection)gallerySection.hidden=!gallery.length;
       put("visual-grid",gallery.map(function(r){
