@@ -28,7 +28,7 @@ STOP = set("""
 WORD_RE = re.compile(r"[\u0600-\u06ffA-Za-z0-9]{3,}")
 URL_RE = re.compile(r"^https?://[^\s]+$", re.I)
 UUID_RE = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", re.I)
-VERSION = "report-v2-precise-history-20261017"
+VERSION = "report-v3-short-editorial-headlines-20261018"
 
 
 def normalize(text: str) -> str:
@@ -149,6 +149,7 @@ SYSTEM = """تو سردبیر گزارش خبری «پندار» هستی. یک 
 ۸) هر بند (شامل لید که به منابع جاری متکی است) مستند باشد و هر بند citation_ids معتبر داشته باشد.
 ۹) ۳ تا ۶ بند، مجموعاً ۳۰۰ تا ۶۵۰ کلمه، بدون تیتر میان‌بندی، بدون فهرست گلوله‌ای.
 ۱۰) در نبود اطلاعات کافی دربارهٔ پیشینه، آن را به زور در گزارش جا نده.
+۱۱) تیتر گزارش مستقل پندار کوتاه و مشخص باشد: ترجیحاً تا ۵ کلمه و فقط در صورت ضرورت حداکثر ۷ کلمه؛ هیچ نام، ادعا، یا انتساب مهم را برای کوتاه‌کردن حذف نکن. جزئیات را در لید بنویس.
 """
 
 
@@ -176,12 +177,17 @@ def report_input(detail: dict, context: dict, sources: list[dict]) -> dict:
     }
 
 
+def editorial_headline_word_count(title: str) -> int:
+    """Whitespace-delimited Persian headline words; attached punctuation is not a word."""
+    return len(re.findall(r"[^\\s]+", str(title or "").strip()))
+
+
 def valid_report(value:dict,sources:list[dict],context:dict)->dict|None:
     if not isinstance(value,dict):return None
     title = str(value.get("title_fa") or "").strip()
     lead = str(value.get("lead_fa") or "").strip()
     blocks = value.get("paragraphs")
-    if not (12<=len(title)<=220 and 80<=len(lead)<=850 and isinstance(blocks,list) and 3<=len(blocks)<=6):
+    if not (2<=editorial_headline_word_count(title)<=7 and len(title)<=140 and 80<=len(lead)<=850 and isinstance(blocks,list) and 3<=len(blocks)<=6):
         return None
     valid_ids = {x["id"]:x["url"] for x in sources}
     valid_ids.update({f"h{i+1}":"/story/"+r["id"]+"/"
