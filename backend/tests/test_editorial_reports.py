@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from scripts.build_editorial_reports import (
-    related_news, source_refs, valid_report, build, editorial_headline_word_count, choose_editorial_author,
+    related_news, source_refs, valid_report, build, editorial_headline_word_count, choose_editorial_author, source_backed_statements, is_service_weather_story,
 )
 
 NOW="2026-10-17T12:00:00+00:00"
@@ -68,7 +68,7 @@ class EditorialReportTests(unittest.TestCase):
         refs=[{"id":"s1","url":"https://news.example/real"}]
         context={"background":[]}
         paras=[{"text_fa":"این یک متن نمونهٔ نسبتا بلند برای بازنویسی مستند در چهارچوب قوانین نگارش است. "*5,
-                "citation_ids":["s1"]} for _ in range(3)]
+                "citation_ids":["s1"]} for _ in range(4)]
         good={"title_fa":"سپاه: برخورد نفتکش با مین در هرمز",
               "lead_fa":"نیروی دریایی سپاه خبر وقوع رویدادی در تنگه هرمز را اعلام کرده و جزئیات آن مستقل بررسی نشده است.",
               "paragraphs":paras}
@@ -81,7 +81,7 @@ class EditorialReportTests(unittest.TestCase):
         self.assertEqual(editorial_headline_word_count("هشدار درباره سیلاب در شمال"),5)
         refs=[{"id":"s1","url":"https://news.example/real"}]
         paras=[{"text_fa":"این متن گزارش مستند بر پایه منابع گردآوری شده و باید با ذکر استناد منتشر شود. "*5,
-                "citation_ids":["s1"]} for _ in range(3)]
+                "citation_ids":["s1"]} for _ in range(4)]
         valid={"title_fa":"هشدار درباره سیلاب در شمال",
                "lead_fa":"مقام‌های مربوط با انتشار گزارشی درباره وقوع بارش‌های شدید و احتمال سیلاب در شمال کشور هشدار داده‌اند.",
                "paragraphs":paras}
@@ -89,6 +89,34 @@ class EditorialReportTests(unittest.TestCase):
         invalid=dict(valid,title_fa="هشدار جدید درباره وقوع احتمالی سیلاب در چند استان شمالی کشور")
         self.assertGreater(editorial_headline_word_count(invalid["title_fa"]),7)
         self.assertIsNone(valid_report(invalid,refs,{"background":[]}))
+
+    def test_approved_quotes_and_weather_tone(self):
+        refs=[{"id":"s1","url":"https://news.example/source"}]
+        detail={"headline_fa":"هشدار هواشناسی درباره سیلاب",
+                "person_statements":[
+                    {"person_name_fa":"سمیرا رضایی","statement_fa":"احتمال بارندگی در استان‌های شمالی افزایش می‌یابد.","article_url":"https://news.example/source","direct_quote":False},
+                    {"person_name_fa":"نامرتبط","statement_fa":"گفته‌ای که هیچ استناد مجازی ندارد و باید حذف شود.","article_url":"https://unrelated.example/story","direct_quote":True},
+                ]}
+        self.assertTrue(is_service_weather_story(detail))
+        statements=source_backed_statements(detail,refs)
+        self.assertEqual(len(statements),1)
+        self.assertEqual(statements[0]["source_id"],"s1")
+        self.assertFalse(statements[0]["direct_quote"])
+        self.assertFalse(is_service_weather_story({"headline_fa":"مذاکرات وزیر خارجه با سفیر"}))
+
+    def test_lead_citation_requires_a_real_source(self):
+        refs=[{"id":"s1","url":"https://news.example/source"}]
+        paragraphs=[{"text_fa":"خبر با استناد به منابع اصلی و داده‌های دقیق و قابل پیگیری تدوین شده و باید پیشینه آن به شیوه‌ای طبیعی و بدون ادعای بی‌پشتوانه توضیح داده شود. "*5,
+                      "citation_ids":["s1"]} for _ in range(4)]
+        draft={"title_fa":"هشدار بارندگی در چند استان",
+               "lead_fa":"هواشناسی نسبت به بارندگی شدید در بعضی مناطق هشدار داد و مردم می‌توانند اطلاعیه‌های محلی را دنبال کنند.",
+               "lead_citation_ids":["s1"],"paragraphs":paragraphs}
+        checked=valid_report(draft,refs,{"background":[]})
+        self.assertIsNotNone(checked)
+        self.assertEqual(checked["lead_citations"][0]["url"],refs[0]["url"])
+        self.assertNotIn("notice_fa",checked)
+        bad=dict(draft,lead_citation_ids=["s998"])
+        self.assertIsNone(valid_report(bad,refs,{"background":[]}))
 
     def test_archive_enriched_without_ai(self):
         class Mock:
