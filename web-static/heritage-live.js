@@ -52,7 +52,44 @@
       var demoArticle=shell.querySelector("#article-page");
       if(demoArticle)demoArticle.remove();
       var searchLink=shell.querySelector(".nav-search");
-      if(searchLink)searchLink.href="/headlines/";
+      if(searchLink){
+        searchLink.href="/headlines/";
+        searchLink.setAttribute("aria-label","جست‌وجوی خبرها در پندار");
+        var searchBox=document.createElement("div");
+        searchBox.className="heritage-search-box";
+        searchBox.hidden=true;
+        searchBox.innerHTML='<label for="heritage-search-query">جست‌وجوی خبرها</label><input id="heritage-search-query" type="search" autocomplete="off" placeholder="عنوان یا موضوع خبر…"><div id="heritage-search-results" role="status"></div>';
+        navigation.appendChild(searchBox);
+        var searchData=null;
+        searchLink.addEventListener("click",async function(event){
+          event.preventDefault();
+          searchBox.hidden=!searchBox.hidden;
+          if(searchBox.hidden)return;
+          var input=searchBox.querySelector("input");
+          input.focus();
+          if(!searchData){
+            try{var response=await fetch("/data/stories.json",{credentials:"same-origin"});searchData=response.ok?await response.json():[];}
+            catch(_){searchData=[];}
+          }
+        });
+        searchBox.querySelector("input").addEventListener("input",function(event){
+          var query=event.target.value.trim().toLocaleLowerCase("fa-IR");
+          var results=searchBox.querySelector("#heritage-search-results");
+          if(query.length<2){results.textContent="حداقل دو حرف وارد کنید.";return;}
+          var matches=(Array.isArray(searchData)?searchData:[]).filter(function(row){
+            return String(row.headline_fa||"").toLocaleLowerCase("fa-IR").includes(query);
+          }).slice(0,8);
+          results.replaceChildren();
+          if(!matches.length){results.textContent="خبری با این عبارت در سرخط‌های اخیر پیدا نشد.";return;}
+          matches.forEach(function(row){
+            if(!/^[0-9a-f-]{36}$/i.test(String(row.id||"")))return;
+            var a=document.createElement("a");
+            a.href="/story/"+encodeURIComponent(row.id)+"/";
+            a.textContent=String(row.headline_fa||"");
+            results.appendChild(a);
+          });
+        });
+      }
       // In-page section anchors stay local. Do not activate SPA hash routing.
       shell.addEventListener("click",function(event){
         var node=event.target;
