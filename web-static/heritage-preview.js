@@ -188,7 +188,7 @@
       }).join("")||'<span class="loading">خبر تصویردار تازه‌ای در دسترس نیست.</span>');
       put("rail-news",railNewsRows.map(railRow).join("")||
         '<p class="empty-state">خبر تصویردار تازه‌ای برای نمایش پیدا نشد.</p>');
-      var cover=varied(editorial,1)[0]||varied(news,1)[0];
+      var cover=varied(editorial.filter(function(r){return (r._imageWidth||0)>=900;}),1)[0]||varied(news.filter(function(r){return (r._imageWidth||0)>=900;}),1)[0];
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
       if(featureSection)featureSection.hidden=!cover;
@@ -213,7 +213,7 @@
         return '<a class="story-card" href="'+esc(slugUrl(r))+'"><span class="image-frame">'+thumb(r,"")
           +'</span><span class="story-info"><b>'+esc(headline(r))+'</b><p>'+esc(hook(r))+'</p></span></a>';
       }).join(""));
-      var gallery=varied(all.filter(function(r){return imageChecks.get(photo(r))===true&&r._imageWidth>=700;}),6);
+      var gallery=varied(all.filter(function(r){return verifiedImage(photo(r))&&(r._imageWidth||0)>=700;}),6);
       var gallerySection=el("gallery");
       if(gallerySection)gallerySection.hidden=!gallery.length;
       put("visual-grid",gallery.map(function(r){
