@@ -11,6 +11,8 @@ on:
       - "web-static/**"
       - ".github/workflows/fast-deploy.yml"
       - "backend/tests/test_editorial_report_ui.js"
+      - "backend/scripts/build_writer_pages.py"
+      - "backend/tests/test_writer_pages.py"
       - "backend/tests/test_story_shell_refresh.py"
       - "backend/scripts/refresh_story_shells.py"
       - "backend/scripts/refresh_figure_shells.py"
@@ -421,6 +423,10 @@ jobs:
         run: |
           python -m unittest discover -s backend/tests -p test_figure_shell_refresh.py -v
           python backend/scripts/refresh_figure_shells.py --site site
+      - name: Publish memorable writer profile links without changing legacy URLs
+        run: |
+          python -m unittest discover -s backend/tests -p test_writer_pages.py -v
+          python backend/scripts/build_writer_pages.py --site site
       - name: Restore cached book shelf entry only (no collectors)
         run: |
           python - <<'PY'
