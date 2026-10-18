@@ -59,22 +59,29 @@ async function showPendarEditorialAuthor(slug){
       target.innerHTML='<div class="state">این پروفایل در تحریریه پندار وجود ندارد.</div>';
       return;
     }
-    const [current,sourceIndex]=await Promise.all([
+    const [index,current,sourceIndex]=await Promise.all([
+      getJSON(DATA+"/editorial-archive.json").catch(()=>null),
       getJSON(DATA+"/stories.json").catch(()=>[]),
       getJSON(DATA+"/press-source-stories.json").catch(()=>({}))
     ]);
     const unique=new Map();
-    for(const card of Array.isArray(current)?current:[]){
-      if(card?.has_editorial_report && pendarEditorialAuthorId(card)===slug)unique.set(card.id,card);
-    }
-    for(const group of Object.values(sourceIndex||{})){
-      if(!Array.isArray(group))continue;
-      for(const row of group){
-        if(row?.has_editorial_report && pendarEditorialAuthorId(row)===slug && !unique.has(row.id))unique.set(row.id,row);
+    if(Array.isArray(index?.reports)){
+      for(const row of index.reports){
+        if(row?.status==="ai_draft" && row.author_id===slug)unique.set(row.id,row);
+      }
+    }else{
+      for(const card of Array.isArray(current)?current:[]){
+        if(card?.has_editorial_report && pendarEditorialAuthorId(card)===slug)unique.set(card.id,card);
+      }
+      for(const group of Object.values(sourceIndex||{})){
+        if(!Array.isArray(group))continue;
+        for(const row of group){
+          if(row?.has_editorial_report && pendarEditorialAuthorId(row)===slug && !unique.has(row.id))unique.set(row.id,row);
+        }
       }
     }
     const reports=[...unique.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
-    const listings=reports.map(s=>'<a class="editorial-author-item" href="/story/'+esc(s.id)+'/"><strong>'+esc(s.editorial_report_title_fa||s.headline_fa||"خبر پندار")+'</strong><small>'+esc(String(s.published_at||"").slice(0,10))+' · گزارش پندار</small></a>').join("");
+    const listings=reports.map(s=>'<a class="editorial-author-item" href="/story/'+esc(s.id)+'/"><strong>'+esc(s.title_fa||s.editorial_report_title_fa||s.headline_fa||"خبر پندار")+'</strong><small>'+esc(String(s.published_at||"").slice(0,10))+' · گزارش پندار</small></a>').join("");
     const avatar=desk.portrait_url?'<img src="'+esc(desk.portrait_url)+'" alt="" loading="lazy">':'<span class="editorial-author-placeholder" aria-hidden="true">پ</span>';
     target.innerHTML='<nav class="editorial-author-back"><a href="/reports/">← آرشیو گزارش‌های پندار</a></nav>'
       +'<div class="editorial-author-header"><div class="editorial-author-avatar">'+avatar+'</div>'
