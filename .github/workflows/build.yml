@@ -428,6 +428,39 @@ jobs:
       - name: Apply temporary news-and-figures publication profile
         run: python backend/scripts/prepare_priority_site.py backend/public
 
+      - name: Keep readable article URLs stable through a full rebuild
+        run: |
+          python -m unittest discover -s backend/tests -p test_story_permalink_publishing.py -v
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+          from urllib.request import urlopen
+          destination=Path("backend/public/data/story-permalinks.json")
+          candidates=["https://pendar.io/data/story-permalinks.json"]
+          old=Path("/tmp/previous-site/data/story-permalinks.json")
+          if old.is_file():
+              candidates.append(old)
+          for source in candidates:
+              try:
+                  data=(json.loads(urlopen(source,timeout=10).read().decode("utf-8"))
+                        if isinstance(source,str)
+                        else json.loads(source.read_text(encoding="utf-8")))
+                  table=data.get("id_to_slug",{})
+                  if not isinstance(table,dict) or len(table)>100:
+                      continue
+                  if any(not re.fullmatch(r"[a-f0-9-]{36}",str(sid),re.I) or
+                         not re.fullmatch(r"[a-z0-9][a-z0-9-]{2,76}",str(slug))
+                         for sid,slug in table.items()):
+                      continue
+                  destination.write_text(json.dumps(data,ensure_ascii=False),encoding="utf-8")
+                  print("Restored",len(table),"permanent readable article URLs")
+                  break
+              except (OSError,ValueError,TimeoutError) as exc:
+                  print("Article permalink map unavailable:",exc)
+          PY
+          python backend/scripts/publish_story_permalinks.py --site backend/public --limit 60
+
       - name: Validate final lightweight site after trimming
         run: python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
 
