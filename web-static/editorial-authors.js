@@ -76,7 +76,7 @@ async function showPendarEditorialAuthor(slug){
     const reports=[...unique.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
     const listings=reports.map(s=>'<a class="editorial-author-item" href="/story/'+esc(s.id)+'/"><strong>'+esc(s.editorial_report_title_fa||s.headline_fa||"خبر پندار")+'</strong><small>'+esc(String(s.published_at||"").slice(0,10))+' · گزارش پندار</small></a>').join("");
     const avatar=desk.portrait_url?'<img src="'+esc(desk.portrait_url)+'" alt="" loading="lazy">':'<span class="editorial-author-placeholder" aria-hidden="true">پ</span>';
-    target.innerHTML='<nav class="editorial-author-back"><a href="/headlines/">← بازگشت به سرخط</a></nav>'
+    target.innerHTML='<nav class="editorial-author-back"><a href="/reports/">← آرشیو گزارش‌های پندار</a></nav>'
       +'<div class="editorial-author-header"><div class="editorial-author-avatar">'+avatar+'</div>'
       +'<div><p class="editorial-author-eyebrow">'+esc(desk.role_fa||"تحریریه پندار")+' · تحریریهٔ پندار</p>'
       +'<h1>'+esc(desk.display_name_fa)+'</h1>'
