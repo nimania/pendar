@@ -40,11 +40,12 @@ SHARED_HOME_STYLE_IDS = (
     "figures-timeline-critical",
     "homepage-news-image-safety",
     "pendar-priority-home",
+    "story-editorial-critical",
 )
 
 
 def compact_story_shell(shell: str) -> str:
-    """Remove redundant home-only inline CSS from a story shell.
+    """Move shared inline rules into the common article stylesheet.
 
     Preserve the editorial CSS, app bootstrap, route DOM, article metadata,
     and any prerendered text. Only whitespace between line-separated tags in
@@ -53,14 +54,8 @@ def compact_story_shell(shell: str) -> str:
     for style_id in SHARED_HOME_STYLE_IDS:
         pattern = r'<style\s+id="' + re.escape(style_id) + r'">[\s\S]*?</style>[\t ]*\r?\n?'
         shell = re.sub(pattern, "", shell, count=1, flags=re.I)
-    # Canonical stories keep critical editorial CSS, but CSS comments and
-    # formatting whitespace need not be repeated in every static HTML file.
-    def compact_critical(match):
-        css = re.sub(r'/\*[\s\S]*?\*/', '', match.group(1))
-        css = re.sub(r'\s+', ' ', css).strip()
-        return '<style id="story-editorial-critical">' + css + '</style>'
-    shell = re.sub(r'<style id="story-editorial-critical">([\s\S]*?)</style>',
-                   compact_critical, shell, count=1, flags=re.I)
+    # Critical article rules are loaded from heritage-article.css. Never
+    # duplicate them across thousands of prerendered article/identity routes.
     shell = re.sub(r'>[ \t]*\r?\n[ \t]*<', '><', shell)
     return shell
 
@@ -97,7 +92,7 @@ def refresh_shell(shell: str, old: str) -> str:
 
     if '<base href="/">' not in template:
         template = template.replace("<head>", '<head><base href="/">', 1)
-    # Repeated full home CSS makes cached direct article pages exceed the
+    # Repeated inline UI CSS makes cached direct article pages exceed the
     # publication footprint. Compact only the shared SPA wrapper; do NOT
     # compact the prerendered SEO article body, its tags, or its source links.
     template = compact_story_shell(template)
