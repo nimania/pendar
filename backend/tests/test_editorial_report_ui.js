@@ -8,6 +8,11 @@ const index=fs.readFileSync(path.join(root,"web-static/index.html"),"utf8");
 const pilot=fs.readFileSync(path.join(root,"web-static/story-editorial-pilots.js"),"utf8");
 const detail=fs.readFileSync(path.join(root,"web-static/story-detail.js"),"utf8");
 const home=fs.readFileSync(path.join(root,"web-static/home.js"),"utf8");
+const authors=fs.readFileSync(path.join(root,"web-static/editorial-authors.js"),"utf8");
+const directory=JSON.parse(fs.readFileSync(path.join(root,"web-static/data/pendar-editorial-authors.json"),"utf8"));
+assert.equal(directory.authors.length,7);
+assert(directory.authors.every(a=>a.name_status==="pending_approval"&&a.is_ai));
+new Function(authors);
 assert(index.includes('story-editorial.css?v='));
 assert(index.includes('id="story-editorial-critical"'),"inline report style fallback must be in the SPA shell");
 const critical=index.match(/<style id="story-editorial-critical">([\s\S]*?)<\/style>/);
@@ -17,6 +22,9 @@ for(const selector of ["#detail-view .story-editorial{","#detail-view .story-rep
 }
 assert(index.indexOf('story-editorial-critical')<index.indexOf('</head>'));
 
+assert(index.indexOf('editorial-authors.js')>=0);
+assert(index.indexOf('editorial-authors.js')<index.indexOf('story-detail.js'));
+assert(index.includes('id="editorial-author-view"'));
 assert(index.indexOf('story-editorial-pilots.js')>=0);
 assert(index.indexOf('story-editorial-pilots.js')<index.indexOf('story-detail.js'));
 assert(detail.includes('${pendarEditorialReport(s)}'));
@@ -30,14 +38,15 @@ const esc=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt
 const start=detail.indexOf("function pendarEditorialReport(s){");
 const end=detail.indexOf("function pendarHistoricalContext(s){",start);
 assert(start>=0&&end>start);
-const render=new Function("window","esc",detail.slice(start,end)+"return pendarEditorialReport;")(win,esc);
+const render=new Function("window","esc","pendarAuthorByline",detail.slice(start,end)+"return pendarEditorialReport;")(win,esc,()=>'<div class="story-author-byline">دبیر مجازی</div>');
 const id="b4efb62f-9240-4e90-ba4f-4664e608fa97";
 const sample=render({id});
 assert(sample.includes('class="story-editorial"'));
 assert(sample.includes("نسخهٔ آزمایشی"));
 assert(sample.includes("نیازمند تأیید"));
-assert(sample.includes("سپاه از برخورد"));
+assert(sample.includes("سپاه: برخورد نفتکش با مین در هرمز"));
 assert(sample.includes("story-report-cite"));
+assert(sample.includes("story-author-byline"));
 assert.equal(render({id:"11111111-1111-4111-8111-111111111111"}),"");
 const generated=render({id,editorial_report:{status:"ai_draft",title_fa:"گزارش تازه",lead_fa:"مقدمهٔ مستند",paragraphs:Array.from({length:3},()=>({text_fa:"متن گزارش",citations:[{id:"s1",url:"https://example.com"}]}))}});
 assert(generated.includes("گزارش تازه"),"real report must supersede sample");
