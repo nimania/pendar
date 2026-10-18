@@ -23,6 +23,15 @@ assert.equal(directory.authors.length,7);
 assert(directory.authors.every(a=>a.name_status==="approved"&&a.is_ai));
 assert(directory.authors.every((a,i)=>a.portrait_status==="installed"&&a.portrait_index===i&&a.portrait_url.endsWith("pendar-authors-sprite.avif")));
 assert(authors.includes("function pendarAuthorPortraitCSS(id)"));
+assert(authors.includes("function pendarAuthorPortraitURL(id)"),"high-resolution approved portraits should be supported");
+assert(authors.includes("function pendarWriterURL(id)"),"readable writer addresses should be stable");
+assert(library.includes('class="magazine-author-stories"'),"reports archive must show the writer story row");
+assert(library.includes('pendarAuthorAvatar(a.id,"magazine-author-story-image")'),"writer strip needs real author portraits");
+assert(heritagePreview.includes('var usedIds=new Set()'),"homepage sections must not recycle the same stories");
+assert(heritagePreview.includes('function imageWideEnough('),"large covers must have measured photo sizes");
+assert(heritagePreview.includes('imageDimensions.set(url,'),"image selection must verify original dimensions");
+assert(router.includes('kind === "writers"'),"readable writer paths must resolve");
+
 assert(authors.includes("story-author-monogram"));
 assert(authors.includes("background-position:"));
 assert(!detail.includes("story-editorial-note"),"no machine-report disclaimer after articles");
@@ -77,15 +86,16 @@ assert(library.includes('pendarMagazineCollectionFrame('),"report archive must u
 assert(authors.includes('pendarMagazineCollectionFrame('),"author archive must use magazine frame");
 assert(magazineCollectionsCss.includes('.magazine-collection .editorial-library-list'),"responsive image grid missing");
 assert(magazineCollectionsCss.includes('@media(max-width:600px)'),"mobile archive layout missing");
-const cardTest=new Function('esc','pendarAuthorName','pendarAuthorPortraitCSS',
+const cardTest=new Function('esc','pendarAuthorName','pendarAuthorPortraitCSS','pendarAuthorAvatar','pendarWriterURL',
   magazineCollections+'return {pendarMagazineCollectionFrame,pendarMagazineReportCard};')(
   value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch])),
-  ()=>"دبیر فرهنگ",()=>"" );
+  ()=>"دبیر فرهنگ",()=>"",()=>'<span class="magazine-report-avatar">پ</span>',
+  id=>id==="culture"?"/writers/mana-radfar/":"/editorial-author/"+id+"/" );
 const cardId="b4efb62f-9240-4e90-ba4f-4664e608fa97";
 const withImage=cardTest.pendarMagazineReportCard({id:cardId,title_fa:"تیتر گزارش",lead_fa:"شرح منبع‌دار",author_id:"culture",image_url:"https://example.com/relevant.jpg",published_at:"2026-10-18"});
 assert(withImage.includes('magazine-report-photo'),"image must be displayed with archive card");
 assert(withImage.includes('شرح منبع‌دار')&&withImage.includes('/story/'+cardId+'/'),"image card must keep lead and URL");
-assert(withImage.includes('/editorial-author/culture/'),"image card must link author archive");
+assert(withImage.includes('/writers/mana-radfar/'),"archive cards should link to human-readable writer profiles");
 const withoutImage=cardTest.pendarMagazineReportCard({id:cardId,title_fa:"گزارش بی‌عکس"});
 assert(withoutImage.includes('no-image')&&!withoutImage.includes('<img '),"archives must not invent images");
 assert(cardTest.pendarMagazineCollectionFrame("EXAMPLE").includes("EXAMPLE"));
