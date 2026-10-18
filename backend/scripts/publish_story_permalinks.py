@@ -45,7 +45,7 @@ CHARS = dict(zip(
      "h","y","y","","v","h"]))
 CHARS.update({"ا":"a","آ":"a","و":"o","ه":"h","ی":"i","ک":"k"})
 PUNCT = re.compile(r"[^\w\u0600-\u06ff-]+", re.U)
-TITLE_TOKENS = re.compile(r"[\u0600-\u06ffA-Za-z0-9\u200c]+", re.U)
+TITLE_TOKENS = re.compile(r"[\u0621-\u063a\u0641-\u064a\u067e\u0686\u0698\u06a9\u06af\u06cc\u200cA-Za-z0-9]+", re.U)
 
 
 def text(value: object) -> str:
