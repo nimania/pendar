@@ -51,7 +51,7 @@
       shadow.appendChild(pendingStyle);
       var css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/heritage-preview.css?v=20261018-images-required-1";
+      css.href="/heritage-preview.css?v=20261018-fast-first-content-1";
       var cssReady=new Promise(function(resolve,reject){
         css.addEventListener("load",resolve,{once:true});
         css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
@@ -60,6 +60,10 @@
       var shell=document.createElement("div");
       shell.className="heritage-root";
       shell.append(header, navigation, main, footer);
+      // A generic cover headline with no article photo is not a homepage item.
+      // Let the fast picture-selection pass insert the actual cover.
+      var pendingFeature=shell.querySelector(".feature-block");
+      if(pendingFeature)pendingFeature.hidden=true;
       var demoNote=shell.querySelector(".edition");
       if(demoNote)demoNote.remove();
       var exit=shell.querySelector(".exit-preview");
@@ -121,7 +125,7 @@
       await new Promise(function(resolve,reject){
         window.PENDAR_HERITAGE_EMBED=true;
         var script=document.createElement("script");
-        script.src="/heritage-preview.js?v=20261018-images-required-1";
+        script.src="/heritage-preview.js?v=20261018-fast-first-content-1";
         script.onload=resolve;
         script.onerror=function(){reject(new Error("Heritage feed script did not load"));};
         document.body.appendChild(script);
@@ -129,12 +133,15 @@
       if(!window.PendarHeritage||typeof window.PendarHeritage.mount!=="function"){
         throw new Error("Magazine renderer is not available");
       }
-      await Promise.all([window.PendarHeritage.mount(shadow),cssReady]);
-      // One visual transition: replace the matching lightweight shell with
-      // the completed magazine, never showing the old homepage in between.
+      // Start real data loading concurrently with CSS. Reveal the actual
+      // magazine chrome as soon as styles are ready, instead of waiting for
+      // third-party thumbnails and detail feeds to finish.
+      var contentReady=window.PendarHeritage.mount(shadow);
+      await cssReady;
       pendingStyle.remove();
       host.classList.add("heritage-ready");
       document.documentElement.classList.remove("heritage-booting");
+      await contentReady;
       isReady=true;
       starting=false;
     }catch(error){fail(error);}

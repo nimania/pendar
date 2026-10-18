@@ -10,6 +10,8 @@ const detail=fs.readFileSync(path.join(root,"web-static/story-detail.js"),"utf8"
 const home=fs.readFileSync(path.join(root,"web-static/home.js"),"utf8");
 const authors=fs.readFileSync(path.join(root,"web-static/editorial-authors.js"),"utf8");
 const library=fs.readFileSync(path.join(root,"web-static/editorial-archive.js"),"utf8");
+const heritageLive=fs.readFileSync(path.join(root,"web-static/heritage-live.js"),"utf8");
+const heritagePreview=fs.readFileSync(path.join(root,"web-static/heritage-preview.js"),"utf8");
 const magazineCollections=fs.readFileSync(path.join(root,"web-static/editorial-magazine.js"),"utf8");
 const magazineCollectionsCss=fs.readFileSync(path.join(root,"web-static/heritage-collections.css"),"utf8");
 const router=fs.readFileSync(path.join(root,"web-static/router.js"),"utf8");
@@ -30,6 +32,15 @@ assert(!authors.includes("editorial-author-disclosure"),"author profile should n
 assert(!("disclosure_fa" in directory),"author profiles should not carry the long AI disclosure");
 new Function(authors);
 new Function(library);
+new Function(heritageLive);
+new Function(heritagePreview);
+assert(!index.includes('heritage-first-paint-columns'),"homepage must not render giant empty loading cards");
+assert(index.includes('heritage-first-paint-nav'),"homepage must keep magazine chrome before initial data");
+assert(heritageLive.indexOf('await cssReady;')<heritageLive.indexOf('await contentReady;'),"show magazine chrome before image checks complete");
+assert(heritageLive.includes('pendingFeature.hidden=true'),"unverified cover must remain hidden");
+assert(heritagePreview.includes('setTimeout(resolve,650)'),"first image selection must have a short bounded delay");
+assert(heritagePreview.includes('Pendar image enrichment:'),"later image hydration must not block first render");
+assert(heritagePreview.includes('verifiedImage(photo(row))'),"homepage cards must still require real loaded photos");
 new Function(magazineCollections);
 new Function(router);
 assert(index.includes('heritage-collections.css?v='),"reports and author stylesheet must load");
