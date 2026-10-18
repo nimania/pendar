@@ -439,6 +439,21 @@ def build(site):
             page['body']+='<aside><a href="/israel-radar/"><strong>رادار اسرائیل</strong> — انتخابات، احزاب و پیامدهایشان برای ایران ←</a></aside>'
         if re.search(r'آمریکا|امریکا|ایالات متحده|کنگره|ترامپ',page.get('title','')+' '+text(page.get('body',''))):
             page['body']+='<aside><a href="/us-radar/"><img src="/assets/us-election-logo.svg" alt="" width="48" height="48"><strong>رادار آمریکا</strong> — انتخابات، رقابت‌ها و پیامدهایشان برای ایران ←</a></aside>'
+    # Existing readable permalinks survive a full SEO regeneration.
+    # UUID routes remain accessible, but only the readable alias is canonical.
+    permalink_index=read(data/'story-permalinks.json',{})
+    for sid,slug in (permalink_index.get('id_to_slug',{}) if isinstance(permalink_index,dict) else {}).items():
+        if not re.fullmatch(r'[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}',str(sid)):
+            continue
+        if not re.fullmatch(r'[a-z0-9][a-z0-9-]{2,76}[a-z0-9]',str(slug)):
+            continue
+        old=route('story',sid)
+        pretty=route('story',slug)
+        if old not in pages or pretty in pages:
+            continue
+        pages[pretty]={**pages[old],'canonical':pretty}
+        pages[old]['canonical']=pretty
+        editorial_urls=[pretty if u==old else u for u in editorial_urls]
     pages['/']={'title':'پندار؛ خبر، چهره‌ها، کتاب، فیلم و سریال','description':'پندار؛ خبر و اندیشه، دیدگاه چهره‌ها، پیشخوان کتاب و جراید، فیلم و سریال و راهنمای تماشا.','body':links([(route(k),v) for k,v in SECTIONS.items()])+ '<h2>تازه‌ترین خبرها</h2>'+links(catalogs['headlines'][:20]),'canonical':'/','indexable':True,'schema_type':'WebSite'}
     generated=[]; sitemap=[]
     for url,page in pages.items():
