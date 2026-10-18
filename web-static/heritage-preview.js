@@ -103,7 +103,7 @@
     var when=statementTime(post.published_at);
     return '<article class="figure-rail-card">'
       +'<a class="figure-rail-person" href="'+esc(url)+'">'
-      +'<img src="'+esc(portrait)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">'
+      +'<img src="'+esc(portrait)+'" alt="" loading="lazy" decoding="async">'
       +'<span><strong>'+esc(name)+'</strong>'+(person.role_fa?'<small>'+esc(excerpt(person.role_fa,45))+'</small>':"")+'</span></a>'
       +'<a class="figure-rail-statement" href="'+esc(postUrl)+'">'+esc(summary)+'</a>'
       +'<div class="figure-rail-meta"><time datetime="'+esc(post.published_at)+'">'+esc(when)+'</time>'
