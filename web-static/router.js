@@ -14,6 +14,13 @@ function currentRoute(){
 function routeURL(h){
   let raw=String(h||"").replace(/^#\/?/,"").replace(/^\/+|\/+$/g,"");
   raw=raw.replace(/^dinr(?=\/|$)/,"diner");
+  // Convert known story UUID links to their published readable permalink.
+  // Unmapped older articles keep the original working URL.
+  const matched=raw.match(/^story\/([0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})$/i);
+  if(matched){
+    const slug=window.PENDAR_STORY_PERMALINKS?.id_to_slug?.[matched[1].toLowerCase()];
+    if(slug)raw="story/"+slug;
+  }
   const entityPath=window.PENDAR_HANDLES?.entities?.[decodeURIComponent(raw)];
   if(entityPath)return entityPath;
   const handle=window.PENDAR_HANDLES?.routes?.[decodeURIComponent(raw)];
@@ -168,7 +175,7 @@ if(location.hash||routeURL(location.pathname)!==location.pathname){const path=ro
 const PUBLIC_ROUTES=new Set(["headlines","home","story","reports","editorial-author","person","topic","trend","event","source","province","day","trends","fact","iran","topics","market","weather","faq","figures","videos","studio-recaps","finance","studio-recap","press","press-source","press-article","books","book","movies","movie","master-movie","tv","knowledge","entity","graph","profile","system","publisher","book-person","tech","figure","news-person","statement","badbadak","us-radar","israel-radar","radar","diner","dinr","future"]);
 function cleanInternalLinks(root){
   const links=root.matches?.("a[href]")?[root]:[...root.querySelectorAll?.("a[href]")||[]];
-  for(const a of links){const h=a.getAttribute("href");if(h?.startsWith("#/"))a.setAttribute("href",routeURL(h));else if(h?.startsWith("/")&&!h.startsWith("//")){const clean=routeURL(h);if(clean!==h&&(window.PENDAR_HANDLES?.routes?.[decodeURIComponent(h.replace(/^\/+|\/+$/g,""))]||window.PENDAR_HANDLES?.entities?.[decodeURIComponent(h.replace(/^\/+|\/+$/g,""))]))a.setAttribute("href",clean);}}
+  for(const a of links){const h=a.getAttribute("href");if(h?.startsWith("#/"))a.setAttribute("href",routeURL(h));else if(h?.startsWith("/")&&!h.startsWith("//")){const clean=routeURL(h);if(clean!==h&&(window.PENDAR_HANDLES?.routes?.[decodeURIComponent(h.replace(/^\/+|\/+$/g,""))]||window.PENDAR_HANDLES?.entities?.[decodeURIComponent(h.replace(/^\/+|\/+$/g,""))]||/^\/story\/[a-f0-9-]{36}\/?$/i.test(h)))a.setAttribute("href",clean);}}
 }
 cleanInternalLinks(document);
 new MutationObserver(mutations=>{for(const m of mutations){if(m.type==="attributes")cleanInternalLinks(m.target);for(const n of m.addedNodes||[])if(n.nodeType===1)cleanInternalLinks(n);}}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["href"]});
