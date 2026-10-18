@@ -37,3 +37,37 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .article-byline .author-link{display:flex;flex-direction:column;gap:2px}
 .article-byline .author-link:hover strong{text-decoration:underline;text-decoration-color:var(--turquoise);text-underline-offset:4px}
 .article-byline .author-link span{font-size:11px;color:var(--soft)}
+
+/* Heritage 2013-inspired picture ticker: five short clickable news items. */
+.latest-ticker{min-height:100px}
+.latest-ticker h2{min-width:126px;min-height:99px}
+.latest-ticker .ticker-items{gap:19px;padding:13px 17px;scroll-snap-type:x proximity;overscroll-behavior-inline:contain}
+.latest-ticker .ticker-story{
+  display:flex;align-items:center;flex:0 0 237px;max-width:237px;min-height:62px;
+  gap:11px;scroll-snap-align:start;line-height:1.65;font-weight:700;font-size:14px;
+}
+.latest-ticker .ticker-story:before{display:none!important}
+.latest-ticker .ticker-thumb{
+  width:62px;height:62px;flex:0 0 62px;display:block;overflow:hidden;border-radius:5px;
+  border:1px solid var(--line);background:#e7edeb;
+}
+.latest-ticker .ticker-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.latest-ticker .ticker-thumb img[hidden]{display:none!important}
+.latest-ticker .ticker-thumb-empty{display:grid;width:100%;height:100%;place-items:center;font-size:11px;font-weight:600;color:#71847b}
+.latest-ticker .ticker-headline{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+  flex:1;min-width:0;text-align:right;font-weight:750;line-height:1.7;letter-spacing:-.005em
+}
+.latest-ticker .ticker-story:hover .ticker-headline{color:var(--turquoise)}
+.latest-ticker .ticker-more{font-size:12px;flex:0 0 auto;padding:0 16px}
+@media(max-width:720px){
+  .latest-ticker{min-height:81px}
+  .latest-ticker h2{min-width:80px;min-height:80px}
+  .latest-ticker .ticker-items{padding:9px 11px;gap:12px}
+  .latest-ticker .ticker-story{flex-basis:205px;max-width:205px;gap:9px;min-height:54px;font-size:12px}
+  .latest-ticker .ticker-thumb{width:54px;height:54px;flex-basis:54px}
+}
+@media(max-width:470px){
+  .latest-ticker h2{min-width:70px;padding:0 11px}
+  .latest-ticker .ticker-story{flex-basis:205px;max-width:205px}
+}
