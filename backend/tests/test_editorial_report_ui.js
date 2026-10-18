@@ -59,8 +59,13 @@ assert(home.includes('home-report-lead'),"homepage reports should display an edi
 assert(home.includes('row.lead_fa'),"homepage teaser must come from source-backed report lead");
 assert(!home.includes("esc(author)+' · '"),"homepage report cards should not show author and date");
 assert(index.includes('story-detail.js?v=20261018-magazine-1'));
-assert(index.includes('heritage-article.css?v=20261018-reader-1'),"magazine article CSS must be loaded");
-assert(index.indexOf('heritage-article.css?v=')>index.indexOf('id="story-editorial-critical"'),"magazine article rules must override legacy critical CSS");
+const magazineCssLink=index.match(/<link\s+rel="stylesheet"\s+href="(heritage-article\.css\?v=[^"]+)">/);
+assert(magazineCssLink,"magazine article CSS must be loaded");
+assert(index.indexOf(magazineCssLink[0])>index.indexOf('id="story-editorial-critical"'),"magazine article rules must override legacy critical CSS");
+const magazineCss=fs.readFileSync(path.join(root,"web-static/heritage-article.css"),"utf8");
+for(const required of ["html.heritage-article-active", ".magazine-reader", ".magazine-article-layout", ".magazine-article-rail", ".story-examination"]){
+  assert(magazineCss.includes(required),"magazine reader stylesheet missing "+required);
+}
 assert(detail.includes('class="magazine-article-layout"'),"full magazine reader must replace the old standalone detail card");
 assert(detail.includes('class="magazine-masthead"'),"magazine article must share the new site identity");
 assert(detail.includes('class="magazine-article-rail"'),"article needs a contextual related-story rail");
