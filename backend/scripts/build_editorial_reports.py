@@ -284,15 +284,31 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
         except sqlite3.Error:
             if cx:cx.close()
             cx=None
-    # Enrich every exported archive page (up to 500), not just the 60-card feed.
-    # Paid editorial generation stays bounded to current headline candidates.
+    # Rotate fairly across the seven specialist desks so prolific subject
+    # categories cannot consume all attempts while smaller beats have no work.
+    # These candidates are archival records, not synthetic filler articles.
+    from collections import deque
     active_ids={str(c.get("id") or "") for c in cards}
-    # Prioritize the first user-selected pilot even if it has moved out of the
-    # front-page feed. The environment variable can later be cleared or changed.
     priority=set(filter(None,(v.strip() for v in os.environ.get(
         "PENDAR_EDITORIAL_PRIORITY_STORY_IDS",
         "b4efb62f-9240-4e90-ba4f-4664e608fa97").split(","))))
-    ordered=sorted(archive,key=lambda row: 0 if str(row.get("id") or "") in priority else 1)
+    topic_groups={a["id"]:[] for a in author_catalog["authors"]}
+    topic_groups["desk"]=[]
+    for row in archive:
+        sid=str(row.get("id") or "")
+        if not UUID_RE.fullmatch(sid):continue
+        topic_groups[choose_editorial_author(row,author_catalog)].append(row)
+    for group in topic_groups.values():
+        group.sort(key=lambda row:(str(row.get("id") or "") not in priority,
+            str(row.get("id") or "") not in active_ids,
+            str(row.get("published_at") or "")),reverse=False)
+    ordered=[]
+    queues={k:deque(v) for k,v in topic_groups.items()}
+    while any(queues.values()):
+        for person in author_catalog["authors"]:
+            if queues[person["id"]]:ordered.append(queues[person["id"]].popleft())
+        if queues["desk"]:ordered.append(queues["desk"].popleft())
+    editorial_items=[]
     for row in ordered:
         sid=str(row.get("id") or "")
         if not UUID_RE.fullmatch(sid):continue
@@ -320,7 +336,7 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
             failed=cx.execute("SELECT attempted_at FROM pendar_editorial_failures WHERE story_id=? AND digest=?",(sid,digest)).fetchone()
             cooldown=bool(failed and time.time()-float(failed[0])<6*3600)
             if cooldown:cooldown_skipped+=1
-        if report is None and not cooldown and (sid in active_ids or sid in priority) and is_ai and enough and attempted<max_generate:
+        if report is None and not cooldown and is_ai and enough and attempted<max_generate:
             attempted+=1
             try:
                 result=provider.generate(system=SYSTEM,user=json.dumps(prompt_data,ensure_ascii=False),context={"editorial":prompt_data})
@@ -344,6 +360,16 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
             row["has_editorial_report"]=True
             row["editorial_author_id"]=author_id
             row["editorial_report_title_fa"]=report.get("title_fa") or ""
+            editorial_items.append({
+                "id":sid,
+                "author_id":author_id,
+                "title_fa":str(report.get("title_fa") or "")[:140],
+                "headline_fa":str(detail.get("headline_fa") or "")[:300],
+                "lead_fa":str(report.get("lead_fa") or "")[:650],
+                "published_at":detail.get("published_at") or row.get("published_at"),
+                "category":row.get("category") or detail.get("category"),
+                "status":"ai_draft",
+            })
             generated+=1
         # If no valid article was generated, keep the existing verified-looking
         # factual sections; do not label stitched excerpts as a new report.
@@ -364,8 +390,26 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
                     for name in ("has_editorial_report","editorial_author_id","editorial_report_title_fa"):
                         item[name]=current.get(name)
         path.write_text(json.dumps(by_source,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
+    editorial_items.sort(key=lambda item:str(item.get("published_at") or ""),reverse=True)
+    counts={author_id:0 for author_id in known_authors}
+    for item in editorial_items:
+        counts[item["author_id"]]+=1
+    target=max(1,int(os.environ.get("PENDAR_EDITORIAL_TARGET_PER_AUTHOR","10")))
+    index={
+        "schema_version":1,
+        "generated_at":datetime.now(timezone.utc).isoformat(),
+        "reports":editorial_items,
+        "counts":counts,
+        "target_per_author":target,
+        "remaining_per_author":{
+            author_id:max(0,target-counts.get(author_id,0))
+            for author_id in (person["id"] for person in author_catalog["authors"])
+        },
+    }
+    (data_dir/"editorial-archive.json").write_text(
+        json.dumps(index,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
     if cx:cx.close()
-    return {"enriched":enriched,"reports":generated,"cached":reused,"attempted":attempted,"cooldown_skipped":cooldown_skipped,"archive":len(archive),"ai_available":is_ai}
+    return {"enriched":enriched,"reports":generated,"cached":reused,"attempted":attempted,"cooldown_skipped":cooldown_skipped,"archive":len(archive),"ai_available":is_ai,"by_author":counts}
 
 
 def main():
