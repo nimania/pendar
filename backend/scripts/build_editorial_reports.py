@@ -179,7 +179,7 @@ def report_input(detail: dict, context: dict, sources: list[dict]) -> dict:
 
 def editorial_headline_word_count(title: str) -> int:
     """Whitespace-delimited Persian headline words; attached punctuation is not a word."""
-    return len(re.findall(r"[^\\s]+", str(title or "").strip()))
+    return len(re.findall(r"\S+", str(title or "").strip()))
 
 
 def valid_report(value:dict,sources:list[dict],context:dict)->dict|None:
