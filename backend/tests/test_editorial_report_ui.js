@@ -10,6 +10,8 @@ const detail=fs.readFileSync(path.join(root,"web-static/story-detail.js"),"utf8"
 const home=fs.readFileSync(path.join(root,"web-static/home.js"),"utf8");
 const authors=fs.readFileSync(path.join(root,"web-static/editorial-authors.js"),"utf8");
 const library=fs.readFileSync(path.join(root,"web-static/editorial-archive.js"),"utf8");
+const magazineCollections=fs.readFileSync(path.join(root,"web-static/editorial-magazine.js"),"utf8");
+const magazineCollectionsCss=fs.readFileSync(path.join(root,"web-static/heritage-collections.css"),"utf8");
 const router=fs.readFileSync(path.join(root,"web-static/router.js"),"utf8");
 const directory=JSON.parse(fs.readFileSync(path.join(root,"web-static/data/pendar-editorial-authors.json"),"utf8"));
 assert.equal(directory.authors.length,7);
@@ -28,7 +30,31 @@ assert(!authors.includes("editorial-author-disclosure"),"author profile should n
 assert(!("disclosure_fa" in directory),"author profiles should not carry the long AI disclosure");
 new Function(authors);
 new Function(library);
+new Function(magazineCollections);
 new Function(router);
+assert(index.includes('heritage-collections.css?v='),"reports and author stylesheet must load");
+assert(index.includes('editorial-magazine.js?v='),"shared magazine chrome must load");
+assert(index.indexOf('editorial-magazine.js?v=')<index.indexOf('editorial-authors.js?v='),"load shared magazine helper before editors");
+assert(index.indexOf('editorial-authors.js?v=')<index.indexOf('editorial-archive.js?v='),"load authors before archive");
+assert(index.includes('heritage-collection-active'),"archive deep links should not flash old UI");
+assert(fs.readFileSync(path.join(root,"web-static/app.js"),"utf8").includes('v === "editorialarchive" || v === "editorialauthor"'),"archive routes must use magazine view");
+assert(library.includes('pendarMagazineCollectionFrame('),"report archive must use magazine frame");
+assert(authors.includes('pendarMagazineCollectionFrame('),"author archive must use magazine frame");
+assert(magazineCollectionsCss.includes('.magazine-collection .editorial-library-list'),"responsive image grid missing");
+assert(magazineCollectionsCss.includes('@media(max-width:600px)'),"mobile archive layout missing");
+const cardTest=new Function('esc','pendarAuthorName','pendarAuthorPortraitCSS',
+  magazineCollections+'return {pendarMagazineCollectionFrame,pendarMagazineReportCard};')(
+  value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch])),
+  ()=>"دبیر فرهنگ",()=>"" );
+const cardId="b4efb62f-9240-4e90-ba4f-4664e608fa97";
+const withImage=cardTest.pendarMagazineReportCard({id:cardId,title_fa:"تیتر گزارش",lead_fa:"شرح منبع‌دار",author_id:"culture",image_url:"https://example.com/relevant.jpg",published_at:"2026-10-18"});
+assert(withImage.includes('magazine-report-photo'),"image must be displayed with archive card");
+assert(withImage.includes('شرح منبع‌دار')&&withImage.includes('/story/'+cardId+'/'),"image card must keep lead and URL");
+assert(withImage.includes('/editorial-author/culture/'),"image card must link author archive");
+const withoutImage=cardTest.pendarMagazineReportCard({id:cardId,title_fa:"گزارش بی‌عکس"});
+assert(withoutImage.includes('no-image')&&!withoutImage.includes('<img '),"archives must not invent images");
+assert(cardTest.pendarMagazineCollectionFrame("EXAMPLE").includes("EXAMPLE"));
+assert(!cardTest.pendarMagazineReportCard({id:"not-a-uuid",title_fa:"خبر اشتباه"}),"invalid story URLs must not be linked");
 assert(index.includes('id="editorial-archive-view"'));
 assert(index.includes('href="/reports/"'));
 assert(index.includes('editorial-archive.js?v='));
