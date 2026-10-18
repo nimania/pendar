@@ -83,7 +83,7 @@ jobs:
       - name: Package news-only data
         run: |
           mkdir -p news-payload/data
-          for file in stories.json topics.json entities.json trends.json stats.json meta.json press-stats.json press-source-stories.json press-source-health.json press-source-repair-queue.json factchecks.json geo.json news-health.json; do
+          for file in stories.json editorial-archive.json topics.json entities.json trends.json stats.json meta.json press-stats.json press-source-stories.json press-source-health.json press-source-repair-queue.json factchecks.json geo.json news-health.json; do
             test -s "backend/public/data/$file"
             cp "backend/public/data/$file" "news-payload/data/$file"
           done
