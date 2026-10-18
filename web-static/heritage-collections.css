@@ -88,3 +88,27 @@ html.heritage-collection-active #editorial-author-view{width:100%;max-width:none
  .magazine-collection-footer>.magazine-collection-container{padding:22px 0}
  .magazine-collection-footer nav{margin-right:0}
 }
+
+/* Newsroom author stories: a persistent Instagram-style discovery strip. */
+.magazine-collection .magazine-author-stories{background:#fff;padding:20px 21px 18px;margin:15px 0;border-top:4px solid var(--magazine-sea);border-bottom:1px solid var(--magazine-line)}
+.magazine-collection .magazine-author-stories-heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.magazine-collection .magazine-author-stories-heading h2{font:850 21px/1.6 "Vazirmatn",Tahoma,sans-serif;margin:0;color:#1e3028}
+.magazine-collection .magazine-author-stories-heading span{color:#697b70;font-size:12px}
+.magazine-collection .magazine-author-stories-list{display:flex;align-items:flex-start;gap:20px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:0 0 10px;scroll-snap-type:x proximity}
+.magazine-collection .magazine-author-story{display:flex;flex:0 0 115px;flex-direction:column;align-items:center;text-align:center;gap:7px;scroll-snap-align:start}
+.magazine-collection .magazine-author-story-ring{width:97px;height:97px;border:3px solid #e17229;box-shadow:0 0 0 3px #fff inset;border-radius:50%;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f4f7f4}
+.magazine-collection .magazine-author-story-image{display:block;width:82px;height:82px;border-radius:50%;object-fit:cover;background-color:#dfe9e3;background-repeat:no-repeat;flex:none;font:700 22px/82px "Vazirmatn",Tahoma,sans-serif}
+.magazine-collection .magazine-author-story:hover .magazine-author-story-ring{border-color:#158b97}
+.magazine-collection .magazine-author-story strong{font:750 13px/1.65 "Vazirmatn",Tahoma,sans-serif;color:#263a30}
+.magazine-collection .magazine-author-story-count{font-size:11px;color:#718279}
+.magazine-collection .magazine-report-avatar{object-fit:cover}
+.magazine-collection .editorial-author-placeholder{object-fit:cover}
+@media(max-width:600px){
+  .magazine-collection .magazine-author-stories{padding:15px 12px 12px;margin:10px 0}
+  .magazine-collection .magazine-author-stories-list{gap:9px}
+  .magazine-collection .magazine-author-story{flex-basis:91px}
+  .magazine-collection .magazine-author-story-ring{width:79px;height:79px}
+  .magazine-collection .magazine-author-story-image{width:65px;height:65px;font-size:18px;line-height:65px}
+  .magazine-collection .magazine-author-story strong{font-size:11px}
+  .magazine-collection .magazine-author-story-count{font-size:10px}
+}
