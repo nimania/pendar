@@ -9,6 +9,8 @@ const pilot=fs.readFileSync(path.join(root,"web-static/story-editorial-pilots.js
 const detail=fs.readFileSync(path.join(root,"web-static/story-detail.js"),"utf8");
 const home=fs.readFileSync(path.join(root,"web-static/home.js"),"utf8");
 const authors=fs.readFileSync(path.join(root,"web-static/editorial-authors.js"),"utf8");
+const library=fs.readFileSync(path.join(root,"web-static/editorial-archive.js"),"utf8");
+const router=fs.readFileSync(path.join(root,"web-static/router.js"),"utf8");
 const directory=JSON.parse(fs.readFileSync(path.join(root,"web-static/data/pendar-editorial-authors.json"),"utf8"));
 assert.equal(directory.authors.length,7);
 assert(directory.authors.every(a=>a.name_status==="approved"&&a.is_ai));
@@ -18,6 +20,17 @@ assert(!authors.includes("تدوین با کمک هوش مصنوعی"),"AI notic
 assert(!authors.includes("editorial-author-disclosure"),"author profile should not render duplicate AI statement");
 assert(!("disclosure_fa" in directory),"author profiles should not carry the long AI disclosure");
 new Function(authors);
+new Function(library);
+new Function(router);
+assert(index.includes('id="editorial-archive-view"'));
+assert(index.includes('href="/reports/"'));
+assert(index.includes('editorial-archive.js?v='));
+assert(router.includes('kind === "reports"'));
+assert(router.includes('"reports","editorial-author"'));
+assert(library.includes('editorial-archive.json'));
+assert(library.includes('filterPendarEditorialArchive'));
+assert(library.includes('status==="ai_draft"'),"library must show actual generated reports");
+
 assert(index.includes('story-editorial.css?v='));
 assert(index.includes('id="story-editorial-critical"'),"inline report style fallback must be in the SPA shell");
 const critical=index.match(/<style id="story-editorial-critical">([\s\S]*?)<\/style>/);
