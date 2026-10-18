@@ -38,6 +38,7 @@
   // External publishers may return blocked, expired or tiny image URLs.
   // Check whether an image actually loads before promoting it to a visual slot.
   var imageChecks=new Map();
+  var imageDimensions=new Map();
   function verifiedImage(url){
     return imageChecks.get(url)===true;
   }
@@ -58,7 +59,7 @@
         resolve(Boolean(ok));
       };
       var timer=setTimeout(function(){done(false);},2600);
-      img.onload=function(){done(img.naturalWidth>=48&&img.naturalHeight>=38);};
+      img.onload=function(){if(img.naturalWidth>=280&&img.naturalHeight>=175){imageDimensions.set(url,{width:img.naturalWidth,height:img.naturalHeight});}done(img.naturalWidth>=280&&img.naturalHeight>=175);};
       img.onerror=function(){done(false);};
       img.src=url;
     });
@@ -130,7 +131,7 @@
       if(!choices.length)return;
       var results=await Promise.all(choices.map(checkImage));
       var good=results.indexOf(true);
-      if(good>=0)row.image_url=choices[good];
+      if(good>=0){row.image_url=choices[good];row._imageWidth=imageDimensions.get(choices[good])?.width||0;}
     }));
   }
   function uniquePictured(items,max){
@@ -149,7 +150,7 @@
     var enoughPictures=new Promise(function(resolve){signalFirst=resolve;});
     var quickChecks=priority.map(function(row){
       return inspectPhotos([row]).then(function(){
-        if(verifiedImage(photo(row))&&++good>=3)signalFirst();
+        if(verifiedImage(photo(row))){row._imageWidth=imageDimensions.get(photo(row))?.width||0;if(++good>=3)signalFirst();}
       });
     });
     await Promise.race([
@@ -164,17 +165,30 @@
       var news=uniquePictured(stories,65);
       var editorial=uniquePictured(reports,65);
       var all=limitUnique(news.concat(editorial),120);
+      // Every module reserves its own story IDs. Editorial diversity is more
+      // important than mechanically repeating the latest five headlines.
+      var used=new Set();
+      function take(rows,n){var result=[];for(var row of rows){if(result.length>=n)break;if(used.has(row.id))continue;used.add(row.id);result.push(row);}return result;}
+      function topic(row){return norm(row.category||row.section||row.topic||"").toLowerCase();}
+      function varied(rows,n){
+        var picked=[],seen=new Set();
+        for(var row of rows){if(picked.length>=n)break;var key=topic(row);if(used.has(row.id)||seen.has(key))continue;picked.push(row);seen.add(key);used.add(row.id);}
+        for(var row of rows){if(picked.length>=n)break;if(used.has(row.id))continue;picked.push(row);used.add(row.id);}
+        return picked;
+      }
+      var tickerRows=varied(news,5);
+      var railNewsRows=varied(news,7);
       var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
       var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
-      put("ticker",news.slice(0,5).map(function(r){
+      put("ticker",tickerRows.map(function(r){
         var title=headline(r);
         return '<a class="ticker-story" href="'+esc(finalStoryUrl(r.id))+'" title="'+esc(title)+'" aria-label="'+esc(title)+'">'
           +'<span class="ticker-thumb">'+thumb(r,"")+'</span>'
           +'<span class="ticker-headline">'+esc(shortTickerTitle(title))+'</span></a>';
       }).join("")||'<span class="loading">خبر تصویردار تازه‌ای در دسترس نیست.</span>');
-      put("rail-news",news.slice(0,7).map(railRow).join("")||
+      put("rail-news",railNewsRows.map(railRow).join("")||
         '<p class="empty-state">خبر تصویردار تازه‌ای برای نمایش پیدا نشد.</p>');
-      var cover=editorial[0]||news[0];
+      var cover=varied(editorial.filter(function(r){return (r._imageWidth||0)>=900;}),1)[0]||varied(news.filter(function(r){return (r._imageWidth||0)>=900;}),1)[0];
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
       if(featureSection)featureSection.hidden=!cover;
@@ -186,20 +200,20 @@
           +'<span class="feature-caption"><span class="category-flag orange">'+(report?"گزارش ویژه":"خبر ویژه")+'</span>'
           +'<strong>'+esc(headline(cover))+'</strong><span>'+esc(hook(cover))+'</span></span>';
       }
-      var more=limitUnique(editorial.concat(news).filter(function(r){return !cover||r.id!==cover.id;}),70);
+      var more=varied(editorial.concat(news),9);
       put("under-hero",more.slice(0,2).map(function(r){
         return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
           +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
       }).join(""));
-      put("rail-reports",editorial.filter(function(r){return !cover||r.id!==cover.id;}).slice(0,7).map(railRow).join("")||
+      put("rail-reports",varied(editorial,7).map(railRow).join("")||
         '<p class="empty-state">گزارش تصویردار دیگری در دسترس نیست.</p>');
       var cultureSection=el("culture");
       if(cultureSection)cultureSection.hidden=!culture.length;
-      put("culture-grid",culture.slice(0,6).map(function(r){
+      put("culture-grid",varied(culture,6).map(function(r){
         return '<a class="story-card" href="'+esc(slugUrl(r))+'"><span class="image-frame">'+thumb(r,"")
           +'</span><span class="story-info"><b>'+esc(headline(r))+'</b><p>'+esc(hook(r))+'</p></span></a>';
       }).join(""));
-      var gallery=all.slice(0,6);
+      var gallery=varied(all.filter(function(r){return verifiedImage(photo(r))&&(r._imageWidth||0)>=700;}),6);
       var gallerySection=el("gallery");
       if(gallerySection)gallerySection.hidden=!gallery.length;
       put("visual-grid",gallery.map(function(r){
