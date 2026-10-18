@@ -220,7 +220,7 @@ function renderHomeCulture(){
 // Two independent homepage windows: headlines and culture.
 let homeNewsMode="reports";
 function setHomeNewsMode(mode){
-  if(!["reports","events","people","latest","viral"].includes(mode))return;
+  if(!["reports","events","people","latest"].includes(mode))return;
   homeNewsMode=mode;
   document.querySelectorAll("[data-home-news]").forEach(button=>{
     const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
