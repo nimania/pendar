@@ -150,6 +150,45 @@ def build(site):
     # Deep stories can outlive the compact homepage feed.
     for p in sorted((data/'story').glob('*.json')):
         s=read(p,{}); add('story',s.get('id') or p.stem,s.get('headline_fa'),s.get('summary_fa'),schema_type='Article',published=s.get('published_at'))
+    # Public editorial reports: crawl the real article rather than a short story teaser.
+    # Only validated, visible reports are eligible; drafts and missing story files
+    # are never promoted to an indexable URL.
+    editorial_urls=[]
+    editorial_index=read(data/'editorial-archive.json',{})
+    for record in array(editorial_index,'reports'):
+        if not isinstance(record,dict) or record.get('status')!='ai_draft':
+            continue
+        story_id=str(record.get('id') or '')
+        if not re.fullmatch(r'[0-9a-fA-F-]{36}',story_id):
+            continue
+        file=data/'story'/(story_id+'.json')
+        if not file.is_file():
+            continue
+        story=read(file,{})
+        report=story.get('editorial_report') or {}
+        blocks=report.get('paragraphs') or []
+        if report.get('status')!='ai_draft' or len(blocks)<3:
+            continue
+        url=route('story',story_id)
+        if url not in pages:
+            continue
+        title=text(report.get('title_fa') or record.get('title_fa') or story.get('headline_fa'))
+        lead=text(report.get('lead_fa') or record.get('lead_fa'))
+        body_parts=[lead]+[text(p.get('text_fa')) for p in blocks if isinstance(p,dict)]
+        body='\\n'.join(p for p in body_parts if p)
+        if len(body)<350 or not title:
+            continue
+        page=pages[url]
+        page.update(title=title,description=lead[:170] or text(story.get('summary_fa'))[:170],
+                    body=paragraphs(body),image=story.get('image_url'),
+                    schema_type='Article',published=story.get('published_at'),
+                    indexable=True)
+        # Preserve sources for editorial review without raw s1/s2 tokens.
+        refs=[(src.get('article_url'),src.get('original_headline') or src.get('source_name') or 'منبع')
+              for src in story.get('sources',[]) if isinstance(src,dict)
+              and str(src.get('article_url','')).startswith(('https://','http://'))]
+        if refs:page['body']+='<h2>منابع و مستندات</h2>'+links(refs)
+        editorial_urls.append(url)
     figures=array(read(data/'figures.json',{}),'figures')
     for f in figures:
         posts=f.get('posts') or []; body='\n'.join(filter(None,[text(f.get('bio_fa')),text(f.get('role_fa')),text(f.get('field_fa'))]))
@@ -435,6 +474,11 @@ def build(site):
     for n in range(0,len(sitemap),10000):
         name='sitemap-'+str(n//10000+1)+'.xml';sitemap_files.append(name)
         (site/name).write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+html.escape(u)+'</loc></url>' for u in sitemap[n:n+10000])+'</urlset>')
+    # Separate editorial sitemap is discoverable through the main sitemap index.
+    editorial_urls=sorted(set(editorial_urls))
+    editorial_name='sitemap-editorial.xml'
+    (site/editorial_name).write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+html.escape(ORIGIN+url)+'</loc></url>' for url in editorial_urls)+'</urlset>',encoding='utf-8')
+    sitemap_files.append(editorial_name)
     (site/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<sitemap><loc>'+ORIGIN+'/'+x+'</loc></sitemap>' for x in sitemap_files)+'</sitemapindex>')
     (site/'robots.txt').write_text('User-agent: *\nAllow: /\nDisallow: /system/\nDisallow: /finance/\nSitemap: '+ORIGIN+'/sitemap.xml\n')
     (data/'seo-manifest.json').write_text(json.dumps({'generated_paths':generated,'pages':len(pages),'indexable':len(sitemap),'aliases':aliases},ensure_ascii=False))
