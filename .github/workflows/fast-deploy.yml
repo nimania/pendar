@@ -11,6 +11,8 @@ on:
       - "web-static/**"
       - ".github/workflows/fast-deploy.yml"
       - "backend/tests/test_editorial_report_ui.js"
+      - "backend/tests/test_story_shell_refresh.py"
+      - "backend/scripts/refresh_story_shells.py"
       - "backend/scripts/prepare_priority_site.py"
       - "backend/scripts/audit_pages_size.py"
       - "backend/scripts/build_iran_scenario_radar.py"
