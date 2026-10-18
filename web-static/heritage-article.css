@@ -1,4 +1,5 @@
-/* story-editorial-critical: shared by every direct article and figure route */
+/* story-editorial-critical */
+/* Shared once rather than in every direct article/figure HTML entry. */
 
     #detail-view .story-editorial{
       margin:24px 0 30px;padding:24px 24px 20px;
