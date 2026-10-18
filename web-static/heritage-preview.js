@@ -59,9 +59,9 @@
   // The visual ticker revives the 2013 picture-and-headline rhythm without
   // inventing imagery, changing original headlines, or modifying canonical URLs.
   function shortTickerTitle(value){
-    var full=norm(value).replace(/\\s*[|؛]\\s*.*$/,"");
+    var full=norm(value).replace(/\s*[|؛]\s*.*$/,"");
     if(!full) return "";
-    var words=full.split(/\\s+/);
+    var words=full.split(/\s+/);
     if(words.length<=9&&full.length<=66) return full;
     var chosen=words.slice(0,9).join(" ");
     if(chosen.length>66){
@@ -69,7 +69,7 @@
       var lastSpace=chosen.lastIndexOf(" ");
       if(lastSpace>=37) chosen=chosen.slice(0,lastSpace);
     }
-    return chosen.replace(/[،:؛\\s]+$/,"")+(chosen!==full?"…":"");
+    return chosen.replace(/[،:؛\s]+$/,"")+(chosen!==full?"…":"");
   }
   async function renderVisualTicker(stories){
     var candidates=stories.slice(0,16).map(function(row){return Object.assign({},row);});
