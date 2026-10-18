@@ -211,3 +211,5 @@
 #detail-view .story-photo-missing{margin:12px 0;padding:16px;border:1px solid var(--line);border-radius:9px;color:var(--ink-soft);background:var(--surface-2)}
 #detail-view .story-editorial-subtitle{font:450 17px/1.95 "Vazirmatn",sans-serif;color:var(--ink-soft);margin:8px 0 14px}
 @media(max-width:600px){#detail-view .story-author-monogram{width:56px;height:56px;font-size:24px}#detail-view .story-examination>summary{padding:14px 15px}#detail-view .story-examination-body{padding:0 15px 15px}}
+
+#detail-view .d-meta[hidden]{display:none!important}
