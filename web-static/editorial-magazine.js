@@ -41,7 +41,7 @@ function pendarMagazineReportCard(row,options){
     +(teaser?'<span class="magazine-report-deck">'+esc(teaser)+'</span>':"")
     +'</span></a>'
     +'<div class="magazine-report-card-footer">'
-    +(showAuthor?'<a class="magazine-report-author" href="/editorial-author/'+encodeURIComponent(author)+'/">'
+    +(showAuthor?'<a class="magazine-report-author" href="'+esc(pendarWriterURL(author))+'">'
         +(avatar||'<span class="magazine-report-avatar" aria-hidden="true">پ</span>')
         +esc(name)+'</a>':"")
     +(published?'<time datetime="'+esc(published)+'">'+esc(published)+'</time>':"")
