@@ -50,6 +50,7 @@ function pendarEditorialReport(s){
   return '<article class="story-editorial" aria-labelledby="story-report-title">'
     +'<div class="story-editorial-kicker">گزارش پندار <span>'+(pilot?'نسخهٔ آزمایشی · نیازمند تأیید تحریریه':'بر اساس منابع این پرونده')+'</span></div>'
     +'<h2 id="story-report-title">'+esc(report.title_fa||s.headline_fa||"")+'</h2>'
+    +pendarAuthorByline(s,report)
     +'<p class="story-editorial-lead">'+esc(report.lead_fa||"")+'</p>'
     +'<div class="story-editorial-body">'+rows+'</div>'
     +'<p class="story-editorial-note">'+esc(report.notice_fa||"گزارش خودکار؛ بررسی ادعاها از طریق منابع اصلی ضروری است.")+'</p>'
@@ -212,7 +213,7 @@ async function openStory(id) {
   }
 
   const imp = impInfo(s.importance_score);
-  const [peopleSuggestions, storyBookData] = await Promise.all([storyPeopleSuggestions(s), loadBooks()]);
+  const [peopleSuggestions, storyBookData] = await Promise.all([storyPeopleSuggestions(s), loadBooks(), loadPendarEditorialAuthors().catch(()=>null)]);
   const storyBooks=(storyBookData.books||[]).filter(b=>(b.mentions||[]).some(m=>String(m.story_id||"")===String(cleanId)));
   const storyBooksSection=storyBooks.length?`<section class="story-books"><div class="rule"><span>کتاب‌های مرتبط با این خبر</span><span class="l"></span></div><div class="press-book-links">${storyBooks.map(b=>`<button onclick="openBook('${esc(b.slug)}')"><span>کتاب</span><b>${esc(b.title_fa||"")}</b></button>`).join("")}</div></section>`:"";
   const li = a => (a || []).map(x => `<li>${esc(x)}</li>`).join("");
