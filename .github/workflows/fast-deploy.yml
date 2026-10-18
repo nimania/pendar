@@ -13,6 +13,8 @@ on:
       - "backend/tests/test_editorial_report_ui.js"
       - "backend/tests/test_story_shell_refresh.py"
       - "backend/scripts/refresh_story_shells.py"
+      - "backend/scripts/refresh_figure_shells.py"
+      - "backend/tests/test_figure_shell_refresh.py"
       - "backend/scripts/prepare_priority_site.py"
       - "backend/scripts/audit_pages_size.py"
       - "backend/scripts/build_iran_scenario_radar.py"
@@ -415,6 +417,10 @@ jobs:
         run: |
           python -m unittest discover -s backend/tests -p test_story_shell_refresh.py -v
           python backend/scripts/refresh_story_shells.py --site site
+      - name: Refresh figures magazine on direct person routes with preserved SEO
+        run: |
+          python -m unittest discover -s backend/tests -p test_figure_shell_refresh.py -v
+          python backend/scripts/refresh_figure_shells.py --site site
       - name: Restore cached book shelf entry only (no collectors)
         run: |
           python - <<'PY'
