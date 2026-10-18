@@ -8,6 +8,7 @@
   function toggle(active){
     host.hidden=!active;
     document.documentElement.classList.toggle("heritage-live-active",active);
+    if(!active)document.documentElement.classList.remove("heritage-booting");
     if(active&&!isReady&&!starting)mount();
   }
   function currentHome(){
@@ -17,7 +18,9 @@
   }
   function fail(error){
     starting=false;
-    document.documentElement.classList.remove("heritage-live-active");
+    // On any network or rendering failure restore the existing functional home.
+    document.documentElement.classList.remove("heritage-booting","heritage-live-active");
+    host.classList.remove("heritage-ready");
     host.hidden=true;
     if(typeof console!=="undefined")console.error("Pendar heritage live: loading failed; the original homepage is preserved.",error);
   }
@@ -36,9 +39,18 @@
         throw new Error("Heritage template is incomplete");
       }
       shadow=host.shadowRoot||host.attachShadow({mode:"open"});
+      // Keep the new DOM invisible until data and its own stylesheet are ready.
+      // The matching magazine-shaped first-paint shell stays visible meanwhile.
+      var pendingStyle=document.createElement("style");
+      pendingStyle.textContent=".heritage-root{display:none!important}";
+      shadow.appendChild(pendingStyle);
       var css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/heritage-preview.css?v=20261018-live-1";
+      css.href="/heritage-preview.css?v=20261018-no-flash-1";
+      var cssReady=new Promise(function(resolve,reject){
+        css.addEventListener("load",resolve,{once:true});
+        css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
+      });
       shadow.appendChild(css);
       var shell=document.createElement("div");
       shell.className="heritage-root";
@@ -112,7 +124,12 @@
       if(!window.PendarHeritage||typeof window.PendarHeritage.mount!=="function"){
         throw new Error("Magazine renderer is not available");
       }
-      await window.PendarHeritage.mount(shadow);
+      await Promise.all([window.PendarHeritage.mount(shadow),cssReady]);
+      // One visual transition: replace the matching lightweight shell with
+      // the completed magazine, never showing the old homepage in between.
+      pendingStyle.remove();
+      host.classList.add("heritage-ready");
+      document.documentElement.classList.remove("heritage-booting");
       isReady=true;
       starting=false;
     }catch(error){fail(error);}
