@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import html
 from pathlib import Path
 import re
 import unicodedata
@@ -82,6 +83,58 @@ def read_json(path: Path, default):
     if not path.exists():
         return default
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def ensure_article_html(site: Path, sid: str, row: dict, content: str) -> str:
+    """Supply real article-specific HTML for new fast-deployed story shells."""
+    if 'id="seo-static"' in content:
+        return content
+    detail = read_json(site/"data"/"story"/(sid+".json"),row)
+    report = detail.get("editorial_report") or {}
+    title = text(report.get("title_fa") or row.get("title_fa") or
+                 detail.get("headline_fa") or row.get("headline_fa"))
+    paragraphs = [text(report.get("lead_fa") or detail.get("summary_fa"))]
+    if report.get("status") in ("ai_draft","published") and isinstance(report.get("paragraphs"),list):
+        paragraphs.extend(text(part.get("text_fa")) for part in report["paragraphs"] if isinstance(part,dict))
+    else:
+        paragraphs.extend(text(detail.get(field)) for field in ("what_happened_fa","why_it_matters_fa"))
+    paragraphs = [p for p in paragraphs if p and p!="—"]
+    if not title or len(" ".join(paragraphs))<110:
+        return ""
+    url=ORIGIN+"/story/"+sid+"/"
+    desc=paragraphs[0][:170]
+    content=re.sub(r"<title>[\s\S]*?</title>",lambda _: "<title>"+html.escape(title)+" | پندار</title>",
+                   content,count=1)
+    desc_tag='<meta name="description" content="'+html.escape(desc,quote=True)+'">'
+    if re.search(r'<meta\s+name="description"[^>]*>',content):
+        content=re.sub(r'<meta\s+name="description"[^>]*>',lambda _:desc_tag,content,count=1)
+    else:
+        content=content.replace("</head>",desc_tag+"</head>",1)
+    if not re.search(r'<link\s+rel="canonical"',content):
+        content=content.replace("</head>",'<link rel="canonical" href="'+url+'"></head>',1)
+    if not re.search(r'<meta\s+property="og:url"',content):
+        content=content.replace("</head>",'<meta property="og:url" content="'+url+'"></head>',1)
+    content=content.replace("</head>",'<meta name="robots" content="index,follow,max-image-preview:large"></head>',1)
+    schema={"@context":"https://schema.org","@type":"Article",
+            "headline":title,"name":title,"url":url,"inLanguage":"fa-IR",
+            "description":desc,"datePublished":text(detail.get("published_at")),
+            "publisher":{"@type":"Organization","name":"پندار","url":ORIGIN}}
+    if 'id="seo-schema"' not in content:
+        content=content.replace("</head>",'<script type="application/ld+json" id="seo-schema">'
+                                +json.dumps(schema,ensure_ascii=False).replace("<","\\u003c")
+                                +'</script></head>',1)
+    body='<section id="seo-static" class="wrap"><nav><a href="/">پندار</a> / <a href="/headlines/">سرخط</a></nav>'
+    body+='<h1>'+html.escape(title)+'</h1>'
+    body+="".join("<p>"+html.escape(p)+"</p>" for p in paragraphs[:24])
+    for source in (detail.get("sources") or [])[:15]:
+        if isinstance(source,dict) and text(source.get("article_url")).startswith(("https://","http://")):
+            body+='<p><a href="'+html.escape(source["article_url"],quote=True)+'">'+html.escape(
+                text(source.get("original_headline") or source.get("source_name") or "منبع"))+'</a></p>'
+    body+='</section><!-- seo-end -->'
+    content=content.replace('<main class="wrap">',body+'<main class="wrap">',1)
+    content=content.replace("</head>",'<style>html.js-enabled #seo-static{display:none!important}'
+                            'html:not(.js-enabled) main.wrap{display:none!important}</style></head>',1)
+    return content
 
 
 def update_html_canonical(content: str, old: str, new: str) -> str:
@@ -166,11 +219,16 @@ def run(site: Path, limit: int = 60) -> dict:
         old = ORIGIN+"/story/"+sid+"/"
         new = ORIGIN+"/story/"+slug+"/"
         original = source.read_text(encoding="utf-8")
+        if 'id="seo-static"' not in original:
+            row=next((item for key,item in choices if key==sid),{})
+            original=ensure_article_html(site,sid,row,original)
+            if not original:
+                continue
         alias = site/"story"/slug/"index.html"
         alias.parent.mkdir(parents=True,exist_ok=True)
         alias.write_text(update_html_canonical(original,old,new),encoding="utf-8")
         old_html = update_html_canonical(original,old,new)
-        if old_html != original:
+        if old_html != source.read_text(encoding="utf-8"):
             source.write_text(old_html,encoding="utf-8")
         old_seo = source.parent/"seo.json"
         if old_seo.is_file():
@@ -185,12 +243,31 @@ def run(site: Path, limit: int = 60) -> dict:
     js+="window.pendarStoryURL=function(id){var slug=window.PENDAR_STORY_PERMALINKS.id_to_slug[String(id||'')];return '/story/'+(slug||encodeURIComponent(String(id||'')))+'/';};\n"
     (data/"story-permalinks.js").write_text(js,encoding="utf-8")
 
+    not_listed=set(effective.values())
     for sitemap in site.glob("sitemap-*.xml"):
+        if sitemap.name=="sitemap-readable-stories.xml":
+            continue
         content=sitemap.read_text(encoding="utf-8")
         for sid,slug in effective.items():
-            content=content.replace("<loc>"+ORIGIN+"/story/"+sid+"/</loc>",
-                                    "<loc>"+ORIGIN+"/story/"+slug+"/</loc>")
+            old_url="<loc>"+ORIGIN+"/story/"+sid+"/</loc>"
+            new_url="<loc>"+ORIGIN+"/story/"+slug+"/</loc>"
+            if old_url in content or new_url in content:
+                not_listed.discard(slug)
+            content=content.replace(old_url,new_url)
         sitemap.write_text(content,encoding="utf-8")
+    extra=site/"sitemap-readable-stories.xml"
+    if not_listed:
+        extra.write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+            +''.join('<url><loc>'+ORIGIN+'/story/'+slug+'/</loc></url>' for slug in sorted(not_listed))
+            +'</urlset>',encoding="utf-8")
+        sitemap_index=site/"sitemap.xml"
+        if sitemap_index.is_file():
+            index_text=sitemap_index.read_text(encoding="utf-8")
+            if "sitemapindex" in index_text and "sitemap-readable-stories.xml" not in index_text:
+                index_text=index_text.replace("</sitemapindex>",'<sitemap><loc>'+ORIGIN+'/sitemap-readable-stories.xml</loc></sitemap></sitemapindex>')
+                sitemap_index.write_text(index_text,encoding="utf-8")
+    elif extra.is_file():
+        extra.unlink()
     print(f"Story permalinks: {len(effective)} readable aliases, UUID routes preserved")
     return payload
 
