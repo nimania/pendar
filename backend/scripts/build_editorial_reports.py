@@ -210,6 +210,39 @@ def valid_report(value:dict,sources:list[dict],context:dict)->dict|None:
             "status":"ai_draft","notice_fa":"گزارش ماشینی بر پایهٔ منابع این پرونده؛ ادعاهای منابع به‌معنای تأیید مستقل نیست."}
 
 
+def choose_editorial_author(detail:dict, author_catalog:dict)->str:
+    """Choose the strongest documented subject; if genuinely tied, use the desk.
+
+    A title hit has priority over incidental references in summary/body.
+    This is a stable editorial attribution, not a claim of human authorship.
+    """
+    title=normalize(detail.get("headline_fa") or "")
+    summary=normalize(detail.get("summary_fa") or "")
+    body=normalize(detail.get("what_happened_fa") or "")[:1300]
+    scored=[]
+    for person in author_catalog.get("authors",[]):
+        matches=set()
+        points=0
+        for item in person.get("keywords",[]):
+            needle=normalize(item).strip()
+            if len(needle)<4 or needle in matches:continue
+            if needle in title:
+                points+=5;matches.add(needle)
+            elif needle in summary:
+                points+=2;matches.add(needle)
+            elif needle in body:
+                points+=1;matches.add(needle)
+        if points:
+            scored.append((points,len(matches),person["id"]))
+    if not scored:
+        return "desk"
+    scored.sort(key=lambda row:(-row[0],-row[1],row[2]))
+    # Equal evidence for two beats is not a reliable dominant subject.
+    if len(scored)>1 and scored[0][:2]==scored[1][:2]:
+        return "desk"
+    return scored[0][2]
+
+
 def _db_path()->str:
     uri=os.environ.get("DATABASE_URL","sqlite:///./build.db")
     if uri.startswith("sqlite:///"):
@@ -234,6 +267,9 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
                     if isinstance(row,dict) and row.get("id"):
                         all_cards.setdefault(str(row["id"]),row)
     archive=list(all_cards.values())
+    author_path=Path(__file__).resolve().parents[2]/"web-static"/"data"/"pendar-editorial-authors.json"
+    author_catalog=json.loads(author_path.read_text(encoding="utf-8"))
+    known_authors={a["id"] for a in author_catalog["authors"]} | {"desk"}
     generated=0; enriched=0; reused=0; attempted=0; cooldown_skipped=0
     provider=provider or get_provider()
     is_ai=getattr(provider,"name","mock")!="mock" and bool(settings.ai_api_key)
@@ -266,6 +302,8 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
         except (ValueError,OSError):continue
         context=related_news(detail,archive)
         detail["editorial_context"]=context
+        author_id=choose_editorial_author(detail,author_catalog)
+        assert author_id in known_authors
         sources=source_refs(detail)
         prompt_data=report_input(detail,context,sources)
         serialized=json.dumps(prompt_data,ensure_ascii=False,sort_keys=True)
@@ -300,8 +338,11 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
                            (sid,digest,json.dumps(report,ensure_ascii=False),datetime.now(timezone.utc).isoformat()))
                 cx.commit()
         if report:
+            report["author_id"]=author_id
             detail["editorial_report"]=report
+            detail["editorial_author_id"]=author_id
             row["has_editorial_report"]=True
+            row["editorial_author_id"]=author_id
             generated+=1
         # If no valid article was generated, keep the existing verified-looking
         # factual sections; do not label stitched excerpts as a new report.
