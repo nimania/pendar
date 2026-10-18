@@ -49,8 +49,8 @@
       if(exit)exit.remove();
       var brand=shell.querySelector(".brand");
       if(brand)brand.href="/";
-      var demoArticle=shell.querySelector("#article-page");
-      if(demoArticle)demoArticle.remove();
+      // Keep the hidden article shell: the shared preview boot checks its ID.
+      // It remains hidden on the production homepage and costs no API requests.
       var searchLink=shell.querySelector(".nav-search");
       if(searchLink){
         searchLink.href="/headlines/";
