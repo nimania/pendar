@@ -14,6 +14,13 @@ const router=fs.readFileSync(path.join(root,"web-static/router.js"),"utf8");
 const directory=JSON.parse(fs.readFileSync(path.join(root,"web-static/data/pendar-editorial-authors.json"),"utf8"));
 assert.equal(directory.authors.length,7);
 assert(directory.authors.every(a=>a.name_status==="approved"&&a.is_ai));
+assert(directory.authors.every((a,i)=>a.portrait_status==="installed"&&a.portrait_index===i&&a.portrait_url.endsWith("pendar-authors-sprite.avif")));
+assert(authors.includes("function pendarAuthorPortraitCSS(id)"));
+assert(authors.includes("story-author-monogram"));
+assert(authors.includes("background-position:"));
+assert(!detail.includes("story-editorial-note"),"no machine-report disclaimer after articles");
+assert(!detail.includes("گزارش ماشینی"));
+
 assert.equal(directory.authors.find(a=>a.id==="diplomacy").role_fa,"دبیر دیپلماسی");
 assert(!authors.includes("دبیر مجازی"),"virtual-editor wording must not appear in public bylines or profiles");
 assert(!authors.includes("تدوین با کمک هوش مصنوعی"),"AI notices must not repeat in bylines");
