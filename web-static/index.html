@@ -45,6 +45,11 @@
       document.documentElement.classList.add("route-boot");
       
     })();
+    // Preserve the magazine first paint on direct figure and statement routes.
+    if (/^\/(?:figures(?:\/directory)?|figure\/[^/]+|statement\/[^/]+)\/?$/i.test(location.pathname)
+        || /^#\/(?:figures(?:\/directory)?|figure\/[^/]+|statement\/[^/]+)\/?$/i.test(location.hash)) {
+      document.documentElement.classList.add("heritage-figures-active");
+    }
   </script>
   <style id="heritage-live-visibility">
     #heritage-live-host[hidden]{display:none!important}
@@ -215,6 +220,7 @@
   </style>
   <link rel="stylesheet" href="heritage-article.css?v=20261018-reader-3">
   <link rel="stylesheet" href="heritage-collections.css?v=20261018-1">
+  <link rel="stylesheet" href="heritage-figures.css?v=20261018-1">
 </head>
 <body>
   <!-- New heritage magazine homepage; the original SPA remains for all other routes. -->
@@ -421,6 +427,17 @@
     </section>
 
     <section class="trends-view" id="figures-view">
+      <div class="magazine-figures-masthead"><div class="magazine-figures-container magazine-figures-masthead-inner">
+        <a href="/" aria-label="صفحهٔ اول پندار"><img src="/assets/pendar-logo.svg" alt="پندار" width="102" height="80"></a>
+        <span>خبر، اندیشه و فرهنگ</span>
+        <a class="magazine-figures-home-link" href="/">بازگشت به صفحهٔ اول ←</a>
+      </div></div>
+      <nav class="magazine-figures-topnav" aria-label="بخش‌های پندار"><div class="magazine-figures-container">
+        <a href="/">خانه</a><a href="/reports/">گزارش‌ها</a><a href="/headlines/">سرخط</a>
+        <a href="/figures/" aria-current="page">چهره‌ها</a><a href="/books/">کتاب</a>
+        <a href="/movies/">جان فیلم</a><a href="/press/">پیشخوان جراید</a>
+      </div></nav>
+      <div class="magazine-figures-container magazine-figures-content">
       <div class="lede" id="figures-lede">
         <h1>چهره‌ها</h1>
         <p>تایملاین مستقلِ دیدگاه‌ها، گفته‌ها و تحلیل‌های چهره‌های پندار؛ جدیدترین مورد همیشه بالاتر است.</p>
@@ -430,6 +447,11 @@
       <div class="rule"><span>نظرها و دیدگاه‌ها</span><span class="l"></span><button class="sortchip" onclick="renderFiguresDirectory()">فهرست چهره‌ها</button></div>
       <div class="figure-timeline" id="figure-timeline"><div class="spinner"></div></div>
       <div id="figures"></div>
+      </div>
+      <footer class="magazine-figures-footer"><div class="magazine-figures-container"><strong>پندار</strong>
+        <span>خبر، اندیشه و فرهنگ</span>
+        <nav aria-label="پایین صفحه"><a href="/reports/">گزارش‌ها</a><a href="/figures/">چهره‌ها</a><a href="/press/">جراید</a></nav>
+      </div></footer>
     </section>
 
     <section class="trends-view" id="press-view">
@@ -574,8 +596,8 @@
 <script defer src="tv-guide.js"></script>
 <script defer src="knowledge-hub.js"></script>
   <script defer src="charts-social.js"></script>
-  <script defer src="figures-core.js"></script>
-  <script defer src="figures-profile.js"></script>
+  <script defer src="figures-core.js?v=20261018-magazine-1"></script>
+  <script defer src="figures-profile.js?v=20261018-magazine-1"></script>
   <script defer src="studio-videos.js"></script>
   <script defer src="press.js"></script>
   <script defer src="search.js"></script>
@@ -600,7 +622,7 @@
   <script defer src="israel-radar.js"></script>
   <script defer src="diner.js?v=recipe-lab-source-audit-4"></script>
   <script defer src="future.js?v=20261017"></script>
-  <script defer src="app.js?v=20261018-collections-1"></script>
+  <script defer src="app.js?v=20261018-figures-1"></script>
   <script defer src="heritage-live.js?v=20261018-fast-first-content-1" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
 </body>
 </html>
