@@ -343,6 +343,7 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
             detail["editorial_author_id"]=author_id
             row["has_editorial_report"]=True
             row["editorial_author_id"]=author_id
+            row["editorial_report_title_fa"]=report.get("title_fa") or ""
             generated+=1
         # If no valid article was generated, keep the existing verified-looking
         # factual sections; do not label stitched excerpts as a new report.
@@ -351,6 +352,18 @@ def build(data_dir:Path, *, provider=None, cache_path:str|None=None, max_generat
     # Surface reports in the existing news tabs, without introducing a new
     # homepage category or changing headline rankings.
     cards_path.write_text(json.dumps(cards,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
+    # The extended press-source archive powers full author bibliographies.
+    # Do not add non-editorial news to author publication lists.
+    if path.is_file():
+        for rows in by_source.values():
+            if not isinstance(rows,list):continue
+            for item in rows:
+                if not isinstance(item,dict):continue
+                current=all_cards.get(str(item.get("id") or ""))
+                if current and current.get("has_editorial_report"):
+                    for name in ("has_editorial_report","editorial_author_id","editorial_report_title_fa"):
+                        item[name]=current.get(name)
+        path.write_text(json.dumps(by_source,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
     if cx:cx.close()
     return {"enriched":enriched,"reports":generated,"cached":reused,"attempted":attempted,"cooldown_skipped":cooldown_skipped,"archive":len(archive),"ai_available":is_ai}
 
