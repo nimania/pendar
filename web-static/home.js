@@ -220,7 +220,7 @@ function renderHomeCulture(){
 // Two independent homepage windows: headlines and culture.
 let homeNewsMode="reports";
 function setHomeNewsMode(mode){
-  if(!["reports","events","people","latest","selected","viral"].includes(mode))return;
+  if(!["reports","events","people","latest","viral"].includes(mode))return;
   homeNewsMode=mode;
   document.querySelectorAll("[data-home-news]").forEach(button=>{
     const on=button.dataset.homeNews===mode;button.classList.toggle("on",on);button.setAttribute("aria-selected",String(on));
@@ -270,7 +270,7 @@ function renderHomeDaily(){
   // A presentation hook for mode-specific editorial styling; no data change.
   storyEl.dataset.homeMode=homeNewsMode;
   const title=document.getElementById("home-news-title");
-  if(title)title.textContent=homeNewsMode==="reports"?"گزارش‌های تحریریه":homeNewsMode==="events"?"ماجراها و ترندها":homeNewsMode==="people"?"چهره‌ها و جان کلام":homeNewsMode==="latest"?"سرخط‌های تازه":homeNewsMode==="selected"?"سرخط‌های برگزیده":"وایرال";
+  if(title)title.textContent=homeNewsMode==="reports"?"گزارش‌های تحریریه":homeNewsMode==="events"?"ماجراها و ترندها":homeNewsMode==="people"?"چهره‌ها و جان کلام":homeNewsMode==="latest"?"سرخط‌های تازه":"وایرال";
   // The independent site-activity section stays visible at the bottom on every tab.
   renderHomeNewsDashboard(ALL||[]);
   storyEl.classList.toggle("home-recaps-list",homeNewsMode==="recaps");
@@ -532,14 +532,23 @@ async function renderHomeReports(){
     const [reports]=await Promise.all([loadPendarEditorialArchive(),loadPendarEditorialAuthors().catch(()=>null)]);
     if(request!==homeReportsRequest||homeNewsMode!=="reports"||document.getElementById("home-daily-stories")!==host)return;
     const rows=reports.slice().sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||""))).slice(0,20);
+    // Older editorial archive records do not contain an image_url. Resolve from
+    // the actual story payload, and never invent or substitute a generic image.
+    const cards=await getJSON(DATA+"/stories.json").catch(()=>[]);
+    const images=new Map((Array.isArray(cards)?cards:[]).filter(x=>x?.id&&x.image_url).map(x=>[String(x.id),x.image_url]));
+    await Promise.all(rows.filter(row=>!row.image_url&&!images.has(String(row.id))).map(async row=>{
+      try{const detail=await getJSON(DATA+"/story/"+encodeURIComponent(row.id)+".json");if(detail?.image_url)images.set(String(row.id),detail.image_url);}catch(_){}
+    }));
+    if(request!==homeReportsRequest||homeNewsMode!=="reports"||document.getElementById("home-daily-stories")!==host)return;
     host.innerHTML=rows.length?'<div class="home-report-list">'+rows.map((row,i)=>{
       const id=String(row.id||"");
       const title=row.title_fa||row.editorial_report_title_fa||row.headline_fa||"";
       const author=pendarAuthorName(row.author_id||pendarEditorialAuthorId(row));
-      const img=typeof row.image_url==="string"&&(row.image_url.startsWith("https://")||row.image_url.startsWith("http://"))?row.image_url:"";
+      const source=row.image_url||images.get(id)||"";
+      const img=typeof source==="string"&&(source.startsWith("https://")||source.startsWith("http://")||source.startsWith("/assets/"))?source:"";
       return '<a class="home-intel-row home-intel-row-rich" href="/story/'+esc(id)+'/">'
         +'<span class="home-intel-rank">'+faN(i+1)+'</span>'
-        +'<span class="home-news-thumb">'+(img?'<img src="'+esc(img)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<span class="home-news-thumb-fallback">پندار</span>')+'</span>'
+        +'<span class="home-news-thumb">'+(img?'<img src="'+esc(img)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'">':'<span class="home-news-thumb-fallback">پندار</span>')+'</span>'
         +'<span class="home-intel-copy"><b>'+esc(title)+'</b><small>'+esc(author)+' · '+esc(String(row.published_at||"").slice(0,10))+'</small></span>'
         +'<span class="home-intel-go">←</span></a>';
     }).join("")+'</div><a class="home-all-reports" href="/reports/">آرشیو همهٔ گزارش‌ها ←</a>':'<div class="state"><div class="big">هنوز گزارشی در آرشیو ثبت نشده است.</div></div>';
