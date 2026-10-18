@@ -140,18 +140,23 @@
     var stories=data.stories.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
     var reports=data.reports.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);})
       .sort(function(a,b){return String(b.published_at||"").localeCompare(String(a.published_at||""));});
-    // Prioritize recent news. Expand to the rest of the feed only when the first
-    // group cannot supply enough verified, relevant photographs.
+    // First paint must not wait for dozens of third-party images or fallback
+    // article requests. Check a small above-the-fold pool concurrently, then
+    // show the verified images we already have within a short bounded window.
     var first=limitUnique(reports.slice(0,23).concat(stories.slice(0,38)),70);
-    await inspectPhotos(first);
-    await hydrateMissingPhotos(first,14);
-    await inspectPhotos(first);
-    if(uniquePictured(stories.slice(0,38),15).length<12||uniquePictured(reports.slice(0,23),5).length<4){
-      var rest=limitUnique(reports.slice(23,65).concat(stories.slice(38,65)),70);
-      await inspectPhotos(rest);
-      await hydrateMissingPhotos(rest,12);
-      await inspectPhotos(rest);
-    }
+    var priority=limitUnique(reports.slice(0,7).concat(stories.slice(0,16)),23);
+    var good=0,signalFirst;
+    var enoughPictures=new Promise(function(resolve){signalFirst=resolve;});
+    var quickChecks=priority.map(function(row){
+      return inspectPhotos([row]).then(function(){
+        if(verifiedImage(photo(row))&&++good>=3)signalFirst();
+      });
+    });
+    await Promise.race([
+      enoughPictures,
+      Promise.all(quickChecks),
+      new Promise(function(resolve){setTimeout(resolve,650);})
+    ]);
     // No item without a verified picture can enter ANY homepage news module.
     // The backend remains unchanged, and imageless reports still exist in the
     // searchable archive and on their original URL.
@@ -204,6 +209,24 @@
     }
     redrawHome=draw;
     draw();
+    // Fill the remaining modules without blocking the first meaningful paint.
+    // Every subsequent draw still filters out images not verified by the browser.
+    (async function(){
+      await Promise.all(quickChecks);
+      await inspectPhotos(first);
+      await hydrateMissingPhotos(first,14);
+      await inspectPhotos(first);
+      if(uniquePictured(stories.slice(0,38),15).length<12||
+         uniquePictured(reports.slice(0,23),5).length<4){
+        var rest=limitUnique(reports.slice(23,65).concat(stories.slice(38,65)),70);
+        await inspectPhotos(rest);
+        await hydrateMissingPhotos(rest,12);
+        await inspectPhotos(rest);
+      }
+      draw();
+    })().catch(function(error){
+      if(typeof console!=="undefined")console.warn("Pendar image enrichment:",error);
+    });
   }
   function authorName(record){
     var key=String(record.editorial_author_id||record.editorial_report&&record.editorial_report.author_id||record.author_id||"");
@@ -275,20 +298,6 @@
           lead_fa:r.lead_fa||story.summary_fa||""
         });
       }),75);
-      // Older archive entries sometimes lack an image or lead. Resolve a
-      // bounded number from existing story details before building the cover.
-      if(!storyMode){
-        var incomplete=data.reports.slice(0,12).filter(function(r){return !photo(r)||!norm(r.lead_fa);});
-        await Promise.all(incomplete.map(async function(row){
-          try{
-            var detail=await fetchJson("/data/story/"+encodeURIComponent(row.id)+".json");
-            if(!photo(row)&&validImage(detail.image_url))row.image_url=detail.image_url;
-            if(!norm(row.lead_fa)&&detail.editorial_report&&detail.editorial_report.lead_fa)
-              row.lead_fa=detail.editorial_report.lead_fa;
-            if(!norm(row.lead_fa)&&detail.summary_fa)row.lead_fa=detail.summary_fa;
-          }catch(_){}
-        }));
-      }
       if(storyMode){
         var detail=await fetchJson("/data/story/"+encodeURIComponent(storyId)+".json");
         renderArticle(storyId,detail);
