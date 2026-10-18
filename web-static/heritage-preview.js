@@ -35,10 +35,43 @@
   var headline=function(r){return norm(r.title_fa||r.editorial_report_title_fa||r.headline_fa||"");};
   var photo=function(r){return validImage(r.image_url||"");};
   var hook=function(r){return excerpt(r.lead_fa||r.editorial_report&&r.editorial_report.lead_fa||r.summary_fa||"",155);};
-  var thumb=function(r,alt,cls){
-    var url=photo(r);
-    return url?'<img class="'+esc(cls||"")+'" src="'+esc(url)+'" alt="'+esc(alt||headline(r))+'" loading="lazy" referrerpolicy="no-referrer">':'<span class="empty-thumb" aria-hidden="true"></span>';
-  };
+  // External publishers may return blocked, expired or tiny image URLs.
+  // Check whether an image actually loads before promoting it to a visual slot.
+  var imageChecks=new Map();
+  function verifiedImage(url){
+    return imageChecks.get(url)===true;
+  }
+  function checkImage(url){
+    if(!url)return Promise.resolve(false);
+    if(imageChecks.has(url)){
+      var cached=imageChecks.get(url);
+      return typeof cached==="boolean"?Promise.resolve(cached):cached;
+    }
+    var pending=new Promise(function(resolve){
+      if(typeof Image==="undefined"){resolve(false);return;}
+      var img=new Image(),finished=false;
+      var done=function(ok){
+        if(finished)return;finished=true;
+        clearTimeout(timer);
+        img.onload=img.onerror=null;
+        imageChecks.set(url,Boolean(ok));
+        resolve(Boolean(ok));
+      };
+      var timer=setTimeout(function(){done(false);},2600);
+      img.onload=function(){done(img.naturalWidth>=48&&img.naturalHeight>=38);};
+      img.onerror=function(){done(false);};
+      img.src=url;
+    });
+    imageChecks.set(url,pending);
+    return pending;
+  }
+  function thumb(item,alt,cls){
+    var url=photo(item);
+    var clsName=esc(cls||"");
+    // Decorative thumbnails never repeat article titles when a hotlink fails.
+    return url?'<img class="'+clsName+'" src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add(\'is-empty\');this.remove()">'
+      :'<span class="empty-thumb" aria-hidden="true"></span>';
+  }
   var data={stories:[],reports:[],authors:[]};
   function put(id,html){var x=el(id);if(x)x.innerHTML=html;}
   function readCard(item){
