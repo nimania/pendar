@@ -65,140 +65,145 @@
     imageChecks.set(url,pending);
     return pending;
   }
-  function thumb(item,alt,cls){
+  function thumb(item,cls){
     var url=photo(item);
-    var clsName=esc(cls||"");
-    // Decorative thumbnails never repeat article titles when a hotlink fails.
-    return url?'<img class="'+clsName+'" src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add(\'is-empty\');this.remove()">'
-      :'<span class="empty-thumb" aria-hidden="true"></span>';
+    // A news tile may only exist when its picture has already loaded.
+    if(!url||!verifiedImage(url))return "";
+    return '<img class="'+esc(cls||"")+'" src="'+esc(url)+'" alt="" loading="lazy" decoding="async">';
   }
   var data={stories:[],reports:[],authors:[]};
+  var redrawHome=null;
   function put(id,html){var x=el(id);if(x)x.innerHTML=html;}
-  function readCard(item){
-    return '<a class="story-card" href="'+esc(slugUrl(item))+'">'
-      +'<span class="image-frame">'+thumb(item,headline(item),"")+'</span>'
-      +'<span class="story-info"><b>'+esc(headline(item))+'</b><p>'+esc(hook(item))+'</p></span></a>';
-  }
-  function railRow(item,withImage){
-    var h=headline(item);
-    return '<a class="rail-row'+(withImage?"":" no-image")+'" href="'+esc(slugUrl(item))+'">'
-      +(withImage?'<span>'+thumb(item,h,"rail-thumb")+'</span>':"")
-      +'<span><span class="rail-title">'+esc(h)+'</span>'
+  function railRow(item){
+    if(!verifiedImage(photo(item)))return "";
+    var title=headline(item);
+    return '<a class="rail-row" href="'+esc(slugUrl(item))+'"><span>'+thumb(item,"rail-thumb")+'</span>'
+      +'<span><span class="rail-title">'+esc(title)+'</span>'
       +(item.category?'<span class="rail-kicker">'+esc(String(item.category).slice(0,34))+'</span>':"")
       +'</span></a>';
   }
-  function fallback(id,message){
-    put(id,'<p class="empty-state">'+esc(message)+' <a href="/reports/" style="color:#178e99">آرشیو پندار ←</a></p>');
+  function photoNotice(id,message,href){
+    put(id,'<p class="empty-state">'+esc(message)+' <a href="'+esc(href)+'" style="color:#178e99">دیدن آرشیو ←</a></p>');
   }
-  // The visual ticker revives the 2013 picture-and-headline rhythm without
-  // inventing imagery, changing original headlines, or modifying canonical URLs.
   function shortTickerTitle(value){
     var full=norm(value).replace(/\s*[|؛]\s*.*$/,"");
-    if(!full) return "";
+    if(!full)return "";
     var words=full.split(/\s+/);
-    if(words.length<=9&&full.length<=66) return full;
+    if(words.length<=9&&full.length<=66)return full;
     var chosen=words.slice(0,9).join(" ");
     if(chosen.length>66){
       chosen=chosen.slice(0,66);
       var lastSpace=chosen.lastIndexOf(" ");
-      if(lastSpace>=37) chosen=chosen.slice(0,lastSpace);
+      if(lastSpace>=37)chosen=chosen.slice(0,lastSpace);
     }
     return chosen.replace(/[،:؛\s]+$/,"")+(chosen!==full?"…":"");
   }
-
-  async function renderVisualTicker(stories){
-    var candidates=stories.slice(0,26).map(function(row){return Object.assign({},row);});
-    var missing=candidates.filter(function(r){return !photo(r);}).slice(0,8);
+  function imageFailure(event){
+    var img=event.target;
+    if(!img||img.tagName!=="IMG"||!el("home-page")||!el("home-page").contains(img))return;
+    // An external host can fail even after a successful verification request.
+    // Remove the entire article tile immediately; never leave a text-only card.
+    var src=img.getAttribute("src");
+    if(src)imageChecks.set(src,false);
+    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.rail-row,.story-card,.visual-card");
+    if(tile)tile.remove();
+    if(redrawHome)redrawHome();
+  }
+  async function hydrateMissingPhotos(items,maxDetails){
+    var missing=items.filter(function(row){return !photo(row)||imageChecks.get(photo(row))===false;}).slice(0,maxDetails);
     await Promise.all(missing.map(async function(row){
       try{
         var detail=await fetchJson("/data/story/"+encodeURIComponent(row.id)+".json");
-        if(validImage(detail.image_url))row.image_url=detail.image_url;
+        var other=validImage(detail.image_url);
+        if(other&&other!==photo(row))row.image_url=other;
+        if(!norm(row.lead_fa)&&detail.editorial_report&&detail.editorial_report.lead_fa)row.lead_fa=detail.editorial_report.lead_fa;
+        if(!norm(row.lead_fa)&&detail.summary_fa)row.lead_fa=detail.summary_fa;
       }catch(_){}
     }));
-    await Promise.all(candidates.filter(function(r){return photo(r);}).map(function(r){return checkImage(photo(r));}));
-    var illustrated=candidates.filter(function(r){return verifiedImage(photo(r));}).slice(0,5);
-    var chosen=illustrated.concat(candidates.filter(function(r){return !illustrated.some(function(x){return x.id===r.id;});})).slice(0,5);
-    chosen.sort(function(a,b){return candidates.findIndex(function(r){return r.id===a.id;})-candidates.findIndex(function(r){return r.id===b.id;});});
-    put("ticker",chosen.map(function(r){
-      var original=headline(r),image=verifiedImage(photo(r))?photo(r):"",display=shortTickerTitle(original);
-      return '<a class="ticker-story'+(image?'':' ticker-without-photo')+'" href="'+esc(finalStoryUrl(r.id))+'" title="'+esc(original)+'" aria-label="'+esc(original)+'">'
-        +(image?'<span class="ticker-thumb"><img src="'+esc(image)+'" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add(\'is-empty\');this.remove()"></span>':"")
-        +'<span class="ticker-headline">'+esc(display)+'</span></a>';
-    }).join("")||'<span class="loading">فعلاً خبری برای نمایش در دسترس نیست.</span>');
   }
-  function renderHome(){
+  async function inspectPhotos(items){
+    await Promise.all(items.map(async function(row){
+      // Prefer the article image; try its matching news-feed image if the
+      // archived report retained a stale URL. Never borrow another topic's photo.
+      var choices=[photo(row)].concat(Array.isArray(row.photo_candidates)?row.photo_candidates:[])
+        .map(validImage).filter(function(url,i,array){return url&&array.indexOf(url)===i;});
+      if(!choices.length)return;
+      var results=await Promise.all(choices.map(checkImage));
+      var good=results.indexOf(true);
+      if(good>=0)row.image_url=choices[good];
+    }));
+  }
+  function uniquePictured(items,max){
+    return limitUnique(items.filter(function(row){return verifiedImage(photo(row));}),max);
+  }
+  async function renderHome(){
     var stories=data.stories.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
-    var reports=data.reports.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
-    var all=limitUnique(stories.concat(reports),90);
-    var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
-    var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
-    renderVisualTicker(stories);
-    function hasImage(r,verified){
-      return Boolean(photo(r))&&(!verified||verifiedImage(photo(r)));
+    var reports=data.reports.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);})
+      .sort(function(a,b){return String(b.published_at||"").localeCompare(String(a.published_at||""));});
+    // Prioritize recent news. Expand to the rest of the feed only when the first
+    // group cannot supply enough verified, relevant photographs.
+    var first=limitUnique(reports.slice(0,23).concat(stories.slice(0,38)),70);
+    await inspectPhotos(first);
+    await hydrateMissingPhotos(first,14);
+    await inspectPhotos(first);
+    if(uniquePictured(stories.slice(0,38),15).length<12||uniquePictured(reports.slice(0,23),5).length<4){
+      var rest=limitUnique(reports.slice(23,65).concat(stories.slice(38,65)),70);
+      await inspectPhotos(rest);
+      await hydrateMissingPhotos(rest,12);
+      await inspectPhotos(rest);
     }
-    function drawSections(verified){
-      put("rail-news",stories.slice(0,7).map(function(r){
-        return railRow(Object.assign({},r,{title_fa:r.headline_fa}),hasImage(r,verified));
-      }).join("")||'<p class="empty-state">سرخط‌ها فعلاً دریافت نشدند.</p>');
-      if(!reports.length){
-        put("feature-hero",'<span class="feature-picture"><span class="image-wait">پندار</span></span><span class="feature-caption"><span class="category-flag orange">گزارش‌ها</span><strong>گزارش‌های تحریریهٔ پندار</strong><span>برای خواندن گزارش‌های کامل وارد آرشیو شوید.</span></span>');
-        fallback("under-hero","گزارشی برای این ویترین پیدا نشد.");
-        fallback("rail-reports","آرشیو گزارش‌ها فعلاً دریافت نشد.");
-      }else{
-        var ranked=reports.slice().sort(function(a,b){return String(b.published_at||"").localeCompare(String(a.published_at||""));});
-        // Do not promote a broken URL to the large cover. Prefer a recent
-        // report with a browser-verified image, otherwise use a text-first cover.
-        var feature=ranked.slice(0,15).find(function(r){return hasImage(r,verified);})||ranked[0];
-        var featured=el("feature-hero"),cover=hasImage(feature,verified)?photo(feature):"";
-        featured.href=slugUrl(feature);
-        featured.setAttribute("aria-label",headline(feature));
-        featured.classList.toggle("text-only-feature",!cover);
-        featured.innerHTML=(cover?'<span class="feature-picture"><img src="'+esc(cover)+'" alt="" decoding="async" onerror="this.parentElement.classList.add(\'is-empty\');this.remove()"></span>':'')
-          +'<span class="feature-caption"><span class="category-flag orange">گزارش ویژه</span><strong>'+esc(headline(feature))+'</strong><span>'+esc(hook(feature))+'</span></span>';
-        var more=ranked.filter(function(r){return r.id!==feature.id;});
-        // Illustrated smaller cards come first; no-image reports become
-        // compact, intentional text cards instead of giant empty rectangles.
-        more.sort(function(a,b){return Number(hasImage(b,verified))-Number(hasImage(a,verified));});
-        put("under-hero",more.slice(0,2).map(function(r){
-          var image=hasImage(r,verified);
-          return '<a class="mini-feature'+(image?'':' no-image')+'" href="'+esc(slugUrl(r))+'">'+(image?thumb(r,"",""):"")
-            +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
-        }).join("")||'<div class="empty-state">مطالب بیشتر در آرشیو گزارش‌ها</div>');
-        put("rail-reports",more.slice(0,7).map(function(r){return railRow(r,hasImage(r,verified));}).join(""));
+    // No item without a verified picture can enter ANY homepage news module.
+    // The backend remains unchanged, and imageless reports still exist in the
+    // searchable archive and on their original URL.
+    function draw(){
+      var news=uniquePictured(stories,65);
+      var editorial=uniquePictured(reports,65);
+      var all=limitUnique(news.concat(editorial),120);
+      var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
+      var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
+      put("ticker",news.slice(0,5).map(function(r){
+        var title=headline(r);
+        return '<a class="ticker-story" href="'+esc(finalStoryUrl(r.id))+'" title="'+esc(title)+'" aria-label="'+esc(title)+'">'
+          +'<span class="ticker-thumb">'+thumb(r,"")+'</span>'
+          +'<span class="ticker-headline">'+esc(shortTickerTitle(title))+'</span></a>';
+      }).join("")||'<span class="loading">خبر تصویردار تازه‌ای در دسترس نیست.</span>');
+      put("rail-news",news.slice(0,7).map(railRow).join("")||
+        '<p class="empty-state">خبر تصویردار تازه‌ای برای نمایش پیدا نشد.</p>');
+      var cover=editorial[0]||news[0];
+      var heroBox=el("feature-hero");
+      var featureSection=heroBox.closest(".feature-block");
+      if(featureSection)featureSection.hidden=!cover;
+      if(cover){
+        var report=editorial.some(function(r){return r.id===cover.id;});
+        heroBox.href=slugUrl(cover);
+        heroBox.setAttribute("aria-label",headline(cover));
+        heroBox.innerHTML='<span class="feature-picture">'+thumb(cover,"")+'</span>'
+          +'<span class="feature-caption"><span class="category-flag orange">'+(report?"گزارش ویژه":"خبر ویژه")+'</span>'
+          +'<strong>'+esc(headline(cover))+'</strong><span>'+esc(hook(cover))+'</span></span>';
       }
-      var picked=culture.slice().sort(function(a,b){return Number(hasImage(b,verified))-Number(hasImage(a,verified));}).slice(0,6);
-      put("culture-grid",picked.map(function(item){
-        var illustrated=hasImage(item,verified);
-        return '<a class="story-card'+(illustrated?'':' no-image')+'" href="'+esc(slugUrl(item))+'">'
-          +(illustrated?'<span class="image-frame">'+thumb(item,"","")+'</span>':"")
-          +'<span class="story-info"><b>'+esc(headline(item))+'</b><p>'+esc(hook(item))+'</p></span></a>';
-      }).join("")||'<div class="empty-state">مطالب مرتبط پس از دریافت از آرشیو نمایش داده می‌شوند. <a href="/badbadak/">دیدن بادبادک ←</a></div>');
-      if(verified){
-        var visual=limitUnique(all.filter(function(r){return hasImage(r,true);}),6);
-        put("visual-grid",visual.map(function(r){
-          return '<a class="visual-card" href="'+esc(slugUrl(r))+'">'+thumb(r,"","")+'<span>'+esc(excerpt(headline(r),70))+'</span></a>';
-        }).join("")||'<div class="empty-state">هنوز عکس قابل‌نمایشی از خبرهای اخیر در دسترس نیست.</div>');
-      }
+      var more=limitUnique(editorial.concat(news).filter(function(r){return !cover||r.id!==cover.id;}),70);
+      put("under-hero",more.slice(0,2).map(function(r){
+        return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
+          +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
+      }).join(""));
+      put("rail-reports",editorial.filter(function(r){return !cover||r.id!==cover.id;}).slice(0,7).map(railRow).join("")||
+        '<p class="empty-state">گزارش تصویردار دیگری در دسترس نیست.</p>');
+      var cultureSection=el("culture");
+      if(cultureSection)cultureSection.hidden=!culture.length;
+      put("culture-grid",culture.slice(0,6).map(function(r){
+        return '<a class="story-card" href="'+esc(slugUrl(r))+'"><span class="image-frame">'+thumb(r,"")
+          +'</span><span class="story-info"><b>'+esc(headline(r))+'</b><p>'+esc(hook(r))+'</p></span></a>';
+      }).join(""));
+      var gallery=all.slice(0,6);
+      var gallerySection=el("gallery");
+      if(gallerySection)gallerySection.hidden=!gallery.length;
+      put("visual-grid",gallery.map(function(r){
+        return '<a class="visual-card" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
+          +'<span>'+esc(excerpt(headline(r),70))+'</span></a>';
+      }).join(""));
     }
-    drawSections(false);
-    put("visual-grid",'<div class="loading">در حال بررسی تصاویر خبرهای اخیر…</div>');
-    (async function(){
-      // Bound image inspection to current articles to avoid downloading an
-      // entire news archive or accumulating network traffic.
-      var candidates=limitUnique(reports.slice(0,16).concat(stories.slice(0,30)),46);
-      var withoutPhoto=candidates.filter(function(r){return !photo(r);}).slice(0,9);
-      await Promise.all(withoutPhoto.map(async function(row){
-        try{
-          var detail=await fetchJson("/data/story/"+encodeURIComponent(row.id)+".json");
-          if(validImage(detail.image_url))row.image_url=detail.image_url;
-        }catch(_){}
-      }));
-      await Promise.all(candidates.filter(function(r){return photo(r);}).map(function(r){return checkImage(photo(r));}));
-      drawSections(true);
-    })().catch(function(err){
-      if(typeof console!=="undefined")console.warn("Pendar verified images:",err);
-      put("visual-grid",'<div class="empty-state">بارگذاری تصاویر موقتاً ممکن نیست.</div>');
-    });
+    redrawHome=draw;
+    draw();
   }
   function authorName(record){
     var key=String(record.editorial_author_id||record.editorial_report&&record.editorial_report.author_id||record.author_id||"");
@@ -250,6 +255,7 @@
     var params=new URLSearchParams(location.search), storyId=options.homeOnly?"":params.get("story")||"";
     var storyMode=UUID.test(storyId);
     el("home-page").hidden=storyMode;el("article-page").hidden=!storyMode;
+    if(!storyMode)mountRoot.addEventListener("error",imageFailure,true);
     try{
       var result=await Promise.all([
         fetchJson("/data/stories.json").catch(function(){return [];}),
@@ -261,7 +267,14 @@
       var archived=Array.isArray(result[1].reports)?result[1].reports.filter(function(r){return r&&r.status==="ai_draft";}):[];
       var backup=data.stories.filter(function(r){return r.has_editorial_report;}).map(function(r){return Object.assign({},r,{title_fa:r.editorial_report_title_fa||r.headline_fa});});
       var byId=new Map(data.stories.filter(function(r){return r&&r.id;}).map(function(r){return [String(r.id),r];}));
-      data.reports=limitUnique(archived.concat(backup).map(function(r){var story=byId.get(String(r.id))||{};return Object.assign({},story,r,{image_url:r.image_url||story.image_url||"",lead_fa:r.lead_fa||story.summary_fa||""});}),30);
+      data.reports=limitUnique(archived.concat(backup).map(function(r){
+        var story=byId.get(String(r.id))||{};
+        return Object.assign({},story,r,{
+          image_url:r.image_url||story.image_url||"",
+          photo_candidates:[r.image_url,story.image_url].filter(Boolean),
+          lead_fa:r.lead_fa||story.summary_fa||""
+        });
+      }),75);
       // Older archive entries sometimes lack an image or lead. Resolve a
       // bounded number from existing story details before building the cover.
       if(!storyMode){
@@ -279,14 +292,18 @@
       if(storyMode){
         var detail=await fetchJson("/data/story/"+encodeURIComponent(storyId)+".json");
         renderArticle(storyId,detail);
-      }else renderHome();
+      }else await renderHome();
     }catch(err){
       if(storyMode){
         put("article-title","نمایش این مطلب فعلاً ممکن نیست");
         put("article-text",'<p>متن گزارش در <a href="'+esc(finalStoryUrl(storyId))+'">نسخهٔ اصلی پندار</a> قابل بررسی است.</p>');
       }else{
-        fallback("under-hero","دریافت گزارش‌ها موقتاً ممکن نیست.");
-        fallback("rail-reports","دریافت داده‌ها موقتاً ممکن نیست.");
+        el("feature-hero").closest(".feature-block").hidden=true;
+        el("culture").hidden=true;
+        el("gallery").hidden=true;
+        photoNotice("rail-reports","دریافت تصاویر گزارش‌ها موقتاً ممکن نیست.","/reports/");
+        photoNotice("rail-news","دریافت تصاویر خبرها موقتاً ممکن نیست.","/headlines/");
+        put("ticker",'<span class="loading">در حال حاضر دریافت خبرها ممکن نیست.</span>');
       }
       if(typeof console!=="undefined")console.warn("Pendar heritage preview:",err);
     }
