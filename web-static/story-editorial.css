@@ -102,3 +102,65 @@
   #detail-view .story-history li a{display:grid;gap:1px;font-size:14px}
   #detail-view .story-history li time{font-size:11px}
 }
+
+/* Provisional bylines for transparent AI newsroom identities. */
+#detail-view .story-author-byline{
+  display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:10px 0;
+  border-bottom:1px solid var(--line);
+}
+#detail-view .story-author-monogram,
+.editorial-author-placeholder{
+  display:grid;place-items:center;flex:0 0 auto;
+  width:43px;height:43px;border-radius:50%;
+  background:var(--accent-soft);color:var(--accent);
+  font:800 21px/1 "Vazirmatn",sans-serif;
+}
+#detail-view .story-author-credit{display:grid;gap:3px}
+#detail-view .story-author-credit a{
+  font:700 14px/1.8 "Vazirmatn",sans-serif;color:var(--accent);text-decoration:none;
+}
+#detail-view .story-author-credit small{
+  font:450 11.5px/1.7 "Vazirmatn",sans-serif;color:var(--ink-soft);
+}
+.editorial-author-view{max-width:800px;margin:0 auto;padding-bottom:60px}
+.editorial-author-back{margin:24px 0;color:var(--accent);font-size:13px}
+.editorial-author-back a{color:inherit;text-decoration:none}
+.editorial-author-header{
+  display:grid;grid-template-columns:104px minmax(0,1fr);
+  align-items:start;gap:22px;padding:28px;
+  background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);
+  border-radius:14px;
+}
+.editorial-author-avatar{
+  width:104px;height:104px;border-radius:50%;overflow:hidden;
+  background:var(--surface-2);
+}
+.editorial-author-avatar img{width:100%;height:100%;object-fit:cover}
+.editorial-author-avatar .editorial-author-placeholder{width:100%;height:100%;font-size:42px}
+.editorial-author-eyebrow{
+  margin:0 0 6px;color:var(--accent);font:700 13px/1.8 "Vazirmatn",sans-serif;
+}
+.editorial-author-header h1{
+  font:800 clamp(21px,3.2vw,29px)/1.6 "Vazirmatn",sans-serif;margin:0 0 10px;
+}
+.editorial-author-header p{
+  font:400 15px/1.95 "Vazirmatn",sans-serif;margin:0 0 8px;
+}
+.editorial-author-header .editorial-author-disclosure{
+  font-size:12.5px;color:var(--ink-soft);
+}
+.editorial-author-publications{margin:30px 0 0}
+.editorial-author-publications h2{
+  font:750 21px/1.8 "Vazirmatn",sans-serif;margin:0 0 12px;
+}
+.editorial-author-item{
+  display:grid;gap:4px;padding:16px 2px;
+  border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;
+}
+.editorial-author-item strong{font:700 17px/1.8 "Vazirmatn",sans-serif}
+.editorial-author-item small{color:var(--ink-soft);font-size:12px}
+.editorial-author-item:hover strong{color:var(--accent)}
+@media(max-width:600px){
+  .editorial-author-header{grid-template-columns:1fr;gap:14px;padding:18px}
+  .editorial-author-avatar{width:88px;height:88px}
+}
