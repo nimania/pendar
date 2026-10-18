@@ -550,12 +550,12 @@ async function renderHomeReports(){
       const id=String(row.id||"");
       const title=row.title_fa||row.editorial_report_title_fa||row.headline_fa||"";
       // Build a compact, source-grounded hook from the report's actual lead.
-      const rawLead=String(row.teaser_fa||row.lead_fa||leads.get(id)||"").replace(/\\s+/g," ").trim();
+      const rawLead=String(row.teaser_fa||row.lead_fa||leads.get(id)||"").replace(/\s+/g," ").trim();
       let teaser=rawLead;
       if(teaser.length>180){
         const first=teaser.slice(0,180);
         const stop=Math.max(first.lastIndexOf("؛"),first.lastIndexOf("؟"),first.lastIndexOf("،"),first.lastIndexOf(" "));
-        teaser=first.slice(0,stop>=90?stop:180).trim().replace(/[،؛\\s]+$/,"")+"…";
+        teaser=first.slice(0,stop>=90?stop:180).trim().replace(/[،؛\s]+$/,"")+"…";
       }
       const source=row.image_url||images.get(id)||"";
       const img=typeof source==="string"&&(source.startsWith("https://")||source.startsWith("http://")||source.startsWith("/assets/"))?source:"";
