@@ -397,6 +397,10 @@ jobs:
               dest=root/"editorial-author"/author_id/"index.html"
               dest.parent.mkdir(parents=True,exist_ok=True)
               shutil.copy2(shell,dest)
+          # Discoverable central reports archive; preserve the same SPA shell.
+          reports_dir=root/"reports"
+          reports_dir.mkdir(parents=True,exist_ok=True)
+          shutil.copy2(shell,reports_dir/"index.html")
           # Fallback keeps SPA routing available for less common generated paths.
           shutil.copy2(shell,root/"404.html")
           assert (root/"event"/"event-9883cb58-e3da-4f35-8684-3ec9a6b70a37"/"index.html").is_file()
