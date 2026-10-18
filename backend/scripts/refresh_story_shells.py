@@ -12,7 +12,7 @@ import re
 
 UUID_RE = re.compile(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}")
 SEO_SECTION_RE = re.compile(
-    r'(<section\s+id="seo-static"\b[\s\S]*?<!--\s*seo-end\s*-->)',
+    r'(<section\s+id="seo-static"[\s\S]*?<!--\s*seo-end\s*-->)',
     re.I,
 )
 SEO_SCHEMA_RE = re.compile(
