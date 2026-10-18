@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from scripts.build_editorial_reports import (
-    related_news, source_refs, valid_report, build, editorial_headline_word_count,
+    related_news, source_refs, valid_report, build, editorial_headline_word_count, choose_editorial_author,
 )
 
 NOW="2026-10-17T12:00:00+00:00"
@@ -27,6 +27,24 @@ UNRELATED={"id":OFF,"headline_fa":"قطع برق و گاز در کهگیلویه
 
 
 class EditorialReportTests(unittest.TestCase):
+    def test_specialist_author_uses_dominant_subject(self):
+        from pathlib import Path
+        roster_path=Path(__file__).resolve().parents[2]/"web-static"/"data"/"pendar-editorial-authors.json"
+        roster=json.loads(roster_path.read_text(encoding="utf-8"))
+        self.assertEqual(len(roster["authors"]),7)
+        eco={
+            "headline_fa":"هشدار سیلاب و بارش شدید در شمال",
+            "summary_fa":"در حاشیه این رویداد درباره مذاکرات با وزارت خارجه نیز صحبت شد",
+        }
+        diplomacy={
+            "headline_fa":"مذاکرات دیپلماتیک با سفیر و وزارت خارجه",
+            "summary_fa":"همچنین برخی هشدارهای بارندگی و سیلاب مطرح شد",
+        }
+        unknown={"headline_fa":"رویدادی نامشخص با جزئیات ناکافی"}
+        self.assertEqual(choose_editorial_author(eco,roster),"environment")
+        self.assertEqual(choose_editorial_author(diplomacy,roster),"diplomacy")
+        self.assertEqual(choose_editorial_author(unknown,roster),"desk")
+
     def test_strong_history_only(self):
         c=related_news(STORY,[STORY,PRIOR,UNRELATED])
         self.assertEqual([v["id"] for v in c["background"]],[OTHER])
