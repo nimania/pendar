@@ -55,6 +55,12 @@ assert(index.indexOf('story-editorial-pilots.js')<index.indexOf('story-detail.js
 assert(detail.includes('${pendarEditorialReport(s)}'));
 assert(detail.includes('${pendarHistoricalContext(s)}'));
 assert(home.includes('s.has_editorial_report'));
+assert(home.includes('home-report-lead'),"homepage reports should display an editorial teaser");
+assert(home.includes('row.lead_fa'),"homepage teaser must come from source-backed report lead");
+assert(!home.includes("esc(author)+' · '"),"homepage report cards should not show author and date");
+assert(index.includes('story-detail.js?v=20261018-microscope-ask-1'));
+assert(index.includes('home.js?v=20261018-report-leads-1'));
+
 assert(detail.includes('زیر ذره‌بین پندار'));
 assert(detail.includes('const articleTitle=editorial?'));
 assert(detail.includes('!editorial?'),"machine summary must be hidden for editorial reports");

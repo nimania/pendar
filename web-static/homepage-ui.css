@@ -367,3 +367,17 @@
 @media(max-width:600px){
   #home-daily-stories .home-report-pill{font-size:11px;padding:1px 7px;}
 }
+
+/* Report cards use a concise story hook, not byline or publication timestamp. */
+#home-daily-stories .home-report-list .home-report-lead{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  font-family:"Vazirmatn",system-ui,sans-serif;
+  font-size:clamp(12px,1.08vw,14px);
+  font-weight:450;
+  line-height:1.85;
+  color:var(--ink-soft,var(--muted,#5d6760));
+  text-align:right;
+}

@@ -290,7 +290,7 @@ async function openStory(id) {
     ${!editorial && s.image_url ? `<img class="hero-img" src="${esc(s.image_url)}" alt="${esc(s.headline_fa||"")}" loading="eager" referrerpolicy="no-referrer">` : ''}
     ${!editorial && s.image_url && s.image_credit ? `<div class="hero-credit">عکس از: ${esc(s.image_credit)}</div>` : ''}
     ${pendarEditorialReport(s)}
-    ${editorial?'<details class="story-examination"><summary><span>زیر ذره‌بین پندار<small class="story-examination-description">منابع، پیشینه، دیدگاه‌ها و بررسی دقیق‌تر خبر</small></span></summary><div class="story-examination-body">':""}
+    ${editorial?'<details class="story-examination"><summary><span>زیر ذره‌بین پندار<small class="story-examination-description">منابع، پیشینه، دیدگاه‌ها و پرسش‌وپاسخ</small></span></summary><div class="story-examination-body">':""}
     ${!editorial?'<div class="kalam-box"><span class="eyebrow">جان‌کلام</span><p>'+esc(s.summary_fa||"")+'</p></div>':""}
     ${pendarHistoricalContext(s)}
     <div id="story-history-fallback"></div>
@@ -312,13 +312,14 @@ async function openStory(id) {
     ${figuresSection(s.figures)}
     ${!editorial && ((String(s.what_happened_fa||"")+String(s.why_it_matters_fa||"")+String(s.summary_fa||"")).length >= 900 && (s.sources||[]).length >= 3) ? articleDisplayAdMarkup().replaceAll("pendar-article-display-ad","pendar-article-display-ad-second") : ""}
     <div class="layers"><h3 class="section-h">منابع و اطلاعات پرونده</h3><div class="d-meta"><span>${faN(s.source_count||0)} منبع</span> · <span>${esc(IRAN_FA[s.iran_relevance]||"")}</span></div><div class="cites">${cites}</div></div>
-    ${editorial?"</div></details>":""}
     <div class="ask"><div class="a-h"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" style="color:var(--accent)"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z" stroke-linejoin="round"/></svg> دربارهٔ این خبر بپرس</div>
       <p class="a-sub">پاسخ‌های آماده از روی همین خبر.</p>
       <div class="chips">${chips}</div>
       <div class="answer" id="answer"><div class="a-bubble" id="a-bubble"></div>
         <div class="grounded"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> مبتنی بر منابع همین خبر</div></div>
-    </div><div id="story-discovery"></div>`;
+    </div>
+    ${editorial?"</div></details>":""}
+    <div id="story-discovery"></div>`;
   loadPendarHistoricalFallback(s);
   loadArticleDisplayAd();
   // Second placement only on substantial news stories; delay avoids competing
