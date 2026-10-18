@@ -31,7 +31,7 @@ function pendarMagazineReportCard(row,options){
   const author=String(row.author_id||row.editorial_author_id||"desk");
   const published=String(row.published_at||"").slice(0,10);
   const showAuthor=options?.showAuthor!==false;
-  const avatar=showAuthor&&typeof pendarAuthorPortraitCSS==="function"?pendarAuthorPortraitCSS(author):"";
+  const avatar=showAuthor&&typeof pendarAuthorAvatar==="function"?pendarAuthorAvatar(author,"magazine-report-avatar"):"";
   const name=typeof pendarAuthorName==="function"?pendarAuthorName(author):"تحریریه پندار";
   return '<article class="magazine-report-card'+(photo?"":" no-image")+'">'
     +'<a class="magazine-report-card-link" href="/story/'+esc(id)+'/">'
@@ -42,7 +42,7 @@ function pendarMagazineReportCard(row,options){
     +'</span></a>'
     +'<div class="magazine-report-card-footer">'
     +(showAuthor?'<a class="magazine-report-author" href="/editorial-author/'+encodeURIComponent(author)+'/">'
-        +'<span class="magazine-report-avatar" aria-hidden="true"'+(avatar?' style="'+avatar+'"':"")+'>'+(avatar?"":"پ")+'</span>'
+        +(avatar||'<span class="magazine-report-avatar" aria-hidden="true">پ</span>')
         +esc(name)+'</a>':"")
     +(published?'<time datetime="'+esc(published)+'">'+esc(published)+'</time>':"")
     +'</div></article>';
