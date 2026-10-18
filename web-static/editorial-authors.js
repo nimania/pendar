@@ -11,13 +11,37 @@ async function loadPendarEditorialAuthors(){
   }
   return _pendarAuthorPromise;
 }
+/* Compatibility attribution for articles exported before the author schema.
+   The build-time classifier remains authoritative after the next news cycle. */
+function pendarEditorialAuthorId(story){
+  const catalog=window.PENDAR_EDITORIAL_AUTHORS;
+  if(!catalog)return "desk";
+  const known=new Set(catalog.authors.map(a=>a.id));
+  const explicit=story?.editorial_author_id||story?.editorial_report?.author_id;
+  if(explicit==="desk"||known.has(explicit))return explicit;
+  const norm=x=>String(x||"").toLowerCase().replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ");
+  const head=norm(story?.headline_fa),summary=norm(story?.summary_fa),body=norm(story?.what_happened_fa).slice(0,1300);
+  const scored=catalog.authors.map(a=>{
+    let total=0,terms=0;
+    for(const word of a.keywords||[]){
+      const w=norm(word).trim();if(w.length<4)continue;
+      if(head.includes(w)){total+=5;terms++;}
+      else if(summary.includes(w)){total+=2;terms++;}
+      else if(body.includes(w)){total++;terms++;}
+    }
+    return {id:a.id,total,terms};
+  }).filter(a=>a.total>0).sort((a,b)=>b.total-a.total||b.terms-a.terms||a.id.localeCompare(b.id));
+  if(!scored.length)return "desk";
+  if(scored.length>1&&scored[0].total===scored[1].total&&scored[0].terms===scored[1].terms)return "desk";
+  return scored[0].id;
+}
 function pendarAuthorName(id){
   const catalog=window.PENDAR_EDITORIAL_AUTHORS;
   const a=catalog?.authors?.find(x=>x.id===id);
   return a?.display_name_fa || catalog?.fallback?.display_name_fa || "تحریریه پندار";
 }
 function pendarAuthorByline(story,report){
-  const id=report?.author_id||story?.editorial_author_id||(report?.status==="pilot_draft"?"diplomacy":"desk");
+  const id=report?.author_id||story?.editorial_author_id||(report?.status==="pilot_draft"?"diplomacy":pendarEditorialAuthorId(story));
   const name=pendarAuthorName(id);
   const href="/editorial-author/"+encodeURIComponent(id)+"/";
   return '<div class="story-author-byline"><span class="story-author-monogram" aria-hidden="true">پ</span>'
@@ -41,12 +65,12 @@ async function showPendarEditorialAuthor(slug){
     ]);
     const unique=new Map();
     for(const card of Array.isArray(current)?current:[]){
-      if(card?.has_editorial_report && card.editorial_author_id===slug)unique.set(card.id,card);
+      if(card?.has_editorial_report && pendarEditorialAuthorId(card)===slug)unique.set(card.id,card);
     }
     for(const group of Object.values(sourceIndex||{})){
       if(!Array.isArray(group))continue;
       for(const row of group){
-        if(row?.has_editorial_report && row.editorial_author_id===slug && !unique.has(row.id))unique.set(row.id,row);
+        if(row?.has_editorial_report && pendarEditorialAuthorId(row)===slug && !unique.has(row.id))unique.set(row.id,row);
       }
     }
     const reports=[...unique.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
