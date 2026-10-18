@@ -80,3 +80,10 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .brand img,.heritage-root .footer-identity img{width:94px;max-height:80px;object-fit:contain}
 .heritage-root .footer-identity img{width:72px}
 .heritage-root .masthead-right:empty{display:none}
+
+.heritage-root .heritage-search-box[hidden]{display:none!important}
+.heritage-root .heritage-search-box{padding:14px max(18px,calc((100% - 1180px)/2));background:#f5f8f6;color:#26302b;border-bottom:1px solid #c5d8cf;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.heritage-root .heritage-search-box label{font-weight:700;font-size:12px}
+.heritage-root .heritage-search-box input{padding:11px 12px;border:1px solid #bdcec7;border-radius:5px;flex:1;min-width:200px;font:inherit;font-size:14px;direction:rtl}
+.heritage-root #heritage-search-results{width:100%;display:flex;flex-wrap:wrap;gap:7px 14px}
+.heritage-root #heritage-search-results a{color:#176e70;font-size:13px;font-weight:650;background:#e2ece8;padding:7px 10px;border-radius:4px}
