@@ -409,6 +409,10 @@ jobs:
           print("Ensured",len(stories),"news entry pages; newly created",made,
                 "; event dossiers",len(ids),flush=True)
           PY
+      - name: Refresh cached article UI while keeping prerendered SEO
+        run: |
+          python -m unittest discover -s backend/tests -p test_story_shell_refresh.py -v
+          python backend/scripts/refresh_story_shells.py --site site
       - name: Restore cached book shelf entry only (no collectors)
         run: |
           python - <<'PY'
