@@ -179,7 +179,7 @@ def source_backed_statements(detail: dict, sources: list[dict]) -> list[dict]:
 def is_service_weather_story(detail:dict)->bool:
     title=normalize(detail.get("headline_fa") or "")
     summary=normalize(detail.get("summary_fa") or "")
-    weather=("هواشناسی","بارش","بارندگی","سیلاب","سیل","سامانه بارشی","باد شدید","آلودگی هوا","هشدار هوا","هوا")
+    weather=("هواشناسی","بارش","بارندگی","سیلاب","سیل","سامانه بارشی","باد شدید","آلودگی هوا","هشدار هوا","گرمای شدید","سرمای شدید","پیش‌بینی هوا")
     return any(word in title for word in weather) or sum(word in summary for word in weather)>=2
 
 
