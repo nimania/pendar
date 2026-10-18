@@ -190,3 +190,24 @@
 .editorial-library-item p{margin:0;font:400 13.5px/1.95 "Vazirmatn",sans-serif;color:var(--ink-soft)}
 .editorial-library-empty{padding:30px 12px;color:var(--ink-soft);font:450 14px/1.85 "Vazirmatn",sans-serif}
 @media(max-width:680px){.editorial-library-list{grid-template-columns:minmax(0,1fr)}.editorial-library-item{padding:16px}.editorial-library-header{padding:18px 0}.editorial-library-search-row{align-items:stretch}.editorial-library-search-row input{min-width:100%;max-width:100%}}
+
+/* Unified editorial reading mode: no nested card, no technical inline citations. */
+#detail-view .story-editorial{margin:12px 0 26px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+#detail-view .story-editorial-lead{border:0;padding:0;margin:0 0 18px}
+#detail-view .story-editorial-kicker{display:none}
+#detail-view .story-author-byline{margin:0 0 18px;padding:10px 0 16px}
+#detail-view .story-author-avatar-link{display:inline-flex;border-radius:50%;text-decoration:none;flex:0 0 auto}
+#detail-view .story-author-monogram{width:64px;height:64px;font-size:27px}
+#detail-view .story-author-credit a{font-size:16px}
+#detail-view .story-report-cites{display:none!important}
+#detail-view .story-examination{margin:26px 0 32px;border:1px solid var(--line);border-radius:13px;background:var(--surface);overflow:hidden}
+#detail-view .story-examination>summary{cursor:pointer;padding:18px 20px;font:750 17px/1.8 "Vazirmatn",sans-serif;list-style:none;display:flex;justify-content:space-between;align-items:center}
+#detail-view .story-examination>summary::-webkit-details-marker{display:none}
+#detail-view .story-examination>summary:after{content:"＋";color:var(--accent);font-size:23px}
+#detail-view .story-examination[open]>summary:after{content:"−"}
+#detail-view .story-examination-description{display:block;color:var(--ink-soft);font-size:12px;font-weight:400}
+#detail-view .story-examination-body{padding:0 20px 20px}
+#detail-view .story-examination .layers{margin-top:18px}
+#detail-view .story-photo-missing{margin:12px 0;padding:16px;border:1px solid var(--line);border-radius:9px;color:var(--ink-soft);background:var(--surface-2)}
+#detail-view .story-editorial-subtitle{font:450 17px/1.95 "Vazirmatn",sans-serif;color:var(--ink-soft);margin:8px 0 14px}
+@media(max-width:600px){#detail-view .story-author-monogram{width:56px;height:56px;font-size:24px}#detail-view .story-examination>summary{padding:14px 15px}#detail-view .story-examination-body{padding:0 15px 15px}}
