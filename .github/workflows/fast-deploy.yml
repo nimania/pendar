@@ -387,6 +387,16 @@ jobs:
               if not dest.is_file():
                   dest.parent.mkdir(parents=True,exist_ok=True)
                   shutil.copy2(shell,dest)
+          # Make all seven AI editorial profile URLs directly shareable. These
+          # slots use role titles until editorial pseudonyms are approved.
+          author_data=json.loads((root/"data/pendar-editorial-authors.json").read_text(encoding="utf-8"))
+          author_ids=[a["id"] for a in author_data.get("authors",[])]+["desk"]
+          assert len(author_ids)==8 and len(set(author_ids))==8
+          for author_id in author_ids:
+              assert re.fullmatch(r"[a-z][a-z0-9-]{2,45}",author_id)
+              dest=root/"editorial-author"/author_id/"index.html"
+              dest.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copy2(shell,dest)
           # Fallback keeps SPA routing available for less common generated paths.
           shutil.copy2(shell,root/"404.html")
           assert (root/"event"/"event-9883cb58-e3da-4f35-8684-3ec9a6b70a37"/"index.html").is_file()
