@@ -3,7 +3,8 @@
 (function(){
   "use strict";
   var UUID=/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
-  var el=function(id){return document.getElementById(id);};
+  var mountRoot=document;
+  var el=function(id){return mountRoot.getElementById(id);};
   var esc=function(value){return String(value==null?"":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});};
   var norm=function(value){return String(value==null?"":value).replace(/\s+/g," ").trim();};
   var excerpt=function(value,limit){
@@ -20,7 +21,7 @@
     var s=String(url||"").trim();
     return (/^https?:\/\/[^\s"<>]+$/i.test(s)||/^\/(?!\/)[^\s"<>]+$/.test(s))?s:"";
   };
-  var slugUrl=function(r){return r&&UUID.test(String(r.id||""))?"/heritage-preview.html?story="+encodeURIComponent(r.id):"/reports/";};
+  var slugUrl=function(r){return r&&UUID.test(String(r.id||""))?(window.PENDAR_HERITAGE_EMBED?"/story/"+encodeURIComponent(r.id)+"/":"/heritage-preview.html?story="+encodeURIComponent(r.id)):"/reports/";};
   var finalStoryUrl=function(id){return UUID.test(String(id||""))?"/story/"+id+"/":"/reports/";};
   var fetchJson=async function(path){
     var response=await fetch(path,{credentials:"same-origin"});
@@ -170,8 +171,10 @@
     var related=data.reports.filter(function(r){return r.id!==id;}).slice(0,6);
     put("related-reports",related.map(function(r){return railRow(r,Boolean(photo(r)));}).join("")||'<p class="empty-state">گزارش دیگری برای نمایش یافت نشد.</p>');
   }
-  async function boot(){
-    var params=new URLSearchParams(location.search), storyId=params.get("story")||"";
+  async function boot(options){
+    options=options||{};
+    mountRoot=options.root||document;
+    var params=new URLSearchParams(location.search), storyId=options.homeOnly?"":params.get("story")||"";
     var storyMode=UUID.test(storyId);
     el("home-page").hidden=storyMode;el("article-page").hidden=!storyMode;
     try{
@@ -186,6 +189,20 @@
       var backup=data.stories.filter(function(r){return r.has_editorial_report;}).map(function(r){return Object.assign({},r,{title_fa:r.editorial_report_title_fa||r.headline_fa});});
       var byId=new Map(data.stories.filter(function(r){return r&&r.id;}).map(function(r){return [String(r.id),r];}));
       data.reports=limitUnique(archived.concat(backup).map(function(r){var story=byId.get(String(r.id))||{};return Object.assign({},story,r,{image_url:r.image_url||story.image_url||"",lead_fa:r.lead_fa||story.summary_fa||""});}),30);
+      // Older archive entries sometimes lack an image or lead. Resolve a
+      // bounded number from existing story details before building the cover.
+      if(!storyMode){
+        var incomplete=data.reports.slice(0,12).filter(function(r){return !photo(r)||!norm(r.lead_fa);});
+        await Promise.all(incomplete.map(async function(row){
+          try{
+            var detail=await fetchJson("/data/story/"+encodeURIComponent(row.id)+".json");
+            if(!photo(row)&&validImage(detail.image_url))row.image_url=detail.image_url;
+            if(!norm(row.lead_fa)&&detail.editorial_report&&detail.editorial_report.lead_fa)
+              row.lead_fa=detail.editorial_report.lead_fa;
+            if(!norm(row.lead_fa)&&detail.summary_fa)row.lead_fa=detail.summary_fa;
+          }catch(_){}
+        }));
+      }
       if(storyMode){
         var detail=await fetchJson("/data/story/"+encodeURIComponent(storyId)+".json");
         renderArticle(storyId,detail);
@@ -201,5 +218,13 @@
       if(typeof console!=="undefined")console.warn("Pendar heritage preview:",err);
     }
   }
-  boot();
+  if(window.PENDAR_HERITAGE_EMBED){
+    // Production homepage can mount this renderer inside an isolated root.
+    // The standalone preview still works unmodified at its own URL.
+    window.PendarHeritage={
+      mount:function(root){return boot({root:root,homeOnly:true});}
+    };
+  }else{
+    boot();
+  }
 })();

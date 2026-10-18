@@ -71,3 +71,19 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
   .latest-ticker h2{min-width:70px;padding:0 11px}
   .latest-ticker .ticker-story{flex-basis:205px;max-width:205px}
 }
+
+/* In the live SPA, all magazine styles live in a shadow root.
+   Establish palette, readable type, and background inside that boundary. */
+:host{display:block;color:#212423;font-family:Vazirmatn,Tahoma,sans-serif;--charcoal:#2a2928;--charcoal2:#403d3c;--paper:#fff;--canvas:#eceeeb;--ink:#212423;--soft:#616a66;--line:#dce2de;--orange:#df651c;--turquoise:#178e99;--turq-pale:#e8f3f2}
+.heritage-root{min-height:100vh;color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed 3px,#e8ebe8 3px,#e8ebe8 4px)}
+.heritage-root *{box-sizing:border-box}
+.heritage-root .brand img,.heritage-root .footer-identity img{width:94px;max-height:80px;object-fit:contain}
+.heritage-root .footer-identity img{width:72px}
+.heritage-root .masthead-right:empty{display:none}
+
+.heritage-root .heritage-search-box[hidden]{display:none!important}
+.heritage-root .heritage-search-box{padding:14px max(18px,calc((100% - 1180px)/2));background:#f5f8f6;color:#26302b;border-bottom:1px solid #c5d8cf;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.heritage-root .heritage-search-box label{font-weight:700;font-size:12px}
+.heritage-root .heritage-search-box input{padding:11px 12px;border:1px solid #bdcec7;border-radius:5px;flex:1;min-width:200px;font:inherit;font-size:14px;direction:rtl}
+.heritage-root #heritage-search-results{width:100%;display:flex;flex-wrap:wrap;gap:7px 14px}
+.heritage-root #heritage-search-results a{color:#176e70;font-size:13px;font-weight:650;background:#e2ece8;padding:7px 10px;border-radius:4px}
