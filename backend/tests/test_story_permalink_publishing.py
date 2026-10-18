@@ -73,6 +73,32 @@ class StoryPermalinkTest(unittest.TestCase):
             self.assertEqual(refreshed["id_to_slug"],original["id_to_slug"])
             self.assertTrue((site/"story"/"iran-hormuz-negotiations"/"index.html").is_file())
 
+    def test_recent_article_gets_real_seo_html_instead_of_homepage_placeholder(self):
+        with tempfile.TemporaryDirectory() as td:
+            site=self.site(td)
+            target=site/"story"/A/"index.html"
+            target.write_text('<!doctype html><head><title>پندار</title></head>'
+                              '<body><main class="wrap"></main></body>',encoding="utf-8")
+            detail=site/"data"/"story"
+            detail.mkdir(parents=True)
+            (detail/(A+".json")).write_text(json.dumps({
+                "id":A,"headline_fa":"ایران هرمز مذاکرات",
+                "summary_fa":"خبرگزاری‌ها از دور جدید مذاکرات درباره مسیرهای عبور و مرور منطقه خبر داده‌اند و مقام‌های مرتبط توضیحاتی ارائه کرده‌اند.",
+                "what_happened_fa":"این تحولات در زمینه گفت‌وگوهای قبلی مطرح شده و درباره زمان و نتیجه نهایی توافق هنوز اطلاعات قطعی منتشر نشده است.",
+                "why_it_matters_fa":"تصمیم درباره رفت‌وآمد کشتی‌ها بر بازار انرژی و فعالیت‌های اقتصادی منطقه اثر می‌گذارد.",
+                "sources":[{"article_url":"https://example.org/report","source_name":"منبع آزمایشی"}],
+            },ensure_ascii=False),encoding="utf-8")
+            result=run(site,limit=1)
+            self.assertEqual(len(result["id_to_slug"]),1)
+            page=(site/"story"/"iran-hormuz-negotiations"/"index.html").read_text(encoding="utf-8")
+            self.assertIn('id="seo-static"',page)
+            self.assertIn("اثر می‌گذارد",page)
+            self.assertIn("https://example.org/report",page)
+            self.assertIn('"canonical" href="https://pendar.io/story/iran-hormuz-negotiations/"',page)
+            self.assertTrue((site/"sitemap-readable-stories.xml").is_file() is False or
+                            "iran-hormuz-negotiations" in
+                            (site/"sitemap-readable-stories.xml").read_text(encoding="utf-8"))
+
     def test_never_removes_original_or_unsupported_legacy_routes(self):
         with tempfile.TemporaryDirectory() as td:
             site=self.site(td)
