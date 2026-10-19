@@ -300,9 +300,21 @@
       // Figure statements are rendered independently of news-card photo gating.
       put("rail-news",railNewsRows.map(railRow).join("")||
         '<p class="empty-state">هنوز سرخطی برای نمایش منتشر نشده است.</p>');
-      var political=/سیاست|انتخابات|دولت|مجلس|دیپلماسی|تحریم|مذاکره|جنگ|اسرائیل|ایران|آمریکا|حکمرانی|امنیت|قدرت/;
-      var politicalReports=editorial.filter(function(r){return political.test(norm((r.category||"")+" "+headline(r)));});
-      var cover=politicalReports.find(function(r){return (r._imageWidth||0)>=900;})||politicalReports[0]||editorial[0]||news[0]||reports[0]||stories[0];
+      // Editorial lead: prefer independent Iran-focused political coverage.
+      // Assess the *subject* of a report, never infer its political allegiance.
+      var iranFocus=/ایران|ایرانی|ایرانگرایی|ایران‌گرایی|ایران دوستی|ایراندوستی|ملی‌گرایی|ملت ایران|هویت ملی|میراث ایران|تاریخ ایران|تمامیت ارضی|آینده ایران|مشروطه|قانون اساسی|گذار سیاسی|آزادی ایران/;
+      var politics=/سیاست|انتخابات|دولت|مجلس|دیپلماسی|تحریم|مذاکره|جنگ|آمریکا|حکمرانی|امنیت|قدرت|حقوق شهروندی|جامعه مدنی|دموکراسی|استقلال/;
+      function leadScore(r){
+        var title=norm(headline(r)),section=norm(r.category||r.section||"");
+        var score=(iranFocus.test(title)?12:0)+(iranFocus.test(section)?6:0)
+          +(politics.test(title)?5:0)+(politics.test(section)?3:0)
+          +(r._imageWidth>=900?2:0);
+        return score;
+      }
+      var leadCandidates=limitUnique(editorial.concat(reports).concat(news).concat(stories),150);
+      var prioritized=leadCandidates.filter(function(r){return leadScore(r)>=8;})
+        .sort(function(a,b){return leadScore(b)-leadScore(a)||String(b.published_at||"").localeCompare(String(a.published_at||""));});
+      var cover=prioritized[0]||editorial[0]||news[0]||reports[0]||stories[0];
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
       if(featureSection)featureSection.hidden=!cover;
