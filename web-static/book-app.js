@@ -17,12 +17,12 @@ async function loadBooks(){
   if(!d || !Array.isArray(d.books) || !d.books.length){
     // This 15+ MB legacy JavaScript dataset is a recovery fallback only:
     // do not download/parse it on every news, figure or article page.
-    if(!window.__BOOKS_DATA__){
+    if(!window.__PENDAR_BOOKS_FALLBACK_LOADED){
       try {
         await new Promise((resolve,reject)=>{
           const script=document.createElement("script");
           script.src="/data/books.js";
-          script.onload=resolve;
+          script.onload=()=>{window.__PENDAR_BOOKS_FALLBACK_LOADED=true;resolve();};
           script.onerror=()=>{script.remove();reject(new Error("Books fallback unavailable"));};
           document.head.appendChild(script);
         });
