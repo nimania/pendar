@@ -146,3 +146,53 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .masthead-tools img{width:29px;height:29px;object-fit:contain}
 .heritage-root .brand img{width:90px;max-height:69px}
 @media(max-width:900px){.heritage-root .masthead-inner{flex-wrap:wrap;padding:12px 0;gap:10px}.heritage-root .masthead-navigation{order:3;width:100%;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.heritage-root .masthead-navigation a{font-size:12px;padding:8px 10px}.heritage-root .masthead-tools{margin-inline-start:auto}}
+
+/* Align the magazine navigation to the same 1180px content grid below it.
+   In RTL: logo on the right, seven labeled tabs, utilities on the left. */
+.heritage-root .masthead-inner{
+  width:min(1180px,calc(100% - 40px));
+  min-height:104px;
+  display:grid;
+  grid-template-columns:100px minmax(0,1fr) auto;
+  align-items:center;
+  justify-content:initial;
+  gap:14px;
+  padding:12px 0;
+}
+.heritage-root .masthead .brand{display:flex;justify-content:flex-start;align-items:center;min-width:0}
+.heritage-root .masthead .brand img{width:88px;max-width:100%;max-height:70px;object-fit:contain}
+.heritage-root .masthead-navigation{
+  display:flex;justify-content:flex-start;align-items:center;flex-wrap:nowrap;
+  gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none;
+}
+.heritage-root .masthead-navigation::-webkit-scrollbar{display:none}
+.heritage-root .masthead-navigation a{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:0 0 auto;min-height:51px;padding:10px 13px;
+  border:2px solid #646261;border-radius:16px;background:#ffffff08;
+  color:#f5f4f2;font-size:15px;font-weight:750;line-height:1.45;
+}
+.heritage-root .masthead-tools{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin:0;min-width:0}
+.heritage-root .masthead-tools a{
+  width:52px;height:52px;flex:0 0 52px;border:2px solid #646261;
+  border-radius:16px;background:#ffffff08;
+}
+.heritage-root .masthead-tools img{width:32px;height:32px}
+@media(max-width:1180px){
+  .heritage-root .masthead-inner{gap:10px;grid-template-columns:85px minmax(0,1fr) auto}
+  .heritage-root .masthead-navigation a{font-size:13px;min-height:47px;padding:8px 10px}
+  .heritage-root .masthead-tools a{width:46px;height:46px;flex-basis:46px}
+}
+@media(max-width:720px){
+  .heritage-root .masthead-inner{
+    width:calc(100% - 28px);grid-template-columns:75px 1fr;
+    gap:10px;padding:10px 0;min-height:0
+  }
+  .heritage-root .masthead .brand img{width:73px;max-height:60px}
+  .heritage-root .masthead-tools{grid-column:2;grid-row:1;justify-self:end;margin:0}
+  .heritage-root .masthead-navigation{
+    grid-column:1 / -1;grid-row:2;width:100%;order:initial;
+    justify-content:flex-start;overflow-x:auto;
+  }
+  .heritage-root .masthead-navigation a{min-height:42px;font-size:12px}
+}
