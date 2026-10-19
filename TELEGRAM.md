@@ -58,3 +58,11 @@ python backend/scripts/publish_figures.py --figures path/to/figures.json --dry-r
 مستندات رسمی: [Telegram Bot API](https://core.telegram.org/bots/api#sendmessage)،
 [محدودیت ارسال](https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this)،
 [GitHub artifacts](https://docs.github.com/en/actions/tutorials/store-and-share-data).
+
+## مسیر مستقل جدید انتشار (مهر ۱۴۰۵)
+
+گردش‌کار [Publish curated Pendar Telegram](https://github.com/nimania/pendar/actions/workflows/pendar-telegram.yml) به‌جای وابستگی به بیلد سنگینِ قدیمی، داده‌های **منتشرشده** را از `https://pendar.io/data/figures.json` و `https://pendar.io/data/stories.json` می‌خواند. روزانه سه نوبت در حدود ساعت‌های ۱۰:۴۰، ۱۶:۴۰ و ۲۲:۴۰ به وقت تهران (۷:۱۰، ۱۳:۱۰، ۱۹:۱۰ UTC) اجرا می‌شود؛ زمان واقعی GitHub Actions می‌تواند دیرتر باشد. در هر اجرا حداکثر **یک گفتهٔ تازه و معتبر از چهره‌ها** منتشر می‌کند؛ جمع‌بندی خبری جداگانه حداکثر یک‌بار در هر هشت ساعت ارسال می‌شود. فیلترهای خلاصهٔ معتبر، ثبت وضعیت در شاخهٔ `telegram-state` و جلوگیری از ارسال مجدد حفظ شده‌اند.
+
+برای **بررسی بدون انتشار** وارد Actions شوید، گردش‌کار جدید را انتخاب کنید و Run workflow را با `dry_run=true` اجرا کنید. برای انتشار آزمایشی واقعی، `dry_run=false` را انتخاب کنید؛ این کار فقط در صورت تنظیم توکن و مجوز ادمین کانال امکان‌پذیر است. توکن را فقط در [Repository secrets همین مخزن](https://github.com/nimania/pendar/settings/secrets/actions) با نام `TELEGRAM_BOT_TOKEN` تنظیم کنید؛ هرگز در چت یا کد نفرستید. نخستین اجرای معتبرِ ارسال، آرشیو موجود را مبنا قرار می‌دهد و پیام‌های قدیمی را یک‌باره منتشر نمی‌کند.
+
+اگر دادهٔ عمومی ناقص باشد یا دریافت آن خطا بدهد، گردش‌کار پیش از ارسال متوقف می‌شود. این مسیر فقط محتوای موجود و منتشرشدهٔ پندار را بازنشر می‌کند و متن جدیدی با هوش مصنوعی تولید نمی‌کند.
