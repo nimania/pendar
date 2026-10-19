@@ -35,7 +35,7 @@
       var navigation=doc.querySelector("nav.site-nav");
       var main=doc.querySelector("main#content");
       var footer=doc.querySelector("footer.footer");
-      if(!header||!navigation||!main||!footer||!main.querySelector("#feature-hero")){
+      if(!header||!main||!footer||!main.querySelector("#feature-hero")){
         throw new Error("Heritage template is incomplete");
       }
       shadow=host.shadowRoot||host.attachShadow({mode:"open"});
@@ -51,7 +51,7 @@
       shadow.appendChild(pendingStyle);
       var css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/heritage-preview.css?v=20261019-footer-1";
+      css.href="/heritage-preview.css?v=20261019-self-header-1";
       var cssReady=new Promise(function(resolve,reject){
         css.addEventListener("load",resolve,{once:true});
         css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
@@ -60,11 +60,11 @@
       // Global Pendar header supplies the shared logo, navigation and controls.
       // Hide the magazine's duplicate chrome; keep its content and footer.
       var sharedHeaderStyle=document.createElement("style");
-      sharedHeaderStyle.textContent=".masthead,.site-nav{display:none!important}";
+      sharedHeaderStyle.textContent=".site-nav{display:none!important}";
       shadow.appendChild(sharedHeaderStyle);
       var shell=document.createElement("div");
       shell.className="heritage-root";
-      shell.append(header, navigation, main, footer);
+      shell.append(header);if(navigation)shell.append(navigation);shell.append(main,footer);
       // A generic cover headline with no article photo is not a homepage item.
       // Let the fast picture-selection pass insert the actual cover.
       var pendingFeature=shell.querySelector(".feature-block");
@@ -130,7 +130,7 @@
       await new Promise(function(resolve,reject){
         window.PENDAR_HERITAGE_EMBED=true;
         var script=document.createElement("script");
-        script.src="/heritage-preview.js?v=20261019-footer-1";
+        script.src="/heritage-preview.js?v=20261019-self-header-1";
         script.onload=resolve;
         script.onerror=function(){reject(new Error("Heritage feed script did not load"));};
         document.body.appendChild(script);
