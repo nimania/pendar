@@ -75,13 +75,38 @@
   var data={stories:[],reports:[],authors:[]};
   var redrawHome=null;
   function put(id,html){var x=el(id);if(x)x.innerHTML=html;}
+  function railPublisher(item){
+    // Only credit a publisher explicitly attached to this story. No category
+    // badge or invented logo if the source cannot be established.
+    var source=Array.isArray(item.sources)&&item.sources.length?item.sources[0]:null;
+    var obj=source&&typeof source==="object"?source:{};
+    var publisher=item.publisher&&typeof item.publisher==="object"?item.publisher:{};
+    var name=norm(obj.name_fa||obj.name||publisher.name_fa||publisher.name||
+      item.source_name_fa||item.source_name||item.publisher_name_fa||
+      item.publisher_name||(typeof item.source==="string"?item.source:""));
+    var logo=validImage(obj.logo_url||obj.logo||publisher.logo_url||publisher.logo||
+      item.source_logo_url||item.source_logo||item.publisher_logo_url||"");
+    var sourceUrl=validLink(obj.url||obj.article_url||item.source_url||item.original_url||
+      item.article_url||item.url||"");
+    var domain="";
+    if(sourceUrl){try{domain=new URL(sourceUrl,location.origin).hostname.toLowerCase();}catch(_){}}
+    // Domain-derived favicons are used only for attributable external media.
+    if(!name&&domain&&domain!==location.hostname)name=domain.replace(/^www\./,"");
+    if(!name)return "";
+    if(!logo&&domain&&domain!==location.hostname){
+      logo="https://www.google.com/s2/favicons?domain="+encodeURIComponent(domain)+"&sz=32";
+    }
+    return '<span class="rail-publisher">'
+      +(logo?'<img class="rail-publisher-logo" src="'+esc(logo)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true">':"")
+      +'<span>'+esc(name.slice(0,52))+'</span></span>';
+  }
   function railRow(item){
     var title=headline(item),url=validImage(photo(item));
-    var image=url?'<img class="rail-thumb" src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.style.visibility=\'hidden\'">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">▤</span>';
+    var image=url?'<img class="rail-thumb" src="'+esc(url)+'" alt="" loading="lazy" decoding="async">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">▤</span>';
     return '<a class="rail-row" href="'+esc(slugUrl(item))+'">'
       +'<span class="rail-thumb-frame">'+image+'</span>'
       +'<span><span class="rail-title">'+esc(title)+'</span>'
-      +(item.category?'<span class="rail-kicker">'+esc(String(item.category).slice(0,34))+'</span>':"")
+      +railPublisher(item)
       +'</span></a>';
   }
   function photoNotice(id,message,href){
