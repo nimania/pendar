@@ -74,6 +74,16 @@
     html.heritage-live-active body{margin:0;padding:0;background:#eceeeb}
     html.heritage-live-active #heritage-live-host{display:block;min-height:100vh}
   </style>
+  <style id="pendar-shared-top-header">
+    /* Keep the original navigation (with working search, theme and partner icons)
+       visible above the magazine homepage, including its loading state. */
+    html.heritage-booting body>header.top,
+    html.heritage-live-active body>header.top{display:block!important}
+    html.heritage-booting body>header.top{position:relative;z-index:3}
+    html.heritage-live-active body>header.top{position:relative;z-index:3}
+    /* Avoid two separate brand/navigation rows on the magazine homepage. */
+    html.heritage-live-active #heritage-live-host{min-height:0}
+  </style>
   <style>
     html.js-enabled #seo-static { display: none; }
     html.route-boot main.wrap { visibility: hidden; }
