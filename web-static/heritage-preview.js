@@ -210,6 +210,27 @@
     });
     put("ticker",cards.join("")||textOnly.join("")||'<a href="/figures/">مشاهدهٔ تازه‌ترین گفته‌ها ←</a>');
   }
+  function renderRailFigureFive(payload){
+    var people=Array.isArray(payload&&payload.figures)?payload.figures:[];
+    var records=people.filter(function(p){return p&&p.handle&&p.name_fa;}).map(function(p){
+      var posts=Array.isArray(p.posts)?p.posts:[];
+      return {person:p,count:posts.length,latest:posts.reduce(function(a,b){
+        return String(b.published_at||"")>String(a||"")?b.published_at:a;
+      },""),engagement:posts.reduce(function(v,post){return v+(Number(post.engagement_score||post.score||0)||0);},0)};
+    });
+    var buckets={
+      fresh:records.slice().sort(function(a,b){return b.latest.localeCompare(a.latest);}),
+      updated:records.slice().sort(function(a,b){return b.latest.localeCompare(a.latest);}),
+      talkative:records.slice().sort(function(a,b){return b.count-a.count||b.latest.localeCompare(a.latest);}),
+      hot:records.slice().sort(function(a,b){return b.engagement-a.engagement||b.count-a.count;})
+    };
+    Object.keys(buckets).forEach(function(key){
+      var rows=buckets[key].slice(0,5).map(function(r){
+        return '<a class="rail-row rail-row-text" href="/@'+encodeURIComponent(r.person.handle)+'/"><span><span class="rail-title">'+esc(r.person.name_fa)+'</span><span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span></span></a>';
+      });
+      put("rail-figures-"+key,rows.join("")||'<p class="empty-state">چهره‌ای برای نمایش موجود نیست.</p>');
+    });
+  }
   function initializeRailTabs(){
     document.querySelectorAll(".rail-tabs-box").forEach(function(box){
       if(box.dataset.tabsReady)return;
@@ -327,8 +348,6 @@
       var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
       var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
       // Figure statements are rendered independently of news-card photo gating.
-      put("rail-news",railNewsRows.map(railRow).join("")||
-        '<p class="empty-state">هنوز سرخطی برای نمایش منتشر نشده است.</p>');
       // Editorial lead: prefer independent Iran-focused political coverage.
       // Assess the *subject* of a report, never infer its political allegiance.
       var iranFocus=/ایران|ایرانی|ایرانگرایی|ایران‌گرایی|ایران دوستی|ایراندوستی|ملی‌گرایی|ملت ایران|هویت ملی|میراث ایران|تاریخ ایران|تمامیت ارضی|آینده ایران|مشروطه|قانون اساسی|گذار سیاسی|آزادی ایران/;
@@ -360,13 +379,46 @@
         return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
           +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
       }).join(""));
-      var videos=stories.concat(reports).filter(function(r){
-        return /ویدئو|ویدیو|فیلم|گفتگو|گفت‌وگو|جان کلام/.test(headline(r)+" "+(r.category||""))||/youtube|video/.test(String(r.content_type||r.media_type||"").toLowerCase());
+      // Each tab contains at most five actual records, ranked independently.
+      var sourceRows=limitUnique(stories.concat(reports),300);
+      function timeOf(r){return Date.parse(r.published_at||r.updated_at||"")||0;}
+      function engagement(r){return Number(r.trend_score||r.viral_score||r.engagement_score||r.share_count||0)||0;}
+      function importance(r){return Number(r.importance_score||r.score||0)||0;}
+      function rankRows(rows,mode){
+        return rows.slice().sort(function(a,b){
+          function score(r){
+            if(mode==="viral")return engagement(r)*10+importance(r);
+            if(mode==="trend")return (Number(r.trend_score)||0)*10+importance(r);
+            if(mode==="hot")return importance(r)*10+engagement(r);
+            return timeOf(r);
+          }
+          return score(b)-score(a)||timeOf(b)-timeOf(a);
+        });
+      }
+      function fillFive(id,rows){
+        var seen=new Set(),picked=[];
+        rows.forEach(function(r){var key=String(r.id||"");if(key&&!seen.has(key)&&picked.length<5){seen.add(key);picked.push(r);}});
+        put(id,picked.map(railRow).join("")||'<p class="empty-state">هنوز مطلبی برای این بخش منتشر نشده است.</p>');
+      }
+      ["fresh","viral","trend","hot"].forEach(function(mode){
+        fillFive("rail-headlines-"+mode,rankRows(stories,mode));
       });
-      put("rail-videos",limitUnique(videos,5).map(railRow).join("")||'<p class="empty-state">ویدئوی تازه‌ای برای نمایش نیست.</p>');
-      put("rail-figures",'<div class="rail-mini-links"><a href="/figures/">تازه‌ترین دیدگاه‌های چهره‌ها ←</a><a href="/figures/">گفته‌ها و تحلیل‌های ثبت‌شده ←</a></div>');
-      put("rail-reports",varied(stories.concat(reports),7).map(railRow).join("")||
-        '<p class="empty-state">گزارش تصویردار دیگری در دسترس نیست.</p>');
+      var reportFilters={
+        politics:/سیاس|ایران|دیپلماس|حکومت|انتخاب|جنگ|امنیت|تحریم/,
+        society:/جامع|آموزش|زندگی|شهر|سلامت|محیط|کارگر|زنان|اجتماع/,
+        culture:/فرهنگ|هنر|کتاب|سینما|فیلم|ادبی|موسیقی|میراث|تئاتر/,
+        sport:/ورزش|فوتبال|والیبال|کشتی|المپیک|قهرمان|مسابقه/
+      };
+      Object.keys(reportFilters).forEach(function(mode){
+        var matches=reports.filter(function(r){return reportFilters[mode].test(headline(r)+" "+(r.category||""));});
+        fillFive("rail-reports-"+mode,rankRows(matches,"fresh"));
+      });
+      fillFive("rail-today-latest",rankRows(stories,"fresh").filter(function(r){
+        return Date.now()-timeOf(r)<36*60*60*1000;
+      }));
+      fillFive("rail-today-big",rankRows(stories,"hot").filter(function(r){
+        return Date.now()-timeOf(r)<36*60*60*1000;
+      }));
       var cultureSection=el("culture");
       if(cultureSection)cultureSection.hidden=!culture.length;
       put("culture-grid",varied(culture,6).map(function(r){
@@ -384,7 +436,7 @@
     redrawHome=draw;
     draw();
     renderHomepageBriefs();
-    fetchJson("/data/figures.json").then(renderFigureStrip).catch(function(){
+    fetchJson("/data/figures.json").then(function(payload){renderFigureStrip(payload);renderRailFigureFive(payload);}).catch(function(){
       put("ticker",'<a href="/figures/">آخرین سخنان و دیدگاه‌های چهره‌ها ←</a>');
     });
     // Fill the remaining modules without blocking the first meaningful paint.

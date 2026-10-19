@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="/heritage-preview.css?v=20261019-rail-tabs-2">
-  <script defer src="/heritage-preview.js?v=20261019-rail-tabs-2"></script>
+  <link rel="stylesheet" href="/heritage-preview.css?v=20261019-four-rails-3">
+  <script defer src="/heritage-preview.js?v=20261019-four-rails-3"></script>
 </head>
 <body>
   <a class="skip" href="#content">رفتن به محتوا</a>
@@ -73,29 +73,35 @@
           </section>
         </div>
         <aside class="rail" aria-label="ستون کناری">
-          <section class="rail-box rail-tabs-box" data-rail-group="news">
-            <div class="rail-tab-strip" role="tablist" aria-label="خبر و گزارش">
-              <button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="headlines">سرخط</button>
-              <button type="button" role="tab" aria-selected="false" data-rail-tab="reports">گزارش</button>
-              <button type="button" role="tab" aria-selected="false" data-rail-tab="video">ویدئو</button>
-              <button type="button" role="tab" aria-selected="false" data-rail-tab="figures">چهره‌ها</button>
-            </div>
-            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="headlines"><div id="rail-news"><p class="loading">در حال دریافت سرخط‌ها…</p></div><a class="rail-tab-more" href="/headlines/">همهٔ سرخط‌ها ←</a></div>
-            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="reports" hidden><div id="rail-reports"><p class="loading">در حال دریافت گزارش‌ها…</p></div><a class="rail-tab-more" href="/reports/">گزارش‌های بیشتر ←</a></div>
-            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="video" hidden><div id="rail-videos"><p class="loading">در حال دریافت ویدئوها…</p></div><a class="rail-tab-more" href="/figures/">ویدئوهای بیشتر ←</a></div>
-            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="figures" hidden><div id="rail-figures"><p class="loading">در حال دریافت چهره‌ها…</p></div><a class="rail-tab-more" href="/figures/">همهٔ چهره‌ها ←</a></div>
+          <section class="rail-box rail-tabs-box rail-five" data-rail-group="headlines">
+            <div class="rail-heading"><h2>سرخط‌ها</h2><a href="/headlines/">همه ←</a></div>
+            <div class="rail-tab-strip" role="tablist" aria-label="سرخط‌ها"><button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="fresh">تازه</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="viral">وایرال</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="trend">ترند</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="hot">داغ</button></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="fresh" ><div id="rail-headlines-fresh" class="rail-five-items"><p class="loading">در حال دریافت تازه…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="viral" hidden><div id="rail-headlines-viral" class="rail-five-items"><p class="loading">در حال دریافت وایرال…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="trend" hidden><div id="rail-headlines-trend" class="rail-five-items"><p class="loading">در حال دریافت ترند…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="hot" hidden><div id="rail-headlines-hot" class="rail-five-items"><p class="loading">در حال دریافت داغ…</p></div></div>
           </section>
-          <section class="rail-box rail-tabs-box rail-utility-tabs" data-rail-group="utility">
-            <div class="rail-tab-strip sea" role="tablist" aria-label="اطلاعات و پیشخوان‌ها">
-              <button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="market">بازار</button>
-              <button type="button" role="tab" aria-selected="false" data-rail-tab="weather">آب‌وهوا</button>
-              <button type="button" role="tab" aria-selected="false" data-rail-tab="press">جراید</button>
-              <button type="button" role="tab" aria-selected="false" data-rail-tab="books">کتاب</button>
-            </div>
-            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="market"><div id="home-market-summary" class="home-brief-body">در حال دریافت بازار…</div><a class="rail-tab-more" href="/market/">نرخ‌های بیشتر ←</a></div>
-            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="weather" hidden><div id="home-weather-summary" class="home-brief-body">در حال دریافت آب‌وهوا…</div><a class="rail-tab-more" href="/weather/">پیش‌بینی کامل ←</a></div>
-            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="press" hidden><div class="rail-mini-links"><a href="/press/">مرور صفحهٔ اول روزنامه‌ها و نشریات ←</a><a href="/press/">تازه‌ترین شماره‌ها و پرونده‌های مطبوعاتی ←</a></div><a class="rail-tab-more" href="/press/">پیشخوان جراید ←</a></div>
-            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="books" hidden><div class="rail-mini-links"><a href="/books/">کتاب‌های تازه و پیشنهادی ←</a><a href="/books/">مرور کتاب‌ها و ناشران ←</a></div><a class="rail-tab-more" href="/books/">پیشخوان کتاب ←</a></div>
+          <section class="rail-box rail-tabs-box rail-five" data-rail-group="reports">
+            <div class="rail-heading"><h2>گزارش‌ها</h2><a href="/reports/">همه ←</a></div>
+            <div class="rail-tab-strip" role="tablist" aria-label="گزارش‌ها"><button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="politics">سیاست</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="society">جامعه</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="culture">فرهنگ</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="sport">ورزش</button></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="politics" ><div id="rail-reports-politics" class="rail-five-items"><p class="loading">در حال دریافت سیاست…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="society" hidden><div id="rail-reports-society" class="rail-five-items"><p class="loading">در حال دریافت جامعه…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="culture" hidden><div id="rail-reports-culture" class="rail-five-items"><p class="loading">در حال دریافت فرهنگ…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="sport" hidden><div id="rail-reports-sport" class="rail-five-items"><p class="loading">در حال دریافت ورزش…</p></div></div>
+          </section>
+          <section class="rail-box rail-tabs-box rail-five" data-rail-group="today">
+            <div class="rail-heading"><h2>ماجراهای امروز</h2><a href="/headlines/">همه ←</a></div>
+            <div class="rail-tab-strip" role="tablist" aria-label="ماجراهای امروز"><button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="latest">تازه‌ها</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="big">پرماجراترها</button></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="latest" ><div id="rail-today-latest" class="rail-five-items"><p class="loading">در حال دریافت تازه‌ها…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="big" hidden><div id="rail-today-big" class="rail-five-items"><p class="loading">در حال دریافت پرماجراترها…</p></div></div>
+          </section>
+          <section class="rail-box rail-tabs-box rail-five" data-rail-group="figures">
+            <div class="rail-heading"><h2>چهره‌ها</h2><a href="/figures/">همه ←</a></div>
+            <div class="rail-tab-strip" role="tablist" aria-label="چهره‌ها"><button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="fresh">تازه</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="updated">به‌روز</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="talkative">پرسخن</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="hot">داغ</button></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="fresh" ><div id="rail-figures-fresh" class="rail-five-items"><p class="loading">در حال دریافت تازه…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="updated" hidden><div id="rail-figures-updated" class="rail-five-items"><p class="loading">در حال دریافت به‌روز…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="talkative" hidden><div id="rail-figures-talkative" class="rail-five-items"><p class="loading">در حال دریافت پرسخن…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="hot" hidden><div id="rail-figures-hot" class="rail-five-items"><p class="loading">در حال دریافت داغ…</p></div></div>
           </section>
           <section class="rail-box rail-links">
             <div class="rail-heading"><h2>بخش‌های دیگر</h2></div>
