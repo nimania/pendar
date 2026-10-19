@@ -289,3 +289,13 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .rail-mini-links a{color:#304940;text-decoration:none;font-size:12px;line-height:1.8;padding:10px 2px;border-bottom:1px solid #e7ece8}
 .heritage-root .rail-mini-links a:hover,.heritage-root .rail-tab-more:hover{text-decoration:underline}
 @media(max-width:400px){.heritage-root .rail-tab-strip button{font-size:11px;padding:10px 2px}}
+
+/* Four compact five-item editorial rails with old-Pendar tab cues. */
+.heritage-root .rail-five .rail-heading{min-height:44px}
+.heritage-root .rail-five .rail-tab-strip{min-height:39px}
+.heritage-root .rail-five .rail-tab-strip button{font-size:11px;padding:7px 3px}
+.heritage-root .rail-five .rail-tab-panel{min-height:0}
+.heritage-root .rail-five .rail-row{min-height:57px;padding:8px 10px}
+.heritage-root .rail-five .rail-row .rail-title{font-size:12px;line-height:1.6}
+.heritage-root .rail-five .rail-row .rail-thumb{width:49px;height:44px;object-fit:cover}
+.heritage-root .rail-five .empty-state{padding:18px 12px;font-size:12px}
