@@ -252,10 +252,19 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       </div>
     </div>
   </article>`;
+  // Deterministic, distinct accounts from the existing figure directory;
+  // exclude the current profile and accounts without a working profile handle.
+  const suggestions=(d.figures||[]).filter(p=>p&&p.handle&&p.handle!==x.handle&&p.name_fa)
+    .sort((a,b)=>(b.count||0)-(a.count||0)||String(a.name_fa).localeCompare(String(b.name_fa),"fa"))
+    .slice(0,6);
+  const suggestionCards=suggestions.map(p=>'<a class="figure-rail-person" href="/@'+encodeURIComponent(p.handle)+'/" aria-label="مشاهدهٔ '+esc(p.name_fa)+'">'
+      +(p.avatar?'<img src="'+esc(p.avatar)+'" alt="" loading="lazy" onerror="this.hidden=true">':'<span class="figure-rail-initial">'+esc(p.name_fa.slice(0,1))+'</span>')
+      +'<span><b>'+esc(p.name_fa)+'</b><small>'+esc(p.role_fa||p.field_fa||"مشاهدهٔ پروفایل")+'</small></span></a>').join("");
   el.innerHTML = `<div class="x-profile">
     ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length+profileMedia.books.length ? `<span><b>${faN(figureBooks.length+profileMedia.books.length)}</b> کتاب</span>` : ""}${mediaWorks.length+profileMedia.films.length ? `<span><b>${faN(mediaWorks.length+profileMedia.films.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
-    ${articleDisplayAdMarkup()}
+    <div class="figure-profile-columns">
+      <div class="figure-profile-primary">
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
       ${hasFeed?`<button class="${_figureProfileFilter==="all"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','all')">همه</button>`:""}
       ${direct.length?`<button class="${_figureProfileFilter==="direct"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','direct')">دیدگاه‌ها</button>`:""}
@@ -279,6 +288,15 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     ${israelSection}
     ${_figureProfileFilter==="usradar"?usRadarSection:""}\n    ${_figureProfileFilter==="about"?aboutSection:""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos"||_figureProfileFilter==="usradar"||_figureProfileFilter==="official"||_figureProfileFilter==="about"||(_figureProfileFilter==="all"&&!shown.length)) ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
+      </div>
+      <aside class="figure-profile-side" aria-label="چهره‌های پیشنهادی و تبلیغات">
+        <section class="figure-rail-box"><h2>چهره‌های پیشنهادی برای دنبال کردن</h2>
+          <div class="figure-rail-people">${suggestionCards}</div>
+          <a class="figure-rail-more" href="/figures/">همهٔ چهره‌ها ←</a>
+        </section>
+        <section class="figure-rail-box figure-rail-ad" aria-label="تبلیغات"><h2>تبلیغات</h2>${articleDisplayAdMarkup()}</section>
+      </aside>
+    </div>
   </div>`;
   loadArticleDisplayAd();
 }
