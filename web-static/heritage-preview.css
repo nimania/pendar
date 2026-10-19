@@ -134,3 +134,15 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .footer-freshness span[title]{cursor:help}
 .footer-freshness:hover{opacity:1;color:#d7e5df}
 @media(max-width:720px){.footer-bottom{flex-direction:column}.footer-freshness{font-size:9px;gap:2px 8px}}
+
+/* The live magazine owns its masthead. This stays inside the mounted Shadow DOM. */
+.heritage-root .masthead{display:block!important;background:#302e2d;color:#f5f4f2;position:relative;z-index:5}
+.heritage-root .masthead-inner{width:min(1500px,calc(100% - 40px));min-height:95px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.heritage-root .masthead-navigation{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center}
+.heritage-root .masthead-navigation a{display:inline-flex;padding:9px 12px;border:1px solid #696765;border-radius:11px;font-size:13px;font-weight:750;color:#f5f4f2;white-space:nowrap}
+.heritage-root .masthead-navigation a:hover{background:#5a5755}
+.heritage-root .masthead-tools{display:flex;align-items:center;gap:8px;flex:none}
+.heritage-root .masthead-tools a{display:grid;place-items:center;width:47px;height:47px;border:1px solid #696765;border-radius:11px;font-size:27px;color:#fff}
+.heritage-root .masthead-tools img{width:29px;height:29px;object-fit:contain}
+.heritage-root .brand img{width:90px;max-height:69px}
+@media(max-width:900px){.heritage-root .masthead-inner{flex-wrap:wrap;padding:12px 0;gap:10px}.heritage-root .masthead-navigation{order:3;width:100%;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.heritage-root .masthead-navigation a{font-size:12px;padding:8px 10px}.heritage-root .masthead-tools{margin-inline-start:auto}}
