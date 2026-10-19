@@ -265,9 +265,31 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   </article>`;
   // Deterministic, distinct accounts from the existing figure directory;
   // exclude the current profile and accounts without a working profile handle.
-  const suggestions=(d.figures||[]).filter(p=>p&&p.handle&&p.handle!==x.handle&&p.name_fa)
-    .sort((a,b)=>(b.count||0)-(a.count||0)||String(a.name_fa).localeCompare(String(b.name_fa),"fa"))
-    .slice(0,6);
+  // Rank nearby editorial interests, not globally popular accounts.
+  // Role + recurring post topics are signals; single generic words aren't.
+  const followStop=new Set(["ایران","درباره","برای","است","این","های","کرد","شود","یک","در","از","با","به","که","را","و","یا","هم","آن","خبر","گفته","نظر","سیاسی","فعال","روزنامه","نگار","تحلیلگر","گزارش","جدید","کشور","مردم","دولت","امروز","دیروز"]);
+  const followTerms=function(p){
+    const body=[p.role_fa,p.field_fa,p.bio_fa,p.description_fa]
+      .concat((p.posts||[]).slice(0,12).map(post=>post.topic_fa||post.headline_fa||post.title_fa||post.text_fa||""))
+      .filter(Boolean).join(" ").replace(/[\u200c\u200f]/g," ").replace(/[^\u0600-\u06ffa-zA-Z0-9 ]/g," ");
+    return new Set(body.split(/\s+/).map(t=>t.trim()).filter(t=>t.length>=4&&!followStop.has(t)));
+  };
+  const currentTerms=followTerms(x);
+  const currentRole=String(x.role_fa||x.field_fa||"").replace(/\s+/g," ").trim();
+  const relatedHandles=new Set((x.posts||[]).flatMap(post=>(post.related_people||[]).map(r=>String(r.handle||"").toLowerCase())));
+  const ranked=(d.figures||[]).filter(p=>p&&p.handle&&p.handle.toLowerCase()!==String(x.handle).toLowerCase()&&p.name_fa)
+    .map(p=>{
+      const terms=followTerms(p);
+      let overlap=0;
+      for(const word of currentTerms)if(terms.has(word))overlap++;
+      const role=String(p.role_fa||p.field_fa||"").replace(/\s+/g," ").trim();
+      const sameRole=Boolean(role&&currentRole&&role===currentRole);
+      const linked=relatedHandles.has(String(p.handle).toLowerCase());
+      return {p,score:Math.min(overlap,12)*3+(sameRole?10:0)+(linked?14:0),overlap};
+    })
+    .sort((a,b)=>b.score-a.score||b.overlap-a.overlap||(b.p.posts||[]).length-(a.p.posts||[]).length||String(a.p.handle).localeCompare(String(b.p.handle)));
+  // Prefer contextual matches; use a stable diversified fallback only where needed.
+  const suggestions=ranked.slice(0,6).map(r=>r.p);
   const suggestionCards=suggestions.map(p=>{
     const followed=isFigureFollowed(p.handle);
     return '<div class="figure-rail-person">'
