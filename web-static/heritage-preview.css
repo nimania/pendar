@@ -299,3 +299,7 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .rail-five .rail-row .rail-title{font-size:12px;line-height:1.6}
 .heritage-root .rail-five .rail-row .rail-thumb{width:49px;height:44px;object-fit:cover}
 .heritage-root .rail-five .empty-state{padding:18px 12px;font-size:12px}
+
+.heritage-root .rail-five .rail-thumb-frame{display:grid;place-items:center;width:49px;height:44px;flex:0 0 49px;background:#e6eeeb;border-radius:4px;overflow:hidden}
+.heritage-root .rail-five .rail-thumb-frame .rail-thumb{display:block;width:49px;height:44px;object-fit:cover;margin:0}
+.heritage-root .rail-five .rail-thumb-placeholder{display:grid;place-items:center;color:#748980;font-size:18px}
