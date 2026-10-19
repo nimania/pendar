@@ -152,7 +152,7 @@
     }).slice(0,9).map(function(x){
       var person=x.person,post=x.post;
       var name=norm(person.name_fa||person.name||person.display_name_fa||person.handle);
-      var title=norm(post.headline_fa||post.title_fa||post.statement_fa||post.text_fa||post.recap_fa||post.summary_fa||"");
+      var title=norm(post.headline_fa||post.title_fa||post.statement_fa||post.text_fa||post.text||post.title||post.recap_fa||post.summary_fa||"");
       var avatar=validImage(person.avatar||person.image_url||person.photo_url||"");
       if(!title)return "";
       var href="/figure/"+encodeURIComponent(person.handle)+"/";
