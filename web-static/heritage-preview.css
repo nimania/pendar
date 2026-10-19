@@ -125,3 +125,12 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .home-brief-body .brief-item{padding:5px 0;border-bottom:1px solid #e6ece8}
 .home-brief-body .brief-item:last-child{border-bottom:0}
 @media(max-width:720px){.latest-ticker .ticker-story.person-statement{flex-basis:245px;max-width:245px}.latest-ticker .ticker-person-photo{width:52px;height:52px}}
+
+/* Unobtrusive operational timestamps: visible on hover and to editors, never guessed. */
+.footer-bottom{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.footer-freshness{font:400 10px/1.9 Vazirmatn,Tahoma,sans-serif;color:#9ca39f;display:flex;flex-wrap:wrap;gap:3px 11px;max-width:100%;opacity:.79}
+.footer-freshness span{white-space:nowrap}
+.footer-freshness time{font-variant-numeric:tabular-nums}
+.footer-freshness span[title]{cursor:help}
+.footer-freshness:hover{opacity:1;color:#d7e5df}
+@media(max-width:720px){.footer-bottom{flex-direction:column}.footer-freshness{font-size:9px;gap:2px 8px}}

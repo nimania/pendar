@@ -619,6 +619,17 @@ jobs:
               raise SystemExit('::error::Missing story detail JSON for published headlines: '+', '.join(missing[:8]))
           print('Fast publish validated:',len(stories),'headlines and',len(figures['figures']),'figures; all story details available')
           PY
+      - name: Stamp actual published build time
+        run: |
+          python - <<'PY'
+          import datetime,json,pathlib
+          target=pathlib.Path('site/data/footer-status.json')
+          target.parent.mkdir(parents=True,exist_ok=True)
+          target.write_text(json.dumps({
+            "published_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "source":"fast-deploy"
+          }),encoding='utf-8')
+          PY
       - name: Report published figure freshness
         run: |
           python - <<'PY'
