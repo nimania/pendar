@@ -46,7 +46,7 @@ assert(!index.includes('heritage-first-paint-columns'),"homepage must not render
 assert(index.includes('heritage-first-paint-nav'),"homepage must keep magazine chrome before initial data");
 assert(heritageLive.indexOf('await cssReady;')<heritageLive.indexOf('await contentReady;'),"show magazine chrome before image checks complete");
 assert(heritageLive.includes('pendingFeature.hidden=true'),"unverified cover must remain hidden");
-assert(heritagePreview.includes('setTimeout(resolve,650)'),"first image selection must have a short bounded delay");
+assert(heritagePreview.includes('setTimeout(resolve,250)'),"first image selection must have a short bounded delay");
 assert(heritagePreview.includes('Pendar image enrichment:'),"later image hydration must not block first render");
 assert(heritagePreview.includes('verifiedImage(photo(row))'),"homepage cards must still require real loaded photos");
 new Function(magazineCollections);
