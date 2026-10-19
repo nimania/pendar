@@ -268,3 +268,8 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .latest-ticker .ticker-text-fallback strong{font-size:12px;color:#176f74}
 .heritage-root .latest-ticker .ticker-text-fallback span{font-size:12px;line-height:1.7}
 .heritage-root .feature-hero:not(:has(.feature-picture)) .feature-caption{position:relative;background:#fff;min-height:190px;display:flex;flex-direction:column;justify-content:center;color:#22342b}
+
+.heritage-root .pendar-telegram-promo{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:17px;margin:22px 0;border-right:4px solid #168f99;border-radius:7px;background:#f4faf8;border-top:1px solid #dce6e0;border-bottom:1px solid #dce6e0;direction:rtl}
+.heritage-root .pendar-telegram-promo strong{font-size:15px}
+.heritage-root .pendar-telegram-promo p{font-size:12px;margin:5px 0;color:#52695e}
+.heritage-root .pendar-telegram-promo a{display:inline-block;background:#168f99;border-radius:6px;color:#fff;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700}
