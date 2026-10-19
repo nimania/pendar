@@ -73,21 +73,29 @@
           </section>
         </div>
         <aside class="rail" aria-label="ستون کناری">
-          <section class="rail-box">
-            <div class="rail-heading"><h2>تازه‌ترین سرخط‌ها</h2><a href="/headlines/">همهٔ سرخط‌ها ←</a></div>
-            <div id="rail-reports"><p class="loading">در حال دریافت گزارش‌ها…</p></div>
+          <section class="rail-box rail-tabs-box" data-rail-group="news">
+            <div class="rail-tab-strip" role="tablist" aria-label="خبر و گزارش">
+              <button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="headlines">سرخط</button>
+              <button type="button" role="tab" aria-selected="false" data-rail-tab="reports">گزارش</button>
+              <button type="button" role="tab" aria-selected="false" data-rail-tab="video">ویدئو</button>
+              <button type="button" role="tab" aria-selected="false" data-rail-tab="figures">چهره‌ها</button>
+            </div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="headlines"><div id="rail-news"><p class="loading">در حال دریافت سرخط‌ها…</p></div><a class="rail-tab-more" href="/headlines/">همهٔ سرخط‌ها ←</a></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="reports" hidden><div id="rail-reports"><p class="loading">در حال دریافت گزارش‌ها…</p></div><a class="rail-tab-more" href="/reports/">گزارش‌های بیشتر ←</a></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="video" hidden><div id="rail-videos"><p class="loading">در حال دریافت ویدئوها…</p></div><a class="rail-tab-more" href="/figures/">ویدئوهای بیشتر ←</a></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="figures" hidden><div id="rail-figures"><p class="loading">در حال دریافت چهره‌ها…</p></div><a class="rail-tab-more" href="/figures/">همهٔ چهره‌ها ←</a></div>
           </section>
-          <section class="rail-box">
-            <div class="rail-heading sea"><h2>سرخط‌ها</h2><a href="/headlines/">آرشیو ←</a></div>
-            <div id="rail-news"><p class="loading">در حال دریافت خبرها…</p></div>
-          </section>
-          <section class="rail-box home-market-preview">
-            <div class="rail-heading"><h2><a class="market-preview-brand" href="/market/" aria-label="پنداربازار"><img src="/assets/pendar-logo.svg" alt="پندار"><span>بازار</span></a></h2><a href="/market/">نرخ‌های بیشتر ←</a></div>
-            <div id="home-market-summary" class="home-brief-body">در حال دریافت اطلاعات بازار…</div>
-          </section>
-          <section class="rail-box home-weather-preview">
-            <div class="rail-heading sea"><h2>آب و هوا</h2><a href="/weather/">پیش‌بینی کامل ←</a></div>
-            <div id="home-weather-summary" class="home-brief-body">در حال دریافت وضعیت هوا…</div>
+          <section class="rail-box rail-tabs-box rail-utility-tabs" data-rail-group="utility">
+            <div class="rail-tab-strip sea" role="tablist" aria-label="اطلاعات و پیشخوان‌ها">
+              <button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="market">بازار</button>
+              <button type="button" role="tab" aria-selected="false" data-rail-tab="weather">آب‌وهوا</button>
+              <button type="button" role="tab" aria-selected="false" data-rail-tab="press">جراید</button>
+              <button type="button" role="tab" aria-selected="false" data-rail-tab="books">کتاب</button>
+            </div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="market"><div id="home-market-summary" class="home-brief-body">در حال دریافت بازار…</div><a class="rail-tab-more" href="/market/">نرخ‌های بیشتر ←</a></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="weather" hidden><div id="home-weather-summary" class="home-brief-body">در حال دریافت آب‌وهوا…</div><a class="rail-tab-more" href="/weather/">پیش‌بینی کامل ←</a></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="press" hidden><div class="rail-mini-links"><a href="/press/">مرور صفحهٔ اول روزنامه‌ها و نشریات ←</a><a href="/press/">تازه‌ترین شماره‌ها و پرونده‌های مطبوعاتی ←</a></div><a class="rail-tab-more" href="/press/">پیشخوان جراید ←</a></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="books" hidden><div class="rail-mini-links"><a href="/books/">کتاب‌های تازه و پیشنهادی ←</a><a href="/books/">مرور کتاب‌ها و ناشران ←</a></div><a class="rail-tab-more" href="/books/">پیشخوان کتاب ←</a></div>
           </section>
           <section class="rail-box rail-links">
             <div class="rail-heading"><h2>بخش‌های دیگر</h2></div>
