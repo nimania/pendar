@@ -190,7 +190,9 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   document.getElementById("figures-lede").style.display = "none";
   document.getElementById("figure-timeline").innerHTML = "";
   const el = document.getElementById("figures");
-  el.innerHTML = `<div class="spinner"></div>`;
+  const existingProfile=!resetFilter && el.querySelector(".x-profile[data-profile-handle]");
+  const switchingTab=!!existingProfile && existingProfile.dataset.profileHandle===String(handle);
+  if(!switchingTab)el.innerHTML = `<div class="spinner"></div>`;
   const [d, curatedPoems, bookData, movieData] = await Promise.all([loadFigures(), loadCuratedPoems(), loadBooks(), loadMovies()]);
   const base = (d.figures || []).find(f => f.handle.toLowerCase() === String(handle).toLowerCase()||(canonicalFigure?.refs||[]).some(r=>r.dataset==="figures"&&String(r.key)===String(f.handle)));
   const x=canonicalFigure?_personFigureRecord(canonicalFigure,base):base;
@@ -265,7 +267,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       +'<span><b>'+esc(p.name_fa)+'</b><small>'+esc(p.role_fa||p.field_fa||"مشاهدهٔ پروفایل")+'</small></span></a>'
       +'<button type="button" class="figure-rail-follow'+(followed?' on':'')+'" data-figure-follow="'+esc(p.handle)+'" onclick="toggleFigureRailFollow(this)" aria-pressed="'+followed+'">'+(followed?'✓ دنبال می‌کنم':'+ دنبال کن')+'</button></div>';
   }).join("");
-  el.innerHTML = `<div class="x-profile">
+  const nextProfileMarkup = `<div class="x-profile" data-profile-handle="${esc(x.handle)}">
     ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length+profileMedia.books.length ? `<span><b>${faN(figureBooks.length+profileMedia.books.length)}</b> کتاب</span>` : ""}${mediaWorks.length+profileMedia.films.length ? `<span><b>${faN(mediaWorks.length+profileMedia.films.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <div class="figure-profile-columns">
@@ -302,7 +304,21 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       </aside>
     </div>
   </div>`;
-  loadArticleDisplayAd();
+  if(switchingTab){
+    const temporary=document.createElement("div");
+    temporary.innerHTML=nextProfileMarkup;
+    const nextPrimary=temporary.querySelector(".figure-profile-primary");
+    const currentPrimary=existingProfile.querySelector(".figure-profile-primary");
+    if(nextPrimary && currentPrimary){
+      currentPrimary.replaceChildren(...Array.from(nextPrimary.childNodes));
+    }else{
+      el.innerHTML=nextProfileMarkup;
+      loadArticleDisplayAd();
+    }
+  }else{
+    el.innerHTML=nextProfileMarkup;
+    loadArticleDisplayAd();
+  }
 }
 
 /* Figures directory: the directory mode state (_figDirectoryMode), its
