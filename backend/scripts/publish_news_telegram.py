@@ -74,7 +74,7 @@ def message(story):
         cut=max(lead.rfind("।",0,600),lead.rfind("。",0,600),lead.rfind(".",0,600),lead.rfind("؛",0,600))
         lead=lead[:cut+1] if cut>=250 else lead[:620].rsplit(" ",1)[0]+"…"
     url=f"{SITE}/story/{story['id']}/"
-    return f"<b>{title}</b>\n\n{html.escape(lead)}\n\n<a href=\"{html.escape(url,quote=True)}\">متن کامل و منابع در پندار ←</a>"
+    return f"<b>{title}</b>\n\n{html.escape(lead)}\n\n<a href=\"{html.escape(url,quote=True)}\">متن کامل و منابع در پندار ←</a>\n\n@pendario"
 
 def publish(stories, ledger, telegram, chat_id, now=None):
     now=now or datetime.now(timezone.utc)
