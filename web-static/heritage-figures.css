@@ -210,7 +210,7 @@ body:has(#figures-view.figure-profile-mode) #figures-view{
    grid-column:1/-1
  }
  #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.story-inline-sponsor{
-   grid-column:2;grid-row:5/span 4;align-self:start;width:100%;
+   grid-column:2;grid-row:auto;align-self:start;width:100%;
    margin:0!important;background:white;border:1px solid #dbe4dd!important
  }
  #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.x-profile-tabs,
