@@ -51,7 +51,7 @@
       shadow.appendChild(pendingStyle);
       var css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/heritage-preview.css?v=20261019-ticker-arrows-2";
+      css.href="/heritage-preview.css?v=20261019-ticker-link-3";
       var cssReady=new Promise(function(resolve,reject){
         css.addEventListener("load",resolve,{once:true});
         css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
