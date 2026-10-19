@@ -234,3 +234,51 @@ body:has(#figures-view.figure-profile-mode) #figures-view{
 #figures-view .figure-rail-follow{flex:none;border:1px solid #178e99;border-radius:7px;color:#147c84;background:#fff;font:700 11px/1.6 "Vazirmatn",Tahoma,sans-serif;padding:6px 8px;cursor:pointer;white-space:nowrap}
 #figures-view .figure-rail-follow.on{background:#e8f4f3;color:#11646c}
 #figures-view .figure-rail-follow:focus-visible{outline:2px solid #178e99;outline-offset:2px}
+
+/* Compact figure profile identity: prioritize statements above the fold. */
+#figures-view.figure-profile-mode .figure-profile-search{
+  padding:6px 10px!important;margin-bottom:8px!important;min-height:48px
+}
+#figures-view.figure-profile-mode .figure-profile-search-box input{min-height:34px;font-size:12px}
+#figures-view.figure-profile-mode .figure-profile-back{height:34px;min-width:36px}
+#figures-view.figure-profile-mode .x-profile-main{
+  grid-template-columns:78px minmax(0,1fr) auto!important;
+  gap:2px 14px!important;padding:12px 17px!important;margin-bottom:9px!important;
+  min-height:112px!important;align-items:center!important
+}
+#figures-view.figure-profile-mode .x-avatar-wrap{
+  grid-column:1!important;grid-row:1/7!important;width:74px!important;height:74px!important;
+  position:static!important;top:auto!important;right:auto!important;
+  border:0!important;align-self:center!important
+}
+#figures-view.figure-profile-mode .x-avatar-wrap img{width:74px!important;height:74px!important;border:2px solid #edf1ed!important}
+#figures-view.figure-profile-mode .x-profile-main>h1{grid-column:2!important;font-size:clamp(19px,2vw,25px)!important;line-height:1.35!important}
+#figures-view.figure-profile-mode .x-profile-main>.x-handle{grid-column:2!important;font-size:11px!important;line-height:1.3!important}
+#figures-view.figure-profile-mode .x-profile-main>.x-bio{grid-column:2!important;font-size:12px!important;line-height:1.45!important}
+#figures-view.figure-profile-mode .x-profile-actions{grid-column:3!important;grid-row:1/5!important;align-self:center!important}
+#figures-view.figure-profile-mode .x-profile-stats{
+  grid-column:2/4!important;gap:5px!important;margin:3px 0 0!important;align-items:center
+}
+#figures-view.figure-profile-mode .x-profile-stats span{font-size:10px!important;padding:2px 6px!important}
+#figures-view.figure-profile-mode .x-profile-main .fig-social,
+#figures-view.figure-profile-mode .x-profile-main .social-links{grid-column:2!important;margin:1px 0!important}
+#figures-view.figure-profile-mode .x-profile-main .fig-social a,
+#figures-view.figure-profile-mode .x-profile-main .social-links a{min-height:25px;padding:3px 7px;font-size:11px}
+#figures-view.figure-profile-mode .x-profile-tabs{padding:5px!important;margin-bottom:8px!important;min-height:42px!important;gap:5px!important}
+#figures-view.figure-profile-mode .x-profile-tabs button{padding:5px 9px!important;font-size:11px!important}
+@media(max-width:650px){
+ #figures-view.figure-profile-mode .x-profile-main{
+   grid-template-columns:56px minmax(0,1fr)!important;padding:10px!important;gap:3px 9px!important
+ }
+ #figures-view.figure-profile-mode .x-avatar-wrap{
+   width:54px!important;height:54px!important;grid-row:1/4!important
+ }
+ #figures-view.figure-profile-mode .x-avatar-wrap img{width:54px!important;height:54px!important}
+ #figures-view.figure-profile-mode .x-profile-main>h1{font-size:19px!important}
+ #figures-view.figure-profile-mode .x-profile-main>.x-handle,
+ #figures-view.figure-profile-mode .x-profile-main>.x-bio{grid-column:2!important}
+ #figures-view.figure-profile-mode .x-profile-actions{grid-column:1/3!important;grid-row:auto!important;justify-content:flex-start!important}
+ #figures-view.figure-profile-mode .x-profile-stats{grid-column:1/3!important}
+ #figures-view.figure-profile-mode .x-profile-main .fig-social,
+ #figures-view.figure-profile-mode .x-profile-main .social-links{grid-column:1/3!important}
+}
