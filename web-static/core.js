@@ -49,7 +49,21 @@ function relTime(iso) {
   return d === 1 ? "دیروز" : faN(d) + " روز پیش";
 }
 
-async function getJSON(path, timeoutMs = 12000) {
+// Share overlapping reads of the same dataset across independent views.
+const _pendingJSON = new Map();
+function getJSON(path, timeoutMs = 12000) {
+  const key = String(path);
+  if (_pendingJSON.has(key)) return _pendingJSON.get(key);
+  const promise = _fetchJSON(path, timeoutMs);
+  _pendingJSON.set(key, promise);
+  // A finished read never stays cached in memory: subsequent visits can see fresh data.
+  promise.then(
+    () => { if (_pendingJSON.get(key) === promise) _pendingJSON.delete(key); },
+    () => { if (_pendingJSON.get(key) === promise) _pendingJSON.delete(key); }
+  );
+  return promise;
+}
+async function _fetchJSON(path, timeoutMs) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), timeoutMs);
   try {
@@ -58,14 +72,14 @@ async function getJSON(path, timeoutMs = 12000) {
     const partition = /(?:^|\/)(people|person-aliases)\/\d+\.json(?:[?#]|$)/.test(path);
     if (partition && typeof DecompressionStream !== "undefined") {
       const compressed = path.replace(/\.json(?=[?#]|$)/, ".json.gz");
-      const response = await fetch(compressed, {cache: "no-cache", signal: ctl.signal});
+      const response = await fetch(compressed, {cache: "default", signal: ctl.signal});
       if (response.ok) {
         const stream = response.body.pipeThrough(new DecompressionStream("gzip"));
         return await new Response(stream).json();
       }
       if (response.status !== 404) throw new Error("HTTP " + response.status);
     }
-    const r = await fetch(path, { cache: "no-cache", signal: ctl.signal });
+    const r = await fetch(path, { cache: "default", signal: ctl.signal });
     if (!r.ok) throw new Error("HTTP " + r.status);
     return await r.json();
   } finally { clearTimeout(timer); }
