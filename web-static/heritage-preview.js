@@ -76,9 +76,9 @@
   var redrawHome=null;
   function put(id,html){var x=el(id);if(x)x.innerHTML=html;}
   function railRow(item){
-    if(!verifiedImage(photo(item)))return "";
-    var title=headline(item);
-    return '<a class="rail-row" href="'+esc(slugUrl(item))+'"><span>'+thumb(item,"rail-thumb")+'</span>'
+    var title=headline(item),image=thumb(item,"rail-thumb");
+    return '<a class="rail-row'+(image?'':' rail-row-text')+'" href="'+esc(slugUrl(item))+'">'
+      +(image?'<span>'+image+'</span>':'')
       +'<span><span class="rail-title">'+esc(title)+'</span>'
       +(item.category?'<span class="rail-kicker">'+esc(String(item.category).slice(0,34))+'</span>':"")
       +'</span></a>';
@@ -204,7 +204,11 @@
         +'<img class="ticker-person-photo" src="'+esc(r.url)+'" alt="'+esc(name)+'" loading="lazy" decoding="async">'
         +'<span><span class="ticker-person-name">'+esc(name)+'</span><span class="ticker-person-quote">'+esc(excerpt(r.c.title,110))+'</span></span></a>';
     });
-    put("ticker",cards.join("")||'<a href="/figures/">عکس تأییدشده‌ای برای گفته‌های تازه در دسترس نیست؛ همهٔ چهره‌ها ←</a>');
+    var textOnly=candidates.slice(0,3).map(function(c){
+      return '<a class="ticker-text-fallback" href="/@'+encodeURIComponent(c.person.handle)+'/"><strong>'
+        +esc(c.person.name_fa||c.person.name||c.person.handle)+'</strong><span>'+esc(excerpt(c.title,65))+'</span></a>';
+    });
+    put("ticker",cards.join("")||textOnly.join("")||'<a href="/figures/">مشاهدهٔ تازه‌ترین گفته‌ها ←</a>');
   }
   function renderHomepageBriefs(){
     var digits=function(value){return String(value).replace(/\\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[Number(d)];});};
@@ -290,15 +294,15 @@
         return picked;
       }
       var tickerRows=varied(news,5);
-      var railNewsRows=varied(news,7);
+      var railNewsRows=varied(stories,7);
       var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
       var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
       // Figure statements are rendered independently of news-card photo gating.
       put("rail-news",railNewsRows.map(railRow).join("")||
-        '<p class="empty-state">خبر تصویردار تازه‌ای برای نمایش پیدا نشد.</p>');
+        '<p class="empty-state">هنوز سرخطی برای نمایش منتشر نشده است.</p>');
       var political=/سیاست|انتخابات|دولت|مجلس|دیپلماسی|تحریم|مذاکره|جنگ|اسرائیل|ایران|آمریکا|حکمرانی|امنیت|قدرت/;
       var politicalReports=editorial.filter(function(r){return political.test(norm((r.category||"")+" "+headline(r)));});
-      var cover=politicalReports.find(function(r){return (r._imageWidth||0)>=900;})||politicalReports[0]||editorial[0]||news[0];
+      var cover=politicalReports.find(function(r){return (r._imageWidth||0)>=900;})||politicalReports[0]||editorial[0]||news[0]||reports[0]||stories[0];
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
       if(featureSection)featureSection.hidden=!cover;
@@ -306,16 +310,16 @@
         var report=editorial.some(function(r){return r.id===cover.id;});
         heroBox.href=slugUrl(cover);
         heroBox.setAttribute("aria-label",headline(cover));
-        heroBox.innerHTML='<span class="feature-picture">'+thumb(cover,"")+'</span>'
+        heroBox.innerHTML=(verifiedImage(photo(cover))?'<span class="feature-picture">'+thumb(cover,"")+'</span>':'')
           +'<span class="feature-caption"><span class="category-flag orange">'+(report?"گزارش ویژه":"خبر ویژه")+'</span>'
           +'<strong>'+esc(headline(cover))+'</strong><span>'+esc(hook(cover))+'</span></span>';
       }
-      var more=varied(editorial.concat(news),9);
+      var more=varied(editorial.concat(news).concat(reports).concat(stories),9);
       put("under-hero",more.slice(0,2).map(function(r){
         return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
           +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
       }).join(""));
-      put("rail-reports",news.slice(0,7).map(railRow).join("")||
+      put("rail-reports",varied(stories.concat(reports),7).map(railRow).join("")||
         '<p class="empty-state">گزارش تصویردار دیگری در دسترس نیست.</p>');
       var cultureSection=el("culture");
       if(cultureSection)cultureSection.hidden=!culture.length;
