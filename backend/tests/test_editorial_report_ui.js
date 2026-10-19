@@ -124,7 +124,7 @@ assert(home.includes('s.has_editorial_report'));
 assert(home.includes('home-report-lead'),"homepage reports should display an editorial teaser");
 assert(home.includes('row.lead_fa'),"homepage teaser must come from source-backed report lead");
 assert(!home.includes("esc(author)+' · '"),"homepage report cards should not show author and date");
-assert(index.includes('story-detail.js?v=20261018-permalinks-1'));
+assert(/story-detail\.js\?v=[^"\x27]+/.test(index), "versioned story detail bundle must remain referenced");
 assert(index.includes('data/story-permalinks.js?v=20261018-pilot-1'),"readable story permalink map must be loaded");
 assert(index.indexOf('data/story-permalinks.js?v=')<index.indexOf('router.js?v='),"slug map must precede router");
 assert(detail.includes('window.pendarStoryURL(cleanId)'),"story route must use stable readable permalink when available");
