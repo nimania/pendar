@@ -366,3 +366,10 @@ body:has(#figures-view.figure-profile-mode) #figures-view{
  #figures-view.figure-profile-mode #figures .statement-layout{grid-template-columns:minmax(0,1fr);gap:14px}
  #figures-view .statement-main{padding:15px}
 }
+
+/* Editorial, nonintrusive Telegram channel invitation. */
+.pendar-telegram-promo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:24px 0;padding:17px;border:1px solid #d8e5df;border-right:4px solid #168f99;border-radius:8px;background:#f5faf8;direction:rtl}
+.pendar-telegram-promo strong{font-size:15px;color:#273b32}
+.pendar-telegram-promo p{margin:4px 0;color:#52685e;font-size:12px}
+.pendar-telegram-promo a{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border-radius:6px;background:#168f99;color:white!important;font-weight:800;text-decoration:none;font-size:12px}
+.pendar-telegram-promo a:hover{background:#08717b}
