@@ -72,7 +72,7 @@
     if(!url||!verifiedImage(url))return "";
     return '<img class="'+esc(cls||"")+'" src="'+esc(url)+'" alt="" loading="lazy" decoding="async">';
   }
-  var data={stories:[],reports:[],authors:[]};
+  var data={stories:[],reports:[],authors:[],homeSnapshot:null};
   var redrawHome=null;
   function put(id,html){var x=el(id);if(x)x.innerHTML=html;}
   function railPublisher(item){
@@ -403,7 +403,9 @@
       var leadCandidates=limitUnique(editorial.concat(reports).concat(news).concat(stories),150);
       var prioritized=leadCandidates.filter(function(r){return leadScore(r)>=8;})
         .sort(function(a,b){return leadScore(b)-leadScore(a)||String(b.published_at||"").localeCompare(String(a.published_at||""));});
-      var cover=prioritized[0]||editorial[0]||news[0]||reports[0]||stories[0];
+      var frozenLead=data.homeSnapshot&&data.homeSnapshot.lead_id;
+      var snapshotCover=frozenLead?[...editorial,...reports,...news,...stories].find(function(r){return String(r.id)===String(frozenLead);}):null;
+      var cover=snapshotCover||prioritized[0]||editorial[0]||news[0]||reports[0]||stories[0];
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
       if(featureSection)featureSection.hidden=!cover;
@@ -598,9 +600,15 @@
       var result=await Promise.all([
         fetchJson("/data/stories.json").catch(function(){return [];}),
         fetchJson("/data/editorial-archive.json").catch(function(){return {};}),
-        fetchJson("/data/pendar-editorial-authors.json").catch(function(){return {};})
+        fetchJson("/data/pendar-editorial-authors.json").catch(function(){return {};}),
+        fetchJson("/data/homepage-snapshot.json").catch(function(){return null;})
       ]);
+      data.homeSnapshot=result[3]&&result[3].version===1?result[3]:null;
       data.stories=Array.isArray(result[0])?result[0]:[];
+      if(data.homeSnapshot&&Array.isArray(data.homeSnapshot.story_ids)){
+        var positions=new Map(data.homeSnapshot.story_ids.map(function(id,i){return [String(id),i];}));
+        data.stories.sort(function(a,b){return (positions.get(String(a.id))??99999)-(positions.get(String(b.id))??99999);});
+      }
       data.authors=Array.isArray(result[2].authors)?result[2].authors:[];
       var archived=Array.isArray(result[1].reports)?result[1].reports.filter(function(r){return r&&r.status==="ai_draft";}):[];
       var backup=data.stories.filter(function(r){return r.has_editorial_report;}).map(function(r){return Object.assign({},r,{title_fa:r.editorial_report_title_fa||r.headline_fa});});
