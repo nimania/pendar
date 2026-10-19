@@ -545,6 +545,21 @@ jobs:
           RADAR_LIVE_ORIGIN: ${{ vars.RADAR_LIVE_ORIGIN }}
           RADAR_LIVE_INGEST_TOKEN: ${{ secrets.RADAR_LIVE_INGEST_TOKEN }}
         run: python backend/scripts/publish_iran_radar_live.py --site site
+      - name: Ensure direct entry pages and verify navigation contracts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          root=Path("site")
+          shell=root/"index.html"
+          assert shell.is_file()
+          for route in ("headlines","figures","books","movies","press","diner","future","reports"):
+              target=root/route/"index.html"
+              if not target.is_file():
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  shutil.copy2(shell,target)
+          PY
+          python backend/scripts/verify_direct_routes.py site
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
