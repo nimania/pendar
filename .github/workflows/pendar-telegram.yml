@@ -55,6 +55,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
         run: |
           python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json --dry-run
+          python backend/scripts/publish_news_telegram.py --stories telegram-export/stories.json --dry-run
           python backend/scripts/publish_figures.py --figures telegram-export/figures.json --dry-run > /tmp/pendar-figures-preview.json
           python - <<'PY'
           import json
@@ -70,6 +71,9 @@ jobs:
             echo "::error::TELEGRAM_BOT_TOKEN is not configured. No messages sent."
             exit 1
           fi
+      - name: Publish curated fresh news (maximum 2)
+        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        run: python backend/scripts/publish_news_telegram.py --stories telegram-export/stories.json
       - name: Publish selected figure statement
         if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
         run: python backend/scripts/publish_figures.py --figures telegram-export/figures.json
