@@ -137,3 +137,31 @@ html.heritage-figures-active #figures-view{max-width:none;width:100%;padding:0;m
 #figures-view.figure-directory-mode .magazine-figures-content>.rule{display:none!important}
 #figures-view.figure-directory-mode #figures-lede p{max-width:85ch}
 #figures-view.figure-profile-mode #figures-lede{display:none!important}
+
+/* Figure profiles: uninterrupted main timeline; recommendations and ads left. */
+#figures-view.figure-profile-mode .magazine-figures-content{max-width:1220px}
+#figures-view.figure-profile-mode .x-profile{max-width:1180px;width:100%;overflow:visible}
+#figures-view .figure-profile-columns{display:grid;grid-template-columns:minmax(0,1fr) 326px;gap:22px;align-items:start;direction:rtl}
+#figures-view .figure-profile-primary{min-width:0}
+#figures-view .figure-profile-side{min-width:0;display:flex;flex-direction:column;gap:14px;padding:16px 0}
+#figures-view .figure-rail-box{background:var(--bg,#fff);border:1px solid var(--line,#ddd);border-radius:10px;overflow:hidden}
+#figures-view .figure-rail-box h2{font-size:14px;font-weight:800;margin:0;padding:13px 14px;background:var(--card,#f5f5f5);border-bottom:1px solid var(--line,#ddd)}
+#figures-view .figure-rail-person{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line,#eee);text-decoration:none;color:inherit}
+#figures-view .figure-rail-person:hover{background:var(--card,#f5f5f5)}
+#figures-view .figure-rail-person img,#figures-view .figure-rail-initial{width:44px;height:44px;flex:0 0 44px;border-radius:50%;object-fit:cover;background:#e7ece9}
+#figures-view .figure-rail-initial{display:grid;place-items:center}
+#figures-view .figure-rail-person span{min-width:0}
+#figures-view .figure-rail-person b{display:block;font-size:12px}
+#figures-view .figure-rail-person small{display:block;color:var(--ink-soft,#777);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#figures-view .figure-rail-more{display:block;padding:12px 14px;font-size:12px;color:#14838a}
+#figures-view .figure-rail-ad{min-height:100px}
+#figures-view .figure-rail-ad .article-display-ad{max-width:100%;overflow:hidden}
+@media(max-width:850px){
+ #figures-view .figure-profile-columns{grid-template-columns:minmax(0,1fr)}
+ #figures-view .figure-profile-side{padding:0 12px 18px}
+ #figures-view .figure-rail-people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:520px){#figures-view .figure-rail-people{grid-template-columns:1fr}}
+
+#figures-view .figure-rail-ad .story-inline-sponsor{margin:0!important;border:0!important;padding:12px!important;max-width:100%}
+#figures-view .figure-rail-ad #pendar-article-display-ad{width:300px;max-width:100%;min-height:250px}
