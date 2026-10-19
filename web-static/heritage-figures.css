@@ -193,3 +193,31 @@ body:has(#figures-view.figure-profile-mode) #figures-view{
   #figures-view.figure-profile-mode #figures .figure-profile-columns{display:grid!important;grid-template-columns:minmax(0,1fr)!important}
   #figures-view.figure-profile-mode .magazine-figures-content{width:calc(100% - 24px)!important}
 }
+
+/* Graceful layout for an older figure-profile renderer still delivered by a
+   stale direct-route shell: its ad is a direct child before the tabs.
+   Keep the profile header wide, move the ad left and the editorial feed right. */
+@media(min-width:901px){
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns)){
+   display:grid!important;grid-template-columns:minmax(0,1fr) 326px!important;
+   column-gap:22px!important;direction:rtl;align-items:start
+ }
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.x-profile-top,
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.figure-profile-search,
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.x-cover,
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.x-profile-main,
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.canonical-strip{
+   grid-column:1/-1
+ }
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.story-inline-sponsor{
+   grid-column:2;grid-row:5/span 4;align-self:start;width:100%;
+   margin:0!important;background:white;border:1px solid #dbe4dd!important
+ }
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.x-profile-tabs,
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.x-profile-feed,
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.x-profile-note,
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>.x-profile-feed~section,
+ #figures-view.figure-profile-mode #figures>.x-profile:not(:has(>.figure-profile-columns))>section{
+   grid-column:1;min-width:0
+ }
+}
