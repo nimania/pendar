@@ -223,3 +223,16 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
   .heritage-root .masthead-nav-row .masthead-tools a{width:31px;height:31px;flex-basis:31px}
   .heritage-root .masthead-nav-row .masthead-tools img{width:22px;height:22px}
 }
+
+/* Historic orange chevrons for the live figure strip. */
+.heritage-root .latest-ticker .ticker-arrow{
+  flex:0 0 36px;align-self:stretch;display:grid;place-items:center;
+  padding:0 5px;border:0;background:transparent;color:#f26917;
+  font:900 31px/1 Arial,sans-serif;cursor:pointer
+}
+.heritage-root .latest-ticker .ticker-arrow:hover,
+.heritage-root .latest-ticker .ticker-arrow:focus-visible{background:#fff0e5;color:#d24d03}
+.heritage-root .latest-ticker .ticker-items{min-width:0;scroll-behavior:smooth}
+@media(max-width:720px){
+ .heritage-root .latest-ticker .ticker-arrow{flex-basis:25px;font-size:23px;padding:0}
+}

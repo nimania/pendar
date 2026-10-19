@@ -137,7 +137,22 @@
   function uniquePictured(items,max){
     return limitUnique(items.filter(function(row){return verifiedImage(photo(row));}),max);
   }
+  function setupTickerArrows(){
+    var ticker=el("ticker");
+    if(!ticker||ticker.dataset.arrowsReady)return;
+    ticker.dataset.arrowsReady="1";
+    var section=ticker.closest(".latest-ticker");
+    if(!section)return;
+    section.querySelectorAll("[data-ticker-direction]").forEach(function(button){
+      button.addEventListener("click",function(){
+        var item=ticker.querySelector(".ticker-story");
+        var distance=item?item.getBoundingClientRect().width+19:Math.max(190,ticker.clientWidth*.75);
+        ticker.scrollBy({left:button.dataset.tickerDirection==="next"?-distance:distance,behavior:"smooth"});
+      });
+    });
+  }
   async function renderFigureStrip(figures) {
+    setupTickerArrows();
     var people=Array.isArray(figures&&figures.figures)?figures.figures:[];
     var found=people.flatMap(function(person){
       var posts=Array.isArray(person.posts)?person.posts:[];
