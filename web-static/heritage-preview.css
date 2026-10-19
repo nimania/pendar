@@ -273,3 +273,19 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .pendar-telegram-promo strong{font-size:15px}
 .heritage-root .pendar-telegram-promo p{font-size:12px;margin:5px 0;color:#52695e}
 .heritage-root .pendar-telegram-promo a{display:inline-block;background:#168f99;border-radius:6px;color:#fff;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700}
+
+/* Heritage-style compact sidebar tab strips; tabs change only local content. */
+.heritage-root .rail-tabs-box{overflow:hidden}
+.heritage-root .rail-tab-strip{display:flex;direction:rtl;background:#e5e5e4;border-bottom:1px solid #c7ccca;min-height:46px}
+.heritage-root .rail-tab-strip button{min-width:0;flex:1;padding:10px 4px;border:0;border-left:1px solid #c8cfcc;border-top:4px solid transparent;background:transparent;color:#56605a;font:700 12px/1.5 Vazirmatn,Tahoma,sans-serif;cursor:pointer;white-space:nowrap}
+.heritage-root .rail-tab-strip button.on{border-top-color:#e66519;background:#fff;color:#26332e}
+.heritage-root .rail-tab-strip.sea button.on{border-top-color:#168f9a}
+.heritage-root .rail-tab-strip button:hover{background:#f8faf8}
+.heritage-root .rail-tab-strip button:focus-visible{outline:2px solid #168f9a;outline-offset:-3px}
+.heritage-root .rail-tab-panel[hidden]{display:none!important}
+.heritage-root .rail-tab-panel{min-height:110px}
+.heritage-root .rail-tab-more{display:block;padding:11px 13px;border-top:1px solid #dce4df;color:#16818a;text-decoration:none;font:700 12px Vazirmatn,Tahoma,sans-serif}
+.heritage-root .rail-mini-links{display:flex;flex-direction:column;padding:8px 13px}
+.heritage-root .rail-mini-links a{color:#304940;text-decoration:none;font-size:12px;line-height:1.8;padding:10px 2px;border-bottom:1px solid #e7ece8}
+.heritage-root .rail-mini-links a:hover,.heritage-root .rail-tab-more:hover{text-decoration:underline}
+@media(max-width:400px){.heritage-root .rail-tab-strip button{font-size:11px;padding:10px 2px}}
