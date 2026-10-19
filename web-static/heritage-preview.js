@@ -137,30 +137,59 @@
   function uniquePictured(items,max){
     return limitUnique(items.filter(function(row){return verifiedImage(photo(row));}),max);
   }
-  function renderFigureStrip(figures) {
-    var people=Array.isArray(figures?.figures)?figures.figures:[];
+  async function renderFigureStrip(figures) {
+    var people=Array.isArray(figures&&figures.figures)?figures.figures:[];
     var found=people.flatMap(function(person){
       var posts=Array.isArray(person.posts)?person.posts:[];
       return posts.slice(0,3).map(function(post){return {person:person,post:post};});
     }).filter(function(x){return x.post&&x.person&&x.person.handle;})
       .sort(function(a,b){return String(b.post.published_at||"").localeCompare(String(a.post.published_at||""));});
-    var unique=new Set();
-    var cards=found.filter(function(x){
-      var handle=x.person.handle;
-      if(unique.has(handle))return false;
-      unique.add(handle);return true;
-    }).slice(0,9).map(function(x){
-      var person=x.person,post=x.post;
-      var name=norm(person.name_fa||person.name||person.display_name_fa||person.handle);
+    var seen=new Set(),candidates=[];
+    for(var entry of found){
+      if(seen.has(entry.person.handle))continue;
+      seen.add(entry.person.handle);
+      var post=entry.post,person=entry.person;
       var title=norm(post.headline_fa||post.title_fa||post.statement_fa||post.text_fa||post.text||post.title||post.recap_fa||post.summary_fa||"");
-      var avatar=validImage(person.avatar||person.image_url||person.photo_url||"");
-      if(!title)return "";
+      if(!title)continue;
+      var paths=[person.avatar,person.avatar_url,person.image_url,person.photo_url,
+        person.image&&person.image.url,person.image&&person.image.path,
+        post.avatar,post.avatar_url,post.figure_avatar];
+      var images=paths.filter(Boolean).map(function(value){
+        var url=String(value).trim();
+        if(/^https?:\/\//i.test(url))return url;
+        if(/^\/?[a-zA-Z0-9][a-zA-Z0-9_./%-]*$/.test(url)&&!url.includes(".."))
+          return "/"+url.replace(/^\/+/, "");
+        return "";
+      }).filter(Boolean);
+      if(images.length)candidates.push({person:person,title:title,images:[...new Set(images)]});
+      if(candidates.length>=25)break;
+    }
+    // The portrait must be a verified actual image from the corresponding figure.
+    // Do not silently substitute a news thumbnail or generic placeholder.
+    async function firstWorking(c){
+      for(var url of c.images.slice(0,4)){
+        var ok=await new Promise(function(resolve){
+          var img=new Image(),done=false;
+          var timer=setTimeout(function(){finish(false);},2000);
+          function finish(value){if(done)return;done=true;clearTimeout(timer);img.onload=img.onerror=null;resolve(value);}
+          img.onload=function(){finish(img.naturalWidth>=50&&img.naturalHeight>=50);};
+          img.onerror=function(){finish(false);};
+          img.src=url;
+        });
+        if(ok)return url;
+      }
+      return "";
+    }
+    var verified=await Promise.all(candidates.map(async function(c){return {c:c,url:await firstWorking(c)};}));
+    var cards=verified.filter(function(r){return Boolean(r.url);}).slice(0,9).map(function(r){
+      var person=r.c.person;
+      var name=norm(person.name_fa||person.name||person.display_name_fa||person.handle);
       var href="/figure/"+encodeURIComponent(person.handle)+"/";
       return '<a class="ticker-story person-statement" href="'+esc(href)+'">'
-        +(avatar?'<img class="ticker-person-photo" src="'+esc(avatar)+'" alt="" loading="lazy" decoding="async">':'<span class="ticker-thumb ticker-thumb-empty" aria-hidden="true">چهره</span>')
-        +'<span><span class="ticker-person-name">'+esc(name)+'</span><span class="ticker-person-quote">'+esc(excerpt(title,110))+'</span></span></a>';
-    }).filter(Boolean);
-    put("ticker",cards.join("")||'<a href="/figures/">تازه‌ترین گفته‌های چهره‌ها را ببینید ←</a>');
+        +'<img class="ticker-person-photo" src="'+esc(r.url)+'" alt="'+esc(name)+'" loading="lazy" decoding="async">'
+        +'<span><span class="ticker-person-name">'+esc(name)+'</span><span class="ticker-person-quote">'+esc(excerpt(r.c.title,110))+'</span></span></a>';
+    });
+    put("ticker",cards.join("")||'<a href="/figures/">عکس تأییدشده‌ای برای گفته‌های تازه در دسترس نیست؛ همهٔ چهره‌ها ←</a>');
   }
   function renderHomepageBriefs(){
     // Use only available published snapshot values; never invent rates or forecasts.
