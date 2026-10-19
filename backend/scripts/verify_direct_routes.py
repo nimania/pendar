@@ -31,7 +31,7 @@ def validate(root: Path) -> list[str]:
             errors.append(f"Empty or truncated direct-route shell: /{route}/")
     if not (root/"404.html").is_file():
         errors.append("Missing SPA fallback 404.html")
-    script_src=re.findall(r'<script\\b[^>]*\\bsrc="([^"]+)"',html)
+    script_src=re.findall(r'<script[^>]+src="([^"]+)"',html)
     for src in script_src:
         relative=src.split("?",1)[0].lstrip("/")
         if relative.startswith(("https:","http:")):continue
