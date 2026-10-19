@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T11:09:32.361628+00:00",
+  "generated_at": "2026-10-19T13:20:35.672157+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -547,31 +547,11 @@
     },
     {
       "channel_id": "digital-world",
-      "title_fa": "همنشین",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1084199",
-      "icon": "https://image.tmdb.org/t/p/w500/A6rRLnBH26dYwepfeMPgT0VIlbZ.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "کلاغ",
       "start": "2026-10-19T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/957452",
       "icon": "https://image.tmdb.org/t/p/w500/8QCzv1j6Wrz180M7bazsZ5fcXme.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "مرد گرگ نما",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/710295",
-      "icon": "https://image.tmdb.org/t/p/w500/p3Jj5TBLi3OkYT8wxXjsjlXb7Px.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -616,16 +596,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-19",
-      "title_fa": "سیمپسون‌ها",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/456",
-      "icon": "https://image.tmdb.org/t/p/w500/tf0CUEynk6GfmrlHIQKQ5mfFP5P.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 3 از فصل 38؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "آخرین نفس",
       "start": "2026-10-25T00:00:00+03:30",
@@ -636,16 +606,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-156",
-      "title_fa": "런닝맨",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/33238",
-      "icon": "https://image.tmdb.org/t/p/w500/15SMnscZqd7HZ0bzruatOcKUlOV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 823 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-47",
       "title_fa": "نمایش روزانه",
       "start": "2026-10-19T00:00:00+03:30",
@@ -654,56 +614,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 115 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-103",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-160",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-2171",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-7068",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-9332",
-      "title_fa": "仮面ライダー",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2661",
-      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -844,16 +754,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/ofo50w2DTFcPkOm3iguWGU3Y8cw.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 986 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-74",
-      "title_fa": "Watch What Happens Live with Andy Cohen",
-      "start": "2026-10-18T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/22980",
-      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 167 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-6",
@@ -1001,7 +901,7 @@
       "start": "2026-10-23T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1025231",
-      "icon": "https://image.tmdb.org/t/p/w500/2eZwRvxLENG4QmawVCR48LlT3xL.jpg",
+      "icon": "https://image.tmdb.org/t/p/w500/1sHvb9l4ZVejU3K2kA8lt4WZFZi.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -1032,6 +932,96 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1339588",
       "icon": "https://image.tmdb.org/t/p/w500/xVt0fu4q1P3rYMz7ichgf5BGx0S.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-10-19T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 168 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-19",
+      "title_fa": "سیمپسون‌ها",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/456",
+      "icon": "https://image.tmdb.org/t/p/w500/tf0CUEynk6GfmrlHIQKQ5mfFP5P.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 4 از فصل 38؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-156",
+      "title_fa": "런닝맨",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/33238",
+      "icon": "https://image.tmdb.org/t/p/w500/15SMnscZqd7HZ0bzruatOcKUlOV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 824 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-103",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 8 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-160",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 8 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2171",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 8 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-7068",
+      "title_fa": "仮面ライダー",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2661",
+      "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 8 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4330",
+      "title_fa": "پادشاه تالسا",
+      "start": "2026-10-23T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/153312",
+      "icon": "https://image.tmdb.org/t/p/w500/24OWkuqt3eqkLO2d0CQ9D8D1yqY.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 2 از فصل 4؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "کیف سیاه",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1233575",
+      "icon": "https://image.tmdb.org/t/p/w500/sgSuca1n3HHlQPZbCIoNfEI0yFC.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
