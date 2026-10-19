@@ -240,3 +240,19 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 /* Orange section label is the full-size entry point for all figures. */
 .heritage-root .latest-ticker h2 a{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:inherit;color:inherit;text-decoration:none}
 .heritage-root .latest-ticker h2 a:hover,.heritage-root .latest-ticker h2 a:focus-visible{background:#c9540c;color:#fff}
+
+/* Compact, real-data teasers in the homepage market and weather boxes. */
+.heritage-root .home-brief-body{padding:10px 12px}
+.heritage-root .brief-mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.heritage-root .brief-cell{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:7px;row-gap:2px;padding:9px 10px!important;border:1px solid #e0e8e3;border-radius:6px;background:#f8faf8;color:#293d34;text-decoration:none;min-width:0}
+.heritage-root .brief-cell:hover{border-color:#178e99;background:#eff8f6}
+.heritage-root .brief-label{font-size:11px;color:#52665c;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heritage-root .brief-cell strong{font-size:15px;line-height:1.5;color:#1e3129;direction:ltr;white-space:nowrap}
+.heritage-root .brief-delta{grid-column:1/-1;font-size:10px;direction:ltr;text-align:left}
+.heritage-root .brief-delta.up{color:#bd493e}
+.heritage-root .brief-delta.down{color:#187c63}
+.heritage-root .brief-delta.flat{color:#8a9990}
+.heritage-root .brief-condition{grid-column:1/-1;color:#61746c;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heritage-root .brief-unit{padding:7px 2px 0;font-size:10px;color:#75857c}
+.heritage-root .brief-fallback{display:block;padding:8px 3px;text-decoration:none}
+@media(max-width:470px){.heritage-root .brief-cell{padding:7px!important}.heritage-root .brief-cell strong{font-size:13px}}
