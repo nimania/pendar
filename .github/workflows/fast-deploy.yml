@@ -2,6 +2,9 @@ name: Fast Deploy Pendar UI
 # Lightweight news + figures publication. Heavy catalog rebuilding is manual-only.
 on:
   workflow_dispatch:
+  schedule:
+    # Rebuild the vetted homepage at :05 and :35 UTC; GitHub can delay schedules.
+    - cron: "5,35 * * * *"
   workflow_run:
     workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Refresh weather and air quality"]
     types: [completed]
@@ -619,6 +622,8 @@ jobs:
               raise SystemExit('::error::Missing story detail JSON for published headlines: '+', '.join(missing[:8]))
           print('Fast publish validated:',len(stories),'headlines and',len(figures['figures']),'figures; all story details available')
           PY
+      - name: Freeze the half-hour homepage editorial snapshot
+        run: python backend/scripts/freeze_homepage_snapshot.py --site site
       - name: Stamp actual published build time
         run: |
           python - <<'PY'
