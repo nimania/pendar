@@ -107,7 +107,8 @@
     // Remove the entire article tile immediately; never leave a text-only card.
     var src=img.getAttribute("src");
     if(src)imageChecks.set(src,false);
-    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.rail-row,.story-card,.visual-card");
+    if(img.closest(".rail-row")){img.style.visibility="hidden";return;}
+    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.story-card,.visual-card");
     if(tile)tile.remove();
     if(redrawHome)redrawHome();
   }
