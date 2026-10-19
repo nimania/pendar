@@ -54,7 +54,6 @@
   <style id="heritage-live-visibility">
     #heritage-live-host[hidden]{display:none!important}
     /* The bootstrap class is attached synchronously in <head> before first paint. */
-    html.heritage-booting body>header.top,
     html.heritage-booting body>main.wrap,
     html.heritage-booting body>footer.site-footer,
     html.heritage-booting body>nav.tabbar{display:none!important}
@@ -67,7 +66,6 @@
     .heritage-first-paint-header img{width:101px;height:auto;max-height:80px;object-fit:contain}
     .heritage-first-paint-nav{min-height:52px;background:#403d3c;display:flex;gap:28px;align-items:center;padding:0 max(20px,calc((100vw - 1180px)/2));color:#eee;overflow:hidden;white-space:nowrap}
     @media(max-width:720px){.heritage-first-paint-header{min-height:78px}.heritage-first-paint-header img{width:77px}.heritage-first-paint-nav{gap:16px;font-size:12px;padding:0 12px}}
-    html.heritage-live-active body>header.top,
     html.heritage-live-active body>main.wrap,
     html.heritage-live-active body>footer.site-footer,
     html.heritage-live-active body>nav.tabbar{display:none!important}
@@ -77,7 +75,6 @@
   <style id="pendar-shared-top-header">
     /* Keep the original navigation (with working search, theme and partner icons)
        visible above the magazine homepage, including its loading state. */
-    html.heritage-booting body>header.top,
     html.heritage-live-active body>header.top{display:block!important}
     html.heritage-booting body>header.top{position:relative;z-index:3}
     html.heritage-live-active body>header.top{position:relative;z-index:3}
