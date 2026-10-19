@@ -89,6 +89,13 @@ async function route() {
         const figureFeed=await loadFigures();
         const matchingFigure=(figureFeed.figures||[]).find(f=>String(f.handle||"").toLowerCase()===requestedHandle);
         if(matchingFigure)return openFigure(matchingFigure.handle);
+        const directory=await loadPersonDirectory();
+        const directoryPerson=directory.find(f=>String(f.handle||"").toLowerCase()===requestedHandle);
+        if(directoryPerson){
+          if(directoryPerson.canonical_id)return openCanonicalEntity(directoryPerson.canonical_id);
+          figureFeed.figures.push(directoryPerson);
+          return openFigure(directoryPerson.handle);
+        }
       }catch(error){
         console.warn("Pendar figure handle lookup unavailable",error);
       }
