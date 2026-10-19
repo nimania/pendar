@@ -102,7 +102,7 @@
   }
   function railRow(item){
     var title=headline(item),url=validImage(photo(item));
-    var image=url?'<img class="rail-thumb" src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.style.visibility=\\'hidden\\'">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">▤</span>';
+    var image=url?'<img class="rail-thumb" src="'+esc(url)+'" alt="" loading="lazy" decoding="async">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">▤</span>';
     return '<a class="rail-row" href="'+esc(slugUrl(item))+'">'
       +'<span class="rail-thumb-frame">'+image+'</span>'
       +'<span><span class="rail-title">'+esc(title)+'</span>'
