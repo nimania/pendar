@@ -72,6 +72,10 @@
     html.heritage-live-active body{margin:0;padding:0;background:#eceeeb}
     html.heritage-live-active #heritage-live-host{display:block;min-height:100vh}
   </style>
+  <style id="pendar-home-hide-duplicate-header">
+    /* The magazine now renders its own real navigation. Avoid a second bar. */
+    html.heritage-live-active body>header.top{display:none!important}
+  </style>
   <style id="pendar-masthead-visibility">
     /* Shared site navigation must precede (and remain above) the magazine host.
        This fixes the missing logo and primary navigation without touching the
@@ -92,6 +96,9 @@
     html.heritage-live-active #heritage-live-host{min-height:0}
     html.heritage-booting .heritage-first-paint-header,
     html.heritage-booting .heritage-first-paint-nav{display:none!important}
+  </style>
+  <style id="pendar-magazine-header-final">
+    html.heritage-live-active body>header.top{display:none!important}
   </style>
   <style>
     html.js-enabled #seo-static { display: none; }
@@ -634,7 +641,7 @@
   <script defer src="radar-live.js"></script>
   <script defer src="israel-radar.js"></script>
   <script defer src="app.js?v=20261018-figures-1"></script>
-  <script defer src="heritage-live.js?v=20261019-footer-1" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
+  <script defer src="heritage-live.js?v=20261019-self-header-1" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
 </body>
 </html>
 
