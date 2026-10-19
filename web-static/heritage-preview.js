@@ -207,32 +207,47 @@
     put("ticker",cards.join("")||'<a href="/figures/">عکس تأییدشده‌ای برای گفته‌های تازه در دسترس نیست؛ همهٔ چهره‌ها ←</a>');
   }
   function renderHomepageBriefs(){
-    // Use only available published snapshot values; never invent rates or forecasts.
+    var digits=function(value){return String(value).replace(/\\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[Number(d)];});};
+    var number=function(value){var n=Number(value);return Number.isFinite(n)?digits(n.toLocaleString("en-US")):"";};
+    var fallback=function(id,href,label){put(id,'<a class="brief-fallback" href="'+href+'">'+label+' ←</a>');};
     Promise.all([
       fetchJson("/data/prices.json").catch(function(){return null;}),
       fetchJson("/data/weather.json").catch(function(){return null;})
     ]).then(function(result){
       var prices=result[0];
-      var priceRows=Array.isArray(prices)?prices:Array.isArray(prices?.prices)?prices.prices:[];
-      var market=priceRows.filter(function(x){return x&&typeof x==="object";}).slice(0,3).map(function(row){
-        var label=norm(row.name_fa||row.name||row.symbol||row.title||"");
-        var value=row.price??row.value??row.last_price;
-        if(!label||value===null||value===undefined||value==="")return "";
-        return '<div class="brief-item">'+esc(label)+' — '+esc(String(value))+'</div>';
+      var priceRows=Array.isArray(prices)?prices:Array.isArray(prices&&prices.prices)?prices.prices:[];
+      var targets=["دلار آمریکا","یورو","سکه امامی","لیر ترکیه"];
+      var market=targets.map(function(name){return priceRows.find(function(r){return r&&r.label_fa===name;});}).filter(Boolean);
+      if(market.length<3){
+        priceRows.forEach(function(row){if(market.length>=4)return;if(row&&!market.includes(row)&&row.label_fa&&Number.isFinite(Number(row.value)))market.push(row);});
+      }
+      var marketHtml=market.slice(0,4).map(function(row){
+        var value=number(row.value),change=Number(row.dp);
+        if(!value)return "";
+        var trend=Number.isFinite(change)&&change!==0
+          ?'<span class="brief-delta '+(change>0?'up':'down')+'">'+(change>0?'▲ ':'▼ ')+number(Math.abs(change))+'٪</span>'
+          :'<span class="brief-delta flat">—</span>';
+        return '<a class="brief-cell" href="/market/"><span class="brief-label">'+esc(row.label_fa)+'</span><strong>'+value+'</strong>'+trend+'</a>';
       }).filter(Boolean);
-      put("home-market-summary",market.join("")||'<a href="/market/">نرخ‌های به‌روز ارز، طلا و بازار را در پنداربازار ببینید ←</a>');
+      if(marketHtml.length)put("home-market-summary",'<div class="brief-mini-grid">'+marketHtml.join("")+'</div><div class="brief-unit">قیمت به تومان · نمایش داده‌های منتشرشدهٔ پندار</div>');
+      else fallback("home-market-summary","/market/","مشاهدهٔ تازه‌ترین نرخ‌های بازار");
+
       var weather=result[1];
-      var weatherRows=Array.isArray(weather)?weather:Array.isArray(weather?.cities)?weather.cities:[];
-      var local=weatherRows.filter(function(x){return x&&typeof x==="object";}).slice(0,3).map(function(row){
-        var name=norm(row.city_fa||row.city||row.name_fa||row.name||"");
-        var temp=row.temperature_c??row.temp_c??row.temperature;
-        if(!name||temp===undefined||temp===null||temp==="")return "";
-        return '<div class="brief-item">'+esc(name)+' — '+esc(String(temp))+'°</div>';
+      var cities=Array.isArray(weather)?weather:Array.isArray(weather&&weather.cities)?weather.cities:[];
+      var selected=["تهران","نوشهر","چالوس","کرمان"].map(function(n){return cities.find(function(r){return r&&r.city_fa===n;});}).filter(Boolean);
+      if(selected.length<3)cities.forEach(function(r){if(selected.length<4&&r&&!selected.includes(r)&&r.city_fa)selected.push(r);});
+      var cityHtml=selected.slice(0,4).map(function(row){
+        var temp=number(row.temp);
+        if(!temp)return "";
+        var icon=typeof row.icon==="string"&&row.icon.length<=4?esc(row.icon):"🌡️";
+        var condition=norm(row.cond_fa||"");
+        return '<a class="brief-cell brief-weather-cell" href="/weather/"><span class="brief-label">'+icon+' '+esc(row.city_fa)+'</span><strong>'+temp+'°</strong><span class="brief-condition">'+esc(condition||"وضعیت هوا")+'</span></a>';
       }).filter(Boolean);
-      put("home-weather-summary",local.join("")||'<a href="/weather/">پیش‌بینی شهرها و وضعیت آب‌وهوا را ببینید ←</a>');
+      if(cityHtml.length)put("home-weather-summary",'<div class="brief-mini-grid">'+cityHtml.join("")+'</div><div class="brief-unit">وضعیت شهرها بر اساس آخرین دادهٔ منتشرشده</div>');
+      else fallback("home-weather-summary","/weather/","مشاهدهٔ پیش‌بینی شهرها");
     }).catch(function(){
-      put("home-market-summary",'<a href="/market/">مشاهدهٔ وضعیت بازار ←</a>');
-      put("home-weather-summary",'<a href="/weather/">مشاهدهٔ وضعیت آب‌وهوا ←</a>');
+      fallback("home-market-summary","/market/","مشاهدهٔ وضعیت بازار");
+      fallback("home-weather-summary","/weather/","مشاهدهٔ وضعیت آب‌وهوا");
     });
   }
   async function renderHome(){
