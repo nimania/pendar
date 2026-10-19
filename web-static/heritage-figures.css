@@ -221,3 +221,8 @@ body:has(#figures-view.figure-profile-mode) #figures-view{
    grid-column:1;min-width:0
  }
 }
+
+/* Compact profile navigation: one identity header, back action inside search. */
+#figures-view.figure-profile-mode .figure-profile-search{display:flex;align-items:center;gap:12px}
+#figures-view.figure-profile-mode .figure-profile-search-box{flex:1;min-width:0}
+#figures-view.figure-profile-mode .figure-profile-back{position:static;flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:42px;padding:0;border:1px solid var(--fig-line);border-radius:7px;background:#f8faf8;color:var(--fig-ink);cursor:pointer}

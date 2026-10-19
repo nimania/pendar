@@ -275,7 +275,6 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       ${figureMovies.length ? `<button class="${_figureProfileFilter==="movies"?"on":""}" onclick="setFigureProfileFilter(\'${esc(x.handle)}\',\'movies\')">اشاره به فیلم‌ها</button>` : ""}
       ${usRadarRecord?`<button class="${_figureProfileFilter==="usradar"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','usradar')">رادار آمریکا</button>`:""}
       ${candidateOfficial.length?`<button class="${_figureProfileFilter==="official"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','official')">از زبان خودش</button>`:""}
-      ${hasAbout?`<button class="${_figureProfileFilter==="about"?"on":""}" onclick="setFigureProfileFilter('${esc(x.handle)}','about')">درباره</button>`:""}
     </nav>
     ${_figureProfileFilter==="stories" ? `<section class="figure-stories">${figureStories.length?groupedFeed(figureStories):""}${candidateNewsSection}</section>` : ""}
     ${_figureProfileFilter==="books" ? `<section class="figure-books"><div class="books-grid">${figureBooks.map(_bookCard).join("")}</div></section>` : ""}
@@ -286,7 +285,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     ${sourceLinks}
     ${candidateFeed?.news_updated_at?'<small class="muted">آخرین بررسی خبرها: '+esc(relTime(candidateFeed.news_updated_at))+'</small>':""}
     ${israelSection}
-    ${_figureProfileFilter==="usradar"?usRadarSection:""}\n    ${_figureProfileFilter==="about"?aboutSection:""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos"||_figureProfileFilter==="usradar"||_figureProfileFilter==="official"||_figureProfileFilter==="about"||(_figureProfileFilter==="all"&&!shown.length)) ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
+    ${_figureProfileFilter==="usradar"?usRadarSection:""}\n    <div class="x-profile-feed" ${(_figureProfileFilter==="works"||_figureProfileFilter==="books"||_figureProfileFilter==="movies"||_figureProfileFilter==="stories"||_figureProfileFilter==="videos"||_figureProfileFilter==="usradar"||_figureProfileFilter==="official"||_figureProfileFilter==="about"||(_figureProfileFilter==="all"&&!shown.length)) ? 'style="display:none"' : ""}>${shown.length ? shown.map(postRow).join("") : '<div class="state"><div class="big">در این بخش موردی ثبت نشده.</div></div>'}</div>
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
       </div>
       <aside class="figure-profile-side" aria-label="چهره‌های پیشنهادی و تبلیغات">
@@ -334,8 +333,7 @@ function renderFiguresDirectory() {
 
 function renderPersonProfileHeader(x,options={}){
   const name=x.name_fa||x.name||"";
-  return `<div class="x-profile-top"><button class="x-back" onclick="showFigures()" aria-label="بازگشت">←</button><div><b>${esc(name)}</b><small>${options.subtitle||faN((x.posts||[]).length)+" گفته"}</small></div></div>
-    <div class="figure-profile-search"><div class="figure-profile-search-box"><span aria-hidden="true">⌕</span><input type="search" placeholder="جستجو میان چهره‌ها…" autocomplete="off" oninput="searchFigureProfiles(this.value)" onfocus="if(this.value)searchFigureProfiles(this.value)"></div><div id="figure-profile-search-results" class="figure-profile-search-results"></div></div>
+  return `<div class="figure-profile-search"><button class="x-back figure-profile-back" onclick="showFigures()" aria-label="بازگشت به چهره‌ها" title="بازگشت به چهره‌ها">←</button><div class="figure-profile-search-box"><span aria-hidden="true">⌕</span><input type="search" placeholder="جستجو میان چهره‌ها…" autocomplete="off" oninput="searchFigureProfiles(this.value)" onfocus="if(this.value)searchFigureProfiles(this.value)"></div><div id="figure-profile-search-results" class="figure-profile-search-results"></div></div>
     <div class="x-cover" style="position:relative;overflow:hidden">
       <div style="position:absolute;top:clamp(14px,3vw,30px);right:clamp(14px,3vw,30px);left:14px;z-index:1;pointer-events:none;text-align:right;text-shadow:0 1px 5px #0007">
         <strong style="display:block;color:#fff;font-size:clamp(19px,3vw,30px);line-height:1.4">${esc(name)}</strong>
