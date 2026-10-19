@@ -340,7 +340,7 @@ async function loadStudioRecaps() {
 
 async function loadProjectFinance() {
   try {
-    _PROJECT_FINANCE = await getJSON(`${DATA}/project-finance.json?v=${Date.now()}`);
+    _PROJECT_FINANCE = await getJSON(`${DATA}/project-finance.json`);
     return (_PROJECT_FINANCE && typeof _PROJECT_FINANCE === "object") ? _PROJECT_FINANCE : {};
   } catch (_) {
     return {};
