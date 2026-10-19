@@ -114,3 +114,14 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
   .heritage-root .story-card.no-image .story-info{padding:11px}
   .heritage-root .story-card.no-image .story-info b{font-size:13px}
 }
+
+/* Editorial front page: statement strip, political lead and compact right-to-left briefs. */
+.latest-ticker .ticker-story.person-statement{flex-basis:285px;max-width:285px}
+.latest-ticker .ticker-person-name{display:block;font-weight:850;color:#265e5c;font-size:12px}
+.latest-ticker .ticker-person-quote{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.latest-ticker .ticker-person-photo{width:62px;height:62px;object-fit:cover;border-radius:50%;background:#dde5e0;flex:none}
+.home-brief-body{padding:15px 18px;line-height:1.9;color:#404d46;font-size:13px}
+.home-brief-body a{color:#167b80;font-weight:700}
+.home-brief-body .brief-item{padding:5px 0;border-bottom:1px solid #e6ece8}
+.home-brief-body .brief-item:last-child{border-bottom:0}
+@media(max-width:720px){.latest-ticker .ticker-story.person-statement{flex-basis:245px;max-width:245px}.latest-ticker .ticker-person-photo{width:52px;height:52px}}
