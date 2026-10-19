@@ -145,7 +145,7 @@
     // article requests. Check a small above-the-fold pool concurrently, then
     // show the verified images we already have within a short bounded window.
     var first=limitUnique(reports.slice(0,23).concat(stories.slice(0,38)),70);
-    var priority=limitUnique(reports.slice(0,7).concat(stories.slice(0,16)),23);
+    var priority=limitUnique(reports.slice(0,5).concat(stories.slice(0,7)),12);
     var good=0,signalFirst;
     var enoughPictures=new Promise(function(resolve){signalFirst=resolve;});
     var quickChecks=priority.map(function(row){
@@ -156,7 +156,7 @@
     await Promise.race([
       enoughPictures,
       Promise.all(quickChecks),
-      new Promise(function(resolve){setTimeout(resolve,650);})
+      new Promise(function(resolve){setTimeout(resolve,250);})
     ]);
     // No item without a verified picture can enter ANY homepage news module.
     // The backend remains unchanged, and imageless reports still exist in the
