@@ -112,6 +112,7 @@ async function openStatement(id) {
       '<div class="fig-head">' + figureProfileLink(person,avatar(person,"lg")) + '<div class="fig-head-body"><h1>' + figureProfileLink(person,esc(person.name_fa)) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
       '<div class="rule"><span>' + (isYoutube ? "جان کلام" : (isNews ? "گفته در خبر" : "دیدگاه")) + '</span><span class="l"></span></div>' +
       figureCard(post,false,true) + telegramEmbed(post) + videoEmbedHtml + pointsHtml + recapHtml +
+      '<aside class="pendar-telegram-promo"><strong>پندار در تلگرام</strong><a href="https://t.me/pendario">عضویت در کانال پندار ←</a></aside>' +
       statementBooksSection + statementMoviesSection +
       '<p class="muted fig-note">این صفحه نشانی مستقل دارد و می‌توان مستقیماً به همین گفته ارجاع داد.</p>' +
     '</div>' +

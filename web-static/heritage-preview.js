@@ -403,7 +403,9 @@
     if(!paras.length){
       paras=[detail.what_happened_fa,detail.why_it_matters_fa,detail.summary_fa].map(norm).filter(Boolean);
     }
-    put("article-text",paras.length?paras.map(function(p){return '<p>'+esc(p)+'</p>';}).join(""):'<p>متن کامل این مطلب در نمای اصلی پندار در دسترس است. <a href="'+esc(finalStoryUrl(id))+'">مشاهدهٔ مطلب ←</a></p>');
+    var articleParagraphs=paras.map(function(p){return '<p>'+esc(p)+'</p>';});
+    articleParagraphs.splice(Math.min(2,articleParagraphs.length),0,'<aside class="pendar-telegram-promo"><strong>پندار در تلگرام</strong><p>خبرها و گزارش‌های منتخب را در کانال دنبال کنید.</p><a href="https://t.me/pendario">عضویت در کانال پندار ←</a></aside>');
+    put("article-text",paras.length?articleParagraphs.join(""):'<p>متن کامل این مطلب در نمای اصلی پندار در دسترس است. <a href="'+esc(finalStoryUrl(id))+'">مشاهدهٔ مطلب ←</a></p>');
     var research="";
     var sources=Array.isArray(detail.sources)?detail.sources.filter(function(s){return s&&validLink(s.article_url);}):[];
     if(sources.length)research+='<h3>منابع و مستندات</h3><ul>'+sources.slice(0,18).map(function(s){return '<li><a href="'+esc(validLink(s.article_url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.original_headline||s.source_name||"مشاهدهٔ منبع")+'</a></li>';}).join("")+'</ul>';

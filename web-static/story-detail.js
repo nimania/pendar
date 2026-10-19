@@ -327,6 +327,7 @@ async function openStory(id) {
        +(s.what_happened_fa&&s.what_happened_fa!==s.summary_fa?'<h2>چه اتفاقی افتاد؟</h2><p>'+esc(s.what_happened_fa)+'</p>':'')
        +(s.why_it_matters_fa&&s.why_it_matters_fa!==s.summary_fa&&s.why_it_matters_fa!==s.what_happened_fa?'<h2>چرا اهمیت دارد؟</h2><p>'+esc(s.why_it_matters_fa)+'</p>':'')
        +'</div>':""}
+<aside class="pendar-telegram-promo"><strong>خبرهای پندار در تلگرام</strong><p>خبرها و گزارش‌های منتخب را دنبال کنید.</p><a href="https://t.me/pendario">عضویت در کانال پندار ←</a></aside>
     ${!editorial?articleDisplayAdMarkup():""}
     <details class="story-examination"><summary><span>زیر ذره‌بین پندار<small class="story-examination-description">منابع، پیشینه، دیدگاه‌ها و پرسش‌وپاسخ</small></span></summary><div class="story-examination-body">
     ${pendarHistoricalContext(s)}
