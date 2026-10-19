@@ -80,6 +80,26 @@ async function route() {
     const person=window.PENDAR_HANDLES?.people?.[decodeURIComponent(raw.slice(1)).toLowerCase()];
     if(person?.id)return openCanonicalEntity(person.id);
     if(person?.figure)return openFigure(person.figure);
+    // The generated handle index can lag behind the published figures feed.
+    // Resolve exact figure handles from the authoritative data before treating
+    // a deep-link as an unknown identity (case-insensitive for Telegram handles).
+    const requestedHandle=decodeURIComponent(raw.slice(1)).trim().toLowerCase();
+    if(requestedHandle){
+      try{
+        const figureFeed=await loadFigures();
+        const matchingFigure=(figureFeed.figures||[]).find(f=>String(f.handle||"").toLowerCase()===requestedHandle);
+        if(matchingFigure)return openFigure(matchingFigure.handle);
+        const directory=await loadPersonDirectory();
+        const directoryPerson=directory.find(f=>String(f.handle||"").toLowerCase()===requestedHandle);
+        if(directoryPerson){
+          if(directoryPerson.canonical_id)return openCanonicalEntity(directoryPerson.canonical_id);
+          figureFeed.figures.push(directoryPerson);
+          return openFigure(directoryPerson.handle);
+        }
+      }catch(error){
+        console.warn("Pendar figure handle lookup unavailable",error);
+      }
+    }
     // Carefully curated non-person handles. Existing person handles always win.
     // Static mapping: no new registry queries, collectors or database joins.
     const aliases={
