@@ -53,7 +53,7 @@ new Function(magazineCollections);
 new Function(router);
 new Function(figureCore);
 new Function(figureProfile);
-assert(index.includes('heritage-figures.css?v=20261018-1'),"magazine figures stylesheet must load");
+assert(/heritage-figures\.css\?v=[^"']+/.test(index),"magazine figures stylesheet must load with a version");
 assert(index.includes('class="magazine-figures-masthead"'),"figure pages need the same editorial masthead");
 assert(index.includes('class="magazine-figures-topnav"'),"figure pages need magazine navigation");
 assert(index.includes('class="magazine-figures-footer"'),"figure pages need editorial footer");
