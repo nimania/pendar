@@ -130,7 +130,7 @@
       await new Promise(function(resolve,reject){
         window.PENDAR_HERITAGE_EMBED=true;
         var script=document.createElement("script");
-        script.src="/heritage-preview.js?v=20261019-home-data-resilience-4";
+        script.src="/heritage-preview.js?v=20261019-iran-lead-5";
         script.onload=resolve;
         script.onerror=function(){reject(new Error("Heritage feed script did not load"));};
         document.body.appendChild(script);
