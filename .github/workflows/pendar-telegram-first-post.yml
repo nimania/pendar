@@ -1,0 +1,23 @@
+name: First Pendar Telegram post
+on:
+  push:
+    branches: [main]
+    paths:
+      - telegram/launch-first-post.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: pendar-first-telegram-post
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish one approved introductory post
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: python -m backend.scripts.publish_launch_telegram
