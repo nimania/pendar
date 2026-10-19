@@ -76,9 +76,10 @@
   var redrawHome=null;
   function put(id,html){var x=el(id);if(x)x.innerHTML=html;}
   function railRow(item){
-    var title=headline(item),image=thumb(item,"rail-thumb");
-    return '<a class="rail-row'+(image?'':' rail-row-text')+'" href="'+esc(slugUrl(item))+'">'
-      +(image?'<span>'+image+'</span>':'')
+    var title=headline(item),url=validImage(photo(item));
+    var image=url?'<img class="rail-thumb" src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.style.visibility=\'hidden\'">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">▤</span>';
+    return '<a class="rail-row" href="'+esc(slugUrl(item))+'">'
+      +'<span class="rail-thumb-frame">'+image+'</span>'
       +'<span><span class="rail-title">'+esc(title)+'</span>'
       +(item.category?'<span class="rail-kicker">'+esc(String(item.category).slice(0,34))+'</span>':"")
       +'</span></a>';
@@ -106,7 +107,8 @@
     // Remove the entire article tile immediately; never leave a text-only card.
     var src=img.getAttribute("src");
     if(src)imageChecks.set(src,false);
-    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.rail-row,.story-card,.visual-card");
+    if(img.closest(".rail-row")){img.style.visibility="hidden";return;}
+    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.story-card,.visual-card");
     if(tile)tile.remove();
     if(redrawHome)redrawHome();
   }
@@ -212,23 +214,37 @@
   }
   function renderRailFigureFive(payload){
     var people=Array.isArray(payload&&payload.figures)?payload.figures:[];
+    function personPhoto(p){
+      var raw=[p.avatar,p.avatar_url,p.image_url,p.photo_url,p.image&&p.image.url,p.image&&p.image.path].filter(Boolean);
+      for(var x of raw){
+        var url=String(x).trim();
+        if(!/^https?:\/\//.test(url)&&/^\/?[a-zA-Z0-9][a-zA-Z0-9_./%-]*$/.test(url)&&!url.includes(".."))url="/"+url.replace(/^\/+/, "");
+        if(validImage(url))return url;
+      }
+      return "";
+    }
     var records=people.filter(function(p){return p&&p.handle&&p.name_fa;}).map(function(p){
       var posts=Array.isArray(p.posts)?p.posts:[];
-      return {person:p,count:posts.length,latest:posts.reduce(function(a,b){
-        return String(b.published_at||"")>String(a||"")?b.published_at:a;
-      },""),engagement:posts.reduce(function(v,post){return v+(Number(post.engagement_score||post.score||0)||0);},0)};
+      var dates=posts.map(function(post){return String(post.published_at||"");}).filter(Boolean);
+      return {person:p,count:posts.length,latest:dates.sort().reverse()[0]||"",
+        added:String(p.created_at||p.added_at||p.first_seen_at||p.profile_created_at||""),
+        engagement:posts.reduce(function(v,post){return v+(Number(post.engagement_score||post.score||post.view_count||0)||0);},0),
+        image:personPhoto(p)};
     });
+    var byLatest=function(a,b){return b.latest.localeCompare(a.latest);};
     var buckets={
-      fresh:records.slice().sort(function(a,b){return b.latest.localeCompare(a.latest);}),
-      updated:records.slice().sort(function(a,b){return b.latest.localeCompare(a.latest);}),
-      talkative:records.slice().sort(function(a,b){return b.count-a.count||b.latest.localeCompare(a.latest);}),
-      hot:records.slice().sort(function(a,b){return b.engagement-a.engagement||b.count-a.count;})
+      // "تازه" means recently ADDED profiles, not recently active ones.
+      fresh:records.filter(function(r){return r.added;}).sort(function(a,b){return b.added.localeCompare(a.added);}),
+      updated:records.slice().sort(byLatest),
+      talkative:records.slice().sort(function(a,b){return b.count-a.count||byLatest(a,b);}),
+      hot:records.slice().sort(function(a,b){return b.engagement-a.engagement||b.count-a.count||byLatest(a,b);})
     };
     Object.keys(buckets).forEach(function(key){
       var rows=buckets[key].slice(0,5).map(function(r){
-        return '<a class="rail-row rail-row-text" href="/@'+encodeURIComponent(r.person.handle)+'/"><span><span class="rail-title">'+esc(r.person.name_fa)+'</span><span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span></span></a>';
+        var image=r.image?'<img class="rail-thumb" src="'+esc(r.image)+'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">◉</span>';
+        return '<a class="rail-row" href="/@'+encodeURIComponent(r.person.handle)+'/"><span class="rail-thumb-frame">'+image+'</span><span><span class="rail-title">'+esc(r.person.name_fa)+'</span><span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span></span></a>';
       });
-      put("rail-figures-"+key,rows.join("")||'<p class="empty-state">چهره‌ای برای نمایش موجود نیست.</p>');
+      put("rail-figures-"+key,rows.join("")||'<p class="empty-state">'+(key==="fresh"?"تاریخ اضافه‌شدن چهره‌ها هنوز در داده‌های فعلی ثبت نشده است.":"چهره‌ای برای نمایش موجود نیست.")+'</p>');
     });
   }
   function initializeRailTabs(){
@@ -380,45 +396,41 @@
           +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
       }).join(""));
       // Each tab contains at most five actual records, ranked independently.
-      var sourceRows=limitUnique(stories.concat(reports),300);
       function timeOf(r){return Date.parse(r.published_at||r.updated_at||"")||0;}
-      function engagement(r){return Number(r.trend_score||r.viral_score||r.engagement_score||r.share_count||0)||0;}
-      function importance(r){return Number(r.importance_score||r.score||0)||0;}
-      function rankRows(rows,mode){
-        return rows.slice().sort(function(a,b){
-          function score(r){
-            if(mode==="viral")return engagement(r)*10+importance(r);
-            if(mode==="trend")return (Number(r.trend_score)||0)*10+importance(r);
-            if(mode==="hot")return importance(r)*10+engagement(r);
-            return timeOf(r);
-          }
-          return score(b)-score(a)||timeOf(b)-timeOf(a);
-        });
-      }
+      function signal(r,keys){for(var k of keys){var n=Number(r[k]);if(Number.isFinite(n)&&n>0)return n;}return 0;}
+      function engagement(r){return signal(r,["viral_score","share_count","engagement_score","view_count"]);}
+      function importance(r){return signal(r,["importance_score","score","source_count"]);}
+      function trend(r){return signal(r,["trend_score","momentum_score","velocity_score"]);}
+      var sorted=stories.slice().sort(function(a,b){return timeOf(b)-timeOf(a);});
       function fillFive(id,rows){
         var seen=new Set(),picked=[];
         rows.forEach(function(r){var key=String(r.id||"");if(key&&!seen.has(key)&&picked.length<5){seen.add(key);picked.push(r);}});
-        put(id,picked.map(railRow).join("")||'<p class="empty-state">هنوز مطلبی برای این بخش منتشر نشده است.</p>');
+        put(id,picked.map(railRow).join("")||'<p class="empty-state">برای این دسته هنوز دادهٔ کافی نداریم.</p>');
       }
-      ["fresh","viral","trend","hot"].forEach(function(mode){
-        fillFive("rail-headlines-"+mode,rankRows(stories,mode));
-      });
+      function rankedWithSignal(score){
+        return stories.filter(function(r){return score(r)>0;})
+          .sort(function(a,b){return score(b)-score(a)||timeOf(b)-timeOf(a);});
+      }
+      fillFive("rail-headlines-fresh",sorted);
+      fillFive("rail-headlines-viral",rankedWithSignal(engagement));
+      fillFive("rail-headlines-trend",rankedWithSignal(trend));
+      fillFive("rail-headlines-hot",rankedWithSignal(importance));
       var reportFilters={
         politics:/سیاس|ایران|دیپلماس|حکومت|انتخاب|جنگ|امنیت|تحریم/,
         society:/جامع|آموزش|زندگی|شهر|سلامت|محیط|کارگر|زنان|اجتماع/,
         culture:/فرهنگ|هنر|کتاب|سینما|فیلم|ادبی|موسیقی|میراث|تئاتر/,
         sport:/ورزش|فوتبال|والیبال|کشتی|المپیک|قهرمان|مسابقه/
       };
+      // Enrich sparse editorial categories with genuinely relevant published
+      // stories. Do not label a regular news item an editorial report.
+      var reportPool=limitUnique(reports.concat(stories),300);
       Object.keys(reportFilters).forEach(function(mode){
-        var matches=reports.filter(function(r){return reportFilters[mode].test(headline(r)+" "+(r.category||""));});
-        fillFive("rail-reports-"+mode,rankRows(matches,"fresh"));
+        var matches=reportPool.filter(function(r){return reportFilters[mode].test(headline(r)+" "+(r.category||""));});
+        fillFive("rail-reports-"+mode,matches.sort(function(a,b){return timeOf(b)-timeOf(a);}));
       });
-      fillFive("rail-today-latest",rankRows(stories,"fresh").filter(function(r){
-        return Date.now()-timeOf(r)<36*60*60*1000;
-      }));
-      fillFive("rail-today-big",rankRows(stories,"hot").filter(function(r){
-        return Date.now()-timeOf(r)<36*60*60*1000;
-      }));
+      var today=sorted.filter(function(r){var dt=timeOf(r);return dt>0&&Date.now()-dt<36*60*60*1000;});
+      fillFive("rail-today-latest",today);
+      fillFive("rail-today-big",today.filter(function(r){return importance(r)>0;}).sort(function(a,b){return importance(b)-importance(a)||timeOf(b)-timeOf(a);}));
       var cultureSection=el("culture");
       if(cultureSection)cultureSection.hidden=!culture.length;
       put("culture-grid",varied(culture,6).map(function(r){
