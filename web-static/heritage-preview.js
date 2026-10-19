@@ -341,6 +341,52 @@
     var related=data.reports.filter(function(r){return r.id!==id;}).slice(0,6);
     put("related-reports",related.map(function(r){return railRow(r,Boolean(photo(r)));}).join("")||'<p class="empty-state">گزارش دیگری برای نمایش یافت نشد.</p>');
   }
+  function newestTimestamp(rows){
+    if(!Array.isArray(rows))return null;
+    var valid=rows.map(function(row){return row&&typeof row==="object"?
+      (row.published_at||row.updated_at||row.created_at||row.collected_at||row.timestamp||""):"";})
+      .map(function(value){var d=new Date(value);return Number.isFinite(d.getTime())?d.getTime():0;})
+      .filter(function(value){return value>0&&value<=Date.now()+86400000;});
+    return valid.length?new Date(Math.max.apply(null,valid)):null;
+  }
+  function freshnessLabel(value){
+    if(!value)return "نامشخص";
+    var d=new Date(value);
+    if(!Number.isFinite(d.getTime())||d.getTime()>Date.now()+86400000)return "نامشخص";
+    return new Intl.DateTimeFormat("fa-IR",{timeZone:"Asia/Tehran",month:"short",day:"numeric",
+      hour:"2-digit",minute:"2-digit",hour12:false}).format(d)+" (تهران)";
+  }
+  function stampBlock(name,date,description){
+    return '<span title="'+esc(description)+'">'+esc(name)+': <time datetime="'+
+      (date?esc(new Date(date).toISOString()):"")+'">'+esc(freshnessLabel(date))+'</time></span>';
+  }
+  function renderFreshness(){
+    // Edition time belongs to deployment, whereas source timestamps belong to
+    // each dataset. A fetch time is not misrepresented as a publication time.
+    var dynamic=[
+      ["انتشار سایت","/data/footer-status.json",function(v){return v&&v.published_at;}],
+      ["چهره‌ها","/data/figures.json",function(v){
+        return newestTimestamp((v.figures||[]).flatMap(function(person){return person.posts||[];}));}],
+      ["بازار","/data/market-nabzesh.json",function(v){return v.updated_at||v.generated_at||v.as_of;}],
+      ["آب‌وهوا","/data/weather.json",function(v){return v.updated_at||v.generated_at||v.as_of;}],
+      ["کتاب","/data/book-curation.json",function(v){return v.updated_at||v.generated_at||v.as_of;}],
+      ["جراید","/data/press-stats.json",function(v){return v.updated_at||v.generated_at||v.as_of;}]
+    ];
+    var items=[
+      stampBlock("سرخط‌ها",newestTimestamp(data.stories),"تاریخ تازه‌ترین خبر در خروجی فعلی"),
+      stampBlock("گزارش‌ها",newestTimestamp(data.reports),"تاریخ تازه‌ترین گزارش در خروجی فعلی")
+    ];
+    put("footer-freshness",items.join('<span aria-hidden="true">·</span>'));
+    Promise.all(dynamic.map(function(entry){
+      return fetchJson(entry[1]).then(function(value){return [entry[0],entry[2](value)];})
+        .catch(function(){return [entry[0],null];});
+    })).then(function(pairs){
+      put("footer-freshness",[
+        stampBlock("انتشار سایت",pairs[0][1],"زمان ساخته‌شدن نسخهٔ منتشرشده؛ نه زمان بازدید"),
+        items[0],items[1]
+      ].concat(pairs.slice(1).map(function(p){return stampBlock(p[0],p[1],"آخرین زمان ثبت‌شده در دادهٔ "+p[0]);})).join('<span aria-hidden="true">·</span>'));
+    });
+  }
   async function boot(options){
     options=options||{};
     mountRoot=options.root||document;
@@ -367,6 +413,7 @@
           lead_fa:r.lead_fa||story.summary_fa||""
         });
       }),75);
+      renderFreshness();
       if(storyMode){
         var detail=await fetchJson("/data/story/"+encodeURIComponent(storyId)+".json");
         renderArticle(storyId,detail);
