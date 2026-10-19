@@ -74,6 +74,18 @@
     html.heritage-live-active body{margin:0;padding:0;background:#eceeeb}
     html.heritage-live-active #heritage-live-host{display:block;min-height:100vh}
   </style>
+  <style id="pendar-shared-top-header">
+    /* Keep the original navigation (with working search, theme and partner icons)
+       visible above the magazine homepage, including its loading state. */
+    html.heritage-booting body>header.top,
+    html.heritage-live-active body>header.top{display:block!important}
+    html.heritage-booting body>header.top{position:relative;z-index:3}
+    html.heritage-live-active body>header.top{position:relative;z-index:3}
+    /* Avoid two separate brand/navigation rows on the magazine homepage. */
+    html.heritage-live-active #heritage-live-host{min-height:0}
+    html.heritage-booting .heritage-first-paint-header,
+    html.heritage-booting .heritage-first-paint-nav{display:none!important}
+  </style>
   <style>
     html.js-enabled #seo-static { display: none; }
     html.route-boot main.wrap { visibility: hidden; }
@@ -248,7 +260,7 @@
         </div></details>
         <button type="button" onclick="showMarket()">بازار</button>
         <button type="button" onclick="showWeather()">هوا</button>
-        <button type="button" onclick="showDiner()">داینر</button>
+        <a href="/diner/">داینر</a>
       </nav>
       <span class="spacer"></span>
       <div class="smart-search" id="smart-search">

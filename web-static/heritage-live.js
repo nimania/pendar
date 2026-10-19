@@ -57,6 +57,11 @@
         css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
       });
       shadow.appendChild(css);
+      // Global Pendar header supplies the shared logo, navigation and controls.
+      // Hide the magazine's duplicate chrome; keep its content and footer.
+      var sharedHeaderStyle=document.createElement("style");
+      sharedHeaderStyle.textContent=".masthead,.site-nav{display:none!important}";
+      shadow.appendChild(sharedHeaderStyle);
       var shell=document.createElement("div");
       shell.className="heritage-root";
       shell.append(header, navigation, main, footer);
