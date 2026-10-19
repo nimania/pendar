@@ -108,7 +108,7 @@ async function openStatement(id) {
   const otherStatements=relatedStatements.map(p=>'<a class="statement-side-link" href="/statement/'+encodeURIComponent(statementKey(p))+'/"><b>'+esc(p.topic_fa||p.headline_fa||p.title_fa||String(p.text_fa||p.text||"گفتهٔ دیگر").slice(0,92))+'</b><small>'+esc(relTime(p.published_at))+'</small></a>').join("");
   el.innerHTML = '<div class="statement-layout">' +
     '<div class="statement-main">' +
-      '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "(\\'" + esc(person.handle) + "\\')\">بازگشت به پروفایل</button>" +
+      '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "('" + esc(person.handle) + "')\">بازگشت به پروفایل</button>" +
       '<div class="fig-head">' + figureProfileLink(person,avatar(person,"lg")) + '<div class="fig-head-body"><h1>' + figureProfileLink(person,esc(person.name_fa)) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
       '<div class="rule"><span>' + (isYoutube ? "جان کلام" : (isNews ? "گفته در خبر" : "دیدگاه")) + '</span><span class="l"></span></div>' +
       figureCard(post,false,true) + telegramEmbed(post) + videoEmbedHtml + pointsHtml + recapHtml +
