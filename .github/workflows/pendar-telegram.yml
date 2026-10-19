@@ -1,0 +1,78 @@
+name: Publish curated Pendar Telegram
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview without posting to the channel"
+        type: boolean
+        default: true
+        required: true
+  schedule:
+    # Three editorial windows per day; times are UTC.
+    - cron: "10 7,13,19 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: pendar-telegram-publisher
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_BOT_USERNAME: janekalaam_bot
+      TELEGRAM_CHAT_ID: "@pendario"
+      GH_TOKEN: ${{ github.token }}
+      SITE_URL: https://pendar.io
+      DIGEST_INTERVAL_HOURS: "8"
+      DIGEST_MAX_NEWS: "4"
+      DIGEST_MAX_VOICES: "3"
+      MAX_FIGURE_POSTS_PER_DAY: "2"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch published editorial datasets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p telegram-export
+          curl --fail --location --silent --show-error --retry 2 --retry-delay 3 --connect-timeout 10 --max-time 50 \
+            "https://pendar.io/data/figures.json" -o telegram-export/figures.json
+          curl --fail --location --silent --show-error --retry 2 --retry-delay 3 --connect-timeout 10 --max-time 50 \
+            "https://pendar.io/data/stories.json" -o telegram-export/stories.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          figures=json.loads(Path("telegram-export/figures.json").read_text())
+          stories=json.loads(Path("telegram-export/stories.json").read_text())
+          if not isinstance(figures,dict) or not isinstance(figures.get("figures"),list) or not figures["figures"]:
+              raise SystemExit("Refusing Telegram publish: figures data empty or malformed")
+          if not isinstance(stories,list) or not stories:
+              raise SystemExit("Refusing Telegram publish: stories data empty or malformed")
+          print("Published dataset valid: figures =",len(figures["figures"]),"stories =",len(stories))
+          PY
+      - name: Preview Telegram messages (no sending)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: |
+          python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json --dry-run
+          python backend/scripts/publish_figures.py --figures telegram-export/figures.json --dry-run > /tmp/pendar-figures-preview.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          messages=json.loads(Path("/tmp/pendar-figures-preview.json").read_text())
+          print("Figure messages eligible for review:",len(messages))
+          for m in messages[:3]: print(str(m.get("text",""))[:450])
+          PY
+      - name: Check bot configuration
+        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        run: |
+          if [ -z "${TELEGRAM_BOT_TOKEN}" ]; then
+            echo "::error::TELEGRAM_BOT_TOKEN is not configured. No messages sent."
+            exit 1
+          fi
+      - name: Publish selected figure statement
+        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        run: python backend/scripts/publish_figures.py --figures telegram-export/figures.json
+      - name: Publish periodic editorial digest
+        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        run: python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json
