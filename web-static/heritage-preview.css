@@ -261,3 +261,10 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .home-market-preview .market-preview-brand{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;font-weight:850;line-height:1.2}
 .heritage-root .home-market-preview .market-preview-brand img{display:block;width:38px;height:34px;object-fit:contain;background:#302d2c;border-radius:5px;padding:4px}
 .heritage-root .home-market-preview .market-preview-brand span{font-size:17px}
+
+/* Keep real editorial content visible during external image outages. */
+.heritage-root .rail-row.rail-row-text{grid-template-columns:minmax(0,1fr)!important}
+.heritage-root .latest-ticker .ticker-text-fallback{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:190px;max-width:235px;flex:0 0 220px;color:inherit;text-decoration:none}
+.heritage-root .latest-ticker .ticker-text-fallback strong{font-size:12px;color:#176f74}
+.heritage-root .latest-ticker .ticker-text-fallback span{font-size:12px;line-height:1.7}
+.heritage-root .feature-hero:not(:has(.feature-picture)) .feature-caption{position:relative;background:#fff;min-height:190px;display:flex;flex-direction:column;justify-content:center;color:#22342b}
