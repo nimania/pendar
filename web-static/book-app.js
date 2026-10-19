@@ -13,7 +13,7 @@ let booksCache = null;
 async function loadBooks(){
   if(booksCache) return _curateBookData(booksCache);
   let d=null;
-  try{d=await getJSON(`${DATA}/books.json?v=${Date.now()}`,7000);}catch(_){}
+  try{d=await getJSON(`${DATA}/books.json`,7000);}catch(_){}
   if(!d || !Array.isArray(d.books) || !d.books.length){
     // This 15+ MB legacy JavaScript dataset is a recovery fallback only:
     // do not download/parse it on every news, figure or article page.
