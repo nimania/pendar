@@ -83,6 +83,8 @@
     html.heritage-live-active body>header.top{position:relative;z-index:3}
     /* Avoid two separate brand/navigation rows on the magazine homepage. */
     html.heritage-live-active #heritage-live-host{min-height:0}
+    html.heritage-booting .heritage-first-paint-header,
+    html.heritage-booting .heritage-first-paint-nav{display:none!important}
   </style>
   <style>
     html.js-enabled #seo-static { display: none; }
@@ -258,7 +260,7 @@
         </div></details>
         <button type="button" onclick="showMarket()">بازار</button>
         <button type="button" onclick="showWeather()">هوا</button>
-        <button type="button" onclick="showDiner()">داینر</button>
+        <a href="/diner/">داینر</a>
       </nav>
       <span class="spacer"></span>
       <div class="smart-search" id="smart-search">
