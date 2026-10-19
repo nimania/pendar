@@ -50,6 +50,27 @@ function setHash(h){
   history.pushState(null,"",path+location.search);
   updateRouteSeo(path);
 }
+// Load rarely visited feature code only when its route is opened.
+const PENDAR_LAZY_SCRIPTS = {
+  diner: "diner.js?v=recipe-lab-source-audit-4",
+  future: "future.js?v=20261017"
+};
+const _pendarLazyRequests = new Map();
+function loadPendarRouteScript(kind) {
+  if (_pendarLazyRequests.has(kind)) return _pendarLazyRequests.get(kind);
+  const src = PENDAR_LAZY_SCRIPTS[kind];
+  if (!src) return Promise.reject(new Error("Unknown lazy route: " + kind));
+  const pending = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = () => { script.remove(); reject(new Error("Could not load " + src)); };
+    document.head.appendChild(script);
+  });
+  _pendarLazyRequests.set(kind, pending);
+  pending.catch(() => { if (_pendarLazyRequests.get(kind) === pending) _pendarLazyRequests.delete(kind); });
+  return pending;
+}
 async function route() {
   if (location.hash === "#/" || location.hash === "#") {
     history.replaceState(null, "", location.pathname + location.search);
@@ -99,7 +120,7 @@ async function route() {
   const kind = i < 0 ? raw : raw.slice(0, i);
   let arg = i < 0 ? "" : decodeURIComponent(raw.slice(i + 1));
   if(["entity","profile","graph"].includes(kind)&&arg.includes("/")&&!arg.includes(":"))arg=arg.replace("/",":");
-  if (kind === "future") return showFuture(arg);
+  if (kind === "future") { await loadPendarRouteScript("future"); return showFuture(arg); }
   if (kind === "headlines" || kind === "feed" || kind === "news") return showFeed();
   if (kind === "home") return showHome();
   if (kind === "reports") return showPendarEditorialArchive();
@@ -153,7 +174,7 @@ async function route() {
   if (kind === "israel-radar") return showIsraelRadar();
   if (kind === "radar") return showRadarHub();
   if (kind === "tech") return showTech();
-  if (kind === "diner" || kind === "dinr") return showDiner(arg);
+  if (kind === "diner" || kind === "dinr") { await loadPendarRouteScript("diner"); return showDiner(arg); }
   if (kind === "figure" && arg) return openFigure(arg);
   if (kind === "news-person" && arg) return openNewsPerson(arg);
   if (kind === "statement" && arg) return openStatement(arg);
