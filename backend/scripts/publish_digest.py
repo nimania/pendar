@@ -125,7 +125,7 @@ def build_digest(figures_data, stories_data, now, hours=DIGEST_INTERVAL_HOURS, s
 
 
 def digest_payload(text, chat_id):
-    return {"chat_id": chat_id, "text": text, "parse_mode": "HTML",
+    return {"chat_id": chat_id, "text": text.rstrip() + "\\n\\n@pendario", "parse_mode": "HTML",
             "disable_web_page_preview": True}
 
 
