@@ -1,0 +1,60 @@
+name: Pendar Page Speed Audit
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Fast Deploy Pendar UI"]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Audit key pages with mobile Lighthouse
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p speed-reports
+          echo "Target site: https://pendar.io/"
+          npm exec --yes --package=lighthouse -- lighthouse --version
+          failures=0
+          for route in root reports figures diner future; do
+            if [ "$route" = root ]; then url="https://pendar.io/"; else url="https://pendar.io/$route/"; fi
+            echo "Auditing $url"
+            if ! npm exec --yes --package=lighthouse -- lighthouse "$url" \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              --output=json --output-path="speed-reports/$route.json" \
+              --quiet; then
+              echo "::warning::Lighthouse could not test $url"
+              failures=$((failures+1))
+            fi
+          done
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for path in sorted(Path('speed-reports').glob('*.json')):
+              try:
+                  x=json.loads(path.read_text(encoding='utf-8'))
+                  audits=x.get('audits') or {}
+                  row={'page':path.stem,'score':round(100*(x.get('categories',{}).get('performance',{}).get('score') or 0)),
+                       'LCP_ms':audits.get('largest-contentful-paint',{}).get('numericValue'),
+                       'TBT_ms':audits.get('total-blocking-time',{}).get('numericValue'),
+                       'CLS':audits.get('cumulative-layout-shift',{}).get('numericValue'),
+                       'final_url':x.get('finalDisplayedUrl'),'error':x.get('runtimeError')}
+                  rows.append(row)
+              except (OSError,ValueError) as exc: print('::warning::Bad Lighthouse result',path,exc)
+          print(json.dumps(rows,ensure_ascii=False,indent=2))
+          Path('speed-reports/summary.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf-8')
+          if not rows: raise SystemExit('No Lighthouse results collected')
+          PY
+      - name: Upload measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pendar-page-speed
+          path: speed-reports/
+          if-no-files-found: ignore
