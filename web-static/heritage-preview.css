@@ -303,3 +303,8 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .rail-five .rail-thumb-frame{display:grid;place-items:center;width:49px;height:44px;flex:0 0 49px;background:#e6eeeb;border-radius:4px;overflow:hidden}
 .heritage-root .rail-five .rail-thumb-frame .rail-thumb{display:block;width:49px;height:44px;object-fit:cover;margin:0}
 .heritage-root .rail-five .rail-thumb-placeholder{display:grid;place-items:center;color:#748980;font-size:18px}
+
+/* Source attribution replaces inaccurate English category codes in sidebar. */
+.heritage-root .rail-five .rail-publisher{display:inline-flex;gap:5px;align-items:center;max-width:100%;margin-top:3px;font:500 10px/1.5 Vazirmatn,Tahoma,sans-serif;color:#65766f}
+.heritage-root .rail-five .rail-publisher-logo{width:16px;height:16px;max-width:16px;max-height:16px;border-radius:3px;object-fit:contain;background:#fff}
+.heritage-root .rail-five .rail-publisher span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
