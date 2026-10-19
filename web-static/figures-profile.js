@@ -102,16 +102,25 @@ async function openStatement(id) {
   const pointsHtml = pointRows.length
     ? '<section class="video-statement-points"><h3>نکات اصلی</h3><ul>' + pointRows.map(x=>'<li>'+esc(x)+'</li>').join('') + '</ul></section>'
     : '';
-  el.innerHTML = '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "(\'" + esc(person.handle) + "\')\">بازگشت به پروفایل</button>" +
-    '<div class="fig-head">' + figureProfileLink(person,avatar(person,"lg")) + '<div class="fig-head-body"><h1>' + figureProfileLink(person,esc(person.name_fa)) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
-    '<div class="rule"><span>' + (isYoutube ? "جان کلام" : (isNews ? "گفته در خبر" : "دیدگاه")) + '</span><span class="l"></span></div>' +
-    figureCard(post,false,true) + telegramEmbed(post) + videoEmbedHtml + pointsHtml + recapHtml +
-    articleDisplayAdMarkup() +
-    statementBooksSection +
-    statementMoviesSection +
-    ((post.related_people || []).length ? '<div class="rule"><span>ارتباط این گفته</span><span class="l"></span></div><div class="views">' +
-      post.related_people.map(r => `<button class="fig-person" onclick="openFigure('${esc(r.handle)}')"><span class="fp-body"><span class="fp-name">${esc(r.name_fa)}</span><span class="fp-role">${r.relation === "response" ? "پاسخ / واکنش مرتبط" : "شخص نام‌برده در این گفته"}</span></span></button>`).join("") + '</div>' : '') +
-    '<div id="statement-discovery"></div><p class="muted fig-note">این صفحه نشانی مستقل دارد و می‌توان مستقیماً به همین گفته ارجاع داد.</p>';
+  const relatedStatements=(person.posts||[]).filter(p=>String(p.id)!==raw)
+    .sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")))
+    .slice(0,5);
+  const otherStatements=relatedStatements.map(p=>'<a class="statement-side-link" href="/statement/'+encodeURIComponent(statementKey(p))+'/"><b>'+esc(p.topic_fa||p.headline_fa||p.title_fa||String(p.text_fa||p.text||"گفتهٔ دیگر").slice(0,92))+'</b><small>'+esc(relTime(p.published_at))+'</small></a>').join("");
+  el.innerHTML = '<div class="statement-layout">' +
+    '<div class="statement-main">' +
+      '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "('" + esc(person.handle) + "')\">بازگشت به پروفایل</button>" +
+      '<div class="fig-head">' + figureProfileLink(person,avatar(person,"lg")) + '<div class="fig-head-body"><h1>' + figureProfileLink(person,esc(person.name_fa)) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
+      '<div class="rule"><span>' + (isYoutube ? "جان کلام" : (isNews ? "گفته در خبر" : "دیدگاه")) + '</span><span class="l"></span></div>' +
+      figureCard(post,false,true) + telegramEmbed(post) + videoEmbedHtml + pointsHtml + recapHtml +
+      statementBooksSection + statementMoviesSection +
+      '<p class="muted fig-note">این صفحه نشانی مستقل دارد و می‌توان مستقیماً به همین گفته ارجاع داد.</p>' +
+    '</div>' +
+    '<aside class="statement-side" aria-label="گفته‌ها و مطالب مکمل">' +
+      '<section class="statement-side-panel"><h2>از همین چهره</h2><a class="statement-person-link" href="/@'+encodeURIComponent(person.handle)+'/">'+esc(person.name_fa)+' ← مشاهدهٔ پروفایل</a>'+otherStatements+'</section>' +
+      ((post.related_people||[]).length?'<section class="statement-side-panel"><h2>چهره‌های مرتبط</h2>'+post.related_people.slice(0,6).map(r=>'<a class="statement-side-link" href="/@'+encodeURIComponent(r.handle)+'/"><b>'+esc(r.name_fa)+'</b><small>'+(r.relation==="response"?"پاسخ یا واکنش":"نام‌برده در گفته")+'</small></a>').join("")+'</section>':"")+
+      '<section class="statement-side-panel"><h2>مطالب و زمینهٔ مرتبط</h2><div id="statement-discovery"></div></section>' +
+      '<section class="statement-side-panel statement-side-ad"><h2>تبلیغات</h2>'+articleDisplayAdMarkup()+'</section>' +
+    '</aside></div>';
   loadArticleDisplayAd();
   renderContentDiscovery(document.getElementById("statement-discovery"),post,person);
 }

@@ -342,3 +342,27 @@ body:has(#figures-view.figure-profile-mode) #figures-view{
  #figures-view.figure-profile-mode .x-profile-main .fig-social{grid-column:1/-1!important;grid-row:5!important}
  #figures-view.figure-profile-mode .x-profile-stats{grid-column:1/-1!important;grid-row:6!important}
 }
+
+/* Statement permalink: substantive reading area right, discovery and ads left. */
+#figures-view.figure-profile-mode #figures .statement-layout{display:grid;grid-template-columns:minmax(0,1fr) 318px;gap:24px;align-items:start;direction:rtl;width:100%}
+#figures-view .statement-main{min-width:0;background:#fff;padding:18px 22px;border-top:4px solid var(--fig-orange)}
+#figures-view .statement-main .fig-head{display:flex;align-items:center;gap:12px;margin:12px 0}
+#figures-view .statement-main .fig-head img{width:54px;height:54px;object-fit:cover;border-radius:50%}
+#figures-view .statement-main .fig-head h1{margin:0;font-size:22px}
+#figures-view .statement-main .telegram-embed,#figures-view .statement-main iframe{max-width:100%}
+#figures-view .statement-side{min-width:0;display:flex;flex-direction:column;gap:14px}
+#figures-view .statement-side-panel{border:1px solid var(--fig-line);background:#fff;border-radius:9px;overflow:hidden}
+#figures-view .statement-side-panel>h2{font-size:15px;font-weight:800;margin:0;padding:13px 14px;background:#f4f7f4;border-bottom:1px solid var(--fig-line)}
+#figures-view .statement-side-link{display:block;padding:12px 14px;border-bottom:1px solid var(--fig-line);color:inherit;text-decoration:none}
+#figures-view .statement-side-link:hover{background:#f6faf7}
+#figures-view .statement-side-link b{display:block;font-size:13px;line-height:1.8}
+#figures-view .statement-side-link small{display:block;margin-top:3px;font-size:11px;color:var(--fig-muted)}
+#figures-view .statement-person-link{display:block;padding:13px 14px;font-weight:700;color:var(--fig-sea);font-size:13px}
+#figures-view .statement-side #statement-discovery{padding:8px 10px}
+#figures-view .statement-side #statement-discovery .rule{margin-top:12px}
+#figures-view .statement-side .story-inline-sponsor{margin:0!important;padding:10px!important;border:0!important}
+#figures-view .statement-side #pendar-article-display-ad{max-width:100%}
+@media(max-width:900px){
+ #figures-view.figure-profile-mode #figures .statement-layout{grid-template-columns:minmax(0,1fr);gap:14px}
+ #figures-view .statement-main{padding:15px}
+}
