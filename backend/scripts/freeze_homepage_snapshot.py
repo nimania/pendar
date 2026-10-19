@@ -23,6 +23,18 @@ def main():
     parser.add_argument("--site",type=Path,required=True)
     args=parser.parse_args()
     data=args.site/"data"
+    target=data/"homepage-snapshot.json"
+    now=datetime.now(timezone.utc)
+    bucket=int(now.timestamp())//1800
+    if target.is_file():
+        try:
+            previous=json.loads(target.read_text(encoding="utf-8"))
+            previous_at=datetime.fromisoformat(previous["generated_at"].replace("Z","+00:00"))
+            if previous.get("version")==1 and int(previous_at.timestamp())//1800==bucket:
+                print("Retaining existing homepage composition for current half-hour slot")
+                return
+        except (ValueError,KeyError,TypeError,AttributeError):
+            pass
     stories=json.loads((data/"stories.json").read_text(encoding="utf-8"))
     archive=json.loads((data/"editorial-archive.json").read_text(encoding="utf-8")) if (data/"editorial-archive.json").exists() else {}
     reports=archive.get("reports",[]) if isinstance(archive,dict) else []
@@ -45,7 +57,6 @@ def main():
         "story_ids":[str(s["id"]) for s in ordered if s.get("id")],
         "source":"validated-published-site"
     }
-    target=data/"homepage-snapshot.json"
     target.write_text(json.dumps(result,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
     print("Homepage snapshot:",result["generated_at"],"lead",lead,"stories",len(result["story_ids"]))
 
