@@ -232,7 +232,7 @@
     });
   }
   function initializeRailTabs(){
-    document.querySelectorAll(".rail-tabs-box").forEach(function(box){
+    mountRoot.querySelectorAll(".rail-tabs-box").forEach(function(box){
       if(box.dataset.tabsReady)return;
       box.dataset.tabsReady="1";
       var tabs=Array.from(box.querySelectorAll("[data-rail-tab]"));
