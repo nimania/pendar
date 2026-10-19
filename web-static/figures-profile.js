@@ -257,9 +257,14 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const suggestions=(d.figures||[]).filter(p=>p&&p.handle&&p.handle!==x.handle&&p.name_fa)
     .sort((a,b)=>(b.count||0)-(a.count||0)||String(a.name_fa).localeCompare(String(b.name_fa),"fa"))
     .slice(0,6);
-  const suggestionCards=suggestions.map(p=>'<a class="figure-rail-person" href="/@'+encodeURIComponent(p.handle)+'/" aria-label="مشاهدهٔ '+esc(p.name_fa)+'">'
+  const suggestionCards=suggestions.map(p=>{
+    const followed=isFigureFollowed(p.handle);
+    return '<div class="figure-rail-person">'
+      +'<a class="figure-rail-person-link" href="/@'+encodeURIComponent(p.handle)+'/" aria-label="مشاهدهٔ '+esc(p.name_fa)+'">'
       +(p.avatar?'<img src="'+esc(p.avatar)+'" alt="" loading="lazy" onerror="this.hidden=true">':'<span class="figure-rail-initial">'+esc(p.name_fa.slice(0,1))+'</span>')
-      +'<span><b>'+esc(p.name_fa)+'</b><small>'+esc(p.role_fa||p.field_fa||"مشاهدهٔ پروفایل")+'</small></span></a>').join("");
+      +'<span><b>'+esc(p.name_fa)+'</b><small>'+esc(p.role_fa||p.field_fa||"مشاهدهٔ پروفایل")+'</small></span></a>'
+      +'<button type="button" class="figure-rail-follow'+(followed?' on':'')+'" data-figure-follow="'+esc(p.handle)+'" onclick="toggleFigureRailFollow(this)" aria-pressed="'+followed+'">'+(followed?'✓ دنبال می‌کنم':'+ دنبال کن')+'</button></div>';
+  }).join("");
   el.innerHTML = `<div class="x-profile">
     ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length+profileMedia.books.length ? `<span><b>${faN(figureBooks.length+profileMedia.books.length)}</b> کتاب</span>` : ""}${mediaWorks.length+profileMedia.films.length ? `<span><b>${faN(mediaWorks.length+profileMedia.films.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
@@ -289,7 +294,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     <p class="muted fig-note x-profile-note">دیدگاه‌ها از منابع عمومی خود شخص می‌آیند؛ موارد «در خبرها» گفته‌هایی هستند که رسانه‌ها به او نسبت داده‌اند.</p>
       </div>
       <aside class="figure-profile-side" aria-label="چهره‌های پیشنهادی و تبلیغات">
-        <section class="figure-rail-box"><h2>چهره‌های پیشنهادی برای دنبال کردن</h2>
+        <section class="figure-rail-box"><h2>دنبال کن</h2>
           <div class="figure-rail-people">${suggestionCards}</div>
           <a class="figure-rail-more" href="/figures/">همهٔ چهره‌ها ←</a>
         </section>
@@ -345,4 +350,21 @@ function renderPersonProfileHeader(x,options={}){
     ${(x.profile_handle===undefined?x.handle:x.profile_handle)?'<div class="x-handle">@'+esc(x.profile_handle===undefined?x.handle:x.profile_handle)+'</div>':x.name&&x.name!==name?'<div class="x-handle" dir="ltr">'+esc(x.name)+'</div>':""}
     <p class="x-bio">${esc(x.role_fa||"")}</p>${socialLinks(x.social||[])}
     <div class="x-profile-stats">${options.stats||""}</div>${options.details||""}</div>`;
+}
+
+/* Sidebar follow actions must not navigate to the recommended profile.
+   Share the same persisted follow set as the ordinary profile control. */
+function toggleFigureRailFollow(button){
+  const handle=button?.dataset?.figureFollow;
+  if(!handle)return;
+  const key=String(handle).toLowerCase(), follows=figureFollows();
+  if(follows.has(key))follows.delete(key);else follows.add(key);
+  localStorage.setItem(FIG_FOLLOW_KEY,JSON.stringify([...follows]));
+  document.querySelectorAll('[data-figure-follow]').forEach(el=>{
+    if(String(el.dataset.figureFollow).toLowerCase()!==key)return;
+    const on=follows.has(key);
+    el.classList.toggle('on',on);
+    el.setAttribute('aria-pressed',String(on));
+    el.textContent=on?'✓ دنبال می‌کنم':'+ دنبال کن';
+  });
 }
