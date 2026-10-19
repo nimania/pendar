@@ -72,6 +72,16 @@
     html.heritage-live-active body{margin:0;padding:0;background:#eceeeb}
     html.heritage-live-active #heritage-live-host{display:block;min-height:100vh}
   </style>
+  <style id="pendar-masthead-visibility">
+    /* Shared site navigation must precede (and remain above) the magazine host.
+       This fixes the missing logo and primary navigation without touching the
+       magazine content inside its Shadow DOM. */
+    body>header.top{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:1000!important;width:100%;min-height:70px}
+    body>header.top>.wrap{max-width:1500px;width:100%;box-sizing:border-box;margin-inline:auto;padding-inline:22px;display:flex;align-items:center;flex-wrap:wrap;gap:12px;min-height:70px;height:auto}
+    body>header.top .header-quicklinks{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+    body>header.top .logo-img{display:block;min-height:36px;max-height:58px}
+    @media(max-width:720px){body>header.top>.wrap{padding:9px 12px;gap:8px}body>header.top .header-quicklinks{order:4;width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:5px}}
+  </style>
   <style id="pendar-shared-top-header">
     /* Keep the original navigation (with working search, theme and partner icons)
        visible above the magazine homepage, including its loading state. */
@@ -233,12 +243,6 @@
 </head>
 <body>
   <!-- New heritage magazine homepage; the original SPA remains for all other routes. -->
-  <div id="heritage-live-host" hidden aria-label="صفحهٔ اول مجله‌ای پندار">
-    <div class="heritage-first-paint" aria-hidden="true">
-      <div class="heritage-first-paint-header"><img src="/assets/pendar-logo.svg" alt=""></div>
-      <div class="heritage-first-paint-nav"><span>خانه</span><span>گزارش‌ها</span><span>سرخط</span><span>چهره‌ها</span><span>فرهنگ و زندگی</span></div>
-    </div>
-  </div>
   <header class="top">
     <div class="wrap">
       <a class="brand" href="https://pendar.io" aria-label="پندار">
@@ -271,6 +275,13 @@
       <a class="icon-btn section-header-link" href="/badbadak/" aria-label="بادبادک" title="بادبادک"><img src="assets/badbadak-header.png" width="28" height="28" alt=""></a>
     </div>
   </header>
+  <div id="heritage-live-host" hidden aria-label="صفحهٔ اول مجله‌ای پندار">
+    <div class="heritage-first-paint" aria-hidden="true">
+      <div class="heritage-first-paint-header"><img src="/assets/pendar-logo.svg" alt=""></div>
+      <div class="heritage-first-paint-nav"><span>خانه</span><span>گزارش‌ها</span><span>سرخط</span><span>چهره‌ها</span><span>فرهنگ و زندگی</span></div>
+    </div>
+  </div>
+
 
   <main class="wrap">
     <section id="home-view">
