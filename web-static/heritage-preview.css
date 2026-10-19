@@ -196,3 +196,30 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
   }
   .heritage-root .masthead-navigation a{min-height:42px;font-size:12px}
 }
+
+/* Heritage-style two-tier masthead: full-width charcoal logo band and
+   slimmer navigation bar, with both rows aligned to the 1180px content grid. */
+.heritage-root .masthead{display:block!important;width:100%;background:#2d2b2a;color:#f4f3f1}
+.heritage-root .masthead-brand-row{background:#2d2b2a}
+.heritage-root .masthead-brand-inner{width:min(1180px,calc(100% - 40px));height:105px;display:flex;align-items:center;justify-content:flex-start}
+.heritage-root .masthead-brand-inner .brand{display:flex;align-items:center;justify-content:flex-start}
+.heritage-root .masthead-brand-inner .brand img{width:91px;height:76px;max-height:76px;object-fit:contain}
+.heritage-root .masthead-nav-row{background:#413e3d;border-top:1px solid #4e4a48;border-bottom:1px solid #575250}
+.heritage-root .masthead-nav-inner{width:min(1180px,calc(100% - 40px));min-height:48px;display:flex;align-items:stretch;justify-content:space-between;gap:20px}
+.heritage-root .masthead-nav-row .masthead-navigation{display:flex;flex:1;align-items:stretch;justify-content:flex-start;gap:0;min-width:0;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+.heritage-root .masthead-nav-row .masthead-navigation::-webkit-scrollbar{display:none}
+.heritage-root .masthead-nav-row .masthead-navigation a{display:flex;align-items:center;justify-content:center;flex:0 0 auto;border:0;border-left:1px solid #554f4d;border-radius:0;background:transparent;color:#ecebe9;font-size:13px;font-weight:700;min-height:48px;padding:9px 14px;white-space:nowrap}
+.heritage-root .masthead-nav-row .masthead-navigation a:hover,.heritage-root .masthead-nav-row .masthead-navigation a:focus-visible{background:#55504e;color:#fff}
+.heritage-root .masthead-nav-row .masthead-tools{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex:none;margin:0}
+.heritage-root .masthead-nav-row .masthead-tools a{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border:1px solid #676260;border-radius:5px;background:#302e2d;color:#f4f4f2;font-size:25px}
+.heritage-root .masthead-nav-row .masthead-tools img{width:26px;height:26px;object-fit:contain}
+@media(max-width:720px){
+  .heritage-root .masthead-brand-inner{width:calc(100% - 28px);height:83px}
+  .heritage-root .masthead-brand-inner .brand img{width:75px;height:65px}
+  .heritage-root .masthead-nav-inner{width:calc(100% - 20px);min-height:48px;gap:8px;flex-wrap:nowrap}
+  .heritage-root .masthead-nav-row .masthead-navigation{order:initial;grid-column:auto;grid-row:auto;width:auto;overflow-x:auto}
+  .heritage-root .masthead-nav-row .masthead-navigation a{font-size:12px;padding:8px 10px;min-height:46px}
+  .heritage-root .masthead-nav-row .masthead-tools{order:initial;grid-column:auto;grid-row:auto;gap:5px}
+  .heritage-root .masthead-nav-row .masthead-tools a{width:31px;height:31px;flex-basis:31px}
+  .heritage-root .masthead-nav-row .masthead-tools img{width:22px;height:22px}
+}
