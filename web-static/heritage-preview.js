@@ -210,6 +210,34 @@
     });
     put("ticker",cards.join("")||textOnly.join("")||'<a href="/figures/">مشاهدهٔ تازه‌ترین گفته‌ها ←</a>');
   }
+  function initializeRailTabs(){
+    document.querySelectorAll(".rail-tabs-box").forEach(function(box){
+      if(box.dataset.tabsReady)return;
+      box.dataset.tabsReady="1";
+      var tabs=Array.from(box.querySelectorAll("[data-rail-tab]"));
+      var panels=Array.from(box.querySelectorAll("[data-rail-panel]"));
+      function activate(name){
+        tabs.forEach(function(tab){
+          var selected=tab.dataset.railTab===name;
+          tab.classList.toggle("on",selected);
+          tab.setAttribute("aria-selected",String(selected));
+          tab.tabIndex=selected?0:-1;
+        });
+        panels.forEach(function(panel){panel.hidden=panel.dataset.railPanel!==name;});
+      }
+      tabs.forEach(function(tab,index){
+        tab.addEventListener("click",function(){activate(tab.dataset.railTab);});
+        tab.addEventListener("keydown",function(e){
+          if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;
+          e.preventDefault();
+          var next=(index+(e.key==="ArrowLeft"?1:tabs.length-1))%tabs.length;
+          activate(tabs[next].dataset.railTab);
+          tabs[next].focus();
+        });
+      });
+      activate(tabs.find(function(tab){return tab.classList.contains("on");})?.dataset.railTab||tabs[0]?.dataset.railTab);
+    });
+  }
   function renderHomepageBriefs(){
     var digits=function(value){return String(value).replace(/\\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[Number(d)];});};
     var number=function(value){var n=Number(value);return Number.isFinite(n)?digits(n.toLocaleString("en-US")):"";};
@@ -278,6 +306,7 @@
     // No item without a verified picture can enter ANY homepage news module.
     // The backend remains unchanged, and imageless reports still exist in the
     // searchable archive and on their original URL.
+    initializeRailTabs();
     function draw(){
       var news=uniquePictured(stories,65);
       var editorial=uniquePictured(reports,65);
@@ -331,6 +360,11 @@
         return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
           +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
       }).join(""));
+      var videos=stories.concat(reports).filter(function(r){
+        return /ویدئو|ویدیو|فیلم|گفتگو|گفت‌وگو|جان کلام/.test(headline(r)+" "+(r.category||""))||/youtube|video/.test(String(r.content_type||r.media_type||"").toLowerCase());
+      });
+      put("rail-videos",limitUnique(videos,5).map(railRow).join("")||'<p class="empty-state">ویدئوی تازه‌ای برای نمایش نیست.</p>');
+      put("rail-figures",'<div class="rail-mini-links"><a href="/figures/">تازه‌ترین دیدگاه‌های چهره‌ها ←</a><a href="/figures/">گفته‌ها و تحلیل‌های ثبت‌شده ←</a></div>');
       put("rail-reports",varied(stories.concat(reports),7).map(railRow).join("")||
         '<p class="empty-state">گزارش تصویردار دیگری در دسترس نیست.</p>');
       var cultureSection=el("culture");
