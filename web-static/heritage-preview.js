@@ -137,6 +137,60 @@
   function uniquePictured(items,max){
     return limitUnique(items.filter(function(row){return verifiedImage(photo(row));}),max);
   }
+  function renderFigureStrip(figures) {
+    var people=Array.isArray(figures?.figures)?figures.figures:[];
+    var found=people.flatMap(function(person){
+      var posts=Array.isArray(person.posts)?person.posts:[];
+      return posts.slice(0,3).map(function(post){return {person:person,post:post};});
+    }).filter(function(x){return x.post&&x.person&&x.person.handle;})
+      .sort(function(a,b){return String(b.post.published_at||"").localeCompare(String(a.post.published_at||""));});
+    var unique=new Set();
+    var cards=found.filter(function(x){
+      var handle=x.person.handle;
+      if(unique.has(handle))return false;
+      unique.add(handle);return true;
+    }).slice(0,9).map(function(x){
+      var person=x.person,post=x.post;
+      var name=norm(person.name_fa||person.name||person.display_name_fa||person.handle);
+      var title=norm(post.headline_fa||post.title_fa||post.statement_fa||post.text_fa||post.recap_fa||post.summary_fa||"");
+      var avatar=validImage(person.avatar||person.image_url||person.photo_url||"");
+      if(!title)return "";
+      var href="/figure/"+encodeURIComponent(person.handle)+"/";
+      return '<a class="ticker-story person-statement" href="'+esc(href)+'">'
+        +(avatar?'<img class="ticker-person-photo" src="'+esc(avatar)+'" alt="" loading="lazy" decoding="async">':'<span class="ticker-thumb ticker-thumb-empty" aria-hidden="true">چهره</span>')
+        +'<span><span class="ticker-person-name">'+esc(name)+'</span><span class="ticker-person-quote">'+esc(excerpt(title,110))+'</span></span></a>';
+    }).filter(Boolean);
+    put("ticker",cards.join("")||'<a href="/figures/">تازه‌ترین گفته‌های چهره‌ها را ببینید ←</a>');
+  }
+  function renderHomepageBriefs(){
+    // Use only available published snapshot values; never invent rates or forecasts.
+    Promise.all([
+      fetchJson("/data/prices.json").catch(function(){return null;}),
+      fetchJson("/data/weather.json").catch(function(){return null;})
+    ]).then(function(result){
+      var prices=result[0];
+      var priceRows=Array.isArray(prices)?prices:Array.isArray(prices?.prices)?prices.prices:[];
+      var market=priceRows.filter(function(x){return x&&typeof x==="object";}).slice(0,3).map(function(row){
+        var label=norm(row.name_fa||row.name||row.symbol||row.title||"");
+        var value=row.price??row.value??row.last_price;
+        if(!label||value===null||value===undefined||value==="")return "";
+        return '<div class="brief-item">'+esc(label)+' — '+esc(String(value))+'</div>';
+      }).filter(Boolean);
+      put("home-market-summary",market.join("")||'<a href="/market/">نرخ‌های به‌روز ارز، طلا و بازار را در پنداربازار ببینید ←</a>');
+      var weather=result[1];
+      var weatherRows=Array.isArray(weather)?weather:Array.isArray(weather?.cities)?weather.cities:[];
+      var local=weatherRows.filter(function(x){return x&&typeof x==="object";}).slice(0,3).map(function(row){
+        var name=norm(row.city_fa||row.city||row.name_fa||row.name||"");
+        var temp=row.temperature_c??row.temp_c??row.temperature;
+        if(!name||temp===undefined||temp===null||temp==="")return "";
+        return '<div class="brief-item">'+esc(name)+' — '+esc(String(temp))+'°</div>';
+      }).filter(Boolean);
+      put("home-weather-summary",local.join("")||'<a href="/weather/">پیش‌بینی شهرها و وضعیت آب‌وهوا را ببینید ←</a>');
+    }).catch(function(){
+      put("home-market-summary",'<a href="/market/">مشاهدهٔ وضعیت بازار ←</a>');
+      put("home-weather-summary",'<a href="/weather/">مشاهدهٔ وضعیت آب‌وهوا ←</a>');
+    });
+  }
   async function renderHome(){
     var stories=data.stories.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
     var reports=data.reports.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);})
@@ -180,15 +234,12 @@
       var railNewsRows=varied(news,7);
       var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
       var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
-      put("ticker",tickerRows.map(function(r){
-        var title=headline(r);
-        return '<a class="ticker-story" href="'+esc(finalStoryUrl(r.id))+'" title="'+esc(title)+'" aria-label="'+esc(title)+'">'
-          +'<span class="ticker-thumb">'+thumb(r,"")+'</span>'
-          +'<span class="ticker-headline">'+esc(shortTickerTitle(title))+'</span></a>';
-      }).join("")||'<span class="loading">خبر تصویردار تازه‌ای در دسترس نیست.</span>');
+      // Figure statements are rendered independently of news-card photo gating.
       put("rail-news",railNewsRows.map(railRow).join("")||
         '<p class="empty-state">خبر تصویردار تازه‌ای برای نمایش پیدا نشد.</p>');
-      var cover=varied(editorial.filter(function(r){return (r._imageWidth||0)>=900;}),1)[0]||varied(news.filter(function(r){return (r._imageWidth||0)>=900;}),1)[0];
+      var political=/سیاست|انتخابات|دولت|مجلس|دیپلماسی|تحریم|مذاکره|جنگ|اسرائیل|ایران|آمریکا|حکمرانی|امنیت|قدرت/;
+      var politicalReports=editorial.filter(function(r){return political.test(norm((r.category||"")+" "+headline(r)));});
+      var cover=politicalReports.find(function(r){return (r._imageWidth||0)>=900;})||politicalReports[0]||editorial[0]||news[0];
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
       if(featureSection)featureSection.hidden=!cover;
@@ -205,7 +256,7 @@
         return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
           +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
       }).join(""));
-      put("rail-reports",varied(editorial,7).map(railRow).join("")||
+      put("rail-reports",news.slice(0,7).map(railRow).join("")||
         '<p class="empty-state">گزارش تصویردار دیگری در دسترس نیست.</p>');
       var cultureSection=el("culture");
       if(cultureSection)cultureSection.hidden=!culture.length;
@@ -223,6 +274,10 @@
     }
     redrawHome=draw;
     draw();
+    renderHomepageBriefs();
+    fetchJson("/data/figures.json").then(renderFigureStrip).catch(function(){
+      put("ticker",'<a href="/figures/">آخرین سخنان و دیدگاه‌های چهره‌ها ←</a>');
+    });
     // Fill the remaining modules without blocking the first meaningful paint.
     // Every subsequent draw still filters out images not verified by the browser.
     (async function(){
