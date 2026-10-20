@@ -214,13 +214,25 @@ def run(site,data):
     body+='<p class="trend-index-lead">مهم‌ترین موضوعاتی که توجه جست‌وجوگران ایران را جلب کرده‌اند؛ همراه با گزارش‌های مستند تحریریهٔ پندار.</p>'
     if dossiers:
         body+='<nav class="trend-topic-links" aria-label="پرونده‌های موضوعی">'+''.join('<a href="'+e(q["url"])+'">'+e(q["title"])+'</a>' for q in dossiers)+'</nav>'
-    if articles:
-        body+='<div class="trend-index-grid">'
-        for row in articles:
-            body+='<a class="trend-index-item" href="'+e(row["url"])+'"><strong>'+e(row["title"])+'</strong>'
-            body+='<p>'+e(row["lead_fa"][:240])+'</p><span class="byline">'+e(row["author_name_fa"])+'</span></a>'
+    # Keep the same visual hierarchy as homepage: only actual photographs
+    # enter visual cards; all other reports remain discoverable as headlines.
+    photographed=[r for r in articles if r.get("image_url")]
+    no_photo=[r for r in articles if not r.get("image_url")]
+    if photographed:
+        body+='<div class="trend-index-grid trend-index-visual">'
+        for row in photographed:
+            body+='<a class="trend-index-item trend-index-with-photo" href="'+e(row["url"])+'">'
+            body+='<span class="trend-index-photo"><img src="'+e(row["image_url"])+'" alt="'+e(row.get("image_alt") or row["title"])+'" loading="lazy" decoding="async" width="640" height="360"></span>'
+            body+='<span class="trend-index-photo-copy"><strong>'+e(row["title"])+'</strong>'
+            body+='<p>'+e(row["lead_fa"][:195])+'</p><span class="byline">'+e(row["author_name_fa"])+'</span></span></a>'
         body+='</div>'
-    else:
+    if no_photo:
+        body+='<section class="trend-index-continuation"><h2>ادامهٔ ترندهای امروز</h2><div class="trend-index-headline-list">'
+        for row in no_photo:
+            body+='<a class="trend-index-headline" href="'+e(row["url"])+'"><strong>'+e(row["title"])+'</strong>'
+            body+='<span>'+e(row["lead_fa"][:160])+'</span><small>'+e(row["author_name_fa"])+'</small></a>'
+        body+='</div></section>'
+    if not articles:
         body+='<p>در حال تکمیل گزارش‌های این نوبت.</p>'
     if topics:
         body+='<section class="trend-index-section"><h2>موضوعات زیر نظر</h2><p class="trend-observation-only">واژه‌های پرجست‌وجو و پیوند خبرهای مرتبط؛ این صفحه‌ها جای گزارش کامل را نمی‌گیرند.</p>'
