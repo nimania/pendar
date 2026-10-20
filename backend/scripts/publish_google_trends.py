@@ -45,16 +45,20 @@ def trend_sidebar(row,site,all_articles,index):
             and "http-equiv=\"refresh\"" not in (Path(site)/p["url"].lstrip("/")/"index.html").read_text(encoding="utf-8")]
     boxes=[]
     if people:
-        content="".join('<a class="trend-side-person" href="'+e(p["url"])+'"><strong>'+e(p.get("name") or p["label"])+'</strong><span>دیدن پروندهٔ چهره ←</span></a>' for p in people)
-        boxes.append('<section class="magazine-rail-box"><div class="magazine-rail-heading"><h2>چهره‌های مرتبط</h2></div>'+content+'</section>')
+        cards=[]
+        for person in people:
+            url=person["url"]
+            handle=url.strip("/").removeprefix("@")
+            follow=('<button type="button" hidden class="trend-follow-button" data-trend-figure-follow="'+e(handle)+'" aria-pressed="false">+ دنبال کن</button>'
+                    if re.fullmatch(r"[a-z0-9_.-]{2,90}",handle) and url.startswith("/@") else "")
+            cards.append('<div class="trend-side-person-item"><a class="trend-side-person" href="'+e(url)+'"><strong>'+e(person.get("name") or person["label"])+'</strong><span>صفحهٔ چهره ←</span></a>'+follow+'</div>')
+        boxes.append('<section class="magazine-rail-box"><div class="magazine-rail-heading"><h2>چهره‌های مرتبط</h2></div>'+''.join(cards)+'</section>')
     stories=related_stories(site,row.get("trend_keyword"),row["report"]["title_fa"],limit=4)
     if stories:
         links="".join('<a class="trend-side-link" href="'+e(story["url"])+'">'+e(story["title"])+'</a>' for story in stories)
         boxes.append('<section class="magazine-rail-box"><div class="magazine-rail-heading"><h2>در همین موضوع</h2></div>'+links+'</section>')
-    others=[a for a in all_articles if a.get("id")!=row.get("id")][:5]
-    if others:
-        cards="".join('<a class="trend-side-link" href="'+e(a["url"])+'">'+e(a["title"])+'</a>' for a in others)
-        boxes.append('<section class="magazine-rail-box"><div class="magazine-rail-heading"><h2>ترندهای دیگر</h2></div>'+cards+'</section>')
+    # The shared left-rail script supplies all other current Trends to every page.
+
     boxes.append('<section class="magazine-rail-box"><div class="magazine-rail-heading"><h2>از تحریریه</h2></div><a class="trend-side-link" href="/reports/">همهٔ گزارش‌های پندار ←</a><a class="trend-side-link" href="/trends/">ترندهای امروز ←</a></section>')
     return "".join(boxes)
 
