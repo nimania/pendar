@@ -90,3 +90,22 @@ html,body{margin:0;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed
 #detail-view .trend-follow-button:focus-visible{outline:2px solid #ef7e31;outline-offset:2px}
 #detail-view .trend-compact-other .trend-side-link{font-size:12px;line-height:1.7;padding:8px 4px}
 #detail-view .trend-compact-other .trend-side-more{color:#0d776f;font-weight:700;margin-top:6px}
+
+/* Native editorial contextual services and today's figures section */
+#detail-view .trend-service-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:30px 0;padding:17px;border-block:1px solid #dce8e2;background:#f8faf7}
+#detail-view .trend-service-links h2{grid-column:1/-1;margin:0 0 4px;font-size:17px}
+#detail-view .trend-service-links a{display:flex;flex-direction:column;gap:6px;border:1px solid #d4e1d8;background:#fff;padding:13px;text-decoration:none;color:#234c43}
+#detail-view .trend-service-links a strong{font-size:14px}
+#detail-view .trend-service-links a span{font-size:12px;color:#64766d}
+#detail-view .trend-explore-only{border-inline-start:3px solid #21786d}
+#detail-view .trend-explore-only a{color:#11695b;text-decoration:underline}
+#detail-view .trend-archive-tabs{display:flex;align-items:stretch;gap:0;border-bottom:1px solid #d6e3dc;margin:25px 0}
+#detail-view .trend-archive-tabs button{background:transparent;border:0;border-bottom:3px solid transparent;color:#54665c;padding:12px 18px;font:700 14px Vazirmatn,Tahoma,sans-serif;cursor:pointer}
+#detail-view .trend-archive-tabs button[aria-selected="true"]{color:#194b42;border-bottom-color:#dc681c}
+#detail-view .trend-figure-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:22px 0}
+#detail-view .trend-figure-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:20px 11px;background:#f8faf8;border:1px solid #e1e9e3;color:#253c31;text-decoration:none}
+#detail-view .trend-figure-card img,#detail-view .trend-figure-monogram{display:flex;align-items:center;justify-content:center;width:94px;height:94px;border-radius:50%;object-fit:cover;background:#e2efe8;color:#276c57;font:800 30px Vazirmatn,Tahoma,sans-serif}
+#detail-view .trend-figure-card strong{font-size:15px}
+#detail-view .trend-figure-card small{font-size:11px;color:#6a8276;line-height:1.7}
+#detail-view [data-trend-archive-panel][hidden]{display:none}
+@media(max-width:640px){#detail-view .trend-figure-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#detail-view .trend-service-links{grid-template-columns:1fr}}
