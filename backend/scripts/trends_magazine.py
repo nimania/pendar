@@ -10,7 +10,7 @@ import html
 import json
 import re
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, quote
 
 def e(s):
     return html.escape(str(s or ""),quote=True)
@@ -81,14 +81,18 @@ def related_stories(site,keyword,title,limit=4):
     return [{"title":r.get("headline_fa") or "","url":"/story/"+r["id"]+"/",
              "published_at":r.get("published_at")} for _,r in matched[:limit]]
 
-def history_graph(history,keyword_id):
+def history_graph(history,keyword_id,keyword=""):
     points=sorted([x for x in history if isinstance(x,dict)
                    and x.get("keyword_id")==keyword_id and isinstance(x.get("lower_bound"),int)
                    and x["lower_bound"]>=0 and x.get("observed_at")],
                   key=lambda x:x["observed_at"])
     dedup={p["observed_at"]:p for p in points}
     points=list(dedup.values())[-12:]
-    if len(points)<3:return ""
+    source_url="https://trends.google.com/trends/explore?date=now%201-d&geo=IR&q="+quote(str(keyword or ""),safe="")
+    if len(points)<2:
+        return ('<section class="trend-evidence-chart trend-explore-only"><h3>روند توجه به این موضوع</h3>'
+                '<p>برای این موضوع هنوز نقاط زمانی کافی جهت رسم نمودار معتبر در پندار ثبت نشده است.</p>'
+                '<a href="'+e(source_url)+'" target="_blank" rel="noopener noreferrer">نمودار ۲۴ ساعته در گوگل ترندز ←</a></section>')
     peak=max(p["lower_bound"] for p in points) or 1
     width=640
     xs=[50+(540*i/(len(points)-1)) for i in range(len(points))]
@@ -187,7 +191,17 @@ def report_body(row,site,observations,article_rows):
             body+='<a class="trend-coverage-story" href="'+e(link)+'" rel="noopener noreferrer"><strong>'+e(source.get("headline"))+'</strong><small>'+e(source.get("publisher"))+'</small></a>'
     body+='</section>'
     key=row.get("id","")
-    body+=history_graph(observations,key)
+    body+=history_graph(observations,key,row.get("trend_keyword") or "")
+    # Connect reports to existing services and relevant local directories.
+    from trends_enrichment import smart_destinations
+    destinations=smart_destinations(site,row)
+    visible=[d for d in destinations if d["kind"]=="service" or
+             (Path(site)/d["url"].lstrip("/")/"index.html").is_file()]
+    if visible:
+        body+='<aside class="trend-service-links"><h2>اطلاعات مرتبط در پندار</h2>'
+        for dest in visible:
+            body+='<a href="'+e(dest["url"])+'"><strong>'+e(dest["label"])+'</strong><span>'+e(dest["detail"])+' ←</span></a>'
+        body+='</aside>'
     related=related_stories(site,row.get("trend_keyword"),report["title_fa"])
     other=[p for p in article_rows if p.get("url") and p.get("trend_keyword")!=row.get("trend_keyword")
            and len(set(str(p.get("trend_keyword") or "").split())&set(str(row.get("trend_keyword") or "").split()))>=2]
