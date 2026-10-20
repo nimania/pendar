@@ -129,16 +129,16 @@ def magazine_shell(title,body,meta,**kwargs):
       '<span class="magazine-masthead-tagline">خبر، اندیشه و فرهنگ</span>'
       '<a class="magazine-masthead-back" href="/">بازگشت به صفحهٔ اول ←</a></div></header>'
       '<nav class="magazine-topnav"><div class="magazine-container magazine-topnav-links">'
-      '<a href="/">خانه</a><a href="/reports/">گزارش‌ها</a><a href="/search-trends/">ترندهای روز</a>'
+      '<a href="/">خانه</a><a href="/reports/">گزارش‌ها</a><a href="/trends/">ترندهای روز</a>'
       '<a href="/figures/">چهره‌ها</a><a href="/books/">پیشخوان کتاب</a>'
       '<a href="/press/">پیشخوان جراید</a><a href="/market/">بازار</a></div></nav>'
       '<div class="magazine-container magazine-article-container"><nav class="magazine-breadcrumb" aria-label="موقعیت">'
-      '<a href="/">پندار</a> / <a href="/search-trends/">ترندهای روز</a></nav>'
+      '<a href="/">پندار</a> / <a href="/trends/">ترندهای روز</a></nav>'
       '<div class="magazine-article-layout"><article class="magazine-article-paper">'
       +body+'</article><aside class="magazine-article-rail"><section class="magazine-rail-box">'
       '<div class="magazine-rail-heading"><h2>ترندهای روز</h2></div>'
       '<p class="trend-side-note">گزارش‌ها و موضوعات تازه از تحریریهٔ پندار</p>'
-      '<a href="/search-trends/">همهٔ مطالب ←</a></section></aside></div></div>'
+      '<a href="/trends/">همهٔ مطالب ←</a></section></aside></div></div>'
       '<footer class="trend-reader-footer"><a href="/">پندار</a> · خبر، اندیشه و فرهنگ</footer>'
       '</div></main></body></html>')
 
@@ -189,4 +189,4 @@ def report_body(row,site,observations,article_rows):
 def index_shell(contents):
     return magazine_shell("ترندهای روز",contents,
         "گزارش‌ها و موضوعات پرجست‌وجوی روز ایران در تحریریهٔ پندار.",
-        path="/search-trends/",kind="CollectionPage")
+        path="/trends/",kind="CollectionPage")
