@@ -35,6 +35,7 @@ on:
       - "backend/scripts/trends_topics.py"
       - "backend/scripts/trends_context.py"
       - "backend/scripts/trends_enrichment.py"
+      - "backend/tests/test_trends_enrichment.py"
       - "backend/tests/test_trends_topics.py"
       - "backend/tests/test_google_trends_presentation.py"
       - "backend/tests/test_trends_home_cards.py"
@@ -646,6 +647,7 @@ jobs:
           node --check web-static/figures-profile.js
           python -m unittest discover -s backend/tests -p test_google_trends_presentation.py -v
           python -m unittest discover -s backend/tests -p test_trends_topics.py -v
+          python -m unittest discover -s backend/tests -p test_trends_enrichment.py -v
           python -m unittest discover -s backend/tests -p test_trends_home_cards.py -v
       - name: Overlay verified Google Trends briefings
         continue-on-error: true
