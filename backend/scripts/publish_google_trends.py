@@ -74,11 +74,16 @@ def brief_page(brief,path):
             links.append('<li><a href="'+e(entry["url"])+'" rel="noopener noreferrer">'+e(entry.get("publisher"))+' — '+e(entry["headline"])+'</a></li>')
     lead=str(brief.get("lead_fa") or "")
     body='<div class="magazine-article-kicker">رصد جست‌وجو</div><div class="d-head"><h1>'+e(brief["title_fa"])+'</h1></div>'
+    photo=credited_photo(brief)
+    if photo:
+        attribution='<a href="'+e(photo["source_url"])+'">منبع عکس</a>' if photo["source_url"].startswith("https://") else ""
+        body+='<figure class="magazine-article-photo"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo["caption"] or brief["title_fa"])+'"><figcaption class="hero-credit">'+e(photo["caption"])+' · '+e(photo["credit"])+' · '+attribution+'</figcaption></figure>'
     body+='<p class="magazine-article-lead">'+e(lead)+'</p><h2>پوشش خبری این موضوع</h2><ol class="trend-sources">'+''.join(links)+'</ol>'
     existing=brief.get("existing_article_url")
     if valid_link(existing) and urlsplit(existing).hostname=="pendar.io":
         body+='<p><a href="'+e(existing)+'">گزارش مرتبط پندار ←</a></p>'
     return magazine_shell(brief["title_fa"],body,lead,path=path,kind="WebPage",
+                          image=photo["url"] if photo else None,
                           keyword=brief.get("trend_keyword"),robots="noindex,follow")
 
 def topical_dossiers(site,rows):
@@ -189,6 +194,12 @@ def run(site,data):
         classified=classify(site,brief["trend_keyword"],index)
         url=classified.get("url") or canonical_path("topic",key)
         brief["title_fa"]=clean_title(brief["title_fa"])
+        if enable_media and classified["kind"]=="topic":
+            photo=verify_and_install(site,brief["trend_keyword"],brief["title_fa"])
+            if photo:
+                brief.update({"image_url":photo["url"],"image_credit":photo["credit"],
+                    "image_license":photo["license"],"image_license_url":photo["license_url"],
+                    "image_source_url":photo["source_url"],"image_caption":photo["caption"]})
         if classified["kind"]=="topic":
             target=site/url.lstrip("/")/"index.html"
             target.parent.mkdir(parents=True,exist_ok=True)
