@@ -86,40 +86,47 @@ def context_content(site,entity,briefs,articles):
             unique.append(item);seen.add(item["url"])
     return unique
 
-def register_verified_person(site,entity):
-    """Make source-identified people discoverable in Pendar's native figure feed.
-
-    Do not create identities from unchecked keywords; only the small curated
-    KNOWN_PEOPLE catalog reaches this branch, and no account is marked verified.
-    """
-    if entity.get("kind")!="person" or entity.get("existing"):return
+def register_verified_person(site,entity,articles=None):
+    """Promote sourced people to the native figure directory with real news links."""
+    if entity.get("kind")!="person":return
     from trends_topics import KNOWN_PEOPLE
     record=entity.get("record") or {}
-    if not any(record.get("slug")==p.get("slug") and record.get("source")==p.get("source")
-               for p in KNOWN_PEOPLE.values()):
-        return
     file=Path(site)/"data"/"figures.json"
     if not file.is_file():return
     try:data=json.loads(file.read_text(encoding="utf-8"))
     except (OSError,ValueError):return
     if not isinstance(data,dict) or not isinstance(data.get("figures"),list):return
-    handle=record.get("slug")
-    if any(str(p.get("handle") or "").casefold()==handle.casefold() for p in data["figures"]):
-        return
-    data["figures"].append({
-        "handle":handle,"name_fa":record.get("name") or entity["label"],
-        "role_fa":record.get("description") or "",
-        "bio_fa":record.get("description") or "",
-        "aliases":[],"posts":[],"avatar":"","verified":False,"directory":True,
-        "profile_source_url":record["source"],
-    })
+    handle=entity["url"].strip("/").removeprefix("@")
+    if not re.fullmatch(r"[a-z0-9_.-]{2,90}",handle):return
+    existing=next((p for p in data["figures"] if str(p.get("handle") or "").lower()==handle.lower()),None)
+    if existing is None:
+        if not any(record.get("slug")==p.get("slug") and record.get("source")==p.get("source")
+                   for p in KNOWN_PEOPLE.values()):return
+        existing={"handle":handle,"name_fa":record.get("name") or entity["label"],
+            "role_fa":record.get("description") or "","bio_fa":record.get("description") or "",
+            "aliases":[],"posts":[],"avatar":"","verified":False,"directory":True,
+            "profile_source_url":record.get("source") or ""}
+        data["figures"].append(existing)
+    news=existing.get("trend_reports") if isinstance(existing.get("trend_reports"),list) else []
+    seen={r.get("url") for r in news if isinstance(r,dict)}
+    for article in (articles or []):
+        if not isinstance(article,dict):continue
+        url=str(article.get("url") or "")
+        if not url.startswith("/trends/report/") or url in seen:continue
+        news.append({"url":url,"title":str(article.get("title") or ""),
+                     "published_at":article.get("published_at") or "",
+                     "summary":str(article.get("lead_fa") or "")[:260]})
+        seen.add(url)
+    existing["trend_reports"]=news[-20:]
     file.write_text(json.dumps(data,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
 
 def render_context(site,entity,briefs,articles):
     from trends_magazine import magazine_shell,e
     url=entity["url"]
     target=Path(site)/url.lstrip("/")/"index.html"
-    if entity.get("existing"):return True
+    if entity.get("existing"):
+        register_verified_person(site,entity,report_coverage(articles,entity.get("name") or entity["label"]))
+        return True
     if entity.get("kind") not in ("person","event","country","province","city"):return False
     # Respect independently existing profile pages. Only replace our own
     # previously-generated empty shells.
@@ -178,5 +185,15 @@ def render_context(site,entity,briefs,articles):
     target.write_text(magazine_shell(label,body,intro or label,path=url,
                  kind="ProfilePage" if kind=="person" else "CollectionPage",
                  robots="noindex,follow"),encoding="utf-8")
-    register_verified_person(site,entity)
+    if kind=="person":
+        register_verified_person(site,entity,[r for r in items if r.get("kind")=="pendar"])
+        # Use the same site app and interactive figure profile as /@rasaee/.
+        native=Path(site)/"index.html"
+        if native.is_file():
+            from trends_seo import head_meta
+            shell=native.read_text(encoding="utf-8")
+            if "</head>" in shell:
+                shell=shell.replace("</head>",head_meta(label,intro or label,
+                    path=url,kind="ProfilePage",robots="noindex,follow")+"</head>",1)
+                target.write_text(shell,encoding="utf-8")
     return True
