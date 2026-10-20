@@ -608,6 +608,27 @@ jobs:
       - name: Preserve validated lightweight news and figures only
         run: |
           python backend/scripts/prepare_priority_site.py site
+          # Lossless JSON whitespace compaction: preserve all keys, values and URLs.
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("site/data")
+          saved=0
+          for p in root.glob("*.json"):
+              if p.stat().st_size < 2_000_000:continue
+              try:
+                  original=p.read_bytes()
+                  obj=json.loads(original)
+                  compact=json.dumps(obj,ensure_ascii=False,separators=(",",":")).encode("utf-8")
+                  assert json.loads(compact)==obj
+                  if len(compact)<len(original):
+                      p.write_bytes(compact)
+                      saved+=len(original)-len(compact)
+                      print(f"Compacted {p.name}: saved {(len(original)-len(compact))/1e6:.2f} MB")
+              except (UnicodeError,ValueError,MemoryError) as exc:
+                  print(f"::warning::Cannot compact {p.name}: {exc}")
+          print(f"Total lossless JSON savings: {saved/1e6:.2f} MB")
+          PY
           python backend/scripts/validate_site_integrity.py --site site
           python backend/scripts/audit_pages_size.py site 750000000
           python - <<'PY'
