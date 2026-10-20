@@ -52,7 +52,6 @@
               <div class="feature-tabs" role="tablist" aria-label="گزیدهٔ گزارش‌های صفحه اول">
                 <button type="button" id="feature-tab-trends" class="on" role="tab" aria-selected="true" tabindex="0" aria-controls="feature-trends-panel" data-feature-tab="trends">ترندهای امروز</button>
                 <button type="button" id="feature-tab-politics" role="tab" aria-selected="false" tabindex="-1" aria-controls="feature-politics-panel" data-feature-tab="politics">گزارش‌ها</button>
-                <button type="button" id="feature-tab-figures" role="tab" aria-selected="false" tabindex="-1" aria-controls="feature-figures-panel" data-feature-tab="figures">چهره‌های ترند امروز</button>
               </div>
               <a id="feature-heading-more" href="/trends/">همهٔ ترندهای امروز <span aria-hidden="true">←</span></a>
             </div>
@@ -66,7 +65,10 @@
             <div id="feature-trends-panel" role="tabpanel" aria-labelledby="feature-tab-trends">
               <div id="home-search-trends-grid" class="feature-trends-grid"><div class="loading">در حال دریافت ترندهای امروز…</div></div>
             </div>
-            <div id="feature-figures-panel" role="tabpanel" aria-labelledby="feature-tab-figures" hidden><div id="home-trending-figures-grid" class="feature-trending-figures-grid"><p class="loading">در حال دریافت چهره‌ها…</p></div></div>
+          </section>
+          <section class="module home-editorial-reports" id="home-editorial-reports">
+            <div class="section-heading"><h2>تازه‌ترین گزارش‌ها</h2><a href="/reports/">همهٔ گزارش‌ها ←</a></div>
+            <div class="home-editorial-report-list" id="home-editorial-report-list"><p class="loading">در حال دریافت گزارش‌های تازه…</p></div>
           </section>
           <section class="module" id="culture">
             <div class="section-heading"><h2>فرهنگ و زندگی</h2><a href="/badbadak/">دیدن مطالب بیشتر ←</a></div>
@@ -110,9 +112,10 @@
           </section>
           <section class="rail-box rail-tabs-box rail-five" data-rail-group="figures">
             <div class="rail-heading"><h2>چهره‌ها</h2><a href="/figures/">همه ←</a></div>
-            <div class="rail-tab-strip" role="tablist" aria-label="چهره‌ها"><button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="updated">به‌روز</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="talkative">پرسخن</button></div>
+            <div class="rail-tab-strip" role="tablist" aria-label="چهره‌ها"><button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="updated">به‌روز</button><button type="button" class="" role="tab" aria-selected="false" data-rail-tab="talkative">پرسخن</button><button type="button" role="tab" aria-selected="false" data-rail-tab="trends">ترندها</button></div>
             <div class="rail-tab-panel" role="tabpanel" data-rail-panel="updated" ><div id="rail-figures-updated" class="rail-five-items"><p class="loading">در حال دریافت به‌روز…</p></div></div>
             <div class="rail-tab-panel" role="tabpanel" data-rail-panel="talkative" hidden><div id="rail-figures-talkative" class="rail-five-items"><p class="loading">در حال دریافت پرسخن…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="trends" hidden><div id="rail-figures-trends" class="rail-five-items"><p class="loading">در حال دریافت چهره‌های ترند…</p></div></div>
             
           </section>
           <section class="rail-box rail-links">
