@@ -344,13 +344,34 @@
       fallback("home-weather-summary","/weather/","مشاهدهٔ وضعیت آب‌وهوا");
     });
   }
-  // The daily trend desk is the featured homepage editorial stream when reports exist.
-  // A photo is shown only for provenance-checked, licensed images in the feed.
+  // Homepage: Today's Trends is the first, initially selected editorial tab.
   function renderSearchTrendTab(){
     var politics=el("feature-tab-politics"),trends=el("feature-tab-trends");
     var politicalPanel=el("feature-politics-panel"),trendsPanel=el("feature-trends-panel");
     var more=el("feature-heading-more"),grid=el("home-search-trends-grid");
     if(!politics||!trends||!politicalPanel||!trendsPanel||!grid)return;
+    var activate=function(isTrend){
+      politics.classList.toggle("on",!isTrend);trends.classList.toggle("on",isTrend);
+      politics.setAttribute("aria-selected",String(!isTrend));trends.setAttribute("aria-selected",String(isTrend));
+      politics.tabIndex=isTrend?-1:0;trends.tabIndex=isTrend?0:-1;
+      politicalPanel.hidden=isTrend;trendsPanel.hidden=!isTrend;
+      more.href=isTrend?"/trends/":"/reports/";
+      more.textContent=isTrend?"همهٔ ترندهای امروز ←":"همهٔ گزارش‌ها ←";
+    };
+    if(!trends.dataset.ready){
+      trends.dataset.ready="1";
+      [politics,trends].forEach(function(button){
+        button.addEventListener("click",function(){activate(button===trends);});
+        button.addEventListener("keydown",function(event){
+          if(event.key==="ArrowRight"||event.key==="ArrowLeft"){
+            event.preventDefault();
+            var next=button===trends?politics:trends;
+            next.focus();activate(next===trends);
+          }
+        });
+      });
+    }
+    activate(true);
     fetchJson("/data/google-trends-iran.json").then(function(payload){
       var entries=Array.isArray(payload&&payload.reports)?payload.reports.filter(function(r){
         return r&&validLink(r.url)&&norm(r.title);
@@ -359,35 +380,17 @@
         grid.innerHTML='<div class="feature-trend-card text-only"><span class="feature-trend-copy"><strong>گزارش‌های تازه در حال آماده‌سازی‌اند</strong><span>آخرین موضوعات را در آرشیو ترندهای امروز ببینید.</span><a href="/trends/">آرشیو ترندهای امروز ←</a></span></div>';
         return;
       }
-      var activate=function(isTrend){
-        politics.classList.toggle("on",!isTrend);trends.classList.toggle("on",isTrend);
-        politics.setAttribute("aria-selected",String(!isTrend));trends.setAttribute("aria-selected",String(isTrend));
-        politics.tabIndex=isTrend?-1:0;trends.tabIndex=isTrend?0:-1;
-        politicalPanel.hidden=isTrend;trendsPanel.hidden=!isTrend;
-        more.href=isTrend?"/trends/":"/reports/";
-        more.textContent=isTrend?"همهٔ ترندهای امروز ←":"همهٔ گزارش‌ها ←";
-      };
       var tiles=entries.map(function(r,i){
-        var image=validImage(r.image_url);
-        return '<a class="feature-trend-card'+(i===0?' trend-lead':'')+(image?' has-photo':' text-only')+'" href="'+esc(r.url)+'">'
-          +(image?'<span class="feature-trend-picture"><img src="'+esc(image)+'" alt="'+esc(r.image_alt||"")+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async" onerror="this.parentElement.remove();this.closest(\'.feature-trend-card\').classList.add(\'text-only\')"></span>':'')
-          +'<span class="feature-trend-copy"><span class="category-flag orange">ترندهای امروز</span>'
+        var img=validImage(r.image_url),photo=img?'<span class="feature-trend-picture"><img src="'+esc(img)+'" alt="'+esc(r.image_alt||"")+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"></span>':'';
+        return '<a class="feature-trend-card'+(i===0?' trend-lead':'')+(img?' has-photo':' text-only')+'" href="'+esc(r.url)+'">'
+          +photo+'<span class="feature-trend-copy"><span class="category-flag orange">ترندهای امروز</span>'
           +'<strong>'+esc(r.title)+'</strong><span>'+esc(excerpt(r.lead_fa||"",i===0?180:94))+'</span>'
           +'<small class="trend-byline">'+esc(r.author_name_fa||"تحریریهٔ پندار")+'</small></span></a>';
       }).join("");
       grid.innerHTML=tiles+'<a class="feature-trends-all" href="/trends/">همهٔ ترندهای امروز ←</a>';
-      trends.hidden=false;
-      [politics,trends].forEach(function(button){
-        button.addEventListener("click",function(){activate(button===trends);});
-        button.addEventListener("keydown",function(event){
-          if(event.key==="ArrowRight"||event.key==="ArrowLeft"){
-            event.preventDefault();var next=button===trends?politics:trends;next.focus();activate(next===trends);
-          }
-        });
-      });
-      // Trend reports lead the editorial homepage; politics remains selectable.
-      activate(true);
-    }).catch(function(){trends.hidden=true;});
+    }).catch(function(){
+      grid.innerHTML='<div class="feature-trend-card text-only"><span class="feature-trend-copy"><strong>دریافت ترندهای امروز موقتاً امکان‌پذیر نیست</strong><span>گزارش‌ها همچنان در تب دوم در دسترس‌اند.</span></span></div>';
+    });
   }
   async function renderHome(){
     var stories=data.stories.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
