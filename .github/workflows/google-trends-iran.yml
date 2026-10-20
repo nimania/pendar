@@ -6,17 +6,20 @@ on:
     paths:
       - '.github/workflows/google-trends-iran.yml'
       - 'backend/scripts/collect_google_trends_iran.py'
+      - 'backend/scripts/research_google_trends_iran.py'
+      - 'backend/tests/test_google_trends_research.py'
   schedule:
     - cron: "13,43 * * * *"
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: pendar-google-trends-iran
   cancel-in-progress: false
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
       - name: Collect 10 evidence-linked initial candidates
@@ -31,6 +34,47 @@ jobs:
           assert d["status"]=="ok" and d["source"].startswith("https://trends.google.com/")
           assert all(x["story_id"] and x["trend_keyword"] and x["article_url"].startswith("https://pendar.io/story/") for x in d["items"])
           print("Real existing-report matches:",len(d["items"]))
+          PY
+      - name: Verify research publication safeguards
+        run: python -m unittest discover -s backend/tests -p test_google_trends_research.py -v
+      - name: Install research requirements
+        run: pip install --disable-pip-version-check beautifulsoup4 httpx pydantic-settings
+      - name: Restore previous research history for deduplication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          last="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/google-trends-iran.yml/runs?status=success&per_page=5" --jq '[.workflow_runs[] | select(.id != '${GITHUB_RUN_ID}')][0].id // empty' 2>/dev/null || true)"
+          if [ -n "$last" ]; then
+            mkdir -p /tmp/last-google-trends
+            if gh run download "$last" -n pendar-google-trends-data -D /tmp/last-google-trends; then
+              if [ -f /tmp/last-google-trends/data/google-trends-iran.json ]; then
+                cp /tmp/last-google-trends/data/google-trends-iran.json trend-payload/previous.json
+              fi
+            fi
+          fi
+      - name: Research up to ten initial topics; two on scheduled runs
+        env:
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
+        run: |
+          max=2
+          if [ "$GITHUB_EVENT_NAME" != "schedule" ]; then max=10; fi
+          python backend/scripts/research_google_trends_iran.py --max-new "$max"
+      - name: Assert citation-safe research archive
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("trend-payload/data/google-trends-iran.json").read_text(encoding="utf-8"))
+          assert data["status"]=="ok"
+          assert len(data.get("research_reports",[])) <= 120
+          for row in data.get("research_reports",[]):
+              if "report" not in row:continue
+              assert len(row["sources"])>=2
+              assert row["research_status"] in ("requires_human_review","eligible_low_risk")
+              assert row["report"]["paragraphs"] and all(p["citation_ids"] for p in row["report"]["paragraphs"])
+          print("Citation-safe research state:", data.get("research_metrics"))
           PY
       - uses: actions/upload-artifact@v4
         with:
