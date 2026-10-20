@@ -383,7 +383,7 @@
       put("rail-figures-trends",people.length?people.map(function(person){
         var avatar=validImage(person.avatar);
         return '<a class="rail-row" href="'+esc(person.url)+'"><span class="rail-thumb-frame">'
-          +(avatar?'<img class="rail-thumb" src="'+esc(avatar)+'" loading="lazy" alt="" onerror="this.style.display=\\'none\\'">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">◉</span>')
+          +(avatar?'<img class="rail-thumb" src="'+esc(avatar)+'" loading="lazy" alt="" onerror="this.remove()">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">◉</span>')
           +'</span><span><span class="rail-title">'+esc(person.name)+'</span><span class="rail-kicker">'+esc(person.role||"صفحهٔ چهره در پندار")+'</span></span></a>';
       }).join(""):'<p class="empty-state">در این نوبت چهرهٔ ترند دارای پروفایل شناسایی نشده است.</p>');
       var reports=Array.isArray(payload&&payload.reports)?payload.reports.filter(function(r){
