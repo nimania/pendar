@@ -79,8 +79,11 @@ def _allowed_license(meta):
     if not re.fullmatch(r"(?:CC BY(?:-SA)? [234]\.0|CC0(?: 1\.0)?|Public domain)",name,re.I):
         return None
     lic_url=str(meta.get("LicenseUrl",{}).get("value",""))
-    if name.lower().startswith("cc") and not lic_url.startswith("https://creativecommons.org/"):
-        return None
+    if name.lower().startswith("cc"):
+        if lic_url.startswith("http://creativecommons.org/"):
+            lic_url="https://"+lic_url[len("http://"):]
+        if not lic_url.startswith("https://creativecommons.org/"):
+            return None
     return name,lic_url
 
 def _discover(topic):
