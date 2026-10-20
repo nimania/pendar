@@ -35,10 +35,10 @@ jobs:
           assert all(x["story_id"] and x["trend_keyword"] and x["article_url"].startswith("https://pendar.io/story/") for x in d["items"])
           print("Real existing-report matches:",len(d["items"]))
           PY
-      - name: Verify research publication safeguards
-        run: python -m unittest discover -s backend/tests -p test_google_trends_research.py -v
       - name: Install research requirements
         run: pip install --disable-pip-version-check beautifulsoup4 httpx pydantic-settings
+      - name: Verify research publication safeguards
+        run: python -m unittest discover -s backend/tests -p test_google_trends_research.py -v
       - name: Restore previous research history for deduplication
         env:
           GH_TOKEN: ${{ github.token }}
