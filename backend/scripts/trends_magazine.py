@@ -172,7 +172,7 @@ def report_body(row,site,observations,article_rows):
     body='<div class="magazine-article-kicker">گزارش • ترندهای روز</div>'
     body+='<div class="d-head"><div class="meta"><span class="chip">گزارش</span><time>'+date+'</time></div><h1>'+e(report["title_fa"])+'</h1></div>'
     body+='<div class="story-author-byline"><div class="story-author-credit">'+portrait(writer)
-    body+='<span><a href="/editorial-author/'+e(author_id)+'/">'+e(name)+'</a>'
+    body+='<span><a href="/@'+e(writer.get('handle') or author_id)+'/">'+e(name)+'</a>'
     body+='<small>تحریریهٔ پندار</small></span></div></div>'
     photo=credited_photo(row)
     if photo:
