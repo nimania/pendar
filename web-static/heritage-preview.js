@@ -620,7 +620,7 @@
       var position=(author.portrait_index*100/6).toFixed(4);
       portrait='<span class="author-avatar" aria-hidden="true" style="background-image:url(/assets/editorial/pendar-authors-sprite.avif);background-size:700% 100%;background-position:'+position+'% center"></span>';
     }
-    put("article-byline",portrait+'<a class="author-link" href="/@'+encodeURIComponent((data.authorHandles||{})[authorId]||authorId||"desk")+'/"><strong>'+esc(authorName(detail))+'</strong><span>تحریریهٔ پندار</span></a>');
+    put("article-byline",portrait+'<a class="author-link" href="/@'+encodeURIComponent(({"diplomacy":"arman-shayegan","politics":"bahar-dadfar","economy":"saman-farhamand","society":"taraneh-nikrosh","environment":"mahtab-sarvestani","culture":"mana-radfar","technology":"parsa-mehrayin"})[authorId]||authorId||"desk")+'/"><strong>'+esc(authorName(detail))+'</strong><span>تحریریهٔ پندار</span></a>');
     var img=validImage(detail.image_url);
     if(img){
       el("article-image").hidden=false;
