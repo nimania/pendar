@@ -59,9 +59,36 @@ function trendRail(){
     target.innerHTML='<a class="trend-side-link trend-side-more" href="/trends/">دیدن ترندهای امروز ←</a>';
   });
 }
+function setupArchiveTabs(){
+  var buttons=Array.from(document.querySelectorAll("[data-trend-archive-tab]"));
+  if(!buttons.length)return;
+  var panels=Array.from(document.querySelectorAll("[data-trend-archive-panel]"));
+  function select(name){
+    buttons.forEach(function(b){
+      var on=b.getAttribute("data-trend-archive-tab")===name;
+      b.setAttribute("aria-selected",String(on));
+      b.tabIndex=on?0:-1;
+    });
+    panels.forEach(function(p){
+      p.hidden=p.getAttribute("data-trend-archive-panel")!==name;
+    });
+  }
+  buttons.forEach(function(button){
+    button.addEventListener("click",function(){select(button.getAttribute("data-trend-archive-tab"));});
+    button.addEventListener("keydown",function(ev){
+      if(ev.key==="ArrowRight"||ev.key==="ArrowLeft"){
+        ev.preventDefault();
+        var next=buttons[(buttons.indexOf(button)+1)%buttons.length];
+        select(next.getAttribute("data-trend-archive-tab"));next.focus();
+      }
+    });
+  });
+  select("reports");
+}
 document.addEventListener("DOMContentLoaded",function(){
   refreshButtons();
   document.querySelectorAll("button[data-trend-figure-follow]").forEach(function(b){b.hidden=false;});
   trendRail();
+  setupArchiveTabs();
 });
 })();
