@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T13:20:35.672157+00:00",
+  "generated_at": "2026-10-20T11:40:46.431131+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -541,27 +541,7 @@
       "start": "2026-10-20T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1380417",
-      "icon": "https://image.tmdb.org/t/p/w500/f4hdIed8vh10O8TkQ1CkHS8MQ3G.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "کلاغ",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/957452",
-      "icon": "https://image.tmdb.org/t/p/w500/8QCzv1j6Wrz180M7bazsZ5fcXme.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "اتاق مجاور",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1088514",
-      "icon": "https://image.tmdb.org/t/p/w500/kAZS6wbDlCU0crWSLpnQoJcFHCx.jpg",
+      "icon": "https://image.tmdb.org/t/p/w500/hxTjCfEmZJFAPW8h5S3tDQNaBi8.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -606,16 +586,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-47",
-      "title_fa": "نمایش روزانه",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2224",
-      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 115 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "1992",
       "start": "2026-10-26T00:00:00+03:30",
@@ -624,46 +594,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/tPvFmQZM5HMspryyYbrtW02NR0G.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "tmdb-network-30",
-      "title_fa": "راو",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/4656",
-      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 42 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-55",
-      "title_fa": "راو",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/4656",
-      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 42 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-213",
-      "title_fa": "راو",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/4656",
-      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 42 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-2103",
-      "title_fa": "راو",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/4656",
-      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 42 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -826,26 +756,6 @@
       "desc_fa": "قسمت 13 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 101 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 101 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-4330",
       "title_fa": "سرزمین اوباش",
       "start": "2026-10-23T00:00:00+03:30",
@@ -874,26 +784,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/5LUFe0nCrKH5RTLpHxyHmiqHamO.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 3 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-290",
-      "title_fa": "فردا از آنِ ماست",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/72879",
-      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 36 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-9",
-      "title_fa": "Coronation Street",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/291",
-      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 193 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -934,16 +824,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/xVt0fu4q1P3rYMz7ichgf5BGx0S.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "tmdb-network-74",
-      "title_fa": "Watch What Happens Live with Andy Cohen",
-      "start": "2026-10-19T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/22980",
-      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 168 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-19",
@@ -1022,6 +902,156 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1233575",
       "icon": "https://image.tmdb.org/t/p/w500/sgSuca1n3HHlQPZbCIoNfEI0yFC.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 169 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-47",
+      "title_fa": "نمایش روزانه",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2224",
+      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 116 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 102 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 102 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "فردا از آنِ ماست",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/72879",
+      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 37 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-30",
+      "title_fa": "راو",
+      "start": "2026-10-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4656",
+      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 43 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-55",
+      "title_fa": "راو",
+      "start": "2026-10-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4656",
+      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 43 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-213",
+      "title_fa": "راو",
+      "start": "2026-10-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4656",
+      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 43 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2103",
+      "title_fa": "راو",
+      "start": "2026-10-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/4656",
+      "icon": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 43 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-274",
+      "title_fa": "Goede Tijden, Slechte Tijden",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/11890",
+      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 30 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1334",
+      "title_fa": "Goede Tijden, Slechte Tijden",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/11890",
+      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 30 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9",
+      "title_fa": "Coronation Street",
+      "start": "2026-10-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/291",
+      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 194 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "زمان پخش",
+      "start": "2026-11-03T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1375441",
+      "icon": "https://image.tmdb.org/t/p/w500/tFWh9g4zluYWnfb8dLdtW9WVKgg.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "The Best Christmas Pageant Ever",
+      "start": "2026-11-01T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1206617",
+      "icon": "https://image.tmdb.org/t/p/w500/6XjvhydAlXbQodoWbIf77H0Dd9R.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Mary",
+      "start": "2026-10-30T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1775821",
+      "icon": "https://image.tmdb.org/t/p/w500/kLcQeHF7pDkjwjIXEhccBG1juu.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
