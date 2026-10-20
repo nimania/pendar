@@ -378,7 +378,7 @@
     activate(0);
     fetchJson("/data/google-trends-iran.json").then(async function(payload){
       var people=Array.isArray(payload&&payload.trending_figures)?payload.trending_figures.filter(function(p){
-        return p&&/^\\/@[a-z0-9_.-]+\\/$/i.test(p.url||"")&&norm(p.name);
+        return p&&new RegExp("^/@[a-z0-9_.-]+/$","i").test(p.url||"")&&norm(p.name);
       }).slice(0,5):[];
       put("rail-figures-trends",people.length?people.map(function(person){
         var avatar=validImage(person.avatar);
@@ -503,7 +503,7 @@
       var cover=snapshotCover||prioritized[0]||editorial[0]||news[0]||reports[0]||stories[0];
       var heroBox=el("feature-hero");
       var featureSection=heroBox.closest(".feature-block");
-      if(featureSection)featureSection.hidden=!cover;
+      if(featureSection)featureSection.hidden=false;
       if(cover){
         var report=editorial.some(function(r){return r.id===cover.id;});
         heroBox.href=slugUrl(cover);
@@ -517,6 +517,14 @@
         return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
           +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
       }).join(""));
+      // Permanent editorial reports; not gated by photograph availability.
+      var latestReports=reports.slice(0,4);
+      put("home-editorial-report-list",latestReports.length?latestReports.map(function(r){
+        var picture=verifiedImage(photo(r))?'<span class="home-editorial-report-photo">'+thumb(r,"")+'</span>':'';
+        return '<a class="home-editorial-report-row" href="'+esc(slugUrl(r))+'">'
+          +picture+'<span class="home-editorial-report-copy"><strong>'+esc(headline(r))+'</strong>'
+          +'<small>'+esc(excerpt(hook(r),125))+'</small></span></a>';
+      }).join(""):'<a class="home-editorial-report-row" href="/reports/">دیدن آرشیو گزارش‌های تحریریه ←</a>');
       // Each tab contains at most five actual records, ranked independently.
       function timeOf(r){return Date.parse(r.published_at||r.updated_at||"")||0;}
       function signal(r,keys){for(var k of keys){var n=Number(r[k]);if(Number.isFinite(n)&&n>0)return n;}return 0;}
