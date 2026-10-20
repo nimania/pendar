@@ -346,21 +346,21 @@
   }
   // Homepage: Today's Trends is the first, initially selected editorial tab.
   function renderSearchTrendTab(){
-    var politics=el("feature-tab-politics"),trends=el("feature-tab-trends"),figures=el("feature-tab-figures");
-    var politicalPanel=el("feature-politics-panel"),trendsPanel=el("feature-trends-panel"),figurePanel=el("feature-figures-panel");
-    var more=el("feature-heading-more"),grid=el("home-search-trends-grid"),figuresGrid=el("home-trending-figures-grid");
-    if(!politics||!trends||!figures||!politicalPanel||!trendsPanel||!figurePanel||!grid||!figuresGrid)return;
-    var buttons=[trends,politics,figures],panels=[trendsPanel,politicalPanel,figurePanel];
+    var politics=el("feature-tab-politics"),trends=el("feature-tab-trends");
+    var politicalPanel=el("feature-politics-panel"),trendsPanel=el("feature-trends-panel");
+    var more=el("feature-heading-more"),grid=el("home-search-trends-grid");
+    if(!politics||!trends||!politicalPanel||!trendsPanel||!grid)return;
+    var buttons=[trends,politics],panels=[trendsPanel,politicalPanel];
     var activate=function(which){
       buttons.forEach(function(button,i){
-        var on=buttons[which]===button;
+        var on=which===i;
         button.classList.toggle("on",on);
         button.setAttribute("aria-selected",String(on));
         button.tabIndex=on?0:-1;
         panels[i].hidden=!on;
       });
-      more.href=which===0?"/trends/":which===1?"/reports/":"/trends/#trending-figures";
-      more.textContent=which===0?"همهٔ ترندهای امروز ←":which===1?"همهٔ گزارش‌ها ←":"همهٔ چهره‌های ترند ←";
+      more.href=which===0?"/trends/":"/reports/";
+      more.textContent=which===0?"همهٔ ترندهای امروز ←":"همهٔ گزارش‌ها ←";
     };
     if(!trends.dataset.ready){
       trends.dataset.ready="1";
@@ -369,8 +369,7 @@
         button.addEventListener("keydown",function(event){
           if(event.key==="ArrowRight"||event.key==="ArrowLeft"){
             event.preventDefault();
-            var direction=event.key==="ArrowLeft"?1:-1;
-            var next=(index+direction+buttons.length)%buttons.length;
+            var next=(index+1)%buttons.length;
             activate(next);buttons[next].focus();
           }
         });
@@ -379,18 +378,14 @@
     activate(0);
     fetchJson("/data/google-trends-iran.json").then(async function(payload){
       var people=Array.isArray(payload&&payload.trending_figures)?payload.trending_figures.filter(function(p){
-        return p&&/^\/@[a-z0-9_.-]+\/$/i.test(p.url||"")&&norm(p.name);
-      }).slice(0,9):[];
-      if(people.length){
-        figuresGrid.innerHTML='<div class="feature-trend-people">'+people.map(function(person){
-          var img=validImage(person.avatar);
-          var photo=img?'<img src="'+esc(img)+'" alt="" loading="lazy" decoding="async">':'<span class="trend-person-monogram">'+esc(person.name.charAt(0))+'</span>';
-          return '<a href="'+esc(person.url)+'" class="feature-trend-person">'+photo+'<strong>'+esc(person.name)+'</strong>'
-            +'<small>'+esc(person.role||"صفحهٔ چهره در پندار")+'</small></a>';
-        }).join('')+'</div>';
-      }else{
-        figuresGrid.innerHTML='<p class="feature-trend-empty">در این نوبت هنوز چهرهٔ ترند دارای پروفایل معتبر شناسایی نشده است.</p>';
-      }
+        return p&&/^\\/@[a-z0-9_.-]+\\/$/i.test(p.url||"")&&norm(p.name);
+      }).slice(0,5):[];
+      put("rail-figures-trends",people.length?people.map(function(person){
+        var avatar=validImage(person.avatar);
+        return '<a class="rail-row" href="'+esc(person.url)+'"><span class="rail-thumb-frame">'
+          +(avatar?'<img class="rail-thumb" src="'+esc(avatar)+'" loading="lazy" alt="" onerror="this.style.display=\\'none\\'">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">◉</span>')
+          +'</span><span><span class="rail-title">'+esc(person.name)+'</span><span class="rail-kicker">'+esc(person.role||"صفحهٔ چهره در پندار")+'</span></span></a>';
+      }).join(""):'<p class="empty-state">در این نوبت چهرهٔ ترند دارای پروفایل شناسایی نشده است.</p>');
       var reports=Array.isArray(payload&&payload.reports)?payload.reports.filter(function(r){
         return r&&validLink(r.url)&&norm(r.title);
       }).slice(0,8):[];
