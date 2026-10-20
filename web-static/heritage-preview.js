@@ -344,8 +344,8 @@
       fallback("home-weather-summary","/weather/","مشاهدهٔ وضعیت آب‌وهوا");
     });
   }
-  // Independent search-trend desk. It does not alter the frozen political hero
-  // or the established five-item sidebar rankings.
+  // The daily trend desk is the featured homepage editorial stream when reports exist.
+  // A photo is shown only for provenance-checked, licensed images in the feed.
   function renderSearchTrendTab(){
     var politics=el("feature-tab-politics"),trends=el("feature-tab-trends");
     var politicalPanel=el("feature-politics-panel"),trendsPanel=el("feature-trends-panel");
@@ -353,23 +353,26 @@
     if(!politics||!trends||!politicalPanel||!trendsPanel||!grid)return;
     fetchJson("/data/google-trends-iran.json").then(function(payload){
       var entries=Array.isArray(payload&&payload.reports)?payload.reports.filter(function(r){
-        return r&&validLink(r.url)&&norm(r.title)&&validImage(r.image_url);
+        return r&&validLink(r.url)&&norm(r.title);
       }).slice(0,5):[];
       if(!entries.length)return;
       var activate=function(isTrend){
         politics.classList.toggle("on",!isTrend);trends.classList.toggle("on",isTrend);
         politics.setAttribute("aria-selected",String(!isTrend));trends.setAttribute("aria-selected",String(isTrend));
+        politics.tabIndex=isTrend?-1:0;trends.tabIndex=isTrend?0:-1;
         politicalPanel.hidden=isTrend;trendsPanel.hidden=!isTrend;
         more.href=isTrend?"/search-trends/":"/reports/";
-        more.textContent=isTrend?"همهٔ گزارش‌های جست‌وجو ←":"همهٔ گزارش‌ها ←";
+        more.textContent=isTrend?"همهٔ ترندهای روز ←":"همهٔ گزارش‌ها ←";
       };
       var tiles=entries.map(function(r,i){
-        return '<a class="feature-trend-card'+(i===0?' trend-lead':'')+'" href="'+esc(r.url)+'">'
-          +'<span class="feature-trend-picture"><img src="'+esc(validImage(r.image_url))+'" alt="'+esc(r.image_alt||"طرح گرافیکی مرتبط با "+r.title)+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async" onerror="this.parentElement.classList.add(\'no-photo\');this.remove()"></span>'
-          +'<span class="feature-trend-copy"><span class="category-flag orange">گزارش از جست‌وجوها</span>'
-          +'<strong>'+esc(r.title)+'</strong><span>'+esc(excerpt(r.lead_fa||"",i===0?180:94))+'</span></span></a>';
+        var image=validImage(r.image_url);
+        return '<a class="feature-trend-card'+(i===0?' trend-lead':'')+(image?' has-photo':' text-only')+'" href="'+esc(r.url)+'">'
+          +(image?'<span class="feature-trend-picture"><img src="'+esc(image)+'" alt="'+esc(r.image_alt||"")+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async" onerror="this.parentElement.remove();this.closest(\'.feature-trend-card\').classList.add(\'text-only\')"></span>':'')
+          +'<span class="feature-trend-copy"><span class="category-flag orange">ترندهای روز</span>'
+          +'<strong>'+esc(r.title)+'</strong><span>'+esc(excerpt(r.lead_fa||"",i===0?180:94))+'</span>'
+          +'<small class="trend-byline">'+esc(r.author_name_fa||"تحریریهٔ پندار")+'</small></span></a>';
       }).join("");
-      grid.innerHTML=tiles+'<a class="feature-trends-all" href="/search-trends/">آرشیو گزارش‌ها و موضوعات جست‌وجوشده ←</a>';
+      grid.innerHTML=tiles+'<a class="feature-trends-all" href="/search-trends/">همهٔ ترندهای روز ←</a>';
       trends.hidden=false;
       [politics,trends].forEach(function(button){
         button.addEventListener("click",function(){activate(button===trends);});
@@ -379,7 +382,8 @@
           }
         });
       });
-      activate(false);
+      // Trend reports lead the editorial homepage; politics remains selectable.
+      activate(true);
     }).catch(function(){trends.hidden=true;});
   }
   async function renderHome(){
