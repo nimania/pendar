@@ -174,9 +174,9 @@ def update_sitemap(site, indexed):
     # Discovery works even if the main sitemap is a urlset instead of an index.
     robots=site/"robots.txt"
     directive="Sitemap: https://pendar.io/sitemap-search-trends.xml"
-    existing=robots.read_text(encoding="utf-8") if robots.is_file() else "User-agent: *\\nAllow: /\\n"
+    existing=robots.read_text(encoding="utf-8") if robots.is_file() else "User-agent: *\nAllow: /\n"
     if directive not in existing:
-        robots.write_text(existing.rstrip()+"\\n"+directive+"\\n",encoding="utf-8")
+        robots.write_text(existing.rstrip()+"\n"+directive+"\n",encoding="utf-8")
     master=site/"sitemap.xml"
     if not master.is_file():return len(unique)
     try:
