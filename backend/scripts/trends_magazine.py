@@ -125,7 +125,7 @@ def magazine_shell(title,body,meta,**kwargs):
       '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap">'
       '<link rel="stylesheet" href="/styles.css">'
       '<link rel="stylesheet" href="/heritage-article.css">'
-      '<link rel="stylesheet" href="/trends-magazine.css?v=20261020-trends-list-layout-4">'
+      '<link rel="stylesheet" href="/trends-magazine.css?v=20261020-trends-list-layout-5">'
       '</head><body><main id="detail-view"><div class="magazine-reader">'
       '<header class="magazine-masthead"><div class="magazine-container magazine-masthead-inner">'
       '<a class="magazine-brand" href="/"><img src="/assets/pendar-logo.svg" alt="پندار"></a>'
