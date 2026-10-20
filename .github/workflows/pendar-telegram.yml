@@ -40,6 +40,8 @@ jobs:
             "https://pendar.io/data/figures.json" -o telegram-export/figures.json
           curl --fail --location --silent --show-error --retry 2 --retry-delay 3 --connect-timeout 10 --max-time 50 \
             "https://pendar.io/data/stories.json" -o telegram-export/stories.json
+          curl --fail --location --silent --show-error --retry 2 --retry-delay 3 --connect-timeout 10 --max-time 50 \
+            "https://pendar.io/data/google-trends-iran.json" -o telegram-export/trends.json
           python - <<'PY'
           import json
           from pathlib import Path
@@ -56,6 +58,7 @@ jobs:
         run: |
           python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json --dry-run
           python backend/scripts/publish_news_telegram.py --stories telegram-export/stories.json --dry-run
+          python backend/scripts/publish_trends_telegram.py --trends telegram-export/trends.json --dry-run
           python backend/scripts/publish_figures.py --figures telegram-export/figures.json --dry-run > /tmp/pendar-figures-preview.json
           python - <<'PY'
           import json
@@ -71,6 +74,9 @@ jobs:
             echo "::error::TELEGRAM_BOT_TOKEN is not configured. No messages sent."
             exit 1
           fi
+      - name: Publish all newly published Trends to @pendario
+        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        run: python backend/scripts/publish_trends_telegram.py --trends telegram-export/trends.json
       - name: Publish curated fresh news (maximum 2)
         if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
         run: python backend/scripts/publish_news_telegram.py --stories telegram-export/stories.json
