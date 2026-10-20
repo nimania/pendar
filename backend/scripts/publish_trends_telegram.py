@@ -21,7 +21,7 @@ except ImportError:
 
 STATE_PATH = "telegram/trends-state.json"
 SITE = "https://pendar.io"
-SECTIONS = ("reports", "subjects")
+SECTIONS = ("reports", "briefs", "subjects")
 
 
 def candidates(data):
@@ -44,7 +44,7 @@ def candidates(data):
                 continue
             if not path.startswith("/trends/") or not path.endswith("/"):
                 continue
-            if not (path.startswith("/trends/report/") or path.startswith("/trends/subject/")):
+            if not (path.startswith("/trends/report/") or path.startswith("/trends/topic/") or path.startswith("/trends/subject/")):
                 continue
             if not title or path in seen:
                 continue
