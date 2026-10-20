@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="/heritage-preview.css?v=20261020-daily-trends-2">
+  <link rel="stylesheet" href="/heritage-preview.css?v=20261020-trends-today-3">
   <script defer src="/heritage-preview.js?v=20261020-daily-trends-2"></script>
 </head>
 <body>
@@ -50,20 +50,20 @@
           <section class="feature-block" aria-label="گزارش ویژه">
             <div class="section-heading trend-feature-heading">
               <div class="feature-tabs" role="tablist" aria-label="گزیدهٔ گزارش‌های صفحه اول">
-                <button type="button" id="feature-tab-politics" class="on" role="tab" aria-selected="true" aria-controls="feature-politics-panel" data-feature-tab="politics">گزارش سیاسی روز</button>
-                <button type="button" id="feature-tab-trends" role="tab" aria-selected="false" aria-controls="feature-trends-panel" data-feature-tab="trends" hidden>ترندهای روز</button>
+                <button type="button" id="feature-tab-trends" class="on" role="tab" aria-selected="true" tabindex="0" aria-controls="feature-trends-panel" data-feature-tab="trends">ترندهای امروز</button>
+                <button type="button" id="feature-tab-politics" role="tab" aria-selected="false" tabindex="-1" aria-controls="feature-politics-panel" data-feature-tab="politics">گزارش‌ها</button>
               </div>
-              <a id="feature-heading-more" href="/reports/">همهٔ گزارش‌ها <span aria-hidden="true">←</span></a>
+              <a id="feature-heading-more" href="/trends/">همهٔ ترندهای امروز <span aria-hidden="true">←</span></a>
             </div>
-            <div id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-tab-politics">
+            <div id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-tab-politics" hidden>
             <a class="feature-hero" id="feature-hero" href="/reports/" aria-label="گزارش ویژه">
               <span class="feature-picture"><span class="image-wait">پندار</span></span>
               <span class="feature-caption"><span class="category-flag orange">گزارش</span><strong>تازه‌ترین گزارش تحریریهٔ پندار</strong><span>گزارش مستند و کامل را بخوانید.</span></span>
             </a>
             <div class="under-hero" id="under-hero"><div class="loading">در حال دریافت گزارش‌ها…</div></div>
             </div>
-            <div id="feature-trends-panel" role="tabpanel" aria-labelledby="feature-tab-trends" hidden>
-              <div id="home-search-trends-grid" class="feature-trends-grid"></div>
+            <div id="feature-trends-panel" role="tabpanel" aria-labelledby="feature-tab-trends">
+              <div id="home-search-trends-grid" class="feature-trends-grid"><div class="loading">در حال دریافت ترندهای امروز…</div></div>
             </div>
           </section>
           <section class="module" id="culture">
