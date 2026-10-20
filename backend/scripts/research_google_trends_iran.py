@@ -220,7 +220,7 @@ def validate_report(raw, sources):
         refs=context.get("citation_ids")
         # A cause hypothesis must have at least two grounded sources, and no
         # unrelated reference id may be quietly accepted.
-        if 60<=len(content)<=360 and isinstance(refs,list) and len(set(refs))>=2 and not set(refs)-ids:
+        if (60<=len(content)<=360 and isinstance(refs,list) and all(isinstance(ref,str) for ref in refs) and len(set(refs))>=2 and not set(refs)-ids):
             article["trend_context"]={"text_fa":content,
                                       "citation_ids":list(dict.fromkeys(refs))}
     return article
