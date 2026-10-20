@@ -181,6 +181,7 @@ def report_body(row,site,observations,article_rows):
         license_link=('<a href="'+e(photo["license_url"])+'" rel="noopener noreferrer">'+e(photo["license"])+'</a>' if photo["license_url"].startswith("https://") else e(photo["license"]))
         body+='<figure class="magazine-article-photo"><div class="trend-photo-frame"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo.get("caption") or report["title_fa"])+'" loading="eager" decoding="async" width="1150" height="647"></div><figcaption class="hero-credit">'+e(photo.get("caption") or "عکس آرشیوی")+' — عکس: '+credit+' · '+link+' · '+license_link+'</figcaption></figure>'
     body+='<p class="magazine-article-lead">'+e(public_prose(report["lead_fa"]))+'</p>'
+    body+='<aside class="pendar-telegram-promo telegram-prominent" aria-label="کانال تلگرام پندار"><span class="telegram-mark" aria-hidden="true">➤</span><span class="telegram-copy"><strong>پندار در تلگرام</strong><p>ترندهای تازه، خبرها و گزارش‌ها را در کانال پندار دنبال کنید.</p></span><a href="https://t.me/pendario" target="_blank" rel="noopener noreferrer">عضویت در کانال پندار ←</a></aside>'
     context=report.get("trend_context")
     # The evidence remains available inside the collapsed source ledger below.
     # Avoid templated "why trending" blocks inside the news article.
