@@ -108,7 +108,7 @@ def credited_photo(row):
     image=str(row.get("image_url") or "")
     license=str(row.get("image_license") or "").lower()
     credit=str(row.get("image_credit") or "")
-    if license not in {"cc-by","cc-by-sa","cc0","public-domain","original-pendar"} and not re.fullmatch(r"cc by(?:-sa)? [234]\\.0",license):return None
+    if license not in {"cc-by","cc-by-sa","cc0","public-domain","original-pendar"} and not re.fullmatch(r"cc by(?:-sa)? [234]\.0",license):return None
     if not image.startswith("/assets/") or ".." in image or not credit:return None
     return {"url":image,"credit":credit,"source_url":row.get("image_source_url") or "",
             "license":row.get("image_license") or "","license_url":row.get("image_license_url") or "",
