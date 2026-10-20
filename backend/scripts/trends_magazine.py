@@ -139,9 +139,11 @@ def magazine_shell(title,body,meta,**kwargs):
       '<a href="/">پندار</a> / <a href="/trends/">ترندهای روز</a></nav>'
       '<div class="magazine-article-layout"><article class="magazine-article-paper">'
       +body+'</article><aside class="magazine-article-rail">'
-      +(sidebar_html if sidebar_html is not None else '<section class="magazine-rail-box"><div class="magazine-rail-heading"><h2>ترندهای امروز</h2></div><p class="trend-side-note">گزارش‌ها و موضوعات تازه از تحریریهٔ پندار</p><a href="/trends/">همهٔ مطالب ←</a></section>')
+      +(sidebar_html if sidebar_html is not None else '')
+      +'<section class="magazine-rail-box trend-compact-other"><div class="magazine-rail-heading"><h2>دیگر ترندهای امروز</h2></div><div data-trends-related-rail><a class="trend-side-link" href="/trends/">دیدن ترندها ←</a></div></section>'
       +'</aside></div></div>'
       '<footer class="trend-reader-footer"><a href="/">پندار</a> · خبر، اندیشه و فرهنگ</footer>'
+      '<script src="/trends-interactions.js?v=20261020-follow-rail-1" defer></script>'
       '</div></main></body></html>')
 
 def report_body(row,site,observations,article_rows):
