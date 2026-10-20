@@ -161,6 +161,14 @@ def run(site,data):
     enable_media=os.environ.get("PENDAR_TRENDS_MEDIA")=="1"
     for row in records:
         row["report"]["title_fa"]=clean_title(row["report"]["title_fa"])
+        existing_photo=credited_photo(row)
+        if existing_photo:
+            file=site/existing_photo["url"].lstrip("/")
+            if not file.is_file() or file.stat().st_size<6000:
+                # A stale asset reference must not create a broken image.
+                for key in ("image_url","image_credit","image_license","image_license_url",
+                            "image_source_url","image_caption"):
+                    row.pop(key,None)
         if enable_media and not credited_photo(row):
             photo=verify_and_install(site,row.get("trend_keyword"),row["report"]["title_fa"])
             if photo:
