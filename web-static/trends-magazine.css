@@ -62,3 +62,20 @@ html,body{margin:0;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed
 #detail-view .magazine-article-photo .trend-photo-frame{width:100%;aspect-ratio:16/9;overflow:hidden;background:#edf1ed}
 #detail-view .magazine-article-photo .trend-photo-frame .hero-img{display:block;width:100%;height:100%;max-height:none;object-fit:cover;object-position:center 30%;border-radius:0}
 #detail-view .magazine-article-photo .hero-credit{display:block;max-width:100%;font-size:11px;line-height:1.75;padding:7px 0 0;margin:0;overflow-wrap:anywhere}
+
+/* Archive follows the same photo-first, text-list rule as the homepage. */
+#detail-view .trend-index-visual{align-items:stretch}
+#detail-view .trend-index-with-photo{padding:0;overflow:hidden;border-radius:0}
+#detail-view .trend-index-with-photo .trend-index-photo{display:block;width:100%;aspect-ratio:16/9;overflow:hidden;background:#e8eeeb}
+#detail-view .trend-index-with-photo .trend-index-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 30%}
+#detail-view .trend-index-with-photo .trend-index-photo-copy{display:block;padding:16px}
+#detail-view .trend-index-with-photo .trend-index-photo-copy p{font-size:12px;line-height:1.8}
+#detail-view .trend-index-continuation{margin-top:22px;border:1px solid #dce5df;background:#fff}
+#detail-view .trend-index-continuation h2{margin:0;padding:13px 16px;background:#f5faf7;border-top:4px solid #178f98;border-bottom:1px solid #dce7df;color:#2b3f36;font-size:19px}
+#detail-view .trend-index-headline-list{display:flex;flex-direction:column}
+#detail-view .trend-index-headline{display:flex;flex-direction:column;gap:4px;padding:13px 17px;border-bottom:1px solid #e8ede8;text-decoration:none}
+#detail-view .trend-index-headline:last-child{border-bottom:0}
+#detail-view .trend-index-headline:hover{background:#f6faf7}
+#detail-view .trend-index-headline strong{font-size:15px;line-height:1.8;color:#24362f}
+#detail-view .trend-index-headline span{font-size:12px;line-height:1.8;color:#5a7167}
+#detail-view .trend-index-headline small{font-size:11px;color:#27786e}
