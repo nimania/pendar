@@ -77,7 +77,7 @@ def brief_page(brief,path):
     photo=credited_photo(brief)
     if photo:
         attribution='<a href="'+e(photo["source_url"])+'">منبع عکس</a>' if photo["source_url"].startswith("https://") else ""
-        body+='<figure class="magazine-article-photo"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo["caption"] or brief["title_fa"])+'"><figcaption class="hero-credit">'+e(photo["caption"])+' · '+e(photo["credit"])+' · '+attribution+'</figcaption></figure>'
+        body+='<figure class="magazine-article-photo"><div class="trend-photo-frame"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo["caption"] or brief["title_fa"])+'" decoding="async" width="1150" height="647"></div><figcaption class="hero-credit">'+e(photo["caption"])+' · '+e(photo["credit"])+' · '+attribution+'</figcaption></figure>'
     body+='<p class="magazine-article-lead">'+e(lead)+'</p><h2>پوشش خبری این موضوع</h2><ol class="trend-sources">'+''.join(links)+'</ol>'
     existing=brief.get("existing_article_url")
     if valid_link(existing) and urlsplit(existing).hostname=="pendar.io":
