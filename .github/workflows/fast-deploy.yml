@@ -624,6 +624,22 @@ jobs:
           PY
       - name: Freeze the half-hour homepage editorial snapshot
         run: python backend/scripts/freeze_homepage_snapshot.py --site site
+      - name: Overlay verified Google Trends briefings
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          trend_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/google-trends-iran.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
+          if [ -z "$trend_run" ]; then
+            echo "::warning::No successful Google Trends collection yet."
+          else
+            mkdir -p /tmp/trends
+            if gh run download "$trend_run" -n pendar-google-trends-data -D /tmp/trends; then
+              python backend/scripts/publish_google_trends.py --site site --data /tmp/trends/data/google-trends-iran.json
+            else
+              echo "::warning::Google Trends artifact missing; retaining existing snapshot."
+            fi
+          fi
       - name: Stamp actual published build time
         run: |
           python - <<'PY'
