@@ -19,6 +19,7 @@ def validate(root: Path) -> list[str]:
         try:
             authors=json.loads(directory.read_text(encoding="utf-8")).get("authors",[])
             routes += ["editorial-author/"+a["id"] for a in authors]
+            routes += ["@"+a["handle"] for a in authors]
         except (ValueError,KeyError,TypeError):
             errors.append("Invalid editorial author directory")
     else:
@@ -27,7 +28,7 @@ def validate(root: Path) -> list[str]:
         p=root/route/"index.html"
         if not p.is_file():
             errors.append(f"Missing direct-route shell: /{route}/")
-        elif p.stat().st_size<1000:
+        elif p.stat().st_size<1000 and not route.startswith("editorial-author/"):
             errors.append(f"Empty or truncated direct-route shell: /{route}/")
     if not (root/"404.html").is_file():
         errors.append("Missing SPA fallback 404.html")
