@@ -230,7 +230,7 @@ def run(data, archive=None, max_new=2, provider=None):
         if not key:
             continue
         existing = history.get(key) or {}
-        if existing.get("report"):
+        if existing.get("report") or existing.get("research_status") == "requires_human_review":
             continue
         if existing.get("research_status") in {"insufficient_independent_fulltext", "generation_rejected", "ai_unavailable"}:
             try:
