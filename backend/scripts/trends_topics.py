@@ -15,6 +15,7 @@ KNOWN_PEOPLE={
  "احمد آرام":{"slug":"ahmad-aram","name":"احمد آرام","description":"مترجم، نویسنده و پژوهشگر ایرانی","source":"https://www.wikidata.org/wiki/Q5956408"},
  "رامین راستاد":{"slug":"ramin-rastad","name":"رامین راستاد","description":"بازیگر ایرانی","source":"https://www.ifilmtv.ir/artist/content/2569"},
  "محمود احمدی‌نژاد":{"slug":"mahmoud-ahmadinejad","name":"محمود احمدی‌نژاد","description":"رئیس‌جمهور پیشین ایران","source":"https://www.wikidata.org/wiki/Q34448"},
+ "اشکان خورشیدی":{"slug":"ashkan-khorshidi","name":"اشکان خورشیدی","description":"داور پیشین فوتبال ایران و معاون ورزشی باشگاه خیبر خرم‌آباد","source":"https://www.tasnimnews.ir/fa/news/1405/07/28/3727591/"},
 }
 KNOWN_COUNTRIES={
  "عراق":"iraq","ایران":"iran","ترکیه":"turkey","اسپانیا":"spain","آمریکا":"united-states",
@@ -34,7 +35,7 @@ PROVINCES={
  "کهگیلویه و بویراحمد":"kohgiluyeh-and-boyer-ahmad",
  "خراسان جنوبی":"south-khorasan","خراسان شمالی":"north-khorasan",
 }
-CITY_NAMES={"نوشهر":"nowshahr","مشهد":"mashhad","تبریز":"tabriz","شیراز":"shiraz",
+CITY_NAMES={"خرم‌آباد":"khorramabad","خرم آباد":"khorramabad","نوشهر":"nowshahr","مشهد":"mashhad","تبریز":"tabriz","شیراز":"shiraz",
     "اهواز":"ahvaz","رشت":"rasht","بابل":"babol","ساری":"sari","کرج":"karaj","قم":"qom",
     "مشهد مقدس":"mashhad","یزد":"yazd"}
 EVENTS=[
@@ -44,7 +45,7 @@ EVENTS=[
 ALIASES={
  "احمدینژاد":"محمود احمدی‌نژاد","احمدی نژاد":"محمود احمدی‌نژاد","محمود احمدینژاد":"محمود احمدی‌نژاد",
  "محمود احمدی نژاد":"محمود احمدی‌نژاد","محمود احمدینژاد":"محمود احمدی‌نژاد",
- "سرجیو راموس":"سرخیو راموس",
+ "سرجیو راموس":"سرخیو راموس","خرم آباد":"خرم‌آباد",
 }
 def norm(value):
     x=unicodedata.normalize("NFKC",str(value or "")).replace("ي","ی").replace("ك","ک").replace("\u200c"," ")
