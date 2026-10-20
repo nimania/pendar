@@ -215,8 +215,10 @@ def run(site,data):
                     "image_license":photo["license"],"image_license_url":photo["license_url"],
                     "image_source_url":photo["source_url"],"image_caption":photo["caption"]})
         if classified["kind"]=="topic":
-            # Raw search terms are research inputs, NOT promoted news cards.
-            # Retain a noindex informational source page only.
+            # Search terms are not editorial headlines. This unlisted,
+            # non-indexed coverage page uses a neutral topic label.
+            brief["title_fa"]=canonical_label(brief["trend_keyword"])
+            brief["lead_fa"]="خبرها و منابع منتشرشده دربارهٔ این موضوع"
             target=site/url.lstrip("/")/"index.html"
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_text(brief_page(brief,url),encoding="utf-8")
