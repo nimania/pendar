@@ -1,0 +1,45 @@
+/* Trends are ordinary Pendar magazine articles, not a standalone microsite. */
+html,body{margin:0;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed 3px,#e8ebe8 3px,#e8ebe8 4px);color:#23352d}
+#detail-view{display:block!important;max-width:none!important;padding:0!important}
+#detail-view .magazine-reader{min-height:100vh}
+#detail-view .magazine-article-layout{grid-template-columns:minmax(0,1.85fr) minmax(230px,.8fr)}
+#detail-view .magazine-article-paper{min-height:540px}
+#detail-view .story-author-byline{display:flex;align-items:center;margin:0 0 27px;padding:15px 0;border-top:1px solid #dee5de;border-bottom:1px solid #dee5de}
+#detail-view .story-author-credit{display:flex;align-items:center;gap:13px}
+#detail-view .story-author-credit>span:last-child{display:flex;flex-direction:column}
+#detail-view .story-author-credit a{font-weight:800;color:#225d56;text-decoration:none;font-size:15px}
+#detail-view .story-author-credit small{font-size:11px;color:#758079}
+#detail-view .story-author-monogram{display:inline-flex;align-items:center;justify-content:center;flex:0 0 58px;width:58px;height:58px;border-radius:50%;background-color:#e3eae5;background-repeat:no-repeat;font-size:22px;color:#2b6b60}
+#detail-view .magazine-article-paper p{line-height:2.05}
+#detail-view .trend-report-prose p{font-size:16px;line-height:2.17;margin:0 0 24px;color:#334138}
+#detail-view .trend-cite{display:inline-block;vertical-align:baseline;border:1px solid #d8e5df;border-radius:4px;background:#eff7f4;color:#227a70!important;font:700 11px Vazirmatn,Tahoma,sans-serif;padding:1px 4px;margin:0 2px;text-decoration:none}
+#detail-view .trend-related{margin:35px 0 25px;padding:22px 0;border-top:3px solid #e2e8e3;border-bottom:1px solid #e2e8e3}
+#detail-view .trend-related h2{font-size:19px;margin:0 0 13px}
+#detail-view .trend-related a{display:block;text-decoration:none;font-size:14px;line-height:1.9;padding:9px 0;border-top:1px solid #edf0eb;color:#255b55}
+#detail-view .trend-sources li{margin:10px 0;overflow-wrap:anywhere}
+#detail-view .trend-sources a{color:#157379;text-decoration:underline;text-underline-offset:3px}
+#detail-view .story-examination{margin-top:25px;border:1px solid #d5e3db;background:#f8faf8;padding:18px 21px}
+#detail-view .story-examination summary{font-weight:800;cursor:pointer}
+#detail-view .story-examination summary small{display:block;color:#77847c;font-size:12px;font-weight:400}
+#detail-view .trend-evidence-chart{background:#f2f8f6;border-right:3px solid #1794a0;padding:18px;margin:34px 0}
+#detail-view .trend-evidence-chart h3{font-size:17px;margin:0}
+#detail-view .trend-evidence-chart p{font-size:12px;color:#566b64;line-height:1.8}
+#detail-view .trend-evidence-chart svg{width:100%;height:auto}
+#detail-view .trend-evidence-chart li{font-size:12px}
+#detail-view .trend-reader-footer{text-align:center;background:#2a2928;color:#eee;padding:22px;font-size:12px}
+#detail-view .trend-reader-footer a{color:#eee}
+#detail-view .trend-side-note{font-size:13px;color:#68786d;padding:12px}
+#detail-view .trend-index-lead{font:650 17px/2 Vazirmatn,Tahoma,sans-serif;color:#587069;margin-bottom:25px}
+#detail-view .trend-index-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#detail-view .trend-index-item{border:1px solid #e3e9e4;background:#f7f9f6;padding:17px;display:block;text-decoration:none}
+#detail-view .trend-index-item strong{font-size:17px;line-height:1.65;display:block}
+#detail-view .trend-index-item p{color:#61736a;font-size:12px;line-height:1.8}
+#detail-view .trend-index-item .byline{color:#176f6d;font-weight:700;font-size:12px}
+#detail-view .trend-index-section{margin-top:30px;padding-top:20px;border-top:2px solid #dce8e2}
+#detail-view .trend-index-section h2{font-size:21px}
+#detail-view .trend-topic-links{display:flex;flex-wrap:wrap;gap:9px;padding:15px 0}
+#detail-view .trend-topic-links a{border:1px solid #cce1d9;border-radius:4px;padding:8px 12px;font-size:13px;background:#f6faf7;color:#255b57;text-decoration:none}
+#detail-view .trend-observation-only{font-size:14px;color:#5e766c}
+#detail-view .magazine-article-photo figcaption{font-size:11px;color:#77867c;padding-top:6px}
+@media(max-width:900px){#detail-view .magazine-article-layout{grid-template-columns:1fr}#detail-view .magazine-article-rail{display:none}}
+@media(max-width:600px){#detail-view .magazine-article-paper{padding:23px 18px}#detail-view .trend-index-grid{grid-template-columns:1fr}#detail-view .trend-report-prose p{font-size:15px}}
