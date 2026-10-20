@@ -148,6 +148,10 @@ def render_context(site,entity,briefs,articles):
     body='<div data-pendar-context="v2"><!-- PENDAR_TRENDS_CONTEXT_V2 -->'
     body+='<div class="magazine-article-kicker">'+e(kinds[kind])+'</div><h1>'+e(label)+'</h1>'
     if intro:body+='<p class="magazine-article-lead">'+e(intro)+'</p>'
+    if kind=="person":
+        handle=url.strip("/").removeprefix("@")
+        if re.fullmatch(r"[a-z0-9_.-]{2,90}",handle):
+            body+='<button type="button" hidden class="trend-follow-button" data-trend-figure-follow="'+e(handle)+'" aria-pressed="false">+ دنبال کن</button>'
     pendar=[x for x in items if x["kind"]=="pendar"]
     external=[x for x in items if x["kind"]=="external"]
     if pendar:
