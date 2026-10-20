@@ -60,7 +60,7 @@ def message(row):
     title = html.escape(row["title"])
     description = "\n\n" + html.escape(lead) if lead else ""
     link = html.escape(row["url"], quote=True)
-    return f"📈 <b>ترندهای پندار</b>\n\n<b>{title}</b>{description}\n\n<a href=\\"{link}\\">متن کامل در پندار ←</a>"
+    return f'📈 <b>ترندهای پندار</b>\n\n<b>{title}</b>{description}\n\n<a href="{link}">متن کامل در پندار ←</a>'
 
 
 def publish(data, ledger, telegram, chat_id, dry_run=False):
