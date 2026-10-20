@@ -266,20 +266,38 @@ def run(data, archive=None, max_new=2, provider=None):
         if not key:
             continue
         existing = history.get(key) or {}
-        if existing.get("report") or existing.get("research_status") == "requires_human_review":
+        if existing.get("research_status") == "requires_human_review":
             continue
-        if existing.get("research_status") in {"insufficient_independent_fulltext", "generation_rejected", "ai_unavailable"}:
-            try:
-                last = datetime.fromisoformat(str(existing.get("attempted_at", "")).replace("Z", "+00:00"))
-                if datetime.now(timezone.utc) - last < timedelta(hours=6):
-                    continue
-            except (ValueError, TypeError):
-                pass
+        now=datetime.now(timezone.utc)
+        try:
+            last=datetime.fromisoformat(str(existing.get("attempted_at","")).replace("Z","+00:00"))
+            if last.tzinfo is None:last=last.replace(tzinfo=timezone.utc)
+            cooldown=(now-last)<timedelta(hours=6)
+        except (TypeError,ValueError):
+            cooldown=False
+        if existing.get("report"):
+            # Refresh only when at least two genuinely new source URLs have
+            # appeared after a cooldown; never rewrite simply because a
+            # keyword remains trending.
+            previous={str(x.get("url") or "") for x in existing.get("sources",[])
+                      if isinstance(x,dict)}
+            candidate={str(x.get("url") or "") for x in b.get("related_news",[])
+                      if isinstance(x,dict)}
+            if cooldown or len(candidate-previous)<2:continue
+        elif cooldown and existing.get("research_status") in {
+            "insufficient_independent_fulltext","generation_rejected","ai_unavailable"
+        }:
+            continue
         attempted += 1
         result = research(b, provider)
+        if existing.get("report") and not result.get("report"):
+            # A failed update cannot unpublish a previously accepted report.
+            history[key]={**existing,"last_refresh_attempt_at":now.isoformat()}
+            continue
         history[key] = {"id": key, "trend_keyword": b["trend_keyword"],
                         "observed_at": b.get("observed_at"),
-                        "attempted_at": datetime.now(timezone.utc).isoformat(), **result}
+                        "first_published_at":existing.get("first_published_at") or existing.get("generated_at"),
+                        "attempted_at":now.isoformat(), **result}
     # Observations come from the real RSS approximate-volume field, not invented Trends scores.
     observations=list(old.get("trend_observations",[])) if isinstance(old.get("trend_observations",[]),list) else []
     for row in data.get("briefs",[]):
