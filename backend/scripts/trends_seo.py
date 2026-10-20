@@ -167,6 +167,10 @@ def update_sitemap(site, indexed):
     ET.register_namespace("",NS)
     root=ET.Element("{"+NS+"}urlset")
     for path in unique:
+        # Never advertise a page which has not been generated on disk.
+        page = site / path.lstrip("/") / "index.html"
+        if not page.is_file():
+            continue
         record=ET.SubElement(root,"{"+NS+"}url")
         ET.SubElement(record,"{"+NS+"}loc").text=absolute(path)
     dest=site/"sitemap-trends.xml"
@@ -178,12 +182,12 @@ def update_sitemap(site, indexed):
     if directive not in existing:
         robots.write_text(existing.rstrip()+"\n"+directive+"\n",encoding="utf-8")
     master=site/"sitemap.xml"
-    if not master.is_file():return len(unique)
+    if not master.is_file():return len(root)
     try:
         tree=ET.parse(master)
         parent=tree.getroot()
         tag=parent.tag.split("}")[-1]
-        if tag!="sitemapindex":return len(unique)
+        if tag!="sitemapindex":return len(root)
         wanted=absolute("/sitemap-trends.xml")
         if not any((el.text or "")==wanted for el in parent.iter() if el.tag.split("}")[-1]=="loc"):
             node=ET.SubElement(parent,"{"+NS+"}sitemap")
@@ -191,4 +195,4 @@ def update_sitemap(site, indexed):
             tree.write(master,encoding="utf-8",xml_declaration=True)
     except ET.ParseError as exc:
         print("::warning::Site sitemap index could not be parsed:",exc)
-    return len(unique)
+    return len(root)
