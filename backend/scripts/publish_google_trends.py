@@ -246,8 +246,47 @@ def run(site,data):
         # A topic earns a visible link only with real relevant coverage.
         topics.append({"title":classified.get("name") or classified["label"],
                        "url":url,"trend_keyword":brief["trend_keyword"],"kind":classified["kind"]})
+    # Verified profile handles already active in the native figure directory.
+    # Never fill a trending-person card from an ambiguous name or guessed photo.
+    native=figures_index(site)
+    trending_figures=[]
+    seen_figures=set()
+    for row in records:
+        for person in related_people(site,row,index=native):
+            handle=person["url"].strip("/").removeprefix("@")
+            if not person.get("existing") and handle not in {p.get("handle") for p in native.values()}:
+                continue
+            if handle in seen_figures:continue
+            original=next((p for p in native.values() if p.get("handle")==handle),{})
+            trending_figures.append({"name":person.get("name") or person["label"],
+                                    "handle":handle,"url":"/@"+handle+"/",
+                                    "role":original.get("role_fa") or "",
+                                    "avatar":original.get("avatar") or "",
+                                    "story_url":canonical_path("report",row["id"])})
+            seen_figures.add(handle)
+    for topic in topics:
+        if topic.get("kind")!="person":continue
+        handle=topic["url"].strip("/").removeprefix("@")
+        if handle in seen_figures:continue
+        original=next((p for p in native.values() if p.get("handle")==handle),None)
+        if not original:continue
+        trending_figures.append({"name":original.get("name_fa") or topic["title"],
+                                "handle":handle,"url":"/@"+handle+"/",
+                                "role":original.get("role_fa") or "",
+                                "avatar":original.get("avatar") or ""})
+        seen_figures.add(handle)
     dossiers=topical_dossiers(site,articles)
     body='<div class="magazine-article-kicker">گزارش‌های تحریریه</div><h1>ترندهای امروز</h1>'
+    if trending_figures:
+        body+='<div class="trend-archive-tabs" role="tablist" aria-label="مطالب ترند">'
+        body+='<button type="button" role="tab" aria-selected="true" data-trend-archive-tab="reports">گزارش‌ها</button>'
+        body+='<button type="button" role="tab" aria-selected="false" data-trend-archive-tab="figures">چهره‌های ترند امروز</button></div>'
+        body+='<section data-trend-archive-panel="figures" hidden><div class="trend-figure-grid">'
+        for person in trending_figures[:12]:
+            avatar=person.get("avatar") or ""
+            photo='<img src="'+e(avatar)+'" alt="" loading="lazy">' if avatar.startswith("/assets/") else '<span class="trend-figure-monogram" aria-hidden="true">'+e(person["name"][:1])+'</span>'
+            body+='<a class="trend-figure-card" href="'+e(person["url"])+'">'+photo+'<strong>'+e(person["name"])+'</strong><small>'+e(person.get("role") or "صفحهٔ چهره در پندار")+'</small></a>'
+        body+='</div></section><section data-trend-archive-panel="reports">'
     body+='<p class="trend-index-lead">مهم‌ترین موضوعاتی که توجه جست‌وجوگران ایران را جلب کرده‌اند؛ همراه با گزارش‌های مستند تحریریهٔ پندار.</p>'
     if dossiers:
         body+='<nav class="trend-topic-links" aria-label="پرونده‌های موضوعی">'+''.join('<a href="'+e(q["url"])+'">'+e(q["title"])+'</a>' for q in dossiers)+'</nav>'
@@ -274,6 +313,7 @@ def run(site,data):
     if topics:
         body+='<section class="trend-index-section"><h2>پرونده‌ها و چهره‌های مرتبط</h2>'
         body+='<div class="trend-topic-links">'+''.join('<a href="'+e(r["url"])+'">'+e(r["title"])+'</a>' for r in topics)+'</div></section>'
+    if trending_figures:body+='</section>'
     (root/"index.html").write_text(index_shell(body),encoding="utf-8")
 
     public={k:v for k,v in d.items() if k not in ("research_reports","research_metrics","unmatched_trends","trend_observations")}
@@ -281,6 +321,7 @@ def run(site,data):
     public["reports"]=articles
     public["briefs"]=topics
     public["subjects"]=dossiers
+    public["trending_figures"]=trending_figures
     public["display_title"]="ترندهای امروز"
     out=site/"data"/"google-trends-iran.json";out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps(public,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
