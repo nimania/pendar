@@ -7,6 +7,9 @@ on:
         type: boolean
         default: true
         required: true
+  workflow_run:
+    workflows: ["Fast Deploy Pendar UI"]
+    types: [completed]
   schedule:
     # Three editorial windows per day; times are UTC.
     - cron: "10 7,13,19 * * *"
@@ -17,6 +20,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     env:
@@ -68,21 +72,21 @@ jobs:
           for m in messages[:3]: print(str(m.get("text",""))[:450])
           PY
       - name: Check bot configuration
-        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: |
           if [ -z "${TELEGRAM_BOT_TOKEN}" ]; then
             echo "::error::TELEGRAM_BOT_TOKEN is not configured. No messages sent."
             exit 1
           fi
       - name: Publish all newly published Trends to @pendario
-        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: python backend/scripts/publish_trends_telegram.py --trends telegram-export/trends.json
       - name: Publish curated fresh news (maximum 2)
-        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: python backend/scripts/publish_news_telegram.py --stories telegram-export/stories.json
       - name: Publish selected figure statement
-        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: python backend/scripts/publish_figures.py --figures telegram-export/figures.json
       - name: Publish periodic editorial digest
-        if: ${{ github.event_name == 'schedule' || !inputs.dry_run }}
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json
