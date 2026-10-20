@@ -344,6 +344,44 @@
       fallback("home-weather-summary","/weather/","مشاهدهٔ وضعیت آب‌وهوا");
     });
   }
+  // Independent search-trend desk. It does not alter the frozen political hero
+  // or the established five-item sidebar rankings.
+  function renderSearchTrendTab(){
+    var politics=el("feature-tab-politics"),trends=el("feature-tab-trends");
+    var politicalPanel=el("feature-politics-panel"),trendsPanel=el("feature-trends-panel");
+    var more=el("feature-heading-more"),grid=el("home-search-trends-grid");
+    if(!politics||!trends||!politicalPanel||!trendsPanel||!grid)return;
+    fetchJson("/data/google-trends-iran.json").then(function(payload){
+      var entries=Array.isArray(payload&&payload.reports)?payload.reports.filter(function(r){
+        return r&&validLink(r.url)&&norm(r.title)&&validImage(r.image_url);
+      }).slice(0,5):[];
+      if(!entries.length)return;
+      var activate=function(isTrend){
+        politics.classList.toggle("on",!isTrend);trends.classList.toggle("on",isTrend);
+        politics.setAttribute("aria-selected",String(!isTrend));trends.setAttribute("aria-selected",String(isTrend));
+        politicalPanel.hidden=isTrend;trendsPanel.hidden=!isTrend;
+        more.href=isTrend?"/search-trends/":"/reports/";
+        more.textContent=isTrend?"همهٔ گزارش‌های جست‌وجو ←":"همهٔ گزارش‌ها ←";
+      };
+      var tiles=entries.map(function(r,i){
+        return '<a class="feature-trend-card'+(i===0?' trend-lead':'')+'" href="'+esc(r.url)+'">'
+          +'<span class="feature-trend-picture"><img src="'+esc(validImage(r.image_url))+'" alt="'+esc(r.image_alt||"طرح گرافیکی مرتبط با "+r.title)+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async" onerror="this.parentElement.classList.add(\'no-photo\');this.remove()"></span>'
+          +'<span class="feature-trend-copy"><span class="category-flag orange">گزارش از جست‌وجوها</span>'
+          +'<strong>'+esc(r.title)+'</strong><span>'+esc(excerpt(r.lead_fa||"",i===0?180:94))+'</span></span></a>';
+      }).join("");
+      grid.innerHTML=tiles+'<a class="feature-trends-all" href="/search-trends/">آرشیو گزارش‌ها و موضوعات جست‌وجوشده ←</a>';
+      trends.hidden=false;
+      [politics,trends].forEach(function(button){
+        button.addEventListener("click",function(){activate(button===trends);});
+        button.addEventListener("keydown",function(event){
+          if(event.key==="ArrowRight"||event.key==="ArrowLeft"){
+            event.preventDefault();var next=button===trends?politics:trends;next.focus();activate(next===trends);
+          }
+        });
+      });
+      activate(false);
+    }).catch(function(){trends.hidden=true;});
+  }
   async function renderHome(){
     var stories=data.stories.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
     var reports=data.reports.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);})
@@ -472,6 +510,7 @@
           +'<span>'+esc(excerpt(headline(r),70))+'</span></a>';
       }).join(""));
     }
+    renderSearchTrendTab();
     redrawHome=draw;
     draw();
     renderHomepageBriefs();
