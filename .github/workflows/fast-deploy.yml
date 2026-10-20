@@ -63,26 +63,45 @@ jobs:
         run: python -m py_compile backend/scripts/build_editorial_reports.py
       - name: Verify visible Pendar reports and source links
         run: node backend/tests/test_editorial_report_ui.js
-      - name: Restore last successful light Pages artifact
+      - name: Restore last verified published site
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          mkdir -p site
-          old_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/fast-deploy.yml/runs?status=success&per_page=10" --jq '[.workflow_runs[] | select(.id != '${GITHUB_RUN_ID}')][0].id // empty')"
-          if [ -z "$old_id" ]; then
-            echo "::error::No previously successful light Pages artifact. Use a verified recovery build."
+          set -euo pipefail
+          restored=0
+          # Do not assume that the most recent successful run still has its Pages artifact.
+          mapfile -t page_runs < <(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/fast-deploy.yml/runs?status=success&per_page=15" --jq '.workflow_runs[].id' 2>/dev/null || true)
+          for old_id in "${page_runs[@]}"; do
+            artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$old_id/artifacts" --jq '[.artifacts[] | select(.expired==false and (.name|startswith("github-pages")))] | .[0].name // empty' 2>/dev/null || true)"
+            [ -n "$artifact" ] || continue
+            rm -rf site /tmp/base-pages && mkdir -p site /tmp/base-pages
+            if gh run download "$old_id" -n "$artifact" -D /tmp/base-pages && [ -s /tmp/base-pages/artifact.tar ] && tar -xf /tmp/base-pages/artifact.tar -C site; then
+              if [ -s site/index.html ] && [ -s site/data/figures.json ] && [ -s site/data/stories.json ]; then
+                echo "Restored Pages snapshot from successful run $old_id"
+                restored=1
+                break
+              fi
+            fi
+            echo "::warning::Pages artifact for run $old_id unavailable or incomplete."
+          done
+          if [ "$restored" -ne 1 ]; then
+            # Recovery for installations where light Pages artifacts have expired.
+            mapfile -t complete_runs < <(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=10" --jq '.workflow_runs[].id' 2>/dev/null || true)
+            for old_id in "${complete_runs[@]}"; do
+              rm -rf site && mkdir -p site
+              if gh run download "$old_id" -n latest-static-site -D site && python backend/scripts/unpack_site_artifact.py site; then
+                if [ -s site/index.html ] && [ -s site/data/figures.json ] && [ -s site/data/stories.json ]; then
+                  echo "Restored complete-build site from run $old_id"
+                  restored=1
+                  break
+                fi
+              fi
+            done
+          fi
+          if [ "$restored" -ne 1 ]; then
+            echo "::error::No verified published site snapshot available; preserving the current live site."
             exit 1
           fi
-          artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$old_id/artifacts" --jq '[.artifacts[] | select(.expired==false and (.name|startswith("github-pages")))] | .[0].name // empty')"
-          test -n "$artifact" || { echo "::error::No existing Pages artifact found"; exit 1; }
-          mkdir -p /tmp/base-pages
-          gh run download "$old_id" -n "$artifact" -D /tmp/base-pages
-          test -s /tmp/base-pages/artifact.tar
-          tar -xf /tmp/base-pages/artifact.tar -C site
-          test -s site/index.html
-          test -s site/data/figures.json
-          test -s site/data/stories.json
-
       - name: Recover missing core data from the last complete build
         env:
           GH_TOKEN: ${{ github.token }}
