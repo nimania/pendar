@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from trends_seo import head_meta, cover, stable_key, update_sitemap
+from trends_seo import head_meta, stable_key, update_sitemap
 from publish_google_trends import run
 
 
@@ -32,13 +32,10 @@ class TrendPresentationTests(unittest.TestCase):
         self.assertIn("noindex,follow",markup)
         self.assertNotIn('"@type": "Article"',markup)
 
-    def test_cover_is_real_image(self):
-        with tempfile.TemporaryDirectory() as root:
-            url=cover(root,"abcdef0123456789","پیش‌فروش بلیت قطار", "بلیت قطار")
-            from PIL import Image
-            img=Image.open(Path(root)/url.lstrip("/"))
-            self.assertEqual(img.size,(1200,630))
-            self.assertEqual(img.format,"PNG")
+    def test_unlicensed_cover_is_never_generated(self):
+        from trends_magazine import credited_photo
+        self.assertIsNone(credited_photo({"image_url": "/assets/trends/fake.png"}))
+        self.assertIsNone(credited_photo({"image_url": "https://publisher.com/pic.jpg"}))
 
     def test_site_public_output_never_leaks_review_draft(self):
         with tempfile.TemporaryDirectory() as root:
@@ -71,7 +68,10 @@ class TrendPresentationTests(unittest.TestCase):
             self.assertTrue((site/"search-trends/report"/key/"index.html").is_file())
             self.assertFalse((site/"search-trends/report/0123456789abcdef/index.html").exists())
             html=(site/"search-trends/report"/key/"index.html").read_text(encoding="utf-8")
-            self.assertIn('"og:image"',html)
+            self.assertNotIn('property="og:image"',html)
+            self.assertIn("magazine-article-paper",html)
+            self.assertIn("story-author-byline",html)
+            self.assertNotIn("ارتباط این موضوع با Google Trends به‌معنای تأیید",html)
             self.assertIn('rel="canonical"',html)
             self.assertIn('application/ld+json',html)
             self.assertIn("بلیت قطار",html)
