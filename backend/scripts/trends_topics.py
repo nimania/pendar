@@ -14,7 +14,7 @@ from pathlib import Path
 KNOWN_PEOPLE={
  "احمد آرام":{"slug":"ahmad-aram","name":"احمد آرام","description":"مترجم، نویسنده و پژوهشگر ایرانی","source":"https://www.wikidata.org/wiki/Q5956408"},
  "رامین راستاد":{"slug":"ramin-rastad","name":"رامین راستاد","description":"بازیگر ایرانی","source":"https://www.ifilmtv.ir/artist/content/2569"},
- "محمود احمدی‌نژاد":{"slug":"mahmoud-ahmadinejad","name":"محمود احمدی‌نژاد","description":"رئیس‌جمهور پیشین ایران","source":"https://www.wikidata.org/wiki/Q1058"},
+ "محمود احمدی‌نژاد":{"slug":"mahmoud-ahmadinejad","name":"محمود احمدی‌نژاد","description":"رئیس‌جمهور پیشین ایران","source":"https://www.wikidata.org/wiki/Q34448"},
 }
 KNOWN_COUNTRIES={
  "عراق":"iraq","ایران":"iran","ترکیه":"turkey","اسپانیا":"spain","آمریکا":"united-states",
