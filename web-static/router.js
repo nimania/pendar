@@ -100,6 +100,14 @@ async function route() {
         console.warn("Pendar figure handle lookup unavailable",error);
       }
     }
+    // Editorial writers share the @ profile namespace; public figure handles take priority.
+    if(requestedHandle && typeof loadPendarEditorialAuthors==="function"){
+      try{
+        const newsroom=await loadPendarEditorialAuthors();
+        const author=(newsroom.authors||[]).find(a=>String(a.handle||"").toLowerCase()===requestedHandle);
+        if(author)return showPendarEditorialAuthor(author.id);
+      }catch(_){/* Retain ordinary @ routing if newsroom data is unavailable. */}
+    }
     // Carefully curated non-person handles. Existing person handles always win.
     // Static mapping: no new registry queries, collectors or database joins.
     const aliases={
