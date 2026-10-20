@@ -164,7 +164,7 @@ def report_body(row,site,observations,article_rows):
         credit=e(photo["credit"])
         link=('<a href="'+e(photo["source_url"])+'" rel="noopener noreferrer">منبع تصویر</a>' if photo["source_url"].startswith("https://") else "")
         license_link=('<a href="'+e(photo["license_url"])+'" rel="noopener noreferrer">'+e(photo["license"])+'</a>' if photo["license_url"].startswith("https://") else e(photo["license"]))
-        body+='<figure class="magazine-article-photo"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo.get("caption") or report["title_fa"])+'"><figcaption class="hero-credit">'+e(photo.get("caption") or "عکس آرشیوی")+' — عکس: '+credit+' · '+link+' · '+license_link+'</figcaption></figure>'
+        body+='<figure class="magazine-article-photo"><div class="trend-photo-frame"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo.get("caption") or report["title_fa"])+'" loading="eager" decoding="async" width="1150" height="647"></div><figcaption class="hero-credit">'+e(photo.get("caption") or "عکس آرشیوی")+' — عکس: '+credit+' · '+link+' · '+license_link+'</figcaption></figure>'
     body+='<p class="magazine-article-lead">'+e(report["lead_fa"])+' '+cites(report.get("lead_citation_ids",[]))+'</p>'
     body+='<div class="trend-report-prose">'
     for block in report["paragraphs"]:
