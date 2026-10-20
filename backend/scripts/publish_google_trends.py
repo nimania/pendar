@@ -97,6 +97,29 @@ def topical_dossiers(site,rows):
         output.append({"id":author_id,"title":title,"url":url,"description":description})
     return output
 
+def redirect_legacy_trends(site):
+    """Forward old URLs to their stable new equivalents; no indexable duplicates."""
+    old=Path(site)/"search-trends"
+    old.mkdir(parents=True,exist_ok=True)
+    original=list(old.rglob("index.html"))
+    original.append(old/"index.html")
+    count=0
+    for file in set(original):
+        suffix=file.parent.relative_to(old).as_posix()
+        target="/trends/" if suffix in (".","") or suffix.isdigit() else "/trends/"+suffix+"/"
+        if not (Path(site)/target.lstrip("/")/"index.html").is_file():
+            target="/trends/"
+        file.parent.mkdir(parents=True,exist_ok=True)
+        file.write_text('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8">'
+            '<title>ترندهای امروز | پندار</title>'
+            '<meta name="robots" content="noindex,follow">'
+            '<meta http-equiv="refresh" content="0;url='+e(target)+'">'
+            '<link rel="canonical" href="https://pendar.io'+e(target)+'"></head>'
+            '<body><a href="'+e(target)+'">ترندهای امروز در پندار ←</a></body></html>',
+            encoding="utf-8")
+        count+=1
+    return count
+
 def run(site,data):
     site=Path(site);source=Path(data)
     if not source.is_file():
@@ -168,6 +191,7 @@ def run(site,data):
     print("Published eligible editorial long reports:",len(articles))
     print("Published substantial controlled topic dossiers:",len(dossiers))
     print("Human-review research drafts are excluded from public outputs")
+    print("Legacy Trends redirects:",redirect_legacy_trends(site))
     # Early numeric pilots were unstable: do not let them masquerade as fresh reporting.
     for i in range(1,11):
         p=root/str(i)/"index.html"
