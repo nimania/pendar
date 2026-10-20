@@ -108,11 +108,14 @@ def credited_photo(row):
     image=str(row.get("image_url") or "")
     license=str(row.get("image_license") or "").lower()
     credit=str(row.get("image_credit") or "")
-    if license not in {"cc-by","cc-by-sa","cc0","public-domain","original-pendar"}:return None
+    if license not in {"cc-by","cc-by-sa","cc0","public-domain","original-pendar"} and not re.fullmatch(r"cc by(?:-sa)? [234]\\.0",license):return None
     if not image.startswith("/assets/") or ".." in image or not credit:return None
-    return {"url":image,"credit":credit}
+    return {"url":image,"credit":credit,"source_url":row.get("image_source_url") or "",
+            "license":row.get("image_license") or "","license_url":row.get("image_license_url") or "",
+            "caption":row.get("image_caption") or ""}
 
 def magazine_shell(title,body,meta,**kwargs):
+    sidebar_html=kwargs.pop("sidebar_html",None)
     from trends_seo import head_meta
     return ('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8">'
       '<meta name="viewport" content="width=device-width,initial-scale=1">'
@@ -135,10 +138,9 @@ def magazine_shell(title,body,meta,**kwargs):
       '<div class="magazine-container magazine-article-container"><nav class="magazine-breadcrumb" aria-label="موقعیت">'
       '<a href="/">پندار</a> / <a href="/trends/">ترندهای روز</a></nav>'
       '<div class="magazine-article-layout"><article class="magazine-article-paper">'
-      +body+'</article><aside class="magazine-article-rail"><section class="magazine-rail-box">'
-      '<div class="magazine-rail-heading"><h2>ترندهای روز</h2></div>'
-      '<p class="trend-side-note">گزارش‌ها و موضوعات تازه از تحریریهٔ پندار</p>'
-      '<a href="/trends/">همهٔ مطالب ←</a></section></aside></div></div>'
+      +body+'</article><aside class="magazine-article-rail">'
+      +(sidebar_html if sidebar_html is not None else '<section class="magazine-rail-box"><div class="magazine-rail-heading"><h2>ترندهای امروز</h2></div><p class="trend-side-note">گزارش‌ها و موضوعات تازه از تحریریهٔ پندار</p><a href="/trends/">همهٔ مطالب ←</a></section>')
+      +'</aside></div></div>'
       '<footer class="trend-reader-footer"><a href="/">پندار</a> · خبر، اندیشه و فرهنگ</footer>'
       '</div></main></body></html>')
 
@@ -159,12 +161,22 @@ def report_body(row,site,observations,article_rows):
     body+='<small>تحریریهٔ پندار</small></span></div></div>'
     photo=credited_photo(row)
     if photo:
-        body+='<figure class="magazine-article-photo"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(report["title_fa"])+'"><figcaption class="hero-credit">عکس: '+e(photo["credit"])+'</figcaption></figure>'
+        credit=e(photo["credit"])
+        link=('<a href="'+e(photo["source_url"])+'" rel="noopener noreferrer">منبع تصویر</a>' if photo["source_url"].startswith("https://") else "")
+        license_link=('<a href="'+e(photo["license_url"])+'" rel="noopener noreferrer">'+e(photo["license"])+'</a>' if photo["license_url"].startswith("https://") else e(photo["license"]))
+        body+='<figure class="magazine-article-photo"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo.get("caption") or report["title_fa"])+'"><figcaption class="hero-credit">'+e(photo.get("caption") or "عکس آرشیوی")+' — عکس: '+credit+' · '+link+' · '+license_link+'</figcaption></figure>'
     body+='<p class="magazine-article-lead">'+e(report["lead_fa"])+' '+cites(report.get("lead_citation_ids",[]))+'</p>'
     body+='<div class="trend-report-prose">'
     for block in report["paragraphs"]:
         body+='<p>'+e(block["text_fa"])+' '+cites(block["citation_ids"])+'</p>'
     body+='</div>'
+    # An editorial digest of the actual source articles, not a fabricated trend narrative.
+    body+='<section class="trend-news-coverage"><h2>در خبرها</h2>'
+    for source in row.get("sources",[])[:4]:
+        link=str(source.get("url") or "")
+        if link.startswith("https://"):
+            body+='<a class="trend-coverage-story" href="'+e(link)+'" rel="noopener noreferrer"><strong>'+e(source.get("headline"))+'</strong><small>'+e(source.get("publisher"))+'</small></a>'
+    body+='</section>'
     key=row.get("id","")
     body+=history_graph(observations,key)
     related=related_stories(site,row.get("trend_keyword"),report["title_fa"])
