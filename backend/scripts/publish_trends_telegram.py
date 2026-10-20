@@ -54,20 +54,20 @@ def candidates(data):
 
 
 def message(row):
-    lead = row["lead"].replace("\\n", " ").strip()
+    lead = row["lead"].replace("\n", " ").strip()
     if len(lead) > 420:
         lead = lead[:417].rsplit(" ", 1)[0] + "…"
     title = html.escape(row["title"])
-    description = "\\n\\n" + html.escape(lead) if lead else ""
+    description = "\n\n" + html.escape(lead) if lead else ""
     link = html.escape(row["url"], quote=True)
-    return f"📈 <b>ترندهای پندار</b>\\n\\n<b>{title}</b>{description}\\n\\n<a href=\\"{link}\\">متن کامل در پندار ←</a>"
+    return f"📈 <b>ترندهای پندار</b>\n\n<b>{title}</b>{description}\n\n<a href=\\"{link}\\">متن کامل در پندار ←</a>"
 
 
 def publish(data, ledger, telegram, chat_id, dry_run=False):
     rows = candidates(data)
     if dry_run:
         for row in rows:
-            print(message(row) + "\\n----")
+            print(message(row) + "\n----")
         print("Eligible trends:", len(rows))
         return len(rows)
 
