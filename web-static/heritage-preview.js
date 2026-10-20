@@ -380,29 +380,48 @@
         grid.innerHTML='<div class="feature-trend-empty">گزارش تازهٔ قابل انتشار برای این نوبت موجود نیست. <a href="/trends/">آرشیو ترندهای امروز ←</a></div>';
         return;
       }
-      // Exactly one lead story; only genuine reported articles enter this rail.
-      // Monitored search terms remain in the archive, not on the homepage.
-      var lead=reports[0],img=validImage(lead.image_url);
-      var ok=img?await checkImage(img):false;
-      var leadHtml='<a class="feature-trend-card trend-lead '+(ok?'has-photo':'text-only')+'" href="'+esc(lead.url)+'">'
-        +(ok?'<span class="feature-trend-picture"><img src="'+esc(img)+'" alt="'+esc(lead.image_alt||"")+'" loading="eager" decoding="async"></span>':'')
-        +'<span class="feature-trend-copy"><span class="category-flag orange">گزارش ویژهٔ ترندهای امروز</span>'
-        +'<strong>'+esc(lead.title)+'</strong><span>'+esc(excerpt(lead.lead_fa||"",180))+'</span>'
-        +'<small class="trend-byline">'+esc(lead.author_name_fa||"تحریریهٔ پندار")+'</small></span></a>';
-      var others=reports.slice(1,5);
+      // Only a verified working photo gets a visual feature. Otherwise the
+      // story remains an ordinary compact headline, never a blank giant card.
+      var checks=await Promise.all(reports.map(async function(r){
+        var url=validImage(r.image_url);
+        return !!url && await checkImage(url);
+      }));
+      var photographic=[],remaining=[];
+      reports.forEach(function(r,i){
+        if(checks[i])photographic.push(r);
+        else remaining.push(r);
+      });
+      var lead=photographic[0]||null;
+      if(photographic.length>1)remaining=photographic.slice(1).concat(remaining);
+      var leadHtml="";
+      if(lead){
+        var img=validImage(lead.image_url);
+        leadHtml='<a class="feature-trend-card trend-lead has-photo" href="'+esc(lead.url)+'">'
+          +'<span class="feature-trend-picture"><img src="'+esc(img)+'" alt="'+esc(lead.image_alt||"")+'" loading="eager" decoding="async"></span>'
+          +'<span class="feature-trend-copy"><span class="category-flag orange">گزارش ویژهٔ ترندهای امروز</span>'
+          +'<strong>'+esc(lead.title)+'</strong><span>'+esc(excerpt(lead.lead_fa||"",180))+'</span>'
+          +'<small class="trend-byline">'+esc(lead.author_name_fa||"تحریریهٔ پندار")+'</small></span></a>';
+      }
+      var others=remaining.slice(0,5);
       var tail=others.length?'<section class="feature-trend-continuation" aria-label="دیگر گزارش‌های ترند">'
-        +'<div class="feature-trend-continuation-heading"><h3>دیگر گزارش‌های امروز</h3></div>'
+        +'<div class="feature-trend-continuation-heading"><h3>ادامهٔ ترندهای امروز</h3></div>'
         +'<div class="feature-trend-continuation-rows">'+others.map(function(r){
           return '<a class="feature-trend-list-row" href="'+esc(r.url)+'"><span class="feature-trend-list-mark" aria-hidden="true"></span>'
            +'<span class="feature-trend-list-copy"><strong>'+esc(r.title)+'</strong><small>'+esc(r.author_name_fa||"تحریریهٔ پندار")+'</small></span>'
            +'<span class="feature-trend-list-arrow">←</span></a>';
         }).join('')+'</div></section>':'';
       grid.innerHTML=leadHtml+tail+'<a class="feature-trends-all" href="/trends/">آرشیو ترندهای امروز ←</a>';
-      var hero=grid.querySelector(".feature-trend-card.trend-lead img");
-      if(hero)hero.addEventListener("error",function(){
-        var card=hero.closest(".feature-trend-card");
-        if(card){hero.parentElement.remove();card.classList.remove("has-photo");card.classList.add("text-only");}
-      },{once:true});
+      grid.querySelectorAll(".feature-trend-card img").forEach(function(photo){
+        photo.addEventListener("error",function(){
+          var card=photo.closest(".feature-trend-card");
+          if(card){
+            // Rare race: file disappears after preflight. Preserve the headline.
+            card.classList.remove("has-photo");card.classList.add("text-only");
+            photo.parentElement.remove();
+          }
+        },{once:true});
+      });
+
     }).catch(function(){
       grid.innerHTML='<div class="feature-trend-empty">دریافت گزارش‌های ترند موقتاً امکان‌پذیر نیست. <a href="/reports/">مشاهدهٔ گزارش‌ها ←</a></div>';
     });
