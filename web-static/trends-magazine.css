@@ -2,8 +2,6 @@
 html,body{margin:0;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed 3px,#e8ebe8 3px,#e8ebe8 4px);color:#23352d}
 #detail-view{display:block!important;max-width:none!important;padding:0!important}
 #detail-view .magazine-reader{min-height:100vh}
-#detail-view .magazine-article-layout{grid-template-columns:minmax(0,1.85fr) minmax(230px,.8fr)}
-#detail-view .magazine-article-paper{min-height:540px}
 #detail-view .story-author-byline{display:flex;align-items:center;margin:0 0 27px;padding:15px 0;border-top:1px solid #dee5de;border-bottom:1px solid #dee5de}
 #detail-view .story-author-credit{display:flex;align-items:center;gap:13px}
 #detail-view .story-author-credit>span:last-child{display:flex;flex-direction:column}
@@ -41,8 +39,7 @@ html,body{margin:0;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed
 #detail-view .trend-topic-links a{border:1px solid #cce1d9;border-radius:4px;padding:8px 12px;font-size:13px;background:#f6faf7;color:#255b57;text-decoration:none}
 #detail-view .trend-observation-only{font-size:14px;color:#5e766c}
 #detail-view .magazine-article-photo figcaption{font-size:11px;color:#77867c;padding-top:6px}
-@media(max-width:900px){#detail-view .magazine-article-layout{grid-template-columns:1fr}#detail-view .magazine-article-rail{display:none}}
-@media(max-width:600px){#detail-view .magazine-article-paper{padding:23px 18px}#detail-view .trend-index-grid{grid-template-columns:1fr}#detail-view .trend-report-prose p{font-size:15px}}
+@media(max-width:600px){#detail-view .trend-index-grid{grid-template-columns:1fr}#detail-view .trend-report-prose p{font-size:15px}}
 
 /* Source-aware trend photo and richer second column. */
 #detail-view .magazine-article-rail .magazine-rail-box{margin:0 0 16px;background:#fff;border-top:3px solid #d9e5dd;padding:15px}
@@ -58,3 +55,10 @@ html,body{margin:0;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed
 #detail-view .trend-coverage-story strong{font-size:14px;line-height:1.9;flex:1}
 #detail-view .trend-coverage-story small{font-size:11px;color:#789087;white-space:nowrap}
 #detail-view .hero-credit a{color:#157a76;text-decoration:underline;text-underline-offset:2px}
+
+/* Reuse Pendar's article layout/breakpoints. The only media override needed
+   by trends is a stable image crop, while retaining caption below the frame. */
+#detail-view .magazine-article-photo{width:100%;max-width:100%;margin:12px 0 26px}
+#detail-view .magazine-article-photo .trend-photo-frame{width:100%;aspect-ratio:16/9;overflow:hidden;background:#edf1ed}
+#detail-view .magazine-article-photo .trend-photo-frame .hero-img{display:block;width:100%;height:100%;max-height:none;object-fit:cover;object-position:center 30%;border-radius:0}
+#detail-view .magazine-article-photo .hero-credit{display:block;max-width:100%;font-size:11px;line-height:1.75;padding:7px 0 0;margin:0;overflow-wrap:anywhere}
