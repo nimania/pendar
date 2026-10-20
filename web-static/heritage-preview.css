@@ -403,3 +403,13 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
  .heritage-root .feature-trend-card.trend-lead.text-only{padding:21px 18px;min-height:180px}
  .heritage-root .feature-trend-card.trend-lead.text-only strong{font-size:22px}
 }
+
+/* Third editorial tab: trending public figures, using actual figure profile URLs. */
+.heritage-root .feature-trending-figures-grid{border-top:4px solid #df651c;background:#fff;padding:22px}
+.heritage-root .feature-trend-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.heritage-root .feature-trend-person{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;border:1px solid #e1e8e2;background:#f9faf8;padding:20px 10px;min-width:0;text-decoration:none}
+.heritage-root .feature-trend-person img,.heritage-root .trend-person-monogram{width:96px;height:96px;border-radius:50%;object-fit:cover;background:#e6eee8;display:flex;align-items:center;justify-content:center;color:#306d5b;font-size:29px;font-weight:800}
+.heritage-root .feature-trend-person strong{color:#233a2f;font-size:15px}
+.heritage-root .feature-trend-person small{font-size:11px;color:#67796e;line-height:1.7}
+.heritage-root .feature-trend-person:hover{background:#edf6f0}
+@media(max-width:680px){.heritage-root .feature-trend-people{grid-template-columns:repeat(2,minmax(0,1fr))}.heritage-root .feature-trending-figures-grid{padding:12px}}
