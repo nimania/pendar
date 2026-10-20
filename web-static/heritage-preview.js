@@ -58,7 +58,7 @@
         imageChecks.set(url,Boolean(ok));
         resolve(Boolean(ok));
       };
-      var timer=setTimeout(function(){done(false);},2600);
+      var timer=setTimeout(function(){done(false);},4800);
       img.onload=function(){if(img.naturalWidth>=280&&img.naturalHeight>=175){imageDimensions.set(url,{width:img.naturalWidth,height:img.naturalHeight});}done(img.naturalWidth>=280&&img.naturalHeight>=175);};
       img.onerror=function(){done(false);};
       img.src=url;
