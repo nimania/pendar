@@ -83,7 +83,7 @@ async function showPendarEditorialArchive(){
     const authorStories=directory.authors.map(a=>{
       const count=counts[a.id]||0;
       const picture=pendarAuthorPortraitCSS(a.id);
-      return '<a class="editorial-story-profile" href="/editorial-author/'+encodeURIComponent(a.id)+'/" title="'+esc(a.role_fa||"")+'">'
+      return '<a class="editorial-story-profile" href="'+pendarAuthorUrl(a.id)+'" title="'+esc(a.role_fa||"")+'">'
         +'<span class="editorial-story-ring"><span class="editorial-story-face"'+(picture?' style="'+picture+'"':"")+'>'+(picture?"":"پ")+'</span></span>'
         +'<strong>'+esc(a.display_name_fa)+'</strong><small>'+esc(a.role_fa||"")+'</small>'
         +'<span class="editorial-story-count">'+faN(count)+' گزارش</span></a>';
