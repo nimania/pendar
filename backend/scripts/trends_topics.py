@@ -59,7 +59,8 @@ def clean_title(title):
 
 def canonical_label(topic):
     cleaned=norm(topic)
-    return ALIASES.get(cleaned,cleaned)
+    normalized_aliases={norm(k):v for k,v in ALIASES.items()}
+    return normalized_aliases.get(cleaned,cleaned)
 
 def figures_index(site):
     path=Path(site)/"data"/"figures.json"
@@ -85,8 +86,9 @@ def classify(site,keyword,index=None):
         person=known[canonical]
         return {"kind":"person","label":canonical,"url":"/@"+person["handle"]+"/",
                 "existing":True,"name":person.get("name_fa") or canonical,"record":person}
-    if canonical in KNOWN_PEOPLE:
-        person=KNOWN_PEOPLE[canonical]
+    matched_person=next((person for label,person in KNOWN_PEOPLE.items() if norm(label)==norm(canonical)),None)
+    if matched_person is not None:
+        person=matched_person
         return {"kind":"person","label":canonical,"url":"/@"+person["slug"]+"/",
                 "existing":False,"name":person["name"],"record":person}
     for labels,slug,desc in EVENTS:
@@ -111,7 +113,7 @@ def related_people(site,row,index=None,limit=5):
     seen=set()
     # Full names only; require at least two tokens for matching in article prose.
     for name in list(KNOWN_PEOPLE)+[n for n in index if len(n.split())>=2]:
-        if len(name.split())<2 or name not in body:continue
+        if len(norm(name).split())<2 or norm(name) not in norm(body):continue
         item=classify(site,name,index)
         if item["kind"]=="person" and item["url"] not in seen:
             result.append(item);seen.add(item["url"])
