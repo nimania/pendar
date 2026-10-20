@@ -30,6 +30,7 @@ on:
       - "backend/scripts/validate_site_integrity.py"
       - "backend/scripts/trends_seo.py"
       - "backend/scripts/publish_google_trends.py"
+      - "backend/scripts/publish_editorial_handles.py"
       - "backend/scripts/trends_magazine.py"
       - "backend/scripts/trends_media.py"
       - "backend/scripts/trends_topics.py"
@@ -573,6 +574,7 @@ jobs:
                   target.parent.mkdir(parents=True,exist_ok=True)
                   shutil.copy2(shell,target)
           PY
+          python backend/scripts/publish_editorial_handles.py --site site
           python backend/scripts/verify_direct_routes.py site
       - name: Install video compressor for Pages artifact
         run: |
