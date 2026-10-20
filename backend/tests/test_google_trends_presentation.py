@@ -75,6 +75,10 @@ class TrendPresentationTests(unittest.TestCase):
             self.assertIn('rel="canonical"',html)
             self.assertIn('application/ld+json',html)
             self.assertIn("بلیت قطار",html)
+            index=(site/"trends/index.html").read_text(encoding="utf-8")
+            self.assertIn("ادامهٔ ترندهای امروز",index)
+            self.assertIn("trend-index-headline-list",index)
+            self.assertNotIn("trend-index-with-photo",index)
             self.assertTrue((site/"sitemap-trends.xml").is_file())
 
 if __name__ == "__main__":unittest.main()
