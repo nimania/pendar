@@ -151,7 +151,7 @@ def magazine_shell(title,body,meta,**kwargs):
       +'<section class="magazine-rail-box trend-compact-other"><div class="magazine-rail-heading"><h2>دیگر ترندهای امروز</h2></div><div data-trends-related-rail><a class="trend-side-link" href="/trends/">دیدن ترندها ←</a></div></section>'
       +'</aside></div></div>'
       '<footer class="trend-reader-footer"><a href="/">پندار</a> · خبر، اندیشه و فرهنگ</footer>'
-      '<script src="/trends-interactions.js?v=20261020-follow-rail-1" defer></script>'
+      '<script src="/trends-interactions.js?v=20261020-follow-rail-2" defer></script>'
       '</div></main></body></html>')
 
 def public_prose(value):
