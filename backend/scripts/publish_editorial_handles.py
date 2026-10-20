@@ -6,7 +6,6 @@ import argparse
 import html
 import json
 import re
-import shutil
 from pathlib import Path
 
 def publish(site: Path) -> int:
@@ -32,6 +31,14 @@ def publish(site: Path) -> int:
         destination.parent.mkdir(parents=True,exist_ok=True)
         content=shell.read_text(encoding="utf-8")
         content=content.replace("<head>","<head>\n<!-- data-editorial-profile-shell=\"1\" -->",1)
+        canonical="https://pendar.io/@"+handle+"/"
+        # Crawlers see writer-specific identity before the SPA hydrates.
+        meta=(
+            '<title>'+html.escape(author["display_name_fa"])+' | تحریریه پندار</title>'
+            '<meta name="description" content="'+html.escape(author.get("bio_fa",""),quote=True)+'">'
+            '<link rel="canonical" href="'+html.escape(canonical,quote=True)+'">'
+        )
+        content=content.replace("</head>",meta+"</head>",1)
         destination.write_text(content,encoding="utf-8")
         legacy=site/"editorial-author"/desk/"index.html"
         legacy.parent.mkdir(parents=True,exist_ok=True)
