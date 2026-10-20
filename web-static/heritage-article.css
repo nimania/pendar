@@ -283,3 +283,26 @@ html.heritage-article-active #detail-view{padding:0;max-width:none;width:100%;ma
 /* pendar-priority-home */
 #home-daily .home-culture-panel {display:none!important}
         #home-daily .home-daily-grid {grid-template-columns:minmax(0,1fr)!important}
+
+/* Prominent Telegram invitation and country radars on article pages only. */
+.telegram-prominent{display:flex!important;align-items:center;gap:14px;flex-wrap:wrap;padding:20px!important;margin:24px 0!important;background:linear-gradient(120deg,#eaf7ff,#d9f0ff)!important;border:1px solid #94cef2!important;border-right:5px solid #229ed9!important;border-radius:12px!important;box-shadow:0 5px 18px rgba(34,158,217,.12);direction:rtl}
+.telegram-prominent .telegram-mark{width:50px;height:50px;flex:0 0 50px;display:grid;place-items:center;border-radius:50%;background:#229ed9;color:white;font-size:27px;transform:none}
+.telegram-prominent .telegram-copy{flex:1 1 180px;min-width:0}
+.telegram-prominent strong{display:block;font-size:18px!important;color:#125a84!important;line-height:1.6}
+.telegram-prominent p{font-size:13px!important;color:#326880!important;margin:4px 0!important;line-height:1.8}
+.telegram-prominent a{display:inline-flex!important;align-items:center;justify-content:center;background:#229ed9!important;color:#fff!important;padding:11px 17px!important;border-radius:8px!important;font-weight:800!important;text-decoration:none!important;white-space:nowrap}
+.telegram-prominent a:hover{background:#1684bd!important}
+.country-radar-panel{direction:rtl;display:block;background:#fff;border:1px solid #d9e3e9;border-radius:10px;overflow:hidden;margin-bottom:17px;box-shadow:0 3px 14px rgba(25,60,80,.06)}
+.country-radar-header{display:flex;align-items:center;gap:9px;padding:14px 15px;background:#eff6fb;border-top:4px solid #2586b9}
+.country-radar-header h2{font-size:16px!important;font-weight:850!important;margin:0!important;flex:1;color:#1d445e}
+.country-radar-header>a{font-size:11px;color:#287fa9;text-decoration:none}
+.radar-indicator{width:10px;height:10px;border-radius:50%;background:#209ed4;box-shadow:0 0 0 4px rgba(32,158,212,.15)}
+.country-radar-intro{margin:0!important;padding:10px 15px;color:#617782;font-size:12px;line-height:1.7}
+.country-radar-item{display:flex;gap:10px;align-items:center;padding:13px 12px;border-top:1px solid #e5edf0;text-decoration:none!important;color:#264658!important;transition:background .15s}
+.country-radar-item:hover{background:#edf8fe}
+.country-radar-flag{font-size:25px;flex:0 0 31px}
+.country-radar-item>span:nth-child(2){min-width:0;flex:1}
+.country-radar-item strong{display:block;font-size:13px;line-height:1.6;color:#1f3c50}
+.country-radar-item small{display:block;font-size:11px;line-height:1.6;color:#617580}
+.country-radar-arrow{color:#168cbd;font-weight:800}
+@media(max-width:720px){.telegram-prominent{padding:14px!important}.telegram-prominent .telegram-mark{width:42px;height:42px;flex-basis:42px}.telegram-prominent a{width:100%}.country-radar-panel{margin-top:16px}}
