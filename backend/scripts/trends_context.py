@@ -85,6 +85,35 @@ def context_content(site,entity,briefs,articles):
             unique.append(item);seen.add(item["url"])
     return unique
 
+def register_verified_person(site,entity):
+    """Make source-identified people discoverable in Pendar's native figure feed.
+
+    Do not create identities from unchecked keywords; only the small curated
+    KNOWN_PEOPLE catalog reaches this branch, and no account is marked verified.
+    """
+    if entity.get("kind")!="person" or entity.get("existing"):return
+    from trends_topics import KNOWN_PEOPLE
+    record=entity.get("record") or {}
+    if not any(record.get("slug")==p.get("slug") and record.get("source")==p.get("source")
+               for p in KNOWN_PEOPLE.values()):
+        return
+    file=Path(site)/"data"/"figures.json"
+    if not file.is_file():return
+    try:data=json.loads(file.read_text(encoding="utf-8"))
+    except (OSError,ValueError):return
+    if not isinstance(data,dict) or not isinstance(data.get("figures"),list):return
+    handle=record.get("slug")
+    if any(str(p.get("handle") or "").casefold()==handle.casefold() for p in data["figures"]):
+        return
+    data["figures"].append({
+        "handle":handle,"name_fa":record.get("name") or entity["label"],
+        "role_fa":record.get("description") or "",
+        "bio_fa":record.get("description") or "",
+        "aliases":[],"posts":[],"avatar":"","verified":False,"directory":True,
+        "profile_source_url":record["source"],
+    })
+    file.write_text(json.dumps(data,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
+
 def render_context(site,entity,briefs,articles):
     from trends_magazine import magazine_shell,e
     url=entity["url"]
@@ -140,4 +169,5 @@ def render_context(site,entity,briefs,articles):
     target.write_text(magazine_shell(label,body,intro or label,path=url,
                  kind="ProfilePage" if kind=="person" else "CollectionPage",
                  robots="noindex,follow"),encoding="utf-8")
+    register_verified_person(site,entity)
     return True
