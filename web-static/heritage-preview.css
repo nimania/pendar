@@ -338,3 +338,46 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .feature-trend-card.text-only .feature-trend-copy>span:last-of-type{font-size:13px;line-height:2}
 .heritage-root .feature-trend-copy .trend-byline{font-size:11px;font-weight:700;color:#4d827a;margin-top:7px}
 @media(max-width:720px){.heritage-root .feature-trend-card.trend-lead.text-only{min-height:275px;padding:17px}.heritage-root .feature-trend-card.trend-lead.text-only strong{font-size:24px}}
+
+/* 2026-10-20: Use original Pendar magazine rhythm. Picture-backed reports
+   occupy visual cards; reports without a photo live in a compact headline list.
+   No fixed-height empty artwork blocks. */
+.heritage-root .feature-trends-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px;background:#fff;align-items:start}
+.heritage-root .feature-trend-card.has-photo{align-self:stretch;border:1px solid #e0e5df;border-radius:0;background:#fff;box-shadow:none}
+.heritage-root .feature-trend-card.has-photo .feature-trend-picture{width:100%;height:auto;aspect-ratio:16/9;min-height:0;max-height:none;display:block;overflow:hidden;background:#e8eeea}
+.heritage-root .feature-trend-card.has-photo .feature-trend-picture img{width:100%;height:100%;aspect-ratio:16/9;display:block;object-fit:cover;object-position:center}
+.heritage-root .feature-trend-card.trend-lead.has-photo{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+.heritage-root .feature-trend-card.trend-lead.has-photo .feature-trend-picture{aspect-ratio:16/9;height:auto;min-height:0}
+.heritage-root .feature-trend-card.trend-lead.has-photo .feature-trend-copy{padding:22px;justify-content:center}
+.heritage-root .feature-trend-card.has-photo .feature-trend-copy{padding:13px 15px;gap:7px}
+.heritage-root .feature-trend-card.has-photo .feature-trend-copy strong{font-size:17px;line-height:1.8}
+.heritage-root .feature-trend-card.trend-lead.has-photo .feature-trend-copy strong{font-size:clamp(20px,2.2vw,26px);line-height:1.75}
+.heritage-root .feature-trend-continuation{grid-column:1/-1;border:1px solid #dce5de;background:white;min-width:0}
+.heritage-root .feature-trend-continuation-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 17px;border-top:4px solid #158f98;border-bottom:1px solid #e2e8e3;background:#f7faf8}
+.heritage-root .feature-trend-continuation-heading h3{margin:0;font:800 17px/1.7 Vazirmatn,Tahoma,sans-serif;color:#243b32}
+.heritage-root .feature-trend-continuation-heading>span{font:500 11px/1.6 Vazirmatn,Tahoma,sans-serif;color:#6a7c73}
+.heritage-root .feature-trend-continuation-rows{display:flex;flex-direction:column}
+.heritage-root .feature-trend-list-row{display:flex;gap:12px;align-items:start;padding:11px 17px;border-bottom:1px solid #ebeeeb;text-decoration:none;color:#27362e}
+.heritage-root .feature-trend-list-row:last-child{border-bottom:0}
+.heritage-root .feature-trend-list-row:hover{background:#f6faf7}
+.heritage-root .feature-trend-list-mark{width:6px;height:6px;flex:0 0 6px;margin-top:12px;border-radius:50%;background:#df671e}
+.heritage-root .feature-trend-list-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:3px}
+.heritage-root .feature-trend-list-copy strong{font:750 14px/1.85 Vazirmatn,Tahoma,sans-serif;color:#293931}
+.heritage-root .feature-trend-list-copy>span{font:400 12px/1.8 Vazirmatn,Tahoma,sans-serif;color:#62736a;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.heritage-root .feature-trend-list-copy small{font:500 10px/1.6 Vazirmatn,Tahoma,sans-serif;color:#40877c}
+.heritage-root .feature-trend-list-arrow{color:#148e98;font-size:15px;flex:0 0 auto}
+.heritage-root .feature-trend-empty{grid-column:1/-1;background:#f7faf8;border-top:3px solid #148f98;padding:24px;font-size:14px}
+.heritage-root .feature-trend-empty a{color:#117e89}
+@media(max-width:720px){
+ .heritage-root .feature-trend-card.trend-lead.has-photo{display:flex;flex-direction:column}
+ .heritage-root .feature-trend-card.trend-lead.has-photo .feature-trend-picture{aspect-ratio:16/9;height:auto}
+ .heritage-root .feature-trend-card.trend-lead.has-photo .feature-trend-copy{padding:15px}
+ .heritage-root .feature-trend-continuation-heading{padding:11px 12px}
+ .heritage-root .feature-trend-continuation-heading h3{font-size:15px}
+ .heritage-root .feature-trend-list-row{padding:10px 12px}
+}
+@media(max-width:470px){
+ .heritage-root .feature-trend-card.has-photo:not(.trend-lead){display:flex;flex-direction:column}
+ .heritage-root .feature-trend-card.has-photo:not(.trend-lead) .feature-trend-picture{aspect-ratio:16/9;height:auto;min-height:0}
+ .heritage-root .feature-trend-continuation-heading>span{display:none}
+}
