@@ -14,7 +14,8 @@ from urllib.parse import urlsplit
 
 from trends_seo import stable_key,canonical_path,update_sitemap
 from trends_media import verify_and_install
-from trends_topics import clean_title, canonical_label, classify, figures_index, related_people, write_context_page
+from trends_topics import clean_title, canonical_label, classify, figures_index, related_people
+from trends_context import render_context
 from trends_magazine import (e,byline,magazine_shell,report_body,
                               index_shell,related_stories,credited_photo)
 
@@ -175,8 +176,6 @@ def run(site,data):
                 row.update({"image_url":photo["url"],"image_credit":photo["credit"],
                     "image_license":photo["license"],"image_license_url":photo["license_url"],
                     "image_source_url":photo["source_url"],"image_caption":photo["caption"]})
-        for person in related_people(site,row,index=index):
-            write_context_page(site,person,related_stories(site,row.get("trend_keyword"),row["report"]["title_fa"]))
     articles=[]
     for row in records:
         url=canonical_path("report",row["id"])
@@ -190,6 +189,11 @@ def run(site,data):
                          "image_credit":photo["credit"] if photo else "",
                          "published_at":row.get("generated_at") or row.get("observed_at"),
                          "trend_keyword":row.get("trend_keyword")})
+    # Build source-backed person pages before any report sidebar hyperlinks them.
+    for row in records:
+        for person in related_people(site,row,index=index):
+            person["trend_keyword"]=row.get("trend_keyword")
+            render_context(site,person,briefs,articles)
     for row in records:
         url=canonical_path("report",row["id"])
         target=site/url.lstrip("/")/"index.html"
@@ -209,16 +213,20 @@ def run(site,data):
                     "image_license":photo["license"],"image_license_url":photo["license_url"],
                     "image_source_url":photo["source_url"],"image_caption":photo["caption"]})
         if classified["kind"]=="topic":
+            # Raw search terms are research inputs, NOT promoted news cards.
+            # Retain a noindex informational source page only.
             target=site/url.lstrip("/")/"index.html"
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_text(brief_page(brief,url),encoding="utf-8")
-        else:
-            linked=related_stories(site,classified["label"],brief["title_fa"])
-            write_context_page(site,classified,linked)
-        topics.append({"title":classified["label"] if classified["kind"]!="topic" else brief["title_fa"],
+            continue
+        classified["trend_keyword"]=brief["trend_keyword"]
+        if not render_context(site,classified,briefs,articles):
+            continue
+        # A topic earns a visible link only with real relevant coverage.
+        topics.append({"title":classified.get("name") or classified["label"],
                        "url":url,"trend_keyword":brief["trend_keyword"],"kind":classified["kind"]})
     dossiers=topical_dossiers(site,articles)
-    body='<div class="magazine-article-kicker">گزارش‌های تحریریه</div><h1>ترندهای روز</h1>'
+    body='<div class="magazine-article-kicker">گزارش‌های تحریریه</div><h1>ترندهای امروز</h1>'
     body+='<p class="trend-index-lead">مهم‌ترین موضوعاتی که توجه جست‌وجوگران ایران را جلب کرده‌اند؛ همراه با گزارش‌های مستند تحریریهٔ پندار.</p>'
     if dossiers:
         body+='<nav class="trend-topic-links" aria-label="پرونده‌های موضوعی">'+''.join('<a href="'+e(q["url"])+'">'+e(q["title"])+'</a>' for q in dossiers)+'</nav>'
@@ -243,8 +251,8 @@ def run(site,data):
     if not articles:
         body+='<p>در حال تکمیل گزارش‌های این نوبت.</p>'
     if topics:
-        body+='<section class="trend-index-section"><h2>موضوعات زیر نظر</h2><p class="trend-observation-only">واژه‌های پرجست‌وجو و پیوند خبرهای مرتبط؛ این صفحه‌ها جای گزارش کامل را نمی‌گیرند.</p>'
-        body+='<div class="trend-topic-links">'+''.join('<a href="'+e(r["url"])+'">'+e(r["trend_keyword"])+'</a>' for r in topics)+'</div></section>'
+        body+='<section class="trend-index-section"><h2>پرونده‌ها و چهره‌های مرتبط</h2>'
+        body+='<div class="trend-topic-links">'+''.join('<a href="'+e(r["url"])+'">'+e(r["title"])+'</a>' for r in topics)+'</div></section>'
     (root/"index.html").write_text(index_shell(body),encoding="utf-8")
 
     public={k:v for k,v in d.items() if k not in ("research_reports","research_metrics","unmatched_trends","trend_observations")}
@@ -252,7 +260,7 @@ def run(site,data):
     public["reports"]=articles
     public["briefs"]=topics
     public["subjects"]=dossiers
-    public["display_title"]="ترندهای روز"
+    public["display_title"]="ترندهای امروز"
     out=site/"data"/"google-trends-iran.json";out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps(public,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
     print("Search Trends indexed sitemap URLs:",update_sitemap(site,["/trends/"]+
