@@ -327,7 +327,7 @@ async function openStory(id) {
        +(s.what_happened_fa&&s.what_happened_fa!==s.summary_fa?'<h2>چه اتفاقی افتاد؟</h2><p>'+esc(s.what_happened_fa)+'</p>':'')
        +(s.why_it_matters_fa&&s.why_it_matters_fa!==s.summary_fa&&s.why_it_matters_fa!==s.what_happened_fa?'<h2>چرا اهمیت دارد؟</h2><p>'+esc(s.why_it_matters_fa)+'</p>':'')
        +'</div>':""}
-<aside class="pendar-telegram-promo"><strong>خبرهای پندار در تلگرام</strong><p>خبرها و گزارش‌های منتخب را دنبال کنید.</p><a href="https://t.me/pendario">عضویت در کانال پندار ←</a></aside>
+<aside class="pendar-telegram-promo telegram-prominent"><span class="telegram-mark" aria-hidden="true">➤</span><span class="telegram-copy"><strong>پندار در تلگرام</strong><p>خبرها و گزارش‌های منتخب را مستقیم در کانال دنبال کنید.</p></span><a href="https://t.me/pendario" target="_blank" rel="noopener noreferrer">عضویت در کانال ←</a></aside>
     ${!editorial?articleDisplayAdMarkup():""}
     <details class="story-examination"><summary><span>زیر ذره‌بین پندار<small class="story-examination-description">منابع، پیشینه، دیدگاه‌ها و پرسش‌وپاسخ</small></span></summary><div class="story-examination-body">
     ${pendarHistoricalContext(s)}
@@ -357,7 +357,7 @@ async function openStory(id) {
     </div></details>
     <div id="story-discovery"></div>
           </article>
-          <aside class="magazine-article-rail" aria-label="مطالب مرتبط">
+          <aside class="magazine-article-rail" aria-label="مطالب مرتبط"><section class="country-radar-panel" aria-label="رادار کشورها"><div class="country-radar-header"><span class="radar-indicator" aria-hidden="true"></span><h2>رادار کشورها</h2><a href="/radar/">همه ←</a></div><p class="country-radar-intro">تحولات و نشانه‌های مهم</p><a class="country-radar-item" href="/us-radar/"><span class="country-radar-flag" aria-hidden="true">🇺🇸</span><span><strong>رادار آمریکا</strong><small>تحولات سیاسی و پیامدها برای ایران</small></span><span class="country-radar-arrow">←</span></a><a class="country-radar-item" href="/israel-radar/"><span class="country-radar-flag" aria-hidden="true">🇮🇱</span><span><strong>رادار اسرائیل</strong><small>تحولات سیاسی و منطقه‌ای</small></span><span class="country-radar-arrow">←</span></a><a class="country-radar-item" href="/radar/iran-scenarios/"><span class="country-radar-flag" aria-hidden="true">🇮🇷</span><span><strong>سناریوهای ایران</strong><small>روندها و احتمال‌های آینده</small></span><span class="country-radar-arrow">←</span></a></section>
             <section class="magazine-rail-box">
               <div class="magazine-rail-heading"><h2>در همین موضوع</h2><a href="/headlines/">بیشتر ←</a></div>
               ${magazineSideStories||'<p class="magazine-rail-empty">خبرهای مرتبط در آرشیو پندار</p>'}
