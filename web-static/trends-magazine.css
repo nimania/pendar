@@ -79,3 +79,14 @@ html,body{margin:0;background:repeating-linear-gradient(135deg,#edf0ed 0,#edf0ed
 #detail-view .trend-index-headline strong{font-size:15px;line-height:1.8;color:#24362f}
 #detail-view .trend-index-headline span{font-size:12px;line-height:1.8;color:#5a7167}
 #detail-view .trend-index-headline small{font-size:11px;color:#27786e}
+
+/* Follow controls share the existing figures directory preference and are
+   shown only when JavaScript confirms local persistence is available. */
+#detail-view .trend-side-person-item{border-bottom:1px solid #e7ece6;padding-bottom:9px}
+#detail-view .trend-side-person-item .trend-side-person{border-top:0;padding-bottom:3px}
+#detail-view .trend-follow-button{display:inline-flex;align-items:center;border:1px solid #9fc4b8;border-radius:5px;background:#eef8f3;color:#23685a;padding:5px 10px;margin:2px 7px 8px;cursor:pointer;font:700 12px/1.6 Vazirmatn,Tahoma,sans-serif}
+#detail-view .trend-follow-button[hidden]{display:none}
+#detail-view .trend-follow-button[aria-pressed="true"]{background:#275c53;color:#fff;border-color:#275c53}
+#detail-view .trend-follow-button:focus-visible{outline:2px solid #ef7e31;outline-offset:2px}
+#detail-view .trend-compact-other .trend-side-link{font-size:12px;line-height:1.7;padding:8px 4px}
+#detail-view .trend-compact-other .trend-side-more{color:#0d776f;font-weight:700;margin-top:6px}
