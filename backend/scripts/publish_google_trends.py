@@ -84,7 +84,7 @@ def topical_dossiers(site,rows):
                     seen.add(story["url"]);contextual.append(story)
         # A pile of tags with no editorial context is not an indexable topic page.
         if len(contextual)<2:continue
-        url="/search-trends/subject/"+author_id+"/"
+        url="/trends/subject/"+author_id+"/"
         items=''.join('<a class="trend-index-item" href="'+e(r["url"])+'"><strong>'+e(r["title"])+'</strong><p>'+e(r.get("lead_fa","")[:185])+'</p></a>'
                       for r in relevant)
         background=''.join('<a class="trend-index-item" href="'+e(x["url"])+'"><strong>'+e(x["title"])+'</strong></a>' for x in contextual[:6])
@@ -105,7 +105,7 @@ def run(site,data):
     if d.get("status")!="ok":raise ValueError("Invalid Trends snapshot")
     briefs=d.get("briefs",[])
     if not isinstance(briefs,list):raise ValueError("Invalid brief index")
-    root=site/"search-trends";root.mkdir(parents=True,exist_ok=True)
+    root=site/"trends";root.mkdir(parents=True,exist_ok=True)
     observations=d.get("trend_observations",[])
     if not isinstance(observations,list):observations=[]
     records=[row for row in d.get("research_reports",[])[:120] if safe_report(row)]
@@ -162,7 +162,7 @@ def run(site,data):
     public["display_title"]="ترندهای روز"
     out=site/"data"/"google-trends-iran.json";out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps(public,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
-    print("Search Trends indexed sitemap URLs:",update_sitemap(site,["/search-trends/"]+
+    print("Search Trends indexed sitemap URLs:",update_sitemap(site,["/trends/"]+
                        [x["url"] for x in articles]+[x["url"] for x in dossiers]))
     print("Published sourced trend briefing pages:",len(topics))
     print("Published eligible editorial long reports:",len(articles))
@@ -172,7 +172,7 @@ def run(site,data):
     for i in range(1,11):
         p=root/str(i)/"index.html"
         if p.is_file():
-            p.write_text('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/search-trends/"><link rel="canonical" href="https://pendar.io/search-trends/"></head><body><a href="/search-trends/">ترندهای روز</a></body></html>',encoding="utf-8")
+            p.write_text('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/trends/"><link rel="canonical" href="https://pendar.io/trends/"></head><body><a href="/trends/">ترندهای روز</a></body></html>',encoding="utf-8")
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
