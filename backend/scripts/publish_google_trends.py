@@ -16,6 +16,7 @@ from trends_seo import stable_key,canonical_path,update_sitemap
 from trends_media import verify_and_install
 from trends_topics import clean_title, canonical_label, classify, figures_index, related_people
 from trends_context import render_context
+from trends_enrichment import smart_destinations
 from trends_magazine import (e,byline,magazine_shell,report_body,
                               index_shell,related_stories,credited_photo)
 
@@ -194,12 +195,24 @@ def run(site,data):
                          "image_alt":row["report"]["title_fa"] if photo else "",
                          "image_credit":photo["credit"] if photo else "",
                          "published_at":row.get("generated_at") or row.get("observed_at"),
-                         "trend_keyword":row.get("trend_keyword")})
+                         "trend_keyword":row.get("trend_keyword"),
+                         "locations":[d["label"] for d in smart_destinations(site,row)
+                                      if d["kind"] in {"city","province","country"}]})
+    # Add source-backed city/province pages before article inline links.
+    from trends_topics import classify
+    for article in articles:
+        for location in article.get("locations",[]):
+            entity=classify(site,location,index)
+            if entity.get("kind") in {"city","province","country"}:
+                render_context(site,entity,briefs,articles)
     # Build source-backed person pages before any report sidebar hyperlinks them.
     for row in records:
         for person in related_people(site,row,index=index):
             person["trend_keyword"]=row.get("trend_keyword")
             render_context(site,person,briefs,articles)
+    # Update article-author and figure identity signals only after new profiles
+    # have been registered in the native figures dataset.
+    index=figures_index(site)
     for row in records:
         url=canonical_path("report",row["id"])
         target=site/url.lstrip("/")/"index.html"
