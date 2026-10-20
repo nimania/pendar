@@ -32,7 +32,14 @@ def fetch_trends():
         if not title: continue
         ns = "{https://trends.google.com/trending/rss}"
         volume = item.findtext(ns+"approx_traffic") or ""
-        items.append({"keyword":title, "geo":"IR", "approx_traffic":volume,
+        related=[]
+        for child in item.findall(ns+"news_item"):
+            headline=(child.findtext(ns+"news_item_title") or "").strip()
+            link=(child.findtext(ns+"news_item_url") or "").strip()
+            outlet=(child.findtext(ns+"news_item_source") or "").strip()
+            if headline and link.startswith("https://"):
+                related.append({"headline":headline,"url":link,"publisher":outlet})
+        items.append({"related_news":related[:6],"keyword":title, "geo":"IR", "approx_traffic":volume,
                       "trend_url":item.findtext("link") or RSS,
                       "published_at":item.findtext("pubDate") or ""})
     if not items:
@@ -83,7 +90,22 @@ def main():
         stories=json.loads(get(STORIES))
         if not isinstance(stories,list):raise ValueError("Published stories is not a list")
         matches=build(trends,stories,args.limit)
+        briefs=[]
+        for trend in trends:
+            if not trend.get("related_news"):continue
+            keyword=trend["keyword"]
+            associated=next((m for m in matches if m["trend_keyword"]==keyword),None)
+            title="جست‌وجوی «"+keyword+"» در گوگل"
+            briefs.append({"title_fa":title,"trend_keyword":keyword,
+                "lead_fa":"«"+keyword+"» در خوراک ترندهای ایران ثبت شده است. این داده تنها نشانهٔ توجه جست‌وجوگران است و وقوع یا درستی هیچ خبر خاصی را اثبات نمی‌کند.",
+                "related_news":trend["related_news"],"geo":"IR",
+                "observed_at":now,"trend_url":trend["trend_url"],
+                "approx_traffic":trend["approx_traffic"],
+                "existing_article_url":associated["article_url"] if associated else None,
+                "publication_status":"source_indexed_trend_brief"})
+            if len(briefs)>=args.limit:break
         result={"observed_at":now,"source":RSS,"status":"ok","trend_count":len(trends),
+                "brief_count":len(briefs),"briefs":briefs,
                 "published_report_count":0,"existing_report_matches":len(matches),
                 "requested_initial_count":args.limit,"items":matches,
                 "unmatched_trends":[t for t in trends if t["keyword"] not in {m["trend_keyword"] for m in matches}][:30]}
