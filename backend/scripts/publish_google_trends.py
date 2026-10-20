@@ -40,10 +40,12 @@ def safe_report(row):
     return bool(report.get("lead_citation_ids")) and not set(report["lead_citation_ids"])-ids
 
 def trend_sidebar(row,site,all_articles,index):
-    people=related_people(site,row,index=index)
+    people=[p for p in related_people(site,row,index=index)
+            if (Path(site)/p["url"].lstrip("/")/"index.html").is_file()
+            and "http-equiv=\"refresh\"" not in (Path(site)/p["url"].lstrip("/")/"index.html").read_text(encoding="utf-8")]
     boxes=[]
     if people:
-        content="".join('<a class="trend-side-person" href="'+e(p["url"])+'"><strong>'+e(p.get("name") or p["label"])+'</strong><span>دیدن صفحه و دنبال‌کردن ←</span></a>' for p in people)
+        content="".join('<a class="trend-side-person" href="'+e(p["url"])+'"><strong>'+e(p.get("name") or p["label"])+'</strong><span>دیدن پروندهٔ چهره ←</span></a>' for p in people)
         boxes.append('<section class="magazine-rail-box"><div class="magazine-rail-heading"><h2>چهره‌های مرتبط</h2></div>'+content+'</section>')
     stories=related_stories(site,row.get("trend_keyword"),row["report"]["title_fa"],limit=4)
     if stories:
