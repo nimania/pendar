@@ -43,7 +43,11 @@ def byline(row):
     scores.sort(key=lambda x:(-x[0],x[1]))
     if scores and (len(scores)==1 or scores[0][0]>scores[1][0]):
         return scores[0][2]
-    return {"id":"desk","display_name_fa":"تحریریهٔ پندار"}
+    # Assign a named editor even when a fresh subject lacks taxonomy keywords.
+    # Until a dedicated sports desk exists, society covers sports appointments.
+    sports=("فوتبال","لیگ","باشگاه","خیبر","داور","ورزشی","بازی","گل","قهرمانی","پرسپولیس","استقلال")
+    fallback="society" if any(word in text for word in sports) else "society"
+    return next((a for a in catalog if a["id"]==fallback),catalog[0] if catalog else {"id":"society","display_name_fa":"ترانه نیک‌روش"})
 
 def portrait(author):
     idx=author.get("portrait_index")
@@ -152,9 +156,9 @@ def report_body(row,site,observations,article_rows):
     name=writer.get("display_name_fa") or "تحریریهٔ پندار"
     author_id=writer["id"]
     refs={x["id"]:x for x in row["sources"] if isinstance(x,dict)}
+    # Citation IDs belong to the closed source ledger, never the reading prose.
     def cites(ids):
-        return " ".join('<a class="trend-cite" href="#source-'+e(s)+'" aria-label="منبع '+e(s)+'">'+e(s)+'</a>'
-                        for s in ids if s in refs)
+        return ""
     date=e((row.get("generated_at") or row.get("observed_at") or "")[:10])
     body='<div class="magazine-article-kicker">گزارش • ترندهای روز</div>'
     body+='<div class="d-head"><div class="meta"><span class="chip">گزارش</span><time>'+date+'</time></div><h1>'+e(report["title_fa"])+'</h1></div>'
@@ -167,13 +171,13 @@ def report_body(row,site,observations,article_rows):
         link=('<a href="'+e(photo["source_url"])+'" rel="noopener noreferrer">منبع تصویر</a>' if photo["source_url"].startswith("https://") else "")
         license_link=('<a href="'+e(photo["license_url"])+'" rel="noopener noreferrer">'+e(photo["license"])+'</a>' if photo["license_url"].startswith("https://") else e(photo["license"]))
         body+='<figure class="magazine-article-photo"><div class="trend-photo-frame"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo.get("caption") or report["title_fa"])+'" loading="eager" decoding="async" width="1150" height="647"></div><figcaption class="hero-credit">'+e(photo.get("caption") or "عکس آرشیوی")+' — عکس: '+credit+' · '+link+' · '+license_link+'</figcaption></figure>'
-    body+='<p class="magazine-article-lead">'+e(report["lead_fa"])+' '+cites(report.get("lead_citation_ids",[]))+'</p>'
+    body+='<p class="magazine-article-lead">'+e(report["lead_fa"])+'</p>'
     context=report.get("trend_context")
-    if isinstance(context,dict) and context.get("text_fa") and context.get("citation_ids"):
-        body+='<section class="trend-context-evidence"><h2>زمینهٔ احتمالی افزایش جست‌وجو</h2><p>'+e(context["text_fa"])+' '+cites(context["citation_ids"])+'</p></section>'
+    # The evidence remains available inside the collapsed source ledger below.
+    # Avoid templated "why trending" blocks inside the news article.
     body+='<div class="trend-report-prose">'
     for block in report["paragraphs"]:
-        body+='<p>'+e(block["text_fa"])+' '+cites(block["citation_ids"])+'</p>'
+        body+='<p>'+e(block["text_fa"])+'</p>'
     body+='</div>'
     # An editorial digest of the actual source articles, not a fabricated trend narrative.
     body+='<section class="trend-news-coverage"><h2>در خبرها</h2>'
@@ -197,9 +201,9 @@ def report_body(row,site,observations,article_rows):
     for r in row["sources"]:
         url=str(r.get("url") or "")
         if urlsplit(url).scheme!="https":continue
-        body+='<li id="source-'+e(r["id"])+'"><a href="'+e(url)+'" rel="noopener noreferrer">'+e(r.get("publisher"))+' — '+e(r.get("headline"))+'</a></li>'
+        body+='<li><a href="'+e(url)+'" rel="noopener noreferrer">'+e(r.get("publisher"))+' — '+e(r.get("headline"))+'</a></li>'
     body+='</ol>'
-    body+='<p>مبنای انتخاب سوژه، دادهٔ عمومی ترندهای ایران بوده است. اطلاعات خبری این گزارش تنها از منابع درج‌شده تهیه شده‌اند.</p>'
+    # Research metadata is retained in the pipeline, not displayed as a boilerplate disclaimer.
     body+='</div></details>'
     return body
 
