@@ -33,6 +33,7 @@ on:
       - "backend/scripts/trends_magazine.py"
       - "backend/scripts/trends_media.py"
       - "backend/scripts/trends_topics.py"
+      - "backend/scripts/trends_context.py"
       - "backend/tests/test_trends_topics.py"
       - "backend/tests/test_google_trends_presentation.py"
       - "backend/tests/test_trends_home_cards.py"
@@ -637,9 +638,10 @@ jobs:
       - name: Check image and SEO publishing regressions
         run: |
           python -m pip install --disable-pip-version-check -q 'Pillow>=11,<13'
-          python -m py_compile backend/scripts/trends_seo.py backend/scripts/trends_magazine.py backend/scripts/trends_media.py backend/scripts/trends_topics.py backend/scripts/publish_google_trends.py
+          python -m py_compile backend/scripts/trends_seo.py backend/scripts/trends_magazine.py backend/scripts/trends_media.py backend/scripts/trends_topics.py backend/scripts/trends_context.py backend/scripts/publish_google_trends.py
           node --check web-static/heritage-preview.js
           node --check web-static/heritage-live.js
+          node --check web-static/trends-interactions.js
           python -m unittest discover -s backend/tests -p test_google_trends_presentation.py -v
           python -m unittest discover -s backend/tests -p test_trends_topics.py -v
           python -m unittest discover -s backend/tests -p test_trends_home_cards.py -v
