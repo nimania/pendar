@@ -31,6 +31,9 @@ on:
       - "backend/scripts/trends_seo.py"
       - "backend/scripts/publish_google_trends.py"
       - "backend/scripts/trends_magazine.py"
+      - "backend/scripts/trends_media.py"
+      - "backend/scripts/trends_topics.py"
+      - "backend/tests/test_trends_topics.py"
       - "backend/tests/test_google_trends_presentation.py"
 permissions:
   actions: read
@@ -633,14 +636,16 @@ jobs:
       - name: Check image and SEO publishing regressions
         run: |
           python -m pip install --disable-pip-version-check -q 'Pillow>=11,<13'
-          python -m py_compile backend/scripts/trends_seo.py backend/scripts/trends_magazine.py backend/scripts/publish_google_trends.py
+          python -m py_compile backend/scripts/trends_seo.py backend/scripts/trends_magazine.py backend/scripts/trends_media.py backend/scripts/trends_topics.py backend/scripts/publish_google_trends.py
           node --check web-static/heritage-preview.js
           node --check web-static/heritage-live.js
           python -m unittest discover -s backend/tests -p test_google_trends_presentation.py -v
+          python -m unittest discover -s backend/tests -p test_trends_topics.py -v
       - name: Overlay verified Google Trends briefings
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
+          PENDAR_TRENDS_MEDIA: "1"
         run: |
           trend_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/google-trends-iran.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].id // empty' 2>/dev/null || true)"
           if [ -z "$trend_run" ]; then
