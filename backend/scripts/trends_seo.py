@@ -33,9 +33,9 @@ def absolute(path):
     return path if path.startswith("https://pendar.io/") else BASE + "/" + path.lstrip("/")
 
 def canonical_path(kind, identifier=None):
-    if kind == "index": return "/search-trends/"
-    if kind == "report": return "/search-trends/report/" + text(identifier) + "/"
-    return "/search-trends/topic/" + text(identifier) + "/"
+    if kind == "index": return "/trends/"
+    if kind == "report": return "/trends/report/" + text(identifier) + "/"
+    return "/trends/topic/" + text(identifier) + "/"
 
 def valid_date(value):
     try:
@@ -162,18 +162,18 @@ def head_meta(title,description,path,image=None,kind="WebPage",published=None,ke
 def update_sitemap(site, indexed):
     """Write a bounded sub-sitemap and register it in the existing sitemap index."""
     site=Path(site)
-    unique=sorted(set(canonical_path("index") if x=="/search-trends/" else x
-                      for x in indexed if x.startswith("/search-trends/")))
+    unique=sorted(set(canonical_path("index") if x=="/trends/" else x
+                      for x in indexed if x.startswith("/trends/")))
     ET.register_namespace("",NS)
     root=ET.Element("{"+NS+"}urlset")
     for path in unique:
         record=ET.SubElement(root,"{"+NS+"}url")
         ET.SubElement(record,"{"+NS+"}loc").text=absolute(path)
-    dest=site/"sitemap-search-trends.xml"
+    dest=site/"sitemap-trends.xml"
     ET.ElementTree(root).write(dest,encoding="utf-8",xml_declaration=True)
     # Discovery works even if the main sitemap is a urlset instead of an index.
     robots=site/"robots.txt"
-    directive="Sitemap: https://pendar.io/sitemap-search-trends.xml"
+    directive="Sitemap: https://pendar.io/sitemap-trends.xml"
     existing=robots.read_text(encoding="utf-8") if robots.is_file() else "User-agent: *\nAllow: /\n"
     if directive not in existing:
         robots.write_text(existing.rstrip()+"\n"+directive+"\n",encoding="utf-8")
@@ -184,7 +184,7 @@ def update_sitemap(site, indexed):
         parent=tree.getroot()
         tag=parent.tag.split("}")[-1]
         if tag!="sitemapindex":return len(unique)
-        wanted=absolute("/sitemap-search-trends.xml")
+        wanted=absolute("/sitemap-trends.xml")
         if not any((el.text or "")==wanted for el in parent.iter() if el.tag.split("}")[-1]=="loc"):
             node=ET.SubElement(parent,"{"+NS+"}sitemap")
             ET.SubElement(node,"{"+NS+"}loc").text=wanted
