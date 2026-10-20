@@ -38,8 +38,8 @@ def example():
 class ResearchTest(unittest.TestCase):
     def setUp(self):
         self.sources = [
-            {"id": "s1", "url": "https://example.com/one", "publisher": "A", "domain": "example.com", "body": "متن"},
-            {"id": "s2", "url": "https://example.org/two", "publisher": "B", "domain": "example.org", "body": "متن"},
+            {"id": "s1", "url": "https://example.com/one", "publisher": "A", "domain": "example.com", "headline": "فوتبال بازی تازه در ورزشگاه", "body": "مسابقات تیم الف با حضور بازیکنان بسیار مطرح امروز برگزار شد"},
+            {"id": "s2", "url": "https://example.org/two", "publisher": "B", "domain": "example.org", "headline": "فوتبال بازی نتیجه یک رقابت", "body": "مسابقه تیم ب با اخباری متفاوت و گفت‌وگوهایی همراه بوده است"},
         ]
 
     def test_rejects_fake_source_id(self):
@@ -58,6 +58,11 @@ class ResearchTest(unittest.TestCase):
         for url in ("http://example.org", "https://127.0.0.1/private", "https://localhost/secret", "file:///etc/passwd"):
             self.assertFalse(m.safe_url(url))
         self.assertTrue(m.safe_url("https://example.org/news"))
+
+    def test_generic_trend_unrelated_stories_rejected(self):
+        sources = [dict(self.sources[0]), dict(self.sources[1])]
+        sources[1]["headline"] = "بررسی قرارداد در بخش انرژی"
+        self.assertEqual(m.select_independent_sources({"trend_keyword": "انتخاب"}, sources), [])
 
     def test_sensitive_requires_review(self):
         brief = {"trend_keyword": "حمله آمریکا به ایران", "related_news": []}
