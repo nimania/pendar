@@ -355,24 +355,27 @@
       var entries=Array.isArray(payload&&payload.reports)?payload.reports.filter(function(r){
         return r&&validLink(r.url)&&norm(r.title);
       }).slice(0,5):[];
-      if(!entries.length)return;
+      if(!entries.length){
+        grid.innerHTML='<div class="feature-trend-card text-only"><span class="feature-trend-copy"><strong>گزارش‌های تازه در حال آماده‌سازی‌اند</strong><span>آخرین موضوعات را در آرشیو ترندهای امروز ببینید.</span><a href="/trends/">آرشیو ترندهای امروز ←</a></span></div>';
+        return;
+      }
       var activate=function(isTrend){
         politics.classList.toggle("on",!isTrend);trends.classList.toggle("on",isTrend);
         politics.setAttribute("aria-selected",String(!isTrend));trends.setAttribute("aria-selected",String(isTrend));
         politics.tabIndex=isTrend?-1:0;trends.tabIndex=isTrend?0:-1;
         politicalPanel.hidden=isTrend;trendsPanel.hidden=!isTrend;
-        more.href=isTrend?"/search-trends/":"/reports/";
-        more.textContent=isTrend?"همهٔ ترندهای روز ←":"همهٔ گزارش‌ها ←";
+        more.href=isTrend?"/trends/":"/reports/";
+        more.textContent=isTrend?"همهٔ ترندهای امروز ←":"همهٔ گزارش‌ها ←";
       };
       var tiles=entries.map(function(r,i){
         var image=validImage(r.image_url);
         return '<a class="feature-trend-card'+(i===0?' trend-lead':'')+(image?' has-photo':' text-only')+'" href="'+esc(r.url)+'">'
           +(image?'<span class="feature-trend-picture"><img src="'+esc(image)+'" alt="'+esc(r.image_alt||"")+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async" onerror="this.parentElement.remove();this.closest(\'.feature-trend-card\').classList.add(\'text-only\')"></span>':'')
-          +'<span class="feature-trend-copy"><span class="category-flag orange">ترندهای روز</span>'
+          +'<span class="feature-trend-copy"><span class="category-flag orange">ترندهای امروز</span>'
           +'<strong>'+esc(r.title)+'</strong><span>'+esc(excerpt(r.lead_fa||"",i===0?180:94))+'</span>'
           +'<small class="trend-byline">'+esc(r.author_name_fa||"تحریریهٔ پندار")+'</small></span></a>';
       }).join("");
-      grid.innerHTML=tiles+'<a class="feature-trends-all" href="/search-trends/">همهٔ ترندهای روز ←</a>';
+      grid.innerHTML=tiles+'<a class="feature-trends-all" href="/trends/">همهٔ ترندهای امروز ←</a>';
       trends.hidden=false;
       [politics,trends].forEach(function(button){
         button.addEventListener("click",function(){activate(button===trends);});
