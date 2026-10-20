@@ -27,8 +27,12 @@ def smart_destinations(site,row):
         out.append({"url":"/weather/","label":"آب‌وهوا و کیفیت هوای ایران","detail":"وضعیت هوا، آلودگی و پیش‌بینی‌های تازه","kind":"service"})
     full=norm(research_text(row))
     from trends_context import includes
+    mentions_khorramabad=includes(full,"خرم آباد") or includes(full,"خرم‌آباد")
     for canonical,alias,kind in LOCALITY_ALIASES:
-        if includes(full,alias) or includes(full,canonical):
+        # Khorramabad is in Lorestan province: a factual geographic parent,
+        # not a claim that all Lorestan news concerns Khorramabad.
+        linked=includes(full,alias) or includes(full,canonical) or (canonical=="لرستان" and mentions_khorramabad)
+        if linked:
             entry=classify(site,canonical,{})
             if entry["kind"]==kind:out.append({"url":entry["url"],"label":canonical,
                         "detail":"خبرها و گزارش‌های مرتبط با "+canonical,"kind":kind})
