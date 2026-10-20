@@ -250,6 +250,9 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const officialSection=candidateOfficial.length?'<section class="candidate-news"><h2>از زبان خودش</h2>'+feedCards(candidateOfficial)+'</section>':"";
   const candidateSources=(candidateFeed?.sources||[]).filter(r=>_figureWorkUrl(r.url));
   const sourceLinks=candidateSources.length?'<div class="candidate-source-links">'+candidateSources.map(r=>'<a href="'+esc(_figureWorkUrl(r.url))+'" target="_blank" rel="noopener">'+esc(r.label)+'</a>').join("")+'</div>':"";
+  const trendReportRows=Array.isArray(x.trend_reports)?x.trend_reports.filter(r=>r&&/^\\/trends\\/report\\/[a-f0-9]{16}\\/$/.test(r.url||"")).slice().reverse():[];
+  const trendReportSection=trendReportRows.length?'<section class="x-profile-feed figure-trend-reports"><div class="rule"><span>خبرهای مرتبط در پندار</span><span class="l"></span></div>'
+    +trendReportRows.map(r=>'<article class="candidate-feed-card"><h3><a href="'+esc(r.url)+'">'+esc(r.title||"خبر مرتبط")+'</a></h3>'+(r.summary?'<p>'+esc(r.summary)+'</p>':'')+'</article>').join("")+'</section>':"";
   const aboutSection='<section class="x-profile-feed"><p class="x-bio">'+esc(canonicalFigure?.meta?.biography_fa||canonicalFigure?.meta?.summary||x.role_fa||"معرفی تکمیلی هنوز ثبت نشده است.")+'</p>'+(canonicalFigure?.meta?.birthday?'<p class="x-bio">تولد: '+esc(faN(canonicalFigure.meta.birthday))+'</p>':"")+(canonicalFigure?.meta?.deathday?'<p class="x-bio">درگذشت: '+esc(faN(canonicalFigure.meta.deathday))+'</p>':"")+(canonicalFigure?.meta?.picture_source?'<p class="x-bio"><a href="'+esc(_figureWorkUrl(canonicalFigure.meta.picture_source))+'" target="_blank" rel="noopener">منبع و مجوز عکس ↗</a></p>':"")+'</section>';
   const postRow = p => `<article class="x-post${isEditorialQuote(p) ? " is-quote" : ""}" ${statementCardAttrs(p)}>
     <div class="x-post-rail">${figureProfileLink(x,avatar(x,"sm"))}</div>
@@ -321,6 +324,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     ${_figureProfileFilter==="works"||(_figureProfileFilter==="all"&&!shown.length&&hasWorks)?worksSection:""}
     ${_figureProfileFilter==="all"?candidateNewsSection+officialSection:""}
     ${_figureProfileFilter==="official"?officialSection:""}
+    ${trendReportSection}
     ${sourceLinks}
     ${candidateFeed?.news_updated_at?'<small class="muted">آخرین بررسی خبرها: '+esc(relTime(candidateFeed.news_updated_at))+'</small>':""}
     ${israelSection}
