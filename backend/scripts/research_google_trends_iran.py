@@ -274,7 +274,7 @@ def run(data, archive=None, max_new=2, provider=None):
     for row in data.get("briefs",[]):
         key=stable_id(row.get("trend_keyword",""))
         volume=str(row.get("approx_traffic") or "").replace(",","").strip()
-        if not key or not re.fullmatch(r"\\d+\\+?",volume):continue
+        if not key or not re.fullmatch(r"\d+\+?",volume):continue
         record={"keyword_id":key,"observed_at":data.get("observed_at"),"lower_bound":int(volume.rstrip("+")),"raw":volume}
         if record not in observations:observations.append(record)
     data["trend_observations"]=observations[-1800:]
