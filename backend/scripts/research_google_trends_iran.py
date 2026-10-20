@@ -16,7 +16,8 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+from itertools import combinations
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -138,6 +139,22 @@ def sources_for(brief, max_attempts=5):
             break
     return selected
 
+def select_independent_sources(brief, sources):
+    """Avoid joining unrelated stories for generic keywords and syndicated copies."""
+    if len(sources) < 2:
+        return []
+    for a, b in combinations(sources, 2):
+        overlap = words(a.get("headline")) & words(b.get("headline"))
+        # One-word trends (e.g. "انتخاب") frequently refer to unrelated stories.
+        if len(words(brief.get("trend_keyword"))) < 2 and len(overlap) < 2:
+            continue
+        aw, bw = words(a.get("body", "")[:5000]), words(b.get("body", "")[:5000])
+        if aw and bw and len(aw & bw) / max(1, len(aw | bw)) > .82:
+            continue
+        return [a, b]
+    return []
+
+
 def is_sensitive(brief):
     blob = " ".join([str(brief.get("trend_keyword") or "")] +
         [str(x.get("headline") or "") for x in brief.get("related_news", [])[:3]])
@@ -175,7 +192,7 @@ def validate_report(raw, sources):
             "paragraphs": checked}
 
 def research(brief, provider):
-    sources = sources_for(brief)
+    sources = select_independent_sources(brief, sources_for(brief))
     if len(sources) < 2:
         return {"research_status": "insufficient_independent_fulltext",
                 "source_count": len(sources)}
@@ -210,12 +227,23 @@ def run(data, archive=None, max_new=2, provider=None):
         if attempted >= max_new:
             break
         key = stable_id(b.get("trend_keyword", ""))
-        if not key or key in history:
+        if not key:
             continue
+        existing = history.get(key) or {}
+        if existing.get("report"):
+            continue
+        if existing.get("research_status") in {"insufficient_independent_fulltext", "generation_rejected", "ai_unavailable"}:
+            try:
+                last = datetime.fromisoformat(str(existing.get("attempted_at", "")).replace("Z", "+00:00"))
+                if datetime.now(timezone.utc) - last < timedelta(hours=6):
+                    continue
+            except (ValueError, TypeError):
+                pass
         attempted += 1
         result = research(b, provider)
         history[key] = {"id": key, "trend_keyword": b["trend_keyword"],
-                        "observed_at": b.get("observed_at"), **result}
+                        "observed_at": b.get("observed_at"),
+                        "attempted_at": datetime.now(timezone.utc).isoformat(), **result}
     data["research_reports"] = sorted(history.values(),
         key=lambda x: x.get("observed_at") or "", reverse=True)[:120]
     data["research_metrics"] = {
