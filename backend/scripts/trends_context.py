@@ -64,7 +64,8 @@ def report_coverage(articles, keyword, limit=6):
         if not isinstance(article,dict):continue
         title=str(article.get("title") or "")
         term=str(article.get("trend_keyword") or "")
-        if includes(title,keyword) or includes(term,keyword) or includes(keyword,term):
+        location_hit=keyword in (article.get("locations") or [])
+        if includes(title,keyword) or includes(str(article.get("lead_fa") or ""),keyword) or location_hit or includes(term,keyword) or includes(keyword,term):
             if article.get("url"):results.append({"url":article["url"],"title":title,
                 "summary":article.get("lead_fa") or "","kind":"pendar"})
     return results[:limit]
@@ -127,10 +128,14 @@ def render_context(site,entity,briefs,articles):
         is_ours=("PENDAR_TRENDS_CONTEXT_V2" in previous or
                 "پروندهٔ این چهره در پندار در حال تکمیل" in previous or
                 "صفحه ساختار اولیهٔ «نشانی»" in previous or
-                "صفحه برای پیوند دادن گزارش‌های یک ماجرا" in previous)
+                "صفحه برای پیوند دادن گزارش‌های یک ماجرا" in previous or
+                'data-pendar-context="v2"' in previous)
         if not is_ours:return True
     items=context_content(site,entity,briefs,articles)
-    enough=(len(items)>=2)
+    # A sourced person/place landing with at least one Pendar report is useful;
+    # for other pages retain the stricter two-item threshold.
+    enough=(len(items)>=2 or (entity.get("kind") in {"person","city","province","country"}
+           and any(x.get("kind")=="pendar" for x in items)))
     if not enough:
         # Older low-value pages must stop inviting visits. They remain a
         # non-indexed route back to the source section, not a fake dossier.
