@@ -16,10 +16,10 @@ class TrendPresentationTests(unittest.TestCase):
         self.assertNotEqual(stable_key("کارشناسی ارشد"), stable_key("آزمون دکتری"))
 
     def test_canonical_and_rich_social_fields(self):
-        markup=head_meta("موضوع مشخص", "توضیح فارسی مستند", "/search-trends/report/abcdef0123456789/",
+        markup=head_meta("موضوع مشخص", "توضیح فارسی مستند", "/trends/report/abcdef0123456789/",
                          image="/assets/trends/abcdef0123456789.png",kind="Article",
                          published="2026-10-20T09:00:00+00:00",keyword="آزمون")
-        self.assertIn('rel="canonical" href="https://pendar.io/search-trends/report/abcdef0123456789/"',markup)
+        self.assertIn('rel="canonical" href="https://pendar.io/trends/report/abcdef0123456789/"',markup)
         self.assertIn('property="og:image"',markup)
         self.assertIn('application/ld+json',markup)
         self.assertIn('"@type": "Article"',markup)
@@ -27,7 +27,7 @@ class TrendPresentationTests(unittest.TestCase):
         self.assertNotIn('<meta name="keywords"',markup)
 
     def test_brief_is_not_article_and_noindex(self):
-        markup=head_meta("موضوع", "متن کوتاه", "/search-trends/topic/abcdef0123456789/",
+        markup=head_meta("موضوع", "متن کوتاه", "/trends/topic/abcdef0123456789/",
                          kind="WebPage",robots="noindex,follow")
         self.assertIn("noindex,follow",markup)
         self.assertNotIn('"@type": "Article"',markup)
@@ -75,6 +75,6 @@ class TrendPresentationTests(unittest.TestCase):
             self.assertIn('rel="canonical"',html)
             self.assertIn('application/ld+json',html)
             self.assertIn("بلیت قطار",html)
-            self.assertTrue((site/"sitemap-search-trends.xml").is_file())
+            self.assertTrue((site/"sitemap-trends.xml").is_file())
 
 if __name__ == "__main__":unittest.main()
