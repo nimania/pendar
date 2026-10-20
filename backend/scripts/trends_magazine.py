@@ -154,6 +154,11 @@ def magazine_shell(title,body,meta,**kwargs):
       '<script src="/trends-interactions.js?v=20261020-follow-rail-1" defer></script>'
       '</div></main></body></html>')
 
+def public_prose(value):
+    """Hide any stray generation-only s1/s2 tokens, never source metadata."""
+    cleaned=re.sub(r"(?<![a-zA-Z0-9])[\[\(]?\s*s[1-9][0-9]?\s*[\]\)]?(?![a-zA-Z0-9])","",str(value or ""),flags=re.I)
+    return re.sub(r" {2,}"," ",cleaned).strip()
+
 def report_body(row,site,observations,article_rows):
     report=row["report"]
     writer=byline(row)
@@ -175,13 +180,13 @@ def report_body(row,site,observations,article_rows):
         link=('<a href="'+e(photo["source_url"])+'" rel="noopener noreferrer">منبع تصویر</a>' if photo["source_url"].startswith("https://") else "")
         license_link=('<a href="'+e(photo["license_url"])+'" rel="noopener noreferrer">'+e(photo["license"])+'</a>' if photo["license_url"].startswith("https://") else e(photo["license"]))
         body+='<figure class="magazine-article-photo"><div class="trend-photo-frame"><img class="hero-img" src="'+e(photo["url"])+'" alt="'+e(photo.get("caption") or report["title_fa"])+'" loading="eager" decoding="async" width="1150" height="647"></div><figcaption class="hero-credit">'+e(photo.get("caption") or "عکس آرشیوی")+' — عکس: '+credit+' · '+link+' · '+license_link+'</figcaption></figure>'
-    body+='<p class="magazine-article-lead">'+e(report["lead_fa"])+'</p>'
+    body+='<p class="magazine-article-lead">'+e(public_prose(report["lead_fa"]))+'</p>'
     context=report.get("trend_context")
     # The evidence remains available inside the collapsed source ledger below.
     # Avoid templated "why trending" blocks inside the news article.
     body+='<div class="trend-report-prose">'
     for block in report["paragraphs"]:
-        body+='<p>'+e(block["text_fa"])+'</p>'
+        body+='<p>'+e(public_prose(block["text_fa"]))+'</p>'
     body+='</div>'
     # An editorial digest of the actual source articles, not a fabricated trend narrative.
     body+='<section class="trend-news-coverage"><h2>در خبرها</h2>'
