@@ -1,0 +1,35 @@
+name: Google Trends Iran Collector
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "13,43 * * * *"
+permissions:
+  contents: read
+concurrency:
+  group: pendar-google-trends-iran
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collect 10 evidence-linked initial candidates
+        run: python backend/scripts/collect_google_trends_iran.py --limit 10
+      - name: Validate real sourced output
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("trend-payload/data/google-trends-iran.json")
+          d=json.loads(p.read_text())
+          assert d["status"]=="ok" and d["source"].startswith("https://trends.google.com/")
+          assert all(x["story_id"] and x["trend_keyword"] and x["article_url"].startswith("https://pendar.io/story/") for x in d["items"])
+          print("Real existing-report matches:",len(d["items"]))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pendar-google-trends-data
+          path: trend-payload/
+          retention-days: 5
+          if-no-files-found: error
