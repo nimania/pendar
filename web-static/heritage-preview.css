@@ -381,3 +381,25 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
  .heritage-root .feature-trend-card.has-photo:not(.trend-lead) .feature-trend-picture{aspect-ratio:16/9;height:auto;min-height:0}
  .heritage-root .feature-trend-continuation-heading>span{display:none}
 }
+
+/* 2026-10-20: single lead plus a compact four-headline continuation. */
+.heritage-root .feature-trends-grid{grid-template-columns:minmax(0,1fr);padding:0;gap:0;background:#fff;border:1px solid #e5e9e4}
+.heritage-root .feature-trends-grid>.trend-lead{grid-column:1!important;border:0!important;border-radius:0!important;border-top:4px solid #df681e!important;box-shadow:none;min-width:0}
+.heritage-root .feature-trend-card.trend-lead.text-only{min-height:220px;padding:26px 26px 22px;justify-content:center}
+.heritage-root .feature-trend-card.trend-lead.text-only .feature-trend-copy{padding:0}
+.heritage-root .feature-trend-card.trend-lead.text-only strong{font-size:clamp(22px,2.4vw,30px);line-height:1.7;max-width:38ch}
+.heritage-root .feature-trend-card.trend-lead.has-photo{min-height:220px;grid-template-columns:46% minmax(0,1fr)}
+.heritage-root .feature-trend-card.trend-lead.has-photo .feature-trend-picture{height:100%;max-height:300px;aspect-ratio:auto}
+.heritage-root .feature-trend-card.trend-lead.has-photo .feature-trend-picture img{height:100%;aspect-ratio:auto}
+.heritage-root .feature-trend-continuation{border:0;border-top:1px solid #e2e9e2}
+.heritage-root .feature-trend-continuation-heading{border-top:0;background:#f6f8f6;padding:8px 18px}
+.heritage-root .feature-trend-continuation-heading h3{font-size:13px}
+.heritage-root .feature-trend-list-row{padding:11px 18px}
+.heritage-root .feature-trend-list-copy strong{font-size:13px;line-height:1.7}
+.heritage-root .feature-trends-all{border-top:1px solid #e4eae5;padding:11px 15px}
+@media(max-width:720px){
+ .heritage-root .feature-trend-card.trend-lead.has-photo{display:flex;flex-direction:column}
+ .heritage-root .feature-trend-card.trend-lead.has-photo .feature-trend-picture{height:auto;aspect-ratio:16/9}
+ .heritage-root .feature-trend-card.trend-lead.text-only{padding:21px 18px;min-height:180px}
+ .heritage-root .feature-trend-card.trend-lead.text-only strong{font-size:22px}
+}
