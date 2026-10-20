@@ -54,8 +54,9 @@ def norm(value):
 
 def clean_title(title):
     """Delete erroneous standalone 'ط', not legitimate single-letter 'و'."""
-    x=norm(title)
-    return re.sub(r"(?<!\S)ط(?!\S)","",x).replace("  "," ").strip()
+    x=unicodedata.normalize("NFKC",str(title or "")).replace("ي","ی").replace("ك","ک")
+    # Preserve meaningful Persian half-spaces (می‌شود, نامه‌ها, etc.).
+    return re.sub(r"\\s+"," ",re.sub(r"(?<!\\S)ط(?!\\S)","",x)).strip()
 
 def canonical_label(topic):
     cleaned=norm(topic)
@@ -82,8 +83,8 @@ def figures_index(site):
 def classify(site,keyword,index=None):
     canonical=canonical_label(keyword)
     known=figures_index(site) if index is None else index
-    if canonical in known:
-        person=known[canonical]
+    if norm(canonical) in known:
+        person=known[norm(canonical)]
         return {"kind":"person","label":canonical,"url":"/@"+person["handle"]+"/",
                 "existing":True,"name":person.get("name_fa") or canonical,"record":person}
     matched_person=next((person for label,person in KNOWN_PEOPLE.items() if norm(label)==norm(canonical)),None)
