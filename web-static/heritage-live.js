@@ -51,7 +51,7 @@
       shadow.appendChild(pendingStyle);
       var css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/heritage-preview.css?v=20261020-trending-figures-5";
+      css.href="/heritage-preview.css?v=20261020-clean-reports-6";
       var cssReady=new Promise(function(resolve,reject){
         css.addEventListener("load",resolve,{once:true});
         css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
@@ -130,7 +130,7 @@
       await new Promise(function(resolve,reject){
         window.PENDAR_HERITAGE_EMBED=true;
         var script=document.createElement("script");
-        script.src="/heritage-preview.js?v=20261020-trending-figures-5";
+        script.src="/heritage-preview.js?v=20261020-clean-reports-6";
         script.onload=resolve;
         script.onerror=function(){reject(new Error("Heritage feed script did not load"));};
         document.body.appendChild(script);
