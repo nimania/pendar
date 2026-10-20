@@ -42,6 +42,10 @@ function pendarAuthorPortraitCSS(id){
   const position=(a.portrait_index*100/6).toFixed(4);
   return "background-image:url('/assets/editorial/pendar-authors-sprite.avif');background-size:700% 100%;background-position:"+position+"% center;background-repeat:no-repeat;";
 }
+function pendarAuthorUrl(id){
+  const author=window.PENDAR_EDITORIAL_AUTHORS?.authors?.find(a=>a.id===id);
+  return author?.handle?"/@"+encodeURIComponent(author.handle)+"/":"/editorial-author/"+encodeURIComponent(id)+"/";
+}
 function pendarAuthorName(id){
   const catalog=window.PENDAR_EDITORIAL_AUTHORS;
   const a=catalog?.authors?.find(x=>x.id===id);
@@ -50,7 +54,7 @@ function pendarAuthorName(id){
 function pendarAuthorByline(story,report){
   const id=report?.author_id||story?.editorial_author_id||(report?.status==="pilot_draft"?"diplomacy":pendarEditorialAuthorId(story));
   const name=pendarAuthorName(id);
-  const href="/editorial-author/"+encodeURIComponent(id)+"/";
+  const href=pendarAuthorUrl(id);
   const avatarStyle=pendarAuthorPortraitCSS(id);
   const avatar='<span class="story-author-monogram" aria-hidden="true"'+(avatarStyle?' style="'+avatarStyle+'"':"")+'>'+(avatarStyle?"":"پ")+'</span>';
   return '<div class="story-author-byline"><a class="story-author-avatar-link" href="'+esc(href)+'" aria-label="آرشیو مطالب '+esc(name)+'">'+avatar+'</a>'
@@ -58,7 +62,7 @@ function pendarAuthorByline(story,report){
     +'<small>'+esc(story?.published_at?new Date(story.published_at).toLocaleDateString("fa-IR"):"")+'</small></span></div>';
 }
 async function showPendarEditorialAuthor(slug){
-  show("editorialauthor");setTab("");setHash("#/editorial-author/"+slug);
+  show("editorialauthor");setTab("");setHash(pendarAuthorUrl(slug));
   const target=document.getElementById("editorial-author-view");
   target.innerHTML='<div class="spinner"></div>';
   try{
