@@ -346,33 +346,51 @@
   }
   // Homepage: Today's Trends is the first, initially selected editorial tab.
   function renderSearchTrendTab(){
-    var politics=el("feature-tab-politics"),trends=el("feature-tab-trends");
-    var politicalPanel=el("feature-politics-panel"),trendsPanel=el("feature-trends-panel");
-    var more=el("feature-heading-more"),grid=el("home-search-trends-grid");
-    if(!politics||!trends||!politicalPanel||!trendsPanel||!grid)return;
-    var activate=function(isTrend){
-      politics.classList.toggle("on",!isTrend);trends.classList.toggle("on",isTrend);
-      politics.setAttribute("aria-selected",String(!isTrend));trends.setAttribute("aria-selected",String(isTrend));
-      politics.tabIndex=isTrend?-1:0;trends.tabIndex=isTrend?0:-1;
-      politicalPanel.hidden=isTrend;trendsPanel.hidden=!isTrend;
-      more.href=isTrend?"/trends/":"/reports/";
-      more.textContent=isTrend?"همهٔ ترندهای امروز ←":"همهٔ گزارش‌ها ←";
+    var politics=el("feature-tab-politics"),trends=el("feature-tab-trends"),figures=el("feature-tab-figures");
+    var politicalPanel=el("feature-politics-panel"),trendsPanel=el("feature-trends-panel"),figurePanel=el("feature-figures-panel");
+    var more=el("feature-heading-more"),grid=el("home-search-trends-grid"),figuresGrid=el("home-trending-figures-grid");
+    if(!politics||!trends||!figures||!politicalPanel||!trendsPanel||!figurePanel||!grid||!figuresGrid)return;
+    var buttons=[trends,politics,figures],panels=[trendsPanel,politicalPanel,figurePanel];
+    var activate=function(which){
+      buttons.forEach(function(button,i){
+        var on=buttons[which]===button;
+        button.classList.toggle("on",on);
+        button.setAttribute("aria-selected",String(on));
+        button.tabIndex=on?0:-1;
+        panels[i].hidden=!on;
+      });
+      more.href=which===0?"/trends/":which===1?"/reports/":"/trends/#trending-figures";
+      more.textContent=which===0?"همهٔ ترندهای امروز ←":which===1?"همهٔ گزارش‌ها ←":"همهٔ چهره‌های ترند ←";
     };
     if(!trends.dataset.ready){
       trends.dataset.ready="1";
-      [politics,trends].forEach(function(button){
-        button.addEventListener("click",function(){activate(button===trends);});
+      buttons.forEach(function(button,index){
+        button.addEventListener("click",function(){activate(index);});
         button.addEventListener("keydown",function(event){
           if(event.key==="ArrowRight"||event.key==="ArrowLeft"){
             event.preventDefault();
-            var next=button===trends?politics:trends;
-            next.focus();activate(next===trends);
+            var direction=event.key==="ArrowLeft"?1:-1;
+            var next=(index+direction+buttons.length)%buttons.length;
+            activate(next);buttons[next].focus();
           }
         });
       });
     }
-    activate(true);
+    activate(0);
     fetchJson("/data/google-trends-iran.json").then(async function(payload){
+      var people=Array.isArray(payload&&payload.trending_figures)?payload.trending_figures.filter(function(p){
+        return p&&/^\/@[a-z0-9_.-]+\/$/i.test(p.url||"")&&norm(p.name);
+      }).slice(0,9):[];
+      if(people.length){
+        figuresGrid.innerHTML='<div class="feature-trend-people">'+people.map(function(person){
+          var img=validImage(person.avatar);
+          var photo=img?'<img src="'+esc(img)+'" alt="" loading="lazy" decoding="async">':'<span class="trend-person-monogram">'+esc(person.name.charAt(0))+'</span>';
+          return '<a href="'+esc(person.url)+'" class="feature-trend-person">'+photo+'<strong>'+esc(person.name)+'</strong>'
+            +'<small>'+esc(person.role||"صفحهٔ چهره در پندار")+'</small></a>';
+        }).join('')+'</div>';
+      }else{
+        figuresGrid.innerHTML='<p class="feature-trend-empty">در این نوبت هنوز چهرهٔ ترند دارای پروفایل معتبر شناسایی نشده است.</p>';
+      }
       var reports=Array.isArray(payload&&payload.reports)?payload.reports.filter(function(r){
         return r&&validLink(r.url)&&norm(r.title);
       }).slice(0,8):[];
