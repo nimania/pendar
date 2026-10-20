@@ -56,7 +56,7 @@ def clean_title(title):
     """Delete erroneous standalone 'ط', not legitimate single-letter 'و'."""
     x=unicodedata.normalize("NFKC",str(title or "")).replace("ي","ی").replace("ك","ک")
     # Preserve meaningful Persian half-spaces (می‌شود, نامه‌ها, etc.).
-    return re.sub(r"\\s+"," ",re.sub(r"(?<!\\S)ط(?!\\S)","",x)).strip()
+    return re.sub(r"\s+"," ",re.sub(r"(?<!\S)ط(?!\S)","",x)).strip()
 
 def canonical_label(topic):
     cleaned=norm(topic)
