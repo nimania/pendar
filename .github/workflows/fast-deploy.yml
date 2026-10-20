@@ -6,7 +6,7 @@ on:
     # Rebuild the vetted homepage at :05 and :35 UTC; GitHub can delay schedules.
     - cron: "5,35 * * * *"
   workflow_run:
-    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Refresh weather and air quality"]
+    workflows: ["Collect Pendar News (independent)", "Collect Pendar Figures (independent)", "Refresh weather and air quality", "Google Trends Iran Collector"]
     types: [completed]
   push:
     branches: [main]
