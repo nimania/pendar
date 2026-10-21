@@ -133,7 +133,11 @@
     var src=img.getAttribute("src");
     if(src)imageChecks.set(src,false);
     if(img.closest(".rail-row")){img.style.visibility="hidden";return;}
-    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.story-card,.visual-card");
+    // A portrait failing after initial validation is omitted rather than
+    // displayed as an empty circle or triggering a full-page rerender loop.
+    var personTile=img.closest(".fp-voice");
+    if(personTile){personTile.remove();return;}
+    var tile=img.closest(".ticker-story,.feature-hero,.mini-feature,.story-card,.visual-card,.fp-lead,.fp-essential");
     if(tile)tile.remove();
     if(redrawHome)redrawHome();
   }
