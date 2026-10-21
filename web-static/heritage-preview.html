@@ -22,48 +22,22 @@
         <a class="brand" href="/" aria-label="خانهٔ پندار"><img src="/assets/pendar-logo.svg" alt="پندار"></a>
       </div>
     </div>
-    <div class="masthead-nav-row">
-      <div class="page-width masthead-nav-inner">
-        <nav class="masthead-navigation" aria-label="بخش‌های پندار">
-          <a href="/">خانه</a><a href="/reports/">گزارش‌ها</a><a href="/figures/">چهره‌ها</a>
-          <a href="/books/">پیشخوان کتاب</a><a href="/press/">پیشخوان جراید</a>
-          <a href="/market/">بازار</a><a href="/weather/">آب و هوا</a>
-        </nav>
-        <div class="masthead-tools">
-          <a href="/badbadak/" title="بادبادک" aria-label="بادبادک"><img src="/assets/badbadak-header.png" alt=""></a>
-          <a href="/future/" title="آینده‌بان" aria-label="آینده‌بان"><img src="/assets/radar-logo.svg" alt=""></a>
-          <a href="/headlines/" title="جست‌وجو و سرخط‌ها" aria-label="جست‌وجو">⌕</a>
-        </div>
-      </div>
-    </div>
+
   </header>
   <div class="preview-line"><div class="page-width"><strong>نسخهٔ آزمایشی طراحی</strong><span>محتوا از موتور فعلی پندار دریافت می‌شود؛ این صفحه جایگزین صفحهٔ اول نشده است.</span></div></div>
 
   <main class="page-width" id="content">
     <div id="home-page">
-      <section class="latest-ticker" aria-label="خبرهای تازه">
-        <h2><a href="/figures/" aria-label="نمایش همهٔ چهره‌ها">چهره‌ها</a></h2><button class="ticker-arrow ticker-arrow-next" type="button" data-ticker-direction="next" aria-label="چهره‌های بعدی">❮</button><div class="ticker-items" id="ticker"><span class="loading">در حال دریافت تازه‌ترین گفته‌ها…</span></div><button class="ticker-arrow ticker-arrow-prev" type="button" data-ticker-direction="prev" aria-label="چهره‌های قبلی">❯</button>
+      <section class="quick-pulse" aria-label="نبض بازار و هوای تهران">
+        <div class="pulse-leading"><span class="pulse-live-dot" aria-hidden="true"></span><strong>نبض</strong></div>
+        <div class="pulse-items" id="ticker" role="list" aria-live="off"><span class="pulse-loading">در حال دریافت آخرین نرخ‌ها و هوا…</span></div>
+        <a class="pulse-market-link" href="/market/" aria-label="مشاهدهٔ بازار">بازار ←</a>
       </section>
 
       <div class="news-layout home-news-layout">
         <div class="primary-column">
           <section class="feature-block" aria-label="گزارش ویژه">
-            <div class="section-heading trend-feature-heading">
-              <h2 id="feature-heading-title">صفحهٔ اول پندار</h2>
-              <a id="feature-heading-more" href="/reports/">همهٔ گزارش‌ها <span aria-hidden="true">←</span></a>
-            </div>
-            <div class="feature-category-tabs" role="tablist" aria-label="بخش‌های صفحهٔ اول پندار">
-                <button type="button" role="tab" id="feature-category-front" data-feature-category="front" aria-controls="feature-politics-panel" aria-selected="true" tabindex="0" class="on">صفحهٔ اول</button>
-                <button type="button" role="tab" id="feature-category-politics" data-feature-category="politics" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">سیاست</button>
-                <button type="button" role="tab" id="feature-category-diplomacy" data-feature-category="diplomacy" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">دیپلماسی</button>
-                <button type="button" role="tab" id="feature-category-society" data-feature-category="society" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">جامعه</button>
-                <button type="button" role="tab" id="feature-category-technology" data-feature-category="technology" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">تکنولوژی</button>
-                <button type="button" role="tab" id="feature-category-statements" data-feature-category="statements" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">گفته‌ها</button>
-                <button type="button" role="tab" id="feature-category-sport" data-feature-category="sport" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">ورزشی</button>
-                <button type="button" role="tab" id="feature-category-environment" data-feature-category="environment" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">محیط زیست</button>
-                <button type="button" role="tab" id="feature-category-culture" data-feature-category="culture" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">فرهنگ</button>
-            </div>
-            <div id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-category-front">
+            <div id="feature-politics-panel" role="region" aria-label="گزارش‌های برگزیدهٔ صفحهٔ اول">
             <section id="feature-front-page" class="feature-front-page" aria-label="صفحهٔ اول زندهٔ پندار"><p class="loading">در حال چیدن صفحهٔ اول…</p></section>
             <section id="feature-statements-edition" class="statements-newspaper" aria-label="گفته‌های چهره‌ها" hidden></section>
             <a class="feature-hero" id="feature-hero" hidden href="/reports/" aria-label="گزارش ویژه">
@@ -78,14 +52,7 @@
             <div class="section-heading"><h2>تازه‌ترین گزارش‌ها</h2><a href="/reports/">همهٔ گزارش‌ها ←</a></div>
             <div class="home-editorial-report-list" id="home-editorial-report-list"><p class="loading">در حال دریافت گزارش‌های تازه…</p></div>
           </section>
-          <section class="module watch-module" id="watch">
-            <div class="section-heading turquoise"><h2>تماشا و خواندنی‌ها</h2><a href="/movies/">جان فیلم ←</a></div>
-            <div class="watch-grid">
-              <a href="/tv/week/"><span class="watch-icon">▶</span><strong>راهنمای تماشای امشب</strong><span>جدول برنامه‌ها و تازه‌های تلویزیون</span></a>
-              <a href="/movies/"><span class="watch-icon">▣</span><strong>جان فیلم</strong><span>فیلم‌ها، سریال‌ها و آثار مرتبط</span></a>
-              <a href="/books/"><span class="watch-icon">▤</span><strong>پیشخوان کتاب</strong><span>کتاب‌ها و پیشنهادهای خواندن</span></a>
-            </div>
-          </section>
+
         </div>
         <section class="rail home-below-panels" aria-label="بخش‌های تکمیلی صفحهٔ اول">
           <section class="rail-box rail-tabs-box rail-five" data-rail-group="headlines">
@@ -119,12 +86,7 @@
             <div class="rail-tab-panel" role="tabpanel" data-rail-panel="trends" hidden><div id="rail-figures-trends" class="rail-five-items"><p class="loading">در حال دریافت چهره‌های ترند…</p></div></div>
             
           </section>
-          <section class="rail-box rail-links">
-            <div class="rail-heading"><h2>بخش‌های دیگر</h2></div>
-            <a href="/radar/iran-scenarios/">رادار سناریوهای ایران <span>←</span></a>
-            <a href="/market/">پنداربازار <span>←</span></a>
-            <a href="/press/">پیشخوان جراید <span>←</span></a>
-          </section>
+
         </section>
       </div>
     </div>
@@ -150,9 +112,32 @@
   </main>
 
   <footer class="footer">
-    <div class="page-width footer-top"><div class="footer-identity"><img src="/assets/pendar-logo.svg" alt="پندار"><span>خبر، اندیشه و فرهنگ؛ با نگاهی تازه.</span></div>
-      <nav aria-label="پایین صفحه"><a href="/reports/">گزارش‌ها</a><a href="/figures/">چهره‌ها</a><a href="/press/">جراید</a><a href="/movies/">فیلم و سریال</a><a href="/radar/">رادار</a><a href="/">نسخهٔ اصلی</a></nav></div>
-    <div class="page-width footer-bottom"><span>کلیه حقوق متعلق به سایت پندار است. (تأسیس: ۱۳۷۹)</span><div id="footer-freshness" class="footer-freshness" aria-label="آخرین به‌روزرسانی بخش‌های پندار">زمان آخرین انتشار و داده‌ها در حال بررسی است…</div></div>
+    <div class="page-width footer-top">
+      <div class="footer-identity">
+        <a href="/" aria-label="پندار، صفحهٔ اصلی"><img src="/assets/pendar-logo.svg" alt="پندار"></a>
+        <span>خبر، دیدگاه و دانش برای فهم بهتر امروز.</span>
+      </div>
+      <nav class="footer-directory" aria-label="فهرست بخش‌های پندار">
+        <div class="footer-link-group"><strong>خبر و گزارش</strong>
+          <a href="/">خانه</a><a href="/headlines/">سرخط‌ها</a><a href="/reports/">گزارش‌ها</a>
+          <a href="/figures/">چهره‌ها</a><a href="/trends/">ترندها</a><a href="/badbadak/">بادبادک</a>
+        </div>
+        <div class="footer-link-group"><strong>رصد و آینده</strong>
+          <a href="/future/">آینده‌بان</a><a href="/radar/iran-scenarios/">سناریوهای ایران</a>
+          <a href="/us-radar/">رادار آمریکا</a><a href="/israel-radar/">رادار اسرائیل</a>
+          <a href="/market/">بازار</a><a href="/weather/">آب‌وهوا</a>
+        </div>
+        <div class="footer-link-group"><strong>خواندنی و دیدنی</strong>
+          <a href="/books/">پیشخوان کتاب</a><a href="/press/">پیشخوان جراید</a>
+          <a href="/movies/">جان فیلم</a><a href="/tv/">راهنمای تماشا</a>
+          <a href="/diner/">داینر</a><a href="/system/">وضعیت سایت</a>
+        </div>
+      </nav>
+    </div>
+    <div class="page-width footer-bottom"><span>کلیه حقوق متعلق به سایت پندار است. (تأسیس: ۱۳۷۹)</span>
+      <div id="footer-freshness" class="footer-freshness" aria-label="آخرین به‌روزرسانی بخش‌های پندار">در حال بررسی تازه‌ترین داده‌ها…</div>
+    </div>
   </footer>
+
 </body>
 </html>
