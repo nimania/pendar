@@ -119,6 +119,21 @@
       html.heritage-booting .heritage-first-paint-nav span{font-size:12px;padding:8px 10px}
     }
   </style>
+  <style id="pendar-minimal-first-paint">
+    /* Same silhouette as the loaded editorial homepage: brand only.
+       All section navigation belongs to the real footer, not a flashing bar. */
+    html.heritage-booting .heritage-first-paint-header{
+      display:flex!important;min-height:78px!important;background:#fff!important;
+      border-bottom:1px solid #e7edf3!important;padding:10px max(18px,calc((100vw - 1380px)/2))!important;
+    }
+    html.heritage-booting .heritage-first-paint-header img{width:94px!important;max-height:55px!important}
+    html.heritage-booting .heritage-first-paint-nav{display:none!important}
+    html.heritage-booting .heritage-first-paint{background:#f8fafc!important;color:#223b56!important}
+    @media(max-width:650px){
+      html.heritage-booting .heritage-first-paint-header{min-height:71px!important;padding-inline:12px!important}
+      html.heritage-booting .heritage-first-paint-header img{width:81px!important}
+    }
+  </style>
   <style>
     html.js-enabled #seo-static { display: none; }
     html.route-boot main.wrap { visibility: hidden; }
@@ -304,7 +319,7 @@
   <div id="heritage-live-host" hidden aria-label="صفحهٔ اول مجله‌ای پندار">
     <div class="heritage-first-paint" aria-hidden="true">
       <div class="heritage-first-paint-header"><img src="/assets/pendar-logo.svg" alt=""></div>
-      <div class="heritage-first-paint-nav"><span>خانه</span><span>گزارش‌ها</span><span>چهره‌ها</span><span>پیشخوان کتاب</span><span>پیشخوان جراید</span><span>بازار</span><span>آب و هوا</span></div>
+      <div class="heritage-first-paint-nav" hidden aria-hidden="true"></div>
     </div>
   </div>
 
