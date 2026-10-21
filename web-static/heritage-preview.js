@@ -561,7 +561,7 @@
       "گزارش","خبر","جدید","تازه","تحلیل","آخرین","چرا","چگونه","یکی","بیشتر",
       "بررسی","تهران","جهان","جهانی","دولت","مردم","سیاسی","مسائل","وضعیت"]);
     function frontTerms(value){
-      var words=featureNormalize(value).match(/[\\u0600-\\u06ffa-z]{4,}/g)||[];
+      var words=featureNormalize(value).match(/[\u0600-\u06ffa-z]{3,}/g)||[];
       return new Set(words.filter(function(word){return !frontStopwords.has(word);}));
     }
     function frontRelated(a,b){
