@@ -293,6 +293,10 @@ assert(context.selectOfficialVideos({figures:[]},Date.now()).length===0,
 context.homeVideoItems=videos;
 context.figureFeatureItems=voices.slice(0,2);
 context.featureAllItems=stories.slice(1,3);
+// Use a reported, unconfirmed claim so the test exercises the sparse mode,
+// not the confirmed-breaking mode.
+const originalBorderTitle=stories[1].headline_fa;
+stories[1].headline_fa="گزارش‌هایی از دستور بستن گذرگاه مرزی با ایران";
 context.renderDesk();
 assert(htmlTarget.innerHTML.includes('class="fp-home-video"')&&
   htmlTarget.innerHTML.includes(youtubeTestId),
@@ -308,5 +312,6 @@ assert(htmlTarget.innerHTML.includes("fp-story-source")&&
   "Only an article's documented publisher may appear beside its headline");
 assert(!htmlTarget.innerHTML.includes("fp-home-video"),
   "An empty video pool must not generate an artificial content card");
+stories[1].headline_fa=originalBorderTitle;
 
 console.log("Pendar mixed editorial desk regression fixtures OK");
