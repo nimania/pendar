@@ -905,9 +905,23 @@
         var heading=lead?
           '<h2>'+esc(excerpt(headline(entry.row),230))+'</h2>':
           '<strong>'+esc(excerpt(headline(entry.row),120))+'</strong>';
+        var byline="";
+        if(lead&&!miniature&&typeof authorPortraitThumb==="function"){
+          var writerPhoto=authorPortraitThumb(entry.row);
+          if(writerPhoto){
+            var report=entry.row.editorial_report||{};
+            var authorId=String(entry.row.editorial_author_id||report.author_id||entry.row.author_id||"");
+            var author=(data.authors||[]).find(function(p){return p.id===authorId;});
+            byline='<span class="fp-lead-writer">'+
+              '<span class="fp-lead-writer-avatar">'+writerPhoto+'</span>'+
+              '<span><small>نویسندهٔ گزارش</small><strong>'+
+              esc(author&&author.display_name_fa||"تحریریهٔ پندار")+'</strong></span>'+
+              '</span>';
+          }
+        }
         var copy='<span class="fp-copy"><small>'+label(entry)+'</small>'+heading+
           (lead&&hook(entry.row)?'<p>'+esc(excerpt(hook(entry.row),205))+'</p>':"")+
-          '</span>';
+          byline+'</span>';
         return '<a class="'+cls+'" href="'+esc(slugUrl(entry.row))+'">'+
           (lead?copy+miniature:miniature+copy)+'</a>';
       }
