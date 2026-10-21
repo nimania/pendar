@@ -2472,3 +2472,18 @@ body:has(#home-page) .masthead-brand-inner .brand img{
     grid-template-columns:1fr!important
   }
 }
+
+
+/* A sparse dossier should never reserve empty grid tracks. The two
+   selectors below react to actual children after final content is chosen. */
+#home-page .feature-front-page .fp-desk-bottom:has(> :only-child){
+  grid-template-columns:minmax(0,1fr)!important
+}
+#home-page .feature-front-page .fp-desk-bottom:has(> :first-child:nth-last-child(2)){
+  grid-template-columns:repeat(2,minmax(0,1fr))!important
+}
+@media(max-width:700px){
+  #home-page .feature-front-page .fp-desk-bottom:has(> :first-child:nth-last-child(2)){
+    grid-template-columns:minmax(0,1fr)!important
+  }
+}
