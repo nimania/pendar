@@ -16,6 +16,8 @@ import sys
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from pathlib import Path
+from urllib.request import urlopen
+from urllib.error import URLError
 
 try:  # as a package import (tests) or as a standalone script (CI workflow)
     from backend.scripts.publish_figures import GitHubLedger, Telegram, clipped
@@ -227,6 +229,31 @@ def main(argv=None):
     args = parser.parse_args(argv)
     figures_data = _load(args.figures) if args.figures.exists() else {}
     stories_data = _load(args.stories) if args.stories.exists() else []
+    # Compact homepage cards may omit source lists. Hydrate a bounded set
+    # of recent important candidates from the published per-story dossier.
+    now = datetime.now(timezone.utc)
+    possible = sorted(
+        [row for row in stories_data if isinstance(row, dict) and row.get("id") and
+         (_parse_time(row.get("published_at")) or datetime.min.replace(tzinfo=timezone.utc)) >= now-timedelta(hours=24)],
+        key=lambda row: float(row.get("importance_score") or 0), reverse=True
+    )[:18]
+    details = {}
+    for row in possible:
+        if row.get("sources"):
+            continue
+        try:
+            with urlopen(f"{SITE}/data/story/{row['id']}.json", timeout=3) as response:
+                detail = json.load(response)
+            if isinstance(detail, dict) and detail.get("sources"):
+                details[str(row["id"])] = detail
+        except (OSError, ValueError, KeyError, TypeError, URLError):
+            continue
+    if details:
+        stories_data = [dict(row, **{k: v for k, v in details[str(row.get("id"))].items()
+                         if k in ("sources", "summary_fa", "source_count", "importance_score")
+                         and v is not None}) if str(row.get("id")) in details else row
+                       for row in stories_data]
+    print("Hydrated full source dossiers:", len(details))
     if args.dry_run:
         text = build_digest(figures_data, stories_data, datetime.now(timezone.utc), hours=args.hours)
         print(text or "(nothing to send in this window)")
