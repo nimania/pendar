@@ -48,8 +48,9 @@ assert(frontTemplate.includes('class="news-layout home-news-layout"')&&
   "editorial front page must use full width and keep news panels below");
 assert(frontStyles.includes('#home-page .home-news-layout{display:block!important'),
   "full-width home layout must remain active");
-assert(heritagePreview.includes('verifiedImage(photo(entry.row))'),
-  "front-page article images must be verified before they are displayed");
+assert(heritagePreview.includes('verifiedImage(url)')&&
+  heritagePreview.includes('imageDimensions.get(url)'),
+  "front-page article photos must be checked for loading success and sufficient resolution");
 assert(library.includes('class="editorial-story-people"'),"reports archive needs author portrait stories");
 assert(index.includes('editorial-archive.js?v=20261018-newsroom-1'),"refresh newsroom carousel cache");
 assert(!index.includes('heritage-first-paint-columns'),"homepage must not render giant empty loading cards");
