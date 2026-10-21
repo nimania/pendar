@@ -382,14 +382,17 @@
       return row&&row.value!==null&&row.value!==undefined&&row.value!==""&&
         Number.isFinite(value)&&value>0?value:null;
     };
-    function quote(ticker,label,alt){
+    function quote(ticker,label,alt,optional){
       var primary=rows.find(function(row){
         return row&&row.ticker===ticker&&row.quote==="IRT";
       });
-      var fallback=prices.find(function(row){return row&&row.label_fa===alt;});
-      var usePrimary=primary&&normPrice(primary)!==null;
+      var fallback=alt?prices.find(function(row){return row&&row.label_fa===alt;}):null;
+      var usePrimary=Boolean(primary&&normPrice(primary)!==null);
       var row=usePrimary?primary:fallback;
       var value=normPrice(row),old=usePrimary&&(snapshotOld||Boolean(row.is_stale));
+      // Without a trustworthy IRT quote, neither Tether nor 18K gold
+      // belongs in the pulse. Do not fill the gap with a dash or conversion.
+      if(optional&&(value===null||old))return "";
       var source=usePrimary?"نبضش":fallback?"TGJU":"";
       var priceLabel=value===null?"—":fmt(value,0);
       var change=row&&row.dp!==null&&row.dp!==undefined&&Number.isFinite(Number(row.dp))
@@ -422,10 +425,11 @@
       quote("USD","دلار","دلار آمریکا"),
       quote("EUR","یورو","یورو"),
       quote("COIN_EMAMI","سکهٔ امامی","سکه امامی"),
-      quote("USDT","تتر",null),
-      quote("GOLD18","طلای ۱۸",null),
+      quote("TRY","لیر ترکیه","لیر ترکیه"),
+      quote("USDT","تتر",null,true),
+      quote("GOLD18","طلای ۱۸",null,true),
       weatherLabel
-    ].join(""));
+    ].filter(Boolean).join(""));
   }
   function renderHomepageBriefs(){
     var digits=function(value){return String(value).replace(/\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[Number(d)];});};
