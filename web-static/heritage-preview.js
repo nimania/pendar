@@ -295,6 +295,38 @@
     });
     put("ticker",cards.join("")||textOnly.join("")||'<a href="/figures/">مشاهدهٔ تازه‌ترین گفته‌ها ←</a>');
   }
+
+  // Statements, not professional titles, are the first choice for a figure
+  // card. Only the figure's own dated posts may be attributed to the person.
+  // These are reported/paraphrased statements unless explicitly direct quotes.
+  function latestFigureStatement(person,now){
+    now=Number.isFinite(now)?now:Date.now();
+    var posts=Array.isArray(person&&person.posts)?person.posts:[];
+    var eligible=posts.map(function(post){
+      if(!post||typeof post!=="object")return null;
+      var stamp=Date.parse(post.published_at||"");
+      if(!Number.isFinite(stamp)||stamp>now+3600000||now-stamp>14*86400000)return null;
+      // A summary provides actual content. A bare topic (e.g. "Iran") is
+      // insufficient to invent or imply a substantive statement.
+      var spoken=norm(post.quote_fa||post.summary_fa||post.statement_fa||
+        post.text_fa||post.text||post.headline_fa||post.title_fa||"");
+      if(spoken.length<24)return null;
+      var isDirect=Boolean(post.direct_quote===true&&post.quote_fa);
+      var priorityTerms=/جنگ(?!ل)|صلح|مذاکر|ایران|اسرائیل|آمریکا|امنیت|تهدید|تحریم|ترامپ|نتانیاهو|اعتراض|انتخابات|مرز|ارتش|سپاه|هسته‌ای|هسته ای|نفت|اقتصاد|دلار|اینترنت|آتش.?بس/;
+      var topical=priorityTerms.test(spoken);
+      return {text:spoken,stamp:stamp,post:post,direct:isDirect,
+        topical:topical,score:(topical?18:0)+Math.max(0,24-Math.floor((now-stamp)/3600000)/2)};
+    }).filter(Boolean).sort(function(a,b){return b.stamp-a.stamp;});
+    return eligible[0]||null; // "last statement" means most recent, not highest-scoring old opinion.
+  }
+  function figureQuoteProminence(entry,now){
+    if(!entry||!entry.statement)return -Infinity;
+    var age=now-entry.statement.stamp;
+    if(age<0||age>4*86400000)return -Infinity;
+    // One notably fresh statement may occupy more space in the daily edition.
+    // No hard-coded figure or political faction receives priority.
+    return entry.statement.score+(entry.engagement>0?Math.min(10,Math.log1p(entry.engagement)):0);
+  }
   function renderRailFigureFive(payload){
     var people=Array.isArray(payload&&payload.figures)?payload.figures:[];
     function personPhoto(p){
@@ -306,13 +338,14 @@
       }
       return "";
     }
+    var now=Date.now();
     var records=people.filter(function(p){return p&&p.handle&&p.name_fa;}).map(function(p){
       var posts=Array.isArray(p.posts)?p.posts:[];
       var dates=posts.map(function(post){return String(post.published_at||"");}).filter(Boolean);
       return {person:p,count:posts.length,latest:dates.sort().reverse()[0]||"",
         added:String(p.created_at||p.added_at||p.first_seen_at||p.profile_created_at||""),
         engagement:posts.reduce(function(v,post){return v+(Number(post.engagement_score||post.score||post.view_count||0)||0);},0),
-        image:personPhoto(p)};
+        image:personPhoto(p),statement:latestFigureStatement(p,now)};
     });
     var byLatest=function(a,b){return b.latest.localeCompare(a.latest);};
     var buckets={
@@ -325,12 +358,32 @@
       trends:records.slice().sort(function(a,b){return b.engagement-a.engagement||b.count-a.count||byLatest(a,b);})
     };
     Object.keys(buckets).forEach(function(key){
-      var rows=buckets[key].slice(0,5).map(function(r){
+      var selected=buckets[key].slice(0,5);
+      var freshStatements=selected.filter(function(row){
+        return Number.isFinite(figureQuoteProminence(row,now));
+      }).sort(function(a,b){
+        return figureQuoteProminence(b,now)-figureQuoteProminence(a,now);
+      });
+      var highlighted=freshStatements.length?freshStatements[0]:null;
+      var target=el("rail-figures-"+key);
+      if(target)target.classList.toggle("rail-figures-has-lead",Boolean(highlighted));
+      var rows=selected.map(function(r){
+        var featured=r===highlighted;
         var image=r.image?'<img class="rail-thumb" src="'+esc(r.image)+'" alt="" loading="lazy" decoding="async" onerror="this.parentNode.remove()">':"";
-        return '<a class="rail-row'+(image?"":" rail-row-text-only")+'" href="/@'+encodeURIComponent(r.person.handle)+'/">'+
+        var statement=r.statement;
+        var hasStatement=Boolean(statement);
+        var summary=hasStatement?'<span class="rail-figure-statement">'+
+            '<small>'+ (statement.direct?"نقل‌قول":"از گفته‌های تازه") +'</small>'+
+            '<span>'+esc(excerpt(statement.text,featured?205:105))+'</span>'+
+          '</span>':"";
+        var role=!hasStatement?'<span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span>':"";
+        return '<a class="rail-row rail-figure-card'+(featured?" rail-figure-featured":"")+
+          (image?"":" rail-row-text-only")+
+          '" href="/@'+encodeURIComponent(r.person.handle)+'/"'+
+          (statement?' title="گفتهٔ این چهره؛ جزئیات در پروفایل"':"")+'>'+
           (image?'<span class="rail-thumb-frame">'+image+'</span>':"")+
           '<span class="rail-story-copy"><span class="rail-title">'+esc(r.person.name_fa)+'</span>'+
-          '<span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span></span></a>';
+          summary+role+'</span></a>';
       });
       put("rail-figures-"+key,rows.join("")||'<p class="empty-state">'+(key==="fresh"?"تاریخ اضافه‌شدن چهره‌ها هنوز در داده‌های فعلی ثبت نشده است.":"چهره‌ای برای نمایش موجود نیست.")+'</p>');
     });
