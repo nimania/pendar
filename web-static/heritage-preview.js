@@ -89,8 +89,7 @@
     var pos=(person.portrait_index*100/6).toFixed(4);
     return '<span class="news-author-photo" role="img" aria-label="عکس نویسنده: '+
       esc(person.display_name_fa||"تحریریهٔ پندار")+'" title="تصویر نویسندهٔ مطلب" '+
-      'style="background-image:url(\''+esc(sprite)+'\');background-position:'+pos+'% center">'+
-      '<small>نویسنده</small></span>';
+      'style="background-image:url(\''+esc(sprite)+'\');background-position:'+pos+'% center"></span>';
   }
   function newsMiniPhoto(row,extraClass){
     var url=photo(row),portrait=authorPortraitThumb(row);
