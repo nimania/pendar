@@ -49,11 +49,12 @@
         <div class="primary-column">
           <section class="feature-block" aria-label="گزارش ویژه">
             <div class="section-heading trend-feature-heading">
-              <h2>گزارش‌های برگزیده</h2>
+              <h2 id="feature-heading-title">صفحهٔ اول پندار</h2>
               <a id="feature-heading-more" href="/reports/">همهٔ گزارش‌ها <span aria-hidden="true">←</span></a>
             </div>
-            <div class="feature-category-tabs" role="tablist" aria-label="موضوعات گزارش‌های برگزیده">
-                <button type="button" role="tab" id="feature-category-politics" data-feature-category="politics" aria-controls="feature-politics-panel" aria-selected="true" tabindex="0" class="on">سیاست</button>
+            <div class="feature-category-tabs" role="tablist" aria-label="بخش‌های صفحهٔ اول پندار">
+                <button type="button" role="tab" id="feature-category-front" data-feature-category="front" aria-controls="feature-politics-panel" aria-selected="true" tabindex="0" class="on">صفحهٔ اول</button>
+                <button type="button" role="tab" id="feature-category-politics" data-feature-category="politics" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">سیاست</button>
                 <button type="button" role="tab" id="feature-category-diplomacy" data-feature-category="diplomacy" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">دیپلماسی</button>
                 <button type="button" role="tab" id="feature-category-society" data-feature-category="society" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">جامعه</button>
                 <button type="button" role="tab" id="feature-category-technology" data-feature-category="technology" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">تکنولوژی</button>
@@ -62,9 +63,10 @@
                 <button type="button" role="tab" id="feature-category-environment" data-feature-category="environment" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">محیط زیست</button>
                 <button type="button" role="tab" id="feature-category-culture" data-feature-category="culture" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">فرهنگ</button>
             </div>
-            <div id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-category-politics">
-            <section id="feature-statements-edition" class="statements-newspaper" aria-label="صفحهٔ روزنامه‌ای گفته‌ها" hidden></section>
-            <a class="feature-hero" id="feature-hero" href="/reports/" aria-label="گزارش ویژه">
+            <div id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-category-front">
+            <section id="feature-front-page" class="feature-front-page" aria-label="صفحهٔ اول زندهٔ پندار"><p class="loading">در حال چیدن صفحهٔ اول…</p></section>
+            <section id="feature-statements-edition" class="statements-newspaper" aria-label="گفته‌های چهره‌ها" hidden></section>
+            <a class="feature-hero" id="feature-hero" hidden href="/reports/" aria-label="گزارش ویژه">
               <span class="feature-picture"><span class="image-wait">پندار</span></span>
               <span class="feature-caption"><span class="category-flag orange">گزارش</span><strong>تازه‌ترین گزارش تحریریهٔ پندار</strong><span>گزارش مستند و کامل را بخوانید.</span></span>
             </a>
