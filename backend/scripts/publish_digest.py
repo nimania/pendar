@@ -100,39 +100,49 @@ def build_digest(figures_data, stories_data, now, hours=DIGEST_INTERVAL_HOURS, s
     if not news and not voices:
         return None
 
-    # A single connected explanatory report rather than a bulletin of links.
-    # Only source-grounded published summaries are used; no fabricated glue.
-    def clean(value, limit=410):
+    # One documented news narrative per window. Attribute every factual
+    # assertion to a named publisher; never combine unrelated stories.
+    def clean(value, limit=650):
         value = " ".join(str(value or "").split())
         if len(value) <= limit:
             return value
-        stop = max(value.rfind("۔", 0, limit), value.rfind(".", 0, limit),
-                   value.rfind("؟", 0, limit), value.rfind("؛", 0, limit))
-        return value[:stop+1] if stop >= limit//2 else value[:limit].rsplit(" ", 1)[0] + "…"
+        stops = [value.rfind(mark, 0, limit) for mark in ("۔", ".", "؟", "؛")]
+        cut = max(stops)
+        return value[:cut + 1] if cut >= limit // 2 else value[:limit].rsplit(" ", 1)[0] + "…"
 
-    usable = [s for s in news if len(str(s.get("summary_fa") or "").strip()) >= 65]
-    if not usable:
+    def named_sources(story):
+        found, seen = [], set()
+        for source in story.get("sources") or []:
+            if not isinstance(source, dict):
+                continue
+            name = str(source.get("source_name") or source.get("name") or "").strip()
+            if not name or name in seen:
+                continue
+            seen.add(name)
+            found.append(name)
+        return found
+
+    # If the source roster is missing, refrain from publishing unattributed
+    # summaries as verified reporting.
+    candidates = [s for s in news
+                  if len(str(s.get("summary_fa") or "").strip()) >= 65
+                  and named_sources(s)]
+    if not candidates:
         return None
-    primary = usable[0]
-    title = clean(primary.get("headline_fa") or "مهم‌ترین تحول", 105)
-    paragraphs = [clean(primary.get("summary_fa"), 480)]
-    links = [("گزارش اصلی", f"{site}/story/{primary['id']}/")]
-    used_topics = {str(primary.get("category") or "")}
-    for extra in usable[1:]:
-        # Avoid repetitive reports from one category if another beat is available.
-        category = str(extra.get("category") or "")
-        summary = clean(extra.get("summary_fa"), 280)
-        if not summary or (category in used_topics and len(usable) > 2):
-            continue
-        paragraphs.append(summary)
-        links.append(("گزارش مرتبط", f"{site}/story/{extra['id']}/"))
-        used_topics.add(category)
-
-    # Source assertions must not be presented as independent Pendar conclusions.
-    opening = "📰 <b>" + html.escape(title) + "</b>"
-    body = "\\n\\n".join(html.escape(paragraph) for paragraph in paragraphs)
-    related = " · ".join(_link(label, url) for label, url in links)
-    return opening + "\\n\\n" + body + "\\n\\n" + related + "\\n" + _link("ادامه در پندار ←", site + "/")
+    primary = candidates[0]
+    names = named_sources(primary)
+    title = clean(primary.get("headline_fa") or "تحولات امروز", 110)
+    summary = clean(primary.get("summary_fa"), 700)
+    intro = ("به گزارش " + " و ".join(names[:2]) +
+             (" و دیگر منابع" if len(names)>2 else "") + "، ")
+    # The published summary is attributed as a paraphrase, not as a quote.
+    narrative = intro + summary
+    direct = f"{site}/story/{primary['id']}/"
+    source_line = "منابع این گزارش: " + "، ".join(names[:4])
+    return ("📰 <b>" + html.escape(title) + "</b>\\n\\n" +
+            html.escape(narrative) + "\\n\\n" +
+            "<i>" + html.escape(source_line) + "</i>\\n" +
+            _link("متن کامل، جزئیات و مستندات در پندار ←", direct))
 
 
 def digest_payload(text, chat_id):
