@@ -1941,3 +1941,195 @@ body:has(#home-page) .masthead-brand-inner .brand img{
     min-height:75px;border-inline-end:0!important
   }
 }
+
+
+/* EDITORIAL COMPOSITION REFINEMENTS — preserve the approved article signature. */
+/* The lead is no longer measured against a 12-item fixed side column.
+   News and attributable opinions may appear in either order and overflow
+   into a balanced row beneath the complete dossier. */
+#home-page .feature-front-page .fp-desk-layout{
+  align-items:start!important;
+  grid-auto-flow:row;
+}
+#home-page .feature-front-page .fp-desk-layout>.fp-lead,
+#home-page .feature-front-page .fp-desk-layout>.fp-desk-context{min-width:0}
+#home-page .feature-front-page .fp-desk-bottom{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-column:1/-1;align-items:stretch;gap:0 16px;
+  margin-top:7px;padding-top:12px;
+  border-top:1px solid #dae2db;min-width:0
+}
+#home-page .feature-front-page .fp-desk-bottom>.fp-related-item,
+#home-page .feature-front-page .fp-desk-bottom>.fp-voice{
+  min-width:0;max-width:100%;
+  padding:12px 4px!important;
+  border-bottom:1px solid #e3e7e4!important;
+}
+#home-page .feature-front-page .fp-desk-context>.fp-related-item,
+#home-page .feature-front-page .fp-desk-context>.fp-voice{
+  width:100%;min-width:0;border-bottom:1px solid #e3e7e4!important
+}
+#home-page .feature-front-page .fp-desk-context>.fp-voice:first-child{
+  border-top:0!important
+}
+#home-page .feature-front-page .fp-desk-bottom .fp-related-copy{
+  min-width:0;flex:1;overflow-wrap:anywhere
+}
+#home-page .feature-front-page .fp-desk-bottom .fp-related-thumb{
+  flex:0 0 79px;width:79px;height:59px
+}
+#home-page .feature-front-page .fp-desk-conversation .fp-desk-context>.fp-voice:first-child{
+  padding-block:14px!important
+}
+/* Newsrooms can reorder small headlines and speakers without overflowing
+   the paired dossier's column widths. */
+#home-page .feature-front-page .fp-secondary-desks{align-items:start}
+#home-page .feature-front-page .fp-topic,
+#home-page .feature-front-page .fp-topic .fp-topic-head,
+#home-page .feature-front-page .fp-topic .fp-topic-head span:last-child{
+  min-width:0!important;max-width:100%!important
+}
+#home-page .feature-front-page .fp-topic .fp-topic-head{
+  overflow:hidden;align-items:flex-start
+}
+#home-page .feature-front-page .fp-topic .fp-topic-head h3{
+  font-size:clamp(15px,1.35vw,19px)!important;
+  max-width:100%;overflow-wrap:anywhere!important;
+  word-break:normal!important;line-height:1.8!important
+}
+#home-page .feature-front-page .fp-topic .fp-topic-flow{
+  display:flex;flex-direction:column;gap:0;min-width:0;
+  margin-top:10px
+}
+#home-page .feature-front-page .fp-topic .fp-topic-flow>.fp-voice,
+#home-page .feature-front-page .fp-topic .fp-topic-flow>.fp-related-item{
+  display:flex!important;gap:12px;
+  min-width:0!important;width:100%;max-width:100%;
+  border:0!important;border-bottom:1px solid #e3e7e4!important;
+  background:transparent!important;
+  margin:0!important;padding:12px 0!important
+}
+#home-page .feature-front-page .fp-topic .fp-topic-flow>*:last-child{
+  border-bottom:0!important
+}
+#home-page .feature-front-page .fp-topic .fp-topic-head .fp-image{
+  width:95px!important;flex:0 0 95px!important;height:82px!important;
+}
+#home-page .feature-front-page .fp-topic .fp-related-item strong,
+#home-page .feature-front-page .fp-topic .fp-voice span{
+  overflow-wrap:anywhere;word-break:normal
+}
+#home-page .feature-front-page .fp-related-item .fp-related-thumb img{
+  width:100%;height:100%;object-fit:cover;object-position:center
+}
+/* Real news photos retain consistent 4:3 slots within each module.
+   Editorial author heads are CIRCULAR and have a Pendar-orange ring. */
+#home-page .news-mini-photo:has(.news-author-photo):not(:has(img)){
+  display:block!important;
+  position:relative!important;flex:none!important;
+  aspect-ratio:1!important;
+  border-radius:50%!important;border:2px solid #dc651e!important;
+  background:#fff!important;
+  overflow:hidden!important;
+  box-shadow:0 0 0 2px #fff inset!important
+}
+#home-page .news-mini-photo:has(.news-author-photo):not(:has(img))
+ .news-author-photo{
+  position:absolute!important;inset:3px!important;
+  width:auto!important;height:auto!important;
+  display:block!important;
+  border-radius:50%!important;
+  background-repeat:no-repeat;background-size:700% 100%;
+  overflow:hidden!important
+}
+#home-page .news-mini-photo .news-author-photo small{
+  display:none!important
+}
+#home-page .fp-related-item .news-mini-photo.fp-related-thumb:has(.news-author-photo):not(:has(img)){
+  flex-basis:61px!important;width:61px!important;height:61px!important
+}
+#home-page .fp-essential .news-mini-photo.fp-image:has(.news-author-photo):not(:has(img)){
+  width:82px!important;height:82px!important;
+  flex-basis:82px!important;align-self:flex-start;
+  margin:15px 15px 0!important
+}
+#home-page .home-editorial-report-row .news-mini-photo.home-editorial-report-photo:has(.news-author-photo):not(:has(img)){
+  width:78px!important;height:78px!important;
+  flex:0 0 78px!important;align-self:flex-start;margin:5px 0!important
+}
+#home-page .fp-topic-head .news-mini-photo.fp-image:has(.news-author-photo):not(:has(img)){
+  width:65px!important;height:65px!important;flex:0 0 65px!important
+}
+#home-page .rail-row .news-mini-photo.rail-thumb:has(.news-author-photo):not(:has(img)){
+  width:53px!important;height:53px!important;flex:0 0 53px!important
+}
+#home-page .rail-row .rail-thumb-frame:has(.news-mini-photo.rail-thumb .news-author-photo){
+  width:62px!important;height:62px!important;flex:0 0 62px!important;
+  background:transparent!important
+}
+#home-page .feature-front-page .fp-lead-writer-avatar{
+  border:2px solid #dc651e!important;
+  box-shadow:0 0 0 3px #fff inset!important
+}
+#home-page .feature-front-page .fp-lead-writer-avatar .news-author-photo{
+  inset:3px!important;border-radius:50%!important
+}
+/* Bottom-of-page destinations, no invented scenario score or fake live status. */
+#home-page .home-destinations{
+  margin:26px 0 6px;min-width:0
+}
+#home-page .home-destinations-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  flex-wrap:wrap;gap:12px;margin:0;padding:7px 1px 13px;
+  border-bottom:1px solid #cfd8d0
+}
+#home-page .home-destinations-head h2{
+  margin:0;color:#222b27;
+  font:800 21px/1.75 "Vazirmatn",Tahoma,sans-serif
+}
+#home-page .home-destinations-head>span{
+  color:#65736a;font:450 12px/1.7 "Vazirmatn",Tahoma,sans-serif
+}
+#home-page .home-destinations-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;padding-top:13px
+}
+#home-page .home-destination{
+  position:relative;display:flex;flex-direction:column;
+  align-items:flex-start;gap:10px;min-width:0;
+  padding:18px 16px 19px;min-height:182px;
+  border:1px solid #dae2db;border-top:4px solid #dc651e;
+  color:#222b27;background:#fff;box-shadow:none;
+  text-decoration:none!important
+}
+#home-page .home-destination:hover{background:#f8faf8;border-color:#adbfb4}
+#home-page .home-destination .home-destination-kicker{
+  font:700 11px/1.7 "Vazirmatn",Tahoma,sans-serif;
+  color:#d25c1c
+}
+#home-page .home-destination>strong{
+  font:800 18px/1.7 "Vazirmatn",Tahoma,sans-serif;
+  overflow-wrap:anywhere;max-width:100%
+}
+#home-page .home-destination>span:nth-last-child(2){
+  color:#627168;font:450 12px/1.95 "Vazirmatn",Tahoma,sans-serif
+}
+#home-page .home-destination-arrow{
+  color:#2a8486;font:700 18px/1;align-self:flex-end;margin-top:auto
+}
+#home-page .home-destination-diner{border-top-color:#2a8486}
+#home-page .home-destination-diner .home-destination-kicker{color:#2a8486}
+@media(max-width:1100px){
+  #home-page .home-destinations-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #home-page .feature-front-page .fp-desk-bottom{
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+}
+@media(max-width:700px){
+  #home-page .feature-front-page .fp-desk-bottom{
+    grid-template-columns:1fr;gap:0
+  }
+  #home-page .home-destinations-grid{grid-template-columns:1fr}
+  #home-page .home-destination{min-height:125px;padding:15px}
+  #home-page .feature-front-page .fp-topic .fp-topic-head h3{font-size:16px!important}
+}
