@@ -2499,3 +2499,11 @@ body:has(#home-page) .masthead-brand-inner .brand img{
 .pubstats-row a:hover{text-decoration:underline}
 .pubstats-value{font-variant-numeric:tabular-nums}
 .footer-publication-stats .pubstats-note{margin:10px 0;opacity:.7;font-size:11px}
+
+/* Official creator videos: one lead-package item plus four compact cards. */
+.fp-video-shelf{margin:20px 0 24px;padding:10px 0;border-top:1px solid rgba(128,128,128,.25)}
+.fp-video-shelf-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.fp-video-shelf-grid .fp-home-video{min-width:0;display:flex;flex-direction:column}
+.fp-video-shelf-grid .fp-video-image{width:100%;aspect-ratio:16/9}
+.fp-video-shelf-grid .fp-video-copy{padding:8px 0}
+@media(max-width:760px){.fp-video-shelf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
