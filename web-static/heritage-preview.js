@@ -1079,30 +1079,6 @@
         return item.type==="voice"?voice(item.item):
           relatedStory(item.entry,prominent&&item.priority>=75);
       }
-      // Keep the side roughly the same height as the headline + photograph.
-      // Any extra stories/quotes flow beneath BOTH columns rather than leaving
-      // a long empty patch below the leading picture.
-      var leadHasPhoto=Boolean(picture(main.seed));
-      var sideCapacity=leadHasPhoto?5:3;
-      var stream=editorialStream(main);
-      var sideItems=stream.slice(0,sideCapacity);
-      var belowItems=stream.slice(sideCapacity);
-      var contextual=stream.length>0;
-      var mood=main.voices.length>main.related.length?" fp-desk-conversation":
-        leadHasPhoto?" fp-desk-photographic":" fp-desk-textual";
-      var desk='<section class="fp-desk'+mood+'" aria-label="تیتر اصلی و مطالب همراه">'+
-        '<div class="fp-desk-layout'+(contextual?"":" fp-desk-solo")+'">'+
-          story(main.seed,"fp-lead")+
-          (contextual?'<div class="fp-desk-context">'+
-            sideItems.map(function(item,i){return flowCard(item,i===0);}).join("")+
-          '</div>':"")+
-          (belowItems.length?'<div class="fp-desk-bottom">'+
-            belowItems.map(function(item){return flowCard(item,false);}).join("")+
-          '</div>':"")+
-        '</div></section>';
-      var html=desk;
-      // Other important dossiers follow the lead regardless of beat. Their
-      // relationships must be evidenced independently of the main desk.
       var clusters=[];
       for(var count=0;count<2;count++){
         var rest=worthy.filter(function(e){return !usedNews.has(e.row.id);});
@@ -1124,6 +1100,51 @@
         next.voices.forEach(function(v){usedSpeakers.add(v.handle);});
         clusters.push(next);
       }
+      // Keep the side roughly the same height as the headline + photograph.
+      // Any extra stories/quotes flow beneath BOTH columns rather than leaving
+      // a long empty patch below the leading picture.
+      var leadHasPhoto=Boolean(picture(main.seed));
+      var stream=editorialStream(main);
+      var layout=frontChooseLayout({
+        lead:main.seed,age:featureAge(main.seed.row),
+        news:main.related.length,voices:main.voices.length,
+        leadPhoto:leadHasPhoto,
+        newsPhotos:main.related.filter(function(e){
+          return Boolean(newsMiniPhoto(e.row,"fp-related-thumb"));
+        }).length,
+        dossiers:clusters.length
+      });
+      // Every layout changes composition only; none changes the factual
+      // headlines, rankings or which articles qualify for the edition.
+      // No time-based randomness and no forced filler for empty modules.
+      if(layout==="conversation"){
+        stream.sort(function(a,b){
+          return Number(b.type==="voice")-Number(a.type==="voice")||
+            b.priority-a.priority;
+        });
+      }
+      var sideCapacity=(layout==="breaking"||layout==="sparse")?0:
+        layout==="visual"?3:layout==="conversation"?4:
+        layout==="dense"?(leadHasPhoto?7:5):
+        layout==="multi"?3:(leadHasPhoto?5:3);
+      var sideItems=stream.slice(0,sideCapacity);
+      var belowItems=stream.slice(sideCapacity);
+      var contextual=sideItems.length>0;
+      var mood=main.voices.length>main.related.length?" fp-desk-conversation":
+        leadHasPhoto?" fp-desk-photographic":" fp-desk-textual";
+      var desk='<section class="fp-desk'+mood+'" aria-label="تیتر اصلی و مطالب همراه">'+
+        '<div class="fp-desk-layout'+(contextual?"":" fp-desk-solo")+'">'+
+          story(main.seed,"fp-lead")+
+          (contextual?'<div class="fp-desk-context">'+
+            sideItems.map(function(item,i){return flowCard(item,i===0);}).join("")+
+          '</div>':"")+
+          (belowItems.length?'<div class="fp-desk-bottom">'+
+            belowItems.map(function(item){return flowCard(item,false);}).join("")+
+          '</div>':"")+
+        '</div></section>';
+      var html='<div class="fp-edition fp-layout-'+layout+'">'+desk;
+      // Other important dossiers follow the lead regardless of beat. Their
+      // relationships must be evidenced independently of the main desk.
       if(clusters.length){
         html+='<div class="fp-secondary-desks">'+clusters.map(function(group){
           return '<section class="fp-topic">'+
@@ -1177,7 +1198,7 @@
       // Track what is actually on this edition, not all candidate stories.
       frontVisibleIds=new Set(usedNews);
       changed.forEach(function(entry){frontVisibleIds.add(entry.row.id);});
-      target.innerHTML=html;
+      target.innerHTML=html+'</div>';
     }
 
     function renderCurrentFeature(){
