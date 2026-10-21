@@ -1714,12 +1714,27 @@
       return '<div class="pubstats-row"><a href="'+href+'">'+name+'</a>'+
         '<span class="pubstats-value">'+fmt(series.length)+'</span>'+cells+'</div>';
     }
-    panel.innerHTML='<h3>آمار انتشار پندار</h3><p>شمار مطالب موجود در خروجی منتشرشده؛ نه کل آرشیو تاریخی یا تعداد ورودی‌های دریافت‌شده.</p>'+
+    panel.innerHTML='<h3>آمار انتشار پندار</h3><p>مجموع سرخط‌ها از آمار کل آرشیو منتشرشده محاسبه می‌شود؛ سایر ردیف‌ها موجودی خروجی‌های همان بخش‌اند.</p>'+
       '<div class="pubstats-table"><div class="pubstats-row pubstats-head"><span>بخش</span><span>موجود</span>'+
       periods.map(function(p){return '<span>'+p[0]+'</span>';}).join("")+'</div>'+
-      row("سرخط",data.stories,"/headlines/",true)+row("گزارش",data.reports,"/reports/",true)+
+      '<div id="pubstats-news"></div>'+row("گزارش",data.reports,"/reports/",true)+
       '<div id="pubstats-extra"></div></div>'+
       '<p class="pubstats-note">دریافت‌شده و ردشده: هنوز شمارندهٔ تاریخی معتبر در خروجی عمومی موجود نیست. علامت — یعنی دادهٔ قابل سنجش موجود نیست، نه صفر.</p>';
+    fetchJson("/data/stats.json").then(function(stats){
+      var slot=panel.querySelector("#pubstats-news");if(!slot)return;
+      if(!stats||!Number.isFinite(Number(stats.total)))throw Error("Missing total");
+      var stamps=Array.isArray(stats.timeline)?stats.timeline:[];
+      var windows=periods.map(function(p){
+        var count=stamps.filter(function(t){var ms=Number(t);return Number.isFinite(ms)&&ms<=now&&now-ms<=p[1];}).length;
+        return '<span class="pubstats-value">'+fmt(count)+'</span>';
+      }).join("");
+      slot.innerHTML='<div class="pubstats-row"><a href="/headlines/">کل سرخط‌ها</a><span class="pubstats-value">'+
+        fmt(Number(stats.total))+'</span>'+windows+'</div>';
+    }).catch(function(){
+      var slot=panel.querySelector("#pubstats-news");
+      if(slot)slot.innerHTML='<div class="pubstats-row"><a href="/headlines/">کل سرخط‌ها</a>'+
+        '<span>—</span><span>—</span><span>—</span><span>—</span></div>';
+    });
     Promise.all([
       fetchJson("/data/books.json").catch(function(){return null;}),
       fetchJson("/data/pendar-series-showcase.json").catch(function(){return null;}),
