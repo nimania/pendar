@@ -12,6 +12,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
+    # Retired: only the documented event narrative publisher may post to @pendario.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
