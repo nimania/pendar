@@ -87,7 +87,8 @@ const context={
 vm.createContext(context);
 vm.runInContext(source.slice(start,finish)+"\nthis.evaluate=frontEditorialScore;"+
   "this.connect=frontConnection;this.promo=frontRoutinePublicity;",context);
-const testSignals=vm.runInContext("frontPrioritySignals",context);
+vm.runInContext("this.prioritySignals=frontPrioritySignals;",context);
+const testSignals=context.prioritySignals;
 const interest=[
   ["احتمال جنگ و مذاکرات صلح", "armed-conflict"],
   ["خبرهای تنگه هرمز", "sea-chokepoints"],
