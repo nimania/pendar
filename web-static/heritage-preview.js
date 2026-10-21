@@ -1264,33 +1264,11 @@
         usedNews.add(picked.row.id);
         counts[picked.category]=(counts[picked.category]||0)+1;
       }
-      // Nima's actual official-channel videos can fill the final incomplete
-      // news row. The video is labelled as media, not represented as a
-      // corroborating report or attributed to an unrelated news source.
-      var videoPool=typeof homeVideoItems!=="undefined"&&
-        Array.isArray(homeVideoItems)?homeVideoItems:[];
-      var freeCells=extras.length?(3-extras.length%3)%3:1;
-      var useVideos=videoPool.length&&(layout==="sparse"||layout==="textual"||
-        extras.length<7||freeCells>0);
-      var videoExtras=useVideos?videoPool.slice(0,Math.min(2,freeCells||1)):[];
-      function videoCard(v){
-        var picture=v.thumbnail?'<span class="fp-video-thumb"><img src="'+
-          esc(v.thumbnail)+'" alt="" loading="lazy" decoding="async" '+
-          'onerror="this.parentElement.remove()"></span>':"";
-        return '<a class="fp-video-card" href="'+esc(v.url)+
-          '" target="_blank" rel="noopener noreferrer">'+picture+
-          '<span class="fp-video-copy"><small>ویدئوی نیما افشارنادری · یوتیوب ↗</small>'+
-          '<strong>'+esc(excerpt(v.title,120))+'</strong></span></a>';
-      }
       if(extras.length){
         html+='<section class="fp-more"><div class="fp-section-heading"><h3>'+
           'دیگر خبرهای مهم</h3><a href="/headlines/">سرخط‌ها ←</a></div>'+
           '<div class="fp-more-grid">'+extras.map(function(e){return story(e,"fp-essential");}).join("")+
-          videoExtras.map(videoCard).join("")+'</div></section>';
-      }else if(videoExtras.length){
-        html+='<section class="fp-video-section" aria-label="ویدئوهای نیما افشارنادری">'+
-          videoExtras.map(videoCard).join("")+
-          '<a class="fp-video-archive" href="/videos/">همهٔ ویدئوها ←</a></section>';
+          '</div></section>';
       }
       // Unrelated opinions stay in the specialist Statements tab. Never
       // fill a mixed front-page module with arbitrary public figures.
