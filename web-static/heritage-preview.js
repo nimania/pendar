@@ -609,7 +609,7 @@
     return found.filter(function(item){
       if(seen.has(item.handle))return false;
       seen.add(item.handle);return true;
-    }).slice(0,16);
+    }).slice(0,160);
   }
   function statementEditionDate(stamp){
     if(!Number.isFinite(stamp))return "";
@@ -1050,8 +1050,26 @@
       figuresReady=true;
       if(currentFeature==="statements"||currentFeature==="front")renderCurrentFeature();
       renderFigureStrip(payload);renderRailFigureFive(payload);
+      // The front desk must see topical speakers beyond the 16 latest
+      // profiles. Only fetch portraits for the newest people and for speakers
+      // actually related to consequential stories (small bounded batch).
+      var priorityTopics=featureAllItems.slice().sort(function(a,b){
+        return frontEditorialScore(b,featureCategory(b))-
+          frontEditorialScore(a,featureCategory(a));
+      }).slice(0,20);
+      var matchingPeople=figureFeatureItems.filter(function(item){
+        return validImage(item.portrait)&&priorityTopics.some(function(story){
+          return frontConnection(story,item);
+        });
+      }).slice(0,18);
+      var portraitSeen=new Set();
+      var portraitCandidates=figureFeatureItems.slice(0,14).concat(matchingPeople)
+        .filter(function(item){
+          if(portraitSeen.has(item.handle))return false;
+          portraitSeen.add(item.handle);return true;
+        });
       // Verify portraits independently of article images (avatars may be small).
-      var checks=figureFeatureItems.slice(0,16).map(function(item){
+      var checks=portraitCandidates.map(function(item){
         return new Promise(function(resolve){
           if(!validImage(item.portrait)){resolve();return;}
           var img=new Image(),settled=false;
@@ -1060,7 +1078,7 @@
             item.portraitVerified=Boolean(ok);resolve();
           };
           var timeout=setTimeout(function(){done(false);},3200);
-          img.onload=function(){done(img.naturalWidth>=72&&img.naturalHeight>=72);};
+          img.onload=function(){done(img.naturalWidth>=64&&img.naturalHeight>=64);};
           img.onerror=function(){done(false);};
           img.src=item.portrait;
         });
