@@ -307,48 +307,104 @@
       activate(tabs.find(function(tab){return tab.classList.contains("on");})?.dataset.railTab||tabs[0]?.dataset.railTab);
     });
   }
+
+  // The former figures ticker is now a sourced market + Tehran weather pulse.
+  // Never synthesize a missing price, confuse IRT/IRR or hide stale timestamps.
+  function renderPulseMetrics(snapshot,fiatPrices,weatherData){
+    var rows=Array.isArray(snapshot&&snapshot.rows)?snapshot.rows:[];
+    var prices=Array.isArray(fiatPrices)?fiatPrices:Array.isArray(fiatPrices&&fiatPrices.prices)?fiatPrices.prices:[];
+    var cities=Array.isArray(weatherData)?weatherData:Array.isArray(weatherData&&weatherData.cities)?weatherData.cities:[];
+    var created=Date.parse(snapshot&&snapshot.generated_at||"");
+    var snapshotOld=!Number.isFinite(created)||created>Date.now()+300000||
+      Date.now()-created>120*60000;
+    var fmt=function(value,decimals){
+      return Number(value).toLocaleString("fa-IR",{maximumFractionDigits:decimals||0});
+    };
+    var normPrice=function(row){
+      var value=Number(row&&row.value);
+      return row&&row.value!==null&&row.value!==undefined&&row.value!==""&&
+        Number.isFinite(value)&&value>0?value:null;
+    };
+    function quote(ticker,label,alt){
+      var primary=rows.find(function(row){
+        return row&&row.ticker===ticker&&row.quote==="IRT";
+      });
+      var fallback=prices.find(function(row){return row&&row.label_fa===alt;});
+      var usePrimary=primary&&normPrice(primary)!==null;
+      var row=usePrimary?primary:fallback;
+      var value=normPrice(row),old=usePrimary&&(snapshotOld||Boolean(row.is_stale));
+      var source=usePrimary?"نبضش":fallback?"TGJU":"";
+      var priceLabel=value===null?"—":fmt(value,0);
+      var change=row&&row.dp!==null&&row.dp!==undefined&&Number.isFinite(Number(row.dp))
+        ?Number(row.dp):null;
+      var move=value!==null&&change!==null&&change!==0
+        ?'<small class="pulse-change '+(change>0?"up":"down")+'">'+
+          (change>0?"▲ ":"▼ ")+fmt(Math.abs(change),1)+'٪</small>':"";
+      var time=usePrimary?row.updated_at||snapshot.generated_at:"";
+      var timestamp=time&&Number.isFinite(Date.parse(time))?
+        new Date(time).toLocaleString("fa-IR",{timeZone:"Asia/Tehran",month:"short",
+          day:"numeric",hour:"2-digit",minute:"2-digit"}):"زمان نامشخص";
+      var description=source?"منبع: "+source+" · آخرین نرخ: "+timestamp:"نرخ در دادهٔ فعلی موجود نیست";
+      return '<a role="listitem" class="pulse-item'+(old?" pulse-stale":"")+
+        '" href="/market/" title="'+esc(description)+(old?" · دادهٔ قدیمی":"")+'">'+
+        '<span class="pulse-label">'+esc(label)+'</span>'+
+        '<span class="pulse-price" dir="auto">'+priceLabel+
+        (value!==null?'<small>تومان</small>':"")+'</span>'+
+        (old?'<small class="pulse-change pulse-old">قدیمی</small>':move)+
+        '</a>';
+    }
+    var tehran=cities.find(function(row){return row&&norm(row.city_fa)==="تهران";});
+    var temperature=tehran&&tehran.temp!==null&&tehran.temp!==undefined&&
+      Number.isFinite(Number(tehran.temp))?fmt(tehran.temp,0)+"°":"—";
+    var weatherCondition=tehran&&tehran.cond_fa?norm(tehran.cond_fa):"آخرین وضعیت";
+    var weatherLabel='<a role="listitem" class="pulse-item pulse-weather" href="/weather/" '+
+      'title="هوا: آخرین دادهٔ منتشرشدهٔ پندار برای تهران"><span class="pulse-label">هوای تهران</span>'+
+      '<span class="pulse-price">'+esc(temperature)+'</span>'+
+      '<small class="pulse-change">'+esc(weatherCondition)+'</small></a>';
+    put("ticker",[
+      quote("USD","دلار","دلار آمریکا"),
+      quote("EUR","یورو","یورو"),
+      quote("COIN_EMAMI","سکهٔ امامی","سکه امامی"),
+      quote("USDT","تتر",null),
+      quote("GOLD18","طلای ۱۸",null),
+      weatherLabel
+    ].join(""));
+  }
   function renderHomepageBriefs(){
-    var digits=function(value){return String(value).replace(/\\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[Number(d)];});};
+    var digits=function(value){return String(value).replace(/\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[Number(d)];});};
     var number=function(value){var n=Number(value);return Number.isFinite(n)?digits(n.toLocaleString("en-US")):"";};
     var fallback=function(id,href,label){put(id,'<a class="brief-fallback" href="'+href+'">'+label+' ←</a>');};
     Promise.all([
-      fetchJson("/data/prices.json").catch(function(){return null;}),
-      fetchJson("/data/weather.json").catch(function(){return null;})
+      fetchJson("/data/prices.json").catch(function(){return [];}),
+      fetchJson("/data/weather.json").catch(function(){return [];}),
+      fetchJson("/data/market-nabzesh.json").catch(function(){return null;})
     ]).then(function(result){
-      var prices=result[0];
+      var prices=result[0],weather=result[1],snapshot=result[2];
+      renderPulseMetrics(snapshot,prices,weather);
       var priceRows=Array.isArray(prices)?prices:Array.isArray(prices&&prices.prices)?prices.prices:[];
       var targets=["دلار آمریکا","یورو","سکه امامی","لیر ترکیه"];
       var market=targets.map(function(name){return priceRows.find(function(r){return r&&r.label_fa===name;});}).filter(Boolean);
-      if(market.length<3){
-        priceRows.forEach(function(row){if(market.length>=4)return;if(row&&!market.includes(row)&&row.label_fa&&Number.isFinite(Number(row.value)))market.push(row);});
-      }
       var marketHtml=market.slice(0,4).map(function(row){
-        var value=number(row.value),change=Number(row.dp);
-        if(!value)return "";
+        if(row.value===null||row.value===undefined||!Number.isFinite(Number(row.value)))return "";
+        var value=number(row.value),change=row.dp===null?null:Number(row.dp);
         var trend=Number.isFinite(change)&&change!==0
           ?'<span class="brief-delta '+(change>0?'up':'down')+'">'+(change>0?'▲ ':'▼ ')+number(Math.abs(change))+'٪</span>'
           :'<span class="brief-delta flat">—</span>';
         return '<a class="brief-cell" href="/market/"><span class="brief-label">'+esc(row.label_fa)+'</span><strong>'+value+'</strong>'+trend+'</a>';
       }).filter(Boolean);
-      if(marketHtml.length)put("home-market-summary",'<div class="brief-mini-grid">'+marketHtml.join("")+'</div><div class="brief-unit">قیمت به تومان · نمایش داده‌های منتشرشدهٔ پندار</div>');
-      else fallback("home-market-summary","/market/","مشاهدهٔ تازه‌ترین نرخ‌های بازار");
-
-      var weather=result[1];
+      if(marketHtml.length)put("home-market-summary",'<div class="brief-mini-grid">'+marketHtml.join("")+'</div><div class="brief-unit">قیمت به تومان · آخرین دادهٔ منتشرشده</div>');
+      else fallback("home-market-summary","/market/","مشاهدهٔ نرخ‌های بازار");
       var cities=Array.isArray(weather)?weather:Array.isArray(weather&&weather.cities)?weather.cities:[];
       var selected=["تهران","نوشهر","چالوس","کرمان"].map(function(n){return cities.find(function(r){return r&&r.city_fa===n;});}).filter(Boolean);
-      if(selected.length<3)cities.forEach(function(r){if(selected.length<4&&r&&!selected.includes(r)&&r.city_fa)selected.push(r);});
-      var cityHtml=selected.slice(0,4).map(function(row){
-        var temp=number(row.temp);
-        if(!temp)return "";
+      var cityHtml=selected.map(function(row){
+        if(row.temp===null||row.temp===undefined||!Number.isFinite(Number(row.temp)))return "";
         var icon=typeof row.icon==="string"&&row.icon.length<=4?esc(row.icon):"🌡️";
-        var condition=norm(row.cond_fa||"");
-        return '<a class="brief-cell brief-weather-cell" href="/weather/"><span class="brief-label">'+icon+' '+esc(row.city_fa)+'</span><strong>'+temp+'°</strong><span class="brief-condition">'+esc(condition||"وضعیت هوا")+'</span></a>';
+        return '<a class="brief-cell brief-weather-cell" href="/weather/"><span class="brief-label">'+icon+' '+esc(row.city_fa)+'</span><strong>'+number(row.temp)+'°</strong><span class="brief-condition">'+esc(norm(row.cond_fa)||"آخرین وضعیت")+'</span></a>';
       }).filter(Boolean);
-      if(cityHtml.length)put("home-weather-summary",'<div class="brief-mini-grid">'+cityHtml.join("")+'</div><div class="brief-unit">وضعیت شهرها بر اساس آخرین دادهٔ منتشرشده</div>');
+      if(cityHtml.length)put("home-weather-summary",'<div class="brief-mini-grid">'+cityHtml.join("")+'</div>');
       else fallback("home-weather-summary","/weather/","مشاهدهٔ پیش‌بینی شهرها");
     }).catch(function(){
-      fallback("home-market-summary","/market/","مشاهدهٔ وضعیت بازار");
-      fallback("home-weather-summary","/weather/","مشاهدهٔ وضعیت آب‌وهوا");
+      renderPulseMetrics(null,[],[]);
     });
   }
   // Search-led trends belong to the compact headlines rail, not the editorial cover.
@@ -917,8 +973,8 @@
       featureSection.hidden=false;
       var isStatement=currentFeature==="statements",isFront=currentFeature==="front";
       var moreUrl=isStatement?"/figures/":isFront?"/headlines/":"/reports/";
-      featureMore.href=moreUrl;
-      featureMore.textContent=isStatement?"همهٔ گفته‌ها ←":isFront?"همهٔ سرخط‌ها ←":"همهٔ گزارش‌ها ←";
+      if(featureMore)featureMore.href=moreUrl;
+      if(featureMore)featureMore.textContent=isStatement?"همهٔ گفته‌ها ←":isFront?"همهٔ سرخط‌ها ←":"همهٔ گزارش‌ها ←";
       var heading=el("feature-heading-title");
       if(heading)heading.textContent=isFront?"صفحهٔ اول پندار":isStatement?"گفته‌ها":FEATURE_NAMES[currentFeature];
       var newspaper=el("feature-statements-edition"),front=el("feature-front-page"),underHero=el("under-hero");
@@ -1072,7 +1128,7 @@
       figureFeatureItems=featureStatementsFromFigures(payload);
       figuresReady=true;
       if(currentFeature==="statements"||currentFeature==="front")renderCurrentFeature();
-      renderFigureStrip(payload);renderRailFigureFive(payload);
+      renderRailFigureFive(payload);
       // The front desk must see topical speakers beyond the 16 latest
       // profiles. Only fetch portraits for the newest people and for speakers
       // actually related to consequential stories (small bounded batch).
@@ -1275,11 +1331,9 @@
         put("article-text",'<p>متن گزارش در <a href="'+esc(finalStoryUrl(storyId))+'">نسخهٔ اصلی پندار</a> قابل بررسی است.</p>');
       }else{
         el("feature-hero").closest(".feature-block").hidden=true;
-        el("culture").hidden=true;
-        el("gallery").hidden=true;
         photoNotice("rail-reports","دریافت تصاویر گزارش‌ها موقتاً ممکن نیست.","/reports/");
         photoNotice("rail-news","دریافت تصاویر خبرها موقتاً ممکن نیست.","/headlines/");
-        put("ticker",'<span class="loading">در حال حاضر دریافت خبرها ممکن نیست.</span>');
+        renderPulseMetrics(null,[],[]);
       }
       if(typeof console!=="undefined")console.warn("Pendar heritage preview:",err);
     }
