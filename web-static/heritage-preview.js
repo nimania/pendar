@@ -487,7 +487,7 @@
     if(frontIssueCache.has(text))return frontIssueCache.get(text);
     var iran=/ایران|ایرانی|تهران/.test(text);
     var regional=/اسرائیل|عراق|غزه|لبنان|خاورمیانه|منطقه|ایران/.test(text);
-    var security=/جنگ|آتش\s?بس|موشک|درگیری|نظامی|گذرگاه مرزی|بستن مرز|بسته شدن مرز|مرزهای بسته|امنیت مرزی|بحران امنیتی/.test(text)||
+    var security=/جنگ(?!ل)|آتش\s?بس|موشک|درگیری|نظامی|گذرگاه مرزی|بستن مرز|بسته شدن مرز|مرزهای بسته|امنیت مرزی|بحران امنیتی/.test(text)||
       (/حمله|تهدید/.test(text)&&!/حمله سایبری|تهدید سایبری|امنیت غذایی|امنیت شغلی|امنیت اقتصادی/.test(text));
     var issues=[];
     if(iran&&security&&regional)issues.push("iran-security");
@@ -551,7 +551,7 @@
     var promotional=/توسعه|گسترش|رونق|ثبت|تاکید|تأکید|ضرورت|برنامه ریزی|برنامه‌ریزی|ظرفیت|حمایت از|برگزاری|گفت|خبر داد/.test(title);
     var ceremonial=/ثبت رویداد|رویدادهای ملی|توسعه گردشگری|توسعهٔ گردشگری|جشنواره گردشگری/.test(title);
     var official=/وزیر|معاون|استاندار|مدیرکل|رئیس سازمان|رییس سازمان|مسئول|دبیر/.test(text);
-    var consequential=/بسته شدن|تعطیلی|دستور بستن|ممنوعیت|تصویب قانون|قانون جدید|ابلاغ قانون|قطع|اعتصاب|بحران|هشدار|سیلاب|کشته|بازداشت|آتش سوزی|آتش‌سوزی|کاهش بودجه|افزایش قیمت|توقف پرواز|جنگ|آتش بس|آتش‌بس|حمله|تصویب|محدودیت|تغییر نرخ|اعمال تحریم|توقف صادرات/.test(text);
+    var consequential=/بسته شدن|تعطیلی|دستور بستن|ممنوعیت|تصویب قانون|قانون جدید|ابلاغ قانون|قطع|اعتصاب|بحران|هشدار|سیلاب|کشته|بازداشت|آتش سوزی|آتش‌سوزی|کاهش بودجه|افزایش قیمت|توقف پرواز|جنگ(?!ل)|آتش بس|آتش‌بس|حمله|تصویب|محدودیت|تغییر نرخ|اعمال تحریم|توقف صادرات/.test(text);
     var hollowStatement=/(تاکید|تأکید|بر ضرورت|باید|خواستار|لزوم|اهمیت|گسترش همکاری|تقویت تعامل|ظرفیت های|ظرفیت‌های|ضروری است)/.test(title);
     if(consequential)return false;
     return ceremonial||(soft&&promotional&&official)||(official&&hollowStatement);
@@ -560,7 +560,7 @@
   // consequences, not a claim that any reported assertion has been verified.
   // No person receives a positive or negative score for political allegiance.
   var FRONT_PRIORITY_RULES=[
-    {key:"armed-conflict",weight:30,re:/جنگ|آتش\s?بس|آتش‌بس|درگیری نظامی|حمله نظامی|حملات موشکی|بمباران|صلح|پایان جنگ|آماده باش نظامی|آماده‌باش نظامی/},
+    {key:"armed-conflict",weight:30,re:/جنگ(?!ل)|آتش\s?بس|آتش‌بس|درگیری نظامی|حمله نظامی|حملات موشکی|بمباران|صلح|پایان جنگ|آماده باش نظامی|آماده‌باش نظامی/},
     {key:"negotiations",weight:22,re:/مذاکره|مذاکرات|دیپلماسی|توافق هسته ای|توافق هسته‌ای|برجام|پیمان ابراهیم|توافق صلح|گفتگوهای صلح|گفت‌وگوهای صلح|میانجیگری|میانجی‌گری/},
     {key:"war-signals",weight:26,re:/محاصره|اعزام نیرو|آرایش نظامی|بسیج نیرو|استقرار نیرو|رزمایش موشکی|هشدار حمله|تهدید حمله|آمادگی رزمی|تحرکات نظامی|احتمال حمله|سناریوی جنگ|گذرگاه مرزی|بسته شدن مرز|بستن مرز|پدافند|موشک بالستیک|موشک بالیستیک/},
     {key:"sea-chokepoints",weight:25,re:/تنگه هرمز|باب المندب|باب‌المندب|تنگه ملاکا|تنگه مالاکا|مسیر کشتیرانی|اختلال کشتیرانی|انسداد کشتیرانی/},
@@ -575,13 +575,13 @@
     {key:"education-exams",weight:16,re:/کنکور|سازمان سنجش|آزمون سراسری|سربازی|خدمت سربازی|نظام وظیفه|معافیت سربازی|مشمولان خدمت/},
     {key:"internet-shutdown",weight:28,re:/قطع اینترنت|اختلال اینترنت|محدودیت اینترنت|فیلترینگ|قطع ارتباطات|انسداد اینترنت|اینترنت ملی|کندی اینترنت|خاموشی اینترنت/},
     {key:"musk",weight:15,re:/ایلان ماسک|الون ماسک|elon musk|اسپیس ایکس|اسپیس‌ایکس|استارلینک|تسلا|نورالینک|ایکس ای آی|xai/},
-    {key:"sports-iran",weight:14,re:/تیم ملی|استقلال|پرسپولیس|لیگ برتر|علی کریمی|علی دایی|کاروان ایران|مدال ایران|فوتبال ایران/},
+    {key:"sports-iran",weight:14,re:/تیم ملی|استقلال(?! اقتصادی| سیاسی| کشور| ایران| فرهنگی| ملی)|پرسپولیس|لیگ برتر|علی کریمی|علی دایی|کاروان ایران|مدال ایران|فوتبال ایران/},
     {key:"environment-harm",weight:19,re:/تخریب محیط زیست|نابودی جنگل|جنگل‌زدایی|قطع درختان|آتش سوزی جنگل|آتش‌سوزی جنگل|آلودگی شدید|فرونشست|خشک شدن تالاب|خشکسالی|بحران آب|تخریب میراث فرهنگی|تخریب اثر تاریخی|تخریب بنای تاریخی|آسیب به میراث فرهنگی/},
     {key:"weather-useful",weight:12,re:/هشدار هواشناسی|سیلاب|آلودگی هوا|طوفان|بارش شدید|یخبندان|هشدار بارندگی|تعطیلی بر اثر آلودگی/},
     {key:"deaths-and-denials",weight:17,re:/درگذشت|فوت کرد|جان باخت|جان‌باخت|کشته شد|خبر فوت|شایعه مرگ|شایعه درگذشت|تکذیب درگذشت|تکذیب خبر فوت|تکذیبیه خبر مرگ/}
   ];
   var FRONT_COMMENTARY_NAMES=/زاگرس رشیدی|مهدی مطهرنیا|فرهنگ هلاکویی|هلاکویی|مهدی تدینی|سجاد فتاحی/;
-  var FRONT_COMMENTARY_SUBJECT=/ایران|جنگ|صلح|امنیت|مذاکره|اسرائیل|آمریکا|دولت|تاریخ|جامعه|اعتراض|آینده|دیپلماسی|خاورمیانه/;
+  var FRONT_COMMENTARY_SUBJECT=/ایران|جنگ(?!ل)|صلح|امنیت|مذاکره|اسرائیل|آمریکا|دولت|تاریخ|جامعه|اعتراض|آینده|دیپلماسی|خاورمیانه/;
   function frontPrioritySignals(row){
     var title=featureNormalize(headline(row)),text=frontSignalText(row),found=[];
     // Headline matches are stronger than a passing reference in a summary.
@@ -865,7 +865,7 @@
             esc(excerpt(headline(group.seed.row),165))+'</h3></span></a></div>'+
             '<div class="fp-topic-grid">'+
               (group.related.length?'<div class="fp-topic-news">'+
-                group.related.map(relatedStory).join("")+'</div>':"")+
+                group.related.map(function(e){return relatedStory(e,false);}).join("")+'</div>':"")+
               (group.voices.length?'<div class="fp-topic-voices">'+
                 group.voices.map(voice).join("")+'</div>':"")+
             '</div></section>';
@@ -904,7 +904,7 @@
         html+='<section class="fp-changes"><div class="fp-section-heading"><h3>'+
           (lastHomeVisit?"از آخرین بازدید شما":"خبرهای تازه‌تر")+
           '</h3><a href="/headlines/">سرخط‌ها ←</a></div>'+
-          '<div class="fp-changes-grid">'+changed.map(relatedStory).join("")+'</div></section>';
+          '<div class="fp-changes-grid">'+changed.map(function(e){return relatedStory(e,false);}).join("")+'</div></section>';
       }
       target.innerHTML=html;
     }
