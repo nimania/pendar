@@ -104,8 +104,12 @@ vm.runInContext(source.slice(renderStart,renderFinish)+
   "\nthis.renderDesk=renderFrontPage;",context);
 context.renderDesk();
 const result=htmlTarget.innerHTML;
-const main=result.match(/<section class="fp-desk">([\s\S]*?)<\/section>/);
+const main=result.match(/<section class="fp-desk"[^>]*>([\s\S]*?)<\/section>/);
 assert(main,"A shared lead desk must be rendered");
+assert(main[1].includes("<h2>"),"The real news headline, not an abstract topic, must head the desk");
+assert(!result.includes("چند روایت از یک موضوع"),"Avoid proclaiming uncertain algorithmic relationships");
+assert(!result.includes("دیدگاه ثبت‌شده"),"Figure attribution should not require editorial jargon");
+assert(main[1].includes("می‌گوید:"),"Figure summaries must be explicitly attributed to their speaker");
 assert(/href="\/story\/(iraq|trump)\/"/.test(main[1]),
   "A consequential item must lead the desk");
 assert(main[1].includes('href="/story/trump/"')&&
