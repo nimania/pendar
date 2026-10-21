@@ -1034,3 +1034,11 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
   .footer .footer-bottom{font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){.quick-pulse .pulse-item{transition:none}}
+
+/* Clean canvas and readable card spacing for the Pendar homepage. */
+.heritage-root{background:#f7f9fc;color:#20334b}
+.heritage-root .page-width#content{padding-bottom:22px}
+#home-page .home-news-layout{row-gap:0}
+#home-page .fp-desk{box-shadow:0 6px 26px rgba(24,52,81,.04)!important}
+#home-page .home-editorial-reports{border-radius:15px;overflow:hidden}
+#home-page .home-below-panels{padding-block:4px 14px}
