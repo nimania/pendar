@@ -1,4 +1,4 @@
-/* Regression guard for eight editorial homepage tabs and real figure statements. */
+/* Regression guard for the default live front page, subject tabs and figure statements. */
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const vm=require("node:vm");
@@ -9,7 +9,7 @@ const js=fs.readFileSync(path.join(root,"web-static/heritage-preview.js"),"utf8"
 const css=fs.readFileSync(path.join(root,"web-static/heritage-preview.css"),"utf8");
 const live=fs.readFileSync(path.join(root,"web-static/heritage-live.js"),"utf8");
 const tabs=[
-  ["politics","سیاست"],["diplomacy","دیپلماسی"],["society","جامعه"],
+  ["front","صفحهٔ اول"],["politics","سیاست"],["diplomacy","دیپلماسی"],["society","جامعه"],
   ["technology","تکنولوژی"],["statements","گفته‌ها"],["sport","ورزشی"],
   ["environment","محیط زیست"],["culture","فرهنگ"]
 ];
@@ -20,16 +20,16 @@ const positions=tabs.map(([id,label])=>{
   return html.indexOf(match[0]);
 });
 assert(positions.every((p,i)=>i===0||p>positions[i-1]),"Tabs must preserve editorial order");
-assert(html.includes('data-feature-category="politics" aria-controls="feature-politics-panel" aria-selected="true"'),
-  "Politics must be the default tab");
-assert(html.includes('role="tabpanel" aria-labelledby="feature-category-politics"'));
+assert(html.includes('data-feature-category="front" aria-controls="feature-politics-panel" aria-selected="true"'),
+  "Front page must be the default tab");
+assert(html.includes('role="tabpanel" aria-labelledby="feature-category-front"'));
 assert(html.includes('id="feature-hero"'));
 assert(html.includes('id="under-hero"'));
 assert(html.includes('id="rail-headlines-trends"'),"Search trends must stay in their small rail");
 assert(css.includes(".feature-category-tabs{display:flex;"));
 assert(css.includes("overflow-x:auto;"),"Small screens need horizontally scrollable tabs");
-assert(live.includes("heritage-preview.js?v=20261021-quotes-newspaper-1"),"Live site should refresh JavaScript");
-assert(live.includes("heritage-preview.css?v=20261021-quotes-newspaper-1"),"Live site should refresh styles");
+assert(live.includes("heritage-preview.js?v=20261021-live-frontpage-1"),"Live site should refresh JavaScript");
+assert(live.includes("heritage-preview.css?v=20261021-live-frontpage-1"),"Live site should refresh styles");
 assert(js.includes('button.addEventListener("click"'),"Tabs need working controls");
 assert(js.includes('featurePanel.setAttribute("aria-labelledby"'),"Active tab must label panel");
 assert(js.includes("featureBucketData=featureBuckets;"),"Each topic needs its own report selection");
@@ -78,13 +78,22 @@ assert(context.rank({headline_fa:"انتخابات مجلس",published_at:new Da
        context.rank({headline_fa:"انتخابات مجلس",published_at:"2025-01-01T00:00:00Z"},"politics"),
        "Newer coverage should win when significance is equal");
 
-assert(html.includes('id="feature-statements-edition"'),"Statement edition container required");
-assert(css.includes(".paper-front-grid{display:grid;"),"Lead plus side columns required");
-assert(css.includes(".paper-columns{display:grid;"),"Newspaper continuation columns required");
-assert(css.includes("@media(max-width:480px)"),"Mobile newspaper needs responsive rules");
-assert(js.includes("newspaper.hidden=!isStatement"),"Unselected newspaper must stay hidden");
-assert(js.includes("if(underHero)underHero.hidden=false"),"Other tabs must restore their regular cards");
-context.validImage=v=>/^\/(?!\/)/.test(v||"")?v:"";
+assert(html.includes('id="feature-front-page"'),"Default first-page container required");
+assert(html.includes('id="feature-statements-edition"'),"Independent statements tab required");
+assert(html.includes('id="feature-hero"'),"Specialist article cover must remain");
+assert(css.includes(".fp-top{display:grid"),"First page needs a mixed editorial grid");
+assert(css.includes(".fp-topic{"),"Related news and viewpoints need a shared module");
+assert(css.includes(".fp-voice-grid{"),"Figure photographs need a featured module");
+assert(css.includes("@media(max-width:560px)"),"Mixed front page must support mobile");
+assert(js.includes('currentFeature="front"'),"First page must be selected initially");
+assert(js.includes('isFront=currentFeature==="front"'),"Front page must toggle independently");
+assert(js.includes('renderFrontPage();'),"Front page must update on new content");
+assert(js.includes('figureFeatureItems.filter(function(item)'),"Figure claims must come from published statements");
+assert(js.includes('item.portraitVerified&&frontRelated'),"Only verified related speakers may be clustered");
+assert(js.includes('frontRelated('),"Distinctive shared terms must guard grouping");
+assert(js.includes('verifiedImage(photo(entry.row))'),"News photos must be verified");
+assert(js.includes('lastHomeVisit'),"Updates since last visit need a real stored timestamp");
+context.validImage=v=>/^\\/(?!\\/)/.test(v||"")?v:"";
 context.esc=v=>String(v==null?"":v).replace(/[&<>"']/g,
   ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 context.excerpt=(v,n)=>String(v||"").slice(0,n);
@@ -93,25 +102,26 @@ vm.runInContext("this.edition=statementEditionHtml;",context);
 const escaped={...statements[0],title:'<script>alert("x")</script>',
   portrait:"/assets/portrait.jpg",role:"خبرنگار"};
 const paper=context.edition([escaped,statements[1]],false);
-assert(paper.includes("paper-nameplate"),"Old-paper masthead is required");
-assert(paper.includes("paper-front-grid")&&paper.includes("paper-side"),"Newspaper lead and side items required");
-assert(paper.includes("paper-person-frame"),"True figure portraits and fallback must be provided");
-assert(paper.includes('filter')===false,"Never inject source descriptions as raw HTML");
-assert(!paper.includes("<script>"),"Potentially unsafe figure statements must be escaped");
-assert(paper.includes("&lt;script&gt;"),"Unsafe title must be escaped but remain legible");
-assert(paper.includes("گفته‌ها"),"Visible newspaper title must be preserved");
-assert(paper.includes('href="/@person-two/"'),"Cards should link to the speaker's own profile");
-const moreFigures=Array.from({length:14},(_,i)=>({
- handle:"speaker-"+i,name_fa:"گوینده "+i,
- avatar:i===0?"/assets/portrait.jpg":undefined,
- posts:[{headline_fa:"دیدگاه شماره "+i,published_at:new Date(2026,9,21,i).toISOString()}]
-}));
-const many=context.extract({figures:moreFigures});
-assert.equal(many.length,14,"The extended layout must keep more than eight speakers");
-const whole=context.edition(many,false);
-assert(whole.includes('paper-columns'),"The lower newspaper grid must render");
-assert(whole.includes('paper-bottom-strip'),"The final dated viewpoints must be discoverable");
+assert(paper.includes("paper-person-frame"),"Every promoted statement must show a portrait");
+assert(!paper.includes("<script>"),"Statements must be escaped");
+assert(paper.includes("&lt;script&gt;"),"Escaped text must remain visible");
+assert(!paper.includes("paper-masthead"),"Old newspaper masthead must remain removed");
+assert(!paper.includes("دیدگاه ۱"),"Artificial view numbers must remain removed");
+assert(paper.includes('href="/@person-two/"'),"Statement cards must link to a real speaker");
+assert(!paper.includes('href="/@person-one/"'),"Portraitless speakers are omitted");
 const empty=context.edition([],true);
-assert(empty.includes("در حال گردآوری"),"The page should show accurate loading status");
+assert(empty.includes("در حال گردآوری"),"Loading status must be accurate");
 
-console.log("Editorial feature tabs and statement fixtures OK");
+// Semantic relatedness must not group generic Iran headlines together.
+const themeStart=js.indexOf("    var frontStopwords=new Set(");
+const themeEnd=js.indexOf("    function renderFrontPage(){",themeStart);
+assert(themeStart>0&&themeEnd>themeStart,"Topic comparison code must be present");
+vm.runInContext(js.slice(themeStart,themeEnd)+
+  "\\nthis.related=frontRelated;",context);
+assert(context.related("جنگ و مذاکرات هسته‌ای در منطقه",
+  "مذاکرات هسته‌ای پس از جنگ"),"Strong shared terms should cluster");
+assert(!context.related("ایران و سیاست روز", "ایران و تحلیل روز"),
+  "Generic Iran or politics must not create false topical clusters");
+assert(!context.related("مسابقه فوتبال و لیگ برتر", "هوش مصنوعی و نرم افزار"),
+  "Unrelated categories must not be mixed into a topical cluster");
+console.log("Live editorial front page and statement fixtures OK");
