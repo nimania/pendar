@@ -179,6 +179,20 @@ def publish_digest(figures_data, stories_data, ledger, telegram, chat_id, *,
                 float(story.get("importance_score") or 0) >= 55 and
                 len(str(story.get("summary_fa") or "").strip()) >= 100):
             recent.append(story)
+    # For the very first narrative edition, allow a documented major story
+    # from the previous day; existing hourly and Tehran quiet-hour gates remain.
+    if not recent and not state.get("seen_story_ids"):
+        for story in stories_data if isinstance(stories_data, list) else []:
+            when = _parse_time(story.get("published_at"))
+            sources = {str(src.get("source_name") or src.get("name") or "").strip()
+                       for src in (story.get("sources") or [])
+                       if isinstance(src, dict)}
+            if (story.get("id") and when and
+                    now - timedelta(hours=24) <= when <= now + timedelta(minutes=10) and
+                    len(sources - {""}) >= 2 and
+                    float(story.get("importance_score") or 0) >= 40 and
+                    len(str(story.get("summary_fa") or "").strip()) >= 100):
+                recent.append(story)
     recent.sort(key=lambda x: (float(x.get("importance_score") or 0),
                                _parse_time(x.get("published_at"))), reverse=True)
     if not recent:
