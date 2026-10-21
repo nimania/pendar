@@ -185,4 +185,64 @@ assert(!smallSlot.includes("<img")&&smallSlot.includes("news-author-photo"),
   "Low-resolution image must be replaced by the actual writer on large cards");
 assert(tinySlot.includes('<img src="/assets/report.jpg"'),
   "The same authentic article photo may remain in the small rail");
+// A source-backed recent statement, not the person's job title, fills the
+// figures strip. Fixture texts below are synthetic examples, not quotations.
+const figA=js.indexOf("  // Statements, not professional titles");
+const figB=js.indexOf("  function initializeRailTabs(){",figA);
+assert(figA>0&&figB>figA,"Figure quote ranking and display must exist");
+const figureNodes=js.slice(figA,figB);
+const figureFrame={};
+const figureFunctions=new Function("norm","validImage","esc","excerpt","put","el",
+  figureNodes+"return {latest:latestFigureStatement,rank:figureQuoteProminence,render:renderRailFigureFive};")(
+  v=>String(v==null?"":v).trim(),
+  v=>typeof v==="string"&&v.startsWith("/"),
+  esc,(v,max)=>String(v).slice(0,max),
+  (key,value)=>{figureFrame[key]=value;},
+  key=>({classList:{toggle:(cls,flag)=>{figureFrame[key+":feature"]=Boolean(flag);}}})
+);
+const today=new Date().toISOString();
+const yesterday=new Date(Date.now()-28*3600000).toISOString();
+const oldDate=new Date(Date.now()-20*86400000).toISOString();
+const fakeRecent="ارزیابی تازه دربارهٔ مذاکرات و تحولات امنیتی منطقه منتشر شد و باید روند تصمیم‌ها را دید";
+const fakePrevious="در خبر پیشین به روابط خارجی و تصمیم‌های سیاسی منطقه پرداخته شده بود";
+const testFigure={
+  handle:"test-observer",name_fa:"پژوهشگر آزمایشی",role_fa:"تحلیلگر",
+  avatar:"/test-observer.jpg",
+  posts:[
+    {published_at:yesterday,summary_fa:fakePrevious,kind:"analysis"},
+    {published_at:today,summary_fa:fakeRecent,kind:"analysis"}
+  ]
+};
+let last=figureFunctions.latest(testFigure,Date.now());
+assert(last&&last.text===fakeRecent,"Choose the most recent dated published statement, not an older popular one");
+assert(last.direct===false,"An editorial summary must never masquerade as an exact quotation");
+assert(figureFunctions.latest({posts:[{published_at:oldDate,summary_fa:fakeRecent}]},Date.now())===null,
+  "A several-week-old quotation must not be labeled current");
+assert(figureFunctions.latest({posts:[{published_at:today,topic_fa:"سیاست"}]},Date.now())===null,
+  "A bare topic label is not a supported claim by a public figure");
+const figures=[testFigure,...Array.from({length:4},(_,i)=>({
+  handle:"figure-"+i,name_fa:"شخص آزمایشی "+i,role_fa:"سمت آزمایشی",
+  avatar:"/figure-"+i+".jpg",posts:[]
+}))];
+figureFunctions.render({figures});
+const figuresLine=figureFrame["rail-figures-updated"];
+assert(figuresLine.includes("rail-figure-featured"),
+  "A current source-backed statement should create one editorial feature");
+assert(figuresLine.includes(esc(fakeRecent)),
+  "The person's latest actual source summary, not their static biography, must be shown");
+assert(!figuresLine.includes('title="گفتهٔ این چهره;'),
+  "Source attribution must not imply a direct quotation");
+assert(figuresLine.includes('href="/@test-observer/"'),
+  "Readers must be able to check the figure's own profile");
+assert(figureFrame["rail-figures-updated:feature"]===true,
+  "Only a five-card row with a qualifying recent opinion receives a larger card");
+assert(css.includes("rail-figures-has-lead")&&css.includes("grid-template-columns:repeat(6,minmax(0,1fr))"),
+  "One double-width figure must fit exactly alongside four regular figures");
+figureFunctions.render({figures:figures.slice(0,3)});
+assert(figureFrame["rail-figures-updated:feature"]===false,
+  "Sparse rows must not create blank layout columns");
+figureFunctions.render({figures:figures.slice(1)});
+assert(!figureFrame["rail-figures-updated"].includes("rail-figure-statement"),
+  "Do not manufacture a statement for a figure with no reliable dated post");
+
 console.log("Market pulse, Tehran weather, writer fallback and layout checks passed");
