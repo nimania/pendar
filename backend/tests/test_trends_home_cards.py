@@ -8,10 +8,11 @@ HTML=ROOT/"web-static"/"heritage-preview.html"
 CSS=ROOT/"web-static"/"heritage-preview.css"
 
 class TrendHomepageTest(unittest.TestCase):
-    def test_editorial_cover_is_default_and_search_trends_have_a_rail_tab(self):
+    def test_editorial_frontpage_is_default_and_search_trends_have_a_rail_tab(self):
         html=HTML.read_text(encoding="utf-8")
-        self.assertIn('<h2>گزارش‌های برگزیده</h2>',html)
-        self.assertIn('id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-category-politics">',html)
+        self.assertIn('<h2 id="feature-heading-title">صفحهٔ اول پندار</h2>',html)
+        self.assertIn('id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-category-front">',html)
+        self.assertIn('id="feature-front-page"',html)
         self.assertIn('id="feature-hero"',html)
         self.assertNotIn('id="feature-trends-panel"',html)
         self.assertNotIn('id="feature-tab-trends"',html)
