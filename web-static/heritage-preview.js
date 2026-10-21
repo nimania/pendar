@@ -432,6 +432,17 @@
     var iran=category==="politics"&&/ایران|تهران|مجلس|دولت/.test(headline(row))?3:0;
     return recency+importance+editorial+iran;
   }
+  function figureStatementPortrait(person){
+    var raw=[person.avatar,person.avatar_url,person.image_url,person.photo_url,
+      person.image&&person.image.url,person.image&&person.image.path].filter(Boolean);
+    for(var value of raw){
+      var url=String(value).trim();
+      if(!/^https?:\/\//i.test(url)&&/^\/?[a-zA-Z0-9][a-zA-Z0-9_./%-]*$/.test(url)&&!url.includes(".."))
+        url="/"+url.replace(/^\/+/,"");
+      if(validImage(url))return url;
+    }
+    return "";
+  }
   function featureStatementsFromFigures(payload){
     var people=Array.isArray(payload&&payload.figures)?payload.figures:[];
     var found=[];
@@ -439,13 +450,16 @@
       var handle=String(person&&person.handle||"");
       if(!/^[a-z0-9_.-]{2,90}$/i.test(handle))return;
       var name=norm(person.name_fa||person.name||person.display_name_fa||handle);
-      (Array.isArray(person.posts)?person.posts:[]).slice(0,7).forEach(function(post){
+      var portrait=figureStatementPortrait(person);
+      (Array.isArray(person.posts)?person.posts:[]).slice(0,12).forEach(function(post){
         var title=norm(post&&(
           post.headline_fa||post.title_fa||post.statement_fa||post.text_fa||
           post.text||post.title||post.recap_fa||post.summary_fa)||"");
         var date=Date.parse(post&&post.published_at||"");
         if(!title||!Number.isFinite(date))return;
-        found.push({title:title,name:name,handle:handle,stamp:date,url:"/@"+encodeURIComponent(handle)+"/"});
+        found.push({title:title,name:name,handle:handle,stamp:date,
+          url:"/@"+encodeURIComponent(handle)+"/",portrait:portrait,
+          role:norm(person.role_fa||"")});
       });
     });
     found.sort(function(a,b){return b.stamp-a.stamp;});
@@ -453,7 +467,66 @@
     return found.filter(function(item){
       if(seen.has(item.handle))return false;
       seen.add(item.handle);return true;
-    }).slice(0,8);
+    }).slice(0,16);
+  }
+  function statementEditionDate(stamp){
+    if(!Number.isFinite(stamp))return "";
+    try{
+      return new Intl.DateTimeFormat("fa-IR",{year:"numeric",month:"long",day:"numeric",
+        timeZone:"Asia/Tehran"}).format(new Date(stamp));
+    }catch(_){return "";}
+  }
+  // Magazine-style typography uses the real public figure feed. Headlines are
+  // editorial summaries, not falsely presented as verbatim quotations.
+  function statementEditionHtml(items,pending){
+    var rows=Array.isArray(items)?items.slice(0,16):[];
+    var latest=rows.length?statementEditionDate(rows[0].stamp):"";
+    function portrait(item){
+      var image=validImage(item.portrait);
+      return '<span class="paper-person-frame"><span class="paper-person-initial" aria-hidden="true">'+
+        esc((item.name||"؟").slice(0,1))+'</span>'
+        +(image?'<img src="'+esc(image)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">':"")+'</span>';
+    }
+    function compact(item,index){
+      return '<a class="paper-column-item" href="'+esc(item.url)+'">'
+        +'<span class="paper-column-kicker">دیدگاه '+esc(String(index+1).replace(/\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[Number(d)];}))+'</span>'
+        +'<strong>'+esc(excerpt(item.title,160))+'</strong>'
+        +'<span class="paper-speaker">'+esc(item.name)+'</span></a>';
+    }
+    var content=rows.length?(
+      '<div class="paper-front-grid">'
+        +'<a class="paper-lead" href="'+esc(rows[0].url)+'">'
+        +'<span class="paper-kicker">سرصفحه • تازه‌ترین دیدگاه</span>'
+        +'<h3>'+esc(excerpt(rows[0].title,270))+'</h3>'
+        +'<div class="paper-lead-foot">'+portrait(rows[0])
+        +'<span><strong>'+esc(rows[0].name)+'</strong>'
+        +(rows[0].role?'<small>'+esc(rows[0].role)+'</small>':"")
+        +'<small>'+esc(statementEditionDate(rows[0].stamp))+'</small></span></div></a>'
+        +'<div class="paper-side">'+rows.slice(1,3).map(function(item){
+          return '<a class="paper-side-item" href="'+esc(item.url)+'">'
+            +'<span class="paper-kicker">از زبان چهره‌ها</span>'
+            +'<strong>'+esc(excerpt(item.title,170))+'</strong>'
+            +'<span class="paper-speaker">'+esc(item.name)+'</span></a>';
+        }).join("")+'</div></div>'
+        +(rows.length>3?'<div class="paper-section-rule"><span>دیگر دیدگاه‌های روز</span>'
+          +'<span aria-hidden="true">◆</span></div>'
+          +'<div class="paper-columns">'+rows.slice(3,12).map(compact).join("")+'</div>':"")
+        +(rows.length>12?'<div class="paper-bottom-strip">'
+          +'<span>در حاشیهٔ صفحه</span><div>'+rows.slice(12,16).map(function(item){
+            return '<a href="'+esc(item.url)+'">'+esc(item.name)+': '+esc(excerpt(item.title,75))+'</a>';
+          }).join("")+'</div></div>':"")
+      ):'<p class="paper-empty">'+(pending?"در حال گردآوری تازه‌ترین گفته‌های ثبت‌شده…":
+        "در این نوبت گفتهٔ تاریخ‌دار و قابل انتشار یافت نشد.")+'</p>';
+    return '<div class="paper-edition-inner">'
+      +'<header class="paper-masthead">'
+      +'<div class="paper-topline"><span>پندار / دفتر چهره‌ها</span>'
+      +'<span>'+(latest?'تازه‌ترین ثبت: '+esc(latest):'آرشیو دیدگاه‌های ثبت‌شده')+'</span></div>'
+      +'<div class="paper-nameplate"><span class="paper-flourish" aria-hidden="true">❧</span>'
+      +'<h2>گفته‌ها</h2><span class="paper-flourish" aria-hidden="true">❧</span></div>'
+      +'<p>آنچه چهره‌ها گفته‌اند؛ گزیده‌ای از تازه‌ترین دیدگاه‌ها</p>'
+      +'</header>'+content
+      +'<footer class="paper-footer"><span>برگرفته از مطالب منتشرشده در پروندهٔ چهره‌ها</span>'
+      +'<a href="/figures/">ورق زدن آرشیو چهره‌ها ←</a></footer></div>';
   }
 
   async function renderHome(){
@@ -493,30 +566,24 @@
       var moreUrl=isStatement?"/figures/":"/reports/";
       featureMore.href=moreUrl;
       featureMore.textContent=isStatement?"همهٔ گفته‌ها ←":"همهٔ گزارش‌ها ←";
-      var items=isStatement?figureFeatureItems:(featureBucketData[currentFeature]||[]);
+      var newspaper=el("feature-statements-edition"),underHero=el("under-hero");
+      if(newspaper)newspaper.hidden=!isStatement;
+      if(isStatement){
+        heroBox.hidden=true;
+        if(underHero)underHero.hidden=true;
+        if(newspaper)newspaper.innerHTML=statementEditionHtml(figureFeatureItems,!figuresReady);
+        return;
+      }
+      if(underHero)underHero.hidden=false;
+      heroBox.classList.remove("feature-statement-hero");
+      var items=featureBucketData[currentFeature]||[];
       if(!items.length){
         heroBox.hidden=true;
-        put("under-hero",'<p class="feature-topic-empty">'+
-          (isStatement&&!figuresReady?"در حال دریافت تازه‌ترین گفته‌ها…":"هنوز مطلب تأییدشده‌ای در این بخش موجود نیست.")+
-          ' <a href="'+moreUrl+'">آرشیو پندار ←</a></p>');
+        put("under-hero",'<p class="feature-topic-empty">هنوز مطلب تأییدشده‌ای در این بخش موجود نیست. '
+          +'<a href="/reports/">آرشیو پندار ←</a></p>');
         return;
       }
       heroBox.hidden=false;
-      heroBox.classList.toggle("feature-statement-hero",isStatement);
-      heroBox.classList.toggle("feature-text-hero",false);
-      if(isStatement){
-        var saying=items[0];
-        heroBox.href=saying.url;
-        heroBox.setAttribute("aria-label",saying.name+": "+saying.title);
-        heroBox.innerHTML='<span class="feature-caption feature-saying-copy"><span class="category-flag orange">گفته‌ها</span>'
-          +'<strong>'+esc(excerpt(saying.title,270))+'</strong>'
-          +'<span class="feature-saying-person">'+esc(saying.name)+'</span></span>';
-        put("under-hero",items.slice(1,5).map(function(item){
-          return '<a class="mini-feature feature-statement-mini" href="'+esc(item.url)+'"><span class="caption">'
-            +'<small>'+esc(item.name)+'</small><strong>'+esc(excerpt(item.title,110))+'</strong></span></a>';
-        }).join(""));
-        return;
-      }
       // A cover gets a real, tested photo from a high-ranking item, or text.
       // Do not let an old photograph outrank every current important report.
       var rows=items.slice(0,12);
