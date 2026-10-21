@@ -1040,7 +1040,36 @@
       }
       var boards=worthy.slice(0,18).map(function(entry){return join(entry,worthy,speakers);})
         .sort(function(a,b){return b.weight-a.weight||b.seed.score-a.seed.score;});
-      var main=boards[0],usedNews=new Set([main.seed.row.id]),usedSpeakers=new Set();
+      // Tehran-time editorial edition: daytime cover renews at most every 3h,
+      // overnight every 5h. Rotation is restricted to comparably important,
+      // independently qualified stories; a weak story never wins by the clock.
+      function frontEditionSlot(date){
+        var parts=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Tehran",year:"numeric",
+          month:"2-digit",day:"2-digit",hour:"2-digit",hourCycle:"h23"}).formatToParts(date);
+        var bits={};parts.forEach(function(p){bits[p.type]=p.value;});
+        var hour=Number(bits.hour),dayKey=bits.year+"-"+bits.month+"-"+bits.day;
+        if(hour<7)return {key:dayKey+"-night-"+Math.floor(hour/5),night:true};
+        return {key:dayKey+"-day-"+Math.floor((hour-7)/3),night:false};
+      }
+      function chooseFrontLead(choices,nowMs){
+        var best=choices[0];
+        if(!best)return null;
+        var edition=frontEditionSlot(new Date(nowMs));
+        var eligible=choices.filter(function(board){
+          var age=featureAge(board.seed.row);
+          // Keep strong, current coverage: never promote routine publicity,
+          // stale stories or a drastically lower-ranked alternative.
+          return board.weight>=best.weight-12 && age<=24*86400000 &&
+            !frontRoutinePublicity(board.seed.row);
+        }).slice(0,5);
+        if(eligible.length<2)return best;
+        // Stable across readers and reloads, unlike per-browser storage.
+        // A slot switch changes the lead only if an eligible alternative exists.
+        var hash=0;
+        for(var i=0;i<edition.key.length;i++)hash=(hash*31+edition.key.charCodeAt(i))>>>0;
+        return eligible[hash%eligible.length];
+      }
+      var main=chooseFrontLead(boards,now),usedNews=new Set([main.seed.row.id]),usedSpeakers=new Set();
       main.related.forEach(function(entry){usedNews.add(entry.row.id);});
       main.voices.forEach(function(item){usedSpeakers.add(item.handle);});
       function label(entry){return esc(FEATURE_NAMES[entry.category]||"خبر");}
