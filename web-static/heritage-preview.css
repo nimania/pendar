@@ -649,3 +649,12 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
  .fp-voice img{width:52px;height:52px;flex-basis:52px}
 }
 @media(prefers-reduced-motion:reduce){.feature-front-page a,.feature-front-page img{transition:none!important}}
+
+/* When several stories have comparable weight, equalize the two lead zones. */
+@media(min-width:851px){
+ .fp-top.fp-mode-balanced{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+ .fp-top.fp-mode-balanced .fp-lead{min-height:425px}
+ .fp-top.fp-mode-focused{grid-template-columns:minmax(0,1.4fr) minmax(0,.95fr)}
+ .fp-top.fp-mode-sparse{grid-template-columns:minmax(0,1fr)}
+ .fp-top.fp-mode-sparse .fp-essentials{grid-template-rows:auto}
+}
