@@ -814,6 +814,41 @@
     if(!leadPhoto)return "textual";
     return "balanced";
   }
+
+  // The video shelf is sourced exclusively from Nima's own official YouTube
+  // posts already recorded in Pendar's published figures catalogue.
+  // Missing or old videos yield no promotional filler at all.
+  function homeNimaVideoItems(payload,clock){
+    var now=Number.isFinite(clock)?clock:Date.now();
+    var people=Array.isArray(payload&&payload.figures)?payload.figures:[];
+    var p=people.find(function(row){
+      return row&&String(row.handle||"").toLowerCase()==="nima-afshar-naderi";
+    });
+    var videos=Array.isArray(p&&p.youtube_videos)?p.youtube_videos:[];
+    var used=new Set();
+    return videos.filter(function(v){
+      if(!v||v.source_type!=="official")return false;
+      var url=String(v.url||"").trim(),title=String(v.title||"").trim();
+      var m=url.match(/^https:\/\/(?:www\.|m\.)?youtube\.com\/watch\?([^#]+)$/i)||
+        url.match(/^https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})(?:[?#].*)?$/i);
+      var vid="";
+      if(m&&url.includes("watch?")){
+        var idMatch=m[1].match(/(?:^|&)v=([A-Za-z0-9_-]{11})(?:&|$)/);
+        vid=idMatch?idMatch[1]:"";
+      }else if(m)vid=m[1];
+      var stamp=Date.parse(v.published_at||"");
+      if(!vid||title.length<8||!Number.isFinite(stamp)||
+         stamp>now+3600000||now-stamp>45*86400000||used.has(vid))return false;
+      used.add(vid);
+      return true;
+    }).sort(function(a,b){
+      return Date.parse(b.published_at)-Date.parse(a.published_at);
+    }).slice(0,3).map(function(v){
+      return {title:String(v.title||""),url:String(v.url||""),
+        thumbnail:validImage(v.thumbnail||""),
+        published_at:v.published_at};
+    });
+  }
   function figureStatementPortrait(person){
     var raw=[person.avatar,person.avatar_url,person.image_url,person.photo_url,
       person.image&&person.image.url,person.image&&person.image.path].filter(Boolean);
@@ -920,6 +955,7 @@
     // searchable archive and on their original URL.
     initializeRailTabs();
     var currentFeature="front",featureBucketData={},featureAllItems=[],figureFeatureItems=[],figuresReady=false,frontVisibleIds=new Set();
+    var homeVideoItems=[];
     var lastHomeVisit=0;
     try{
       lastHomeVisit=Number(localStorage.getItem("pendar-home-last-visit-v1"))||0;
@@ -1388,6 +1424,7 @@
     renderHomepageBriefs();
     fetchJson("/data/figures.json").then(function(payload){
       figureFeatureItems=featureStatementsFromFigures(payload);
+      homeVideoItems=homeNimaVideoItems(payload,Date.now());
       figuresReady=true;
       if(currentFeature==="statements"||currentFeature==="front")renderCurrentFeature();
       renderRailFigureFive(payload);
@@ -1430,7 +1467,8 @@
     }).catch(function(){
       figuresReady=true;
       if(currentFeature==="statements"||currentFeature==="front")renderCurrentFeature();
-      put("ticker",'<a href="/figures/">آخرین سخنان و دیدگاه‌های چهره‌ها ←</a>');
+      // A figures-service failure must never overwrite independently sourced
+      // market and weather data in the Nabzesh pulse.
     });
     // Fill the remaining modules without blocking the first meaningful paint.
     // Every subsequent draw still filters out images not verified by the browser.
