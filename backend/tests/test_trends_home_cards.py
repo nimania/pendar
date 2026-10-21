@@ -47,7 +47,7 @@ class TrendHomepageTest(unittest.TestCase):
     def test_existing_headline_and_figure_tabs_remain(self):
         js=JS.read_text(encoding="utf-8")
         html=HTML.read_text(encoding="utf-8")
-        self.assertIn('fillFive("rail-headlines-fresh",sorted);',js)
+        self.assertIn('fillFive("rail-headlines-fresh",sorted,true);',js)
         self.assertIn('fillFive("rail-headlines-hot",rankedWithSignal(importance));',js)
         self.assertIn('data-rail-group="figures"',html)
         self.assertIn('id="rail-figures-updated"',html)
