@@ -18,6 +18,16 @@ assert(markup.includes('data-feature-category="front" aria-controls="feature-pol
   "The front page must remain the default tab");
 assert(css.includes(".fp-desk-layout{display:grid"),"Shared editorial desk must be responsive");
 assert(css.includes(".fp-related-prominent"),"Related headlines need differential prominence");
+assert(markup.includes('class="news-layout home-news-layout"'),
+  "The news content must occupy the former combined columns");
+assert(markup.includes('class="rail home-below-panels"'),
+  "Old sidebar sections should follow the main reading flow");
+assert(!markup.includes('id="culture"')&&!markup.includes('id="gallery"'),
+  "Unrelated cultural cards and the photo-only gallery must not appear");
+assert(css.includes('#home-page .home-news-layout{display:block!important'),
+  "Homepage columns must form a single wide reading surface");
+assert(css.includes('.home-below-panels'),
+  "Supplementary feeds must use responsive bottom grids");
 
 const now=new Date().toISOString();
 const stories=[
@@ -77,6 +87,32 @@ const context={
 vm.createContext(context);
 vm.runInContext(source.slice(start,finish)+"\nthis.evaluate=frontEditorialScore;"+
   "this.connect=frontConnection;this.promo=frontRoutinePublicity;",context);
+const testSignals=vm.runInContext("frontPrioritySignals",context);
+const interest=[
+  ["احتمال جنگ و مذاکرات صلح", "armed-conflict"],
+  ["خبرهای تنگه هرمز", "sea-chokepoints"],
+  ["پیمان ابراهیم در خاورمیانه", "negotiations"],
+  ["انتخابات آمریکا و اسرائیل", "foreign-elections"],
+  ["اعتراض صنفی دانشجویان", "strikes-protests"],
+  ["احتمال تعطیلی دانشگاه‌ها", "school-closure"],
+  ["اختلال و قطع اینترنت", "internet-shutdown"],
+  ["ایلان ماسک از پروژه جدید خبر داد", "musk"],
+  ["تیم ملی و علی دایی", "sports-iran"],
+  ["تخریب میراث فرهنگی", "environment-harm"],
+  ["شایعه درگذشت و تکذیب خبر فوت", "deaths-and-denials"],
+  ["کنکور و سربازی", "education-exams"],
+  ["قیمت نفت و قیمت سکه", "markets-energy"]
+];
+for(const [headline_fa,key] of interest){
+  assert(testSignals({headline_fa}).some(r=>r.key===key),
+    "Missing editorial public-interest signal: "+key);
+}
+assert(!testSignals({headline_fa:"تخریب جنگل‌های شمال ایران"})
+  .some(r=>r.key==="armed-conflict"),
+  "Forest destruction must not be misread as armed conflict");
+assert(!testSignals({headline_fa:"ضرورت استقلال اقتصادی ایران"})
+  .some(r=>r.key==="sports-iran"),
+  "Economic independence must not be misread as a football club");
 assert(context.promo(stories[0]),"Routine ministerial tourism publicity should be detected");
 assert(context.evaluate(stories[0],"culture")<
   context.evaluate(stories[1],"diplomacy"),
