@@ -135,6 +135,10 @@ def run(existing: Path, output: Path, now: dt.datetime | None = None) -> tuple[i
         if key not in by_url:
             by_url[key] = row
             added += 1
+    if not added:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_bytes(existing.read_bytes())
+        return 0, len(known)
     events = sorted(by_url.values(), key=lambda x: (x.get("date", ""), x.get("id", "")), reverse=True)[:300]
     if len(events) < len(known) and len(known) <= 300:
         raise RuntimeError("Naval collection regression")
