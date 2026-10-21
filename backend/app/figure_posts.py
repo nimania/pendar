@@ -13,6 +13,7 @@ A failure here must never break the build: callers wrap it.
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime, timedelta, timezone
 from typing import Literal
 
@@ -39,7 +40,7 @@ SHOWN_KINDS = {"analysis", "party_claim"}
 # Bump when the prompt below changes so cached posts are re-labeled with the new
 # instructions (e.g. v1 → v2 = fuller summaries). Rule-based relay rows are left
 # alone; only AI-labeled rows from an older version are re-sent.
-PROMPT_VERSION = "v4"
+PROMPT_VERSION = "v5"
 
 BATCH_SIZE = 20
 MAX_PER_RUN = 60          # ≤ 3 AI calls per build
@@ -62,6 +63,7 @@ SYSTEM_PROMPT = """\
   اطلاعیه‌های شخصی.
 
 برای هر پست:
+- انتشار در کانال یک شخص به معنی نویسندگی او نیست. به‌ویژه کانال «فردای بهتر» مصطفی تاجزاده گاهی مقالهٔ دیگران را با نشان‌هایی مثل ✍ و 📝 بازنشر می‌کند؛ نام نویسنده را از متن استخراج کن. اگر یادداشت به شخص دیگری نسبت داده شده و تاجزاده نظر مستقلی اضافه نکرده است، حتماً relay بگذار و نویسنده را در relayed_from ثبت کن؛ هرگز دیدگاه او را به تاجزاده منتسب نکن.
 - topic_fa: موضوع در حداکثر ۸ کلمه (مثلاً «مذاکرات ایران و آمریکا»).
 - summary_fa: فقط برای analysis و party_claim؛ حداکثر ۲ تا ۳ جمله (کوتاه و مستقیم).
   جملهٔ اول باید گزاره یا ادعای اصلی شخص باشد — جذاب و مشخص. بقیه فقط مهم‌ترین
@@ -162,6 +164,27 @@ def _log(db: Session, r: ProviderResult | None, status: str, msg: str | None = N
     ))
 
 
+def _external_tajzadeh_byline(article: Article) -> str:
+    """Conservatively detect explicit independent author bylines in Fardaye Behtar."""
+    source = str(article.source_name or "").lower()
+    if not any(token in source for token in ("تاجزاده", "mostafatajzadeh", "فردای بهتر")):
+        return ""
+    body = str(article.description or "")
+    # Emoji and ordinary byline forms, avoiding a person's quoted mention.
+    for line in body.splitlines()[:16]:
+        line = line.strip().strip("*ـ- ")
+        match = re.match(
+            r"^(?:✍️?|📝|نویسنده\s*[:：]|به\s*قلم\s*[:：]?)\s*"
+            r"(?:نویسنده\s*[:：]\s*)?([آ-ی][آ-ی‌\\s]{5,65})$",
+            line,
+        )
+        if match:
+            name = " ".join(match.group(1).split()).strip(" .،؛")
+            if 2 <= len(name.split()) <= 4 and "تاجزاده" not in name:
+                return name
+    return ""
+
+
 def classify_figure_posts(db: Session, *, provider: Provider | None = None,
                           now: datetime | None = None) -> dict:
     now = now or datetime.now(timezone.utc)
@@ -172,7 +195,12 @@ def classify_figure_posts(db: Session, *, provider: Provider | None = None,
     # 1) forwarded posts → relay, free
     rest: list[Article] = []
     for a in pending:
-        if is_forwarded(a.author):
+        external_author = _external_tajzadeh_byline(a)
+        if external_author:
+            _store(db, a, kind="relay", relayed_from=external_author, confidence=0.95,
+                   by="rule:credited-author")
+            summary["relay_rule"] += 1
+        elif is_forwarded(a.author):
             _store(db, a, kind="relay",
                    relayed_from=a.author.removeprefix(FORWARD_PREFIX), confidence=0.9)
             summary["relay_rule"] += 1
