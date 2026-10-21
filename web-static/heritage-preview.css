@@ -1042,3 +1042,9 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 #home-page .fp-desk{box-shadow:0 6px 26px rgba(24,52,81,.04)!important}
 #home-page .home-editorial-reports{border-radius:15px;overflow:hidden}
 #home-page .home-below-panels{padding-block:4px 14px}
+
+
+/* Four compact directory groups, balanced at tablet sizes. */
+.footer .footer-directory{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:850px){.footer .footer-directory{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.footer .footer-directory{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px}}
