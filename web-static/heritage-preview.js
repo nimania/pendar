@@ -649,7 +649,7 @@
       if(best){
         best.news.forEach(function(entry){selected.add(entry.row.id);});
         html+='<section class="fp-topic"><div class="fp-section-heading">'+
-          '<div><span class="fp-eyebrow">پیوند خبرها و دیدگاه‌ها</span><h3>'+
+          '<div><span class="fp-eyebrow">'+(best.voices.length?"پیوند خبرها و دیدگاه‌ها":"خبرهای مرتبط")+'</span><h3>'+
           esc(excerpt(headline(best.seed.row),95))+'</h3></div>'+
           '<a href="'+esc(slugUrl(best.seed.row))+'">اصل ماجرا ←</a></div>'+
           '<div class="fp-topic-grid">'+
