@@ -846,15 +846,8 @@
           '<div class="fp-more-grid">'+extras.map(function(e){return story(e,"fp-essential");}).join("")+
           '</div></section>';
       }
-      // Unmatched viewpoints still exist in the specialist Statements tab.
-      // Display a small remainder here only when genuine linked dossiers are
-      // already visible; do not fill the lead desk with unrelated opinions.
-      var recentVoices=speakers.filter(function(v){return !usedSpeakers.has(v.handle);}).slice(0,3);
-      if(recentVoices.length&&main.voices.length){
-        html+='<section class="fp-voices"><div class="fp-section-heading"><h3>گفته‌های دیگر</h3>'+
-          '<a href="/figures/">همهٔ چهره‌ها ←</a></div>'+
-          '<div class="fp-voice-grid">'+recentVoices.map(voice).join("")+'</div></section>';
-      }
+      // Unrelated opinions stay in the specialist Statements tab. Never
+      // fill a mixed front-page module with arbitrary public figures.
       var newsSince=lastHomeVisit||now-36*3600000;
       var changed=pool.filter(function(entry){
         if(usedNews.has(entry.row.id)||frontRoutinePublicity(entry.row))return false;
