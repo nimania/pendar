@@ -556,22 +556,57 @@
     if(consequential)return false;
     return ceremonial||(soft&&promotional&&official)||(official&&hollowStatement);
   }
+  // Iran-focused editorial priorities. These are signals of relevance and
+  // consequences, not a claim that any reported assertion has been verified.
+  // No person receives a positive or negative score for political allegiance.
+  var FRONT_PRIORITY_RULES=[
+    {key:"armed-conflict",weight:30,re:/جنگ|آتش\s?بس|آتش‌بس|درگیری نظامی|حمله نظامی|حملات موشکی|بمباران|صلح|پایان جنگ|آماده باش نظامی|آماده‌باش نظامی/},
+    {key:"negotiations",weight:22,re:/مذاکره|مذاکرات|دیپلماسی|توافق هسته ای|توافق هسته‌ای|برجام|پیمان ابراهیم|توافق صلح|گفتگوهای صلح|گفت‌وگوهای صلح|میانجیگری|میانجی‌گری/},
+    {key:"war-signals",weight:26,re:/محاصره|اعزام نیرو|آرایش نظامی|بسیج نیرو|استقرار نیرو|رزمایش موشکی|هشدار حمله|تهدید حمله|آمادگی رزمی|تحرکات نظامی|احتمال حمله|سناریوی جنگ|گذرگاه مرزی|بسته شدن مرز|بستن مرز|پدافند|موشک بالستیک|موشک بالیستیک/},
+    {key:"sea-chokepoints",weight:25,re:/تنگه هرمز|باب المندب|باب‌المندب|تنگه ملاکا|تنگه مالاکا|مسیر کشتیرانی|اختلال کشتیرانی|انسداد کشتیرانی/},
+    {key:"iran-region",weight:16,re:/خاورمیانه|اسرائیل|نتانیاهو|عراق|کشورهای عربی|اعراب|خلیج فارس|دریای سرخ|لبنان|غزه|ایالات متحده|روابط ایران و|روابط تهران و/},
+    {key:"iran-military",weight:20,re:/ارتش ایران|سپاه پاسداران|فرمانده سپاه|فرمانده ارتش|ستاد کل نیروهای مسلح|فرماندهان نظامی|وزیر دفاع|رئیس ستاد کل|رییس ستاد کل|پدافند هوایی/},
+    {key:"state-visits",weight:16,re:/سفر رسمی|سفر دیپلماتیک|سفر رئیس جمهور|سفر رییس جمهور|سفر وزیر خارجه|دیدار وزیر خارجه|مذاکرات وزیر خارجه|سفر مقام ایرانی|دیدار مقامات ایرانی|دیدار رئیس جمهور|دیدار رییس جمهور/},
+    {key:"foreign-elections",weight:18,re:/انتخابات آمریکا|انتخابات ریاست جمهوری آمریکا|انتخابات کنگره آمریکا|انتخابات اسرائیل|انتخابات کنست|انتخابات میان دوره‌ای آمریکا|انتخابات میان‌دوره‌ای آمریکا/},
+    {key:"trump-netanyahu",weight:15,re:/ترامپ|دونالد ترامپ|نتانیاهو|بنیامین نتانیاهو/},
+    {key:"markets-energy",weight:18,re:/قیمت نفت|نفت خام|صادرات نفت|توقف صادرات نفت|تحریم نفت|قیمت ارز|بازار ارز|دلار|قیمت سکه|سکه امامی|تورم|ریال|نرخ برابری|نرخ ارز|قیمت طلا|کمبود سوخت/},
+    {key:"strikes-protests",weight:27,re:/اعتراض صنفی|اعتراض دانشگاهی|اعتراض دانشجویی|اعتراض دانش‌آموزی|اعتراض سیاسی|اعتراض اقتصادی|اعتراضات|تجمع اعتراضی|اعتصاب|ناآرامی|سرکوب|بازداشت معترضان|تجمع صنفی|تحصن/},
+    {key:"school-closure",weight:26,re:/تعطیلی مدارس|تعطیل شدن مدارس|تعطیلی دانشگاه|تعطیلی دانشگاه‌ها|تعطیلی کلاس‌ها|تعلیق کلاس|تعطیل شدن دانشگاه/},
+    {key:"education-exams",weight:16,re:/کنکور|سازمان سنجش|آزمون سراسری|سربازی|خدمت سربازی|نظام وظیفه|معافیت سربازی|مشمولان خدمت/},
+    {key:"internet-shutdown",weight:28,re:/قطع اینترنت|اختلال اینترنت|محدودیت اینترنت|فیلترینگ|قطع ارتباطات|انسداد اینترنت|اینترنت ملی|کندی اینترنت|خاموشی اینترنت/},
+    {key:"musk",weight:15,re:/ایلان ماسک|الون ماسک|elon musk|اسپیس ایکس|اسپیس‌ایکس|استارلینک|تسلا|نورالینک|ایکس ای آی|xai/},
+    {key:"sports-iran",weight:14,re:/تیم ملی|استقلال|پرسپولیس|لیگ برتر|علی کریمی|علی دایی|کاروان ایران|مدال ایران|فوتبال ایران/},
+    {key:"environment-harm",weight:19,re:/تخریب محیط زیست|نابودی جنگل|جنگل‌زدایی|قطع درختان|آتش سوزی جنگل|آتش‌سوزی جنگل|آلودگی شدید|فرونشست|خشک شدن تالاب|خشکسالی|بحران آب|تخریب میراث فرهنگی|تخریب اثر تاریخی|تخریب بنای تاریخی|آسیب به میراث فرهنگی/},
+    {key:"weather-useful",weight:12,re:/هشدار هواشناسی|سیلاب|آلودگی هوا|طوفان|بارش شدید|یخبندان|هشدار بارندگی|تعطیلی بر اثر آلودگی/},
+    {key:"deaths-and-denials",weight:17,re:/درگذشت|فوت کرد|جان باخت|جان‌باخت|کشته شد|خبر فوت|شایعه مرگ|شایعه درگذشت|تکذیب درگذشت|تکذیب خبر فوت|تکذیبیه خبر مرگ/}
+  ];
+  var FRONT_COMMENTARY_NAMES=/زاگرس رشیدی|مهدی مطهرنیا|فرهنگ هلاکویی|هلاکویی|مهدی تدینی|سجاد فتاحی/;
+  var FRONT_COMMENTARY_SUBJECT=/ایران|جنگ|صلح|امنیت|مذاکره|اسرائیل|آمریکا|دولت|تاریخ|جامعه|اعتراض|آینده|دیپلماسی|خاورمیانه/;
+  function frontPrioritySignals(row){
+    var title=featureNormalize(headline(row)),text=frontSignalText(row),found=[];
+    // Headline matches are stronger than a passing reference in a summary.
+    FRONT_PRIORITY_RULES.forEach(function(rule){
+      if(rule.re.test(title))found.push({key:rule.key,weight:rule.weight});
+      else if(rule.re.test(text))found.push({key:rule.key,weight:Math.round(rule.weight*.65)});
+    });
+    if(FRONT_COMMENTARY_NAMES.test(text)&&FRONT_COMMENTARY_SUBJECT.test(text))
+      found.push({key:"notable-analysis",weight:11});
+    return found;
+  }
   function frontEditorialScore(row,category){
     var text=frontSignalText(row),title=featureNormalize(headline(row));
     var score=featureRank(row,category);
-    // Public interest: material decisions, security, measurable disruption.
-    if(/جنگ|آتش\s?بس|حمله|درگیری|عملیات نظامی|بحران امنیتی/.test(title))score+=24;
+    var signals=frontPrioritySignals(row);
+    var weighted=signals.reduce(function(sum,signal){return sum+signal.weight;},0);
+    score+=Math.min(75,weighted);
+    // Concrete actions carry more weight than vague rhetoric.
     if(/بستن|بسته شدن|مسدود|تعطیل|توقف تردد|محدودیت تردد/.test(text)&&
-       /گذرگاه|مرز|گمرک|مرزی/.test(text))score+=42;
-    if(/ترامپ|رئیس جمهور آمریکا|رییس جمهور آمریکا/.test(text)&&
-       /جنگ|آتش\s?بس|توافق|پایان/.test(title))score+=25;
-    if(/دستور|تصویب|لغو|ممنوعیت|ابلاغ|اعتصاب|زلزله|حادثه|کشته|بازداشت/.test(title))score+=16;
-    if(/هشدار|سیلاب|طوفان|کیفیت هوا|آلودگی شدید|قطعی برق|تعطیلی مدارس/.test(title))score+=16;
-    else if(/هواشناسی|بارش|پیش بینی هوا|پیش‌بینی هوا/.test(title))score+=7;
-    if(/قیمت دلار|تورم|نرخ ارز|افزایش قیمت|کاهش قیمت|کمبود|معیشت/.test(title))score+=11;
-    if(/کاروان ایران|مدال|قهرمان جهان|قهرمانی جهان|المپیک/.test(title))score+=8;
-    // Neither "ملی" nor an official's title is a newsworthiness signal.
-    if(frontRoutinePublicity(row))score-=85;
+       /گذرگاه|مرز|گمرک|مرزی/.test(text))score+=32;
+    if(/دستور|تصویب|لغو|ممنوعیت|ابلاغ|اعتصاب|زلزله|حادثه|کشته|بازداشت/.test(title))score+=11;
+    // Rumours matter editorially, but are not established facts.
+    if(/شایعه|ادعاهای تاییدنشده|ادعای تاییدنشده|تأیید نشده|تایید نشده/.test(title))score-=7;
+    // National/state publicity is not nationalism or hard news.
+    if(frontRoutinePublicity(row))score-=95;
     return score;
   }
 
