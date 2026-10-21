@@ -8,32 +8,25 @@ const html=fs.readFileSync(path.join(root,"web-static/heritage-preview.html"),"u
 const js=fs.readFileSync(path.join(root,"web-static/heritage-preview.js"),"utf8");
 const css=fs.readFileSync(path.join(root,"web-static/heritage-preview.css"),"utf8");
 const live=fs.readFileSync(path.join(root,"web-static/heritage-live.js"),"utf8");
-const tabs=[
-  ["front","صفحهٔ اول"],["politics","سیاست"],["diplomacy","دیپلماسی"],["society","جامعه"],
-  ["technology","تکنولوژی"],["statements","گفته‌ها"],["sport","ورزشی"],
-  ["environment","محیط زیست"],["culture","فرهنگ"]
-];
-const positions=tabs.map(([id,label])=>{
-  const tag=new RegExp('<button[^>]*data-feature-category="'+id+'"[^>]*>'+label+'</button>');
-  const match=html.match(tag);
-  assert(match,"Missing accessible category "+label);
-  return html.indexOf(match[0]);
-});
-assert(positions.every((p,i)=>i===0||p>positions[i-1]),"Tabs must preserve editorial order");
-assert(html.includes('data-feature-category="front" aria-controls="feature-politics-panel" aria-selected="true"'),
-  "Front page must be the default tab");
-assert(html.includes('role="tabpanel" aria-labelledby="feature-category-front"'));
-assert(html.includes('id="feature-hero"'));
-assert(html.includes('id="under-hero"'));
-assert(html.includes('id="rail-headlines-trends"'),"Search trends must stay in their small rail");
-assert(css.includes(".feature-category-tabs{display:flex;"));
-assert(css.includes("overflow-x:auto;"),"Small screens need horizontally scrollable tabs");
-assert(live.includes("heritage-preview.js?v=20261021-editorial-fullwidth-1"),"Live site should refresh JavaScript");
-assert(live.includes("heritage-preview.css?v=20261021-editorial-fullwidth-1"),"Live site should refresh styles");
-assert(js.includes('button.addEventListener("click"'),"Tabs need working controls");
-assert(js.includes('featurePanel.setAttribute("aria-labelledby"'),"Active tab must label panel");
-assert(js.includes("featureBucketData=featureBuckets;"),"Each topic needs its own report selection");
-assert(js.includes('featureBucketData[currentFeature]||[]'),"Never substitute an unrelated report");
+assert(!html.includes('class="feature-category-tabs"'),"Topic tabs must be removed from the home cover");
+assert(!html.includes('id="feature-heading-title"'),"Redundant editorial heading must not return");
+assert(html.includes('id="feature-front-page"'),"The actual editorial desk must remain visible");
+assert(html.includes('role="region" aria-label="گزارش‌های برگزیدهٔ صفحهٔ اول"'),
+  "The front page must retain accessible region semantics");
+assert(html.includes('id="feature-hero"'),"Hidden compatibility cover must remain");
+assert(html.includes('id="under-hero"'),"Hidden compatibility stories must remain");
+assert(html.includes('id="rail-headlines-trends"'),"Search trends remain in their lower card");
+assert(html.includes('class="quick-pulse"'),"Home pulse replaces the figure ticker");
+assert(html.includes('class="footer-directory"'),"All section navigation goes in the footer");
+assert(!html.includes('class="masthead-navigation"'),"Duplicate top site-wide links are removed");
+assert(!html.includes('id="watch"'),"Standalone link-only boxes are replaced by footer links");
+assert(live.includes("heritage-preview.js?v=20261021-editorial-fullwidth-1"),"Live assets must be versioned");
+assert(live.includes("heritage-preview.css?v=20261021-editorial-fullwidth-1"),"Live styles must be versioned");
+assert(js.includes('featureBucketData=featureBuckets;'),"Topic metadata still feeds the homepage");
+assert(js.includes('frontEditorialScore('),"Editorial prioritization stays intact");
+assert(js.includes('renderPulseMetrics('),"The markets-and-weather strip must be populated");
+assert(css.includes(".quick-pulse"),"Pulse styles must exist");
+assert(css.includes(".news-mini-photo"),"Thumbnail fallback frames must exist");
 
 const start=js.indexOf("  var FEATURE_CATEGORIES=");
 const end=js.indexOf("  async function renderHome()",start);
