@@ -1087,6 +1087,13 @@
         await hydrateMissingPhotos(rest,12);
         await inspectPhotos(rest);
       }
+      // A genuinely consequential story may be older than the newest-image
+      // sampling pool. Verify its own photograph, never borrow a topic's image.
+      var frontPriority=featureAllItems.slice().sort(function(a,b){
+        return frontEditorialScore(b,featureCategory(b))-
+          frontEditorialScore(a,featureCategory(a));
+      }).slice(0,18);
+      await inspectPhotos(frontPriority);
       draw();
     })().catch(function(error){
       if(typeof console!=="undefined")console.warn("Pendar image enrichment:",error);
