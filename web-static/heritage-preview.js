@@ -133,6 +133,9 @@
     var src=img.getAttribute("src");
     if(src)imageChecks.set(src,false);
     if(img.closest(".rail-row")){img.style.visibility="hidden";return;}
+    // The smaller dossier cover is optional; remove only its failed photo.
+    var dossierCover=img.closest(".fp-topic-head .fp-image");
+    if(dossierCover){dossierCover.remove();return;}
     // A portrait failing after initial validation is omitted rather than
     // displayed as an empty circle or triggering a full-page rerender loop.
     var personTile=img.closest(".fp-voice");
@@ -771,14 +774,14 @@
             !frontRoutinePublicity(e.row)&&frontConnection(seed.row,e.row);
         }).sort(function(a,b){
           return b.score-a.score;
-        }).slice(0,4);
+        }).slice(0,6);
         var linkedSpeakers=unusedSpeakers.filter(function(item){
           // A viewpoint may connect to any verified news item on the same
           // desk, not necessarily to the lead headline itself.
           return frontConnection(seed.row,item)||related.some(function(entry){
             return frontConnection(entry.row,item);
           });
-        }).slice(0,3);
+        }).slice(0,4);
         var issue=related.length?frontConnection(seed.row,related[0].row):
           linkedSpeakers.length?frontConnection(seed.row,linkedSpeakers[0]):null;
         return {seed:seed,related:related,voices:linkedSpeakers,issue:issue,
