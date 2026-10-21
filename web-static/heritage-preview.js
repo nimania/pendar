@@ -454,7 +454,10 @@
     "توسط","مورد","دولت","مردم","جامعه","مسائل","وضعیت","سیاست","سیاسی","تحلیل",
     "گفته","دیدگاه","اظهارات","تاکید","تأکید","آغاز","ادامه","پایان","اعلام",
     "شود","شده","شد","خواهد","بود","است","هست","نیست","کرد","کرده","کند","چگونه",
-    "چرا","آنها","دیگر","هایی","ترین","تهران","ایرانشهر","جهان","جهانی"]);
+    "چرا","آنها","دیگر","هایی","ترین","تهران","ایرانشهر","جهان","جهانی",
+    "داد","دادند","داده","دادن","داشت","دارد","گفت","گفتند","بیان","کردند",
+    "دستور","وزیر","رئیس","رییس","مسئول","مدیر","برنامه","اقدام","اجرا","اجرای",
+    "تصمیم","نشست","دیدار","فعالیت","موضوع","ثبت","تعطیلی","اعلامی","اظهار"]);
   function frontKeywords(item){
     var text=typeof item==="string"?featureNormalize(item):frontSignalText(item);
     var raw=text.match(/[\u0600-\u06ffa-z]{3,}/g)||[];
@@ -751,8 +754,8 @@
           (type==="fp-lead"&&hook(entry.row)?'<span>'+esc(excerpt(hook(entry.row),180))+'</span>':"")+
           '</span></a>';
       }
-      function relatedStory(entry){
-        return '<a class="fp-related-item" href="'+esc(slugUrl(entry.row))+'">'+
+      function relatedStory(entry,prominent){
+        return '<a class="fp-related-item'+(prominent?" fp-related-prominent":"")+'" href="'+esc(slugUrl(entry.row))+'">'+
           '<small>'+label(entry)+'</small><strong>'+
           esc(excerpt(headline(entry.row),120))+'</strong></a>';
       }
@@ -776,7 +779,7 @@
           (contextual?'<div class="fp-desk-context">'+
             (main.related.length?'<div class="fp-desk-related">'+
               '<h4>خبرها و گزارش‌های مرتبط</h4>'+
-              main.related.map(relatedStory).join("")+'</div>':"")+
+              main.related.map(function(e,i){return relatedStory(e,i===0&&main.seed.score-e.score<17);}).join("")+'</div>':"")+
             (main.voices.length?'<div class="fp-desk-voices">'+
               '<h4>دیدگاه‌های مرتبط</h4>'+main.voices.map(voice).join("")+
               '</div>':"")+
