@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="/heritage-preview.css?v=20261021-search-trends-rail-1">
+  <link rel="stylesheet" href="/heritage-preview.css?v=20261021-feature-topics-1">
   <script defer src="/heritage-preview.js?v=20261021-search-trends-rail-1"></script>
 </head>
 <body>
@@ -52,7 +52,17 @@
               <h2>گزارش‌های برگزیده</h2>
               <a id="feature-heading-more" href="/reports/">همهٔ گزارش‌ها <span aria-hidden="true">←</span></a>
             </div>
-            <div id="feature-politics-panel">
+            <div class="feature-category-tabs" role="tablist" aria-label="موضوعات گزارش‌های برگزیده">
+                <button type="button" role="tab" id="feature-category-politics" data-feature-category="politics" aria-controls="feature-politics-panel" aria-selected="true" tabindex="0" class="on">سیاست</button>
+                <button type="button" role="tab" id="feature-category-diplomacy" data-feature-category="diplomacy" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">دیپلماسی</button>
+                <button type="button" role="tab" id="feature-category-society" data-feature-category="society" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">جامعه</button>
+                <button type="button" role="tab" id="feature-category-technology" data-feature-category="technology" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">تکنولوژی</button>
+                <button type="button" role="tab" id="feature-category-statements" data-feature-category="statements" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">گفته‌ها</button>
+                <button type="button" role="tab" id="feature-category-sport" data-feature-category="sport" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">ورزشی</button>
+                <button type="button" role="tab" id="feature-category-environment" data-feature-category="environment" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">محیط زیست</button>
+                <button type="button" role="tab" id="feature-category-culture" data-feature-category="culture" aria-controls="feature-politics-panel" aria-selected="false" tabindex="-1">فرهنگ</button>
+            </div>
+            <div id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-category-politics">
             <a class="feature-hero" id="feature-hero" href="/reports/" aria-label="گزارش ویژه">
               <span class="feature-picture"><span class="image-wait">پندار</span></span>
               <span class="feature-caption"><span class="category-flag orange">گزارش</span><strong>تازه‌ترین گزارش تحریریهٔ پندار</strong><span>گزارش مستند و کامل را بخوانید.</span></span>
