@@ -11,8 +11,8 @@ on:
     workflows: ["Fast Deploy Pendar UI"]
     types: [completed]
   schedule:
-    # Three editorial windows per day; times are UTC.
-    - cron: "10 7,13,19 * * *"
+    # Editorial report every two hours; GitHub schedules can be delayed.
+    - cron: "10 */2 * * *"
 permissions:
   contents: write
 concurrency:
@@ -29,9 +29,9 @@ jobs:
       TELEGRAM_CHAT_ID: "@pendario"
       GH_TOKEN: ${{ github.token }}
       SITE_URL: https://pendar.io
-      DIGEST_INTERVAL_HOURS: "8"
-      DIGEST_MAX_NEWS: "4"
-      DIGEST_MAX_VOICES: "3"
+      DIGEST_INTERVAL_HOURS: "2"
+      DIGEST_MAX_NEWS: "3"
+      DIGEST_MAX_VOICES: "1"
       MAX_FIGURE_POSTS_PER_DAY: "2"
     steps:
       - uses: actions/checkout@v4
@@ -61,16 +61,6 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
         run: |
           python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json --dry-run
-          python backend/scripts/publish_news_telegram.py --stories telegram-export/stories.json --dry-run
-          python backend/scripts/publish_trends_telegram.py --trends telegram-export/trends.json --dry-run
-          python backend/scripts/publish_figures.py --figures telegram-export/figures.json --dry-run > /tmp/pendar-figures-preview.json
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          messages=json.loads(Path("/tmp/pendar-figures-preview.json").read_text())
-          print("Figure messages eligible for review:",len(messages))
-          for m in messages[:3]: print(str(m.get("text",""))[:450])
-          PY
       - name: Check bot configuration
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: |
@@ -78,15 +68,6 @@ jobs:
             echo "::error::TELEGRAM_BOT_TOKEN is not configured. No messages sent."
             exit 1
           fi
-      - name: Publish all newly published Trends to @pendario
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
-        run: python backend/scripts/publish_trends_telegram.py --trends telegram-export/trends.json
-      - name: Publish curated fresh news (maximum 2)
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
-        run: python backend/scripts/publish_news_telegram.py --stories telegram-export/stories.json
-      - name: Publish selected figure statement
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
-        run: python backend/scripts/publish_figures.py --figures telegram-export/figures.json
       - name: Publish periodic editorial digest
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json
