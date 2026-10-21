@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="/heritage-preview.css?v=20261020-radar-telegram-1">
-  <script defer src="/heritage-preview.js?v=20261020-radar-telegram-1"></script>
+  <link rel="stylesheet" href="/heritage-preview.css?v=20261021-search-trends-rail-1">
+  <script defer src="/heritage-preview.js?v=20261021-search-trends-rail-1"></script>
 </head>
 <body>
   <a class="skip" href="#content">رفتن به محتوا</a>
@@ -49,22 +49,17 @@
         <div class="primary-column">
           <section class="feature-block" aria-label="گزارش ویژه">
             <div class="section-heading trend-feature-heading">
-              <div class="feature-tabs" role="tablist" aria-label="گزیدهٔ گزارش‌های صفحه اول">
-                <button type="button" id="feature-tab-trends" class="on" role="tab" aria-selected="true" tabindex="0" aria-controls="feature-trends-panel" data-feature-tab="trends">ترندهای امروز</button>
-                <button type="button" id="feature-tab-politics" role="tab" aria-selected="false" tabindex="-1" aria-controls="feature-politics-panel" data-feature-tab="politics">گزارش‌ها</button>
-              </div>
-              <a id="feature-heading-more" href="/trends/">همهٔ ترندهای امروز <span aria-hidden="true">←</span></a>
+              <h2>گزارش‌های برگزیده</h2>
+              <a id="feature-heading-more" href="/reports/">همهٔ گزارش‌ها <span aria-hidden="true">←</span></a>
             </div>
-            <div id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-tab-politics" hidden>
+            <div id="feature-politics-panel">
             <a class="feature-hero" id="feature-hero" href="/reports/" aria-label="گزارش ویژه">
               <span class="feature-picture"><span class="image-wait">پندار</span></span>
               <span class="feature-caption"><span class="category-flag orange">گزارش</span><strong>تازه‌ترین گزارش تحریریهٔ پندار</strong><span>گزارش مستند و کامل را بخوانید.</span></span>
             </a>
             <div class="under-hero" id="under-hero"><div class="loading">در حال دریافت گزارش‌ها…</div></div>
             </div>
-            <div id="feature-trends-panel" role="tabpanel" aria-labelledby="feature-tab-trends">
-              <div id="home-search-trends-grid" class="feature-trends-grid"><div class="loading">در حال دریافت ترندهای امروز…</div></div>
-            </div>
+
           </section>
           <section class="module home-editorial-reports" id="home-editorial-reports">
             <div class="section-heading"><h2>تازه‌ترین گزارش‌ها</h2><a href="/reports/">همهٔ گزارش‌ها ←</a></div>
@@ -90,11 +85,12 @@
         <aside class="rail" aria-label="ستون کناری">
           <section class="rail-box rail-tabs-box rail-five" data-rail-group="headlines">
             <div class="rail-heading"><h2>سرخط‌ها</h2><a href="/headlines/">همه ←</a></div>
-            <div class="rail-tab-strip" role="tablist" aria-label="سرخط‌ها"><button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="fresh">تازه</button><button type="button" role="tab" aria-selected="false" data-rail-tab="hot">داغ</button></div>
+            <div class="rail-tab-strip" role="tablist" aria-label="سرخط‌ها"><button type="button" class="on" role="tab" aria-selected="true" data-rail-tab="fresh">تازه</button><button type="button" role="tab" aria-selected="false" data-rail-tab="hot">داغ</button><button type="button" role="tab" aria-selected="false" data-rail-tab="trends">ترند</button></div>
             <div class="rail-tab-panel" role="tabpanel" data-rail-panel="fresh" ><div id="rail-headlines-fresh" class="rail-five-items"><p class="loading">در حال دریافت تازه…</p></div></div>
             
             
             <div class="rail-tab-panel" role="tabpanel" data-rail-panel="hot" hidden><div id="rail-headlines-hot" class="rail-five-items"><p class="loading">در حال دریافت داغ…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-rail-panel="trends" hidden><div id="rail-headlines-trends" class="rail-five-items"><p class="loading">در حال دریافت ترندهای امروز…</p></div><a class="rail-tab-more" href="/trends/">آرشیو ترندهای امروز ←</a></div>
           </section>
           <section class="rail-box rail-tabs-box rail-five" data-rail-group="reports">
             <div class="rail-heading"><h2>گزارش‌ها</h2><a href="/reports/">همه ←</a></div>

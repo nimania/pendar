@@ -1,4 +1,4 @@
-"""Guard the homepage trend photo/list layout and figure rail from regressions."""
+"""Keep search-oriented trends in the headline rail and editorial reports on the cover."""
 import unittest
 from pathlib import Path
 
@@ -8,32 +8,53 @@ HTML=ROOT/"web-static"/"heritage-preview.html"
 CSS=ROOT/"web-static"/"heritage-preview.css"
 
 class TrendHomepageTest(unittest.TestCase):
-    def test_trends_remain_first_default_tab(self):
+    def test_editorial_cover_is_default_and_search_trends_have_a_rail_tab(self):
         html=HTML.read_text(encoding="utf-8")
-        first=html.index('id="feature-tab-trends"')
-        second=html.index('id="feature-tab-politics"')
-        self.assertLess(first,second)
-        self.assertIn('id="feature-trends-panel" role="tabpanel" aria-labelledby="feature-tab-trends">',html)
-        self.assertIn('id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-tab-politics" hidden',html)
-    def test_missing_photos_go_to_list_not_large_blank_cards(self):
+        self.assertIn('<h2>گزارش‌های برگزیده</h2>',html)
+        self.assertIn('id="feature-politics-panel">',html)
+        self.assertIn('id="feature-hero"',html)
+        self.assertNotIn('id="feature-trends-panel"',html)
+        self.assertNotIn('id="feature-tab-trends"',html)
+        self.assertIn('data-rail-group="headlines"',html)
+        self.assertIn('data-rail-tab="fresh"',html)
+        self.assertIn('data-rail-tab="hot"',html)
+        self.assertIn('data-rail-tab="trends">ترند</button>',html)
+        self.assertIn('data-rail-panel="trends" hidden',html)
+        self.assertIn('id="rail-headlines-trends"',html)
+        self.assertIn('href="/trends/">آرشیو ترندهای امروز',html)
+
+    def test_only_eligible_published_trends_enter_compact_rail(self):
         js=JS.read_text(encoding="utf-8")
-        section=js[js.index("function renderSearchTrendTab()"):js.index("async function renderHome()")]
-        self.assertIn('checkImage(url)',section)
-        self.assertIn('photographic.push(r)',section)
-        self.assertIn('else remaining.push(r)',section)
-        self.assertIn('ادامهٔ ترندهای امروز',section)
-        self.assertIn('feature-trend-list-row',section)
-        self.assertNotIn("trend-lead text-only",section)
-        self.assertIn('grid.querySelectorAll(".feature-trend-card img")',section)
-    def test_figures_section_untouched(self):
+        section=js[js.index("function renderSearchTrendsInRail()"):js.index("async function renderHome()")]
+        self.assertIn('fetchJson("/data/google-trends-iran.json")',section)
+        self.assertIn('payload&&payload.reports',section)
+        self.assertIn('payload&&payload.briefs',section)
+        self.assertIn('reports.concat(topics)',section)
+        self.assertIn('selected.length>=5',section)
+        self.assertIn('seen.has(url)',section)
+        self.assertIn('validLink(row.url)',section)
+        self.assertIn('esc(row.title)',section)
+        self.assertIn('put("rail-headlines-trends"',section)
+        self.assertIn('put("rail-figures-trends"',section)
+        self.assertNotIn('feature-trend-card',section)
+        self.assertNotIn('checkImage(url)',section)
+        self.assertIn('renderSearchTrendsInRail();',js)
+        self.assertNotIn('renderSearchTrendTab();',js)
+
+    def test_existing_headline_and_figure_tabs_remain(self):
+        js=JS.read_text(encoding="utf-8")
         html=HTML.read_text(encoding="utf-8")
+        self.assertIn('fillFive("rail-headlines-fresh",sorted);',js)
+        self.assertIn('fillFive("rail-headlines-hot",rankedWithSignal(importance));',js)
         self.assertIn('data-rail-group="figures"',html)
         self.assertIn('id="rail-figures-updated"',html)
         self.assertIn('id="rail-figures-talkative"',html)
-    def test_photos_have_fixed_aspect_ratio(self):
+
+    def test_compact_trends_and_unchanged_photo_cover(self):
         css=CSS.read_text(encoding="utf-8")
-        self.assertIn('.feature-trend-card.has-photo .feature-trend-picture{width:100%;height:auto;aspect-ratio:16/9;',css)
-        self.assertIn('.feature-trend-continuation{grid-column:1/-1;',css)
+        self.assertIn('.rail-five .rail-trend-row{display:flex;',css)
+        self.assertIn('.rail-five .rail-trend-marker{',css)
+        self.assertIn('.feature-picture img{display:block;',css)
 
 if __name__=="__main__":
     unittest.main()
