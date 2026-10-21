@@ -84,7 +84,8 @@ assert(js.includes('renderFrontPage();'),"Front page must update on new content"
 assert(js.includes('figureFeatureItems.filter(function(item)'),"Figure claims must come from published statements");
 assert(js.includes('item.portraitVerified&&validImage(item.portrait)'),"Only verified photographed speakers may be clustered");
 assert(js.includes('frontConnection('),"Evidence-based links must guard grouping");
-assert(js.includes('verifiedImage(photo(entry.row))'),"News photos must be verified");
+assert(js.includes('verifiedImage(url)')&&js.includes('imageDimensions.get(url)'),
+  "News photos must be verified and checked for adequate cover resolution");
 assert(js.includes('lastHomeVisit'),"Updates since last visit need a real stored timestamp");
 context.validImage=v=>String(v||"").startsWith("/")&&!String(v||"").startsWith("//")?v:"";
 context.esc=v=>String(v==null?"":v).replace(/[&<>"']/g,
