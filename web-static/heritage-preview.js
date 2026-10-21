@@ -321,7 +321,9 @@
       fresh:records.filter(function(r){return r.added;}).sort(function(a,b){return b.added.localeCompare(a.added);}),
       updated:records.slice().sort(byLatest),
       talkative:records.slice().sort(function(a,b){return b.count-a.count||byLatest(a,b);}),
-      hot:records.slice().sort(function(a,b){return b.engagement-a.engagement||b.count-a.count||byLatest(a,b);})
+      // This is a conversation-volume ranking, not independently measured
+      // Google search trends; describe it accurately in the UI.
+      trends:records.slice().sort(function(a,b){return b.engagement-a.engagement||b.count-a.count||byLatest(a,b);})
     };
     Object.keys(buckets).forEach(function(key){
       var rows=buckets[key].slice(0,5).map(function(r){
