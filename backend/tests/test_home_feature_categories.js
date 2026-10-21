@@ -93,7 +93,7 @@ assert(js.includes('item.portraitVerified&&frontRelated'),"Only verified related
 assert(js.includes('frontRelated('),"Distinctive shared terms must guard grouping");
 assert(js.includes('verifiedImage(photo(entry.row))'),"News photos must be verified");
 assert(js.includes('lastHomeVisit'),"Updates since last visit need a real stored timestamp");
-context.validImage=v=>/^\\/(?!\\/)/.test(v||"")?v:"";
+context.validImage=v=>String(v||"").startsWith("/")&&!String(v||"").startsWith("//")?v:"";
 context.esc=v=>String(v==null?"":v).replace(/[&<>"']/g,
   ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 context.excerpt=(v,n)=>String(v||"").slice(0,n);
@@ -117,7 +117,7 @@ const themeStart=js.indexOf("    var frontStopwords=new Set(");
 const themeEnd=js.indexOf("    function renderFrontPage(){",themeStart);
 assert(themeStart>0&&themeEnd>themeStart,"Topic comparison code must be present");
 vm.runInContext(js.slice(themeStart,themeEnd)+
-  "\\nthis.related=frontRelated;",context);
+  "\nthis.related=frontRelated;",context);
 assert(context.related("جنگ و مذاکرات هسته‌ای در منطقه",
   "مذاکرات هسته‌ای پس از جنگ"),"Strong shared terms should cluster");
 assert(!context.related("ایران و سیاست روز", "ایران و تحلیل روز"),
