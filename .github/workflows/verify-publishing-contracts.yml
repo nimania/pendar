@@ -26,3 +26,8 @@ jobs:
         run: node backend/tests/test_editorial_report_ui.js
       - name: Verify SEO and asynchronous route contracts
         run: node backend/tests/test_seo_routes.js web-static/router.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify homepage editorial cover and search-trend rail
+        run: python -m unittest discover -s backend/tests -p 'test_trends_home_cards.py' -v
