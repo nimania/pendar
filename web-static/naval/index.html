@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1825">
+<meta name="description" content="دیده‌بان دریایی پندار؛ آرشیو مستند تحولات، مأموریت‌ها و رزمایش‌های دریایی بر پایه منابع عمومی و رسمی.">
+<link rel="canonical" href="https://pendar.io/naval/">
+<title>دیده‌بان دریایی | پندار</title>
+<link rel="icon" href="../assets/pendar-logo.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--bg:#08131f;--panel:#0f2436;--panel2:#122c40;--line:#2a4354;--text:#ebf4fa;--dim:#aec2ce;--gold:#efbc75;--sea:#55b9bd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% 0,#16354a 0,transparent 46%),var(--bg);color:var(--text);font:16px/1.85 system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
+a{color:inherit}button,input,select{font:inherit}.wrap{max-width:1340px;margin:auto;padding:0 20px}
+.sitebar{border-bottom:1px solid var(--line);background:rgba(8,19,31,.82)}.sitebar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:74px}.brand{display:flex;gap:12px;align-items:center;text-decoration:none;font-weight:800}.brand img{width:52px;height:52px;object-fit:contain}.return{color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:100px;padding:5px 16px}
+.hero{padding:45px 0 24px}.eyebrow{font-size:.78rem;letter-spacing:.13em;color:var(--gold)}h1{margin:.1em 0;font-size:clamp(2.1rem,4.7vw,4.1rem);font-weight:900;line-height:1.4}h1 span{color:var(--sea)}.deck{color:var(--dim);max-width:850px;margin:8px 0 16px}.disclaimer{padding:14px 18px;background:#142d3a;border-right:3px solid var(--gold);font-size:.92rem;color:#dbe5e5;border-radius:8px}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:20px 0}.field{display:grid;gap:4px;min-width:155px}.field label{font-size:.8rem;color:var(--dim)}.field input,.field select{width:100%;background:#0f2738;border:1px solid #3b596a;color:var(--text);padding:10px 12px;border-radius:9px;min-height:43px}.field.search{flex:1;min-width:185px}
+.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(320px,1fr);gap:18px;align-items:start}.mapPanel,.listPanel{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden}.panelHead{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid var(--line)}.panelHead h2{margin:0;font-size:1.08rem}.panelHead small,.stat{color:var(--dim)}.mapFrame{position:relative;min-height:510px;background:linear-gradient(140deg,#0b2534,#153b4f)}#map{height:510px;width:100%;z-index:1}.map-fallback{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:25px;color:var(--dim);background:radial-gradient(ellipse,#1b4458,#0b2534)}.map-fallback strong{color:#fff;display:block;font-size:1.3rem}.mapLegend{padding:12px 17px;font-size:.8rem;color:var(--dim);border-top:1px solid var(--line)}.dot{display:inline-block;vertical-align:middle;background:var(--sea);width:9px;height:9px;border-radius:50%;margin-left:6px}.events{max-height:578px;overflow:auto;scrollbar-color:#567387 #0f2436}.event{padding:17px 18px;border-bottom:1px solid var(--line);display:grid;gap:7px}.event:last-child{border-bottom:0}.event h3{font-size:1rem;line-height:1.75;margin:0}.event .row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--dim);font-size:.78rem}.tag{padding:0px 8px;border:1px solid #466079;border-radius:99px;color:#d2e6f0}.tag.sensitive{border-color:#866341;color:#f3cc9b}.event p{margin:0;color:#bbcfd9;font-size:.87rem}.origin{direction:ltr;text-align:right;color:#98b5c8;line-height:1.5;font-size:.78rem}.sourceLink{justify-self:start;color:#f0c68c;text-decoration:none;border-bottom:1px solid #805a32;font-size:.85rem}.sourceLink:hover{color:#fff}.empty{padding:26px;color:var(--dim);text-align:center}.below{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0 40px}.note{border:1px solid var(--line);background:#102537;border-radius:12px;padding:15px 19px}.note h2{font-size:1.03rem;margin:0 0 5px}.note p{font-size:.88rem;color:var(--dim);margin:0}.footer{border-top:1px solid var(--line);color:var(--dim);font-size:.85rem;padding:20px 0 35px}.leaflet-container{background:#102d40!important}.region-pin{background:transparent;border:0}.region-pin b{display:inline-grid;place-items:center;width:34px;height:34px;color:#092735;background:#86d4d1;border:3px solid #e6ffff;border-radius:50%;font:bold 15px system-ui;box-shadow:0 0 0 7px #71c9ca33}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.mapFrame,#map{height:390px;min-height:390px}.events{max-height:none}.below{grid-template-columns:1fr}.hero{padding-top:24px}.sitebar .wrap{min-height:62px}.toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.field.search{grid-column:1/-1;min-width:0}}
+@media(max-width:450px){.toolbar{grid-template-columns:1fr}.field.search{grid-column:auto}.wrap{padding:0 14px}}
+</style>
+</head>
+<body>
+<header class="sitebar"><div class="wrap"><a class="brand" href="/"><img src="../assets/pendar-logo.svg" alt=""> پندار <span style="color:#6d9cad">/</span> دیده‌بان دریایی</a><a class="return" href="/">بازگشت به پندار ←</a></div></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">PENDAR · NAVAL OBSERVER</div><h1>دیده‌بان <span>دریایی</span></h1>
+<p class="deck">نقشه و خط زمانی تحولات اعلام‌شده ناوگروه‌ها، رزمایش‌ها و مأموریت‌های دریایی؛ همراه با تاریخ و ارجاع مستقیم به منابع مستقل و رسمی.</p>
+<div class="disclaimer"><strong>توجه:</strong> این نقشه ردیاب زنده ناوها نیست. نشانگرها فقط مرکز قراردادیِ مناطق بسیار وسیع برای دسته‌بندی گزارش‌ها هستند؛ موقعیت، شمار ناوها، مسیر حرکت یا استقرار فعلی هیچ شناوری را نمایش نمی‌دهند. مطالب خبری نقلِ انتسابی به منابع هستند، نه تأیید مستقل همه ادعاها.</div></section>
+<section class="toolbar" aria-label="پالایش گزارش‌ها">
+<div class="field"><label for="country">کشور یا سازمان</label><select id="country"><option value="all">همه</option><option value="us">آمریکا</option><option value="uk">بریتانیا</option><option value="fr">فرانسه</option><option value="nato">ناتو</option><option value="other">دیگر کشورها</option></select></div>
+<div class="field"><label for="region">منطقه</label><select id="region"><option value="all">همه مناطق</option><option value="atlantic">اقیانوس اطلس</option><option value="med">مدیترانه</option><option value="pacific">اقیانوس آرام</option><option value="westpac">غرب اقیانوس آرام</option><option value="indian">اقیانوس هند</option><option value="redsea">دریای سرخ</option><option value="gulf">دریای عرب و خلیج فارس</option><option value="arctic">اقیانوس شمالگان</option><option value="global">جهانی / بدون منطقه</option></select></div>
+<div class="field"><label for="month">ماه انتشار</label><input type="month" id="month" min="2025-01"></div>
+<div class="field search"><label for="search">جست‌وجو در عنوان‌ها و منابع</label><input id="search" type="search" placeholder="نام ناوگروه، رزمایش، منبع…"></div>
+</section>
+<div class="layout">
+<section class="mapPanel" aria-labelledby="map-title"><div class="panelHead"><h2 id="map-title">نمای منطقه‌ای</h2><small>نشانگرها = تعداد گزارش‌ها، نه کشتی‌ها</small></div><div class="mapFrame"><div id="map" role="img" aria-label="نقشه تعاملی مناطق جغرافیایی گزارش‌های دریایی"></div><div id="map-fallback" class="map-fallback"><div><strong>نقشه جهان</strong>بارگذاری نقشه منطقه‌ای…<p>فهرست منابع در کنار نقشه مستقل از آن کار می‌کند.</p></div></div></div><div class="mapLegend"><span class="dot"></span> فقط دسته‌بندی ناحیه‌ای گزارش‌های تاریخی · بدون مختصات یا مسیر ناوها · گزارش‌های جهانی خارج از نشانگرها</div></section>
+<section class="listPanel" aria-labelledby="events-title"><div class="panelHead"><h2 id="events-title">روزشمار مستند</h2><small class="stat" id="count" aria-live="polite">—</small></div><div class="events" id="events"><div class="empty">در حال دریافت گزارش‌های منبع‌دار…</div></div></section>
+</div>
+<div class="below"><section class="note"><h2>درباره منابع</h2><p>عنوان، تاریخ و نشانیِ منبع اصلی برای هر رویداد ثبت می‌شود. خبرهای حساس نیز با انتساب روشن منتشر می‌شوند؛ روایت منبع با تأیید مستقل پندار یکسان نیست.</p></section><section class="note"><h2>روش به‌روزرسانی</h2><p>بخش دریایی مستقل از چرخه به‌روزرسانی صفحه اول عمل می‌کند. داده‌ها فقط هنگام بازشدن این صفحه دریافت می‌شوند؛ داده تازه در صورت احراز اعتبار، جایگزین آرشیو نمی‌شود بلکه به آن افزوده می‌شود.</p><p id="updated" style="margin-top:9px">—</p></section></div>
+</main><footer class="footer"><div class="wrap">پندار · دیده‌بان دریایی · آرشیو عمومی و غیرعملیاتی | <a href="/">خانه</a></div></footer>
+<script>
+(function(){
+"use strict";
+var feedUrl="https://raw.githubusercontent.com/nimania/pendar/naval-data/naval/events.json";
+var labels={us:"آمریکا",uk:"بریتانیا",fr:"فرانسه",nato:"ناتو",other:"سایر",global:"جهانی",atlantic:"اقیانوس اطلس",med:"مدیترانه",pacific:"اقیانوس آرام",westpac:"غرب اقیانوس آرام",indian:"اقیانوس هند",redsea:"دریای سرخ",gulf:"دریای عرب و خلیج فارس",arctic:"اقیانوس شمالگان"};
+// Deliberately conventional, region-level anchor points. Never vessel locations.
+var anchors={atlantic:[33,-35],med:[36,18],pacific:[-6,-147],westpac:[15,137],indian:[-14,77],redsea:[17,40],gulf:[19,61],arctic:[71,-15]};
+var events=[],map=null,markers=[];
+var country=document.getElementById("country"),region=document.getElementById("region"),month=document.getElementById("month"),search=document.getElementById("search"),holder=document.getElementById("events");
+function safeUrl(x){try{var u=new URL(x);return u.protocol==="https:"?u.href:null}catch(_){return null}}
+function cleanRows(data){if(!data||!Array.isArray(data.events))throw Error("invalid data");return data.events.filter(function(e){return e&&e.id&&e.date&&e.title&&e.source&&safeUrl(e.url)&&/^20\d\d-\d\d-\d\d$/.test(e.date)}).slice(0,300).sort(function(a,b){return b.date.localeCompare(a.date)})}
+async function jsonGet(url){var ctl=new AbortController(),timer=setTimeout(function(){ctl.abort()},8000);try{var r=await fetch(url,{cache:"no-store",signal:ctl.signal});if(!r.ok)throw Error("HTTP "+r.status);return await r.json()}finally{clearTimeout(timer)}}
+async function init(){var data;try{data=await jsonGet(feedUrl)}catch(_){try{data=await jsonGet("./events.json")}catch(_2){holder.textContent="فعلاً دریافت اطلاعات ممکن نیست. بعداً دوباره مراجعه کنید.";return}}
+try{events=cleanRows(data)}catch(_){holder.textContent="داده‌های رویدادها قابل تأیید نیستند.";return}
+document.getElementById("updated").textContent="آخرین ثبت داده: "+String((data.updated_at||"").slice(0,10)||"نامشخص")+" · انتشار گزارش‌ها ممکن است با تأخیر انجام شود.";
+render();loadMap();}
+function filtered(){var q=search.value.trim().toLocaleLowerCase();return events.filter(function(e){return(country.value==="all"||e.country===country.value)&&(region.value==="all"||e.region===region.value)&&(month.value===""||e.date.startsWith(month.value))&&(!q||[e.title,e.original_title,e.description,e.source].join(" ").toLocaleLowerCase().includes(q))})}
+function node(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined)x.textContent=txt;return x}
+function render(){var rows=filtered();document.getElementById("count").textContent=rows.length+" گزارش";holder.replaceChildren();if(!rows.length)holder.append(node("div","empty","گزارشی با این پالایش پیدا نشد."));
+rows.forEach(function(e){var article=node("article","event");var top=node("div","row");top.append(node("time","",e.date),node("span","tag",labels[e.country]||"گزارش بین‌المللی"),node("span","tag",e.type||"خبر"));if(e.sensitive)top.append(node("span","tag sensitive","موضوع حساس · به نقل از منبع"));article.append(top,node("h3","",e.title));
+if(e.description)article.append(node("p","",e.description));if(e.original_title)article.append(node("div","origin",e.original_title));
+var bottom=node("div","row");bottom.append(node("span","",labels[e.region]||"بدون منطقه"));bottom.append(node("span","","·"));bottom.append(node("span","",e.source));article.append(bottom);
+var link=node("a","sourceLink","مشاهده متن اصلی در "+e.source+" ↗");link.href=safeUrl(e.url);link.target="_blank";link.rel="noopener noreferrer";article.append(link);holder.append(article)});
+updateMarkers(rows)}
+function updateMarkers(rows){if(!map||!window.L)return;markers.forEach(function(m){map.removeLayer(m)});markers=[];Object.keys(anchors).forEach(function(key){var n=rows.filter(function(e){return e.region===key}).length;if(!n)return;var m=L.marker(anchors[key],{icon:L.divIcon({className:"region-pin",html:"<b>"+n+"</b>",iconSize:[36,36],iconAnchor:[18,18]}),title:labels[key]+": "+n+" گزارش"}).addTo(map);m.on("click",function(){region.value=key;render();document.getElementById("events-title").scrollIntoView({behavior:"smooth",block:"center"})});m.bindTooltip(labels[key]+": "+n+" گزارش منتشرشده",{direction:"top"});markers.push(m)})}
+function loadMap(){var css=document.createElement("link");css.rel="stylesheet";css.href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css";document.head.append(css);
+var script=document.createElement("script");script.src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js";script.async=true;script.onload=function(){try{map=L.map("map",{zoomControl:true,scrollWheelZoom:false,minZoom:2,maxZoom:4,worldCopyJump:false}).setView([24,8],2);L.tileLayer("https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',maxZoom:4,noWrap:true}).addTo(map);document.getElementById("map-fallback").style.display="none";updateMarkers(filtered())}catch(_){map=null}};script.onerror=function(){document.getElementById("map-fallback").textContent="نمای نقشه در دسترس نیست؛ فهرست گزارش‌ها همچنان قابل استفاده است."};document.head.append(script)}
+[country,region,month,search].forEach(function(x){x.addEventListener("input",render)});init();
+})();
+</script>
+</body>
+</html>
