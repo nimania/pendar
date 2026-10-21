@@ -39,7 +39,17 @@ new Function(heritageLive);
 new Function(heritagePreview);
 assert(heritagePreview.includes('var used=new Set()')&&heritagePreview.includes('function varied(rows,n)'),"homepage sections must not repeat identical stories");
 assert(heritagePreview.includes('>=900'),"large cover needs a high-resolution original photo");
-assert(heritagePreview.includes('>=700'),"photo gallery must reject tiny source images");
+const frontTemplate=fs.readFileSync(path.join(root,"web-static/heritage-preview.html"),"utf8");
+const frontStyles=fs.readFileSync(path.join(root,"web-static/heritage-preview.css"),"utf8");
+assert(!frontTemplate.includes('id="gallery"')&&!frontTemplate.includes('id="culture"'),
+  "removed homepage photo-gallery and unrelated culture blocks must stay absent");
+assert(frontTemplate.includes('class="news-layout home-news-layout"')&&
+  frontTemplate.includes('class="rail home-below-panels"'),
+  "editorial front page must use full width and keep news panels below");
+assert(frontStyles.includes('#home-page .home-news-layout{display:block!important'),
+  "full-width home layout must remain active");
+assert(heritagePreview.includes('verifiedImage(photo(entry.row))'),
+  "front-page article images must be verified before they are displayed");
 assert(library.includes('class="editorial-story-people"'),"reports archive needs author portrait stories");
 assert(index.includes('editorial-archive.js?v=20261018-newsroom-1'),"refresh newsroom carousel cache");
 assert(!index.includes('heritage-first-paint-columns'),"homepage must not render giant empty loading cards");
