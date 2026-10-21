@@ -139,9 +139,9 @@ def build_digest(figures_data, stories_data, now, hours=DIGEST_INTERVAL_HOURS, s
     narrative = intro + summary
     direct = f"{site}/story/{primary['id']}/"
     source_line = "منابع این گزارش: " + "، ".join(names[:4])
-    return ("📰 <b>" + html.escape(title) + "</b>\\n\\n" +
-            html.escape(narrative) + "\\n\\n" +
-            "<i>" + html.escape(source_line) + "</i>\\n" +
+    return ("📰 <b>" + html.escape(title) + "</b>\n\n" +
+            html.escape(narrative) + "\n\n" +
+            "<i>" + html.escape(source_line) + "</i>\n" +
             _link("متن کامل، جزئیات و مستندات در پندار ←", direct))
 
 
