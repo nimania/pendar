@@ -111,4 +111,24 @@ assert(system.includes("@media(max-width:1150px)") &&
   system.includes("@media(max-width:540px)"),
   "Responsive editorial layout and market strip must be retained");
 
+const articleSignature=css.slice(css.indexOf("/* PENDAR ARTICLE SIGNATURE 2026-10-21"));
+assert(articleSignature.length>12000,"The article-matching visual layer is required");
+assert(articleSignature.includes("background:#2a2928!important") &&
+  articleSignature.includes("border-top:4px solid #dc651e!important"),
+  "Home must reproduce the story reader's charcoal masthead and orange editorial rules");
+assert(articleSignature.includes("font:850 clamp(26px,3vw,38px)/1.65") &&
+  articleSignature.includes("color:#495a52!important"),
+  "Front-page article heading and lead must follow the story-page hierarchy");
+assert(articleSignature.includes("min-height:0!important;height:auto!important") &&
+  articleSignature.includes("fp-lead.fp-text-only"),
+  "Image-free leads must not become tall empty slabs");
+assert(articleSignature.includes("fp-lead-writer") &&
+  js.includes("authorPortraitThumb(entry.row)"),
+  "A legitimate installed writer may be shown as a small article byline");
+const indexMarkup=fs.readFileSync(path.join(root,"web-static/index.html"),"utf8");
+assert(indexMarkup.includes('id="pendar-shared-top-header"') &&
+  !indexMarkup.includes('id="pendar-magazine-header-final"'),
+  "Single dark loading masthead avoids duplicate conflicting first-paint rules");
+assert(markup.includes('masthead-tagline')&&markup.includes('/assets/pendar-logo.svg'),
+  "Homepage masthead has its real brand and matching editorial tagline");
 console.log("Market pulse, Tehran weather, writer fallback and layout checks passed");
