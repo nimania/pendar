@@ -1826,3 +1826,34 @@ body:has(#home-page) .masthead-brand-inner .brand img{
     border-top:1px solid #e2e8e3!important;padding-top:12px!important
   }
 }
+
+
+/* The article author's identity appears only when the main report has no
+   trustworthy article photograph. It never acts as a giant hero stand-in. */
+#home-page .feature-front-page .fp-lead-writer{
+  display:flex;align-items:center;gap:11px;margin-top:9px;
+  padding:13px 0!important;border-top:1px solid #e1e7e2;
+  border-bottom:1px solid #e1e7e2
+}
+#home-page .feature-front-page .fp-lead-writer-avatar{
+  display:block;position:relative;width:55px;height:55px;
+  flex:0 0 55px;border-radius:50%;overflow:hidden;background:#e2e9e4
+}
+#home-page .feature-front-page .fp-lead-writer-avatar .news-author-photo{
+  display:block;position:absolute;inset:0;background-size:700% 100%;
+  background-repeat:no-repeat
+}
+#home-page .feature-front-page .fp-lead-writer-avatar .news-author-photo small{
+  display:none
+}
+#home-page .feature-front-page .fp-lead-writer>span:last-child{
+  display:flex;flex-direction:column;gap:1px;min-width:0
+}
+#home-page .feature-front-page .fp-lead-writer>span:last-child small{
+  color:#768079!important;
+  font:450 11px/1.65 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .feature-front-page .fp-lead-writer strong{
+  color:#2d625d!important;
+  font:700 14px/1.8 "Vazirmatn",Tahoma,sans-serif!important
+}
