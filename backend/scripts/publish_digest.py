@@ -23,7 +23,7 @@ except ImportError:
 
 SITE = os.environ.get("SITE_URL", "https://pendar.io").rstrip("/")
 DIGEST_STATE_PATH = "telegram/digest-state.json"
-DIGEST_INTERVAL_HOURS = int(os.environ.get("DIGEST_INTERVAL_HOURS", "8"))
+DIGEST_INTERVAL_HOURS = max(1, int(os.environ.get("DIGEST_INTERVAL_HOURS", "1")))
 MAX_NEWS = int(os.environ.get("DIGEST_MAX_NEWS", "5"))
 MAX_VOICES = int(os.environ.get("DIGEST_MAX_VOICES", "4"))
 
@@ -155,19 +155,42 @@ def publish_digest(figures_data, stories_data, ledger, telegram, chat_id, *,
     now = now or datetime.now(timezone.utc)
     state = ledger.load() or {}
     last = _parse_time(state.get("last_digest_at"))
-    if not force and last and (now - last) < timedelta(hours=hours):
-        due_in = timedelta(hours=hours) - (now - last)
-        print(f"Digest not due yet (next in ~{int(due_in.total_seconds() // 60)} min)")
-        return {"sent": 0, "reason": "not_due"}
-    text = build_digest(figures_data, stories_data, now, hours=hours)
+    if not force and last and (now - last) < timedelta(hours=1):
+        print("Telegram hourly publication limit reached")
+        return {"sent": 0, "reason": "hourly_limit"}
+    # The current story must be new, sufficiently consequential and independently
+    # sourced. Never republish a previous story merely to fill a time slot.
+    seen = set(str(x) for x in state.get("seen_story_ids", []))
+    recent = []
+    for story in stories_data if isinstance(stories_data, list) else []:
+        when = _parse_time(story.get("published_at"))
+        sources = {str(src.get("source_name") or src.get("name") or "").strip()
+                   for src in (story.get("sources") or [])
+                   if isinstance(src, dict)}
+        if (str(story.get("id") or "") not in seen and when and
+                now - timedelta(hours=6) <= when <= now + timedelta(minutes=10) and
+                len(sources - {""}) >= 2 and
+                float(story.get("importance_score") or 0) >= 55 and
+                len(str(story.get("summary_fa") or "").strip()) >= 100):
+            recent.append(story)
+    recent.sort(key=lambda x: (float(x.get("importance_score") or 0),
+                               _parse_time(x.get("published_at"))), reverse=True)
+    if not recent:
+        print("No fresh, sufficiently documented major event; nothing sent")
+        return {"sent": 0, "reason": "no_qualifying_event"}
+    selected = recent[0]
+    # A single story, not unrelated top headlines in the same bulletin.
+    text = build_digest(figures_data, [selected], now, hours=6)
     if not text:
-        print("Digest has no news or voices in the window; nothing to send")
-        return {"sent": 0, "reason": "empty"}
-    # Reserve the slot before sending so a failure skips this window, not duplicates it.
-    ledger.save({"version": 1, "last_digest_at": now.isoformat()})
+        return {"sent": 0, "reason": "insufficient_source_data"}
+    # Record last publication and story ID before sending to avoid duplicates
+    # on uncertain Telegram API responses.
+    seen.add(str(selected["id"]))
+    ledger.save({"version": 2, "last_digest_at": now.isoformat(),
+                 "seen_story_ids": sorted(seen)[-3000:]})
     telegram.call("sendMessage", digest_payload(text, chat_id))
-    print("Digest sent")
-    return {"sent": 1, "reason": "ok"}
+    print("Published event narrative:", selected["id"])
+    return {"sent": 1, "reason": "ok", "story_id": str(selected["id"])}
 
 
 def _load(path):
