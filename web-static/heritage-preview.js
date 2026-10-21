@@ -1666,6 +1666,77 @@
       ].concat(pairs.slice(1).map(function(p){return stampBlock(p[0],p[1],"آخرین زمان ثبت‌شده در دادهٔ "+p[0]);})).join('<span aria-hidden="true">·</span>'));
     });
   }
+  // Statistics are computed from the actual published datasets, never inferred
+  // from homepage cards. Collector intake and historical totals require separate
+  // persisted counters and are explicitly marked unavailable here.
+  function renderFooterPublicationStats(){
+    var host=el("footer-freshness");
+    if(!host)return;
+    var panel=document.createElement("section");
+    panel.className="footer-publication-stats";
+    panel.setAttribute("aria-label","آمار محتوای منتشرشدهٔ پندار");
+    host.parentNode.insertBefore(panel,host);
+    var fmt=function(n){return new Intl.NumberFormat("fa-IR").format(n);};
+    var published=function(rows){
+      return (Array.isArray(rows)?rows:[]).filter(function(row){
+        return row&&typeof row==="object"&&!["draft","pending","private","ai_draft"].includes(String(row.status||"").toLowerCase());
+      });
+    };
+    var unique=function(rows){
+      var seen=new Set();
+      return published(rows).filter(function(row){
+        var key=String(row.id||row.slug||row.url||"");
+        if(!key||seen.has(key))return false;
+        seen.add(key);return true;
+      });
+    };
+    var now=Date.now();
+    var periods=[["۲۴ ساعت",86400000],["۷ روز",7*86400000],["۳۰ روز",30*86400000]];
+    function dateOf(row){
+      var raw=row.published_at||row.release_date||row.created_at||"";
+      var stamp=Date.parse(raw);
+      return Number.isFinite(stamp)&&stamp<=now?stamp:0;
+    }
+    function row(name,items,href,windowed){
+      var series=unique(items);
+      var cells=periods.map(function(p){
+        if(!windowed)return '<span class="pubstats-value">—</span>';
+        var count=series.filter(function(x){var t=dateOf(x);return t&&now-t<=p[1];}).length;
+        return '<span class="pubstats-value">'+fmt(count)+'</span>';
+      }).join("");
+      return '<div class="pubstats-row"><a href="'+href+'">'+name+'</a>'+
+        '<span class="pubstats-value">'+fmt(series.length)+'</span>'+cells+'</div>';
+    }
+    panel.innerHTML='<h3>آمار انتشار پندار</h3><p>شمار مطالب موجود در خروجی منتشرشده؛ نه کل آرشیو تاریخی یا تعداد ورودی‌های دریافت‌شده.</p>'+
+      '<div class="pubstats-table"><div class="pubstats-row pubstats-head"><span>بخش</span><span>موجود</span>'+
+      periods.map(function(p){return '<span>'+p[0]+'</span>';}).join("")+'</div>'+
+      row("سرخط",data.stories,"/headlines/",true)+row("گزارش",data.reports,"/reports/",true)+
+      '<div id="pubstats-extra"></div></div>'+
+      '<p class="pubstats-note">دریافت‌شده و ردشده: هنوز شمارندهٔ تاریخی معتبر در خروجی عمومی موجود نیست. علامت — یعنی دادهٔ قابل سنجش موجود نیست، نه صفر.</p>';
+    Promise.all([
+      fetchJson("/data/books.json").catch(function(){return null;}),
+      fetchJson("/data/pendar-series-showcase.json").catch(function(){return null;}),
+      fetchJson("/data/movie-master.json").catch(function(){return null;})
+    ]).then(function(results){
+      var books=results[0],series=results[1],movies=results[2];
+      var extra=panel.querySelector("#pubstats-extra");if(!extra)return;
+      function collection(payload,keys){
+        if(Array.isArray(payload))return payload;
+        for(var i=0;i<keys.length;i++)if(Array.isArray(payload&&payload[keys[i]]))return payload[keys[i]];
+        return null;
+      }
+      var bookRows=collection(books,["books","items"]);
+      var seriesRows=collection(series,["items","series"]);
+      var movieRows=collection(movies,["movies","items"]);
+      function optional(label,rows,path){
+        return rows?row(label,rows,path,false):
+          '<div class="pubstats-row"><a href="'+path+'">'+label+'</a><span>—</span><span>—</span><span>—</span><span>—</span></div>';
+      }
+      extra.innerHTML=optional("کتاب",bookRows,"/books/")+
+        optional("فیلم",movieRows,"/movies/")+
+        optional("سریال",seriesRows,"/series/");
+    });
+  }
   async function boot(options){
     options=options||{};
     mountRoot=options.root||document;
@@ -1699,6 +1770,7 @@
         });
       }),75);
       renderFreshness();
+      renderFooterPublicationStats();
       if(storyMode){
         var detail=await fetchJson("/data/story/"+encodeURIComponent(storyId)+".json");
         renderArticle(storyId,detail);
