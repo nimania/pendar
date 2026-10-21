@@ -344,39 +344,12 @@
       fallback("home-weather-summary","/weather/","مشاهدهٔ وضعیت آب‌وهوا");
     });
   }
-  // Homepage: Today's Trends is the first, initially selected editorial tab.
-  function renderSearchTrendTab(){
-    var politics=el("feature-tab-politics"),trends=el("feature-tab-trends");
-    var politicalPanel=el("feature-politics-panel"),trendsPanel=el("feature-trends-panel");
-    var more=el("feature-heading-more"),grid=el("home-search-trends-grid");
-    if(!politics||!trends||!politicalPanel||!trendsPanel||!grid)return;
-    var buttons=[trends,politics],panels=[trendsPanel,politicalPanel];
-    var activate=function(which){
-      buttons.forEach(function(button,i){
-        var on=which===i;
-        button.classList.toggle("on",on);
-        button.setAttribute("aria-selected",String(on));
-        button.tabIndex=on?0:-1;
-        panels[i].hidden=!on;
-      });
-      more.href=which===0?"/trends/":"/reports/";
-      more.textContent=which===0?"همهٔ ترندهای امروز ←":"همهٔ گزارش‌ها ←";
-    };
-    if(!trends.dataset.ready){
-      trends.dataset.ready="1";
-      buttons.forEach(function(button,index){
-        button.addEventListener("click",function(){activate(index);});
-        button.addEventListener("keydown",function(event){
-          if(event.key==="ArrowRight"||event.key==="ArrowLeft"){
-            event.preventDefault();
-            var next=(index+1)%buttons.length;
-            activate(next);buttons[next].focus();
-          }
-        });
-      });
-    }
-    activate(0);
-    fetchJson("/data/google-trends-iran.json").then(async function(payload){
+  // Search-led trends belong to the compact headlines rail, not the editorial cover.
+  // Keep the separate /trends/ archive and the trending-figures rail intact.
+  function renderSearchTrendsInRail(){
+    var target=el("rail-headlines-trends");
+    if(!target)return;
+    fetchJson("/data/google-trends-iran.json").then(function(payload){
       var people=Array.isArray(payload&&payload.trending_figures)?payload.trending_figures.filter(function(p){
         return p&&new RegExp("^/@[a-z0-9_.-]+/$","i").test(p.url||"")&&norm(p.name);
       }).slice(0,5):[];
@@ -386,57 +359,22 @@
           +(avatar?'<img class="rail-thumb" src="'+esc(avatar)+'" loading="lazy" alt="" onerror="this.remove()">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">◉</span>')
           +'</span><span><span class="rail-title">'+esc(person.name)+'</span><span class="rail-kicker">'+esc(person.role||"صفحهٔ چهره در پندار")+'</span></span></a>';
       }).join(""):'<p class="empty-state">در این نوبت چهرهٔ ترند دارای پروفایل شناسایی نشده است.</p>');
-      var reports=Array.isArray(payload&&payload.reports)?payload.reports.filter(function(r){
-        return r&&validLink(r.url)&&norm(r.title);
-      }).slice(0,8):[];
-      if(!reports.length){
-        grid.innerHTML='<div class="feature-trend-empty">گزارش تازهٔ قابل انتشار برای این نوبت موجود نیست. <a href="/trends/">آرشیو ترندهای امروز ←</a></div>';
-        return;
-      }
-      // Only a verified working photo gets a visual feature. Otherwise the
-      // story remains an ordinary compact headline, never a blank giant card.
-      var checks=await Promise.all(reports.map(async function(r){
-        var url=validImage(r.image_url);
-        return !!url && await checkImage(url);
-      }));
-      var photographic=[],remaining=[];
-      reports.forEach(function(r,i){
-        if(checks[i])photographic.push(r);
-        else remaining.push(r);
+      var reports=Array.isArray(payload&&payload.reports)?payload.reports:[];
+      var topics=Array.isArray(payload&&payload.briefs)?payload.briefs:[];
+      var seen=new Set(),selected=[];
+      reports.concat(topics).forEach(function(row){
+        if(!row||selected.length>=5)return;
+        var url=validLink(row.url),title=norm(row.title);
+        // Only already published Pendar destinations are eligible for the rail.
+        if(!title||!url||!(/^\/(?!\/)/.test(url)||/^https:\/\/pendar\.io\//i.test(url)))return;
+        if(seen.has(url))return;
+        seen.add(url);selected.push({url:url,title:title});
       });
-      var lead=photographic[0]||null;
-      if(photographic.length>1)remaining=photographic.slice(1).concat(remaining);
-      var leadHtml="";
-      if(lead){
-        var img=validImage(lead.image_url);
-        leadHtml='<a class="feature-trend-card trend-lead has-photo" href="'+esc(lead.url)+'">'
-          +'<span class="feature-trend-picture"><img src="'+esc(img)+'" alt="'+esc(lead.image_alt||"")+'" loading="eager" decoding="async"></span>'
-          +'<span class="feature-trend-copy"><span class="category-flag orange">گزارش ویژهٔ ترندهای امروز</span>'
-          +'<strong>'+esc(lead.title)+'</strong><span>'+esc(excerpt(lead.lead_fa||"",180))+'</span>'
-          +'<small class="trend-byline">'+esc(lead.author_name_fa||"تحریریهٔ پندار")+'</small></span></a>';
-      }
-      var others=remaining.slice(0,5);
-      var tail=others.length?'<section class="feature-trend-continuation" aria-label="دیگر گزارش‌های ترند">'
-        +'<div class="feature-trend-continuation-heading"><h3>ادامهٔ ترندهای امروز</h3></div>'
-        +'<div class="feature-trend-continuation-rows">'+others.map(function(r){
-          return '<a class="feature-trend-list-row" href="'+esc(r.url)+'"><span class="feature-trend-list-mark" aria-hidden="true"></span>'
-           +'<span class="feature-trend-list-copy"><strong>'+esc(r.title)+'</strong><small>'+esc(r.author_name_fa||"تحریریهٔ پندار")+'</small></span>'
-           +'<span class="feature-trend-list-arrow">←</span></a>';
-        }).join('')+'</div></section>':'';
-      grid.innerHTML=leadHtml+tail+'<a class="feature-trends-all" href="/trends/">آرشیو ترندهای امروز ←</a>';
-      grid.querySelectorAll(".feature-trend-card img").forEach(function(photo){
-        photo.addEventListener("error",function(){
-          var card=photo.closest(".feature-trend-card");
-          if(card){
-            // Rare race: file disappears after preflight. Preserve the headline.
-            card.classList.remove("has-photo");card.classList.add("text-only");
-            photo.parentElement.remove();
-          }
-        },{once:true});
-      });
-
+      put("rail-headlines-trends",selected.length?selected.map(function(row){
+        return '<a class="rail-trend-row" href="'+esc(row.url)+'"><span class="rail-trend-marker" aria-hidden="true">↗</span><span class="rail-title">'+esc(row.title)+'</span></a>';
+      }).join(""):'<p class="empty-state">در این نوبت ترند تأییدشده‌ای برای نمایش نداریم.</p>');
     }).catch(function(){
-      grid.innerHTML='<div class="feature-trend-empty">دریافت گزارش‌های ترند موقتاً امکان‌پذیر نیست. <a href="/reports/">مشاهدهٔ گزارش‌ها ←</a></div>';
+      put("rail-headlines-trends",'<p class="empty-state">دریافت ترندها موقتاً ممکن نیست. <a href="/trends/">آرشیو ترندها ←</a></p>');
     });
   }
   async function renderHome(){
@@ -575,7 +513,7 @@
           +'<span>'+esc(excerpt(headline(r),70))+'</span></a>';
       }).join(""));
     }
-    renderSearchTrendTab();
+    renderSearchTrendsInRail();
     redrawHome=draw;
     draw();
     renderHomepageBriefs();
