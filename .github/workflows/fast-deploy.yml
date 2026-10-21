@@ -16,6 +16,8 @@ on:
       - "backend/tests/test_editorial_report_ui.js"
       - "backend/tests/test_front_page_desk.js"
       - "backend/tests/test_home_feature_categories.js"
+      - "backend/tests/test_home_pulse_and_thumbnails.js"
+      - "backend/tests/test_trends_home_cards.py"
       - "backend/tests/test_story_shell_refresh.py"
       - "backend/scripts/refresh_story_shells.py"
       - "backend/scripts/refresh_figure_shells.py"
@@ -69,6 +71,8 @@ jobs:
         run: |
           node backend/tests/test_home_feature_categories.js
           node backend/tests/test_front_page_desk.js
+          node backend/tests/test_home_pulse_and_thumbnails.js
+          python -m unittest discover -s backend/tests -p test_trends_home_cards.py -v
       - name: Restore last verified published site
         env:
           GH_TOKEN: ${{ github.token }}
