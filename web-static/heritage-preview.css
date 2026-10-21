@@ -658,3 +658,72 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
  .fp-top.fp-mode-sparse{grid-template-columns:minmax(0,1fr)}
  .fp-top.fp-mode-sparse .fp-essentials{grid-template-rows:auto}
 }
+
+
+/* Editorial desks: connections lead; categories are metadata, not seats. */
+.feature-front-page .fp-desk{margin:0 0 20px;padding:clamp(16px,2.2vw,25px);
+  border-radius:25px;border:1px solid #cddff0;
+  background:linear-gradient(125deg,#eaf2ff 0%,#f5f7ff 68%,#ebf7f6 100%);
+  box-shadow:0 14px 34px rgba(20,44,84,.055)}
+.fp-desk-heading{display:flex;flex-direction:column;gap:2px;margin-bottom:17px}
+.fp-desk-heading h3{font:900 clamp(17px,2vw,25px)/1.8 Vazirmatn,Tahoma,sans-serif;
+  letter-spacing:-.025em;color:#182f50;margin:0}
+.fp-desk-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.95fr);
+  align-items:stretch;gap:13px}
+.fp-desk-layout.fp-desk-solo{grid-template-columns:1fr}
+.fp-desk .fp-lead{min-height:465px;border-radius:19px;box-shadow:0 10px 26px rgba(14,34,62,.12)}
+.fp-desk .fp-lead.fp-text-only{background:linear-gradient(125deg,#102d50,#204e68 90%);isolation:auto}
+.fp-desk-context{display:flex;flex-direction:column;gap:12px;min-width:0}
+.fp-desk-related,.fp-desk-voices{padding:15px;border:1px solid #dce6f1;
+  border-radius:18px;background:rgba(255,255,255,.94);min-width:0}
+.fp-desk-related h4,.fp-desk-voices h4{font:850 12px/1.8 Vazirmatn,Tahoma,sans-serif;
+  margin:0 0 9px;color:#38547a}
+.fp-related-item{display:flex;flex-direction:column;gap:5px;background:#fff;
+  border:1px solid #e5ebf3;border-radius:12px;padding:11px 13px;
+  transition:transform .16s ease,background .16s ease}
+.fp-related-item+.fp-related-item{margin-top:7px}
+.fp-related-item:hover{background:#f4f8ff;transform:translateY(-1px)}
+.fp-related-item small{font:800 10px/1.7 Vazirmatn,Tahoma,sans-serif;color:#367da5}
+.fp-related-item strong{font:800 12px/1.8 Vazirmatn,Tahoma,sans-serif;color:#263a59}
+.fp-related-prominent{border-inline-start:3px solid #539cbd;background:#f5f9ff}
+.fp-related-prominent strong{font-size:15px;line-height:1.85}
+.fp-desk-voices .fp-voice{padding:10px;border:0;background:#f4f6fd}
+.fp-desk-voices .fp-voice+.fp-voice{margin-top:7px}
+.fp-voice small{font:750 10px/1.4 Vazirmatn,Tahoma,sans-serif;color:#70809f}
+.fp-secondary-desks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;margin:18px 0 20px}
+.fp-secondary-desks .fp-topic{margin:0;padding:19px}
+.fp-secondary-desks .fp-topic-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.fp-secondary-desks .fp-topic-news{min-width:0}
+.fp-secondary-desks .fp-topic-news .fp-related-item{display:flex;min-height:0}
+.fp-secondary-desks .fp-topic-voices{display:flex;flex-direction:column;gap:8px}
+.fp-more{margin-top:17px;padding:15px 0}
+.fp-more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.fp-more-grid .fp-essential{min-height:190px}
+.fp-more-grid .fp-essential .fp-image{height:117px}
+.fp-more-grid .fp-essential.fp-text-only{background:#f8fafc}
+.fp-more-grid .fp-essential.fp-text-only .fp-copy{padding:20px 16px}
+.fp-desk .fp-voice img{border-radius:50%;width:48px;height:48px;flex-basis:48px}
+@media(max-width:1000px){
+ .fp-desk-layout{grid-template-columns:1fr}
+ .fp-desk .fp-lead{min-height:355px}
+ .fp-desk-context{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .fp-desk-context>div:only-child{grid-column:1/-1}
+ .fp-more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ .fp-secondary-desks{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .feature-front-page .fp-desk{padding:13px;border-radius:17px}
+ .fp-desk .fp-lead{min-height:350px}
+ .fp-desk-context{grid-template-columns:1fr}
+ .fp-more-grid{grid-template-columns:1fr}
+ .fp-more-grid .fp-essential{min-height:120px}
+ .fp-more-grid .fp-essential .fp-image{height:auto}
+ .fp-secondary-desks{gap:10px}
+ .fp-secondary-desks .fp-topic{padding:15px}
+}
+@media(prefers-reduced-motion:reduce){
+ .fp-related-item{transition:none!important}
+}
