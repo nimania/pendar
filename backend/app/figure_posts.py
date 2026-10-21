@@ -175,7 +175,7 @@ def _external_tajzadeh_byline(article: Article) -> str:
         line = line.strip().strip("*ـ- ")
         match = re.match(
             r"^(?:✍️?|📝|نویسنده\s*[:：]|به\s*قلم\s*[:：]?)\s*"
-            r"(?:نویسنده\s*[:：]\s*)?([آ-ی][آ-ی‌\\s]{5,65})$",
+            r"(?:نویسنده\s*[:：]\s*)?([آ-ی][آ-ی‌\s]{5,65})$",
             line,
         )
         if match:
