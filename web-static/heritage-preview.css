@@ -1475,3 +1475,354 @@ body:has(#home-page){
 @media(prefers-reduced-motion:reduce){
   .quick-pulse .pulse-item,#home-page .fp-essential{transition:none!important}
 }
+
+
+/* PENDAR ARTICLE SIGNATURE 2026-10-21
+   Homepage references the actual /story/ reader in heritage-article.css:
+   charcoal masthead (#2a2928), orange editorial rule (#dc651e),
+   off-white newsprint (#eceeeb), white article paper, teal links (#2a8486).
+   This is a presentation layer; news selection is unchanged. */
+.heritage-root{
+  --signature-charcoal:#2a2928;
+  --signature-orange:#dc651e;
+  --signature-teal:#2a8486;
+  --signature-ink:#222b27;
+  --signature-muted:#5e6e66;
+  --signature-paper:#fff;
+  --signature-canvas:#eceeeb;
+  --signature-line:#dae2db;
+  --signature-soft:#f5f7f4;
+  --ph-ink:var(--signature-ink);
+  --ph-muted:var(--signature-muted);
+  --ph-surface:var(--signature-paper);
+  --ph-paper:var(--signature-canvas);
+  --ph-soft:var(--signature-soft);
+  --ph-line:var(--signature-line);
+  --ph-accent:var(--signature-orange);
+  --ph-shadow:none;
+  background:var(--signature-canvas)!important;
+  color:var(--signature-ink)!important;
+  font:400 15px/1.85 "Vazirmatn",Tahoma,sans-serif
+}
+.heritage-root .masthead,body:has(#home-page) .masthead{
+  display:block!important;
+  background:#2a2928!important;
+  border:0!important;box-shadow:none!important;color:white!important
+}
+.heritage-root .masthead-brand-row,body:has(#home-page) .masthead-brand-row{
+  background:#2a2928!important;border:0!important
+}
+.heritage-root .masthead-brand-inner,body:has(#home-page) .masthead-brand-inner{
+  display:flex;align-items:center;gap:20px;
+  min-height:100px!important;max-width:1180px;margin-inline:auto;
+  padding:12px 0!important
+}
+.heritage-root .masthead-brand-inner .brand img,
+body:has(#home-page) .masthead-brand-inner .brand img{
+  display:block;width:101px!important;max-width:101px!important;
+  height:auto!important;max-height:85px!important;filter:none!important
+}
+.heritage-root .masthead-tagline,body:has(#home-page) .masthead-tagline{
+  display:inline-block;color:#d2d3d0;
+  border-inline-start:1px solid #545351;padding-inline-start:17px;
+  font:450 13px/1.75 "Vazirmatn",Tahoma,sans-serif
+}
+.heritage-root .page-width#content{padding-top:23px;padding-bottom:48px}
+#content.page-width:has(#home-page){width:min(1280px,calc(100% - 40px))}
+#home-page .feature-front-page{padding:0 0 12px!important}
+
+/* Market pulse = one restrained utility strip, not a dashboard. */
+.quick-pulse{
+  margin:0 0 22px!important;padding:0!important;
+  background:white!important;border:1px solid #dae2db!important;
+  border-radius:0!important;box-shadow:none!important;overflow:hidden
+}
+.quick-pulse .pulse-leading{
+  justify-content:center;min-width:88px;
+  background:#f5f7f4!important;color:#d25c1c!important;
+  border-inline-end:1px solid #dae2db;
+  font-weight:800
+}
+.quick-pulse .pulse-live-dot{background:#dc651e!important}
+.quick-pulse .pulse-items{gap:0!important}
+.quick-pulse .pulse-item{
+  background:white!important;border:0!important;
+  border-inline-end:1px solid #dae2db!important;
+  border-radius:0!important;box-shadow:none!important;
+  min-height:74px
+}
+.quick-pulse .pulse-item:hover{background:#f5f8f6!important}
+.quick-pulse .pulse-label,.quick-pulse .pulse-change{color:#5e6e66!important}
+.quick-pulse .pulse-price{color:#222b27!important}
+.quick-pulse .pulse-change.up{color:#2a8486!important}
+.quick-pulse .pulse-market-link{color:#2a8486!important}
+.quick-pulse .pulse-stale{background:#f5f7f4!important}
+
+/* Front desk borrows the precise hierarchy of .magazine-article-paper. */
+#home-page .feature-front-page .fp-desk{
+  display:block;background:#fff!important;color:#222b27!important;
+  border:0!important;border-top:4px solid #dc651e!important;
+  border-radius:0!important;box-shadow:none!important;
+  margin:0 0 22px!important;
+  padding:30px clamp(19px,3.2vw,45px) 35px!important;
+  overflow:hidden
+}
+#home-page .feature-front-page .fp-desk-layout{
+  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.90fr);
+  gap:clamp(18px,2.4vw,34px);align-items:start
+}
+#home-page .feature-front-page .fp-desk-layout.fp-desk-solo{grid-template-columns:1fr}
+#home-page .feature-front-page .fp-desk .fp-lead{
+  display:flex!important;flex-direction:column!important;
+  align-items:stretch!important;justify-content:flex-start!important;
+  position:relative;min-width:0;min-height:0!important;height:auto!important;
+  background:#fff!important;color:#222b27!important;
+  border:0!important;border-radius:0!important;
+  isolation:auto!important;box-shadow:none!important;overflow:visible
+}
+#home-page .feature-front-page .fp-desk .fp-lead .fp-copy{
+  display:flex!important;flex-direction:column!important;
+  justify-content:flex-start!important;align-items:stretch;
+  order:0!important;gap:10px!important;margin:0!important;
+  padding:0!important;min-height:0!important;height:auto!important;
+  background:transparent!important;color:#222b27!important
+}
+#home-page .feature-front-page .fp-desk .fp-lead .fp-copy small{
+  color:#d25c1c!important;font:800 13px/1.75 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .feature-front-page .fp-desk .fp-lead .fp-copy h2{
+  margin:0!important;padding:0!important;
+  color:#1c2622!important;
+  font:850 clamp(26px,3vw,38px)/1.65 "Vazirmatn",Tahoma,sans-serif!important;
+  letter-spacing:-.025em;text-wrap:pretty;
+  overflow-wrap:anywhere;word-break:normal;max-width:100%
+}
+#home-page .feature-front-page .fp-desk .fp-lead .fp-copy p{
+  color:#495a52!important;
+  font:650 clamp(15px,1.45vw,18px)/2 "Vazirmatn",Tahoma,sans-serif!important;
+  margin:5px 0 0!important;padding:0 0 19px!important;
+  border-bottom:1px solid #e2e8e3;
+  max-width:100%;overflow-wrap:anywhere
+}
+#home-page .feature-front-page .fp-desk .fp-lead .fp-image{
+  display:block;position:relative!important;inset:auto!important;
+  order:1;flex:none;
+  margin-top:19px!important;width:100%;height:auto!important;
+  min-height:0!important;aspect-ratio:16/9;overflow:hidden;
+  background:#e2e9e4!important;border-radius:0!important
+}
+#home-page .feature-front-page .fp-desk .fp-lead .fp-image img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;filter:none!important;border-radius:0
+}
+#home-page .feature-front-page .fp-desk .fp-lead .fp-image:after{display:none!important}
+/* If no verified story photograph exists, use a normal article heading.
+   Never pad that empty headline into an enormous grey promotional slab. */
+#home-page .feature-front-page .fp-desk .fp-lead.fp-text-only,
+#home-page .feature-front-page .fp-desk .fp-lead.fp-text-only .fp-copy{
+  min-height:0!important;height:auto!important;
+  margin:0!important;background:#fff!important;border-radius:0!important;
+  color:#222b27!important;justify-content:flex-start!important
+}
+#home-page .feature-front-page .fp-desk .fp-lead.fp-text-only .fp-copy{
+  padding:0!important
+}
+#home-page .feature-front-page .fp-desk .fp-lead.fp-text-only .fp-copy h2{
+  color:#1c2622!important
+}
+#home-page .feature-front-page .fp-desk .fp-lead.fp-text-only .fp-copy p{
+  color:#495a52!important
+}
+#home-page .feature-front-page .fp-desk .fp-lead.fp-text-only .fp-copy small{
+  color:#d25c1c!important
+}
+
+/* Accompanying headlines read like the story-page magazine rail. */
+#home-page .feature-front-page .fp-desk-context{
+  display:flex;flex-direction:column;gap:0!important;min-width:0;
+  border-inline-start:1px solid #e2e8e3!important;
+  padding-inline-start:clamp(14px,1.6vw,23px)!important
+}
+#home-page .feature-front-page .fp-desk-related,
+#home-page .feature-front-page .fp-desk-voices{
+  padding:0!important;margin:0!important;border:0!important;
+  border-radius:0!important;background:transparent!important
+}
+#home-page .feature-front-page .fp-desk-voices{
+  border-top:1px solid #e1e7e2!important;
+  margin-top:4px!important;padding-top:9px!important
+}
+#home-page .feature-front-page .fp-related-item{
+  display:flex!important;align-items:center;gap:11px;
+  margin:0!important;padding:12px 0!important;min-height:78px;
+  border:0!important;border-bottom:1px solid #e6ebe7!important;
+  border-radius:0!important;background:transparent!important;
+  color:#222b27!important;box-shadow:none!important;transform:none!important
+}
+#home-page .feature-front-page .fp-related-item:hover,
+#home-page .feature-front-page .fp-voice:hover{background:#f5f8f6!important}
+#home-page .feature-front-page .fp-related-prominent{
+  border-inline-start:0!important;background:#f5f8f6!important;
+  border-radius:0!important;padding-inline:7px!important
+}
+#home-page .feature-front-page .fp-related-item small{
+  color:#d25c1c!important;font-weight:750!important
+}
+#home-page .feature-front-page .fp-related-item strong{
+  color:#222b27!important;font:700 14px/1.8 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .feature-front-page .fp-voice{
+  margin:0!important;padding:12px 0!important;
+  border:0!important;border-bottom:1px solid #e6ebe7!important;
+  border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;transform:none!important
+}
+#home-page .feature-front-page .fp-voice:last-child{border-bottom:0!important}
+#home-page .feature-front-page .fp-voice strong{
+  color:#2d625d!important;
+  font:700 13px/1.8 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .feature-front-page .fp-voice>span>span{
+  color:#46574e!important;
+  font:450 13px/1.9 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .feature-front-page .fp-voice img{border:1px solid #dce3de}
+
+/* Small dossiers and lists use the article's squared-off newspaper panels. */
+#home-page .feature-front-page .fp-topic,
+#home-page .home-editorial-reports,
+#home-page .home-below-panels .rail-box{
+  background:#fff!important;color:#222b27!important;
+  border:1px solid #dae2db!important;
+  border-top:4px solid #dc651e!important;
+  border-radius:0!important;box-shadow:none!important;overflow:hidden
+}
+#home-page .feature-front-page .fp-secondary-desks .fp-topic:nth-child(2n){
+  border-top-color:#158f98!important
+}
+#home-page .feature-front-page .fp-topic-head h3{
+  color:#1c2622!important;font:800 clamp(16px,1.4vw,20px)/1.75 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .feature-front-page .fp-topic-head small,
+#home-page .feature-front-page .fp-essential .fp-copy small{
+  color:#d25c1c!important;font-weight:750!important
+}
+#home-page .feature-front-page .fp-topic-voices{
+  border-top:1px solid #e1e7e2!important
+}
+#home-page .feature-front-page .fp-section-heading{
+  border:0!important;border-bottom:1px solid #dae2db!important;
+  background:transparent!important;padding:10px 0 12px!important
+}
+#home-page .feature-front-page .fp-section-heading h3{
+  color:#222b27!important;font:800 20px/1.75 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .feature-front-page .fp-section-heading a{color:#2a8486!important}
+#home-page .feature-front-page .fp-essential,
+#home-page .feature-front-page .fp-changes-grid .fp-related-item{
+  color:#222b27!important;border:1px solid #dae2db!important;
+  border-radius:0!important;background:#fff!important;
+  box-shadow:none!important;transform:none!important
+}
+#home-page .feature-front-page .fp-essential:hover{
+  background:#f5f8f6!important;box-shadow:none!important;transform:none!important
+}
+#home-page .feature-front-page .fp-essential .fp-copy strong{
+  color:#222b27!important;font:700 15px/1.8 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .feature-front-page .fp-essential.fp-text-only,
+#home-page .feature-front-page .fp-essential.fp-text-only .fp-copy{
+  background:#fff!important;min-height:0!important
+}
+#home-page .home-editorial-reports .section-heading,
+#home-page .home-below-panels .rail-heading{
+  background:#f9faf8!important;border:0!important;
+  border-bottom:1px solid #e3e7e4!important;min-height:50px
+}
+#home-page .home-editorial-reports .section-heading h2,
+#home-page .home-below-panels .rail-heading h2{
+  color:#222b27!important;
+  font:800 17px/1.75 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .home-editorial-reports .section-heading a,
+#home-page .home-below-panels .rail-heading a,
+#home-page .home-below-panels .rail-tab-more{color:#2a8486!important}
+#home-page .home-news-layout .home-editorial-report-list,
+.heritage-root #home-page .home-news-layout .home-editorial-report-list{
+  border:0!important;border-radius:0!important;background:#fff!important
+}
+#home-page .home-editorial-report-row,
+.heritage-root #home-page .home-news-layout .home-editorial-report-row{
+  background:#fff!important;color:#222b27!important
+}
+#home-page .home-editorial-report-row:hover{background:#f5f8f6!important}
+#home-page .home-editorial-report-copy strong{
+  color:#222b27!important;font:700 14px/1.85 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .home-below-panels .rail-tab-strip{
+  background:#fff!important;border-bottom:1px solid #e3e7e4!important
+}
+#home-page .home-below-panels .rail-tab-strip button.on,
+#home-page .home-below-panels .rail-tab-strip button[aria-selected="true"]{
+  color:#fff!important;background:#167f88!important;
+  border-color:#167f88!important;border-radius:4px!important
+}
+#home-page .home-below-panels .rail-title{
+  color:#222b27!important;
+  font:700 13px/1.8 "Vazirmatn",Tahoma,sans-serif!important
+}
+#home-page .home-below-panels .rail-kicker,
+#home-page .home-below-panels .rail-publisher{color:#65736a!important}
+#home-page .home-below-panels .rail-thumb-frame,
+#home-page .news-mini-photo.fp-image,
+#home-page .news-mini-photo.fp-related-thumb{
+  border-radius:3px!important
+}
+
+/* The actual article's charcoal closing chrome and restrained directory. */
+.heritage-root .footer,.footer{
+  margin-top:32px!important;padding:0!important;
+  background:#2a2928!important;color:#dde0dc!important;
+  border:0!important;box-shadow:none!important
+}
+.footer .footer-top{padding:28px 0!important}
+.footer .footer-identity{color:#c1c8c1!important}
+.footer .footer-identity img{filter:none!important}
+.footer .footer-link-group strong{color:#fff!important}
+.footer .footer-link-group a{color:#d9ddda!important}
+.footer .footer-link-group a:hover{color:#75d1d2!important}
+.footer .footer-bottom{
+  color:#abb7af!important;padding:15px 0!important;
+  border-top:1px solid #484746!important
+}
+.footer .footer-freshness{color:#abb7af!important}
+
+@media(max-width:1150px){
+  #home-page .feature-front-page .fp-desk-layout{grid-template-columns:1fr}
+  #home-page .feature-front-page .fp-desk-context{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    border-inline-start:0!important;border-top:1px solid #e2e8e3;
+    padding:15px 0 0!important
+  }
+  #home-page .feature-front-page .fp-desk-context>div:only-child{grid-column:1/-1}
+}
+@media(max-width:700px){
+  .heritage-root .masthead-brand-inner,body:has(#home-page) .masthead-brand-inner{
+    min-height:77px!important;padding:11px 0!important
+  }
+  .heritage-root .masthead-brand-inner .brand img,
+  body:has(#home-page) .masthead-brand-inner .brand img{
+    width:78px!important;max-width:78px!important
+  }
+  .masthead-tagline{display:none!important}
+  .heritage-root .page-width#content{padding-top:15px}
+  #content.page-width:has(#home-page){width:calc(100% - 24px)}
+  #home-page .feature-front-page .fp-desk{padding:22px 19px 27px!important}
+  #home-page .feature-front-page .fp-desk .fp-lead .fp-copy h2{
+    font-size:27px!important;line-height:1.62!important
+  }
+  #home-page .feature-front-page .fp-desk-context{
+    display:flex;flex-direction:column;gap:0;
+    border-top:1px solid #e2e8e3!important;padding-top:12px!important
+  }
+}
