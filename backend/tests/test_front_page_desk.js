@@ -142,8 +142,14 @@ vm.runInContext(source.slice(renderStart,renderFinish)+
   "\nthis.renderDesk=renderFrontPage;",context);
 context.renderDesk();
 const result=htmlTarget.innerHTML;
-const main=result.match(/<section class="fp-desk"[^>]*>([\s\S]*?)<\/section>/);
+const main=result.match(/<section class="fp-desk[^"]*"[^>]*>([\s\S]*?)<\/section>/);
 assert(main,"A shared lead desk must be rendered");
+assert(source.includes("function editorialStream(group)")&&
+  source.includes("sideItems=stream.slice(0,sideCapacity)")&&
+  source.includes("belowItems=stream.slice(sideCapacity)"),
+  "Stories and quotes must be reordered by relevance and overflow below both columns");
+assert(source.includes("return a.type===\"voice\"")===false,
+  "Newsroom layout must not impose a fixed speaker-first or article-first order");
 assert(main[1].includes("<h2>"),"The real news headline, not an abstract topic, must head the desk");
 assert(!result.includes("چند روایت از یک موضوع"),"Avoid proclaiming uncertain algorithmic relationships");
 assert(!result.includes("دیدگاه ثبت‌شده"),"Figure attribution should not require editorial jargon");
