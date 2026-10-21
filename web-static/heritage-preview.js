@@ -364,7 +364,7 @@
       }).sort(function(a,b){
         return figureQuoteProminence(b,now)-figureQuoteProminence(a,now);
       });
-      var highlighted=freshStatements.length?freshStatements[0]:null;
+      var highlighted=selected.length===5&&freshStatements.length?freshStatements[0]:null;
       var target=el("rail-figures-"+key);
       if(target)target.classList.toggle("rail-figures-has-lead",Boolean(highlighted));
       var rows=selected.map(function(r){
