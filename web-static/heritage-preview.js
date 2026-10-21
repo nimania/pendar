@@ -965,8 +965,6 @@
       }
       var tickerRows=varied(news,5);
       var railNewsRows=varied(stories,7);
-      var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
-      var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
       // Category tabs own the cover and its related cards. All items must
       // match the selected category; an unrelated cover is never a fallback.
       var featurePool=limitUnique(reports.concat(stories),400);
@@ -1028,19 +1026,6 @@
       var today=sorted.filter(function(r){var dt=timeOf(r);return dt>0&&Date.now()-dt<36*60*60*1000;});
       fillFive("rail-today-latest",today);
       fillFive("rail-today-big",today.filter(function(r){return importance(r)>0;}).sort(function(a,b){return importance(b)-importance(a)||timeOf(b)-timeOf(a);}));
-      var cultureSection=el("culture");
-      if(cultureSection)cultureSection.hidden=!culture.length;
-      put("culture-grid",varied(culture,6).map(function(r){
-        return '<a class="story-card" href="'+esc(slugUrl(r))+'"><span class="image-frame">'+thumb(r,"")
-          +'</span><span class="story-info"><b>'+esc(headline(r))+'</b><p>'+esc(hook(r))+'</p></span></a>';
-      }).join(""));
-      var gallery=varied(all.filter(function(r){return verifiedImage(photo(r))&&(r._imageWidth||0)>=700;}),6);
-      var gallerySection=el("gallery");
-      if(gallerySection)gallerySection.hidden=!gallery.length;
-      put("visual-grid",gallery.map(function(r){
-        return '<a class="visual-card" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
-          +'<span>'+esc(excerpt(headline(r),70))+'</span></a>';
-      }).join(""));
     }
     renderSearchTrendsInRail();
     redrawHome=draw;
