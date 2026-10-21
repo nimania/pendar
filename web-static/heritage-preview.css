@@ -2215,3 +2215,143 @@ body:has(#home-page) .masthead-brand-inner .brand img{
     min-height:92px!important;
   }
 }
+
+
+/* PENDAR SEVEN EDITION MODES — one visual identity, data-driven compositions.
+   Class names describe layout selection internally, not headlines or public
+   claims. No time-random styling and no stretched/borrowed news photographs. */
+#home-page .feature-front-page .fp-edition{
+  display:block;min-width:0;max-width:100%;
+}
+#home-page .feature-front-page .fp-edition .fp-desk-layout,
+#home-page .feature-front-page .fp-edition .fp-desk-layout>*{
+  min-width:0;max-width:100%;
+}
+/* Sparse: compact story-and-photo spread, with any remaining notes beneath.
+   If the photograph does not exist, the article simply fills the width. */
+@media(min-width:801px){
+  #home-page .feature-front-page .fp-layout-sparse .fp-desk-layout{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  #home-page .feature-front-page .fp-layout-sparse .fp-desk .fp-lead:has(.fp-image){
+    display:flex!important;flex-direction:row!important;
+    align-items:center!important;gap:clamp(18px,3vw,36px);
+  }
+  #home-page .feature-front-page .fp-layout-sparse .fp-desk .fp-lead:has(.fp-image) .fp-copy{
+    order:1!important;flex:1 1 55%;min-width:0!important
+  }
+  #home-page .feature-front-page .fp-layout-sparse .fp-desk .fp-lead:has(.fp-image) .fp-image{
+    order:0!important;width:42%!important;flex:0 0 42%!important;
+    aspect-ratio:4/3!important;margin-top:0!important
+  }
+}
+#home-page .feature-front-page .fp-layout-sparse .fp-desk-bottom{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+/* Major confirmed action: prominent, calm lead across the page.
+   No "breaking" badge: attribution remains in the report itself. */
+#home-page .feature-front-page .fp-layout-breaking .fp-desk{
+  border-top-width:5px!important;
+}
+#home-page .feature-front-page .fp-layout-breaking .fp-desk-layout{
+  grid-template-columns:minmax(0,1fr)!important;
+}
+#home-page .feature-front-page .fp-layout-breaking .fp-desk .fp-lead .fp-copy h2{
+  font-size:clamp(30px,3.45vw,47px)!important;
+  max-width:100%!important;
+}
+#home-page .feature-front-page .fp-layout-breaking .fp-desk .fp-lead .fp-image{
+  max-height:470px;aspect-ratio:2.25/1!important
+}
+#home-page .feature-front-page .fp-layout-breaking .fp-desk-bottom{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important
+}
+/* Visual: the actual verified photo leads the story, not a decorative fill. */
+#home-page .feature-front-page .fp-layout-visual .fp-desk .fp-lead .fp-image{
+  order:-1!important;margin-top:0!important;margin-bottom:18px!important;
+  aspect-ratio:16/10!important;
+}
+#home-page .feature-front-page .fp-layout-visual .fp-desk .fp-lead .fp-copy{
+  order:0!important
+}
+#home-page .feature-front-page .fp-layout-visual .fp-desk .fp-lead .fp-copy h2{
+  font-size:clamp(25px,2.9vw,36px)!important
+}
+#home-page .feature-front-page .fp-layout-visual .fp-desk-context{
+  gap:0!important
+}
+/* Conversation: important sourced speakers move up; modest emphasis without
+   implied endorsement or setting an arbitrary four-person quota. */
+#home-page .feature-front-page .fp-layout-conversation .fp-desk-context>.fp-voice:first-child{
+  background:#f8faf8!important;
+  border-inline-start:3px solid #dc651e!important;
+  padding:16px 13px!important
+}
+#home-page .feature-front-page .fp-layout-conversation .fp-desk-context>.fp-voice:first-child img{
+  width:60px!important;height:60px!important;flex:0 0 60px!important
+}
+#home-page .feature-front-page .fp-layout-conversation .fp-desk-context>.fp-voice:first-child>span>span{
+  font-size:14px!important;line-height:2!important
+}
+#home-page .feature-front-page .fp-layout-conversation .fp-desk-bottom{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important
+}
+/* Dense: more short items fit without increasing column heights artificially. */
+#home-page .feature-front-page .fp-layout-dense .fp-desk-bottom{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0 13px
+}
+#home-page .feature-front-page .fp-layout-dense .fp-desk-bottom .fp-related-item,
+#home-page .feature-front-page .fp-layout-dense .fp-desk-bottom .fp-voice{
+  padding:10px 2px!important
+}
+#home-page .feature-front-page .fp-layout-dense .fp-desk-context .fp-related-item{
+  min-height:67px!important;padding:9px 0!important
+}
+#home-page .feature-front-page .fp-layout-dense .fp-desk-context .fp-related-item strong{
+  font-size:13px!important
+}
+/* Multi: give independently evidenced dossiers equal editorial standing. */
+#home-page .feature-front-page .fp-layout-multi .fp-secondary-desks{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:16px!important;margin-top:19px!important
+}
+#home-page .feature-front-page .fp-layout-multi .fp-secondary-desks .fp-topic{
+  padding:clamp(18px,2vw,26px)!important
+}
+#home-page .feature-front-page .fp-layout-multi .fp-secondary-desks .fp-topic .fp-topic-head h3{
+  font-size:clamp(18px,1.65vw,23px)!important
+}
+/* Balanced: retains the previously approved Pendar two-column desk. */
+#home-page .feature-front-page .fp-layout-balanced .fp-desk-layout{
+  align-items:start!important
+}
+@media(max-width:1100px){
+  #home-page .feature-front-page .fp-layout-dense .fp-desk-bottom{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important
+  }
+}
+@media(max-width:800px){
+  #home-page .feature-front-page .fp-layout-sparse .fp-desk .fp-lead{
+    flex-direction:column!important
+  }
+  #home-page .feature-front-page .fp-layout-sparse .fp-desk .fp-lead .fp-image{
+    width:100%!important;flex:auto!important;aspect-ratio:16/10!important
+  }
+}
+@media(max-width:700px){
+  #home-page .feature-front-page .fp-layout-breaking .fp-desk .fp-lead .fp-copy h2{
+    font-size:clamp(23px,6vw,31px)!important
+  }
+  #home-page .feature-front-page .fp-layout-breaking .fp-desk .fp-lead .fp-image{
+    aspect-ratio:16/9!important
+  }
+  #home-page .feature-front-page .fp-layout-sparse .fp-desk-bottom,
+  #home-page .feature-front-page .fp-layout-breaking .fp-desk-bottom,
+  #home-page .feature-front-page .fp-layout-conversation .fp-desk-bottom,
+  #home-page .feature-front-page .fp-layout-dense .fp-desk-bottom{
+    grid-template-columns:1fr!important
+  }
+  #home-page .feature-front-page .fp-layout-multi .fp-secondary-desks{
+    grid-template-columns:1fr!important
+  }
+}
