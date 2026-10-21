@@ -87,15 +87,29 @@
     @media(max-width:720px){body>header.top>.wrap{padding:9px 12px;gap:8px}body>header.top .header-quicklinks{order:4;width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:5px}}
   </style>
   <style id="pendar-shared-top-header">
-    /* Keep the original navigation (with working search, theme and partner icons)
-       visible above the magazine homepage, including its loading state. */
-    html.heritage-live-active body>header.top{display:block!important}
-    html.heritage-booting body>header.top{position:relative;z-index:3}
-    html.heritage-live-active body>header.top{position:relative;z-index:3}
-    /* Avoid two separate brand/navigation rows on the magazine homepage. */
+    /* The same charcoal masthead as the article reader is the sole home header.
+       The original SPA header returns normally if the isolated home mount fails. */
+    html.heritage-live-active body>header.top,
+    html.heritage-booting body>header.top{display:none!important}
     html.heritage-live-active #heritage-live-host{min-height:0}
-    html.heritage-booting .heritage-first-paint-header,
+    html.heritage-booting .heritage-first-paint-header{
+      display:flex!important;background:#2a2928!important;
+      min-height:100px!important;
+      padding:12px max(20px,calc((100vw - 1180px)/2))!important
+    }
+    html.heritage-booting .heritage-first-paint-header img{
+      width:101px!important;max-height:80px!important;filter:none!important
+    }
     html.heritage-booting .heritage-first-paint-nav{display:none!important}
+    html.heritage-booting .heritage-first-paint{
+      background:#eceeeb!important;color:#222b27!important
+    }
+    @media(max-width:700px){
+      html.heritage-booting .heritage-first-paint-header{
+        min-height:77px!important;padding-inline:12px!important
+      }
+      html.heritage-booting .heritage-first-paint-header img{width:78px!important}
+    }
   </style>
   <style id="pendar-magazine-header-final">
     /* Never flash the legacy SPA navigation before the magazine mounts. */
@@ -119,21 +133,7 @@
       html.heritage-booting .heritage-first-paint-nav span{font-size:12px;padding:8px 10px}
     }
   </style>
-  <style id="pendar-minimal-first-paint">
-    /* Same silhouette as the loaded editorial homepage: brand only.
-       All section navigation belongs to the real footer, not a flashing bar. */
-    html.heritage-booting .heritage-first-paint-header{
-      display:flex!important;min-height:78px!important;background:#fff!important;
-      border-bottom:1px solid #e7edf3!important;padding:10px max(18px,calc((100vw - 1380px)/2))!important;
-    }
-    html.heritage-booting .heritage-first-paint-header img{width:94px!important;max-height:55px!important}
-    html.heritage-booting .heritage-first-paint-nav{display:none!important}
-    html.heritage-booting .heritage-first-paint{background:#f8fafc!important;color:#223b56!important}
-    @media(max-width:650px){
-      html.heritage-booting .heritage-first-paint-header{min-height:71px!important;padding-inline:12px!important}
-      html.heritage-booting .heritage-first-paint-header img{width:81px!important}
-    }
-  </style>
+
   <style>
     html.js-enabled #seo-static { display: none; }
     html.route-boot main.wrap { visibility: hidden; }
