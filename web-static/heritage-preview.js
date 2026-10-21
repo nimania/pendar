@@ -844,7 +844,7 @@
       return true;
     }).sort(function(a,b){
       return Date.parse(b.published_at)-Date.parse(a.published_at);
-    }).slice(0,3).map(function(v){
+    }).slice(0,5).map(function(v){
       return {title:String(v.title||""),url:String(v.url||""),
         thumbnail:validImage(v.thumbnail||""),
         published_at:v.published_at};
@@ -1241,10 +1241,8 @@
       // Only a real official Nima video may occupy otherwise sparse space.
       // Never interrupt breaking or heavily covered news with promotion.
       var homeVideo=typeof homeVideoItems!=="undefined"&&Array.isArray(homeVideoItems)&&homeVideoItems.length?homeVideoItems[0]:null;
-      var sideVideo=Boolean(homeVideo&&leadHasPhoto&&sideItems.length<=3&&
-        (layout==="balanced"||layout==="visual"));
-      var belowVideo=Boolean(homeVideo&&!sideVideo&&
-        (layout==="sparse"||layout==="textual"));
+      var sideVideo=Boolean(homeVideo);
+      var belowVideo=false;
       var contextual=sideItems.length>0||sideVideo;
       var mood=main.voices.length>main.related.length?" fp-desk-conversation":
         leadHasPhoto?" fp-desk-photographic":" fp-desk-textual";
@@ -1255,12 +1253,21 @@
             sideItems.map(function(item,i){return flowCard(item,i===0);}).join("")+
             (sideVideo?videoCard(homeVideo):"")+
           '</div>':"")+
-          (belowItems.length||belowVideo?'<div class="fp-desk-bottom">'+
+          (belowItems.length?'<div class="fp-desk-bottom">'+
             belowItems.map(function(item){return flowCard(item,false);}).join("")+
-            (belowVideo?videoCard(homeVideo):"")+
+
           '</div>':"")+
         '</div></section>';
       var html='<div class="fp-edition fp-layout-'+layout+'">'+desk;
+      // At least one available official video in the top editorial package;
+      // the remaining four appear in a dedicated compact shelf.
+      var moreVideos=(homeVideoItems||[]).slice(1,5);
+      if(moreVideos.length){
+        html+='<section class="fp-video-shelf" aria-label="ویدئوهای نیما افشارنادری">'+
+          '<div class="fp-section-heading"><h3>آخرین ویدئوهای نیما افشارنادری</h3>'+
+          '<a href="/videos/">همهٔ ویدئوها ←</a></div>'+
+          '<div class="fp-video-shelf-grid">'+moreVideos.map(videoCard).join("")+'</div></section>';
+      }
       // Other important dossiers follow the lead regardless of beat. Their
       // relationships must be evidenced independently of the main desk.
       if(clusters.length){
