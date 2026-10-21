@@ -131,4 +131,36 @@ assert(indexMarkup.includes('id="pendar-shared-top-header"') &&
   "Single dark loading masthead avoids duplicate conflicting first-paint rules");
 assert(markup.includes('masthead-tagline')&&markup.includes('/assets/pendar-logo.svg'),
   "Homepage masthead has its real brand and matching editorial tagline");
+// Approved editorial identity must remain; the fixes are only hygiene.
+assert(css.includes("APPROVED HOME EDITION"),"Visual approval must be retained as an explicit baseline");
+assert(css.includes('[data-rail-group="figures"]{')&&
+  css.includes('grid-column:1/-1'),
+  "The final people panel must span the full row, not leave two empty columns");
+assert(css.includes('grid-template-columns:repeat(5,minmax(0,1fr))')&&
+  css.includes('grid-template-columns:repeat(2,minmax(0,1fr))'),
+  "The people strip must be responsive on large and small screens");
+assert(js.includes('var belowVisibleIds=new Set(latestReports.map(')&&
+  js.includes('!frontVisibleIds.has(row.id)&&!belowVisibleIds.has(row.id)'),
+  "Default editorial panels must prefer stories not already shown above");
+assert(js.includes('frontVisibleIds=new Set(usedNews)'),
+  "Only displayed front-page records may be excluded from lower modules");
+assert(js.includes('trends:records.slice().sort(') &&
+  markup.includes('data-rail-tab="trends">پربحث‌ها'),
+  "The engagement-driven people tab must render and must not claim measured search trends");
+assert(js.includes('rail-row-text-only')&&js.includes('if(frame)frame.remove()'),
+  "Missing article images must never leave empty grey thumbnail frames");
+// A low-resolution photograph remains suitable as a tiny rail thumbnail, but
+// should not be enlarged into a soft-focus editorial cover.
+const thumbWithSizes=new Function("data","validImage","verifiedImage","photo","esc","imageDimensions",
+  js.slice(thumbsA,thumbsB)+"return newsMiniPhoto;")(
+  directory,v=>typeof v==="string"&&v.startsWith("/")?v:"",
+  ()=>true,r=>r.image_url||"",esc,
+  new Map([["/assets/report.jpg",{width:320,height:210}]])
+);
+const smallSlot=thumbWithSizes(authored,"fp-image");
+const tinySlot=thumbWithSizes(authored,"rail-thumb");
+assert(!smallSlot.includes("<img")&&smallSlot.includes("news-author-photo"),
+  "Low-resolution image must be replaced by the actual writer on large cards");
+assert(tinySlot.includes('<img src="/assets/report.jpg"'),
+  "The same authentic article photo may remain in the small rail");
 console.log("Market pulse, Tehran weather, writer fallback and layout checks passed");
