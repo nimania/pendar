@@ -1072,7 +1072,7 @@
       function videoCard(video){
         if(!video||!video.url||!video.title)return "";
         var image=video.thumbnail?'<span class="fp-video-image">'+
-          '<img src="'+esc(video.thumbnail)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">'+
+          '<img src="'+esc(video.thumbnail)+'" alt="" loading="lazy" decoding="async" onerror="this.parentNode.remove()">'+
           '<span class="fp-video-play" aria-hidden="true">▶</span></span>':"";
         return '<a class="fp-home-video" href="'+esc(video.url)+
           '" target="_blank" rel="noopener noreferrer" title="نمایش ویدئو در یوتیوب">'+
