@@ -891,14 +891,26 @@
             !frontRoutinePublicity(e.row)&&frontConnection(seed.row,e.row);
         }).sort(function(a,b){
           return b.score-a.score;
-        }).slice(0,6);
+        }).slice(0,8);
         var linkedSpeakers=unusedSpeakers.filter(function(item){
-          // A viewpoint may connect to any verified news item on the same
-          // desk, not necessarily to the lead headline itself.
+          // Relatedness is required but does not impose a four-person quota.
+          // A dossier may have no quotes or several, depending on coverage.
           return frontConnection(seed.row,item)||related.some(function(entry){
             return frontConnection(entry.row,item);
           });
-        }).slice(0,4);
+        }).sort(function(a,b){
+          function importance(person){
+            var links=[seed].concat(related);
+            var strengths=links.map(function(e){
+              return (frontConnection(e.row,person)||{}).strength||0;
+            });
+            var topical=Math.max.apply(null,strengths)*25;
+            var freshness=Math.max(0,14-Math.floor((now-person.stamp)/day));
+            var analyst=FRONT_COMMENTARY_NAMES.test(featureNormalize(person.name))?8:0;
+            return topical+freshness+analyst;
+          }
+          return importance(b)-importance(a);
+        }).slice(0,7);
         var issue=related.length?frontConnection(seed.row,related[0].row):
           linkedSpeakers.length?frontConnection(seed.row,linkedSpeakers[0]):null;
         return {seed:seed,related:related,voices:linkedSpeakers,issue:issue,
@@ -962,17 +974,51 @@
           '<span><strong>'+esc(item.name)+' می‌گوید:</strong>'+
           '<span>'+esc(excerpt(item.title,150))+'</span></span></a>';
       }
-      // The news headline is the heading. Visual proximity shows context;
-      // avoid suggesting a causal link through explicit "related" labels.
-      var contextual=main.related.length+main.voices.length>0;
-      var desk='<section class="fp-desk" aria-label="تیتر اصلی و مطالب همراه">'+
+      // Layout is an editorial composition, not a frozen "4 statements"
+      // template. Important claims or photographed viewpoints can rise above
+      // supplementary headlines when the daily dossier warrants it.
+      function editorialStream(group){
+        var entries=group.related.map(function(entry){
+          var link=frontConnection(group.seed.row,entry.row);
+          var closeness=(link&&link.strength||0)*13;
+          return {type:"news",entry:entry,
+            priority:entry.score*.46+closeness};
+        });
+        group.voices.forEach(function(item){
+          var connections=[group.seed].concat(group.related).map(function(entry){
+            return (frontConnection(entry.row,item)||{}).strength||0;
+          });
+          var strongest=Math.max.apply(null,connections);
+          var recent=Math.max(0,12-Math.floor((now-item.stamp)/day));
+          var analyst=FRONT_COMMENTARY_NAMES.test(featureNormalize(item.name))?12:0;
+          entries.push({type:"voice",item:item,
+            priority:strongest*23+recent+analyst});
+        });
+        return entries.sort(function(a,b){return b.priority-a.priority;});
+      }
+      function flowCard(item,prominent){
+        return item.type==="voice"?voice(item.item):
+          relatedStory(item.entry,prominent&&item.priority>=75);
+      }
+      // Keep the side roughly the same height as the headline + photograph.
+      // Any extra stories/quotes flow beneath BOTH columns rather than leaving
+      // a long empty patch below the leading picture.
+      var leadHasPhoto=Boolean(picture(main.seed));
+      var sideCapacity=leadHasPhoto?5:3;
+      var stream=editorialStream(main);
+      var sideItems=stream.slice(0,sideCapacity);
+      var belowItems=stream.slice(sideCapacity);
+      var contextual=stream.length>0;
+      var mood=main.voices.length>main.related.length?" fp-desk-conversation":
+        leadHasPhoto?" fp-desk-photographic":" fp-desk-textual";
+      var desk='<section class="fp-desk'+mood+'" aria-label="تیتر اصلی و مطالب همراه">'+
         '<div class="fp-desk-layout'+(contextual?"":" fp-desk-solo")+'">'+
           story(main.seed,"fp-lead")+
           (contextual?'<div class="fp-desk-context">'+
-            (main.related.length?'<div class="fp-desk-related" aria-label="خبرها و گزارش‌های بیشتر">'+
-              main.related.map(function(e,i){return relatedStory(e,i===0&&main.seed.score-e.score<17);}).join("")+'</div>':"")+
-            (main.voices.length?'<div class="fp-desk-voices" aria-label="گفته‌های چهره‌ها">'+
-              main.voices.map(voice).join("")+'</div>':"")+
+            sideItems.map(function(item,i){return flowCard(item,i===0);}).join("")+
+          '</div>':"")+
+          (belowItems.length?'<div class="fp-desk-bottom">'+
+            belowItems.map(function(item){return flowCard(item,false);}).join("")+
           '</div>':"")+
         '</div></section>';
       var html=desk;
@@ -1007,10 +1053,10 @@
             '<span><small>'+label(group.seed)+'</small><h3>'+
             esc(excerpt(headline(group.seed.row),165))+'</h3></span></a></div>'+
             '<div class="fp-topic-grid">'+
-              (group.related.length?'<div class="fp-topic-news">'+
-                group.related.map(function(e){return relatedStory(e,false);}).join("")+'</div>':"")+
-              (group.voices.length?'<div class="fp-topic-voices">'+
-                group.voices.map(voice).join("")+'</div>':"")+
+              (group.related.length||group.voices.length?
+                '<div class="fp-topic-flow">'+
+                editorialStream(group).map(function(e){return flowCard(e,false);}).join("")+
+                '</div>':"")+
             '</div></section>';
         }).join("")+'</div>';
       }
