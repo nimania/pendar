@@ -70,7 +70,7 @@ const context={
   featureRank:v=>40+(v.rank||0),
   featureAge:v=>Date.now()-Date.parse(v.published_at||"2026-01-01"),
   featureCategory:v=>v.category||"",
-  figureFeatureItems:voices,featureAllItems:stories,
+  figureFeatureItems:voices,featureAllItems:stories,homeVideoItems:[],
   el:()=>htmlTarget,
   validImage:v=>typeof v==="string"&&/^\/(?!\/)/.test(v)?v:"",
   verifiedImage:()=>true,
@@ -116,6 +116,10 @@ const cases=[
   ["multi",{
     lead:{row:{headline_fa:"چند پرونده مستقل منطقه‌ای"},score:75},
     age:3600000,news:4,voices:1,leadPhoto:false,newsPhotos:0,dossiers:2
+  }],
+  ["textual",{
+    lead:{row:{headline_fa:"تحولات امروز"},score:75},
+    age:3600000,news:5,voices:1,leadPhoto:false,newsPhotos:0,dossiers:1
   }],
   ["balanced",{
     lead:{row:{headline_fa:"تحولات امروز"},score:75},
@@ -262,4 +266,47 @@ assert(fluid.includes('class="fp-desk-bottom"'),
   "Excess contextual reporting must flow beneath the main cover");
 assert(fluid.includes("می‌گوید:"),
   "The flexible newsroom must still attribute every viewpoint");
+
+// A schematic video fixture tests access rules; it is not a real user video.
+vm.runInContext("this.selectOfficialVideos=homeNimaVideoItems;",context);
+const fresh=new Date().toISOString(),youtubeTestId="dQw4w9WgXcQ";
+const catalogue={figures:[{
+  handle:"nima-afshar-naderi",youtube_videos:[
+    {id:youtubeTestId,title:"بررسی آزمایشی تحولات و اخبار منطقه‌ای",
+      url:"https://www.youtube.com/watch?v="+youtubeTestId,
+      thumbnail:"https://i.ytimg.com/vi/"+youtubeTestId+"/hqdefault.jpg",
+      published_at:fresh,source_type:"official"},
+    {id:"aaaaaaaaaaa",title:"گفت‌وگو در یک کانال دیگر",
+      url:"https://www.youtube.com/watch?v=aaaaaaaaaaa",
+      published_at:fresh,source_type:"hosted"},
+    {id:"bbbbbbbbbbb",title:"ویدئوی قدیمی و خارج از بازه",
+      url:"https://www.youtube.com/watch?v=bbbbbbbbbbb",
+      published_at:"2023-01-01T00:00:00Z",source_type:"official"}
+  ]
+}]};
+const videos=context.selectOfficialVideos(catalogue,Date.now());
+assert(videos.length===1&&videos[0].url.endsWith(youtubeTestId),
+  "Only recent and official Nima YouTube videos may enter the cover");
+assert(context.selectOfficialVideos({figures:[]},Date.now()).length===0,
+  "A missing video catalogue must never create a placeholder");
+// Force a sparse edition with one main report and few related items.
+context.homeVideoItems=videos;
+context.figureFeatureItems=voices.slice(0,2);
+context.featureAllItems=stories.slice(1,3);
+context.renderDesk();
+assert(htmlTarget.innerHTML.includes('class="fp-home-video"')&&
+  htmlTarget.innerHTML.includes(youtubeTestId),
+  "Sparse editorial dossiers may show a verified YouTube video card");
+assert(htmlTarget.innerHTML.includes('target="_blank" rel="noopener noreferrer"'),
+  "External YouTube links should open safely");
+// A verified media-source identity must belong to THIS report only.
+stories[1].sources=[{name:"رسانهٔ نمونه",article_url:"https://example.com/report"}];
+context.homeVideoItems=[];
+context.renderDesk();
+assert(htmlTarget.innerHTML.includes("fp-story-source")&&
+  htmlTarget.innerHTML.includes("رسانهٔ نمونه"),
+  "Only an article's documented publisher may appear beside its headline");
+assert(!htmlTarget.innerHTML.includes("fp-home-video"),
+  "An empty video pool must not generate an artificial content card");
+
 console.log("Pendar mixed editorial desk regression fixtures OK");
