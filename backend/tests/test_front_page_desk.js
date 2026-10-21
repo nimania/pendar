@@ -119,7 +119,7 @@ const cases=[
   }],
   ["balanced",{
     lead:{row:{headline_fa:"تحولات امروز"},score:75},
-    age:3600000,news:5,voices:1,leadPhoto:false,newsPhotos:0,dossiers:1
+    age:3600000,news:5,voices:1,leadPhoto:true,newsPhotos:0,dossiers:1
   }]
 ];
 for(const [name,criteria] of cases){
