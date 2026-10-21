@@ -830,7 +830,8 @@
       if(!v||v.source_type!=="official")return false;
       var url=String(v.url||"").trim(),title=String(v.title||"").trim();
       var m=url.match(/^https:\/\/(?:www\.|m\.)?youtube\.com\/watch\?([^#]+)$/i)||
-        url.match(/^https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})(?:[?#].*)?$/i);
+        url.match(/^https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})(?:[?#].*)?$/i)||
+        url.match(/^https:\/\/(?:www\.|m\.)?youtube\.com\/(?:shorts|live)\/([A-Za-z0-9_-]{11})(?:[?#].*)?$/i);
       var vid="";
       if(m&&url.includes("watch?")){
         var idMatch=m[1].match(/(?:^|&)v=([A-Za-z0-9_-]{11})(?:&|$)/);
