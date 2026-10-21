@@ -664,7 +664,7 @@
     // The backend remains unchanged, and imageless reports still exist in the
     // searchable archive and on their original URL.
     initializeRailTabs();
-    var currentFeature="front",featureBucketData={},figureFeatureItems=[],figuresReady=false;
+    var currentFeature="front",featureBucketData={},featureAllItems=[],figureFeatureItems=[],figuresReady=false;
     var lastHomeVisit=0;
     try{
       lastHomeVisit=Number(localStorage.getItem("pendar-home-last-visit-v1"))||0;
@@ -676,136 +676,192 @@
     var featurePanel=el("feature-politics-panel");
     var featureMore=el("feature-heading-more");
 
-    // Relatedness requires at least two distinctive shared terms, not merely
-    // a shared category or the word "Iran". It is not a claim of agreement.
-    var frontStopwords=new Set(["ایران","ایرانی","ایرانیان","کشور","امروز","دیروز",
-      "فردا","درباره","برای","اینکه","است","هست","بود","شد","شده","شود","کند",
-      "کرد","خواهد","باید","نیست","سخنان","اظهارات","گفته","نگاه","نظر","دیدگاه",
-      "گزارش","خبر","جدید","تازه","تحلیل","آخرین","چرا","چگونه","یکی","بیشتر",
-      "بررسی","تهران","جهان","جهانی","دولت","مردم","سیاسی","مسائل","وضعیت"]);
-    function frontTerms(value){
-      var words=featureNormalize(value).match(/[\u0600-\u06ffa-z]{3,}/g)||[];
-      return new Set(words.filter(function(word){return !frontStopwords.has(word);}));
-    }
-    function frontRelated(a,b){
-      var left=frontTerms(a),right=frontTerms(b),shared=0;
-      left.forEach(function(word){if(right.has(word))shared++;});
-      return shared>=2;
-    }
+
+    // The front page is an editorial desk, not a category carousel.
+    // News, contextual reporting and attributable viewpoints can share a
+    // dossier only when the underlying records establish a topical connection.
     function renderFrontPage(){
       var target=el("feature-front-page");
       if(!target)return;
-      var categories=FEATURE_BEATS;
-      var seen=new Set(),pool=[];
-      categories.forEach(function(key){
-        (featureBucketData[key]||[]).slice(0,18).forEach(function(row){
-          if(seen.has(row.id))return;
-          seen.add(row.id);pool.push({row:row,category:featureCategory(row)||key});
-        });
+      var now=Date.now(),day=86400000;
+      var pool=(featureAllItems||[]).filter(function(row){
+        return row&&row.id&&headline(row)&&featureAge(row)<30*day;
+      }).map(function(row){
+        var category=featureCategory(row)||"news";
+        return {row:row,category:category,score:frontEditorialScore(row,category)};
+      }).sort(function(a,b){
+        return b.score-a.score||featureAge(a.row)-featureAge(b.row);
       });
-      pool.sort(function(a,b){
-        return featureRank(b.row,b.category)-featureRank(a.row,a.category)||
-          featureAge(a.row)-featureAge(b.row);
+      var unique=[];
+      pool.forEach(function(entry){
+        if(unique.length>=100)return;
+        if(unique.some(function(p){return frontSimilar(p.row,entry.row);}))return;
+        unique.push(entry);
       });
-      var pictured=pool.filter(function(entry){return verifiedImage(photo(entry.row));});
-      if(!pictured.length){
-        target.innerHTML='<p class="fp-empty">'+(pool.length?
-          "در حال آماده‌سازی تصویرهای تأییدشده برای صفحهٔ اول…":
-          "هنوز مطالب کافی برای چیدن صفحهٔ اول منتشر نشده است.")+'</p>';
+      pool=unique;
+      if(!pool.length){
+        target.innerHTML='<p class="fp-empty">در این نوبت خبر تاریخ‌دار کافی برای چیدن صفحهٔ اول نداریم. <a href="/headlines/">سرخط‌ها ←</a></p>';
         return;
       }
-      var lead=pictured.slice(0,10).find(function(entry){
-        return (entry.row._imageWidth||imageDimensions.get(photo(entry.row))?.width||0)>=900&&
-          featureRank(entry.row,entry.category)>=featureRank(pictured[0].row,pictured[0].category)-12;
-      })||pictured[0];
-      var selected=new Set([lead.row.id]);
-      var essentials=[],chosenCategories=new Set([lead.category]);
-      // Four strong stories from different beats rather than a mechanical list.
-      pictured.forEach(function(entry){
-        if(essentials.length>=4||selected.has(entry.row.id)||chosenCategories.has(entry.category))return;
-        selected.add(entry.row.id);chosenCategories.add(entry.category);essentials.push(entry);
+      // Ceremonial or PR-shaped news remains available in its section, never
+      // allowed to displace consequential coverage as the main lead.
+      var worthy=pool.filter(function(e){return !frontRoutinePublicity(e.row);});
+      if(!worthy.length){
+        target.innerHTML='<p class="fp-empty">در این نوبت خبر شاخصی برای تیتر اصلی شناسایی نشد. <a href="/headlines/">همهٔ سرخط‌ها ←</a></p>';
+        return;
+      }
+      var speakers=figureFeatureItems.filter(function(item){
+        return item.portraitVerified&&validImage(item.portrait)&&
+          Number.isFinite(item.stamp)&&item.stamp<=now+3600000&&now-item.stamp<=14*day;
       });
-      if(essentials.length<4)pictured.forEach(function(entry){
-        if(essentials.length>=4||selected.has(entry.row.id))return;
-        selected.add(entry.row.id);essentials.push(entry);
-      });
+      function join(seed,choices,unusedSpeakers){
+        var related=choices.filter(function(e){
+          return e.row.id!==seed.row.id&&!frontSimilar(seed.row,e.row)&&
+            !frontRoutinePublicity(e.row)&&frontConnection(seed.row,e.row);
+        }).sort(function(a,b){
+          return b.score-a.score;
+        }).slice(0,4);
+        var linkedSpeakers=unusedSpeakers.filter(function(item){
+          return frontConnection(seed.row,item);
+        }).slice(0,3);
+        var issue=related.length?frontConnection(seed.row,related[0].row):
+          linkedSpeakers.length?frontConnection(seed.row,linkedSpeakers[0]):null;
+        return {seed:seed,related:related,voices:linkedSpeakers,issue:issue,
+          // Cluster strength can reorder close leads, not override a major
+          // breaking story with a large pile of trivial articles.
+          weight:seed.score+Math.min(20,related.length*5+linkedSpeakers.length*4)};
+      }
+      var boards=worthy.slice(0,18).map(function(entry){return join(entry,worthy,speakers);})
+        .sort(function(a,b){return b.weight-a.weight||b.seed.score-a.seed.score;});
+      var main=boards[0],usedNews=new Set([main.seed.row.id]),usedSpeakers=new Set();
+      main.related.forEach(function(entry){usedNews.add(entry.row.id);});
+      main.voices.forEach(function(item){usedSpeakers.add(item.handle);});
       function label(entry){return esc(FEATURE_NAMES[entry.category]||"خبر");}
-      function image(entry){return '<img src="'+esc(photo(entry.row))+'" alt="" loading="lazy" decoding="async">';}
-      function article(entry,style){
-        var row=entry.row;
-        return '<a class="'+style+'" href="'+esc(slugUrl(row))+'">'+
-          '<span class="fp-image">'+image(entry)+'</span>'+
-          '<span class="fp-copy"><small>'+label(entry)+'</small>'+
-          '<strong>'+esc(excerpt(headline(row),style==="fp-lead"?180:110))+'</strong>'+
-          (style==="fp-lead"?'<span>'+esc(excerpt(hook(row),150))+'</span>':"")+
+      function picture(entry){
+        if(!verifiedImage(photo(entry.row)))return "";
+        return '<span class="fp-image"><img src="'+esc(photo(entry.row))+
+          '" alt="" loading="lazy" decoding="async"></span>';
+      }
+      function story(entry,type){
+        var hasPicture=verifiedImage(photo(entry.row));
+        var cls=type+(hasPicture?"":" fp-text-only");
+        return '<a class="'+cls+'" href="'+esc(slugUrl(entry.row))+'">'+
+          picture(entry)+'<span class="fp-copy"><small>'+label(entry)+'</small>'+
+          '<strong>'+esc(excerpt(headline(entry.row),type==="fp-lead"?230:120))+'</strong>'+
+          (type==="fp-lead"&&hook(entry.row)?'<span>'+esc(excerpt(hook(entry.row),180))+'</span>':"")+
           '</span></a>';
       }
-      // Layout emphasis responds to the relative rank and number of stories.
-      var rankGap=pictured.length>1?
-        featureRank(lead.row,lead.category)-featureRank(pictured[1].row,pictured[1].category):Infinity;
-      var layoutMode=pictured.length<3?"sparse":rankGap<=5?"balanced":"focused";
-      var html='<div class="fp-top fp-mode-'+layoutMode+'">'+article(lead,"fp-lead")+
-        '<div class="fp-essentials">'+essentials.map(function(e){return article(e,"fp-essential");}).join("")+'</div></div>';
-      // Pick the most substantiated shared topic from prominent stories.
-      var subjects=[lead].concat(essentials),best=null;
-      subjects.forEach(function(seed){
-        var news=pictured.filter(function(entry){
-          return !selected.has(entry.row.id)&&frontRelated(headline(seed.row),headline(entry.row));
-        }).slice(0,3);
-        var voices=figureFeatureItems.filter(function(item){
-          return item.portraitVerified&&frontRelated(headline(seed.row),item.title);
-        }).slice(0,3);
-        var weight=news.length+voices.length*2;
-        if(news.length+voices.length>=2&&(!best||weight>best.weight))
-          best={seed:seed,news:news,voices:voices,weight:weight};
-      });
+      function relatedStory(entry){
+        return '<a class="fp-related-item" href="'+esc(slugUrl(entry.row))+'">'+
+          '<small>'+label(entry)+'</small><strong>'+
+          esc(excerpt(headline(entry.row),120))+'</strong></a>';
+      }
       function voice(item){
         return '<a class="fp-voice" href="'+esc(item.url)+'">'+
           '<img src="'+esc(item.portrait)+'" alt="" loading="lazy" decoding="async">'+
-          '<span><strong>'+esc(item.name)+'</strong><span>'+
-          esc(excerpt(item.title,125))+'</span></span></a>';
+          '<span><small>دیدگاه ثبت‌شده</small><strong>'+esc(item.name)+'</strong>'+
+          '<span>'+esc(excerpt(item.title,145))+'</span></span></a>';
       }
-      if(best){
-        best.news.forEach(function(entry){selected.add(entry.row.id);});
-        html+='<section class="fp-topic"><div class="fp-section-heading">'+
-          '<div><span class="fp-eyebrow">'+(best.voices.length?"پیوند خبرها و دیدگاه‌ها":"خبرهای مرتبط")+'</span><h3>'+
-          esc(excerpt(headline(best.seed.row),95))+'</h3></div>'+
-          '<a href="'+esc(slugUrl(best.seed.row))+'">اصل ماجرا ←</a></div>'+
-          '<div class="fp-topic-grid">'+
-          (best.news.length?'<div class="fp-topic-news">'+best.news.map(function(entry){
-            return '<a href="'+esc(slugUrl(entry.row))+'"><small>'+label(entry)+'</small><strong>'+
-              esc(excerpt(headline(entry.row),110))+'</strong></a>';
-          }).join("")+'</div>':"")+
-          (best.voices.length?'<div class="fp-topic-voices">'+best.voices.map(voice).join("")+'</div>':"")+
+      // The lead and related items live in one shared desk, not in
+      // disconnected politics/diplomacy/quote compartments.
+      var contextual=main.related.length+main.voices.length>0;
+      var title=contextual?main.issue&&main.issue.label||"در یک پرونده":
+        "مهم‌ترین خبر";
+      var desk='<section class="fp-desk">'+
+        '<div class="fp-desk-heading"><span class="fp-eyebrow">'+
+        (contextual?"چند روایت از یک موضوع":"خبر برجستهٔ امروز")+'</span>'+
+        '<h3>'+esc(title)+'</h3></div>'+
+        '<div class="fp-desk-layout'+(contextual?"":" fp-desk-solo")+'">'+
+          story(main.seed,"fp-lead")+
+          (contextual?'<div class="fp-desk-context">'+
+            (main.related.length?'<div class="fp-desk-related">'+
+              '<h4>خبرها و گزارش‌های مرتبط</h4>'+
+              main.related.map(relatedStory).join("")+'</div>':"")+
+            (main.voices.length?'<div class="fp-desk-voices">'+
+              '<h4>دیدگاه‌های مرتبط</h4>'+main.voices.map(voice).join("")+
+              '</div>':"")+
+          '</div>':"")+
+        '</div></section>';
+      var html=desk;
+      // Other important dossiers follow the lead regardless of beat. Their
+      // relationships must be evidenced independently of the main desk.
+      var clusters=[];
+      for(var count=0;count<2;count++){
+        var rest=worthy.filter(function(e){return !usedNews.has(e.row.id);});
+        var voicesLeft=speakers.filter(function(v){return !usedSpeakers.has(v.handle);});
+        var candidates=rest.slice(0,22).map(function(entry){
+          return join(entry,rest,voicesLeft);
+        }).filter(function(group){
+          return group.related.length>=1||group.voices.length>=2;
+        }).sort(function(a,b){return b.weight-a.weight;});
+        if(!candidates.length)break;
+        var next=candidates[0];
+        // Avoid a second box that is just a fragmented copy of the lead desk.
+        if(frontConnection(main.seed.row,next.seed.row))break;
+        usedNews.add(next.seed.row.id);
+        next.related.forEach(function(e){usedNews.add(e.row.id);});
+        next.voices.forEach(function(v){usedSpeakers.add(v.handle);});
+        clusters.push(next);
+      }
+      if(clusters.length){
+        html+='<div class="fp-secondary-desks">'+clusters.map(function(group){
+          return '<section class="fp-topic">'+
+            '<div class="fp-section-heading"><div>'+
+            '<span class="fp-eyebrow">چند روایت از یک موضوع</span>'+
+            '<h3>'+esc(group.issue&&group.issue.label||"گزارش‌های مرتبط")+'</h3></div>'+
+            '<a href="'+esc(slugUrl(group.seed.row))+'">اصل ماجرا ←</a></div>'+
+            '<div class="fp-topic-grid"><div class="fp-topic-news">'+
+              relatedStory(group.seed)+group.related.map(relatedStory).join("")+'</div>'+
+              (group.voices.length?'<div class="fp-topic-voices">'+
+                group.voices.map(voice).join("")+'</div>':"")+
+            '</div></section>';
+        }).join("")+'</div>';
+      }
+      // A soft diversity preference, never a fixed category quota.
+      var independent=worthy.filter(function(e){return !usedNews.has(e.row.id);});
+      var extras=[],counts={};
+      while(independent.length&&extras.length<6){
+        independent.sort(function(a,b){
+          var as=a.score-(counts[a.category]||0)*7;
+          var bs=b.score-(counts[b.category]||0)*7;
+          return bs-as;
+        });
+        var picked=independent.shift();
+        if(picked.score<0)break;
+        extras.push(picked);
+        usedNews.add(picked.row.id);
+        counts[picked.category]=(counts[picked.category]||0)+1;
+      }
+      if(extras.length){
+        html+='<section class="fp-more"><div class="fp-section-heading"><h3>'+
+          'دیگر خبرهای مهم</h3><a href="/headlines/">سرخط‌ها ←</a></div>'+
+          '<div class="fp-more-grid">'+extras.map(function(e){return story(e,"fp-essential");}).join("")+
           '</div></section>';
       }
-      var otherVoices=figureFeatureItems.filter(function(item){
-        return item.portraitVerified&&(!best||!best.voices.some(function(v){return v.handle===item.handle;}));
-      }).slice(0,3);
-      if(otherVoices.length){
-        html+='<section class="fp-voices"><div class="fp-section-heading"><div>'+
-          '<span class="fp-eyebrow">تازه‌ترین گفته‌های ثبت‌شده</span><h3>از میان چهره‌ها</h3>'+
-          '</div><a href="/figures/">همهٔ چهره‌ها ←</a></div>'+
-          '<div class="fp-voice-grid">'+otherVoices.map(voice).join("")+'</div></section>';
+      // Unmatched viewpoints still exist in the specialist Statements tab.
+      // Display a small remainder here only when genuine linked dossiers are
+      // already visible; do not fill the lead desk with unrelated opinions.
+      var recentVoices=speakers.filter(function(v){return !usedSpeakers.has(v.handle);}).slice(0,3);
+      if(recentVoices.length&&main.voices.length){
+        html+='<section class="fp-voices"><div class="fp-section-heading"><h3>گفته‌های دیگر</h3>'+
+          '<a href="/figures/">همهٔ چهره‌ها ←</a></div>'+
+          '<div class="fp-voice-grid">'+recentVoices.map(voice).join("")+'</div></section>';
       }
-      // New means published since a previous visit only if a valid visit exists.
-      var changed=pictured.filter(function(entry){
-        if(selected.has(entry.row.id))return false;
-        var published=Date.parse(entry.row.published_at||entry.row.created_at||"");
-        return Number.isFinite(published)&&published>(lastHomeVisit||Date.now()-36*3600000)&&
-          published<=Date.now()+3600000;
-      }).slice(0,4);
+      var newsSince=lastHomeVisit||now-36*3600000;
+      var changed=pool.filter(function(entry){
+        if(usedNews.has(entry.row.id)||frontRoutinePublicity(entry.row))return false;
+        var date=Date.parse(entry.row.published_at||entry.row.created_at||"");
+        return Number.isFinite(date)&&date>newsSince&&date<=now+3600000;
+      }).sort(function(a,b){return featureAge(a.row)-featureAge(b.row);}).slice(0,4);
       if(changed.length){
         html+='<section class="fp-changes"><div class="fp-section-heading"><h3>'+
-          (lastHomeVisit?"از آخرین بازدید شما":"تازه‌ترین تحولات")+
-          '</h3><a href="/headlines/">سرخط‌ها ←</a></div><div class="fp-changes-grid">'+
-          changed.map(function(entry){
-            return '<a href="'+esc(slugUrl(entry.row))+'"><small>'+label(entry)+'</small>'+
-              '<strong>'+esc(excerpt(headline(entry.row),100))+'</strong></a>';
-          }).join("")+'</div></section>';
+          (lastHomeVisit?"از آخرین بازدید شما":"خبرهای تازه‌تر")+
+          '</h3><a href="/headlines/">سرخط‌ها ←</a></div>'+
+          '<div class="fp-changes-grid">'+changed.map(relatedStory).join("")+'</div></section>';
       }
       target.innerHTML=html;
     }
+
     function renderCurrentFeature(){
       if(!featureSection||!heroBox)return;
       featureSection.hidden=false;
@@ -901,6 +957,7 @@
       // Category tabs own the cover and its related cards. All items must
       // match the selected category; an unrelated cover is never a fallback.
       var featurePool=limitUnique(reports.concat(stories),400);
+      featureAllItems=featurePool;
       var featureBuckets={};
       FEATURE_BEATS.forEach(function(key){featureBuckets[key]=[];});
       featurePool.forEach(function(row){
