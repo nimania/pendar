@@ -4,19 +4,6 @@
   "scope": "Public-source regional naval developments; no vessel coordinates, live tracks or predicted routes.",
   "events": [
     {
-      "id": "usni-tracker-2026-10-19",
-      "date": "2026-10-19",
-      "country": "us",
-      "region": "global",
-      "type": "استقرار",
-      "sensitive": true,
-      "title": "انتشار گزارش دوره‌ای ناوگروه‌های آمریکا",
-      "original_title": "USNI News Fleet and Marine Tracker: Oct. 19, 2026",
-      "description": "مؤسسه نیروی دریایی آمریکا گزارشی از استقرارهای اعلام‌شده و تقریبی ناوگروه‌ها منتشر کرده است. این پرونده فقط خبر انتشار گزارش را نشان می‌دهد، نه مختصات ناوها.",
-      "source": "USNI News",
-      "url": "https://news.usni.org/2026/10/19/usni-news-fleet-and-marine-tracker-oct-19-2026"
-    },
-    {
       "id": "royal-navy-2026-10-17",
       "date": "2026-10-17",
       "country": "uk",
@@ -41,6 +28,19 @@
       "description": "نشریه رسمی نیروی دریایی فرانسه درباره پشتیبانی لجستیکی مأموریت «La Fayette 26» گزارش داده است.",
       "source": "Cols Bleus / Marine nationale",
       "url": "https://www.colsbleus.defense.gouv.fr/fr/comment-faire-durer-le-groupe-aeronaval-la-mer"
+    },
+    {
+      "id": "usni-tracker-2026-10-13",
+      "date": "2026-10-13",
+      "country": "us",
+      "region": "global",
+      "type": "استقرار",
+      "sensitive": true,
+      "title": "انتشار گزارش دوره‌ای ناوگروه‌های آمریکا",
+      "original_title": "USNI News Fleet and Marine Tracker: Oct. 13, 2026",
+      "description": "مؤسسه نیروی دریایی آمریکا گزارشی از استقرارهای اعلام‌شده و تقریبی ناوگروه‌ها منتشر کرده است. این پرونده فقط خبر انتشار گزارش را نشان می‌دهد، نه مختصات ناوها.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/13/usni-news-fleet-and-marine-tracker-oct-13-2026"
     },
     {
       "id": "nato-repmus-2026-10-08",
