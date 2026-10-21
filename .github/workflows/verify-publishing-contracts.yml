@@ -31,3 +31,5 @@ jobs:
           python-version: "3.11"
       - name: Verify homepage editorial cover and search-trend rail
         run: python -m unittest discover -s backend/tests -p 'test_trends_home_cards.py' -v
+      - name: Verify eight editorial topics and figures statements
+        run: node backend/tests/test_home_feature_categories.js
