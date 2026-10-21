@@ -440,6 +440,121 @@
     var iran=category==="politics"&&/ایران|تهران|مجلس|دولت/.test(headline(row))?3:0;
     return recency+importance+editorial+iran;
   }
+
+  // Front-page prominence reflects consequences, verifiable decisions and
+  // public usefulness — not ceremonial national rhetoric or office-holder rank.
+  // These heuristics are editorial triage, not a truth or political-loyalty score.
+  function frontSignalText(item){
+    var main=headline(item)||norm(item.title||item.statement_fa||"");
+    var detail=norm(item.lead_fa||item.summary_fa||item.editorial_report&&item.editorial_report.lead_fa||"");
+    return featureNormalize(main+" "+detail.slice(0,210));
+  }
+  var FRONT_IGNORE=new Set(["ایران","ایرانی","ایرانیان","ملی","کشور","امروز","دیروز",
+    "جدید","تازه","آخرین","خبر","گزارش","رویداد","ماجرا","درباره","برای","اینکه",
+    "توسط","مورد","دولت","مردم","جامعه","مسائل","وضعیت","سیاست","سیاسی","تحلیل",
+    "گفته","دیدگاه","اظهارات","تاکید","تأکید","آغاز","ادامه","پایان","اعلام",
+    "شود","شده","شد","خواهد","بود","است","هست","نیست","کرد","کرده","کند","چگونه",
+    "چرا","آنها","دیگر","هایی","ترین","تهران","ایرانشهر","جهان","جهانی"]);
+  function frontKeywords(item){
+    var text=typeof item==="string"?featureNormalize(item):frontSignalText(item);
+    var raw=text.match(/[\u0600-\u06ffa-z]{3,}/g)||[];
+    var tokens=raw.map(function(word){
+      if(/^مذاکر/.test(word))return "مذاکره";
+      if(/^گفتگو|^گفت‌وگو/.test(word))return "گفتگو";
+      if(/^هسته/.test(word))return "هسته";
+      if(/^گذرگاه/.test(word))return "گذرگاه";
+      if(/^مرزها|^مرزی/.test(word))return "مرز";
+      if(/^تحریم/.test(word))return "تحریم";
+      if(/^انتخاب/.test(word))return "انتخابات";
+      if(/^جنگ/.test(word))return "جنگ";
+      return word.replace(/(های|ها|ترین)$/,"");
+    }).filter(function(word){return word.length>=3&&!FRONT_IGNORE.has(word);});
+    return new Set(tokens);
+  }
+  function frontIssues(item){
+    var text=typeof item==="string"?featureNormalize(item):frontSignalText(item);
+    var iran=/ایران|ایرانی|تهران/.test(text);
+    var regional=/اسرائیل|عراق|غزه|لبنان|خاورمیانه|منطقه|ایران/.test(text);
+    var security=/جنگ|آتش\s?بس|حمله|موشک|درگیری|امنیت|تهدید|نظامی|گذرگاه مرزی|بستن مرز|بسته شدن مرز|مرزهای بسته/.test(text);
+    var issues=[];
+    if(iran&&security&&regional)issues.push("iran-security");
+    if(regional&&security&&!iran)issues.push("regional-security");
+    if(/گذرگاه|مرزی|مرز/.test(text)&&/عراق|پاکستان|افغانستان|ترکیه|ارمنستان|آذربایجان/.test(text)&&iran)issues.push("iran-border");
+    if(/هسته ای|هسته‌ای|برجام|غنی سازی|غنی‌سازی/.test(text)&&/مذاکر|توافق|تحریم|ایران|آمریکا/.test(text))issues.push("nuclear");
+    if(/دلار|ارز|ریال|سکه|تورم|گرانی|بانک مرکزی/.test(text)&&/قیمت|افزایش|کاهش|بازار|معیشت|نرخ|سیاست پولی/.test(text))issues.push("prices");
+    if(/هواشناسی|هشدار هوا|آلودگی هوا|بارندگی|طوفان|سیلاب|خشکسالی|ریزگرد|بارش/.test(text))issues.push("weather");
+    if(/مدرسه|معلم|دانش آموز|دانش‌آموز|آموزش و پرورش/.test(text))issues.push("education");
+    if(/هوش مصنوعی|اینترنت|فیلترینگ|شبکه اجتماعی|امنیت سایبری/.test(text))issues.push("digital");
+    if(/فوتبال|المپیک|بازی های آسیایی|بازی‌های آسیایی|مسابقات جهانی/.test(text))issues.push("sports");
+    return issues;
+  }
+  var FRONT_TOPIC_LABELS={
+    "iran-security":"تحولات امنیتی پیرامون ایران",
+    "regional-security":"تنش‌های منطقه‌ای",
+    "iran-border":"گذرگاه‌ها و مرزهای ایران",
+    nuclear:"مذاکرات و پروندهٔ هسته‌ای",
+    prices:"اقتصاد و معیشت",
+    weather:"هوا و محیط زیست",
+    education:"آموزش و مدارس",
+    digital:"تکنولوژی و ارتباطات",
+    sports:"ورزش و رقابت‌ها"
+  };
+  function frontConnection(a,b){
+    var left=frontSignalText(a),right=frontSignalText(b);
+    var first=frontIssues(a),second=frontIssues(b);
+    // Regional news can be discussed in one dossier; that does not establish
+    // causality. An Iran security story never links to a separate foreign war
+    // without another independent shared substantive detail.
+    var mutual=first.filter(function(topic){return second.includes(topic);});
+    if(mutual.length){
+      var topic=mutual[0];
+      if(topic!=="regional-security"||frontKeywords(a).size&&frontKeywords(b).size)
+        return {strength:3,issue:topic,label:FRONT_TOPIC_LABELS[topic]};
+    }
+    var one=frontKeywords(a),two=frontKeywords(b),matches=[];
+    one.forEach(function(token){if(two.has(token))matches.push(token);});
+    if(matches.length>=2){
+      return {strength:2,issue:"shared-terms",label:"گزارش‌های مرتبط"};
+    }
+    return null;
+  }
+  function frontSimilar(a,b){
+    var one=frontKeywords(headline(a)||a.title||"");
+    var two=frontKeywords(headline(b)||b.title||"");
+    var shared=0;
+    one.forEach(function(term){if(two.has(term))shared++;});
+    return Math.min(one.size,two.size)>=4&&
+      shared/Math.max(1,Math.min(one.size,two.size))>=.85;
+  }
+  function frontRoutinePublicity(row){
+    var text=frontSignalText(row),title=featureNormalize(headline(row));
+    var soft=/گردشگری|رویدادهای ملی|همایش|جشنواره|مراسم|افتتاح|تقدیر|نشست خبری|نامگذاری|نام گذاری|نام‌گذاری|برگزاری مراسم|ثبت در تقویم/.test(text);
+    var promotional=/توسعه|گسترش|رونق|ثبت|تاکید|تأکید|ضرورت|برنامه ریزی|برنامه‌ریزی|ظرفیت|حمایت از|برگزاری|گفت|خبر داد/.test(title);
+    var ceremonial=/ثبت رویداد|رویدادهای ملی|توسعه گردشگری|توسعهٔ گردشگری|جشنواره گردشگری/.test(title);
+    var official=/وزیر|معاون|استاندار|مدیرکل|رئیس سازمان|رییس سازمان|مسئول|دبیر/.test(text);
+    var consequential=/بسته شدن|تعطیلی|دستور بستن|ممنوعیت|تصویب قانون|قانون جدید|ابلاغ قانون|قطع|اعتصاب|بحران|هشدار|سیلاب|کشته|بازداشت|آتش سوزی|آتش‌سوزی|کاهش بودجه|افزایش قیمت|توقف پرواز/.test(text);
+    if(consequential)return false;
+    return ceremonial||(soft&&promotional&&official);
+  }
+  function frontEditorialScore(row,category){
+    var text=frontSignalText(row),title=featureNormalize(headline(row));
+    var score=featureRank(row,category);
+    // Public interest: material decisions, security, measurable disruption.
+    if(/جنگ|آتش\s?بس|حمله|درگیری|عملیات نظامی|بحران امنیتی/.test(title))score+=24;
+    if(/بستن|بسته شدن|مسدود|تعطیل|توقف تردد|محدودیت تردد/.test(text)&&
+       /گذرگاه|مرز|گمرک|مرزی/.test(text))score+=42;
+    if(/ترامپ|رئیس جمهور آمریکا|رییس جمهور آمریکا/.test(text)&&
+       /جنگ|آتش\s?بس|توافق|پایان/.test(title))score+=25;
+    if(/دستور|تصویب|لغو|ممنوعیت|ابلاغ|اعتصاب|زلزله|حادثه|کشته|بازداشت/.test(title))score+=16;
+    if(/هشدار|سیلاب|طوفان|کیفیت هوا|آلودگی شدید|قطعی برق|تعطیلی مدارس/.test(title))score+=16;
+    else if(/هواشناسی|بارش|پیش بینی هوا|پیش‌بینی هوا/.test(title))score+=7;
+    if(/قیمت دلار|تورم|نرخ ارز|افزایش قیمت|کاهش قیمت|کمبود|معیشت/.test(title))score+=11;
+    if(/کاروان ایران|مدال|قهرمان جهان|قهرمانی جهان|المپیک/.test(title))score+=8;
+    // Neither "ملی" nor an official's title is a newsworthiness signal.
+    if(frontRoutinePublicity(row))score-=85;
+    return score;
+  }
+
   function figureStatementPortrait(person){
     var raw=[person.avatar,person.avatar_url,person.image_url,person.photo_url,
       person.image&&person.image.url,person.image&&person.image.path].filter(Boolean);
