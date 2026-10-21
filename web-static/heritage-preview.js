@@ -377,6 +377,85 @@
       put("rail-headlines-trends",'<p class="empty-state">دریافت ترندها موقتاً ممکن نیست. <a href="/trends/">آرشیو ترندها ←</a></p>');
     });
   }
+
+  // The feature is a reading destination: classify from reported subject, never
+  // from search popularity, a country's mere mention, or unrelated recommendations.
+  var FEATURE_CATEGORIES=["politics","diplomacy","society","technology","statements","sport","environment","culture"];
+  var FEATURE_NAMES={politics:"سیاست",diplomacy:"دیپلماسی",society:"جامعه",technology:"تکنولوژی",
+    statements:"گفته‌ها",sport:"ورزشی",environment:"محیط زیست",culture:"فرهنگ"};
+  var FEATURE_PATTERNS={
+    politics:/سیاست|حکومت|حکمرانی|انتخاب|مجلس|دولت|رئیس.?جمهور|رییس.?جمهور|قوه قضاییه|شورای نگهبان|اعتراض|اپوزیسیون|قانون اساسی|قدرت سیاسی|نخست وزیر|نخست‌وزیر|شهرداری|پارلمان/,
+    diplomacy:/دیپلماسی|مذاکر|توافق|تحریم|سفیر|سفارت|روابط خارجی|وزارت خارجه|سازمان ملل|بین.?الملل|آتش.?بس|سفر رسمی|دیدار رسمی|ناتو|پاکستان|آمریکا|روسیه|اسرائیل|جنگ|موشک/,
+    society:/جامعه|اجتماع|آموزش|دانشگاه|دانشجو|مدرسه|معلم|سلامت|بیمارستان|درمان|حقوق شهروندی|کودک|زنان|کارگر|بازنشسته|مسکن|مهاجرت|جمعیت|بیمه|زندگی روزمره/,
+    technology:/تکنولوژی|فناوری|هوش مصنوعی|اینترنت|استارتاپ|استارت‌آپ|اپلیکیشن|نرم.?افزار|سایبری|تراشه|هوشمند|دیجیتال|ربات|ماهواره|پژوهش علمی|گجت/,
+    sport:/ورزش|فوتبال|فوتبالیست|لیگ برتر|لیگ قهرمانان|جام جهانی|تیم ملی|المپیک|والیبال|بسکتبال|کشتی گیر|کشتی‌گیر|مسابقه|قهرمانی|استقلال تهران|پرسپولیس|تراکتور|سپاهان|داور فوتبال|گلزن|مربی فوتبال/,
+    environment:/محیط.?زیست|اقلیم|خشکسالی|آلودگی هوا|آلودگی آب|هواشناسی|گرمایش زمین|جنگل|منابع طبیعی|تالاب|فرونشست|حیات وحش|حیات.?وحش|بارندگی|سیلاب|بارش|ریزگرد|آب و هوا|آب‌وهوا/,
+    culture:/فرهنگ|هنر|سینما|فیلم|سریال|تئاتر|موسیقی|کنسرت|ادبیات|رمان|کتاب|شعر|نویسنده|کارگردان|بازیگر|میراث فرهنگی|موزه|جشنواره|نمایشگاه|شاهنامه/
+  };
+  var FEATURE_META={
+    politics:/politic|government|governance|سیاست|حکمرانی/,
+    diplomacy:/diplomac|foreign|international|دیپلماسی|روابط خارجی/,
+    society:/societ|social|education|health|جامعه|اجتماع|آموزش|سلامت/,
+    technology:/technolog|science|digital|فناوری|تکنولوژی|دانش/,
+    sport:/sport|football|ورزش|فوتبال/,
+    environment:/environment|climate|nature|محیط زیست|اقلیم/,
+    culture:/cultur|art|entertainment|فرهنگ|هنر/
+  };
+  function featureNormalize(value){
+    return norm(value).replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/\u200c/g," ").toLowerCase();
+  }
+  function featureCategory(row){
+    var author=featureNormalize(row.editorial_author_id||row.editorial_report&&row.editorial_report.author_id||row.author_id||"");
+    var metadata=[row.category,row.section,row.section_fa,row.category_fa,row.topic,row.topic_fa,row.beat]
+      .concat(Array.isArray(row.tags)?row.tags:[],Array.isArray(row.topics)?row.topics:[])
+      .map(function(item){return featureNormalize(typeof item==="string"?item:item&&(item.name_fa||item.label||item.name)||"");}).join(" ");
+    var title=featureNormalize(headline(row));
+    var summary=featureNormalize(row.summary_fa||row.lead_fa||"");
+    var best="",points=0;
+    Object.keys(FEATURE_PATTERNS).forEach(function(key){
+      var score=(author===key?12:0)+(FEATURE_META[key].test(metadata)?10:0)
+        +(FEATURE_PATTERNS[key].test(title)?15:0)+(FEATURE_PATTERNS[key].test(summary)?2:0);
+      if(score>points){points=score;best=key;}
+    });
+    return best;
+  }
+  function featureAge(row){
+    var stamp=Date.parse(row.published_at||row.updated_at||row.created_at||"");
+    return Number.isFinite(stamp)?Math.max(0,Date.now()-stamp):Infinity;
+  }
+  function featureRank(row,category){
+    var age=featureAge(row),hour=3600000;
+    var recency=age<6*hour?32:age<24*hour?27:age<48*hour?21:age<7*24*hour?12:age<30*24*hour?5:0;
+    var raw=Number(row.importance_score||row.score||row.source_count||0);
+    var importance=Number.isFinite(raw)&&raw>0?Math.min(20,Math.log1p(raw)*5):0;
+    var editorial=Number(Boolean(row.editorial_report||row.editorial_author_id))*4;
+    var iran=category==="politics"&&/ایران|تهران|مجلس|دولت/.test(headline(row))?3:0;
+    return recency+importance+editorial+iran;
+  }
+  function featureStatementsFromFigures(payload){
+    var people=Array.isArray(payload&&payload.figures)?payload.figures:[];
+    var found=[];
+    people.forEach(function(person){
+      var handle=String(person&&person.handle||"");
+      if(!/^[a-z0-9_.-]{2,90}$/i.test(handle))return;
+      var name=norm(person.name_fa||person.name||person.display_name_fa||handle);
+      (Array.isArray(person.posts)?person.posts:[]).slice(0,7).forEach(function(post){
+        var title=norm(post&&(
+          post.headline_fa||post.title_fa||post.statement_fa||post.text_fa||
+          post.text||post.title||post.recap_fa||post.summary_fa)||"");
+        var date=Date.parse(post&&post.published_at||"");
+        if(!title||!Number.isFinite(date))return;
+        found.push({title:title,name:name,handle:handle,stamp:date,url:"/@"+encodeURIComponent(handle)+"/"});
+      });
+    });
+    found.sort(function(a,b){return b.stamp-a.stamp;});
+    var seen=new Set();
+    return found.filter(function(item){
+      if(seen.has(item.handle))return false;
+      seen.add(item.handle);return true;
+    }).slice(0,8);
+  }
+
   async function renderHome(){
     var stories=data.stories.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
     var reports=data.reports.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);})
@@ -402,6 +481,86 @@
     // The backend remains unchanged, and imageless reports still exist in the
     // searchable archive and on their original URL.
     initializeRailTabs();
+    var currentFeature="politics",featureBucketData={},figureFeatureItems=[],figuresReady=false;
+    var heroBox=el("feature-hero"),featureSection=heroBox.closest(".feature-block");
+    var featureButtons=Array.from(mountRoot.querySelectorAll("[data-feature-category]"));
+    var featurePanel=el("feature-politics-panel");
+    var featureMore=el("feature-heading-more");
+    function renderCurrentFeature(){
+      if(!featureSection||!heroBox)return;
+      featureSection.hidden=false;
+      var isStatement=currentFeature==="statements";
+      var moreUrl=isStatement?"/figures/":"/reports/";
+      featureMore.href=moreUrl;
+      featureMore.textContent=isStatement?"همهٔ گفته‌ها ←":"همهٔ گزارش‌ها ←";
+      var items=isStatement?figureFeatureItems:(featureBucketData[currentFeature]||[]);
+      if(!items.length){
+        heroBox.hidden=true;
+        put("under-hero",'<p class="feature-topic-empty">'+
+          (isStatement&&!figuresReady?"در حال دریافت تازه‌ترین گفته‌ها…":"هنوز مطلب تأییدشده‌ای در این بخش موجود نیست.")+
+          ' <a href="'+moreUrl+'">آرشیو پندار ←</a></p>');
+        return;
+      }
+      heroBox.hidden=false;
+      heroBox.classList.toggle("feature-statement-hero",isStatement);
+      heroBox.classList.toggle("feature-text-hero",false);
+      if(isStatement){
+        var saying=items[0];
+        heroBox.href=saying.url;
+        heroBox.setAttribute("aria-label",saying.name+": "+saying.title);
+        heroBox.innerHTML='<span class="feature-caption feature-saying-copy"><span class="category-flag orange">گفته‌ها</span>'
+          +'<strong>'+esc(excerpt(saying.title,270))+'</strong>'
+          +'<span class="feature-saying-person">'+esc(saying.name)+'</span></span>';
+        put("under-hero",items.slice(1,5).map(function(item){
+          return '<a class="mini-feature feature-statement-mini" href="'+esc(item.url)+'"><span class="caption">'
+            +'<small>'+esc(item.name)+'</small><strong>'+esc(excerpt(item.title,110))+'</strong></span></a>';
+        }).join(""));
+        return;
+      }
+      // A cover gets a real, tested photo from a high-ranking item, or text.
+      // Do not let an old photograph outrank every current important report.
+      var rows=items.slice(0,12);
+      var lead=rows.slice(0,6).find(function(item){
+        return verifiedImage(photo(item))&&featureRank(item,currentFeature)>=featureRank(rows[0],currentFeature)-10;
+      })||rows[0];
+      var withPicture=verifiedImage(photo(lead));
+      heroBox.classList.toggle("feature-text-hero",!withPicture);
+      heroBox.href=slugUrl(lead);
+      heroBox.setAttribute("aria-label",headline(lead));
+      heroBox.innerHTML=(withPicture?'<span class="feature-picture">'+thumb(lead,"")+'</span>':"")
+        +'<span class="feature-caption"><span class="category-flag orange">'+esc(FEATURE_NAMES[currentFeature])+'</span>'
+        +'<strong>'+esc(headline(lead))+'</strong><span>'+esc(hook(lead))+'</span></span>';
+      var others=rows.filter(function(item){return item.id!==lead.id;}).slice(0,4);
+      put("under-hero",others.map(function(item){
+        var image=verifiedImage(photo(item))?thumb(item,""):"";
+        return '<a class="mini-feature'+(image?"":" feature-mini-text")+'" href="'+esc(slugUrl(item))+'">'
+          +image+'<span class="caption"><strong>'+esc(headline(item))+'</strong>'
+          +'<span>'+esc(hook(item))+'</span></span></a>';
+      }).join(""));
+    }
+    function selectFeature(key){
+      if(!FEATURE_CATEGORIES.includes(key))return;
+      currentFeature=key;
+      featureButtons.forEach(function(tab){
+        var on=tab.dataset.featureCategory===key;
+        tab.classList.toggle("on",on);
+        tab.setAttribute("aria-selected",String(on));
+        tab.tabIndex=on?0:-1;
+      });
+      featurePanel.setAttribute("aria-labelledby","feature-category-"+key);
+      renderCurrentFeature();
+    }
+    featureButtons.forEach(function(button,index){
+      button.addEventListener("click",function(){selectFeature(button.dataset.featureCategory);});
+      button.addEventListener("keydown",function(event){
+        if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
+        event.preventDefault();
+        var next=event.key==="Home"?0:event.key==="End"?featureButtons.length-1:
+          (index+(event.key==="ArrowLeft"?1:featureButtons.length-1))%featureButtons.length;
+        selectFeature(featureButtons[next].dataset.featureCategory);
+        featureButtons[next].focus();
+      });
+    });
     function draw(){
       var news=uniquePictured(stories,65);
       var editorial=uniquePictured(reports,65);
@@ -421,40 +580,22 @@
       var railNewsRows=varied(stories,7);
       var cultureWords=/فرهنگ|موسیقی|کتاب|فیلم|سریال|سینما|هنر|عکاس|معمار|تئاتر|زندگی|گردش|غذا|آشپزی|ادبی|دانش|محیط زیست|طبیعت|سلامت|ورزش/;
       var culture=all.filter(function(r){return cultureWords.test(norm(headline(r)+" "+(r.category||"")));});
-      // Figure statements are rendered independently of news-card photo gating.
-      // Editorial lead: prefer independent Iran-focused political coverage.
-      // Assess the *subject* of a report, never infer its political allegiance.
-      var iranFocus=/ایران|ایرانی|ایرانگرایی|ایران‌گرایی|ایران دوستی|ایراندوستی|ملی‌گرایی|ملت ایران|هویت ملی|میراث ایران|تاریخ ایران|تمامیت ارضی|آینده ایران|مشروطه|قانون اساسی|گذار سیاسی|آزادی ایران/;
-      var politics=/سیاست|انتخابات|دولت|مجلس|دیپلماسی|تحریم|مذاکره|جنگ|آمریکا|حکمرانی|امنیت|قدرت|حقوق شهروندی|جامعه مدنی|دموکراسی|استقلال/;
-      function leadScore(r){
-        var title=norm(headline(r)),section=norm(r.category||r.section||"");
-        var score=(iranFocus.test(title)?12:0)+(iranFocus.test(section)?6:0)
-          +(politics.test(title)?5:0)+(politics.test(section)?3:0)
-          +(r._imageWidth>=900?2:0);
-        return score;
-      }
-      var leadCandidates=limitUnique(editorial.concat(reports).concat(news).concat(stories),150);
-      var prioritized=leadCandidates.filter(function(r){return leadScore(r)>=8;})
-        .sort(function(a,b){return leadScore(b)-leadScore(a)||String(b.published_at||"").localeCompare(String(a.published_at||""));});
-      var frozenLead=data.homeSnapshot&&data.homeSnapshot.lead_id;
-      var snapshotCover=frozenLead?[...editorial,...reports,...news,...stories].find(function(r){return String(r.id)===String(frozenLead);}):null;
-      var cover=snapshotCover||prioritized[0]||editorial[0]||news[0]||reports[0]||stories[0];
-      var heroBox=el("feature-hero");
-      var featureSection=heroBox.closest(".feature-block");
-      if(featureSection)featureSection.hidden=false;
-      if(cover){
-        var report=editorial.some(function(r){return r.id===cover.id;});
-        heroBox.href=slugUrl(cover);
-        heroBox.setAttribute("aria-label",headline(cover));
-        heroBox.innerHTML=(verifiedImage(photo(cover))?'<span class="feature-picture">'+thumb(cover,"")+'</span>':'')
-          +'<span class="feature-caption"><span class="category-flag orange">'+(report?"گزارش ویژه":"خبر ویژه")+'</span>'
-          +'<strong>'+esc(headline(cover))+'</strong><span>'+esc(hook(cover))+'</span></span>';
-      }
-      var more=varied(editorial.concat(news).concat(reports).concat(stories),9);
-      put("under-hero",more.slice(0,2).map(function(r){
-        return '<a class="mini-feature" href="'+esc(slugUrl(r))+'">'+thumb(r,"")
-          +'<span class="caption"><strong>'+esc(headline(r))+'</strong><span>'+esc(hook(r))+'</span></span></a>';
-      }).join(""));
+      // Category tabs own the cover and its related cards. All items must
+      // match the selected category; an unrelated cover is never a fallback.
+      var featurePool=limitUnique(reports.concat(stories),400);
+      var featureBuckets={};
+      FEATURE_CATEGORIES.forEach(function(key){featureBuckets[key]=[];});
+      featurePool.forEach(function(row){
+        var category=featureCategory(row);
+        if(category&&featureBuckets[category])featureBuckets[category].push(row);
+      });
+      FEATURE_CATEGORIES.forEach(function(key){
+        featureBuckets[key].sort(function(a,b){
+          return featureRank(b,key)-featureRank(a,key)||featureAge(a)-featureAge(b);
+        });
+      });
+      featureBucketData=featureBuckets;
+      renderCurrentFeature();
       // Permanent editorial reports; not gated by photograph availability.
       var latestReports=reports.slice(0,4);
       put("home-editorial-report-list",latestReports.length?latestReports.map(function(r){
@@ -517,7 +658,14 @@
     redrawHome=draw;
     draw();
     renderHomepageBriefs();
-    fetchJson("/data/figures.json").then(function(payload){renderFigureStrip(payload);renderRailFigureFive(payload);}).catch(function(){
+    fetchJson("/data/figures.json").then(function(payload){
+      figureFeatureItems=featureStatementsFromFigures(payload);
+      figuresReady=true;
+      if(currentFeature==="statements")renderCurrentFeature();
+      renderFigureStrip(payload);renderRailFigureFive(payload);
+    }).catch(function(){
+      figuresReady=true;
+      if(currentFeature==="statements")renderCurrentFeature();
       put("ticker",'<a href="/figures/">آخرین سخنان و دیدگاه‌های چهره‌ها ←</a>');
     });
     // Fill the remaining modules without blocking the first meaningful paint.
