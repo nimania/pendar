@@ -539,9 +539,10 @@
     var promotional=/توسعه|گسترش|رونق|ثبت|تاکید|تأکید|ضرورت|برنامه ریزی|برنامه‌ریزی|ظرفیت|حمایت از|برگزاری|گفت|خبر داد/.test(title);
     var ceremonial=/ثبت رویداد|رویدادهای ملی|توسعه گردشگری|توسعهٔ گردشگری|جشنواره گردشگری/.test(title);
     var official=/وزیر|معاون|استاندار|مدیرکل|رئیس سازمان|رییس سازمان|مسئول|دبیر/.test(text);
-    var consequential=/بسته شدن|تعطیلی|دستور بستن|ممنوعیت|تصویب قانون|قانون جدید|ابلاغ قانون|قطع|اعتصاب|بحران|هشدار|سیلاب|کشته|بازداشت|آتش سوزی|آتش‌سوزی|کاهش بودجه|افزایش قیمت|توقف پرواز/.test(text);
+    var consequential=/بسته شدن|تعطیلی|دستور بستن|ممنوعیت|تصویب قانون|قانون جدید|ابلاغ قانون|قطع|اعتصاب|بحران|هشدار|سیلاب|کشته|بازداشت|آتش سوزی|آتش‌سوزی|کاهش بودجه|افزایش قیمت|توقف پرواز|جنگ|آتش بس|آتش‌بس|حمله|تصویب|محدودیت|تغییر نرخ|اعمال تحریم|توقف صادرات/.test(text);
+    var hollowStatement=/(تاکید|تأکید|بر ضرورت|باید|خواستار|لزوم|اهمیت|گسترش همکاری|تقویت تعامل|ظرفیت های|ظرفیت‌های|ضروری است)/.test(title);
     if(consequential)return false;
-    return ceremonial||(soft&&promotional&&official);
+    return ceremonial||(soft&&promotional&&official)||(official&&hollowStatement);
   }
   function frontEditorialScore(row,category){
     var text=frontSignalText(row),title=featureNormalize(headline(row));
