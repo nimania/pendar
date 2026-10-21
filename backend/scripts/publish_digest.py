@@ -14,6 +14,7 @@ import json
 import os
 import sys
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 try:  # as a package import (tests) or as a standalone script (CI workflow)
@@ -153,6 +154,11 @@ def digest_payload(text, chat_id):
 def publish_digest(figures_data, stories_data, ledger, telegram, chat_id, *,
                    now=None, hours=DIGEST_INTERVAL_HOURS, force=False):
     now = now or datetime.now(timezone.utc)
+    tehran = now.astimezone(ZoneInfo("Asia/Tehran"))
+    minutes = tehran.hour * 60 + tehran.minute
+    if minutes >= 23 * 60 + 30 or minutes < 8 * 60:
+        print("Telegram quiet hours (23:30–08:00 Tehran); no publishing")
+        return {"sent": 0, "reason": "quiet_hours"}
     state = ledger.load() or {}
     last = _parse_time(state.get("last_digest_at"))
     if not force and last and (now - last) < timedelta(hours=1):
