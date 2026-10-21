@@ -1528,7 +1528,7 @@ body:has(#home-page) .masthead-brand-inner .brand img{
   font:450 13px/1.75 "Vazirmatn",Tahoma,sans-serif
 }
 .heritage-root .page-width#content{padding-top:23px;padding-bottom:48px}
-#content.page-width:has(#home-page){width:min(1280px,calc(100% - 40px))}
+#content.page-width:has(#home-page){width:min(1180px,calc(100% - 40px))}
 #home-page .feature-front-page{padding:0 0 12px!important}
 
 /* Market pulse = one restrained utility strip, not a dashboard. */
