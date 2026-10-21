@@ -15,7 +15,7 @@ keep_dirs = {
     "person", "people", "news", "search", "topic", "topics", "event", "books", "movies", "tv", "press", "future",
     "market", "weather", "system", "diner", "icons",
     "entity", "movie", "book", "publisher", "book-person", "cinema-person",
-    "studio", "recaps", "videos", "radar", "badbadak",
+    "studio", "recaps", "videos", "radar", "badbadak", "naval",
 }
 # Root-level data consumed by news feeds, archive, entity/figure views and search.
 keep_data_names = {
@@ -56,6 +56,9 @@ def keep_data_file(name):
 def prepare(root):
     root = Path(root).resolve()
     assert (root / "index.html").is_file(), "Refusing to trim a non-site folder"
+    naval = root / "naval" / "index.html"
+    if not naval.is_file() or "PENDAR · NAVAL OBSERVER" not in naval.read_text(encoding="utf-8"):
+        raise SystemExit("::error::Dedicated /naval/ entry page missing or replaced by homepage shell")
     data = root / "data"
     # Fail before modifying the payload. system-health is produced by the
     # integrity gate AFTER trimming; an old report is not a prerequisite.
