@@ -487,7 +487,8 @@
     if(frontIssueCache.has(text))return frontIssueCache.get(text);
     var iran=/ایران|ایرانی|تهران/.test(text);
     var regional=/اسرائیل|عراق|غزه|لبنان|خاورمیانه|منطقه|ایران/.test(text);
-    var security=/جنگ|آتش\s?بس|حمله|موشک|درگیری|امنیت|تهدید|نظامی|گذرگاه مرزی|بستن مرز|بسته شدن مرز|مرزهای بسته/.test(text);
+    var security=/جنگ|آتش\s?بس|موشک|درگیری|نظامی|گذرگاه مرزی|بستن مرز|بسته شدن مرز|مرزهای بسته|امنیت مرزی|بحران امنیتی/.test(text)||
+      (/حمله|تهدید/.test(text)&&!/حمله سایبری|تهدید سایبری|امنیت غذایی|امنیت شغلی|امنیت اقتصادی/.test(text));
     var issues=[];
     if(iran&&security&&regional)issues.push("iran-security");
     if(regional&&security&&!iran)issues.push("regional-security");
