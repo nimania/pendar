@@ -1044,6 +1044,43 @@
       main.related.forEach(function(entry){usedNews.add(entry.row.id);});
       main.voices.forEach(function(item){usedSpeakers.add(item.handle);});
       function label(entry){return esc(FEATURE_NAMES[entry.category]||"خبر");}
+
+      function sourceMark(row){
+        // Never attach a media logo by topical similarity. The publisher must
+        // be explicitly associated with THIS exact news story record.
+        var item=Array.isArray(row&&row.sources)?
+          row.sources.find(function(x){return x&&typeof x==="object";}):null;
+        var source=item||{},pub=row&&row.publisher&&typeof row.publisher==="object"?row.publisher:{};
+        var name=norm(source.source_name||source.name_fa||source.name||
+          pub.name_fa||pub.name||row&&row.source_name_fa||
+          row&&row.source_name||row&&row.publisher_name_fa||"");
+        if(!name)return "";
+        var logo=validImage(source.logo_url||source.logo||pub.logo_url||pub.logo||
+          row&&row.source_logo_url||row&&row.publisher_logo_url||"");
+        var articleLink=String(source.article_url||source.url||row&&row.source_url||"");
+        var domainMatch=articleLink.match(/^https:\/\/([a-z0-9.-]+)(?:[/?#]|$)/i);
+        var domain=domainMatch&&domainMatch[1].toLowerCase();
+        if(!logo&&domain&&domain!=="pendar.io"&&!domain.endsWith(".pendar.io")){
+          // A favicon is merely the visual identity of a documented publisher;
+          // it must never be mistaken for evidence about the article's claims.
+          logo="https://www.google.com/s2/favicons?domain="+encodeURIComponent(domain)+"&sz=32";
+        }
+        return '<span class="fp-story-source" title="'+esc("منبع گزارش: "+name)+'">'+
+          (logo?'<img src="'+esc(logo)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">':"")+
+          '<small>'+esc(name.slice(0,36))+'</small></span>';
+      }
+      function videoCard(video){
+        if(!video||!video.url||!video.title)return "";
+        var image=video.thumbnail?'<span class="fp-video-image">'+
+          '<img src="'+esc(video.thumbnail)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">'+
+          '<span class="fp-video-play" aria-hidden="true">▶</span></span>':"";
+        return '<a class="fp-home-video" href="'+esc(video.url)+
+          '" target="_blank" rel="noopener noreferrer" title="نمایش ویدئو در یوتیوب">'+
+          image+'<span class="fp-video-copy"><small>ویدئو · نیما افشارنادری</small>'+
+          '<strong>'+esc(excerpt(video.title,115))+'</strong>'+
+          '<span class="fp-video-watch">تماشا در یوتیوب ↗</span></span></a>';
+      }
+
       function picture(entry){
         var url=photo(entry.row),size=typeof imageDimensions!=="undefined"?imageDimensions.get(url):null;
         if(!verifiedImage(url)||size&&(size.width<680||size.height<350))return "";
@@ -1076,7 +1113,7 @@
         }
         var copy='<span class="fp-copy"><small>'+label(entry)+'</small>'+heading+
           (lead&&hook(entry.row)?'<p>'+esc(excerpt(hook(entry.row),205))+'</p>':"")+
-          byline+'</span>';
+          sourceMark(entry.row)+byline+'</span>';
         return '<a class="'+cls+'" href="'+esc(slugUrl(entry.row))+'">'+
           (lead?copy+miniature:miniature+copy)+'</a>';
       }
@@ -1084,7 +1121,8 @@
         var mini=newsMiniPhoto(entry.row,"fp-related-thumb");
         return '<a class="fp-related-item'+(prominent?" fp-related-prominent":"")+'" href="'+esc(slugUrl(entry.row))+'">'+
           mini+'<span class="fp-related-copy"><small>'+label(entry)+'</small><strong>'+
-          esc(excerpt(headline(entry.row),150))+'</strong></span></a>';
+          esc(excerpt(headline(entry.row),150))+'</strong>'+
+          sourceMark(entry.row)+'</span></a>';
       }
       function voice(item){
         // Headlines of figure posts are edited summaries, not verbatim quotes.
@@ -1170,7 +1208,14 @@
         layout==="multi"?3:(leadHasPhoto?5:3);
       var sideItems=stream.slice(0,sideCapacity);
       var belowItems=stream.slice(sideCapacity);
-      var contextual=sideItems.length>0;
+      // Only a real official Nima video may occupy otherwise sparse space.
+      // Never interrupt breaking or heavily covered news with promotion.
+      var homeVideo=homeVideoItems.length?homeVideoItems[0]:null;
+      var sideVideo=Boolean(homeVideo&&leadHasPhoto&&sideItems.length<=3&&
+        (layout==="balanced"||layout==="visual"));
+      var belowVideo=Boolean(homeVideo&&!sideVideo&&
+        (layout==="sparse"||layout==="textual"));
+      var contextual=sideItems.length>0||sideVideo;
       var mood=main.voices.length>main.related.length?" fp-desk-conversation":
         leadHasPhoto?" fp-desk-photographic":" fp-desk-textual";
       var desk='<section class="fp-desk'+mood+'" aria-label="تیتر اصلی و مطالب همراه">'+
@@ -1178,9 +1223,11 @@
           story(main.seed,"fp-lead")+
           (contextual?'<div class="fp-desk-context">'+
             sideItems.map(function(item,i){return flowCard(item,i===0);}).join("")+
+            (sideVideo?videoCard(homeVideo):"")+
           '</div>':"")+
-          (belowItems.length?'<div class="fp-desk-bottom">'+
+          (belowItems.length||belowVideo?'<div class="fp-desk-bottom">'+
             belowItems.map(function(item){return flowCard(item,false);}).join("")+
+            (belowVideo?videoCard(homeVideo):"")+
           '</div>':"")+
         '</div></section>';
       var html='<div class="fp-edition fp-layout-'+layout+'">'+desk;
@@ -1192,7 +1239,8 @@
             '<div class="fp-section-heading"><a class="fp-topic-head" href="'+
             esc(slugUrl(group.seed.row))+'">'+previewPhoto(group.seed)+
             '<span><small>'+label(group.seed)+'</small><h3>'+
-            esc(excerpt(headline(group.seed.row),165))+'</h3></span></a></div>'+
+            esc(excerpt(headline(group.seed.row),165))+'</h3>'+
+            sourceMark(group.seed.row)+'</span></a></div>'+
             '<div class="fp-topic-grid">'+
               (group.related.length||group.voices.length?
                 '<div class="fp-topic-flow">'+
