@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "updated_at": "2026-10-21T00:00:00Z",
+  "scope": "Public-source regional naval developments; no vessel coordinates, live tracks or predicted routes.",
+  "events": [
+    {
+      "id": "usni-tracker-2026-10-19",
+      "date": "2026-10-19",
+      "country": "us",
+      "region": "global",
+      "type": "استقرار",
+      "sensitive": true,
+      "title": "انتشار گزارش دوره‌ای ناوگروه‌های آمریکا",
+      "original_title": "USNI News Fleet and Marine Tracker: Oct. 19, 2026",
+      "description": "مؤسسه نیروی دریایی آمریکا گزارشی از استقرارهای اعلام‌شده و تقریبی ناوگروه‌ها منتشر کرده است. این پرونده فقط خبر انتشار گزارش را نشان می‌دهد، نه مختصات ناوها.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/19/usni-news-fleet-and-marine-tracker-oct-19-2026"
+    },
+    {
+      "id": "royal-navy-2026-10-17",
+      "date": "2026-10-17",
+      "country": "uk",
+      "region": "atlantic",
+      "type": "مأموریت",
+      "sensitive": false,
+      "title": "گزارش رسمی بریتانیا از مأموریت ناو هواپیمابر در شمال اقیانوس اطلس",
+      "original_title": "Britain’s biggest warship HMS Prince of Wales returns to North Atlantic, bolstering security of NATO’s Northern Flank",
+      "description": "نیروی دریایی بریتانیا مأموریت ناوگروه خود و همکاری اعلام‌شده با متحدان ناتو را شرح داده است.",
+      "source": "Royal Navy",
+      "url": "https://www.royalnavy.mod.uk/news/2026/october/17/20261007-hms-pwls-firecrest-2"
+    },
+    {
+      "id": "france-navy-2026-10-16",
+      "date": "2026-10-16",
+      "country": "fr",
+      "region": "global",
+      "type": "پشتیبانی",
+      "sensitive": false,
+      "title": "روایت رسمی فرانسه از پشتیبانی مأموریت ناوگروه هواپیمابر",
+      "original_title": "Comment faire durer le groupe aéronaval à la mer ?",
+      "description": "نشریه رسمی نیروی دریایی فرانسه درباره پشتیبانی لجستیکی مأموریت «La Fayette 26» گزارش داده است.",
+      "source": "Cols Bleus / Marine nationale",
+      "url": "https://www.colsbleus.defense.gouv.fr/fr/comment-faire-durer-le-groupe-aeronaval-la-mer"
+    },
+    {
+      "id": "nato-repmus-2026-10-08",
+      "date": "2026-10-08",
+      "country": "nato",
+      "region": "atlantic",
+      "type": "رزمایش",
+      "sensitive": false,
+      "title": "گزارش ناتو از رزمایش سامانه‌های دریایی بدون سرنشین",
+      "original_title": "REPMUS 2026 in Portugal brings together NATO Allies to test uncrewed maritime systems",
+      "description": "ناتو گزارش داده است رزمایش REPMUS با مشارکت چندین نیروی دریایی در پرتغال برگزار شده است.",
+      "source": "NATO News",
+      "url": "https://www.nato.int/en/news-and-events/articles/news/2026/10/08/repmus-2026-in-portugal-brings-together-nato-allies-to-test-uncrewed-maritime-systems"
+    },
+    {
+      "id": "nato-dynamicguard-2026-10-01",
+      "date": "2026-10-01",
+      "country": "nato",
+      "region": "med",
+      "type": "رزمایش",
+      "sensitive": false,
+      "title": "گزارش رسمی رزمایش دریایی چندملیتی در مدیترانه",
+      "original_title": "NATO Allies test drone defences at sea",
+      "description": "ناتو جزئیات یک رزمایش دفاع در برابر پهپاد و تهدیدات هوایی را در قالب گروه دریایی چندملیتی منتشر کرده است.",
+      "source": "NATO",
+      "url": "https://www.nato.int/en/multimedia/multimedia/videos/2026/10/01/nato-allies-test-drone-defences-at-sea"
+    }
+  ]
+}
