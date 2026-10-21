@@ -872,6 +872,13 @@ body:has(#home-page){
   --line:#e1e3dc;--line-strong:#cdd0c8;
   --accent:#155a4f;--accent-soft:#d6e6e1;
   --shadow-soft:0 1px 2px rgba(20,30,25,.05);
+  /* The standalone template does not have a .heritage-root wrapper. */
+  --ph-paper:var(--paper);--ph-surface:var(--surface);
+  --ph-soft:var(--surface-2);--ph-ink:var(--ink);
+  --ph-muted:var(--ink-soft);--ph-faint:var(--ink-faint);
+  --ph-line:var(--line);--ph-line-strong:var(--line-strong);
+  --ph-accent:var(--accent);--ph-accent-soft:var(--accent-soft);
+  --ph-shadow:var(--shadow-soft);
   background:var(--paper)!important;color:var(--ink)!important
 }
 .heritage-root{
