@@ -1685,7 +1685,7 @@
     var unique=function(rows){
       var seen=new Set();
       return published(rows).filter(function(row){
-        var key=String(row.id||row.slug||row.url||"");
+        var key=String(row.id||row.slug||row.url||row.title_fa||row.title||"");
         if(!key||seen.has(key))return false;
         seen.add(key);return true;
       });
