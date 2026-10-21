@@ -523,7 +523,7 @@
       var lead=rows.slice(0,6).find(function(item){
         return verifiedImage(photo(item))&&(item._imageWidth||imageDimensions.get(photo(item))?.width||0)>=900&&featureRank(item,currentFeature)>=featureRank(rows[0],currentFeature)-10;
       })||rows[0];
-      var withPicture=verifiedImage(photo(lead));
+      var withPicture=verifiedImage(photo(lead))&&(lead._imageWidth||imageDimensions.get(photo(lead))?.width||0)>=900;
       heroBox.classList.toggle("feature-text-hero",!withPicture);
       heroBox.href=slugUrl(lead);
       heroBox.setAttribute("aria-label",headline(lead));
