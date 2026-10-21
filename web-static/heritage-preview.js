@@ -95,6 +95,11 @@
   function newsMiniPhoto(row,extraClass){
     var url=photo(row),portrait=authorPortraitThumb(row);
     var storyImage=url&&verifiedImage(url);
+    // A 280px thumbnail is fine in a rail but looks blurry enlarged to an
+    // entire editorial card. Prefer a genuine writer portrait or typography.
+    var largeSlot=/(?:^|\s)(?:fp-image|home-editorial-report-photo)(?:\s|$)/.test(extraClass||"");
+    var dims=url&&typeof imageDimensions!=="undefined"?imageDimensions.get(url):null;
+    if(largeSlot&&dims&&(dims.width<480||dims.height<240))storyImage=false;
     if(!storyImage&&!portrait)return "";
     return '<span class="news-mini-photo '+esc(extraClass||"")+'">'+
       portrait+(storyImage?'<img src="'+esc(url)+'" alt="" loading="lazy" decoding="async">':"")+
@@ -131,8 +136,8 @@
   function railRow(item){
     var title=headline(item);
     var image=newsMiniPhoto(item,"rail-thumb");
-    return '<a class="rail-row" href="'+esc(slugUrl(item))+'">'
-      +'<span class="rail-thumb-frame">'+(image||'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">◈</span>')+'</span>'
+    return '<a class="rail-row'+(image?"":" rail-row-text-only")+'" href="'+esc(slugUrl(item))+'">'
+      +(image?'<span class="rail-thumb-frame">'+image+'</span>':"")
       +'<span class="rail-story-copy"><span class="rail-title">'+esc(title)+'</span>'
       +railPublisher(item)
       +'</span></a>';
@@ -163,7 +168,15 @@
     // A failed article image reveals the already-rendered author portrait.
     // A failed main cover becomes text-led, never removes the whole lead.
     var compact=img.closest(".news-mini-photo");
-    if(compact){img.remove();return;}
+    if(compact){
+      img.remove();
+      if(!compact.querySelector(".news-author-photo")){
+        var frame=compact.closest(".rail-thumb-frame");
+        if(frame)frame.remove();
+        else compact.remove();
+      }
+      return;
+    }
     var mainCover=img.closest(".fp-lead .fp-image");
     if(mainCover){
       var card=img.closest(".fp-lead");
@@ -891,8 +904,9 @@
       main.voices.forEach(function(item){usedSpeakers.add(item.handle);});
       function label(entry){return esc(FEATURE_NAMES[entry.category]||"خبر");}
       function picture(entry){
-        if(!verifiedImage(photo(entry.row)))return "";
-        return '<span class="fp-image"><img src="'+esc(photo(entry.row))+
+        var url=photo(entry.row),size=typeof imageDimensions!=="undefined"?imageDimensions.get(url):null;
+        if(!verifiedImage(url)||size&&(size.width<680||size.height<350))return "";
+        return '<span class="fp-image"><img src="'+esc(url)+
           '" alt="" loading="lazy" decoding="async"></span>';
       }
       function previewPhoto(entry){
@@ -960,7 +974,10 @@
         var rest=worthy.filter(function(e){return !usedNews.has(e.row.id);});
         var voicesLeft=speakers.filter(function(v){return !usedSpeakers.has(v.handle);});
         // Related leftovers belong to the main topic, never a fake second dossier.
-        var freshTopics=rest.filter(function(e){return !frontConnection(main.seed.row,e.row);});
+        var freshTopics=rest.filter(function(e){
+          return !frontConnection(main.seed.row,e.row)&&
+            !clusters.some(function(group){return frontConnection(group.seed.row,e.row);});
+        });
         var candidates=freshTopics.slice(0,22).map(function(entry){
           return join(entry,rest,voicesLeft);
         }).filter(function(group){
