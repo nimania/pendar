@@ -458,8 +458,13 @@
     "داد","دادند","داده","دادن","داشت","دارد","گفت","گفتند","بیان","کردند",
     "دستور","وزیر","رئیس","رییس","مسئول","مدیر","برنامه","اقدام","اجرا","اجرای",
     "تصمیم","نشست","دیدار","فعالیت","موضوع","ثبت","تعطیلی","اعلامی","اظهار"]);
+  // Bound text-level caches keep cross-topic comparisons inexpensive on mobile.
+  // Cache keys are the full current editorial text, so enriched summaries
+  // produce fresh entries instead of reusing stale topic classifications.
+  var frontKeywordCache=new Map(),frontIssueCache=new Map();
   function frontKeywords(item){
     var text=typeof item==="string"?featureNormalize(item):frontSignalText(item);
+    if(frontKeywordCache.has(text))return frontKeywordCache.get(text);
     var raw=text.match(/[\u0600-\u06ffa-z]{3,}/g)||[];
     var tokens=raw.map(function(word){
       if(/^مذاکر/.test(word))return "مذاکره";
@@ -472,10 +477,14 @@
       if(/^جنگ/.test(word))return "جنگ";
       return word.replace(/(های|ها|ترین)$/,"");
     }).filter(function(word){return word.length>=3&&!FRONT_IGNORE.has(word);});
-    return new Set(tokens);
+    var result=new Set(tokens);
+    if(frontKeywordCache.size>1200)frontKeywordCache.clear();
+    frontKeywordCache.set(text,result);
+    return result;
   }
   function frontIssues(item){
     var text=typeof item==="string"?featureNormalize(item):frontSignalText(item);
+    if(frontIssueCache.has(text))return frontIssueCache.get(text);
     var iran=/ایران|ایرانی|تهران/.test(text);
     var regional=/اسرائیل|عراق|غزه|لبنان|خاورمیانه|منطقه|ایران/.test(text);
     var security=/جنگ|آتش\s?بس|حمله|موشک|درگیری|امنیت|تهدید|نظامی|گذرگاه مرزی|بستن مرز|بسته شدن مرز|مرزهای بسته/.test(text);
@@ -489,6 +498,8 @@
     if(/مدرسه|معلم|دانش آموز|دانش‌آموز|آموزش و پرورش/.test(text))issues.push("education");
     if(/هوش مصنوعی|اینترنت|فیلترینگ|شبکه اجتماعی|امنیت سایبری/.test(text))issues.push("digital");
     if(/فوتبال|المپیک|بازی های آسیایی|بازی‌های آسیایی|مسابقات جهانی/.test(text))issues.push("sports");
+    if(frontIssueCache.size>1200)frontIssueCache.clear();
+    frontIssueCache.set(text,issues);
     return issues;
   }
   var FRONT_TOPIC_LABELS={
