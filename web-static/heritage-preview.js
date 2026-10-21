@@ -73,6 +73,34 @@
     return '<img class="'+esc(cls||"")+'" src="'+esc(url)+'" alt="" loading="lazy" decoding="async">';
   }
   var data={stories:[],reports:[],authors:[],homeSnapshot:null};
+  // Editorial portraits are only fallbacks for articles by an identifiable,
+  // installed Pendar author. Do not use unrelated stock/figure images.
+  function authorPortraitThumb(row){
+    var report=row&&row.editorial_report||{};
+    var id=String(row&&(
+      row.editorial_author_id||report.author_id||row.author_id)||"");
+    var person=(data.authors||[]).find(function(p){
+      return p.id===id&&p.portrait_status==="installed"&&
+        Number.isInteger(p.portrait_index)&&p.portrait_index>=0&&p.portrait_index<=6;
+    });
+    if(!person)return "";
+    var sprite=validImage(person.portrait_url);
+    if(!sprite)return "";
+    var pos=(person.portrait_index*100/6).toFixed(4);
+    return '<span class="news-author-photo" role="img" aria-label="عکس نویسنده: '+
+      esc(person.display_name_fa||"تحریریهٔ پندار")+'" title="تصویر نویسندهٔ مطلب" '+
+      'style="background-image:url(\''+esc(sprite)+'\');background-position:'+pos+'% center">'+
+      '<small>نویسنده</small></span>';
+  }
+  function newsMiniPhoto(row,extraClass){
+    var url=photo(row),portrait=authorPortraitThumb(row);
+    var storyImage=url&&verifiedImage(url);
+    if(!storyImage&&!portrait)return "";
+    return '<span class="news-mini-photo '+esc(extraClass||"")+'">'+
+      portrait+(storyImage?'<img src="'+esc(url)+'" alt="" loading="lazy" decoding="async">':"")+
+      '</span>';
+  }
+
   var redrawHome=null;
   function put(id,html){var x=el(id);if(x)x.innerHTML=html;}
   function railPublisher(item){
@@ -101,11 +129,11 @@
       +'<span>'+esc(name.slice(0,52))+'</span></span>';
   }
   function railRow(item){
-    var title=headline(item),url=validImage(photo(item));
-    var image=url?'<img class="rail-thumb" src="'+esc(url)+'" alt="" loading="lazy" decoding="async">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">▤</span>';
+    var title=headline(item);
+    var image=newsMiniPhoto(item,"rail-thumb");
     return '<a class="rail-row" href="'+esc(slugUrl(item))+'">'
-      +'<span class="rail-thumb-frame">'+image+'</span>'
-      +'<span><span class="rail-title">'+esc(title)+'</span>'
+      +'<span class="rail-thumb-frame">'+(image||'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">◈</span>')+'</span>'
+      +'<span class="rail-story-copy"><span class="rail-title">'+esc(title)+'</span>'
       +railPublisher(item)
       +'</span></a>';
   }
@@ -132,7 +160,18 @@
     // Remove the entire article tile immediately; never leave a text-only card.
     var src=img.getAttribute("src");
     if(src)imageChecks.set(src,false);
-    if(img.closest(".rail-row")){img.style.visibility="hidden";return;}
+    // A failed article image reveals the already-rendered author portrait.
+    // A failed main cover becomes text-led, never removes the whole lead.
+    var compact=img.closest(".news-mini-photo");
+    if(compact){img.remove();return;}
+    var mainCover=img.closest(".fp-lead .fp-image");
+    if(mainCover){
+      var card=img.closest(".fp-lead");
+      mainCover.remove();
+      if(card)card.classList.add("fp-text-only");
+      return;
+    }
+    if(img.closest(".rail-row")){img.remove();return;}
     // The smaller dossier cover is optional; remove only its failed photo.
     var dossierCover=img.closest(".fp-topic-head .fp-image");
     if(dossierCover){dossierCover.remove();return;}
@@ -856,9 +895,13 @@
         return '<span class="fp-image"><img src="'+esc(photo(entry.row))+
           '" alt="" loading="lazy" decoding="async"></span>';
       }
+      function previewPhoto(entry){
+        return newsMiniPhoto(entry.row,"fp-image");
+      }
       function story(entry,type){
-        var hasPicture=verifiedImage(photo(entry.row)),lead=type==="fp-lead";
-        var cls=type+(hasPicture?"":" fp-text-only");
+        var lead=type==="fp-lead";
+        var miniature=lead?picture(entry):previewPhoto(entry);
+        var cls=type+(miniature?"":" fp-text-only");
         var heading=lead?
           '<h2>'+esc(excerpt(headline(entry.row),230))+'</h2>':
           '<strong>'+esc(excerpt(headline(entry.row),120))+'</strong>';
@@ -866,12 +909,13 @@
           (lead&&hook(entry.row)?'<p>'+esc(excerpt(hook(entry.row),205))+'</p>':"")+
           '</span>';
         return '<a class="'+cls+'" href="'+esc(slugUrl(entry.row))+'">'+
-          (lead?copy+picture(entry):picture(entry)+copy)+'</a>';
+          (lead?copy+miniature:miniature+copy)+'</a>';
       }
       function relatedStory(entry,prominent){
+        var mini=newsMiniPhoto(entry.row,"fp-related-thumb");
         return '<a class="fp-related-item'+(prominent?" fp-related-prominent":"")+'" href="'+esc(slugUrl(entry.row))+'">'+
-          '<small>'+label(entry)+'</small><strong>'+
-          esc(excerpt(headline(entry.row),120))+'</strong></a>';
+          mini+'<span class="fp-related-copy"><small>'+label(entry)+'</small><strong>'+
+          esc(excerpt(headline(entry.row),150))+'</strong></span></a>';
       }
       function voice(item){
         // Headlines of figure posts are edited summaries, not verbatim quotes.
@@ -919,7 +963,7 @@
         html+='<div class="fp-secondary-desks">'+clusters.map(function(group){
           return '<section class="fp-topic">'+
             '<div class="fp-section-heading"><a class="fp-topic-head" href="'+
-            esc(slugUrl(group.seed.row))+'">'+picture(group.seed)+
+            esc(slugUrl(group.seed.row))+'">'+previewPhoto(group.seed)+
             '<span><small>'+label(group.seed)+'</small><h3>'+
             esc(excerpt(headline(group.seed.row),165))+'</h3></span></a></div>'+
             '<div class="fp-topic-grid">'+
@@ -1078,7 +1122,7 @@
       // Permanent editorial reports; not gated by photograph availability.
       var latestReports=reports.slice(0,4);
       put("home-editorial-report-list",latestReports.length?latestReports.map(function(r){
-        var picture=verifiedImage(photo(r))?'<span class="home-editorial-report-photo">'+thumb(r,"")+'</span>':'';
+        var picture=newsMiniPhoto(r,"home-editorial-report-photo");
         return '<a class="home-editorial-report-row" href="'+esc(slugUrl(r))+'">'
           +picture+'<span class="home-editorial-report-copy"><strong>'+esc(headline(r))+'</strong>'
           +'<small>'+esc(excerpt(hook(r),125))+'</small></span></a>';
