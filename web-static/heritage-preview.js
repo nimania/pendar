@@ -785,28 +785,33 @@
   // The daily edition uses an evidence-based layout. It is stable for the
   // same source snapshot; no random rotation or filler headlines.
   // Six specialised layouts plus the ordinary balanced article desk.
+  // Choose one stable editorial geometry from the *published* evidence.
+  // This is a deterministic, bounded choice: no rotation, random placement,
+  // automatic publication, added opinions or invented image placeholders.
   function frontChooseLayout(data){
-    var lead=data&&data.lead||{},row=lead.row||lead;
+    data=data||{};
+    var lead=data.lead||{},row=lead.row||lead;
     var title=featureNormalize(headline(row));
-    var age=Number(data&&data.age);
-    var fresh=Number.isFinite(age)&&age>=0&&age<=12*3600000;
-    var score=Number(lead.score||0);
-    var voices=Math.max(0,Number(data&&data.voices)||0);
-    var news=Math.max(0,Number(data&&data.news)||0);
-    var photograph=Boolean(data&&data.leadPhoto);
-    var gallery=Math.max(0,Number(data&&data.newsPhotos)||0);
-    var dossiers=Math.max(0,Number(data&&data.dossiers)||0);
-    var uncertain=/شایعه|گزارش(?:‌| )?هایی|گزارش(?:‌| )?ها|احتمال|ممکن است|ادعا|تکذیب|هنوز تأیید نشده|هنوز تایید نشده/.test(title);
+    var age=Number(data.age),score=Number(lead.score||0);
+    var voices=Math.max(0,Math.min(24,Number(data.voices)||0));
+    var news=Math.max(0,Math.min(24,Number(data.news)||0));
+    var count=news+voices;
+    var leadPhoto=Boolean(data.leadPhoto);
+    var newsPhotos=Math.max(0,Math.min(24,Number(data.newsPhotos)||0));
+    var dossiers=Math.max(0,Math.min(5,Number(data.dossiers)||0));
+    var recent=Number.isFinite(age)&&age>=0&&age<=12*3600000;
+    var uncertain=/شایعه|گزارش(?:‌| )?هایی|گزارش(?:‌| )?ها|احتمال|ممکن است|ادعا|تکذیب|هنوز تأیید نشده|هنوز تایید نشده|به گفته|به نقل از|منابع مدعی/.test(title);
     var concrete=/دستور (?:قطعی )?بستن|بسته شد|توقف (?:تردد|پرواز)|تعطیل شد|قطع شد|آغاز حمله|اعلام آتش.?بس|تصویب شد|اعتصاب آغاز شد|وقوع زلزله/.test(title);
-    var consequence=/مرز|گذرگاه|جنگ|حمله|پرواز|مدرسه|دانشگاه|اینترنت|اعتصاب|آتش.?بس|زلزله/.test(title);
-    // "Breaking" is visual priority, not evidence that an unverified claim
-    // occurred. Speculative or merely reported orders stay in other modes.
-    if(fresh&&!uncertain&&concrete&&consequence&&score>=95)return "breaking";
-    if(voices>=3&&voices>=news&&voices+news>=4)return "conversation";
-    if(photograph&&gallery>=3&&news>=3)return "visual";
-    if(news+voices<=3)return "sparse";
-    if(news+voices>=9)return "dense";
-    if(dossiers>=2&&news+voices<=8)return "multi";
+    var consequence=/مرز|گذرگاه|جنگ(?!ل)|حمله|پرواز|مدرسه|دانشگاه|اینترنت|اعتصاب|آتش.?بس|زلزله/.test(title);
+    // "Breaking" changes typography only. A sourced *report about* an
+    // alleged order is not automatically promoted as a confirmed event.
+    if(recent&&!uncertain&&concrete&&consequence&&score>=95)return "breaking";
+    if(voices>=3&&voices>=news&&count>=4)return "conversation";
+    if(leadPhoto&&newsPhotos>=3&&news>=3)return "visual";
+    if(count<=3)return "sparse";
+    if(dossiers>=2&&count<=8)return "multi";
+    if(count>=9)return "dense";
+    if(!leadPhoto)return "textual";
     return "balanced";
   }
   function figureStatementPortrait(person){
