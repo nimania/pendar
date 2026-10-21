@@ -90,6 +90,66 @@ vm.runInContext(source.slice(start,finish)+"\nthis.evaluate=frontEditorialScore;
   "this.connect=frontConnection;this.promo=frontRoutinePublicity;",context);
 vm.runInContext("this.prioritySignals=frontPrioritySignals;",context);
 const testSignals=context.prioritySignals;
+
+vm.runInContext("this.planEdition=frontChooseLayout;",context);
+const cases=[
+  ["breaking",{
+    lead:{row:{headline_fa:"گذرگاه مرزی با ایران بسته شد"},score:130},
+    age:3600000,news:5,voices:1,leadPhoto:true,newsPhotos:4,dossiers:2
+  }],
+  ["conversation",{
+    lead:{row:{headline_fa:"تحلیل‌های تازه دربارهٔ مذاکرات"},score:95},
+    age:3600000,news:2,voices:5,leadPhoto:true,newsPhotos:1,dossiers:1
+  }],
+  ["visual",{
+    lead:{row:{headline_fa:"تصاویر تحولات منطقه"},score:80},
+    age:3600000,news:5,voices:1,leadPhoto:true,newsPhotos:4,dossiers:1
+  }],
+  ["sparse",{
+    lead:{row:{headline_fa:"خبر تازه بدون مجموعهٔ بزرگ"},score:80},
+    age:3600000,news:1,voices:1,leadPhoto:true,newsPhotos:1,dossiers:0
+  }],
+  ["dense",{
+    lead:{row:{headline_fa:"خبرهای پرشمار روز"},score:75},
+    age:3600000,news:8,voices:4,leadPhoto:false,newsPhotos:1,dossiers:2
+  }],
+  ["multi",{
+    lead:{row:{headline_fa:"چند پرونده مستقل منطقه‌ای"},score:75},
+    age:3600000,news:4,voices:1,leadPhoto:false,newsPhotos:0,dossiers:2
+  }],
+  ["balanced",{
+    lead:{row:{headline_fa:"تحولات امروز"},score:75},
+    age:3600000,news:5,voices:1,leadPhoto:false,newsPhotos:0,dossiers:1
+  }]
+];
+for(const [name,criteria] of cases){
+  assert(context.planEdition(criteria)===name,
+    "Deterministic layout planner must choose "+name);
+  assert(context.planEdition(criteria)===context.planEdition(criteria),
+    "An identical source snapshot cannot randomly change its layout");
+  assert(css.includes(".fp-layout-"+name),
+    "Layout "+name+" needs its own responsive CSS treatment");
+}
+assert(context.planEdition({
+  lead:{row:{headline_fa:"گزارش‌هایی از دستور بستن گذرگاه مرزی با ایران"},score:140},
+  age:3600000,news:4,voices:0,leadPhoto:true,newsPhotos:1,dossiers:1
+})!=="breaking",
+  "Unverified reports must not be treated as confirmed breaking actions");
+assert(context.planEdition({
+  lead:{row:{headline_fa:"احتمال بسته شدن گذرگاه مرزی"},score:140},
+  age:3600000,news:4,voices:0,leadPhoto:true,newsPhotos:1,dossiers:1
+})!=="breaking",
+  "An uncertain future closure must not be classified as confirmed breaking");
+assert(context.planEdition({
+  lead:{row:{headline_fa:"گذرگاه مرزی بسته شد"},score:130},
+  age:24*3600000,news:4,voices:0,leadPhoto:true,newsPhotos:1,dossiers:1
+})!=="breaking",
+  "Old events may remain important, but cannot be labeled breaking");
+assert(css.includes(".fp-layout-dense .fp-desk-bottom")&&
+  css.includes(".fp-layout-conversation .fp-desk-context")&&
+  css.includes("@media(max-width:700px)"),
+  "All home cover layouts require mobile-safe wrapping");
+
 const interest=[
   ["احتمال جنگ و مذاکرات صلح", "armed-conflict"],
   ["خبرهای تنگه هرمز", "sea-chokepoints"],
@@ -144,6 +204,9 @@ context.renderDesk();
 const result=htmlTarget.innerHTML;
 const main=result.match(/<section class="fp-desk[^"]*"[^>]*>([\s\S]*?)<\/section>/);
 assert(main,"A shared lead desk must be rendered");
+assert(result.includes('class="fp-edition fp-layout-'),
+  "Live first-page rendering must actually use the deterministic layout planner");
+
 assert(source.includes("function editorialStream(group)")&&
   source.includes("sideItems=stream.slice(0,sideCapacity)")&&
   source.includes("belowItems=stream.slice(sideCapacity)"),
