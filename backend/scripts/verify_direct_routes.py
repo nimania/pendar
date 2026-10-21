@@ -30,6 +30,15 @@ def validate(root: Path) -> list[str]:
             errors.append(f"Missing direct-route shell: /{route}/")
         elif p.stat().st_size<1000 and not route.startswith("editorial-author/"):
             errors.append(f"Empty or truncated direct-route shell: /{route}/")
+    # A standalone maritime page must not accidentally become the SPA homepage.
+    naval=root/"naval/index.html"
+    naval_feed=root/"naval/events.json"
+    if not naval.is_file():
+        errors.append("Missing dedicated maritime route: /naval/")
+    elif "PENDAR · NAVAL OBSERVER" not in naval.read_text(encoding="utf-8"):
+        errors.append("Maritime route replaced by homepage SPA shell: /naval/")
+    if not naval_feed.is_file():
+        errors.append("Missing local fallback maritime event archive: /naval/events.json")
     if not (root/"404.html").is_file():
         errors.append("Missing SPA fallback 404.html")
     script_src=re.findall(r'<script[^>]+src="([^"]+)"',html)
