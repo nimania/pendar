@@ -20,8 +20,8 @@ assert(html.includes('class="quick-pulse"'),"Home pulse replaces the figure tick
 assert(html.includes('class="footer-directory"'),"All section navigation goes in the footer");
 assert(!html.includes('class="masthead-navigation"'),"Duplicate top site-wide links are removed");
 assert(!html.includes('id="watch"'),"Standalone link-only boxes are replaced by footer links");
-assert(live.includes("heritage-preview.js?v=20261021-edition-refinement-1"),"Live assets must be versioned");
-assert(live.includes("heritage-preview.css?v=20261021-edition-refinement-1"),"Live styles must be versioned");
+assert(live.includes("heritage-preview.js?v=20261021-cover-modes-videos-1"),"Live assets must be versioned");
+assert(live.includes("heritage-preview.css?v=20261021-cover-modes-videos-1"),"Live styles must be versioned");
 assert(js.includes('featureBucketData=featureBuckets;'),"Topic metadata still feeds the homepage");
 assert(js.includes('frontEditorialScore('),"Editorial prioritization stays intact");
 assert(js.includes('renderPulseMetrics('),"The markets-and-weather strip must be populated");
