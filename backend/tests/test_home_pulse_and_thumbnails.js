@@ -164,7 +164,8 @@ assert(markup.includes('class="home-destinations"') &&
     .every(href=>markup.includes('href="'+href+'"')),
   "All three radar and Diner destination cards must appear below news panels");
 assert(css.includes("fp-desk-bottom")&&js.includes('editorialStream(main)')&&
-  js.includes('sideCapacity=leadHasPhoto?5:3'),
+  js.includes('var sideCapacity=(layout==="breaking"||layout==="sparse")?0:')&&
+  js.includes('var belowItems=stream.slice(sideCapacity);'),
   "The live news/quotes arrangement must flow beyond either fixed column");
 assert(!js.includes('}).slice(0,4);\n        var issue='),
   "Related speakers must no longer have a fixed four-person quota");
