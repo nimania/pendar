@@ -385,13 +385,16 @@
   // The feature is a reading destination: classify from reported subject, never
   // from search popularity, a country's mere mention, or unrelated recommendations.
   var FEATURE_CATEGORIES=["front","politics","diplomacy","society","technology","statements","sport","environment","culture"];
+  // Economy is an editorial beat in the mixed front page without adding a tab.
+  var FEATURE_BEATS=["politics","diplomacy","society","technology","economy","sport","environment","culture"];
   var FEATURE_NAMES={front:"صفحهٔ اول",politics:"سیاست",diplomacy:"دیپلماسی",society:"جامعه",technology:"تکنولوژی",
-    statements:"گفته‌ها",sport:"ورزشی",environment:"محیط زیست",culture:"فرهنگ"};
+    statements:"گفته‌ها",economy:"اقتصاد",sport:"ورزشی",environment:"محیط زیست",culture:"فرهنگ"};
   var FEATURE_PATTERNS={
     politics:/سیاست|حکومت|حکمرانی|انتخاب|مجلس|دولت|رئیس.?جمهور|رییس.?جمهور|قوه قضاییه|شورای نگهبان|اعتراض|اپوزیسیون|قانون اساسی|قدرت سیاسی|نخست وزیر|نخست‌وزیر|شهرداری|پارلمان/,
     diplomacy:/دیپلماسی|مذاکر|توافق|تحریم|سفیر|سفارت|روابط خارجی|وزارت خارجه|سازمان ملل|بین.?الملل|آتش.?بس|سفر رسمی|دیدار رسمی|ناتو|پاکستان|آمریکا|روسیه|اسرائیل|جنگ|موشک/,
     society:/جامعه|اجتماع|آموزش|دانشگاه|دانشجو|مدرسه|معلم|سلامت|بیمارستان|درمان|حقوق شهروندی|کودک|زنان|کارگر|بازنشسته|مسکن|مهاجرت|جمعیت|بیمه|زندگی روزمره/,
     technology:/تکنولوژی|فناوری|هوش مصنوعی|اینترنت|استارتاپ|استارت‌آپ|اپلیکیشن|نرم.?افزار|سایبری|تراشه|هوشمند|دیجیتال|ربات|ماهواره|پژوهش علمی|گجت/,
+    economy:/اقتصاد|تورم|گرانی|بازار سرمایه|بورس|بازار ارز|قیمت دلار|قیمت سکه|بانک مرکزی|بهره بانکی|تولید صنعتی|رشد اقتصادی|بودجه|کسری بودجه|مالیات|بیکاری|صادرات|واردات|سرمایه گذاری|سرمایه‌گذاری|معیشت|حقوق و دستمزد/,
     sport:/ورزش|فوتبال|فوتبالیست|لیگ برتر|لیگ قهرمانان|جام جهانی|تیم ملی|المپیک|والیبال|بسکتبال|کشتی گیر|کشتی‌گیر|مسابقه|قهرمانی|استقلال تهران|پرسپولیس|تراکتور|سپاهان|داور فوتبال|گلزن|مربی فوتبال/,
     environment:/محیط.?زیست|اقلیم|خشکسالی|آلودگی هوا|آلودگی آب|هواشناسی|گرمایش زمین|جنگل|منابع طبیعی|تالاب|فرونشست|حیات وحش|حیات.?وحش|بارندگی|سیلاب|بارش|ریزگرد|آب و هوا|آب‌وهوا/,
     culture:/فرهنگ|هنر|سینما|فیلم|سریال|تئاتر|موسیقی|کنسرت|ادبیات|رمان|کتاب|شعر|نویسنده|کارگردان|بازیگر|میراث فرهنگی|موزه|جشنواره|نمایشگاه|شاهنامه/
@@ -401,6 +404,7 @@
     diplomacy:/diplomac|foreign|international|دیپلماسی|روابط خارجی/,
     society:/societ|social|education|health|جامعه|اجتماع|آموزش|سلامت/,
     technology:/technolog|science|digital|فناوری|تکنولوژی|دانش/,
+    economy:/econom|financ|market|business|اقتصاد|بازار|مالی/,
     sport:/sport|football|ورزش|فوتبال/,
     environment:/environment|climate|nature|محیط زیست|اقلیم/,
     culture:/cultur|art|entertainment|فرهنگ|هنر/
@@ -572,7 +576,7 @@
     function renderFrontPage(){
       var target=el("feature-front-page");
       if(!target)return;
-      var categories=FEATURE_CATEGORIES.filter(function(key){return key!=="front"&&key!=="statements";});
+      var categories=FEATURE_BEATS;
       var seen=new Set(),pool=[];
       categories.forEach(function(key){
         (featureBucketData[key]||[]).slice(0,18).forEach(function(row){
@@ -775,12 +779,12 @@
       // match the selected category; an unrelated cover is never a fallback.
       var featurePool=limitUnique(reports.concat(stories),400);
       var featureBuckets={};
-      FEATURE_CATEGORIES.forEach(function(key){featureBuckets[key]=[];});
+      FEATURE_BEATS.forEach(function(key){featureBuckets[key]=[];});
       featurePool.forEach(function(row){
         var category=featureCategory(row);
         if(category&&featureBuckets[category])featureBuckets[category].push(row);
       });
-      FEATURE_CATEGORIES.forEach(function(key){
+      FEATURE_BEATS.forEach(function(key){
         featureBuckets[key].sort(function(a,b){
           return featureRank(b,key)-featureRank(a,key)||featureAge(a)-featureAge(b);
         });
