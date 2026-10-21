@@ -1,0 +1,28 @@
+name: Verify Pendar publishing contracts
+
+on:
+  pull_request:
+    paths:
+      - "backend/tests/test_editorial_report_ui.js"
+      - "backend/tests/test_seo_routes.js"
+      - "web-static/**"
+      - ".github/workflows/fast-deploy.yml"
+      - ".github/workflows/periodicals.yml"
+      - ".github/workflows/verify-publishing-contracts.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-node-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify editorial report and canonical author links
+        run: node backend/tests/test_editorial_report_ui.js
+      - name: Verify SEO and asynchronous route contracts
+        run: node backend/tests/test_seo_routes.js web-static/router.js

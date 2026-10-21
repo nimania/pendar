@@ -82,15 +82,21 @@ assert(library.includes('pendarMagazineCollectionFrame('),"report archive must u
 assert(authors.includes('pendarMagazineCollectionFrame('),"author archive must use magazine frame");
 assert(magazineCollectionsCss.includes('.magazine-collection .editorial-library-list'),"responsive image grid missing");
 assert(magazineCollectionsCss.includes('@media(max-width:600px)'),"mobile archive layout missing");
-const cardTest=new Function('esc','pendarAuthorName','pendarAuthorPortraitCSS',
+// Exercise the production author URL helper against the approved newsroom roster.
+const authorUrlSource=authors.match(/function pendarAuthorUrl\(id\)\{[\s\S]*?\n\}/);
+assert(authorUrlSource,"author URL helper must remain available to archive cards");
+const authorUrl=new Function("window",authorUrlSource[0]+";return pendarAuthorUrl;")({PENDAR_EDITORIAL_AUTHORS:directory});
+assert.equal(authorUrl("culture"),"/@mana-radfar/");
+assert.equal(authorUrl("desk"),"/editorial-author/desk/");
+const cardTest=new Function('esc','pendarAuthorName','pendarAuthorPortraitCSS','pendarAuthorUrl',
   magazineCollections+'return {pendarMagazineCollectionFrame,pendarMagazineReportCard};')(
   value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch])),
-  ()=>"دبیر فرهنگ",()=>"" );
+  ()=>"دبیر فرهنگ",()=>"",authorUrl );
 const cardId="b4efb62f-9240-4e90-ba4f-4664e608fa97";
 const withImage=cardTest.pendarMagazineReportCard({id:cardId,title_fa:"تیتر گزارش",lead_fa:"شرح منبع‌دار",author_id:"culture",image_url:"https://example.com/relevant.jpg",published_at:"2026-10-18"});
 assert(withImage.includes('magazine-report-photo'),"image must be displayed with archive card");
 assert(withImage.includes('شرح منبع‌دار')&&withImage.includes('/story/'+cardId+'/'),"image card must keep lead and URL");
-assert(withImage.includes('/editorial-author/culture/'),"image card must link author archive");
+assert(withImage.includes('/@mana-radfar/'),"image card must link the canonical author handle");
 const withoutImage=cardTest.pendarMagazineReportCard({id:cardId,title_fa:"گزارش بی‌عکس"});
 assert(withoutImage.includes('no-image')&&!withoutImage.includes('<img '),"archives must not invent images");
 assert(cardTest.pendarMagazineCollectionFrame("EXAMPLE").includes("EXAMPLE"));

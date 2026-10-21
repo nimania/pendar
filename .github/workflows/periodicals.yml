@@ -74,22 +74,48 @@ jobs:
           AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
         run: python -m scripts.publish_periodicals
 
-      - name: Find latest successful full site build
-        id: base
+      - name: Restore last healthy published site
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          RUN_ID="$(gh run list --workflow build.yml --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
-          test -n "$RUN_ID"
-          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
-
-      - name: Download latest static site
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh run download "${{ steps.base.outputs.run_id }}" -n latest-static-site -D site
-          python backend/scripts/unpack_site_artifact.py site
-
+          set -euo pipefail
+          # A successful full build can be old or have an expired artifact.
+          # Prefer the newest intact fast-deploy Pages snapshot actually served to readers.
+          restored=0
+          mapfile -t page_runs < <(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/fast-deploy.yml/runs?status=success&per_page=15" --jq '.workflow_runs[].id' 2>/dev/null || true)
+          for run_id in "${page_runs[@]}"; do
+            artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$run_id/artifacts" --jq '[.artifacts[] | select(.expired==false and (.name|startswith("github-pages")))] | .[0].name // empty' 2>/dev/null || true)"
+            [ -n "$artifact" ] || continue
+            rm -rf site /tmp/press-pages
+            mkdir -p site /tmp/press-pages
+            if gh run download "$run_id" -n "$artifact" -D /tmp/press-pages && [ -s /tmp/press-pages/artifact.tar ] && tar -xf /tmp/press-pages/artifact.tar -C site; then
+              if [ -s site/index.html ] && [ -s site/data/stories.json ] && [ -s site/data/figures.json ]; then
+                echo "Restored verified published Pages snapshot from run $run_id"
+                restored=1
+                break
+              fi
+            fi
+            echo "::warning::Pages snapshot $run_id was missing or incomplete; trying an older one."
+          done
+          if [ "$restored" -ne 1 ]; then
+            # Keep the complete-build archive as a secondary, verified recovery source.
+            mapfile -t complete_runs < <(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build.yml/runs?status=success&per_page=10" --jq '.workflow_runs[].id' 2>/dev/null || true)
+            for run_id in "${complete_runs[@]}"; do
+              rm -rf site && mkdir -p site
+              if gh run download "$run_id" -n latest-static-site -D site && python backend/scripts/unpack_site_artifact.py site; then
+                if [ -s site/index.html ] && [ -s site/data/stories.json ] && [ -s site/data/figures.json ]; then
+                  echo "Restored verified complete-build snapshot from run $run_id"
+                  restored=1
+                  break
+                fi
+              fi
+              echo "::warning::Complete-build artifact $run_id unavailable or incomplete."
+            done
+          fi
+          if [ "$restored" -ne 1 ]; then
+            echo "::error::No verified published site artifact available; refusing to deploy an incomplete press site."
+            exit 1
+          fi
       - name: Restore freshest Torob commerce cache
         env:
           GH_TOKEN: ${{ github.token }}
