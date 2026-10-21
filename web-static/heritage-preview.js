@@ -476,42 +476,40 @@
         timeZone:"Asia/Tehran"}).format(new Date(stamp));
     }catch(_){return "";}
   }
-  // Magazine-style typography uses the real public figure feed. Headlines are
-  // editorial summaries, not falsely presented as verbatim quotations.
-  // Preserve the editorial quote grid without a newspaper masthead or labels.
+  // Group only clearly related viewpoints; never imply agreement.
   function statementEditionHtml(items,pending){
-    var rows=Array.isArray(items)?items.slice(0,16):[];
+    var rows=(Array.isArray(items)?items:[]).filter(function(x){return validImage(x.portrait);}).slice(0,16);
+    var themes=[
+      {name:"سیاست و حکمرانی",re:/سیاست|حکومت|دولت|مجلس|انتخابات|قدرت|قانون|جمهوری|پادشاهی/},
+      {name:"دیپلماسی و امنیت",re:/جنگ|اسرائیل|آمریکا|مذاکره|دیپلماسی|تحریم|امنیت|هسته‌ای|منطقه/},
+      {name:"اقتصاد و جامعه",re:/اقتصاد|تورم|دلار|ارز|بازار|معیشت|جامعه|مردم|کار|فقر/},
+      {name:"فرهنگ و اندیشه",re:/فرهنگ|تاریخ|کتاب|فلسفه|هنر|ادبیات|ایران|هویت/}
+    ];
     function portrait(item){
-      var image=validImage(item.portrait);
-      return '<span class="paper-person-frame"><span class="paper-person-initial" aria-hidden="true">'+
-        esc((item.name||"؟").slice(0,1))+'</span>'+
-        (image?'<img src="'+esc(image)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">':"")+'</span>';
+      return '<span class="paper-person-frame"><img src="'+esc(item.portrait)+'" alt="" loading="lazy" decoding="async"></span>';
     }
-    function byline(item){
-      return '<span class="paper-lead-foot">'+portrait(item)+
-        '<span><strong>'+esc(item.name)+'</strong>'+
-        (item.role?'<small>'+esc(item.role)+'</small>':"")+
-        '</span></span>';
+    function card(item,cls){
+      return '<a class="'+cls+'" href="'+esc(item.url)+'"><strong>'+esc(excerpt(item.title,cls==="paper-lead"?270:165))+
+        '</strong><span class="paper-lead-foot">'+portrait(item)+'<span><b>'+esc(item.name)+'</b>'+
+        (item.role?'<small>'+esc(item.role)+'</small>':"")+'</span></span></a>';
     }
-    function compact(item){
-      return '<a class="paper-column-item" href="'+esc(item.url)+'">'+
-        '<strong>'+esc(excerpt(item.title,160))+'</strong>'+byline(item)+'</a>';
-    }
-    var content=rows.length?(
-      '<div class="paper-front-grid">'+
-        '<a class="paper-lead" href="'+esc(rows[0].url)+'">'+
-          '<h3>'+esc(excerpt(rows[0].title,270))+'</h3>'+
-          byline(rows[0])+'</a>'+
-        '<div class="paper-side">'+rows.slice(1,3).map(function(item){
-          return '<a class="paper-side-item" href="'+esc(item.url)+'">'+
-            '<strong>'+esc(excerpt(item.title,170))+'</strong>'+
-            byline(item)+'</a>';
-        }).join("")+'</div></div>'+
-      (rows.length>3?'<div class="paper-columns">'+rows.slice(3,12).map(compact).join("")+'</div>':"")+
-      (rows.length>12?'<div class="paper-columns">'+rows.slice(12,16).map(compact).join("")+'</div>':"")
-    ):'<p class="paper-empty">'+(pending?"در حال گردآوری تازه‌ترین گفته‌های ثبت‌شده…":
-      "در این نوبت گفتهٔ تاریخ‌دار و قابل انتشار یافت نشد.")+'</p>';
-    return '<div class="paper-edition-inner">'+content+'</div>';
+    var used=new Set(),groups=[];
+    themes.forEach(function(theme){
+      var matches=rows.filter(function(item){return !used.has(item.handle)&&theme.re.test(item.title);});
+      if(matches.length>=2){
+        matches.slice(0,4).forEach(function(item){used.add(item.handle);});
+        groups.push({name:theme.name,items:matches.slice(0,4)});
+      }
+    });
+    var remaining=rows.filter(function(item){return !used.has(item.handle);});
+    var html=groups.map(function(group){
+      return '<section class="statement-topic"><h3>'+esc(group.name)+'</h3><div class="statement-topic-grid">'+
+        group.items.map(function(item,i){return card(item,i===0?"paper-lead":"paper-column-item");}).join("")+
+        '</div></section>';
+    }).join("");
+    if(remaining.length)html+='<div class="paper-columns">'+remaining.map(function(item){return card(item,"paper-column-item");}).join("")+'</div>';
+    return '<div class="paper-edition-inner">'+(html||'<p class="paper-empty">'+
+      (pending?"در حال گردآوری گفته‌ها…":"فعلاً گفته‌ای با عکس معتبر برای نمایش وجود ندارد.")+'</p>')+'</div>';
   }
 
   async function renderHome(){
