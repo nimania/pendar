@@ -10,9 +10,13 @@ on:
   workflow_run:
     workflows: ["Fast Deploy Pendar UI"]
     types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/pendar-telegram.yml"
   schedule:
-    # Editorial report every two hours; GitHub schedules can be delayed.
-    - cron: "10 */2 * * *"
+    # Check for a qualifying new event hourly; publication is conditional.
+    - cron: "10 * * * *"
 permissions:
   contents: write
 concurrency:
@@ -29,7 +33,7 @@ jobs:
       TELEGRAM_CHAT_ID: "@pendario"
       GH_TOKEN: ${{ github.token }}
       SITE_URL: https://pendar.io
-      DIGEST_INTERVAL_HOURS: "2"
+      DIGEST_INTERVAL_HOURS: "1"
       DIGEST_MAX_NEWS: "3"
       DIGEST_MAX_VOICES: "1"
       MAX_FIGURE_POSTS_PER_DAY: "2"
@@ -68,6 +72,6 @@ jobs:
             echo "::error::TELEGRAM_BOT_TOKEN is not configured. No messages sent."
             exit 1
           fi
-      - name: Publish periodic editorial digest
+      - name: Publish at most one verified major-event narrative per hour
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: python backend/scripts/publish_digest.py --figures telegram-export/figures.json --stories telegram-export/stories.json
