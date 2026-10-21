@@ -92,4 +92,23 @@ assert(css.includes("overflow-wrap:anywhere")&&
   "Long Persian headlines must wrap inside constrained columns");
 assert(css.includes(".news-mini-photo")&&css.includes(".pulse-items"),
   "Native Pendar styles must cover thumbnails and pulse");
+const system=css.slice(css.indexOf("/* PENDAR CANONICAL DESIGN SYSTEM"));
+assert(system.length>10000,"Canonical theme layer must load after the legacy magazine rules");
+assert(system.includes("--ph-paper:var(--paper,#f2f4f0)") &&
+  system.includes("--ph-accent:var(--accent,#155a4f)") &&
+  system.includes("--ph-line:var(--line,#e1e3dc)"),
+  "Live homepage must inherit the original Pendar tokens, not invent another palette");
+assert(system.includes("background:var(--ph-surface)!important") &&
+  system.includes("border-top:3px solid var(--ph-accent)!important"),
+  "Editorial desk must use original Pendar card surface and forest-green accent");
+assert(system.includes("background:var(--ph-paper,var(--paper,#f2f4f0))!important") &&
+  system.includes("color:var(--ph-muted,var(--ink-soft,#474d49))!important"),
+  "Footer must use the Pendar paper and ink palette instead of a dark blue block");
+assert(!/#(?:17283e|1e4869|eaf2ff|f5f7ff|162c49)/i.test(system),
+  "Blue dashboard colors must not return in the canonical design layer");
+assert(system.includes("@media(max-width:1150px)") &&
+  system.includes("@media(max-width:650px)") &&
+  system.includes("@media(max-width:540px)"),
+  "Responsive editorial layout and market strip must be retained");
+
 console.log("Market pulse, Tehran weather, writer fallback and layout checks passed");
