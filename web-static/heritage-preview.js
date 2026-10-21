@@ -521,7 +521,7 @@
       // Do not let an old photograph outrank every current important report.
       var rows=items.slice(0,12);
       var lead=rows.slice(0,6).find(function(item){
-        return verifiedImage(photo(item))&&featureRank(item,currentFeature)>=featureRank(rows[0],currentFeature)-10;
+        return verifiedImage(photo(item))&&(item._imageWidth||imageDimensions.get(photo(item))?.width||0)>=900&&featureRank(item,currentFeature)>=featureRank(rows[0],currentFeature)-10;
       })||rows[0];
       var withPicture=verifiedImage(photo(lead));
       heroBox.classList.toggle("feature-text-hero",!withPicture);
