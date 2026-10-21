@@ -1,6 +1,6 @@
 /* Pendar static PWA — network-first so new deploys always show; cache is the
    offline fallback only. Bump V on any shell change to evict old caches. */
-const V = "pendar-static-v13";
+const V = "pendar-static-v14";
 const SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./iran-provinces.js",
   "./manifest.webmanifest", "./icons/icon.svg"];
 
@@ -18,6 +18,11 @@ self.addEventListener("activate", e =>
 // to cache only when offline. This keeps a frequently-updated news app current.
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
+  // Standalone Naval Observer must never fall back to the Pendar homepage.
+  // Keep its document and source archive outside the SPA offline cache.
+  const url = new URL(e.request.url);
+  if (url.origin === self.location.origin &&
+      (url.pathname === "/naval" || url.pathname.startsWith("/naval/"))) return;
   e.respondWith(
     fetch(e.request)
       .then(r => {
