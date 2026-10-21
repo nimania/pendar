@@ -90,6 +90,12 @@ assert(!context.connect(stories[1],stories[3]),
   "Shared generic news verbs must not connect school closures to border orders");
 assert(!context.connect(stories[0],stories[4]),
   "National tourism rhetoric is not related to the Iranian sports delegation");
+assert(context.promo({headline_fa:"وزیر بر اهمیت وحدت ملی تأکید کرد"}),
+  "Generic national rhetoric by an official must be treated as weak newsworthiness");
+assert(!context.connect(
+  {headline_fa:"امنیت غذایی ایران و بحران توزیع گندم"},
+  {headline_fa:"جنگ ایران و اسرائیل در منطقه"}),
+  "Food security must not be mistaken for military conflict");
 assert(!context.connect(
   {headline_fa:"فوتبال ایران در بازی جهانی",summary_fa:""},
   {headline_fa:"تیم والیبال در بازی آسیایی",summary_fa:""}),
