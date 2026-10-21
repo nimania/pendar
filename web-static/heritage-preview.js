@@ -325,8 +325,11 @@
     };
     Object.keys(buckets).forEach(function(key){
       var rows=buckets[key].slice(0,5).map(function(r){
-        var image=r.image?'<img class="rail-thumb" src="'+esc(r.image)+'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">':'<span class="rail-thumb rail-thumb-placeholder" aria-hidden="true">◉</span>';
-        return '<a class="rail-row" href="/@'+encodeURIComponent(r.person.handle)+'/"><span class="rail-thumb-frame">'+image+'</span><span><span class="rail-title">'+esc(r.person.name_fa)+'</span><span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span></span></a>';
+        var image=r.image?'<img class="rail-thumb" src="'+esc(r.image)+'" alt="" loading="lazy" decoding="async" onerror="this.parentNode.remove()">':"";
+        return '<a class="rail-row'+(image?"":" rail-row-text-only")+'" href="/@'+encodeURIComponent(r.person.handle)+'/">'+
+          (image?'<span class="rail-thumb-frame">'+image+'</span>':"")+
+          '<span class="rail-story-copy"><span class="rail-title">'+esc(r.person.name_fa)+'</span>'+
+          '<span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span></span></a>';
       });
       put("rail-figures-"+key,rows.join("")||'<p class="empty-state">'+(key==="fresh"?"تاریخ اضافه‌شدن چهره‌ها هنوز در داده‌های فعلی ثبت نشده است.":"چهره‌ای برای نمایش موجود نیست.")+'</p>');
     });
