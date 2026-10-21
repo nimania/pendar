@@ -478,55 +478,40 @@
   }
   // Magazine-style typography uses the real public figure feed. Headlines are
   // editorial summaries, not falsely presented as verbatim quotations.
+  // Preserve the editorial quote grid without a newspaper masthead or labels.
   function statementEditionHtml(items,pending){
     var rows=Array.isArray(items)?items.slice(0,16):[];
-    var latest=rows.length?statementEditionDate(rows[0].stamp):"";
     function portrait(item){
       var image=validImage(item.portrait);
       return '<span class="paper-person-frame"><span class="paper-person-initial" aria-hidden="true">'+
-        esc((item.name||"؟").slice(0,1))+'</span>'
-        +(image?'<img src="'+esc(image)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">':"")+'</span>';
+        esc((item.name||"؟").slice(0,1))+'</span>'+
+        (image?'<img src="'+esc(image)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">':"")+'</span>';
     }
-    function compact(item,index){
-      return '<a class="paper-column-item" href="'+esc(item.url)+'">'
-        +'<span class="paper-column-kicker">دیدگاه '+esc(String(index+1).replace(/\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[Number(d)];}))+'</span>'
-        +'<strong>'+esc(excerpt(item.title,160))+'</strong>'
-        +'<span class="paper-speaker">'+esc(item.name)+'</span></a>';
+    function byline(item){
+      return '<span class="paper-lead-foot">'+portrait(item)+
+        '<span><strong>'+esc(item.name)+'</strong>'+
+        (item.role?'<small>'+esc(item.role)+'</small>':"")+
+        '</span></span>';
+    }
+    function compact(item){
+      return '<a class="paper-column-item" href="'+esc(item.url)+'">'+
+        '<strong>'+esc(excerpt(item.title,160))+'</strong>'+byline(item)+'</a>';
     }
     var content=rows.length?(
-      '<div class="paper-front-grid">'
-        +'<a class="paper-lead" href="'+esc(rows[0].url)+'">'
-        +'<span class="paper-kicker">سرصفحه • تازه‌ترین دیدگاه</span>'
-        +'<h3>'+esc(excerpt(rows[0].title,270))+'</h3>'
-        +'<div class="paper-lead-foot">'+portrait(rows[0])
-        +'<span><strong>'+esc(rows[0].name)+'</strong>'
-        +(rows[0].role?'<small>'+esc(rows[0].role)+'</small>':"")
-        +'<small>'+esc(statementEditionDate(rows[0].stamp))+'</small></span></div></a>'
-        +'<div class="paper-side">'+rows.slice(1,3).map(function(item){
-          return '<a class="paper-side-item" href="'+esc(item.url)+'">'
-            +'<span class="paper-kicker">از زبان چهره‌ها</span>'
-            +'<strong>'+esc(excerpt(item.title,170))+'</strong>'
-            +'<span class="paper-speaker">'+esc(item.name)+'</span></a>';
-        }).join("")+'</div></div>'
-        +(rows.length>3?'<div class="paper-section-rule"><span>دیگر دیدگاه‌های روز</span>'
-          +'<span aria-hidden="true">◆</span></div>'
-          +'<div class="paper-columns">'+rows.slice(3,12).map(compact).join("")+'</div>':"")
-        +(rows.length>12?'<div class="paper-bottom-strip">'
-          +'<span>در حاشیهٔ صفحه</span><div>'+rows.slice(12,16).map(function(item){
-            return '<a href="'+esc(item.url)+'">'+esc(item.name)+': '+esc(excerpt(item.title,75))+'</a>';
-          }).join("")+'</div></div>':"")
-      ):'<p class="paper-empty">'+(pending?"در حال گردآوری تازه‌ترین گفته‌های ثبت‌شده…":
-        "در این نوبت گفتهٔ تاریخ‌دار و قابل انتشار یافت نشد.")+'</p>';
-    return '<div class="paper-edition-inner">'
-      +'<header class="paper-masthead">'
-      +'<div class="paper-topline"><span>پندار / دفتر چهره‌ها</span>'
-      +'<span>'+(latest?'تازه‌ترین ثبت: '+esc(latest):'آرشیو دیدگاه‌های ثبت‌شده')+'</span></div>'
-      +'<div class="paper-nameplate"><span class="paper-flourish" aria-hidden="true">❧</span>'
-      +'<h2>گفته‌ها</h2><span class="paper-flourish" aria-hidden="true">❧</span></div>'
-      +'<p>آنچه چهره‌ها گفته‌اند؛ گزیده‌ای از تازه‌ترین دیدگاه‌ها</p>'
-      +'</header>'+content
-      +'<footer class="paper-footer"><span>برگرفته از مطالب منتشرشده در پروندهٔ چهره‌ها</span>'
-      +'<a href="/figures/">ورق زدن آرشیو چهره‌ها ←</a></footer></div>';
+      '<div class="paper-front-grid">'+
+        '<a class="paper-lead" href="'+esc(rows[0].url)+'">'+
+          '<h3>'+esc(excerpt(rows[0].title,270))+'</h3>'+
+          byline(rows[0])+'</a>'+
+        '<div class="paper-side">'+rows.slice(1,3).map(function(item){
+          return '<a class="paper-side-item" href="'+esc(item.url)+'">'+
+            '<strong>'+esc(excerpt(item.title,170))+'</strong>'+
+            byline(item)+'</a>';
+        }).join("")+'</div></div>'+
+      (rows.length>3?'<div class="paper-columns">'+rows.slice(3,12).map(compact).join("")+'</div>':"")+
+      (rows.length>12?'<div class="paper-columns">'+rows.slice(12,16).map(compact).join("")+'</div>':"")
+    ):'<p class="paper-empty">'+(pending?"در حال گردآوری تازه‌ترین گفته‌های ثبت‌شده…":
+      "در این نوبت گفتهٔ تاریخ‌دار و قابل انتشار یافت نشد.")+'</p>';
+    return '<div class="paper-edition-inner">'+content+'</div>';
   }
 
   async function renderHome(){
