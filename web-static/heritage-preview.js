@@ -621,7 +621,11 @@
           (style==="fp-lead"?'<span>'+esc(excerpt(hook(row),150))+'</span>':"")+
           '</span></a>';
       }
-      var html='<div class="fp-top">'+article(lead,"fp-lead")+
+      // Layout emphasis responds to the relative rank and number of stories.
+      var rankGap=pictured.length>1?
+        featureRank(lead.row,lead.category)-featureRank(pictured[1].row,pictured[1].category):Infinity;
+      var layoutMode=pictured.length<3?"sparse":rankGap<=5?"balanced":"focused";
+      var html='<div class="fp-top fp-mode-'+layoutMode+'">'+article(lead,"fp-lead")+
         '<div class="fp-essentials">'+essentials.map(function(e){return article(e,"fp-essential");}).join("")+'</div></div>';
       // Pick the most substantiated shared topic from prominent stories.
       var subjects=[lead].concat(essentials),best=null;
