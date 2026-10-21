@@ -726,7 +726,11 @@
           return b.score-a.score;
         }).slice(0,4);
         var linkedSpeakers=unusedSpeakers.filter(function(item){
-          return frontConnection(seed.row,item);
+          // A viewpoint may connect to any verified news item on the same
+          // desk, not necessarily to the lead headline itself.
+          return frontConnection(seed.row,item)||related.some(function(entry){
+            return frontConnection(entry.row,item);
+          });
         }).slice(0,3);
         var issue=related.length?frontConnection(seed.row,related[0].row):
           linkedSpeakers.length?frontConnection(seed.row,linkedSpeakers[0]):null;
@@ -793,15 +797,15 @@
       for(var count=0;count<2;count++){
         var rest=worthy.filter(function(e){return !usedNews.has(e.row.id);});
         var voicesLeft=speakers.filter(function(v){return !usedSpeakers.has(v.handle);});
-        var candidates=rest.slice(0,22).map(function(entry){
+        // Related leftovers belong to the main topic, never a fake second dossier.
+        var freshTopics=rest.filter(function(e){return !frontConnection(main.seed.row,e.row);});
+        var candidates=freshTopics.slice(0,22).map(function(entry){
           return join(entry,rest,voicesLeft);
         }).filter(function(group){
           return group.related.length>=1||group.voices.length>=2;
         }).sort(function(a,b){return b.weight-a.weight;});
         if(!candidates.length)break;
         var next=candidates[0];
-        // Avoid a second box that is just a fragmented copy of the lead desk.
-        if(frontConnection(main.seed.row,next.seed.row))break;
         usedNews.add(next.seed.row.id);
         next.related.forEach(function(e){usedNews.add(e.row.id);});
         next.voices.forEach(function(v){usedSpeakers.add(v.handle);});
