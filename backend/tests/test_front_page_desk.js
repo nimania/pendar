@@ -177,4 +177,26 @@ assert(htmlTarget.innerHTML.includes('href="/story/iraq/"'),
   "A consequential report must survive a missing article photo");
 assert(htmlTarget.innerHTML.includes("fp-text-only"),
   "Missing article image must not produce a broken thumbnail");
+// Compositions with no relevant voices, and with more than four, must both
+// remain valid; no static four-opinion sidebar should reappear.
+context.figureFeatureItems=[];
+context.renderDesk();
+assert(!htmlTarget.innerHTML.includes('class="fp-voice"'),
+  "A dossier without statements must not pad out four empty opinion slots");
+const extraVoices=Array.from({length:5},(_,i)=>({
+  name:"تحلیلگر "+(i+1),handle:"extra-"+i,
+  title:"تحلیل جنگ ایران و اسرائیل و تحول مرزی",
+  stamp:Date.now(),portrait:"/extra-"+i+".jpg",portraitVerified:true,
+  url:"/@extra-"+i+"/"
+}));
+context.figureFeatureItems=voices.slice(0,2).concat(extraVoices);
+context.verifiedImage=()=>true;
+context.renderDesk();
+const fluid=htmlTarget.innerHTML;
+assert(extraVoices.every(v=>fluid.includes('href="'+v.url+'"')),
+  "More than four evidenced speakers must remain visible in the live dossier");
+assert(fluid.includes('class="fp-desk-bottom"'),
+  "Excess contextual reporting must flow beneath the main cover");
+assert(fluid.includes("می‌گوید:"),
+  "The flexible newsroom must still attribute every viewpoint");
 console.log("Pendar mixed editorial desk regression fixtures OK");
