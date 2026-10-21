@@ -14,8 +14,8 @@ const renderStart=source.indexOf("    // The front page is an editorial desk");
 const renderFinish=source.indexOf("    function renderCurrentFeature(){",renderStart);
 assert(start>=0&&finish>start&&renderStart>finish&&renderFinish>renderStart,
   "Front-page ranking and renderer must remain available");
-assert(markup.includes('data-feature-category="front" aria-controls="feature-politics-panel" aria-selected="true"'),
-  "The front page must remain the default tab");
+assert(markup.includes('id="feature-front-page"')&&!markup.includes('class="feature-category-tabs"'),
+  "Front page must remain the unadorned default editorial desk");
 assert(css.includes(".fp-desk-layout{display:grid"),"Shared editorial desk must be responsive");
 assert(css.includes(".fp-related-prominent"),"Related headlines need differential prominence");
 assert(markup.includes('class="news-layout home-news-layout"'),
@@ -81,6 +81,7 @@ const context={
   excerpt:(v,max)=>String(v).slice(0,max),
   hook:v=>String(v.summary_fa||""),
   lastHomeVisit:0,
+  newsMiniPhoto:(row,cls)=>'<span class="news-mini-photo '+(cls||"")+'"></span>',
   FEATURE_NAMES:{culture:"فرهنگ",diplomacy:"دیپلماسی",society:"جامعه",
     technology:"تکنولوژی",sport:"ورزش",environment:"محیط زیست",economy:"اقتصاد"}
 };
