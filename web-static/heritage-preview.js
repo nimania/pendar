@@ -874,7 +874,7 @@
       // A soft diversity preference, never a fixed category quota.
       var independent=worthy.filter(function(e){return !usedNews.has(e.row.id);});
       var extras=[],counts={};
-      while(independent.length&&extras.length<6){
+      while(independent.length&&extras.length<9){
         independent.sort(function(a,b){
           var as=a.score-(counts[a.category]||0)*7;
           var bs=b.score-(counts[b.category]||0)*7;
