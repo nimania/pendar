@@ -89,8 +89,8 @@ assert(js.includes('currentFeature="front"'),"First page must be selected initia
 assert(js.includes('isFront=currentFeature==="front"'),"Front page must toggle independently");
 assert(js.includes('renderFrontPage();'),"Front page must update on new content");
 assert(js.includes('figureFeatureItems.filter(function(item)'),"Figure claims must come from published statements");
-assert(js.includes('item.portraitVerified&&frontRelated'),"Only verified related speakers may be clustered");
-assert(js.includes('frontRelated('),"Distinctive shared terms must guard grouping");
+assert(js.includes('item.portraitVerified&&validImage(item.portrait)'),"Only verified photographed speakers may be clustered");
+assert(js.includes('frontConnection('),"Evidence-based links must guard grouping");
 assert(js.includes('verifiedImage(photo(entry.row))'),"News photos must be verified");
 assert(js.includes('lastHomeVisit'),"Updates since last visit need a real stored timestamp");
 context.validImage=v=>String(v||"").startsWith("/")&&!String(v||"").startsWith("//")?v:"";
@@ -112,16 +112,22 @@ assert(!paper.includes('href="/@person-one/"'),"Portraitless speakers are omitte
 const empty=context.edition([],true);
 assert(empty.includes("در حال گردآوری"),"Loading status must be accurate");
 
-// Semantic relatedness must not group generic Iran headlines together.
-const themeStart=js.indexOf("    var frontStopwords=new Set(");
-const themeEnd=js.indexOf("    function renderFrontPage(){",themeStart);
-assert(themeStart>0&&themeEnd>themeStart,"Topic comparison code must be present");
-vm.runInContext(js.slice(themeStart,themeEnd)+
-  "\nthis.related=frontRelated;",context);
-assert(context.related("جنگ و مذاکرات هسته‌ای در منطقه",
-  "مذاکرات هسته‌ای پس از جنگ"),"Strong shared terms should cluster");
-assert(!context.related("ایران و سیاست روز", "ایران و تحلیل روز"),
-  "Generic Iran or politics must not create false topical clusters");
-assert(!context.related("مسابقه فوتبال و لیگ برتر", "هوش مصنوعی و نرم افزار"),
-  "Unrelated categories must not be mixed into a topical cluster");
-console.log("Live editorial front page and statement fixtures OK");
+// Shared desk relevance is not established by categories, rhetoric or generic words.
+vm.runInContext("this.connected=frontConnection;this.editorialScore=frontEditorialScore;",context);
+const promo={headline_fa:"وزیر: توسعه گردشگری و ثبت رویدادهای ملی را پیگیری می‌کنیم",
+  summary_fa:"نشست وزارت میراث فرهنگی",published_at:new Date().toISOString()};
+const border={headline_fa:"دستور نخست‌وزیر عراق برای بستن گذرگاه مرزی با ایران",
+  published_at:new Date().toISOString()};
+const warClaim={headline_fa:"ترامپ مدعی پایان جنگ شد",
+  summary_fa:"در خصوص جنگ ایران و اسرائیل",published_at:new Date().toISOString()};
+assert(context.editorialScore(promo,"culture")<context.editorialScore(border,"diplomacy"),
+  "Routine government press releases must not outrank consequential border orders");
+assert(context.connected(border,warClaim),
+  "Independently related regional security news can share a dossier");
+assert(!context.connected(border,{headline_fa:"وزارت آموزش و پرورش از تعطیلی مدارس خبر داد"}),
+  "Unrelated stories cannot cluster on shared generic verbs");
+assert(!context.connected(promo,{headline_fa:"کاروان ایران در بازی‌های آسیایی"}),
+  "Official nationalism rhetoric must not imply a topic connection");
+assert(css.includes(".fp-desk-layout{display:grid"),
+  "Front page needs a dominant shared editorial desk");
+console.log("Editorial tabs, news judgement and statement fixtures OK");
