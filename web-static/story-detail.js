@@ -324,8 +324,8 @@ async function openStory(id) {
     ${!editorial && s.image_url && s.image_credit ? `<div class="hero-credit">عکس از: ${esc(s.image_credit)}</div>` : ''}
     ${pendarEditorialReport(s)}
     ${!editorial?'<div class="magazine-news-narrative">'
-       +(s.what_happened_fa&&s.what_happened_fa!==s.summary_fa?'<h2>چه اتفاقی افتاد؟</h2><p>'+esc(s.what_happened_fa)+'</p>':'')
-       +(s.why_it_matters_fa&&s.why_it_matters_fa!==s.summary_fa&&s.why_it_matters_fa!==s.what_happened_fa?'<h2>چرا اهمیت دارد؟</h2><p>'+esc(s.why_it_matters_fa)+'</p>':'')
+       +(s.what_happened_fa&&s.what_happened_fa!==s.summary_fa?'<p>'+esc(s.what_happened_fa)+'</p>':'')
+       +(s.why_it_matters_fa&&s.why_it_matters_fa!==s.summary_fa&&s.why_it_matters_fa!==s.what_happened_fa?'<p>'+esc(s.why_it_matters_fa)+'</p>':'')
        +'</div>':""}
 <aside class="pendar-telegram-promo telegram-prominent"><span class="telegram-mark" aria-hidden="true">➤</span><span class="telegram-copy"><strong>پندار در تلگرام</strong><p>خبرها و گزارش‌های منتخب را مستقیم در کانال دنبال کنید.</p></span><a href="https://t.me/pendario" target="_blank" rel="noopener noreferrer">عضویت در کانال ←</a></aside>
     ${!editorial?articleDisplayAdMarkup():""}
