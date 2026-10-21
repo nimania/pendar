@@ -21,6 +21,7 @@ const rates={
   rows:[
     {ticker:"USD",quote:"IRT",value:110000,dp:1.4,updated_at:new Date().toISOString()},
     {ticker:"EUR",quote:"IRT",value:121000,dp:-.2,updated_at:new Date().toISOString()},
+    {ticker:"TRY",quote:"IRT",value:3500,dp:0.5,updated_at:new Date().toISOString()},
     {ticker:"COIN_EMAMI",quote:"IRT",value:117000000,dp:0,updated_at:new Date().toISOString()},
     {ticker:"USDT",quote:"IRT",value:111100,dp:1.1,updated_at:new Date().toISOString()},
     {ticker:"GOLD18",quote:"IRT",value:10900000,dp:0.4,updated_at:new Date().toISOString()},
@@ -32,7 +33,10 @@ const weather=[{city_fa:"تهران",temp:0,cond_fa:"صاف",icon:"☀️"},
 draw(rates,[],weather);
 let pulse=out.ticker;
 assert(pulse.includes("دلار")&&pulse.includes("یورو")&&pulse.includes("سکه"),"Major assets must be included");
-assert(pulse.includes("تتر")&&pulse.includes("طلای ۱۸"),"USDT and gold must have their own cards");
+assert(pulse.includes("لیر ترکیه")&&pulse.includes("۳٬۵۰۰"),
+  "Turkish lira must be present as a correctly quoted IRT currency");
+assert(pulse.includes("تتر")&&pulse.includes("طلای ۱۸"),
+  "Tether and 18K gold appear only when real toman quotes exist");
 assert(pulse.includes("۱۱۱٬۱۰۰"),"USDT/IRT must come from Nabzesh, in toman");
 assert(!pulse.includes("دادهٔ قدیمی"),"Fresh source data must not be treated as old");
 assert(pulse.includes("هوای تهران")&&pulse.includes("۰°"),"Tehran temperature of zero is valid");
@@ -47,14 +51,18 @@ const tgju=[
 draw(null,tgju,weather);
 pulse=out.ticker;
 assert(pulse.includes("۱۰۸٬۷۰۰"),"TGJU fallback must be shown only for supported values");
-assert(pulse.includes("تتر")&&pulse.includes("—"),"No fake USDT fallback through USD conversion");
+assert(!pulse.includes("تتر")&&!pulse.includes("طلای ۱۸"),
+  "Missing optional prices must be omitted, not displayed with dashes");
 assert(!pulse.includes("NaN")&&!pulse.includes("undefined"),"Missing quote must stay missing");
 draw({...rates,generated_at:new Date(Date.now()-5*3600000).toISOString()},[],weather);
 assert(out.ticker.includes("قدیمی"),"Stale market snapshots must be labelled");
+assert(!out.ticker.includes("تتر")&&!out.ticker.includes("طلای ۱۸"),
+  "Optional quotes must also disappear if the source snapshot is stale");
 draw({generated_at:new Date().toISOString(),rows:[
   {ticker:"USDT",quote:"USD",value:1,dp:0}
 ]},[],[]);
 assert(!out.ticker.includes("۱ تومان"),"A USD-quoted USDT rate must not masquerade as tomans");
+assert(!out.ticker.includes("تتر"),"USD-only Tether quotes must be omitted");
 
 const thumbsA=js.indexOf("  function authorPortraitThumb(");
 const thumbsB=js.indexOf("  function put(id,html)",thumbsA);
@@ -73,8 +81,10 @@ ok=false;
 const fallback=authorPhoto(noImage,"fp-related-thumb");
 assert(fallback.includes("news-author-photo")&&fallback.includes("آرمان شایگان"),
   "Missing article image must use only its installed writer's portrait");
-assert(fallback.includes("نویسنده")&&!fallback.includes("<img"),
-  "Author fallback must be clearly labelled as the writer, not the story subject");
+assert(fallback.includes('aria-label="عکس نویسنده:')&&!fallback.includes("<img"),
+  "A fallback portrait must identify its writer accessibly, without an unrelated news photograph");
+assert(!fallback.includes("<small>نویسنده</small>"),
+  "Circular Pendar staff photos must not have a text watermark");
 ok=true;
 const pictured=authorPhoto(authored,"fp-related-thumb");
 assert(pictured.includes('<img src="/assets/report.jpg"')&&pictured.includes("news-author-photo"),
@@ -149,6 +159,18 @@ assert(js.includes('trends:records.slice().sort(') &&
   "The engagement-driven people tab must render and must not claim measured search trends");
 assert(js.includes('rail-row-text-only')&&js.includes('if(frame)frame.remove()'),
   "Missing article images must never leave empty grey thumbnail frames");
+assert(markup.includes('class="home-destinations"') &&
+  ['/radar/iran-scenarios/','/us-radar/','/israel-radar/','/diner/']
+    .every(href=>markup.includes('href="'+href+'"')),
+  "All three radar and Diner destination cards must appear below news panels");
+assert(css.includes("fp-desk-bottom")&&js.includes('editorialStream(main)')&&
+  js.includes('sideCapacity=leadHasPhoto?5:3'),
+  "The live news/quotes arrangement must flow beyond either fixed column");
+assert(!js.includes('}).slice(0,4);\n        var issue='),
+  "Related speakers must no longer have a fixed four-person quota");
+assert(css.includes(':has(.news-author-photo):not(:has(img))')&&
+  css.includes('border:2px solid #dc651e!important'),
+  "Editorial writer portraits must be circular with Pendar-orange rings");
 // A low-resolution photograph remains suitable as a tiny rail thumbnail, but
 // should not be enlarged into a soft-focus editorial cover.
 const thumbWithSizes=new Function("data","validImage","verifiedImage","photo","esc","imageDimensions",
