@@ -501,18 +501,21 @@
   };
   function frontConnection(a,b){
     var left=frontSignalText(a),right=frontSignalText(b);
-    var first=frontIssues(a),second=frontIssues(b);
-    // Regional news can be discussed in one dossier; that does not establish
-    // causality. An Iran security story never links to a separate foreign war
-    // without another independent shared substantive detail.
-    var mutual=first.filter(function(topic){return second.includes(topic);});
-    if(mutual.length){
-      var topic=mutual[0];
-      if(topic!=="regional-security"||frontKeywords(a).size&&frontKeywords(b).size)
-        return {strength:3,issue:topic,label:FRONT_TOPIC_LABELS[topic]};
-    }
     var one=frontKeywords(a),two=frontKeywords(b),matches=[];
     one.forEach(function(token){if(two.has(token))matches.push(token);});
+    var first=frontIssues(a),second=frontIssues(b);
+    var mutual=first.filter(function(topic){return second.includes(topic);});
+    for(var topic of mutual){
+      // Multiple developments can be grouped as one *security dossier*
+      // only when both explicitly concern Iran and an actual security event.
+      // The collection is thematic, not evidence of causation.
+      if(topic==="iran-security"&&/ایران|ایرانی|تهران/.test(left)&&
+         /ایران|ایرانی|تهران/.test(right))
+        return {strength:3,issue:topic,label:FRONT_TOPIC_LABELS[topic]};
+      // Other issue labels are too broad without common specific facts.
+      if(matches.length>=2)
+        return {strength:3,issue:topic,label:FRONT_TOPIC_LABELS[topic]};
+    }
     if(matches.length>=2){
       return {strength:2,issue:"shared-terms",label:"گزارش‌های مرتبط"};
     }
@@ -523,6 +526,7 @@
     var two=frontKeywords(headline(b)||b.title||"");
     var shared=0;
     one.forEach(function(term){if(two.has(term))shared++;});
+    if(featureNormalize(headline(a)||a.title||"")===featureNormalize(headline(b)||b.title||""))return true;
     return Math.min(one.size,two.size)>=4&&
       shared/Math.max(1,Math.min(one.size,two.size))>=.85;
   }
