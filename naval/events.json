@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-10-21T00:00:00Z",
-  "scope": "Public-source regional naval developments; no vessel coordinates, live tracks or predicted routes.",
+  "updated_at": "2026-10-21T20:05:25+00:00",
+  "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-889e815e0f6ac5913c",
+      "date": "2026-10-19",
+      "country": "us",
+      "region": "global",
+      "type": "گزارش استقرار",
+      "sensitive": true,
+      "title": "انتشار گزارش دوره‌ای ناوگروه‌های آمریکا",
+      "original_title": "USNI News Fleet and Marine Tracker: Oct. 19, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/19/usni-news-fleet-and-marine-tracker-oct-19-2026"
+    },
     {
       "id": "royal-navy-2026-10-17",
       "date": "2026-10-17",
@@ -15,6 +28,32 @@
       "description": "نیروی دریایی بریتانیا مأموریت ناوگروه خود و همکاری اعلام‌شده با متحدان ناتو را شرح داده است.",
       "source": "Royal Navy",
       "url": "https://www.royalnavy.mod.uk/news/2026/october/17/20261007-hms-pwls-firecrest-2"
+    },
+    {
+      "id": "usni-5724ccf9e8ad250213",
+      "date": "2026-10-16",
+      "country": "other",
+      "region": "westpac",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "انتشار گزارش تحولات دریایی غرب اقیانوس آرام",
+      "original_title": "USNI News Western Pacific Pulse: Oct. 16, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/16/usni-news-western-pacific-pulse-oct-16-2026"
+    },
+    {
+      "id": "usni-30a5ad04f702766ade",
+      "date": "2026-10-16",
+      "country": "us",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش یک رزمایش دریایی در منبع",
+      "original_title": "Carrier USS Theodore Roosevelt Arrives in Japan Ahead of Keen Sword Exercise",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/16/carrier-uss-theodore-roosevelt-arrives-in-japan-ahead-of-keen-sword-exercise"
     },
     {
       "id": "france-navy-2026-10-16",
@@ -30,6 +69,45 @@
       "url": "https://www.colsbleus.defense.gouv.fr/fr/comment-faire-durer-le-groupe-aeronaval-la-mer"
     },
     {
+      "id": "usni-ab2b6a76e4945a627f",
+      "date": "2026-10-15",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Japan Wants to Sell Air Defense, Maritime Surveillance Systems to Philippine Forces",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/15/japan-wants-to-sell-air-defense-maritime-surveillance-systems-to-philippine-forces"
+    },
+    {
+      "id": "usni-8d7c2646e746b944b8",
+      "date": "2026-10-14",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "VIDEO: F-35C Lands on New Navy Aircraft Carrier Class for First Time",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/14/video-f-35c-lands-on-new-navy-aircraft-carrier-class-for-first-time"
+    },
+    {
+      "id": "usni-72804ef744e47b08c3",
+      "date": "2026-10-14",
+      "country": "other",
+      "region": "westpac",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش یک رزمایش دریایی در منبع",
+      "original_title": "UPDATED: Chinese Carrier Strike Group Heads to South China Sea After Philippine Sea Drills",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/14/chinese-carrier-strike-group-drills-in-the-philippine-sea"
+    },
+    {
       "id": "usni-tracker-2026-10-13",
       "date": "2026-10-13",
       "country": "us",
@@ -41,6 +119,58 @@
       "description": "مؤسسه نیروی دریایی آمریکا گزارشی از استقرارهای اعلام‌شده و تقریبی ناوگروه‌ها منتشر کرده است. این پرونده فقط خبر انتشار گزارش را نشان می‌دهد، نه مختصات ناوها.",
       "source": "USNI News",
       "url": "https://news.usni.org/2026/10/13/usni-news-fleet-and-marine-tracker-oct-13-2026"
+    },
+    {
+      "id": "usni-b23561b97bfc7837f9",
+      "date": "2026-10-13",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "NCIS Investigating Submarine Sailor Death on Naval Base Kitsap",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/13/ncis-investigating-submarine-sailor-death-on-naval-base-kitsap"
+    },
+    {
+      "id": "usni-220242406fc783ee40",
+      "date": "2026-10-13",
+      "country": "fr",
+      "region": "indian",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "French Navy Seizes Suspected Shadow Fleet Tanker in Indian Ocean",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/13/french-navy-seizes-suspected-shadow-fleet-tanker-in-indian-ocean"
+    },
+    {
+      "id": "usni-c468fca0b7b36136b8",
+      "date": "2026-10-12",
+      "country": "uk",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "U.K. Royal Navy Destroyer Returns Home From Middle East, Strait of Hormuz Multinational Mission in Limbo",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/12/u-k-royal-navy-destroyer-returns-home-from-middle-east-strait-of-hormuz-multinational-mission-in-limbo"
+    },
+    {
+      "id": "usni-69028efa4d144f54f5",
+      "date": "2026-10-09",
+      "country": "other",
+      "region": "westpac",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "انتشار گزارش تحولات دریایی غرب اقیانوس آرام",
+      "original_title": "USNI News Western Pacific Pulse: Oct. 9, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/09/usni-news-western-pacific-pulse-oct-9-2026"
     },
     {
       "id": "nato-repmus-2026-10-08",
