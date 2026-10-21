@@ -79,7 +79,9 @@ async function _fetchJSON(path, timeoutMs) {
       }
       if (response.status !== 404) throw new Error("HTTP " + response.status);
     }
-    const r = await fetch(path, { cache: "default", signal: ctl.signal });
+    // News and figure feeds are live datasets, not immutable browser assets.
+    const isFreshFeed = /(?:^|\/)(?:stories|figures|editorial-archive|trends|meta|news-health|figures-health)\.json(?:[?#]|$)/.test(path);
+    const r = await fetch(path, { cache: isFreshFeed ? "no-store" : "default", signal: ctl.signal });
     if (!r.ok) throw new Error("HTTP " + r.status);
     return await r.json();
   } finally { clearTimeout(timer); }
