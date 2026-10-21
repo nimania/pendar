@@ -2487,3 +2487,15 @@ body:has(#home-page) .masthead-brand-inner .brand img{
     grid-template-columns:minmax(0,1fr)!important
   }
 }
+
+/* Compact factual publication inventory in the site footer. */
+.footer-publication-stats{margin:18px 0 12px;text-align:right;width:100%;font-size:12px}
+.footer-publication-stats h3{font-size:14px;margin:0 0 5px}
+.footer-publication-stats p{margin:0 0 9px;opacity:.75;line-height:1.9}
+.pubstats-table{overflow-x:auto}
+.pubstats-row{display:grid;grid-template-columns:minmax(78px,1.3fr) repeat(4,minmax(65px,1fr));gap:8px;align-items:center;border-bottom:1px solid rgba(128,128,128,.19);padding:7px 4px;min-width:390px}
+.pubstats-head{font-weight:700;opacity:.7}
+.pubstats-row a{color:inherit;text-decoration:none}
+.pubstats-row a:hover{text-decoration:underline}
+.pubstats-value{font-variant-numeric:tabular-nums}
+.footer-publication-stats .pubstats-note{margin:10px 0;opacity:.7;font-size:11px}
