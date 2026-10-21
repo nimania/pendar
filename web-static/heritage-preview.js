@@ -1210,7 +1210,7 @@
       var belowItems=stream.slice(sideCapacity);
       // Only a real official Nima video may occupy otherwise sparse space.
       // Never interrupt breaking or heavily covered news with promotion.
-      var homeVideo=homeVideoItems.length?homeVideoItems[0]:null;
+      var homeVideo=typeof homeVideoItems!=="undefined"&&Array.isArray(homeVideoItems)&&homeVideoItems.length?homeVideoItems[0]:null;
       var sideVideo=Boolean(homeVideo&&leadHasPhoto&&sideItems.length<=3&&
         (layout==="balanced"||layout==="visual"));
       var belowVideo=Boolean(homeVideo&&!sideVideo&&
