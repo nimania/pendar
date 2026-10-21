@@ -798,13 +798,16 @@
           '" alt="" loading="lazy" decoding="async"></span>';
       }
       function story(entry,type){
-        var hasPicture=verifiedImage(photo(entry.row));
+        var hasPicture=verifiedImage(photo(entry.row)),lead=type==="fp-lead";
         var cls=type+(hasPicture?"":" fp-text-only");
+        var heading=lead?
+          '<h2>'+esc(excerpt(headline(entry.row),230))+'</h2>':
+          '<strong>'+esc(excerpt(headline(entry.row),120))+'</strong>';
+        var copy='<span class="fp-copy"><small>'+label(entry)+'</small>'+heading+
+          (lead&&hook(entry.row)?'<p>'+esc(excerpt(hook(entry.row),205))+'</p>':"")+
+          '</span>';
         return '<a class="'+cls+'" href="'+esc(slugUrl(entry.row))+'">'+
-          picture(entry)+'<span class="fp-copy"><small>'+label(entry)+'</small>'+
-          '<strong>'+esc(excerpt(headline(entry.row),type==="fp-lead"?230:120))+'</strong>'+
-          (type==="fp-lead"&&hook(entry.row)?'<span>'+esc(excerpt(hook(entry.row),180))+'</span>':"")+
-          '</span></a>';
+          (lead?copy+picture(entry):picture(entry)+copy)+'</a>';
       }
       function relatedStory(entry,prominent){
         return '<a class="fp-related-item'+(prominent?" fp-related-prominent":"")+'" href="'+esc(slugUrl(entry.row))+'">'+
@@ -812,29 +815,24 @@
           esc(excerpt(headline(entry.row),120))+'</strong></a>';
       }
       function voice(item){
-        return '<a class="fp-voice" href="'+esc(item.url)+'">'+
+        // Headlines of figure posts are edited summaries, not verbatim quotes.
+        // Attribute them clearly without presenting the summary as a fact.
+        return '<a class="fp-voice" href="'+esc(item.url)+'" title="خلاصهٔ گفتهٔ این چهره">'+
           '<img src="'+esc(item.portrait)+'" alt="" loading="lazy" decoding="async">'+
-          '<span><small>دیدگاه ثبت‌شده</small><strong>'+esc(item.name)+'</strong>'+
-          '<span>'+esc(excerpt(item.title,145))+'</span></span></a>';
+          '<span><strong>'+esc(item.name)+' می‌گوید:</strong>'+
+          '<span>'+esc(excerpt(item.title,150))+'</span></span></a>';
       }
-      // The lead and related items live in one shared desk, not in
-      // disconnected politics/diplomacy/quote compartments.
+      // The news headline is the heading. Visual proximity shows context;
+      // avoid suggesting a causal link through explicit "related" labels.
       var contextual=main.related.length+main.voices.length>0;
-      var title=contextual?main.issue&&main.issue.label||"در یک پرونده":
-        "مهم‌ترین خبر";
-      var desk='<section class="fp-desk">'+
-        '<div class="fp-desk-heading"><span class="fp-eyebrow">'+
-        (contextual?"چند روایت از یک موضوع":"خبر برجستهٔ امروز")+'</span>'+
-        '<h3>'+esc(title)+'</h3></div>'+
+      var desk='<section class="fp-desk" aria-label="تیتر اصلی و مطالب همراه">'+
         '<div class="fp-desk-layout'+(contextual?"":" fp-desk-solo")+'">'+
           story(main.seed,"fp-lead")+
           (contextual?'<div class="fp-desk-context">'+
-            (main.related.length?'<div class="fp-desk-related">'+
-              '<h4>خبرها و گزارش‌های مرتبط</h4>'+
+            (main.related.length?'<div class="fp-desk-related" aria-label="خبرها و گزارش‌های بیشتر">'+
               main.related.map(function(e,i){return relatedStory(e,i===0&&main.seed.score-e.score<17);}).join("")+'</div>':"")+
-            (main.voices.length?'<div class="fp-desk-voices">'+
-              '<h4>دیدگاه‌های مرتبط</h4>'+main.voices.map(voice).join("")+
-              '</div>':"")+
+            (main.voices.length?'<div class="fp-desk-voices" aria-label="گفته‌های چهره‌ها">'+
+              main.voices.map(voice).join("")+'</div>':"")+
           '</div>':"")+
         '</div></section>';
       var html=desk;
@@ -861,12 +859,13 @@
       if(clusters.length){
         html+='<div class="fp-secondary-desks">'+clusters.map(function(group){
           return '<section class="fp-topic">'+
-            '<div class="fp-section-heading"><div>'+
-            '<span class="fp-eyebrow">چند روایت از یک موضوع</span>'+
-            '<h3>'+esc(group.issue&&group.issue.label||"گزارش‌های مرتبط")+'</h3></div>'+
-            '<a href="'+esc(slugUrl(group.seed.row))+'">اصل ماجرا ←</a></div>'+
-            '<div class="fp-topic-grid"><div class="fp-topic-news">'+
-              relatedStory(group.seed)+group.related.map(relatedStory).join("")+'</div>'+
+            '<div class="fp-section-heading"><a class="fp-topic-head" href="'+
+            esc(slugUrl(group.seed.row))+'">'+picture(group.seed)+
+            '<span><small>'+label(group.seed)+'</small><h3>'+
+            esc(excerpt(headline(group.seed.row),165))+'</h3></span></a></div>'+
+            '<div class="fp-topic-grid">'+
+              (group.related.length?'<div class="fp-topic-news">'+
+                group.related.map(relatedStory).join("")+'</div>':"")+
               (group.voices.length?'<div class="fp-topic-voices">'+
                 group.voices.map(voice).join("")+'</div>':"")+
             '</div></section>';
