@@ -456,3 +456,23 @@ main.page-width{padding:24px 0 56px}.latest-ticker{min-height:82px;display:flex;
 .heritage-root .rail-five .rail-trend-row:hover{background:#f4f8f6}
 .heritage-root .rail-five .rail-trend-row .rail-title{flex:1;min-width:0;font-size:12px;line-height:1.8;font-weight:700}
 .heritage-root .rail-five .rail-trend-marker{color:#178e95;flex:0 0 12px;font-size:13px;margin-top:1px}
+
+
+/* Editorial cover: independent tabs for subject-specific recent and important stories. */
+.feature-category-tabs{display:flex;align-items:stretch;gap:2px;width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#c1cec6 transparent;background:#f5f7f4;border-bottom:1px solid #d9e3db;padding:0 8px;direction:rtl}
+.feature-category-tabs button{flex:1 0 auto;min-width:fit-content;padding:13px 11px 12px;background:transparent;border:0;border-bottom:3px solid transparent;color:#52665c;font:750 12px/1.65 Vazirmatn,Tahoma,sans-serif;white-space:nowrap;cursor:pointer;transition:background .15s,color .15s}
+.feature-category-tabs button:hover{background:#e8f0e9;color:#223b31}
+.feature-category-tabs button.on{background:#fff;color:#183c2c;border-bottom-color:#e46c22}
+.feature-category-tabs button:focus-visible{outline:2px solid #168f9a;outline-offset:-3px}
+.feature-text-hero{display:flex;align-items:center;min-height:230px;border-right:4px solid #d87032;background:#fff}
+.feature-text-hero .feature-caption{width:100%;padding:22px 25px}
+.feature-statement-hero{display:flex;align-items:center;min-height:260px;border-right:4px solid #168f9a;background:linear-gradient(110deg,#f6fbf9,#eef5f0)}
+.feature-statement-hero .feature-saying-copy{padding:27px 30px;max-width:100%}
+.feature-statement-hero .feature-saying-person{display:block;color:#337e77;font-weight:800;font-size:15px;margin-top:9px}
+.under-hero .feature-mini-text{border-top:3px solid #e4eae4;min-height:125px}
+.under-hero .feature-statement-mini{border-top:3px solid #168f9a;background:#f8fbf9;min-height:115px}
+.under-hero .feature-statement-mini small{display:block;color:#287f78;font-size:12px;font-weight:750;margin-bottom:5px}
+.feature-topic-empty{grid-column:1/-1;margin:0;padding:25px 18px;color:#546c5f;background:#fff;line-height:1.9;font-size:14px}
+.feature-topic-empty a{color:#16838e;text-decoration:underline}
+@media(max-width:850px){.feature-category-tabs button{flex:0 0 auto;font-size:12px;padding:12px 14px}}
+@media(max-width:470px){.feature-category-tabs{padding:0 5px}.feature-category-tabs button{padding:10px 12px;font-size:12px}.feature-text-hero{min-height:180px}.feature-statement-hero{min-height:210px}.feature-statement-hero .feature-saying-copy{padding:18px}.under-hero .feature-statement-mini{min-height:0}}
