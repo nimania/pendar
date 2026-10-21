@@ -246,4 +246,11 @@ figureFunctions.render({figures:figures.slice(1)});
 assert(!figureFrame["rail-figures-updated"].includes("rail-figure-statement"),
   "Do not manufacture a statement for a figure with no reliable dated post");
 
+
+assert(css.includes('.fp-desk-bottom:has(> :only-child)') &&
+  css.includes('.fp-desk-bottom:has(> :first-child:nth-last-child(2))'),
+  "Sparse dossiers must avoid reserving blank columns for missing news or videos");
+assert(js.includes('onerror="this.parentNode.remove()"'),
+  "A failed YouTube thumbnail must collapse to a title-only video rather than leave an empty photo");
+
 console.log("Market pulse, Tehran weather, writer fallback and layout checks passed");
