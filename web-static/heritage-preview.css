@@ -2133,3 +2133,85 @@ body:has(#home-page) .masthead-brand-inner .brand img{
   #home-page .home-destination{min-height:125px;padding:15px}
   #home-page .feature-front-page .fp-topic .fp-topic-head h3{font-size:16px!important}
 }
+
+
+/* The daily figures line is a miniature editorial desk: real dated speech
+   replaces the boilerplate job title when available. Exactly one featured
+   topical statement may take two of six equal tracks. */
+#home-page .home-below-panels [data-rail-group="figures"] .rail-five-items.rail-figures-has-lead{
+  grid-template-columns:repeat(6,minmax(0,1fr));
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-card{
+  align-items:flex-start!important;gap:9px;
+  min-width:0!important;max-width:100%;
+  min-height:140px!important;overflow:hidden;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured{
+  grid-column:span 2;min-height:140px!important;
+  border-top:3px solid #dc651e!important;
+  background:#fffaf6!important;
+  padding-block:14px!important;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured:hover{
+  background:#fff6f0!important;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-card .rail-story-copy{
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  min-width:0!important;flex:1;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-card .rail-title{
+  font-size:14px!important;line-height:1.75!important;
+  overflow-wrap:anywhere;text-wrap:pretty;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured .rail-title{
+  font-size:17px!important;color:#2a3430!important;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-statement{
+  display:flex;flex-direction:column;gap:4px;
+  min-width:0;max-width:100%;overflow-wrap:anywhere;
+  color:#48564d;font:550 11px/1.8 "Vazirmatn",Tahoma,sans-serif;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-statement small{
+  display:block;color:#ce6120;
+  font:700 10px/1.6 "Vazirmatn",Tahoma,sans-serif;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-statement>span{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;
+  overflow:hidden;overflow-wrap:anywhere;max-width:100%;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured .rail-figure-statement{
+  font-size:13px;line-height:1.95;color:#354c40;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured .rail-figure-statement>span{
+  -webkit-line-clamp:4;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-card .rail-thumb-frame{
+  width:52px!important;height:52px!important;flex:0 0 52px!important;
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured .rail-thumb-frame{
+  width:64px!important;height:64px!important;flex:0 0 64px!important;
+}
+@media(max-width:1100px){
+  #home-page .home-below-panels [data-rail-group="figures"] .rail-five-items.rail-figures-has-lead{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+@media(max-width:700px){
+  #home-page .home-below-panels [data-rail-group="figures"] .rail-five-items.rail-figures-has-lead{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  #home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured{
+    grid-column:span 2;
+  }
+}
+@media(max-width:430px){
+  #home-page .home-below-panels [data-rail-group="figures"] .rail-five-items.rail-figures-has-lead{
+    grid-template-columns:1fr;
+  }
+  #home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured{
+    grid-column:span 1;
+  }
+  #home-page .home-below-panels [data-rail-group="figures"] .rail-figure-card{
+    min-height:92px!important;
+  }
+}
