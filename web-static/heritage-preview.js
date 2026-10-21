@@ -813,7 +813,7 @@
     // The backend remains unchanged, and imageless reports still exist in the
     // searchable archive and on their original URL.
     initializeRailTabs();
-    var currentFeature="front",featureBucketData={},featureAllItems=[],figureFeatureItems=[],figuresReady=false;
+    var currentFeature="front",featureBucketData={},featureAllItems=[],figureFeatureItems=[],figuresReady=false,frontVisibleIds=new Set();
     var lastHomeVisit=0;
     try{
       lastHomeVisit=Number(localStorage.getItem("pendar-home-last-visit-v1"))||0;
@@ -1023,6 +1023,9 @@
           '</h3><a href="/headlines/">سرخط‌ها ←</a></div>'+
           '<div class="fp-changes-grid">'+changed.map(function(e){return relatedStory(e,false);}).join("")+'</div></section>';
       }
+      // Track what is actually on this edition, not all candidate stories.
+      frontVisibleIds=new Set(usedNews);
+      changed.forEach(function(entry){frontVisibleIds.add(entry.row.id);});
       target.innerHTML=html;
     }
 
@@ -1134,7 +1137,14 @@
       featureBucketData=featureBuckets;
       renderCurrentFeature();
       // Permanent editorial reports; not gated by photograph availability.
-      var latestReports=reports.slice(0,4);
+      var uniqueReports=reports.filter(function(r){return !frontVisibleIds.has(r.id);});
+      var latestReports=uniqueReports.slice(0,4);
+      if(latestReports.length<4){
+        reports.forEach(function(r){
+          if(latestReports.length>=4)return;
+          if(!latestReports.some(function(x){return x.id===r.id;}))latestReports.push(r);
+        });
+      }
       put("home-editorial-report-list",latestReports.length?latestReports.map(function(r){
         var picture=newsMiniPhoto(r,"home-editorial-report-photo");
         return '<a class="home-editorial-report-row" href="'+esc(slugUrl(r))+'">'
@@ -1148,16 +1158,33 @@
       function importance(r){return signal(r,["importance_score","score","source_count"]);}
       function trend(r){return signal(r,["trend_score","momentum_score","velocity_score"]);}
       var sorted=stories.slice().sort(function(a,b){return timeOf(b)-timeOf(a);});
-      function fillFive(id,rows){
+      // Default panels prefer distinct stories; hidden tabs retain their
+      // independent ranking and remain available if a reader switches tabs.
+      var belowVisibleIds=new Set(latestReports.map(function(r){return r.id;}));
+      function fillFive(id,rows,visibleOnLoad){
         var seen=new Set(),picked=[];
-        rows.forEach(function(r){var key=String(r.id||"");if(key&&!seen.has(key)&&picked.length<5){seen.add(key);picked.push(r);}});
-        put(id,picked.map(railRow).join("")||'<p class="empty-state">برای این دسته هنوز دادهٔ کافی نداریم.</p>');
+        function add(row){
+          if(!row||!row.id||seen.has(row.id)||picked.length>=5)return;
+          seen.add(row.id);picked.push(row);
+        }
+        if(visibleOnLoad){
+          rows.forEach(function(row){
+            if(row&&!frontVisibleIds.has(row.id)&&!belowVisibleIds.has(row.id))add(row);
+          });
+          if(picked.length<3)rows.forEach(function(row){
+            if(row&&!belowVisibleIds.has(row.id))add(row);
+          });
+        }
+        if(picked.length<5)rows.forEach(add);
+        if(visibleOnLoad)picked.forEach(function(row){belowVisibleIds.add(row.id);});
+        put(id,picked.map(railRow).join("")||
+          '<p class="empty-state">برای این دسته هنوز دادهٔ کافی نداریم.</p>');
       }
       function rankedWithSignal(score){
         return stories.filter(function(r){return score(r)>0;})
           .sort(function(a,b){return score(b)-score(a)||timeOf(b)-timeOf(a);});
       }
-      fillFive("rail-headlines-fresh",sorted);
+      fillFive("rail-headlines-fresh",sorted,true);
       fillFive("rail-headlines-viral",rankedWithSignal(engagement));
       fillFive("rail-headlines-trend",rankedWithSignal(trend));
       fillFive("rail-headlines-hot",rankedWithSignal(importance));
@@ -1172,10 +1199,10 @@
       var reportPool=limitUnique(reports.concat(stories),300);
       Object.keys(reportFilters).forEach(function(mode){
         var matches=reportPool.filter(function(r){return reportFilters[mode].test(headline(r)+" "+(r.category||""));});
-        fillFive("rail-reports-"+mode,matches.sort(function(a,b){return timeOf(b)-timeOf(a);}));
+        fillFive("rail-reports-"+mode,matches.sort(function(a,b){return timeOf(b)-timeOf(a);}),mode==="politics");
       });
       var today=sorted.filter(function(r){var dt=timeOf(r);return dt>0&&Date.now()-dt<36*60*60*1000;});
-      fillFive("rail-today-latest",today);
+      fillFive("rail-today-latest",today,true);
       fillFive("rail-today-big",today.filter(function(r){return importance(r)>0;}).sort(function(a,b){return importance(b)-importance(a)||timeOf(b)-timeOf(a);}));
     }
     renderSearchTrendsInRail();
