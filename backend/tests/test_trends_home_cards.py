@@ -1,4 +1,4 @@
-"""Keep search-oriented trends in the headline rail and editorial reports on the cover."""
+"""Keep search-oriented trends in the lower headline panel and an uncluttered editorial cover."""
 import unittest
 from pathlib import Path
 
@@ -10,8 +10,10 @@ CSS=ROOT/"web-static"/"heritage-preview.css"
 class TrendHomepageTest(unittest.TestCase):
     def test_editorial_frontpage_is_default_and_search_trends_have_a_rail_tab(self):
         html=HTML.read_text(encoding="utf-8")
-        self.assertIn('<h2 id="feature-heading-title">صفحهٔ اول پندار</h2>',html)
-        self.assertIn('id="feature-politics-panel" role="tabpanel" aria-labelledby="feature-category-front">',html)
+        self.assertNotIn('id="feature-heading-title"',html)
+        self.assertNotIn('class="feature-category-tabs"',html)
+        self.assertIn('id="feature-politics-panel" role="region" aria-label="گزارش‌های برگزیدهٔ صفحهٔ اول">',html)
+        self.assertIn('class="quick-pulse"',html)
         self.assertIn('id="feature-front-page"',html)
         self.assertIn('id="feature-hero"',html)
         self.assertNotIn('id="feature-trends-panel"',html)
