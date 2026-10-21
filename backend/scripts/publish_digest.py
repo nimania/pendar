@@ -100,28 +100,39 @@ def build_digest(figures_data, stories_data, now, hours=DIGEST_INTERVAL_HOURS, s
     if not news and not voices:
         return None
 
-    lines = [f"📊 <b>جمع‌بندی {_fa_num(hours)} ساعت گذشتهٔ پندار</b>", ""]
-    if news:
-        lines.append("📰 <b>مهم‌ترین خبرها</b>")
-        for s in news:
-            emoji = _CATEGORY_EMOJI.get(str(s.get("category") or ""), "•")
-            headline = clipped(str(s.get("headline_fa") or "خبر").strip(), 110)
-            url = f"{site}/s/{s.get('id')}/"
-            count = s.get("source_count") or 0
-            tail = f" <i>({_fa_num(count)} منبع)</i>" if count else ""
-            lines.append(f"{emoji} {_link(headline, url)}{tail}")
-        lines.append("")
-    if voices:
-        lines.append("🗣 <b>تازه‌ترین گفته‌های چهره‌ها</b>")
-        for p in voices:
-            name = html.escape(clipped(str(p.get("name_fa") or "").strip(), 60))
-            topic = clipped(str(p.get("topic_fa") or "دیدگاه تازه").strip(), 90)
-            handle = str(p.get("handle") or "")
-            url = f"{site}/#/figure/{handle}" if handle else (p.get("url") or site)
-            lines.append(f"• <b>{name}</b> — {_link(topic, url)}")
-        lines.append("")
-    lines.append(_link("مرور کامل در پندار ←", f"{site}/"))
-    return "\n".join(lines).strip()
+    # A single connected explanatory report rather than a bulletin of links.
+    # Only source-grounded published summaries are used; no fabricated glue.
+    def clean(value, limit=410):
+        value = " ".join(str(value or "").split())
+        if len(value) <= limit:
+            return value
+        stop = max(value.rfind("۔", 0, limit), value.rfind(".", 0, limit),
+                   value.rfind("؟", 0, limit), value.rfind("؛", 0, limit))
+        return value[:stop+1] if stop >= limit//2 else value[:limit].rsplit(" ", 1)[0] + "…"
+
+    usable = [s for s in news if len(str(s.get("summary_fa") or "").strip()) >= 65]
+    if not usable:
+        return None
+    primary = usable[0]
+    title = clean(primary.get("headline_fa") or "مهم‌ترین تحول", 105)
+    paragraphs = [clean(primary.get("summary_fa"), 480)]
+    links = [("گزارش اصلی", f"{site}/story/{primary['id']}/")]
+    used_topics = {str(primary.get("category") or "")}
+    for extra in usable[1:]:
+        # Avoid repetitive reports from one category if another beat is available.
+        category = str(extra.get("category") or "")
+        summary = clean(extra.get("summary_fa"), 280)
+        if not summary or (category in used_topics and len(usable) > 2):
+            continue
+        paragraphs.append(summary)
+        links.append(("گزارش مرتبط", f"{site}/story/{extra['id']}/"))
+        used_topics.add(category)
+
+    # Source assertions must not be presented as independent Pendar conclusions.
+    opening = "📰 <b>" + html.escape(title) + "</b>"
+    body = "\\n\\n".join(html.escape(paragraph) for paragraph in paragraphs)
+    related = " · ".join(_link(label, url) for label, url in links)
+    return opening + "\\n\\n" + body + "\\n\\n" + related + "\\n" + _link("ادامه در پندار ←", site + "/")
 
 
 def digest_payload(text, chat_id):
