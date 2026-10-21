@@ -28,8 +28,8 @@ assert(html.includes('id="under-hero"'));
 assert(html.includes('id="rail-headlines-trends"'),"Search trends must stay in their small rail");
 assert(css.includes(".feature-category-tabs{display:flex;"));
 assert(css.includes("overflow-x:auto;"),"Small screens need horizontally scrollable tabs");
-assert(live.includes("heritage-preview.js?v=20261021-feature-topics-1"),"Live site should refresh JavaScript");
-assert(live.includes("heritage-preview.css?v=20261021-feature-topics-1"),"Live site should refresh styles");
+assert(live.includes("heritage-preview.js?v=20261021-quotes-newspaper-1"),"Live site should refresh JavaScript");
+assert(live.includes("heritage-preview.css?v=20261021-quotes-newspaper-1"),"Live site should refresh styles");
 assert(js.includes('button.addEventListener("click"'),"Tabs need working controls");
 assert(js.includes('featurePanel.setAttribute("aria-labelledby"'),"Active tab must label panel");
 assert(js.includes("featureBucketData=featureBuckets;"),"Each topic needs its own report selection");
@@ -77,4 +77,41 @@ assert.equal(statements[1].title,"نظر تازه درباره اقتصاد");
 assert(context.rank({headline_fa:"انتخابات مجلس",published_at:new Date().toISOString()},"politics")>
        context.rank({headline_fa:"انتخابات مجلس",published_at:"2025-01-01T00:00:00Z"},"politics"),
        "Newer coverage should win when significance is equal");
+
+assert(html.includes('id="feature-statements-edition"'),"Statement edition container required");
+assert(css.includes(".paper-front-grid{display:grid;"),"Lead plus side columns required");
+assert(css.includes(".paper-columns{display:grid;"),"Newspaper continuation columns required");
+assert(css.includes("@media(max-width:480px)"),"Mobile newspaper needs responsive rules");
+assert(js.includes("newspaper.hidden=!isStatement"),"Unselected newspaper must stay hidden");
+assert(js.includes("if(underHero)underHero.hidden=false"),"Other tabs must restore their regular cards");
+context.validImage=v=>/^\/(?!\/)/.test(v||"")?v:"";
+context.esc=v=>String(v==null?"":v).replace(/[&<>"']/g,
+  ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+context.excerpt=(v,n)=>String(v||"").slice(0,n);
+context.Intl=Intl;
+vm.runInContext("this.edition=statementEditionHtml;",context);
+const escaped={...statements[0],title:'<script>alert("x")</script>',
+  portrait:"/assets/portrait.jpg",role:"خبرنگار"};
+const paper=context.edition([escaped,statements[1]],false);
+assert(paper.includes("paper-nameplate"),"Old-paper masthead is required");
+assert(paper.includes("paper-front-grid")&&paper.includes("paper-side"),"Newspaper lead and side items required");
+assert(paper.includes("paper-person-frame"),"True figure portraits and fallback must be provided");
+assert(paper.includes('filter')===false,"Never inject source descriptions as raw HTML");
+assert(!paper.includes("<script>"),"Potentially unsafe figure statements must be escaped");
+assert(paper.includes("&lt;script&gt;"),"Unsafe title must be escaped but remain legible");
+assert(paper.includes("گفته‌ها"),"Visible newspaper title must be preserved");
+assert(paper.includes('href="/@person-two/"'),"Cards should link to the speaker's own profile");
+const moreFigures=Array.from({length:14},(_,i)=>({
+ handle:"speaker-"+i,name_fa:"گوینده "+i,
+ avatar:i===0?"/assets/portrait.jpg":undefined,
+ posts:[{headline_fa:"دیدگاه شماره "+i,published_at:new Date(2026,9,21,i).toISOString()}]
+}));
+const many=context.extract({figures:moreFigures});
+assert.equal(many.length,14,"The extended layout must keep more than eight speakers");
+const whole=context.edition(many,false);
+assert(whole.includes('paper-columns'),"The lower newspaper grid must render");
+assert(whole.includes('paper-bottom-strip'),"The final dated viewpoints must be discoverable");
+const empty=context.edition([],true);
+assert(empty.includes("در حال گردآوری"),"The page should show accurate loading status");
+
 console.log("Editorial feature tabs and statement fixtures OK");
