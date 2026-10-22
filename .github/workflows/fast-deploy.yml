@@ -1,4 +1,5 @@
 name: Fast Deploy Pendar UI
+# Manual homepage refresh requested on 2026-10-22; retain scheduled and collector-triggered publication.
 # Lightweight news + figures publication. Heavy catalog rebuilding is manual-only.
 on:
   workflow_dispatch:
