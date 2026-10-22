@@ -1,0 +1,51 @@
+name: Intake Google Drive Newspapers
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "19 */3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pendar-drive-newspaper-intake
+  cancel-in-progress: false
+
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    # Do not run with missing credentials; publication remains disabled.
+    if: ${{ vars.NEWSPAPER_DRIVE_ENABLED == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install isolated intake dependencies
+        run: python -m pip install "pypdf>=5,<7" "google-auth>=2,<3" "requests>=2,<3"
+      - name: Inspect newly uploaded PDF issues
+        env:
+          GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON }}
+          NEWSPAPER_DRIVE_FOLDER_ID: "1rP8lEWxcWUWK1mG3fKEhWySv85VgCnbX"
+          NEWSPAPER_MAX_FILES_PER_RUN: "2"
+        run: python backend/scripts/drive_newspaper_intake.py
+      - name: Validate index, commit only when changed
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("backend/data/newspaper-intake.json")
+          obj = json.loads(p.read_text(encoding="utf-8"))
+          assert obj["schema_version"] == 1 and isinstance(obj["files"], list)
+          assert len({x["id"] for x in obj["files"]}) == len(obj["files"])
+          assert all(x["full_translation_allowed"] is False for x in obj["files"])
+          print("Verified pending-review PDF index:", len(obj["files"]))
+          PY
+          if ! git diff --quiet -- backend/data/newspaper-intake.json || git ls-files --error-unmatch backend/data/newspaper-intake.json >/dev/null 2>&1; then
+            git config user.name "pendar-news-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add backend/data/newspaper-intake.json
+            git diff --cached --quiet || (git commit -m "data(newspapers): index newly uploaded Drive PDFs" && git push)
+          fi
