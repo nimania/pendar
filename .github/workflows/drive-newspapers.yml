@@ -43,9 +43,10 @@ jobs:
           assert all(x["full_translation_allowed"] is False for x in obj["files"])
           print("Verified pending-review PDF index:", len(obj["files"]))
           PY
-          if ! git diff --quiet -- backend/data/newspaper-intake.json || git ls-files --error-unmatch backend/data/newspaper-intake.json >/dev/null 2>&1; then
-            git config user.name "pendar-news-bot"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add backend/data/newspaper-intake.json
-            git diff --cached --quiet || (git commit -m "data(newspapers): index newly uploaded Drive PDFs" && git push)
+          git config user.name "pendar-news-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add backend/data/newspaper-intake.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data(newspapers): index newly uploaded Drive PDFs"
+            git push
           fi
