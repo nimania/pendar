@@ -110,9 +110,13 @@ def ensure_article_html(site: Path, sid: str, row: dict, content: str) -> str:
         content=re.sub(r'<meta\s+name="description"[^>]*>',lambda _:desc_tag,content,count=1)
     else:
         content=content.replace("</head>",desc_tag+"</head>",1)
-    if not re.search(r'<link\s+rel="canonical"',content):
+    if re.search(r'<link\s+rel="canonical"[^>]*>',content):
+        content=re.sub(r'<link\s+rel="canonical"[^>]*>','<link rel="canonical" href="'+url+'">',content,count=1)
+    else:
         content=content.replace("</head>",'<link rel="canonical" href="'+url+'"></head>',1)
-    if not re.search(r'<meta\s+property="og:url"',content):
+    if re.search(r'<meta\s+property="og:url"[^>]*>',content):
+        content=re.sub(r'<meta\s+property="og:url"[^>]*>','<meta property="og:url" content="'+url+'">',content,count=1)
+    else:
         content=content.replace("</head>",'<meta property="og:url" content="'+url+'"></head>',1)
     content=content.replace("</head>",'<meta name="robots" content="index,follow,max-image-preview:large"></head>',1)
     schema={"@context":"https://schema.org","@type":"Article",
@@ -140,9 +144,9 @@ def ensure_article_html(site: Path, sid: str, row: dict, content: str) -> str:
 def update_html_canonical(content: str, old: str, new: str) -> str:
     # Only canonical metadata and structured-data URL references are rewritten;
     # editorial content, sources, and the readable prerendered article stay intact.
-    content = re.sub(r'(<link\b[^>]*\brel="canonical"[^>]*href=")'+re.escape(old)+r'(")',
+    content = re.sub(r'(<link\b[^>]*\brel="canonical"[^>]*href=")[^"]*(")',
                      lambda m: m.group(1)+new+m.group(2), content)
-    content = re.sub(r'(<meta\b[^>]*\bproperty="og:url"[^>]*content=")'+re.escape(old)+r'(")',
+    content = re.sub(r'(<meta\b[^>]*\bproperty="og:url"[^>]*content=")[^"]*(")',
                      lambda m: m.group(1)+new+m.group(2), content)
     # JSON-LD includes canonical main-entity URL as an ordinary JSON string.
     content = content.replace('"url": "'+old+'"', '"url": "'+new+'"')
