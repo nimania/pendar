@@ -31,6 +31,34 @@ function loadArticleDisplayAd() {
 /* Linked and sourced Pendar editorial reports (build-time, never on page load).
    Only show an authored article when the exported model output has passed the
    server's citation and quality checks; otherwise retain existing summary. */
+
+// Images that are part of the reporting must remain visible in full.
+// Optional media entries are supplied by the editorial pipeline, not inferred
+// from unrelated stories. A source link is shown when embedding is unavailable.
+function pendarStoryMediaGallery(s, report) {
+  const media=[...(Array.isArray(s?.images)?s.images:[]),
+               ...(Array.isArray(report?.images)?report.images:[])];
+  const seen=new Set([String(s?.image_url||"")]);
+  const cards=[];
+  for(const entry of media){
+    if(!entry || typeof entry!=="object")continue;
+    const image=String(entry.url||entry.image_url||"").trim();
+    const source=String(entry.source_url||entry.page_url||entry.link||"").trim();
+    const caption=String(entry.caption_fa||entry.caption||entry.alt||"تصویر مرتبط با گزارش").trim();
+    const validImage=/^https:\/\//i.test(image);
+    const validSource=/^https:\/\//i.test(source);
+    const key=image||source;
+    if(!key||seen.has(key)||(!validImage&&!validSource))continue;
+    seen.add(key);
+    cards.push('<figure class="story-media-item">'
+      +(validImage?'<a href="'+esc(image)+'" target="_blank" rel="noopener noreferrer" aria-label="مشاهدهٔ تصویر کامل"><img src="'+esc(image)+'" alt="'+esc(caption)+'" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.closest(\'figure\').querySelector(\'.story-media-fallback\')?.removeAttribute(\'hidden\')"></a>':'')
+      +'<figcaption>'+esc(caption)+(validSource?' · <a href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">منبع تصویر ↗</a>':'')+'</figcaption>'
+      +(validSource?'<a class="story-media-fallback" '+(validImage?'hidden ':'')+'href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">مشاهدهٔ تصویر در منبع ↗</a>':'')
+      +'</figure>');
+  }
+  return cards.length?'<section class="story-media-gallery" aria-label="تصاویر مرتبط با این گزارش"><h2>تصاویر این گزارش</h2><div class="story-media-grid">'+cards.join("")+'</div></section>':"";
+}
+
 function pendarEditorialReport(s){
   const preview=window.PendarEditorialPilots?.[String(s?.id||"")];
   const report=s?.editorial_report||preview;
@@ -55,6 +83,7 @@ function pendarEditorialReport(s){
     +(s.image_url?'<figure class="story-editorial-photo"><img class="hero-img" src="'+esc(s.image_url)+'" alt="'+esc(report.title_fa||s.headline_fa||"")+'" loading="eager" referrerpolicy="no-referrer"><figcaption class="hero-credit">'+esc(s.image_credit||"")+'</figcaption></figure>':'')
     +'<p class="story-editorial-lead">'+esc(report.lead_fa||"")+' '+renderCitations(report.lead_citations)+'</p>'
     +'<div class="story-editorial-body">'+rows+'</div>'
+     +pendarStoryMediaGallery(s,report)
     +'</article>';
 }
 function pendarHistoricalContext(s){
@@ -323,6 +352,7 @@ async function openStory(id) {
     ${!editorial && s.image_url ? `<figure class="magazine-article-photo"><img class="hero-img" src="${esc(s.image_url)}" alt="" loading="eager" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"></figure>` : ''}
     ${!editorial && s.image_url && s.image_credit ? `<div class="hero-credit">عکس از: ${esc(s.image_credit)}</div>` : ''}
     ${pendarEditorialReport(s)}
+    ${!editorial?pendarStoryMediaGallery(s,null):""}
     ${!editorial?'<div class="magazine-news-narrative">'
        +(s.what_happened_fa&&s.what_happened_fa!==s.summary_fa?'<p>'+esc(s.what_happened_fa)+'</p>':'')
        +(s.why_it_matters_fa&&s.why_it_matters_fa!==s.summary_fa&&s.why_it_matters_fa!==s.what_happened_fa?'<p>'+esc(s.why_it_matters_fa)+'</p>':'')
