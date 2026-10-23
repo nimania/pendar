@@ -266,3 +266,5 @@ jobs:
           retention-days: 3
 
   # Fast Deploy consumes this artifact and publishes all datasets together.
+
+# Manual refresh requested 2026-10-23 for periodicals and books.
