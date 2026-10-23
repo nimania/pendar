@@ -117,3 +117,5 @@ jobs:
           if-no-files-found: error
 
 # Recovery trigger: refresh collector after extended schedule gap on 2026-10-12.
+
+# Manual refresh requested 2026-10-23 for figure timelines.
