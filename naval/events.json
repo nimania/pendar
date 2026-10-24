@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-10-22T20:00:44+00:00",
+  "updated_at": "2026-10-24T18:45:11+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-73b720b1473e0ef4e5",
+      "date": "2026-10-22",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش یک رزمایش دریایی در منبع",
+      "original_title": "Theodore Roosevelt Carrier Strike Group Sails in the Philippine Sea for Keen Sword Drills",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/22/theodore-roosevelt-carrier-strike-group-sails-in-the-philippine-sea-for-keen-sword-drills"
+    },
     {
       "id": "usni-ba7516b64e4292a90e",
       "date": "2026-10-20",
