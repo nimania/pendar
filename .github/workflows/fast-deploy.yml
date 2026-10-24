@@ -747,6 +747,17 @@ jobs:
           assert "<article" in text or "<p>" in text
           print("Standalone Radar article verified:", p, len(text), "bytes")
           PY
+      - name: Verify IranSignal hub and daily report in publication payload
+        run: |
+          set -euo pipefail
+          for path in iransignal/index.html iransignal/daily/index.html iransignal/weekly/index.html iransignal/daily/2026-10-24/military-threat-and-diplomacy/index.html; do
+            test -s "web-static/$path"
+            mkdir -p "site/$(dirname "$path")"
+            cp "web-static/$path" "site/$path"
+            test -s "site/$path"
+          done
+          grep -q 'نیما افشارنادری' site/iransignal/daily/2026-10-24/military-threat-and-diplomacy/index.html
+          echo "IranSignal hub, daily archive, weekly archive and first report verified in Pages payload."
       - name: Upload light Pages site
         uses: actions/upload-pages-artifact@v3
         with:
