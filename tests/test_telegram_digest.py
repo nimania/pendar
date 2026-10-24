@@ -88,7 +88,7 @@ class PublishDigestTests(unittest.TestCase):
     def test_skips_within_interval(self):
         self.ledger.state = {"version": 1,
                              "last_digest_at": (NOW - timedelta(hours=3)).isoformat()}
-        result = publish_digest(figures(voice("a")), [story("s1", 9)],
+        result = publish_digest(figures(voice("a")), [story("s1", 90)],
                                 self.ledger, self.bot, "@pendario", now=NOW, hours=8)
         self.assertEqual(result["sent"], 0)
         self.bot.call.assert_not_called()
@@ -96,7 +96,7 @@ class PublishDigestTests(unittest.TestCase):
     def test_sends_again_after_interval_elapsed(self):
         self.ledger.state = {"version": 1,
                              "last_digest_at": (NOW - timedelta(hours=9)).isoformat()}
-        result = publish_digest(figures(voice("a")), [story("s1", 9)],
+        result = publish_digest(figures(voice("a")), [story("s1", 90)],
                                 self.ledger, self.bot, "@pendario", now=NOW, hours=8)
         self.assertEqual(result["sent"], 1)
         self.bot.call.assert_called_once()
@@ -111,7 +111,7 @@ class PublishDigestTests(unittest.TestCase):
     def test_slot_reserved_before_send_so_failure_does_not_duplicate(self):
         self.bot.call.side_effect = RuntimeError("send failed")
         with self.assertRaises(RuntimeError):
-            publish_digest(figures(voice("a")), [story("s1", 9)],
+            publish_digest(figures(voice("a")), [story("s1", 90)],
                            self.ledger, self.bot, "@pendario", now=NOW, hours=8)
         # Timestamp was recorded before the send attempt, so the next run waits.
         self.assertIn("last_digest_at", self.ledger.state)
