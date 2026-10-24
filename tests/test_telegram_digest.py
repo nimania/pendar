@@ -87,15 +87,16 @@ class PublishDigestTests(unittest.TestCase):
 
     def test_skips_within_interval(self):
         self.ledger.state = {"version": 1,
-                             "last_digest_at": (NOW - timedelta(hours=3)).isoformat()}
+                             "last_digest_at": (NOW - timedelta(minutes=30)).isoformat()}
         result = publish_digest(figures(voice("a")), [story("s1", 90)],
                                 self.ledger, self.bot, "@pendario", now=NOW, hours=8)
         self.assertEqual(result["sent"], 0)
+        self.assertEqual(result["reason"], "hourly_limit")
         self.bot.call.assert_not_called()
 
     def test_sends_again_after_interval_elapsed(self):
         self.ledger.state = {"version": 1,
-                             "last_digest_at": (NOW - timedelta(hours=9)).isoformat()}
+                             "last_digest_at": (NOW - timedelta(hours=3)).isoformat()}
         result = publish_digest(figures(voice("a")), [story("s1", 90)],
                                 self.ledger, self.bot, "@pendario", now=NOW, hours=8)
         self.assertEqual(result["sent"], 1)
