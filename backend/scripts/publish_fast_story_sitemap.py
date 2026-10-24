@@ -36,10 +36,10 @@ def run(site: Path, limit=100):
         if not file.is_file():
             continue
         html = file.read_text(encoding="utf-8")
-        if 'id="seo-static"' not in html or not re.search(r'<meta\\s+name="robots"\\s+content="index,follow', html, re.I):
+        if 'id="seo-static"' not in html or not re.search(r'<meta\s+name="robots"\s+content="index,follow', html, re.I):
             continue
         expected = BASE + "/story/" + str(mapping.get(sid) or sid) + "/"
-        canonical = re.search(r'<link\\s+rel="canonical"\\s+href="([^"]+)"', html, re.I)
+        canonical = re.search(r'<link\s+rel="canonical"\s+href="([^"]+)"', html, re.I)
         if not canonical or canonical.group(1) != expected:
             continue
         date = str(row.get("published_at") or "")
