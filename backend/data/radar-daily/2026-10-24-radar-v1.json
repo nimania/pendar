@@ -1,0 +1,41 @@
+{
+  "report_id": "2026-10-24-radar-v1",
+  "date": "2026-10-24",
+  "slug": "military-threat-and-diplomacy",
+  "status": "draft",
+  "author": {
+    "name_fa": "نیما افشارنادری",
+    "name_en": "Nima Afshar Naderi",
+    "profile": "https://pendar.io/@nima-afshar-naderi"
+  },
+  "headline_fa": "تهدید حمله و تحرک دیپلماتیک؛ آیا این دو واقعاً متناقض‌اند؟",
+  "headline_en": "Iran: Military Threats and Diplomatic Activity Are Not Necessarily Opposites",
+  "summary_fa": "اظهارات تام بارک درباره امکان حمله را در کنار نشست استانبول بررسی می‌کنیم، بدون آنکه امکان را تصمیم قطعی یا تحرک دیپلماتیک را توافق تلقی کنیم.",
+  "summary_en": "A review of the US envoy's remarks and Istanbul diplomacy, distinguishing a possible military strike from an operational decision and diplomatic contact from an agreement.",
+  "article_fa": "تام بارک در گفت‌وگویی احتمال حمله آمریکا به ایران در پایان هفته را رد نکرد، اما اظهار امکان وقوع، معادل اعلام تصمیم قطعی نیست. دونالد ترامپ نیز در پاسخ به این اظهارات گفت اطلاعی از آن ندارد.\n\nدر ۲۳ اکتبر، وزیران خارجه چند کشور اروپایی و منطقه‌ای در استانبول گرد آمدند. وزارت خارجه آلمان هدف نشست را همکاری بر سر امنیت کشتیرانی و تأمین عرضه توصیف کرده است؛ این نشست را نباید با مذاکره مستقیم ایران و آمریکا یکسان گرفت.\n\nسه تفسیر نیازمند آزمون‌اند: فشار برای توافق، آماده‌سازی نظامی هم‌زمان با دیپلماسی، و نبود تصمیم نهایی. فعلاً از یک اظهارنظر یا یک نشست نمی‌توان با قطعیت میان آن‌ها انتخاب کرد. ادامه گزارش به تکمیل داده‌های مستقل، تغییرات امتیاز رادار و آزمون ادعاهای اقتصادی نیاز دارد.",
+  "article_en": "US envoy Tom Barrack said a strike against Iran could occur as soon as the weekend. A statement about possibility, however, does not establish that an operational decision has been made. Donald Trump subsequently said he knew nothing about the envoy's suggestion.\n\nOn October 23, European and regional ministers met in Istanbul. Germany's foreign ministry described the agenda in terms of maritime navigation and supply security. The meeting was not a direct US-Iran negotiation.\n\nThree rival interpretations remain open: coercive pressure to reach a deal, military preparation alongside diplomacy, or unresolved strategic choices. Discriminating among them requires independently corroborated developments, not merely repeated coverage of the same remark.",
+  "narration_fa": "نقشهٔ امروز\n\nاین متن فعلاً صرفاً جای‌نگهدار پروندهٔ پژوهشی است و برای اجرا آماده نیست.\n\nجان کلام\n\nامکان حمله را نباید با تصمیم به حمله اشتباه گرفت. گفت‌وگوی چندجانبه نیز لزوماً مذاکرهٔ مستقیم با ایران نیست.\n\nفردا چه چیزی را زیر نظر بگیریم\n\nبررسی نشانه‌های عملیاتی مستقل و اعلام برنامهٔ مشخص مذاکرات. پیش از تأیید باید متن گفتاری واقعی با مدت حداقل هشت دقیقه تهیه شود.",
+  "sources": [
+    {
+      "title": "Anadolu Agency — US envoy suggests Iran strikes possible this weekend",
+      "url": "https://www.aa.com.tr/en/americas/us-envoy-suggests-iran-strikes-possible-this-weekend-trump-says-hes-unaware/4099059",
+      "published_at": "2026-10-23"
+    },
+    {
+      "title": "German Federal Foreign Office — Istanbul meeting",
+      "url": "https://www.auswaertiges-amt.de/en/aussenpolitik/laenderinformationen/tuerkei-node/2807008-2807008",
+      "published_at": "2026-10-23"
+    },
+    {
+      "title": "Anadolu Agency — German FM on Istanbul meeting",
+      "url": "https://f.aa.com.tr/en/europe/german-fm-hails-istanbul-talks-says-european-regional-powers-will-meet-again/4098935",
+      "published_at": "2026-10-23"
+    }
+  ],
+  "editorial_checklist": {
+    "sources_reviewed": "partial",
+    "economic_numbers": "excluded_pending_verification",
+    "narration_duration": "incomplete",
+    "approval": "not_granted"
+  }
+}
