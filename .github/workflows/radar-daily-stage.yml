@@ -1,0 +1,50 @@
+name: Stage approved Radar daily report
+on:
+  workflow_dispatch:
+    inputs:
+      dossier_path:
+        description: "Path to reviewed approved dossier JSON within backend/data/radar-daily/"
+        required: true
+        type: string
+      speaking_wpm:
+        description: "Calibrated Persian narration words per minute"
+        required: true
+        default: "130"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate dossier location and stage three outputs
+        env:
+          DOSSIER_PATH: ${{ inputs.dossier_path }}
+          SPEAKING_WPM: ${{ inputs.speaking_wpm }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+          root = Path.cwd().resolve()
+          approved_dir = (root / "backend/data/radar-daily").resolve()
+          file = (root / os.environ["DOSSIER_PATH"]).resolve()
+          if not file.is_relative_to(approved_dir) or file.suffix != ".json" or not file.is_file():
+              raise SystemExit("Dossier must be an existing JSON under backend/data/radar-daily/")
+          subprocess.run(["python", "backend/scripts/package_radar_daily.py",
+                          str(file), "--out", "radar-output",
+                          "--wpm", os.environ["SPEAKING_WPM"]], check=True)
+          PY
+      - name: Upload staged outputs for editorial review (never publish)
+        uses: actions/upload-artifact@v4
+        with:
+          name: radar-reviewed-package
+          path: radar-output/
+          retention-days: 14
+          if-no-files-found: error
