@@ -730,6 +730,23 @@ jobs:
           print(f"Published figures: {len(d.get('figures',[]))}; valid statements: {len(dates)}; 24h: {recent}; latest: {last}; generated_at: {d.get('generated_at','missing')}",flush=True)
           if not dates:raise SystemExit("::error::No dated figure statements in publish payload")
           PY
+      - name: Guarantee standalone Radar daily article survives final site assembly
+        run: |
+          set -euo pipefail
+          source="web-static/reports/daily/2026-10-24/military-threat-and-diplomacy/index.html"
+          target="site/reports/daily/2026-10-24/military-threat-and-diplomacy/index.html"
+          test -s "$source"
+          mkdir -p "$(dirname "$target")"
+          cp "$source" "$target"
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("site/reports/daily/2026-10-24/military-threat-and-diplomacy/index.html")
+          text = p.read_text(encoding="utf-8")
+          assert "نیما افشارنادری" in text
+          assert "تهدید حمله" in text
+          assert "<article" in text or "<p>" in text
+          print("Standalone Radar article verified:", p, len(text), "bytes")
+          PY
       - name: Upload light Pages site
         uses: actions/upload-pages-artifact@v3
         with:
