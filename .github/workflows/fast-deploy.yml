@@ -111,6 +111,26 @@ jobs:
             done
           fi
           if [ "$restored" -ne 1 ]; then
+            # A build artifact can outlive the short run search window, and
+            # the matching run can be absent from the first 10 results.
+            # Enumerate retained artifacts repo-wide instead of guessing run IDs.
+            mapfile -t recovery_artifacts < <(gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/artifacts?per_page=100" --jq '.artifacts[] | select(.expired==false and .name=="latest-static-site") | .id' 2>/dev/null || true)
+            echo "Retained complete-site artifacts available: ${#recovery_artifacts[@]}"
+            for artifact_id in "${recovery_artifacts[@]}"; do
+              rm -rf site /tmp/recovery-archive && mkdir -p site /tmp/recovery-archive
+              if gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > /tmp/recovery-archive/artifact.zip \
+                  && unzip -q /tmp/recovery-archive/artifact.zip -d /tmp/recovery-archive/extracted \
+                  && cp -a /tmp/recovery-archive/extracted/. site/ \
+                  && python backend/scripts/unpack_site_artifact.py site \
+                  && [ -s site/index.html ] && [ -s site/data/figures.json ] && [ -s site/data/stories.json ]; then
+                echo "Restored complete-site snapshot from retained artifact ${artifact_id}"
+                restored=1
+                break
+              fi
+              echo "::warning::Retained artifact ${artifact_id} could not restore verified core."
+            done
+          fi
+          if [ "$restored" -ne 1 ]; then
             echo "::error::No verified published site snapshot available; preserving the current live site."
             exit 1
           fi
