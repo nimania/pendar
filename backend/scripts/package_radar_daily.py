@@ -12,6 +12,12 @@ from pathlib import Path
 import re
 from urllib.parse import urlparse
 
+AUTHOR_NAME_FA = "نیما افشارنادری"
+AUTHOR_NAME_EN = "Nima Afshar Naderi"
+AUTHOR_PROFILE = "https://pendar.io/@nima-afshar-naderi"
+# Same publicly listed portrait as the Pendar figures profile fallback.
+AUTHOR_AVATAR = "https://pbs.twimg.com/profile_images/2094137144591933440/SIBK8HjF_400x400.jpg"
+
 SECTIONS = ("نقشهٔ امروز", "جان کلام", "فردا چه چیزی را زیر نظر بگیریم")
 WORD = re.compile(r"[^\W_]+(?:[‌'’][^\W_]+)*", re.UNICODE)
 
@@ -61,13 +67,20 @@ def article_html(data, language):
     # Plain text paragraphs prevent injected HTML/JS in authored dossier.
     paragraphs = "".join("<p>" + escape(p.strip()) + "</p>" for p in re.split(r"\n\s*\n", article) if p.strip())
     links = "".join('<li><a href="' + escape(s["url"], quote=True) + '" rel="noopener noreferrer">' + escape(s["title"]) + "</a> · " + escape(str(s["published_at"])) + "</li>" for s in data["sources"])
+    author_name = AUTHOR_NAME_FA if fa else AUTHOR_NAME_EN
+    byline = ('<div class="byline"><a href="' + escape(AUTHOR_PROFILE, quote=True) +
+              '"><img src="' + escape(AUTHOR_AVATAR, quote=True) +
+              '" width="52" height="52" alt="' + escape(author_name, quote=True) +
+              '" loading="lazy"></a><div><span>' + ('نویسنده: ' if fa else 'By ') +
+              '</span><a rel="author" href="' + escape(AUTHOR_PROFILE, quote=True) +
+              '">' + escape(author_name) + '</a></div></div>')
     counterpart = ("https://nimania.github.io/IranSignal/daily/" if fa else "https://pendar.io/reports/daily/")
     return ('<!doctype html><html lang="' + language + '" dir="' + ('rtl' if fa else 'ltr') + '"><head><meta charset="utf-8">'
-            '<meta name="viewport" content="width=device-width, initial-scale=1"><title>' + escape(title) + '</title>'
+            '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="' + escape(author_name, quote=True) + '"><title>' + escape(title) + '</title>'
             '<meta name="description" content="' + escape(summary, quote=True) + '">'
             '<style>body{font:18px/1.85 system-ui,sans-serif;max-width:780px;margin:3rem auto;padding:0 1.25rem;color:#172036}'
-            'a{color:#1467a1}h1{line-height:1.3}footer{margin-top:3rem;border-top:1px solid #ccc;padding-top:1rem}</style></head><body>'
-            '<main><small>' + escape(data["date"]) + ' · ' + escape(data["report_id"]) + '</small><h1>' + escape(title) + '</h1>'
+            'a{color:#1467a1}h1{line-height:1.3}.byline{display:flex;align-items:center;gap:12px;margin:1rem 0 1.5rem}.byline img{border-radius:50%;object-fit:cover}footer{margin-top:3rem;border-top:1px solid #ccc;padding-top:1rem}</style></head><body>'
+            '<main><small>' + escape(data["date"]) + ' · ' + escape(data["report_id"]) + '</small><h1>' + escape(title) + '</h1>' + byline
             '<p><strong>' + escape(summary) + '</strong></p>' + paragraphs + '<h2>' + ('منابع' if fa else 'Sources') + '</h2><ul>' + links + '</ul>'
             '<p><a href="' + counterpart + escape(data["date"]) + '/' + escape(data["slug"]) + '/">' +
             ('English edition' if fa else 'Persian edition') + '</a></p></main><footer>Radar Iran — reviewed editorial publication</footer></body></html>')
@@ -91,7 +104,8 @@ def main():
     (out / "pendar-article.html").write_text(article_html(data, "fa"), encoding="utf-8")
     (out / "iransignal-article.html").write_text(article_html(data, "en"), encoding="utf-8")
     (out / "youtube-narration-fa.md").write_text(data["narration_fa"] + "\n", encoding="utf-8")
-    manifest = {"date":data["date"],"slug":data["date"] + "/" + data["slug"],
+    manifest = {"author": {"name": AUTHOR_NAME_EN, "profile": AUTHOR_PROFILE, "avatar": AUTHOR_AVATAR},
+                "date":data["date"],"slug":data["date"] + "/" + data["slug"],
                 "title":data["headline_en"],"summary":data["summary_en"],"status":"published"}
     (out / "iransignal-manifest-entry.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2) + "\n",encoding="utf-8")
     (out / "preflight.json").write_text(json.dumps({"report_id":data["report_id"],"words":words,
