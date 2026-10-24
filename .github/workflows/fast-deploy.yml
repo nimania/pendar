@@ -493,6 +493,8 @@ jobs:
         run: |
           python -m unittest discover -s backend/tests -p test_story_permalink_publishing.py -v
           python backend/scripts/publish_story_permalinks.py --site site --limit 60
+      - name: Advertise recent verified story URLs to Google via dedicated sitemap
+        run: python backend/scripts/publish_fast_story_sitemap.py --site site --limit 100
       - name: Restore cached book shelf entry only (no collectors)
         run: |
           python - <<'PY'
