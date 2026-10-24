@@ -10,6 +10,8 @@ NOW = datetime(2026, 10, 6, 12, 0, tzinfo=timezone.utc)
 
 def story(sid, score, hours_ago=1, headline="سرخط آزمایشی", category="iran", sources=3):
     return {"id": sid, "headline_fa": headline, "category": category,
+            "summary_fa": "این گزارشی مستند درباره رویدادهای مهم روز است که با مقایسه چند منبع معتبر و ارائه اطلاعات دقیق و قابل بررسی برای مخاطبان تهیه شده است.",
+            "sources": [{"source_name": "رسانه الف"}, {"source_name": "رسانه ب"}],
             "importance_score": score, "source_count": sources,
             "published_at": (NOW - timedelta(hours=hours_ago)).isoformat()}
 
@@ -46,28 +48,20 @@ class BuildDigestTests(unittest.TestCase):
     def test_news_ranked_by_importance_and_capped(self):
         stories = [story(f"s{i}", score=i) for i in range(1, 9)]  # 8 stories
         text = build_digest(figures(), stories, NOW, hours=8)
-        self.assertIn("مهم‌ترین خبرها", text)
+        self.assertIn("به گزارش", text)
         # The highest score (s8) appears; a low one beyond the cap does not.
-        self.assertIn("/s/s8/", text)
-        self.assertNotIn("/s/s1/", text)
-        self.assertEqual(text.count("/s/s"), 5)  # MAX_NEWS
+        self.assertIn("/story/s8/", text)
+        self.assertNotIn("/story/s1/", text)
+        self.assertEqual(text.count("/story/"), 1)  # One verified narrative per digest
 
-    def test_voices_one_per_figure_and_filtered(self):
-        data = figures(
-            voice("alpha", hours_ago=1),
-            voice("alpha", hours_ago=2),           # same figure, deduped
-            voice("beta", hours_ago=3, kind="relay"),   # wrong kind, dropped
-            voice("gamma", hours_ago=4, summary=""),     # empty summary, dropped
-            voice("delta", hours_ago=5),
-        )
-        text = build_digest(data, [], NOW, hours=8)
-        self.assertEqual(text.count("#/figure/alpha"), 1)
-        self.assertIn("#/figure/delta", text)
-        self.assertNotIn("#/figure/beta", text)
-        self.assertNotIn("#/figure/gamma", text)
+    def test_digest_rejects_unattributed_news(self):
+        item = story("s1", 90)
+        item["sources"] = []
+        self.assertIsNone(build_digest(figures(voice("alpha")), [item], NOW))
+        self.assertIsNone(build_digest(figures(voice("alpha")), [], NOW))
 
     def test_html_is_escaped_and_payload_is_html_mode(self):
-        text = build_digest(figures(), [story("s1", 9, headline="نفت <b> و «گاز» & برق")], NOW)
+        text = build_digest(figures(), [story("s1", 90, headline="نفت <b> و «گاز» & برق")], NOW)
         self.assertIn("&lt;b&gt;", text)        # angle brackets escaped
         self.assertNotIn("<b> و", text)
         payload = digest_payload(text, "@pendario")
@@ -84,7 +78,7 @@ class PublishDigestTests(unittest.TestCase):
         self.bot = Mock()
 
     def test_sends_when_due_and_records_timestamp(self):
-        result = publish_digest(figures(voice("a")), [story("s1", 9)],
+        result = publish_digest(figures(voice("a")), [story("s1", 90)],
                                 self.ledger, self.bot, "@pendario", now=NOW, hours=8)
         self.assertEqual(result["sent"], 1)
         self.bot.call.assert_called_once()
