@@ -13,7 +13,7 @@ import re
 from urllib.parse import urlparse
 
 SECTIONS = ("نقشهٔ امروز", "جان کلام", "فردا چه چیزی را زیر نظر بگیریم")
-WORD = re.compile(r"[^\\W_]+(?:[‌'’][^\\W_]+)*", re.UNICODE)
+WORD = re.compile(r"[^\W_]+(?:[‌'’][^\W_]+)*", re.UNICODE)
 
 def valid_url(value):
     p = urlparse(str(value))
@@ -59,7 +59,7 @@ def article_html(data, language):
     summary = data["summary_fa" if fa else "summary_en"]
     article = data["article_fa" if fa else "article_en"]
     # Plain text paragraphs prevent injected HTML/JS in authored dossier.
-    paragraphs = "".join("<p>" + escape(p.strip()) + "</p>" for p in re.split(r"\\n\\s*\\n", article) if p.strip())
+    paragraphs = "".join("<p>" + escape(p.strip()) + "</p>" for p in re.split(r"\n\s*\n", article) if p.strip())
     links = "".join('<li><a href="' + escape(s["url"], quote=True) + '" rel="noopener noreferrer">' + escape(s["title"]) + "</a> · " + escape(str(s["published_at"])) + "</li>" for s in data["sources"])
     counterpart = ("https://nimania.github.io/IranSignal/daily/" if fa else "https://pendar.io/reports/daily/")
     return ('<!doctype html><html lang="' + language + '" dir="' + ('rtl' if fa else 'ltr') + '"><head><meta charset="utf-8">'
@@ -90,13 +90,13 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     (out / "pendar-article.html").write_text(article_html(data, "fa"), encoding="utf-8")
     (out / "iransignal-article.html").write_text(article_html(data, "en"), encoding="utf-8")
-    (out / "youtube-narration-fa.md").write_text(data["narration_fa"] + "\\n", encoding="utf-8")
+    (out / "youtube-narration-fa.md").write_text(data["narration_fa"] + "\n", encoding="utf-8")
     manifest = {"date":data["date"],"slug":data["date"] + "/" + data["slug"],
                 "title":data["headline_en"],"summary":data["summary_en"],"status":"published"}
-    (out / "iransignal-manifest-entry.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2) + "\\n",encoding="utf-8")
+    (out / "iransignal-manifest-entry.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2) + "\n",encoding="utf-8")
     (out / "preflight.json").write_text(json.dumps({"report_id":data["report_id"],"words":words,
         "estimated_seconds":seconds,"wpm":args.wpm,
-        "warning":"Estimated duration only; record and verify actual narration before YouTube."},indent=2)+"\\n",encoding="utf-8")
+        "warning":"Estimated duration only; record and verify actual narration before YouTube."},indent=2)+"\n",encoding="utf-8")
     print(f"Staged {data['report_id']}: {words} spoken words, {seconds/60:.1f} min estimated; NO auto-publish")
 
 if __name__ == "__main__":
