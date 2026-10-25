@@ -1,0 +1,37 @@
+name: Test Telegram Delivery Independently
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "backend/scripts/publish_figures.py"
+      - "backend/scripts/publish_digest.py"
+      - "tests/test_telegram_publish.py"
+      - "tests/test_telegram_digest.py"
+      - ".github/workflows/telegram-tests.yml"
+  pull_request:
+    paths:
+      - "backend/scripts/publish_figures.py"
+      - "backend/scripts/publish_digest.py"
+      - "tests/test_telegram_publish.py"
+      - "tests/test_telegram_digest.py"
+      - ".github/workflows/telegram-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  telegram-tests:
+    name: Telegram offline unit tests (never gate site publication)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate Telegram publisher and delivery state
+        run: python -m unittest discover -s tests -p 'test_telegram_publish.py' -v
+      - name: Validate one-story digest and quiet hours
+        run: python -m unittest discover -s tests -p 'test_telegram_digest.py' -v
