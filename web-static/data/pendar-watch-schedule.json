@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T11:04:30.787321+00:00",
+  "generated_at": "2026-10-25T11:33:41.740409+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -573,16 +573,6 @@
   "programmes": [
     {
       "channel_id": "digital-world",
-      "title_fa": "Dolly",
-      "start": "2026-10-24T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1309083",
-      "icon": "https://image.tmdb.org/t/p/w500/oJJquv1sg5XMTIyNHxEm0KLo696.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "آخرین نفس",
       "start": "2026-10-25T00:00:00+03:30",
       "date_only": true,
@@ -632,22 +622,12 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-103",
-      "title_fa": "ドラえもん",
-      "start": "2026-10-24T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/65733",
-      "icon": "https://image.tmdb.org/t/p/w500/9YqdMXlPTQGLIG67vqZdsPdPC4T.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 939 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-19",
       "title_fa": "سیمپسون‌ها",
       "start": "2026-10-25T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/tv/456",
-      "icon": "https://image.tmdb.org/t/p/w500/tf0CUEynk6GfmrlHIQKQ5mfFP5P.jpg",
+      "icon": "https://image.tmdb.org/t/p/w500/k5UALlcA0EnviaCUn2wMjOWYiOO.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 4 از فصل 38؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
@@ -1178,6 +1158,106 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1329471",
       "icon": "https://image.tmdb.org/t/p/w500/9Jkylw7Y5NQyi7C8IwXLBvVSrH2.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-189",
+      "title_fa": "صحنه جرم",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/3034",
+      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 22 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-308",
+      "title_fa": "صحنه جرم",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/3034",
+      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 22 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-571",
+      "title_fa": "صحنه جرم",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/3034",
+      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 22 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2118",
+      "title_fa": "صحنه جرم",
+      "start": "2026-10-25T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/3034",
+      "icon": "https://image.tmdb.org/t/p/w500/j73WOp6ArCy8vK4vreIdSunoXAr.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 22 از فصل 57؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "اینجا همه چیز شروع می‌شود",
+      "start": "2026-10-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/112470",
+      "icon": "https://image.tmdb.org/t/p/w500/v7nXPo2zdaIOfeIaERiOuTEt89N.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 41 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "قیام",
+      "start": "2026-11-06T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/977942",
+      "icon": "https://image.tmdb.org/t/p/w500/l0UYMS86pBxDoGP78qJNUKeAqZX.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "La Bataille de Gaulle : L’Âge de fer",
+      "start": "2026-11-06T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1165366",
+      "icon": "https://image.tmdb.org/t/p/w500/zWuZWFKyga6GF3agrhJn8UtdMSu.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Gail Daughtry and the Celebrity Sex Pass",
+      "start": "2026-11-07T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1476682",
+      "icon": "https://image.tmdb.org/t/p/w500/98T4bnMjJs71WOVZoeY8edZhfgZ.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "ریگان",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/647245",
+      "icon": "https://image.tmdb.org/t/p/w500/o21NB4f5fNk1dtrRlyAmA0C0cb3.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Model Citizen",
+      "start": "2026-11-03T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1792170",
+      "icon": "https://image.tmdb.org/t/p/w500/duuH76uKtbB2nFm3esFztPkVAMt.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
