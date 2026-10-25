@@ -52,6 +52,10 @@ jobs:
         run: |
           python -m unittest discover -s backend/tests -p test_shared_seo_shell.py -v
           python -m unittest discover -s backend/tests -p test_reconcile_published_sitemaps.py -v
+      - name: Check lossless movie detail packing and browser loader before build
+        run: |
+          python -m unittest discover -s backend/tests -p test_pack_movie_details.py -v
+          node backend/tests/test_movie_shard_loader.js
       - name: Verify book identity and commerce preservation
         run: python -m unittest discover -s backend/tests -p test_book_catalog.py -v
       - name: Verify market data contracts
@@ -461,6 +465,9 @@ jobs:
 
       - name: Reconcile published sitemaps against retained crawlable routes
         run: python backend/scripts/reconcile_published_sitemaps.py --site backend/public
+
+      - name: Losslessly pack movie details for GitHub Pages size
+        run: python backend/scripts/pack_movie_details.py --site backend/public --minimum 1000
 
       - name: Audit GitHub Pages payload size
         run: python backend/scripts/audit_pages_size.py backend/public 750000000
