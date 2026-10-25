@@ -87,6 +87,20 @@ jobs:
           key: jankalam-extfig-${{ github.run_id }}
           restore-keys: |
             jankalam-extfig-
+      # The independent figures collector stores history with a different cache
+      # key and path list from the legacy full builder. Reuse that verified
+      # collector history instead of starting from an empty statement feed.
+      - name: Restore independently collected figure history
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            backend/data/external-figure-posts.json
+            backend/data/youtube-videos.json
+            backend/data/youtube-recap-state.json
+            backend/data/youtube-transcripts.json
+          key: pendar-figure-history-${{ github.run_id }}
+          restore-keys: |
+            pendar-figure-history-
       - name: Collect figure videos and recaps
         working-directory: backend
         env:
