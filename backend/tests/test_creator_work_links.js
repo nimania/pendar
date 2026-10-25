@@ -1,5 +1,10 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
-const base=path.resolve(__dirname,'../..'),context={URL,Map,Set,console,esc:s=>String(s),relTime:s=>s,youtubeVideoId:()=>null};
+const base=path.resolve(__dirname,'../..'),context={
+  URL,Map,Set,console,esc:s=>String(s),relTime:s=>s,youtubeVideoId:()=>null,
+  // The movie module registers its DOM-ready hook when loaded in a browser.
+  // Keep the hook inert in this Node VM unit test; test only pure routing/identity helpers.
+  document:{readyState:'loading',addEventListener:()=>{}}
+};
 vm.createContext(context);
 vm.runInContext(fs.readFileSync(path.join(base,'web-static/figures-profile.js'),'utf8'),context);
 vm.runInContext(fs.readFileSync(path.join(base,'web-static/movies-hub.js'),'utf8'),context);
