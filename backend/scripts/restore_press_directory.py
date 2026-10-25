@@ -69,7 +69,7 @@ def restore(site: Path, *, fetch=None):
     # partial or invented records.
     target.write_text(json.dumps(rows, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     js = site / "data" / "press-directory.js"
-    js.write_text("window.__PRESS_DIRECTORY__=" + json.dumps(rows, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c") + ";\n", encoding="utf-8")
+    js.write_text("window.__PRESS_DIRECTORY__=" + json.dumps(rows, ensure_ascii=False, separators=(",", ":")).replace("<", "\\\\u003c") + ";\n", encoding="utf-8")
     print(f"Recovered {len(rows)} published publisher records from {LIVE_URL}")
     return len(rows)
 
