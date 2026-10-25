@@ -9,7 +9,7 @@ import json
 import re
 from pathlib import Path
 
-SHELL_SCRIPT = '<script src="/seo-app-shell.js"></script>'
+SHELL_SCRIPT = '<script src="/seo-app-shell.js" onerror="document.documentElement.classList.remove(&quot;js-enabled&quot;)"></script>'
 _MAIN = re.compile(r'<main\s+class="wrap">[\s\S]*?</main>', re.I)
 _STYLE = re.compile(r'<style\b(?P<attrs>[^>]*)>(?P<code>[\s\S]*?)</style>', re.I)
 _SCRIPT = re.compile(r'<script\b(?P<attrs>[^>]*)>(?P<code>[\s\S]*?)</script>', re.I)
