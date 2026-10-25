@@ -3,6 +3,7 @@ import argparse, datetime, hashlib, html, json, re, shutil, subprocess, runpy
 from pathlib import Path
 from urllib.parse import quote, unquote
 from build_entities import merge_editorial_views
+from share_seo_shell import share_template
 
 ORIGIN = 'https://pendar.io'
 SECTIONS = {'radar':'رادارهای پندار؛ آمریکا و اسرائیل','israel-radar':'رادار اسرائیل؛ انتخابات و پیامدها برای ایران','us-radar':'رادار آمریکا؛ انتخابات و پیامدها برای ایران','badbadak':'بادبادک؛ چهره‌ها، سبک زندگی و سرگرمی','headlines':'سرخط خبرها','books':'پیشخوان کتاب','movies':'جان فیلم','figures':'چهره‌ها','press':'پیشخوان جراید','tv':'راهنمای تماشا','knowledge':'دانش پندار','market':'پنداربازار','weather':'آب‌وهوا','faq':'راهنمای پندار','trends':'روند خبرها','iran':'خبرهای ایران','topics':'موضوعات'}
@@ -53,6 +54,8 @@ def build(site):
     template=re.sub(r'<meta[^>]*(?:property="og:[^"]+"|name="(?:robots|twitter:[^"]+)")[^>]*>', '', template)
     template=re.sub(r'<script[^>]*id="seo-schema"[^>]*>[\s\S]*?</script>', '', template)
     template=re.sub(r'<section id="seo-static"[\s\S]*?</section><!-- seo-end -->', '', template)
+    # Large repeated SPA scaffolding is shared without changing the initial HTML article.
+    template, seo_shell_marker = share_template(site, template)
     pages={}; aliases={}; catalogs={k:[] for k in SECTIONS}
     def add(kind,key,title,body,image=None,schema_type='WebPage',published=None,canonical=None):
         if not title or not key: return
@@ -477,7 +480,7 @@ def build(site):
         if 'person-handles.js' not in out:out=out.replace('<script defer src="router.js">','<script defer src="data/person-handles.js"></script><script defer src="router.js">')
         out=out.replace('<head>','<head><base href="/">',1).replace('</head>',head+'</head>')
         content='<section id="seo-static" class="wrap"><nav><a href="/">پندار</a> · <a href="/'+esc(page.get('section',page.get('kind','headlines')))+'/">'+esc(SECTIONS.get(page.get('section',page.get('kind')),'مطالب پندار'))+'</a></nav><h1>'+esc(page['title'])+'</h1>'+page['body']+'</section><!-- seo-end -->'
-        out=out.replace('<main class="wrap">',content+'<main class="wrap">')
+        out=out.replace(seo_shell_marker, content+seo_shell_marker, 1)
         # Prevent the app shell from painting below the readable static content.
         out=out.replace('</head>','<style>html:not(.js-enabled) main.wrap{display:none}html.js-enabled #seo-static{display:none}</style></head>')
         target=site/(unquote(url.strip('/'))+'/index.html' if url!='/' else 'index.html');target.parent.mkdir(parents=True,exist_ok=True);target.write_text(out,encoding='utf-8')
