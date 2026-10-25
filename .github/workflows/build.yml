@@ -48,6 +48,10 @@ jobs:
         run: node backend/tests/test_creator_work_links.js
       - name: Test press directory recovery safely before full build
         run: python -m unittest discover -s backend/tests -p test_restore_press_directory.py -v
+      - name: Test shared SEO chrome and published sitemap reconciliation early
+        run: |
+          python -m unittest discover -s backend/tests -p test_shared_seo_shell.py -v
+          python -m unittest discover -s backend/tests -p test_reconcile_published_sitemaps.py -v
       - name: Verify book identity and commerce preservation
         run: python -m unittest discover -s backend/tests -p test_book_catalog.py -v
       - name: Verify market data contracts
@@ -55,6 +59,8 @@ jobs:
       - name: Install dependencies
         working-directory: backend
         run: pip install -r requirements.txt
+      - name: Smoke-test full crawlable SEO routes before news ingestion
+        run: python backend/tests/test_seo.py
       - name: Verify editorial history and report safeguards
         working-directory: backend
         run: python -m unittest discover -s tests -p test_editorial_reports.py -v
@@ -452,6 +458,9 @@ jobs:
 
       - name: Validate final lightweight site after trimming
         run: python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
+
+      - name: Reconcile published sitemaps against retained crawlable routes
+        run: python backend/scripts/reconcile_published_sitemaps.py --site backend/public
 
       - name: Audit GitHub Pages payload size
         run: python backend/scripts/audit_pages_size.py backend/public 750000000
