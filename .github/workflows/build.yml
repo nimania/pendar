@@ -455,6 +455,14 @@ jobs:
 
       - name: Audit GitHub Pages payload size
         run: python backend/scripts/audit_pages_size.py backend/public 750000000
+      - name: Preserve read-only Pages size diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-size-diagnostics
+          path: pages-payload-audit.json
+          retention-days: 7
+          if-no-files-found: ignore
 
       - name: Package latest complete site
         run: tar -cf /tmp/latest-static-site.tar -C backend/public .
