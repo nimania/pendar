@@ -12,6 +12,7 @@ const requested=[];
 const ctx = {
   Map, Set, console, Response, Blob, DecompressionStream, TextDecoder,
   DATA:'/data',
+  document:{readyState:'loading',addEventListener:()=>{}},
   fetch:async (url)=>{
     requested.push(url);
     return new Response(bytes, {status:200});
