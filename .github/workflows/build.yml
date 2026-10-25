@@ -369,6 +369,11 @@ jobs:
           elif not valid(current):
               print("::error::Press directory is missing or too small; no verified backup available.")
           PY
+          # If all retained artifacts have expired, recover the real publisher
+          # directory from the currently published Pendar site. The helper
+          # refuses incomplete/placeholder data; the integrity gate stays strict.
+          python -m unittest discover -s backend/tests -p test_restore_press_directory.py -v
+          python backend/scripts/restore_press_directory.py --site backend/public
           python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
 
       - name: Validate static SEO routes
