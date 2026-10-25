@@ -1,0 +1,35 @@
+name: Smoke-test crawlable SEO output
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "backend/scripts/build_seo.py"
+      - "backend/scripts/share_seo_shell.py"
+      - "backend/scripts/reconcile_published_sitemaps.py"
+      - "backend/tests/test_shared_seo_shell.py"
+      - "backend/tests/test_reconcile_published_sitemaps.py"
+      - "backend/tests/test_seo.py"
+      - ".github/workflows/seo-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  seo-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install requirements for offline SEO fixture
+        run: pip install -r backend/requirements.txt
+      - name: Test reusable browser shell and sitemap rules
+        run: |
+          python -m unittest discover -s backend/tests -p test_shared_seo_shell.py -v
+          python -m unittest discover -s backend/tests -p test_reconcile_published_sitemaps.py -v
+      - name: Validate full crawlable HTML fixture and rebuild
+        run: python backend/tests/test_seo.py
