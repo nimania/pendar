@@ -1,0 +1,73 @@
+name: Preflight historical archive recovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build.yml"
+      - ".github/workflows/archive-preflight.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  inspect-archives:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore independent news database (read only)
+        id: news
+        uses: actions/cache/restore@v4
+        with:
+          path: backend/build.db
+          key: archive-preflight-news-${{ github.run_id }}
+          restore-keys: |
+            pendar-news-db-
+            pendar-figures-db-
+            jankalam-db-
+      - name: Restore independent figure history (read only)
+        id: history
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            backend/data/external-figure-posts.json
+            backend/data/youtube-videos.json
+            backend/data/youtube-recap-state.json
+            backend/data/youtube-transcripts.json
+          key: archive-preflight-figures-${{ github.run_id }}
+          restore-keys: |
+            pendar-figure-history-
+      - name: Report recovered archive health without publishing
+        run: |
+          python - <<'PY'
+          import json, sqlite3
+          from pathlib import Path
+          db = Path("backend/build.db")
+          print("Database cache restored: ${{ steps.news.outputs.cache-matched-key }}")
+          print("Figure history cache restored: ${{ steps.history.outputs.cache-matched-key }}")
+          if not db.is_file():
+              print("::error::No historical news SQLite database could be recovered from GitHub Actions cache.")
+              raise SystemExit(1)
+          try:
+              with sqlite3.connect("file:" + db.resolve().as_posix() + "?mode=ro", uri=True) as con:
+                  published = con.execute("select count(*) from stories where status = 'published'").fetchone()[0]
+          except (sqlite3.Error, OSError) as exc:
+              print(f"::error::Historical database cannot be read: {exc}")
+              raise SystemExit(1)
+          print("Restored published news records:", published)
+          posts_file = Path("backend/data/external-figure-posts.json")
+          if posts_file.is_file():
+              try:
+                  posts = json.loads(posts_file.read_text(encoding="utf-8"))
+                  print("Restored external figure post records:", len(posts) if isinstance(posts, list) else "unexpected structure")
+              except (OSError, ValueError) as exc:
+                  print("::warning::External figure post history invalid:", exc)
+          else:
+              print("::warning::No historical external figure posts cache was found")
+          if published < 10000:
+              print("::error::Historic news database has fewer than the integrity gate's required 10000 published stories. Do not run the complete build as a replacement for the live archive.")
+              raise SystemExit(1)
+          print("Historical news database is large enough for the first-stage integrity requirement.")
+          PY
