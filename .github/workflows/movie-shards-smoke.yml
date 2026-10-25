@@ -1,0 +1,34 @@
+name: Smoke-test lossless movie detail shards
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "backend/scripts/pack_movie_details.py"
+      - "backend/tests/test_pack_movie_details.py"
+      - "backend/tests/test_movie_shard_loader.js"
+      - "web-static/movies-hub.js"
+      - ".github/workflows/movie-shards-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  movie-shard-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify lossless compression and missing-data safety
+        run: python -m unittest discover -s backend/tests -p test_pack_movie_details.py -v
+      - name: Verify movie browser loader and old-site fallback
+        run: node backend/tests/test_movie_shard_loader.js
+      - name: Verify no regression in creator identity links
+        run: node backend/tests/test_creator_work_links.js
