@@ -73,11 +73,11 @@
         }
       ],
       "source_check": {
-        "checked_at": "2026-10-25T16:05:55.797243+00:00",
+        "checked_at": "2026-10-25T19:00:28.297988+00:00",
         "ok": true,
         "content_hash": "c78bfefe4c41d798ed74f13f4f0da856e7da5c70f3b99430299b976557221426",
         "url": "https://www.ipsos.com/sites/default/files/ct/news/documents/2026-10/Reuters%20Ipsos%20October%20Large%20Issue%20Topline.pdf",
-        "last_success_at": "2026-10-25T16:05:55.797243+00:00"
+        "last_success_at": "2026-10-25T19:00:28.297988+00:00"
       }
     },
     "israel": {
@@ -172,11 +172,11 @@
         }
       ],
       "source_check": {
-        "checked_at": "2026-10-25T16:05:55.797243+00:00",
+        "checked_at": "2026-10-25T19:00:28.297988+00:00",
         "ok": true,
-        "content_hash": "914409a1c3c6378e190b58ff3d3443fbbd89a61e07b8f2f9dad0a9be84886e7c",
+        "content_hash": "deae62d8843052c78d9931dc86f98d39aa67fa428278550921788b3559f9fb27",
         "url": "https://www.kan.org.il/content/kan-news/politic/1105927/",
-        "last_success_at": "2026-10-25T16:05:55.797243+00:00"
+        "last_success_at": "2026-10-25T19:00:28.297988+00:00"
       }
     }
   }
