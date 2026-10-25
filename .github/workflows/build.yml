@@ -58,10 +58,8 @@ jobs:
       - name: Verify editorial history and report safeguards
         working-directory: backend
         run: python -m unittest discover -s tests -p test_editorial_reports.py -v
-      - name: Check Telegram publishing
-        run: python -m unittest discover -s tests -p 'test_telegram_publish.py'
-      - name: Check Telegram digest
-        run: python -m unittest discover -s tests -p 'test_telegram_digest.py'
+      # Telegram delivery tests run independently in telegram-tests.yml.
+      # Publishing crawlable pages must not depend on delivery-channel unit tests.
       # Persist the news DB between hourly runs so we DON'T re-synthesize the same
       # stories every hour (only new clusters cost an AI call). Restores the most
       # recent cache; always saves a fresh one (unique key + prefix restore-keys).
