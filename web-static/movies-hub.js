@@ -12,7 +12,47 @@ function _movieScopeBar(){
   return '<div class="movie-source-tabs">'+[["all","همه آثار"],["editorial","دارای جان کلام"],["iran","ایرانی"],["turkish","ترکی"],["classic","کلاسیک‌ها"]].map(x=>'<button class="'+(movieState.scope===x[0]?"on":"")+'" onclick="movieState.scope=\''+x[0]+'\';movieState.visible=100;renderMovieGrid()">'+x[1]+'</button>').join("")+'</div>';
 }
 function _movieLoadMore(){movieState.visible+=100;renderMovieGrid()}
+// Details are packed losslessly into 64 compressed, cacheable JSON shards for
+// GitHub Pages. Older deployments still have individual JSON files below.
+async function _packedMovieDetail(pendarId){
+  const id=String(pendarId||"");
+  if(!/^p[mt]_[a-z0-9]+$/.test(id))return null;
+  const shard=Array.from(id).reduce((sum,ch)=>sum+ch.charCodeAt(0),0)%64;
+  const key="packed-"+shard;
+  if(!movieDetailBuckets.has(key)){
+    movieDetailBuckets.set(key,(async()=>{
+      const response=await fetch(DATA+"/movie-detail-shards/"+shard+".json.gz?v=packed1");
+      if(!response.ok)throw new Error("Movie-detail shard unavailable");
+      const buffer=await response.arrayBuffer();
+      const bytes=new Uint8Array(buffer);
+      // Some CDNs transparently decode gzip. Check magic bytes before using
+      // DecompressionStream to support both types of static serving.
+      const compressed=bytes.length>=2&&bytes[0]===31&&bytes[1]===139;
+      let text;
+      if(compressed){
+        if(typeof DecompressionStream==="undefined")throw new Error("Gzip decoder unavailable");
+        text=await new Response(new Blob([buffer]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+      }else{
+        text=new TextDecoder().decode(bytes);
+      }
+      const records=JSON.parse(text);
+      if(!records||typeof records!=="object"||Array.isArray(records))throw new Error("Invalid movie-detail shard");
+      return records;
+    })());
+  }
+  try{
+    const records=await movieDetailBuckets.get(key);
+    return records[id]||null;
+  }catch(err){
+    movieDetailBuckets.delete(key);
+    throw err;
+  }
+}
 async function _movieLoadDetail(raw){
+  try{
+    const detail=await _packedMovieDetail(raw.pendar_id);
+    if(detail&&Array.isArray(detail.credits))return {...raw,...detail};
+  }catch(_){}
   try{
     const detail=await getJSON(DATA+"/movie-details/"+encodeURIComponent(raw.pendar_id)+".json?v=person1",15000);
     if(detail&&Array.isArray(detail.credits))return {...raw,...detail};
