@@ -72,6 +72,8 @@ jobs:
           path: backend/build.db
           key: jankalam-db-${{ github.run_id }}
           restore-keys: |
+            pendar-news-db-
+            pendar-figures-db-
             jankalam-db-
 
       - name: Restore external figure feed cache
