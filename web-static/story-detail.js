@@ -359,7 +359,11 @@ async function openStory(id) {
        +'</div>':""}
 <aside class="pendar-telegram-promo telegram-prominent"><span class="telegram-mark" aria-hidden="true">➤</span><span class="telegram-copy"><strong>پندار در تلگرام</strong><p>خبرها و گزارش‌های منتخب را مستقیم در کانال دنبال کنید.</p></span><a href="https://t.me/pendario" target="_blank" rel="noopener noreferrer">عضویت در کانال ←</a></aside>
     ${!editorial?articleDisplayAdMarkup():""}
-    <details class="story-examination"><summary><span>زیر ذره‌بین پندار<small class="story-examination-description">منابع، پیشینه، دیدگاه‌ها و پرسش‌وپاسخ</small></span></summary><div class="story-examination-body">
+    <div class="ref-strip story-jan-kalam-link" aria-label="ذره‌بین این خبر در جان‌کلام">
+      <span class="ref-hd"><b>ذره‌بین این خبر در جان‌کلام</b> · مقایسهٔ روایت منابع و دیدگاه‌ها</span>
+      <div class="ref-links"><a href="https://nimania.github.io/jan-kalam/?story=${encodeURIComponent(cleanId)}"><span class="ref-src">جان‌کلام</span>خواندن بررسی چندمنبعی و نقاط اختلاف ↗</a></div>
+    </div>
+    <details class="story-examination"><summary><span>زمینه و پیوندهای پرونده در پندار<small class="story-examination-description">پیشینه، چهره‌ها، نقشه و منابع خبر</small></span></summary><div class="story-examination-body">
     ${pendarHistoricalContext(s)}
     <div id="story-history-fallback"></div>
     ${detailGeoStrip(s)}
@@ -373,17 +377,10 @@ async function openStory(id) {
     ${cred}
     ${trendSec}
     ${relSection}
-    <div class="layers"><h3 class="section-h">منابع چه می‌گویند <span class="n">دیدگاه هر منبع، جدا از واقعیت</span></h3><div class="views">${views || '<p class="muted">—</p>'}</div>${consensus}</div>
-    ${quotedPeople}
-    ${figuresSection(s.figures)}
+    
     ${!editorial && ((String(s.what_happened_fa||"")+String(s.why_it_matters_fa||"")+String(s.summary_fa||"")).length >= 900 && (s.sources||[]).length >= 3) ? articleDisplayAdMarkup().replaceAll("pendar-article-display-ad","pendar-article-display-ad-second") : ""}
     <div class="layers"><h3 class="section-h">منابع و اطلاعات پرونده</h3><div class="d-meta"><span>${faN(s.source_count||0)} منبع</span> · <span>${esc(IRAN_FA[s.iran_relevance]||"")}</span></div><div class="cites">${cites}</div></div>
-    <div class="ask"><div class="a-h"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" style="color:var(--accent)"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z" stroke-linejoin="round"/></svg> دربارهٔ این خبر بپرس</div>
-      <p class="a-sub">پاسخ‌های آماده از روی همین خبر.</p>
-      <div class="chips">${chips}</div>
-      <div class="answer" id="answer"><div class="a-bubble" id="a-bubble"></div>
-        <div class="grounded"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> مبتنی بر منابع همین خبر</div></div>
-    </div>
+    
     </div></details>
     <div id="story-discovery"></div>
           </article>
