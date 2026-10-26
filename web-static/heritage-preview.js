@@ -368,6 +368,67 @@
     });
     put("rail-figures-updated",cards.join("")||'<p class="empty-state">فعلاً گفته‌ای برای نمایش نیست.</p>');
   }
+  function renderRailFigureFive(payload){
+    var people=Array.isArray(payload&&payload.figures)?payload.figures:[];
+    function personPhoto(p){
+      var raw=[p.avatar,p.avatar_url,p.image_url,p.photo_url,p.image&&p.image.url,p.image&&p.image.path].filter(Boolean);
+      for(var x of raw){
+        var url=String(x).trim();
+        if(!/^https?:\/\//.test(url)&&/^\/?[a-zA-Z0-9][a-zA-Z0-9_./%-]*$/.test(url)&&!url.includes(".."))url="/"+url.replace(/^\/+/, "");
+        if(validImage(url))return url;
+      }
+      return "";
+    }
+    var now=Date.now();
+    var records=people.filter(function(p){return p&&p.handle&&p.name_fa;}).map(function(p){
+      var posts=Array.isArray(p.posts)?p.posts:[];
+      var dates=posts.map(function(post){return String(post.published_at||"");}).filter(Boolean);
+      return {person:p,count:posts.length,latest:dates.sort().reverse()[0]||"",
+        added:String(p.created_at||p.added_at||p.first_seen_at||p.profile_created_at||""),
+        engagement:posts.reduce(function(v,post){return v+(Number(post.engagement_score||post.score||post.view_count||0)||0);},0),
+        image:personPhoto(p),statement:latestFigureStatement(p,now)};
+    });
+    var byLatest=function(a,b){return b.latest.localeCompare(a.latest);};
+    var buckets={
+      // "تازه" means recently ADDED profiles, not recently active ones.
+      fresh:records.filter(function(r){return r.added;}).sort(function(a,b){return b.added.localeCompare(a.added);}),
+      updated:records.slice().sort(byLatest),
+      talkative:records.slice().sort(function(a,b){return b.count-a.count||byLatest(a,b);}),
+      // This is a conversation-volume ranking, not independently measured
+      // Google search trends; describe it accurately in the UI.
+      trends:records.slice().sort(function(a,b){return b.engagement-a.engagement||b.count-a.count||byLatest(a,b);})
+    };
+    Object.keys(buckets).forEach(function(key){
+      var selected=buckets[key].slice(0,5);
+      var freshStatements=selected.filter(function(row){
+        return Number.isFinite(figureQuoteProminence(row,now));
+      }).sort(function(a,b){
+        return figureQuoteProminence(b,now)-figureQuoteProminence(a,now);
+      });
+      var highlighted=selected.length===5&&freshStatements.length?freshStatements[0]:null;
+      var target=el("rail-figures-"+key);
+      if(target)target.classList.toggle("rail-figures-has-lead",Boolean(highlighted));
+      var rows=selected.map(function(r){
+        var featured=r===highlighted;
+        var image=r.image?'<img class="rail-thumb" src="'+esc(r.image)+'" alt="" loading="lazy" decoding="async" onerror="this.parentNode.remove()">':"";
+        var statement=r.statement;
+        var hasStatement=Boolean(statement);
+        var summary=hasStatement?'<span class="rail-figure-statement">'+
+            '<small>'+ (statement.direct?"نقل‌قول":"گفته") +'</small>'+
+            '<span>'+esc(excerpt(statement.text,featured?205:105))+'</span>'+
+          '</span>':"";
+        var role=!hasStatement?'<span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span>':"";
+        return '<a class="rail-row rail-figure-card'+(featured?" rail-figure-featured":"")+
+          (image?"":" rail-row-text-only")+
+          '" href="/@'+encodeURIComponent(r.person.handle)+'/"'+
+          (statement?' title="گفتهٔ این چهره؛ جزئیات در پروفایل"':"")+'>'+
+          (image?'<span class="rail-thumb-frame">'+image+'</span>':"")+
+          '<span class="rail-story-copy"><span class="rail-title">'+esc(r.person.name_fa)+'</span>'+
+          summary+role+'</span></a>';
+      });
+      put("rail-figures-"+key,rows.join("")||'<p class="empty-state">'+(key==="fresh"?"تاریخ اضافه‌شدن چهره‌ها هنوز در داده‌های فعلی ثبت نشده است.":"چهره‌ای برای نمایش موجود نیست.")+'</p>');
+    });
+  }
   function initializeRailTabs(){
     mountRoot.querySelectorAll(".rail-tabs-box").forEach(function(box){
       if(box.dataset.tabsReady)return;
