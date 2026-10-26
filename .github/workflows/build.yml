@@ -21,7 +21,6 @@ on:
         description: "Build an opt-in recording script for this YouTube video ID"
         required: false
         type: string
-  # Manual full builds remain available; the scoped push trigger publishes Badbadak source updates.
 
 permissions:
   actions: read
