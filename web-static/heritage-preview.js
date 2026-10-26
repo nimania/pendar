@@ -327,7 +327,7 @@
     // No hard-coded figure or political faction receives priority.
     return entry.statement.score+(entry.engagement>0?Math.min(10,Math.log1p(entry.engagement)):0);
   }
-  function renderRailFigureFive(payload){
+  function renderRailFigureLatestTwenty(payload){
     var people=Array.isArray(payload&&payload.figures)?payload.figures:[];
     function personPhoto(p){
       var raw=[p.avatar,p.avatar_url,p.image_url,p.photo_url,p.image&&p.image.url,p.image&&p.image.path].filter(Boolean);
@@ -338,55 +338,35 @@
       }
       return "";
     }
-    var now=Date.now();
-    var records=people.filter(function(p){return p&&p.handle&&p.name_fa;}).map(function(p){
-      var posts=Array.isArray(p.posts)?p.posts:[];
-      var dates=posts.map(function(post){return String(post.published_at||"");}).filter(Boolean);
-      return {person:p,count:posts.length,latest:dates.sort().reverse()[0]||"",
-        added:String(p.created_at||p.added_at||p.first_seen_at||p.profile_created_at||""),
-        engagement:posts.reduce(function(v,post){return v+(Number(post.engagement_score||post.score||post.view_count||0)||0);},0),
-        image:personPhoto(p),statement:latestFigureStatement(p,now)};
-    });
-    var byLatest=function(a,b){return b.latest.localeCompare(a.latest);};
-    var buckets={
-      // "تازه" means recently ADDED profiles, not recently active ones.
-      fresh:records.filter(function(r){return r.added;}).sort(function(a,b){return b.added.localeCompare(a.added);}),
-      updated:records.slice().sort(byLatest),
-      talkative:records.slice().sort(function(a,b){return b.count-a.count||byLatest(a,b);}),
-      // This is a conversation-volume ranking, not independently measured
-      // Google search trends; describe it accurately in the UI.
-      trends:records.slice().sort(function(a,b){return b.engagement-a.engagement||b.count-a.count||byLatest(a,b);})
-    };
-    Object.keys(buckets).forEach(function(key){
-      var selected=buckets[key].slice(0,5);
-      var freshStatements=selected.filter(function(row){
-        return Number.isFinite(figureQuoteProminence(row,now));
-      }).sort(function(a,b){
-        return figureQuoteProminence(b,now)-figureQuoteProminence(a,now);
+    var rows=[];
+    people.filter(function(p){return p&&p.handle&&p.name_fa;}).forEach(function(person){
+      (Array.isArray(person.posts)?person.posts:[]).forEach(function(post){
+        if(!post||typeof post!=="object")return;
+        var stamp=Date.parse(post.published_at||post.recorded_at||post.created_at||"");
+        if(!Number.isFinite(stamp)||stamp>Date.now()+3600000)return;
+        var statement=norm(post.quote_fa||post.summary_fa||post.statement_fa||
+          post.text_fa||post.text||post.headline_fa||post.title_fa||"");
+        if(statement.length<24||/^(draft|private|pending)$/i.test(String(post.status||"")))return;
+        rows.push({person:person,post:post,stamp:stamp,text:statement,image:personPhoto(person)});
       });
-      var highlighted=selected.length===5&&freshStatements.length?freshStatements[0]:null;
-      var target=el("rail-figures-"+key);
-      if(target)target.classList.toggle("rail-figures-has-lead",Boolean(highlighted));
-      var rows=selected.map(function(r){
-        var featured=r===highlighted;
-        var image=r.image?'<img class="rail-thumb" src="'+esc(r.image)+'" alt="" loading="lazy" decoding="async" onerror="this.parentNode.remove()">':"";
-        var statement=r.statement;
-        var hasStatement=Boolean(statement);
-        var summary=hasStatement?'<span class="rail-figure-statement">'+
-            '<small>'+ (statement.direct?"نقل‌قول":"از گفته‌های تازه") +'</small>'+
-            '<span>'+esc(excerpt(statement.text,featured?205:105))+'</span>'+
-          '</span>':"";
-        var role=!hasStatement?'<span class="rail-kicker">'+esc(r.person.role_fa||"")+'</span>':"";
-        return '<a class="rail-row rail-figure-card'+(featured?" rail-figure-featured":"")+
-          (image?"":" rail-row-text-only")+
-          '" href="/@'+encodeURIComponent(r.person.handle)+'/"'+
-          (statement?' title="گفتهٔ این چهره؛ جزئیات در پروفایل"':"")+'>'+
-          (image?'<span class="rail-thumb-frame">'+image+'</span>':"")+
-          '<span class="rail-story-copy"><span class="rail-title">'+esc(r.person.name_fa)+'</span>'+
-          summary+role+'</span></a>';
-      });
-      put("rail-figures-"+key,rows.join("")||'<p class="empty-state">'+(key==="fresh"?"تاریخ اضافه‌شدن چهره‌ها هنوز در داده‌های فعلی ثبت نشده است.":"چهره‌ای برای نمایش موجود نیست.")+'</p>');
     });
+    rows.sort(function(a,b){return b.stamp-a.stamp;});
+    var seen=new Set(),latest=[];
+    rows.forEach(function(row){
+      var key=String(row.post.id||row.post.url||row.post.published_at||row.stamp)+"|"+
+        row.person.handle+"|"+row.text.slice(0,90).toLowerCase();
+      if(seen.has(key))return;
+      seen.add(key);latest.push(row);
+    });
+    var cards=latest.slice(0,20).map(function(row){
+      var image=row.image
+        ?'<img src="'+esc(row.image)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">'
+        :'<span class="home-quote-avatar-fallback" aria-hidden="true">'+esc(String(row.person.name_fa||"").slice(0,1))+'</span>';
+      return '<a class="home-quote-item" href="/@'+encodeURIComponent(row.person.handle)+'/">'
+        +'<span class="home-quote-person">'+image+'<strong>'+esc(row.person.name_fa)+'</strong></span>'
+        +'<span class="home-quote-text">'+esc(excerpt(row.text,220))+'</span></a>';
+    });
+    put("rail-figures-updated",cards.join("")||'<p class="empty-state">فعلاً گفته‌ای برای نمایش نیست.</p>');
   }
   function initializeRailTabs(){
     mountRoot.querySelectorAll(".rail-tabs-box").forEach(function(box){
@@ -930,6 +910,65 @@
       (pending?"در حال گردآوری گفته‌ها…":"فعلاً گفته‌ای با عکس معتبر برای نمایش وجود ندارد.")+'</p>')+'</div>';
   }
 
+  var homeBadbadakFeedsPromise=null;
+  function renderHomeJanKalamNews(stories){
+    var latest=(Array.isArray(stories)?stories:[]).filter(function(row){
+      return row&&UUID.test(String(row.id||""))&&headline(row);
+    }).slice().sort(function(a,b){
+      return (Date.parse(b.published_at||b.updated_at||"")||0)-(Date.parse(a.published_at||a.updated_at||"")||0);
+    }).slice(0,4);
+    put("home-jan-kalam-list",latest.map(function(row){
+      return '<a class="home-cross-site-item" href="https://nimania.github.io/jan-kalam/?story='+encodeURIComponent(row.id)+'">'
+        +'<strong>'+esc(headline(row))+'</strong><small>'+esc(excerpt(row.summary_fa||row.lead_fa||"",100))+'</small></a>';
+    }).join("")||'<p class="empty-state">خبر تازه‌ای برای نمایش نیست.</p>');
+  }
+  function renderHomeBadbadakNews(stories){
+    var target=el("home-badbadak-list");
+    if(!target)return;
+    function eligible(row){
+      var title=norm(row&& (row.title||row.title_fa||row.headline_fa||""));
+      if(!title)return false;
+      var blocked=/نفتکش|سپاه|موشک|حمله نظامی|تنگه هرمز|غزه|جنگ|سفیر|دیپلمات|وزیر|رئیس.?جمهور|جاسوسی|تروریست|پایگاه نظامی|ناتو/;
+      var lifestyle=/بازیگر|خواننده|سینما|سریال|هنرمند|کنسرت|سلبریتی|جشنواره.*فیلم|زیبایی|آرایش|غذا|رستوران|آشپزی|تغذیه|قهوه|شیرینی|پوشاک|لباس|استایل|فشن|سلامت|پزشکی|بیماری|گردشگری|هتل|سفر|فناوری|هوش مصنوعی|تکنولوژی|گجت|آیفون|حادثه|تصادف|جنجال|حاشیه|قتل/;
+      return !blocked.test(title)&&lifestyle.test(title);
+    }
+    function published(row){return Date.parse(row.published_at||row.published||row.updated_at||"")||0;}
+    function render(feeds){
+      var all=[];
+      (Array.isArray(stories)?stories:[]).filter(eligible).forEach(function(row){
+        all.push({title:headline(row),summary:row.summary_fa||row.lead_fa||"",href:slugUrl(row),time:published(row),rank:Number(row.source_count||1),internal:true});
+      });
+      (feeds||[]).forEach(function(row){
+        if(!eligible(row))return;
+        var href=validLink(row.url||row.href||"");
+        if(!href)return;
+        all.push({title:row.title||row.title_fa||row.headline_fa||"",summary:row.summary||row.summary_fa||row.description||"",href:href,time:published(row),rank:Number(row.source_count||row.sources_count||1),internal:false});
+      });
+      var seen=new Set();
+      all.sort(function(a,b){return b.rank-a.rank||b.time-a.time;});
+      var items=all.filter(function(row){
+        var key=row.title.toLowerCase().replace(/[\s\u200c،؛.!؟]+/g,"");
+        if(seen.has(key))return false;seen.add(key);return true;
+      }).slice(0,5);
+      put("home-badbadak-list",items.map(function(row){
+        return '<a class="home-cross-site-item" href="'+esc(row.href)+'"'+(row.internal?'':' target="_blank" rel="noopener noreferrer"')+'>'
+          +'<strong>'+esc(row.title)+'</strong><small>'+esc(excerpt(row.summary,100))+'</small></a>';
+      }).join("")||'<a class="home-cross-site-item" href="https://nimania.github.io/badbadak/"><strong>دیدن خبرهای داغ بادبادک</strong></a>');
+    }
+    if(homeBadbadakFeedsPromise){homeBadbadakFeedsPromise.then(render);return;}
+    var sources=["7sobh","bartarinha","rokna"];
+    homeBadbadakFeedsPromise=Promise.allSettled(sources.map(function(source){
+      var url="https://raw.githubusercontent.com/nimania/badbadak/main/data/"+source+"-feed.json";
+      return fetch(url,{credentials:"omit",mode:"cors",cache:"no-cache"}).then(function(response){
+        if(!response.ok)throw new Error("badbadak feed "+response.status);
+        return response.json();
+      }).then(function(rows){return Array.isArray(rows)?rows:[];});
+    })).then(function(results){
+      return results.reduce(function(rows,result){return result.status==="fulfilled"?rows.concat(result.value):rows;},[]);
+    });
+    homeBadbadakFeedsPromise.then(render);
+  }
+
   async function renderHome(){
     var stories=data.stories.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);});
     var reports=data.reports.filter(function(r){return r&&UUID.test(String(r.id||""))&&headline(r);})
@@ -1446,11 +1485,17 @@
         var portraitHtml=portrait
           ?'<span class="home-editorial-report-author-photo">'+portrait+'</span>'
           :'<span class="home-editorial-report-author-photo home-editorial-report-author-fallback" aria-hidden="true">پ</span>';
+        var image=photo(r);
+        var imageHtml=image
+          ?'<span class="home-editorial-report-image"><img src="'+esc(image)+'" alt="" loading="lazy" decoding="async" onerror="this.remove();this.parentNode.classList.add(\'home-editorial-report-image-empty\')"></span>'
+          :'<span class="home-editorial-report-image home-editorial-report-image-empty" aria-hidden="true"></span>';
         return '<a class="home-editorial-report-row" href="'+esc(slugUrl(r))+'">'
-          +'<span class="home-editorial-report-copy"><strong>'+esc(headline(r))+'</strong>'
+          +'<span class="home-editorial-report-copy"><strong>'+esc(headline(r))+'</strong>'+imageHtml
           +'<span class="home-editorial-report-leadline">'+portraitHtml
           +'<small>'+esc(excerpt(hook(r),155))+'</small></span></span></a>';
       }).join(""):'<a class="home-editorial-report-row" href="/reports/">دیدن آرشیو گزارش‌های تحریریه ←</a>');
+      renderHomeJanKalamNews(stories);
+      renderHomeBadbadakNews(stories);
       // Each tab contains at most five actual records, ranked independently.
       function timeOf(r){return Date.parse(r.published_at||r.updated_at||"")||0;}
       function signal(r,keys){for(var k of keys){var n=Number(r[k]);if(Number.isFinite(n)&&n>0)return n;}return 0;}
@@ -1514,7 +1559,7 @@
       homeVideoItems=homeNimaVideoItems(payload,Date.now());
       figuresReady=true;
       if(currentFeature==="statements"||currentFeature==="front")renderCurrentFeature();
-      renderRailFigureFive(payload);
+      renderRailFigureLatestTwenty(payload);
       // The front desk must see topical speakers beyond the 16 latest
       // profiles. Only fetch portraits for the newest people and for speakers
       // actually related to consequential stories (small bounded batch).
