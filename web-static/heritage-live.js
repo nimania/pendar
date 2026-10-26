@@ -27,7 +27,7 @@
   async function mount(){
     starting=true;
     try{
-      var response=await fetch("/heritage-preview.html",{credentials:"same-origin"});
+      var response=await fetch("/heritage-preview.html?v=20261027-reports-quotes-1",{credentials:"same-origin"});
       if(!response.ok)throw new Error("Heritage template missing: "+response.status);
       var html=await response.text();
       var doc=new DOMParser().parseFromString(html,"text/html");
@@ -51,7 +51,7 @@
       shadow.appendChild(pendingStyle);
       var css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/heritage-preview.css?v=20261021-cover-modes-videos-2";
+      css.href="/heritage-preview.css?v=20261027-reports-quotes-1";
       var cssReady=new Promise(function(resolve,reject){
         css.addEventListener("load",resolve,{once:true});
         css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
