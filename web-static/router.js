@@ -197,7 +197,7 @@ async function route() {
   if (kind === "system") return showSystem();
   if (kind === "publisher" && arg) return openPublisher(arg);
   if (kind === "book-person" && arg) return openBookPerson(arg);
-  if (kind === "badbadak") { window.location.replace("https://nimania.github.io/badbadak/" + (arg === "crossword" ? "#/badbadak/crossword" : "")); return; }
+  if (kind === "badbadak") { window.location.replace("https://github.com/nimania/badbadak"); return; }
   if (kind === "us-radar") return showUSRadar();
   if (kind === "israel-radar") return showIsraelRadar();
   if (kind === "radar") return showRadarHub();
