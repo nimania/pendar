@@ -1434,20 +1434,22 @@
       });
       featureBucketData=featureBuckets;
       renderCurrentFeature();
-      // Permanent editorial reports; not gated by photograph availability.
-      var uniqueReports=reports.filter(function(r){return !frontVisibleIds.has(r.id);});
-      var latestReports=uniqueReports.slice(0,4);
-      if(latestReports.length<4){
-        reports.forEach(function(r){
-          if(latestReports.length>=4)return;
-          if(!latestReports.some(function(x){return x.id===r.id;}))latestReports.push(r);
-        });
+      // The visible report column is the ten newest editorial reports.
+      // The feature cover is hidden, so do not remove reports that appeared there.
+      function reportTime(r){
+        return Date.parse(r.published_at||r.updated_at||
+          r.editorial_report&&r.editorial_report.published_at||r.created_at||"")||0;
       }
+      var latestReports=reports.slice().sort(function(a,b){return reportTime(b)-reportTime(a);}).slice(0,10);
       put("home-editorial-report-list",latestReports.length?latestReports.map(function(r){
-        var picture=newsMiniPhoto(r,"home-editorial-report-photo");
+        var portrait=authorPortraitThumb(r);
+        var portraitHtml=portrait
+          ?'<span class="home-editorial-report-author-photo">'+portrait+'</span>'
+          :'<span class="home-editorial-report-author-photo home-editorial-report-author-fallback" aria-hidden="true">پ</span>';
         return '<a class="home-editorial-report-row" href="'+esc(slugUrl(r))+'">'
-          +picture+'<span class="home-editorial-report-copy"><strong>'+esc(headline(r))+'</strong>'
-          +'<small>'+esc(excerpt(hook(r),125))+'</small></span></a>';
+          +'<span class="home-editorial-report-copy"><strong>'+esc(headline(r))+'</strong>'
+          +'<span class="home-editorial-report-leadline">'+portraitHtml
+          +'<small>'+esc(excerpt(hook(r),155))+'</small></span></span></a>';
       }).join(""):'<a class="home-editorial-report-row" href="/reports/">دیدن آرشیو گزارش‌های تحریریه ←</a>');
       // Each tab contains at most five actual records, ranked independently.
       function timeOf(r){return Date.parse(r.published_at||r.updated_at||"")||0;}

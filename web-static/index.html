@@ -74,7 +74,7 @@
   </style>
   <style id="pendar-home-hide-duplicate-header">
     /* The magazine now renders its own real navigation. Avoid a second bar. */
-    html.heritage-live-active body>header.top{display:none!important}
+    html.heritage-live-active body>header.top{display:block!important}
   </style>
   <style id="pendar-masthead-visibility">
     /* Shared site navigation must precede (and remain above) the magazine host.
@@ -90,7 +90,7 @@
     /* The same charcoal masthead as the article reader is the sole home header.
        The original SPA header returns normally if the isolated home mount fails. */
     html.heritage-live-active body>header.top,
-    html.heritage-booting body>header.top{display:none!important}
+    html.heritage-booting body>header.top{display:block!important}
     html.heritage-live-active #heritage-live-host{min-height:0}
     html.heritage-booting .heritage-first-paint-header{
       display:flex!important;background:#2a2928!important;
@@ -635,7 +635,7 @@
   <script defer src="radar-live.js"></script>
   <script defer src="israel-radar.js"></script>
   <script defer src="app.js?v=20261018-figures-1"></script>
-  <script defer src="heritage-live.js?v=20261021-cover-modes-videos-2&rev=20261027-reports-quotes-2" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
+  <script defer src="heritage-live.js?v=20261021-cover-modes-videos-2&rev=20261027-reports-quotes-nav-1" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
 </body>
 </html>
 

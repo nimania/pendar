@@ -2588,3 +2588,80 @@ body:has(#home-page) .masthead-brand-inner .brand img{
   #home-page #home-editorial-reports{grid-row:1}
   #home-page .home-quote-panel{grid-row:2}
 }
+
+
+/* Compact homepage requested: ten reports on the right and one statement per card on the left. */
+.heritage-root>header.masthead{display:none!important}
+#home-page .home-news-layout,
+.heritage-root #home-page .home-news-layout{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(320px,.9fr)!important;
+  gap:18px!important;align-items:start!important;direction:rtl!important;min-width:0
+}
+#home-page .home-news-layout>.primary-column,
+.heritage-root #home-page .home-news-layout>.primary-column{
+  grid-column:1!important;grid-row:1!important;width:100%!important;min-width:0
+}
+#home-page .home-news-layout>.home-below-panels,
+.heritage-root #home-page .home-news-layout>.home-below-panels{
+  grid-column:2!important;grid-row:1!important;display:block!important;
+  width:100%!important;min-width:0;margin:0!important
+}
+#home-page .home-news-layout .feature-block{display:none!important}
+#home-page .home-news-layout .home-editorial-reports{margin:0!important}
+#home-page .home-editorial-report-list{
+  display:flex!important;flex-direction:column!important;grid-template-columns:1fr!important;
+  border:1px solid #e2e9f0;border-radius:0 0 14px 14px;overflow:hidden;background:#fff
+}
+#home-page .home-editorial-report-row{
+  display:flex!important;flex-direction:row!important;align-items:center!important;
+  min-width:0;padding:10px 14px!important;border-bottom:1px solid #e7ebe7;
+  text-decoration:none!important;color:inherit!important;background:#fff
+}
+#home-page .home-editorial-report-row:last-child{border-bottom:0}
+#home-page .home-editorial-report-row:hover{background:#f5f9f6}
+#home-page .home-editorial-report-copy{display:flex;flex:1;flex-direction:column;gap:4px;min-width:0}
+#home-page .home-editorial-report-copy strong{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+  font:750 13.5px/1.65 Vazirmatn,Tahoma,sans-serif;color:#263d33
+}
+#home-page .home-editorial-report-leadline{
+  display:flex;align-items:center;gap:9px;min-width:0;direction:rtl
+}
+#home-page .home-editorial-report-author-photo{
+  position:relative;display:grid;place-items:center;overflow:hidden;
+  flex:0 0 42px;width:42px;height:42px;border-radius:50%;
+  background:#e6ece7;color:#63746a;font:700 15px/1 Vazirmatn,Tahoma,sans-serif
+}
+#home-page .home-editorial-report-author-photo .news-author-photo{
+  position:absolute;inset:0;display:block;width:100%;height:100%;
+  background-size:700% 100%;background-repeat:no-repeat
+}
+#home-page .home-editorial-report-leadline small{
+  display:-webkit-box;flex:1;min-width:0;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+  overflow:hidden;font:400 11.5px/1.8 Vazirmatn,Tahoma,sans-serif;color:#65766d
+}
+#home-page .home-below-panels>[data-rail-group]:not([data-rail-group="figures"]){display:none!important}
+#home-page .home-below-panels>[data-rail-group="figures"]{display:block!important}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-five-items{
+  display:flex!important;flex-direction:column!important;grid-template-columns:1fr!important
+}
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-card,
+#home-page .home-below-panels [data-rail-group="figures"] .rail-figure-featured{
+  display:flex!important;grid-column:auto!important;grid-row:auto!important;
+  width:100%!important;min-width:0!important;min-height:92px!important;
+  padding:11px 13px!important;align-items:flex-start!important
+}
+@media(max-width:850px){
+  #home-page .home-news-layout,.heritage-root #home-page .home-news-layout{
+    grid-template-columns:minmax(0,1fr)!important;gap:16px!important
+  }
+  #home-page .home-news-layout>.primary-column,
+  #home-page .home-news-layout>.home-below-panels{
+    grid-column:1!important;grid-row:auto!important
+  }
+}
+@media(max-width:520px){
+  #home-page .home-editorial-report-row{padding:9px 10px!important}
+  #home-page .home-editorial-report-author-photo{flex-basis:38px;width:38px;height:38px}
+}
