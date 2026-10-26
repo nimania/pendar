@@ -15,7 +15,7 @@ keep_dirs = {
     "person", "people", "news", "search", "topic", "topics", "event", "books", "movies", "tv", "press", "future",
     "market", "weather", "system", "diner", "icons",
     "entity", "movie", "book", "publisher", "book-person", "cinema-person",
-    "studio", "recaps", "videos", "radar", "reports", "iransignal", "naval",
+    "studio", "recaps", "videos", "radar", "reports", "iransignal", "badbadak", "naval",
 }
 # Root-level data consumed by news feeds, archive, entity/figure views and search.
 keep_data_names = {
