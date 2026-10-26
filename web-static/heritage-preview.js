@@ -987,32 +987,28 @@
     var target=el("home-badbadak-list");
     if(!target)return;
     function eligible(row){
-      var title=norm(row&& (row.title||row.title_fa||row.headline_fa||""));
+      var title=norm(row&&(row.title||row.title_fa||row.headline_fa||""));
       if(!title)return false;
-      var blocked=/نفتکش|سپاه|موشک|حمله نظامی|تنگه هرمز|غزه|جنگ|سفیر|دیپلمات|وزیر|رئیس.?جمهور|جاسوسی|تروریست|پایگاه نظامی|ناتو/;
-      var lifestyle=/بازیگر|خواننده|سینما|سریال|هنرمند|کنسرت|سلبریتی|جشنواره.*فیلم|زیبایی|آرایش|غذا|رستوران|آشپزی|تغذیه|قهوه|شیرینی|پوشاک|لباس|استایل|فشن|سلامت|پزشکی|بیماری|گردشگری|هتل|سفر|فناوری|هوش مصنوعی|تکنولوژی|گجت|آیفون|حادثه|تصادف|جنجال|حاشیه|قتل/;
-      return !blocked.test(title)&&lifestyle.test(title);
+      var blocked=/نفتکش|سپاه|موشک|حمله نظامی|تنگه هرمز|غزه|جنگ|سفیر|دیپلمات|وزیر|وزارت|رئیس.?جمهور|پزشکیان|جاسوسی|تروریست|پایگاه نظامی|ناتو|مجلس|نماینده|دولت|سیاست|سیاسی|انتخابات|عربستان|ترکیه|پاکستان|مسکو|روسیه|مذاکره|دیپلماسی|تحریم|ایران|حکومت|ارتش|نیروهای مسلح|مقام رسمی/;
+      var topical=/بازیگر|خواننده|سینما|سریال|هنرمند|کنسرت|سلبریتی|جشنواره.*فیلم|منوچهر هادی|یکتا ناصر|آرایش|زیبایی|پوست(?:\s|$)|موهای|مراقبت.*مو|خوراک|غذا|رستوران|آشپزی|تغذیه|قهوه|شیرینی|پوشاک|لباس|استایل|فشن|طراح.*مد|سلامت|پزشکی(?:\s|$)|بیماری|درمان|بهداشت|طاعون|گردشگری|هتل|مقصد.*سفر|فناوری|هوش مصنوعی|تکنولوژی|گجت|آیفون|حادثه|تصادف|آتش.?سوزی|جنجال|حاشیه|قتل|شهربازی/;
+      return topical.test(title)&&!blocked.test(title);
     }
     function published(row){return Date.parse(row.published_at||row.published||row.updated_at||"")||0;}
     function render(feeds){
-      var all=[];
-      (Array.isArray(stories)?stories:[]).filter(eligible).forEach(function(row){
-        all.push({title:headline(row),summary:row.summary_fa||row.lead_fa||"",href:slugUrl(row),time:published(row),rank:Number(row.source_count||1),internal:true});
-      });
-      (feeds||[]).forEach(function(row){
-        if(!eligible(row))return;
-        var href=validLink(row.url||row.href||"");
-        if(!href)return;
-        all.push({title:row.title||row.title_fa||row.headline_fa||"",summary:row.summary||row.summary_fa||row.description||"",href:href,time:published(row),rank:Number(row.source_count||row.sources_count||1),internal:false});
-      });
       var seen=new Set();
-      all.sort(function(a,b){return b.rank-a.rank||b.time-a.time;});
-      var items=all.filter(function(row){
-        var key=row.title.toLowerCase().replace(/[\s\u200c،؛.!؟]+/g,"");
-        if(seen.has(key))return false;seen.add(key);return true;
-      }).slice(0,5);
+      var items=(feeds||[]).filter(eligible).map(function(row){
+        return {title:row.title||row.title_fa||row.headline_fa||"",
+          summary:row.summary||row.summary_fa||row.description||"",
+          href:validLink(row.url||row.href||""),time:published(row),
+          rank:Number(row.source_count||row.sources_count||1),source:row.source||""};
+      }).filter(function(row){return row.title&&row.href;})
+        .sort(function(a,b){return b.rank-a.rank||b.time-a.time;})
+        .filter(function(row){
+          var key=row.title.toLowerCase().replace(/[\s\u200c،؛.!؟]+/g,"");
+          if(seen.has(key))return false;seen.add(key);return true;
+        }).slice(0,5);
       put("home-badbadak-list",items.map(function(row){
-        return '<a class="home-cross-site-item" href="'+esc(row.href)+'"'+(row.internal?'':' target="_blank" rel="noopener noreferrer"')+'>'
+        return '<a class="home-cross-site-item" href="'+esc(row.href)+'" target="_blank" rel="noopener noreferrer">'
           +'<strong>'+esc(row.title)+'</strong><small>'+esc(excerpt(row.summary,100))+'</small></a>';
       }).join("")||'<a class="home-cross-site-item" href="https://nimania.github.io/badbadak/"><strong>دیدن خبرهای داغ بادبادک</strong></a>');
     }
