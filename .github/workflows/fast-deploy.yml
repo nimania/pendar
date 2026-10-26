@@ -63,12 +63,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Check out independent Badbadak source
-        uses: actions/checkout@v4
-        with:
-          repository: nimania/badbadak
-          ref: main
-          path: badbadak-source
       - name: Verify core recovery contracts
         run: python -m unittest discover -s backend/tests -p test_core_site_recovery.py -v
       - name: Check editorial Python syntax before publication
@@ -696,24 +690,6 @@ jobs:
               raise SystemExit('::error::Missing story detail JSON for published headlines: '+', '.join(missing[:8]))
           print('Fast publish validated:',len(stories),'headlines and',len(figures['figures']),'figures; all story details available')
           PY
-      - name: Publish independent Badbadak at /badbadak/
-        run: |
-          target=site/badbadak
-          mkdir -p "$target/data"
-          cp badbadak-source/index.html badbadak-source/runtime.js badbadak-source/badbadak.js badbadak-source/badbadak.css "$target/"
-          cp -R badbadak-source/assets "$target/assets"
-          for name in stories figures entity-registry trends bartarinha-feed rokna-feed 7sobh-feed; do
-            if [ -s "site/data/$name.json" ]; then
-              cp "site/data/$name.json" "$target/data/$name.json"
-            fi
-          done
-          if [ -s site/data/pendar-series-showcase.json ]; then
-            cp site/data/pendar-series-showcase.json "$target/data/series-showcase.json"
-          fi
-          if [ -s badbadak-source/data/meshki-news-feed.json ]; then
-            cp badbadak-source/data/meshki-news-feed.json "$target/data/meshki-news-feed.json"
-          fi
-          python backend/scripts/audit_pages_size.py site 780000000
       - name: Freeze the half-hour homepage editorial snapshot
         run: python backend/scripts/freeze_homepage_snapshot.py --site site
       - name: Check image and SEO publishing regressions
