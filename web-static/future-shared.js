@@ -3,7 +3,7 @@
   function boot(){
     if(document.querySelector(".pendar-future-header"))return;
     const head=document.createElement("header");head.className="pendar-future-header";
-    head.innerHTML='<div class="inner"><a class="logo" href="/" aria-label="صفحهٔ اصلی پندار"><img src="/assets/pendar-logo.svg" alt="پندار"></a><span class="masthead-spacer"></span><nav class="masthead-actions" aria-label="دسترسی سریع"><a href="/headlines/" title="سرخط‌ها">سرخط</a><a href="/figures/" title="چهره‌ها">چهره‌ها</a><a href="/press/" title="پیشخوان جراید">جراید</a><a href="/books/" title="پیشخوان کتاب">کتاب</a><a href="/future/" title="آینده‌بان"><img src="/assets/radar-logo.svg" alt="آینده‌بان"></a><a href="/badbadak/" title="بادبادک"><img src="/assets/badbadak-header.png" alt="بادبادک"></a></nav></div>';
+    head.innerHTML='<div class="inner"><a class="logo" href="/" aria-label="صفحهٔ اصلی پندار"><img src="/assets/pendar-logo.svg" alt="پندار"></a><span class="masthead-spacer"></span><nav class="masthead-actions" aria-label="دسترسی سریع"><a href="/headlines/" title="سرخط‌ها">سرخط</a><a href="/figures/" title="چهره‌ها">چهره‌ها</a><a href="/press/" title="پیشخوان جراید">جراید</a><a href="/books/" title="پیشخوان کتاب">کتاب</a><a href="/future/" title="آینده‌بان"><img src="/assets/radar-logo.svg" alt="آینده‌بان"></a></nav></div>';
     document.body.prepend(head);
     const crumb=document.createElement("div");crumb.className="pendar-future-breadcrumb";
     const home=document.createElement("a");home.href="/";home.textContent="پندار";
