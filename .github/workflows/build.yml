@@ -5,6 +5,10 @@ name: Build & Deploy Pendar (static)
 # A push to main also republishes front-end changes such as the figures timeline.
 # It generates the news and publishes a static site to GitHub Pages — free.
 on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/build.yml
   workflow_dispatch:
     inputs:
       resolve_url:
@@ -21,8 +25,7 @@ on:
         description: "Build an opt-in recording script for this YouTube video ID"
         required: false
         type: string
-  # Temporarily manual-only: prioritize independent news and figure collectors.
-  # Restore a schedule after the GitHub Pages payload falls below the safe limit.
+  # Manual full builds remain available; the scoped push trigger publishes Badbadak source updates.
 
 permissions:
   actions: read
@@ -41,6 +44,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check out independent Badbadak source
+        uses: actions/checkout@v4
+        with:
+          repository: nimania/badbadak
+          ref: main
+          path: badbadak-source
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -459,6 +468,26 @@ jobs:
           python -m unittest discover -s backend/tests -p 'test_iran_scenario_pages.py' -v
       - name: Apply temporary news-and-figures publication profile
         run: python backend/scripts/prepare_priority_site.py backend/public
+
+      - name: Publish independent Badbadak at /badbadak/
+        run: |
+          target=backend/public/badbadak
+          mkdir -p "$target/data"
+          cp badbadak-source/index.html badbadak-source/runtime.js badbadak-source/badbadak.js badbadak-source/badbadak.css "$target/"
+          cp -R badbadak-source/assets "$target/assets"
+          for name in stories figures entity-registry trends; do
+            if [ -s "backend/public/data/$name.json" ]; then
+              cp "backend/public/data/$name.json" "$target/data/$name.json"
+            fi
+          done
+          if [ -s backend/public/data/pendar-series-showcase.json ]; then
+            cp backend/public/data/pendar-series-showcase.json "$target/data/series-showcase.json"
+          fi
+          for name in meshki-news-feed bartarinha-feed rokna-feed 7sobh-feed; do
+            if [ -s "badbadak-source/data/$name.json" ]; then
+              cp "badbadak-source/data/$name.json" "$target/data/$name.json"
+            fi
+          done
 
       - name: Validate final lightweight site after trimming
         run: python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
