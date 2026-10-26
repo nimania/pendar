@@ -657,6 +657,13 @@ jobs:
               raise SystemExit('::error::Missing story detail JSON for published headlines: '+', '.join(missing[:8]))
           print('Fast publish validated:',len(stories),'headlines and',len(figures['figures']),'figures; all story details available')
           PY
+      - name: Remove retired Badbadak assets and retain only its redirect
+        run: |
+          rm -f site/badbadak.js site/badbadak.css site/assets/badbadak-header.png site/assets/badbadak-logo.png
+          rm -rf site/badbadak
+          mkdir -p site/badbadak
+          cp web-static/badbadak/index.html site/badbadak/index.html
+          python backend/scripts/audit_pages_size.py site 780000000
       - name: Freeze the half-hour homepage editorial snapshot
         run: python backend/scripts/freeze_homepage_snapshot.py --site site
       - name: Check image and SEO publishing regressions
