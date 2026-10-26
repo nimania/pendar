@@ -360,7 +360,7 @@ async function openStory(id) {
 <aside class="pendar-telegram-promo telegram-prominent"><span class="telegram-mark" aria-hidden="true">➤</span><span class="telegram-copy"><strong>پندار در تلگرام</strong><p>خبرها و گزارش‌های منتخب را مستقیم در کانال دنبال کنید.</p></span><a href="https://t.me/pendario" target="_blank" rel="noopener noreferrer">عضویت در کانال ←</a></aside>
     ${!editorial?articleDisplayAdMarkup():""}
     <div class="ref-strip story-jan-kalam-link" aria-label="ذره‌بین این خبر در جان‌کلام">
-      <span class="ref-hd"><b>ذره‌بین این خبر در جان‌کلام</b> · مقایسهٔ روایت منابع و دیدگاه‌ها</span>
+      <span class="ref-hd"><b>زیر ذره‌بین پندار، در جان‌کلام</b> · مقایسهٔ روایت منابع و دیدگاه‌ها</span>
       <div class="ref-links"><a href="https://nimania.github.io/jan-kalam/?story=${encodeURIComponent(cleanId)}"><span class="ref-src">جان‌کلام</span>خواندن بررسی چندمنبعی و نقاط اختلاف ↗</a></div>
     </div>
     <details class="story-examination"><summary><span>زمینه و پیوندهای پرونده در پندار<small class="story-examination-description">پیشینه، چهره‌ها، نقشه و منابع خبر</small></span></summary><div class="story-examination-body">
