@@ -2716,3 +2716,6 @@ body:has(#home-page) .masthead-brand-inner .brand img{
   #home-page .home-editorial-report-copy strong{font-size:17px!important}
   #home-page .home-editorial-report-image{aspect-ratio:1.8/1;max-height:160px}
 }
+
+/* Keep the two requested companion news boxes visible below the quotes. */
+#home-page .home-below-panels>.rail-box.home-cross-site-box{display:block!important}
