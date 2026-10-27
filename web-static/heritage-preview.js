@@ -359,7 +359,8 @@
       var role=folded(roles);
       if(/تحلیلگر|نویسنده|روزنامهنگار|فعالسیاسی|فعالمدنی|کنشگر|کارشناس|جامعەشناس|جامعهشناس|پژوهشگر|استاد|مفسر|منتقد|ستوننویس|اندیشمند|analyst|columnist|commentator|writer|activist|researcher|pundit/.test(role))return "opinion";
       if(/رئیسجمهور|رئیس|وزیر|سخنگو|نماینده|فرمانده|نخستو‌زیر|دیپلمات|مقام|سناتور|فرماندار|مذاکرهکننده|president|minister|spokesperson|official|senator|governor|diplomat|politician|negotiator/.test(role))return "news";
-      return "news";
+      // Collector-generated profile handles are explicitly marked news-*; other named figures are opinion sources by default.
+      return /^news[-_]/i.test(String(person.handle||""))?"news":"opinion";
     }
     var rows=[];
     people.filter(function(p){return p&&p.handle&&p.name_fa;}).forEach(function(person){
