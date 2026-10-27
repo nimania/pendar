@@ -600,7 +600,7 @@ function paintHomeQuotes(){
   const host=document.getElementById("home-quotes-list");
   if(!host||!homeQuotesCache)return;
   const rows=homeQuotesCache[homeQuoteMode]||[];
-  const cards=rows.slice(0,5).map(({f,p})=>{
+  const cards=rows.slice(0,20).map(({f,p})=>{
     const title=String(p.topic_fa||p.video_title||p.headline_fa||"گفتهٔ تازه").split("\n").join(" ").trim();
     const raw=String(p.summary_fa||p.text||p.content_fa||p.recap_fa||"").replace(/<[^>]*>/g," ").split("\n").join(" ").trim();
     const excerpt=raw.length>145?raw.slice(0,145).trim()+"…":raw;
