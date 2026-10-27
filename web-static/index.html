@@ -259,10 +259,41 @@
   <link rel="stylesheet" href="heritage-article.css?v=20261020-radar-telegram-1">
   <link rel="stylesheet" href="heritage-collections.css?v=20261018-newsroom-1">
   <link rel="stylesheet" href="heritage-figures.css?v=20261019-telegram-promo-1">
+  <style id="pendar-home-report-header">
+    body>header.top{background:#2a2928!important;padding:0!important}
+    body>header.top>.home-report-masthead{
+      min-height:124px;box-sizing:border-box;display:flex;align-items:center;gap:26px;
+      padding:16px max(22px,calc((100vw - 1500px)/2));background:#2a2928;color:#eee
+    }
+    body>header.top>.home-report-masthead .brand{display:block;flex:0 0 auto}
+    body>header.top>.home-report-masthead .brand img{display:block;width:116px;max-height:92px;object-fit:contain}
+    body>header.top>.home-report-masthead .home-report-tagline{
+      border-right:1px solid #5b5856;padding-right:24px;color:#d4d1ce;font-size:17px;font-weight:500
+    }
+    body>header.top>.wrap{
+      max-width:none;width:100%;box-sizing:border-box;min-height:64px;height:auto;
+      padding:8px max(22px,calc((100vw - 1500px)/2));background:#403d3c;display:flex;
+      align-items:center;flex-wrap:wrap;gap:10px
+    }
+    body>header.top>.wrap>.brand,body>header.top>.wrap>.spacer{display:none!important}
+    body>header.top .header-quicklinks{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;min-width:0}
+    body>header.top .header-quicklinks a{white-space:nowrap}
+    @media(max-width:720px){
+      body>header.top>.home-report-masthead{min-height:82px;padding:8px 14px;gap:14px}
+      body>header.top>.home-report-masthead .brand img{width:76px;max-height:62px}
+      body>header.top>.home-report-masthead .home-report-tagline{font-size:14px;padding-right:14px}
+      body>header.top>.wrap{padding:8px 12px;gap:8px}
+      body>header.top .header-quicklinks{order:4;width:100%;flex:0 0 100%;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:5px}
+    }
+  </style>
 </head>
 <body>
   <!-- New heritage magazine homepage; the original SPA remains for all other routes. -->
   <header class="top">
+    <div class="home-report-masthead">
+      <a class="brand" href="/" aria-label="خانهٔ پندار"><img src="assets/pendar-logo.svg" alt="پندار"></a>
+      <span class="home-report-tagline">خبر، اندیشه و فرهنگ</span>
+    </div>
     <div class="wrap">
       <a class="brand" href="https://pendar.io" aria-label="پندار">
         <img class="logo-img" src="assets/pendar-logo.svg" alt="پندار">
@@ -325,7 +356,7 @@
           </section>
           <section class="home-daily-panel home-news-panel home-quotes-panel" aria-label="گفته‌ها و دیدگاه‌های چهره‌ها">
             <div class="home-panel-title home-panel-title-rich">
-              <span><b>گفته‌ها</b><small>آخرین دیدگاه‌های چهره‌ها</small></span>
+              <span><b>۲۰ گفتهٔ آخر</b><small>تفکیک گفته‌های خبری و دیدگاه‌ها</small></span>
               <a href="/figures/">همهٔ چهره‌ها ←</a>
             </div>
             <div class="home-quote-tabs" role="tablist" aria-label="دسته‌بندی گفته‌ها" style="display:flex;gap:7px;padding:8px 12px;border-bottom:1px solid var(--line)">
