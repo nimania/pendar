@@ -571,34 +571,69 @@ async function renderHomeReports(){
 }
 
 
-/* Short, one-per-person quote window paired with homepage reports. */
+/* Latest public statements, split into news and opinion on the homepage. */
+let homeQuoteMode="opinions";
+let homeQuotesCache=null;
+function setHomeQuoteMode(mode){
+  if(!["news","opinions"].includes(mode))return;
+  homeQuoteMode=mode;
+  document.querySelectorAll("[data-home-quote-mode]").forEach(button=>{
+    const selected=button.dataset.homeQuoteMode===mode;
+    button.classList.toggle("on",selected);
+    button.setAttribute("aria-selected",String(selected));
+  });
+  paintHomeQuotes();
+}
+function isHomeNewsQuote(f,p){
+  const kind=String(p.kind||p.type||p.post_type||p.statement_type||"").toLowerCase();
+  if(/news|official|announcement|press.release/.test(kind))return true;
+  if(p.is_official_statement===true||p.is_news===true||p.category==="news")return true;
+  const profile=[f.handle,f.name_fa,f.role_fa,f.role,f.title_fa,f.position_fa,f.field]
+    .filter(Boolean).join(" ").toLowerCase();
+  // Explicit public-office roles and current-event sources belong under news.
+  return /ترامپ|trump|رئیس.?جمهور|president|نخست.?وزیر|prime minister|وزیر|minister|فرماندار|governor|شهردار|mayor|سخنگو|spokesperson|مدیرعامل|مدیرکل|رئیس.{0,18}(آتش.?نشانی|پلیس|هلال.?احمر|اورژانس)|آتش.?نشانی|fire chief|police chief|official|مقام رسمی/.test(profile);
+}
+function paintHomeQuotes(){
+  const host=document.getElementById("home-quotes-list");
+  if(!host||!homeQuotesCache)return;
+  const rows=homeQuotesCache[homeQuoteMode]||[];
+  const cards=rows.slice(0,5).map(({f,p})=>{
+    const title=String(p.topic_fa||p.video_title||p.headline_fa||"گفتهٔ تازه").split("\n").join(" ").trim();
+    const raw=String(p.summary_fa||p.text||p.content_fa||p.recap_fa||"").replace(/<[^>]*>/g," ").split("\n").join(" ").trim();
+    const excerpt=raw.length>145?raw.slice(0,145).trim()+"…":raw;
+    const source=String(f.avatar||"");
+    const photo=source.startsWith("https://")||source.startsWith("http://")||source.startsWith("/")||source.startsWith("assets/")||source.startsWith("figures/")?source:"";
+    const href="/statement/"+encodeURIComponent(String(p.id))+"/";
+    return '<a class="home-quote-card" href="'+href+'">'+
+      '<span class="home-quote-avatar">'+(photo?'<img src="'+esc(photo)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa).slice(0,1))+'</span>')+'</span>'+
+      '<span class="home-quote-copy"><span class="home-quote-meta"><b>'+esc(f.name_fa)+'</b>'+(p.published_at?'<time>'+esc(relTime(p.published_at))+'</time>':'')+'</span>'+
+      '<strong>'+esc(title)+'</strong>'+(excerpt?'<span class="home-quote-excerpt">'+esc(excerpt)+'</span>':'')+'</span><span class="home-quote-arrow" aria-hidden="true">←</span></a>';
+  }).join("");
+  host.innerHTML=cards||'<div class="state">فعلاً مورد تازه‌ای در این بخش نداریم.</div>';
+}
 async function renderHomeQuotes(){
   const host=document.getElementById("home-quotes-list");
   if(!host)return;
   host.innerHTML='<div class="spinner"></div>';
   try{
     const d=await loadFigures();
-    const rows=[];
+    const grouped={news:[],opinions:[]};
     for(const f of d.figures||[]){
       if(!f||!f.handle||!f.name_fa||f.us_radar||f.israel_radar||HOME_FIGURE_EXCLUDE.has(String(f.handle).toLowerCase()))continue;
-      const posts=(f.posts||[]).filter(p=>p&&p.id&&p.kind!=="news_statement"&&!["draft","pending","private"].includes(String(p.status||"").toLowerCase()))
-        .sort((a,b)=>figureActivityTime(b)-figureActivityTime(a));
-      if(posts[0])rows.push({f,p:posts[0],time:figureActivityTime(posts[0])});
+      const byCategory={news:null,opinions:null};
+      for(const p of f.posts||[]){
+        if(!p||!p.id||["draft","pending","private"].includes(String(p.status||"").toLowerCase()))continue;
+        const category=isHomeNewsQuote(f,p)?"news":"opinions";
+        if(!byCategory[category]||figureActivityTime(p)>figureActivityTime(byCategory[category]))byCategory[category]=p;
+      }
+      for(const category of ["news","opinions"]){
+        const p=byCategory[category];
+        if(p)grouped[category].push({f,p,time:figureActivityTime(p)});
+      }
     }
-    rows.sort((a,b)=>b.time-a.time);
-    const cards=rows.slice(0,5).map(({f,p})=>{
-      const title=String(p.topic_fa||p.video_title||p.headline_fa||"گفتهٔ تازه").split("\n").join(" ").trim();
-      const raw=String(p.summary_fa||p.text||p.content_fa||p.recap_fa||"").replace(/<[^>]*>/g," ").split("\n").join(" ").trim();
-      const excerpt=raw.length>145?raw.slice(0,145).trim()+"…":raw;
-      const source=String(f.avatar||"");
-      const photo=source.startsWith("https://")||source.startsWith("http://")||source.startsWith("/")||source.startsWith("assets/")||source.startsWith("figures/")?source:"";
-      const href="/statement/"+encodeURIComponent(String(p.id))+"/";
-      return '<a class="home-quote-card" href="'+href+'">'+
-        '<span class="home-quote-avatar">'+(photo?'<img src="'+esc(photo)+'" alt="" loading="lazy" onerror="this.remove()">':'<span>'+esc(String(f.name_fa).slice(0,1))+'</span>')+'</span>'+
-        '<span class="home-quote-copy"><span class="home-quote-meta"><b>'+esc(f.name_fa)+'</b>'+(p.published_at?'<time>'+esc(relTime(p.published_at))+'</time>':'')+'</span>'+
-        '<strong>'+esc(title)+'</strong>'+(excerpt?'<span class="home-quote-excerpt">'+esc(excerpt)+'</span>':'')+'</span><span class="home-quote-arrow" aria-hidden="true">←</span></a>';
-    }).join("");
-    host.innerHTML=cards||'<div class="state">فعلاً گفتهٔ تازه‌ای برای نمایش نداریم.</div>';
+    for(const category of ["news","opinions"])grouped[category].sort((a,b)=>b.time-a.time);
+    homeQuotesCache=grouped;
+    paintHomeQuotes();
   }catch(_){host.innerHTML='<div class="state">دریافت گفته‌ها فعلاً ممکن نیست.</div>';}
 }
 renderHomeQuotes();
