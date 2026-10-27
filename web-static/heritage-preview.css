@@ -2800,3 +2800,37 @@ body:has(#home-page) .masthead-brand-inner .brand img{
   #home-page .home-quote-panel{grid-column:1!important;grid-row:auto!important}
   #home-page .home-quote-panel .home-quote-list{grid-template-columns:1fr!important}
 }
+
+
+/* Reassert the visible cards over the older two-column homepage rules. */
+#home-page .home-news-layout>.home-below-panels>.home-jan-kalam{
+  display:block!important;grid-column:2!important;grid-row:1!important
+}
+#home-page .home-news-layout>.home-below-panels>.home-quote-panel{
+  display:block!important;grid-column:3!important;grid-row:1!important
+}
+#home-page .home-news-layout>.home-below-panels>.home-badbadak{
+  display:block!important;grid-column:1/-1!important;grid-row:2!important
+}
+@media(max-width:980px){
+  #home-page .home-news-layout>.primary-column>#home-editorial-reports{
+    grid-column:1!important;grid-row:1!important
+  }
+  #home-page .home-news-layout>.home-below-panels>.home-jan-kalam{
+    grid-column:2!important;grid-row:1!important
+  }
+  #home-page .home-news-layout>.home-below-panels>.home-quote-panel{
+    grid-column:1/-1!important;grid-row:2!important
+  }
+  #home-page .home-news-layout>.home-below-panels>.home-badbadak{
+    grid-column:1/-1!important;grid-row:3!important
+  }
+}
+@media(max-width:620px){
+  #home-page .home-news-layout>.primary-column>#home-editorial-reports,
+  #home-page .home-news-layout>.home-below-panels>.home-jan-kalam,
+  #home-page .home-news-layout>.home-below-panels>.home-quote-panel,
+  #home-page .home-news-layout>.home-below-panels>.home-badbadak{
+    grid-column:1!important;grid-row:auto!important
+  }
+}
