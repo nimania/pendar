@@ -60,27 +60,14 @@
     html.heritage-booting body{margin:0;padding:0;background:#eceeeb}
     html.heritage-booting #heritage-live-host[hidden]{display:block!important}
     #heritage-live-host.heritage-ready>.heritage-first-paint{display:none!important}
-    /* First paint reuses the real header and shows content-shaped placeholders below it. */
-    .heritage-first-paint{min-height:calc(100vh - 150px);box-sizing:border-box;background:#eceeeb;color:#27332d;font:500 13px/1.8 "Vazirmatn",Tahoma,sans-serif;padding:1px 18px 38px}
-    .heritage-first-paint-content{max-width:1280px;margin:20px auto}
-    .heritage-first-paint-status{display:flex;align-items:center;justify-content:center;gap:10px;min-height:42px;margin:0 auto 14px;color:#69756e;font-size:13px}
-    .heritage-first-paint-spinner{width:15px;height:15px;border:2px solid #c7d0ca;border-top-color:#df6b24;border-radius:50%;animation:heritage-first-paint-spin .8s linear infinite}
+    /* Reuse the real header and show one compact status panel while data loads. */
+    .heritage-first-paint{min-height:210px;box-sizing:border-box;background:#eceeeb;color:#27332d;font:500 13px/1.8 "Vazirmatn",Tahoma,sans-serif;padding:1px 18px 28px}
+    .heritage-first-paint-nav{display:none!important}
+    .heritage-first-paint-content{max-width:1280px;margin:26px auto 0}
+    .heritage-first-paint-status{display:flex;align-items:center;justify-content:center;gap:11px;min-height:112px;margin:0 auto;color:#69756e;font-size:13px;background:#fff;border:1px solid #d6ddd8;border-right:4px solid #df6b24;border-radius:6px}
+    .heritage-first-paint-spinner{width:16px;height:16px;flex:0 0 16px;border:2px solid #c7d0ca;border-top-color:#df6b24;border-radius:50%;animation:heritage-first-paint-spin .8s linear infinite}
     @keyframes heritage-first-paint-spin{to{transform:rotate(360deg)}}
-    .heritage-first-paint-pulse{display:flex;align-items:center;gap:12px;min-height:66px;margin-bottom:16px;padding:9px 14px;background:#fff;border:1px solid #d6ddd8;border-radius:6px}
-    .heritage-first-paint-pulse b{color:#dd6b25;margin-inline-end:auto}
-    .heritage-first-paint-pulse i,.heritage-first-paint-hero i,.heritage-first-paint-panel i{display:block;border-radius:4px;background:linear-gradient(90deg,#e9edeb 25%,#f4f6f4 45%,#e9edeb 65%);background-size:300% 100%;animation:heritage-first-paint-shimmer 1.4s ease-in-out infinite}
-    @keyframes heritage-first-paint-shimmer{to{background-position:-150% 0}}
-    .heritage-first-paint-pulse i{height:17px;width:14%;min-width:48px}
-    .heritage-first-paint-hero{height:134px;margin-bottom:18px;padding:19px 22px;display:flex;flex-direction:column;justify-content:center;gap:13px;background:#fff;border:1px solid #d6ddd8;border-right:4px solid #df6b24;border-radius:6px}
-    .heritage-first-paint-hero i{height:15px;width:72%}
-    .heritage-first-paint-hero i:first-child{height:22px;width:52%}
-    .heritage-first-paint-hero i:last-child{height:11px;width:38%}
-    .heritage-first-paint-columns{display:grid;grid-template-columns:minmax(270px,.82fr) minmax(0,1.55fr);gap:18px;direction:rtl}
-    .heritage-first-paint-panel{min-height:280px;padding:0 15px 16px;background:#fff;border:1px solid #d6ddd8;border-top:4px solid #df6b24;border-radius:6px}
-    .heritage-first-paint-panel b{display:block;padding:11px 0 9px;border-bottom:1px solid #e0e5e1;color:#303a34;font-size:15px}
-    .heritage-first-paint-panel i{height:52px;margin-top:12px}
-    .heritage-first-paint-reports i:first-of-type{height:92px}
-    @media(max-width:760px){.heritage-first-paint{padding-inline:12px}.heritage-first-paint-pulse i:nth-of-type(n+4){display:none}.heritage-first-paint-columns{grid-template-columns:1fr}.heritage-first-paint-panel{min-height:185px}.heritage-first-paint-quotes{display:none}}
+    @media(max-width:760px){.heritage-first-paint{padding-inline:12px}}
     html.heritage-live-active body>main.wrap,
     html.heritage-live-active body>footer.site-footer,
     html.heritage-live-active body>nav.tabbar{display:none!important}
@@ -322,14 +309,9 @@
   </header>
   <div id="heritage-live-host" hidden aria-label="صفحهٔ اول مجله‌ای پندار">
     <div class="heritage-first-paint">
+      <div class="heritage-first-paint-nav" hidden aria-hidden="true"></div>
       <div class="heritage-first-paint-content">
-        <div class="heritage-first-paint-status" role="status" aria-live="polite"><span class="heritage-first-paint-spinner" aria-hidden="true"></span>صفحهٔ اول پندار در حال آماده‌سازی است…</div>
-        <div class="heritage-first-paint-pulse" aria-hidden="true"><b>نبض</b><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="heritage-first-paint-hero" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="heritage-first-paint-columns" aria-hidden="true">
-          <div class="heritage-first-paint-panel heritage-first-paint-reports"><b>تازه‌ترین گزارش‌ها</b><i></i><i></i><i></i></div>
-          <div class="heritage-first-paint-panel heritage-first-paint-quotes"><b>گفته‌ها</b><i></i><i></i><i></i><i></i></div>
-        </div>
+        <div class="heritage-first-paint-status" role="status" aria-live="polite"><span class="heritage-first-paint-spinner" aria-hidden="true"></span><span>صفحهٔ اول پندار در حال آماده‌سازی است…</span></div>
       </div>
     </div>
   </div>
@@ -673,7 +655,7 @@
   <script defer src="radar-live.js"></script>
   <script defer src="israel-radar.js"></script>
   <script defer src="app.js?v=20261018-figures-1"></script>
-  <script defer src="heritage-live.js?v=20261021-cover-modes-videos-2&rev=20261027-first-paint-skeleton-1" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
+  <script defer src="heritage-live.js?v=20261021-cover-modes-videos-2&rev=20261027-first-paint-loader-2" onerror="document.documentElement.classList.remove('heritage-booting','heritage-live-active')"></script>
 </body>
 </html>
 
