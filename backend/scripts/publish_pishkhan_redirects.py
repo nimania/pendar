@@ -19,8 +19,24 @@ def migrate(site):
     catalog = site / 'data/books.json'
     if catalog.exists():
         data = json.loads(catalog.read_text())
-        for key, kind in [('books', 'book'), ('people', 'book-person'), ('publishers', 'publisher')]:
-            routes.update((kind, str(row['slug'])) for row in data.get(key, []) if row.get('slug') and '/' not in row['slug'] and '..' not in row['slug'])
+        collections = []
+        if isinstance(data, dict):
+            collections = [
+                (data.get('books', []), 'book'),
+                (data.get('people', []), 'book-person'),
+                (data.get('publishers', []), 'publisher'),
+            ]
+        elif isinstance(data, list):
+            collections = [(data, 'book')]
+        for rows, kind in collections:
+            if not isinstance(rows, list):
+                continue
+            for row in rows:
+                if not isinstance(row, dict):
+                    continue
+                slug = row.get('slug')
+                if slug and '/' not in str(slug) and '..' not in str(slug):
+                    routes.add((kind, str(slug)))
     for kind, slug in routes:
         target = BASE + ('#/books/' + quote(slug) if kind == 'books' and slug else '' if kind == 'books' else kind + '/' + quote(slug) + '/')
         out = site / kind / slug / 'index.html'
