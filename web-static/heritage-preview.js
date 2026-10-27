@@ -1018,17 +1018,34 @@
       (pending?"در حال گردآوری گفته‌ها…":"فعلاً گفته‌ای با عکس معتبر برای نمایش وجود ندارد.")+'</p>')+'</div>';
   }
 
+  var homeJanKalamFeedPromise=null;
   var homeBadbadakFeedsPromise=null;
-  function renderHomeJanKalamNews(stories){
-    var latest=(Array.isArray(stories)?stories:[]).filter(function(row){
-      return row&&UUID.test(String(row.id||""))&&headline(row);
-    }).slice().sort(function(a,b){
-      return (Date.parse(b.published_at||b.updated_at||"")||0)-(Date.parse(a.published_at||a.updated_at||"")||0);
-    }).slice(0,10);
-    put("home-jan-kalam-list",latest.map(function(row){
-      return '<a class="home-cross-site-item" href="https://nimania.github.io/jan-kalam/?story='+encodeURIComponent(row.id)+'">'
-        +'<strong>'+esc(headline(row))+'</strong><small>'+esc(excerpt(row.summary_fa||row.lead_fa||"",100))+'</small></a>';
-    }).join("")||'<p class="empty-state">خبر تازه‌ای برای نمایش نیست.</p>');
+  function renderHomeJanKalamNews(){
+    var fallback='<a class="home-cross-site-item" href="https://nimania.github.io/jan-kalam/">'
+      +'<strong>دیدن تازه‌ترین خبرهای جان‌کلام</strong><small>ورود به خط خبری جان‌کلام ←</small></a>';
+    if(!homeJanKalamFeedPromise){
+      homeJanKalamFeedPromise=fetch("https://raw.githubusercontent.com/nimania/jan-kalam/main/data/snapshot.json.gz",{
+        credentials:"omit",mode:"cors",cache:"no-cache"
+      }).then(function(response){
+        if(!response.ok)throw new Error("Jan Kalam snapshot "+response.status);
+        if(typeof DecompressionStream==="undefined")throw new Error("Gzip decompression is unavailable");
+        return new Response(response.body.pipeThrough(new DecompressionStream("gzip"))).json();
+      });
+    }
+    homeJanKalamFeedPromise.then(function(snapshot){
+      var feed=snapshot&&Array.isArray(snapshot["stories.json"])?snapshot["stories.json"]:[];
+      var latest=feed.filter(function(row){
+        return row&&UUID.test(String(row.id||""))&&headline(row)&&
+          Object.prototype.hasOwnProperty.call(snapshot,"story/"+row.id+".json");
+      }).slice().sort(function(a,b){
+        return (Date.parse(b.published_at||b.updated_at||"")||0)-
+          (Date.parse(a.published_at||a.updated_at||"")||0);
+      }).slice(0,10);
+      put("home-jan-kalam-list",latest.map(function(row){
+        return '<a class="home-cross-site-item" href="https://nimania.github.io/jan-kalam/?story='+encodeURIComponent(row.id)+'">'
+          +'<strong>'+esc(headline(row))+'</strong><small>'+esc(excerpt(row.summary_fa||row.what_happened_fa||row.lead_fa||"",100))+'</small></a>';
+      }).join("")||fallback);
+    }).catch(function(){put("home-jan-kalam-list",fallback);});
   }
   function renderHomeBadbadakNews(stories){
     var target=el("home-badbadak-list");
