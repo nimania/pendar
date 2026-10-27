@@ -2836,3 +2836,8 @@ body:has(#home-page) .masthead-brand-inner .brand img{
 }
 
 /* Home three-column build revision: keep the corrected desks cache-distinct. */
+
+/* Flatten the rail at the magazine root so the three desks become grid items. */
+.heritage-root #home-page .home-news-layout>.home-below-panels.rail{
+  display:contents!important
+}
