@@ -2724,3 +2724,79 @@ body:has(#home-page) .masthead-brand-inner .brand img{
 .heritage-root .home-quote-panel .home-quote-tabs{min-height:40px;border-bottom:0}
 .heritage-root .home-quote-panel .home-quote-tabs button{padding:7px 8px;font-size:12px}
 .heritage-root .home-quote-panel [data-home-quote-panel][hidden]{display:none!important}
+
+
+/* Three equal editorial desks: reports, Jan Kalam headlines, and statements. */
+#home-page .home-news-layout,
+.heritage-root #home-page .home-news-layout{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.08fr) repeat(2,minmax(0,1fr))!important;
+  gap:16px!important;align-items:start!important;direction:rtl!important;min-width:0
+}
+#home-page .home-news-layout>.primary-column,
+#home-page .home-news-layout>.home-below-panels{
+  display:contents!important
+}
+#home-page #home-editorial-reports,
+#home-page .home-jan-kalam,
+#home-page .home-quote-panel{
+  display:block!important;grid-row:1!important;grid-column:auto!important;
+  min-width:0!important;width:auto!important;margin:0!important;
+  border:1px solid var(--line,#d8ded9)!important;border-radius:12px!important;
+  background:var(--surface,#fff)!important;
+  box-shadow:0 3px 15px rgba(20,34,38,.045)!important;overflow:hidden
+}
+#home-page #home-editorial-reports{grid-column:1!important}
+#home-page .home-jan-kalam{grid-column:2!important}
+#home-page .home-quote-panel{grid-column:3!important}
+#home-page .home-news-layout .feature-block{display:none!important}
+#home-page .home-news-layout .home-below-panels>[data-rail-group]:not([data-rail-group="figures"]),
+#home-page .home-news-layout .home-below-panels>.home-cross-site-box.home-badbadak{display:none!important}
+#home-page #home-editorial-reports .section-heading,
+#home-page .home-jan-kalam .rail-heading,
+#home-page .home-quote-panel .rail-heading{
+  min-height:58px;margin:0;padding:12px 14px;display:flex;align-items:center;
+  justify-content:space-between;border-bottom:1px solid var(--line,#d8ded9)
+}
+#home-page #home-editorial-reports .section-heading h2,
+#home-page .home-jan-kalam .rail-heading h2,
+#home-page .home-quote-panel .rail-heading h2{
+  margin:0;font-size:16px;line-height:1.55
+}
+#home-page .home-jan-kalam .home-cross-site-list,
+#home-page .home-quote-panel .home-quote-list{display:flex!important;flex-direction:column!important}
+#home-page .home-jan-kalam .home-cross-site-item,
+#home-page .home-quote-panel .home-quote-item{
+  min-width:0;padding:12px 13px;border-bottom:1px solid #e7ebe7
+}
+#home-page .home-jan-kalam .home-cross-site-item:last-child,
+#home-page .home-quote-panel .home-quote-item:last-child{border-bottom:0}
+#home-page .home-jan-kalam .home-cross-site-item strong{font-size:13px;line-height:1.8}
+#home-page .home-jan-kalam .home-cross-site-item small{font-size:11px;line-height:1.75}
+#home-page .home-quote-panel .rail-five-items{padding:0}
+#home-page .home-quote-panel .home-quote-item{gap:7px}
+#home-page .home-below-panels>.rail-box.home-cross-site-box.home-badbadak{
+  display:block!important;grid-column:1/-1!important;grid-row:2!important;
+  width:100%!important;margin:0!important
+}
+#home-page .home-destinations{display:none!important}
+@media(max-width:980px){
+  #home-page .home-news-layout,.heritage-root #home-page .home-news-layout{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+  #home-page #home-editorial-reports{grid-column:1!important;grid-row:1!important}
+  #home-page .home-jan-kalam{grid-column:2!important;grid-row:1!important}
+  #home-page .home-quote-panel{grid-column:1/-1!important;grid-row:2!important}
+  #home-page .home-quote-panel .home-quote-list{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+}
+@media(max-width:620px){
+  #home-page .home-news-layout,.heritage-root #home-page .home-news-layout{
+    grid-template-columns:minmax(0,1fr)!important;gap:12px!important
+  }
+  #home-page #home-editorial-reports,
+  #home-page .home-jan-kalam,
+  #home-page .home-quote-panel{grid-column:1!important;grid-row:auto!important}
+  #home-page .home-quote-panel .home-quote-list{grid-template-columns:1fr!important}
+}

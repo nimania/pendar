@@ -87,6 +87,28 @@
     body>header.top .header-quicklinks{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
     body>header.top .logo-img{display:block;min-height:36px;max-height:58px}
     @media(max-width:720px){body>header.top>.wrap{padding:9px 12px;gap:8px}body>header.top .header-quicklinks{order:4;width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:5px}}
+      body>header.top .header-quicklinks{
+      align-self:stretch;gap:0!important;flex-wrap:nowrap!important;
+      overflow-x:auto;scrollbar-width:none;background:#413e3d;
+      border-block:1px solid #575250
+    }
+    body>header.top .header-quicklinks::-webkit-scrollbar{display:none}
+    body>header.top .header-quicklinks>a{
+      display:flex!important;align-items:center;justify-content:center;
+      min-height:48px;padding:9px 13px!important;white-space:nowrap;
+      border:0!important;border-left:1px solid #554f4d!important;
+      border-radius:0!important;background:transparent!important;
+      color:#ecebe9!important;font-size:13px;font-weight:700;
+      text-decoration:none!important
+    }
+    body>header.top .header-quicklinks>a:hover,
+    body>header.top .header-quicklinks>a:focus-visible{
+      background:#55504e!important;color:#fff!important
+    }
+    @media(max-width:720px){
+      body>header.top .header-quicklinks{min-height:46px;order:4}
+      body>header.top .header-quicklinks>a{min-height:46px;padding:8px 10px!important;font-size:12px}
+    }
   </style>
   <style id="pendar-shared-top-header">
     /* The shared masthead is the only logo during boot; keep the shell below it. */
@@ -284,8 +306,10 @@
       <nav class="header-quicklinks" aria-label="بخش‌های پندار">
         <a href="/">خانه</a>
         <a href="/reports/">گزارش‌ها</a>
+        <a href="/headlines/">سرخط</a>
         <a href="/figures/">چهره‌ها</a>
-        <a href="/books/">پیشخوان کتاب</a>
+        <a href="/books/">کتاب</a>
+        <a href="/movies/">جان فیلم</a>
         <a href="/press/">پیشخوان جراید</a>
         <a href="/market/">بازار</a>
         <a href="/weather/">آب و هوا</a>
@@ -319,7 +343,7 @@
 
   <main class="wrap">
     <section id="home-view">
-      <aside class="iransignal-home-panel" aria-label="گزارش روز ایران سیگنال" style="margin:16px 0 22px;border:1px solid #cbd4db;border-right:5px solid #a72f34;background:#f8f9fa;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;border-radius:6px"><div style="flex:1;min-width:230px"><span style="display:block;font-size:12px;color:#7c4040;font-weight:750">ایران سیگنال · تحلیل روزانه · ۲ آبان ۱۴۰۵</span><a href="https://nimania.github.io/IranSignal/fa/daily/2026-10-24/military-threat-and-diplomacy/" target="_blank" rel="noopener noreferrer" style="display:block;font-weight:800;font-size:clamp(17px,2vw,23px);line-height:1.8;color:#182d43;text-decoration:none">تهدید حمله یا فشار برای توافق؟ سه روایت از روز پرتنش ایران</a><span style="display:block;font-size:13px;color:#607080">تحلیل نیما افشارنادری · گزارش فارسی و ویدئوی کامل</span></div><a href="https://nimania.github.io/IranSignal/fa/daily/2026-10-24/military-threat-and-diplomacy/" target="_blank" rel="noopener noreferrer" style="white-space:nowrap;background:#182d43;color:#fff;padding:10px 17px;border-radius:4px;text-decoration:none;font-size:14px;font-weight:700">خواندن گزارش ←</a></aside>
+
 
 
 
