@@ -581,6 +581,9 @@ function setHomeQuoteMode(mode){
     const selected=button.dataset.homeQuoteMode===mode;
     button.classList.toggle("on",selected);
     button.setAttribute("aria-selected",String(selected));
+    button.style.background=selected?"var(--accent-soft)":"transparent";
+    button.style.color=selected?"var(--accent)":"var(--ink-soft)";
+    button.style.fontWeight=selected?"700":"600";
   });
   paintHomeQuotes();
 }
