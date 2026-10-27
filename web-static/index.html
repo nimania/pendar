@@ -328,6 +328,10 @@
               <span><b>گفته‌ها</b><small>آخرین دیدگاه‌های چهره‌ها</small></span>
               <a href="/figures/">همهٔ چهره‌ها ←</a>
             </div>
+            <div class="home-quote-tabs" role="tablist" aria-label="دسته‌بندی گفته‌ها" style="display:flex;gap:7px;padding:8px 12px;border-bottom:1px solid var(--line)">
+              <button type="button" class="on" role="tab" aria-selected="true" data-home-quote-mode="opinions" onclick="setHomeQuoteMode('opinions')" style="border:1px solid var(--line);border-radius:9px;padding:6px 14px;background:var(--accent-soft);color:var(--accent);font:700 12px Vazirmatn,sans-serif;cursor:pointer">نظرات</button>
+              <button type="button" role="tab" aria-selected="false" data-home-quote-mode="news" onclick="setHomeQuoteMode('news')" style="border:1px solid var(--line);border-radius:9px;padding:6px 14px;background:transparent;color:var(--ink-soft);font:600 12px Vazirmatn,sans-serif;cursor:pointer">اخبار</button>
+            </div>
             <div id="home-quotes-list"><div class="spinner"></div></div>
           </section>
         </div>
