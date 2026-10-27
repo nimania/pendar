@@ -338,6 +338,29 @@
       }
       return "";
     }
+    function folded(value){
+      return String(value||"").normalize("NFKC").toLowerCase()
+        .replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/[\u200c\u200e\u200f\sـ]/g,"")
+        .replace(/[^\p{L}\p{N}]/gu,"");
+    }
+    var opinionNames=[
+      "مسیح علینژاد","مسیح علی‌نژاد","وحید اشتری","مهدی تدینی","احمد زیدآبادی","زیدآبادی"
+    ].map(folded);
+    var newsNames=["دونالد ترامپ","ترامپ","علی باقری کنی","علی باقری‌کنی"].map(folded);
+    function statementDesk(person){
+      var name=folded(person.name_fa||person.name||person.full_name_fa||"");
+      var handle=folded(person.handle||"");
+      var identity=name+" "+handle;
+      if(opinionNames.some(function(n){return identity.includes(n);}))return "opinion";
+      if(newsNames.some(function(n){return identity.includes(n);}))return "news";
+      var roles=[person.role_fa,person.title_fa,person.profession_fa,person.category_fa,
+        person.description_fa,person.bio_fa,person.role,person.title,person.profession,person.category]
+        .filter(Boolean).join(" ");
+      var role=folded(roles);
+      if(/تحلیلگر|نویسنده|روزنامهنگار|فعالسیاسی|فعالمدنی|کنشگر|کارشناس|جامعەشناس|جامعهشناس|پژوهشگر|استاد|مفسر|منتقد|ستوننویس|اندیشمند|analyst|columnist|commentator|writer|activist|researcher|pundit/.test(role))return "opinion";
+      if(/رئیسجمهور|رئیس|وزیر|سخنگو|نماینده|فرمانده|نخستو‌زیر|دیپلمات|مقام|سناتور|فرماندار|مذاکرهکننده|president|minister|spokesperson|official|senator|governor|diplomat|politician|negotiator/.test(role))return "news";
+      return "news";
+    }
     var rows=[];
     people.filter(function(p){return p&&p.handle&&p.name_fa;}).forEach(function(person){
       (Array.isArray(person.posts)?person.posts:[]).forEach(function(post){
@@ -347,7 +370,7 @@
         var statement=norm(post.quote_fa||post.summary_fa||post.statement_fa||
           post.text_fa||post.text||post.headline_fa||post.title_fa||"");
         if(statement.length<24||/^(draft|private|pending)$/i.test(String(post.status||"")))return;
-        rows.push({person:person,post:post,stamp:stamp,text:statement,image:personPhoto(person)});
+        rows.push({person:person,post:post,stamp:stamp,text:statement,image:personPhoto(person),desk:statementDesk(person)});
       });
     });
     rows.sort(function(a,b){return b.stamp-a.stamp;});
@@ -358,15 +381,38 @@
       if(seen.has(key))return;
       seen.add(key);latest.push(row);
     });
-    var cards=latest.slice(0,20).map(function(row){
-      var image=row.image
-        ?'<img src="'+esc(row.image)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">'
-        :'<span class="home-quote-avatar-fallback" aria-hidden="true">'+esc(String(row.person.name_fa||"").slice(0,1))+'</span>';
-      return '<a class="home-quote-item" href="/@'+encodeURIComponent(row.person.handle)+'/">'
-        +'<span class="home-quote-person">'+image+'<strong>'+esc(row.person.name_fa)+'</strong></span>'
-        +'<span class="home-quote-text">'+esc(excerpt(row.text,220))+'</span></a>';
-    });
-    put("rail-figures-updated",cards.join("")||'<p class="empty-state">فعلاً گفته‌ای برای نمایش نیست.</p>');
+    function renderRows(rows){
+      return rows.slice(0,20).map(function(row){
+        var image=row.image
+          ?'<img src="'+esc(row.image)+'" alt="" loading="lazy" decoding="async" onerror="this.remove()">'
+          :'<span class="home-quote-avatar-fallback" aria-hidden="true">'+esc(String(row.person.name_fa||"").slice(0,1))+'</span>';
+        return '<a class="home-quote-item" href="/@'+encodeURIComponent(row.person.handle)+'/">'
+          +'<span class="home-quote-person">'+image+'<strong>'+esc(row.person.name_fa)+'</strong></span>'
+          +'<span class="home-quote-text">'+esc(excerpt(row.text,220))+'</span></a>';
+      }).join("")||'<p class="empty-state">فعلاً گفته‌ای برای نمایش نیست.</p>';
+    }
+    put("rail-figures-updated",renderRows(latest.filter(function(row){return row.desk==="news";})));
+    put("rail-figures-opinions",renderRows(latest.filter(function(row){return row.desk==="opinion";})));
+    var tabs=mountRoot.querySelector(".home-quote-panel");
+    if(tabs&&!tabs.dataset.homeQuoteTabsReady){
+      tabs.dataset.homeQuoteTabsReady="1";
+      var buttons=tabs.querySelectorAll("[data-home-quote-tab]");
+      var panels=tabs.querySelectorAll("[data-home-quote-panel]");
+      buttons.forEach(function(button){
+        button.addEventListener("click",function(){
+          var selected=button.getAttribute("data-home-quote-tab");
+          buttons.forEach(function(item){
+            var active=item===button;
+            item.classList.toggle("on",active);
+            item.setAttribute("aria-selected",active?"true":"false");
+            item.tabIndex=active?0:-1;
+          });
+          panels.forEach(function(panel){
+            panel.hidden=panel.getAttribute("data-home-quote-panel")!==selected;
+          });
+        });
+      });
+    }
   }
   function renderRailFigureFive(payload){
     var people=Array.isArray(payload&&payload.figures)?payload.figures:[];

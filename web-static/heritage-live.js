@@ -27,7 +27,7 @@
   async function mount(){
     starting=true;
     try{
-      var response=await fetch("/heritage-preview.html?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-6",{credentials:"same-origin"});
+      var response=await fetch("/heritage-preview.html?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-tabs-1",{credentials:"same-origin"});
       if(!response.ok)throw new Error("Heritage template missing: "+response.status);
       var html=await response.text();
       var doc=new DOMParser().parseFromString(html,"text/html");
@@ -51,7 +51,7 @@
       shadow.appendChild(pendingStyle);
       var css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/heritage-preview.css?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-6";
+      css.href="/heritage-preview.css?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-tabs-1";
       var cssReady=new Promise(function(resolve,reject){
         css.addEventListener("load",resolve,{once:true});
         css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
@@ -130,7 +130,7 @@
       await new Promise(function(resolve,reject){
         window.PENDAR_HERITAGE_EMBED=true;
         var script=document.createElement("script");
-        script.src="/heritage-preview.js?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-6";
+        script.src="/heritage-preview.js?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-tabs-1";
         script.onload=resolve;
         script.onerror=function(){reject(new Error("Heritage feed script did not load"));};
         document.body.appendChild(script);

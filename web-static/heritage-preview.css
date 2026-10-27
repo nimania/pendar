@@ -2719,3 +2719,8 @@ body:has(#home-page) .masthead-brand-inner .brand img{
 
 /* Keep the two requested companion news boxes visible below the quotes. */
 #home-page .home-below-panels>.rail-box.home-cross-site-box{display:block!important}
+
+/* Quote desk tabs separate statements made as news from commentary. */
+.heritage-root .home-quote-panel .home-quote-tabs{min-height:40px;border-bottom:0}
+.heritage-root .home-quote-panel .home-quote-tabs button{padding:7px 8px;font-size:12px}
+.heritage-root .home-quote-panel [data-home-quote-panel][hidden]{display:none!important}

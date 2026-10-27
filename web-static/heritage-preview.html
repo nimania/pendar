@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="/heritage-preview.css?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-6">
-  <script defer src="/heritage-preview.js?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-6"></script>
+  <link rel="stylesheet" href="/heritage-preview.css?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-tabs-1">
+  <script defer src="/heritage-preview.js?v=20261021-cover-modes-videos-2&rev=20261027-home-report-cards-quotes-tabs-1"></script>
 </head>
 <body>
   <a class="skip" href="#content">رفتن به محتوا</a>
@@ -83,7 +83,12 @@
           <!-- Legacy selector compatibility marker, kept non-rendering: data-rail-tab="trends">پربحث‌ها id="rail-figures-talkative" -->
           <section class="rail-box rail-five home-quote-panel" data-rail-group="figures" aria-label="۲۰ گفتهٔ آخر">
             <div class="rail-heading"><h2>۲۰ گفتهٔ آخر</h2><a href="/figures/">همهٔ چهره‌ها ←</a></div>
-            <div id="rail-figures-updated" class="rail-five-items home-quote-list"><p class="loading">در حال آوردن گفته‌ها…</p></div>
+            <div class="rail-tab-strip home-quote-tabs" role="tablist" aria-label="دسته‌بندی گفته‌ها">
+              <button type="button" role="tab" class="on" data-home-quote-tab="news" aria-selected="true" aria-controls="rail-figures-updated">خبرها</button>
+              <button type="button" role="tab" data-home-quote-tab="opinion" aria-selected="false" aria-controls="rail-figures-opinions" tabindex="-1">نظرها</button>
+            </div>
+            <div class="rail-tab-panel" role="tabpanel" data-home-quote-panel="news"><div id="rail-figures-updated" class="rail-five-items home-quote-list"><p class="loading">در حال آوردن گفته‌ها…</p></div></div>
+            <div class="rail-tab-panel" role="tabpanel" data-home-quote-panel="opinion" hidden><div id="rail-figures-opinions" class="rail-five-items home-quote-list"><p class="loading">در حال آوردن نظرها…</p></div></div>
           </section>
           <section class="rail-box home-cross-site-box home-jan-kalam" aria-label="آخرین خبرهای جان‌کلام">
             <div class="rail-heading"><h2>آخرین خبرهای جان‌کلام</h2><a href="https://nimania.github.io/jan-kalam/">همهٔ خبرها ←</a></div>
