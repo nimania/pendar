@@ -90,6 +90,11 @@ def prepare(root):
     # Never delete a required catalog merely because it exceeds 5 MB. The
     # separate overall size gate blocks oversized uploads without data loss.
     print(f"Core public profile: excluded {removed} optional items.")
+    try:
+        from .publish_pishkhan_redirects import migrate
+    except ImportError:
+        from publish_pishkhan_redirects import migrate
+    migrate(root)
 
 
 if __name__ == "__main__":

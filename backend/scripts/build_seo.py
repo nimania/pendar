@@ -456,11 +456,7 @@ def build(site):
     pages['/']={'title':'پندار؛ خبر، چهره‌ها، کتاب، فیلم و سریال','description':'پندار؛ خبر و اندیشه، دیدگاه چهره‌ها، پیشخوان کتاب و جراید، فیلم و سریال و راهنمای تماشا.','body':links([(route(k),v) for k,v in SECTIONS.items()])+ '<h2>تازه‌ترین خبرها</h2>'+links(catalogs['headlines'][:20]),'canonical':'/','indexable':True,'schema_type':'WebSite'}
     generated=[]; sitemap=[]
     for url,page in pages.items():
-        if url.split('/')[1] in ('books','book','publisher','book-person'):
-            destination='https://nimania.github.io/pishkhan/#'+url.rstrip('/')
-            page={**page,'redirect':destination,'indexable':False}
-            page['canonical']=destination
-        canonical=(page['canonical'] if page['canonical'].startswith('https://') else ORIGIN+page['canonical']); title=page['title']+' | پندار'; desc=page['description']
+        canonical=ORIGIN+page['canonical']; title=page['title']+' | پندار'; desc=page['description']
         schema={'@context':'https://schema.org','@type':page['schema_type'],'name':page['title'],'url':canonical,'description':desc,'inLanguage':'fa-IR'}
         if schema['@type']=='Article':schema.update(headline=page['title'],publisher={'@type':'Organization','name':'پندار','url':ORIGIN})
         if page.get('published'):schema['datePublished']=page['published']
