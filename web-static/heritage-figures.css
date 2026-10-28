@@ -373,3 +373,11 @@ body:has(#figures-view.figure-profile-mode) #figures-view{
 .pendar-telegram-promo p{margin:4px 0;color:#52685e;font-size:12px}
 .pendar-telegram-promo a{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border-radius:6px;background:#168f99;color:white!important;font-weight:800;text-decoration:none;font-size:12px}
 .pendar-telegram-promo a:hover{background:#08717b}
+
+
+/* Cross-site contract: Pendar owns profiles/recaps; Videos owns video detail pages. */
+#figures-view .pendar-video-bridge{margin:15px 0 20px;padding:13px 15px;background:#edf8f7;border:1px solid #bcdbd9;border-radius:10px}
+#figures-view .pendar-video-bridge a{color:#08777b;text-decoration:none;font-size:14px;font-weight:800;line-height:1.8}
+#figures-view .pendar-video-bridge a:hover{text-decoration:underline}
+#figures-view .pendar-video-bridge-link{display:inline-flex;align-items:center;gap:6px;margin:4px 0;padding:8px 13px;border:1px solid #a9d5d2;border-radius:9px;background:#edf8f7;color:#08777b!important;text-decoration:none;font-weight:800;font-size:12px;line-height:1.7}
+#figures-view .pendar-video-bridge-link:hover{background:#dff3f1}
