@@ -1,8 +1,34 @@
 {
   "version": 1,
-  "updated_at": "2026-10-26T10:01:51+00:00",
+  "updated_at": "2026-10-28T20:59:58+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-edeb3025d2fe38978a",
+      "date": "2026-10-26",
+      "country": "us",
+      "region": "global",
+      "type": "گزارش استقرار",
+      "sensitive": true,
+      "title": "انتشار گزارش دوره‌ای ناوگروه‌های آمریکا",
+      "original_title": "USNI News Fleet and Marine Tracker: Oct. 26, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/26/usni-news-fleet-and-marine-tracker-oct-26-2026"
+    },
+    {
+      "id": "usni-4420e0d7375095bedc",
+      "date": "2026-10-26",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "New Philippine Coast Guard Vessel Shadows Chinese Carrier Strike Group off Mindanao",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/26/new-philippine-coast-guard-vessel-shadows-chinese-carrier-strike-group-off-mindanao"
+    },
     {
       "id": "usni-6fb6f45fb5dd86b164",
       "date": "2026-10-23",
