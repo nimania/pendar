@@ -506,6 +506,13 @@ def load_videos_catalog():
     use only the last known good local cache (never silently delete records).
     """
     import urllib.request
+    def record_status(fresh, imported=0, cached=0, error=""):
+        status_file=YOUTUBE_CATALOG_OUT.with_name("videos-feed-import-status.json")
+        status_file.parent.mkdir(parents=True,exist_ok=True)
+        status_file.write_text(json.dumps({
+            "source":VIDEOS_OWNED_CATALOG, "fresh":bool(fresh),
+            "imported":imported,"cached":cached,"error":error
+        },ensure_ascii=False),encoding="utf-8")
     previous=[]
     if YOUTUBE_CATALOG_OUT.is_file():
         try:
@@ -545,9 +552,11 @@ def load_videos_catalog():
         YOUTUBE_CATALOG_OUT.parent.mkdir(parents=True,exist_ok=True)
         YOUTUBE_CATALOG_OUT.write_text(
             json.dumps(catalog,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        record_status(True,len(valid),len(catalog))
         print(f"videos: imported {len(valid)} curated rows from independent Videos; {len(catalog)} cached")
         return catalog
     except Exception as exc:
+        record_status(False,0,len(previous),type(exc).__name__)
         print(f"videos: independent feed unavailable ({type(exc).__name__}); keeping {len(previous)} cached rows")
         return previous
 
