@@ -301,8 +301,8 @@ context.renderDesk();
 assert(htmlTarget.innerHTML.includes('class="fp-home-video"')&&
   htmlTarget.innerHTML.includes(youtubeTestId),
   "Sparse editorial dossiers may show a verified YouTube video card");
-assert(htmlTarget.innerHTML.includes('target="_blank" rel="noopener noreferrer"'),
-  "External YouTube links should open safely");
+assert(htmlTarget.innerHTML.includes('https://nimania.github.io/videos/video/'+youtubeTestId+'/'),
+  "Pendar video cards must point to canonical independent Videos detail pages");
 // A verified media-source identity must belong to THIS report only.
 stories[1].sources=[{name:"رسانهٔ نمونه",article_url:"https://example.com/report"}];
 context.homeVideoItems=[];
