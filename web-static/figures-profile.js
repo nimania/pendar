@@ -186,7 +186,18 @@ function _figureWorkCard(work) {
 function _figureVideoCard(video) {
   if(!video.url)return _figureWorkCard({...video,type_fa:"ویدئو"});
   const statement=video.statement_id||(video.recap_fa&&video.id?"youtube-"+String(video.id).replace(/^youtube-/,""):"");
-  return '<article class="figure-youtube-card"><a href="'+esc(video.url)+'" target="_blank" rel="noopener"><span class="figure-youtube-thumb">'+(video.thumbnail?'<img src="'+esc(_figureWorkUrl(video.thumbnail))+'" alt="" loading="lazy">':"")+'<span class="figure-youtube-play">▶</span></span><span class="figure-youtube-body"><b>'+esc(video.title_fa||video.title||"ویدئو")+'</b><small>'+esc(video.source_type==="hosted"?"گفت‌وگو / حضور ویدئویی":"ویدئو")+(video.published_at?" · "+esc(relTime(video.published_at)):"")+'</small></span></a>'+(video.recap_fa&&statement?'<button class="video-recap-btn" onclick="openStatement(\''+statementKey({id:statement})+'\')">جان کلام</button>':"")+'</article>';
+  const id=String(video.id||"").replace(/^youtube-/,"");
+  const ownUrl=/^[A-Za-z0-9_-]{11}$/.test(id)
+    ?"https://nimania.github.io/videos/video/"+encodeURIComponent(id)+"/"
+    :video.url;
+  return '<article class="figure-youtube-card"><a href="'+esc(ownUrl)+'"><span class="figure-youtube-thumb">'
+    +(video.thumbnail?'<img src="'+esc(_figureWorkUrl(video.thumbnail))+'" alt="" loading="lazy">':"")
+    +'<span class="figure-youtube-play">▶</span></span><span class="figure-youtube-body"><b>'
+    +esc(video.title_fa||video.title||"ویدئو")+'</b><small>'
+    +esc(video.source_type==="hosted"?"گفت‌وگو / حضور ویدئویی":"ویدئو")
+    +(video.published_at?" · "+esc(relTime(video.published_at)):"")+'</small></span></a>'
+    +(video.recap_fa&&statement?'<a class="video-recap-btn" href="/statement/'+encodeURIComponent(statement)+'/">جان کلام</a>':"")
+    +'<a class="video-source-link" href="'+esc(video.url)+'" target="_blank" rel="noopener noreferrer">منبع یوتیوب ↗</a></article>';
 }
 
 async function openFigure(handle, resetFilter = true, canonicalId = null) {

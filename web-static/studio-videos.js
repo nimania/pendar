@@ -171,66 +171,9 @@ function requestStudioRecap(videoId) {
   window.open(url,"_blank","noopener,noreferrer");
 }
 
-async function showLatestVideos(mode = "all") {
-  show("figures"); setTab("");
-  const lede=document.getElementById("figures-lede");
-  if(lede) lede.style.display="none";
-  const timeline=document.getElementById("figure-timeline");
-  if(timeline) timeline.innerHTML="";
-  const el=document.getElementById("figures");
-  if(!el) return;
-  el.innerHTML='<div class="spinner"></div>';
-  const [d,studioRows]=await Promise.all([loadFigures(),loadStudioRecaps()]);
-  const studioByVideo=new Map((studioRows||[]).map(r=>[String(r.video_id||""),
-    r]));
-  const byVideo=new Map();
-  for(const person of (d.figures||[])){
-    for(const v of (person.youtube_videos||[])){
-      if(!v || !v.url) continue;
-      const key=String(v.id||v.url);
-      let row=byVideo.get(key);
-      if(!row){
-        row={...v,people:[]};
-        byVideo.set(key,row);
-      } else if (!row.recap_fa && v.recap_fa) {
-        // Preserve recap enrichment if a shared video is attached to more than one person.
-        row={...row,...v,people:row.people};
-        byVideo.set(key,row);
-      }
-      if(!row.people.some(p=>String(p.handle).toLowerCase()===String(person.handle).toLowerCase())){
-        row.people.push({handle:person.handle,name_fa:person.name_fa,avatar:person.avatar,role_fa:person.role_fa,directory:person.directory!==false});
-      }
-    }
-  }
-  const videos=[...byVideo.values()].sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
-  const recapVideos=videos.filter(v=>String(v.recap_fa||"").trim());
-  const recapsOnly=mode==="recaps";
-  const studioCount=(studioRows||[]).length;
-  const visibleVideos=recapsOnly?recapVideos:videos;
-  const peopleCount=new Set(videos.flatMap(v=>v.people.filter(p=>p.directory!==false).map(p=>String(p.handle).toLowerCase()))).size;
-  const sourceCount=new Set(videos.flatMap(v=>v.people.filter(p=>p.directory===false).map(p=>String(p.handle).toLowerCase()))).size;
-  document.title=(recapsOnly?"جان کلام ویدئوهای چهره‌ها":"آخرین ویدئوهای چهره‌ها")+" | پندار";
-  setHash(recapsOnly?"#/videos/recaps":"#/videos");
-  el.innerHTML=`
-    <div class="latest-videos-head">
-      <button class="back" onclick="showFigures()">بازگشت به چهره‌ها</button>
-      <div><span class="press-kicker">چهره‌ها · ویدئو</span><h1>${recapsOnly?"جان کلام ویدئوها":"آخرین ویدئوها"}</h1>
-      <p>${recapsOnly?"ویدئوهایی که متن آن‌ها به «جان کلام» حرفه‌ای و وفادارانه تبدیل شده است.":"تازه‌ترین ویدئوهای چهره‌های پندار؛ از کانال‌های رسمی و حضورهای شناسایی‌شده در میزبان‌های معتبر."}</p></div>
-      <div class="latest-videos-stats">
-        <button class="${!recapsOnly?"on":""}" onclick="showLatestVideos('all')"><b>${faN(videos.length)}</b> ویدئو</button>
-        <span><b>${faN(peopleCount)}</b> چهره</span>${sourceCount?`<span><b>${faN(sourceCount)}</b> منبع</span>`:""}
-        ${recapVideos.length?`<button class="${recapsOnly?"on":""}" onclick="showLatestVideos('recaps')"><b>${faN(recapVideos.length)}</b> ≣ جان کلام</button>`:""}
-        <button onclick="showStudioRecaps()" title="نسخه‌های ضبط آماده" aria-label="نسخه‌های ضبط آماده">${studioCount?`<b>${faN(studioCount)}</b> `:""}✦</button>
-      </div>
-    </div>
-    ${visibleVideos.length?`<div class="latest-videos-grid">${visibleVideos.slice(0,120).map(v=>`
-      <article class="latest-video-card">
-        <a class="latest-video-main" href="${esc(v.url)}" target="_blank" rel="noopener">
-          <span class="figure-youtube-thumb">${v.thumbnail?`<img src="${esc(v.thumbnail)}" alt="" loading="lazy">`:""}<span class="figure-youtube-play">▶</span></span>
-          <span class="latest-video-copy"><b>${esc(v.title||"ویدئوی یوتیوب")}</b><small>${v.published_at?relTime(v.published_at):"YouTube"} · YouTube ↗</small></span>
-        </a>
-        <div class="latest-video-people">${v.people.map(p=>p.directory!==false?`<button onclick="openFigure('${String(p.handle||"").replace(/'/g,"\\'")}')">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></button>`:`<span class="latest-video-source">${p.avatar?`<img src="${esc(p.avatar)}" alt="" loading="lazy">`:""}<span>${esc(p.name_fa||"")}</span></span>`).join("")}</div>
-        ${v.recap_fa?`<div class="latest-video-actions"><button onclick="openStatement('youtube-${String(v.id||"").replace(/'/g,"\\'")}')">≣ <span>جان کلام</span></button>${studioByVideo.has(String(v.id||""))?`<button class="studio-mark ready" onclick="openStudioRecap('${String(studioByVideo.get(String(v.id||"")).id||"").replace(/'/g,"\\'")}')" title="نسخهٔ ضبط آماده" aria-label="نسخهٔ ضبط آماده">✦</button>`:`<button class="studio-mark request" onclick="requestStudioRecap('${String(v.id||"").replace(/'/g,"\\'")}')" title="ساخت نسخهٔ ضبط" aria-label="ساخت نسخهٔ ضبط">✧</button>`}</div>`:""}
-      </article>`).join("")}</div>`:`<div class="state"><div class="big">${recapsOnly?"هنوز جان کلامی آماده نشده":"هنوز ویدئویی برای چهره‌ها پیدا نشده"}</div></div>`}
-  `;
+// The public video directory has moved to its own Pages repository.
+// Studio/finance readers remain here until their independent migration.
+function showLatestVideos(mode = "all") {
+  const dest="https://nimania.github.io/videos/";
+  window.location.assign(dest+(mode==="recaps"?"?filter=recaps":""));
 }
