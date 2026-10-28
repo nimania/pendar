@@ -175,20 +175,6 @@ YOUTUBE_RECAP_EXCLUDE_HANDLES = {
     "nima-afshar-naderi",
 }
 
-# Trusted interview/media channels. Their latest uploads are scanned once per
-# build and title-matched against *all* curated figures, so hosted appearances
-# do not require a one-off rule per person.
-YOUTUBE_SHARED_HOSTS = (
-    "https://www.youtube.com/@Parsi_Live",
-    "https://www.youtube.com/@Abdi_media4",
-    "https://youtube.com/jedaaltv",
-    "https://www.youtube.com/@Studio_patt",
-    "https://www.youtube.com/@fusepodcast",
-    "https://www.youtube.com/@jomhouristreet",
-    "https://www.youtube.com/@TomorrowsHorizon2024",
-    "https://www.youtube.com/@GoldenSimorgh-d4u",
-)
-
 SYSTEM = """تو ویراستار «جان کلام» هستی. متن عمومی یک چهره را از منبع اصلی دریافت می‌کنی.
 فقط محتوای دارای موضع، ادعا، تصمیم، استدلال یا پیام عمومی معنادار را publish=true کن.
 تبلیغ، تبریک ساده، بازنشر بدون نظر تازه، محتوای تکراری و متن تقریباً خالی را publish=false کن.
@@ -511,149 +497,59 @@ def collect_truth(provider, old: list[dict]) -> list[dict]:
     return public
 
 
-def youtube_url(figure) -> str | None:
-    for kind, url in figure.social:
-        if kind == "youtube":
-            return url
-    return None
+VIDEOS_OWNED_CATALOG = "https://nimania.github.io/videos/data/pendar-youtube-videos.json"
 
+def load_videos_catalog():
+    """Read video discovery owned/published by nimania/videos, NOT YouTube.
 
-def youtube_channel_id(client: httpx.Client, url: str) -> str | None:
-    m = re.search(r"/channel/(UC[\w-]{20,})", url)
-    if m:
-        return m.group(1)
-    clean = url.split("?", 1)[0].rstrip("/")
-    r = client.get(clean)
-    r.raise_for_status()
-    text = r.text
-    patterns = [
-        r'"channelId":"(UC[\w-]{20,})"',
-        r'"externalId":"(UC[\w-]{20,})"',
-        r'itemprop="channelId"\s+content="(UC[\w-]{20,})"',
-        r'<link rel="canonical" href="https://www\.youtube\.com/channel/(UC[\w-]{20,})"',
-    ]
-    for pattern in patterns:
-        m = re.search(pattern, text)
-        if m:
-            return m.group(1)
-    return None
-
-
-def youtube_feed(client: httpx.Client, channel_id: str) -> list[dict]:
-    r = client.get("https://www.youtube.com/feeds/videos.xml",
-                   params={"channel_id": channel_id})
-    r.raise_for_status()
-    root = ET.fromstring(r.text)
-    ns = {
-        "atom": "http://www.w3.org/2005/Atom",
-        "yt": "http://www.youtube.com/xml/schemas/2015",
-        "media": "http://search.yahoo.com/mrss/",
-    }
-    out = []
-    for entry in root.findall("atom:entry", ns):
-        vid = entry.findtext("yt:videoId", default="", namespaces=ns).strip()
-        if not vid:
-            continue
-        thumb = entry.find("media:group/media:thumbnail", ns)
-        out.append({
-            "id": vid,
-            "title": entry.findtext("atom:title", default="", namespaces=ns).strip(),
-            "published_at": entry.findtext("atom:published", default="", namespaces=ns).strip(),
-            "url": f"https://www.youtube.com/watch?v={vid}",
-            "media_url": thumb.get("url") if thumb is not None else None,
-        })
-    return out
-
-
-def _youtube_name_variants(figure) -> tuple[str, ...]:
-    """Conservative title-match variants for hosted appearances."""
-    raw = [figure.name_fa, *getattr(figure, "aliases", ())]
-    out = []
-    for value in raw:
-        value = re.sub(r"\s+", " ", str(value or "")).strip()
-        # Short/common tokens are too risky for global title matching.
-        if len(value) < 5 or value in out:
-            continue
-        out.append(value)
-    return tuple(out)
-
-
-def collect_youtube_catalog() -> list[dict]:
-    """Latest uploads for every curated figure with a discoverable YouTube presence.
-
-    Official channels are attached directly. In addition, a small allow-list of
-    trusted host channels is fetched once and their video titles are matched
-    against every figure's canonical name and aliases. This makes the feature
-    global rather than person-specific while avoiding noisy YouTube-wide search.
+    Pendar remains an editorial consumer. If the independent feed is missing,
+    use only the last known good local cache (never silently delete records).
     """
-    rows: list[dict] = []
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; Pendar/1.0)"}
-    with httpx.Client(headers=headers, timeout=25, follow_redirects=True) as client:
-        # 1) Direct/official channels declared on the figure.
-        for figure in FIGURES:
-            url = youtube_url(figure)
-            if not url:
-                continue
-            try:
-                channel_id = youtube_channel_id(client, url)
-                if not channel_id:
-                    print(f"youtube catalog: channel id unresolved for {figure.name_fa}")
-                    continue
-                entries = youtube_feed(client, channel_id)[:15]
-            except Exception as exc:
-                print(f"youtube catalog: feed unavailable for {figure.name_fa} ({type(exc).__name__})")
-                continue
-            for entry in entries:
-                rows.append({
-                    "id": entry["id"],
-                    "handle": figure.handle,
-                    "title": entry["title"],
-                    "url": entry["url"],
-                    "published_at": entry["published_at"],
-                    "thumbnail": entry.get("media_url"),
-                    "channel_url": url,
-                    "source_type": "official",
-                })
-
-        # 2) Hosted appearances: scan each trusted host once, then match all people.
-        matchers = [
-            (figure, _youtube_name_variants(figure))
-            for figure in FIGURES
-            if getattr(figure, "directory", True) is not False
-        ]
-        for host_url in YOUTUBE_SHARED_HOSTS:
-            try:
-                channel_id = youtube_channel_id(client, host_url)
-                if not channel_id:
-                    print(f"youtube catalog: shared host unresolved {host_url}")
-                    continue
-                entries = youtube_feed(client, channel_id)[:15]
-            except Exception as exc:
-                print(f"youtube catalog: shared host unavailable {host_url} ({type(exc).__name__})")
-                continue
-            for entry in entries:
-                title = re.sub(r"\s+", " ", str(entry.get("title") or "")).strip()
-                if not title:
-                    continue
-                for figure, needles in matchers:
-                    if not needles or not any(n in title for n in needles):
-                        continue
-                    rows.append({
-                        "id": entry["id"],
-                        "handle": figure.handle,
-                        "title": title,
-                        "url": entry["url"],
-                        "published_at": entry["published_at"],
-                        "thumbnail": entry.get("media_url"),
-                        "channel_url": host_url,
-                        "source_type": "hosted",
-                    })
-
-    # De-duplicate the same video when it is reachable through more than one rule.
-    dedup = {}
-    for row in rows:
-        dedup[(row["handle"], row["id"])] = row
-    return list(dedup.values())
+    import urllib.request
+    previous=[]
+    if YOUTUBE_CATALOG_OUT.is_file():
+        try:
+            previous=json.loads(YOUTUBE_CATALOG_OUT.read_text(encoding="utf-8"))
+            if not isinstance(previous,list):previous=[]
+        except (ValueError,OSError):
+            previous=[]
+    try:
+        req=urllib.request.Request(VIDEOS_OWNED_CATALOG,headers={
+            "User-Agent":"Pendar/1.0 (Videos consumer; https://pendar.io/)",
+            "Accept":"application/json"})
+        with urllib.request.urlopen(req,timeout=30) as response:
+            if response.status!=200:raise ValueError("Unexpected status "+str(response.status))
+            body=response.read(18_000_001)
+            if len(body)>18_000_000:raise ValueError("Video feed too large")
+        data=json.loads(body)
+        if not isinstance(data,list) or len(data)<200:
+            raise ValueError("Missing or unexpectedly small Videos export")
+        allowed={f.handle for f in FIGURES}
+        valid=[]
+        for video in data:
+            if not isinstance(video,dict):continue
+            vid=str(video.get("id") or "")
+            handle=str(video.get("handle") or "")
+            if not re.fullmatch(r"[A-Za-z0-9_-]{11}",vid):continue
+            if handle not in allowed:continue
+            if not str(video.get("url") or "").startswith("https://www.youtube.com/watch?v="+vid):continue
+            valid.append(video)
+        if len(valid)<200:raise ValueError("Invalid or incomplete Videos export")
+        # Last-known-good cache may include uploads temporarily absent from the
+        # independent feed; do not discard them based on one publication cycle.
+        merged={(str(v.get("handle")),str(v.get("id"))):v
+                for v in previous if isinstance(v,dict) and v.get("handle") and v.get("id")}
+        for v in valid:
+            merged[(v["handle"],v["id"])]=v
+        catalog=list(merged.values())
+        YOUTUBE_CATALOG_OUT.parent.mkdir(parents=True,exist_ok=True)
+        YOUTUBE_CATALOG_OUT.write_text(
+            json.dumps(catalog,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        print(f"videos: imported {len(valid)} curated rows from independent Videos; {len(catalog)} cached")
+        return catalog
+    except Exception as exc:
+        print(f"videos: independent feed unavailable ({type(exc).__name__}); keeping {len(previous)} cached rows")
+        return previous
 
 
 def _sample_text(text: str, limit: int = YOUTUBE_TRANSCRIPT_CHARS) -> str:
@@ -1292,19 +1188,9 @@ def run() -> int:
     provider = _provider()
     fresh: list[dict] = []
 
-    # Keep the visual video archive separate from AI-filtered figure statements.
-    # If YouTube is temporarily unavailable, preserve the last known-good catalog.
-    catalog: list[dict] = []
-    try:
-        catalog = collect_youtube_catalog()
-        if catalog:
-            YOUTUBE_CATALOG_OUT.write_text(
-                json.dumps(catalog, ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
-            print(f"youtube catalog: {len(catalog)} uploads saved")
-    except Exception as exc:
-        print(f"youtube catalog: keeping existing data ({type(exc).__name__})")
+    # Video discovery has moved to nimania/videos. Pendar imports the official
+    # compatibility export and retains its AI/editorial recap pipeline only.
+    catalog=load_videos_catalog()
     try:
         fresh.extend(collect_truth(provider, old))
     except Exception as exc:
