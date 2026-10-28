@@ -91,9 +91,7 @@ async function openStatement(id) {
   setHash("#/statement/" + encodeURIComponent(raw));
   const isYoutube = post.platform === "youtube";
   const youtubeIdFromPost=()=>{
-    if(!isYoutube)return "";
-    const fromKey=String(raw||"").replace(/^youtube-/,"");
-    if(/^[A-Za-z0-9_-]{11}$/.test(fromKey))return fromKey;
+    if(!isYoutube||!(post.video_title||post.topic_fa||post.headline_fa))return "";
     const url=String(post.url||"");
     try{
       const u=new URL(url),host=u.hostname.toLowerCase();
