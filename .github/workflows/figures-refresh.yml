@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   actions: read
+  issues: write
 concurrency:
   group: pendar-figures-refresh
   cancel-in-progress: false
@@ -119,6 +120,33 @@ jobs:
           path: figure-payload/
           retention-days: 3
           if-no-files-found: error
+      - name: Report first successful independent Videos import
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          issue_state="$(gh issue view 208 --repo "$GITHUB_REPOSITORY" --json state --jq .state 2>/dev/null || echo UNKNOWN)"
+          if [ "$issue_state" != "OPEN" ]; then
+            echo "Videos migration verification issue already closed or unavailable"
+            exit 0
+          fi
+          python - <<'PY' > /tmp/videos-import-status.txt
+          import json
+          from pathlib import Path
+          f=Path('backend/data/videos-feed-import-status.json')
+          data=json.loads(f.read_text(encoding='utf-8')) if f.is_file() else {}
+          print("Fresh independent feed: "+str(data.get('fresh',False)))
+          print("Rows imported: "+str(data.get('imported',0)))
+          print("Cached rows: "+str(data.get('cached',0)))
+          print("Fallback reason: "+str(data.get('error') or 'none'))
+          PY
+          printf 'Pendar Figures workflow: https://github.com/%s/actions/runs/%s\n\nResult: %s\n' "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" "$JOB_STATUS" > /tmp/videos-migration.md
+          cat /tmp/videos-import-status.txt >> /tmp/videos-migration.md
+          gh issue comment 208 --repo "$GITHUB_REPOSITORY" --body-file /tmp/videos-migration.md
+          if [ "$JOB_STATUS" = "success" ] && grep -q 'Fresh independent feed: True' /tmp/videos-import-status.txt; then
+            gh issue close 208 --repo "$GITHUB_REPOSITORY" || true
+          fi
 
 # Recovery trigger: refresh collector after extended schedule gap on 2026-10-12.
 
