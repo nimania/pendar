@@ -933,7 +933,7 @@
     }).sort(function(a,b){
       return Date.parse(b.published_at)-Date.parse(a.published_at);
     }).slice(0,5).map(function(v){
-      return {title:String(v.title||""),url:String(v.url||""),
+      return {title:String(v.title||""),url:String(v.url||""),id:String(v.id||""),
         thumbnail:validImage(v.thumbnail||""),
         published_at:v.published_at};
     });
@@ -1264,11 +1264,13 @@
         var image=video.thumbnail?'<span class="fp-video-image">'+
           '<img src="'+esc(video.thumbnail)+'" alt="" loading="lazy" decoding="async" onerror="this.parentNode.remove()">'+
           '<span class="fp-video-play" aria-hidden="true">▶</span></span>':"";
-        return '<a class="fp-home-video" href="'+esc(video.url)+
-          '" target="_blank" rel="noopener noreferrer" title="نمایش ویدئو در یوتیوب">'+
+        var id=String(video.id||"").replace(/^youtube-/,"");
+        var ownUrl=/^[A-Za-z0-9_-]{11}$/.test(id)?
+          "https://nimania.github.io/videos/video/"+encodeURIComponent(id)+"/":video.url;
+        return '<a class="fp-home-video" href="'+esc(ownUrl)+'" title="نمایش در آرشیو ویدئوها">'+
           image+'<span class="fp-video-copy"><small>ویدئو · نیما افشارنادری</small>'+
           '<strong>'+esc(excerpt(video.title,115))+'</strong>'+
-          '<span class="fp-video-watch">تماشا در یوتیوب ↗</span></span></a>';
+          '<span class="fp-video-watch">صفحهٔ ویدئو ↗</span></span></a>';
       }
 
       function picture(entry){
