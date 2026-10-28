@@ -90,6 +90,25 @@ async function openStatement(id) {
   const statementMoviesSection=statementMovies.length?'<div class="rule"><span>فیلم‌ها و سریال‌های مرتبط با این گفته</span><span class="l"></span></div><div class="press-book-links">'+statementMovies.map(m=>'<button onclick="openMovie(\''+esc(m.slug)+'\')"><span>فیلم</span><b>'+esc(m.title_fa||m.original_title||"")+'</b></button>').join("")+'</div>':"";
   setHash("#/statement/" + encodeURIComponent(raw));
   const isYoutube = post.platform === "youtube";
+  const youtubeIdFromPost=()=>{
+    if(!isYoutube)return "";
+    const fromKey=String(raw||"").replace(/^youtube-/,"");
+    if(/^[A-Za-z0-9_-]{11}$/.test(fromKey))return fromKey;
+    const url=String(post.url||"");
+    try{
+      const u=new URL(url),host=u.hostname.toLowerCase();
+      let vid="";
+      if(["www.youtube.com","youtube.com","m.youtube.com"].includes(host)){
+        if(u.pathname==="/watch")vid=u.searchParams.get("v")||"";
+        else if(/^\/(live|shorts|embed)\//.test(u.pathname))vid=u.pathname.split("/")[2]||"";
+      }else if(["youtu.be","www.youtu.be"].includes(host))vid=u.pathname.split("/")[1]||"";
+      return /^[A-Za-z0-9_-]{11}$/.test(vid)?vid:"";
+    }catch(_){return "";}
+  };
+  const videoArchiveId=youtubeIdFromPost();
+  const videoArchiveLink=videoArchiveId
+    ? '<p class="pendar-video-bridge"><a href="https://nimania.github.io/videos/video/'+encodeURIComponent(videoArchiveId)+'/">▶ مشاهدهٔ صفحهٔ ویدئو، رسانه و شرکت‌کنندگان در آرشیو مستقل ویدئوها ↗</a></p>'
+    : "";
   const recapText = String(post.recap_fa || "").trim();
   const recapHtml = recapText
     ? '<section class="video-statement-recap"><div class="rule"><span>≣ جان کلام</span><span class="l"></span></div>' +
@@ -111,7 +130,7 @@ async function openStatement(id) {
       '<button class="back" onclick="' + (isNews ? "openNewsPerson" : "openFigure") + "('" + esc(person.handle) + "')\">بازگشت به پروفایل</button>" +
       '<div class="fig-head">' + figureProfileLink(person,avatar(person,"lg")) + '<div class="fig-head-body"><h1>' + figureProfileLink(person,esc(person.name_fa)) + '</h1><p class="muted">' + esc(person.role_fa||"") + '</p></div></div>' +
       '<div class="rule"><span>' + (isYoutube ? "جان کلام" : (isNews ? "گفته در خبر" : "دیدگاه")) + '</span><span class="l"></span></div>' +
-      figureCard(post,false,true) + telegramEmbed(post) + videoEmbedHtml + pointsHtml + recapHtml +
+      figureCard(post,false,true) + telegramEmbed(post) + videoArchiveLink + videoEmbedHtml + pointsHtml + recapHtml +
       '<aside class="pendar-telegram-promo"><strong>پندار در تلگرام</strong><a href="https://t.me/pendario">عضویت در کانال پندار ←</a></aside>' +
       statementBooksSection + statementMoviesSection +
       '<p class="muted fig-note">این صفحه نشانی مستقل دارد و می‌توان مستقیماً به همین گفته ارجاع داد.</p>' +
@@ -236,6 +255,9 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const localBookIds=new Set(figureBooks.map(b=>b.slug));
   profileMedia.books=profileMedia.books.filter(w=>!w.internal_target||!localBookIds.has(w.internal_target.id));
   const youtubeVideos=profileMedia.videos;
+  const personArchiveLink=/^[A-Za-z0-9_.-]{2,90}$/.test(String(x.handle||""))
+    ? '<a class="pendar-video-bridge-link" href="https://nimania.github.io/videos/?person='+encodeURIComponent(x.handle)+'">▶ همهٔ ویدئوهای مرتبط در آرشیو مستقل ↗</a>'
+    : "";
   const canonicalNames=new Set([x.name_fa,...(canonicalFigure?.aliases||[])].map(_canonicalNorm).filter(Boolean));
   const figureStories=(typeof ALL!=="undefined"?ALL:[]).filter(s=>(s.entities||[]).some(e=>canonicalNames.has(_canonicalNorm(e.name_fa||e.name||""))));
   let shown = _figureProfileFilter === "direct" ? direct : _figureProfileFilter === "news" ? news : (_figureProfileFilter === "works" || _figureProfileFilter === "books" || _figureProfileFilter === "movies" || _figureProfileFilter === "stories" || _figureProfileFilter === "videos" || _figureProfileFilter === "about") ? [] : (x.posts || []);
@@ -314,7 +336,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
       +'<button type="button" class="figure-rail-follow'+(followed?' on':'')+'" data-figure-follow="'+esc(p.handle)+'" onclick="toggleFigureRailFollow(this)" aria-pressed="'+followed+'">'+(followed?'✓ دنبال می‌کنم':'+ دنبال کن')+'</button></div>';
   }).join("");
   const nextProfileMarkup = `<div class="x-profile" data-profile-handle="${esc(x.handle)}">
-    ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false),stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length+profileMedia.books.length ? `<span><b>${faN(figureBooks.length+profileMedia.books.length)}</b> کتاب</span>` : ""}${mediaWorks.length+profileMedia.films.length ? `<span><b>${faN(mediaWorks.length+profileMedia.films.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
+    ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false)+personArchiveLink,stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length+profileMedia.books.length ? `<span><b>${faN(figureBooks.length+profileMedia.books.length)}</b> کتاب</span>` : ""}${mediaWorks.length+profileMedia.films.length ? `<span><b>${faN(mediaWorks.length+profileMedia.films.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
     <div class="figure-profile-columns">
       <div class="figure-profile-primary">
