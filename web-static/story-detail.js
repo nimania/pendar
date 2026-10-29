@@ -338,7 +338,7 @@ async function openStory(id) {
       </div></nav>
       <div class="magazine-container magazine-article-container">
         <nav class="magazine-breadcrumb" aria-label="موقعیت صفحه"><a href="/">پندار</a><span>/</span>
-          <a href="${editorial?"/reports/":"/headlines/"}">${editorial?"گزارش‌ها":"سرخط"}</a><span>/</span>
+          <a href="${editorial?"/reports/":"https://nimania.github.io/jan-kalam/"}">${editorial?"گزارش‌ها":"جان‌کلام"}</a><span>/</span>
           <span>${esc(CAT_FA[s.category]||"خبر")}</span>
         </nav>
         <div class="magazine-article-layout">
@@ -386,8 +386,8 @@ async function openStory(id) {
           </article>
           <aside class="magazine-article-rail" aria-label="مطالب مرتبط"><section class="country-radar-panel" aria-label="رادار کشورها"><div class="country-radar-header"><span class="radar-indicator" aria-hidden="true"></span><h2>رادار کشورها</h2><a href="/radar/">همه ←</a></div><p class="country-radar-intro">تحولات و نشانه‌های مهم</p><a class="country-radar-item" href="/us-radar/"><span class="country-radar-flag" aria-hidden="true">🇺🇸</span><span><strong>رادار آمریکا</strong><small>تحولات سیاسی و پیامدها برای ایران</small></span><span class="country-radar-arrow">←</span></a><a class="country-radar-item" href="/israel-radar/"><span class="country-radar-flag" aria-hidden="true">🇮🇱</span><span><strong>رادار اسرائیل</strong><small>تحولات سیاسی و منطقه‌ای</small></span><span class="country-radar-arrow">←</span></a><a class="country-radar-item" href="/radar/iran-scenarios/"><span class="country-radar-flag" aria-hidden="true">🇮🇷</span><span><strong>سناریوهای ایران</strong><small>روندها و احتمال‌های آینده</small></span><span class="country-radar-arrow">←</span></a></section>
             <section class="magazine-rail-box">
-              <div class="magazine-rail-heading"><h2>در همین موضوع</h2><a href="/headlines/">بیشتر ←</a></div>
-              ${magazineSideStories||'<p class="magazine-rail-empty">خبرهای مرتبط در آرشیو پندار</p>'}
+              <div class="magazine-rail-heading"><h2>در همین موضوع</h2><a href="https://nimania.github.io/jan-kalam/">همهٔ خبرها در جان‌کلام ←</a></div>
+              ${magazineSideStories||'<p class="magazine-rail-empty">خبرهای مرتبط را در جان‌کلام دنبال کنید</p>'}
             </section>
             <section class="magazine-rail-nav"><h2>بیشتر در پندار</h2>
               <a href="/reports/">گزارش‌های تحریریه ←</a>
