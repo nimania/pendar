@@ -6,6 +6,18 @@ vm.createContext(ctx);vm.runInContext(fs.readFileSync(path.join(root,'news-migra
 assert.equal(ctx.pendarContentURL({id:NEWS}),'https://nimania.github.io/jan-kalam/?story='+NEWS);
 assert.equal(ctx.pendarContentURL({id:REPORT}),'/story/'+REPORT+'/');
 assert.equal(ctx.pendarContentURL({id:NEWS,has_editorial_report:true}),'/story/'+NEWS+'/');
+for (const file of [
+  "future-shared.js",
+  "story-detail.js",
+  "heritage-preview.js",
+  "neshani/turkey/index.html",
+  "neshani/turkey/news.js"
+]) {
+  const source = fs.readFileSync(path.join(root, file), "utf8");
+  assert(!source.includes("/headlines/"), file + " still links to Pendar's retired headlines route");
+  assert(source.includes("https://nimania.github.io/jan-kalam/"), file + " must link directly to Jan Kalam");
+}
+assert(!fs.readFileSync(path.join(root,"radar/iran-scenarios/scenario/reader.js"),"utf8").includes("سرخط پندار"));
 ctx.goJanKalam('source','منبع یک');assert.equal(ctx.target,'https://nimania.github.io/jan-kalam/#/source/'+encodeURIComponent('منبع یک'));
 // Authored trend reports must use their generated page, not the news router.
 const router=fs.readFileSync(path.join(root,'router.js'),'utf8');
