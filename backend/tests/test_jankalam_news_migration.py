@@ -73,6 +73,16 @@ class NewsMigrationTests(unittest.TestCase):
                 MODULE.migrate(site)
             self.assertEqual((site / "story" / NEWS / "index.html").read_text(), "ORIGINAL-" + NEWS)
 
+    def test_editorial_ownership_survives_later_missing_report_metadata(self):
+        with tempfile.TemporaryDirectory() as temp:
+            site = self.make_site(temp)
+            MODULE.migrate(site)
+            (site / "data/story" / (REPORT + ".json")).write_text(json.dumps({"id": REPORT}))
+            (site / "data/stories.json").write_text(json.dumps([{"id": REPORT}, {"id": NEWS}]))
+            result = MODULE.migrate(site)
+            self.assertEqual(result["news"], 1)
+            self.assertEqual((site / "story" / REPORT / "index.html").read_text(), "ORIGINAL-" + REPORT)
+
 
 if __name__ == "__main__":
     unittest.main()

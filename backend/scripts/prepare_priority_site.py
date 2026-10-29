@@ -16,6 +16,7 @@ keep_dirs = {
     "market", "weather", "system", "diner", "icons",
     "entity", "movie", "book", "publisher", "book-person", "cinema-person",
     "studio", "recaps", "videos", "radar", "reports", "iransignal", "badbadak", "naval",
+    "trends", "editorial-author",
 }
 # Root-level data consumed by news feeds, archive, entity/figure views and search.
 keep_data_names = {
@@ -34,6 +35,7 @@ keep_data_names = {
     "books.js", "movies.js", "press-directory.js", "studio-recaps.json",
     "youtube-videos.json", "prices.json", "crypto.json", "candidate-feeds.json",
     "project-finance.json",
+    "editorial-archive.json", "google-trends-iran.json",
 }
 keep_data_prefixes = (
     "figure", "news-", "curated-", "source-", "story-", "search-",

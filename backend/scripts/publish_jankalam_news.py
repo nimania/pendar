@@ -63,6 +63,9 @@ def migrate(site):
     feed = read(data / "stories.json", [])
     archive = read(data / "editorial-archive.json", {}).get("reports", [])
     protected = {str(row.get("id")) for row in archive if row.get("id")}
+    # Editorial ownership survives a compact collector refresh that omits
+    # report metadata; a previously protected URL must not become news.
+    protected.update(read(data / "news-destinations.json", {}).get("editorial", {}))
     protected.update(str(row["id"]) for row in feed if editorial_story(row))
     pilots = site / "story-editorial-pilots.js"
     if pilots.is_file():

@@ -12,6 +12,24 @@ from restore_core_site_data import missing, restore
 
 
 class CoreRecoveryTests(unittest.TestCase):
+    def test_publication_preserves_authored_reports_and_their_ownership_index(self):
+        with tempfile.TemporaryDirectory() as directory:
+            site = Path(directory)
+            (site / "data").mkdir()
+            (site / "index.html").write_text("shell")
+            for name in required_data:
+                (site / "data" / name).write_text("{}")
+            paths = ("reports/daily/example/index.html", "trends/report/example/index.html",
+                     "editorial-author/example/index.html", "data/editorial-archive.json",
+                     "data/google-trends-iran.json", "data/news-destinations.json")
+            for path in paths:
+                target = site / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text("preserved editorial content")
+            prepare(site)
+            for path in paths:
+                self.assertEqual((site / path).read_text(), "preserved editorial content", path)
+
     def test_recovery_then_trim_preserves_data_needed_for_profiles_and_catalogs(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
