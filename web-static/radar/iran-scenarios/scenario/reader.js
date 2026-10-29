@@ -264,8 +264,8 @@
       peerPosts.slice(0,35).forEach(p=>drawFigurePost(peers,p));
     }
     const headlines=relatedNews();
-    const newsSection=section(root,"آخرین خبرهای مرتبط از سرخط پندار",
-      "فقط پیوند موضوعیِ عنوان و خلاصه؛ برای مشاهدهٔ منابع و شواهد اصلی، پروندهٔ هر خبر را باز کنید.");
+    const newsSection=section(root,"آخرین خبرهای مرتبط در جان‌کلام",
+      "پیوندها به خبرهای جان‌کلام می‌روند؛ تطبیق موضوعی به معنی تأیید سناریو نیست. برای مشاهدهٔ منابع و شواهد اصلی، پروندهٔ هر خبر را باز کنید.");
     if(!headlines.length)newsSection.append(node("div","empty","خبر دیگری با تطبیق موضوعی در فهرست موجود پیدا نشد."));
     headlines.slice(0,45).forEach(article=>{
       const e=node("article","entry");
