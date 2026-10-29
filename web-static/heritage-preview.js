@@ -1152,14 +1152,14 @@
       });
       pool=unique;
       if(!pool.length){
-        target.innerHTML='<p class="fp-empty">در این نوبت خبر تاریخ‌دار کافی برای چیدن صفحهٔ اول نداریم. <a href="/headlines/">سرخط‌ها ←</a></p>';
+        target.innerHTML='<p class="fp-empty">در این نوبت خبر تاریخ‌دار کافی برای چیدن صفحهٔ اول نداریم. <a href="https://nimania.github.io/jan-kalam/">خبرها در جان‌کلام ←</a></p>';
         return;
       }
       // Ceremonial or PR-shaped news remains available in its section, never
       // allowed to displace consequential coverage as the main lead.
       var worthy=pool.filter(function(e){return !frontRoutinePublicity(e.row);});
       if(!worthy.length){
-        target.innerHTML='<p class="fp-empty">در این نوبت خبر شاخصی برای تیتر اصلی شناسایی نشد. <a href="/headlines/">همهٔ سرخط‌ها ←</a></p>';
+        target.innerHTML='<p class="fp-empty">در این نوبت خبر شاخصی برای تیتر اصلی شناسایی نشد. <a href="https://nimania.github.io/jan-kalam/">همهٔ خبرها در جان‌کلام ←</a></p>';
         return;
       }
       var speakers=figureFeatureItems.filter(function(item){
@@ -1465,7 +1465,7 @@
       }
       if(extras.length){
         html+='<section class="fp-more"><div class="fp-section-heading"><h3>'+
-          'دیگر خبرهای مهم</h3><a href="/headlines/">سرخط‌ها ←</a></div>'+
+          'دیگر خبرهای مهم</h3><a href="https://nimania.github.io/jan-kalam/">خبرها در جان‌کلام ←</a></div>'+
           '<div class="fp-more-grid">'+extras.map(function(e){return story(e,"fp-essential");}).join("")+
           '</div></section>';
       }
@@ -1480,7 +1480,7 @@
       if(changed.length){
         html+='<section class="fp-changes"><div class="fp-section-heading"><h3>'+
           (lastHomeVisit?"از آخرین بازدید شما":"خبرهای تازه‌تر")+
-          '</h3><a href="/headlines/">سرخط‌ها ←</a></div>'+
+          '</h3><a href="https://nimania.github.io/jan-kalam/">خبرها در جان‌کلام ←</a></div>'+
           '<div class="fp-changes-grid">'+changed.map(function(e){return relatedStory(e,false);}).join("")+'</div></section>';
       }
       // Track what is actually on this edition, not all candidate stories.
@@ -1493,9 +1493,9 @@
       if(!featureSection||!heroBox)return;
       featureSection.hidden=false;
       var isStatement=currentFeature==="statements",isFront=currentFeature==="front";
-      var moreUrl=isStatement?"/figures/":isFront?"/headlines/":"/reports/";
+      var moreUrl=isStatement?"/figures/":isFront?"https://nimania.github.io/jan-kalam/":"/reports/";
       if(featureMore)featureMore.href=moreUrl;
-      if(featureMore)featureMore.textContent=isStatement?"همهٔ گفته‌ها ←":isFront?"همهٔ سرخط‌ها ←":"همهٔ گزارش‌ها ←";
+      if(featureMore)featureMore.textContent=isStatement?"همهٔ گفته‌ها ←":isFront?"همهٔ خبرها در جان‌کلام ←":"همهٔ گزارش‌ها ←";
       var heading=el("feature-heading-title");
       if(heading)heading.textContent=isFront?"صفحهٔ اول پندار":isStatement?"گفته‌ها":FEATURE_NAMES[currentFeature];
       var newspaper=el("feature-statements-edition"),front=el("feature-front-page"),underHero=el("under-hero");
@@ -1828,7 +1828,7 @@
       ["جراید","/data/press-stats.json",function(v){return v.updated_at||v.generated_at||v.as_of;}]
     ];
     var items=[
-      stampBlock("سرخط‌ها",newestTimestamp(data.stories),"تاریخ تازه‌ترین خبر در خروجی فعلی"),
+      stampBlock("خبرهای جان‌کلام",newestTimestamp(data.stories),"تاریخ تازه‌ترین خبر در خروجی فعلی"),
       stampBlock("گزارش‌ها",newestTimestamp(data.reports),"تاریخ تازه‌ترین گزارش در خروجی فعلی")
     ];
     put("footer-freshness",items.join('<span aria-hidden="true">·</span>'));
@@ -1883,7 +1883,7 @@
       return '<div class="pubstats-row"><a href="'+href+'">'+name+'</a>'+
         '<span class="pubstats-value">'+fmt(series.length)+'</span>'+cells+'</div>';
     }
-    panel.innerHTML='<h3>آمار انتشار پندار</h3><p>مجموع سرخط‌ها از آمار کل آرشیو منتشرشده محاسبه می‌شود؛ سایر ردیف‌ها موجودی خروجی‌های همان بخش‌اند.</p>'+
+    panel.innerHTML='<h3>آمار انتشار پندار</h3><p>مجموع خبرهای جان‌کلام از آمار کل آرشیو منتشرشده محاسبه می‌شود؛ سایر ردیف‌ها موجودی خروجی‌های همان بخش‌اند.</p>'+
       '<div class="pubstats-table"><div class="pubstats-row pubstats-head"><span>بخش</span><span>موجود</span>'+
       periods.map(function(p){return '<span>'+p[0]+'</span>';}).join("")+'</div>'+
       '<div id="pubstats-news"></div>'+row("گزارش",data.reports,"/reports/",true)+
@@ -1897,11 +1897,11 @@
         var count=stamps.filter(function(t){var ms=Number(t);return Number.isFinite(ms)&&ms<=now&&now-ms<=p[1];}).length;
         return '<span class="pubstats-value">'+fmt(count)+'</span>';
       }).join("");
-      slot.innerHTML='<div class="pubstats-row"><a href="/headlines/">کل سرخط‌ها</a><span class="pubstats-value">'+
+      slot.innerHTML='<div class="pubstats-row"><a href="https://nimania.github.io/jan-kalam/">کل خبرهای جان‌کلام</a><span class="pubstats-value">'+
         fmt(Number(stats.total))+'</span>'+windows+'</div>';
     }).catch(function(){
       var slot=panel.querySelector("#pubstats-news");
-      if(slot)slot.innerHTML='<div class="pubstats-row"><a href="/headlines/">کل سرخط‌ها</a>'+
+      if(slot)slot.innerHTML='<div class="pubstats-row"><a href="https://nimania.github.io/jan-kalam/">کل خبرهای جان‌کلام</a>'+
         '<span>—</span><span>—</span><span>—</span><span>—</span></div>';
     });
     Promise.all([
@@ -1973,7 +1973,7 @@
       }else{
         el("feature-hero").closest(".feature-block").hidden=true;
         photoNotice("rail-reports","دریافت تصاویر گزارش‌ها موقتاً ممکن نیست.","/reports/");
-        photoNotice("rail-news","دریافت تصاویر خبرها موقتاً ممکن نیست.","/headlines/");
+        photoNotice("rail-news","دریافت تصاویر خبرها موقتاً ممکن نیست.","https://nimania.github.io/jan-kalam/");
         renderPulseMetrics(null,[],[]);
       }
       if(typeof console!=="undefined")console.warn("Pendar heritage preview:",err);
