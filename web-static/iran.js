@@ -7,7 +7,7 @@
    follow store (charts-social.js) at runtime. No behavior change. */
 
 let _iranScope = "all";
-function showIran() { show("iran"); setTab("iran"); renderIran(); setHash("#/iran"); }
+function showIran() { return goJanKalam("iran"); }
 async function renderIran() {
   const el = document.getElementById("iran");
   try {
@@ -50,19 +50,7 @@ function setIranScope(s) {
   const items = s === "all" ? ALL : ALL.filter(x => x.geo && x.geo.scope === s);
   document.getElementById("iran-body").innerHTML = groupedFeed(items);
 }
-async function openProvince(slug) {
-  if (!PATHS[slug]) return;
-  if (!ALL.length) ALL = await getJSON(`${DATA}/stories.json`).catch(()=>[]);
-  setHash("#/province/" + slug);
-  show("topicarchive"); setTab("iran");
-  document.getElementById("ta-back-t").textContent = "بازگشت به ایران";
-  document.getElementById("ta-back").onclick = showIran;
-  const items = ALL.filter(s => s.geo && (s.geo.provinces || []).some(p => p.slug === slug));
-  const name = (PATHS[slug] || {}).fa || slug;
-  document.getElementById("ta-title").textContent = "سرخط " + name;
-  document.getElementById("ta-sub").textContent = faN(items.length) + " خبر در این استان";
-  document.getElementById("ta-feed").innerHTML = followBar("provinces", slug, "خبرهای این استان در «سرخط من» بیاید") + provinceFilters(items, slug) + `<div id="province-news">${items.length?groupedFeed(items):'<p class="state">هنوز خبری برای این استان ثبت نشده است.</p>'}</div>`;
-}
+function openProvince(slug) { return goJanKalam("province", slug); }
 function hitProvFollow(slug, btn) {
   toggleF("provinces", slug);
   btn.classList.toggle("on", isF("provinces", slug));

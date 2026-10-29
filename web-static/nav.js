@@ -54,57 +54,11 @@ function groupedByCategory(items) {
   }
   return html;
 }
-function openDay(dateStr) {
-  if (!ALL.length) return;
-  setHash("#/day/" + dateStr);
-  show("topicarchive"); setTab("feed");
-  document.getElementById("ta-back-t").textContent = "بازگشت به سرخط";
-  document.getElementById("ta-back").onclick = showFeed;
-  const items = ALL.filter(s => (s.published_at || "").slice(0, 10) === dateStr);
-  document.getElementById("ta-title").textContent = "خبرهای " + dayLabel(dateStr);
-  document.getElementById("ta-sub").textContent = faN(items.length) + " خبر · " + dateStr;
-  document.getElementById("ta-feed").innerHTML = groupedByCategory(items);
-}
+function openDay(dateStr) { return goJanKalam("day", dateStr); }
 
-async function openTrendDossier(slug) {
-  if (!ALL.length) { try { ALL = await getJSON(`${DATA}/stories.json`); } catch (e) {} }
-  const t = await getJSON(`${DATA}/trends.json`).catch(() => ({ topics: [] }));
-  const tp = (t.topics || []).find(x => x.slug === slug);
-  if (!tp) return openTopic(slug);
-  setHash("#/trend/" + slug);
-  show("topicarchive"); setTab("trends");
-  document.getElementById("ta-back-t").textContent = "بازگشت به بورس اخبار";
-  document.getElementById("ta-back").onclick = showTrends;
-  document.getElementById("ta-title").textContent = "جانِ ماجرا: " + (tp.name_fa || slug);
-  const d = tp.dossier || {};
-  document.getElementById("ta-sub").textContent =
-    faN(d.development_count || tp.story_count || 0) + " تحول مستقل · " +
-    faN(d.source_coverage || tp.coverage || 0) + " پوشش منبع";
-  const ids = new Set(d.story_ids || []);
-  const items = ALL.filter(s => ids.has(s.id) || (s.topics || []).some(x => x.slug === slug));
-  const timeline = items.slice().sort((a,b) => String(b.published_at||"").localeCompare(String(a.published_at||"")));
-  document.getElementById("ta-feed").innerHTML =
-    `<div class="trend-dossier">
-      <div class="rule"><span>جانِ ماجرا</span><span class="l"></span></div>
-      <p class="kalam">${esc(d.summary_fa || "این پرونده از چند تحول خبری مستقل ساخته شده است.")}</p>
-      ${d.why_now_fa ? `<div class="rule"><span>چرا الان مهم است؟</span><span class="l"></span></div><p class="kalam">${esc(d.why_now_fa)}</p>` : ""}
-      <div class="trend-dossier-stats"><span><b>${faN(d.development_count || tp.story_count || 0)}</b> تحول مستقل</span><span><b>${faN(d.source_coverage || tp.coverage || 0)}</b> پوشش منبع</span>${tp.growth != null ? `<span><b>${faN(tp.growth)}٪</b> رشد</span>` : ""}</div>
-      <div class="rule"><span>مسیر ماجرا</span><span class="l"></span></div>
-    </div>` + groupedFeed(timeline);
-}
+function openTrendDossier(slug) { return goJanKalam("trend", slug); }
 
-async function openTopic(slug) {
-  if (!ALL.length) { try { ALL = await getJSON(`${DATA}/stories.json`); } catch (e) {} }
-  setHash("#/topic/" + slug);
-  show("topicarchive"); setTab("topics");
-  document.getElementById("ta-back-t").textContent = "بازگشت به موضوعات";
-  document.getElementById("ta-back").onclick = showTopics;
-  const items = ALL.filter(s => (s.topics || []).some(t => t.slug === slug));
-  const name = ((items[0] && items[0].topics.find(t => t.slug === slug)) || {}).name_fa || slug;
-  document.getElementById("ta-title").textContent = "موضوع: " + name;
-  document.getElementById("ta-sub").textContent = faN(items.length) + " خبر در این موضوع";
-  document.getElementById("ta-feed").innerHTML = groupedFeed(items);
-}
+function openTopic(slug) { return goJanKalam("topic", slug); }
 
 // pre-baked reference links (persian + english wikipedia + Grokipedia) so a
 // reader can pick up context from multiple encyclopedias with different tones
@@ -151,19 +105,4 @@ async function openEntity(slug) {
 function followBar(kind, id, note) {
   return `<div class="follow-bar">${followBtn(kind, id, "در حال دنبال‌کردن", "دنبال کن")}<span class="fb-note">${esc(note)}</span></div>`;
 }
-async function openSource(name) {
-  if (!ALL.length) return;
-  const entity=await canonicalEntityByName("source",name);
-  if(entity) return showPress(entity.routes?.press_source||entity.name_fa,entity.id);
-  const canonical = PRESS_SOURCES.find(s => [s.name,...(s.aliases||[])].includes(name));
-  if (canonical) return showPress(canonical.name);
-
-  setHash("#/source/" + encodeURIComponent(name));
-  show("topicarchive"); setTab("feed");
-  document.getElementById("ta-back-t").textContent = "بازگشت به سرخط";
-  document.getElementById("ta-back").onclick = showFeed;
-  const items = ALL.filter(s => (s.source_names || []).includes(name));
-  document.getElementById("ta-title").textContent = "منبع: " + name;
-  document.getElementById("ta-sub").textContent = faN(items.length) + " خبر از این منبع";
-  document.getElementById("ta-feed").innerHTML = followBar("sources", name, "خبرهای این منبع در «سرخط من» بیاید") + groupedFeed(items);
-}
+function openSource(name) { return goJanKalam("source", name); }

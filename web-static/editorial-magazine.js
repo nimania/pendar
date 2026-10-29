@@ -9,13 +9,13 @@ function pendarMagazineCollectionFrame(content){
     +'</div></header>'
     +'<nav class="magazine-collection-nav" aria-label="بخش‌های پندار"><div class="magazine-collection-container">'
     +'<a href="/">خانه</a><a class="magazine-collection-nav-current" href="/reports/">گزارش‌ها</a>'
-    +'<a href="/headlines/">سرخط</a><a href="/figures/">چهره‌ها</a>'
+    +'<a href="https://nimania.github.io/jan-kalam/">جان‌کلام</a><a href="/figures/">چهره‌ها</a>'
     +'<a href="/books/">کتاب</a><a href="/movies/">جان فیلم</a><a href="/press/">پیشخوان جراید</a>'
     +'</div></nav>'
     +'<div class="magazine-collection-container magazine-collection-content">'+content+'</div>'
     +'<footer class="magazine-collection-footer"><div class="magazine-collection-container">'
     +'<strong>پندار</strong><span>خبر، اندیشه و فرهنگ</span>'
-    +'<nav aria-label="پایین صفحه"><a href="/reports/">گزارش‌ها</a><a href="/headlines/">سرخط</a>'
+    +'<nav aria-label="پایین صفحه"><a href="/reports/">گزارش‌ها</a><a href="https://nimania.github.io/jan-kalam/">جان‌کلام</a>'
     +'<a href="/figures/">چهره‌ها</a><a href="/press/">جراید</a></nav>'
     +'</div></footer></div>';
 }

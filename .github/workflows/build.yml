@@ -446,6 +446,11 @@ jobs:
       - name: Validate final lightweight site after trimming
         run: python backend/scripts/validate_site_integrity.py --site backend/public --previous-site /tmp/previous-site
 
+      - name: Publish Jan Kalam news archive and preserve Pendar authored reports
+        run: |
+          python -m unittest discover -s backend/tests -p test_jankalam_news_migration.py -v
+          node backend/tests/test_jankalam_news_routes.js
+          python backend/scripts/publish_jankalam_news.py --site backend/public
       - name: Reconcile published sitemaps against retained crawlable routes
         run: python backend/scripts/reconcile_published_sitemaps.py --site backend/public
 

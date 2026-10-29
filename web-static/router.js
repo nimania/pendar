@@ -149,7 +149,10 @@ async function route() {
   let arg = i < 0 ? "" : decodeURIComponent(raw.slice(i + 1));
   if(["entity","profile","graph"].includes(kind)&&arg.includes("/")&&!arg.includes(":"))arg=arg.replace("/",":");
   if (kind === "future") { await loadPendarRouteScript("future"); return showFuture(arg); }
-  if (kind === "headlines" || kind === "feed" || kind === "news") return showFeed();
+  if (["headlines", "feed", "news", "topic", "source", "province", "day", "fact", "iran", "topics", "trend"].includes(kind)) {
+    return goJanKalam(kind, arg, true);
+  }
+  if (kind === "event" && !arg.startsWith("editorial-")) return goJanKalam("event", arg, true);
   if (kind === "home") return showHome();
   if (kind === "reports") return showPendarEditorialArchive();
   if (kind === "editorial-author" && arg) return showPendarEditorialAuthor(arg);
@@ -225,6 +228,9 @@ document.addEventListener("click",event=>{
  if(!a||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||a.target||a.hasAttribute("download")||a.hasAttribute("onclick"))return;
  const url=new URL(a.href,location.href);
  if(url.origin!==location.origin)return;
+ // These are generated editorial briefings, including their archive pages.
+ // Let the browser load them instead of opening the legacy news trends view.
+ if(/^\/trends(?:\/|$)/.test(url.pathname))return;
  if(url.pathname!=="/"&&!url.pathname.startsWith("/@")&&!PUBLIC_ROUTES.has(url.pathname.split("/")[1]))return;
  event.preventDefault();window.__PENDAR_ROUTE="";
  history.pushState(null,"",url.pathname+url.search);route();updateRouteSeo(url.pathname);

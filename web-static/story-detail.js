@@ -244,10 +244,11 @@ async function openStory(id) {
   catch (e) {
     // Deep links can outlive the compact feed.  Give a useful failure state
     // rather than leaving a blank/spinner page.
-    v.innerHTML = `<button class="back" onclick="showFeed()">بازگشت به سرخط</button><div class="state"><div class="big">این خبر در آرشیو فعلی پیدا نشد</div><p class="muted">شناسهٔ خبر: ${esc(cleanId)}</p></div>`;
+    v.innerHTML = `<button class="back" onclick="showPendarEditorialArchive()">بازگشت به گزارش‌ها</button><div class="state"><div class="big">این خبر در آرشیو فعلی پیدا نشد</div><p class="muted">شناسهٔ خبر: ${esc(cleanId)}</p></div>`;
     return;
   }
 
+  if (!pendarIsEditorialStory(s)) { goJanKalam("story", cleanId, true); return; }
   const imp = impInfo(s.importance_score);
   const report=s.editorial_report||window.PendarEditorialPilots?.[String(s.id||"")];
   const editorial=!!(report && ["ai_draft","pilot_draft"].includes(report.status) && Array.isArray(report.paragraphs) && report.paragraphs.length>=3);
@@ -332,7 +333,7 @@ async function openStory(id) {
         <a class="magazine-masthead-back" href="/">بازگشت به صفحهٔ اول ←</a>
       </div></header>
       <nav class="magazine-topnav" aria-label="بخش‌های پندار"><div class="magazine-container magazine-topnav-links">
-        <a href="/">خانه</a><a href="/reports/">گزارش‌ها</a><a href="/headlines/">سرخط</a><a href="/figures/">چهره‌ها</a>
+        <a href="/">خانه</a><a href="/reports/">گزارش‌ها</a><a href="https://nimania.github.io/jan-kalam/">جان‌کلام</a><a href="/figures/">چهره‌ها</a>
         <a href="/books/">کتاب</a><a href="/movies/">جان فیلم</a><a href="/press/">پیشخوان جراید</a>
       </div></nav>
       <div class="magazine-container magazine-article-container">
@@ -342,7 +343,7 @@ async function openStory(id) {
         </nav>
         <div class="magazine-article-layout">
           <article class="magazine-article-paper">
-    <button class="back" onclick="showFeed()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به سرخط</button>
+    <button class="back" onclick="showPendarEditorialArchive()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> بازگشت به گزارش‌ها</button>
     <div class="d-head"><div class="meta"><span class="chip">${CAT_FA[s.category] || "خبر"}</span><span class="dot"></span><span class="muted">${relTime(s.published_at)}</span>${trendBadge(s.trend)}<span class="spacer" style="flex:1"></span>${saveBtn(s.id)}</div>
       <h1>${esc(articleTitle || "")}</h1>
       <div class="d-meta" ${editorial?'hidden':""}><span class="imp ${imp.cls}"><span class="bars"><i></i><i></i><i></i></span><span class="lbl">${imp.lbl}</span></span>
@@ -359,8 +360,8 @@ async function openStory(id) {
        +'</div>':""}
 <aside class="pendar-telegram-promo telegram-prominent"><span class="telegram-mark" aria-hidden="true">➤</span><span class="telegram-copy"><strong>پندار در تلگرام</strong><p>خبرها و گزارش‌های منتخب را مستقیم در کانال دنبال کنید.</p></span><a href="https://t.me/pendario" target="_blank" rel="noopener noreferrer">عضویت در کانال ←</a></aside>
     ${!editorial?articleDisplayAdMarkup():""}
-    <a class="ref-strip story-jan-kalam-link" aria-label="زیر ذره‌بین پندار در جان‌کلام" href="https://nimania.github.io/jan-kalam/?story=${encodeURIComponent(cleanId)}" style="text-decoration:none;color:inherit;cursor:pointer">
-      <span class="ref-hd"><b>زیر ذره‌بین پندار</b> · مقایسهٔ روایت منابع و دیدگاه‌ها در جان‌کلام ↗</span>
+    <a class="ref-strip story-jan-kalam-link" aria-label="خبرها و روایت منابع در جان‌کلام" href="https://nimania.github.io/jan-kalam/" style="text-decoration:none;color:inherit;cursor:pointer">
+      <span class="ref-hd"><b>خبرها در جان‌کلام</b> · دنبال‌کردن خبرها و مقایسهٔ روایت منابع ↗</span>
     </a>
     <details class="story-examination"><summary><span>زمینه و پیوندهای پرونده در پندار<small class="story-examination-description">پیشینه، چهره‌ها، نقشه و منابع خبر</small></span></summary><div class="story-examination-body">
     ${pendarHistoricalContext(s)}
@@ -398,7 +399,7 @@ async function openStory(id) {
       </div>
       <footer class="magazine-article-footer"><div class="magazine-container">
         <a href="/">پندار</a><span>خبر، اندیشه و فرهنگ</span>
-        <nav aria-label="پیوندهای پایین صفحه"><a href="/reports/">گزارش‌ها</a><a href="/headlines/">سرخط</a><a href="/books/">کتاب</a><a href="/movies/">فیلم و سریال</a></nav>
+        <nav aria-label="پیوندهای پایین صفحه"><a href="/reports/">گزارش‌ها</a><a href="https://nimania.github.io/jan-kalam/">جان‌کلام</a><a href="/books/">کتاب</a><a href="/movies/">فیلم و سریال</a></nav>
       </div></footer>
     </div>`;
   loadPendarHistoricalFallback(s);

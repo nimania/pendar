@@ -27,7 +27,7 @@
   async function mount(){
     starting=true;
     try{
-      var response=await fetch("/heritage-preview.html?v=20261021-cover-modes-videos-2&rev=20261027-jankalam-story-links-2",{credentials:"same-origin"});
+      var response=await fetch("/heritage-preview.html?v=20261021-cover-modes-videos-2&rev=20261029-news-home",{credentials:"same-origin"});
       if(!response.ok)throw new Error("Heritage template missing: "+response.status);
       var html=await response.text();
       var doc=new DOMParser().parseFromString(html,"text/html");
@@ -51,7 +51,7 @@
       shadow.appendChild(pendingStyle);
       var css=document.createElement("link");
       css.rel="stylesheet";
-      css.href="/heritage-preview.css?v=20261021-cover-modes-videos-2&rev=20261027-jankalam-story-links-2";
+      css.href="/heritage-preview.css?v=20261021-cover-modes-videos-2&rev=20261029-news-home";
       var cssReady=new Promise(function(resolve,reject){
         css.addEventListener("load",resolve,{once:true});
         css.addEventListener("error",function(){reject(new Error("Heritage stylesheet did not load"));},{once:true});
@@ -79,8 +79,8 @@
       // It remains hidden on the production homepage and costs no API requests.
       var searchLink=shell.querySelector(".nav-search");
       if(searchLink){
-        searchLink.href="/headlines/";
-        searchLink.setAttribute("aria-label","جست‌وجوی خبرها در پندار");
+        searchLink.href="https://nimania.github.io/jan-kalam/#/archive";
+        searchLink.setAttribute("aria-label","جست‌وجوی خبرها و گزارش‌ها");
         var searchBox=document.createElement("div");
         searchBox.className="heritage-search-box";
         searchBox.hidden=true;
@@ -110,7 +110,7 @@
           matches.forEach(function(row){
             if(!/^[0-9a-f-]{36}$/i.test(String(row.id||"")))return;
             var a=document.createElement("a");
-            a.href="/story/"+encodeURIComponent(row.id)+"/";
+            a.href=typeof window.pendarContentURL==="function"?window.pendarContentURL(row):"/story/"+encodeURIComponent(row.id)+"/";
             a.textContent=String(row.headline_fa||"");
             results.appendChild(a);
           });
@@ -130,7 +130,7 @@
       await new Promise(function(resolve,reject){
         window.PENDAR_HERITAGE_EMBED=true;
         var script=document.createElement("script");
-        script.src="/heritage-preview.js?v=20261021-cover-modes-videos-2&rev=20261027-jankalam-story-links-2";
+        script.src="/heritage-preview.js?v=20261021-cover-modes-videos-2&rev=20261029-news-home";
         script.onload=resolve;
         script.onerror=function(){reject(new Error("Heritage feed script did not load"));};
         document.body.appendChild(script);

@@ -252,7 +252,7 @@ async function smartSearch(q){
       out.innerHTML=
         `<div class="ss-answer"><strong>چهره</strong><small>پروفایل اصلی</small></div>`+
         profileHits.map(x=>_ssRenderRow(x.d,Q,x.d.count?`چهره · ${faN(x.d.count)} گفته`:"چهره")).join("")+
-        (news.length?`<div class="ss-divider">سرخط‌های مرتبط</div>${news.map(x=>_ssRenderRow(x.d,Q,"سرخط")).join("")}`:"")+
+        (news.length?`<div class="ss-divider">خبرهای مرتبط در جان‌کلام</div>${news.map(x=>_ssRenderRow(x.d,Q,"جان‌کلام")).join("")}`:"")+
         (related.length?`<div class="ss-divider">چند نتیجهٔ مرتبط</div>${related.map(x=>_ssRenderRow(x.d,Q)).join("")}`:"");
       return;
     }
@@ -274,7 +274,7 @@ async function smartSearch(q){
     const headlineKeys=new Set(headlines.map(x=>x.d.go));
     const others=compact.filter(x=>!headlineKeys.has(x.d.go)).slice(0,6);
     const visible=headlines.concat(others);
-    out.innerHTML=visible.length?(headlines.length?`<div class="ss-divider">سرخط‌های مرتبط</div>${headlines.map(x=>_ssRenderRow(x.d,Q,"سرخط")).join("")}`:"")+(others.length?`${headlines.length?'<div class="ss-divider">سایر نتایج</div>':""}${others.map(x=>_ssRenderRow(x.d,Q)).join("")}`:""):'<div class="smart-search-hint">نتیجه‌ای پیدا نشد. عبارت را طبیعی‌تر یا کوتاه‌تر امتحان کن.</div>';
+    out.innerHTML=visible.length?(headlines.length?`<div class="ss-divider">خبرهای مرتبط در جان‌کلام</div>${headlines.map(x=>_ssRenderRow(x.d,Q,"جان‌کلام")).join("")}`:"")+(others.length?`${headlines.length?'<div class="ss-divider">سایر نتایج</div>':""}${others.map(x=>_ssRenderRow(x.d,Q)).join("")}`:""):'<div class="smart-search-hint">نتیجه‌ای پیدا نشد. عبارت را طبیعی‌تر یا کوتاه‌تر امتحان کن.</div>';
   },140);
 }
 document.addEventListener("click",e=>{const box=document.getElementById("smart-search");if(box?.classList.contains("open")&&!box.contains(e.target))toggleSmartSearch(false)});

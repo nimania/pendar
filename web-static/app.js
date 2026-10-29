@@ -84,16 +84,10 @@ function showHome() {
   renderHomeCulture(); renderHomeEvents(); renderHomeRecaps();
   if (ALL.length) renderHomeDaily(); else loadFeed(true);
 }
-async function showFeed() {
-  show("feed"); setTab("feed"); setHash("#/headlines");
-  document.title="سرخط خبرها | پندار";
-  renderHeadlinesDiscovery();
-  if (!ALL.length) await loadFeed(true);
-  else { renderFeed(); renderDayChips(); }
-}
-function showTopics() { show("topics"); setTab("topics"); renderTopics(); setHash("#/topics"); }
-function showTrends() { show("trends"); setTab("trends"); renderTrends(); setHash("#/trends"); }
-function showFactchecks() { show("factchecks"); setTab("factchecks"); renderFactchecks(); setHash("#/fact"); }
+function showFeed() { return goJanKalam(); }
+function showTopics() { return goJanKalam("topics"); }
+function showTrends() { return goJanKalam("trends"); }
+function showFactchecks() { return goJanKalam("fact"); }
 function showFaq() { show("faq"); setTab("faq"); renderFaq(); setHash("#/faq"); }
 
 // Book app glue (booksCache, loadBooks, _bookBySlug, _toman,

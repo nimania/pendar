@@ -162,7 +162,9 @@ assert(detail.includes('magazine-news-narrative'),"ordinary news still needs rea
 assert(!detail.includes('${editorial?"</div></details>":""}'),"microscope must be available for all articles");
 assert(index.includes('home.js?v=20261018-report-leads-1'));
 
-assert(detail.includes('زیر ذره‌بین پندار'));
+assert(detail.includes('خبرها در جان‌کلام'));
+assert(detail.includes('if (!pendarIsEditorialStory(s))'), "only authored stories stay in the Pendar reader");
+assert(!detail.includes('href="https://nimania.github.io/jan-kalam/?story=${encodeURIComponent(cleanId)}"'), "authored reports must not link to a redirect back to themselves");
 assert(detail.includes('const articleTitle=editorial?'));
 assert(detail.includes('!editorial?'),"machine summary must be hidden for editorial reports");
 new Function(detail);

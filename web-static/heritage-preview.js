@@ -21,8 +21,8 @@
     var s=String(url||"").trim();
     return (/^https?:\/\/[^\s"<>]+$/i.test(s)||/^\/(?!\/)[^\s"<>]+$/.test(s))?s:"";
   };
-  var slugUrl=function(r){return r&&UUID.test(String(r.id||""))?(window.PENDAR_HERITAGE_EMBED?(typeof window.pendarStoryURL==="function"?window.pendarStoryURL(r.id):"/story/"+encodeURIComponent(r.id)+"/"):"/heritage-preview.html?story="+encodeURIComponent(r.id)):"/reports/";};
-  var finalStoryUrl=function(id){return UUID.test(String(id||""))?(typeof window.pendarStoryURL==="function"?window.pendarStoryURL(id):"/story/"+id+"/"):"/reports/";};
+  var slugUrl=function(r){if(r&&typeof window.pendarContentURL==="function")return window.pendarContentURL(r);return r&&UUID.test(String(r.id||""))?(window.PENDAR_HERITAGE_EMBED?(typeof window.pendarStoryURL==="function"?window.pendarStoryURL(r.id):"/story/"+encodeURIComponent(r.id)+"/"):"/heritage-preview.html?story="+encodeURIComponent(r.id)):"/reports/";};
+  var finalStoryUrl=function(id){if(typeof window.pendarContentURL==="function")return window.pendarContentURL({id:id});return UUID.test(String(id||""))?(typeof window.pendarStoryURL==="function"?window.pendarStoryURL(id):"/story/"+id+"/"):"/reports/";};
   var fetchJson=async function(path){
     var response=await fetch(path,{credentials:"same-origin"});
     if(!response.ok)throw new Error("HTTP "+response.status+" "+path);
@@ -1024,7 +1024,7 @@
     var fallback='<a class="home-cross-site-item" href="https://nimania.github.io/jan-kalam/">'
       +'<strong>دیدن تازه‌ترین خبرهای جان‌کلام</strong><small>ورود به خط خبری جان‌کلام ←</small></a>';
     if(!homeJanKalamFeedPromise){
-      homeJanKalamFeedPromise=fetch("https://raw.githubusercontent.com/nimania/jan-kalam/main/data/snapshot.json.gz",{
+      homeJanKalamFeedPromise=fetch("https://nimania.github.io/jan-kalam/data/snapshot.json.gz",{
         credentials:"omit",mode:"cors",cache:"no-cache"
       }).then(function(response){
         if(!response.ok)throw new Error("Jan Kalam snapshot "+response.status);
@@ -1040,7 +1040,7 @@
       }).slice().sort(function(a,b){
         return (Date.parse(b.published_at||b.updated_at||"")||0)-
           (Date.parse(a.published_at||a.updated_at||"")||0);
-      }).slice(0,10);
+      }).slice(0,5);
       put("home-jan-kalam-list",latest.map(function(row){
         return '<a class="home-cross-site-item" href="https://nimania.github.io/jan-kalam/?story='+encodeURIComponent(row.id)+'">'
           +'<strong>'+esc(headline(row))+'</strong><small>'+esc(excerpt(row.summary_fa||row.what_happened_fa||row.lead_fa||"",100))+'</small></a>';
@@ -1581,7 +1581,7 @@
       var railNewsRows=varied(stories,7);
       // Category tabs own the cover and its related cards. All items must
       // match the selected category; an unrelated cover is never a fallback.
-      var featurePool=limitUnique(reports.concat(stories),400);
+      var featurePool=limitUnique(reports,400);
       featureAllItems=featurePool;
       var featureBuckets={};
       FEATURE_BEATS.forEach(function(key){featureBuckets[key]=[];});
@@ -1662,9 +1662,8 @@
         culture:/فرهنگ|هنر|کتاب|سینما|فیلم|ادبی|موسیقی|میراث|تئاتر/,
         sport:/ورزش|فوتبال|والیبال|کشتی|المپیک|قهرمان|مسابقه/
       };
-      // Enrich sparse editorial categories with genuinely relevant published
-      // stories. Do not label a regular news item an editorial report.
-      var reportPool=limitUnique(reports.concat(stories),300);
+      // Editorial category panels contain authored reports only.
+      var reportPool=limitUnique(reports,300);
       Object.keys(reportFilters).forEach(function(mode){
         var matches=reportPool.filter(function(r){return reportFilters[mode].test(headline(r)+" "+(r.category||""));});
         fillFive("rail-reports-"+mode,matches.sort(function(a,b){return timeOf(b)-timeOf(a);}),mode==="politics");

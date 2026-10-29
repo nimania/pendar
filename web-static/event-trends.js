@@ -137,6 +137,7 @@ function scrollHomeEvents(direction) {
 }
 let _activeEvent=null, _eventRequest=0;
 async function openEventDossier(id) {
+  if (!String(id).startsWith("editorial-")) return goJanKalam("event", id);
   const request=++_eventRequest;
   setHash('#/event/'+encodeURIComponent(id));show('topicarchive');setTab('trends');
   document.getElementById('ta-back-t').textContent='بازگشت به بورس اخبار';
