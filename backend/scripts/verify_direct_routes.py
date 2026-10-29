@@ -5,6 +5,21 @@ import re
 import sys
 from pathlib import Path
 
+def valid_migrated_headlines_redirect(page: str) -> bool:
+    """Accept only the intentional, crawl-safe move to Jan Kalam.
+
+    Pendar's news index is retired; its short HTML redirect is not a
+    truncated SPA shell. Unrelated short files must still fail validation.
+    """
+    destination = "https://nimania.github.io/jan-kalam/"
+    return all((
+        '<meta name="robots" content="noindex,follow">' in page,
+        f'<link rel="canonical" href="{destination}">' in page,
+        f'<meta http-equiv="refresh" content="0;url={destination}">' in page,
+        f'<a href="{destination}">' in page,
+    ))
+
+
 def validate(root: Path) -> list[str]:
     errors=[]
     shell=root/"index.html"
@@ -29,6 +44,10 @@ def validate(root: Path) -> list[str]:
         if not p.is_file():
             errors.append(f"Missing direct-route shell: /{route}/")
         elif p.stat().st_size<1000 and not route.startswith("editorial-author/"):
+            # /headlines/ is intentionally a small redirect to Jan Kalam.
+            # Every other short route remains a deployment-blocking error.
+            if route == "headlines" and valid_migrated_headlines_redirect(p.read_text(encoding="utf-8")):
+                continue
             errors.append(f"Empty or truncated direct-route shell: /{route}/")
     # A standalone maritime page must not accidentally become the SPA homepage.
     naval=root/"naval/index.html"
