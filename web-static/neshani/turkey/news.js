@@ -18,15 +18,15 @@ try{
    const summary=String(s.summary_fa||"");
    return (country(s)||turkey.test(name))&&name.length>12&&!other.test(name.slice(0,30));
  }).sort((a,b)=>sortTime(b)-sortTime(a)).slice(0,8);
- if(!matches.length){status.textContent="فعلاً خبر منطبق و قابل نمایش در داده‌های پندار پیدا نشد.";return;}
+ if(!matches.length){status.textContent="فعلاً خبر منطبق با ترکیه پیدا نشد.";return;}
  container.innerHTML=matches.map(s=>{
    const title=String(s.headline_fa||s.title_fa||s.title||"");
-   const link=/^[0-9a-f-]{36}$/i.test(String(s.id||""))?"/story/"+encodeURIComponent(s.id)+"/":"/headlines/";
+   const link=/^[0-9a-f-]{36}$/i.test(String(s.id||""))?"/story/"+encodeURIComponent(s.id)+"/":"https://nimania.github.io/jan-kalam/";
    const date=sortTime(s)?new Intl.DateTimeFormat("fa-IR",{day:"numeric",month:"short",timeZone:"Europe/Istanbul"}).format(new Date(sortTime(s))):"";
-   return '<article class="card neshani-news-card"><span class="kicker">خبر از پندار'+(date?" · "+esc(date):"")+'</span><b><a href="'+link+'">'+esc(title)+'</a></b><p>'+esc(String(s.summary_fa||"").slice(0,190))+'</p></article>';
+   return '<article class="card neshani-news-card"><span class="kicker">خبر مرتبط با ترکیه'+(date?" · "+esc(date):"")+'</span><b><a href="'+link+'">'+esc(title)+'</a></b><p>'+esc(String(s.summary_fa||"").slice(0,190))+'</p></article>';
  }).join("");
- status.textContent="گزیدهٔ خودکار خبرهای مرتبط با ترکیه از داده‌های پندار؛ برای تأیید جزئیات روی تیتر کلیک کنید.";
-}catch(e){status.textContent="دریافت خبرهای پندار فعلاً ممکن نیست. از سرخط‌های پندار استفاده کنید.";}
+ status.textContent="گزیدهٔ خودکار خبرهای مرتبط با ترکیه؛ برای جزئیات و منابع، تیتر را باز کنید. آرشیو عمومی خبرها در جان‌کلام است.";
+}catch(e){status.textContent="دریافت خبرهای ترکیه فعلاً ممکن نیست. آرشیو عمومی خبرها را در جان‌کلام ببینید.";}
 }
 render();
 })();
