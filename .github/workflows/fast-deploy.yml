@@ -595,6 +595,8 @@ jobs:
                   shutil.copy2(shell,target)
           PY
           python backend/scripts/publish_editorial_handles.py --site site
+          # Route validation requires the destination manifest; final publication refreshes it again.
+          python backend/scripts/publish_jankalam_news.py --site site
           python backend/scripts/verify_direct_routes.py site
       - name: Install optional video compressor for Pages artifact
         run: |
