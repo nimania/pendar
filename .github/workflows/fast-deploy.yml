@@ -27,6 +27,8 @@ on:
       - "backend/tests/test_story_permalink_publishing.py"
       - "backend/tests/test_figure_shell_refresh.py"
       - "backend/scripts/prepare_priority_site.py"
+      - "backend/scripts/verify_direct_routes.py"
+      - "backend/tests/test_verify_direct_routes.py"
       - "backend/scripts/audit_pages_size.py"
       - "backend/scripts/build_iran_scenario_radar.py"
       - "backend/scripts/build_iran_scenario_pages.py"
@@ -597,6 +599,7 @@ jobs:
           python backend/scripts/publish_editorial_handles.py --site site
           # Route validation requires the destination manifest; final publication refreshes it again.
           python backend/scripts/publish_jankalam_news.py --site site
+          python -m unittest discover -s backend/tests -p test_verify_direct_routes.py -v
           python backend/scripts/verify_direct_routes.py site
       - name: Install optional video compressor for Pages artifact
         run: |
