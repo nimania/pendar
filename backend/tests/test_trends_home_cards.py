@@ -1,4 +1,4 @@
-"""Keep search-oriented trends in the lower headline panel and an uncluttered editorial cover."""
+"""Keep authored trend briefings on Pendar and send news readers to Jan Kalam."""
 import unittest
 from pathlib import Path
 
@@ -8,7 +8,7 @@ HTML=ROOT/"web-static"/"heritage-preview.html"
 CSS=ROOT/"web-static"/"heritage-preview.css"
 
 class TrendHomepageTest(unittest.TestCase):
-    def test_editorial_frontpage_is_default_and_search_trends_have_a_rail_tab(self):
+    def test_editorial_frontpage_and_authored_trends_remain_without_duplicate_headlines(self):
         html=HTML.read_text(encoding="utf-8")
         self.assertNotIn('id="feature-heading-title"',html)
         self.assertNotIn('class="feature-category-tabs"',html)
@@ -18,13 +18,14 @@ class TrendHomepageTest(unittest.TestCase):
         self.assertIn('id="feature-hero"',html)
         self.assertNotIn('id="feature-trends-panel"',html)
         self.assertNotIn('id="feature-tab-trends"',html)
-        self.assertIn('data-rail-group="headlines"',html)
-        self.assertIn('data-rail-tab="fresh"',html)
-        self.assertIn('data-rail-tab="hot"',html)
-        self.assertIn('data-rail-tab="trends">ترند</button>',html)
-        self.assertIn('data-rail-panel="trends" hidden',html)
+        self.assertNotIn('data-rail-group="headlines"',html)
+        self.assertNotIn('data-rail-tab="fresh"',html)
+        self.assertNotIn('data-rail-tab="hot"',html)
+        self.assertNotIn('data-rail-group="today"',html)
         self.assertIn('id="rail-headlines-trends"',html)
-        self.assertIn('href="/trends/">آرشیو ترندهای امروز',html)
+        self.assertIn('href="/trends/">گزارش‌های ترند',html)
+        self.assertIn('href="https://nimania.github.io/jan-kalam/">همهٔ خبرها',html)
+        self.assertIn('href="/reports/">همهٔ گزارش‌ها',html)
 
     def test_only_eligible_published_trends_enter_compact_rail(self):
         js=JS.read_text(encoding="utf-8")
@@ -44,14 +45,11 @@ class TrendHomepageTest(unittest.TestCase):
         self.assertIn('renderSearchTrendsInRail();',js)
         self.assertNotIn('renderSearchTrendTab();',js)
 
-    def test_existing_headline_and_figure_tabs_remain(self):
-        js=JS.read_text(encoding="utf-8")
+    def test_figure_tabs_remain_after_news_migration(self):
         html=HTML.read_text(encoding="utf-8")
-        self.assertIn('fillFive("rail-headlines-fresh",sorted,true);',js)
-        self.assertIn('fillFive("rail-headlines-hot",rankedWithSignal(importance));',js)
         self.assertIn('data-rail-group="figures"',html)
         self.assertIn('id="rail-figures-updated"',html)
-        self.assertIn('id="rail-figures-talkative"',html)
+        self.assertIn('id="rail-figures-opinions"',html)
 
     def test_compact_trends_and_unchanged_photo_cover(self):
         css=CSS.read_text(encoding="utf-8")
