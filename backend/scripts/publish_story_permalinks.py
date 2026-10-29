@@ -85,12 +85,12 @@ def read_json(path: Path, default):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def ensure_article_html(site: Path, sid: str, row: dict, content: str) -> str:
+def ensure_article_html(site: Path, sid: str, row: dict, content: str, editorial: bool = False) -> str:
     """Supply real article-specific HTML for new fast-deployed story shells."""
     if 'id="seo-static"' in content:
         return content
     detail = read_json(site/"data"/"story"/(sid+".json"),row)
-    report = detail.get("editorial_report") or {}
+    report = detail.get("editorial_report") or row.get("editorial_report") or {}
     title = text(report.get("title_fa") or row.get("title_fa") or
                  detail.get("headline_fa") or row.get("headline_fa"))
     paragraphs = [text(report.get("lead_fa") or detail.get("summary_fa"))]
@@ -127,7 +127,11 @@ def ensure_article_html(site: Path, sid: str, row: dict, content: str) -> str:
         content=content.replace("</head>",'<script type="application/ld+json" id="seo-schema">'
                                 +json.dumps(schema,ensure_ascii=False).replace("<","\\u003c")
                                 +'</script></head>',1)
-    body='<section id="seo-static" class="wrap"><nav><a href="/">پندار</a> / <a href="/headlines/">سرخط</a></nav>'
+    is_editorial = editorial or bool(report or detail.get("has_editorial_report") or row.get("has_editorial_report"))
+    section_url = "/reports/" if is_editorial else "https://nimania.github.io/jan-kalam/"
+    section_label = "گزارش‌ها" if is_editorial else "جان‌کلام"
+    body = ('<section id="seo-static" class="wrap"><nav><a href="/">پندار</a> / '
+            '<a href="' + section_url + '">' + section_label + '</a></nav>')
     body+='<h1>'+html.escape(title)+'</h1>'
     body+="".join("<p>"+html.escape(p)+"</p>" for p in paragraphs[:24])
     for source in (detail.get("sources") or [])[:15]:
@@ -184,6 +188,7 @@ def run(site: Path, limit: int = 60) -> dict:
             used.add(slug)
 
     editorial = array(read_json(data/"editorial-archive.json",{}),"reports")
+    editorial_ids = {text(item.get("id")) for item in editorial if isinstance(item, dict)}
     stories = array(read_json(data/"stories.json",[]),"stories")
     choices = []
     seen = set(mapping)
@@ -225,7 +230,7 @@ def run(site: Path, limit: int = 60) -> dict:
         original = source.read_text(encoding="utf-8")
         if 'id="seo-static"' not in original:
             row=next((item for key,item in choices if key==sid),{})
-            original=ensure_article_html(site,sid,row,original)
+            original=ensure_article_html(site,sid,row,original,editorial=sid in editorial_ids)
             if not original:
                 continue
         alias = site/"story"/slug/"index.html"
@@ -238,7 +243,7 @@ def run(site: Path, limit: int = 60) -> dict:
         if not old_seo.is_file():
             detail=read_json(data/"story"/(sid+".json"),{})
             row=next((item for key,item in choices if key==sid),{})
-            report=detail.get("editorial_report") or {}
+            report=detail.get("editorial_report") or row.get("editorial_report") or {}
             title=text(report.get("title_fa") or row.get("title_fa") or
                        detail.get("headline_fa") or row.get("headline_fa"))
             description=text(report.get("lead_fa") or detail.get("summary_fa") or row.get("summary_fa"))[:170]
