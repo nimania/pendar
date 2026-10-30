@@ -432,8 +432,9 @@ def report_page(report):
              if str(sources[x].get("internal_url") or "").startswith("https://") else '')+
             ' title="'+escape(sources[x].get("internal_label") or "مشاهدهٔ گفته")+'">'+escape(x)+'</a>'
             for x in p["source_ids"] if x in sources)
-        attributed=[sources[x] for x in p["source_ids"] if x in sources]
-        paras.append('<p>'+link_people_in_text(p["text_fa"],attributed)+' '+cited+'</p>')
+        # Link every person named in the report, while preserving paragraph-level
+        # evidence badges for the sources actually used in that paragraph.
+        paras.append('<p>'+link_people_in_text(p["text_fa"],report["sources"])+' '+cited+'</p>')
     evidence = []
     for s in report["sources"]:
         original=s.get("url") or ""
