@@ -453,6 +453,10 @@ jobs:
           python backend/scripts/publish_jankalam_news.py --site backend/public
       - name: Reconcile published sitemaps against retained crawlable routes
         run: python backend/scripts/reconcile_published_sitemaps.py --site backend/public
+      - name: Prerender complete authored story reports before sitemap validation
+        run: |
+          python -m unittest discover -s backend/tests -p test_prerender_editorial_story_shells.py -v
+          python backend/scripts/prerender_editorial_story_shells.py --site backend/public
       - name: Publish verified authored story sitemap
         run: |
           python -m unittest discover -s backend/tests -p test_editorial_story_sitemap.py -v
