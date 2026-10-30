@@ -11,14 +11,26 @@ async function loadPendarEditorialAuthors(){
   }
   return _pendarAuthorPromise;
 }
+/* Match the build-time UUID fallback when an article was assigned to "desk".
+   A fixed ID chooses a fixed byline (no rerolls on each page load). */
+function pendarStableFallbackAuthorId(story,catalog){
+  const authors=catalog?.authors||[];
+  if(!authors.length)return "desk";
+  const key=String(story?.id||story?.headline_fa||"");
+  const uuid=/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(key);
+  const index=uuid?parseInt(key.replace(/-/g,"").slice(-8),16):
+    Array.from(key).reduce((sum,char)=>sum+char.codePointAt(0),0);
+  return authors[index%authors.length].id;
+}
 /* Compatibility attribution for articles exported before the author schema.
    The build-time classifier remains authoritative after the next news cycle. */
 function pendarEditorialAuthorId(story){
   const catalog=window.PENDAR_EDITORIAL_AUTHORS;
   if(!catalog)return "desk";
   const known=new Set(catalog.authors.map(a=>a.id));
-  const explicit=story?.editorial_author_id||story?.editorial_report?.author_id;
-  if(explicit==="desk"||known.has(explicit))return explicit;
+  const explicit=story?.editorial_author_id||story?.editorial_report?.author_id||story?.author_id;
+  if(known.has(explicit))return explicit;
+  if(explicit==="desk")return pendarStableFallbackAuthorId(story,catalog);
   const norm=x=>String(x||"").toLowerCase().replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/‌/g," ");
   const head=norm(story?.headline_fa),summary=norm(story?.summary_fa),body=norm(story?.what_happened_fa).slice(0,1300);
   const scored=catalog.authors.map(a=>{
@@ -31,8 +43,8 @@ function pendarEditorialAuthorId(story){
     }
     return {id:a.id,total,terms};
   }).filter(a=>a.total>0).sort((a,b)=>b.total-a.total||b.terms-a.terms||a.id.localeCompare(b.id));
-  if(!scored.length)return "desk";
-  if(scored.length>1&&scored[0].total===scored[1].total&&scored[0].terms===scored[1].terms)return "desk";
+  if(!scored.length)return pendarStableFallbackAuthorId(story,catalog);
+  if(scored.length>1&&scored[0].total===scored[1].total&&scored[0].terms===scored[1].terms)return pendarStableFallbackAuthorId(story,catalog);
   return scored[0].id;
 }
 /* One optimized image file holds the seven user-approved portrait crops. */
@@ -52,7 +64,8 @@ function pendarAuthorName(id){
   return a?.display_name_fa || catalog?.fallback?.display_name_fa || "تحریریه پندار";
 }
 function pendarAuthorByline(story,report){
-  const id=report?.author_id||story?.editorial_author_id||(report?.status==="pilot_draft"?"diplomacy":pendarEditorialAuthorId(story));
+  const id=pendarEditorialAuthorId({...story,editorial_author_id:
+    report?.author_id||story?.editorial_author_id||(report?.status==="pilot_draft"?"diplomacy":undefined)});
   const name=pendarAuthorName(id);
   const href=pendarAuthorUrl(id);
   const avatarStyle=pendarAuthorPortraitCSS(id);
@@ -80,7 +93,7 @@ async function showPendarEditorialAuthor(slug){
     const unique=new Map();
     if(Array.isArray(index?.reports)){
       for(const row of index.reports){
-        if(row?.status==="ai_draft" && row.author_id===slug)unique.set(row.id,row);
+        if(row?.status==="ai_draft" && pendarEditorialAuthorId(row)===slug)unique.set(row.id,row);
       }
     }else{
       for(const card of Array.isArray(current)?current:[]){
