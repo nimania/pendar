@@ -54,7 +54,7 @@ class EditorialReportTests(unittest.TestCase):
         },roster) for i in range(28)}
         self.assertEqual(distributed,{a["id"] for a in roster["authors"]})
         tie={"id":"babe8d8a-4a58-4d4d-a737-572d2d306ddc",
-             "headline_fa":"مذاکرات و انتخابات"}
+             "headline_fa":"سفیر و انتخابات"}
         expected_tie=roster["authors"][int("2d306ddc",16)%7]["id"]
         self.assertEqual(choose_editorial_author(tie,roster),expected_tie)
 
