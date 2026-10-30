@@ -121,6 +121,10 @@ class AuthoredStorySitemapTests(unittest.TestCase):
     def test_recovers_only_real_matching_canonical_alias(self):
         with tempfile.TemporaryDirectory() as tmp:
             site = self.setup_site(tmp)
+            (site / "data/news-destinations.json").write_text(
+                json.dumps({"editorial": {GOOD: url(GOOD), SHORT: url(SLUG)}}),
+                encoding="utf-8",
+            )
             # A retained authored UUID points to its original readable
             # permalink; both serve the exact same prerendered report.
             wrong = url(GOOD)
@@ -133,6 +137,10 @@ class AuthoredStorySitemapTests(unittest.TestCase):
     def test_does_not_promote_unrelated_canonical_target(self):
         with tempfile.TemporaryDirectory() as tmp:
             site = self.setup_site(tmp)
+            (site / "data/news-destinations.json").write_text(
+                json.dumps({"editorial": {GOOD: url(GOOD), SHORT: url(SLUG)}}),
+                encoding="utf-8",
+            )
             # A self-canonical news page is not evidence that it is the
             # matching authored report; never promote a different article.
             news = page(url(NEWS)).replace("گزارش تألیفی مستقل درباره موضوع", "موضوع دیگری از خبرهای عمومی")
