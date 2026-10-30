@@ -46,7 +46,7 @@ function renderPendarEditorialArchiveItems(){
   const host=document.getElementById("editorial-library-list");
   if(!host)return;
   const visible=_pendarReports.filter(row=>{
-    const author=row.author_id||pendarEditorialAuthorId(row);
+    const author=pendarEditorialAuthorId({...row,editorial_author_id:row.author_id||row.editorial_author_id});
     const matchAuthor=_pendarReportFilter==="all"||author===_pendarReportFilter;
     const blob=[row.title_fa,row.headline_fa,row.lead_fa,pendarAuthorName(author)].join(" ").toLocaleLowerCase("fa");
     return matchAuthor && (!_pendarReportQuery||blob.includes(_pendarReportQuery));
@@ -74,7 +74,10 @@ async function showPendarEditorialArchive(){
     _pendarReportCatalog=directory;
     _pendarReports=reports.sort((a,b)=>String(b.published_at||"").localeCompare(String(a.published_at||"")));
     const counts=Object.fromEntries(directory.authors.map(a=>[a.id,0]));
-    for(const item of reports)if(item.author_id in counts)counts[item.author_id]++;
+    for(const item of reports){
+      const author=pendarEditorialAuthorId({...item,editorial_author_id:item.author_id||item.editorial_author_id});
+      if(author in counts)counts[author]++;
+    }
     _pendarReportFilter="all";_pendarReportQuery="";
     const chips=directory.authors.map(a=>{
       return '<button type="button" class="editorial-library-filter" data-report-author="'+esc(a.id)+'" aria-pressed="false" onclick="filterPendarEditorialArchive(\''+esc(a.id)+'\')">'
