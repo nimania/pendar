@@ -337,13 +337,17 @@ def publish(site, *, now=None, generate_fn=generate):
     known={x["id"] for x in reports if isinstance(x,dict) and x.get("id")}
     current_slot=int(now.timestamp()//SLOT_SECONDS)-1
     created=[]
-    # Catch up on up to three missed closed windows when the collector is fresh.
-    for slot in range(current_slot-2,current_slot+1):
+    attempted=0
+    # Newest completed window first; cap model calls to protect deploy time.
+    # Older windows can be repaired by subsequent half-hour deployments.
+    for slot in range(current_slot,current_slot-3,-1):
         start=dt.datetime.fromtimestamp(slot*SLOT_SECONDS,UTC)
         end=start+dt.timedelta(seconds=SLOT_SECONDS)
         if end > now or end+dt.timedelta(minutes=2)>published_time:
             continue
         for kind in ("news","opinions"):
+            if attempted>=2:
+                break
             uid=f"{slot}-{kind}"
             if uid in known:
                 continue
@@ -353,6 +357,7 @@ def publish(site, *, now=None, generate_fn=generate):
             if len(sources)>MAX_INPUT:
                 print("WARN: too many statements to include all:",uid,len(sources))
                 continue
+            attempted+=1
             text=generate_fn(kind,start,end,sources)
             if text is None:
                 continue
@@ -380,6 +385,12 @@ def publish(site, *, now=None, generate_fn=generate):
                        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+
                        ''.join('<url><loc>'+escape(ROOT_URL+url)+'</loc></url>\n' for url in paths)+
                        '</urlset>\n',encoding="utf-8")
+    robots=site/"robots.txt"
+    if robots.is_file():
+        content=robots.read_text(encoding="utf-8")
+        entry="Sitemap: "+ROOT_URL+"/sitemap-voices.xml"
+        if entry not in content:
+            robots.write_text(content.rstrip()+"\n"+entry+"\n",encoding="utf-8")
     print(json.dumps({"new_reports":created,"total":len(reports),
                       "figures_generated_at":published_time.isoformat()},ensure_ascii=False))
     return created
