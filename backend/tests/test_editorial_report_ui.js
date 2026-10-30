@@ -34,6 +34,20 @@ assert(!authors.includes("تدوین با کمک هوش مصنوعی"),"AI notic
 assert(!authors.includes("editorial-author-disclosure"),"author profile should not render duplicate AI statement");
 assert(!("disclosure_fa" in directory),"author profiles should not carry the long AI disclosure");
 new Function(authors);
+const authorContext={
+  window:{PENDAR_EDITORIAL_AUTHORS:directory},
+  esc:x=>String(x),
+  DATA:"/data",getJSON:async()=>directory
+};
+vm.runInNewContext(authors,authorContext);
+const oldDesk={id:"0dac3487-2a02-4311-a203-c76ae58fd404",author_id:"desk"};
+const stableAuthor=directory.authors[parseInt("e58fd404",16)%7].id;
+assert.equal(authorContext.pendarEditorialAuthorId(oldDesk),stableAuthor);
+assert.equal(authorContext.pendarEditorialAuthorId(oldDesk),stableAuthor);
+assert.equal(authorContext.pendarEditorialAuthorId({...oldDesk,editorial_author_id:"culture"}),"culture");
+assert.equal(authorContext.pendarEditorialAuthorId({id:"babe8d8a-4a58-4d4d-a737-572d2d306ddc",author_id:"desk"}),
+  directory.authors[parseInt("2d306ddc",16)%7].id);
+assert(authorContext.pendarAuthorByline(oldDesk,{author_id:"desk"}).includes(directory.authors.find(a=>a.id===stableAuthor).display_name_fa));
 new Function(library);
 new Function(heritageLive);
 new Function(heritagePreview);
@@ -52,7 +66,7 @@ assert(heritagePreview.includes('verifiedImage(url)')&&
   heritagePreview.includes('imageDimensions.get(url)'),
   "front-page article photos must be checked for loading success and sufficient resolution");
 assert(library.includes('class="editorial-story-people"'),"reports archive needs author portrait stories");
-assert(index.includes('editorial-archive.js?v=20261018-newsroom-1'),"refresh newsroom carousel cache");
+assert(index.includes('editorial-archive.js?v=20261030-stable-authors-1'),"refresh newsroom carousel cache");
 assert(!index.includes('heritage-first-paint-columns'),"homepage must not render giant empty loading cards");
 assert(index.includes('heritage-first-paint-nav'),"homepage must keep magazine chrome before initial data");
 assert(heritageLive.indexOf('await cssReady;')<heritageLive.indexOf('await contentReady;'),"show magazine chrome before image checks complete");
