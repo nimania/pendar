@@ -426,7 +426,12 @@ def report_page(report):
               ' (عضو تحریریهٔ هوش مصنوعی پندار)</div>')
     paras = []
     for p in report["paragraphs"]:
-        cited = "".join('<a class="cite" href="#'+escape(x)+'">'+escape(x)+'</a>' for x in p["source_ids"] if x in sources)
+        cited = "".join(
+            '<a class="cite" href="'+escape(sources[x].get("internal_url") or "#"+x)+'"'+
+            (' target="_blank" rel="noopener noreferrer"'
+             if str(sources[x].get("internal_url") or "").startswith("https://") else '')+
+            ' title="'+escape(sources[x].get("internal_label") or "مشاهدهٔ گفته")+'">'+escape(x)+'</a>'
+            for x in p["source_ids"] if x in sources)
         attributed=[sources[x] for x in p["source_ids"] if x in sources]
         paras.append('<p>'+link_people_in_text(p["text_fa"],attributed)+' '+cited+'</p>')
     evidence = []
