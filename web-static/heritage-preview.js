@@ -73,12 +73,25 @@
     return '<img class="'+esc(cls||"")+'" src="'+esc(url)+'" alt="" loading="lazy" decoding="async">';
   }
   var data={stories:[],reports:[],authors:[],homeSnapshot:null};
+  // The same stable random fallback is used by Python and the article reader.
+  function editorialWriterId(row){
+    var report=row&&row.editorial_report||{};
+    var explicit=String(row&&(row.editorial_author_id||report.author_id||row.author_id)||"");
+    if(explicit&&explicit!=="desk")return explicit;
+    if(!explicit&&!(row&&(row.has_editorial_report||row.editorial_report)))return "";
+    var writers=data.authors||[];
+    if(!writers.length)return "desk";
+    var key=String(row&&(row.id||row.headline_fa)||"");
+    var uuid=/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(key);
+    var index=uuid?parseInt(key.replace(/-/g,"").slice(-8),16):
+      Array.from(key).reduce(function(sum,char){return sum+char.codePointAt(0);},0);
+    return writers[index%writers.length].id;
+  }
   // Editorial portraits are only fallbacks for articles by an identifiable,
   // installed Pendar author. Do not use unrelated stock/figure images.
   function authorPortraitThumb(row){
     var report=row&&row.editorial_report||{};
-    var id=String(row&&(
-      row.editorial_author_id||report.author_id||row.author_id)||"");
+    var id=editorialWriterId(row);
     var person=(data.authors||[]).find(function(p){
       return p.id===id&&p.portrait_status==="installed"&&
         Number.isInteger(p.portrait_index)&&p.portrait_index>=0&&p.portrait_index<=6;
@@ -1294,7 +1307,7 @@
           var writerPhoto=authorPortraitThumb(entry.row);
           if(writerPhoto){
             var report=entry.row.editorial_report||{};
-            var authorId=String(entry.row.editorial_author_id||report.author_id||entry.row.author_id||"");
+            var authorId=editorialWriterId(entry.row);
             var author=(data.authors||[]).find(function(p){return p.id===authorId;});
             byline='<span class="fp-lead-writer">'+
               '<span class="fp-lead-writer-avatar">'+writerPhoto+'</span>'+
@@ -1751,7 +1764,7 @@
     });
   }
   function authorName(record){
-    var key=String(record.editorial_author_id||record.editorial_report&&record.editorial_report.author_id||record.author_id||"");
+    var key=editorialWriterId(record);
     var person=data.authors.find(function(a){return a.id===key;});
     return person?String(person.display_name_fa||"تحریریهٔ پندار"):"تحریریهٔ پندار";
   }
@@ -1762,7 +1775,7 @@
     document.title=title+" | پندار — پیش‌نمایش";
     put("article-title",esc(title));
     put("article-deck",esc(lead));
-    var authorId=String(detail.editorial_author_id||report.author_id||"");
+    var authorId=editorialWriterId(detail);
     var author=data.authors.find(function(a){return a.id===authorId;});
     var portrait="";
     if(author&&Number.isInteger(author.portrait_index)&&author.portrait_index>=0&&author.portrait_index<=6&&author.portrait_status==="installed"){
