@@ -1,0 +1,65 @@
+name: Publish five-hour Pendar recaps to Telegram
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview only — do not send to Telegram"
+        required: true
+        default: true
+        type: boolean
+  workflow_run:
+    workflows: ["Fast Deploy Pendar UI"]
+    types: [completed]
+  schedule:
+    # Independent retry check: once per hour, in addition to successful deploys.
+    - cron: "24 * * * *"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/pendar-voice-recaps-telegram.yml"
+      - "backend/scripts/publish_voice_recaps_telegram.py"
+      - "backend/tests/test_voice_recaps_telegram.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pendar-voice-recaps-telegram
+  cancel-in-progress: false
+
+jobs:
+  publish-voice-recaps:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_BOT_USERNAME: janekalaam_bot
+      TELEGRAM_CHAT_ID: "@pendario"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test message safety and duplicate prevention
+        run: |
+          python -m unittest discover -s backend/tests -p 'test_voice_recaps_telegram.py' -v
+          python -m py_compile backend/scripts/publish_voice_recaps_telegram.py
+      - name: Fetch actually published reports (not build previews)
+        run: |
+          set -euo pipefail
+          mkdir -p telegram-export
+          curl --fail --location --silent --show-error --retry 3 --retry-delay 5 --connect-timeout 10 --max-time 50 \
+            "https://pendar.io/data/voice-recaps.json" -o telegram-export/voice-recaps.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("telegram-export/voice-recaps.json").read_text(encoding="utf-8"))
+          assert isinstance(d,dict) and isinstance(d.get("reports"),list),"Invalid five-hour report archive"
+          print("Published reports in archive:",len(d["reports"]))
+          PY
+      - name: Preview reports, without delivery
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: python backend/scripts/publish_voice_recaps_telegram.py --input telegram-export/voice-recaps.json --dry-run
+      - name: Publish at most two new reports (news and opinions)
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
+        run: python backend/scripts/publish_voice_recaps_telegram.py --input telegram-export/voice-recaps.json
