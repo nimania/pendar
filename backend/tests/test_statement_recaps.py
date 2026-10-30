@@ -52,6 +52,9 @@ class StatementRecapTests(unittest.TestCase):
                                 ["gemini-2.5-flash-lite","gemini-2.5-flash"])
         self.assertEqual(gemini[0],"gemini-2.5-flash")
         self.assertNotIn("obsolete-model",gemini)
+        newest=model_candidates("gemini","old-model",
+                                ["gemini-2.5-flash","gemini-3.5-flash","gemini-3.1-flash-lite"])
+        self.assertEqual(newest[0],"gemini-3.5-flash")
         anthropic=model_candidates("anthropic","stale-claude",
                                    ["claude-haiku-4-5","claude-sonnet-4-5"])
         self.assertEqual(anthropic[0],"claude-sonnet-4-5")
