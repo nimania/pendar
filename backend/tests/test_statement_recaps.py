@@ -27,6 +27,10 @@ class StatementRecapTests(unittest.TestCase):
     def tearDown(self):
         self.temporary.cleanup()
 
+    def test_light_deploy_keeps_published_recap_data(self):
+        from scripts.prepare_priority_site import keep_data_file
+        self.assertTrue(keep_data_file("voice-recaps.json"))
+
     def test_role_classification_matches_front_page(self):
         self.assertEqual(desk({"name_fa":"مهدی تدینی","role_fa":"تاریخ‌نگار"}),"opinions")
         self.assertEqual(desk({"name_fa":"دونالد ترامپ","role_fa":"سیاستمدار"}),"news")
