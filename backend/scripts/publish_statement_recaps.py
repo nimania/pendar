@@ -26,6 +26,7 @@ SLOT_SECONDS = 5 * 3600
 MAX_INPUT = 100
 MAX_ARCHIVE = 1200
 ROOT_URL = "https://pendar.io"
+JAN_KALAM_URL = "https://nimania.github.io/jan-kalam/"
 DATA_NAME = "voice-recaps.json"
 NEWS_NAMES = {"دونالدترامپ", "ترامپ", "علیباقریکنی"}
 OPINION_NAMES = {"مسیحعلینژاد", "وحیداشتری", "مهدیتدینی", "احمدزیدآبادی", "زیدآبادی"}
@@ -107,6 +108,73 @@ def link_of(post, person):
     return "/@" + urllib.parse.quote(handle, safe="") + "/" if handle else ""
 
 
+def person_url(handle):
+    handle=str(handle or "").strip()
+    return "/@" + urllib.parse.quote(handle, safe="") + "/" if handle else "/figures/"
+
+
+def statement_url(post_id, handle=""):
+    if not str(post_id or "").strip():
+        return person_url(handle)
+    return "/statement/" + urllib.parse.quote(str(post_id), safe="") + "/"
+
+
+def news_destination(story_id, destinations):
+    """Only explicit owned Pendar articles stay here; all migrated news use Jan Kalam."""
+    sid=str(story_id or "").strip()
+    if not re.fullmatch(r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}", sid, re.I):
+        return ""
+    owned=destinations.get("editorial", {})
+    if isinstance(owned, dict) and sid in owned:
+        url=str(owned[sid])
+        if url.startswith(ROOT_URL+"/story/"):
+            return url
+    # A linked story on the figures feed may predate a compact manifest export.
+    # Only send to Jan Kalam when the migration actually owns the news ID.
+    if sid in destinations.get("news_ids", []):
+        return JAN_KALAM_URL + "?story=" + urllib.parse.quote(sid, safe="")
+    return ""
+
+
+def attach_internal_links(sources, destinations):
+    """Keep upstream evidence while adding local, source-specific destinations."""
+    for source in sources:
+        source["person_url"]=person_url(source.get("handle"))
+        source["statement_url"]=statement_url(source.get("post_id"),source.get("handle"))
+        story_id=source.get("story_id")
+        dest=news_destination(story_id,destinations) if source.get("post_kind")=="news_statement" else ""
+        source["internal_url"]=dest or source["statement_url"]
+        source["internal_label"]=(
+            "گزارش کامل در پندار" if dest.startswith(ROOT_URL+"/story/")
+            else "خبر در جان‌کلام" if dest.startswith(JAN_KALAM_URL)
+            else "صفحهٔ همین گفته در پندار")
+
+
+def person_anchor(name, handle):
+    return '<a class="person-ref" href="'+escape(person_url(handle))+'">'+escape(name)+'</a>'
+
+
+def link_people_in_text(raw, sources):
+    """Add only verified, exact names from attributed source_ids; escape all other text."""
+    people={}
+    for source in sources:
+        name=str(source.get("person") or "").strip()
+        if name and source.get("handle"):
+            people.setdefault(name,source["handle"])
+    if not people:
+        return escape(raw)
+    pattern=re.compile(r"(?<!\\w)("+ "|".join(re.escape(n) for n in sorted(people,key=len,reverse=True))+r")(?!\\w)")
+    parts=[]
+    offset=0
+    for match in pattern.finditer(raw):
+        parts.append(escape(raw[offset:match.start()]))
+        name=match.group(0)
+        parts.append(person_anchor(name,people[name]))
+        offset=match.end()
+    parts.append(escape(raw[offset:]))
+    return "".join(parts)
+
+
 def gather(figures, start, end, kind):
     """Reproduce the front-page role/name split. Require statements inside [start,end)."""
     rows, seen = [], set()
@@ -131,7 +199,9 @@ def gather(figures, start, end, kind):
             rows.append({"person":str(person["name_fa"]), "handle":str(person["handle"]),
                          "role":str(person.get("role_fa") or "")[:100],
                          "text":content[:1250], "time":when.isoformat(),
-                         "url":link_of(post, person), "post_id":str(post.get("id") or "")})
+                         "url":link_of(post, person), "post_id":str(post.get("id") or ""),
+                         "story_id":str(post.get("story_id") or ""),
+                         "post_kind":str(post.get("kind") or "")})
     rows.sort(key=lambda x:(x["time"], x["handle"], x["text"]), reverse=True)
     for i, row in enumerate(rows, 1):
         row["source_id"] = "s" + str(i)
@@ -321,6 +391,8 @@ def shell(title, description, canonical, body, *, article=None):
     .source-list{padding:0 20px;font-size:14px}.source-list li{padding:8px 0;border-bottom:1px solid #eee}
     .source-list small{color:var(--muted);display:block;line-height:1.6}
     .cite{font-size:11px;border:1px solid var(--line);padding:1px 5px;border-radius:3px;color:var(--burgundy);margin:0 3px}
+    .person-ref{color:var(--burgundy);text-decoration:underline;text-decoration-color:#d4adb4;text-underline-offset:4px}
+    .evidence-links{display:block;font-size:13px;margin-top:4px;color:var(--burgundy)}
     .card{display:block;border:1px solid var(--line);background:white;padding:21px;margin:14px 0;border-radius:9px}
     .card strong{font-size:18px}.card small{display:block;color:var(--muted);margin-top:3px}
     .pill{display:inline-block;padding:2px 9px;background:#f3e8e8;color:#813645;border-radius:16px;font-size:12px}
@@ -346,8 +418,8 @@ def shell(title, description, canonical, body, *, article=None):
 def report_page(report):
     sources = {s["source_id"]:s for s in report["sources"]}
     header = ('<div class="eyebrow">'+('گفته‌ها در خبرها' if report["kind"] == "news" else 'نظرها و دیدگاه‌ها')+
-              ' · مرور پنج‌ساعته</div><h1>'+escape(report["title_fa"])+'</h1>'
-              '<p class="lead">'+escape(report["lead_fa"])+'</p>'
+              ' · مرور پنج‌ساعته</div><h1>'+link_people_in_text(report["title_fa"],report["sources"])+'</h1>'
+              '<p class="lead">'+link_people_in_text(report["lead_fa"],report["sources"])+'</p>'
               '<div class="meta">دوره: '+escape(to_fa_date(report["window_start"]))+' تا '+
               escape(to_fa_date(report["window_end"]))+' · '+str(len(report["sources"]))+
               ' گفته · تنظیم: <a href="/@'+escape(report["author_handle"])+'/">'+escape(report["author_name"])+'</a>'
@@ -355,14 +427,23 @@ def report_page(report):
     paras = []
     for p in report["paragraphs"]:
         cited = "".join('<a class="cite" href="#'+escape(x)+'">'+escape(x)+'</a>' for x in p["source_ids"] if x in sources)
-        paras.append('<p>'+escape(p["text_fa"])+' '+cited+'</p>')
+        attributed=[sources[x] for x in p["source_ids"] if x in sources]
+        paras.append('<p>'+link_people_in_text(p["text_fa"],attributed)+' '+cited+'</p>')
     evidence = []
     for s in report["sources"]:
-        url=s["url"] or "/figures/"
-        evidence.append('<li id="'+escape(s["source_id"])+'"><strong>'+escape(s["person"])+'</strong> — '+
-                        escape(s["text"])+' <a class="cite" href="'+escape(url)+'"'+
-                        (' target="_blank" rel="noopener noreferrer"' if url.startswith("https://") else '')+
-                        '>منبع '+escape(s["source_id"])+'</a></li>')
+        original=s.get("url") or ""
+        internal=s.get("internal_url") or s.get("statement_url") or person_url(s.get("handle"))
+        evidence.append('<li id="'+escape(s["source_id"])+'"><strong>'+
+                        person_anchor(s["person"],s["handle"])+'</strong> — '+
+                        link_people_in_text(s["text"],[s])+
+                        ' <div class="evidence-links"><a href="'+escape(internal)+'"'+
+                        (' target="_blank" rel="noopener noreferrer"' if internal.startswith("https://") else '')+
+                        '>'+escape(s.get("internal_label") or "صفحهٔ گفته در پندار")+'</a>'
+                        ' · <a href="'+escape(s.get("statement_url") or person_url(s.get("handle")))+
+                        '">مشاهدهٔ گفته در پندار</a>'+
+                        (' · <a href="'+escape(original)+'" target="_blank" rel="noopener noreferrer">منبع اولیه ↗</a>'
+                         if original.startswith("https://") and original!=internal else '')+
+                        '</div></li>')
     body = header + '<article class="report">' + "".join(paras) + (
         '<div class="sources"><h2>تمام گفته‌های این دوره و منابع</h2>'
         '<p>متن‌های زیر، خلاصه‌های ثبت‌شده در پندار هستند؛ نه نقل‌قول لفظ‌به‌لفظ یا راستی‌آزمایی مستقل.</p>'
@@ -398,6 +479,8 @@ def publish(site, *, now=None, generate_fn=generate):
     roster=json.loads((data_dir/"pendar-editorial-authors.json").read_text(encoding="utf-8")).get("authors",[])
     if len(roster)!=7:
         raise ValueError("A complete seven-author roster is required")
+    destinations_path=data_dir/"news-destinations.json"
+    destinations=json.loads(destinations_path.read_text(encoding="utf-8")) if destinations_path.is_file() else {}
     published_time=stamp(dataset.get("generated_at"))
     if published_time is None:
         raise ValueError("Figure dataset has no valid generated_at")
@@ -422,6 +505,7 @@ def publish(site, *, now=None, generate_fn=generate):
             if uid in known:
                 continue
             sources=gather(dataset,start,end,kind)
+            attach_internal_links(sources,destinations)
             if not sources:
                 continue
             if len(sources)>MAX_INPUT:
@@ -445,6 +529,23 @@ def publish(site, *, now=None, generate_fn=generate):
             known.add(uid)
             created.append(uid)
     reports=sorted(reports,key=lambda r:(r["window_end"],r["kind"]),reverse=True)[:MAX_ARCHIVE]
+    # Rehydrate older reports (which predate story_id fields) from the current
+    # figures dataset, without changing their published text, window or byline.
+    post_index={}
+    for person in dataset.get("figures",[]):
+        for post in person.get("posts",[]):
+            if post.get("id"):
+                post_index[(str(person.get("handle")),str(post.get("id")))]=post
+    for report in reports:
+        for source in report.get("sources",[]):
+            matched=post_index.get((str(source.get("handle")),str(source.get("post_id"))))
+            if matched:
+                source["story_id"]=source.get("story_id") or str(matched.get("story_id") or "")
+                source["post_kind"]=source.get("post_kind") or str(matched.get("kind") or "")
+        attach_internal_links(report.get("sources",[]),destinations)
+        target=site/str(report["url"]).lstrip("/")/"index.html"
+        target.parent.mkdir(parents=True,exist_ok=True)
+        target.write_text(report_page(report),encoding="utf-8")
     archive_file.write_text(json.dumps({"version":1,"generated_at":now.isoformat(),
                                         "reports":reports},ensure_ascii=False,separators=(",",":")),encoding="utf-8")
     publish_hub(site,reports)
