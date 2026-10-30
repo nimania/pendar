@@ -46,6 +46,16 @@ class StatementRecapTests(unittest.TestCase):
         figure["posts"].append(dict(base,id="x2",published_at=iso(self.end)))
         self.assertEqual(len(gather({"figures":[figure]},self.start,self.end,"news")),1)
 
+    def test_model_discovery_avoids_obsolete_configured_name(self):
+        from scripts.publish_statement_recaps import model_candidates
+        gemini=model_candidates("gemini","obsolete-model",
+                                ["gemini-2.5-flash-lite","gemini-2.5-flash"])
+        self.assertEqual(gemini[0],"gemini-2.5-flash")
+        self.assertNotIn("obsolete-model",gemini)
+        anthropic=model_candidates("anthropic","stale-claude",
+                                   ["claude-haiku-4-5","claude-sonnet-4-5"])
+        self.assertEqual(anthropic[0],"claude-sonnet-4-5")
+
     def test_stable_author(self):
         selected=author_for(1234,"news",self.roster)
         self.assertEqual(selected,author_for(1234,"news",self.roster))
