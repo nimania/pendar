@@ -195,7 +195,7 @@ def model_candidates(provider, preferred, models):
 
 def generate(kind, start, end, sources):
     provider = os.environ.get("AI_PROVIDER", "").lower().strip()
-    keys = re.split(r"[,\\s]+", os.environ.get("AI_API_KEY", "").strip())
+    keys = re.split(r"[,\s]+", os.environ.get("AI_API_KEY", "").strip())
     keys = [x for x in keys if x]
     if provider not in ("gemini", "anthropic") or not keys:
         print("INFO: no supported AI provider/key configured; not publishing synthetic text", flush=True)
@@ -236,7 +236,7 @@ def generate(kind, start, end, sources):
                                 if p.get("type")=="text")
                 raw=raw.strip()
                 if raw.startswith("```"):
-                    raw=re.sub(r"^\\x60{3}(?:json)?\\s*|\\s*\\x60{3}$","",raw,flags=re.I)
+                    raw=re.sub(r"^\x60{3}(?:json)?\s*|\s*\x60{3}$","",raw,flags=re.I)
                 validated=validate(json.loads(raw),sources)
                 if validated:
                     print("INFO: valid sourced recap generated with model",model,flush=True)
