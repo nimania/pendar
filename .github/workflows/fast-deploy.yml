@@ -443,8 +443,16 @@ jobs:
           reports_dir=root/"reports"
           reports_dir.mkdir(parents=True,exist_ok=True)
           shutil.copy2(shell,reports_dir/"index.html")
-          # Fallback keeps SPA routing available for less common generated paths.
-          shutil.copy2(shell,root/"404.html")
+          # Historic /fa/ and /en/ serial-news URLs are no longer Pendar content.
+          # Keep a true GitHub Pages 404 fallback instead of showing the SPA
+          # homepage (a misleading soft-404-like response for retired URLs).
+          not_found=pathlib.Path("web-static/404.html")
+          if not not_found.is_file():
+              raise SystemExit("::error::Dedicated 404.html missing")
+          error_html=not_found.read_text(encoding="utf-8")
+          if '<meta name="robots" content="noindex,follow">' not in error_html or '<h1>این صفحه پیدا نشد</h1>' not in error_html:
+              raise SystemExit("::error::Dedicated 404.html lacks the required removed-content contract")
+          shutil.copy2(not_found,root/"404.html")
           assert (root/"event"/"event-9883cb58-e3da-4f35-8684-3ec9a6b70a37"/"index.html").is_file()
           assert (root/"404.html").is_file()
           print("Ensured",len(stories),"news entry pages; newly created",made,
