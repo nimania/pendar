@@ -100,13 +100,19 @@ def validate_story(site: Path, url: str) -> str | None:
     if not schema:
         return "missing_article_schema"
     try:
-        graph = json.loads(schema.group(1)).get("@graph", [])
-    except (ValueError, TypeError, AttributeError):
+        schema_data = json.loads(schema.group(1))
+    except (ValueError, TypeError):
         return "invalid_article_schema"
-    if not isinstance(graph, list) or not any(
+    if not isinstance(schema_data, dict):
+        return "invalid_article_schema"
+    graph = schema_data.get("@graph", [])
+    # Full rebuilds emit @graph; fast-deployed editorial permalinks emit a
+    # single top-level Article. Both are legitimate JSON-LD representations.
+    nodes = [schema_data] + (graph if isinstance(graph, list) else [])
+    if not any(
         isinstance(node, dict)
         and node.get("@type") in ("Article", "NewsArticle", "ReportageNewsArticle")
-        and node.get("url") == url for node in graph
+        and node.get("url") == url for node in nodes
     ):
         return "article_schema_url_mismatch"
     return None
