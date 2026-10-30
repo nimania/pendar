@@ -27,7 +27,7 @@
   async function mount(){
     starting=true;
     try{
-      var response=await fetch("/heritage-preview.html?v=20261021-cover-modes-videos-2&rev=20261029-news-home",{credentials:"same-origin"});
+      var response=await fetch("/heritage-preview.html?v=20261021-cover-modes-videos-2&rev=20261030-stable-authors-1",{credentials:"same-origin"});
       if(!response.ok)throw new Error("Heritage template missing: "+response.status);
       var html=await response.text();
       var doc=new DOMParser().parseFromString(html,"text/html");
