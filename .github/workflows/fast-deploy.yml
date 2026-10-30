@@ -28,6 +28,8 @@ on:
       - "backend/tests/test_figure_shell_refresh.py"
       - "backend/scripts/prepare_priority_site.py"
       - "backend/scripts/verify_direct_routes.py"
+      - "backend/scripts/publish_editorial_story_sitemap.py"
+      - "backend/tests/test_editorial_story_sitemap.py"
       - "backend/tests/test_verify_direct_routes.py"
       - "backend/scripts/audit_pages_size.py"
       - "backend/scripts/build_iran_scenario_radar.py"
@@ -781,6 +783,10 @@ jobs:
           python -m unittest discover -s backend/tests -p test_jankalam_news_migration.py -v
           node backend/tests/test_jankalam_news_routes.js
           python backend/scripts/publish_jankalam_news.py --site site
+      - name: Publish verified authored story sitemap
+        run: |
+          python -m unittest discover -s backend/tests -p test_editorial_story_sitemap.py -v
+          python backend/scripts/publish_editorial_story_sitemap.py --site site
       - name: Upload light Pages site
         uses: actions/upload-pages-artifact@v3
         with:
