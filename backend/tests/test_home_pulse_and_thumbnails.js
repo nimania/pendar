@@ -64,7 +64,8 @@ draw({generated_at:new Date().toISOString(),rows:[
 assert(!out.ticker.includes("۱ تومان"),"A USD-quoted USDT rate must not masquerade as tomans");
 assert(!out.ticker.includes("تتر"),"USD-only Tether quotes must be omitted");
 
-const thumbsA=js.indexOf("  function authorPortraitThumb(");
+// Include the author-attribution helper; both portrait functions depend on it.
+const thumbsA=js.indexOf("  function editorialWriterId(");
 const thumbsB=js.indexOf("  function put(id,html)",thumbsA);
 assert(thumbsA>0&&thumbsB>thumbsA,"Known editorial author photo helper must exist");
 const directory={authors:[{id:"diplomacy",portrait_status:"installed",
