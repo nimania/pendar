@@ -40,10 +40,23 @@ class EditorialReportTests(unittest.TestCase):
             "headline_fa":"مذاکرات دیپلماتیک با سفیر و وزارت خارجه",
             "summary_fa":"همچنین برخی هشدارهای بارندگی و سیلاب مطرح شد",
         }
-        unknown={"headline_fa":"رویدادی نامشخص با جزئیات ناکافی"}
+        unknown={"id":"0dac3487-2a02-4311-a203-c76ae58fd404",
+                 "headline_fa":"رویدادی نامشخص با جزئیات ناکافی"}
         self.assertEqual(choose_editorial_author(eco,roster),"environment")
         self.assertEqual(choose_editorial_author(diplomacy,roster),"diplomacy")
-        self.assertEqual(choose_editorial_author(unknown,roster),"desk")
+        expected=roster["authors"][int("e58fd404",16)%7]["id"]
+        self.assertEqual(choose_editorial_author(unknown,roster),expected)
+        self.assertEqual(choose_editorial_author(unknown,roster),expected)
+        # UUID randomness distributes stories across all seven without rerolls.
+        distributed={choose_editorial_author({
+            "id":f"00000000-0000-4000-8000-{i:012x}",
+            "headline_fa":"رویدادی نامشخص با جزئیات ناکافی",
+        },roster) for i in range(28)}
+        self.assertEqual(distributed,{a["id"] for a in roster["authors"]})
+        tie={"id":"babe8d8a-4a58-4d4d-a737-572d2d306ddc",
+             "headline_fa":"مذاکرات و انتخابات"}
+        expected_tie=roster["authors"][int("2d306ddc",16)%7]["id"]
+        self.assertEqual(choose_editorial_author(tie,roster),expected_tie)
 
     def test_strong_history_only(self):
         c=related_news(STORY,[STORY,PRIOR,UNRELATED])
