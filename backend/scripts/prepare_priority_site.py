@@ -36,6 +36,8 @@ keep_data_names = {
     "youtube-videos.json", "prices.json", "crypto.json", "candidate-feeds.json",
     "project-finance.json",
     "editorial-archive.json", "google-trends-iran.json",
+    # Immutable five-hour news/opinion report archive must survive light deploys.
+    "voice-recaps.json",
 }
 keep_data_prefixes = (
     "figure", "news-", "curated-", "source-", "story-", "search-",
