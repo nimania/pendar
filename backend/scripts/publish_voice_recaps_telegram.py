@@ -89,15 +89,27 @@ def message(report):
     parts=[]
     for text in body:
         value=" ".join(text.split())
-        if len(value)>allowance:
+        escaped=html.escape(value)
+        if len(escaped)>allowance:
             if allowance>=100:
-                parts.append(html.escape(value[:allowance-2].rsplit(" ",1)[0]+"…"))
+                low,high=0,len(value)
+                while low<high:
+                    middle=(low+high+1)//2
+                    if len(html.escape(value[:middle]+"…"))<=allowance:
+                        low=middle
+                    else:
+                        high=middle-1
+                if low:
+                    parts.append(html.escape(value[:low].rsplit(" ",1)[0]+"…"))
             break
-        parts.append(html.escape(value))
-        allowance-=len(value)+2
+        parts.append(escaped)
+        allowance-=len(escaped)+2
         if allowance<100:
             break
-    return heading+"\n\n".join(parts)+byline
+    result=heading+"\n\n".join(parts)+byline
+    if len(result)>MAX_MESSAGE:
+        raise ValueError("Telegram recap exceeds message size limit")
+    return result
 
 
 def payload(report,chat_id):
