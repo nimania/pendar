@@ -40,6 +40,8 @@ on:
       - "backend/scripts/validate_site_integrity.py"
       - "backend/scripts/trends_seo.py"
       - "backend/scripts/publish_google_trends.py"
+      - "backend/scripts/publish_statement_recaps.py"
+      - "backend/tests/test_statement_recaps.py"
       - "backend/scripts/publish_editorial_handles.py"
       - "backend/scripts/trends_magazine.py"
       - "backend/scripts/trends_media.py"
@@ -787,6 +789,18 @@ jobs:
         run: |
           python -m unittest discover -s backend/tests -p test_editorial_story_sitemap.py -v
           python backend/scripts/publish_editorial_story_sitemap.py --site site
+      - name: Check five-hour voice recap publication safeguards
+        working-directory: backend
+        run: |
+          python -m unittest discover -s tests -p test_statement_recaps.py -v
+          python -m py_compile scripts/publish_statement_recaps.py
+      - name: Publish sourced five-hour news and opinion roundups
+        continue-on-error: true
+        env:
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
+        run: python backend/scripts/publish_statement_recaps.py --site site
       - name: Upload light Pages site
         uses: actions/upload-pages-artifact@v3
         with:
