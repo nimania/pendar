@@ -118,6 +118,31 @@ class AuthoredStorySitemapTests(unittest.TestCase):
             self.assertIsNone(validate_story(site, url(SLUG)))
             self.assertEqual(build(site)["indexable"], 1)
 
+    def test_recovers_only_real_matching_canonical_alias(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = self.setup_site(tmp)
+            # A retained authored UUID points to its original readable
+            # permalink; both serve the exact same prerendered report.
+            wrong = url(GOOD)
+            write_page(site, GOOD, page(wrong, canonical=url(SLUG)))
+            result = build(site)
+            self.assertEqual(result["recovered_by_reason"]["verified_matching_canonical_alias"], 1)
+            self.assertEqual(result["indexable"], 1)
+            self.assertEqual(sitemap_urls(site / NAME), [url(SLUG)])
+
+    def test_does_not_promote_unrelated_canonical_target(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = self.setup_site(tmp)
+            # A self-canonical news page is not evidence that it is the
+            # matching authored report; never promote a different article.
+            news = page(url(NEWS)).replace("گزارش تألیفی مستقل درباره موضوع", "موضوع دیگری از خبرهای عمومی")
+            write_page(site, NEWS, news)
+            write_page(site, GOOD, page(url(GOOD), canonical=url(NEWS)))
+            result = build(site)
+            self.assertEqual(result["indexable"], 1)
+            self.assertEqual(result["excluded_by_reason"]["not_self_canonical"], 1)
+            self.assertEqual(sitemap_urls(site / NAME), [url(SLUG)])
+
     def test_refuses_empty_or_uninitialized_release(self):
         with tempfile.TemporaryDirectory() as tmp:
             site = self.setup_site(tmp)
