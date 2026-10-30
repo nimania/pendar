@@ -178,7 +178,7 @@ def model_candidates(provider, preferred, models):
         n=name.lower()
         if provider=="gemini":
             return (100*("flash" in n)+50*("2.5" in n)+25*("2.0" in n)
-                    +10*("lite" in n)-130*any(t in n for t in
+                    -5*("lite" in n)-130*any(t in n for t in
                     ("preview","exp","image","tts","vision","embedding","live","gemma")))
         return (100*("sonnet" in n)+40*("haiku" in n)-100*("legacy" in n or "instant" in n))
     listed=[x for x in models if x]
