@@ -244,8 +244,25 @@ def valid_report(value:dict,sources:list[dict],context:dict)->dict|None:
             "paragraphs":cleaned,"status":"ai_draft"}
 
 
+def stable_fallback_editorial_author(detail:dict, author_catalog:dict)->str:
+    """Distribute unclassified reports among the seven approved AI bylines.
+
+    UUIDs contain random bits. Use the same UUID suffix as the browser so
+    assignments are stable across rebuilds and page reloads.
+    """
+    authors=author_catalog.get("authors") or []
+    if not authors:
+        return "desk"
+    key=str(detail.get("id") or detail.get("headline_fa") or "")
+    if UUID_RE.fullmatch(key):
+        index=int(key.replace("-","")[-8:],16)
+    else:
+        index=sum(ord(c) for c in key)
+    return authors[index % len(authors)]["id"]
+
+
 def choose_editorial_author(detail:dict, author_catalog:dict)->str:
-    """Choose the strongest documented subject; if genuinely tied, use the desk.
+    """Use the dominant beat, with stable distribution for genuinely unclear cases.
 
     A title hit has priority over incidental references in summary/body.
     This is a stable editorial attribution, not a claim of human authorship.
@@ -269,11 +286,11 @@ def choose_editorial_author(detail:dict, author_catalog:dict)->str:
         if points:
             scored.append((points,len(matches),person["id"]))
     if not scored:
-        return "desk"
+        return stable_fallback_editorial_author(detail,author_catalog)
     scored.sort(key=lambda row:(-row[0],-row[1],row[2]))
-    # Equal evidence for two beats is not a reliable dominant subject.
+    # Distribute genuinely tied stories, rather than crediting a generic desk.
     if len(scored)>1 and scored[0][:2]==scored[1][:2]:
-        return "desk"
+        return stable_fallback_editorial_author(detail,author_catalog)
     return scored[0][2]
 
 
