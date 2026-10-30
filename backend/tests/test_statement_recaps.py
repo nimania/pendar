@@ -27,6 +27,42 @@ class StatementRecapTests(unittest.TestCase):
     def tearDown(self):
         self.temporary.cleanup()
 
+    def test_profile_links_and_migrated_news_destinations(self):
+        from scripts.publish_statement_recaps import (
+            news_destination, attach_internal_links, link_people_in_text, report_page
+        )
+        sid="11111111-1111-4111-8111-111111111111"
+        eid="22222222-2222-4222-8222-222222222222"
+        manifest={"news_ids":[sid],
+                  "editorial":{eid:"https://pendar.io/story/editorial-feature/"}}
+        self.assertEqual(news_destination(sid,manifest),
+            "https://nimania.github.io/jan-kalam/?story="+sid)
+        self.assertEqual(news_destination(eid,manifest),
+            "https://pendar.io/story/editorial-feature/")
+        sources=[{"source_id":"s1","person":"دونالد ترامپ","handle":"donald-trump",
+                  "post_id":"news:post-1","story_id":sid,"post_kind":"news_statement",
+                  "text":"اظهارنظر جدید دونالد ترامپ درباره وضعیت منطقه ثبت شده است.",
+                  "url":"https://example.org/source","time":self.now.isoformat()}]
+        attach_internal_links(sources,manifest)
+        self.assertEqual(sources[0]["person_url"],"/@donald-trump/")
+        self.assertEqual(sources[0]["statement_url"],"/statement/news%3Apost-1/")
+        self.assertIn("jan-kalam/?story=",sources[0]["internal_url"])
+        self.assertIn('href="/@donald-trump/"',
+            link_people_in_text("دونالد ترامپ درباره سیاست منطقه گفت",sources))
+        report={"id":"99629-news","kind":"news","url":"/reports/voices/99629-news/",
+                "generated_at":self.now.isoformat(),"title_fa":"گفته‌های دونالد ترامپ در خبرها",
+                "lead_fa":"دونالد ترامپ درباره مسائل منطقه و تغییرات تازه اظهارنظر کرده است.",
+                "window_start":self.start.isoformat(),"window_end":self.end.isoformat(),
+                "author_handle":"author-1","author_name":"نویسنده نمونه",
+                "sources":sources,
+                "paragraphs":[{"text_fa":"دونالد ترامپ در این اظهارنظر درباره تحولات منطقه صحبت کرده است.",
+                               "source_ids":["s1"]}]}
+        page=report_page(report)
+        self.assertIn('href="/@donald-trump/"',page)
+        self.assertIn("جان‌کلام",page)
+        self.assertIn("https://example.org/source",page)
+        self.assertIn("/statement/news%3Apost-1/",page)
+
     def test_light_deploy_keeps_published_recap_data(self):
         from scripts.prepare_priority_site import keep_data_file
         self.assertTrue(keep_data_file("voice-recaps.json"))
