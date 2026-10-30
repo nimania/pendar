@@ -28,7 +28,7 @@ function pendarMagazineReportCard(row,options){
   const photo=/^(https?:\/\/|\/(?!\/))[^"'<> ]+$/i.test(url)?url:"";
   const short=String(row.lead_fa||"").replace(/\s+/g," ").trim();
   const teaser=short.length>172?short.slice(0,171).replace(/\s+\S*$/,"")+"…":short;
-  const author=String(row.author_id||row.editorial_author_id||"desk");
+  const author=pendarEditorialAuthorId({...row,editorial_author_id:row.author_id||row.editorial_author_id});
   const published=String(row.published_at||"").slice(0,10);
   const showAuthor=options?.showAuthor!==false;
   const avatar=showAuthor&&typeof pendarAuthorPortraitCSS==="function"?pendarAuthorPortraitCSS(author):"";
