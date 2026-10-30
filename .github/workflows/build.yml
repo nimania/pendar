@@ -453,6 +453,10 @@ jobs:
           python backend/scripts/publish_jankalam_news.py --site backend/public
       - name: Reconcile published sitemaps against retained crawlable routes
         run: python backend/scripts/reconcile_published_sitemaps.py --site backend/public
+      - name: Publish verified authored story sitemap
+        run: |
+          python -m unittest discover -s backend/tests -p test_editorial_story_sitemap.py -v
+          python backend/scripts/publish_editorial_story_sitemap.py --site backend/public
 
       - name: Losslessly pack movie details for GitHub Pages size
         run: python backend/scripts/pack_movie_details.py --site backend/public --minimum 1000
