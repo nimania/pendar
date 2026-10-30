@@ -163,7 +163,7 @@ def link_people_in_text(raw, sources):
             people.setdefault(name,source["handle"])
     if not people:
         return escape(raw)
-    pattern=re.compile(r"(?<!\\w)("+ "|".join(re.escape(n) for n in sorted(people,key=len,reverse=True))+r")(?!\\w)")
+    pattern=re.compile(r"(?<!\w)("+ "|".join(re.escape(n) for n in sorted(people,key=len,reverse=True))+r")(?!\w)")
     parts=[]
     offset=0
     for match in pattern.finditer(raw):
