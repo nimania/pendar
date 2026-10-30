@@ -74,11 +74,11 @@ def message(report):
     url=SITE+str(report["url"])
     start=str(report.get("window_start") or "")[:16].replace("T"," ")
     end=str(report.get("window_end") or "")[:16].replace("T"," ")
-    heading=(f"📰 <b>ری‌کپ پنج‌ساعتهٔ {category} | پندار</b>\\n\\n"
-             f"<b>{title}</b>\\n"
-             f"<i>دوره: {html.escape(start)} تا {html.escape(end)} UTC</i>\\n\\n")
-    byline=("\\n\\nتنظیم: "+link(writer,author_url)+
-            "\\n"+link("متن کامل، چهره‌ها، خبرها و منابع در پندار ←",url))
+    heading=(f"📰 <b>ری‌کپ پنج‌ساعتهٔ {category} | پندار</b>\n\n"
+             f"<b>{title}</b>\n"
+             f"<i>دوره: {html.escape(start)} تا {html.escape(end)} UTC</i>\n\n")
+    byline=("\n\nتنظیم: "+link(writer,author_url)+
+            "\n"+link("متن کامل، چهره‌ها، خبرها و منابع در پندار ←",url))
     body=[str(report.get("lead_fa") or "").strip()]
     # Self-contained Telegram edition with attribution, not merely a headline.
     for para in report["paragraphs"]:
@@ -97,7 +97,7 @@ def message(report):
         allowance-=len(value)+2
         if allowance<100:
             break
-    return heading+"\\n\\n".join(parts)+byline
+    return heading+"\n\n".join(parts)+byline
 
 
 def payload(report,chat_id):
