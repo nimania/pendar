@@ -106,6 +106,18 @@ class AuthoredStorySitemapTests(unittest.TestCase):
                     write_page(site, SLUG, markup)
                     self.assertEqual(validate_story(site, url(SLUG)), expected)
 
+    def test_fast_deploy_top_level_article_jsonld_is_accepted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = self.setup_site(tmp)
+            content = page(url(SLUG))
+            content = content.replace(
+                json.dumps({"@graph": [{"@type": "Article", "url": url(SLUG)}]}),
+                json.dumps({"@type": "Article", "url": url(SLUG)}),
+            )
+            write_page(site, SLUG, content)
+            self.assertIsNone(validate_story(site, url(SLUG)))
+            self.assertEqual(build(site)["indexable"], 1)
+
     def test_refuses_empty_or_uninitialized_release(self):
         with tempfile.TemporaryDirectory() as tmp:
             site = self.setup_site(tmp)
