@@ -150,9 +150,52 @@ def get_json_api(url, headers, payload):
         return json.load(response)
 
 
+def available_models(provider, api_key):
+    """Ask the configured provider what this key can actually generate with."""
+    if provider == "gemini":
+        url = "https://generativelanguage.googleapis.com/v1beta/models?pageSize=200"
+        headers = {"x-goog-api-key":api_key}
+    else:
+        url = "https://api.anthropic.com/v1/models?limit=100"
+        headers = {"x-api-key":api_key, "anthropic-version":"2023-06-01"}
+    try:
+        request = urllib.request.Request(url, headers=headers, method="GET")
+        with urllib.request.urlopen(request, timeout=18) as response:
+            doc = json.load(response)
+        if provider == "gemini":
+            return [str(row.get("name") or "").rsplit("/",1)[-1]
+                    for row in doc.get("models",[])
+                    if "generateContent" in row.get("supportedGenerationMethods",[])]
+        return [str(row.get("id") or "") for row in doc.get("data",[]) if row.get("id")]
+    except (ValueError, KeyError, urllib.error.URLError, TimeoutError) as exc:
+        print("WARN: model-list request unavailable:", type(exc).__name__,flush=True)
+        return []
+
+
+def model_candidates(provider, preferred, models):
+    """Prefer a working stable text model over a stale configured model name."""
+    def score(name):
+        n=name.lower()
+        if provider=="gemini":
+            return (100*("flash" in n)+50*("2.5" in n)+25*("2.0" in n)
+                    +10*("lite" in n)-130*any(t in n for t in
+                    ("preview","exp","image","tts","vision","embedding","live","gemma")))
+        return (100*("sonnet" in n)+40*("haiku" in n)-100*("legacy" in n or "instant" in n))
+    listed=[x for x in models if x]
+    fav=preferred.rsplit("/",1)[-1]
+    alternatives=(["gemini-2.5-flash","gemini-2.5-flash-lite","gemini-2.0-flash"]
+                  if provider=="gemini" else
+                  ["claude-sonnet-4-5","claude-sonnet-4-0","claude-3-7-sonnet-latest"])
+    if listed:
+        sorted_models=sorted(set(listed),key=lambda x:(-score(x),x))
+        # A stale preference is not tried before the API's current supported set.
+        return ([fav] if fav in listed else [])+[x for x in sorted_models if x!=fav][:5]
+    return list(dict.fromkeys([fav]+alternatives))
+
+
 def generate(kind, start, end, sources):
     provider = os.environ.get("AI_PROVIDER", "").lower().strip()
-    keys = re.split(r"[,\s]+", os.environ.get("AI_API_KEY", "").strip())
+    keys = re.split(r"[,\\s]+", os.environ.get("AI_API_KEY", "").strip())
     keys = [x for x in keys if x]
     if provider not in ("gemini", "anthropic") or not keys:
         print("INFO: no supported AI provider/key configured; not publishing synthetic text", flush=True)
@@ -165,31 +208,49 @@ def generate(kind, start, end, sources):
                     for row in sources]
     }
     prompt = json.dumps(input_data, ensure_ascii=False, separators=(",", ":"))
-    model = os.environ.get("AI_MODEL_STRONG", "").strip() or ("gemini-2.5-flash" if provider == "gemini" else "claude-sonnet-4-5")
+    preferred = os.environ.get("AI_MODEL_STRONG", "").strip() or (
+        "gemini-2.5-flash" if provider=="gemini" else "claude-sonnet-4-5")
+    attempts=0
     for api_key in keys[:3]:
-        try:
-            if provider == "gemini":
-                clean_model = model.rsplit("/", 1)[-1]
-                endpoint = "https://generativelanguage.googleapis.com/v1beta/models/" + urllib.parse.quote(clean_model, safe="-_.") + ":generateContent"
-                result = get_json_api(endpoint, {"x-goog-api-key":api_key,"Content-Type":"application/json"},
-                    {"system_instruction":{"parts":[{"text":SYSTEM}]},
-                     "contents":[{"parts":[{"text":prompt}]}],
-                     "generationConfig":{"responseMimeType":"application/json","temperature":0.2}})
-                raw = "".join(part.get("text", "") for choice in result.get("candidates", [])
-                              for part in choice.get("content", {}).get("parts", []))
-            else:
-                result = get_json_api("https://api.anthropic.com/v1/messages",
-                    {"x-api-key":api_key,"anthropic-version":"2023-06-01","Content-Type":"application/json"},
-                    {"model":model, "max_tokens":3500, "temperature":0.2,
-                     "system":SYSTEM,"messages":[{"role":"user","content":prompt}]})
-                raw = "".join(block.get("text", "") for block in result.get("content", []) if block.get("type") == "text")
-            raw = raw.strip()
-            if raw.startswith("```"):
-                raw = re.sub(r"^\x60{3}(?:json)?\s*|\s*\x60{3}$", "", raw, flags=re.I)
-            value = json.loads(raw)
-            return validate(value, sources)
-        except (ValueError, KeyError, TypeError, urllib.error.URLError, TimeoutError) as exc:
-            print("WARN: AI output unavailable or invalid for", kind, type(exc).__name__, str(exc)[:150], flush=True)
+        choices=model_candidates(provider,preferred,available_models(provider,api_key))
+        for model in choices[:4]:
+            if attempts>=4:
+                break
+            attempts+=1
+            try:
+                if provider=="gemini":
+                    endpoint=("https://generativelanguage.googleapis.com/v1beta/models/"+
+                              urllib.parse.quote(model.rsplit("/",1)[-1],safe="-_.")+":generateContent")
+                    result=get_json_api(endpoint,{"x-goog-api-key":api_key,"Content-Type":"application/json"},
+                        {"system_instruction":{"parts":[{"text":SYSTEM}]},
+                         "contents":[{"parts":[{"text":prompt}]}],
+                         "generationConfig":{"responseMimeType":"application/json","temperature":0.2}})
+                    raw="".join(p.get("text","") for choice in result.get("candidates",[])
+                                for p in choice.get("content",{}).get("parts",[]))
+                else:
+                    result=get_json_api("https://api.anthropic.com/v1/messages",
+                        {"x-api-key":api_key,"anthropic-version":"2023-06-01","Content-Type":"application/json"},
+                        {"model":model,"max_tokens":5000,"temperature":0.2,
+                         "system":SYSTEM,"messages":[{"role":"user","content":prompt}]})
+                    raw="".join(p.get("text","") for p in result.get("content",[])
+                                if p.get("type")=="text")
+                raw=raw.strip()
+                if raw.startswith("```"):
+                    raw=re.sub(r"^\\x60{3}(?:json)?\\s*|\\s*\\x60{3}$","",raw,flags=re.I)
+                validated=validate(json.loads(raw),sources)
+                if validated:
+                    print("INFO: valid sourced recap generated with model",model,flush=True)
+                    return validated
+                print("WARN: output failed the report quality contract:",model,flush=True)
+            except urllib.error.HTTPError as exc:
+                print("WARN: model request rejected:",model,"HTTP",exc.code,flush=True)
+                # Bad model, quota or transient provider failure: try another.
+                if exc.code in (401,403):
+                    break
+            except (ValueError, KeyError, TypeError, urllib.error.URLError, TimeoutError) as exc:
+                print("WARN: model output unavailable:",model,type(exc).__name__,flush=True)
+        if attempts>=4:
+            break
     return None
 
 
