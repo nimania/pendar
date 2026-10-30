@@ -118,6 +118,38 @@ def validate_story(site: Path, url: str) -> str | None:
     return None
 
 
+def canonical_targets(site: Path, url: str) -> list[str]:
+    """Extract all declared canonicals, rather than trusting the first match."""
+    path, reason = candidate_url(site, url)
+    if reason or path is None or not path.is_file():
+        return []
+    content = path.read_text(encoding="utf-8")
+    head = re.search(r"<head\\b[^>]*>(.*?)</head>", content, re.I | re.S)
+    if not head:
+        return []
+    return [attrs(tag).get("href", "") for tag in re.findall(r"<link\\b[^>]*>", head.group(1), re.I)
+            if attrs(tag).get("rel", "").lower() == "canonical"]
+
+
+def article_fingerprint(site: Path, url: str) -> str:
+    """A report alias must share the actual prerendered article, not a title."""
+    path, reason = candidate_url(site, url)
+    if reason or path is None or not path.is_file():
+        return ""
+    source = path.read_text(encoding="utf-8")
+    section = SEO_SECTION.search(source)
+    if not section:
+        return ""
+    body = section.group(1)
+    heading = H1.search(body)
+    text = " ".join(visible(p) for p in PARAGRAPH.findall(body))
+    if not heading or len(text) < 300:
+        return ""
+    # Compare report body + heading; navigation, HTML and SEO wrappers may
+    # legitimately differ across UUID and readable permalink variants.
+    return visible(heading.group(1)) + "\\n" + text
+
+
 def build(site: Path) -> dict:
     site = Path(site)
     data_file = site / "data/news-destinations.json"
@@ -137,12 +169,37 @@ def build(site: Path) -> dict:
 
     valid_urls: set[str] = set()
     rejected = Counter()
+    recovered = Counter()
     examples: dict[str, list[str]] = {}
+    canonical_diagnostics: list[dict[str, str]] = []
     for story_id, url in sorted(owned.items()):
         if not UUID.fullmatch(story_id) or not isinstance(url, str):
             rejected["invalid_ownership_record"] += 1
             continue
         problem = validate_story(site, url)
+        if problem == "not_self_canonical":
+            canonical = canonical_targets(site, url)
+            if len(canonical) == 1 and canonical[0] != url:
+                target = canonical[0]
+                # Only accept a real, self-canonical, independently readable
+                # /story/ page carrying precisely the same article text.
+                target_problem = validate_story(site, target)
+                if (target_problem is None
+                        and article_fingerprint(site, url)
+                        and article_fingerprint(site, url) == article_fingerprint(site, target)):
+                    valid_urls.add(target)
+                    recovered["verified_matching_canonical_alias"] += 1
+                    continue
+                if len(canonical_diagnostics) < 8:
+                    canonical_diagnostics.append({
+                        "listed": url, "declared_canonical": target,
+                        "canonical_problem": target_problem or "body_mismatch",
+                    })
+            elif len(canonical_diagnostics) < 8:
+                canonical_diagnostics.append({
+                    "listed": url, "canonical_tags": str(canonical),
+                    "canonical_problem": "zero_or_multiple_canonicals",
+                })
         if problem:
             rejected[problem] += 1
             if len(examples.setdefault(problem, [])) < 5:
@@ -213,6 +270,8 @@ def build(site: Path) -> dict:
         "indexable": len(valid_urls),
         "removed_old_story_sitemap_entries": removed,
         "excluded_by_reason": dict(sorted(rejected.items())),
+        "recovered_by_reason": dict(sorted(recovered.items())),
+        "excluded_canonical_examples": canonical_diagnostics,
         "excluded_examples": examples,
         "sample_urls": sorted(valid_urls)[:20],
     }
@@ -220,8 +279,10 @@ def build(site: Path) -> dict:
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(json.dumps(audit, ensure_ascii=False, indent=2), encoding="utf-8")
     print("Pendar authored story sitemap: " + json.dumps(
-        {key: value for key, value in audit.items() if key not in ("excluded_examples", "sample_urls")},
+        {key: value for key, value in audit.items() if key not in ("excluded_examples", "excluded_canonical_examples", "sample_urls")},
         ensure_ascii=False), flush=True)
+    if canonical_diagnostics:
+        print("Canonical mismatch examples: " + json.dumps(canonical_diagnostics[:5], ensure_ascii=False), flush=True)
     return audit
 
 
