@@ -121,6 +121,12 @@ class AuthoredStorySitemapTests(unittest.TestCase):
     def test_recovers_only_real_matching_canonical_alias(self):
         with tempfile.TemporaryDirectory() as tmp:
             site = self.setup_site(tmp)
+            # The UUID itself must be the listed ownership URL for alias tests.
+            # Keep a separate valid self-canonical report to verify safe fallback.
+            (site / "data/news-destinations.json").write_text(
+                json.dumps({"editorial": {GOOD: url(GOOD), SHORT: url(SLUG)}}),
+                encoding="utf-8",
+            )
             (site / "data/news-destinations.json").write_text(
                 json.dumps({"editorial": {GOOD: url(GOOD), SHORT: url(SLUG)}}),
                 encoding="utf-8",
@@ -137,6 +143,12 @@ class AuthoredStorySitemapTests(unittest.TestCase):
     def test_does_not_promote_unrelated_canonical_target(self):
         with tempfile.TemporaryDirectory() as tmp:
             site = self.setup_site(tmp)
+            # The UUID itself must be the listed ownership URL for alias tests.
+            # Keep a separate valid self-canonical report to verify safe fallback.
+            (site / "data/news-destinations.json").write_text(
+                json.dumps({"editorial": {GOOD: url(GOOD), SHORT: url(SLUG)}}),
+                encoding="utf-8",
+            )
             (site / "data/news-destinations.json").write_text(
                 json.dumps({"editorial": {GOOD: url(GOOD), SHORT: url(SLUG)}}),
                 encoding="utf-8",
