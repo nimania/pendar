@@ -124,10 +124,10 @@ def canonical_targets(site: Path, url: str) -> list[str]:
     if reason or path is None or not path.is_file():
         return []
     content = path.read_text(encoding="utf-8")
-    head = re.search(r"<head\\b[^>]*>(.*?)</head>", content, re.I | re.S)
+    head = re.search(r"<head\b[^>]*>(.*?)</head>", content, re.I | re.S)
     if not head:
         return []
-    return [attrs(tag).get("href", "") for tag in re.findall(r"<link\\b[^>]*>", head.group(1), re.I)
+    return [attrs(tag).get("href", "") for tag in re.findall(r"<link\b[^>]*>", head.group(1), re.I)
             if attrs(tag).get("rel", "").lower() == "canonical"]
 
 
@@ -147,7 +147,7 @@ def article_fingerprint(site: Path, url: str) -> str:
         return ""
     # Compare report body + heading; navigation, HTML and SEO wrappers may
     # legitimately differ across UUID and readable permalink variants.
-    return visible(heading.group(1)) + "\\n" + text
+    return visible(heading.group(1)) + "\n" + text
 
 
 def build(site: Path) -> dict:
