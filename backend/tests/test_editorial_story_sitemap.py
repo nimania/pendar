@@ -43,7 +43,7 @@ def url(segment):
 
 def write_page(site, segment, content):
     path = site / "story" / segment
-    path.mkdir(parents=True)
+    path.mkdir(parents=True, exist_ok=True)
     (path / "index.html").write_text(content, encoding="utf-8")
 
 
