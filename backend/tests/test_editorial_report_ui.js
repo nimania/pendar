@@ -113,10 +113,10 @@ assert(authorUrlSource,"author URL helper must remain available to archive cards
 const authorUrl=new Function("window",authorUrlSource[0]+";return pendarAuthorUrl;")({PENDAR_EDITORIAL_AUTHORS:directory});
 assert.equal(authorUrl("culture"),"/@mana-radfar/");
 assert.equal(authorUrl("desk"),"/editorial-author/desk/");
-const cardTest=new Function('esc','pendarAuthorName','pendarAuthorPortraitCSS','pendarAuthorUrl',
+const cardTest=new Function('esc','pendarAuthorName','pendarAuthorPortraitCSS','pendarAuthorUrl','pendarEditorialAuthorId',
   magazineCollections+'return {pendarMagazineCollectionFrame,pendarMagazineReportCard};')(
   value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch])),
-  ()=>"دبیر فرهنگ",()=>"",authorUrl );
+  ()=>"دبیر فرهنگ",()=>"",authorUrl,authorContext.pendarEditorialAuthorId );
 const cardId="b4efb62f-9240-4e90-ba4f-4664e608fa97";
 const withImage=cardTest.pendarMagazineReportCard({id:cardId,title_fa:"تیتر گزارش",lead_fa:"شرح منبع‌دار",author_id:"culture",image_url:"https://example.com/relevant.jpg",published_at:"2026-10-18"});
 assert(withImage.includes('magazine-report-photo'),"image must be displayed with archive card");
