@@ -33,6 +33,8 @@ OPINION_ROLES = ("تحلیلگر", "نویسنده", "روزنامهنگار", "
                  "کنشگر", "کارشناس", "جامعهشناس", "پژوهشگر", "استاد", "مفسر",
                  "منتقد", "ستوننویس", "اندیشمند", "analyst", "columnist",
                  "commentator", "writer", "activist", "researcher", "pundit")
+_GOOD_MODELS = {}
+_BAD_MODELS = set()
 NEWS_ROLES = ("رئیسجمهور", "رئیس", "وزیر", "سخنگو", "نماینده", "فرمانده",
               "نخستوزیر", "دیپلمات", "مقام", "سناتور", "فرماندار",
               "مذاکرهکننده", "president", "minister", "spokesperson",
@@ -177,7 +179,8 @@ def model_candidates(provider, preferred, models):
     def score(name):
         n=name.lower()
         if provider=="gemini":
-            return (100*("flash" in n)+50*("2.5" in n)+25*("2.0" in n)
+            return (100*("flash" in n)+90*("3.5" in n)+80*("3.6" in n)+70*("3.1" in n)
+                    +50*("2.5" in n)+25*("2.0" in n)
                     -5*("lite" in n)-130*any(t in n for t in
                     ("preview","exp","image","tts","vision","embedding","live","gemma")))
         return (100*("sonnet" in n)+40*("haiku" in n)-100*("legacy" in n or "instant" in n))
@@ -188,8 +191,9 @@ def model_candidates(provider, preferred, models):
                   ["claude-sonnet-4-5","claude-sonnet-4-0","claude-3-7-sonnet-latest"])
     if listed:
         sorted_models=sorted(set(listed),key=lambda x:(-score(x),x))
-        # A stale preference is not tried before the API's current supported set.
-        return ([fav] if fav in listed else [])+[x for x in sorted_models if x!=fav][:5]
+        # The list is authoritative: newer, supported text models outrank a
+        # configured preference that may now fail at generateContent.
+        return sorted_models[:8]
     return list(dict.fromkeys([fav]+alternatives))
 
 
@@ -213,7 +217,9 @@ def generate(kind, start, end, sources):
     attempts=0
     for api_key in keys[:3]:
         choices=model_candidates(provider,preferred,available_models(provider,api_key))
-        for model in choices[:4]:
+        candidates=list(dict.fromkeys([_GOOD_MODELS[provider]] if provider in _GOOD_MODELS else []))
+        candidates += [x for x in choices if x not in candidates and x not in _BAD_MODELS]
+        for model in candidates[:6]:
             if attempts>=4:
                 break
             attempts+=1
@@ -239,11 +245,14 @@ def generate(kind, start, end, sources):
                     raw=re.sub(r"^\x60{3}(?:json)?\s*|\s*\x60{3}$","",raw,flags=re.I)
                 validated=validate(json.loads(raw),sources)
                 if validated:
+                    _GOOD_MODELS[provider]=model
                     print("INFO: valid sourced recap generated with model",model,flush=True)
                     return validated
                 print("WARN: output failed the report quality contract:",model,flush=True)
             except urllib.error.HTTPError as exc:
                 print("WARN: model request rejected:",model,"HTTP",exc.code,flush=True)
+                if exc.code==404:
+                    _BAD_MODELS.add(model)
                 # Bad model, quota or transient provider failure: try another.
                 if exc.code in (401,403):
                     break
