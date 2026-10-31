@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T12:58:37.668816+00:00",
+  "generated_at": "2026-10-31T12:35:33.651239+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -592,6 +592,54 @@
       "group": "series",
       "confidence": "aggregated",
       "logo": "https://image.tmdb.org/t/p/w185/nGBvrhfhGtipdl12f55t1oUwQQS.png"
+    },
+    {
+      "id": "tmdb-network-71",
+      "name_fa": "The CW",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/hEpcdJ4O6eitG9ADSnDXNUrlovS.png"
+    },
+    {
+      "id": "tmdb-network-77",
+      "name_fa": "Syfy",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/iYfrkobwDhTOFJ4AXYPSLIEeaAT.png"
+    },
+    {
+      "id": "tmdb-network-453",
+      "name_fa": "Hulu",
+      "platform_type": "world_stream",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/pqUTCleNUiTLAVlelGxUgWn1ELh.png"
+    },
+    {
+      "id": "tmdb-network-1025",
+      "name_fa": "WWE Network",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/fNkVI38NJKpnWKMmEkSxxinuyAe.png"
+    },
+    {
+      "id": "tmdb-network-7642",
+      "name_fa": "WWE.com",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/cq7EMJxfl6IjQtgvjpQRkUttSeG.png"
+    },
+    {
+      "id": "tmdb-network-8571",
+      "name_fa": "ESPN App",
+      "platform_type": "other",
+      "group": "series",
+      "confidence": "aggregated",
+      "logo": "https://image.tmdb.org/t/p/w185/nGVnOlJb5axYcLLdUT3dmiw7vU.png"
     }
   ],
   "programmes": [
@@ -622,16 +670,6 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1206617",
       "icon": "https://image.tmdb.org/t/p/w500/6XjvhydAlXbQodoWbIf77H0Dd9R.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "Mary",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1775821",
-      "icon": "https://image.tmdb.org/t/p/w500/kLcQeHF7pDkjwjIXEhccBG1juu.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -736,36 +774,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-4330",
-      "title_fa": "سرزمین اوباش",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/247718",
-      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6100",
-      "title_fa": "سرزمین اوباش",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/247718",
-      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4330",
-      "title_fa": "پادشاه تالسا",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/153312",
-      "icon": "https://image.tmdb.org/t/p/w500/24OWkuqt3eqkLO2d0CQ9D8D1yqY.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 3 از فصل 4؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "رزیدنت ایول",
       "start": "2026-11-03T00:00:00+03:30",
@@ -782,16 +790,6 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1286656",
       "icon": "https://image.tmdb.org/t/p/w500/xE5tY3lppZUyG7WKKThsuYHuAHr.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "SCTV: The Greatest Show You've Never Heard Of",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1756307",
-      "icon": "https://image.tmdb.org/t/p/w500/dSp528gsiCTMEth1DrJcxIXBXim.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -1056,16 +1054,6 @@
       "desc_fa": "قسمت 5 از فصل 15؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-49",
-      "title_fa": "در لحظه با بیل ماهر",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/4419",
-      "icon": "https://image.tmdb.org/t/p/w500/pbpoLLp4kvnYVfnEGiEhagpJuVZ.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 32 از فصل 24؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "El despertar",
       "start": "2026-11-10T00:00:00+03:30",
@@ -1144,56 +1132,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 123 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-290",
-      "title_fa": "فردا از آنِ ماست",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/72879",
-      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 45 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 110 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 110 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-290",
-      "title_fa": "اینجا همه چیز شروع می‌شود",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/112470",
-      "icon": "https://image.tmdb.org/t/p/w500/v7nXPo2zdaIOfeIaERiOuTEt89N.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 45 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-9",
-      "title_fa": "Coronation Street",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/291",
-      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 201 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-6",
@@ -1476,36 +1414,6 @@
       "desc_fa": "قسمت 1554 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-213",
-      "title_fa": "Good Mythical Morning",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/65701",
-      "icon": "https://image.tmdb.org/t/p/w500/jMpBQr2aNOFAI6wsC47zsOG6qOh.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 40 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-247",
-      "title_fa": "Good Mythical Morning",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/65701",
-      "icon": "https://image.tmdb.org/t/p/w500/jMpBQr2aNOFAI6wsC47zsOG6qOh.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 40 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-9309",
-      "title_fa": "Good Mythical Morning",
-      "start": "2026-10-30T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/65701",
-      "icon": "https://image.tmdb.org/t/p/w500/jMpBQr2aNOFAI6wsC47zsOG6qOh.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 40 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "Crawlers",
       "start": "2026-11-10T00:00:00+03:30",
@@ -1516,12 +1424,212 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "digital-world",
-      "title_fa": "Vampire Carnival",
-      "start": "2026-10-30T00:00:00+03:30",
+      "channel_id": "tmdb-network-30",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-04T00:00:00+03:30",
       "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1634905",
-      "icon": "https://image.tmdb.org/t/p/w500/ihxByv2GHUxz7g82mhVlYp9pCj3.jpg",
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-71",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-77",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-453",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1025",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-7642",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-8571",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "Diepe Waters",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/231962",
+      "icon": "https://image.tmdb.org/t/p/w500/uF5SpFjMmYTMF0sc5MbjnDsoBcG.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 21 از فصل 5؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "نمایش امشب با اجرای جیمی فالون",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/59941",
+      "icon": "https://image.tmdb.org/t/p/w500/1N4o5PmmqhlVDrcdJ2RlCFWbLGX.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 21 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4330",
+      "title_fa": "سرزمین اوباش",
+      "start": "2026-11-06T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/247718",
+      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 8 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6100",
+      "title_fa": "سرزمین اوباش",
+      "start": "2026-11-06T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/247718",
+      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 8 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "فردا از آنِ ماست",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/72879",
+      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 46 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 111 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 111 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4330",
+      "title_fa": "پادشاه تالسا",
+      "start": "2026-11-06T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/153312",
+      "icon": "https://image.tmdb.org/t/p/w500/24OWkuqt3eqkLO2d0CQ9D8D1yqY.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 4 از فصل 4؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-213",
+      "title_fa": "Good Mythical Morning",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65701",
+      "icon": "https://image.tmdb.org/t/p/w500/jMpBQr2aNOFAI6wsC47zsOG6qOh.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 41 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-247",
+      "title_fa": "Good Mythical Morning",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65701",
+      "icon": "https://image.tmdb.org/t/p/w500/jMpBQr2aNOFAI6wsC47zsOG6qOh.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 41 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9309",
+      "title_fa": "Good Mythical Morning",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65701",
+      "icon": "https://image.tmdb.org/t/p/w500/jMpBQr2aNOFAI6wsC47zsOG6qOh.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 41 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9",
+      "title_fa": "Coronation Street",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/291",
+      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 202 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "اینجا همه چیز شروع می‌شود",
+      "start": "2026-11-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/112470",
+      "icon": "https://image.tmdb.org/t/p/w500/v7nXPo2zdaIOfeIaERiOuTEt89N.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 46 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "خانم وب",
+      "start": "2026-11-14T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/634492",
+      "icon": "https://image.tmdb.org/t/p/w500/5KYfiwVBbIJlegyGzSYp4uO99r2.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
