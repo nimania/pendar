@@ -66,26 +66,64 @@ def link(label,url):
     return '<a href="'+html.escape(url,quote=True)+'">'+html.escape(str(label))+'</a>'
 
 
+def editorial_text(value):
+    """Normalize the repetitive opening without changing attributed claims."""
+    value=" ".join(str(value or "").split())
+    value=value.replace(
+        "بررسی تازه‌ترین دیدگاه‌های منتشرشده در پندار حاکی از",
+        "مرور بر تازه‌ترین دیدگاه‌های شخصیت‌های گوناگون، حاکی از", 1)
+    return value
+
+
+def qualified_body(report):
+    """Identify people with verified source roles on their first mention."""
+    import re
+    sources=report.get("sources") or []
+    roles={}
+    for row in sources:
+        if not isinstance(row,dict):
+            continue
+        name=str(row.get("person") or "").strip()
+        role=" ".join(str(row.get("role") or "").split()).strip(" ،،")
+        if name and role and name not in roles:
+            roles[name]=role
+    seen=set()
+    pattern=(re.compile(r"(?<!\\w)("+ "|".join(re.escape(n) for n in sorted(roles,key=len,reverse=True))+r")(?!\\w)")
+             if roles else None)
+    def qualify(value):
+        value=editorial_text(value)
+        if not pattern:
+            return value
+        def replace(match):
+            name=match.group(0)
+            if name in seen:
+                return name
+            seen.add(name)
+            role=roles[name]
+            following=value[match.end():].lstrip()
+            # Do not double a description already supplied by the editor.
+            if following.startswith(("، "+role, "،"+role, "("+role, "("+role)):
+                return name
+            return name+"، "+role+"،"
+        return pattern.sub(replace,value)
+    texts=[qualify(report.get("lead_fa") or "")]
+    for para in report["paragraphs"]:
+        value=str(para.get("text_fa") or "").strip() if isinstance(para,dict) else ""
+        if value:
+            texts.append(qualify(value))
+    return texts
+
+
 def message(report):
-    title=html.escape(str(report["title_fa"]))
-    category="خبرها" if report["kind"]=="news" else "نظرها"
     writer=str(report.get("author_name") or "تحریریهٔ پندار")
     author_url=SITE+"/@"+str(report.get("author_handle") or "desk").replace("/","%2F")+"/"
     url=SITE+str(report["url"])
-    start=str(report.get("window_start") or "")[:16].replace("T"," ")
-    end=str(report.get("window_end") or "")[:16].replace("T"," ")
-    heading=(f"📰 <b>ری‌کپ پنج‌ساعتهٔ {category} | پندار</b>\n\n"
-             f"<b>{title}</b>\n"
-             f"<i>دوره: {html.escape(start)} تا {html.escape(end)} UTC</i>\n\n")
-    byline=("\n\nتنظیم: "+link(writer,author_url)+
-            "\n"+link("متن کامل، چهره‌ها، خبرها و منابع در پندار ←",url))
-    body=[str(report.get("lead_fa") or "").strip()]
-    # Self-contained Telegram edition with attribution, not merely a headline.
-    for para in report["paragraphs"]:
-        text=str(para.get("text_fa") or "").strip() if isinstance(para,dict) else ""
-        if text:
-            body.append(text)
-    allowance=MAX_MESSAGE-len(heading)-len(byline)-32
+    # Telegram contains the actual report, not the site headline, recap label,
+    # or machine-readable UTC reporting window.
+    byline=("\\n\\nتنظیم: "+link(writer,author_url)+
+            "\\n"+link("متن کامل، چهره‌ها، خبرها و منابع در پندار ←",url))
+    body=qualified_body(report)
+    allowance=MAX_MESSAGE-len(byline)-32
     parts=[]
     for text in body:
         value=" ".join(text.split())
@@ -106,7 +144,7 @@ def message(report):
         allowance-=len(escaped)+2
         if allowance<100:
             break
-    result=heading+"\n\n".join(parts)+byline
+    result="\\n\\n".join(parts)+byline
     if len(result)>MAX_MESSAGE:
         raise ValueError("Telegram recap exceeds message size limit")
     return result
