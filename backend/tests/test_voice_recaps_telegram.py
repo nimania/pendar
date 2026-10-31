@@ -43,7 +43,7 @@ class VoiceTelegramTests(unittest.TestCase):
                 "title_fa":"متن گزارش و تحول تازهٔ ایران",
                 "lead_fa":"این خلاصه از اظهارنظرهای منتشرشده در طول پنج ساعت گذشته گردآوری شده و مواضع گویندگان را با احتیاط بازتاب می‌دهد.",
                 "author_name":"دبیر نمونه","author_handle":"sample-author",
-                "sources":[{"person":"گوینده","source_id":"s1"}],
+                "sources":[{"person":"گوینده","role":"پژوهشگر","source_id":"s1"}],
                 "paragraphs":[{"text_fa":"توضیح مفصل و مستند درباره تحول تازهٔ منطقه و مواضع مطرح‌شده در آن."} for _ in range(3)]}
 
     def test_both_types_only_if_recent_and_valid(self):
@@ -61,10 +61,25 @@ class VoiceTelegramTests(unittest.TestCase):
         text=message(self.news)
         self.assertIn("https://pendar.io/reports/voices/99629-news/",text)
         self.assertIn("https://pendar.io/@sample-author/",text)
-        self.assertIn("ری‌کپ پنج‌ساعتهٔ خبرها",text)
+        self.assertNotIn("ری‌کپ پنج‌ساعتهٔ خبرها",text)
+        self.assertNotIn("دوره:",text)
+        self.assertNotIn(self.news["title_fa"],text)
         self.assertIn("\n",text)
         self.assertLessEqual(len(text),MAX_MESSAGE)
         self.assertEqual(payload(self.news,"@pendario")["parse_mode"],"HTML")
+
+    def test_opening_and_verified_profession_in_telegram(self):
+        row=copy.deepcopy(self.opinions)
+        row["lead_fa"]=("بررسی تازه‌ترین دیدگاه‌های منتشرشده در پندار حاکی از "
+                        "واکنش‌های مختلف به رویدادهای سیاسی و رسانه‌ای است که اکنون مورد بحث قرار گرفته‌اند.")
+        row["sources"]=[{"person":"مهدی تدینی","role":"نویسنده و مترجم","source_id":"s1"}]
+        row["paragraphs"]=[{"text_fa":"مهدی تدینی درباره موضوع بحث توضیح داد و مهدی تدینی آن را بررسی کرد."},
+                           {"text_fa":"تحلیل او در ادامه با توضیحات بیشتر تکمیل شد."}]
+        text=message(row)
+        self.assertIn("مرور بر تازه‌ترین دیدگاه‌های شخصیت‌های گوناگون، حاکی از",text)
+        self.assertNotIn("بررسی تازه‌ترین دیدگاه‌های منتشرشده در پندار",text)
+        self.assertEqual(text.count("مهدی تدینی، نویسنده و مترجم،"),1)
+        self.assertNotIn("UTC",text)
 
     def test_sends_two_then_never_repeats(self):
         ledger,bot=FakeLedger(),FakeTelegram()
