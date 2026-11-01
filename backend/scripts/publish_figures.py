@@ -178,9 +178,12 @@ def message_payload(post, chat_id, site=SITE):
     topic = clipped(post["topic_fa"].strip(), 200)
     field_emoji = _FIELD_EMOJI.get(post.get("field", ""), "🗣")
     figure_url = f"{site.rstrip('/')}/#/figure/{quote(post['handle'], safe='')}"
-    text = (f"{field_emoji} جان‌کلام {name}\n{topic}\n\n"
-            f"{clipped(post['summary_fa'], 3200)}\n\n"
-            f"{figure_url}\n\n@pendario")
+    text = (f"{field_emoji} جان‌کلام | {name}\n"
+            f"▫️ {topic}\n\n"
+            f"{clipped(post['summary_fa'], 3150)}\n\n"
+            f"📌 این نوشته خلاصهٔ دیدگاه گوینده است، نه تأیید مستقل ادعاها.\n"
+            f"🔎 پروندهٔ این چهره:\n{figure_url}")
+
     return {
         "chat_id": chat_id, "text": text,
         # Plain text avoids HTML/Markdown injection and broken Persian escaping.
