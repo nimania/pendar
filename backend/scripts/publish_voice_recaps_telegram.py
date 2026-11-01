@@ -120,8 +120,8 @@ def message(report):
     url=SITE+str(report["url"])
     # Telegram contains the actual report, not the site headline, recap label,
     # or machine-readable UTC reporting window.
-    byline=("\\n\\nتنظیم: "+link(writer,author_url)+
-            "\\n"+link("متن کامل، چهره‌ها، خبرها و منابع در پندار ←",url))
+    byline=("\n\nتنظیم: "+link(writer,author_url)+
+            "\n"+link("متن کامل، چهره‌ها، خبرها و منابع در پندار ←",url))
     body=qualified_body(report)
     heading=("🗞 <b>پندار | مرور خبرها و واکنش‌ها</b>\n\n"
              if report.get("kind")=="news" else
@@ -147,7 +147,7 @@ def message(report):
         allowance-=len(escaped)+2
         if allowance<100:
             break
-    result="\\n\\n".join(parts)+byline
+    result=heading+"\n\n".join(parts)+byline
     if len(result)>MAX_MESSAGE:
         raise ValueError("Telegram recap exceeds message size limit")
     return result
