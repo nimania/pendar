@@ -29,6 +29,13 @@ class SimorghIntakeTests(unittest.TestCase):
         second = update(first, [CANDIDATE], observed_at="2026-11-03T00:00:00Z")
         self.assertEqual(second["leads"][0]["review_status"], "rejected")
 
+    def test_pending_headline_refresh_keeps_review_state(self):
+        first = update(EMPTY, [CANDIDATE], observed_at="2026-11-02T00:00:00Z")
+        changed = dict(CANDIDATE, title="تیتر اصلی تکمیل‌شده پس از استخراج چند خط پیام")
+        result = update(first, [changed], observed_at="2026-11-02T01:00:00Z")
+        self.assertEqual(result["leads"][0]["headline_hint"], changed["title"])
+        self.assertEqual(result["leads"][0]["review_status"], "pending")
+
     def test_source_spoofing_discarded(self):
         bad = copy.deepcopy(CANDIDATE)
         bad["url"] = "https://t.me/another/22"
