@@ -123,7 +123,10 @@ def message(report):
     byline=("\\n\\nتنظیم: "+link(writer,author_url)+
             "\\n"+link("متن کامل، چهره‌ها، خبرها و منابع در پندار ←",url))
     body=qualified_body(report)
-    allowance=MAX_MESSAGE-len(byline)-32
+    heading=("🗞 <b>پندار | مرور خبرها و واکنش‌ها</b>\n\n"
+             if report.get("kind")=="news" else
+             "💬 <b>پندار | مرور دیدگاه‌ها</b>\n\n")
+    allowance=MAX_MESSAGE-len(byline)-len(heading)-32
     parts=[]
     for text in body:
         value=" ".join(text.split())
