@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T12:35:33.651239+00:00",
+  "generated_at": "2026-11-01T13:27:47.144874+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -1632,6 +1632,16 @@
       "icon": "https://image.tmdb.org/t/p/w500/5KYfiwVBbIJlegyGzSYp4uO99r2.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "آخر شب با ست مایرز",
+      "start": "2026-11-03T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/61818",
+      "icon": "https://image.tmdb.org/t/p/w500/u0ttHM5ZQCvnfL0lkueEgS4h2nI.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 21 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     }
   ]
 }
