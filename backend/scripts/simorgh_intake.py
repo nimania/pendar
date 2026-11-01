@@ -57,7 +57,10 @@ def update(previous, candidates, *, observed_at=None):
         if len(snippet) < 55:
             continue
         if sid in leads:
-            # Deliberately do not overwrite editor-approved or rejected content.
+            # Refresh only automatic display hints; preserve every editorial decision.
+            if leads[sid].get("review_status") == "pending":
+                leads[sid]["headline_hint"] = str(row.get("title") or "")[:180]
+                leads[sid]["source_excerpt"] = snippet
             continue
         leads[sid] = {
             "id": sid, "channel": "@simorghdata369", "source_url": url,
