@@ -16,6 +16,7 @@ import sys
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from pathlib import Path
+from urllib.parse import quote
 from urllib.request import urlopen
 from urllib.error import URLError
 
@@ -140,12 +141,18 @@ def build_digest(figures_data, stories_data, now, hours=DIGEST_INTERVAL_HOURS, s
              (" و دیگر منابع" if len(names)>2 else "") + "، ")
     # The published summary is attributed as a paraphrase, not as a quote.
     narrative = intro + summary
-    direct = f"{site}/story/{primary['id']}/"
-    source_line = "منابع این گزارش: " + "، ".join(names[:4])
-    return ("📰 <b>" + html.escape(title) + "</b>\n\n" +
-            html.escape(narrative) + "\n\n" +
-            "<i>" + html.escape(source_line) + "</i>\n" +
-            _link("متن کامل، جزئیات و مستندات در پندار ←", direct))
+    # News belongs to Jan Kalam; Pendar retains independently authored reports.
+    direct = "https://nimania.github.io/jan-kalam/?story=" + quote(str(primary["id"]), safe="")
+    source_line = "، ".join(names[:4])
+    context = clean(primary.get("why_it_matters_fa"), 320)
+    result = ("🗞 <b>پندار | مهم‌ترین خبر</b>\n"
+              "<b>" + html.escape(title) + "</b>\n\n"
+              + html.escape(narrative) + "\n\n")
+    if context:
+        result += "📌 <b>چرا مهم است؟</b>\n" + html.escape(context) + "\n\n"
+    result += ("🔎 <b>منابع:</b> " + html.escape(source_line) + "\n\n"
+               + _link("📖 جزئیات و روایت منابع در جان‌کلام", direct))
+    return result
 
 
 def digest_payload(text, chat_id):
