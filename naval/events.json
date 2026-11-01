@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-10-28T20:59:58+00:00",
+  "updated_at": "2026-11-01T11:13:03+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-4357281420045b92b9",
+      "date": "2026-10-29",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش یک رزمایش دریایی در منبع",
+      "original_title": "U.S., Partner Nations to Hold Annual Malabar Naval Exercise Near Japan",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/10/29/u-s-partner-nations-to-hold-annual-malabar-naval-exercise-near-japan"
+    },
     {
       "id": "usni-edeb3025d2fe38978a",
       "date": "2026-10-26",
