@@ -73,8 +73,11 @@ def message(story):
     if len(lead)>650:
         cut=max(lead.rfind("।",0,600),lead.rfind("。",0,600),lead.rfind(".",0,600),lead.rfind("؛",0,600))
         lead=lead[:cut+1] if cut>=250 else lead[:620].rsplit(" ",1)[0]+"…"
-    url=f"{SITE}/story/{story['id']}/"
-    return f"<b>{title}</b>\n\n{html.escape(lead)}\n\n<a href=\"{html.escape(url,quote=True)}\">متن کامل و منابع در پندار ←</a>"
+    url=f"https://nimania.github.io/jan-kalam/?story={story['id']}"
+    return (f"🗞 <b>جان‌کلام | خبر</b>\n"
+            f"<b>{title}</b>\n\n"
+            f"{html.escape(lead)}\n\n"
+            f"<a href=\"{html.escape(url,quote=True)}\">📖 خبر کامل و منابع در جان‌کلام</a>")
 
 def publish(stories, ledger, telegram, chat_id, now=None):
     now=now or datetime.now(timezone.utc)
