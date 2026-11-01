@@ -49,10 +49,12 @@ class BuildDigestTests(unittest.TestCase):
         stories = [story(f"s{i}", score=i) for i in range(1, 9)]  # 8 stories
         text = build_digest(figures(), stories, NOW, hours=8)
         self.assertIn("به گزارش", text)
+        self.assertIn("پندار | مهم‌ترین خبر", text)
+        self.assertIn("jan-kalam/?story=", text)
         # The highest score (s8) appears; a low one beyond the cap does not.
-        self.assertIn("/story/s8/", text)
-        self.assertNotIn("/story/s1/", text)
-        self.assertEqual(text.count("/story/"), 1)  # One verified narrative per digest
+        self.assertIn("?story=s8", text)
+        self.assertNotIn("?story=s1", text)
+        self.assertEqual(text.count("?story="), 1)  # One verified narrative per digest
 
     def test_digest_rejects_unattributed_news(self):
         item = story("s1", 90)
