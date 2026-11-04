@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "territory": "Kerman city (not the entire province)",
+  "editorial_policy": "Short attributed excerpts; never copy long texts or media. Sensitive and ambiguous city items require approval.",
+  "sources": [
+    {
+      "name": "کرمان‌نو",
+      "platform": "telegram",
+      "handle": "kermane_no",
+      "enabled": true,
+      "role": "independent-local-news",
+      "verified_from": "https://t.me/KERMANE_NO"
+    },
+    {
+      "name": "فردای کرمان",
+      "platform": "telegram",
+      "handle": "fardaayekerman",
+      "enabled": true,
+      "role": "independent-local-news",
+      "verified_from": "https://fardayekerman.ir"
+    },
+    {
+      "name": "ایرنا کرمان",
+      "platform": "telegram",
+      "handle": "irna_kerman",
+      "enabled": true,
+      "role": "news-agency",
+      "verified_from": "https://t.me/irna_kerman"
+    },
+    {
+      "name": "اخبار استانداری کرمان",
+      "platform": "telegram",
+      "handle": "kerman_gov",
+      "enabled": true,
+      "role": "official-announcements",
+      "verified_from": "https://t.me/kerman_gov"
+    },
+    {
+      "name": "آخرین خبر کرمان",
+      "platform": "telegram",
+      "handle": "kerman_akhbar",
+      "enabled": true,
+      "role": "regional-news",
+      "verified_from": "https://t.me/kerman_akhbar"
+    }
+  ]
+}
