@@ -1,8 +1,34 @@
 {
   "version": 1,
-  "updated_at": "2026-11-02T12:16:22+00:00",
+  "updated_at": "2026-11-04T21:49:51+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-c433f6c0698796969c",
+      "date": "2026-11-02",
+      "country": "us",
+      "region": "global",
+      "type": "گزارش استقرار",
+      "sensitive": true,
+      "title": "انتشار گزارش دوره‌ای ناوگروه‌های آمریکا",
+      "original_title": "USNI News Fleet and Marine Tracker: Nov. 2, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/02/usni-news-fleet-and-marine-tracker-nov-2-2026"
+    },
+    {
+      "id": "usni-bb3259bbb100e6e71a",
+      "date": "2026-11-02",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "China’s New Drone Carrier Launches, Recovers First Autonomous Combat Aircraft",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/02/chinas-new-drone-carrier-launches-recovers-first-autonomous-combat-aircraft"
+    },
     {
       "id": "usni-f07cfb0c229d710c3f",
       "date": "2026-10-30",
