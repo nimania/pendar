@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T14:18:56.986329+00:00",
+  "generated_at": "2026-11-04T14:35:51.401583+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -645,16 +645,6 @@
   "programmes": [
     {
       "channel_id": "digital-world",
-      "title_fa": "زمان پخش",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1375441",
-      "icon": "https://image.tmdb.org/t/p/w500/tFWh9g4zluYWnfb8dLdtW9WVKgg.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "The Loud House Movie",
       "start": "2026-11-04T00:00:00+03:30",
       "date_only": true,
@@ -675,31 +665,11 @@
     },
     {
       "channel_id": "digital-world",
-      "title_fa": "Beware Boiúna",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1244523",
-      "icon": "https://image.tmdb.org/t/p/w500/uW5YMPxJUzT9bkafrCKHXjPTCoQ.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "Inside",
       "start": "2026-11-05T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/958196",
       "icon": "https://image.tmdb.org/t/p/w500/dXsiWJWwGwYwOQ6DfYFt5pPBMwT.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "لبه سایه",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1419406",
-      "icon": "https://image.tmdb.org/t/p/w500/m5YtVj1ypy47cJxFPgeNnIvh5G0.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -740,16 +710,6 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1483525",
       "icon": "https://image.tmdb.org/t/p/w500/tnwFaR8oaRMW85iKmYxRtbuKx09.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "رزیدنت ایول",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1423191",
-      "icon": "https://image.tmdb.org/t/p/w500/fhRKsAmFQHTRsMYp1c7uvWb54ra.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -815,16 +775,6 @@
     },
     {
       "channel_id": "digital-world",
-      "title_fa": "Model Citizen",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1792170",
-      "icon": "https://image.tmdb.org/t/p/w500/duuH76uKtbB2nFm3esFztPkVAMt.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "عشق لطمه می زند",
       "start": "2026-11-09T00:00:00+03:30",
       "date_only": true,
@@ -874,42 +824,12 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-16",
-      "title_fa": "NCIS (سرویس تحقیقات جنایی نیروی دریایی آمریکا)",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/4614",
-      "icon": "https://image.tmdb.org/t/p/w500/y4fGncqELtnvRQuwSpuH8LncZqU.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 5 از فصل 24؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-2739",
-      "title_fa": "ویژن‌ کوئست",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/213375",
-      "icon": "https://image.tmdb.org/t/p/w500/5LUFe0nCrKH5RTLpHxyHmiqHamO.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "آن یکی مامان",
       "start": "2026-11-10T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1400837",
       "icon": "https://image.tmdb.org/t/p/w500/fGRNCssTRrhYZxNzykGGCoMsAVq.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "Rolling Loud: The Movie",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1336166",
-      "icon": "https://image.tmdb.org/t/p/w500/kx4ippA15v1Qc1xZjsjrb2r8NQZ.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -1114,16 +1034,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "آخر شب با ست مایرز",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/61818",
-      "icon": "https://image.tmdb.org/t/p/w500/u0ttHM5ZQCvnfL0lkueEgS4h2nI.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 21 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-19",
       "title_fa": "سیمپسون‌ها",
       "start": "2026-11-08T00:00:00+03:30",
@@ -1182,26 +1092,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 10 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "Diepe Waters",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/231962",
-      "icon": "https://image.tmdb.org/t/p/w500/uF5SpFjMmYTMF0sc5MbjnDsoBcG.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 22 از فصل 5؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-74",
-      "title_fa": "Watch What Happens Live with Andy Cohen",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/22980",
-      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 179 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-30",
@@ -1264,56 +1154,6 @@
       "desc_fa": "قسمت 5 از فصل 24؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 112 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 112 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-47",
-      "title_fa": "نمایش روزانه",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2224",
-      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 124 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-290",
-      "title_fa": "فردا از آنِ ماست",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/72879",
-      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 47 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-290",
-      "title_fa": "اینجا همه چیز شروع می‌شود",
-      "start": "2026-11-03T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/112470",
-      "icon": "https://image.tmdb.org/t/p/w500/v7nXPo2zdaIOfeIaERiOuTEt89N.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 47 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "اودیسه",
       "start": "2026-11-17T00:00:00+03:30",
@@ -1334,22 +1174,112 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "digital-world",
-      "title_fa": "عقل و احساس",
-      "start": "2026-11-03T00:00:00+03:30",
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "Diepe Waters",
+      "start": "2026-11-04T00:00:00+03:30",
       "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1503762",
-      "icon": "https://image.tmdb.org/t/p/w500/czsyPHosFNbh4PPqXfqWu1aBXnA.jpg",
+      "source_url": "https://www.themoviedb.org/tv/231962",
+      "icon": "https://image.tmdb.org/t/p/w500/uF5SpFjMmYTMF0sc5MbjnDsoBcG.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 23 از فصل 5؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 180 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-47",
+      "title_fa": "نمایش روزانه",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2224",
+      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 125 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "آخر شب با ست مایرز",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/61818",
+      "icon": "https://image.tmdb.org/t/p/w500/u0ttHM5ZQCvnfL0lkueEgS4h2nI.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 22 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 113 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 113 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2739",
+      "title_fa": "ویژن‌ کوئست",
+      "start": "2026-11-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/213375",
+      "icon": "https://image.tmdb.org/t/p/w500/5LUFe0nCrKH5RTLpHxyHmiqHamO.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 8 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "فردا از آنِ ماست",
+      "start": "2026-11-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/72879",
+      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 48 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-47",
+      "title_fa": "ساوت پارک",
+      "start": "2026-11-11T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2190",
+      "icon": "https://image.tmdb.org/t/p/w500/k7n2EVge7G77eMr3brztRGG1fFU.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 5 از فصل 29؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Madden",
+      "start": "2026-11-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1131943",
+      "icon": "https://image.tmdb.org/t/p/w500/bRa83oPFFPqaAF3wrpVWPqqfFel.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
       "channel_id": "digital-world",
-      "title_fa": "Your Mother Your Mother Your Mother",
-      "start": "2026-11-03T00:00:00+03:30",
+      "title_fa": "Super Troopers 3",
+      "start": "2026-11-05T00:00:00+03:30",
       "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1437396",
-      "icon": "https://image.tmdb.org/t/p/w500/4KaPZSKnInnArErTTgy9Oy14leR.jpg",
+      "source_url": "https://www.themoviedb.org/movie/675871",
+      "icon": "https://image.tmdb.org/t/p/w500/VVU42nqsEmUtFpH1d9MHj5BIpF.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
