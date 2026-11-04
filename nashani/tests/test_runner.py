@@ -73,5 +73,47 @@ class NewsRadarTests(unittest.TestCase):
         self.assertEqual(len(result), 1)
 
 
+    def test_telegram_identity_and_permissions(self):
+        response = [
+            {"ok": True, "result": {"id": 1234, "username": "neshanikermanbot"}},
+            {"ok": True, "result": {"username": "neshanikerman", "type": "channel"}},
+            {"ok": True, "result": {"status": "administrator", "can_post_messages": True}},
+        ]
+        with patch.object(runner, "http_json", side_effect=response) as api:
+            self.assertTrue(runner.verify_telegram_identity("secret", "@neshanikerman"))
+            self.assertEqual(api.call_count, 3)
+
+    def test_reject_wrong_bot_token(self):
+        response = {"ok": True, "result": {"id": 1, "username": "notourbot"}}
+        with patch.object(runner, "http_json", return_value=response) as api:
+            with self.assertRaises(RuntimeError):
+                runner.verify_telegram_identity("secret", "@neshanikerman")
+            self.assertEqual(api.call_count, 1)
+
+    def test_reject_missing_post_permission(self):
+        response = [
+            {"ok": True, "result": {"id": 1234, "username": "neshanikermanbot"}},
+            {"ok": True, "result": {"username": "neshanikerman", "type": "channel"}},
+            {"ok": True, "result": {"status": "administrator", "can_post_messages": False}},
+        ]
+        with patch.object(runner, "http_json", side_effect=response):
+            with self.assertRaises(RuntimeError):
+                runner.verify_telegram_identity("secret", "@neshanikerman")
+
+    def test_reject_wrong_channel_without_api_request(self):
+        with patch.object(runner, "http_json") as api:
+            with self.assertRaises(RuntimeError):
+                runner.verify_telegram_identity("secret", "@pendario")
+            api.assert_not_called()
+
+    def test_read_only_connection_check_exits_without_scraping(self):
+        with patch.object(sys, "argv", ["runner.py", "--check-connection"]), \
+             patch.dict(runner.os.environ, {"NASHANI_TELEGRAM_BOT_TOKEN": "secret", "NASHANI_CHANNEL_ID": "@neshanikerman"}), \
+             patch.object(runner, "verify_telegram_identity", return_value=True) as verify, \
+             patch.object(runner, "source_posts") as scrape:
+            runner.main()
+            verify.assert_called_once_with("secret", "@neshanikerman")
+            scrape.assert_not_called()
+
 if __name__ == "__main__":
     unittest.main()
