@@ -302,13 +302,15 @@ def main():
         print(f"Initial baseline: {len(state['seen'])} URLs, no historic news published")
         return
 
-    seen = set(state.get("seen", []))
+    seen_list = list(state.get("seen", []))
+    seen = set(seen_list)
     queue = state.setdefault("queue", [])
     new = []
     for post in sorted(results, key=lambda p: p["published_at"] or ""):
         if post["url"] in seen:
             continue
         seen.add(post["url"])
+        seen_list.append(post["url"])
         item = evaluate(dict(post), now)
         if item is None:
             continue
@@ -320,7 +322,8 @@ def main():
             continue
         queue.append(item)
         new.append(item)
-    state["seen"] = sorted(seen)[-5000:]
+    # Recency order matters: lexicographic URL sorting would forget recent IDs.
+    state["seen"] = seen_list[-5000:]
     if len(queue) > 300:
         state["queue"] = queue[-300:]
         queue = state["queue"]
@@ -348,4 +351,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as exc:
+        # Never print full Telegram request URL: it contains a secret bot token.
+        print(f"::error::Nashani radar failed ({type(exc).__name__})", file=sys.stderr)
+        sys.exit(1)
