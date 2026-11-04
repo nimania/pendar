@@ -168,7 +168,7 @@ def telegram_message(item):
     lead = item["excerpt"]
     if normalize(lead).startswith(normalize(item["title"])):
         lead = lead[len(item["title"]):].strip(" :؛-—|")
-    lead = html.escape(short_text(lead, 460) or item["title"])
+    lead = html.escape(short_text(lead, 180) or item["title"])
     source = html.escape(item["source"])
     link = html.escape(item["url"], quote=True)
     return (f"📍 <b>نشانی | کرمان</b>\n\n"
@@ -343,9 +343,15 @@ def main():
             raise ValueError("Approval ID missing, duplicated or already sent")
         check_and_publish(matches[0], state, ledger, token, channel)
     elif publishing:
-        for item in new:
-            if item.get("status") == "ready":
-                check_and_publish(item, state, ledger, token, channel)
+        auto_items = [item for item in new if item.get("status") == "ready"]
+        # Never flood a channel after a delayed scrape; send at most two items.
+        for item in auto_items[2:]:
+            item["status"] = "review"
+            item["review_reason"] = "rate_limit"
+        if len(auto_items) > 2:
+            ledger.save(state)
+        for item in auto_items[:2]:
+            check_and_publish(item, state, ledger, token, channel)
     else:
         print("Safe preview mode: outbound publishing DISABLED")
 
