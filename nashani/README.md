@@ -18,6 +18,10 @@
 ۱. ربات تلگرام را با مجوز Post Messages مدیر کانال @neshanikerman کنید.
 ۲. در GitHub مخزن nimania/pendar، زیر Settings > Secrets and variables > Actions
 یک Repository secret به نام NASHANI_TELEGRAM_BOT_TOKEN بسازید؛ توکن را در کد عمومی نگذارید.
+پیش از هر ارسال، سامانه بررسی می‌کند که توکن متعلق به @neshanikermanbot باشد،
+کانال واقعاً @neshanikerman باشد و ربات مجوز Post Messages داشته باشد.
+برای آزمایش امن، در صفحه Actions همین گردش‌کار، Run workflow را اجرا و
+گزینه check_connection را true کنید؛ این آزمون هیچ پستی ارسال نمی‌کند.
 ۳. بعد از بررسی صف و خروجی‌ها، یک Repository variable به نام NASHANI_PUBLISH_ENABLED با مقدار true قرار دهید.
 تا قبل از آن هیچ خبر تازه‌ای به کانال ارسال نمی‌شود.
 ۴. اجرا و تأیید دستی از Actions > Nashani Kerman city-news radar > Run workflow انجام می‌شود.

@@ -13,6 +13,11 @@ on:
         description: 'Optional exact 16-char reviewed story ID to publish'
         required: false
         type: string
+      check_connection:
+        description: 'Verify @neshanikermanbot is an admin of @neshanikerman; do not send a message'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -56,8 +61,11 @@ jobs:
           NASHANI_CHANNEL_ID: '@neshanikerman'
           NASHANI_PUBLISH_ENABLED: ${{ vars.NASHANI_PUBLISH_ENABLED }}
           APPROVE_ID: ${{ inputs.approve_id }}
+          CHECK_CONNECTION: ${{ inputs.check_connection }}
         run: |
-          if [ -n "$APPROVE_ID" ]; then
+          if [ "$CHECK_CONNECTION" = "true" ]; then
+            python nashani/runner.py --check-connection
+          elif [ -n "$APPROVE_ID" ]; then
             python nashani/runner.py --approve "$APPROVE_ID"
           else
             python nashani/runner.py
