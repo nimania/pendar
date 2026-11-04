@@ -26,6 +26,8 @@ from bs4 import BeautifulSoup
 
 REPO = os.getenv("GITHUB_REPOSITORY", "nimania/pendar")
 BRANCH = "nashani-state"
+EXPECTED_BOT_USERNAME = "neshanikermanbot"
+EXPECTED_CHANNEL_USERNAME = "neshanikerman"
 STATE_PATH = "nashani/state.json"
 USER_AGENT = "NashaniKermanRadar/1.0 (public-source monitoring)"
 MAX_AGE = timedelta(hours=5)
@@ -231,6 +233,33 @@ class Ledger:
         self.sha = result["content"]["sha"]
 
 
+def verify_telegram_identity(token, channel):
+    """Read-only guard: validate exact bot and destination and posting permission."""
+    if not token:
+        raise RuntimeError("NASHANI_TELEGRAM_BOT_TOKEN is not configured")
+    if channel != "@" + EXPECTED_CHANNEL_USERNAME:
+        raise RuntimeError("Telegram channel is not the approved Nashani Kerman destination")
+    api = "https://api.telegram.org/bot" + token + "/"
+    me = http_json(api + "getMe")
+    bot = me.get("result") if me.get("ok") else None
+    if not isinstance(bot, dict) or bot.get("username", "").lower() != EXPECTED_BOT_USERNAME:
+        raise RuntimeError("Configured token does not belong to @neshanikermanbot")
+    chat_result = http_json(api + "getChat", "POST", {"chat_id": channel})
+    chat = chat_result.get("result") if chat_result.get("ok") else None
+    if not isinstance(chat, dict) or chat.get("username", "").lower() != EXPECTED_CHANNEL_USERNAME or chat.get("type") != "channel":
+        raise RuntimeError("Configured destination is not @neshanikerman channel")
+    member_result = http_json(api + "getChatMember", "POST", {
+        "chat_id": channel, "user_id": bot.get("id")
+    })
+    member = member_result.get("result") if member_result.get("ok") else None
+    if not isinstance(member, dict) or member.get("status") not in {"administrator", "creator"}:
+        raise RuntimeError("Bot is not an administrator of @neshanikerman")
+    if member.get("status") == "administrator" and member.get("can_post_messages") is not True:
+        raise RuntimeError("Bot is missing the Post Messages administrator permission")
+    print("Nashani Telegram identity and Post Messages permission verified")
+    return True
+
+
 def send_to_telegram(item, token, channel):
     if not token or not channel:
         raise RuntimeError("Missing Nashani Telegram token or channel")
@@ -238,6 +267,7 @@ def send_to_telegram(item, token, channel):
     if not (re.fullmatch(r"@[A-Za-z0-9_]{5,32}", channel)
             or re.fullmatch(r"-100\d{6,}", channel)):
         raise ValueError("NASHANI_CHANNEL_ID must be an @handle or numeric channel ID")
+    verify_telegram_identity(token, channel)
     url = "https://api.telegram.org/bot" + token + "/sendMessage"
     response = http_json(url, method="POST", payload={
         "chat_id": channel, "text": telegram_message(item),
@@ -267,9 +297,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--sources", default="nashani/sources.json")
     parser.add_argument("--approve", default="", help="Specific reviewed story ID to publish")
+    parser.add_argument("--check-connection", action="store_true", help="Read-only Bot API permission check; sends no message")
     parser.add_argument("--dry-run", action="store_true",
                         help="Fetch previews without writing state or publishing")
     args = parser.parse_args()
+    if args.check_connection:
+        verify_telegram_identity(os.getenv("NASHANI_TELEGRAM_BOT_TOKEN", ""),
+                                 os.getenv("NASHANI_CHANNEL_ID", ""))
+        return
     sources = json.load(open(args.sources, encoding="utf-8"))["sources"]
     enabled = [s for s in sources if s.get("enabled")]
     now = utcnow()
