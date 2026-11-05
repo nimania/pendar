@@ -217,6 +217,48 @@ function _figureVideoCard(video) {
     +'<a class="video-source-link" href="'+esc(video.url)+'" target="_blank" rel="noopener noreferrer">منبع یوتیوب ↗</a></article>';
 }
 
+async function renderFigureKarnameAutomaticPreview(root, handle){
+  const exact=String(handle||"").toLowerCase();
+  const selector='[data-profile-handle]';
+  try{
+    const response=await fetch("/karname/auto-radar.json",{cache:"no-store"});
+    if(!response.ok)throw Error("Auto radar unavailable");
+    const data=await response.json();
+    if(data?.scope!=="automatically_collected_observations_not_verified_predictions"
+        || !Array.isArray(data.items) || data.items.length>5000)throw Error("Invalid radar index");
+    const person=data.items.filter(item=>
+      item?.observation_status==="auto_collected_unverified"
+      &&typeof item.person?.profile_handle==="string"
+      &&item.person.profile_handle.toLowerCase()===exact);
+    const current=root.querySelector(selector);
+    if(!current||String(current.dataset.profileHandle||"").toLowerCase()!==exact)return;
+    const mount=current.querySelector("[data-karname-auto-preview]");
+    if(!mount)return;
+    if(!person.length){
+      mount.innerHTML='<p class="muted">هنوز موردی برای این پرونده در رصد خودکار ثبت نشده است.</p>'
+        +'<a class="figure-karname-all" href="/karname/#auto">دیدن همهٔ رصدهای خودکار ←</a>';
+      return;
+    }
+    const safeLink=u=>typeof u==="string"&&/^https:\/\//.test(u)?u:null;
+    const cards=person.slice(0,3).map(item=>{
+      const source=item.source||{};
+      const link=safeLink(source.link)?
+        '<a href="'+esc(source.link)+'" target="_blank" rel="noopener noreferrer">منبع ثبت‌شده ↗</a>':"";
+      return '<article class="figure-karname-card"><p>'+esc(item.text_from_source||"")+'</p>'
+       +'<small>'+esc(source.text_origin||"منشأ هنوز باید تأیید شود")+'</small>'+link+'</article>';
+    }).join("");
+    mount.innerHTML='<p class="figure-karname-disclaimer">این '+faN(person.length)
+      +' مورد خودکار گردآوری شده‌اند؛ انتساب و متن اصلی مستقلاً تأیید نشده و نتیجه‌ای نمره‌گذاری نشده است.</p>'
+      +'<div class="figure-karname-cards">'+cards+'</div>'
+      +'<a class="figure-karname-all" href="/karname/?person='+encodeURIComponent(handle)+'#auto">نمایش همهٔ '
+      +faN(person.length)+' مورد رصد این چهره ←</a>';
+  }catch(err){
+    const current=root.querySelector(selector);
+    if(!current||String(current.dataset.profileHandle||"").toLowerCase()!==exact)return;
+    const mount=current.querySelector("[data-karname-auto-preview]");
+    if(mount)mount.innerHTML='<p class="muted">رصد خودکار فعلاً در دسترس نیست؛ پروندهٔ اصلی بدون تغییر باقی می‌ماند.</p>';
+  }
+}
 async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const canonicalFigure=canonicalId?await canonicalEntityById(canonicalId):await canonicalEntityByRef("figures",handle);
   canonicalId=canonicalFigure?.id||canonicalId;
@@ -336,6 +378,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
   const nextProfileMarkup = `<div class="x-profile" data-profile-handle="${esc(x.handle)}">
     ${renderPersonProfileHeader(x,{actions:figureFollowBtn(x.handle,false)+personArchiveLink,stats:`<span><b>${faN(direct.length)}</b> دیدگاه مستقیم</span><span><b>${faN(news.length)}</b> گفته در خبر</span>${figureStories.length ? `<span><b>${faN(figureStories.length)}</b> خبر</span>` : ""}${figureBooks.length+profileMedia.books.length ? `<span><b>${faN(figureBooks.length+profileMedia.books.length)}</b> کتاب</span>` : ""}${mediaWorks.length+profileMedia.films.length ? `<span><b>${faN(mediaWorks.length+profileMedia.films.length)}</b> فیلم/سریال</span>` : ""}${profileMedia.podcasts.length ? `<span><b>${faN(profileMedia.podcasts.length)}</b> پادکست</span>` : ""}${youtubeVideos.length ? `<span><b>${faN(youtubeVideos.length)}</b> ویدئو</span>` : ""}${latest ? `<span>آخرین فعالیت ${relTime(latest)}</span>` : ""}`})}
     ${canonicalFigure?canonicalStrip(canonicalFigure):""}
+    <section class="figure-karname-preview" aria-label="رصد خودکار گفته‌ها"><div class="figure-karname-heading"><h2>کارنامهٔ رصد خودکار</h2><span>گفته‌های احتمالی و گزارش‌شده، بدون داوری</span></div><div data-karname-auto-preview><p class="muted">در حال بررسی فهرست تازهٔ کارنامه…</p></div></section>
     <div class="figure-profile-columns">
       <div class="figure-profile-primary">
     <nav class="x-profile-tabs" aria-label="بخش‌های پروفایل">
@@ -386,6 +429,7 @@ async function openFigure(handle, resetFilter = true, canonicalId = null) {
     el.innerHTML=nextProfileMarkup;
     loadArticleDisplayAd();
   }
+  void renderFigureKarnameAutomaticPreview(el,x.handle);
 }
 
 /* Figures directory: the directory mode state (_figDirectoryMode), its

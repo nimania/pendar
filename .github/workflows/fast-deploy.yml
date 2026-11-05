@@ -338,6 +338,8 @@ jobs:
           python -m unittest discover -s backend/tests -p 'test_karname_publish.py' -v
           python -m unittest discover -s backend/tests -p 'test_karname_intake_stats.py' -v
           python -m unittest discover -s backend/tests -p 'test_karname_auto_radar.py' -v
+          node --check web-static/figures-profile.js
+          node backend/tests/test_karname_figure_integration.js
           python backend/scripts/build_karname_intake_stats.py --check
           python backend/scripts/build_karname_auto_radar.py --check
       - name: Overlay current UI without overwriting generated data
