@@ -11,12 +11,18 @@ on:
       - "backend/data/editorial-recaps.json"
       - "web-static/data/pendar-editorial-views.json"
       - "backend/scripts/collect_karname_candidates.py"
+      - "backend/scripts/fetch_karname_figures.py"
       - "backend/tests/test_karname_candidates.py"
+      - "backend/tests/test_karname_scenarios.js"
+      - "web-static/karname/app.js"
       - ".github/workflows/karname-intake.yml"
   pull_request:
     paths:
       - "backend/scripts/collect_karname_candidates.py"
+      - "backend/scripts/fetch_karname_figures.py"
       - "backend/tests/test_karname_candidates.py"
+      - "backend/tests/test_karname_scenarios.js"
+      - "web-static/karname/app.js"
       - ".github/workflows/karname-intake.yml"
 
 permissions:
@@ -41,10 +47,24 @@ jobs:
           python-version: "3.11"
       - name: Test candidate extraction and safety boundaries
         run: python -m unittest discover -s backend/tests -p 'test_karname_candidates.py' -v
-      - name: Extract candidates from editorial feeds
+      - name: Verify scenario UI and classifications
         run: |
-          python backend/scripts/collect_karname_candidates.py
-          python backend/scripts/collect_karname_candidates.py --check
+          node --check web-static/karname/app.js
+          node backend/tests/test_karname_scenarios.js
+      - name: Read current Pendar figure and news index
+        id: figure_feed
+        continue-on-error: true
+        run: python backend/scripts/fetch_karname_figures.py --output "$RUNNER_TEMP/karname-figures.json"
+      - name: Extract candidates across editorial feeds and available figure profiles
+        run: |
+          if [ -s "$RUNNER_TEMP/karname-figures.json" ]; then
+            python backend/scripts/collect_karname_candidates.py --figures "$RUNNER_TEMP/karname-figures.json"
+            python backend/scripts/collect_karname_candidates.py --figures "$RUNNER_TEMP/karname-figures.json" --check
+          else
+            echo "::warning::Figure index unavailable; retaining historical queue and scanning local editorial sources only"
+            python backend/scripts/collect_karname_candidates.py
+            python backend/scripts/collect_karname_candidates.py --check
+          fi
           python - <<'PY'
           import json, os
           from pathlib import Path
@@ -56,6 +76,9 @@ jobs:
               f.write(f"- Candidates in review queue: **{stats['total']}**\n")
               f.write(f"- Pending review: **{stats['pending']}**\n")
               f.write(f"- Sources scanned: **{stats['sources_scanned']}**\n")
+              f.write(f"- Profiles scanned: **{stats.get('figure_profiles_scanned', 0)}**\n")
+              f.write(f"- Figure/news posts scanned: **{stats.get('figure_posts_scanned', 0)}**\n")
+              f.write(f"- Figure snapshot available: **{data.get('figure_snapshot_available', False)}**\n")
               f.write("- **No claims or grades were published.**\n")
           PY
       - name: Preserve review queue artifact

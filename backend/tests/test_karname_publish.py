@@ -135,10 +135,31 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertIn("data/figures.json", js)
         self.assertIn("karname-portrait-sources.json", js)
         queue = json.loads((ROOT / "backend/data/karname-candidates.json").read_text())
-        self.assertEqual(queue["stats"]["pending"], 52)
-        self.assertEqual(queue["stats"]["screened"], 12)
-        self.assertEqual(queue["stats"]["manual_review_requested"], 2)
-        self.assertEqual(sum(bool(c.get("screening_reason_fa")) for c in queue["candidates"]), 14)
+        self.assertEqual(queue["stats"]["total"], len(queue["candidates"]))
+        self.assertEqual(queue["stats"]["pending"],
+                         sum(c.get("status") == "pending_editorial_review"
+                             for c in queue["candidates"]))
+        self.assertEqual(queue["stats"]["screened"],
+                         sum(c.get("status") == "screened_out_by_current_filter"
+                             for c in queue["candidates"]))
+        self.assertGreaterEqual(
+            sum(bool(c.get("screening_reason_fa")) for c in queue["candidates"]), 14)
+
+    def test_scenario_view_has_five_distinct_direction_labels_and_drilldown(self):
+        js = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
+        css = (ROOT / "web-static/karname/style.css").read_text(encoding="utf-8")
+        for raw in ('"له"', '"علیه"', '"امکان"', '"زمینه"', '"شرایط"'):
+            self.assertIn(raw, js)
+        for category in ("support", "against", "possible", "context", "other"):
+            self.assertIn('key:"' + category + '"', js)
+        self.assertIn("function scenarioCategory(dir)", js)
+        self.assertIn("function scenarioMatches(", js)
+        self.assertIn("data-scenario-person", js)
+        self.assertIn("data-scenario-kind", js)
+        self.assertIn("data-claim=", js)
+        self.assertIn("id=\"scenario-detail\"", js)
+        self.assertIn(".scenario-detail", css)
+        self.assertIn("این جدول امتیاز موفقیت نیست", js)
 
     def test_pilot_notice_visible_and_share_links_present(self):
         code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")

@@ -160,6 +160,91 @@ class CandidateIntakeTests(unittest.TestCase):
         self.assertIsNone(valid_url("http://example.org"))
         self.assertEqual(valid_url("https://example.org/a"), "https://example.org/a")
 
+    def test_full_figure_directory_and_news_statements_enter_review_only(self):
+        snapshot = {"figures": [
+            {"handle": "abbas-souri", "name_fa": "عباس سوری",
+             "posts": [{"id": "abc-1", "kind": "analysis", "summary_fa": PREDICTION,
+                        "url": "https://example.org/profile", "published_at": "2026-11-06T12:00:00Z"},
+                       {"id": "abc-2", "kind": "news_statement", "summary_fa": CONDITIONAL,
+                        "direct_quote": False, "url": "https://example.org/news"}]},
+            {"handle": "person-7", "name_fa": "چهرهٔ جدید",
+             "posts": [{"id": "news:7", "kind": "news_statement", "summary_fa": PREDICTION,
+                        "direct_quote": True, "url": "https://example.org/story"}]},
+            {"handle": "empty-person", "name_fa": "بدون اظهار نظر", "posts": []},
+        ]}
+        original = copy.deepcopy(snapshot)
+        q = build_queue([], [], {"claims": [], "speakers": []},
+                        figures=FIGURES, figure_snapshot=snapshot)
+        self.assertTrue(q["figure_snapshot_available"])
+        self.assertEqual(q["stats"]["figure_profiles_scanned"], 3)
+        self.assertEqual(q["stats"]["figure_posts_scanned"], 3)
+        self.assertEqual(q["stats"]["total"], 3)
+        self.assertEqual(snapshot, original)
+        by_rec = {o["record_id"]: c for c in q["candidates"]
+                  for o in c["origins"]}
+        self.assertEqual(by_rec["abc-1"]["speaker_handle"], "abbas-souri")
+        self.assertEqual(by_rec["news:7"]["identity_status"], "indexed_news_person_requires_review")
+        self.assertIsNone(by_rec["news:7"]["speaker_handle"])
+        self.assertEqual(by_rec["abc-2"]["origins"][0]["figure_post_kind"], "news_statement")
+        self.assertFalse(by_rec["abc-2"]["origins"][0]["primary_source_verified"])
+        self.assertFalse(by_rec["abc-2"]["origins"][0]["source_direct_quote_flag"])
+        self.assertEqual(q["publication_policy"], "internal_review_queue_only_no_public_import")
+
+    def test_duplicate_excerpt_across_editorial_and_published_figure_sources(self):
+        figures = {"figures": [{
+            "handle": "abbas-souri", "name_fa": "عباس سوری",
+            "posts": [{"id": "fp-1", "summary_fa": PREDICTION, "kind": "analysis"}],
+        }]}
+        q = build_queue([recap("rec-1", PREDICTION)], [],
+                        {"claims": [], "speakers": []}, figures=FIGURES,
+                        figure_snapshot=figures)
+        self.assertEqual(q["stats"]["total"], 1)
+        self.assertEqual({x["feed"] for x in q["candidates"][0]["origins"]},
+                         {"editorial_recap", "figure_post"})
+        q2 = build_queue([recap("rec-1", PREDICTION)], [],
+                         {"claims": [], "speakers": []}, previous=q,
+                         figures=FIGURES, figure_snapshot=figures)
+        self.assertEqual(q2, q)
+
+    def test_missing_figure_snapshot_keeps_existing_pending_review(self):
+        snapshot = {"figures": [
+            {"handle": "abbas-souri", "name_fa": "عباس سوری",
+             "posts": [{"id": "figure-1", "summary_fa": PREDICTION}]},
+        ]}
+        old = build_queue([], [], {"claims": [], "speakers": []},
+                          figures=FIGURES, figure_snapshot=snapshot)
+        fresh = build_queue([], [], {"claims": [], "speakers": []},
+                            previous=old, figures=FIGURES)
+        self.assertEqual(fresh["stats"]["total"], 1)
+        self.assertEqual(fresh["stats"]["pending"], 1)
+        self.assertEqual(fresh["stats"]["figure_profiles_scanned"], 0)
+        self.assertFalse(fresh["figure_snapshot_available"])
+
+    def test_figure_fetch_validates_size_and_identity_before_writing(self):
+        from scripts.fetch_karname_figures import fetch_figures
+        from io import BytesIO
+
+        class Response:
+            def __init__(self, content): self.content = content
+            def __enter__(self): return self
+            def __exit__(self, *args): return None
+            def read(self, n): return self.content[:n]
+
+        sample = {"figures": [{"handle": f"profile-{i}", "posts": []}
+                              for i in range(110)]}
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "figures.json"
+            good = lambda request, timeout: Response(
+                json.dumps(sample, ensure_ascii=False).encode("utf-8"))
+            result = fetch_figures(output, opener=good)
+            self.assertEqual(result["figure_profiles"], 110)
+            self.assertEqual(len(json.loads(output.read_text())["figures"]), 110)
+            sample["figures"][0]["handle"] = sample["figures"][1]["handle"]
+            bad = lambda request, timeout: Response(json.dumps(sample).encode("utf-8"))
+            with self.assertRaises(ValueError):
+                fetch_figures(output, opener=bad)
+            self.assertEqual(len(json.loads(output.read_text())["figures"]), 110)
+
     def test_bad_queue_is_not_silently_destroyed(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
