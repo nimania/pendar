@@ -79,13 +79,13 @@ class NewsRadarTests(unittest.TestCase):
             {"ok": True, "result": {"username": "neshanikerman", "type": "channel"}},
             {"ok": True, "result": {"status": "administrator", "can_post_messages": True}},
         ]
-        with patch.object(runner, "http_json", side_effect=response) as api:
+        with patch.object(runner, "telegram_checked_call", side_effect=response) as api:
             self.assertTrue(runner.verify_telegram_identity("secret", "@neshanikerman"))
             self.assertEqual(api.call_count, 3)
 
     def test_reject_wrong_bot_token(self):
         response = {"ok": True, "result": {"id": 1, "username": "notourbot"}}
-        with patch.object(runner, "http_json", return_value=response) as api:
+        with patch.object(runner, "telegram_checked_call", return_value=response) as api:
             with self.assertRaises(RuntimeError):
                 runner.verify_telegram_identity("secret", "@neshanikerman")
             self.assertEqual(api.call_count, 1)
@@ -96,12 +96,28 @@ class NewsRadarTests(unittest.TestCase):
             {"ok": True, "result": {"username": "neshanikerman", "type": "channel"}},
             {"ok": True, "result": {"status": "administrator", "can_post_messages": False}},
         ]
-        with patch.object(runner, "http_json", side_effect=response):
+        with patch.object(runner, "telegram_checked_call", side_effect=response):
             with self.assertRaises(RuntimeError):
                 runner.verify_telegram_identity("secret", "@neshanikerman")
 
+    def test_headline_skips_standalone_emoji(self):
+        sample = """<div class="tgme_widget_message" data-post="kermane_no/124">
+          <div class="tgme_widget_message_text">🔹<br/>شهرداری کرمان برنامه ترافیکی تازه اعلام کرد</div>
+          <a class="tgme_widget_message_date"><time datetime="2026-11-04T12:00:00+00:00"></time></a>
+        </div>"""
+        class DummyResponse:
+            def __enter__(self):
+                return self
+            def __exit__(self, *_):
+                return False
+            def read(self, *_):
+                return sample.encode("utf-8")
+        with patch.object(runner, "urlopen", return_value=DummyResponse()):
+            result = runner.source_posts({"handle": "kermane_no", "name": "کرمان نو"})
+        self.assertIn("شهرداری کرمان", result[0]["title"])
+
     def test_reject_wrong_channel_without_api_request(self):
-        with patch.object(runner, "http_json") as api:
+        with patch.object(runner, "telegram_checked_call") as api:
             with self.assertRaises(RuntimeError):
                 runner.verify_telegram_identity("secret", "@pendario")
             api.assert_not_called()
