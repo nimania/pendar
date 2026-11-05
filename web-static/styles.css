@@ -1829,3 +1829,18 @@ input::placeholder,textarea::placeholder{color:var(--ink-faint);opacity:1}
 
 /* Header archive shortcut styled consistently with adjacent controls. */
 .top .header-quicklinks>a{text-decoration:none}
+
+
+/* The optional Karname preview is an automatically indexed source view, never a verdict. */
+.figure-karname-preview{margin:16px 18px 21px;padding:18px;border:1px solid var(--line-strong);border-radius:13px;background:var(--surface)}
+.figure-karname-heading{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.figure-karname-heading h2{font-size:19px;margin:0;color:var(--text)}.figure-karname-heading span{font-size:11px;color:var(--ink-faint)}
+.figure-karname-disclaimer{font-size:12px;line-height:1.9;background:var(--warn-bg);border:1px solid var(--quote-border);border-radius:9px;color:var(--warn);padding:9px 12px;margin:0 0 12px}
+.figure-karname-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.figure-karname-card{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--surface-2);overflow-wrap:anywhere}
+.figure-karname-card p{color:var(--text);line-height:2;font-size:13px;margin:0 0 9px}
+.figure-karname-card small{display:block;font-size:11px;color:var(--ink-faint);line-height:1.8}
+.figure-karname-card a{display:inline-block;margin-top:7px;font-size:11px;color:var(--accent);font-weight:700}
+.figure-karname-all{display:inline-block;margin-top:12px;border:1px solid var(--line-strong);border-radius:9px;padding:7px 12px;font-weight:750;font-size:12px;color:var(--accent)}
+.figure-karname-all:hover{background:var(--accent-soft)}
+@media(max-width:620px){.figure-karname-preview{margin:12px 7px;padding:12px}.figure-karname-cards{grid-template-columns:1fr}}
