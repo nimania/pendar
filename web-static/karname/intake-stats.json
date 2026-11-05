@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "scope": "public_aggregate_only",
+  "is_editorially_approved": false,
+  "counts": {
+    "extracted_candidates": 146,
+    "pending_review": 134,
+    "screened_out": 12,
+    "previously_reviewed": 0,
+    "manual_review_requested": 2
+  },
+  "coverage": {
+    "figure_profiles_scanned": 519,
+    "figure_posts_scanned": 797,
+    "source_spans_scanned": 2223,
+    "figure_feed_available": true
+  },
+  "review_queue_url": "https://github.com/nimania/pendar/blob/main/backend/data/karname-candidates.json",
+  "workflow_url": "https://github.com/nimania/pendar/actions/workflows/karname-intake.yml",
+  "explanation_fa": "نامزدهای استخراج‌شده تا تأیید منبع و انتساب به کارنامهٔ عمومی افزوده نمی‌شوند."
+}
