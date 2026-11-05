@@ -323,6 +323,10 @@ jobs:
           print("Weather data overlaid without rebuilding the site")
           PY
 
+      - name: Verify Karname dashboard, alias and safe data publisher
+        run: |
+          node --check web-static/karname/app.js
+          python -m unittest discover -s backend/tests -p 'test_karname_publish.py' -v
       - name: Overlay current UI without overwriting generated data
         run: |
           # Generated datasets (especially Jan-e Jaraid) belong to collector/build
@@ -331,6 +335,8 @@ jobs:
           mkdir -p site/data
           cp web-static/data/pendar-*.json site/data/
           cp web-static/data/us-radar.json site/data/us-radar.json
+          # Publish the generated ledger only when validated; otherwise preserve prior live data.
+          python backend/scripts/publish_karname_data.py --site site
           # Validate and overlay Recipe Lab only. Fail open for unrelated Pendar sections.
           python - <<'PY_RECIPE_LAB'
           import json, shutil

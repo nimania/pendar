@@ -16,7 +16,7 @@ keep_dirs = {
     "market", "weather", "system", "diner", "icons",
     "entity", "movie", "book", "publisher", "book-person", "cinema-person",
     "studio", "recaps", "videos", "radar", "reports", "iransignal", "badbadak", "naval",
-    "trends", "editorial-author",
+    "trends", "editorial-author", "karname", "karnameh",
 }
 # Root-level data consumed by news feeds, archive, entity/figure views and search.
 keep_data_names = {
@@ -37,7 +37,7 @@ keep_data_names = {
     "project-finance.json",
     "editorial-archive.json", "google-trends-iran.json",
     # Immutable five-hour news/opinion report archive must survive light deploys.
-    "voice-recaps.json",
+    "voice-recaps.json", "karname.json",
 }
 keep_data_prefixes = (
     "figure", "news-", "curated-", "source-", "story-", "search-",
