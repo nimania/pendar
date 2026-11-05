@@ -59,6 +59,24 @@ OTHER_CITIES = (
     "قلعه گنج", "قلعه‌گنج", "فهرج", "انار", "راور",
 )
 CITY_TERMS = ("کرمان", "کرمانی", "گنجعلی", "میدان آزادی", "چهارراه طهماسب")
+REGIONAL_PLACES = (
+    "سیرجان", "رفسنجان", "جیرفت", "زرند", "شهربابک", "بردسیر",
+    "کهنوج", "عنبرآباد", "قلعه گنج", "قلعه‌گنج", "فهرج", "راور",
+    "نرماشیر", "ریگان", "کوهبنان", "رودبار جنوب", "منوجان",
+    "فاریاب", "ارزوئیه", "ارزوییه", "راین", "لاله زار",
+    "گلباف", "ماهان", "گل گهر", "گل‌گهر", "مس کرمان",
+)
+REGIONAL_WITH_CONTEXT = (
+    "شهرستان بافت", "شهر بافت", "شهرستان بم", "شهر بم",
+    "شهرستان انار", "شهر انار", "استان کرمان",
+    "جنوب کرمان", "شرق کرمان", "شمال کرمان", "غرب کرمان",
+)
+ADVERTISING_MARKERS = (
+    "تبلیغات", "ثبت سفارش", "برای سفارش", "کد تخفیف",
+    "فروش ویژه", "قیمت ویژه", "پرداخت درب منزل",
+    "ارسال رایگان", "پرداخت در محل", "لینک خرید", "حراج",
+    "سفارش دهید", "سفارش بده", "فروش اقساطی",
+)
 
 
 def utcnow():
@@ -93,6 +111,20 @@ def city_relevance(text):
 def is_sensitive(text):
     clean = normalize(text)
     return any(normalize(term) in clean for term in SENSITIVE)
+
+
+def regional_relevance(text):
+    clean = normalize(text)
+    if city_relevance(text) != "reject":
+        return "high"
+    if any(normalize(term) in clean for term in REGIONAL_PLACES + REGIONAL_WITH_CONTEXT):
+        return "high"
+    return "reject"
+
+
+def looks_like_advertisement(text):
+    clean = normalize(text)
+    return any(normalize(term) in clean for term in ADVERTISING_MARKERS)
 
 
 def source_due(source, state, now):
@@ -183,15 +215,20 @@ def evaluate(item, now, source=None):
     if not stamp or stamp > now + timedelta(minutes=5) or now - stamp > MAX_AGE:
         return None
     source = source or {}
-    relevance = city_relevance(item["title"] + " " + item["excerpt"])
-    full_feed = source.get("coverage") == "all"
+    body = item["title"] + " " + item["excerpt"]
+    coverage = source.get("coverage", "city")
+    full_feed = coverage == "all"
+    relevance = regional_relevance(body) if coverage == "region" else city_relevance(body)
     if relevance == "reject" and not full_feed:
         return None
     if full_feed and relevance == "reject":
         relevance = "source_full_feed"
-    sensitive = is_sensitive(item["title"] + " " + item["excerpt"])
+    if looks_like_advertisement(body):
+        return None
+    sensitive = is_sensitive(body)
     item["id"] = story_id(item["url"])
     item["media_repost_allowed"] = bool(source.get("media_repost_allowed", False))
+    item["source_hashtag"] = source.get("source_hashtag", "")
     item["risk"] = "sensitive" if sensitive else "ordinary"
     item["city_confidence"] = relevance
     item["status"] = "review" if sensitive or not item.get("paragraphs", [item["excerpt"]]) or source.get("review_only") or (not full_feed and relevance != "high") else "ready"
@@ -494,8 +531,9 @@ def main():
         item = evaluate(dict(post), now, policy)
         if item is None:
             continue
-        # Kerman-No full-feed mode preserves every distinct source post URL.
-        old = None if policy.get("coverage") == "all" else duplicate(item, queue)
+        # Owner-approved media feeds preserve each distinct source post. 
+        # Other outlets still deduplicate comparable headlines across sources.
+        old = None if policy.get("priority_publish") else duplicate(item, queue)
         if old:
             if item["source"] != old["source"]:
                 old.setdefault("other_sources", []).append({
@@ -537,12 +575,12 @@ def main():
                 item["review_reason"] = "old_news_not_sent"
             else:
                 ready.append(item)
-        priority = [x for x in ready if source_map.get(x["source_handle"].lower(), {}).get("coverage") == "all"]
+        priority = [x for x in ready if source_map.get(x["source_handle"].lower(), {}).get("priority_publish") or source_map.get(x["source_handle"].lower(), {}).get("coverage") == "all"]
         other = [x for x in ready if x not in priority]
         priority.sort(key=lambda p: p.get("published_at") or "")
         other.sort(key=lambda p: p.get("published_at") or "")
-        # Six Kerman-No posts and two other reports per run. Remaining
-        # Kerman-No posts stay ready for the next automatic run.
+        # Six priority posts from Kerman-No, Kerman News and qh_qv combined,
+        # plus two from other outlets. Remaining safe posts stay queued.
         selected = sorted(priority[:6] + other[:2], key=lambda p: p.get("published_at") or "")
         publish_batch(selected, state, ledger, token, channel)
     else:
