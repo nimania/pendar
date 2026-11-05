@@ -251,7 +251,13 @@
     "https://t.me/Kerman_akhbar/66211",
     "https://t.me/kerman_news/140121",
     "https://t.me/kerman_news/140122",
-    "https://t.me/Kerman_akhbar/66212"
+    "https://t.me/Kerman_akhbar/66212",
+    "https://t.me/kerman_news/140123",
+    "https://t.me/kerman_news/140124",
+    "https://t.me/kerman_news/140125",
+    "https://t.me/kerman_news/140126",
+    "https://t.me/kerman_news/140127",
+    "https://t.me/kerman_gov/10512"
   ],
   "queue": [
     {
@@ -267,7 +273,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/Kerman_akhbar/66193",
@@ -282,7 +289,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kerman_gov/10490",
@@ -297,7 +305,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/fardaayekerman/34946",
@@ -312,7 +321,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kermane_no/58973",
@@ -327,7 +337,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/fardaayekerman/34947",
@@ -342,7 +353,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/fardaayekerman/34948",
@@ -357,7 +369,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/fardaayekerman/34949",
@@ -387,7 +400,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/fardaayekerman/34950",
@@ -402,7 +416,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kerman_gov/10491",
@@ -417,7 +432,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/58978",
@@ -432,7 +448,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/58979",
@@ -447,7 +464,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/Kerman_akhbar/66197",
@@ -462,7 +480,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kermane_no/58982",
@@ -477,7 +496,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/fardaayekerman/34951",
@@ -492,7 +512,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kerman_gov/10492",
@@ -507,7 +528,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kerman_gov/10493",
@@ -522,7 +544,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/58992",
@@ -537,7 +560,8 @@
       "status": "review",
       "detected_at": "2026-11-05T09:55:12.748365+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kerman_gov/10494",
@@ -552,7 +576,8 @@
       "status": "review",
       "detected_at": "2026-11-05T11:06:41.938007+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/irna_kerman/30293",
@@ -567,7 +592,8 @@
       "status": "review",
       "detected_at": "2026-11-05T11:06:41.938007+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kermane_no/58996",
@@ -582,7 +608,8 @@
       "status": "review",
       "detected_at": "2026-11-05T11:06:41.938007+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kerman_gov/10495",
@@ -597,7 +624,8 @@
       "status": "review",
       "detected_at": "2026-11-05T11:06:41.938007+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/58998",
@@ -660,7 +688,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/Kerman_akhbar/66201",
@@ -675,7 +704,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kermane_no/59001",
@@ -758,7 +788,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/59006",
@@ -807,7 +838,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/59008",
@@ -839,7 +871,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kermane_no/59009",
@@ -871,7 +904,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/59010",
@@ -903,7 +937,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/59011",
@@ -935,7 +970,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kermane_no/59012",
@@ -967,7 +1003,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kermane_no/59013",
@@ -999,7 +1036,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kermane_no/59014",
@@ -1048,7 +1086,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/kerman_gov/10499",
@@ -1063,7 +1102,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/kerman_news/140099",
@@ -1078,7 +1118,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": true
     },
     {
       "url": "https://t.me/Kerman_akhbar/66204",
@@ -1093,7 +1134,8 @@
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
       "other_sources": [],
-      "geography": "kerman"
+      "geography": "kerman",
+      "media_repost_allowed": false
     },
     {
       "url": "https://t.me/Kerman_akhbar/66207",
@@ -1623,17 +1665,101 @@
       "delivery_kind": "photo",
       "telegram_message_id": 35,
       "sent_at": "2026-11-05T19:10:49.740799+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_news/140123",
+      "source_post_id": "140123",
+      "title": "باران هم نتوانست حضور پرشور مردم جیرفت را متوقف کند؛ ۲۵۰ شب ایستادگی ادامه دارد",
+      "excerpt": "باران هم نتوانست حضور پرشور مردم جیرفت را متوقف کند؛ ۲۵۰ شب ایستادگی ادامه دارد",
+      "paragraphs": [
+        "باران هم نتوانست حضور پرشور مردم جیرفت را متوقف کند؛ ۲۵۰ شب ایستادگی ادامه دارد"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/9f10b5f50c.mp4?token=hDW3x7XiwbZf02uStn4KXSrIz5-6-bKrqJQcB0x7PVhHNi1hSIpSKXtVxutfo2ln7fkAjr8Pyf57zUzV4PaxUjcvcoWBZvB86JXPnWHSdgJglgQ8PjiBl3_8BLPWAUm6PO2PIYfyWaSiKkVz35-bMtedSdwtNuwPlghtM0pC14GITylXtoQdvJLd9hfelxRgrBVE06n_Yn7B4lsroSEvxPnZ3Rhse2q3ZRRym6l5gFAiD5rICxsvD47s-x6hRmWUO2BQ2EdcaN81H0nj_mOX-Sh8PaBL6DjwvuGct7EXFdlEq8TSNCsBXp-DVDi2OTJ9-jBAxv4VQLG-IqCR3UT83D9DNjixYixbNmuwWyDXAXwb0MkmpENjVQIHrZX5In2tUTNrfT0IG6xraoMC0Y1nBcT_m4DF5zWwaIZcyMVKcx7-Gjs6Rm5nb7ylAYHed6_5NnpQOMPKx0EnjlDk5Jclrnn1lx-u0wPofZPY4QAbQ4hM3-4juYvYcCPtKLPtoa4U3Irc_GoaDpOs0M7O32YTG2toxyDVjOwNcSnVlpiUNjMZf75Dmb8B1O9jzHQ478nJyBwFcCXunEihJ3AK5UzLicluGz6eUYLENHmjI73B5IvRYAHr0Lfeavaqj5Y9mfnwWTE0_5HRQaPcrz7Chp81EYgRmq9Z7aQZNDNqn625nj0"
+      },
+      "published_at": "2026-11-05T19:10:20+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "7e87186e014161b1",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T19:43:04.267567+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140124",
+      "source_post_id": "140124",
+      "title": "مروری بر مهمترین اخبار امروز",
+      "excerpt": "مروری بر مهمترین اخبار امروز دادستان عمومی و انقلاب قلعه‌گنج: صاحب یک فروشگاه مواد غذایی در بازار قلعه‌گنج بر اثر تیراندازی سرنشینان یک خودرو کشته شد و تحقیقات برای شناسایی عاملان ادامه دارد. دادستان عمومی و انقلاب زرند: پنج عضو باند سرقت محموله‌های ریلی دستگیر شدند و بیش از دو تن گندم مسروقه از منازل آنان کشف شد. فرمانده انتظامی سیرجان: هفت کارگاه ضایعاتی به اتهام خرید اموال مسروقه پلمب و هفت نفر دستگیر شدند؛ اموال مرتبط با ۱۵ فقره سرقت نیز کشف شد. رئیس اتحادیه صنف نانوایان کرمان: قیمت هر کیسه آرد آزاد از یک میلیون و ۲۰۰ هزار به سه میلیون و ۱۵۰ هزار تومان رسیده و قیمت نان آزاد نیز افزایش چشمگیری داشته است. رئیس مرکز اورژانس رفسنجان: برخورد پژو با وانت مزدا در دوراهی محی‌آباد یک کشته و یک مصدوم بر جای گذاشت. گزارش هواشناسی: لاله‌زار با دمای منفی یک درجه سردترین و ریگان با ۳۲.۴ درجه گرم‌ترین ایستگاه استان کرمان در شبانه‌روز گذشته بودند.",
+      "paragraphs": [
+        "مروری بر مهمترین اخبار امروز",
+        "دادستان عمومی و انقلاب قلعه‌گنج: صاحب یک فروشگاه مواد غذایی در بازار قلعه‌گنج بر اثر تیراندازی سرنشینان یک خودرو کشته شد و تحقیقات برای شناسایی عاملان ادامه دارد.",
+        "دادستان عمومی و انقلاب زرند: پنج عضو باند سرقت محموله‌های ریلی دستگیر شدند و بیش از دو تن گندم مسروقه از منازل آنان کشف شد.",
+        "فرمانده انتظامی سیرجان: هفت کارگاه ضایعاتی به اتهام خرید اموال مسروقه پلمب و هفت نفر دستگیر شدند؛ اموال مرتبط با ۱۵ فقره سرقت نیز کشف شد.",
+        "رئیس اتحادیه صنف نانوایان کرمان: قیمت هر کیسه آرد آزاد از یک میلیون و ۲۰۰ هزار به سه میلیون و ۱۵۰ هزار تومان رسیده و قیمت نان آزاد نیز افزایش چشمگیری داشته است.",
+        "رئیس مرکز اورژانس رفسنجان: برخورد پژو با وانت مزدا در دوراهی محی‌آباد یک کشته و یک مصدوم بر جای گذاشت.",
+        "گزارش هواشناسی: لاله‌زار با دمای منفی یک درجه سردترین و ریگان با ۳۲.۴ درجه گرم‌ترین ایستگاه استان کرمان در شبانه‌روز گذشته بودند."
+      ],
+      "media": null,
+      "published_at": "2026-11-05T19:24:50+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "0a382ef2546ca630",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-05T19:43:04.267567+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10512",
+      "source_post_id": "10512",
+      "title": "از مشاوران و شورای نسل Z؛ انتظار تصمیمات تامین کننده منافع این نسل را داریم‌",
+      "excerpt": "از مشاوران و شورای نسل Z؛ انتظار تصمیمات تامین کننده منافع این نسل را داریم‌ از بیان دیدگاه‌های نسل جدید استقبال می‌کنیم استاندار کرمان گفت: از طرح مشاوران نسل Z و شورای نسل Z به دنبال آن هستیم که از دل این مشاوره‌ها، همفکری‌ها و همراهی‌ها، تصمیم‌هایی در راستای تأمین منافع این نسل اتخاذ کنیم. به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی شامگاه پنجشنبه ۱۴ آبان ماه در دیدار مشاور امور نسل Z رئیس شورای اطلاع‌رسانی دولت در تعریف نگاه خود به حوزه نسل Z اعتقاد دارم که باید فرصت نقش‌آفرینی و حضور موثر این نسل را در همه فرآیندهای جامعه فراهم کنیم. طرح و تاکید ما بر مشارکت نسل جدید و Z و نقش‌آفرینی آنها در فرآیندهای مختلف برای این است که آنها را درگیر مسائل مختلف اجتماع کرده و این‌باور و احساس را به آنها بدهیم که نقش مؤثری در فرآیندها و تصمیم‌گیری‌ها دارند. از بیان دیدگاه‌های نسل جدید استقبال می‌کنیم و در استان کرمان خدمت عزیزان هستیم که بیشترین زمینه و فرصت را برای این نقش‌آفرینی آماده کنیم.",
+      "paragraphs": [
+        "از مشاوران و شورای نسل Z؛ انتظار تصمیمات تامین کننده منافع این نسل را داریم‌",
+        "از بیان دیدگاه‌های نسل جدید استقبال می‌کنیم",
+        "استاندار کرمان گفت: از طرح مشاوران نسل Z و شورای نسل Z به دنبال آن هستیم که از دل این مشاوره‌ها، همفکری‌ها و همراهی‌ها، تصمیم‌هایی در راستای تأمین منافع این نسل اتخاذ کنیم.",
+        "به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی شامگاه پنجشنبه ۱۴ آبان ماه در دیدار مشاور امور نسل Z رئیس شورای اطلاع‌رسانی دولت در تعریف نگاه خود به حوزه نسل Z",
+        "اعتقاد دارم که باید فرصت نقش‌آفرینی و حضور موثر این نسل را در همه فرآیندهای جامعه فراهم کنیم.",
+        "طرح و تاکید ما بر مشارکت نسل جدید و Z و نقش‌آفرینی آنها در فرآیندهای مختلف برای این است که آنها را درگیر مسائل مختلف اجتماع کرده و این‌باور و احساس را به آنها بدهیم که نقش مؤثری در فرآیندها و تصمیم‌گیری‌ها دارند.",
+        "از بیان دیدگاه‌های نسل جدید استقبال می‌کنیم و در استان کرمان خدمت عزیزان هستیم که بیشترین زمینه و فرصت را برای این نقش‌آفرینی آماده کنیم."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Gl82oq9BusM_WzTFrieUJJTs9gqCv3CanGhPSQ4WjmbYIYbpSSEUbTfQs4GAj0Q1RZbLhAo-ToYd-1mYnR8niW9ddHGTyQMEbkXGlCKnWg7mT_py9uE1A1erUwjduIGezdfBxK8mDPC8hHWSSqFdhFzzKhV1IvunuIPu_sEb5XTh8xUeLuDSIv4zikc7JKjdHeaWVlG3pyFsC_7mZgBrpSachBja6o_zGZ3OGkDbgBcWRnviquDNlwKJgjH1sKPVMMWzMhWwDouIrYR1X-zDUB2hkAfek7bIkX3nOVEFYMa4ccXStIQnGiL3xo7b88bDuUyEEVJ07k7uz95MAdSSwg.jpg"
+      },
+      "published_at": "2026-11-05T19:35:58+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "1c084c6cbdc24127",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T19:43:04.267567+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-05T19:33:00.579598+00:00",
+  "saved_at": "2026-11-05T19:43:16.954696+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-05T19:10:26.902690+00:00",
-    "fardaayekerman": "2026-11-05T19:32:55.854373+00:00",
-    "irna_kerman": "2026-11-05T19:32:55.854373+00:00",
-    "kerman_gov": "2026-11-05T19:32:55.854373+00:00",
-    "kerman_akhbar": "2026-11-05T19:32:55.854373+00:00",
-    "kerman_news": "2026-11-05T19:10:26.902690+00:00",
-    "kerman_rasaneh": "2026-11-05T19:32:55.854373+00:00",
-    "qh_qv": "2026-11-05T19:10:26.902690+00:00"
+    "kermane_no": "2026-11-05T19:43:04.267567+00:00",
+    "fardaayekerman": "2026-11-05T19:43:04.267567+00:00",
+    "irna_kerman": "2026-11-05T19:43:04.267567+00:00",
+    "kerman_gov": "2026-11-05T19:43:04.267567+00:00",
+    "kerman_akhbar": "2026-11-05T19:43:04.267567+00:00",
+    "kerman_news": "2026-11-05T19:43:04.267567+00:00",
+    "kerman_rasaneh": "2026-11-05T19:43:04.267567+00:00",
+    "qh_qv": "2026-11-05T19:43:04.267567+00:00"
   }
 }
