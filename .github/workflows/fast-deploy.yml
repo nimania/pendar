@@ -14,6 +14,8 @@ on:
     paths:
       - "web-static/**"
       - "backend/data/editorial-recaps.json"
+      - "backend/data/karname.json"
+      - "karname/imports/**"
       - ".github/workflows/fast-deploy.yml"
       - "backend/tests/test_editorial_report_ui.js"
       - "backend/tests/test_karname_publish.py"
