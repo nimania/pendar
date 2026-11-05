@@ -3,7 +3,7 @@
 (()=>{
 "use strict";
 const DATA_URL="/data/karname.json", $=id=>document.getElementById(id);
-const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[]};
+const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null};
 const labels={
   highlights:["منتخب کارنامه","پیش‌بینی‌ها زیر ذره‌بین","تازه‌ترین پرونده‌ها، با متن اصلی و منابع."],
   people:["کارنامهٔ چهره‌ها","چه کسی چه گفته؟","امتیاز فقط برای پیش‌بینی‌های ارزیابی‌شده است."],
@@ -162,18 +162,64 @@ function renderCalendar(){
  for(const c of rows){const b=bucket(c),key=c.bucket||"other",label=b.label||b.title||c.due_label||"بدون سررسید مشخص";if(!buckets.has(key))buckets.set(key,{label,claims:[]});buckets.get(key).claims.push(c);}
  return [...buckets.values()].map(b=>'<section class="calendar-group"><h3>'+esc(b.label)+'</h3><div class="group-items">'+b.claims.map((c,i)=>mini(c,i)).join("")+'</div></section>').join("");
 }
+function scenarioCategory(dir){
+ const d=norm(dir);
+ if(/^(?:له|مؤید|موافق|support)$/.test(d))return "support";
+ if(/^(?:علیه|مخالف|against)$/.test(d))return "against";
+ if(/^(?:امکان|احتمال|possible)$/.test(d))return "possible";
+ if(/^(?:زمینه|شرایط|شرط|context|condition)$/.test(d))return "context";
+ return "other"; // Do not count unknown labels as support.
+}
+function scenarioMatches(speakerKey,family,category){
+ return state.claims.flatMap(claim=>{
+  if(!array(claim.speakers).some(v=>speakerId(v)===speakerKey))return [];
+  return array(claim.scenarios)
+   .filter(x=>x.family===family&&(!category||scenarioCategory(x.dir)===category))
+   .map(x=>({claim,tag:x}));
+ });
+}
 function renderScenarios(){
- let families=state.families.filter(x=>x.key||x.id);
+ const families=state.families.filter(x=>x.key||x.id);
  if(!families.length)return noData("نقشهٔ سناریوها هنوز آماده نیست","سناریوهای دفتر کارنامه پس از اتصال داده در اینجا قابل مقایسه خواهند بود.");
- let active=state.speakers.filter(s=>state.claims.some(c=>array(c.speakers).some(v=>speakerId(v)===(s.key||s.name))));
+ const active=state.speakers.filter(s=>state.claims.some(c=>array(c.speakers).some(v=>speakerId(v)===(s.key||s.name))));
  if(!active.length)return noData("تحلیلگری برای مقایسه نیست","نقشه پس از ورود پیش‌بینی‌های واقعی نمایش داده می‌شود.");
- let th=families.map(f=>'<th>'+esc(f.label||f.name||f.title||f.key)+'</th>').join("");
- let rows=active.map(s=>{
-  let claims=state.claims.filter(c=>array(c.speakers).some(v=>speakerId(v)===(s.key||s.name)));
-  let cells=families.map(f=>{let matches=claims.flatMap(c=>array(c.scenarios).filter(sc=>sc.family===(f.key||f.id)));let n=matches.length;let against=matches.filter(x=>/علیه|against/.test(norm(x.dir))).length;let possible=matches.filter(x=>/امکان|possible/.test(norm(x.dir))).length;let support=n-against-possible;return '<td title="له: '+support+' / علیه: '+against+' / امکان: '+possible+'">'+(n?'<span class="count">'+fa(n)+'</span><small class="muted">  +'+fa(support)+' / −'+fa(against)+'</small>':'—')+'</td>';}).join("");
-  return '<tr><td>'+esc(s.name||s.key)+'</td>'+cells+'</tr>';
+ const categories=[
+  {key:"support",label:"مؤید",short:"+",className:"support"},
+  {key:"against",label:"مخالف",short:"−",className:"against"},
+  {key:"possible",label:"امکان",short:"؟",className:"possible"},
+  {key:"context",label:"زمینه/شرط",short:"◌",className:"context"},
+  {key:"other",label:"طبقه‌بندی‌نشده",short:"…",className:"other"}
+ ];
+ const th=families.map(f=>'<th>'+esc(f.label||f.name||f.title||f.key)+'</th>').join("");
+ const rows=active.map(s=>{
+  const speakerKey=s.key||s.name;
+  const cells=families.map(f=>{
+   const family=f.key||f.id;
+   const matches=scenarioMatches(speakerKey,family);
+   if(!matches.length)return '<td class="scenario-empty" aria-label="موضعی ثبت نشده">—</td>';
+   const labels=categories.map(cat=>{
+    const n=matches.filter(x=>scenarioCategory(x.tag.dir)===cat.key).length;
+    return n?'<button type="button" class="scenario-chip '+cat.className+'" data-scenario-person="'+esc(speakerKey)+'" data-scenario-family="'+esc(family)+'" data-scenario-kind="'+cat.key+'" aria-label="'+esc(s.name||speakerKey)+'، '+esc(family)+'، '+cat.label+'، '+fa(n)+' مورد" title="'+cat.label+'، '+fa(n)+' مورد">'+cat.short+fa(n)+'</button>':"";
+   }).join("");
+   const all='<button type="button" class="scenario-total" data-scenario-person="'+esc(speakerKey)+'" data-scenario-family="'+esc(family)+'" data-scenario-kind="" aria-label="همهٔ '+fa(matches.length)+' موضع '+esc(s.name||speakerKey)+' دربارهٔ '+esc(family)+'">'+fa(matches.length)+'</button>';
+   return '<td><div class="scenario-cell">'+all+'<span class="scenario-chips">'+labels+'</span></div></td>';
+  }).join("");
+  return '<tr><th scope="row">'+esc(s.name||speakerKey)+'</th>'+cells+'</tr>';
  }).join("");
- return '<div class="matrix"><table><thead><tr><th>تحلیلگر</th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></div>';
+ const heading='<div class="scenario-explainer"><strong>این جدول امتیاز موفقیت نیست.</strong> هر عدد، شمار برچسب‌های موضع ثبت‌شده دربارهٔ یک سناریو است. روی عدد کل یا هر علامت بزنید تا متن ادعا و نوع موضع را ببینید. <span class="scenario-legend">'+categories.map(x=>'<span class="scenario-legend-entry"><b class="'+x.className+'">'+x.short+'</b> '+x.label+'</span>').join("")+'</span></div>';
+ let selected="";
+ if(state.selectedScenario){
+  const {speakerKey,family,category}=state.selectedScenario;
+  const matches=scenarioMatches(speakerKey,family,category);
+  const person=state.speakers.find(s=>(s.key||s.name)===speakerKey);
+  const kind=categories.find(x=>x.key===category);
+  const title=esc(person?.name||speakerKey)+' / '+esc(family)+(kind?' / '+kind.label:' / همهٔ مواضع');
+  const unique=[];
+  for(const item of matches)if(!unique.some(x=>x.claim.id===item.claim.id&&x.tag.dir===item.tag.dir))unique.push(item);
+  const cards=unique.map(x=>'<li class="scenario-claim"><button type="button" data-claim="'+esc(x.claim.id)+'"><span class="pill open">'+esc(x.tag.dir||"نامشخص")+'</span><b dir="ltr">'+esc(x.claim.id)+'</b><span>'+esc(claimText(x.claim))+'</span></button></li>').join("");
+  selected='<section id="scenario-detail" class="scenario-detail" aria-live="polite"><div class="scenario-detail-head"><h3>'+title+' · '+fa(matches.length)+' برچسب</h3><button type="button" class="scenario-close" data-scenario-clear="true" aria-label="بستن فهرست مواضع">بستن ✕</button></div><p class="muted">با انتخاب یک ادعا، متن، قیدها و منشأ آن باز می‌شود. چند موضع ممکن است به یک ادعا مربوط باشند.</p><ol>'+cards+'</ol></section>';
+ }
+ return heading+'<div class="matrix"><table><thead><tr><th scope="col">تحلیلگر</th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+selected;
 }
 function renderAll(){
  const speakers=state.speakers.map(s=>'<option value="'+esc(s.key||s.name)+'" '+(state.speaker===(s.key||s.name)?"selected":"")+'>'+esc(s.name||s.key)+'</option>').join("");
@@ -232,6 +278,8 @@ function eventHandlers(){
  $("cards").addEventListener("click",ev=>{
   let c=ev.target.closest("[data-claim]");if(c)return openClaim(c.dataset.claim);
   let p=ev.target.closest("[data-person]");if(p){state.speaker=p.dataset.person;state.query="";state.status="";setTab("all");}
+  let sc=ev.target.closest("[data-scenario-person]");if(sc){state.selectedScenario={speakerKey:sc.dataset.scenarioPerson,family:sc.dataset.scenarioFamily,category:sc.dataset.scenarioKind||""};render();$("scenario-detail")?.scrollIntoView({block:"nearest",behavior:"smooth"});return;}
+  if(ev.target.closest("[data-scenario-clear]")){state.selectedScenario=null;render();return;}
  });
  $("cards").addEventListener("input",ev=>{if(ev.target.id==="claim-search"){let start=ev.target.selectionStart;state.query=ev.target.value;render();let inp=$("claim-search");if(inp){inp.focus();inp.setSelectionRange(start,start);}}});
  $("cards").addEventListener("change",ev=>{if(ev.target.id==="filter-speaker"){state.speaker=ev.target.value;render();}if(ev.target.id==="filter-status"){state.status=ev.target.value;render();}});
