@@ -27,7 +27,8 @@ from bs4 import BeautifulSoup
 REPO = os.getenv("GITHUB_REPOSITORY", "nimania/pendar")
 BRANCH = "nashani-state"
 EXPECTED_BOT_USERNAME = "neshanikermanbot"
-EXPECTED_CHANNEL_USERNAME = "neshanikerman"
+EXPECTED_CHANNEL_ID = -1003958286892
+EXPECTED_CHANNEL_TITLE = "نشانی: کرمان"
 STATE_PATH = "nashani/state.json"
 USER_AGENT = "NashaniKermanRadar/1.0 (public-source monitoring)"
 MAX_AGE = timedelta(hours=5)
@@ -263,8 +264,8 @@ def verify_telegram_identity(token, channel):
     """Read-only guard: validate exact bot and destination and posting permission."""
     if not token:
         raise RuntimeError("NASHANI_TELEGRAM_BOT_TOKEN is not configured")
-    if channel != "@" + EXPECTED_CHANNEL_USERNAME:
-        raise RuntimeError("Telegram channel is not the approved Nashani Kerman destination")
+    if str(channel) != str(EXPECTED_CHANNEL_ID):
+        raise RuntimeError("Telegram channel ID does not match verified Nashani Kerman channel")
     api = "https://api.telegram.org/bot" + token + "/"
     me = telegram_checked_call(api, "getMe")
     bot = me.get("result") if me.get("ok") else None
@@ -272,8 +273,11 @@ def verify_telegram_identity(token, channel):
         raise RuntimeError("Configured token does not belong to @neshanikermanbot")
     chat_result = telegram_checked_call(api, "getChat", {"chat_id": channel})
     chat = chat_result.get("result") if chat_result.get("ok") else None
-    if not isinstance(chat, dict) or chat.get("username", "").lower() != EXPECTED_CHANNEL_USERNAME or chat.get("type") != "channel":
-        raise RuntimeError("Configured destination is not @neshanikerman channel")
+    if (not isinstance(chat, dict)
+            or chat.get("id") != EXPECTED_CHANNEL_ID
+            or chat.get("type") != "channel"
+            or str(chat.get("title", "")).strip() != EXPECTED_CHANNEL_TITLE):
+        raise RuntimeError("Telegram destination is not the verified Nashani Kerman channel")
     member_result = telegram_checked_call(api, "getChatMember", {
         "chat_id": channel, "user_id": bot.get("id")
     })
@@ -290,12 +294,10 @@ def send_to_telegram(item, token, channel):
     if not token or not channel:
         raise RuntimeError("Missing Nashani Telegram token or channel")
     # Require explicit channel selection. Never fall back to @pendario.
-    if not (re.fullmatch(r"@[A-Za-z0-9_]{5,32}", channel)
-            or re.fullmatch(r"-100\d{6,}", channel)):
-        raise ValueError("NASHANI_CHANNEL_ID must be an @handle or numeric channel ID")
+    if str(channel) != str(EXPECTED_CHANNEL_ID):
+        raise ValueError("NASHANI_CHANNEL_ID must be the verified numeric channel ID")
     verify_telegram_identity(token, channel)
-    url = "https://api.telegram.org/bot" + token + "/sendMessage"
-    response = http_json(url, method="POST", payload={
+    response = telegram_checked_call("https://api.telegram.org/bot" + token + "/", "sendMessage", {
         "chat_id": channel, "text": telegram_message(item),
         "parse_mode": "HTML", "link_preview_options": {"is_disabled": True},
     })

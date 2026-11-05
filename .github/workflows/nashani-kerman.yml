@@ -59,13 +59,13 @@ jobs:
         continue-on-error: true
         env:
           NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
-          NASHANI_CHANNEL_ID: '@neshanikerman'
+          NASHANI_CHANNEL_ID: '-1003958286892'
         run: python nashani/runner.py --check-connection
       - name: Monitor sources and publish verified local news
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
-          NASHANI_CHANNEL_ID: '@neshanikerman'
+          NASHANI_CHANNEL_ID: '-1003958286892'
           NASHANI_PUBLISH_ENABLED: ${{ steps.telegram_connection.outcome == 'success' && 'true' || 'false' }}
           APPROVE_ID: ${{ inputs.approve_id }}
           CHECK_CONNECTION: ${{ inputs.check_connection }}

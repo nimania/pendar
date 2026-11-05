@@ -76,29 +76,44 @@ class NewsRadarTests(unittest.TestCase):
     def test_telegram_identity_and_permissions(self):
         response = [
             {"ok": True, "result": {"id": 1234, "username": "neshanikermanbot"}},
-            {"ok": True, "result": {"username": "neshanikerman", "type": "channel"}},
+            {"ok": True, "result": {"id": -1003958286892, "title": "نشانی: کرمان", "type": "channel"}},
             {"ok": True, "result": {"status": "administrator", "can_post_messages": True}},
         ]
         with patch.object(runner, "telegram_checked_call", side_effect=response) as api:
-            self.assertTrue(runner.verify_telegram_identity("secret", "@neshanikerman"))
+            self.assertTrue(runner.verify_telegram_identity("secret", "-1003958286892"))
             self.assertEqual(api.call_count, 3)
 
     def test_reject_wrong_bot_token(self):
         response = {"ok": True, "result": {"id": 1, "username": "notourbot"}}
         with patch.object(runner, "telegram_checked_call", return_value=response) as api:
             with self.assertRaises(RuntimeError):
-                runner.verify_telegram_identity("secret", "@neshanikerman")
+                runner.verify_telegram_identity("secret", "-1003958286892")
             self.assertEqual(api.call_count, 1)
 
     def test_reject_missing_post_permission(self):
         response = [
             {"ok": True, "result": {"id": 1234, "username": "neshanikermanbot"}},
-            {"ok": True, "result": {"username": "neshanikerman", "type": "channel"}},
+            {"ok": True, "result": {"id": -1003958286892, "title": "نشانی: کرمان", "type": "channel"}},
             {"ok": True, "result": {"status": "administrator", "can_post_messages": False}},
         ]
         with patch.object(runner, "telegram_checked_call", side_effect=response):
             with self.assertRaises(RuntimeError):
-                runner.verify_telegram_identity("secret", "@neshanikerman")
+                runner.verify_telegram_identity("secret", "-1003958286892")
+
+    def test_reject_other_numeric_channel(self):
+        with patch.object(runner, "telegram_checked_call") as api:
+            with self.assertRaises(RuntimeError):
+                runner.verify_telegram_identity("secret", "-1001111111111")
+            api.assert_not_called()
+
+    def test_reject_numeric_channel_with_wrong_title(self):
+        response = [
+            {"ok": True, "result": {"id": 1234, "username": "neshanikermanbot"}},
+            {"ok": True, "result": {"id": -1003958286892, "title": "Another channel", "type": "channel"}},
+        ]
+        with patch.object(runner, "telegram_checked_call", side_effect=response):
+            with self.assertRaises(RuntimeError):
+                runner.verify_telegram_identity("secret", "-1003958286892")
 
     def test_headline_skips_standalone_emoji(self):
         sample = """<div class="tgme_widget_message" data-post="kermane_no/124">
@@ -124,11 +139,11 @@ class NewsRadarTests(unittest.TestCase):
 
     def test_read_only_connection_check_exits_without_scraping(self):
         with patch.object(sys, "argv", ["runner.py", "--check-connection"]), \
-             patch.dict(runner.os.environ, {"NASHANI_TELEGRAM_BOT_TOKEN": "secret", "NASHANI_CHANNEL_ID": "@neshanikerman"}), \
+             patch.dict(runner.os.environ, {"NASHANI_TELEGRAM_BOT_TOKEN": "secret", "NASHANI_CHANNEL_ID": "-1003958286892"}), \
              patch.object(runner, "verify_telegram_identity", return_value=True) as verify, \
              patch.object(runner, "source_posts") as scrape:
             runner.main()
-            verify.assert_called_once_with("secret", "@neshanikerman")
+            verify.assert_called_once_with("secret", "-1003958286892")
             scrape.assert_not_called()
 
 if __name__ == "__main__":

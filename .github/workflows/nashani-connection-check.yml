@@ -31,5 +31,5 @@ jobs:
       - name: Validate BotFather token, exact channel, and posting permission
         env:
           NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
-          NASHANI_CHANNEL_ID: '@neshanikerman'
+          NASHANI_CHANNEL_ID: '-1003958286892'
         run: python nashani/runner.py --check-connection
