@@ -83,7 +83,7 @@ class NewsRadarTests(unittest.TestCase):
                 "excerpt": "شهرداری کرمان منطقه جدید اعلام کرد برای مشاهده متن کامل https://kermaneno.ir/x و @kermane_no",
                 "source": "کرمان‌نو", "url": "https://t.me/kermane_no/123"}
         rendered = runner.telegram_message(item)
-        self.assertIn("به گزارش کرمان نو:", rendered)
+        self.assertIn("به گزارش کرمان نو،", rendered)
         self.assertNotIn("https://", rendered)
         self.assertNotIn("href=", rendered)
         self.assertNotIn("@kermane_no", rendered)
@@ -128,6 +128,52 @@ class NewsRadarTests(unittest.TestCase):
         rendered = runner.telegram_message(item)
         self.assertNotIn("<script>", rendered)
         self.assertIn("&lt;script&gt;", rendered)
+
+    def test_native_photo_copied_with_our_caption(self):
+        item = {"title": "گزارش تازه شهرداری کرمان",
+                "excerpt": "شهرداری کرمان طرح توسعه شهر را معرفی کرد.",
+                "source": "کرمان‌نو", "source_handle": "kermane_no",
+                "source_post_id": "234", "media": {"kind": "photo", "url": None},
+                "media_repost_allowed": True}
+        with patch.object(runner, "verify_telegram_identity"), \
+             patch.object(runner, "upload_public_media") as upload, \
+             patch.object(runner, "telegram_checked_call", return_value={
+                 "ok": True, "result": {"message_id": 44}}) as api:
+            result = runner.send_to_telegram(item, "token", "-1003958286892")
+        self.assertEqual(result, 44)
+        self.assertEqual(api.call_args.args[1], "copyMessage")
+        payload = api.call_args.args[2]
+        self.assertIn("🔶", payload["caption"])
+        self.assertIn("🔹", payload["caption"])
+        self.assertEqual(payload["from_chat_id"], "@kermane_no")
+        upload.assert_not_called()
+
+    def test_video_upload_when_source_copy_unavailable(self):
+        item = {"title": "گزارش ویدیویی از شهر کرمان",
+                "excerpt": "تصاویر تازه‌ای از طرح ترافیک شهر کرمان منتشر شد.",
+                "source": "کرمان‌نو", "source_handle": "kermane_no",
+                "source_post_id": "235",
+                "media": {"kind": "video", "url": "https://cdn4.telesco.pe/video.mp4"},
+                "media_repost_allowed": True}
+        denied = runner.TelegramApiError("copyMessage", 400, "Bad Request: chat not found")
+        with patch.object(runner, "verify_telegram_identity"), \
+             patch.object(runner, "telegram_checked_call", side_effect=denied), \
+             patch.object(runner, "upload_public_media", return_value=51) as upload:
+            result = runner.send_to_telegram(item, "token", "-1003958286892")
+        self.assertEqual(result, 51)
+        self.assertEqual(upload.call_args.args[2]["kind"], "video")
+
+    def test_caption_falls_back_to_text_on_missing_video(self):
+        item = {"title": "خبر تصویری کرمان", "excerpt": "تصویری از شهر کرمان منتشر شد",
+                "source": "کرمان‌نو", "source_handle": "kermane_no",
+                "source_post_id": "235", "media_repost_allowed": True,
+                "media": {"kind": "video", "url": None}}
+        rejected = runner.TelegramApiError("copyMessage", 400, "chat not found")
+        calls = [rejected, {"ok": True, "result": {"message_id": 9}}]
+        with patch.object(runner, "verify_telegram_identity"), \
+             patch.object(runner, "telegram_checked_call", side_effect=calls) as api:
+            self.assertEqual(runner.send_to_telegram(item, "token", "-1003958286892"), 9)
+        self.assertEqual(api.call_args.args[1], "sendMessage")
 
     def test_no_publish_without_explicit_channel(self):
         with self.assertRaises(RuntimeError):
