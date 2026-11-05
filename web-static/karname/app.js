@@ -128,6 +128,7 @@ function detail(c){
  const recap=array(state.data?.recaps).find(r=>array(r.claims||r.claim_ids).includes(c.id));
  const recapLink=recap&&(recap.url||recap.link),validRecap=typeof recapLink==="string"&&/^https?:\/\//i.test(recapLink);
  let html='<div class="meta-line">'+pills(c)+'<span dir="ltr">'+esc(c.id)+'</span></div><h2 id="dialog-title">'+esc(claimText(c))+'</h2><div class="detail-grid"><div><strong>چه کسی گفته؟</strong>'+esc(names)+'</div><div><strong>چه زمانی؟</strong>'+esc(c.said||"تاریخ ذکر نشده")+'</div><div><strong>موعد بررسی</strong>'+esc(c.due_label||b.label||"مشخص نشده")+'</div><div><strong>نوع ادعا</strong>'+esc(c.type||c.type_class||"پیش‌بینی")+'</div></div>';
+ if(c.source_title)html+='<div class="detail-source"><strong>منشأ این ثبت:</strong> '+esc(c.source_title)+'<p class="muted">انتساب بر اساس پروندهٔ ارائه‌شده است؛ تا ثبت لینک منبع اصلی، قابل راستی‌آزمایی مستقل از این صفحه نیست.</p></div>';
  if(c.condition)html+='<div class="detail-source"><strong>شرط تحقق:</strong><p>'+esc(c.condition)+'</p></div>';
  if(c.speaker_note&&norm(c.speaker_note)!==norm(c.text))html+='<div class="detail-source"><strong>شرح و قیدهای اصلی:</strong><p>'+esc(c.speaker_note)+'</p></div>';
  html+='<div class="detail-source"><strong>وضعیت:</strong> '+esc(s.label)+(safeURL?'<p><a href="'+esc(safeURL)+'" target="_blank" rel="noopener noreferrer">مشاهدهٔ سند نتیجه ↗</a></p>':resultSource?'<p>'+esc(resultSource)+'</p>':'<p class="muted">سند نتیجه هنوز ثبت نشده است.</p>')+'</div>';
@@ -172,7 +173,7 @@ async function load(){
   $("stat-due").textContent=fa(state.claims.filter(c=>c.kind!=="L"&&!c.result&&due(c)&&due(c)<new Date()).length);
   $("stat-speakers").textContent=fa(state.speakers.filter(s=>state.claims.some(c=>array(c.speakers).some(p=>speakerId(p)===(s.key||s.name)))).length);
   $("asof").textContent="آخرین به‌روزرسانی: "+(data.as_of_fa||data.as_of||"تاریخ نامشخص");
-  if(state.claims.length===0){$("feed-notice").hidden=false;$("feed-notice").textContent="بانک کارنامه متصل است، اما هنوز ادعای منتشرشده‌ای ندارد.";}
+  if(data.is_complete===false||data.dataset_scope==="initial_partial_import"){$("feed-notice").hidden=false;$("feed-notice").textContent=data.provenance?.disclosure||"این داده‌ها فقط بخشی از دفتر کارنامه هستند و هنوز ارزیابی نهایی ندارند.";}else if(state.claims.length===0){$("feed-notice").hidden=false;$("feed-notice").textContent="بانک کارنامه متصل است، اما هنوز ادعای منتشرشده‌ای ندارد.";}
   render();
   let requested=new URL(location.href).searchParams.get("claim");if(requested)openClaim(requested);
  }catch(err){
