@@ -17,6 +17,7 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
 from urllib.error import HTTPError
 from urllib.parse import quote
@@ -258,15 +259,21 @@ class Ledger:
                    "branch": BRANCH, "content": content}
         if self.sha:
             payload["sha"] = self.sha
-        try:
-            result = http_json(self.endpoint(), method="PUT", payload=payload, token=self.token)
-        except HTTPError as error:
+        for attempt in range(4):
             try:
-                detail = str(json.loads(error.read().decode("utf-8")).get("message", ""))[:200]
-            except (ValueError, AttributeError):
-                detail = ""
-            print(f"::error::Nashani state write HTTP {error.code}: {detail}", file=sys.stderr)
-            raise RuntimeError("Nashani state checkpoint failed") from None
+                result = http_json(self.endpoint(), method="PUT", payload=payload, token=self.token)
+                break
+            except HTTPError as error:
+                if error.code in {500, 502, 503, 504} and attempt < 3:
+                    # GitHub occasionally returns a transient server error to successive writes.
+                    time.sleep(2 * (attempt + 1))
+                    continue
+                try:
+                    detail = str(json.loads(error.read().decode("utf-8")).get("message", ""))[:200]
+                except (ValueError, AttributeError):
+                    detail = ""
+                print(f"::error::Nashani state write HTTP {error.code}: {detail}", file=sys.stderr)
+                raise RuntimeError("Nashani state checkpoint failed") from None
         self.sha = result["content"]["sha"]
 
 
@@ -349,6 +356,41 @@ def check_and_publish(item, state, ledger, token, channel):
     item["telegram_message_id"] = msg_id
     item["sent_at"] = utcnow().isoformat()
     ledger.save(state)
+
+
+def publish_batch(items, state, ledger, token, channel):
+    """Reserve the entire outbound batch first, then save results in one commit.
+
+    An uncertain network response leaves a post reserved, never eligible for
+    automatic resending; later unattempted posts are returned to ready state.
+    """
+    if not items:
+        return 0
+    verify_telegram_identity(token, channel)
+    stamp = utcnow().isoformat()
+    for item in items:
+        item["status"] = "sending_uncertain"
+        item["reserved_at"] = stamp
+    ledger.save(state)
+    delivered = 0
+    for position, item in enumerate(items):
+        try:
+            message_id = send_to_telegram(item, token, channel)
+        except Exception:
+            # This post may have reached Telegram: keep uncertain. Subsequent
+            # posts were definitely not attempted, so they can be retried.
+            for later in items[position + 1:]:
+                later["status"] = "ready"
+                later.pop("reserved_at", None)
+            ledger.save(state)
+            raise
+        item["status"] = "published"
+        item["telegram_message_id"] = message_id
+        item["sent_at"] = utcnow().isoformat()
+        delivered += 1
+    ledger.save(state)
+    print(f"Nashani published {delivered} messages in one batch")
+    return delivered
 
 
 def main():
@@ -445,18 +487,27 @@ def main():
             raise ValueError("Approval ID missing, duplicated or already sent")
         check_and_publish(matches[0], state, ledger, token, channel)
     elif publishing:
-        auto_items = [item for item in new if item.get("status") == "ready"]
-        priority = [x for x in auto_items if source_map.get(x["source_handle"].lower(), {}).get("coverage") == "all"]
-        other = [x for x in auto_items if x not in priority]
-        # Kerman-No: all newly discovered ordinary text posts, subject to safety review.
-        # Other news feeds: up to two locally relevant items each run.
-        for item in other[2:]:
-            item["status"] = "review"
-            item["review_reason"] = "rate_limit"
-        if len(other) > 2:
-            ledger.save(state)
-        for item in sorted(priority + other[:2], key=lambda p: p.get("published_at") or ""):
-            check_and_publish(item, state, ledger, token, channel)
+        # Read from the persistent queue, not only this run's fresh discoveries.
+        # This drains Kerman-No's half-hour intake over subsequent five-minute
+        # runs without losing safe stories when GitHub has transient errors.
+        ready = []
+        for item in queue:
+            if item.get("status") != "ready":
+                continue
+            published = parse_time(item.get("published_at"))
+            if not published or now - published > MAX_AGE:
+                item["status"] = "expired"
+                item["review_reason"] = "old_news_not_sent"
+            else:
+                ready.append(item)
+        priority = [x for x in ready if source_map.get(x["source_handle"].lower(), {}).get("coverage") == "all"]
+        other = [x for x in ready if x not in priority]
+        priority.sort(key=lambda p: p.get("published_at") or "")
+        other.sort(key=lambda p: p.get("published_at") or "")
+        # Six Kerman-No posts and two other reports per run. Remaining
+        # Kerman-No posts stay ready for the next automatic run.
+        selected = sorted(priority[:6] + other[:2], key=lambda p: p.get("published_at") or "")
+        publish_batch(selected, state, ledger, token, channel)
     else:
         print("Safe preview mode: outbound publishing DISABLED")
 
