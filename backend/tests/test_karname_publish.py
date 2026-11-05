@@ -161,6 +161,21 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertIn(".scenario-detail", css)
         self.assertIn("این جدول امتیاز موفقیت نیست", js)
 
+    def test_top_level_numbers_separate_public_ledger_from_review_queue(self):
+        html = (ROOT / "web-static/karname/index.html").read_text(encoding="utf-8")
+        js = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
+        for card in ("stat-claims", "stat-extracted", "stat-pending", "stat-graded",
+                     "stat-due", "stat-speakers"):
+            self.assertIn('id="' + card + '"', html)
+        self.assertIn('id="intake-breakdown"', html)
+        self.assertIn("نامزد استخراج‌شده از منابع", html)
+        self.assertIn("نتیجهٔ راستی‌آزمایی‌شده", html)
+        self.assertIn('fetch("/karname/intake-stats.json"', js)
+        self.assertIn("function validIntakeStats(payload)", js)
+        self.assertIn("pending_review+c.screened_out+c.previously_reviewed", js)
+        self.assertIn("void loadIntakeStats()", js)
+        self.assertIn("آمار صف بررسی فعلاً در دسترس نیست", js)
+
     def test_pilot_notice_visible_and_share_links_present(self):
         code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
         self.assertIn('data.is_complete===false', code)

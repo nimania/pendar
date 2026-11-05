@@ -287,7 +287,38 @@ function eventHandlers(){
  $("claim-dialog").addEventListener("close",()=>{let url=new URL(location.href);url.searchParams.delete("claim");history.replaceState(null,"",url);});
  window.addEventListener("hashchange",()=>{let tab=location.hash.slice(1);if(labels[tab]){state.tab=tab;render();}});
 }
+function validIntakeStats(payload){
+ if(payload?.schema_version!==1||payload.scope!=="public_aggregate_only")return false;
+ const c=payload.counts||{};
+ const names=["extracted_candidates","pending_review","screened_out","previously_reviewed","manual_review_requested"];
+ if(!names.every(key=>Number.isSafeInteger(c[key])&&c[key]>=0))return false;
+ return c.pending_review+c.screened_out+c.previously_reviewed===c.extracted_candidates
+  &&c.manual_review_requested<=c.pending_review;
+}
+async function loadIntakeStats(){
+ try{
+  const response=await fetch("/karname/intake-stats.json",{cache:"no-store"});
+  if(!response.ok)throw Error("HTTP "+response.status);
+  const report=await response.json();
+  if(!validIntakeStats(report))throw Error("Invalid aggregate schema");
+  const c=report.counts,coverage=report.coverage||{};
+  $("stat-extracted").textContent=fa(c.extracted_candidates);
+  $("stat-pending").textContent=fa(c.pending_review);
+  const coverageText=Number.isSafeInteger(coverage.figure_profiles_scanned)&&coverage.figure_profiles_scanned>0
+   ?" آخرین پوشش ثبت‌شده: "+fa(coverage.figure_profiles_scanned)+" پروندهٔ چهره و "
+    +fa(coverage.figure_posts_scanned||0)+" گفته/پست قابل اسکن.":"";
+  $("intake-breakdown").textContent=fa(c.screened_out)+" مورد با حفظ سابقه از صف فعال کنار گذاشته شده؛ "
+   +fa(c.manual_review_requested)+" مورد بازبینی ویژه لازم دارد. "
+   +"هیچ یک از این آمارها به معنای تأیید نتیجه نیست."+coverageText;
+ }catch(err){
+  $("stat-extracted").textContent="—";
+  $("stat-pending").textContent="—";
+  $("intake-breakdown").textContent="آمار صف بررسی فعلاً در دسترس نیست؛ ارقام کارنامهٔ عمومی جداگانه و معتبر باقی می‌مانند.";
+  console.warn("Karname aggregate unavailable:",err.message);
+ }
+}
 async function load(){
+ void loadIntakeStats();
  // Portrait lookup is best-effort. No invented images or name-only photo searches.
  const resource=(url,fallback)=>fetch(url,{cache:"no-cache"})
   .then(r=>r.ok?r.json():fallback).catch(()=>fallback);

@@ -11,6 +11,7 @@ on:
       - "backend/data/editorial-recaps.json"
       - "web-static/data/pendar-editorial-views.json"
       - "backend/scripts/collect_karname_candidates.py"
+      - "backend/scripts/build_karname_intake_stats.py"
       - "backend/scripts/fetch_karname_figures.py"
       - "backend/tests/test_karname_candidates.py"
       - "backend/tests/test_karname_scenarios.js"
@@ -19,6 +20,7 @@ on:
   pull_request:
     paths:
       - "backend/scripts/collect_karname_candidates.py"
+      - "backend/scripts/build_karname_intake_stats.py"
       - "backend/scripts/fetch_karname_figures.py"
       - "backend/tests/test_karname_candidates.py"
       - "backend/tests/test_karname_scenarios.js"
@@ -46,7 +48,9 @@ jobs:
         with:
           python-version: "3.11"
       - name: Test candidate extraction and safety boundaries
-        run: python -m unittest discover -s backend/tests -p 'test_karname_candidates.py' -v
+        run: |
+          python -m unittest discover -s backend/tests -p 'test_karname_candidates.py' -v
+          python -m unittest discover -s backend/tests -p 'test_karname_intake_stats.py' -v
       - name: Verify scenario UI and classifications
         run: |
           node --check web-static/karname/app.js
@@ -65,6 +69,8 @@ jobs:
             python backend/scripts/collect_karname_candidates.py
             python backend/scripts/collect_karname_candidates.py --check
           fi
+          python backend/scripts/build_karname_intake_stats.py
+          python backend/scripts/build_karname_intake_stats.py --check
           python - <<'PY'
           import json, os
           from pathlib import Path
@@ -91,13 +97,13 @@ jobs:
       - name: Save new review candidates (not public data)
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
-          git add backend/data/karname-candidates.json
+          git add backend/data/karname-candidates.json web-static/karname/intake-stats.json
           if git diff --cached --quiet; then
             echo "No new candidates or review changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "data(karname): refresh internal editorial claim candidates [skip ci]"
+          git commit -m "data(karname): refresh internal claim candidates and public aggregate"
           git pull --rebase origin main
           git push origin HEAD:main
