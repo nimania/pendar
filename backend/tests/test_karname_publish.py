@@ -110,6 +110,23 @@ class KarnamePublicationTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 build(ledger, target)
 
+    def test_figure_portraits_and_canonical_navigation(self):
+        code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
+        css = (ROOT / "web-static/karname/style.css").read_text(encoding="utf-8")
+        portraits = json.loads(
+            (ROOT / "web-static/data/pendar-figure-portraits.json").read_text(encoding="utf-8"))
+        self.assertIn("function profileHandle(s)", code)
+        self.assertIn("function avatarMarkup(s)", code)
+        self.assertIn("function contributorLinks(c)", code)
+        self.assertIn("function personHref(s)", code)
+        self.assertIn('"/data/pendar-figure-portraits.json"', code)
+        self.assertIn("html+=contributorLinks(c)", code)
+        self.assertIn("همهٔ سخنان این چهره در پندار", code)
+        self.assertIn("a.claim-person:hover", css)
+        self.assertEqual(portraits["abbas-souri"], "/figures/abbas-souri-user.png")
+        self.assertTrue((ROOT / "web-static/figures/abbas-souri-user.png").is_file())
+        self.assertTrue(any(p.get("key") == "abbas-souri" for p in self.public["speakers"]))
+
     def test_pilot_notice_visible_and_share_links_present(self):
         code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
         self.assertIn('data.is_complete===false', code)
