@@ -17,7 +17,7 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertIn('href="https://pendar.io/karname/"', canonical)
         self.assertIn('href="https://pendar.io/karname/"', alias)
         self.assertIn('location.replace("/karname/"+location.search+location.hash)', alias)
-        self.assertIn('href="/karname/app.js"', canonical)
+        self.assertIn('src="/karname/app.js"', canonical)
 
     def test_missing_ledger_does_not_create_fake_data(self):
         with tempfile.TemporaryDirectory() as temp:
