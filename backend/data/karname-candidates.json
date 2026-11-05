@@ -1,0 +1,2643 @@
+{
+  "schema_version": 1,
+  "publication_policy": "internal_review_queue_only_no_public_import",
+  "sources": [
+    "backend/data/editorial-recaps.json",
+    "web-static/data/pendar-editorial-views.json"
+  ],
+  "mirrored_jan_kalam_skipped": true,
+  "stats": {
+    "total": 64,
+    "pending": 64,
+    "reviewed": 0,
+    "sources_scanned": 61,
+    "source_spans_scanned": 1200,
+    "ambiguous_sources": 1
+  },
+  "candidates": [
+    {
+      "id": "KC-077fdcba2a9d8d4190",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": "mohammad-marandi",
+      "speaker_name": "محمد مرندی",
+      "speaker_candidates": [
+        "mohammad-marandi"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تحلیلِ او «اما اگر این رژیم‌ها بی‌ثبات‌تر و آینده‌شان نامطمئن‌تر شود، کم‌کم شاهدِ اعتراض و حرف‌زدنِ مردم خواهیم بود و آنگاه همه‌چیز می‌تواند خیلی سریع تغییر کند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر این رژیم‌ها بی‌ثبات‌تر و آینده‌شان نامطمئن‌تر شود",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-marandi-yemen-saudi-20261018",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگوی تحلیلی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T10:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-0d00ca6c38b305b4a8",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "فؤاد ایزدی",
+      "speaker_candidates": [
+        "foad-izadi"
+      ],
+      "identity_status": "unresolved_requires_review",
+      "excerpt_exact_from_field": "به تعبیرِ مجری، در این ده روزِ پرحادثه و هرچه به انتخاباتِ آمریکا نزدیک‌تر می‌شویم، احتمالِ جنگ بیشتر به نظر می‌رسد؛ و «کارِ حیرت‌انگیزِ» ترامپ، یعنی اعلامِ حمایتِ رسمی از نتانیاهو، تقریباً بی‌سابقه بوده است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "در این ده روز",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-izadi-alizadeh-netanyahu-endorsement-2026",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگو با علی علیزاده",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-21T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "bcb17dcc67d1f639465a2c89a04a915578934f4c95291204ff9c8028f9e11c08"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-14637dd30762a942ee",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "از فحوای صحبت‌های آقای ترامپ و حتی معاونش ونس و وزیر خارجه‌اش مارکو روبیو برمی‌آید که در آن دو ماه، متأسفانه احتمالِ حملهٔ نظامیِ آمریکا و اسرائیل را که با هم خواهد بود خواهیم داشت؛ یعنی از چهارم نوامبر تا سوم یا چهارم ژانویه.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "در آن دو ماه",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-holakouee-oct7-90-days-window",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی فرهنگ هلاکویی دربارهٔ اوضاع ایران و خاورمیانه (۷ اکتبر ۲۰۲۶)",
+          "source_url": null,
+          "source_date_label": "۷ اکتبر ۲۰۲۶",
+          "editorial_recorded_at": "2026-10-08T18:24:18Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "37168339d5d05ffe91e86131a4b2aad11c900b1b9aad0b2afec31acbcbd77560"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-1589d7d8c5c70e7106",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "تأکیدش بر رصد نشانه‌ها و تمایز سناریوی ممکن از سناریوی محتمل است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-15ac9d8f383a7d2c67",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "او انتخاباتِ اخیر را نمونه می‌آورد: «تمامِ ژنرال‌های مشهور و دانشگاهیان و روزن‌گشایان — امثالِ رنانیِ عزیز — را بسیج کردند و آن بیانیه‌ها را دادند؛ گفتم این‌ها با رنجی بی‌پایان روبه‌رو خواهند شد».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-sokoot-20261022",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-22T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "90876ee5cc9932837774a054bd35ccf3db3c5547c7d85bc1139332e2019192a8"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-1b4e41d08b15a05607",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "اما بعد از سوم یا چهارم نوامبر، صرف‌نظر از نتایجِ انتخابات، این آزادیِ عمل را برای مدتِ دو ماه تا سوم یا چهارم ژانویه خواهد داشت.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "از سوم یا چهارم نوامبر",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-holakouee-oct7-90-days-window",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی فرهنگ هلاکویی دربارهٔ اوضاع ایران و خاورمیانه (۷ اکتبر ۲۰۲۶)",
+          "source_url": null,
+          "source_date_label": "۷ اکتبر ۲۰۲۶",
+          "editorial_recorded_at": "2026-10-08T18:24:18Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "37168339d5d05ffe91e86131a4b2aad11c900b1b9aad0b2afec31acbcbd77560"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-21b8d5a0b5ceadb7ad",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "جنگ از سقوط محتمل‌تر، اما بدون تاریخ قطعی",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-2584ef3e3632142160",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "از همین‌رو او احتمال می‌دهد که «اگر این‌بار کاری بکنند، کاری بسیار غیرمترقبه و غافلگیرکننده خواهد بود — نه فقط به‌لحاظِ زمان، بلکه در نوعِ کار؛ با صورتی توطئه‌آمیز که اکنون برای ما قابلِ درک نیست» — چیزی شبیهِ آنچه برای لبنانی‌ها رخ داد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-32e43a2a7871d55ae2",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "mohammad-marandi",
+      "speaker_name": "محمد مرندی",
+      "speaker_candidates": [
+        "mohammad-marandi"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "او یادآوری می‌کند که «عربستان و این کشورهای خلیجِ فارس جوامعی مصرف‌گرا و متکی به یارانه‌اند و دارایی‌هاشان در آمریکا به شکلِ سهام و اوراقِ قرضه است — بعید می‌دانم در این بحرانِ اقتصادی، آمریکا اجازه دهد آن دارایی‌ها را نقد کنند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-marandi-yemen-saudi-20261018",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگوی تحلیلی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T10:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-35326cbdb6864e6ab8",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "تأکید دارد جابه‌جایی افراد بدون تغییر گفتمان حاکم، لزوماً بن‌بست را برطرف نخواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-3ba2d3cf3f63f87796",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "بنابراین پایین بودن سطح اعتراض خیابانی را نمی‌توان معادل رضایت عمومی دانست؛ ممکن است مؤلفه‌های لازم برای کنش جمعی مؤثر هنوز کنار هم قرار نگرفته باشند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-3d10c85f3ec0850ec2",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به نظر من و متأسفانه ما تو اون دو ماه احتمال حملهٔ نظامی آمریکا و اسرائیل رو که با هم خواهد بود خواهیم داشت؛ یعنی از چهارم نوامبر تا سوم، چهارم ژانویه.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "از چهارم نوامبر",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-holakouee-meybodi-war-timing",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی فرهنگ هلاکویی با علیرضا میبدی",
+          "source_url": "https://www.youtube.com/watch?v=ZTDWWQJ9DGg",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T16:09:50Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "76804c5691a95aefdea0c4128f035a36f582d3c0b121a2b530ad6e2f58243bc2"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-3e20f6a891587c70e9",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "گفتهٔ او دربارهٔ صفرنشدن صادرات نفت و جهت‌گیری احتمالی مکران علیه چین، در این بازگویی راستی‌آزمایی مستقل نشده است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-part2-20261005",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — گفت‌وگوی ویژه، قسمت دوم",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:22:03Z",
+          "editorial_published_at": "2026-10-05",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "9fbe9ceb478d9d09ddaf13ffcd5a312cbc39a8519af13647cb78d57833470aae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-41a336de3d6c2c3a91",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "mohammad-marandi",
+      "speaker_name": "محمد مرندی",
+      "speaker_candidates": [
+        "mohammad-marandi"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ مجری، اوضاع برای سعودی‌ها خوب پیش نمی‌رود، آمریکا هم در موقعیتی نیست که مستقیم واردِ جنگ با یمن شود، و حالا نشانه‌هایی از احتمالِ مداخله‌ی نظامیِ مصر دیده می‌شود: «سی‌سی همین یکشنبه، هجدهمِ اکتبر، درخواستِ رأی‌گیری در پارلمان را داده؛ نتیجه هرچه باشد، نشان می‌دهد کشورهای بیشتری به داخلِ این جنگ کشیده می‌شوند و مصر کشورِ کوچکی نیست».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "از احتمالِ مداخله‌ی نظامیِ مصر دی",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-marandi-yemen-saudi-20261018",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگوی تحلیلی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T10:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-42e81589ec900d0293",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به روایتِ او، اگر جنگِ دوباره‌ای رخ دهد، «بر محاسباتی تازه استوار خواهد بود، متفاوت از محاسباتی که جنگِ چهل‌روزه بر اساسِ آن‌ها شروع شد».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر جنگِ دوباره‌ای رخ دهد",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-49cbe58aa6e96bdb3b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "اما واکنش اسرائیل و احتمال جنگ زمینی طولانی را درست محاسبه نکرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-oct7-2026",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:12:53Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "04ef1a66a54c83e355f9678c96dcf024a65aba19488f43c7f04f30cdd74c96d1"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-4bb26cf497a3f8db59",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ او جمع‌بندیِ این بخش چنین است: «احتمالِ یک توافقِ بسیار عجیب صفر نیست اما بسیار ضعیف است؛ احتمالِ جنگ بسیار بالا رفته؛ جنگ می‌تواند دو صورت داشته باشد؛ حمله پیش از انتخابات بعید است؛ و چه اپوزیسیون پیروز شود چه نشود، نتانیاهو همچنان فرصتِ زیادی دارد — و محاسباتِ آن‌ها این‌بار حتماً پیچیده‌تر و کارشان دقیق‌تر است».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-4cea5ee23d577c1804",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "darwinsabouri",
+      "speaker_name": "داروین صبوری",
+      "speaker_candidates": [
+        "darwinsabouri"
+      ],
+      "identity_status": "matched_unique_name",
+      "excerpt_exact_from_field": "به روایتِ او، «هرکه تا امروز به رضاشاه فحش داده و خواهد داد، هم‌زمان دارد به تمامِ روشنفکرانِ مشروطه فحش می‌دهد؛ غیر از این نیست».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-saboori-tarikh-andisheh-tokvin-agahi",
+          "text_field": "recap_fa",
+          "source_title": "درس‌گفتارِ تاریخِ اندیشه",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "02fbfa2c689c97996365a6965ebb4acb378f9740e17096a42f89cfc7aa9ecfcf"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-518690265cbf068e3a",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "فؤاد ایزدی",
+      "speaker_candidates": [
+        "foad-izadi"
+      ],
+      "identity_status": "unresolved_requires_review",
+      "excerpt_exact_from_field": "به روایتِ او، چون پیش‌بینی‌هایش درست از آب درآمد — «که تفاهم و برجام قابلِ اعتماد نیست و در دو سالِ باقی‌مانده‌ی ترامپ جنگ خواهیم داشت» — حالا «بقیه را می‌ترسانند که مبادا فکت‌های درست بگویند و درست پیش‌بینی کنند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "در دو سال",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-izadi-alizadeh-netanyahu-endorsement-2026",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگو با علی علیزاده",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-21T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "bcb17dcc67d1f639465a2c89a04a915578934f4c95291204ff9c8028f9e11c08"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-561f01f8c49d508546",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به روایتِ او — در پاسخ به اصرارِ مجری برای یک پیش‌بینیِ مشخص — «آنچه می‌بینم این است که در شش ماهِ آینده ضرباتِ نظامیِ هوشیارانه‌ای را شاهد خواهیم بود، و آنچه اکنون می‌بینیم مقدماتی است برای ورود به منطقِ تسلیم یا جنگی گسترده‌تر».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "در شش ماه",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-finale-20261019",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-19T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "73505ab78e5c901038b08fd59e1fdccd79a01a7bd81cb06cfe6c604c4251c89e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-59bad804f7bea24f61",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ او سخنِ ترامپ هم که می‌گوید «در هدف‌قراردادنِ رهبران افراط کردیم و حالا کسی نمانده که با او مذاکره کنیم»، احتمالاً «نوعی عملیاتِ فریب است و شاید می‌خواهد دوباره دست به همین اقدام بزند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-5a23051aac539336ab",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "احتمال توافق پایدار در چارچوب گفتمان موجود را بسیار کم، حتی کمتر از پنج درصد، توصیف می‌کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-5f2b03e4c6a6460f11",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به‌روایتِ او این «نوعی خودزنی» است: «اهرمِ هرمز جواب نداد، حالا کابل‌ها را پیش می‌کشند؛ اما این کار در تحلیلِ نهایی احتمالاً به نفعِ آمریکا تمام می‌شود».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261020",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "680b4688b53b6c881545b94d6abf722ab6e61a681fd708237422fbeb6739ab54"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-6abb17f086bd2223fc",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ او تنها چیزی که ممکن است مانعِ این سناریو شود، «تبعاتش برای خودِ آمریکا و کشورهای منطقه است؛ یک ایرانِ بی‌ثباتِ ازکنترل‌خارج‌شده می‌تواند کلِ منطقه را در خود فروببلعد».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-72be015557a316ce19",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "darwinsabouri",
+      "speaker_name": "داروین صبوری",
+      "speaker_candidates": [
+        "darwinsabouri"
+      ],
+      "identity_status": "matched_unique_name",
+      "excerpt_exact_from_field": "به تحلیلِ او این مرورِ تاریخی برای فردای ایران است: «همه‌ی این‌ها را می‌گویم تا متوجه باشیم؛ آن دستاوردها وقتی بدل به نهاد شدند دوام آوردند، و هر جامعه‌ای که نتواند تجربه‌اش را به نهاد بدل کند، حافظه‌ی تاریخی نخواهد داشت».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-saboori-tarikh-andisheh-tokvin-agahi",
+          "text_field": "recap_fa",
+          "source_title": "درس‌گفتارِ تاریخِ اندیشه",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "02fbfa2c689c97996365a6965ebb4acb378f9740e17096a42f89cfc7aa9ecfcf"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-7f31b04903810eecaa",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_unique_name",
+      "excerpt_exact_from_field": "این اولینش نیست، آخرینش هم نخواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-mehdi-motaharnia-20261009-rasaee-factions",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی پرسش‌وپاسخ مهدی مطهرنیا",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-09T18:20:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "2279d2f1cb300bcf3522a823ebf6bdeb8258ff0dcb4b3ebd08b6d7fb3c451724"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-800227d5af2d1a2a70",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "البته اگر جمهوری‌خواهان مجلس نمایندگان و سنا را در اختیار داشته باشند، هم فرصتِ بعدی به آقای ترامپ می‌دهد و هم ممکن است آن را با توجه به شرایط به بعد موکول کنند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر جمهوری‌خواهان مجلس نمایندگان و سنا را در اختیار داشته باشند",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-holakouee-oct7-90-days-window",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی فرهنگ هلاکویی دربارهٔ اوضاع ایران و خاورمیانه (۷ اکتبر ۲۰۲۶)",
+          "source_url": null,
+          "source_date_label": "۷ اکتبر ۲۰۲۶",
+          "editorial_recorded_at": "2026-10-08T18:24:18Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "37168339d5d05ffe91e86131a4b2aad11c900b1b9aad0b2afec31acbcbd77560"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-8405e2830701bba432",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "mohammad-marandi",
+      "speaker_name": "محمد مرندی",
+      "speaker_candidates": [
+        "mohammad-marandi"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ او «جامعه‌ای قبیله‌ای که فقط با پولِ زیاد قابلِ اداره بود و حالا آن پول دارد ناپدید می‌شود، عاقبتِ خوشی نخواهد داشت».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-marandi-yemen-saudi-20261018",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگوی تحلیلی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T10:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-8729196cc6c258fe75",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "mohammad-marandi",
+      "speaker_name": "محمد مرندی",
+      "speaker_candidates": [
+        "mohammad-marandi"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ او در کشورهای دیگر «مردم مخالفِ جنگ و کشتار بودند و خواهند دید که این جنگ را صهیونیسم و ترامپ و نتانیاهو بر سرشان آوار کرده‌اند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "در کشورهای دی",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-marandi-yemen-saudi-20261018",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگوی تحلیلی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T10:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-929f19eff0b81db9cb",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به باورش حتی نیروهای وفادار به جمهوری اسلامی نیز ضرورت تحول را احساس می‌کنند، اما مقاومت در برابر اصلاحات محدود ممکن است جامعه را به سوی مطالبه تغییر ساختاری ببرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-92fb115104ce6a98ac",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ او خطرِ اصلی همین‌جاست: «زیرِ لوای اینکه باید کاری کنیم جنگ نشود، یا اینکه مقاومت است که ایران را از همه‌ی خطرها مصون می‌دارد، یا اینکه هرکه از مذاکره و حلِ مسئله حرف می‌زند خائن است — دارند ایران را به جایی هل می‌دهند که بیرون‌آمدن از آن ساده نیست، و ممکن است وضعیتِ ایران شبیهِ عراق شود — نه عراقِ امروز، بلکه عراقِ چندسالِ پیش و آن ظهورِ داعش و آن مصیبت‌ها».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-9466760dfcda1b2741",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "او این مفهوم را از اجرای توطئه به دست خود بازیگر و از غفلت یا شکست اطلاعاتی متمایز می‌کند: بازیگر دوم ممکن است از احتمال رخداد آگاه باشد، ممانعت مؤثر نکند و بعد، رخداد را در خدمت اهداف خود قرار دهد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-oct7-2026",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:12:53Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "04ef1a66a54c83e355f9678c96dcf024a65aba19488f43c7f04f30cdd74c96d1"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-9766288c65494e7983",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "یوسف عزیزی",
+      "speaker_candidates": [
+        "yousef-azizi"
+      ],
+      "identity_status": "unresolved_requires_review",
+      "excerpt_exact_from_field": "درباره‌ی احتمالِ حمله‌ی پیش‌دستانه، او از نگاهِ مطلق‌انگارانه پرهیز می‌دهد و می‌گوید نباید مسئله را «صفر و یک» دید.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "yousef-azizi-meydan-diplomasi-mehr1405",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "e5e8aa440ecd824607ab9cde85e63e524fea8f82150edeeccb2e1a2d26654f6b"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-a1dceaded4fef82820",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "او نام نبردن ترامپ از رضا پهلوی را دلیل بی‌اهمیت بودن او نمی‌داند و می‌گوید در دوره گذار ممکن است معرفی علنی گزینه‌ها به‌عمد به تعویق بیفتد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-a1ec6cd700a1c920ac",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "مطهرنیا در پاسخ مستقیم به مقایسه احتمالات، جنگ را محتمل‌تر از سایر رویدادهای بزرگ ارزیابی می‌کند؛ حتی وقوع آن پیش از انتخابات میان‌دوره‌ای آمریکا را ممکن می‌داند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-a857c3d7c10d76178e",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "فؤاد ایزدی",
+      "speaker_candidates": [
+        "foad-izadi"
+      ],
+      "identity_status": "unresolved_requires_review",
+      "excerpt_exact_from_field": "به روایتِ او، «دغدغه‌ی اصلیِ کشور الان باید این باشد که حمله‌ی دیگری نشود؛ این‌بار اگر حمله کنند، به‌جای پنج‌هزار شهید ممکن است ده‌هزار بدهیم».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر حمله کنند",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-izadi-alizadeh-netanyahu-endorsement-2026",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگو با علی علیزاده",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-21T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "bcb17dcc67d1f639465a2c89a04a915578934f4c95291204ff9c8028f9e11c08"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-a9a5d15c1a26e9248f",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "با این حال، همان‌گونه که در برنامه‌های قبلی هم عرض کردم، یک آتش‌بسِ نانوشته تا حدودِ چهار هفتهٔ دیگر ادامه خواهد داشت؛ یعنی از امروز که هفتم اکتبر است تا سوم یا چهارم نوامبر، که انتخاباتِ آمریکا تمام شده و نتیجه‌اش مشخص شده است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "تا حدودِ چهار هفته",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-holakouee-oct7-90-days-window",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی فرهنگ هلاکویی دربارهٔ اوضاع ایران و خاورمیانه (۷ اکتبر ۲۰۲۶)",
+          "source_url": null,
+          "source_date_label": "۷ اکتبر ۲۰۲۶",
+          "editorial_recorded_at": "2026-10-08T18:24:18Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "37168339d5d05ffe91e86131a4b2aad11c900b1b9aad0b2afec31acbcbd77560"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-aa36613503940b868c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تحلیلِ او نتیجه‌ی این وضع آن است که «هر اتفاقی ممکن است»؛ حتی در همین شرایط که اجماع به‌سمتِ «ناممکن‌بودنِ توافق و وقوعِ جنگ» می‌رود، «یک توافقِ ناگهانی از پشتِ پرده هم امرِ غیرممکنی نیست — هرچند بعید است».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-abac935887e34e36a3",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "درست است که جمهوری اسلامی حرفشون این هست که ما در مقابل این حمله مقاومت می‌کنیم یا پیروز این جنگ یا حملهٔ نظامی خواهیم بود؛ و یا احتمالاً بقیهٔ کشورهای اطراف رو، مثلاً اون‌هایی که یه پایگاه‌هایی در اختیار آمریکا گذاشتن یا به هر حال با ما همکاری نکردن، ممکنه با حملهٔ موشکی و پهپادی به هم بریزیم.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-holakouee-meybodi-war-timing",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی فرهنگ هلاکویی با علیرضا میبدی",
+          "source_url": "https://www.youtube.com/watch?v=ZTDWWQJ9DGg",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T16:09:50Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "76804c5691a95aefdea0c4128f035a36f582d3c0b121a2b530ad6e2f58243bc2"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-b15dcbbc69a98583d7",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به روایتِ او، «محتمل‌ترین سناریو همان است که رخ داده: سناریوی پنجم، جنگِ نیابتیِ ژئوپولیتیکی که در حالِ پیاده‌شدن است؛ و فعلاً خفگیِ شبکه‌ای است تا به ضربه‌ی نهایی برسد».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-finale-20261019",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-19T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "73505ab78e5c901038b08fd59e1fdccd79a01a7bd81cb06cfe6c604c4251c89e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-b3e584fa3b39e74de0",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": "darwinsabouri",
+      "speaker_name": "داروین صبوری",
+      "speaker_candidates": [
+        "darwinsabouri"
+      ],
+      "identity_status": "matched_unique_name",
+      "excerpt_exact_from_field": "به تعبیرِ او کاظم‌زاده نتیجه می‌گیرد که «اگر ذهنیت را تغییر ندهیم، هزاران نفر کشته می‌شوند؛ اگر همه‌ی اشراف هم کشته شوند، همین دهقانِ برهنه هزار اربابِ تازه خواهد یافت — پس انقلاب باید در روحِ مردم هم رخنه کند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر همه‌ی اشراف هم کشته شوند",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-saboori-tarikh-andisheh-tokvin-agahi",
+          "text_field": "recap_fa",
+          "source_title": "درس‌گفتارِ تاریخِ اندیشه",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "02fbfa2c689c97996365a6965ebb4acb378f9740e17096a42f89cfc7aa9ecfcf"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-b58eef3fa783634afd",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "و داوریِ کلیِ او این است: «مایه‌ی ننگ و مسخره است که کشوری در حدِ اسرائیل بخواهد در کشوری به وسعتِ ایران رژیم‌چنج کند؛ اگر به هر دلیل چنین اتفاقی بیفتد، در تاریخ خواهد ماند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر به هر دلیل چنین اتفاقی بیفتد",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-c69a535cf545d7127c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "معتقد است آمریکا ممکن است جریان‌های موجود را حلقهٔ اتصال گذار بداند، نه عناصر ماندگار؛ از الجولانی مثال می‌آورد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-part2-20261005",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — گفت‌وگوی ویژه، قسمت دوم",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:22:03Z",
+          "editorial_published_at": "2026-10-05",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "9fbe9ceb478d9d09ddaf13ffcd5a312cbc39a8519af13647cb78d57833470aae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-c83a5fbf12704a9e4a",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ او همین حالا «اختلاف بر سرِ نحوه‌ی خروج از بحران در درونِ ساختار بالا گرفته — میانِ آقازاده‌ها و مشاورانِ اجرایی و چهره‌هایی که ۱۸۰ درجه خلافِ مقاماتِ امنیتی حرف می‌زنند»؛ و «ممکن است عاملِ تعیین‌کننده‌ی آینده نه خودِ محاصره، بلکه همین اختلاف بر سرِ راهِ خروج باشد».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-khafegi-20261017",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-17T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "5a18aee93a851fad66bc93dbe13923b0ffd70802e9518cb75395cd6d34740024"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-c89af3046ae0499b08",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "مطهرنیا خطرناک‌ترین احتمال را یک حادثهٔ تروریستی یا درگیری شدید منطقه‌ای، به‌ویژه میان تهران و تل‌آویو، می‌داند که ممکن است جنگ را گسترش دهد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-oct7-2026",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:12:53Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "04ef1a66a54c83e355f9678c96dcf024a65aba19488f43c7f04f30cdd74c96d1"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-c921ded71d4840c6b7",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "darwinsabouri",
+      "speaker_name": "داروین صبوری",
+      "speaker_candidates": [
+        "darwinsabouri"
+      ],
+      "identity_status": "matched_unique_name",
+      "excerpt_exact_from_field": "به روایتِ او، سال‌های ۱۲۹۹ تا ۱۳۰۴ را می‌توان «آستانه‌ی گذار» نامید: «گذاری میانِ یک شکستِ تجربه، بازاندیشی به خویشتن، و دعوتِ آینده به وضعیتی تازه» — هرچند او خود هشدار می‌دهد که «این تقسیم‌بندیِ پنج‌ساله ممکن است دقیق نباشد، چون جرقه‌های این اندیشه را می‌توان تا ۱۲۸۷ هم عقب برد».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-saboori-tarikh-andisheh-tokvin-agahi",
+          "text_field": "recap_fa",
+          "source_title": "درس‌گفتارِ تاریخِ اندیشه",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "02fbfa2c689c97996365a6965ebb4acb378f9740e17096a42f89cfc7aa9ecfcf"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-caf3d411b894e57d8b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "محتمل‌ترین سناریو و زنجیره‌ی فرسایش",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-finale-20261019",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-19T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "73505ab78e5c901038b08fd59e1fdccd79a01a7bd81cb06cfe6c604c4251c89e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-ce7d3d43b3dd965954",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "یوسف عزیزی",
+      "speaker_candidates": [
+        "yousef-azizi"
+      ],
+      "identity_status": "unresolved_requires_review",
+      "excerpt_exact_from_field": "او استدلال می‌کند که دموکرات‌ها نیز در پیِ منافعِ خودند و حتی ممکن است بودجه‌ی جنگِ ایران را با پرونده‌ی اوکراین گره بزنند — یعنی به ترامپ بگویند اگر پولِ ادامه‌ی فشار بر ایران را می‌خواهی، باید در اوکراین به زلنسکی امتیاز بدهی.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر پولِ ادامه‌ی فشار بر ایران را می‌خواهی",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "yousef-azizi-meydan-diplomasi-mehr1405",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "e5e8aa440ecd824607ab9cde85e63e524fea8f82150edeeccb2e1a2d26654f6b"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-d328933804886daec1",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "او ۱۴۰۶ تا ۱۴۰۷ را دوره احتمالی برجسته شدن این فرایند می‌داند؛ نه موعد قطعی سقوط یا بهبود اقتصاد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-d43268b5d2f042ada4",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تحلیلِ او «اگر این فقط بهانه‌ای برای تعویقِ انتخابات باشد، نتانیاهو دچارِ مشکلِ داخلی می‌شود؛ پس بعید است پیش از پنجمِ آبان رخ دهد — هرچند در وضعیتِ آشوبناک همه‌ی این پیش‌بینی‌ها ضریب می‌خورد و هر آن هر اتفاقی ممکن است».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "پیش از پنجمِ آبان",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-d67c75f28db066881a",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "mohammad-marandi",
+      "speaker_name": "محمد مرندی",
+      "speaker_candidates": [
+        "mohammad-marandi"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تحلیلِ او جبهه‌ها در حالِ ادغام‌اند: «جنگِ اوکراین به‌شدت در جریان است و تغییرِ سیاستِ ترامپ در برابرِ روسیه نشانه‌ی شکست است؛ می‌توان این جبهه را از شمالی‌ترین نقطه‌ی اوکراین تا اقیانوسِ هند یکپارچه دید — این یک جنگ است، نه به معنای دو ارتش روبه‌روی هم، بلکه جنگی که از اروپا تا اقیانوسِ هند جریان دارد و ادامه‌اش ناممکن است».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "از شمالی‌ترین نقطه‌ی اوکراین تا اقیانوسِ هند یکپارچه دی",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-marandi-yemen-saudi-20261018",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگوی تحلیلی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-18T10:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-d814711dd62d8caede",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "او می‌افزاید «آمریکا بیشتر از آنچه نمایش می‌دهد در اختیار دارد؛ همان‌طور که اینترنت و هوشِ مصنوعی را وقتی به جهان داد که خودش سال‌ها در جنگ‌هایش به کار برده بود»، و پیش‌بینی می‌کند که «جنگِ ربات‌ها را هم خواهیم دید».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-khafegi-20261017",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-17T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "5a18aee93a851fad66bc93dbe13923b0ffd70802e9518cb75395cd6d34740024"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-ded8bd3f6ee803e034",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تحلیل او، هشدارها به سطوح بالا رسید، اما واکنش امنیتی و نظامی متناسب با حملهٔ تمام‌عیار شکل نگرفت؛ احتمالاً ابعاد تهدید کم‌ارزیابی شد و سپس از شوک آن بهره‌برداری شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-oct7-2026",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:12:53Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "04ef1a66a54c83e355f9678c96dcf024a65aba19488f43c7f04f30cdd74c96d1"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-e009f338718ee16e87",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "قیس قریشی",
+      "speaker_candidates": [
+        "qeys-qoreishi"
+      ],
+      "identity_status": "unresolved_requires_review",
+      "excerpt_exact_from_field": "وضعیت کشورهای حوزه خلیج فارس هم وضعیت بحرانی خواهد بود قطعاً تو جنگ جدید.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-qeys-qoreishi-20261019-04",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی قیس قریشی و توحید عزیزی درباره احتمال حمله آمریکا به ایران",
+          "source_url": null,
+          "source_date_label": "مهر ۱۴۰۵ (تاریخ دقیق پخش نامشخص)",
+          "editorial_recorded_at": "2026-10-19T00:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "cf370c06f33cc781de7bfd4c7baa28c815aaddcba798ed44552b473516b6fc30"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-e551b80f824e1ab7ea",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به روایتِ او، همه از احتمالِ جنگ سخن می‌گویند و آن را «بالای نود درصد» می‌دانند؛ اما او پیش از پرداختن به خودِ جنگ، یک نکته‌ی معرفتی را پیش می‌کشد: «ذهنِ ما به نظم عادت کرده و نظم است که امکانِ پیش‌بینی را — آن هم به‌طورِ نسبی — فراهم می‌کند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "recap_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-e742173873bca9724f",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "یوسف عزیزی",
+      "speaker_candidates": [
+        "yousef-azizi"
+      ],
+      "identity_status": "unresolved_requires_review",
+      "excerpt_exact_from_field": "به تعبیرِ او، اگر مجلسِ نمایندگان به دستِ دموکرات‌ها بیفتد، آن‌ها می‌توانند با ابزارِ استیضاح و به‌ویژه از مجرای بودجه، ترامپ را در داخل تحتِ فشار بگذارند و دولت را به تعطیلی (شات‌داون) بکشانند؛ هرچند استیضاح به‌احتمالِ زیاد به برکناری نمی‌انجامد، چون برای آن دوسومِ آرای سنا لازم است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر مجلسِ نمایندگان به دستِ دموکرات‌ها بیفتد",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "yousef-azizi-meydan-diplomasi-mehr1405",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "e5e8aa440ecd824607ab9cde85e63e524fea8f82150edeeccb2e1a2d26654f6b"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-efa6c7a38687326470",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به روایتِ او، این پرسش که آیا واشینگتن برای پیامدهای فروپاشیِ ساختارِ سیاسیِ جمهوریِ اسلامی — بی‌ثباتی و تجزیه‌طلبیِ احتمالی — برنامه دارد، پاسخش روشن است: «حتماً می‌نشینند و درباره‌اش حرف می‌زنند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-finale-20261019",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-19T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "73505ab78e5c901038b08fd59e1fdccd79a01a7bd81cb06cfe6c604c4251c89e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-efef7bb299254bef5e",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "محور گفت‌وگو: اگر محاصره به عملیات مستقیم تبدیل شود، هدف آمریکا چه خواهد بود؟",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر محاصره به عملیات مستقیم تبدیل شود",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-part2-20261005",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — گفت‌وگوی ویژه، قسمت دوم",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:22:03Z",
+          "editorial_published_at": "2026-10-05",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "9fbe9ceb478d9d09ddaf13ffcd5a312cbc39a8519af13647cb78d57833470aae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-f09215dc9d7d18098c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "اگر این فشارها به هدف مورد نظر طرف مقابل نرسند، احتمال جنگ محدود اما پرضربه را مطرح می‌کند و پس از آن نیز احتمال گسترش دامنه جنگ را منتفی نمی‌داند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر این فشارها به هدف مورد نظر طرف مقابل نرسند",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-f57e4c52221dc0832d",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "به تعبیرِ او بسیاری‌شان حتی پیش‌بینیِ درست دارند: «می‌دانند چه خواهد شد — شاید بهتر از من — اما در میانِ مردم طورِ دیگری می‌گویند».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "از من — اما در میانِ مردم طورِ دی",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-sokoot-20261022",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-22T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "90876ee5cc9932837774a054bd35ccf3db3c5547c7d85bc1139332e2019192a8"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-f5d8c6557085927c54",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "او هشدار می‌دهد که «پس از محاصره‌ی زمینیِ پاکستان، نوبتِ عراق و افغانستان و ترکیه و کشورهای شمالی است؛ همان جاهایی که می‌دهند، جاهای نفوذ خواهد شد — این فشار در حالِ افزایش است».",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-motaharnia-golden-simorgh-sokoot-20261022",
+          "text_field": "recap_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-22T18:30:00Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "90876ee5cc9932837774a054bd35ccf3db3c5547c7d85bc1139332e2019192a8"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-f8d94fbce662b9fdce",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "هلاکویی بازهٔ پس از انتخابات تا آغاز کار کنگرهٔ جدید را دوره‌ای با آزادی عمل بیشتر برای ترامپ می‌داند و احتمال برخورد نظامی را در ارزیابی شخصی خود بالاتر از ۶۰ تا ۷۰ درصد اعلام می‌کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-holakouee-meybodi-un-election-2026",
+          "text_field": "recap_fa",
+          "source_title": "گفت‌وگو با علیرضا میبدی — برنامهٔ چهارشنبه",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:16:18Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "61550ac3748813c3ab7830b35a2d80404817a9a8573fe0226f0a40908367053e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-fc3b7f94a18fa865b3",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "اما به نظرم احتمالِ بسیار زیادی هست که این حمله آغاز شود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_view",
+          "record_id": "editorial-holakouee-oct7-90-days-window",
+          "text_field": "quote_fa",
+          "source_title": "گفت‌وگوی فرهنگ هلاکویی دربارهٔ اوضاع ایران و خاورمیانه (۷ اکتبر ۲۰۲۶)",
+          "source_url": null,
+          "source_date_label": "۷ اکتبر ۲۰۲۶",
+          "editorial_recorded_at": "2026-10-08T18:24:18Z",
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "37168339d5d05ffe91e86131a4b2aad11c900b1b9aad0b2afec31acbcbd77560"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-fcc686a578f02bb110",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "zagros-rashidi",
+      "speaker_name": "زاگرس رشیدی",
+      "speaker_candidates": [
+        "zagros-rashidi"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "تصویب جنگ طولانی پس از انتخابات میان‌دوره‌ای را بعید می‌داند، اما معتقد است ترامپ می‌تواند از دوره‌های محدود و جنگ کوتاه استفاده کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "editorial_recap",
+          "record_id": "editorial-zagros-rashidi-un-20260924",
+          "text_field": "recap_fa",
+          "source_title": "کانال شخصی یوتیوب زاگرس رشیدی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:18:45Z",
+          "editorial_published_at": "2026-09-24",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "source_content_sha256": "b2a2db441341ef5b8ac35951592ccc50650bc71e9a510711625de4cff8e15596"
+        }
+      ],
+      "editorial_decision": null
+    }
+  ]
+}
