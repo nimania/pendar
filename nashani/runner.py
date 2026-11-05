@@ -353,7 +353,11 @@ def send_to_telegram(item, token, channel):
             except TelegramApiError as error:
                 if error.code not in (400, 403):
                     raise
-                if "protected" in error.description.lower() or "restricted" in error.description.lower():
+                lower_description = error.description.lower()
+                if any(term in lower_description for term in (
+                    "protected", "restricted", "can't be copied",
+                    "cannot be copied", "content is protected",
+                )):
                     print("Protected source media: using attributed text only")
                     media = None
         if media is not None:
