@@ -89,6 +89,39 @@ class NewsRadarTests(unittest.TestCase):
         self.assertNotIn("@kermane_no", rendered)
         self.assertNotIn("منبع و متن اصلی", rendered)
 
+    def test_publish_batch_saves_twice_for_multiple_messages(self):
+        class Ledger:
+            def __init__(self):
+                self.calls = 0
+            def save(self, state):
+                self.calls += 1
+        rows = [
+            {"id": "one", "title": "شهرداری کرمان", "source": "کرمان‌نو", "status": "ready"},
+            {"id": "two", "title": "گزارش کرمان", "source": "ایرنا کرمان", "status": "ready"},
+        ]
+        state = {"queue": rows}
+        ledger = Ledger()
+        with patch.object(runner, "verify_telegram_identity"), \
+             patch.object(runner, "send_to_telegram", side_effect=[8, 9]) as sender:
+            count = runner.publish_batch(rows, state, ledger, "test", "-1003958286892")
+        self.assertEqual(count, 2)
+        self.assertEqual(ledger.calls, 2)
+        self.assertEqual(sender.call_count, 2)
+        self.assertEqual([row["telegram_message_id"] for row in rows], [8, 9])
+        self.assertTrue(all(row["status"] == "published" for row in rows))
+
+    def test_publish_batch_preserves_uncertain_and_recovers_unattempted(self):
+        class Ledger:
+            def save(self, state):
+                pass
+        rows = [{"id": str(i), "status": "ready"} for i in range(3)]
+        with patch.object(runner, "verify_telegram_identity"), \
+             patch.object(runner, "send_to_telegram", side_effect=[11, RuntimeError("failure")]):
+            with self.assertRaises(RuntimeError):
+                runner.publish_batch(rows, {"queue": rows}, Ledger(), "test", "-1003958286892")
+        self.assertEqual([row["status"] for row in rows],
+                         ["published", "sending_uncertain", "ready"])
+
     def test_html_is_escaped(self):
         item = {"title": "خبر <script> ناامن", "excerpt": "خبر <script> ناامن",
                 "source": "خبرگزاری", "url": "https://t.me/example/1"}
