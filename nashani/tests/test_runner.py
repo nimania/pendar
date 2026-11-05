@@ -94,19 +94,20 @@ class NewsRadarTests(unittest.TestCase):
         checked["source_last_checked"]["kermane_no"] = "2026-11-05T14:59:00+00:00"
         self.assertTrue(runner.source_due({"handle": "kermane_no", "poll_minutes": 30}, checked, now))
 
-    def test_full_feed_preserves_all_ordinary_posts_regardless_of_city(self):
+    def test_former_full_feed_now_requires_kerman_geography(self):
         now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
         row = {"url": "https://t.me/kermane_no/999", "title": "خبر تازه از شهربابک",
                "excerpt": "در نشست امروز شهربابک برنامه توسعه شهر اعلام شد",
                "source": "کرمان‌نو", "published_at": now.isoformat()}
         assessed = runner.evaluate(row, now, {"coverage": "all"})
         self.assertEqual(assessed["status"], "ready")
-        self.assertEqual(assessed["city_confidence"], "source_full_feed")
+        self.assertEqual(assessed["city_confidence"], "high")
+        self.assertEqual(assessed["geography"], "kerman")
 
     def test_sensitive_full_feed_posts_still_require_review(self):
         now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
-        row = {"url": "https://t.me/kermane_no/1000", "title": "بازداشت متهم",
-               "excerpt": "این خبر حاوی ادعای بازداشت در شهرستان است",
+        row = {"url": "https://t.me/kermane_no/1000", "title": "بازداشت متهم در شهر کرمان",
+               "excerpt": "این خبر حاوی ادعای بازداشت در شهر کرمان است",
                "source": "کرمان‌نو", "published_at": now.isoformat()}
         self.assertEqual(runner.evaluate(row, now, {"coverage": "all"})["status"], "review")
 
@@ -116,6 +117,46 @@ class NewsRadarTests(unittest.TestCase):
                "excerpt": "گزارش امروز درباره پروژه‌های شهر کرمان است",
                "source": "کرمان رسانه", "published_at": now.isoformat()}
         self.assertEqual(runner.evaluate(row, now, {"coverage": "city", "review_only": True})["status"], "review")
+
+    def test_strict_geography_applies_even_to_kerman_no_full_feed(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        post = {"url": "https://t.me/kermane_no/9100",
+                "title": "وام دانشجویی برای همه دانشگاه‌های کشور",
+                "excerpt": "ثبت‌نام وام دانشجویی در سراسر کشور آغاز شد.",
+                "source": "کرمان‌نو", "published_at": now.isoformat()}
+        for coverage in ("all", "kerman_geography", "region", "city"):
+            with self.subTest(coverage=coverage):
+                self.assertIsNone(runner.evaluate(dict(post), now, {"coverage": coverage}))
+        post["title"] = "افتتاح پروژه جدید در شهربابک"
+        post["excerpt"] = "این پروژه در شهر شهربابک بهره‌برداری شد."
+        self.assertEqual(
+            runner.evaluate(post, now, {"coverage": "all"})["status"], "ready")
+
+    def test_revalidate_existing_queue_and_keep_published_history(self):
+        queue = [
+            {"status": "ready", "title": "وام دانشجویی سراسری",
+             "excerpt": "وام‌های تحصیلی برای کل کشور تصویب شد."},
+            {"status": "review", "title": "جلسه درباره استان یزد",
+             "excerpt": "نشست مسئولان یزد انجام شد."},
+            {"status": "ready", "title": "بازسازی خیابان‌های شهر کرمان",
+             "excerpt": "شهرداری کرمان گزارش بازسازی را منتشر کرد."},
+            {"status": "published", "title": "مقررات کشوری",
+             "excerpt": "پیش‌تر در کانال منتشر شده است."},
+        ]
+        self.assertEqual(runner.enforce_geography_on_queue(queue), 2)
+        self.assertEqual([x["status"] for x in queue],
+                         ["excluded_nonlocal", "excluded_nonlocal", "ready", "published"])
+        self.assertEqual(queue[2]["geography"], "kerman")
+
+    def test_final_telegram_send_refuses_unrelated_even_with_credentials(self):
+        with patch.object(runner, "verify_telegram_identity") as verify, \
+             patch.object(runner, "telegram_checked_call") as api:
+            with self.assertRaises(ValueError):
+                runner.send_to_telegram(
+                    {"title": "خبر روز تهران", "excerpt": "جلسه تهران برگزار شد."},
+                    "token", "-1003958286892")
+            verify.assert_not_called()
+            api.assert_not_called()
 
     def test_message_uses_only_plain_outlet_attribution(self):
         item = {"title": "شهرداری کرمان منطقه جدید اعلام کرد",
