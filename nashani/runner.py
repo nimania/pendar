@@ -103,7 +103,7 @@ def source_due(source, state, now):
 
 def clean_visible_excerpt(text):
     """Keep clickable source URLs and Telegram handles out of the public caption."""
-    text = re.sub(r"https?://[^\s]+|(?<!\w)(?:t\.me|ble\.ir)/[^\s]+", " ", text or "", flags=re.I)
+    text = re.sub(r"(?:https?://|www\.)[^\s]+|(?<!\w)(?:[A-Za-z0-9_-]+\.)+(?:ir|com|net|org|me)(?:/[^\s]*)?", " ", text or "", flags=re.I)
     text = re.sub(r"(?<!\w)@[A-Za-z0-9_]{3,}", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
