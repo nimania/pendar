@@ -1,0 +1,80 @@
+name: Karname Candidate Intake (editorial review only)
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every six hours. GitHub scheduled runs can be delayed.
+    - cron: "17 */6 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "backend/data/editorial-recaps.json"
+      - "web-static/data/pendar-editorial-views.json"
+      - "backend/scripts/collect_karname_candidates.py"
+      - "backend/tests/test_karname_candidates.py"
+      - ".github/workflows/karname-intake.yml"
+  pull_request:
+    paths:
+      - "backend/scripts/collect_karname_candidates.py"
+      - "backend/tests/test_karname_candidates.py"
+      - ".github/workflows/karname-intake.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: karname-candidate-intake-main
+  cancel-in-progress: false
+
+jobs:
+  candidate-intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout Pendar sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test candidate extraction and safety boundaries
+        run: python -m unittest discover -s backend/tests -p 'test_karname_candidates.py' -v
+      - name: Extract candidates from editorial feeds
+        run: |
+          python backend/scripts/collect_karname_candidates.py
+          python backend/scripts/collect_karname_candidates.py --check
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          data=json.loads(Path("backend/data/karname-candidates.json").read_text(encoding="utf-8"))
+          stats=data["stats"]
+          path=Path(os.environ["GITHUB_STEP_SUMMARY"])
+          with path.open("a",encoding="utf-8") as f:
+              f.write("## Karname editorial intake\n\n")
+              f.write(f"- Candidates in review queue: **{stats['total']}**\n")
+              f.write(f"- Pending review: **{stats['pending']}**\n")
+              f.write(f"- Sources scanned: **{stats['sources_scanned']}**\n")
+              f.write("- **No claims or grades were published.**\n")
+          PY
+      - name: Preserve review queue artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: karname-candidate-review-queue
+          path: backend/data/karname-candidates.json
+          if-no-files-found: error
+          retention-days: 21
+      - name: Save new review candidates (not public data)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git add backend/data/karname-candidates.json
+          if git diff --cached --quiet; then
+            echo "No new candidates or review changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data(karname): refresh internal editorial claim candidates [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
