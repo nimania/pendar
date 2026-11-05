@@ -4,12 +4,19 @@
   "dataset_scope": "initial_partial_import",
   "is_complete": false,
   "provenance": {
-    "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+    "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
     "source_type": "user_provided_transcript",
     "source_url": null,
     "source_registered_at": "2026-11-02",
     "source_path": "karname/imports/jan_kalam_souri_predictions_2026-11-01.json",
-    "disclosure": "۹ مدخل اولیه از پروندهٔ سوری؛ این فایل دفتر جامع کارنامه نیست. انتساب‌ها بر اساس متن ارائه‌شدهٔ کاربر است و لینک گفت‌وگوی اصلی هنوز ثبت نشده. هیچ نتیجه‌ای راستی‌آزمایی نشده است."
+    "disclosure": "۹ مدخل اولیه از پروندهٔ سوری؛ این فایل دفتر جامع کارنامه نیست. انتساب‌ها بر اساس متن ارائه‌شدهٔ کاربر است و لینک گفت‌وگوی اصلی هنوز ثبت نشده. هیچ نتیجه‌ای راستی‌آزمایی نشده است.",
+    "attribution_correction": {
+      "date": "2026-11-05",
+      "speaker_key": "abbas-souri",
+      "previous_label": "عباس (نام خانوادگی نامشخص)",
+      "corrected_label": "عباس سوری",
+      "basis": "تصحیح صریح نام گوینده توسط کاربر؛ فایل خام اولیه برای بررسی تاریخچه بدون تغییر نگه داشته شده است"
+    }
   },
   "scale": [
     {
@@ -75,8 +82,8 @@
   ],
   "speakers": [
     {
-      "key": "abbas-unknown",
-      "name": "عباس (نام خانوادگی نامشخص)",
+      "key": "abbas-souri",
+      "name": "عباس سوری",
       "handle": null
     },
     {
@@ -96,7 +103,7 @@
       "kind": "K",
       "text": "وقوع جنگ تازه با ایران قطعی است",
       "speakers": [
-        "abbas-unknown"
+        "abbas-souri"
       ],
       "speaker_note": "قید و احتیاط ثبت‌شده: گزاره کلی؛ فاقد افق زمانی مشخص\nمعیار سنجش: وقوع حمله نظامی تازه و قابل تأیید به ایران\nوضعیت منبع: آزمون‌نشده",
       "said": "2026-11-01",
@@ -109,7 +116,7 @@
       "bucket": "e1",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "وقوع حمله نظامی تازه و قابل تأیید به ایران",
@@ -133,7 +140,7 @@
       "bucket": "b3",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "آغاز حمله نظامی تازه به ایران تا پایان ۲۰ مارس ۲۰۲۷",
@@ -144,7 +151,7 @@
       "kind": "K",
       "text": "جمهوری‌خواهان اکثریت سنا را در انتخابات میان‌دوره‌ای حفظ می‌کنند",
       "speakers": [
-        "abbas-unknown"
+        "abbas-souri"
       ],
       "speaker_note": "قید و احتیاط ثبت‌شده: نتیجه نهایی ممکن است پس از روز رأی‌گیری مشخص شود\nمعیار سنجش: اکثریت کرسی‌های سنای آمریکا پس از انتخابات و روشن شدن ترکیب\nوضعیت منبع: آزمون‌نشده",
       "said": "2026-11-01",
@@ -157,7 +164,7 @@
       "bucket": "b1",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "اکثریت کرسی‌های سنای آمریکا پس از انتخابات و روشن شدن ترکیب",
@@ -168,7 +175,7 @@
       "kind": "K",
       "text": "جمهوری‌خواهان احتمالاً کنترل مجلس نمایندگان را از دست می‌دهند",
       "speakers": [
-        "abbas-unknown"
+        "abbas-souri"
       ],
       "speaker_note": "معیار سنجش: اکثریت کرسی‌های مجلس نمایندگان پس از انتخابات\nوضعیت منبع: آزمون‌نشده",
       "said": "2026-11-01",
@@ -181,7 +188,7 @@
       "bucket": "b1",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "اکثریت کرسی‌های مجلس نمایندگان پس از انتخابات",
@@ -192,7 +199,7 @@
       "kind": "K",
       "text": "حفظ سنا توسط جمهوری‌خواهان احتمال تعویق بیشتر جنگ را بالا می‌برد؛ شکست آنان ممکن است حمله را نزدیک کند",
       "speakers": [
-        "abbas-unknown"
+        "abbas-souri"
       ],
       "speaker_note": "قید و احتیاط ثبت‌شده: مشروط و فاقد بازه صریح برای دیرتر/زودتر\nمعیار سنجش: نتیجه سنا و فاصله زمانی وقوع یا عدم وقوع حمله؛ بدون معیار قطعی علیت\nوضعیت منبع: آزمون‌نشده",
       "said": "2026-11-01",
@@ -205,7 +212,7 @@
       "bucket": "e2",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "نتیجه سنا و فاصله زمانی وقوع یا عدم وقوع حمله؛ بدون معیار قطعی علیت",
@@ -216,7 +223,7 @@
       "kind": "K",
       "text": "حمله گسترده به زیرساخت‌های ایران به سود بلندمدت آمریکا نیست و احتمالاً انجام نمی‌شود",
       "speakers": [
-        "abbas-unknown"
+        "abbas-souri"
       ],
       "speaker_note": "قید و احتیاط ثبت‌شده: پیش‌بینی مشروط به وقوع جنگ\nمعیار سنجش: گزارش حملات و اهداف تأییدشده، به‌ویژه نیروگاه و زیرساخت انرژی\nوضعیت منبع: آزمون‌نشده",
       "said": "2026-11-01",
@@ -229,7 +236,7 @@
       "bucket": "e2",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "گزارش حملات و اهداف تأییدشده، به‌ویژه نیروگاه و زیرساخت انرژی",
@@ -240,7 +247,7 @@
       "kind": "L",
       "text": "راست‌گرایان در اروپا در سه تا چهار سال آینده تقویت می‌شوند",
       "speakers": [
-        "abbas-unknown"
+        "abbas-souri"
       ],
       "speaker_note": "قید و احتیاط ثبت‌شده: کشورها و سنجه دقیق در گفت‌وگو تعیین نشده\nمعیار سنجش: سهم آرا و کرسی احزاب راست در انتخابات منتخب اروپا نسبت به مبنا\nوضعیت منبع: آزمون‌نشده",
       "said": "2026-11-01",
@@ -253,7 +260,7 @@
       "bucket": "b5",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "سهم آرا و کرسی احزاب راست در انتخابات منتخب اروپا نسبت به مبنا",
@@ -277,7 +284,7 @@
       "bucket": "b4",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "تغییر GDP واقعی در بازه تعریف‌شده بر اساس منبع آماری معتبر",
@@ -301,7 +308,7 @@
       "bucket": "b2",
       "result": null,
       "result_source": null,
-      "source_title": "گفت‌وگوی بنیامین سوری با عباس در رسانه پارسی",
+      "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
       "source_type": "user_provided_transcript",
       "source_url": null,
       "evaluation_trigger": "آغاز جنگ در بازه ۴–۱۵ نوامبر ۲۰۲۶",
