@@ -29,6 +29,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: karname-candidate-intake-main
@@ -94,8 +95,10 @@ jobs:
           path: backend/data/karname-candidates.json
           if-no-files-found: error
           retention-days: 21
-      - name: Save new review candidates (not public data)
+      - name: Save candidate changes and request a fresh Pendar deployment
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git add backend/data/karname-candidates.json web-static/karname/intake-stats.json
           if git diff --cached --quiet; then
@@ -107,3 +110,8 @@ jobs:
           git commit -m "data(karname): refresh internal claim candidates and public aggregate"
           git pull --rebase origin main
           git push origin HEAD:main
+          # A push using GITHUB_TOKEN does not trigger a separate workflow.
+          # workflow_dispatch is explicitly allowed by GitHub for this token.
+          # Publish only when something changed; unchanged scans stay read-only.
+          gh workflow run fast-deploy.yml --ref main
+          echo "Triggered Fast Deploy Pendar UI for new aggregate statistics."

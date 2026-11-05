@@ -176,6 +176,14 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertIn("void loadIntakeStats()", js)
         self.assertIn("آمار صف بررسی فعلاً در دسترس نیست", js)
 
+    def test_scheduled_intake_explicitly_dispatches_site_refresh(self):
+        flow = (ROOT / ".github/workflows/karname-intake.yml").read_text(encoding="utf-8")
+        self.assertIn("actions: write", flow)
+        self.assertIn("gh workflow run fast-deploy.yml --ref main", flow)
+        self.assertIn("GH_TOKEN: ${{ github.token }}", flow)
+        self.assertIn("if git diff --cached --quiet; then", flow)
+        self.assertNotIn("[skip ci]", flow)
+
     def test_pilot_notice_visible_and_share_links_present(self):
         code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
         self.assertIn('data.is_complete===false', code)
