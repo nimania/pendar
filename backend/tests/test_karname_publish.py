@@ -127,6 +127,19 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertTrue((ROOT / "web-static/figures/abbas-souri-user.png").is_file())
         self.assertTrue(any(p.get("key") == "abbas-souri" for p in self.public["speakers"]))
 
+    def test_portrait_registry_and_screened_audit(self):
+        from pathlib import Path
+        photos = json.loads((ROOT / "web-static/data/karname-portrait-sources.json").read_text())
+        self.assertGreaterEqual(len(photos["portraits"]), 12)
+        js = (ROOT / "web-static/karname/app.js").read_text()
+        self.assertIn("data/figures.json", js)
+        self.assertIn("karname-portrait-sources.json", js)
+        queue = json.loads((ROOT / "backend/data/karname-candidates.json").read_text())
+        self.assertEqual(queue["stats"]["pending"], 52)
+        self.assertEqual(queue["stats"]["screened"], 12)
+        self.assertEqual(queue["stats"]["manual_review_requested"], 2)
+        self.assertEqual(sum(bool(c.get("screening_reason_fa")) for c in queue["candidates"]), 14)
+
     def test_pilot_notice_visible_and_share_links_present(self):
         code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
         self.assertIn('data.is_complete===false', code)
