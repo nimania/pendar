@@ -9,6 +9,7 @@ Pendar snapshot is deliberately not ingested again.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import re
@@ -232,7 +233,7 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
     prior = {c.get("id"): c for c in (previous or {}).get("candidates", [])
              if isinstance(c, dict) and isinstance(c.get("id"), str)}
     # The inbox is append-only; reviewed or dismissed records are never reset.
-    found = dict(prior)
+    found = copy.deepcopy(prior)
     active_ids: set[str] = set()
     scanned_sources: set[tuple[str, str]] = set()
     metrics = {"sources_scanned": 0, "source_spans_scanned": 0,
