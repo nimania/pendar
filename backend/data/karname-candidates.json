@@ -9,16 +9,16 @@
   "figure_snapshot_available": true,
   "mirrored_jan_kalam_skipped": true,
   "stats": {
-    "total": 146,
-    "pending": 134,
+    "total": 148,
+    "pending": 136,
     "screened": 12,
     "manual_review_requested": 2,
     "reviewed": 0,
-    "sources_scanned": 868,
-    "source_spans_scanned": 2223,
+    "sources_scanned": 890,
+    "source_spans_scanned": 2256,
     "ambiguous_sources": 1,
-    "figure_profiles_scanned": 519,
-    "figure_posts_scanned": 797
+    "figure_profiles_scanned": 527,
+    "figure_posts_scanned": 819
   },
   "candidates": [
     {
@@ -4764,6 +4764,50 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-c872aa8b85a0e32afa",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "فاطمه مهاجرانی",
+      "speaker_candidates": [
+        "news-404de11d07be"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "شایعه قطع کالابرگ ۳۰ تا ۴۰ میلیون نفر صحت ندارد و دولت در راستای عدالت‌محوری برای حمایت از اقشار آسیب‌پذیر، اصلاحاتی انجام می‌دهد که جزئیات آن اعلام خواهد شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:5cbc1743-d23f-43b4-8932-5784bdef4ea4",
+          "text_field": "summary_fa",
+          "source_title": "خبرگزاری ایرنا (IRNA)",
+          "source_url": "https://www.irna.ir/news/86313622/%D8%AA%DA%A9%D8%B0%DB%8C%D8%A8-%D8%B4%D8%A7%DB%8C%D8%B9%D9%87-%D9%82%D8%B7%D8%B9-%DA%A9%D8%A7%D9%84%D8%A7%D8%A8%D8%B1%DA%AF-%DB%B3%DB%B0-%D8%AA%D8%A7-%DB%B4%DB%B0-%D9%85%DB%8C%D9%84%DB%8C%D9%88%D9%86-%D9%86%D9%81%D8%B1",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-05T18:44:30",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "c1e1a3ad6ffd061500745435581839fb8e9e71a686905f8768295414551cbfed"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-c89af3046ae0499b08",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -5011,6 +5055,50 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "e5e8aa440ecd824607ab9cde85e63e524fea8f82150edeeccb2e1a2d26654f6b"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-d2231b58b8c41ee13b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "Garajetadayoni",
+      "speaker_name": "مهدی تدینی",
+      "speaker_candidates": [
+        "Garajetadayoni"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "این میزان موفقیت حتی در چارچوب‌های انتخاباتی جمهوری اسلامی نیز بعید به نظر می‌رسید.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "217b5969-9d6d-4157-9ab2-5e1f49e532c1",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/Garajetadayoni/11769",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-05T14:47:07",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "71f570fe056989731017dee0f2a90ba4ecdbc88fe4b24add364d6bfc44a90628"
         }
       ],
       "editorial_decision": null
