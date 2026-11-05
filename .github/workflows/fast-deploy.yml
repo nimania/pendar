@@ -323,6 +323,10 @@ jobs:
           print("Weather data overlaid without rebuilding the site")
           PY
 
+      - name: Verify Karname dashboard, alias and safe data publisher
+        run: |
+          node --check web-static/karname/app.js
+          python -m unittest discover -s backend/tests -p 'test_karname_publish.py' -v
       - name: Overlay current UI without overwriting generated data
         run: |
           # Generated datasets (especially Jan-e Jaraid) belong to collector/build
