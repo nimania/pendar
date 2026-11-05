@@ -258,7 +258,15 @@ class Ledger:
                    "branch": BRANCH, "content": content}
         if self.sha:
             payload["sha"] = self.sha
-        result = http_json(self.endpoint(), method="PUT", payload=payload, token=self.token)
+        try:
+            result = http_json(self.endpoint(), method="PUT", payload=payload, token=self.token)
+        except HTTPError as error:
+            try:
+                detail = str(json.loads(error.read().decode("utf-8")).get("message", ""))[:200]
+            except (ValueError, AttributeError):
+                detail = ""
+            print(f"::error::Nashani state write HTTP {error.code}: {detail}", file=sys.stderr)
+            raise RuntimeError("Nashani state checkpoint failed") from None
         self.sha = result["content"]["sha"]
 
 
