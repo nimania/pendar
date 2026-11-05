@@ -440,6 +440,10 @@ jobs:
         run: |
           python -m py_compile backend/scripts/build_iran_scenario_pages.py
           python -m unittest discover -s backend/tests -p 'test_iran_scenario_pages.py' -v
+      - name: Validate Karname and its alternative route
+        run: |
+          node --check web-static/karname/app.js
+          python -m unittest discover -s backend/tests -p 'test_karname_publish.py' -v
       - name: Publish verified predictions ledger when available
         run: python backend/scripts/publish_karname_data.py --site backend/public --previous /tmp/previous-site
       - name: Apply temporary news-and-figures publication profile
