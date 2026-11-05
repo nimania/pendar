@@ -148,8 +148,12 @@ class KarnamePublicationTests(unittest.TestCase):
     def test_scenario_view_has_five_distinct_direction_labels_and_drilldown(self):
         js = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
         css = (ROOT / "web-static/karname/style.css").read_text(encoding="utf-8")
-        for raw in ('"له"', '"علیه"', '"امکان"', '"زمینه"', '"شرایط"'):
-            self.assertIn(raw, js)
+        # Direction values are intentionally alternatives within regular
+        # expressions, not quoted JS string constants. The executable Node
+        # regression test checks each exact mapping on the real ledger.
+        self.assertIn("function scenarioCategory(dir)", js)
+        self.assertIn("node backend/tests/test_karname_scenarios.js",
+                      (ROOT / ".github/workflows/fast-deploy.yml").read_text(encoding="utf-8"))
         for category in ("support", "against", "possible", "context", "other"):
             self.assertIn('key:"' + category + '"', js)
         self.assertIn("function scenarioCategory(dir)", js)
