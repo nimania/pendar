@@ -66,8 +66,8 @@ jobs:
                   username=str(chat.get("username","")).lower()
                   if chat.get("type")=="channel":
                       public_channels += 1
-                      print("Observed channel update:",field,"username:",username or "(none)")
-                  if chat.get("type")=="channel" and username=="neshanikerman":
+                      print("Observed channel update:",field,"numeric_id:",chat.get("id"),"title:",chat.get("title"),"username:",username or "(none)")
+                  if chat.get("type")=="channel" and (username=="neshanikerman" or ("کرمان" in str(chat.get("title","")) and "نشانی" in str(chat.get("title","")))):
                       matches[chat.get("id")]=username
           print("Buffered update count:",len(items))
           print("Update categories:",categories)
@@ -79,8 +79,8 @@ jobs:
           for chat_id in matches:
               details=call("getChat",{"chat_id":chat_id})
               found=details.get("result",{}) if details.get("ok") else {}
-              valid=found.get("username","").lower()=="neshanikerman" and found.get("type")=="channel"
-              print("Numeric chat ID:",chat_id,"verified:",valid)
+              valid=found.get("type")=="channel" and (str(found.get("username","")).lower()=="neshanikerman" or ("نشانی" in str(found.get("title","")) and "کرمان" in str(found.get("title",""))))
+              print("Numeric chat ID:",chat_id,"actual title:",found.get("title"),"username:",found.get("username"),"verified:",valid)
               if not valid:
                   continue
               member=call("getChatMember",{"chat_id":chat_id,"user_id":me["result"]["id"]})
