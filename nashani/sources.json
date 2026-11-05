@@ -1,7 +1,7 @@
 {
   "version": 3,
   "territory": "Kerman city (not the entire province)",
-  "editorial_policy": "Every published post must attribute the original named outlet and include a #source_hashtag, with no original source URL in the public post. All relevant Kerman news from owner-supplied qh_qv and Kerman News is candidates for the same rich caption, permitted photo/video delivery, and sensitive-item review as Kerman-No. Reject ads and off-topic material.",
+  "editorial_policy": "Source attribution uses a plain outlet name and its unique hashtag. Permitted photo/video reuse applies to owner-provided channels Kerman-No, Kerman News, qh_qv only; other discovered outlets are currently text-summary-only until reuse permission is confirmed. Only relevant Kerman posts are shared from mixed feeds and promotional/sensitive content is filtered.",
   "sources": [
     {
       "name": "کرمان‌نو",
@@ -25,7 +25,8 @@
       "verified_from": "https://fardayekerman.ir",
       "poll_minutes": 5,
       "coverage": "city",
-      "media_repost_allowed": true
+      "media_repost_allowed": false,
+      "media_permission_status": "not_owner_confirmed"
     },
     {
       "name": "ایرنا کرمان",
@@ -36,7 +37,8 @@
       "verified_from": "https://t.me/irna_kerman",
       "poll_minutes": 5,
       "coverage": "city",
-      "media_repost_allowed": true
+      "media_repost_allowed": false,
+      "media_permission_status": "not_owner_confirmed"
     },
     {
       "name": "اخبار استانداری کرمان",
@@ -47,7 +49,8 @@
       "verified_from": "https://t.me/kerman_gov",
       "poll_minutes": 5,
       "coverage": "city",
-      "media_repost_allowed": true
+      "media_repost_allowed": false,
+      "media_permission_status": "not_owner_confirmed"
     },
     {
       "name": "آخرین خبر کرمان",
@@ -58,7 +61,8 @@
       "verified_from": "https://t.me/kerman_akhbar",
       "poll_minutes": 5,
       "coverage": "city",
-      "media_repost_allowed": true
+      "media_repost_allowed": false,
+      "media_permission_status": "not_owner_confirmed"
     },
     {
       "name": "اخبار کرمان",
@@ -84,7 +88,8 @@
       "poll_minutes": 5,
       "coverage": "city",
       "review_only": true,
-      "media_repost_allowed": false
+      "media_repost_allowed": false,
+      "media_permission_status": "not_owner_confirmed"
     },
     {
       "name": "qh_qv",
