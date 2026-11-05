@@ -1,7 +1,7 @@
 {
-  "version": 4,
+  "version": 5,
   "territory": "Kerman city, all localities in Kerman Province, and neighboring-province matters explicitly connected to Kerman",
-  "editorial_policy": "A universal fail-closed geo check is mandatory for all source handles, including Kerman-No. Only articles explicitly connected with a Kerman city/province locality, or cross-border issues with a named Kerman endpoint, may be published. Off-topic national and neighboring-province-only news are excluded. Apply the gate to new items, queued items, manual approval and final send. Keep sensitive-story review and the outlet-source hashtag. Suppress source/channel self-promotions and keep image-dependent reports in review if their authorized photo/video cannot be delivered.",
+  "editorial_policy": "A universal fail-closed geo check is mandatory for all source handles, including Kerman-No. Only articles explicitly connected with a Kerman city/province locality, or cross-border issues with a named Kerman endpoint, may be published. Off-topic national and neighboring-province-only news are excluded. Apply the gate to new items, queued items, manual approval and final send. Keep sensitive-story review and the outlet-source hashtag. Suppress source/channel self-promotions and keep image-dependent reports in review if their authorized photo/video cannot be delivered. Website articles must have a verified per-article publication timestamp within five hours; homepage timestamps and undated articles do not qualify.",
   "sources": [
     {
       "name": "کرمان‌نو",
@@ -113,6 +113,36 @@
       "owner_confirms_reuse_rights": true,
       "source_hashtag": "qh_qv",
       "geography_filter": "strict"
+    },
+    {
+      "name": "کرنا",
+      "platform": "website",
+      "handle": "web_kerna",
+      "url": "https://kerna.ir/",
+      "enabled": true,
+      "role": "local-municipal-news",
+      "poll_minutes": 30,
+      "coverage": "kerman_geography",
+      "media_repost_allowed": false,
+      "source_hashtag": "کرنا",
+      "geography_filter": "strict",
+      "require_article_date": true,
+      "max_age_hours": 5
+    },
+    {
+      "name": "خبرگزاری صداوسیما ـ کرمان",
+      "platform": "website",
+      "handle": "web_irib_kerman",
+      "url": "https://www.irib-news.ir/fa/services/31",
+      "enabled": true,
+      "role": "regional-news",
+      "poll_minutes": 30,
+      "coverage": "kerman_geography",
+      "media_repost_allowed": false,
+      "source_hashtag": "صدا_و_سیمای_کرمان",
+      "geography_filter": "strict",
+      "require_article_date": true,
+      "max_age_hours": 5
     }
   ]
 }
