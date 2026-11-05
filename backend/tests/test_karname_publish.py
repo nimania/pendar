@@ -19,6 +19,24 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertIn('location.replace("/karname/"+location.search+location.hash)', alias)
         self.assertIn('src="/karname/app.js"', canonical)
 
+    def test_initial_import_is_truthful_and_unscored(self):
+        path = ROOT / "backend/data/karname.json"
+        data = validate(json.loads(path.read_text(encoding="utf-8")))
+        self.assertEqual(data["dataset_scope"], "initial_partial_import")
+        self.assertFalse(data["is_complete"])
+        self.assertEqual(len(data["claims"]), 9)
+        self.assertTrue(all(claim["result"] is None for claim in data["claims"]))
+        by_id = {claim["id"]: claim for claim in data["claims"]}
+        self.assertEqual(by_id["SOURI-20261101-02"]["speakers"], ["benjamin-souri"])
+        self.assertEqual(by_id["SOURI-20261101-08"]["type_class"], "نقل گزارش")
+        self.assertEqual(by_id["SOURI-20261101-09"]["type_class"], "نقل گزارش")
+        self.assertIn("۹ مدخل", data["provenance"]["disclosure"])
+
+    def test_pilot_notice_visible_in_app_code(self):
+        code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
+        self.assertIn('data.is_complete===false', code)
+        self.assertIn('data.provenance?.disclosure', code)
+
     def test_missing_ledger_does_not_create_fake_data(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
