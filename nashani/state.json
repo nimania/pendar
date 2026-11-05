@@ -1616,12 +1616,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-05T19:10:26.902690+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-05T19:10:36.099827+00:00"
     }
   ],
-  "saved_at": "2026-11-05T19:10:33.545345+00:00",
+  "saved_at": "2026-11-05T19:10:36.099846+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-05T19:10:26.902690+00:00",
     "fardaayekerman": "2026-11-05T19:10:26.902690+00:00",
