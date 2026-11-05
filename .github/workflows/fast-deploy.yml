@@ -331,6 +331,8 @@ jobs:
           mkdir -p site/data
           cp web-static/data/pendar-*.json site/data/
           cp web-static/data/us-radar.json site/data/us-radar.json
+          # Publish the generated ledger only when validated; otherwise preserve prior live data.
+          python backend/scripts/publish_karname_data.py --site site
           # Validate and overlay Recipe Lab only. Fail open for unrelated Pendar sections.
           python - <<'PY_RECIPE_LAB'
           import json, shutil
