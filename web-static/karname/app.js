@@ -164,6 +164,7 @@ function detail(c){
  const recap=array(state.data?.recaps).find(r=>array(r.claims||r.claim_ids).includes(c.id));
  const recapLink=recap&&(recap.url||recap.link),validRecap=typeof recapLink==="string"&&/^https?:\/\//i.test(recapLink);
  let html='<div class="meta-line">'+pills(c)+'<span dir="ltr">'+esc(c.id)+'</span></div><h2 id="dialog-title">'+esc(claimText(c))+'</h2><div class="detail-grid"><div><strong>چه کسی گفته؟</strong>'+esc(names)+'</div><div><strong>چه زمانی؟</strong>'+esc(c.said||"تاریخ ذکر نشده")+'</div><div><strong>موعد بررسی</strong>'+esc(c.due_label||b.label||"مشخص نشده")+'</div><div><strong>نوع ادعا</strong>'+esc(c.type||c.type_class||"پیش‌بینی")+'</div></div>';
+ html+=contributorLinks(c);
  if(c.said_date_basis)html+='<p class="muted" style="font-size:12px;margin:10px 0">'+esc(c.said_date_basis)+'</p>';
  if(c.source_title){
   const secondary=c.source_type==="secondary_editorial_recap";
