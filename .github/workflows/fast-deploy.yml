@@ -341,6 +341,7 @@ jobs:
           rsync -a --exclude 'data/' web-static/ site/
           mkdir -p site/data
           cp web-static/data/pendar-*.json site/data/
+          cp web-static/data/karname-portrait-sources.json site/data/karname-portrait-sources.json
           cp web-static/data/us-radar.json site/data/us-radar.json
           # Publish the generated ledger only when validated; otherwise preserve prior live data.
           python backend/scripts/build_karname.py
