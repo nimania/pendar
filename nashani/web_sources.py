@@ -145,15 +145,23 @@ def published_at(soup):
         date = find_date(payload)
         if date:
             return date
-    # Kerna presents "7 آبان 1405" and "19:05" near the article header.
+    # Kerna places the article date after "شماره خبر" near the heading.
+    # Critically, do not mistake the clock/date in the SITE HEADER for article time.
     heading = soup.select_one("h1")
     if not heading:
         return None
-    for parent in list(heading.parents)[:3]:
-        txt = parent.get_text(" ", strip=True)[:1200]
-        date = parse_article_time(txt)
-        if date:
-            return date
+    for parent in list(heading.parents)[:4]:
+        txt = parent.get_text(" ", strip=True)[:4500]
+        match = re.search(r"شماره\s*خبر\s*[:：]?\s*[0-9۰-۹]{3,}", txt)
+        if match:
+            candidate = txt[match.end():match.end() + 180]
+            date = parse_article_time(candidate)
+            if date:
+                return date
+        for node in parent.select("time[datetime], [itemprop='datePublished']"):
+            date = parse_article_time(node.get("datetime") or node.get("content"))
+            if date:
+                return date
     # No article-level date: fail closed.
     return None
 
@@ -176,7 +184,7 @@ def article_excerpt(soup, title):
     return value[:700] if len(value) >= 35 else ""
 
 
-def website_posts(source, max_articles=12):
+def website_posts(source, max_articles=8):
     homepage = source["url"]
     page = get_html(homepage)
     found = []
