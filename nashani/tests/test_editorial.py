@@ -53,6 +53,34 @@ class EditorialTests(unittest.TestCase):
         self.assertNotIn("…", rendered)
         self.assertLessEqual(len(rendered), editorial.MAX_CAPTION)
 
+    def test_all_outlets_receive_source_name_hashtags(self):
+        examples = [
+            ("کرمان‌نو", "کرمان_نو", "#کرمان_نو"),
+            ("اخبار کرمان", "اخبار_کرمان", "#اخبار_کرمان"),
+            ("qh_qv", "qh_qv", "#qh_qv"),
+            ("فردای کرمان", None, "#فردای_کرمان"),
+            ("ایرنا کرمان", None, "#ایرنا_کرمان"),
+        ]
+        for name, explicit, hashtag in examples:
+            with self.subTest(outlet=name):
+                item = {
+                    "title": "شهرداری کرمان طرح جدید را اعلام کرد",
+                    "paragraphs": ["شورای شهر کرمان امروز طرح جدید را تصویب کرد."],
+                    "source": name,
+                }
+                if explicit:
+                    item["source_hashtag"] = explicit
+                caption = editorial.compose_caption(item)
+                self.assertIn(hashtag, caption)
+                self.assertIn("به گزارش ", caption)
+                self.assertNotIn("https://", caption)
+
+    def test_persian_source_hashtag_with_punctuation(self):
+        self.assertEqual(
+            editorial.source_hashtag({"source": "کرمان‌نو / خبر"}),
+            "#کرمان_نو_خبر",
+        )
+
     def test_long_sentence_not_cut_midway(self):
         item = {
             "title": "خبر تازه درباره شهر کرمان",

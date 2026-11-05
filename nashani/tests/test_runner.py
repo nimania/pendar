@@ -18,6 +18,45 @@ class NewsRadarTests(unittest.TestCase):
     def test_unrelated_national_headline_is_rejected(self):
         self.assertEqual(runner.city_relevance("گفت‌وگوی وزرای خارجه چین و ترکیه"), "reject")
 
+    def test_mixed_source_only_accepts_kerman_region(self):
+        self.assertEqual(runner.regional_relevance("گزارش روزانه از شهرستان جیرفت"), "high")
+        self.assertEqual(runner.regional_relevance("وضعیت آب و هوای شهر کرمان"), "high")
+        self.assertEqual(runner.regional_relevance("گزارش کامل از کرمانشاه"), "reject")
+        self.assertEqual(runner.regional_relevance("تورم کشور و مصوبه مجلس در تهران"), "reject")
+
+    def test_qh_qv_regional_filter_accepts_news_and_skips_irrelevant(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        source = {"coverage": "region", "media_repost_allowed": True,
+                  "priority_publish": True, "source_hashtag": "qh_qv"}
+        original = {"url": "https://t.me/qh_qv/100",
+                    "title": "خبر فوری درباره آبگرفتگی معابر کرمان",
+                    "excerpt": "امروز خیابان‌های شهر کرمان دچار آبگرفتگی شد.",
+                    "source": "qh_qv", "published_at": now.isoformat()}
+        approved = runner.evaluate(dict(original), now, source)
+        self.assertEqual(approved["status"], "ready")
+        self.assertTrue(approved["media_repost_allowed"])
+        self.assertEqual(approved["source_hashtag"], "qh_qv")
+        unrelated = dict(original, title="گزارش بازار خودرو در تهران",
+                         excerpt="معاملات خودرو در تهران امروز گزارش شد.")
+        self.assertIsNone(runner.evaluate(unrelated, now, source))
+
+    def test_kerman_news_regional_feed_is_30_min_and_filters_ads(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        source = {"handle": "kerman_news", "poll_minutes": 30, "coverage": "region",
+                  "priority_publish": True, "media_repost_allowed": True,
+                  "source_hashtag": "اخبار_کرمان"}
+        past = {"source_last_checked": {"kerman_news": "2026-11-05T15:10:00+00:00"}}
+        self.assertFalse(runner.source_due(source, past, now))
+        past["source_last_checked"]["kerman_news"] = "2026-11-05T14:59:00+00:00"
+        self.assertTrue(runner.source_due(source, past, now))
+        row = {"url": "https://t.me/kerman_news/999", "title": "سیل در روستای جیرفت",
+               "excerpt": "وضعیت سیلاب در شهرستان جیرفت بررسی شد.",
+               "source": "اخبار کرمان", "published_at": now.isoformat()}
+        self.assertEqual(runner.evaluate(dict(row), now, source)["status"], "ready")
+        ad = dict(row, title="قیمت ویژه لوازم خانگی در کرمان",
+                  excerpt="ثبت سفارش با تخفیف ویژه در کرمان")
+        self.assertIsNone(runner.evaluate(ad, now, source))
+
     def test_sensitive_claim_never_auto_ready(self):
         now = datetime(2026, 11, 4, 12, 0, tzinfo=timezone.utc)
         item = {

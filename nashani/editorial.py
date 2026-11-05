@@ -105,6 +105,14 @@ def brief_sentences(text, max_chars=530, max_parts=3):
     return chosen
 
 
+def source_hashtag(item):
+    """Make a stable, local Telegram search hashtag without clickable source URLs."""
+    value = str(item.get("source_hashtag") or item.get("source") or "منبع").replace("\u200c", " ")
+    value = re.sub(r"[^\w\s]", " ", value, flags=re.UNICODE)
+    value = re.sub(r"\s+", "_", value.strip()).strip("_")
+    return "#" + (value or "منبع")
+
+
 def compose_caption(item, limit=MAX_CAPTION):
     """Telegram-like heading + blue-diamond readable paragraphs + text attribution."""
     headline = clean_news_line(item.get("title", "")) or "گزارش تازه"
@@ -145,5 +153,5 @@ def compose_caption(item, limit=MAX_CAPTION):
             pieces.append(part)
     if not pieces:
         pieces.append("🔹 " + label.rstrip("، ") + " خبر را منتشر کرد.")
-    footer = "#کرمان #نشانی_کرمان"
+    footer = "#کرمان #نشانی_کرمان " + source_hashtag(item)
     return prefix + "\n\n" + "\n\n".join(pieces) + "\n\n" + footer

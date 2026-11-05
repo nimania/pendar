@@ -1,7 +1,7 @@
 {
-  "version": 2,
+  "version": 3,
   "territory": "Kerman city (not the entire province)",
-  "editorial_policy": "Short original-format headline and two to three blue-diamond paragraphs. Attribute source by name without outgoing URLs. Eligible public Telegram photos/videos may be copied or uploaded where republication rights apply; protected media remains text-only. Sensitive/ambiguous reports require editorial approval.",
+  "editorial_policy": "Every published post must attribute the original named outlet and include a #source_hashtag, with no original source URL in the public post. All relevant Kerman news from owner-supplied qh_qv and Kerman News is candidates for the same rich caption, permitted photo/video delivery, and sensitive-item review as Kerman-No. Reject ads and off-topic material.",
   "sources": [
     {
       "name": "کرمان‌نو",
@@ -12,7 +12,9 @@
       "verified_from": "https://t.me/KERMANE_NO",
       "poll_minutes": 30,
       "coverage": "all",
-      "media_repost_allowed": true
+      "media_repost_allowed": true,
+      "priority_publish": true,
+      "source_hashtag": "کرمان_نو"
     },
     {
       "name": "فردای کرمان",
@@ -65,9 +67,12 @@
       "enabled": true,
       "role": "regional-aggregator",
       "verified_from": "https://t.me/kerman_news",
-      "poll_minutes": 5,
-      "coverage": "city",
-      "media_repost_allowed": true
+      "poll_minutes": 30,
+      "coverage": "region",
+      "media_repost_allowed": true,
+      "priority_publish": true,
+      "owner_confirms_reuse_rights": true,
+      "source_hashtag": "اخبار_کرمان"
     },
     {
       "name": "کرمان رسانه",
@@ -80,6 +85,21 @@
       "coverage": "city",
       "review_only": true,
       "media_repost_allowed": false
+    },
+    {
+      "name": "qh_qv",
+      "platform": "telegram",
+      "handle": "qh_qv",
+      "enabled": true,
+      "role": "mixed-channel-kerman-news-only",
+      "verified_from": "https://t.me/qh_qv",
+      "source_identity": "owner-provided handle; channel display name not yet independently verified",
+      "poll_minutes": 30,
+      "coverage": "region",
+      "priority_publish": true,
+      "media_repost_allowed": true,
+      "owner_confirms_reuse_rights": true,
+      "source_hashtag": "qh_qv"
     }
   ]
 }
