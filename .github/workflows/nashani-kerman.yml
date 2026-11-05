@@ -6,6 +6,8 @@ on:
   push:
     paths:
       - '.github/workflows/nashani-kerman.yml'
+      - 'nashani/runner.py'
+      - 'nashani/sources.json'
   pull_request:
     paths:
       - 'nashani/**'
