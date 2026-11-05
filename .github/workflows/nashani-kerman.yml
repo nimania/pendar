@@ -3,6 +3,9 @@ name: Nashani Kerman city-news radar
 on:
   schedule:
     - cron: '*/5 * * * *'
+  push:
+    paths:
+      - '.github/workflows/nashani-kerman.yml'
   pull_request:
     paths:
       - 'nashani/**'
@@ -14,7 +17,7 @@ on:
         required: false
         type: string
       check_connection:
-        description: 'Verify @neshanikermanbot is an admin of @neshanikerman; do not send a message'
+        description: 'Verify @neshanikermanbot is an admin of numeric Nashani Kerman channel; do not send a message'
         required: false
         type: boolean
         default: false
