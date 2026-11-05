@@ -224,7 +224,19 @@
     "https://t.me/qh_qv/871",
     "https://t.me/qh_qv/872",
     "https://t.me/qh_qv/873",
-    "https://t.me/Kerman_akhbar/66207"
+    "https://t.me/Kerman_akhbar/66207",
+    "https://t.me/kerman_news/140111",
+    "https://t.me/kermane_no/59016",
+    "https://t.me/kermane_no/59017",
+    "https://t.me/kermane_no/59018",
+    "https://t.me/kerman_news/140112",
+    "https://t.me/kerman_news/140113",
+    "https://t.me/kerman_news/140114",
+    "https://t.me/kermane_no/59019",
+    "https://t.me/Kerman_akhbar/66208",
+    "https://t.me/fardaayekerman/34952",
+    "https://t.me/Kerman_akhbar/66209",
+    "https://t.me/kermane_no/59020"
   ],
   "queue": [
     {
@@ -1093,17 +1105,239 @@
       "detected_at": "2026-11-05T16:56:31.998931+00:00",
       "other_sources": [],
       "geography": "kerman"
+    },
+    {
+      "url": "https://t.me/kermane_no/59016",
+      "source_post_id": "59016",
+      "title": "موافقت سازمان امور مالیاتی با معافیت مالیاتی مدارس غیردولتی",
+      "excerpt": "موافقت سازمان امور مالیاتی با معافیت مالیاتی مدارس غیردولتی مدیرکل مدارس و مراکز غیردولتی وزارت آموزش‌وپرورش از پاسخ مثبت سازمان امور مالیاتی به درخواست معافیت فعالیت‌های آموزشی و فرهنگی مدارس غیردولتی از مالیات بر ارزش افزوده خبر داد و اعلام کرد این موضوع در وزارت اقتصاد در حال پیگیری نهایی است. رضا زینی‌وند در ششمین جلسه شورای آموزش‌وپرورش استان کرمان با اشاره به اینکه فعالیت‌های آموزشی و پژوهشی طبق قانون مشمول معافیت هستند، بر لزوم اجرای یکسان قوانین، واگذاری املاک مازاد و صدور شناسه ملی برای مدارس غیردولتی تأکید کرد. وی با بیان اینکه مدارس غیردولتی رقیب مدارس دولتی نیستند بلکه ظرفیتی بزرگ برای نظام آموزشی محسوب می‌شوند، خاطرنشان کرد که در حال حاضر حدود ۲۱ هزار مدرسه غیردولتی با دو میلیون و ۵۰۰ هزار دانش‌آموز در کشور فعال هستند و بیش از ۳۰۰ هزار نفر در این بخش اشتغال دارند.",
+      "paragraphs": [
+        "موافقت سازمان امور مالیاتی با معافیت مالیاتی مدارس غیردولتی",
+        "مدیرکل مدارس و مراکز غیردولتی وزارت آموزش‌وپرورش از پاسخ مثبت سازمان امور مالیاتی به درخواست معافیت فعالیت‌های آموزشی و فرهنگی مدارس غیردولتی از مالیات بر ارزش افزوده خبر داد و اعلام کرد این موضوع در وزارت اقتصاد در حال پیگیری نهایی است.",
+        "رضا زینی‌وند در ششمین جلسه شورای آموزش‌وپرورش استان کرمان با اشاره به اینکه فعالیت‌های آموزشی و پژوهشی طبق قانون مشمول معافیت هستند، بر لزوم اجرای یکسان قوانین، واگذاری املاک مازاد و صدور شناسه ملی برای مدارس غیردولتی تأکید کرد.",
+        "وی با بیان اینکه مدارس غیردولتی رقیب مدارس دولتی نیستند بلکه ظرفیتی بزرگ برای نظام آموزشی محسوب می‌شوند، خاطرنشان کرد که در حال حاضر حدود ۲۱ هزار مدرسه غیردولتی با دو میلیون و ۵۰۰ هزار دانش‌آموز در کشور فعال هستند و بیش از ۳۰۰ هزار نفر در این بخش اشتغال دارند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/PtmFuzWgXD9mukV5mkqYYxQJ7WCGUgIu1OaD1tmiHqDB2gDVgbDS6myryl2ejJ1M99HBRn7iMdBQc9ET-98Nas7iuMtevnxvUva7cekNwhFODt8dUJ6eOM3amn0y1nQTjKT28qup3IKON3DgYIrHtVBEjbb0zqItHXcZXCp6wn88qFHCfqcIKkJ8B2ZFWT52dz1hhvDbWLprN9fdUwM6tsW8pO2C0Ik3ULmK9aqaf8QHV8q6fw1XOxF4Obk-jW-e62P8pNGrCfZMLrJUp62gTJE-0O4MTW303ClIRwJP4Ezhc1pSko4bJJTMV6nFRE0X-F9hdiA2nz_uJHwIF0nDUg.jpg"
+      },
+      "published_at": "2026-11-05T16:51:25+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "e4cf652952d1cd40",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T17:45:46.320241+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59017",
+      "source_post_id": "59017",
+      "title": "آمادگی خیران برای ساخت هنرستان؛ درخواست تعیین سهم دولت در طرح‌های آموزشی",
+      "excerpt": "آمادگی خیران برای ساخت هنرستان؛ درخواست تعیین سهم دولت در طرح‌های آموزشی نماینده مردم رفسنجان و انار در شورای آموزش‌وپرورش کرمان با تأکید بر نیاز استان به نیروهای فنی و تکنسین، از آمادگی خیران برای ساخت هنرستان خبر داد و خواستار مشخص شدن دقیق سهم دولت در این پروژه‌ها شد. احمد انارکی با اشاره به لزوم تطبیق آموزش‌ها با نیاز بازار کار و جذب نیروهای بومی، بر اهمیت انجام به‌موقع تعهدات دولتی در طرح‌های مشارکتی برای جلب اعتماد بیشتر خیران تأکید کرد. وی همچنین با اشاره به وجود برخی مدارس غیرقابل‌استفاده، خواستار تعیین تکلیف فضاهای آموزشی موجود و حمایت از مدارس غیردولتی در راستای بهبود شرایط آموزش‌وپرورش شد.",
+      "paragraphs": [
+        "آمادگی خیران برای ساخت هنرستان؛ درخواست تعیین سهم دولت در طرح‌های آموزشی",
+        "نماینده مردم رفسنجان و انار در شورای آموزش‌وپرورش کرمان با تأکید بر نیاز استان به نیروهای فنی و تکنسین، از آمادگی خیران برای ساخت هنرستان خبر داد و خواستار مشخص شدن دقیق سهم دولت در این پروژه‌ها شد.",
+        "احمد انارکی با اشاره به لزوم تطبیق آموزش‌ها با نیاز بازار کار و جذب نیروهای بومی، بر اهمیت انجام به‌موقع تعهدات دولتی در طرح‌های مشارکتی برای جلب اعتماد بیشتر خیران تأکید کرد.",
+        "وی همچنین با اشاره به وجود برخی مدارس غیرقابل‌استفاده، خواستار تعیین تکلیف فضاهای آموزشی موجود و حمایت از مدارس غیردولتی در راستای بهبود شرایط آموزش‌وپرورش شد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/fVNJG3tvqL40GZsYEOsD4whoOC0J2TldBqznZiULyvGUM8ZdSzPZlMRxbcc7_mjESoNZPULnd1XJN_8H6A2z8QvO6b9alyBq7CQXW71jTU9YaJcuVlRWsa_NUq8Mg6eNGnSOPtgleqrUoO0iNmRi72lxmNJwSohudiuhkWg8PcuU-EPkKbAkyby9uhJnrxNL-W9VHtxP7Hsqw0uZvImXcqRnMYw0XdxywzWR2M0BgxMUyMOBKdFxZuOIcrO9Xh6PAn7liiR-me4cq0RGlBMXMlcgFpngJZXjDo7GTdInSYFe_NCGdpcpW8S7E2td9pghc3mDUs2lvH2rDSXng101DA.jpg"
+      },
+      "published_at": "2026-11-05T16:52:42+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "84c435674a305845",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T17:45:46.320241+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59018",
+      "source_post_id": "59018",
+      "title": "انتقاد از پرداخت‌نشدن سهم دولت در پروژه‌های مدرسه‌سازی کرمان",
+      "excerpt": "انتقاد از پرداخت‌نشدن سهم دولت در پروژه‌های مدرسه‌سازی کرمان نماینده مردم کرمان و راور در شورای آموزش‌وپرورش کرمان با انتقاد از عمل‌نکردن دولت به تعهدات خود در طرح‌های مدرسه‌ساز، خواستار تسریع در رفع کمبود فضای آموزشی و تأمین اعتبار برای هنرستان‌ها شد. شهباز حسن‌پور با اشاره به آغاز ساخت ۵۵ مدرسه در استان، بر لزوم پیگیری نهضت مدرسه‌سازی تأکید کرد و افزود که با وجود آمادگی مدرسه فدک برای افتتاح، دولت باید سهم قانونی خود را در این پروژه‌ها پرداخت کند. وی همچنین با تجلیل از نقش مؤسسان مدارس غیردولتی و خیران، پیشنهاد کرد ثبت جهانی خیران کرمان در دستور کار قرار گیرد.",
+      "paragraphs": [
+        "انتقاد از پرداخت‌نشدن سهم دولت در پروژه‌های مدرسه‌سازی کرمان",
+        "نماینده مردم کرمان و راور در شورای آموزش‌وپرورش کرمان با انتقاد از عمل‌نکردن دولت به تعهدات خود در طرح‌های مدرسه‌ساز، خواستار تسریع در رفع کمبود فضای آموزشی و تأمین اعتبار برای هنرستان‌ها شد.",
+        "شهباز حسن‌پور با اشاره به آغاز ساخت ۵۵ مدرسه در استان، بر لزوم پیگیری نهضت مدرسه‌سازی تأکید کرد و افزود که با وجود آمادگی مدرسه فدک برای افتتاح، دولت باید سهم قانونی خود را در این پروژه‌ها پرداخت کند.",
+        "وی همچنین با تجلیل از نقش مؤسسان مدارس غیردولتی و خیران، پیشنهاد کرد ثبت جهانی خیران کرمان در دستور کار قرار گیرد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/HGDqxqLwa5PO5hXZZq10oR3mKHP8VQGn18syD3N56wRLoL0lbVQmOxq1YyEmiHFdMNngsd9Za6DK0bQwiq2aagku7WtrVmmcg1GLOcNhATqHxMK67vq5iJWZg_wVWEk6RDI55IdnFOPUkhp6saKAyq-XO0aQQyEYqdw7t9rFNLfQZm6AoUcNWOF5VNmvypWGIF5PpDnRla90c3gBPTF8Kj4LkoZs77W_2up6swGtwzkSmmVzqtD_m-9NfG9geBzyq_CmdrZGDPixgxzOslIhUC5IJHCA9pnZBxILaQrYmUujkKu8w7K7sL6nI73cP8EEMQjLUHYOTWVdz83bfK3mFA.jpg"
+      },
+      "published_at": "2026-11-05T17:03:09+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "b240885db84c8479",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T17:45:46.320241+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140112",
+      "source_post_id": "140112",
+      "title": "وضعیت خیابان های امشب جیرفت",
+      "excerpt": "وضعیت خیابان های امشب جیرفت",
+      "paragraphs": [
+        "وضعیت خیابان های امشب جیرفت"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/8420b6e650.mp4?token=FD3YVieplIb2MraI4oCvvGnXvLuI8DNwtV9aaqxd1OElbIFnqqlazUVvgxWr3evZXjWaHHYUiV5GSDbuKPk45JK9QXfYVPz-DgoCVbv58cLkQE-LnWnvvm6RE3RaIpu5E89VW7XOQ42qT2-tSqOlkTLecQXxmb8BUpBzh0xjr_tX3s3KhUIpnmmcbxKdmm8I9ARugHqu4ygYM7KZQpy662eO4TP4kKhUtrP1nI5jB9zd1seyxNP3TUFqCnMZWxBURqiZoMCPeTK0IjxsXMzy8z5KG8gPncH3DNJFs0fyzuqACw2ajzjRn4rMn5A7DoG2sImQLwWguGVlb-2xzCbm2w"
+      },
+      "published_at": "2026-11-05T17:07:11+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "0c0ebd9eb6ccbafd",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T17:45:46.320241+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140114",
+      "source_post_id": "140114",
+      "title": "پلمپ ۹ واحد صنفی در برنامه نظارت پلیس بر صنوف بم",
+      "excerpt": "پلمپ ۹ واحد صنفی در برنامه نظارت پلیس بر صنوف بم فرمانده انتظامی بم ماموران اداره نظارت بر اماکن پلیس امنیت عمومی در گشت مشترک با دادگستری این شهرستان طی هفته گذشته برنامه بازدید و نظارت از واحدهای صنفی را اجرایی کردند. ۹ واحد صنفی از جمله کافه و پوشاک به دلیل تخلف نداشتن پروانه کسب و عدم رعایت قوانین و مقررات و ضوابط عمومی برابر ماده ۲۷ قانون نظام صنفی پلمب شد.",
+      "paragraphs": [
+        "پلمپ ۹ واحد صنفی در برنامه نظارت پلیس بر صنوف بم",
+        "فرمانده انتظامی بم",
+        "ماموران اداره نظارت بر اماکن پلیس امنیت عمومی در گشت مشترک با دادگستری این شهرستان طی هفته گذشته برنامه بازدید و نظارت از واحدهای صنفی را اجرایی کردند.",
+        "۹ واحد صنفی از جمله کافه و پوشاک به دلیل تخلف نداشتن پروانه کسب و عدم رعایت قوانین و مقررات و ضوابط عمومی برابر ماده ۲۷ قانون نظام صنفی پلمب شد."
+      ],
+      "media": null,
+      "published_at": "2026-11-05T17:23:01+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "fadeed9b588823cf",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-05T17:45:46.320241+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59019",
+      "source_post_id": "59019",
+      "title": "درخواست استاندار کرمان برای تبدیل استان به الگوی مشارکت جمعی در مدرسه‌سازی",
+      "excerpt": "درخواست استاندار کرمان برای تبدیل استان به الگوی مشارکت جمعی در مدرسه‌سازی استاندار کرمان با تأکید بر لزوم فراهم‌کردن سازوکار مشارکت اقشار مختلف در مدرسه‌سازی، گفت بنگاه‌های اقتصادی می‌توانند با تأمین مصالح ارزان‌تر به طرح‌های مردمی کمک کنند تا کرمان به الگویی برای مشارکت‌های جمعی تبدیل شود. محمدعلی طالبی در ششمین جلسه شورای آموزش‌وپرورش استان با اشاره به قرار گرفتن کرمان در جمع استان‌های برتر نهضت مدرسه‌سازی کشور، بر استفاده از ظرفیت تشکل‌های ملی و بنگاه‌های اقتصادی تأکید کرد. وی همچنین با اشاره به وضعیت بحرانی فضای آموزشی در رفسنجان با وجود برخورداری اقتصادی، خواستار اقدام فوق‌العاده برای جبران کمبودها و افزایش اعتبارات دولتی در این حوزه شد.",
+      "paragraphs": [
+        "درخواست استاندار کرمان برای تبدیل استان به الگوی مشارکت جمعی در مدرسه‌سازی",
+        "استاندار کرمان با تأکید بر لزوم فراهم‌کردن سازوکار مشارکت اقشار مختلف در مدرسه‌سازی، گفت بنگاه‌های اقتصادی می‌توانند با تأمین مصالح ارزان‌تر به طرح‌های مردمی کمک کنند تا کرمان به الگویی برای مشارکت‌های جمعی تبدیل شود.",
+        "محمدعلی طالبی در ششمین جلسه شورای آموزش‌وپرورش استان با اشاره به قرار گرفتن کرمان در جمع استان‌های برتر نهضت مدرسه‌سازی کشور، بر استفاده از ظرفیت تشکل‌های ملی و بنگاه‌های اقتصادی تأکید کرد.",
+        "وی همچنین با اشاره به وضعیت بحرانی فضای آموزشی در رفسنجان با وجود برخورداری اقتصادی، خواستار اقدام فوق‌العاده برای جبران کمبودها و افزایش اعتبارات دولتی در این حوزه شد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/SiamhinwFfPUdLUV-7uEdy7tTCgkBUH7gdFvPx6GIXcO3M_EAFs6uQLaSiL3dJNaJovDPH8z-iHvXdCrjv3fH7if84ZBTF5mlCBlTi7LEnyXw-s5G-KUjlbp-Nn5lnKoaRZG_2488wc_1d4TlPBL0GurzKka7EoyfLelx4B85u9HbjCWwc2NEavilKro4gjtbellQIbJW17zP_XcqDpVP-H2XCRY8nGp5mSIohe_m7yP-dYYgNqhyu_lxXADX8kH_U70NGg1LlxK33lAjCI9K8oxZq79imBtr5bIpfQXXFr61E4C2KcsLU7zqqfg8GTtd-BC5RG27fMcpSfd5EhR7w.jpg"
+      },
+      "published_at": "2026-11-05T17:23:09+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "cebc5c944bf70e17",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T17:45:46.320241+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/34952",
+      "source_post_id": "34952",
+      "title": "طی مراسمی از گل‌گهر تجلیل شد؛",
+      "excerpt": "طی مراسمی از گل‌گهر تجلیل شد؛ کسب رتبه برتر در حوزه پدافند غیرعامل کشور توسط شرکت گل‌گهر فردای کرمان ـ گروه اطلاع‌رسانی: طی مراسمی با حضور سردار غلامرضا جلالی، رئیس سازمان پدافند غیرعامل کشور و دکتر سمیعی نژاد رئیس سازمان ایمیدرو، از شرکت معدنی و صنعتی گل‌گهر به عنوان شرکت برتر حوزه پدافند غیرعامل تجلیل شد. فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "طی مراسمی از گل‌گهر تجلیل شد؛",
+        "کسب رتبه برتر در حوزه پدافند غیرعامل کشور توسط شرکت گل‌گهر",
+        "فردای کرمان ـ گروه اطلاع‌رسانی: طی مراسمی با حضور سردار غلامرضا جلالی، رئیس سازمان پدافند غیرعامل کشور و دکتر سمیعی نژاد رئیس سازمان ایمیدرو، از شرکت معدنی و صنعتی گل‌گهر به عنوان شرکت برتر حوزه پدافند غیرعامل تجلیل شد.",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Xelh71Zeir63A33xP23RZ8HhcaSi7iR2oCn6BwTrKqWizlqt9vHDZusgDjXGveNBmPJAZ_bPVH0uOfjYJH72OzVgBpZKgL1zWOUbQyFHWI9y6yFeMbdWb3T2A9QaF0vsn0LNZJmg7wuMqbh3IhByS8BMDnwqQK6GWqQ9gABg_ogeRwwCRyAOezAaGpcvDP5ox-DAtruYl8G6pN7Kkx_3cBL_7_4WnqyxPYetF3FB7iqOe9ArffJCEmlsITIAnQZtB7fK4QNVc3q8txE9JCDNoqApPtu4vViKYVI5lGZk2kYwc6mgZnk8gxp1_ebxFb-xJEBkzPToGam4-EGwe5Lv9A.jpg"
+      },
+      "published_at": "2026-11-05T17:34:36+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "fa45ede92b1c37bc",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T17:45:46.320241+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59020",
+      "source_post_id": "59020",
+      "title": "در مسابقات لیگ دسته سوم فوتبال کشور",
+      "excerpt": "در مسابقات لیگ دسته سوم فوتبال کشور مس نوین کرمان با پنج گل پیروز شد مس نوین کرمان عصر پنج‌شنبه ۱۴ آبان در ورزشگاه شهید باهنر، با نتیجه ۵ بر یک مقابل شهرداری قلعه‌ممبی به پیروزی رسید. به گزارش «کرمان‌نو»، تیم فوتبال مس نوین کرمان در دیداری از رقابت‌های لیگ دسته سوم کشور، میزبان شهرداری قلعه‌ممبی بود و با پنج گل حریف خود را شکست داد. علی یوسفی دو گل و عرفان آبادی‌پیشه، حسن حمیدی و طاها ستائی مختاری هرکدام یک گل برای مس نوین کرمان به ثمر رساندند.",
+      "paragraphs": [
+        "در مسابقات لیگ دسته سوم فوتبال کشور",
+        "مس نوین کرمان با پنج گل پیروز شد",
+        "مس نوین کرمان عصر پنج‌شنبه ۱۴ آبان در ورزشگاه شهید باهنر، با نتیجه ۵ بر یک مقابل شهرداری قلعه‌ممبی به پیروزی رسید.",
+        "به گزارش «کرمان‌نو»، تیم فوتبال مس نوین کرمان در دیداری از رقابت‌های لیگ دسته سوم کشور، میزبان شهرداری قلعه‌ممبی بود و با پنج گل حریف خود را شکست داد.",
+        "علی یوسفی دو گل و عرفان آبادی‌پیشه، حسن حمیدی و طاها ستائی مختاری هرکدام یک گل برای مس نوین کرمان به ثمر رساندند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/omXJVhumO-3bsnYSdDTG7_BwKxKnycRE1ro7IAX10EfiI6SDybCxSbxPFalTgfzIgStdUYCsakPahkYxjzc7V3P7MbqsQlvg8YHpZvlDkK3GC2sxpRjL4DGR8tdiEMNsWwGIXc1fnClTkkt6yyXW9CYN8HcSn3l3p5ik2l_SqSR9Ooso4yh3rBDgk5K82RTKWXZMBJft7a_js14sp-tMwF-ACKn2TRG3VcYT6kD2uvcyNnhmXWDiEdhdxumeycEzbHRaAJBluj76t46vprgwU2ZevIu0AlIRtU8OzTAvqdtJmoxC405XQwX6eNZmBtqa1DouT3K7JiCm6ZQMvAaosQ.jpg"
+      },
+      "published_at": "2026-11-05T17:35:14+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "90a05c4fbb37e2b3",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T17:45:46.320241+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-05T17:04:07.597859+00:00",
+  "saved_at": "2026-11-05T17:45:54.224744+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-05T16:50:53.449005+00:00",
-    "fardaayekerman": "2026-11-05T17:04:02.494268+00:00",
-    "irna_kerman": "2026-11-05T17:04:02.494268+00:00",
-    "kerman_gov": "2026-11-05T17:04:02.494268+00:00",
-    "kerman_akhbar": "2026-11-05T17:04:02.494268+00:00",
-    "kerman_news": "2026-11-05T16:38:27.180690+00:00",
-    "kerman_rasaneh": "2026-11-05T17:04:02.494268+00:00",
-    "qh_qv": "2026-11-05T16:50:53.449005+00:00"
+    "kermane_no": "2026-11-05T17:45:46.320241+00:00",
+    "fardaayekerman": "2026-11-05T17:45:46.320241+00:00",
+    "irna_kerman": "2026-11-05T17:45:46.320241+00:00",
+    "kerman_gov": "2026-11-05T17:45:46.320241+00:00",
+    "kerman_akhbar": "2026-11-05T17:45:46.320241+00:00",
+    "kerman_news": "2026-11-05T17:45:46.320241+00:00",
+    "kerman_rasaneh": "2026-11-05T17:45:46.320241+00:00",
+    "qh_qv": "2026-11-05T17:45:46.320241+00:00"
   }
 }
