@@ -248,7 +248,10 @@
     "https://t.me/kerman_news/140120",
     "https://t.me/kerman_gov/10501",
     "https://t.me/kerman_gov/10502",
-    "https://t.me/Kerman_akhbar/66211"
+    "https://t.me/Kerman_akhbar/66211",
+    "https://t.me/kerman_news/140121",
+    "https://t.me/kerman_news/140122",
+    "https://t.me/Kerman_akhbar/66212"
   ],
   "queue": [
     {
@@ -1590,17 +1593,43 @@
       "delivery_kind": "text",
       "telegram_message_id": 34,
       "sent_at": "2026-11-05T19:00:00.153246+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_news/140121",
+      "source_post_id": "140121",
+      "title": "جدیدترین اخبار و اطلاعیه‌های استان کرمان را در کانال‌های زیر دنبال کنید",
+      "excerpt": "جدیدترین اخبار و اطلاعیه‌های استان کرمان را در کانال‌های زیر دنبال کنید اینستاگرام",
+      "paragraphs": [
+        "جدیدترین اخبار و اطلاعیه‌های استان کرمان را در کانال‌های زیر دنبال کنید",
+        "اینستاگرام"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/OmoQW8CAopfAxqn0SMEQ9j8Fbg50h8vI7FwQuB4ae5TNgVZheHyhUC_-n0o9CdgUFn05RBmtohijhFDL6fBvoQxkT8g620JLz3CPR5x8NfX2jXRjN95IAIHWO9N6kB_ypVkKXeu2Ccdl3vnOTON5HdifisX9xJfu56bKJevu0BDAFMM9UhqWBbQKhPizLeSzP0rcFMnxcB65GlqLuDX6tEen5__wklZ7Y5jR_JQNqAcnnmJ3CaYTLUbAPnzFeYbLXG-J1kT863Bl9dodp7jUMpomkm2tQNVronVouwLdtybKosI_OeB5UDQ2SbNhTUNvyMros-86SrV9CfyMWLf4Dg.jpg"
+      },
+      "published_at": "2026-11-05T18:47:56+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "4a12539e029fbffe",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T19:10:26.902690+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-05T19:00:00.153266+00:00",
+  "saved_at": "2026-11-05T19:10:33.545345+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-05T18:38:31.443963+00:00",
-    "fardaayekerman": "2026-11-05T18:59:46.489556+00:00",
-    "irna_kerman": "2026-11-05T18:59:46.489556+00:00",
-    "kerman_gov": "2026-11-05T18:59:46.489556+00:00",
-    "kerman_akhbar": "2026-11-05T18:59:46.489556+00:00",
-    "kerman_news": "2026-11-05T18:38:31.443963+00:00",
-    "kerman_rasaneh": "2026-11-05T18:59:46.489556+00:00",
-    "qh_qv": "2026-11-05T18:38:31.443963+00:00"
+    "kermane_no": "2026-11-05T19:10:26.902690+00:00",
+    "fardaayekerman": "2026-11-05T19:10:26.902690+00:00",
+    "irna_kerman": "2026-11-05T19:10:26.902690+00:00",
+    "kerman_gov": "2026-11-05T19:10:26.902690+00:00",
+    "kerman_akhbar": "2026-11-05T19:10:26.902690+00:00",
+    "kerman_news": "2026-11-05T19:10:26.902690+00:00",
+    "kerman_rasaneh": "2026-11-05T19:10:26.902690+00:00",
+    "qh_qv": "2026-11-05T19:10:26.902690+00:00"
   }
 }
