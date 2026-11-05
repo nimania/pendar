@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Deterministically compile karname/daftar.md into backend/data/karname.json.
 
-The original Claude ledger has not yet been imported. This module never
-invents claims, sources, evaluations, timestamps or probabilities.
+The uploaded Claude ledger is the primary source of current claims. The old
+reconstruction is archived. This module never invents any claims or scores.
 """
 from __future__ import annotations
 import argparse
@@ -34,7 +34,7 @@ def extract(markdown: str) -> dict:
     for claim in payload["claims"]:
         if not set(claim.get("speakers", [])).issubset(people):
             raise ValueError("Unknown speaker on claim " + claim["id"])
-        if claim.get("result") is not None and not claim.get("result_source"):
+        if claim.get("result") not in (None, "") and not claim.get("result_source"):
             raise ValueError("A scored claim must include a result_source: " + claim["id"])
         if claim.get("source_type") == "secondary_editorial_recap":
             if not claim.get("source_record_id") or not claim.get("source_ref_url"):
@@ -50,7 +50,7 @@ def build(ledger: Path = DEFAULT_LEDGER, output: Path = DEFAULT_OUTPUT,
     rendered = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     output = Path(output)
     if check:
-        if not output.is_file() or output.read_text(encoding="utf-8") != rendered:
+        if not output.is_file() or json.loads(output.read_text(encoding="utf-8")) != payload:
             raise ValueError("Generated Karname JSON is out of sync with daftar.md")
     else:
         if output.is_file():
@@ -58,9 +58,18 @@ def build(ledger: Path = DEFAULT_LEDGER, output: Path = DEFAULT_OUTPUT,
             older = {c["id"] for c in previous.get("claims", [])}
             newer = {c["id"] for c in payload["claims"]}
             missing = older - newer
-            if missing:
-                raise ValueError("Refusing to drop existing claim IDs: " +
-                                 ", ".join(sorted(missing)[:12]))
+            # The pre-import reconstruction was saved intact before importing
+            # the user's original ledger. Only its known archived claim IDs
+            # may disappear from the active public view.
+            archive = ROOT / "karname/imports/pendar-reconstructed-18-20261105.json"
+            archived = set()
+            if archive.is_file():
+                archived = {c["id"] for c in json.loads(
+                    archive.read_text(encoding="utf-8")).get("claims", [])}
+            unexpected = missing - archived
+            if unexpected:
+                raise ValueError("Refusing to drop unarchived existing claim IDs: " +
+                                 ", ".join(sorted(unexpected)[:12]))
         output.parent.mkdir(parents=True, exist_ok=True)
         temp = output.with_suffix(".json.tmp")
         temp.write_text(rendered, encoding="utf-8")

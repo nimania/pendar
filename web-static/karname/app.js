@@ -20,7 +20,7 @@ function norm(v){return String(v??"").replace(/[\u200c\u200e\u200f]/g,"").toLowe
 function speakerId(v){return typeof v==="object"&&v?(v.key||v.handle||v.name||""):String(v??"");}
 function speaker(v){let id=speakerId(v),s=state.speakers.find(x=>[x.key,x.handle,x.name].includes(id));return s?.name||id;}
 function people(c){return array(c.speakers).map(speaker).filter(Boolean);}
-function excluded(c){let t=norm(c.type||"")+" "+norm(c.type_class||"");return /نقل.?گزارش|توصیه|reported|recommendation/.test(t);}
+function excluded(c){let t=norm(c.type||"")+" "+norm(c.type_class||"");return /نقل[\s\u064B-\u065F‌]*گزارش|توصیه|reported|recommendation/.test(t);}
 function bucket(c){return state.buckets.find(x=>x.key===c.bucket||x.id===c.bucket)||{};}
 function due(c){let b=bucket(c),raw=b.date||b.date_iso||b.due||b.deadline||b.iso||"";if(!/^\d{4}-\d\d-\d\d$/.test(String(raw)))return null;let d=new Date(raw+"T23:59:59Z");return Number.isNaN(d.getTime())?null:d;}
 function result(c){
@@ -32,7 +32,7 @@ function result(c){
   let pts=s?.score??s?.points;
   if(/نیمه.?درست|نسبتا.?درست|partial|half/.test(t)||pts===0.5)return {key:"half",label:"نیمه‌درست",points:.5};
   if(/نادرست|غلط|incorrect|false|wrong|❌|🔴/.test(t)||pts===0)return {key:"bad",label:"نادرست",points:0};
-  if(/شرط.*رخ نداد|شرط.*محقق نشد|condition.*not/.test(t))return {key:"wait",label:"شرط رخ نداد",points:null};
+  if(/شرط.*رخ نداد|شرط.*محقق نشد|condition.*not|void|⊘/.test(t))return {key:"open",label:"شرط رخ نداد",points:null};
   if(/در انتظار|معلق|نامشخص|pending|final/.test(t))return {key:"wait",label:"منتظر نتیجهٔ نهایی",points:null};
   if(/درست|صحیح|correct|true|✅|🟢/.test(t)||pts===1)return {key:"good",label:"درست",points:1};
   return {key:"wait",label:String(s?.label||r),points:null};
@@ -41,7 +41,7 @@ function status(c){
   if(c.kind==="L")return {key:"open",label:"بلندمدت",points:null};
   let r=result(c);if(r)return r;
   let d=due(c);if(d&&d.getTime()<Date.now())return {key:"wait",label:"موعد گذشته؛ منتظر بررسی",points:null};
-  if(["e2","e3"].includes(c.bucket))return {key:"open",label:"منتظر شرط",points:null};
+  if(/(?:^|-)e[23]$/.test(c.bucket||""))return {key:"open",label:"منتظر شرط",points:null};
   return {key:"open",label:"هنوز باز است",points:null};
 }
 function scorable(c){return c.kind!=="L"&&!excluded(c)&&result(c)?.points!=null;}
@@ -133,8 +133,9 @@ function detail(c){
   const secondary=c.source_type==="secondary_editorial_recap";
   const documentUrl=typeof c.source_ref_url==="string"&&/^https:\/\//.test(c.source_ref_url)?c.source_ref_url:null;
   const link=documentUrl?'<p><a href="'+esc(documentUrl)+'" target="_blank" rel="noopener noreferrer">مشاهدهٔ سند مبنا در مخزن پندار ↗</a></p>':"";
+  const origin=secondary?"استخراج از ری‌کپ ثانویهٔ پندار؛ متن ویدئوی اصلی هنوز مستقلاً تطبیق داده نشده است.":(c.source_type==="claude_snapshot"?"این ادعا با شناسه و قیدهای ثبت‌شده از فایل اصلی ارسالیِ Claude وارد شده است؛ نتیجهٔ آن هنوز راستی‌آزمایی نشده است.":"ثبت بر مبنای پروندهٔ ارائه‌شده؛ لینک منبع مستقیم هنوز ثبت نشده است.");
   html+='<div class="detail-source"><strong>منشأ این ثبت:</strong> '+esc(c.source_title)
-     +'<p class="muted">'+(secondary?"استخراج از ری‌کپ ثانویهٔ پندار؛ متن ویدئوی اصلی هنوز مستقلاً تطبیق داده نشده است.":"ثبت بر مبنای پروندهٔ ارائه‌شده؛ لینک منبع مستقیم هنوز ثبت نشده است.")+'</p>'
+     +'<p class="muted">'+origin+'</p>'
      +(c.source_record_id?'<p class="muted">شناسهٔ گزارش: '+esc(c.source_record_id)+'</p>':"")
      +(c.source_anchor?'<p>عبارت مبنای استخراج: '+esc(c.source_anchor)+'</p>':"")
      +link+'</div>';
@@ -143,6 +144,7 @@ function detail(c){
  if(c.condition)html+='<div class="detail-source"><strong>شرط تحقق:</strong><p>'+esc(c.condition)+'</p></div>';
  if(c.speaker_note&&norm(c.speaker_note)!==norm(c.text))html+='<div class="detail-source"><strong>شرح و قیدهای اصلی:</strong><p>'+esc(c.speaker_note)+'</p></div>';
  html+='<div class="detail-source"><strong>وضعیت:</strong> '+esc(s.label)+(safeURL?'<p><a href="'+esc(safeURL)+'" target="_blank" rel="noopener noreferrer">مشاهدهٔ سند نتیجه ↗</a></p>':resultSource?'<p>'+esc(resultSource)+'</p>':'<p class="muted">سند نتیجه هنوز ثبت نشده است.</p>')+'</div>';
+ if(recap)html+='<div class="detail-source"><strong>پیوند دفتر با جان‌کلام:</strong> '+esc(recap.id||"")+(recap.date?' · '+esc(recap.date):"")+'</div>';
  if(validRecap)html+='<p><a href="'+esc(recapLink)+'" target="_blank" rel="noopener noreferrer">جان‌کلام منبع ↗</a></p>';
  html+='<button class="share" type="button" data-share="'+esc(c.id)+'">اشتراک‌گذاری در تلگرام ↗</button>';
  return html;

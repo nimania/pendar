@@ -1,4 +1,4 @@
-"""Regression tests for the independently published Karname scoreboard."""
+"""Regression tests for the canonical Claude Karname import and static website."""
 import json
 import sys
 import tempfile
@@ -8,9 +8,19 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "backend"))
 from scripts.publish_karname_data import publish, validate  # noqa: E402
+from scripts.build_karname import build, extract  # noqa: E402
 
 
 class KarnamePublicationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.public = validate(json.loads(
+            (ROOT / "backend/data/karname.json").read_text(encoding="utf-8")))
+        cls.original = json.loads(
+            (ROOT / "karname/imports/claude-original-80-20261105.json").read_text(encoding="utf-8"))
+        cls.history = json.loads(
+            (ROOT / "karname/imports/pendar-reconstructed-18-20261105.json").read_text(encoding="utf-8"))
+
     def test_canonical_and_alias_page_exist(self):
         canonical = (ROOT / "web-static/karname/index.html").read_text(encoding="utf-8")
         alias = (ROOT / "web-static/karnameh/index.html").read_text(encoding="utf-8")
@@ -19,120 +29,116 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertIn('location.replace("/karname/"+location.search+location.hash)', alias)
         self.assertIn('src="/karname/app.js"', canonical)
 
-    def test_initial_import_is_truthful_and_unscored(self):
-        path = ROOT / "backend/data/karname.json"
-        data = validate(json.loads(path.read_text(encoding="utf-8")))
-        self.assertEqual(data["dataset_scope"], "reconstructed_partial_ledger")
-        self.assertFalse(data["is_complete"])
-        self.assertEqual(len(data["claims"]), 18)
-        self.assertTrue(all(claim["result"] is None for claim in data["claims"]))
-        by_id = {claim["id"]: claim for claim in data["claims"]}
-        self.assertEqual(by_id["SOURI-20261101-02"]["speakers"], ["benjamin-souri"])
-        self.assertEqual(by_id["SOURI-20261101-01"]["speakers"], ["abbas-souri"])
-        self.assertEqual(data["speakers"][0]["name"], "عباس سوری")
-        self.assertEqual(sum("abbas-souri" in c["speakers"] for c in data["claims"]), 6)
-        self.assertEqual(data["provenance"]["attribution_correction"]["corrected_label"], "عباس سوری")
-        self.assertEqual(by_id["SOURI-20261101-08"]["type_class"], "نقل گزارش")
-        self.assertEqual(by_id["SOURI-20261101-09"]["type_class"], "نقل گزارش")
-        self.assertIn("18", data["provenance"]["disclosure"])
+    def test_original_claude_snapshot_preserved_without_edits(self):
+        original, data = self.original, self.public
+        self.assertEqual(len(original["claims"]), 80)
+        self.assertEqual(sum(c["kind"] == "K" for c in original["claims"]), 55)
+        self.assertEqual(sum(c["kind"] == "L" for c in original["claims"]), 25)
+        self.assertEqual(len(original["speakers"]), 13)
+        self.assertEqual(len(original["pairs"]), 7)
+        self.assertEqual(len(original["recaps"]), 30)
+        self.assertEqual(data["pairs"], original["pairs"])
+        self.assertEqual(data["recaps"], original["recaps"])
+        indexed = {c["id"]: c for c in data["claims"]}
+        for claim in original["claims"]:
+            with self.subTest(original_claim=claim["id"]):
+                self.assertIn(claim["id"], indexed)
+                for key, value in claim.items():
+                    self.assertEqual(indexed[claim["id"]][key], value)
 
-    def test_canonical_ledger_reproduces_public_json(self):
-        from scripts.build_karname import build, extract
+    def test_import_retains_history_and_has_no_invented_scores(self):
+        d = self.public
+        self.assertFalse(d["is_complete"])
+        self.assertEqual(d["dataset_scope"], "uploaded_claude_snapshot_and_supplements")
+        self.assertEqual(len(d["claims"]), 95)
+        self.assertEqual(len(d["speakers"]), 17)
+        self.assertEqual(len({c["id"] for c in d["claims"]}), 95)
+        self.assertEqual(len(self.history["claims"]), 18)
+        self.assertTrue(all(not c.get("result") for c in d["claims"]))
+        self.assertEqual(sum(c["id"].startswith("SOURI-") for c in d["claims"]), 9)
+        self.assertEqual(sum(c["id"].startswith("PDR-") for c in d["claims"]), 6)
+        people = {p["key"]: p for p in d["speakers"]}
+        self.assertEqual(people["abbas-souri"]["name"], "عباس سوری")
+        self.assertEqual(sum("abbas-souri" in c["speakers"] for c in d["claims"]), 6)
+        self.assertEqual(len(d["provenance"]["archived_potential_overlaps"]), 3)
+        for c in d["claims"]:
+            self.assertTrue(all(k in people for k in c["speakers"]))
+        self.assertTrue(all(p["a"] in {c["id"] for c in d["claims"]}
+                            and p["b"] in {c["id"] for c in d["claims"]}
+                            for p in d["pairs"]))
+
+    def test_canonical_ledger_is_authoritative_and_reproducible(self):
         ledger = ROOT / "karname/daftar.md"
-        payload = extract(ledger.read_text(encoding="utf-8"))
-        output = json.loads((ROOT / "backend/data/karname.json").read_text(encoding="utf-8"))
-        self.assertEqual(payload, output)
-        self.assertEqual(build(ledger, ROOT / "backend/data/karname.json", check=True), output)
+        self.assertEqual(extract(ledger.read_text(encoding="utf-8")), self.public)
+        self.assertEqual(build(ledger, ROOT / "backend/data/karname.json", check=True), self.public)
 
-    def test_additional_analysts_are_present_without_unverified_scores(self):
-        data = json.loads((ROOT / "backend/data/karname.json").read_text(encoding="utf-8"))
-        names = {p["name"] for p in data["speakers"]}
-        for expected in ("مهدی مطهرنیا", "فرهنگ هلاکویی", "احمد زیدآبادی",
-                         "سید محمد مرندی", "فؤاد ایزدی", "یوسف عزیزی"):
-            self.assertIn(expected, names)
-        new = [c for c in data["claims"] if c["id"].startswith("PDR-")]
-        self.assertEqual(len(new), 9)
-        self.assertTrue(all(c["result"] is None and c["result_source"] is None for c in new))
-        self.assertTrue(all(c["source_type"] == "secondary_editorial_recap" for c in new))
-        self.assertTrue(all(c["source_record_id"] and c["source_ref_url"] for c in new))
-        self.assertFalse(data["is_complete"])
-
-    def test_secondary_claims_trace_to_exact_published_recap(self):
-        data = json.loads((ROOT / "backend/data/karname.json").read_text(encoding="utf-8"))
-        recaps = json.loads((ROOT / "backend/data/editorial-recaps.json").read_text(encoding="utf-8"))
+    def test_source_claims_are_traced_to_existing_recap_evidence(self):
+        recaps = json.loads(
+            (ROOT / "backend/data/editorial-recaps.json").read_text(encoding="utf-8"))
         by_id = {r["id"]: r for r in recaps}
-        for claim in data["claims"]:
-            if claim.get("source_type") != "secondary_editorial_recap":
-                continue
+        supplement = [c for c in self.public["claims"]
+                      if c.get("source_type") == "secondary_editorial_recap"]
+        self.assertEqual(len(supplement), 6)
+        for claim in supplement:
             with self.subTest(claim=claim["id"]):
                 source = by_id[claim["source_record_id"]]
                 self.assertIn(claim["source_anchor"], source["recap_fa"])
                 self.assertFalse(claim["source_primary_verified"])
                 self.assertIn("مستقلاً تأیید نشده", claim["said_date_basis"])
 
-    def test_canonical_source_cannot_drop_existing_claims(self):
-        from scripts.build_karname import build
+    def test_scenarios_and_duels_have_defined_components(self):
+        d = self.public
+        family_ids = {f["key"] for f in d["scenario_families"]}
+        self.assertEqual(len(family_ids), 7)
+        self.assertEqual(len(d["pairs"]), 7)
+        buckets = {b["key"] for b in d["buckets"]}
+        self.assertTrue(all(
+            x["family"] in family_ids for claim in d["claims"]
+            for x in claim.get("scenarios", [])))
+        self.assertTrue(all(c["kind"] == "L" or c["bucket"] in buckets
+                            for c in d["claims"]))
+
+    def test_ledger_does_not_silently_drop_unarchived_claims(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            source = root / "daftar.md"
-            target = root / "karname.json"
+            ledger = root / "daftar.md"
+            target = root / "data.json"
             target.write_text('{"claims":[{"id":"keep-me"}],"speakers":[]}', encoding="utf-8")
-            source.write_text(chr(96) * 3 + "json\n" +
+            ledger.write_text(chr(96) * 3 + "json\n" +
                               '{"claims":[],"speakers":[],"is_complete":false}' +
                               "\n" + chr(96) * 3, encoding="utf-8")
             with self.assertRaises(ValueError):
-                build(source, target)
+                build(ledger, target)
 
-    def test_pilot_notice_visible_in_app_code(self):
+    def test_pilot_notice_visible_and_share_links_present(self):
         code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")
         self.assertIn('data.is_complete===false', code)
         self.assertIn('data.provenance?.disclosure', code)
+        self.assertIn('https://t.me/share/url?', code)
 
-    def test_missing_ledger_does_not_create_fake_data(self):
+    def test_publisher_missing_source_never_invents_data(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             result = publish(root / "site", root / "missing.json")
             self.assertEqual(result, "missing")
             self.assertFalse((root / "site/data/karname.json").exists())
 
-    def test_valid_dataset_published(self):
+    def test_publisher_accepts_valid_and_rejects_invalid_sources(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             source = root / "source.json"
-            source.write_text(json.dumps({"claims": [
-                {"id": "K-1", "text": "Test claim", "speakers": ["example"]}
-            ], "speakers": [{"key": "example", "name": "Example"}]}, ensure_ascii=False), encoding="utf-8")
-            result = publish(root / "site", source)
-            self.assertEqual(result, "new")
-            data = json.loads((root / "site/data/karname.json").read_text(encoding="utf-8"))
-            self.assertEqual(len(data["claims"]), 1)
-
-    def test_invalid_fresh_dataset_fails_without_overwriting_prior(self):
-        with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            prior = root / "prior/data"
-            prior.mkdir(parents=True)
-            good = {"claims": [], "speakers": []}
-            (prior / "karname.json").write_text(json.dumps(good), encoding="utf-8")
-            source = root / "source.json"
-            source.write_text('{"claims": [{}, {}], "speakers": []}', encoding="utf-8")
+            source.write_text('{"claims":[{"id":"K-1","text":"Test","speakers":["e"]}],'
+                              '"speakers":[{"key":"e","name":"Example"}]}', encoding="utf-8")
+            self.assertEqual(publish(root / "site", source), "new")
+            self.assertEqual(len(json.loads(
+                (root / "site/data/karname.json").read_text(encoding="utf-8"))["claims"]), 1)
+            source.write_text('{"claims":[{},{}],"speakers":[]}', encoding="utf-8")
             with self.assertRaises(ValueError):
-                publish(root / "site", source, root / "prior")
-            self.assertFalse((root / "site/data/karname.json").exists())
-
-    def test_reuse_valid_prior_archive(self):
-        with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            prior = root / "prior/data"
-            prior.mkdir(parents=True)
-            (prior / "karname.json").write_text('{"claims":[],"speakers":[]}', encoding="utf-8")
-            self.assertEqual(publish(root / "site", root / "missing.json", root / "prior"), "previous")
-
-    def test_reject_duplicate_ids_and_unbound_pairs(self):
-        with self.assertRaises(ValueError):
-            validate({"claims": [{"id": "K-1"}, {"id": "K-1"}], "speakers": []})
-        with self.assertRaises(ValueError):
-            validate({"claims": [], "speakers": [], "pairs": [{"a": "K-99", "b": "K-100"}]})
+                publish(root / "site2", source)
+            with self.assertRaises(ValueError):
+                validate({"claims": [{"id": "K-1"}, {"id": "K-1"}], "speakers": []})
+            with self.assertRaises(ValueError):
+                validate({"claims": [], "speakers": [], "pairs": [{"a": "K-99", "b": "K-100"}]})
 
 
 if __name__ == "__main__":
