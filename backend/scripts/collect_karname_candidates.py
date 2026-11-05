@@ -303,6 +303,7 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
         if (candidate_id not in active_ids
                 and candidate.get("status") == "pending_editorial_review"
                 and candidate.get("editorial_decision") is None
+                and candidate.get("manual_review_required") is not True
                 and candidate.get("origins")
                 and all((o.get("feed"), str(o.get("record_id"))) in scanned_sources
                         for o in candidate["origins"])):
@@ -322,6 +323,8 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
             "pending": sum(c.get("status") == "pending_editorial_review" for c in found.values()),
             "screened": sum(c.get("status") == "screened_out_by_current_filter"
                             for c in found.values()),
+            "manual_review_requested": sum(c.get("manual_review_required") is True
+                                           for c in found.values()),
             "reviewed": sum(c.get("status") not in
                             ("pending_editorial_review", "screened_out_by_current_filter")
                             for c in found.values()),

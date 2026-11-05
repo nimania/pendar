@@ -8,12 +8,13 @@
   "mirrored_jan_kalam_skipped": true,
   "stats": {
     "total": 64,
-    "pending": 50,
-    "screened": 14,
+    "pending": 52,
+    "screened": 12,
     "reviewed": 0,
     "sources_scanned": 61,
     "source_spans_scanned": 1200,
-    "ambiguous_sources": 1
+    "ambiguous_sources": 1,
+    "manual_review_requested": 2
   },
   "candidates": [
     {
@@ -97,7 +98,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "host_statement",
+      "screening_reason_fa": "عبارت با «به تعبیرِ مجری» شروع می‌شود؛ نسبت‌دادن برداشت مجری به فؤاد ایزدی قابل دفاع نیست.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-14637dd30762a942ee",
@@ -306,7 +317,7 @@
     },
     {
       "id": "KC-2584ef3e3632142160",
-      "status": "screened_out_by_current_filter",
+      "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "ahmadzeidabad",
@@ -344,7 +355,18 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "conditional_prediction_needs_context",
+      "screening_reason_fa": "احتمال اقدامی غافلگیرکننده در قالب شرط «اگر این‌بار کاری بکنند» مطرح شده؛ ممکن است پیش‌بینی مشروط باشد، اما رویداد، گوینده و معیار سنجش باید از مصاحبهٔ اصلی بررسی شوند.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "reopened_for_primary_source_review"
+      },
+      "manual_review_required": true
     },
     {
       "id": "KC-32e43a2a7871d55ae2",
@@ -427,7 +449,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "broad_analysis",
+      "screening_reason_fa": "«جابه‌جایی افراد بن‌بست را برطرف نخواهد کرد» تحلیل علّی کلی است و سنجه یا موعد مشخصی ندارد.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-3ba2d3cf3f63f87796",
@@ -551,7 +583,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "editorial_meta",
+      "screening_reason_fa": "این جمله شرح تحریریه دربارهٔ راستی‌آزمایی‌نشدن ادعاهاست، نه یک پیش‌بینی تازه.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-41a336de3d6c2c3a91",
@@ -593,7 +635,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "host_statement",
+      "screening_reason_fa": "متن صریحاً با «به تعبیر مجری» شروع می‌شود و نباید به محمد مرندی نسبت داده شود.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-42e81589ec900d0293",
@@ -676,7 +728,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "retrospective",
+      "screening_reason_fa": "دربارهٔ خطای محاسبهٔ گذشته صحبت می‌کند؛ بیان پیش‌بینیِ جدید نیست.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-4bb26cf497a3f8db59",
@@ -759,7 +821,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "rhetoric",
+      "screening_reason_fa": "عبارت «هرکه ... فحش داده و خواهد داد» داوری ارزشی دربارهٔ رفتار افراد است، نه پیش‌بینی رویداد قابل سنجش.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-518690265cbf068e3a",
@@ -1047,7 +1119,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "general_theory",
+      "screening_reason_fa": "«جامعه‌ای که تجربه‌اش را نهاد نکند حافظهٔ تاریخی نخواهد داشت» گزارهٔ نظری کلی و فاقد سررسید است.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-7f31b04903810eecaa",
@@ -1089,7 +1171,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "vague_future",
+      "screening_reason_fa": "«آخرینش هم نخواهد بود» بدون مرجع دقیق رخداد، موعد یا معیار روشن قابل سنجش نیست.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-800227d5af2d1a2a70",
@@ -1172,7 +1264,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "vague_outcome",
+      "screening_reason_fa": "«عاقبت خوشی نخواهد داشت» تعریف عملیاتیِ نتیجه یا زمان‌بندی ندارد.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-8729196cc6c258fe75",
@@ -1747,7 +1849,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "value_judgment",
+      "screening_reason_fa": "عبارت «در تاریخ خواهد ماند» قضاوت ارزشی دربارهٔ یک فرض است، نه پیش‌بینی مستقلِ وقوع آن.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-c69a535cf545d7127c",
@@ -2404,7 +2516,17 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "editorial_question",
+      "screening_reason_fa": "«اگر محاصره ... هدف آمریکا چه خواهد بود؟» سؤال طرح‌شده در معرفی گفت‌وگوست، نه پاسخ یا پیش‌بینی گوینده.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-f09215dc9d7d18098c",
@@ -2487,11 +2609,21 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "reported_claim_about_others",
+      "screening_reason_fa": "«می‌دانند چه خواهد شد» توصیف ادعاییِ علم دیگران است؛ رویداد مشخص، تاریخ و صاحب پیش‌بینی معلوم نیست.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "screened_remains_in_archive"
+      }
     },
     {
       "id": "KC-f5d8c6557085927c54",
-      "status": "screened_out_by_current_filter",
+      "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "MehdiMotaharnia1344",
@@ -2529,7 +2661,18 @@
         }
       ],
       "editorial_decision": null,
-      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment.",
+      "screening_reason_code": "conditional_prediction_needs_context",
+      "screening_reason_fa": "«پس از محاصرهٔ پاکستان، نوبت عراق و افغانستان و ترکیه ... است» می‌تواند پیش‌بینی ترتیبی/مشروط باشد؛ پیش از داوری باید عبارت اصلی، تحقق شرط و تعریف محاصره بررسی شود.",
+      "screening_triage": {
+        "type": "assistant_preliminary_evidence_review",
+        "date": "2026-11-06",
+        "source": "record_excerpt_only",
+        "original_extraction_preserved": true,
+        "publication_approved": false,
+        "action": "reopened_for_primary_source_review"
+      },
+      "manual_review_required": true
     },
     {
       "id": "KC-f8d94fbce662b9fdce",

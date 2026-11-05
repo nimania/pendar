@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "usage": "editorial_public_figure_portrait_sources",
+  "priority": "existing_verified_pendar_images_before_external_fallback",
+  "rights_note": "These are external source-hosted public-figure portraits, not licensed for redistribution by this file. Credits retained; a failed external image falls back to the person's initial. Replace with authorized self-hosted assets when available.",
+  "portraits": {
+    "مطهرنیا": {
+      "handle": "MehdiMotaharnia1344",
+      "image_url": "https://huistory.net/wp-content/uploads/2018/06/%D8%B1%D8%A7%D8%B2%D9%87%D8%A7%DB%8C-%D9%BE%D9%86%D9%87%D8%A7%D9%86-%D8%B2%D9%84%D8%B2%D9%84%D9%87-%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF%DB%8C-%DB%B1%DB%B4%DB%B0%DB%B4.jpeg.webp",
+      "source_url": "https://huistory.net/teacher/mehdi-motaharnia/",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "زیدآبادی": {
+      "handle": "ahmadzeidabad",
+      "image_url": "https://pbs.twimg.com/profile_images/1825667437666136070/pbMHJqbQ_400x400.jpg",
+      "source_url": "https://x.com/Zeidabadi_Ahmad",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "عزیزی": {
+      "handle": "yousef-azizi",
+      "image_url": "https://pbs.twimg.com/profile_images/1937997474989301760/6QZqoOz1_400x400.jpg",
+      "source_url": "https://x.com/yousofazizi23",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "هلاکویی": {
+      "handle": "bahadaf",
+      "image_url": "https://pbcdn1.podbean.com/imglogo/dir-logo/1742954/1742954.jpg",
+      "source_url": "https://www.podbean.com/podcast-detail/kii95-1a986a/",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "قهرمان‌پور": {
+      "handle": "rahman-ghahremanpour",
+      "image_url": "https://pbs.twimg.com/profile_images/1327285632998248448/hqnejizD.jpg",
+      "source_url": "https://x.com/RGhahremanpour",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "خراتیان": {
+      "handle": "mahdi-kharatian",
+      "image_url": "https://i.iranintl.com/images/rdk9umy0/production/a4617dfbca8063740d807f99cbde5a5c26c20489-800x557.jpg?fm=webp&h=630&q=70&rect=0%2C69%2C800%2C420&w=1200",
+      "source_url": "https://www.iranintl.com/ar/202404025080",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "ایزدی": {
+      "handle": "IzadiFoad",
+      "image_url": "https://abdimedia.net/sites/default/files/styles/max_1300x1300/public/1403-09/2352144_853.jpg.webp?itok=8BkKcXGe",
+      "source_url": "https://abdimedia.net/en/politics/sharp-attack-foreign-policy-theorist-fouad-izadi",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "قاضی‌زاده": {
+      "handle": "alihossein-ghazizadeh",
+      "image_url": "https://pbs.twimg.com/profile_images/1587946759300550657/t6k7v-Wz.jpg",
+      "source_url": "https://x.com/Alighazizade",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "صوفیامهر": {
+      "handle": "amin-sofiamehr",
+      "image_url": "https://pbs.twimg.com/media/HGCqoaLXAAAh6ym.jpg",
+      "source_url": "https://x.com/asophiamehr",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "علیزاده": {
+      "handle": "ali-alizadeh",
+      "image_url": "https://pbs.twimg.com/profile_images/936268054228594689/H0aDhxwY_400x400.jpg",
+      "source_url": "https://x.com/jedaaal",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "scott-bessent-quoted": {
+      "handle": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Scott_Bessent%2C_official_portrait_%282025%29.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Scott_Bessent,_official_portrait_(2025).jpg",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    },
+    "mohammad-marandi": {
+      "handle": "mohammad-marandi",
+      "image_url": "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202603/professor-syed-mohammad-marandi-284654589-1x1.png?VersionId=Tn0cW3ew3ohwOFhQ7hJ5gLK5UiFFkxnx",
+      "source_url": "https://www.indiatoday.in/world/story/ceasefire-will-help-trump-israel-regroup-iran-analyst-says-no-talks-with-us-2888603-2026-03-29",
+      "verified_identity_match": true,
+      "externally_hosted": true
+    }
+  }
+}

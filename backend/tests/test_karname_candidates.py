@@ -76,6 +76,20 @@ class CandidateIntakeTests(unittest.TestCase):
                               previous=old, figures=FIGURES)
         self.assertEqual(missing["candidates"][0]["status"], "pending_editorial_review")
 
+    def test_preliminary_human_context_override_survives_rescan(self):
+        q = build_queue([recap("r1", PREDICTION)], [],
+                        {"claims": [], "speakers": []}, figures=FIGURES)
+        candidate = q["candidates"][0]
+        candidate["status"] = "pending_editorial_review"
+        candidate["manual_review_required"] = True
+        candidate["screening_reason_fa"] = "نیاز به بازبینی متن کامل"
+        second = build_queue([recap("r1", "این اولینش نیست، آخرینش هم نخواهد بود.")], [],
+                             {"claims": [], "speakers": []}, previous=q, figures=FIGURES)
+        self.assertEqual(second["stats"]["pending"], 1)
+        self.assertEqual(second["stats"]["manual_review_requested"], 1)
+        self.assertEqual(second["candidates"][0]["screening_reason_fa"],
+                         "نیاز به بازبینی متن کامل")
+
     def test_no_date_or_victory_is_invented(self):
         t = trigger_hint(PREDICTION, "unspecified")
         self.assertIsNone(t["verified_due_at"])
