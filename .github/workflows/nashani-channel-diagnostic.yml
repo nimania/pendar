@@ -54,14 +54,24 @@ jobs:
               sys.exit(0)
           items=updates.get("result",[])
           matches={}
+          categories={}
+          public_channels=0
           for event in items:
+              keys=[key for key in event if key!="update_id"]
+              for key in keys:
+                  categories[key]=categories.get(key,0)+1
               for field in ("my_chat_member","channel_post","edited_channel_post"):
                   entity=event.get(field) or {}
                   chat=entity.get("chat") or {}
                   username=str(chat.get("username","")).lower()
+                  if chat.get("type")=="channel":
+                      public_channels += 1
+                      print("Observed channel update:",field,"username:",username or "(none)")
                   if chat.get("type")=="channel" and username=="neshanikerman":
                       matches[chat.get("id")]=username
           print("Buffered update count:",len(items))
+          print("Update categories:",categories)
+          print("Observed channel count:",public_channels)
           print("Matching public channel count:",len(matches))
           if not matches:
               print("No update confirms @neshanikerman; add bot and post a new channel message then retry")
