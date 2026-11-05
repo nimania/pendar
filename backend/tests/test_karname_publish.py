@@ -34,7 +34,7 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertEqual(data["provenance"]["attribution_correction"]["corrected_label"], "عباس سوری")
         self.assertEqual(by_id["SOURI-20261101-08"]["type_class"], "نقل گزارش")
         self.assertEqual(by_id["SOURI-20261101-09"]["type_class"], "نقل گزارش")
-        self.assertIn("۱۸", data["provenance"]["disclosure"])
+        self.assertIn("18", data["provenance"]["disclosure"])
 
     def test_canonical_ledger_reproduces_public_json(self):
         from scripts.build_karname import build, extract
@@ -56,6 +56,19 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertTrue(all(c["source_type"] == "secondary_editorial_recap" for c in new))
         self.assertTrue(all(c["source_record_id"] and c["source_ref_url"] for c in new))
         self.assertFalse(data["is_complete"])
+
+    def test_secondary_claims_trace_to_exact_published_recap(self):
+        data = json.loads((ROOT / "backend/data/karname.json").read_text(encoding="utf-8"))
+        recaps = json.loads((ROOT / "backend/data/editorial-recaps.json").read_text(encoding="utf-8"))
+        by_id = {r["id"]: r for r in recaps}
+        for claim in data["claims"]:
+            if claim.get("source_type") != "secondary_editorial_recap":
+                continue
+            with self.subTest(claim=claim["id"]):
+                source = by_id[claim["source_record_id"]]
+                self.assertIn(claim["source_anchor"], source["recap_fa"])
+                self.assertFalse(claim["source_primary_verified"])
+                self.assertIn("مستقلاً تأیید نشده", claim["said_date_basis"])
 
     def test_canonical_source_cannot_drop_existing_claims(self):
         from scripts.build_karname import build
