@@ -24,6 +24,8 @@ RECAPS = ROOT / "backend/data/editorial-recaps.json"
 VIEWS = ROOT / "web-static/data/pendar-editorial-views.json"
 LEDGER = ROOT / "backend/data/karname.json"
 QUEUE = ROOT / "backend/data/karname-candidates.json"
+FIGURES_SNAPSHOT = ROOT / "backend/data/karname-live-figures.tmp.json"
+
 SCHEMA_VERSION = 1
 
 PERSIAN_MAP = str.maketrans({"ي": "ی", "ى": "ی", "ك": "ک", "ۀ": "ه", "\u200c": " ",
@@ -123,6 +125,13 @@ def attribution(source: dict, kind: str, handles: dict, names: dict) -> dict:
         fig = handles[norm(handle)]
         return {"speaker_handle": fig.handle, "speaker_name": fig.name_fa,
                 "speaker_candidates": [fig.handle], "identity_status": "matched_unique_name"}
+    # The site publishes verified source-to-profile links, but dynamically
+    # discovered people in the news are not necessarily in the curated registry.
+    # Keep their index handle as a *candidate* identity, never an approved person.
+    if kind == "figure_post" and raw and re.fullmatch(r"[A-Za-z0-9_-]{2,100}", str(raw)):
+        return {"speaker_handle": None, "speaker_name": name or None,
+                "speaker_candidates": [str(raw)],
+                "identity_status": "indexed_news_person_requires_review"}
     candidates = [str(raw)] if raw else sorted(possible)
     return {"speaker_handle": None, "speaker_name": name or None,
             "speaker_candidates": candidates, "identity_status": "unresolved_requires_review"}
@@ -207,7 +216,7 @@ def ledger_near_matches(excerpt: str, speaker_handle: str | None, claims: list[d
     return sorted(set(matches))
 
 
-def source_records(recaps: list, views: list):
+def source_records(recaps: list, views: list, snapshot: dict | None = None):
     for item in recaps:
         if not isinstance(item, dict) or not item.get("id"):
             continue
@@ -225,8 +234,35 @@ def source_records(recaps: list, views: list):
             yield ("editorial_view", record, "quote_fa", str(record["quote_fa"]))
 
 
+    # Pendar's full published figure directory includes the curated profiles
+    # and (when present) people discovered in news. New published posts are
+    # scanned in addition to editorial recaps, not substituted for them.
+    if isinstance(snapshot, dict):
+        profiles = snapshot.get("figures", [])
+        if isinstance(profiles, list):
+            for person in profiles:
+                if not isinstance(person, dict) or not person.get("handle"):
+                    continue
+                for post in person.get("posts", []):
+                    if not isinstance(post, dict) or not post.get("id"):
+                        continue
+                    # AI-generated summaries and contextualized news quotes are
+                    # *not* verbatim speech; the pending queue preserves origin.
+                    field = "quote_fa" if str(post.get("quote_fa") or "").strip() else "summary_fa"
+                    statement = str(post.get(field) or "")
+                    if not statement:
+                        continue
+                    rec = dict(post)
+                    rec["speaker_handle"] = person["handle"]
+                    rec["name_fa"] = person.get("name_fa") or post.get("name_fa") or ""
+                    rec["figure_kind"] = post.get("kind")
+                    rec["figure_direct_quote_flag"] = post.get("direct_quote") is True
+                    rec["figure_profile_handle"] = person["handle"]
+                    yield ("figure_post", rec, field, statement)
+
+
 def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None = None,
-                figures=FIGURES) -> dict:
+                figures=FIGURES, figure_snapshot: dict | None = None) -> dict:
     handles, names = figure_lookup(figures)
     existing_claims = ledger.get("claims") or []
     speakers = {s.get("key"): s for s in ledger.get("speakers", [])}
@@ -238,7 +274,7 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
     scanned_sources: set[tuple[str, str]] = set()
     metrics = {"sources_scanned": 0, "source_spans_scanned": 0,
                "matched_new": 0, "ambiguous_sources": 0}
-    for kind, source, field, full_text in source_records(recaps, views):
+    for kind, source, field, full_text in source_records(recaps, views, figure_snapshot):
         metrics["sources_scanned"] += 1
         scanned_sources.add((kind, str(source["id"])))
         who = attribution(source, kind, handles, names)
@@ -266,6 +302,9 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
                 "editorial_published_at": source.get("published_at"),
                 "primary_speech_date_verified": False,
                 "primary_source_verified": False,
+                "excerpt_basis": "source_quote_field" if field == "quote_fa" else "editorial_or_news_summary",
+                "figure_post_kind": source.get("figure_kind"),
+                "source_direct_quote_flag": source.get("figure_direct_quote_flag") is True,
                 "source_content_sha256": digest(full_text),
             }
             if id_ in found:
@@ -316,7 +355,9 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
         "schema_version": SCHEMA_VERSION,
         "publication_policy": "internal_review_queue_only_no_public_import",
         "sources": ["backend/data/editorial-recaps.json",
-                    "web-static/data/pendar-editorial-views.json"],
+                    "web-static/data/pendar-editorial-views.json"] +
+                   (["https://pendar.io/data/figures.json"] if isinstance(figure_snapshot, dict) else []),
+        "figure_snapshot_available": isinstance(figure_snapshot, dict),
         "mirrored_jan_kalam_skipped": True,
         "stats": {
             "total": len(found),
@@ -331,6 +372,8 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
             "sources_scanned": metrics["sources_scanned"],
             "source_spans_scanned": metrics["source_spans_scanned"],
             "ambiguous_sources": metrics["ambiguous_sources"],
+            "figure_profiles_scanned": len(figure_snapshot.get("figures", [])) if isinstance(figure_snapshot, dict) else 0,
+            "figure_posts_scanned": sum(1 for c in scanned_sources if c[0] == "figure_post"),
         },
         "candidates": sorted(found.values(), key=lambda c: c["id"]),
     }
@@ -344,7 +387,8 @@ def read_json(path: Path, default):
 
 
 def run(recaps_path: Path = RECAPS, views_path: Path = VIEWS,
-        ledger_path: Path = LEDGER, output: Path = QUEUE, *, check=False) -> dict:
+        ledger_path: Path = LEDGER, output: Path = QUEUE, *, check=False,
+        figures_path: Path | None = None) -> dict:
     for path in (recaps_path, views_path, ledger_path):
         if not path.is_file():
             raise ValueError("Required input not found: " + str(path))
@@ -354,10 +398,16 @@ def run(recaps_path: Path = RECAPS, views_path: Path = VIEWS,
         raise ValueError("Editorial sources must be arrays")
     if not isinstance(ledger, dict) or not isinstance(ledger.get("claims"), list):
         raise ValueError("Canonical Karname registry missing")
+    snapshot = read_json(figures_path, None) if figures_path else None
+    if snapshot is not None:
+        if (not isinstance(snapshot, dict)
+                or not isinstance(snapshot.get("figures"), list)
+                or not snapshot["figures"]):
+            raise ValueError("Figure snapshot must contain a nonempty figures array")
     previous = read_json(output, {"candidates": []})
     if not isinstance(previous, dict) or not isinstance(previous.get("candidates"), list):
         raise ValueError("Previous candidate queue is malformed; refusing destructive overwrite")
-    generated = build_queue(recaps, views, ledger, previous)
+    generated = build_queue(recaps, views, ledger, previous, figure_snapshot=snapshot)
     rendered = json.dumps(generated, ensure_ascii=False, indent=2) + "\n"
     if check:
         if not output.is_file() or output.read_text(encoding="utf-8") != rendered:
@@ -378,9 +428,11 @@ if __name__ == "__main__":
     parser.add_argument("--ledger", type=Path, default=LEDGER)
     parser.add_argument("--output", type=Path, default=QUEUE)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--figures", type=Path, help="Latest published Pendar figures JSON; omit when unavailable")
     args = parser.parse_args()
     try:
-        run(args.recaps, args.views, args.ledger, args.output, check=args.check)
+        run(args.recaps, args.views, args.ledger, args.output, check=args.check,
+            figures_path=args.figures)
     except (OSError, ValueError, TypeError) as exc:
         print("Karname candidate intake stopped:", exc, file=sys.stderr)
         sys.exit(1)
