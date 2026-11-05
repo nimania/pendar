@@ -1,7 +1,7 @@
 {
-  "version": 3,
-  "territory": "Kerman city (not the entire province)",
-  "editorial_policy": "Source attribution uses a plain outlet name and its unique hashtag. Permitted photo/video reuse applies to owner-provided channels Kerman-No, Kerman News, qh_qv only; other discovered outlets are currently text-summary-only until reuse permission is confirmed. Only relevant Kerman posts are shared from mixed feeds and promotional/sensitive content is filtered.",
+  "version": 4,
+  "territory": "Kerman city, all localities in Kerman Province, and neighboring-province matters explicitly connected to Kerman",
+  "editorial_policy": "A universal fail-closed geo check is mandatory for all source handles, including Kerman-No. Only articles explicitly connected with a Kerman city/province locality, or cross-border issues with a named Kerman endpoint, may be published. Off-topic national and neighboring-province-only news are excluded. Apply the gate to new items, queued items, manual approval and final send. Keep sensitive-story review and the outlet-source hashtag.",
   "sources": [
     {
       "name": "کرمان‌نو",
@@ -11,10 +11,11 @@
       "role": "independent-local-news",
       "verified_from": "https://t.me/KERMANE_NO",
       "poll_minutes": 30,
-      "coverage": "all",
+      "coverage": "kerman_geography",
       "media_repost_allowed": true,
       "priority_publish": true,
-      "source_hashtag": "کرمان_نو"
+      "source_hashtag": "کرمان_نو",
+      "geography_filter": "strict"
     },
     {
       "name": "فردای کرمان",
@@ -24,9 +25,10 @@
       "role": "independent-local-news",
       "verified_from": "https://fardayekerman.ir",
       "poll_minutes": 5,
-      "coverage": "city",
+      "coverage": "kerman_geography",
       "media_repost_allowed": false,
-      "media_permission_status": "not_owner_confirmed"
+      "media_permission_status": "not_owner_confirmed",
+      "geography_filter": "strict"
     },
     {
       "name": "ایرنا کرمان",
@@ -36,9 +38,10 @@
       "role": "news-agency",
       "verified_from": "https://t.me/irna_kerman",
       "poll_minutes": 5,
-      "coverage": "city",
+      "coverage": "kerman_geography",
       "media_repost_allowed": false,
-      "media_permission_status": "not_owner_confirmed"
+      "media_permission_status": "not_owner_confirmed",
+      "geography_filter": "strict"
     },
     {
       "name": "اخبار استانداری کرمان",
@@ -48,9 +51,10 @@
       "role": "official-announcements",
       "verified_from": "https://t.me/kerman_gov",
       "poll_minutes": 5,
-      "coverage": "city",
+      "coverage": "kerman_geography",
       "media_repost_allowed": false,
-      "media_permission_status": "not_owner_confirmed"
+      "media_permission_status": "not_owner_confirmed",
+      "geography_filter": "strict"
     },
     {
       "name": "آخرین خبر کرمان",
@@ -60,9 +64,10 @@
       "role": "regional-news",
       "verified_from": "https://t.me/kerman_akhbar",
       "poll_minutes": 5,
-      "coverage": "city",
+      "coverage": "kerman_geography",
       "media_repost_allowed": false,
-      "media_permission_status": "not_owner_confirmed"
+      "media_permission_status": "not_owner_confirmed",
+      "geography_filter": "strict"
     },
     {
       "name": "اخبار کرمان",
@@ -72,11 +77,12 @@
       "role": "regional-aggregator",
       "verified_from": "https://t.me/kerman_news",
       "poll_minutes": 30,
-      "coverage": "region",
+      "coverage": "kerman_geography",
       "media_repost_allowed": true,
       "priority_publish": true,
       "owner_confirms_reuse_rights": true,
-      "source_hashtag": "اخبار_کرمان"
+      "source_hashtag": "اخبار_کرمان",
+      "geography_filter": "strict"
     },
     {
       "name": "کرمان رسانه",
@@ -86,10 +92,11 @@
       "role": "regional-monitoring",
       "verified_from": "https://t.me/kerman_rasaneh",
       "poll_minutes": 5,
-      "coverage": "city",
+      "coverage": "kerman_geography",
       "review_only": true,
       "media_repost_allowed": false,
-      "media_permission_status": "not_owner_confirmed"
+      "media_permission_status": "not_owner_confirmed",
+      "geography_filter": "strict"
     },
     {
       "name": "qh_qv",
@@ -100,11 +107,12 @@
       "verified_from": "https://t.me/qh_qv",
       "source_identity": "owner-provided handle; channel display name not yet independently verified",
       "poll_minutes": 30,
-      "coverage": "region",
+      "coverage": "kerman_geography",
       "priority_publish": true,
       "media_repost_allowed": true,
       "owner_confirms_reuse_rights": true,
-      "source_hashtag": "qh_qv"
+      "source_hashtag": "qh_qv",
+      "geography_filter": "strict"
     }
   ]
 }
