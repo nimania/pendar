@@ -10,11 +10,11 @@
     "total": 64,
     "pending": 52,
     "screened": 12,
+    "manual_review_requested": 2,
     "reviewed": 0,
     "sources_scanned": 61,
     "source_spans_scanned": 1200,
-    "ambiguous_sources": 1,
-    "manual_review_requested": 2
+    "ambiguous_sources": 1
   },
   "candidates": [
     {
