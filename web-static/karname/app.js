@@ -3,9 +3,10 @@
 (()=>{
 "use strict";
 const DATA_URL="/data/karname.json", $=id=>document.getElementById(id);
-const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null};
+const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null,autoItems:[],autoQuery:"",autoKind:"",autoPerson:"",autoLoadState:"loading",autoNotice:""};
 const labels={
   highlights:["منتخب کارنامه","پیش‌بینی‌ها زیر ذره‌بین","تازه‌ترین پرونده‌ها، با متن اصلی و منابع."],
+  auto:["رادار خودکار پندار","چه گفته‌هایی تازه رصد شده‌اند؟","متن‌های یافت‌شده از منابع عمومی؛ انتساب، نقل مستقیم و نتیجه هنوز تأیید نشده‌اند."],
   people:["کارنامهٔ چهره‌ها","چه کسی چه گفته؟","امتیاز فقط برای پیش‌بینی‌های ارزیابی‌شده است."],
   duels:["دو تحلیل؛ یک آینده","دوئل پیش‌بینی‌ها","دیدگاه‌های متفاوت را کنار هم ببینید."],
   calendar:["زمان حسابرسی","موعد رسید!","سررسیدهای گذشته و پیش‌بینی‌های در انتظار."],
@@ -139,10 +140,13 @@ function renderPeople(){
  if(!rows.length)return noData("هنوز کارنامه‌ای ثبت نشده","نام تحلیلگران پس از اتصال بانک داده در این قسمت ظاهر می‌شود.");
  return rows.map(x=>{
   let {s,claims}=x,good=claims.filter(c=>status(c).key==="good").length,half=claims.filter(c=>status(c).key==="half").length,bad=claims.filter(c=>status(c).key==="bad").length,other=claims.length-good-half-bad;
-  let total=claims.length;let parts=[["good",good],["half",half],["bad",bad],["open",other]].map(([k,n])=>n?'<span class="'+k+'" style="flex:'+n+'" title="'+fa(n)+'"></span>':"").join("");
+  let total=claims.length;
+  const handleForAuto=profileHandle(s)||s.handle||"";
+  const autoCount=state.autoItems.filter(x=>x.person?.profile_handle===handleForAuto&&handleForAuto).length;
+  let parts=[["good",good],["half",half],["bad",bad],["open",other]].map(([k,n])=>n?'<span class="'+k+'" style="flex:'+n+'" title="'+fa(n)+'"></span>':"").join("");
   let handle=personHref(s);
   const personTitle=handle?'<a class="profile-name" href="'+esc(handle)+'">'+esc(s.name||s.key||"گوینده")+'</a>':esc(s.name||s.key||"گوینده");
-  return '<article class="tile person"><div class="person-head">'+avatarMarkup(s)+'<div><h3>'+personTitle+'</h3><span class="muted">'+fa(total)+' ادعا</span></div></div><div class="score">'+esc(x.score.percent)+'</div><span class="muted">از '+fa(x.score.n)+' پیش‌بینی ارزیابی‌شده</span><div class="bar" aria-label="نتایج ثبت‌شده">'+parts+'</div><div class="tile-foot"><button class="open-card" type="button" data-person="'+esc(s.key||s.name)+'">دیدن پیش‌بینی‌ها ←</button>'+(handle?'<a href="'+esc(handle)+'">همهٔ سخنان این چهره در پندار</a>':"")+'</div></article>';
+  return '<article class="tile person"><div class="person-head">'+avatarMarkup(s)+'<div><h3>'+personTitle+'</h3><span class="muted">'+fa(total)+' ادعا</span></div></div><div class="score">'+esc(x.score.percent)+'</div><span class="muted">از '+fa(x.score.n)+' پیش‌بینی ارزیابی‌شده</span><div class="bar" aria-label="نتایج ثبت‌شده">'+parts+'</div><div class="tile-foot"><button class="open-card" type="button" data-person="'+esc(s.key||s.name)+'">دیدن پیش‌بینی‌ها ←</button>'+(handle?'<a href="'+esc(handle)+'">همهٔ سخنان این چهره در پندار</a>':"")+(autoCount?'<button type="button" class="auto-person-link" data-auto-person="'+esc(handleForAuto)+'">'+fa(autoCount)+' مورد رصد خودکار</button>':"")+'</div></article>';
  }).join("");
 }
 function renderDuels(){
@@ -221,6 +225,62 @@ function renderScenarios(){
  }
  return heading+'<div class="matrix"><table><thead><tr><th scope="col">تحلیلگر</th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+selected;
 }
+function validAutoRadar(value){
+ return value?.schema_version===1
+  &&value.scope==="automatically_collected_observations_not_verified_predictions"
+  &&value.is_editorially_approved===false
+  &&Array.isArray(value.items)&&value.items.length<=5000
+  &&value.items.every(x=>/^KC-[0-9a-f]{18}$/.test(String(x?.id||""))
+    &&x.observation_status==="auto_collected_unverified"
+    &&typeof x.text_from_source==="string"
+    &&x.publication_approved===false&&x.evaluation===null
+    &&typeof x.person?.label==="string"
+    &&typeof x.source?.text_origin==="string");
+}
+async function loadAutoRadar(){
+ try{
+  const r=await fetch("/karname/auto-radar.json",{cache:"no-store"});
+  if(!r.ok)throw Error("HTTP "+r.status);
+  const data=await r.json();
+  if(!validAutoRadar(data))throw Error("auto-radar schema invalid");
+  state.autoItems=data.items;
+  state.autoNotice=String(data.notice_fa||"");
+  state.autoLoadState="ready";
+ }catch(err){
+  state.autoLoadState="error";
+  state.autoItems=[];
+  console.warn("Karname automatic observations unavailable:",err.message);
+ }
+ if(state.tab==="auto"||state.tab==="people")render();
+}
+function renderAuto(){
+ if(state.autoLoadState==="loading")return noData("در حال دریافت رصدهای تازه","داده‌های خودکار مستقل از پرونده‌های اصلی دریافت می‌شوند.");
+ if(state.autoLoadState==="error")return noData("رصد خودکار موقتاً در دسترس نیست","بانک رسمی کارنامه بدون تغییر باقی می‌ماند؛ وضعیت انتشار و استخراج را در GitHub بررسی کنید.");
+ const kinds=[{key:"",label:"همهٔ منابع"},{key:"figure_post",label:"پست و خبر چهره‌ها"},{key:"editorial_recap",label:"ری‌کپ تحریریه"},{key:"editorial_view",label:"نقل‌قول ثبت‌شده"}];
+ const choices=kinds.map(k=>'<option value="'+esc(k.key)+'"'+(state.autoKind===k.key?" selected":"")+'>'+esc(k.label)+'</option>').join("");
+ const controls='<div class="tools auto-tools"><input id="auto-search" type="search" value="'+esc(state.autoQuery)+'" placeholder="جست‌وجو در متن، نامِ مرتبط یا نام منبع..." aria-label="جست‌وجوی خودکار"><select id="auto-kind" aria-label="نوع منبع">'+choices+'</select>'+(state.autoPerson?'<button type="button" class="auto-reset" data-auto-reset="true">حذف فیلتر چهره ✕</button>':"")+'</div>';
+ const visible=state.autoItems.filter(c=>(!state.autoKind||c.source?.kind===state.autoKind)
+  &&(!state.autoPerson||c.person?.profile_handle===state.autoPerson)
+  &&(!state.autoQuery||norm([c.id,c.text_from_source,c.person?.label,c.source?.title].join(" ")).includes(norm(state.autoQuery))));
+ const intro='<div class="auto-intro" role="status"><strong>انتشار ماشینیِ شفاف؛ نه داوری یا انتساب قطعی</strong><p>'+esc(state.autoNotice||"تمام موارد در این بخش هنوز نیازمند شواهد مستقل‌اند.")+'</p><p>'+fa(visible.length)+' مورد از '+fa(state.autoItems.length)+' رصد خودکار نمایش داده می‌شود؛ موارد پالایش‌شده در صف داخلی حفظ می‌شوند و در این صفحه نیستند.</p></div>';
+ if(!visible.length)return intro+controls+noData("برای این فیلتر موردی نیست","فیلتر را پاک کنید یا جست‌وجو را تغییر دهید.");
+ const cards=visible.map(c=>{
+  const person=c.person||{},source=c.source||{},trigger=c.trigger||{};
+  const link=typeof source.link==="string"&&/^https:\/\//.test(source.link)?'<a href="'+esc(source.link)+'" target="_blank" rel="noopener noreferrer">بازکردن منبع منتشرشده ←</a>':"";
+  const handle=person.profile_handle&&/^[a-zA-Z0-9_-]{2,100}$/.test(person.profile_handle)?'/@'+encodeURIComponent(person.profile_handle)+'/':"";
+  const name=handle?'<a href="'+esc(handle)+'" class="auto-profile">'+esc(person.label)+'</a>':esc(person.label||"نامشخص");
+  const cond=trigger.condition_mention?'شرطِ مطرح‌شده: '+trigger.condition_mention:trigger.time_mention?'اشارهٔ زمانی: '+trigger.time_mention:"موعد قطعی استخراج نشده";
+  const sourceLabel=source.kind==="figure_post"?"خبر یا پست چهره":source.kind==="editorial_recap"?"بازگویی تحریریه":"متن نقل‌قول ثبت‌شده";
+  return '<article class="tile auto-claim"><div class="auto-claim-head"><span class="auto-provisional">تأییدنشده · رصد خودکار</span><small dir="ltr">'+esc(c.id)+'</small></div>'
+   +'<h3>'+name+'</h3><p class="auto-identity">'+esc(person.role||"انتساب نیازمند بررسی")+'</p>'
+   +'<p class="auto-quote">'+esc(c.text_from_source)+'</p>'
+   +'<p class="auto-evidence">'+esc(sourceLabel)+' · '+esc(source.title||"منبع در پندار")+'</p>'
+   +'<p class="auto-explainer">'+esc(source.text_origin||"")+'</p>'
+   +'<div class="auto-trigger">'+esc(cond)+'</div>'
+   +'<div class="tile-foot">'+link+'<span>نتیجه: هنوز بررسی نشده</span></div></article>';
+ }).join("");
+ return intro+controls+cards;
+}
 function renderAll(){
  const speakers=state.speakers.map(s=>'<option value="'+esc(s.key||s.name)+'" '+(state.speaker===(s.key||s.name)?"selected":"")+'>'+esc(s.name||s.key)+'</option>').join("");
  const controls='<div class="tools"><input id="claim-search" type="search" value="'+esc(state.query)+'" placeholder="جست‌وجو در گفته‌ها، شناسه و نام تحلیلگر…" aria-label="جست‌وجوی ادعاها"><select id="filter-speaker" aria-label="تحلیلگر"><option value="">همهٔ تحلیلگران</option>'+speakers+'</select><select id="filter-status" aria-label="نتیجه"><option value="">همهٔ نتیجه‌ها</option><option value="good" '+(state.status==="good"?"selected":"")+'>درست</option><option value="half" '+(state.status==="half"?"selected":"")+'>نیمه‌درست</option><option value="bad" '+(state.status==="bad"?"selected":"")+'>نادرست</option><option value="wait" '+(state.status==="wait"?"selected":"")+'>منتظر بررسی</option><option value="open" '+(state.status==="open"?"selected":"")+'>باز و بلندمدت</option></select></div>';
@@ -228,8 +288,8 @@ function renderAll(){
  return controls+showClaims(rows);
 }
 function render(){
- setHeading();if(!state.data){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
- const views={highlights:renderHighlights,people:renderPeople,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderAll};
+ setHeading();if(!state.data&&state.tab!=="auto"){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
+ const views={highlights:renderHighlights,auto:renderAuto,people:renderPeople,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderAll};
  $("cards").innerHTML=(views[state.tab]||renderHighlights)();
 }
 function detail(c){
@@ -278,10 +338,14 @@ function eventHandlers(){
  $("cards").addEventListener("click",ev=>{
   let c=ev.target.closest("[data-claim]");if(c)return openClaim(c.dataset.claim);
   let p=ev.target.closest("[data-person]");if(p){state.speaker=p.dataset.person;state.query="";state.status="";setTab("all");}
+  let auto=ev.target.closest("[data-auto-person]");if(auto){state.autoPerson=auto.dataset.autoPerson;state.autoQuery="";state.autoKind="";setTab("auto");return;}
+  if(ev.target.closest("[data-auto-reset]")){state.autoPerson="";render();return;}
   let sc=ev.target.closest("[data-scenario-person]");if(sc){state.selectedScenario={speakerKey:sc.dataset.scenarioPerson,family:sc.dataset.scenarioFamily,category:sc.dataset.scenarioKind||""};render();$("scenario-detail")?.scrollIntoView({block:"nearest",behavior:"smooth"});return;}
   if(ev.target.closest("[data-scenario-clear]")){state.selectedScenario=null;render();return;}
  });
+ $("cards").addEventListener("input",ev=>{if(ev.target.id==="auto-search"){let pos=ev.target.selectionStart;state.autoQuery=ev.target.value;render();let el=$("auto-search");if(el){el.focus();el.setSelectionRange(pos,pos);}return;}});
  $("cards").addEventListener("input",ev=>{if(ev.target.id==="claim-search"){let start=ev.target.selectionStart;state.query=ev.target.value;render();let inp=$("claim-search");if(inp){inp.focus();inp.setSelectionRange(start,start);}}});
+ $("cards").addEventListener("change",ev=>{if(ev.target.id==="auto-kind"){state.autoKind=ev.target.value;render();return;} });
  $("cards").addEventListener("change",ev=>{if(ev.target.id==="filter-speaker"){state.speaker=ev.target.value;render();}if(ev.target.id==="filter-status"){state.status=ev.target.value;render();}});
  $("claim-dialog").addEventListener("click",ev=>{let btn=ev.target.closest("[data-share]");if(btn)shareClaim(btn.dataset.share);});
  $("claim-dialog").addEventListener("close",()=>{let url=new URL(location.href);url.searchParams.delete("claim");history.replaceState(null,"",url);});
@@ -319,6 +383,7 @@ async function loadIntakeStats(){
 }
 async function load(){
  void loadIntakeStats();
+ void loadAutoRadar();
  // Portrait lookup is best-effort. No invented images or name-only photo searches.
  const resource=(url,fallback)=>fetch(url,{cache:"no-cache"})
   .then(r=>r.ok?r.json():fallback).catch(()=>fallback);
