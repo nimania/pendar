@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - '.github/workflows/nashani-connection-check.yml'
+      - 'nashani/runner.py'
+      - '.github/workflows/nashani-kerman.yml'
   workflow_dispatch:
 
 permissions:
