@@ -1,7 +1,7 @@
 {
   "as_of": "2026-11-05",
   "as_of_fa": "۱۴ آبان ۱۴۰۵",
-  "dataset_scope": "initial_partial_import",
+  "dataset_scope": "reconstructed_partial_ledger",
   "is_complete": false,
   "provenance": {
     "source_title": "گفت‌وگوی بنیامین سوری با عباس سوری در رسانه پارسی",
@@ -9,14 +9,16 @@
     "source_url": null,
     "source_registered_at": "2026-11-02",
     "source_path": "karname/imports/jan_kalam_souri_predictions_2026-11-01.json",
-    "disclosure": "۹ مدخل اولیه از پروندهٔ سوری؛ این فایل دفتر جامع کارنامه نیست. انتساب‌ها بر اساس متن ارائه‌شدهٔ کاربر است و لینک گفت‌وگوی اصلی هنوز ثبت نشده. هیچ نتیجه‌ای راستی‌آزمایی نشده است.",
+    "disclosure": "بانک بازسازی‌شدهٔ ناقص: 18 مدخل از پروندهٔ سوری و گزارش‌های ثانویهٔ پندار. دفتر جامع Claude هنوز دریافت نشده و پیوند مستقیم برخی ویدئوها موجود نیست؛ هیچ ادعا به‌طور مستقل نمره‌گذاری نشده است.",
     "attribution_correction": {
       "date": "2026-11-05",
       "speaker_key": "abbas-souri",
       "previous_label": "عباس (نام خانوادگی نامشخص)",
       "corrected_label": "عباس سوری",
       "basis": "تصحیح صریح نام گوینده توسط کاربر؛ فایل خام اولیه برای بررسی تاریخچه بدون تغییر نگه داشته شده است"
-    }
+    },
+    "additional_source_path": "backend/data/editorial-recaps.json",
+    "reconstruction_note": "۹ مدخل دیگر از خلاصه‌های منتشرشدهٔ پندار با حفظ تاریخ، نام، مشروط‌بودن و مرز شواهد اضافه شده‌اند."
   },
   "scale": [
     {
@@ -78,6 +80,25 @@
     {
       "key": "e2",
       "label": "منوط به وقوع رویداد"
+    },
+    {
+      "key": "b6",
+      "label": "۵ آبان ۱۴۰۵ — انتخابات اسرائیل",
+      "date": "2026-10-27"
+    },
+    {
+      "key": "b7",
+      "label": "تا ۳ ژانویهٔ ۲۰۲۷ — بازهٔ آمریکا",
+      "date": "2027-01-03"
+    },
+    {
+      "key": "b8",
+      "label": "تا ۱۹ آوریل ۲۰۲۷ — شش ماه",
+      "date": "2027-04-19"
+    },
+    {
+      "key": "e3",
+      "label": "رویدادمحور و بدون موعد قطعی"
     }
   ],
   "speakers": [
@@ -95,6 +116,36 @@
       "key": "scott-bessent-quoted",
       "name": "اسکات بسنت (نقل‌شده در گفت‌وگو)",
       "handle": null
+    },
+    {
+      "key": "mehdi-motaharnia",
+      "name": "مهدی مطهرنیا",
+      "handle": "MehdiMotaharnia1344"
+    },
+    {
+      "key": "farhang-holakouee",
+      "name": "فرهنگ هلاکویی",
+      "handle": "bahadaf"
+    },
+    {
+      "key": "ahmad-zeidabadi",
+      "name": "احمد زیدآبادی",
+      "handle": "ahmadzeidabad"
+    },
+    {
+      "key": "mohammad-marandi",
+      "name": "سید محمد مرندی",
+      "handle": "mohammad-marandi"
+    },
+    {
+      "key": "foad-izadi",
+      "name": "فؤاد ایزدی",
+      "handle": "foad-izadi"
+    },
+    {
+      "key": "yousef-azizi",
+      "name": "یوسف عزیزی",
+      "handle": "yousef-azizi"
     }
   ],
   "claims": [
@@ -313,6 +364,253 @@
       "source_url": null,
       "evaluation_trigger": "آغاز جنگ در بازه ۴–۱۵ نوامبر ۲۰۲۶",
       "source_registration_date": "2026-11-02"
+    },
+    {
+      "id": "PDR-MOT-20261008-01",
+      "kind": "K",
+      "speakers": [
+        "mehdi-motaharnia"
+      ],
+      "text": "اگر فشارهای دیپلماتیک و اقتصادی به هدف مورد نظر نرسد، احتمال جنگی محدود اما پُرضربه مطرح است؛ گسترش جنگ هم منتفی نیست.",
+      "said": "2026-10-08",
+      "type": "سناریوی مشروط",
+      "type_class": "پیش‌بینی مشروط",
+      "condition": "شکست فشارهای دیپلماتیک و اقتصادی در دستیابی به هدف طرف مقابل",
+      "due_label": "در صورت شکست فشارها؛ موعد ثابت ارائه نشده",
+      "bucket": "e2",
+      "evaluation_trigger": "برای ارزیابی باید تحقق شرط و نوع جنگ مستقل از روایت اولیه احراز شود.",
+      "source_record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+      "source_title": "مهدی مطهرنیا | سیمرغ طلایی — پرسش‌وپاسخ",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "اگر این فشارها به هدف مورد نظر طرف مقابل نرسند، احتمال جنگ محدود اما پرضربه را مطرح می‌کند",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
+    },
+    {
+      "id": "PDR-MOT-20261019-01",
+      "kind": "K",
+      "speakers": [
+        "mehdi-motaharnia"
+      ],
+      "text": "در شش ماه آینده ضربات نظامی هوشیارانه‌ای رخ خواهد داد؛ رویدادهای کنونی مقدمهٔ ورود به منطق تسلیم یا جنگ گسترده‌ترند.",
+      "said": "2026-10-19",
+      "type": "پیش‌بینی زمان‌دار",
+      "type_class": "پیش‌بینی",
+      "due_label": "تا ۱۹ آوریل ۲۰۲۷ (شش ماه پس از ۱۹ اکتبر ۲۰۲۶)",
+      "bucket": "b8",
+      "evaluation_trigger": "بررسی وقوع حملات نظامی جدید و قابل تأیید در بازهٔ زمانی؛ عبارت «هوشیارانه» سنجهٔ مستقل دقیقی ندارد.",
+      "source_record_id": "editorial-motaharnia-golden-simorgh-finale-20261019",
+      "source_title": "مهدی مطهرنیا | سیمرغ طلایی",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "در شش ماهِ آینده ضرباتِ نظامیِ هوشیارانه‌ای را شاهد خواهیم بود",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
+    },
+    {
+      "id": "PDR-HOL-20261008-01",
+      "kind": "K",
+      "speakers": [
+        "farhang-holakouee"
+      ],
+      "text": "احتمال برخورد نظامی در فاصلهٔ پس از انتخابات میان‌دوره‌ای آمریکا تا آغاز کار کنگرهٔ جدید از نظر شخصی او بالاتر از ۶۰ تا ۷۰ درصد است.",
+      "said": "2026-10-08",
+      "type": "برآورد احتمال عددی",
+      "type_class": "پیش‌بینی احتمالی",
+      "due_label": "۳ نوامبر ۲۰۲۶ تا ۳ ژانویهٔ ۲۰۲۷",
+      "bucket": "b7",
+      "evaluation_trigger": "شروع درگیری نظامی تازهٔ قابل تأیید در بازهٔ ۳ نوامبر ۲۰۲۶ تا ۳ ژانویهٔ ۲۰۲۷؛ احتمال عددی پیش‌بینی قطعی نیست.",
+      "source_record_id": "editorial-holakouee-meybodi-un-election-2026",
+      "source_title": "فرهنگ هلاکویی | گفت‌وگو با علیرضا میبدی — برنامهٔ چهارشنبه",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": null,
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "احتمال برخورد نظامی را در ارزیابی شخصی خود بالاتر از ۶۰ تا ۷۰ درصد اعلام می‌کند",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
+    },
+    {
+      "id": "PDR-HOL-20261008-02",
+      "kind": "K",
+      "speakers": [
+        "farhang-holakouee"
+      ],
+      "text": "اگر حمله‌ای انجام شود، موج نخست آن احتمالاً مراکز نظامی و موشکی ایران را هدف می‌گیرد.",
+      "said": "2026-10-08",
+      "type": "پیش‌بینی دربارهٔ اهداف جنگ",
+      "type_class": "پیش‌بینی مشروط",
+      "condition": "وقوع حملهٔ نظامی",
+      "due_label": "موج نخست حملهٔ احتمالی؛ بدون تاریخ ثابت",
+      "bucket": "e2",
+      "evaluation_trigger": "مطابقت اهداف مرحلهٔ نخست حمله با مراکز نظامی و موشکی طبق منابع مستقل.",
+      "source_record_id": "editorial-holakouee-meybodi-un-election-2026",
+      "source_title": "فرهنگ هلاکویی | گفت‌وگو با علیرضا میبدی — برنامهٔ چهارشنبه",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": null,
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "پیش‌بینی‌اش این است که حملات نخست بر مراکز نظامی و موشکی متمرکز شود",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
+    },
+    {
+      "id": "PDR-ZEI-20261020-01",
+      "kind": "K",
+      "speakers": [
+        "ahmad-zeidabadi"
+      ],
+      "text": "وقوع حملهٔ خارجی علیه ایران پیش از انتخابات پارلمانی اسرائیل در پنجم آبان بعید است، مگر در قالب ادعای حملهٔ پیش‌دستانه.",
+      "said": "2026-10-20",
+      "type": "پیش‌بینی احتمالی زمان‌دار",
+      "type_class": "پیش‌بینی احتمالی",
+      "condition": "جز در صورت ارائه و پذیرش ادعای اقدام پیش‌دستانه",
+      "due_label": "تا ۵ آبان ۱۴۰۵ / ۲۷ اکتبر ۲۰۲۶",
+      "bucket": "b6",
+      "evaluation_trigger": "آیا پیش از ۲۷ اکتبر ۲۰۲۶ حملهٔ نظامی تازه علیه ایران رخ داد و استثنای ادعاشده چگونه صورت‌بندی شد؟",
+      "source_record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+      "source_title": "احمد زیدآبادی | پیامِ ویدیویی",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": null,
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "بعید است پیش از پنجمِ آبان رخ دهد",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
+    },
+    {
+      "id": "PDR-ZEI-20261020-02",
+      "kind": "K",
+      "speakers": [
+        "ahmad-zeidabadi"
+      ],
+      "text": "ائتلاف احزاب مخالف نتانیاهو در انتخابات پارلمانی اسرائیل در مجموع بیش از ۵۸ کرسی و شاید حد نصاب ۶۱ کرسی را به دست خواهد آورد.",
+      "said": "2026-10-20",
+      "type": "پیش‌بینی انتخاباتی احتمالی",
+      "type_class": "پیش‌بینی احتمالی",
+      "due_label": "پس از انتخابات ۵ آبان ۱۴۰۵ / تشکیل نتایج نهایی",
+      "bucket": "b6",
+      "evaluation_trigger": "سنجش کرسی‌های ائتلاف مدنظر در نتیجهٔ نهایی انتخابات؛ ترکیب دقیق احزاب باید از متن اصلی بازبینی شود.",
+      "source_record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+      "source_title": "احمد زیدآبادی | پیامِ ویدیویی",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": null,
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "در مجموع بیش از پنجاه‌وهشت کرسی و شاید حدِ نصاب را به دست آورد",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
+    },
+    {
+      "id": "PDR-MAR-20261018-01",
+      "kind": "K",
+      "speakers": [
+        "mohammad-marandi"
+      ],
+      "text": "در صورت حملهٔ محدودتر آمریکا به ایران، ایران واکنش سنگین نشان خواهد داد و تنگهٔ هرمز را می‌بندد.",
+      "said": "2026-10-18",
+      "type": "پیش‌بینی مشروط",
+      "type_class": "پیش‌بینی مشروط",
+      "condition": "وقوع حملهٔ نظامی محدودتر آمریکا به ایران",
+      "due_label": "در صورت وقوع حملهٔ محدود آمریکا",
+      "bucket": "e2",
+      "evaluation_trigger": "ثبت حملهٔ محدود، واکنش نظامی ایران و هرگونه بسته‌شدن تأییدشدهٔ تنگهٔ هرمز.",
+      "source_record_id": "editorial-marandi-yemen-saudi-20261018",
+      "source_title": "سید محمد مرندی | گفت‌وگوی تحلیلی",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": null,
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "بازهم ایران محکم ضربه می‌زند، تنگه‌ی هرمز را می‌بندد",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
+    },
+    {
+      "id": "PDR-IZA-20261021-01",
+      "kind": "K",
+      "speakers": [
+        "foad-izadi"
+      ],
+      "text": "در دو سال باقی‌مانده از دورهٔ ترامپ، جنگی با ایران رخ خواهد داد.",
+      "said": "2026-10-21",
+      "type": "پیش‌بینی زمان‌دار با افق تقریبی",
+      "type_class": "پیش‌بینی",
+      "due_label": "دو سال باقی‌ماندهٔ دورهٔ ترامپ (زمان دقیق بیان نیازمند بررسی نسخهٔ اصلی است)",
+      "bucket": "e3",
+      "evaluation_trigger": "احراز وقوع جنگ تازه در باقی‌ماندهٔ دورهٔ مورد اشاره؛ بازهٔ دقیق فقط با مراجعه به مصاحبهٔ اصلی تثبیت شود.",
+      "source_record_id": "editorial-izadi-alizadeh-netanyahu-endorsement-2026",
+      "source_title": "فؤاد ایزدی | گفت‌وگو با علی علیزاده",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": null,
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "در دو سالِ باقی‌مانده‌ی ترامپ جنگ خواهیم داشت",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
+    },
+    {
+      "id": "PDR-AZI-20261020-01",
+      "kind": "L",
+      "speakers": [
+        "yousef-azizi"
+      ],
+      "text": "پس از انتخابات میان‌دوره‌ای آمریکا، خطر اقدام نظامی سنگین اما موقتی از سوی ترامپ برای اعلام پیروزی و سپس مذاکره وجود دارد.",
+      "said": "2026-10-20",
+      "type": "هشدار دربارهٔ سناریوی ممکن",
+      "type_class": "سناریو، نه پیش‌بینی قطعی",
+      "due_label": "پس از انتخابات ۳ نوامبر ۲۰۲۶؛ بدون موعد پایان",
+      "bucket": "e3",
+      "evaluation_trigger": "تا تعیین بازه و آستانهٔ وقوع از متن اصلی، ارزیابی کمی انجام نشود.",
+      "source_record_id": "yousef-azizi-meydan-diplomasi-mehr1405",
+      "source_title": "یوسف عزیزی | سیمرغ طلایی",
+      "source_type": "secondary_editorial_recap",
+      "source_ref_url": "https://github.com/nimania/pendar/blob/main/backend/data/editorial-recaps.json",
+      "source_primary_url": null,
+      "source_primary_unverified": true,
+      "source_note": "بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "source_anchor": "پس از انتخابات دست به یک «حرکتِ نظامیِ سنگینِ موقت» بزند",
+      "scenarios": [],
+      "scenario_label": "",
+      "speaker_note": "بازگویی از گزارش پندار با قیدها؛ نقل‌قول مستقیم محسوب نمی‌شود. بازگویی ثانویه از جان‌کلام پندار؛ تا بازیابی ویدئوی مستقیم، متنِ اصلی مستقلاً تطبیق داده نشده است.",
+      "result": null,
+      "result_source": null
     }
   ],
   "pairs": [],
