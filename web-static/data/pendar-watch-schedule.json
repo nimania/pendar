@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T14:35:51.401583+00:00",
+  "generated_at": "2026-11-05T14:41:14.385673+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -645,26 +645,6 @@
   "programmes": [
     {
       "channel_id": "digital-world",
-      "title_fa": "The Loud House Movie",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/410113",
-      "icon": "https://image.tmdb.org/t/p/w500/mab5wPeGVjbMyYMzyzfdKKnG9cl.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "A Dog's Perfect Christmas",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1570488",
-      "icon": "https://image.tmdb.org/t/p/w500/gKKwnZS3BGPSPw59V7VP4cob6uW.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "Inside",
       "start": "2026-11-05T00:00:00+03:30",
       "date_only": true,
@@ -765,16 +745,6 @@
     },
     {
       "channel_id": "digital-world",
-      "title_fa": "ریگان",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/647245",
-      "icon": "https://image.tmdb.org/t/p/w500/o21NB4f5fNk1dtrRlyAmA0C0cb3.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "عشق لطمه می زند",
       "start": "2026-11-09T00:00:00+03:30",
       "date_only": true,
@@ -829,19 +799,9 @@
       "start": "2026-11-10T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1400837",
-      "icon": "https://image.tmdb.org/t/p/w500/fGRNCssTRrhYZxNzykGGCoMsAVq.jpg",
+      "icon": "https://image.tmdb.org/t/p/w500/zrGOYS3mKAaiyviBrCfzYi6qVlQ.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "آتش‌نشانی شیکاگو",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/44006",
-      "icon": "https://image.tmdb.org/t/p/w500/iyA6NKz3IcdkSjpjNR7PYCXbgTz.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 5 از فصل 15؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -904,16 +864,6 @@
       "desc_fa": "قسمت 5 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "اداره پلیس شیکاگو",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/58841",
-      "icon": "https://image.tmdb.org/t/p/w500/w7R4ooo2IbOfBKOoMDwaiMGsNQf.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 5 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "Crawlers",
       "start": "2026-11-10T00:00:00+03:30",
@@ -922,76 +872,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/lNXeEpg4yLSRwXwOeR5lbPgwbqL.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "tmdb-network-30",
-      "title_fa": "WWE NXT",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/31991",
-      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-71",
-      "title_fa": "WWE NXT",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/31991",
-      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-77",
-      "title_fa": "WWE NXT",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/31991",
-      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-453",
-      "title_fa": "WWE NXT",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/31991",
-      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1025",
-      "title_fa": "WWE NXT",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/31991",
-      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-7642",
-      "title_fa": "WWE NXT",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/31991",
-      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-8571",
-      "title_fa": "WWE NXT",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/31991",
-      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 44 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-4330",
@@ -1134,16 +1014,6 @@
       "desc_fa": "قسمت 45 از فصل 34؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "نمایش امشب با اجرای جیمی فالون",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/59941",
-      "icon": "https://image.tmdb.org/t/p/w500/1N4o5PmmqhlVDrcdJ2RlCFWbLGX.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 22 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-16",
       "title_fa": "NCIS (سرویس تحقیقات جنایی نیروی دریایی آمریکا)",
       "start": "2026-11-10T00:00:00+03:30",
@@ -1174,66 +1044,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "Diepe Waters",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/231962",
-      "icon": "https://image.tmdb.org/t/p/w500/uF5SpFjMmYTMF0sc5MbjnDsoBcG.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 23 از فصل 5؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-74",
-      "title_fa": "Watch What Happens Live with Andy Cohen",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/22980",
-      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 180 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-47",
-      "title_fa": "نمایش روزانه",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/2224",
-      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 125 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6",
-      "title_fa": "آخر شب با ست مایرز",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/61818",
-      "icon": "https://image.tmdb.org/t/p/w500/u0ttHM5ZQCvnfL0lkueEgS4h2nI.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 22 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 113 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 113 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-2739",
       "title_fa": "ویژن‌ کوئست",
       "start": "2026-11-10T00:00:00+03:30",
@@ -1242,16 +1052,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/5LUFe0nCrKH5RTLpHxyHmiqHamO.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 8 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-290",
-      "title_fa": "فردا از آنِ ماست",
-      "start": "2026-11-04T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/72879",
-      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 48 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-47",
@@ -1280,6 +1080,176 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/675871",
       "icon": "https://image.tmdb.org/t/p/w500/VVU42nqsEmUtFpH1d9MHj5BIpF.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-30",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 45 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-71",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 45 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-77",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 45 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-453",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 45 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1025",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 45 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-7642",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 45 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-8571",
+      "title_fa": "WWE NXT",
+      "start": "2026-11-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/31991",
+      "icon": "https://image.tmdb.org/t/p/w500/9nLBX5Bf7PW4FAaWJLXpFFdeTlV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 45 از فصل 20؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-11-05T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 181 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "Diepe Waters",
+      "start": "2026-11-05T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/231962",
+      "icon": "https://image.tmdb.org/t/p/w500/uF5SpFjMmYTMF0sc5MbjnDsoBcG.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 24 از فصل 5؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "نمایش امشب با اجرای جیمی فالون",
+      "start": "2026-11-05T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/59941",
+      "icon": "https://image.tmdb.org/t/p/w500/1N4o5PmmqhlVDrcdJ2RlCFWbLGX.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 23 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-47",
+      "title_fa": "نمایش روزانه",
+      "start": "2026-11-05T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2224",
+      "icon": "https://image.tmdb.org/t/p/w500/ixcfyK7it6FjRM36Te4OdblAq4X.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 126 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "آخر شب با ست مایرز",
+      "start": "2026-11-05T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/61818",
+      "icon": "https://image.tmdb.org/t/p/w500/u0ttHM5ZQCvnfL0lkueEgS4h2nI.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 23 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-05T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 114 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-05T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 114 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "فردا از آنِ ماست",
+      "start": "2026-11-05T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/72879",
+      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 49 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "هیولا",
+      "start": "2026-11-17T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1185344",
+      "icon": "https://image.tmdb.org/t/p/w500/ukhuKqfFyqJDixEdwfBd7Y1d38J.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "ஜெயிலர் 2",
+      "start": "2026-11-12T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1234139",
+      "icon": "https://image.tmdb.org/t/p/w500/upwdEyhhYZ7pT2hD535fr2MGfpx.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
