@@ -3,7 +3,7 @@
 (()=>{
 "use strict";
 const DATA_URL="/data/karname.json", $=id=>document.getElementById(id);
-const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:""};
+const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{}};
 const labels={
   highlights:["منتخب کارنامه","پیش‌بینی‌ها زیر ذره‌بین","تازه‌ترین پرونده‌ها، با متن اصلی و منابع."],
   people:["کارنامهٔ چهره‌ها","چه کسی چه گفته؟","امتیاز فقط برای پیش‌بینی‌های ارزیابی‌شده است."],
@@ -20,6 +20,33 @@ function norm(v){return String(v??"").replace(/[\u200c\u200e\u200f]/g,"").toLowe
 function speakerId(v){return typeof v==="object"&&v?(v.key||v.handle||v.name||""):String(v??"");}
 function speaker(v){let id=speakerId(v),s=state.speakers.find(x=>[x.key,x.handle,x.name].includes(id));return s?.name||id;}
 function people(c){return array(c.speakers).map(speaker).filter(Boolean);}
+function profileHandle(s){
+ // Never guess a public profile URL from an unrelated name or imported slug.
+ const h=String(s?.handle||((s?.key==="abbas-souri")?"abbas-souri":""));
+ return /^[A-Za-z0-9_-]{2,80}$/.test(h)?h:"";
+}
+function personRecord(v){
+ const id=speakerId(v);
+ return state.speakers.find(x=>[x.key,x.handle,x.name].includes(id))||{key:id,name:id};
+}
+function portraitPath(s){
+ const h=profileHandle(s);
+ const src=h?state.portraits[h]:"";
+ return typeof src==="string"&&/^\/figures\/[A-Za-z0-9_.-]+\.(?:png|jpe?g|webp)$/i.test(src)?src:"";
+}
+function avatarMarkup(s){
+ const photo=portraitPath(s),initial=esc(String(s?.name||s?.key||"?").slice(0,1));
+ return '<span class="avatar" aria-hidden="true"><span class="avatar-initial">'+initial+'</span>'+(photo?'<img src="'+esc(photo)+'" loading="lazy" decoding="async" alt="">':"")+'</span>';
+}
+function personHref(s){const h=profileHandle(s);return h?'/@'+encodeURIComponent(h)+'/':"";}
+function contributorLinks(c){
+ const people=array(c.speakers).map(personRecord),top=people.slice(0,2);
+ const links=top.map(s=>{
+  const href=personHref(s),body=avatarMarkup(s)+'<span>'+esc(s.name||s.key)+'</span>';
+  return href?'<a class="claim-person" href="'+esc(href)+'" aria-label="پروندهٔ '+esc(s.name||s.key)+' در پندار">'+body+'</a>':'<span class="claim-person">'+body+'</span>';
+ }).join("");
+ return '<div class="claim-contributors" aria-label="گویندگان این ادعا">'+links+(people.length>top.length?'<span class="claim-extra">و '+fa(people.length-top.length)+' نفر دیگر</span>':"")+'</div>';
+}
 function excluded(c){let t=norm(c.type||"")+" "+norm(c.type_class||"");return /نقل[\s\u064B-\u065F‌]*گزارش|توصیه|reported|recommendation/.test(t);}
 function bucket(c){return state.buckets.find(x=>x.key===c.bucket||x.id===c.bucket)||{};}
 function due(c){let b=bucket(c),raw=b.date||b.date_iso||b.due||b.deadline||b.iso||"";if(!/^\d{4}-\d\d-\d\d$/.test(String(raw)))return null;let d=new Date(raw+"T23:59:59Z");return Number.isNaN(d.getTime())?null:d;}
@@ -52,7 +79,15 @@ function score(list){
 function pills(c){let s=status(c);return '<span class="pill '+s.key+'">'+esc(s.label)+'</span>';}
 function claimText(c){return String(c.text||c.speaker_note||"بدون شرح").trim();}
 function titleText(c){return claimText(c).slice(0,135);}
-function mini(c,index){return '<article class="tile '+(index===0&&state.tab==="highlights"?"tile-hero":"")+'"><button class="open-card" type="button" data-claim="'+esc(c.id)+'" aria-label="مشاهدهٔ پروندهٔ '+esc(c.id)+'"><div class="meta-line">'+pills(c)+'<span dir="ltr">'+esc(c.id||"")+'</span></div><h3 class="tile-title">'+esc(titleText(c))+'</h3><p class="tile-copy">'+esc(people(c).join("، ")||"گوینده نامشخص")+' · '+esc(c.said||bucket(c).label||"تاریخ نامشخص")+'</p><div class="tile-foot"><span>مشاهدهٔ متن و شواهد</span><strong>مشاهده ←</strong></div></button></article>';}
+function mini(c,index){
+ return '<article class="tile '+(index===0&&state.tab==="highlights"?"tile-hero":"")+'">'
+ +contributorLinks(c)
+ +'<button class="open-card" type="button" data-claim="'+esc(c.id)+'" aria-label="مشاهدهٔ پروندهٔ '+esc(c.id)+'">'
+ +'<div class="meta-line">'+pills(c)+'<span dir="ltr">'+esc(c.id||"")+'</span></div>'
+ +'<h3 class="tile-title">'+esc(titleText(c))+'</h3>'
+ +'<p class="tile-copy">'+esc(c.said||bucket(c).label||"تاریخ نامشخص")+'</p>'
+ +'<div class="tile-foot"><span>متن، شرط و شواهد</span><strong>مشاهده ←</strong></div></button></article>';
+}
 function noData(title,txt){return '<div class="empty"><h3>'+esc(title)+'</h3><p>'+esc(txt)+'</p></div>';}
 function setHeading(){
  let l=labels[state.tab],heading=$("panel-title");
@@ -76,8 +111,9 @@ function renderPeople(){
  return rows.map(x=>{
   let {s,claims}=x,good=claims.filter(c=>status(c).key==="good").length,half=claims.filter(c=>status(c).key==="half").length,bad=claims.filter(c=>status(c).key==="bad").length,other=claims.length-good-half-bad;
   let total=claims.length;let parts=[["good",good],["half",half],["bad",bad],["open",other]].map(([k,n])=>n?'<span class="'+k+'" style="flex:'+n+'" title="'+fa(n)+'"></span>':"").join("");
-  let handle=/^[a-zA-Z0-9_-]{2,80}$/.test(s.handle||"")?'/@'+encodeURIComponent(s.handle)+'/':"";
-  return '<article class="tile person"><div class="person-head"><span class="avatar" aria-hidden="true">'+esc((s.name||"?").slice(0,1))+'</span><div><h3>'+esc(s.name||s.key||"گوینده")+'</h3><span class="muted">'+fa(total)+' ادعا</span></div></div><div class="score">'+esc(x.score.percent)+'</div><span class="muted">از '+fa(x.score.n)+' پیش‌بینی ارزیابی‌شده</span><div class="bar" aria-label="نتایج ثبت‌شده">'+parts+'</div><div class="tile-foot"><button class="open-card" type="button" data-person="'+esc(s.key||s.name)+'">دیدن پیش‌بینی‌ها ←</button>'+(handle?'<a href="'+handle+'">صفحهٔ چهره</a>':"")+'</div></article>';
+  let handle=personHref(s);
+  const personTitle=handle?'<a class="profile-name" href="'+esc(handle)+'">'+esc(s.name||s.key||"گوینده")+'</a>':esc(s.name||s.key||"گوینده");
+  return '<article class="tile person"><div class="person-head">'+avatarMarkup(s)+'<div><h3>'+personTitle+'</h3><span class="muted">'+fa(total)+' ادعا</span></div></div><div class="score">'+esc(x.score.percent)+'</div><span class="muted">از '+fa(x.score.n)+' پیش‌بینی ارزیابی‌شده</span><div class="bar" aria-label="نتایج ثبت‌شده">'+parts+'</div><div class="tile-foot"><button class="open-card" type="button" data-person="'+esc(s.key||s.name)+'">دیدن پیش‌بینی‌ها ←</button>'+(handle?'<a href="'+esc(handle)+'">همهٔ سخنان این چهره در پندار</a>':"")+'</div></article>';
  }).join("");
 }
 function renderDuels(){
@@ -174,12 +210,16 @@ function eventHandlers(){
  window.addEventListener("hashchange",()=>{let tab=location.hash.slice(1);if(labels[tab]){state.tab=tab;render();}});
 }
 async function load(){
+ // Portrait lookup is best-effort. No invented images or name-only photo searches.
+ const portraitPromise=fetch("/data/pendar-figure-portraits.json",{cache:"no-cache"})
+  .then(r=>r.ok?r.json():{}).catch(()=>({}));
  try{
   const response=await fetch(DATA_URL,{cache:"no-cache"});
   if(!response.ok)throw new Error("HTTP "+response.status);
   const data=await response.json();
   if(!data||!Array.isArray(data.claims)||!Array.isArray(data.speakers))throw new Error("ساختار داده نامعتبر");
   state.data=data;state.claims=data.claims.filter(c=>c&&typeof c.id==="string");state.speakers=data.speakers;
+  state.portraits=await portraitPromise;
   state.buckets=objects(data.buckets);state.pairs=array(data.pairs);state.families=objects(data.scenario_families);
   $("stat-claims").textContent=fa(state.claims.length);
   $("stat-graded").textContent=fa(state.claims.filter(scorable).length);
@@ -197,6 +237,11 @@ async function load(){
  }
 }
 eventHandlers();
+document.addEventListener("error",ev=>{
+ if(ev.target instanceof HTMLImageElement&&ev.target.closest(".avatar")){
+  ev.target.remove(); // visible initial remains when the verified photo fails to load
+ }
+},true);
 let initial=location.hash.slice(1);if(labels[initial])state.tab=initial;
 render();load();
 })();
