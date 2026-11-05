@@ -25,6 +25,9 @@ from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
 
+from editorial import compose_caption, extract_media, meaningful_lines, clean_news_line
+from media_delivery import MediaNotAvailable, upload_public_media
+
 REPO = os.getenv("GITHUB_REPOSITORY", "nimania/pendar")
 BRANCH = "nashani-state"
 EXPECTED_BOT_USERNAME = "neshanikermanbot"
@@ -130,31 +133,31 @@ def source_posts(source, timeout=18):
         if not ident.lower().startswith(handle.lower() + "/"):
             continue
         message = element.select_one(".tgme_widget_message_text")
-        if message is None:
-            continue
-        lines = [line.strip() for line in message.get_text("\n", strip=True).splitlines()]
-        lines = [line for line in lines if line]
-        if not lines:
+        media = extract_media(element)
+        lines = meaningful_lines(message)
+        if not lines and not media:
             continue
         stamp = element.select_one(".tgme_widget_message_date time[datetime]")
         if stamp is None:
             stamp = element.select_one("time[datetime]")
         when = parse_time(stamp.get("datetime")) if stamp else None
-        # Some channel posts start with a standalone emoji; pick meaningful text.
-        meaningful = []
-        for line in lines[:7]:
-            cleaned = re.sub(r"^[^\w\u0600-\u06FF]+", "", line).strip()
-            cleaned = cleaned.strip("*ـ-:| ")
-            if len(normalize(cleaned)) >= 14 and not cleaned.startswith(("http", "@")):
-                meaningful.append(cleaned)
-        title = short_text(meaningful[0] if meaningful else lines[0], 140)
-        body = short_text(" ".join(lines), 720)
-        if len(normalize(body)) < 20:
+        title = lines[0] if lines else "رسانه بدون توضیح"
+        # Preserve source text in short paragraphs for structured editorial output.
+        paragraphs = []
+        for line in lines[:16]:
+            if sum(map(len, paragraphs)) + len(line) > 1700:
+                break
+            paragraphs.append(line)
+        body = " ".join(paragraphs) if paragraphs else title
+        if len(normalize(body)) < 15 and not media:
             continue
         result.append({
             "url": "https://t.me/" + ident,
+            "source_post_id": ident.split("/", 1)[1],
             "title": title,
             "excerpt": body,
+            "paragraphs": paragraphs,
+            "media": media,
             "published_at": when.isoformat() if when else None,
             "source": source["name"],
             "source_handle": handle,
@@ -188,26 +191,17 @@ def evaluate(item, now, source=None):
         relevance = "source_full_feed"
     sensitive = is_sensitive(item["title"] + " " + item["excerpt"])
     item["id"] = story_id(item["url"])
+    item["media_repost_allowed"] = bool(source.get("media_repost_allowed", False))
     item["risk"] = "sensitive" if sensitive else "ordinary"
     item["city_confidence"] = relevance
-    item["status"] = "review" if sensitive or source.get("review_only") or (not full_feed and relevance != "high") else "ready"
+    item["status"] = "review" if sensitive or not item.get("paragraphs", [item["excerpt"]]) or source.get("review_only") or (not full_feed and relevance != "high") else "ready"
     item["detected_at"] = now.isoformat()
     item["other_sources"] = []
     return item
 
 
 def telegram_message(item):
-    title = html.escape(short_text(clean_visible_excerpt(item["title"]), 125))
-    lead = item["excerpt"]
-    if normalize(lead).startswith(normalize(item["title"])):
-        lead = lead[len(item["title"]):].strip(" :؛-—|")
-    lead = html.escape(short_text(clean_visible_excerpt(lead), 180) or item["title"])
-    # Cite the outlet in plain language, but keep original URLs only in the private ledger.
-    source = html.escape(item["source"].replace("\u200c", " "))
-    return (f"📍 <b>نشانی | کرمان</b>\n\n"
-            f"<b>{title}</b>\n\n"
-            f"به گزارش {source}: {lead}\n\n"
-            f"#کرمان #نشانی_کرمان")
+    return compose_caption(item)
 
 
 def http_json(url, method="GET", payload=None, token=None):
@@ -277,6 +271,14 @@ class Ledger:
         self.sha = result["content"]["sha"]
 
 
+class TelegramApiError(RuntimeError):
+    """Telegram rejected a command with a definite HTTP status."""
+    def __init__(self, method, code, description):
+        super().__init__(f"Telegram {method} returned HTTP {code}")
+        self.code = code
+        self.description = description
+
+
 def telegram_checked_call(api_base, method, payload=None):
     """Bot API errors are logged without showing secret-bearing request URLs."""
     try:
@@ -292,7 +294,7 @@ def telegram_checked_call(api_base, method, payload=None):
         # Never emit the bot token, headers or full Telegram API URL.
         print(f"::error::Telegram {method} returned HTTP {code}: {description}",
               file=sys.stderr)
-        raise RuntimeError(f"Telegram {method} returned HTTP {code}") from None
+        raise TelegramApiError(method, code, description) from None
 
 
 def verify_telegram_identity(token, channel):
@@ -328,17 +330,48 @@ def verify_telegram_identity(token, channel):
 def send_to_telegram(item, token, channel):
     if not token or not channel:
         raise RuntimeError("Missing Nashani Telegram token or channel")
-    # Require explicit channel selection. Never fall back to @pendario.
     if str(channel) != str(EXPECTED_CHANNEL_ID):
         raise ValueError("NASHANI_CHANNEL_ID must be the verified numeric channel ID")
     verify_telegram_identity(token, channel)
-    response = telegram_checked_call("https://api.telegram.org/bot" + token + "/", "sendMessage", {
-        "chat_id": channel, "text": telegram_message(item),
+    api = "https://api.telegram.org/bot" + token + "/"
+    caption = telegram_message(item)
+    media = item.get("media")
+    if item.get("media_repost_allowed") and isinstance(media, dict):
+        handle = item.get("source_handle", "")
+        post_id = item.get("source_post_id", "")
+        if re.fullmatch(r"[A-Za-z0-9_]{5,32}", handle) and str(post_id).isdigit():
+            # copyMessage preserves native Telegram photos/videos and uses OUR
+            # caption without exposing a forwarded-from header.
+            try:
+                copied = telegram_checked_call(api, "copyMessage", {
+                    "chat_id": channel, "from_chat_id": "@" + handle,
+                    "message_id": int(post_id), "caption": caption,
+                    "parse_mode": "HTML",
+                })
+                if copied.get("ok"):
+                    return copied["result"]["message_id"]
+            except TelegramApiError as error:
+                if error.code not in (400, 403):
+                    raise
+                lower_description = error.description.lower()
+                if any(term in lower_description for term in (
+                    "protected", "restricted", "can't be copied",
+                    "cannot be copied", "content is protected",
+                )):
+                    print("Protected source media: using attributed text only")
+                    media = None
+        if media is not None:
+            try:
+                return upload_public_media(token, channel, media, caption)
+            except MediaNotAvailable as error:
+                print(f"Media not available ({error}); using attributed text instead")
+    result = telegram_checked_call(api, "sendMessage", {
+        "chat_id": channel, "text": caption,
         "parse_mode": "HTML", "link_preview_options": {"is_disabled": True},
     })
-    if response.get("ok") is not True:
-        raise RuntimeError("Telegram rejected message")
-    return response["result"].get("message_id")
+    if result.get("ok") is not True:
+        raise RuntimeError("Telegram rejected text message")
+    return result["result"]["message_id"]
 
 
 def check_and_publish(item, state, ledger, token, channel):
