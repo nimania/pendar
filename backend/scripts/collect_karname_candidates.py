@@ -292,7 +292,9 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
             "total": len(found),
             "pending": sum(c.get("status") == "pending_editorial_review" for c in found.values()),
             "reviewed": sum(c.get("status") != "pending_editorial_review" for c in found.values()),
-            **metrics,
+            "sources_scanned": metrics["sources_scanned"],
+            "source_spans_scanned": metrics["source_spans_scanned"],
+            "ambiguous_sources": metrics["ambiguous_sources"],
         },
         "candidates": sorted(found.values(), key=lambda c: c["id"]),
     }
