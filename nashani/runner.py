@@ -36,6 +36,7 @@ SENSITIVE = (
     "بازداشت", "قتل", "تجاوز", "اتهام", "دستگیری", "انفجار",
     "ترور", "حمله", "اعدام", "آدم ربایی", "خودکشی",
     "مفقود", "درگیری", "انتحاری", "بمب", "موشک", "زلزله",
+    "احضار", "توقیف", "بازپرسی", "دادستانی", "پلمب",
 )
 CITY_ANCHORS = (
     "شهر کرمان", "شهرداری کرمان", "شورای شهر کرمان",
@@ -120,7 +121,14 @@ def source_posts(source, timeout=18):
         if stamp is None:
             stamp = element.select_one("time[datetime]")
         when = parse_time(stamp.get("datetime")) if stamp else None
-        title = short_text(lines[0], 140)
+        # Some channel posts start with a standalone emoji; pick meaningful text.
+        meaningful = []
+        for line in lines[:7]:
+            cleaned = re.sub(r"^[^\w\u0600-\u06FF]+", "", line).strip()
+            cleaned = cleaned.strip("*ـ-:| ")
+            if len(normalize(cleaned)) >= 14 and not cleaned.startswith(("http", "@")):
+                meaningful.append(cleaned)
+        title = short_text(meaningful[0] if meaningful else lines[0], 140)
         body = short_text(" ".join(lines), 720)
         if len(normalize(body)) < 20:
             continue
@@ -233,6 +241,24 @@ class Ledger:
         self.sha = result["content"]["sha"]
 
 
+def telegram_checked_call(api_base, method, payload=None):
+    """Bot API errors are logged without showing secret-bearing request URLs."""
+    try:
+        return http_json(api_base + method,
+                         "POST" if payload is not None else "GET", payload)
+    except HTTPError as error:
+        code = error.code
+        try:
+            details = json.loads(error.read().decode("utf-8", errors="replace"))
+            description = str(details.get("description", ""))[:180]
+        except (ValueError, AttributeError):
+            description = ""
+        # Never emit the bot token, headers or full Telegram API URL.
+        print(f"::error::Telegram {method} returned HTTP {code}: {description}",
+              file=sys.stderr)
+        raise RuntimeError(f"Telegram {method} returned HTTP {code}") from None
+
+
 def verify_telegram_identity(token, channel):
     """Read-only guard: validate exact bot and destination and posting permission."""
     if not token:
@@ -240,15 +266,15 @@ def verify_telegram_identity(token, channel):
     if channel != "@" + EXPECTED_CHANNEL_USERNAME:
         raise RuntimeError("Telegram channel is not the approved Nashani Kerman destination")
     api = "https://api.telegram.org/bot" + token + "/"
-    me = http_json(api + "getMe")
+    me = telegram_checked_call(api, "getMe")
     bot = me.get("result") if me.get("ok") else None
     if not isinstance(bot, dict) or bot.get("username", "").lower() != EXPECTED_BOT_USERNAME:
         raise RuntimeError("Configured token does not belong to @neshanikermanbot")
-    chat_result = http_json(api + "getChat", "POST", {"chat_id": channel})
+    chat_result = telegram_checked_call(api, "getChat", {"chat_id": channel})
     chat = chat_result.get("result") if chat_result.get("ok") else None
     if not isinstance(chat, dict) or chat.get("username", "").lower() != EXPECTED_CHANNEL_USERNAME or chat.get("type") != "channel":
         raise RuntimeError("Configured destination is not @neshanikerman channel")
-    member_result = http_json(api + "getChatMember", "POST", {
+    member_result = telegram_checked_call(api, "getChatMember", {
         "chat_id": channel, "user_id": bot.get("id")
     })
     member = member_result.get("result") if member_result.get("ok") else None
@@ -280,6 +306,8 @@ def send_to_telegram(item, token, channel):
 
 def check_and_publish(item, state, ledger, token, channel):
     # Reserve first. A transport timeout can otherwise create duplicate posts.
+    # Reject invalid bot credentials/permissions before reserving the story.
+    verify_telegram_identity(token, channel)
     item["status"] = "sending_uncertain"
     ledger.save(state)
     try:
