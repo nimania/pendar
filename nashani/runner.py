@@ -189,7 +189,7 @@ def evaluate(item, now, source=None):
     item["id"] = story_id(item["url"])
     item["risk"] = "sensitive" if sensitive else "ordinary"
     item["city_confidence"] = relevance
-    item["status"] = "review" if sensitive or (not full_feed and relevance != "high") else "ready"
+    item["status"] = "review" if sensitive or source.get("review_only") or (not full_feed and relevance != "high") else "ready"
     item["detected_at"] = now.isoformat()
     item["other_sources"] = []
     return item
