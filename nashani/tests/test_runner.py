@@ -245,18 +245,67 @@ class NewsRadarTests(unittest.TestCase):
         self.assertEqual(item["delivery_kind"], "video")
         self.assertEqual(upload.call_args.args[2]["kind"], "video")
 
-    def test_caption_falls_back_to_text_on_missing_video(self):
+    def test_visual_story_never_falls_back_to_text_without_video(self):
         item = {"title": "خبر تصویری کرمان", "excerpt": "تصویری از شهر کرمان منتشر شد",
                 "source": "کرمان‌نو", "source_handle": "kermane_no",
                 "source_post_id": "235", "media_repost_allowed": True,
                 "media": {"kind": "video", "url": None}}
         rejected = runner.TelegramApiError("copyMessage", 400, "chat not found")
-        calls = [rejected, {"ok": True, "result": {"message_id": 9}}]
         with patch.object(runner, "verify_telegram_identity"), \
-             patch.object(runner, "telegram_checked_call", side_effect=calls) as api:
-            self.assertEqual(runner.send_to_telegram(item, "token", "-1003958286892"), 9)
-        self.assertEqual(item["delivery_kind"], "text")
-        self.assertEqual(api.call_args.args[1], "sendMessage")
+             patch.object(runner, "telegram_checked_call", side_effect=[rejected]) as api:
+            with self.assertRaises(runner.MediaNotAvailable):
+                runner.send_to_telegram(item, "token", "-1003958286892")
+        self.assertEqual(api.call_count, 1)
+        self.assertEqual(api.call_args.args[1], "copyMessage")
+
+
+    def test_kerman_governorate_photo_permission(self):
+        import json
+        cfg = json.loads((Path(__file__).resolve().parents[1] / "sources.json").read_text())
+        gov = next(s for s in cfg["sources"] if s["handle"] == "kerman_gov")
+        self.assertTrue(gov["media_repost_allowed"])
+        self.assertEqual(gov["source_hashtag"] if "source_hashtag" in gov else "اخبار_استانداری_کرمان",
+                         "اخبار_استانداری_کرمان")
+
+    def test_self_promotion_is_excluded_even_if_about_kerman(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        src = {"media_repost_allowed": True, "source_hashtag": "اخبار_کرمان"}
+        promo = {"url": "https://t.me/kerman_news/33",
+                 "title": "جدیدترین اخبار و اطلاعیه‌های استان کرمان",
+                 "excerpt": "به گزارش اخبار کرمان، تازه‌ترین خبرهای استان کرمان را در کانال‌های زیر دنبال کنید. به گزارش اخبار کرمان، اینستاگرام.",
+                 "source": "اخبار کرمان", "published_at": now.isoformat(),
+                 "media": {"kind": "photo", "url": None}}
+        self.assertIsNone(runner.evaluate(dict(promo), now, src))
+        queued = [{**promo, "status": "ready"}, {**promo, "status": "published"}]
+        self.assertEqual(runner.enforce_promotion_on_queue(queued), 1)
+        self.assertEqual([x["status"] for x in queued], ["excluded_promotion", "published"])
+
+    def test_visual_report_requires_approved_media(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        item = {"url": "https://t.me/kerman_gov/123", "title": "یک روز، یک قاب",
+                "excerpt": "روایت تصویری یک روز از تلاش‌های استان کرمان",
+                "source": "اخبار استانداری کرمان", "published_at": now.isoformat()}
+        self.assertEqual(runner.evaluate(dict(item), now, {})["status"], "review")
+        self.assertEqual(runner.evaluate(dict(item, media={"kind": "photo", "url": None}),
+                                         now, {"media_repost_allowed": True})["status"], "ready")
+
+    def test_non_visual_regular_report_can_still_be_text(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        item = {"url": "https://t.me/kerman_gov/124",
+                "title": "اجرای طرح عمرانی کرمان",
+                "excerpt": "معاون استاندار کرمان از تکمیل پروژه عمرانی خبر داد.",
+                "source": "اخبار استانداری کرمان", "published_at": now.isoformat()}
+        self.assertEqual(runner.evaluate(item, now, {})["status"], "ready")
+
+    def test_visual_report_no_media_never_sends_telegram_text(self):
+        item = {"title": "یک روز، یک قاب", "excerpt": "روایت تصویری از شهر کرمان",
+                "media_repost_allowed": True, "media": None}
+        with patch.object(runner, "verify_telegram_identity") as identity, \
+             patch.object(runner, "telegram_checked_call") as call:
+            with self.assertRaises(runner.MediaNotAvailable):
+                runner.send_to_telegram(item, "token", "-1003958286892")
+            identity.assert_not_called()
+            call.assert_not_called()
 
     def test_no_publish_without_explicit_channel(self):
         with self.assertRaises(RuntimeError):
