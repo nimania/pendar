@@ -3,7 +3,7 @@
 (()=>{
 "use strict";
 const DATA_URL="/data/karname.json", $=id=>document.getElementById(id);
-const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{}};
+const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[]};
 const labels={
   highlights:["منتخب کارنامه","پیش‌بینی‌ها زیر ذره‌بین","تازه‌ترین پرونده‌ها، با متن اصلی و منابع."],
   people:["کارنامهٔ چهره‌ها","چه کسی چه گفته؟","امتیاز فقط برای پیش‌بینی‌های ارزیابی‌شده است."],
@@ -20,23 +20,52 @@ function norm(v){return String(v??"").replace(/[\u200c\u200e\u200f]/g,"").toLowe
 function speakerId(v){return typeof v==="object"&&v?(v.key||v.handle||v.name||""):String(v??"");}
 function speaker(v){let id=speakerId(v),s=state.speakers.find(x=>[x.key,x.handle,x.name].includes(id));return s?.name||id;}
 function people(c){return array(c.speakers).map(speaker).filter(Boolean);}
+function personNorm(v){
+ return String(v||"").replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/ؤ/g,"و")
+ .replace(/[\u200c\u200e\u200f]/g," ").replace(/[\u064b-\u065f]/g,"")
+ .replace(/\s*\([^)]*\)/g,"").replace(/^سید\s+/g,"").replace(/[،,]/g," ")
+ .toLowerCase().replace(/\s+/g," ").trim();
+}
+function matchedFigure(s){
+ const list=state.figures,requested=String(s?.handle||s?.key||"").toLowerCase();
+ const exact=list.filter(f=>String(f.handle||"").toLowerCase()===requested);
+ if(exact.length===1)return exact[0];
+ const byName=list.filter(f=>personNorm(f.name_fa)===personNorm(s?.name));
+ return byName.length===1?byName[0]:null;
+}
 function profileHandle(s){
- // Never guess a public profile URL from an unrelated name or imported slug.
- const h=String(s?.handle||((s?.key==="abbas-souri")?"abbas-souri":""));
- return /^[A-Za-z0-9_-]{2,80}$/.test(h)?h:"";
+ const found=matchedFigure(s);
+ if(found&&/^[A-Za-z0-9_-]{2,80}$/.test(String(found.handle)))return found.handle;
+ // Existing verified local portrait / identity, even when figures.json is unreachable.
+ if(s?.key==="abbas-souri")return "abbas-souri";
+ return "";
 }
 function personRecord(v){
  const id=speakerId(v);
  return state.speakers.find(x=>[x.key,x.handle,x.name].includes(id))||{key:id,name:id};
 }
+function safePhotoURL(src){
+ if(typeof src!=="string")return "";
+ if(/^\/?figures\/[A-Za-z0-9_.-]+\.(?:png|jpe?g|webp)$/i.test(src))
+   return src[0]==="/"?src:"/"+src;
+ if(/^https:\/\/[A-Za-z0-9.-]+\/[A-Za-z0-9._~!$&'()*+,;=:@%/?#-]+$/i.test(src))
+   return src;
+ return "";
+}
 function portraitPath(s){
- const h=profileHandle(s);
- const src=h?state.portraits[h]:"";
- return typeof src==="string"&&/^\/figures\/[A-Za-z0-9_.-]+\.(?:png|jpe?g|webp)$/i.test(src)?src:"";
+ const found=matchedFigure(s),handle=found?.handle||profileHandle(s);
+ const local=handle?state.portraits[handle]:"";
+ if(safePhotoURL(local))return safePhotoURL(local);
+ // Use the actual Pendar figure portrait, not a guessed search result.
+ const existing=safePhotoURL(found?.avatar);
+ if(existing)return existing;
+ const fallback=state.externalPortraits[s?.key];
+ return fallback?.verified_identity_match===true?safePhotoURL(fallback.image_url):"";
 }
 function avatarMarkup(s){
  const photo=portraitPath(s),initial=esc(String(s?.name||s?.key||"?").slice(0,1));
- return '<span class="avatar" aria-hidden="true"><span class="avatar-initial">'+initial+'</span>'+(photo?'<img src="'+esc(photo)+'" loading="lazy" decoding="async" alt="">':"")+'</span>';
+ return '<span class="avatar" aria-hidden="true"><span class="avatar-initial">'+initial+'</span>'
+ +(photo?'<img src="'+esc(photo)+'" loading="lazy" decoding="async" alt="">':"")+'</span>';
 }
 function personHref(s){const h=profileHandle(s);return h?'/@'+encodeURIComponent(h)+'/':"";}
 function contributorLinks(c){
@@ -212,8 +241,11 @@ function eventHandlers(){
 }
 async function load(){
  // Portrait lookup is best-effort. No invented images or name-only photo searches.
- const portraitPromise=fetch("/data/pendar-figure-portraits.json",{cache:"no-cache"})
-  .then(r=>r.ok?r.json():{}).catch(()=>({}));
+ const resource=(url,fallback)=>fetch(url,{cache:"no-cache"})
+  .then(r=>r.ok?r.json():fallback).catch(()=>fallback);
+ const portraitPromise=resource("/data/pendar-figure-portraits.json",{});
+ const externalPromise=resource("/data/karname-portrait-sources.json",{portraits:{}});
+ const figurePromise=resource("/data/figures.json",{figures:[]});
  try{
   const response=await fetch(DATA_URL,{cache:"no-cache"});
   if(!response.ok)throw new Error("HTTP "+response.status);
@@ -229,6 +261,12 @@ async function load(){
   $("asof").textContent="آخرین به‌روزرسانی: "+(data.as_of_fa||data.as_of||"تاریخ نامشخص");
   if(data.is_complete===false||data.dataset_scope==="initial_partial_import"){$("feed-notice").hidden=false;$("feed-notice").textContent=data.provenance?.disclosure||"این داده‌ها فقط بخشی از دفتر کارنامه هستند و هنوز ارزیابی نهایی ندارند.";}else if(state.claims.length===0){$("feed-notice").hidden=false;$("feed-notice").textContent="بانک کارنامه متصل است، اما هنوز ادعای منتشرشده‌ای ندارد.";}
   render();
+  // Secondary images load independently and never prevent the claims dashboard.
+  Promise.all([figurePromise,externalPromise]).then(([directory,external])=>{
+   state.figures=Array.isArray(directory?.figures)?directory.figures:[];
+   state.externalPortraits=external?.portraits||{};
+   render();
+  }).catch(()=>{});
   let requested=new URL(location.href).searchParams.get("claim");if(requested)openClaim(requested);
  }catch(err){
   $("asof").textContent="بانک داده هنوز برای انتشار آماده نیست";
