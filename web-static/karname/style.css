@@ -18,3 +18,17 @@ dialog .claim-contributors{padding:10px 0;border-bottom:1px solid #3a4653}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tile{transition:none}}
 @media(max-width:780px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.intake-context{flex-direction:column;align-items:stretch}.intake-context a{align-self:flex-start}}
 @media(max-width:420px){.stats{gap:8px;padding:0 14px}.stats article{padding:12px 14px;min-height:115px}.stats strong{font-size:27px}.intake-context{padding:14px}}
+
+
+/* Automatically indexed observations are never presented as adjudicated claims. */
+.auto-intro{grid-column:1/-1;background:#2a2f39;border:1px solid #8b754d;border-radius:16px;padding:17px 20px;line-height:1.95;color:#efdbb1}
+.auto-intro strong{font-size:16px;color:#ffe6a0}.auto-intro p{font-size:13px;margin:8px 0 0;color:#c8d1db}
+.auto-tools{grid-column:1/-1;margin:0}.auto-tools input{flex:2;min-width:190px}.auto-reset{background:#384a5e;color:#f0f5fb;border:1px solid #67788a;border-radius:8px;padding:9px 12px}
+.auto-claim{display:flex;flex-direction:column;gap:9px;overflow-wrap:anywhere}
+.auto-claim-head{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap}.auto-provisional{color:#ffda92;font-weight:800;font-size:11px;border:1px solid #8b7142;border-radius:12px;padding:4px 8px}.auto-claim-head small{color:#a2b3c5}
+.auto-claim h3{font-size:18px;margin:4px 0 0}.auto-profile{color:#e7f2ff;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:4px}.auto-profile:hover{color:var(--yellow)}
+.auto-identity{font-size:12px;color:#f4d699}.auto-quote{font-size:14px;line-height:2.1;color:#f1f5fa;white-space:normal;overflow-wrap:anywhere}
+.auto-evidence{font-size:12px;color:#d5e4f2}.auto-explainer{font-size:12px;color:#acb8c8}.auto-trigger{padding:8px 10px;background:#2d3a4a;border:1px solid #485b73;border-radius:10px;font-size:12px;color:#d6e8fa}
+.auto-claim .tile-foot{margin-top:auto;display:flex;align-items:center;flex-wrap:wrap;gap:10px}.auto-claim .tile-foot a{color:var(--yellow);font-weight:800;font-size:12px}.auto-claim .tile-foot span{font-size:11px;color:#b4c2d2}
+.auto-person-link{color:#f5e3ad;font-size:11px;font-weight:800;border:1px solid #826e47;background:#3a352d;padding:5px 9px;border-radius:8px}
+.auto-person-link:hover{border-color:#d2b777}
