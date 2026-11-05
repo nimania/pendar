@@ -64,7 +64,8 @@ class KermanGeographyTests(unittest.TestCase):
 
     def test_all_sources_have_strict_gate(self):
         config = json.loads((Path(__file__).resolve().parents[1] / "sources.json").read_text(encoding="utf-8"))
-        self.assertEqual(len(config["sources"]), 8)
+        self.assertEqual(len(config["sources"]), 10)
+        self.assertEqual(sum(row.get("platform") == "website" for row in config["sources"]), 2)
         self.assertTrue(all(row.get("geography_filter") == "strict" for row in config["sources"]))
         self.assertTrue(all(row.get("coverage") == "kerman_geography" for row in config["sources"]))
 
