@@ -526,8 +526,8 @@ def publish_batch(items, state, ledger, token, channel):
     """
     if not items:
         return 0
-    if any(not is_local_news(item) or is_promotional_story(item) for item in items):
-        raise ValueError("Batch contains a nonlocal or promotional story")
+    if any(is_promotional_story(item) for item in items):
+        raise ValueError("Batch contains a promotional story")
     verify_telegram_identity(token, channel)
     stamp = utcnow().isoformat()
     for item in items:
