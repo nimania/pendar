@@ -236,7 +236,18 @@
     "https://t.me/Kerman_akhbar/66208",
     "https://t.me/fardaayekerman/34952",
     "https://t.me/Kerman_akhbar/66209",
-    "https://t.me/kermane_no/59020"
+    "https://t.me/kermane_no/59020",
+    "https://t.me/kerman_news/140115",
+    "https://t.me/kermane_no/59021",
+    "https://t.me/Kerman_akhbar/66210",
+    "https://t.me/kerman_gov/10500",
+    "https://t.me/irna_kerman/30297",
+    "https://t.me/kerman_news/140116",
+    "https://t.me/kerman_news/140118",
+    "https://t.me/kerman_news/140119",
+    "https://t.me/kerman_news/140120",
+    "https://t.me/kerman_gov/10501",
+    "https://t.me/kerman_gov/10502"
   ],
   "queue": [
     {
@@ -1355,17 +1366,212 @@
       "delivery_kind": "photo",
       "telegram_message_id": 27,
       "sent_at": "2026-11-05T17:46:32.184666+00:00"
+    },
+    {
+      "url": "https://t.me/kermane_no/59021",
+      "source_post_id": "59021",
+      "title": "ضرورت بررسی کلان کمبود مدرسه در شهرهای بزرگ و توجه ویژه به نمازخانه‌ها",
+      "excerpt": "ضرورت بررسی کلان کمبود مدرسه در شهرهای بزرگ و توجه ویژه به نمازخانه‌ها امام‌جمعه کرمان در ششمین جلسه شورای آموزش‌وپرورش استان کرمان، ضمن قدردانی از تلاش‌های ارزشمند بخش دولتی و مجموعه‌های غیردولتی در حوزه توسعه فضاهای آموزشی، اعلام کرد که با وجود تمامی این اقدامات، مرکز استان و شهرهای بزرگ همچنان با کمبود فضای آموزشی مواجه هستند و این مسئله باید در سطحی کلان‌تر و با رویکردی ملی مورد واکاوی و تصمیم‌گیری قرار گیرد. وی همچنین با تأکید بر اهمیت جایگاه مسائل تربیتی و دینی در محیط‌های آموزشی، خواستار توجه جدی مسئولان وزارت آموزش‌وپرورش و مدیران استانی به وضعیت نمازخانه‌های مدارس شد و تأکید کرد که باید با نگاهی حمایتی، کمبودها و مسائل موجود در این فضاها به‌طور جدی پیگیری و برطرف شود.",
+      "paragraphs": [
+        "ضرورت بررسی کلان کمبود مدرسه در شهرهای بزرگ و توجه ویژه به نمازخانه‌ها",
+        "امام‌جمعه کرمان در ششمین جلسه شورای آموزش‌وپرورش استان کرمان، ضمن قدردانی از تلاش‌های ارزشمند بخش دولتی و مجموعه‌های غیردولتی در حوزه توسعه فضاهای آموزشی، اعلام کرد که با وجود تمامی این اقدامات، مرکز استان و شهرهای بزرگ همچنان با کمبود فضای آموزشی مواجه هستند و این مسئله باید در سطحی کلان‌تر و با رویکردی ملی مورد واکاوی و تصمیم‌گیری قرار گیرد.",
+        "وی همچنین با تأکید بر اهمیت جایگاه مسائل تربیتی و دینی در محیط‌های آموزشی، خواستار توجه جدی مسئولان وزارت آموزش‌وپرورش و مدیران استانی به وضعیت نمازخانه‌های مدارس شد و تأکید کرد که باید با نگاهی حمایتی، کمبودها و مسائل موجود در این فضاها به‌طور جدی پیگیری و برطرف شود."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/ooaZEcgoRxOQKdedFKbBIypkMOfcNzMUAncFuKeov_JQ1kLFeu6WRm3Yh6St61wa0dw2xOsNxiraSyeS9fqBfdaytl8vIXn1vFrpyucsDnkw8ZtuhD1Na3sJArFIsVI0hWHpB1AB21-ve7rGDqAYPFYDQcEHIgbr4IOOKwrtCBBN5jgyoCyK0EA50xZxkZsJASrqNNAsRABTgqYX4a1BBg9ZKP_IzhNOe3ZVPAsX-pZNVYg_8zAkUlk94iZ5XRPrxNh9rB1rrUNZkGtW--9ynaI-gk9PVNTB4RVfxdkKPBvK4HmVz4bMHV8gRGhemxjEYs4P_RFcnNZSf-nRoUvA6Q.jpg"
+      },
+      "published_at": "2026-11-05T17:48:08+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "7ab93f17865f495a",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T18:38:31.443963+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10500",
+      "source_post_id": "10500",
+      "title": "ضرورت تهیه الگوی مشارکت‌های جمعی در حوزه مدرسه‌سازی",
+      "excerpt": "ضرورت تهیه الگوی مشارکت‌های جمعی در حوزه مدرسه‌سازی گفتمان مدرسه‌سازی در استان به مشارکت عمومی و همراهی جامعه منجر شده است کرمان می‌تواند الگوی ملی مشارکت‌های مردمی در امر مدرسه‌سازی باشد پویایی و شتاب فعالیت‌های مدرسه‌سازی در استان استاندار کرمان بر تهیه الگوی مشارکت‌های جمعی در حوزه مدرسه‌سازی در استان تاکید کرد و گفت: استان کرمان ظرفیت آن را دارد که با تکیه بر مشارکت‌های جمعی در امر مدرسه‌سازی، الگویی موفق ارائه و این تجربه را به الگویی ملی تبدیل کند. به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی شامگاه پنجشنبه ۱۴ آبان‌ماه در نشست شورای آموزش و پرورش استان که با حضور معاون وزیر آموزش و پرورش در نشستی با حضور رئیس‌جمهور اعلام شد که استان کرمان از استان‌های پیشرو و برتر در نهضت مدرسه‌سازی است. مروز شاهد مشارکت گسترده اقشار مختلف و همراهی فضای عمومی جامعه در این زمینه هستیم. طی دو سال گذشته، به‌ویژه پس از سفر رئیس‌جمهور به شهرستان سیرجان، روند اجرای نهضت مدرسه‌سازی در استان با جدیت بیشتری دنبال شد و دستاوردهای خوبی در این زمینه حاصل شده است.",
+      "paragraphs": [
+        "ضرورت تهیه الگوی مشارکت‌های جمعی در حوزه مدرسه‌سازی",
+        "گفتمان مدرسه‌سازی در استان به مشارکت عمومی و همراهی جامعه منجر شده است",
+        "کرمان می‌تواند الگوی ملی مشارکت‌های مردمی در امر مدرسه‌سازی باشد",
+        "پویایی و شتاب فعالیت‌های مدرسه‌سازی در استان",
+        "استاندار کرمان بر تهیه الگوی مشارکت‌های جمعی در حوزه مدرسه‌سازی در استان تاکید کرد و گفت: استان کرمان ظرفیت آن را دارد که با تکیه بر مشارکت‌های جمعی در امر مدرسه‌سازی، الگویی موفق ارائه و این تجربه را به الگویی ملی تبدیل کند.",
+        "به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی شامگاه پنجشنبه ۱۴ آبان‌ماه در نشست شورای آموزش و پرورش استان که با حضور معاون وزیر آموزش و پرورش",
+        "در نشستی با حضور رئیس‌جمهور اعلام شد که استان کرمان از استان‌های پیشرو و برتر در نهضت مدرسه‌سازی است.",
+        "مروز شاهد مشارکت گسترده اقشار مختلف و همراهی فضای عمومی جامعه در این زمینه هستیم.",
+        "طی دو سال گذشته، به‌ویژه پس از سفر رئیس‌جمهور به شهرستان سیرجان، روند اجرای نهضت مدرسه‌سازی در استان با جدیت بیشتری دنبال شد و دستاوردهای خوبی در این زمینه حاصل شده است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/nKB0RYzjz62EFMtgKfF8S1-jerGqyPK5CU7us3eCmhyJEHLNSqkcT4GWtIfpSOzNJt6M85FLBXcTRPiCdsktVX7etwxSI-Zuc9zUZI2-KKnwUNy5Orpiz8Tpk12OYph09uvIGTtqPJO-wNqFQrpVtSPZ_bs573gjwuFDfSQ4TGMsSvZfJ6NHS1vTyfJ3mt9Hu3unoi8DerYgmKdiYrsgBq2HqpWlxxHqetRCVP8qWSa9HVkCsCCFNrKPOWpP2doNjTUX960s9cWCYj_EpBL_i1bYcL9qtCIcmor8-VRKUV9yMqp1F0CQi8xfq-oVeyhmy2mwG9JUL6jm1c2FmUNLCQ.jpg"
+      },
+      "published_at": "2026-11-05T17:56:08+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "44c56e7a67a447cf",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T18:38:31.443963+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30297",
+      "source_post_id": "30297",
+      "title": "جهرم با یک امتیاز بر مس غلبه کرد؛ نخستین شکست فصل رفسنجانی‌ها رقم خورد",
+      "excerpt": "جهرم با یک امتیاز بر مس غلبه کرد؛ نخستین شکست فصل رفسنجانی‌ها رقم خورد تیم بسکتبال صنعت مس رفسنجان در هفته سوم رقابت‌های لیگ برتر کشور با اختلاف یک امتیاز مغلوب تیم نفت و گاز زاگرس جنوبی جهرم شد تا نخستین باخت فصل این تیم به ثبت برسد. irna_kerman",
+      "paragraphs": [
+        "جهرم با یک امتیاز بر مس غلبه کرد؛ نخستین شکست فصل رفسنجانی‌ها رقم خورد",
+        "تیم بسکتبال صنعت مس رفسنجان در هفته سوم رقابت‌های لیگ برتر کشور با اختلاف یک امتیاز مغلوب تیم نفت و گاز زاگرس جنوبی جهرم شد تا نخستین باخت فصل این تیم به ثبت برسد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/gLwmb0K3sxvcMVEswKSjjHhRarkfQ6lejdgMpI7N1z5j_avByh5Y98IIopvrQGFxDxzk3U_ZaJzVsJzEtADbn5weHkYwGWRnh4_uuxA2lDXQwTDpWOtvp7dGVW2eaLHKU9jxHKHW4pUuQcd5eJnUNCQIZsS4HVpKY3XHIsap-BH75HOKdixndgfdd9gUZouPA24hVA8-bsrR2sFu7NjYUyk3qtDrjrJk1tdWNKTPgaFKDzb5_WrkW3n6C4TPWkkkc_1Y8iVKJ0M5xacSleBuJK3kYpfhXPEdgMBovMR2dztMulYZzvbfWF0jppvdpSyvN4TgmMxkQgDx9y4E2KpwNQ.jpg"
+      },
+      "published_at": "2026-11-05T17:56:17+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "6915571120c7ad37",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T18:38:31.443963+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140116",
+      "source_post_id": "140116",
+      "title": "شکست مس رفسنجان در بازی نفس‌گیر مقابل زاگرس جنوبی جهرم",
+      "excerpt": "شکست مس رفسنجان در بازی نفس‌گیر مقابل زاگرس جنوبی جهرم تیم بسکتبال مس رفسنجان در هفته سوم لیگ برتر بسکتبال باشگاه‌های کشور، در دیداری نفس‌گیر و تا ثانیه‌های پایانی، در سالن خانگی خود مقابل نفت و گاز زاگرس جنوبی جهرم با نتیجه ۸۹ بر ۸۸ شکست خورد تا دو امتیاز حساس خانگی را از دست بدهد.",
+      "paragraphs": [
+        "شکست مس رفسنجان در بازی نفس‌گیر مقابل زاگرس جنوبی جهرم",
+        "تیم بسکتبال مس رفسنجان در هفته سوم لیگ برتر بسکتبال باشگاه‌های کشور، در دیداری نفس‌گیر و تا ثانیه‌های پایانی، در سالن خانگی خود مقابل نفت و گاز زاگرس جنوبی جهرم با نتیجه ۸۹ بر ۸۸ شکست خورد تا دو امتیاز حساس خانگی را از دست بدهد."
+      ],
+      "media": null,
+      "published_at": "2026-11-05T17:57:59+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "c1942be0b383f02f",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T18:38:31.443963+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140120",
+      "source_post_id": "140120",
+      "title": "شهید گمنام مهمان امشب کرمانی‌ها در میدان‌ کوثر",
+      "excerpt": "شهید گمنام مهمان امشب کرمانی‌ها در میدان‌ کوثر",
+      "paragraphs": [
+        "شهید گمنام مهمان امشب کرمانی‌ها در میدان‌ کوثر"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/abacccaa5e.mp4?token=iyrh8QchpswMeLfk-S1Ss2RMWoEAgeuItaoWgs3IiwJzSkTI6zdW96E96DAfXdmUwvsj3QCYZfwhQqNSU-5N5muXu_kVd0o-6F2lu07RyP6oiJ3nKpsEPWHohyHkiPwaKHwD6lkLcBg9u7X1cTxb8-Ib_R8XJerGWU8AcOxxpDAl1dwVw_1ZCISJS2h7urd6C4e1uT62DU-ChsvGaBO3k87zpP1hqcmJ6UoZaO0Kx5dc-TH13W-Mg8gdgDp2XouKLEApMeEDQWvhJgR-szUEyAK4CJR2lDvZ7AsCIve1klbq2BCmMZ5SONMFkdaiXj-IRFsyOOMV_cdmGH-yh5sB0w"
+      },
+      "published_at": "2026-11-05T18:28:59+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "0171152eb8d891a1",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T18:38:31.443963+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10501",
+      "source_post_id": "10501",
+      "title": "هشدار مدیریت بحران درباره افت فشار گاز در پیک سرما؛ ۱۱ استان کشور و ۸ شهرستان کرمان در معرض محدودیت قرار دارند",
+      "excerpt": "هشدار مدیریت بحران درباره افت فشار گاز در پیک سرما؛ ۱۱ استان کشور و ۸ شهرستان کرمان در معرض محدودیت قرار دارند معاون هماهنگی امور عمرانی استاندار کرمان با اشاره به پیش‌بینی افت فشار گاز در پیک مصرف زمستان، گفت: مشکلات تأمین گاز محدود به استان کرمان نیست و بر اساس برآوردهای ارائه‌شده، ۱۱ استان کشور در فصل سرد با محدودیت‌های گازی مواجه خواهند بود. به گزارش روابط عمومی استانداری کرمان، علی‌اصغر ذاکری‌هرندی پنجشنبه ۱۴ آبان در نشست شورای اداری شهرستان‌های نرماشیر، ریگان و گنبکی در استان کرمان تعدادی از شهرستان‌های شرقی و برخی مناطق شمالی و جنوبی در دوره اوج مصرف با افت فشار گاز مواجه خواهند شد. بازه زمانی مورد توجه از حدود ۱۵ آذرماه تا ۱۵ بهمن‌ماه‌ خواهد بود که مدیریت استان از هم‌اکنون تمهیدات لازم برای کاهش آثار این محدودیت‌ها را در دستور کار قرار داده است. فرمانداران و بخشداران بلید مصوبات ستاد بحران و ابلاغیه‌های شرکت گاز را جدی گرفته و نسبت به اطلاع‌رسانی دقیق به مردم اقدام کنند.",
+      "paragraphs": [
+        "هشدار مدیریت بحران درباره افت فشار گاز در پیک سرما؛ ۱۱ استان کشور و ۸ شهرستان کرمان در معرض محدودیت قرار دارند",
+        "معاون هماهنگی امور عمرانی استاندار کرمان با اشاره به پیش‌بینی افت فشار گاز در پیک مصرف زمستان، گفت: مشکلات تأمین گاز محدود به استان کرمان نیست و بر اساس برآوردهای ارائه‌شده، ۱۱ استان کشور در فصل سرد با محدودیت‌های گازی مواجه خواهند بود.",
+        "به گزارش روابط عمومی استانداری کرمان، علی‌اصغر ذاکری‌هرندی پنجشنبه ۱۴ آبان در نشست شورای اداری شهرستان‌های نرماشیر، ریگان و گنبکی",
+        "در استان کرمان تعدادی از شهرستان‌های شرقی و برخی مناطق شمالی و جنوبی در دوره اوج مصرف با افت فشار گاز مواجه خواهند شد.",
+        "بازه زمانی مورد توجه از حدود ۱۵ آذرماه تا ۱۵ بهمن‌ماه‌ خواهد بود که مدیریت استان از هم‌اکنون تمهیدات لازم برای کاهش آثار این محدودیت‌ها را در دستور کار قرار داده است.",
+        "فرمانداران و بخشداران بلید مصوبات ستاد بحران و ابلاغیه‌های شرکت گاز را جدی گرفته و نسبت به اطلاع‌رسانی دقیق به مردم اقدام کنند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/PqMhYxAK8KH4jTOWTUxCLfIwzLzW4yeStIrb15NaF5_vjVCI_WAXzpFjsq_zjuojCU_mzLwdTRgkTVkZnIjhWi7kr3zA8KljdDglFZAN9_4rndLL00EotcFrLuBAaD0xWbhRlniARtbmJfOcz2Wi8TlmPfky8xxHC9fQxzALs4d_2YXsmqJ-aNQs3Vr705CiGptPDiCCvhKtjoBFWN2VfZNhCSxZI3sD2ILwlbC1RKNRmIjnK7IlBh-kHiuFBWkSRFthNCXB5Ykx5_AV41KZCJR6cTaZp4W0h3IZuQmFrXxCy2zrzZtLCZz891iCvmrCKQiePc2_q9toSlo43rxAeQ.jpg"
+      },
+      "published_at": "2026-11-05T18:31:00+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "b1a4a6e487cac09c",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T18:38:31.443963+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10502",
+      "source_post_id": "10502",
+      "title": "یک روز، یک قاب",
+      "excerpt": "یک روز، یک قاب از سفر معاون عمرانی استاندار کرمان به شرق استان تا همایش میکرورسانه‌ها روایت تصویری یک روز از تلاش‌ها، تصمیم‌ها و رویدادهای استان کرمان عکس‌ها: محمد قنبری و فاطمه اکبری شنبه تا جمعه، ساعت ۲۲ در کانال استانداری کرمان",
+      "paragraphs": [
+        "یک روز، یک قاب",
+        "از سفر معاون عمرانی استاندار کرمان به شرق استان تا همایش میکرورسانه‌ها",
+        "روایت تصویری یک روز از تلاش‌ها، تصمیم‌ها و رویدادهای استان کرمان",
+        "عکس‌ها: محمد قنبری و فاطمه اکبری",
+        "شنبه تا جمعه، ساعت ۲۲",
+        "در کانال استانداری کرمان"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/BYKjCiFFdc2nVklIYhvSh3FGP7GvMiBkm-v3Nt7RSsOMzWfgWzb79RwUm0svimgvLGyvfFYXNoE84_aQ-idNjXrz810nDoktxrbmrVQVy9CP5SP2YVeJ-XjRNa5RsxAQ3La753y_ikWaNCcOig16ZJepYQP-jHVC2kE_y0gnAKxy3esP0rzXX2CnAgbpP_UrzxZSbQJ6QyUWvZNKqaJnuM8yZc0vJrSWz-Df7QsuxUDDtk8S4wYgWTiQ7NKaxExQh-EhS1bRQGOynA4xbRy7O58KaODWWk001QYdFmwQnupSZMLeohoOFoWB4Y4ejjtAqbzMlFBFc7_QLiB-c-fRPg.jpg"
+      },
+      "published_at": "2026-11-05T18:36:12+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "b9ed3fc56143a8aa",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T18:38:31.443963+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-05T17:46:32.184685+00:00",
+  "saved_at": "2026-11-05T18:38:39.856239+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-05T17:45:46.320241+00:00",
-    "fardaayekerman": "2026-11-05T17:45:46.320241+00:00",
-    "irna_kerman": "2026-11-05T17:45:46.320241+00:00",
-    "kerman_gov": "2026-11-05T17:45:46.320241+00:00",
-    "kerman_akhbar": "2026-11-05T17:45:46.320241+00:00",
-    "kerman_news": "2026-11-05T17:45:46.320241+00:00",
-    "kerman_rasaneh": "2026-11-05T17:45:46.320241+00:00",
-    "qh_qv": "2026-11-05T17:45:46.320241+00:00"
+    "kermane_no": "2026-11-05T18:38:31.443963+00:00",
+    "fardaayekerman": "2026-11-05T18:38:31.443963+00:00",
+    "irna_kerman": "2026-11-05T18:38:31.443963+00:00",
+    "kerman_gov": "2026-11-05T18:38:31.443963+00:00",
+    "kerman_akhbar": "2026-11-05T18:38:31.443963+00:00",
+    "kerman_news": "2026-11-05T18:38:31.443963+00:00",
+    "kerman_rasaneh": "2026-11-05T18:38:31.443963+00:00",
+    "qh_qv": "2026-11-05T18:38:31.443963+00:00"
   }
 }
