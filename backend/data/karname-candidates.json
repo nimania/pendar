@@ -3,20 +3,244 @@
   "publication_policy": "internal_review_queue_only_no_public_import",
   "sources": [
     "backend/data/editorial-recaps.json",
-    "web-static/data/pendar-editorial-views.json"
+    "web-static/data/pendar-editorial-views.json",
+    "https://pendar.io/data/figures.json"
   ],
+  "figure_snapshot_available": true,
   "mirrored_jan_kalam_skipped": true,
   "stats": {
-    "total": 64,
-    "pending": 52,
+    "total": 146,
+    "pending": 134,
     "screened": 12,
     "manual_review_requested": 2,
     "reviewed": 0,
-    "sources_scanned": 61,
-    "source_spans_scanned": 1200,
-    "ambiguous_sources": 1
+    "sources_scanned": 868,
+    "source_spans_scanned": 2223,
+    "ambiguous_sources": 1,
+    "figure_profiles_scanned": 519,
+    "figure_posts_scanned": 797
   },
   "candidates": [
+    {
+      "id": "KC-006a055688fe7d79c5",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "عبدالفتاح سیسی",
+      "speaker_candidates": [
+        "news-28e68974ac16"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "در صورت ازسرگیری جنگ ایالات متحده و ایران، پیامدهای آن فاجعه‌بار خواهد بود و واشنگتن و تهران باید پیش از دیر شدن زمینه را برای یک توافق فراهم کنند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "پیش از دی",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:dca931e0-3597-4496-8533-cc7295d216db",
+          "text_field": "summary_fa",
+          "source_title": "Anadolu Ajansı",
+          "source_url": "https://www.aa.com.tr/en/middle-east/iran-s-parliament-speaker-says-us-voters-rejected-war-tehran-backs-this-message/4110933",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T06:13:55",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "07a617ce839835bd58261d8a4457f862630e6db896768a771e7e7516c4884400"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-01ac53787fcec5bb2c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "الیزابت وارن",
+      "speaker_candidates": [
+        "news-2e3f7398b607"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "ستون فقرات هر سناتور جمهوری‌خواه با جراحی برداشته شده و ما سالها در حال مطالعه آن خواهیم بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:16510d7d-757e-4340-946d-d605cc1b7a4a",
+          "text_field": "summary_fa",
+          "source_title": "عصر ایران",
+          "source_url": "https://www.asriran.com/fa/news/1203475/سناتور-آمریکایی-واشنگتن-جای-کثیفی-است",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T18:17:13",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "81ceb759815554691b2c8650c5af23da984646f10a018d09190d128a7667e823"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-01ca8f05b0ccfe6a5e",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "مایک جانسون",
+      "speaker_candidates": [
+        "news-7259b3411b40"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "برای رهبری جمهوری‌خواهان در مجلس نمایندگان نامزد نخواهد شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:da224121-bde2-4b04-abe5-709e65726346",
+          "text_field": "summary_fa",
+          "source_title": "خبرگزاری ایرنا (IRNA)",
+          "source_url": "https://www.irna.ir/news/86312798/%D8%B1%D8%A6%DB%8C%D8%B3-%D9%85%D8%AC%D9%84%D8%B3-%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%DA%AF%D8%A7%D9%86-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%86%D8%AE%D8%B3%D8%AA%DB%8C%D9%86-%D9%82%D8%B1%D8%A8%D8%A7%D9%86%DB%8C-%D8%B4%DA%A9%D8%B3%D8%AA-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA%DB%8C-%D8%AC%D9%85%D9%87%D9%88%D8%B1%DB%8C-%D8%AE%D9%88%D8%A7%D9%87%D8%A7%D9%86",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T16:18:46",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "e5caee0cb8da9a9e023977c1d08836834f30c32a2b6e7a69f8835d19fbb9520f"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-0223606fee425bcbb9",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "پیت هگزث",
+      "speaker_candidates": [
+        "news-ab8283f04b40"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "بررسی احتمال برکناری او توسط دونالد ترامپ پس از انتخابات میان‌دوره‌ای در گفت‌وگوهای محرمانه مطرح شده است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:176429e3-ab1a-4a9d-a38f-5ec8c8c8f2cf",
+          "text_field": "summary_fa",
+          "source_title": "فردانیوز",
+          "source_url": "https://www.fardanews.com/fa/tiny/news-1417383",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T15:15:33",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "26b9379027ed202a7cda488bc88997e6f86f9ed6bd5af48e15fbd9d380d39675"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-06239fd776dddeecc4",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "محمد اکرمی‌نیا",
+      "speaker_candidates": [
+        "news-a27dcd66cb50"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "اگر رئیس جمهور آمریکا بار دیگر با تهدید و تطمیع صهیونیست‌ها دست به ماجراجویی دیگری در منطقه بزند، بی‌تردید آتش جنگ جغرافیای گسترده‌تری را در بر خواهد گرفت و پایان جنگ به دست او نخواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر رئیس جمهور آمریکا بار دیگر با تهدید و تطمیع صهیونیست‌ها دست به ماجراجویی دیگری در منطقه بزند",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:bb2565b8-1b31-4d0d-9f76-372488557af9",
+          "text_field": "summary_fa",
+          "source_title": "آنا",
+          "source_url": "https://ana.ir/fa/news/1093642/هشدار-جدی-سخنگوی-ارتش-به-آمریکا",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T07:44:35",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "0fe13486f51858457aae3dec221da8cc275db468a703ca119bcd0a65c6520a84"
+        }
+      ],
+      "editorial_decision": null
+    },
     {
       "id": "KC-077fdcba2a9d8d4190",
       "status": "pending_editorial_review",
@@ -54,6 +278,50 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-0ca51d3e1e341a683a",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "جی‌دی ونس",
+      "speaker_candidates": [
+        "news-201441186036"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "رئیس‌جمهوری و من هر دو نسبت به چشم‌انداز دستیابی احتمالی به یک توافق از طریق مذاکره احساس خوبی داریم.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:6423335e-dadd-4546-bc19-fbbf82b0aeb3",
+          "text_field": "summary_fa",
+          "source_title": "ایندیپندنت فارسی",
+          "source_url": "https://www.independentpersian.com/node/423010/%D8%B3%DB%8C%D8%A7%D8%B3%DB%8C-%D9%88-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%DB%8C/%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D8%A7-%DB%B2%DB%B0-%D9%87%D8%B2%D8%A7%D8%B1-%D9%86%DB%8C%D8%B1%D9%88%DB%8C-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D8%AF%D8%B1-%D9%85%D9%86%D8%B7%D9%82%D9%87%D8%9B-%D8%A7%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84%DB%8C-%D8%AD%D9%85%D9%84%D8%A7%D8%AA-%D8%AF%D9%88%D8%A8%D8%A7%D8%B1%D9%87-%D8%AF%D8%B1",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T17:55:23",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "be3cd1e1d0a7b02815467bb5e70293fb3a4c82f65f4b3b71e7e046a3c8ed25ff"
         }
       ],
       "editorial_decision": null
@@ -111,6 +379,94 @@
       }
     },
     {
+      "id": "KC-10cfc03402ea46c93b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "تاکر کارلسون",
+      "speaker_candidates": [
+        "news-fd1fde14c56e"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "واشنگتن ممکن است تنها چند روز با حمله هسته‌ای به ایران فاصله داشته باشد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:854cf255-2968-4a9e-a0c2-f75e1d020088",
+          "text_field": "summary_fa",
+          "source_title": "دنیای اقتصاد",
+          "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305759-%D8%AA%D8%A7%DA%A9%D8%B1-%DA%A9%D8%A7%D8%B1%D9%84%D8%B3%D9%88%D9%86-%D9%85%D8%AF%D8%B9%DB%8C-%D8%B4%D8%AF-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%85%D9%85%DA%A9%D9%86-%D8%A7%D8%B3%D8%AA-%D8%AF%D8%B1-%DA%86%D9%86%D8%AF-%D8%B1%D9%88%D8%B2-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%AD%D9%85%D9%84%D9%87-%D9%87%D8%B3%D8%AA%D9%87-%D8%A7%DB%8C-%DA%A9%D9%86%D8%AF",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T06:51:49",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "9b72b3fca7baf788325fe3648bcbde9f693aba1d8e315b8d1f4ade9cd675803c"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-14373a95373735198c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "Karimipour_K",
+      "speaker_name": "یدالله کریمی‌پور",
+      "speaker_candidates": [
+        "Karimipour_K"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "واشینگتن احتمالاً به جای جنگ مستقیم، از راهکارهای فشار اقتصادی و سیاسی برای پیشبرد اهداف خود استفاده خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "c102b60e-b33a-437b-8808-314169be38d7",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/Karimipour_K/6332",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T16:13:35",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "a09cce421727564ee06ba14f00b5c1230e93c88d8e0f6d7c79d77ef2f812b932"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-14637dd30762a942ee",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -147,6 +503,50 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "37168339d5d05ffe91e86131a4b2aad11c900b1b9aad0b2afec31acbcbd77560"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-1489c8232c792de70b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "تاکر کارلسون",
+      "speaker_candidates": [
+        "news-fd1fde14c56e"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "ممکن است ترامپ تحت فشار نتانیاهو طی چند روز آینده حمله هسته‌ای به ایران را آغاز کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:ae0bbdaa-7859-4492-8951-a3c78668a965",
+          "text_field": "summary_fa",
+          "source_title": "شفقنا فارسی",
+          "source_url": "https://fa.shafaqna.com/news/2392212/",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T05:05:23",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "c07e401d69835b9f1cf1813c6a1a240e54bb90b561eacbd67d2766f194217912"
         }
       ],
       "editorial_decision": null
@@ -234,6 +634,50 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-1a60f55dc76d4c7582",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "سوزان دلبنه",
+      "speaker_candidates": [
+        "news-6cc89e57375d"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "اطمینان زیادی دارم که دموکرات‌ها بار دیگر کنترل مجلس نمایندگان را به دست خواهند گرفت؛ اما هم‌زمان برای سناریویی آماده می‌شویم که در آن دونالد ترامپ و حزب جمهوری‌خواه در لحظات پایانی تلاش کنند نتیجه انتخابات را به نفع خود تغییر دهند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:bedc6cc0-f0db-448c-92a4-28019d2f77f6",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/946360/سی-ان-ان-هشت-رقابت-مجلس-نمایندگان-که-رئیس-ستاد-انتخاباتی-دموکرات-ها-دنبال-می-کند",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T17:25:48",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "50857ce1c46726e1ec632c10fc94051160683505201b13e227f3f3153f0d0b38"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-1b4e41d08b15a05607",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -270,6 +714,50 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "37168339d5d05ffe91e86131a4b2aad11c900b1b9aad0b2afec31acbcbd77560"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-20f7aecee2b1dcc737",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "ولودیمیر زلنسکی",
+      "speaker_candidates": [
+        "news-9b37c7c1a686"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "این اقدام یک حمله تروریستی وقیحانه است و ده‌ها تن دیگر ممکن است زیر آوار گرفتار شده باشند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:2812f9e9-8a05-46de-b6fe-b9a5fe4e1088",
+          "text_field": "summary_fa",
+          "source_title": "BBC",
+          "source_url": "https://www.bbc.co.uk/news/articles/c65ynez5y599o?at_medium=RSS&at_campaign=rss",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T16:57:41",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "e814a99e6030e13ad94653ddb7faf2af8a6b6d5168a257405549f8a8a4486c4f"
         }
       ],
       "editorial_decision": null
@@ -369,6 +857,138 @@
       "manual_review_required": true
     },
     {
+      "id": "KC-2aeb2a33520439fa46",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "اکرمی‌نیا",
+      "speaker_candidates": [
+        "news-40f820e1cba2"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "اگر رئیس جمهور آمریکا بار دیگر با تهدید و تطمیع صهیونیست‌ها دست به ماجراجویی دیگری در منطقه بزند، بی‌تردید آتش جنگ جغرافیای گسترده‌تری را در بر خواهد گرفت.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر رئیس جمهور آمریکا بار دیگر با تهدید و تطمیع صهیونیست‌ها دست به ماجراجویی دیگری در منطقه بزند",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:99e3a43f-c79b-4064-b4d6-2e63c166c983",
+          "text_field": "summary_fa",
+          "source_title": "باشگاه خبرنگاران جوان",
+          "source_url": "https://www.yjc.ir/fa/news/9144023/هشدار-سخنگوی-ارتش-به-آمریکا-ماجراجویی-جدید-جغرافیای-جنگ-را-گسترده-می‌کند",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T08:16:28",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "ee7532fec46b0a9542ed47e36036e3bf9dfb802d7c076462bd1184aa1a2b9333"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-2c42d10fff387157a8",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "غلامرضا کریمی",
+      "speaker_candidates": [
+        "news-cffb83c56374"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "در صورت پیروزی دموکرات‌ها در انتخابات میان‌دوره‌ای، شرایط برای ادامه سیاست‌های رئیس‌جمهور آمریکا دشوارتر خواهد شد و با توجه به تحرکات نظامی و انتقال تجهیزات، احتمال حمله نظامی به ایران پس از انتخابات و پیش از استقرار کنگره جدید مطرح است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:e371a127-4a28-43be-bf2b-425945390272",
+          "text_field": "summary_fa",
+          "source_title": "فرارو",
+          "source_url": "https://fararu.com/fa/news/1012817/%D8%A2%DB%8C%D8%A7-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D9%BE%DB%8C%D8%B4-%D8%A7%D8%B2-%D8%A7%D8%B3%D8%AA%D9%82%D8%B1%D8%A7%D8%B1-%DA%A9%D9%86%DA%AF%D8%B1%D9%87-%D8%AC%D8%AF%DB%8C%D8%AF-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%AD%D9%85%D9%84%D9%87-%D9%85%DB%8C-%DA%A9%D9%86%D8%AF",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-30T11:30:00",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "607cb606a7a4c92af0596a114bfd17d98377b4896d0687b50904032c692aa594"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-2fce1ade1761e9fc60",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "donald-trump",
+      "speaker_name": "دونالد ترامپ",
+      "speaker_candidates": [
+        "donald-trump"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "جنگ در ایران احتمالاً در عقب‌نشینی جمهوری‌خواهان در انتخابات میان‌دوره‌ای نقش داشته است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:c3bf185a-9529-46f8-82ea-861e408f5068",
+          "text_field": "summary_fa",
+          "source_title": "Al Jazeera",
+          "source_url": "https://www.aljazeera.com/video/newsfeed/2026/11/4/trump-blames-iran-war-for-midterms-losses?traffic_source=rss",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T23:30:01",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "65fac7e67f7f0a15df30c8d1fcadc77c04abd60d63fe895ccff476c7b61753d3"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-32e43a2a7871d55ae2",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -405,6 +1025,94 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-33078d46619cb73fe9",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "محسن رضایی",
+      "speaker_candidates": [
+        "news-19b548dedaba"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "ایران توانایی‌هایی دارد که در صورت آغاز جنگ، از آنها برای وارد کردن ضربه به آمریکا استفاده خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:0283f18f-4c5f-469e-b0e1-d5747792eb4d",
+          "text_field": "summary_fa",
+          "source_title": "رویداد۲۴",
+          "source_url": "https://www.rouydad24.ir/fa/news/476166/عراقچی-رایزنی-ها-درباره-طرح-دو-روزه-با-میانجی-های-مذاکرات-ادامه-دارد-به-نتیجه-قطعی-نرسیده-ایم",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-01T14:49:51",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "866853c33a93940563ba31a86012d85d4bbd48c5f298c8034bd6dac875a30e71"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-3414585b0172e02225",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "اسماعیل بقایی",
+      "speaker_candidates": [
+        "news-66fafbc86e7a"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "موضوع خروج اورانیوم ۶۰ درصد غنی شده به کشور ثالث در مذاکرات دوحه مطرح نشده و موافقت هم نخواهیم کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:109a6715-8486-4796-8a72-e0adb386471e",
+          "text_field": "summary_fa",
+          "source_title": "فردانیوز",
+          "source_url": "https://www.fardanews.com/fa/tiny/news-1417336",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T08:24:07",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "486a8e1fbd107f7a574b30b59665d7fe1dd7d13a704afea0a0dbb2a6966803ec"
         }
       ],
       "editorial_decision": null
@@ -460,6 +1168,50 @@
         "publication_approved": false,
         "action": "screened_remains_in_archive"
       }
+    },
+    {
+      "id": "KC-370d1bc5892a9a7952",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "مارگارت برنان",
+      "speaker_candidates": [
+        "news-82792d7a6fa1"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "میانجی‌های قطری امروز با جدیدترین نسخه از پیشنهاد دیپلماتیک برای پایان دادن به جنگ آمریکا با ایران، در تهران حضور دارند و ۴۸ ساعت آینده برای تصمیم‌گیری در این زمینه بسیار تعیین‌کننده خواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "از پیشنهاد دی",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:529afa66-3b33-444a-95ad-45d575126ce5",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/945730/سی-بی-اس-میانجی-های-قطری-در-تهران-حضور-داشتند-تا-آخرین-اصلاحات-در-پیش-نویس-پیشنهاد-پایان-دادن-به-جنگ-را-به-طرف-ایرانی-منتقل-کنند-نشانه-هایی-از-پیشرفت-در-روند-مذاکرات-مشاهده-می-شود",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-30T13:44:18",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "6685f882ab3e0b34a7678ae104a57ae53464182d8f6e285a478360f38163ef35"
+        }
+      ],
+      "editorial_decision": null
     },
     {
       "id": "KC-3ba2d3cf3f63f87796",
@@ -596,6 +1348,50 @@
       }
     },
     {
+      "id": "KC-3e4ac67a398455112a",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "donald-trump",
+      "speaker_name": "دونالد ترامپ",
+      "speaker_candidates": [
+        "donald-trump"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "من نگفتم جنگ علیه ایران بلافاصله پس از انتخابات میان‌دوره‌ای به پایان خواهد رسید.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:b5139d70-9005-420d-aa41-9d912138a18e",
+          "text_field": "summary_fa",
+          "source_title": "فردانیوز",
+          "source_url": "https://www.fardanews.com/fa/tiny/news-1417696",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T18:49:59",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "445c19b1e2e482bddf7df9900d64c6d52fd3d78322d7dc3ffa0d4dc127d826c3"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-41a336de3d6c2c3a91",
       "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
@@ -689,6 +1485,94 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-445bcb0625bb2c9e27",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "عباس عراقچی",
+      "speaker_candidates": [
+        "news-0b5eb30a0ec8"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "کشورهای منطقه بهتر است مراقبت کنند که جنگ جدیدی شکل نگیرد؛ زیرا اگر جنگ جدیدی آغاز شود، متأسفانه برای کل منطقه تبعاتی خواهد داشت.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر جنگ جدیدی آغاز شود",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:9639383f-0e0d-44bd-a1da-0c7cd0fe0562",
+          "text_field": "summary_fa",
+          "source_title": "عصر ایران",
+          "source_url": "https://www.asriran.com/fa/news/1203216/عراقچی-رهبر-انقلاب-همه-امور-کشور-را-با-تسلط-اداره-می-کنند-سلاح-هایمان-را-به-روز-کرد-ه-ایم-هیچ-برنامه-ملاقاتی-با-هیات-آمریکایی-نداریم",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-01T20:14:06",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "36ed112765fd16f801cfa61603022c124debaf6c788442a8670a8bc09fa22ff0"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-45692e15c2006a3a4b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "تاکر کارلسون",
+      "speaker_candidates": [
+        "news-fd1fde14c56e"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "تحت فشار بنیامین نتانیاهو، نخست‌وزیر اسرائیل، دولت ترامپ ممکن است تنها چند روز با آغاز یک حمله هسته‌ای به ایران فاصله داشته باشد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:872eccad-0cbb-44e6-9331-884510a8b600",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/946078/تاکر-کارلسون-مجری-مشهور-آمریکایی-ترامپ-تحت-فشار-نتانیاهو-ممکن-است-به-کوه-کلنگ-حمله-اتمی-کند-او-تا-شش-روز-دیگر-می-خواهد-درباره-استفاده-یا-عدم-استفاده-از-سلاح-اتمی-تصمیم-بگیرد-ترامپ-فعلا-مردد-است-هنوز-به-ونس-گوش-می-دهد-که-می-گوید-توافق-با-ایران-شدنی-است",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T05:21:29",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "bcdda116d7e02f344cc4103438aaced9ba593f592fd7010ed42b8f603b180ea3"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-49cbe58aa6e96bdb3b",
       "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
@@ -739,6 +1623,50 @@
         "publication_approved": false,
         "action": "screened_remains_in_archive"
       }
+    },
+    {
+      "id": "KC-4a5863a3bb51fba6d0",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "جان کری",
+      "speaker_candidates": [
+        "news-a73f505f76ea"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "شروع یک حمله نظامی پس از انتخابات میان‌دوره‌ای اشتباه بزرگی خواهد بود و ایرانی‌ها را به طور جدی‌تری به میز مذاکره نمی‌کشد بلکه دور خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:ae083d2b-e3c1-40b3-8680-4be5ee386759",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/945687/جان-کری-وزیر-خارجه-سابق-آمریکا-ترامپ-با-مجموعه-ای-از-فرضیات-غلط-به-ایران-حمله-کرد-شروع-یک-حمله-نظامی-پس-از-انتخابات-میان-دوره-ای-آمریکا-اشتباه-بزرگی-خواهد-بود-اوضاع-به-قدری-غیرقابل-پیش-بینی-است-که-تقریبا-هر-اتفاقی-ممکن-است-رخ-دهد",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-30T04:10:04",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "49d89aeedfcc5436c991b504d8bbead69fe75b6c5429419bfe5b5ff0d8f9d185"
+        }
+      ],
+      "editorial_decision": null
     },
     {
       "id": "KC-4bb26cf497a3f8db59",
@@ -834,6 +1762,94 @@
       }
     },
     {
+      "id": "KC-4f431c79d242d49002",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "Karimipour_K",
+      "speaker_name": "یدالله کریمی‌پور",
+      "speaker_candidates": [
+        "Karimipour_K"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "قطر به دلیل موقعیت جغرافیایی کوچک و آسیب‌پذیری‌های ساختاری، ناگزیر است با دیپلماسی فعال و میانجی‌گری سمج برای پایان دادن به جنگ احتمالی میان ایران و آمریکا تلاش کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "83c18b9e-eeb1-4f87-af82-b692acb75313",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/Karimipour_K/6327",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-30T10:04:23",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "c9fedccd704fae825a9e979aa2966d3bfd4f392d17f0a944131c78e3d30c4c46"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-508fa9a975d50d5ffa",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ali-alizadeh",
+      "speaker_name": "علی علیزاده",
+      "speaker_candidates": [
+        "ali-alizadeh"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "همزمان، شایعات پیرامون دور جدید مذاکرات در دوحه و احتمال تغییر تیم مذاکره‌کننده مطرح است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "de7c7ea1-707a-4918-a592-fa52defb2173",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/jedaal/8560",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T19:14:35",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "80103c87a01361e4b75c5367c66caed6673ef517dc27b25211a63d111c7be6cb"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-518690265cbf068e3a",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -875,6 +1891,94 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-5329e0ea52d65c38cc",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "اکرمی‌نیا",
+      "speaker_candidates": [
+        "news-40f820e1cba2"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "جنگ آینده جغرافیای وسیع‌تری خواهد داشت، یگان‌های عمل‌کننده آمادگی صد در صدی برای مقابله با تحرکات آمریکا دارند و دامنه پاسخ ایران الزاماً به محدوده گذشته محدود نخواهد ماند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:1d81dfcd-14c7-4306-acde-fd0d959d11cf",
+          "text_field": "summary_fa",
+          "source_title": "دنیای اقتصاد",
+          "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305577-%D8%AF%D8%B1%DB%8C%D8%A7%D8%AF%D8%A7%D8%B1-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D9%86%DB%8C%D8%B1%D9%88%D9%87%D8%A7%DB%8C-%D9%85%D8%B3%D9%84%D8%AD-%D8%A2%D9%85%D8%A7%D8%AF%DA%AF%DB%8C-%D8%AE%D9%88%D8%AF-%D8%B1%D8%A7-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%85%D9%82%D8%A7%D8%A8%D9%84%D9%87-%D8%A8%D8%A7-%D8%AA%D9%87%D8%AF%DB%8C%D8%AF%D9%87%D8%A7-%D8%AC%D9%86%DA%AF-%D9%87%D8%A7%DB%8C-%D8%AA%D8%B1%DA%A9%DB%8C%D8%A8%DB%8C-%D8%A7%D8%B1%D8%AA%D9%82%D8%A7-%D9%85%DB%8C-%D8%AF%D9%87%D9%86%D8%AF",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-01T13:53:13",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "f7d3b351614f9d18beabba929ed2ab44eaa55c9f2349f53f8c02a3dfa68c6df1"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-53e890c46b40f7d8aa",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "علی عبداللهی",
+      "speaker_candidates": [
+        "news-5db867b6870f"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "هرگاه نشانه‌های اقدام خصمانه دشمن احراز شود، نیروهای مسلح در انتخاب زمان و نحوه پاسخ، منتظر آغاز اقدام او نخواهند ماند و پاسخ‌ها فوری، اثرگذار و بدون محدودیت جغرافیایی خواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:39a0ae9d-ea23-470e-a3a6-759d1339a40c",
+          "text_field": "summary_fa",
+          "source_title": "خبرگزاری ایسنا (ISNA)",
+          "source_url": "https://www.isna.ir/news/1405080905884/%D8%B3%D8%B1%D9%84%D8%B4%DA%A9%D8%B1-%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87%DB%8C-%D9%85%D9%86%D8%AA%D8%B8%D8%B1-%D8%A2%D8%BA%D8%A7%D8%B2-%D8%A7%D9%82%D8%AF%D8%A7%D9%85-%D8%AF%D8%B4%D9%85%D9%86-%D9%86%D9%85%DB%8C-%D9%85%D8%A7%D9%86%DB%8C%D9%85",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T18:39:35",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "83809c0f470c8e4d1a15aea93c23e28b7e5e8c5360150cd732143dd89897187a"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-561f01f8c49d508546",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -911,6 +2015,138 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "73505ab78e5c901038b08fd59e1fdccd79a01a7bd81cb06cfe6c604c4251c89e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-56cc80756c4e088d8b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "محمد مخبر",
+      "speaker_candidates": [
+        "news-f356992794f1"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "پیروز واقعی این میدان ایران بود که هزینه جنگ را به داخل آمریکا منتقل کرد و ادامه سیاست شکست‌خورده ترامپ باقی‌مانده حیثیت آمریکا را به باد خواهد داد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:b798dff1-b9e5-4b3e-a511-e378e9924bf1",
+          "text_field": "summary_fa",
+          "source_title": "شفقنا فارسی",
+          "source_url": "https://fa.shafaqna.com/news/2394264/",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T14:30:00",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "94251b643f486f19e555ae16600372ba3422ebfc10df63f4c9b73aca43e42e2a"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-58fc16c1e13f0ecfd3",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "جی‌دی ونس",
+      "speaker_candidates": [
+        "news-201441186036"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "ترامپ اجازه نخواهد داد درگیری نظامی با ایران به جنگی بی‌پایان تبدیل شود و مخالفت با جنگ‌های طولانی‌مدت به معنای مخالفت با هرگونه استفاده از نیروی نظامی نیست.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:1ec7e579-263d-4172-bdf0-33385be43a3d",
+          "text_field": "summary_fa",
+          "source_title": "بی‌بی‌سی فارسی (BBC Persian)",
+          "source_url": "https://www.bbc.co.uk/persian/live/ckdd8p9ypld7t?at_medium=RSS&at_campaign=rss",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": null,
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "bf67ee73765a641127370a8fcaa0b9c6214733ae3e7a79e3e7f9a7736c980017"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-59a6e6ca4be2d6c1b9",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "ولودیمیر زلنسکی",
+      "speaker_candidates": [
+        "news-9b37c7c1a686"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "اگر آمریکا موشک‌های پاتریوت را در اختیار کشورش قرار دهد، کی‌یف حمله به پالایشگاه‌های نفت روسیه را متوقف خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر آمریکا موشک‌های پاتریوت را در اختیار کشورش قرار دهد",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:a08bc9e9-f400-4a47-ab11-05b6b42bebdd",
+          "text_field": "summary_fa",
+          "source_title": "دنیای اقتصاد",
+          "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305732-%D8%B4%D8%B1%D8%B7-%D8%B2%D9%84%D9%86%D8%B3%DA%A9%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D9%88%D9%82%D9%81-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D9%BE%D8%A7%D9%84%D8%A7%DB%8C%D8%B4%DA%AF%D8%A7%D9%87-%D9%87%D8%A7%DB%8C-%D9%86%D9%81%D8%AA-%D8%B1%D9%88%D8%B3%DB%8C%D9%87",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T03:39:47",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "215c4f67db3231af863f84137d1294c2777b83ba4096316487edb854d658a113"
         }
       ],
       "editorial_decision": null
@@ -998,6 +2234,94 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-5c31241345faf13d5e",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "انور قرقاش",
+      "speaker_candidates": [
+        "news-c664930ea1d7"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "نمی‌توان احتمال جنگ با ایران را نادیده گرفت و ابوظبی با راه‌حل نظامی برای مسئله ایران مخالف است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:6e305920-85c2-44b0-99c0-4437d62b0939",
+          "text_field": "summary_fa",
+          "source_title": "اقتصاد آنلاین",
+          "source_url": "https://www.eghtesadonline.com/fa/news/2172718/موضع-جدید-عراق-درباره-جنگ-ایران-و-آمریکا-بغداد-پشت-ایران-می-ماند-یا-کنار-می-کشد",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-01T15:43:17",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "7208d949b285ffe1a747c19ab3477bb71d7fde20f3354c4ec50193f7bd5c9424"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-5c72cd99daf931f28d",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "خوان لوییس مانفردو سانچز",
+      "speaker_candidates": [
+        "news-a42066d2d293"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "با وجود کنترل دموکرات‌ها بر کنگره، ترامپ همچنان به حکومت کردن از طریق فرمان‌های اجرایی ادامه خواهد داد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:24287dee-374e-4356-875f-7ef6f8f20afc",
+          "text_field": "summary_fa",
+          "source_title": "France 24 Español",
+          "source_url": "https://www.france24.com/es/video/20261104-juan-manfredi-pese-al-control-dem%C3%B3crata-del-congreso-trump-seguir%C3%A1-gobernando-por-decreto",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T09:18:41",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "e1f62f5405801c2979d7256ec7f3d91221d1ad858eb685f34717b3ca5610310e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-5f2b03e4c6a6460f11",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -1039,6 +2363,138 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-63df0f54474e9a87b5",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "دیمیتری مدودف",
+      "speaker_candidates": [
+        "news-bd676cc9be09"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "تشدید تحریم‌های روسیه توسط دموکرات‌ها تنها به ضرر واشنگتن خواهد بود و ممکن است نتیجه معامله‌ای برای جلوگیری از استیضاح ترامپ باشد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:ea057cb7-ecbf-4e93-8d34-fe7af9a683f7",
+          "text_field": "summary_fa",
+          "source_title": "عصر ایران",
+          "source_url": "https://www.asriran.com/fa/news/1204026/مدودف-تشدید-تحریم-های-روسیه-توسط-دموکرات-ها-به-زیان-واشنگتن-خواهد-شد",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-05T08:45:13",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "62517416210cc3a1663de0ebfdb6a50a6318c832f456bfff1b97f02b362770b7"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-644af6650efbaa261e",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "زیدآبادی سه موضوع را می‌کاود: «شبه‌جنگ» و اینکه در وضعیتِ آشوبناک پیش‌بینی ناممکن است و باید منتظرِ غافلگیری بود؛ انتخاباتِ اسرائیل و زمان‌بندیِ احتمالیِ حمله؛ و سفرنامهٔ عراق، از بحرانِ زباله و آب تا کم‌رنگ‌شدنِ نفوذِ ایران.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "editorial-zeidabadi-shabehjang-eragh-20261020",
+          "text_field": "summary_fa",
+          "source_title": "پیامِ ویدیویی",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-20T12:00:00Z",
+          "editorial_published_at": "2026-10-20T12:00:00Z",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "e5850bf7e9110bce01f7a98c17aabda6b21d5de4e2e247132633ce530a7018ee"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-6635a8f006a7fd1d1e",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "سحر تاجبخش",
+      "speaker_candidates": [
+        "news-d6aab84ac499"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "روند افزایش بارش در کشور برای فصل پاییز به‌ویژه در بخش‌های غربی کشور، سواحل دریای خزر و دامنه رشته‌کوه‌های زاگرس است و توزیع افزایش بارش در کشور یکنواخت نخواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:d722eef7-32bb-495d-b38d-c763536e2341",
+          "text_field": "summary_fa",
+          "source_title": "خبرآنلاین — تلگرام",
+          "source_url": "https://t.me/khabaronline_ir/666950",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-01T07:20:03",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "efea060b26dc89befe39914d007d795da46c5e304466e1b8e6d1b617f546b843"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-6abb17f086bd2223fc",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -1075,6 +2531,94 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-6ae0006077b14f5d4b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "yekhezaran",
+      "speaker_name": "حسین جابری‌انصاری",
+      "speaker_candidates": [
+        "yekhezaran"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "کاهش اعتبار جریان‌های تندرو و انزوای حامیان جنگ، احتمال تشدید تنش‌های نظامی گسترده را کاهش داده است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "608381f2-70a0-400c-accd-1750ac560d88",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/yekhezaran/52230",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T10:28:05",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "ac19b6eba6ed23a6d05fc4c1c392936a68c9078a05bf89a25aca4ed4b1f972f1"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-7013f5b814f3541443",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "sahandiranmehr",
+      "speaker_name": "سهند ایرانمهر",
+      "speaker_candidates": [
+        "sahandiranmehr"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "شکست احتمالی جمهوری‌خواهان در انتخابات میان‌دوره‌ای ۲۰۲۶، ترامپ را در چالش با نهادهای داخلی و باتلاق جنگی پر از عدم قطعیت گرفتار می‌کند که الگوهای تاریخی مشابه ویتنام دارد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "در انتخابات میان‌دوره‌ای ۲۰۲۶",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "7d8e05f1-e668-4d8e-a99b-cceb76ff3926",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/sahandiranmehr/36681",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T06:26:47",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "c902ed14ce3e006f59c6ae0b2d610361d33b5b1745ebada44f6549dbf3d355fc"
         }
       ],
       "editorial_decision": null
@@ -1130,6 +2674,182 @@
         "publication_approved": false,
         "action": "screened_remains_in_archive"
       }
+    },
+    {
+      "id": "KC-75cf7b2e8f135d00e8",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "جی‌دی ونس",
+      "speaker_candidates": [
+        "news-201441186036"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "ایالات متحده ۴۷ سال است که با ایران سروکار دارد و دونالد ترامپ اجازه نخواهد داد درگیری با ایران به یک جنگ بی‌پایان یا فرسایشی تبدیل شود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:556ac117-84e2-43d5-ac76-ab5b24068cae",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/945695/ونس-ترامپ-اجازه-نخواهد-داد-درگیری-با-ایران-به-یک-جنگ-بی-پایان-تبدیل-شود",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-30T05:22:34",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "2ed43cc7c4d0c7bad71948a9f1a36f891c8b37b9745563cfeb19c9878e6d7eda"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-79cc4a92d0ffb7bf4a",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "اسماعیل بقائی",
+      "speaker_candidates": [
+        "news-0d697a79b027"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "در هرگونه توافق احتمالی برای پایان دادن به جنگ، توپ در زمین آمریکا است و مطالبات ما به‌روشنی و شفافیت بیان شده‌اند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:d4a3738b-fee9-4738-829a-a7f7aa602d23",
+          "text_field": "summary_fa",
+          "source_title": "ایندیپندنت فارسی",
+          "source_url": "https://www.independentpersian.com/node/423010/%D8%B3%DB%8C%D8%A7%D8%B3%DB%8C-%D9%88-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%DB%8C/%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D8%A7-%DB%B2%DB%B0-%D9%87%D8%B2%D8%A7%D8%B1-%D9%86%DB%8C%D8%B1%D9%88%DB%8C-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D8%AF%D8%B1-%D9%85%D9%86%D8%B7%D9%82%D9%87%D8%9B-%D8%A7%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84%DB%8C-%D8%AD%D9%85%D9%84%D8%A7%D8%AA-%D8%AF%D9%88%D8%A8%D8%A7%D8%B1%D9%87-%D8%AF%D8%B1",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T17:55:23",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "9146abf88258f7f13116b9cbc6a5a9e7b513fea4af9e1fefd604591471668222"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-7c68e28802f4c9281d",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "علیرضا میبدی",
+      "speaker_candidates": [
+        "alireza-meybodi"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "احتمال عددی جنگ و سناریوهای مطرح‌شده، برآورد شخصی او هستند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "editorial-holakouee-meybodi-un-election-2026",
+          "text_field": "summary_fa",
+          "source_title": "گفت‌وگو با علیرضا میبدی — برنامهٔ چهارشنبه",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:16:18Z",
+          "editorial_published_at": "2026-10-08T06:16:18Z",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "df2561e83c38955160c04db0fb95d81dc8238fa50c488117a4157f2a78f8a15a"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-7e41fe3b8d3966bc47",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "فریدریش مرتس",
+      "speaker_candidates": [
+        "news-55acd867b389"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "نتیجه این جنگ، امنیت اروپا را برای مدت طولانی شکل خواهد داد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:8fcc3db1-7a2c-4714-a10b-93c1c36511e4",
+          "text_field": "summary_fa",
+          "source_title": "ABC España",
+          "source_url": "https://www.abc.es/internacional/merz-zelenski-piden-participacion-europa-negociaciones-ucrania-20261103171443-nt.html",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T16:14:43",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "d2581892ff7a92da48e2cff4f2a525990498ad735ec36bb715fb593de928fa95"
+        }
+      ],
+      "editorial_decision": null
     },
     {
       "id": "KC-7f31b04903810eecaa",
@@ -1225,6 +2945,138 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-80117d63fb9544eedc",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "پل پیلار",
+      "speaker_candidates": [
+        "news-cfe4281bd89c"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "انفجارهای قشم ممکن است نتیجه اقدام اسرائیل با هدف تخریب مذاکرات ایران و آمریکا باشد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:99f5c8b9-d5dd-4006-bfe1-d139634acf79",
+          "text_field": "summary_fa",
+          "source_title": "تابناک",
+          "source_url": "https://tabnak.ir/fa/news/100000328/%D8%A7%D9%86%D9%81%D8%AC%D8%A7%D8%B1%D9%87%D8%A7%DB%8C-%D9%82%D8%B4%D9%85-%D8%AA%D9%84%D8%A7%D8%B4-%D8%A7%D8%B3%D8%B1%D8%A7%D8%A6%DB%8C%D9%84-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D8%AE%D8%B1%DB%8C%D8%A8-%D9%85%D8%B0%D8%A7%DA%A9%D8%B1%D8%A7%D8%AA-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%88-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D9%88%D8%AF-%D9%86%D9%85%DB%8C%D8%AA%D9%88%D8%A7%D9%86-%DA%AF%D9%81%D8%AA-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D8%A7%D8%B5%D9%84%D8%A7-%D8%AF%D9%86%D8%A8%D8%A7%D9%84-%D8%AA%D9%88%D8%A7%D9%81%D9%82-%D9%86%DB%8C%D8%B3%D8%AA-6d09574518fd426cbb092cfe",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T09:53:20",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "0aa18e11af0091744a683f50120c910aa32534726144a209af2192c646abf194"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-8178b4d96ceb54d093",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "محسن رضایی",
+      "speaker_candidates": [
+        "news-19b548dedaba"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "پاسخ آمریکا به حقوق و مطالبات ایران قانع‌کننده نبود و آن‌ها باید کامل و صریح هفت شرط ایران را پاسخ داده و به آن عمل کنند؛ تنها در این صورت تنگه هرمز باز خواهد شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:a3b94aab-3c08-420c-b29e-a6e0d6482879",
+          "text_field": "summary_fa",
+          "source_title": "تابناک",
+          "source_url": "https://tabnak.ir/fa/news/100000405/%D9%85%D8%AD%D8%B3%D9%86-%D8%B1%D8%B6%D8%A7%DB%8C%DB%8C-%D9%BE%D8%A7%D8%B3%D8%AE-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%82%D8%A7%D9%86%D8%B9%DA%A9%D9%86%D9%86%D8%AF%D9%87-%D9%86%D8%A8%D9%88%D8%AF-9b318a483f5a4c21ada9f042",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T14:38:44",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "22df708aef564a523d852a8ef25dba3f2ffacab088ffe4596c1922b576f6d60a"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-818196b4cfa27b195c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "اسکات بسنت",
+      "speaker_candidates": [
+        "news-86e2171570b7"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "ما کسانی را که به حمایت از ایران ادامه می‌دهند، چه از طریق زمینی، دریایی یا هوایی تحریم خواهیم کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:96767d1f-85f0-4ff3-ae23-b46d3b804ce6",
+          "text_field": "summary_fa",
+          "source_title": "شرق",
+          "source_url": "https://www.sharghdaily.com/fa/tiny/news-1139681",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T19:18:02",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "36c2c2a9c87c55b68fc89b4266220a621ad40c804b1758d208a87565e2f6378b"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-8405e2830701bba432",
       "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
@@ -1277,6 +3129,94 @@
       }
     },
     {
+      "id": "KC-84871b41fa67d5e3f6",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "دن کین",
+      "speaker_candidates": [
+        "news-acf03ea6b441"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "بررسی احتمال برکناری او توسط دونالد ترامپ پس از انتخابات میان‌دوره‌ای در گفت‌وگوهای محرمانه مطرح شده است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:f6ce15aa-63aa-4581-9943-5edf6695bab2",
+          "text_field": "summary_fa",
+          "source_title": "فردانیوز",
+          "source_url": "https://www.fardanews.com/fa/tiny/news-1417383",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T15:15:33",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "26b9379027ed202a7cda488bc88997e6f86f9ed6bd5af48e15fbd9d380d39675"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-853eccf70c14823329",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "محمد اکرمی‌نیا",
+      "speaker_candidates": [
+        "news-a27dcd66cb50"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "هرگونه تجاوز مجدد آمریکا با پاسخی فوری، کوبنده و گسترده‌تر از گذشته مواجه خواهد شد و در صورت وقوع جنگ جدید، جغرافیای درگیری به منطقه غرب آسیا محدود نخواهد ماند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:f3b1ae82-8cda-448c-ad2d-87e8e494ae85",
+          "text_field": "summary_fa",
+          "source_title": "شفقنا فارسی",
+          "source_url": "https://fa.shafaqna.com/news/2391624/",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-01T06:51:00",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "b383b07fdaf9820c6446c2e9b1c6f5661191be4cee7fc74337e06b65ba556e25"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-8729196cc6c258fe75",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -1313,6 +3253,226 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-8aca61a6481202de40",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "بدر عبدالعاطی",
+      "speaker_candidates": [
+        "news-d0cb45c42d30"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "نگرانی‌های قاهره از احتمال بازگشت درگیری‌ها و تشدید بحران در منطقه را به طرف ایرانی منتقل کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:3761e7cf-a058-4b0d-917f-b56815da10b1",
+          "text_field": "summary_fa",
+          "source_title": "فردانیوز",
+          "source_url": "https://www.fardanews.com/fa/tiny/news-1417565",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T19:49:36",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "d87d7bc5071963a13a7dbcd08d26935c50bdf858244edcadc39f63ad2515038d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-8c52040eb3d9f9007b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "Garajetadayoni",
+      "speaker_name": "مهدی تدینی",
+      "speaker_candidates": [
+        "Garajetadayoni"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "نتایج اولیه انتخابات ریاست‌جمهوری آمریکا از امشب و به تدریج تا فردا ظهر اعلام خواهد شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "e2565989-6d89-4d92-89cf-277a254449cf",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/Garajetadayoni/11717",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T17:31:45",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "1e0dfbe0bbfc9e53dc22460b6403f08b70a5e9a9d592d7aaff59bed4fbc77a6b"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-8ef73abe9af59dd073",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "شفاف‌سازی درباره دیپلماسی یا احتمال جنگ برای آگاهی مردم و فهم چشم‌انداز آینده کشور ضروری است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "79650707-722b-422f-bd8f-dd59a14d755a",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/ahmadzeidabad/6082",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T07:43:51",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "fab1d2cc328bf18d8f3ea44a18886087cdeccc34ef60bf2d25ce3b0da8113fa8"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-8f12643c0c1d27db5d",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "hoderestan",
+      "speaker_name": "حسین درخشان",
+      "speaker_candidates": [
+        "hoderestan"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "ایران باید در واکنش به تهدید حمله اتمی، اعلام کند که دانش سوخت هسته‌ای را به طور آزادانه به بازار عرضه خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "4adb6358-6c5b-429b-b7f9-55d23c93ed8b",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/hoderestan/2285",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T14:44:29",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "6547d129fab89cea9069f87a96a26226d35a27e82973b027cc1d50633221228f"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-92727a1353fa0d6833",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "لوران نونی‌یز",
+      "speaker_candidates": [
+        "news-a4fcd5872ba0"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "کشور با خطر بسیار بالای بی‌نظمی عمومی روبه‌رو است و پاسخ دولت به خشونت‌ها بسیار قاطع خواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:283696e5-fa06-4ee6-85f0-c866fa948787",
+          "text_field": "summary_fa",
+          "source_title": "France 24",
+          "source_url": "https://www.france24.com/en/french-interior-minister-fears-disorder-after-dark-on-halloween",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T09:28:52",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "c5f3cddb6b1286f10bbe1134616ee454f0a980a6d47f1ae2bf2a84ce099b217e"
         }
       ],
       "editorial_decision": null
@@ -1441,6 +3601,50 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-95340fb79c6e2a519f",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "عباس ملکی",
+      "speaker_candidates": [
+        "news-73c66efe6207"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "ایران باید برای بدترین سناریو در سایه احتمال ازسرگیری جنگ آماده باشد و در منطقه بدون تعامل با ایران نمی‌توان امنیت برقرار کرد یا آن را برهم زد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:a26440f5-bb8b-42b0-a6c7-21c650fc789d",
+          "text_field": "summary_fa",
+          "source_title": "دنیای اقتصاد",
+          "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305286-%D8%AE%DB%8C%D8%B2-%D8%A7%D8%AD%D8%B2%D8%A7%D8%A8-%D8%B9%D8%B1%D8%A8%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%DA%A9%D9%86%D8%A7%D8%B1-%D8%B2%D8%AF%D9%86-%D9%86%D8%AA%D8%A7%D9%86%DB%8C%D8%A7%D9%87%D9%88-%D8%A2%D9%85%D8%A7%D8%AF%D9%87-%D9%85%D8%B0%D8%A7%DA%A9%D8%B1%D9%87-%D8%A8%D8%A7-%D8%A7%D8%B1%D8%AF%D9%88%DA%AF%D8%A7%D9%87-%D8%AA%D8%BA%DB%8C%DB%8C%D8%B1-%D9%87%D8%B3%D8%AA%DB%8C%D9%85",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T05:17:41",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "1c71f180339514d49714469dfa5df60fed0ca54bc13a7be4a00d589e1d81bcf6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-9766288c65494e7983",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -1477,6 +3681,94 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "e5e8aa440ecd824607ab9cde85e63e524fea8f82150edeeccb2e1a2d26654f6b"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-98785fdf5b0730838f",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "جان کری",
+      "speaker_candidates": [
+        "news-a73f505f76ea"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "ترامپ با مجموعه‌ای از پیش‌فرض‌های نادرست، شتاب‌زده وارد جنگ با ایران شد و حمله به ایران پس از انتخابات اشتباهی فاحش خواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:61799cbd-734e-4576-8a82-c641f20ed146",
+          "text_field": "summary_fa",
+          "source_title": "فرارو",
+          "source_url": "https://fararu.com/fa/news/1013312/%D8%AC%D8%A7%D9%86-%DA%A9%D8%B1%DB%8C-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA-%D8%A7%D8%B4%D8%AA%D8%A8%D8%A7%D9%87%DB%8C-%D9%81%D8%A7%D8%AD%D8%B4-%D8%AE%D9%88%D8%A7%D9%87%D8%AF-%D8%A8%D9%88%D8%AF",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-30T05:13:24",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "9260bb957457a09baa4dc058781eb8a4e575df35a6fd772291299f5a917bb6ad"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-9f8582b8d349f9716f",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "داوود شکیبایی",
+      "speaker_candidates": [
+        "news-0b442653c6f4"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "با شروع فصل سرما و افزایش نگرانی‌ها درباره آلودگی هوا، پلیس با خودروهای دودزا و دارای نقص فنی آلاینده برخورد قاطع می‌کند و این خودروها ضمن تعلیق و ابطال اعتبار معاینه فنی، با پلاک اعزام به تعمیرگاه ملزم به رفع نقص خواهند شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:50fc6011-3963-4683-b909-5b5a327f21d8",
+          "text_field": "summary_fa",
+          "source_title": "شفقنا فارسی",
+          "source_url": "https://fa.shafaqna.com/news/2391348/",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T14:14:13",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "eaa5da039e36fae4ddc3460d3dc4cf1f8a107cec6cdd5415c71c42be078ac2af"
         }
       ],
       "editorial_decision": null
@@ -1564,6 +3856,94 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-a2c93dc1ee8fefc8e0",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "جان رتکلیف",
+      "speaker_candidates": [
+        "news-bc01e028f16f"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "وضعیت کنونیِ «نه جنگ، نه توافق» باید حفظ شود و تداوم فشارهای اقتصادی و افزایش مشکلات معیشتی در بلندمدت، ایران را وادار به دادن امتیازات بیشتر خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:3d324c89-3219-4a42-9cd2-08fb69967298",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/946238/ادعای-اکسیوس-رئیس-سیا-به-ترامپ-توصیه-می-کند-وضعیت-کنونی-نه-جنگ-نه-توافق-را-حفظ-کند-رتکلیف-به-ترامپ-گفته-تداوم-فشارهای-اقتصادی-و-افزایش-مشکلات-معیشتی-در-بلندمدت-ایران-را-وادار-به-دادن-امتیازات-بیشتر-خواهد-کرد",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T04:09:03",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "75eb7e91b726815b84af9abc9a978241da4c4e222604b3c532bc2dd5aa100c63"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-a6e811645dea462570",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "مارکو روبیو",
+      "speaker_candidates": [
+        "news-24a19efe5b66"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "حکومتی که مردم خود را قتل‌عام کرده، نباید به سلاح هسته‌ای دست یابد و دولت ترامپ اجازه چنین کاری را نخواهد داد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:99e1521d-492d-4131-a7fd-a641bb1c6cf5",
+          "text_field": "summary_fa",
+          "source_title": "ایران اینترنشنال (Iran International)",
+          "source_url": "https://www.iranintl.com/202610314066",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T22:26:45",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "ec24d9e10af3e5f74b472adefd3158cd2e3ba29e5fad7fff4a6d56dc16312ce6"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-a857c3d7c10d76178e",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -1646,6 +4026,50 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-aa076945676116c7ff",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "سید عباس عراقچی",
+      "speaker_candidates": [
+        "news-2af0b2d23ab8"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "یاد و خاطره دکتر پیروز مجتهدزاده در حافظه علمی ایران ماندگار خواهد ماند و آثار ارزشمند او از جمله پژوهش‌های مربوط به حاکمیت ایران بر جزایر سه‌گانه، بخشی ماندگار از میراث مطالعاتی جغرافیای سیاسی ایران به شمار می‌رود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:53a8aa32-2da3-401c-be6b-26b8e6a5f0bf",
+          "text_field": "summary_fa",
+          "source_title": "خبرگزاری ایرنا (IRNA)",
+          "source_url": "https://www.irna.ir/news/86308633/%D8%B9%D8%B1%D8%A7%D9%82%DA%86%DB%8C-%DB%8C%D8%A7%D8%AF-%D9%88-%D9%86%D8%A7%D9%85-%D8%AF%DA%A9%D8%AA%D8%B1-%D9%BE%DB%8C%D8%B1%D9%88%D8%B2-%D9%85%D8%AC%D8%AA%D9%87%D8%AF%D8%B2%D8%A7%D8%AF%D9%87-%D8%AF%D8%B1-%D8%AD%D8%A7%D9%81%D8%B8%D9%87-%D8%B9%D9%84%D9%85%DB%8C-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%85%D8%A7%D9%86%D8%AF%DA%AF%D8%A7%D8%B1",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T19:00:28",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "c94277edf20afa97cf4dc40b74951b519b2bb6f633c67360306b3bcb298d99fb"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-aa36613503940b868c",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -1723,6 +4147,94 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "76804c5691a95aefdea0c4128f035a36f582d3c0b121a2b530ad6e2f58243bc2"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-ae851fab9c0e3394b7",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "محمد سراج",
+      "speaker_candidates": [
+        "news-9fdac5a31325"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "اگر از طرف اروپا هم مورد حمله و تهاجم قرار بگیریم، پاسخ خواهیم داد و برای هدف قرار دادن پایگاه‌های آمریکا در اروپا برنامه وجود دارد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر از طرف اروپا هم مورد حمله و تهاجم قرار بگیریم",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:4c0896e9-806a-450d-97b9-f70ec96876d0",
+          "text_field": "summary_fa",
+          "source_title": "اقتصاد آنلاین",
+          "source_url": "https://www.eghtesadonline.com/fa/news/2173224/فوری-برنامه-ایران-برای-حمله-به-پایگاه-های-آمریکا-در-اروپا",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T14:18:15",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "6cbec936038b8e853449f09f8aca61efe7cf96d0f38c88b9ead4adafcfe60844"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-b00e4d7d19843d8735",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "bahadaf",
+      "speaker_name": "فرهنگ هلاکویی",
+      "speaker_candidates": [
+        "bahadaf"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "احتمال عددی جنگ و سناریوهای مطرح‌شده، برآورد شخصی او هستند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "editorial-holakouee-meybodi-un-election-2026",
+          "text_field": "summary_fa",
+          "source_title": "گفت‌وگو با علیرضا میبدی — برنامهٔ چهارشنبه",
+          "source_url": null,
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:16:18Z",
+          "editorial_published_at": "2026-10-08T06:16:18Z",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "df2561e83c38955160c04db0fb95d81dc8238fa50c488117a4157f2a78f8a15a"
         }
       ],
       "editorial_decision": null
@@ -1860,6 +4372,314 @@
         "publication_approved": false,
         "action": "screened_remains_in_archive"
       }
+    },
+    {
+      "id": "KC-b794457452c2715fb8",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "rasaee",
+      "speaker_name": "حمید رسایی",
+      "speaker_candidates": [
+        "rasaee"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "افشای اسناد ارتباط چهره‌های سیاسی گذشته با سرویس‌های اطلاعاتی خارجی، الگو و چرخه‌ای است که در آینده نیز تکرار خواهد شد و دست‌های پنهان برخی جریانات سیاسی را نمایان خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "172759cf-2845-4490-b78c-5895d1b967d1",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/rasaee/33911",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T07:46:19",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "c7f324aced4fc99a56140f84acf5616fe52baff4e60bf3bdff308e732811b091"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-b9a42df7f046330b3d",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "jalaeipour",
+      "speaker_name": "محمدرضا جلایی‌پور",
+      "speaker_candidates": [
+        "jalaeipour"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "هدف ایران از بستن تنگهٔ هرمز فراتر از انتظار حاصل شده و دردی به متجاوز تحمیل شده که احتمال تفکر تجاوز به ایران را کاهش می‌دهد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:6b6e6e28-96a6-4bad-8c9b-e15984dcb258",
+          "text_field": "summary_fa",
+          "source_title": "انصاف نیوز",
+          "source_url": "https://ensafnews.com/676314/%d9%87%d8%af%d9%81-%d8%a7%db%8c%d8%b1%d8%a7%d9%86-%d8%a7%d8%b2-%d8%a8%d8%b3%d8%aa%d9%86-%d8%aa%d9%86%da%af%d9%87%d9%94-%d9%87%d8%b1%d9%85%d8%b2-%d9%81%d8%b1%d8%a7%d8%aa%d8%b1-%d8%a7%d8%b2-%d8%a7%d9%86/",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T09:14:05",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "9df4ca03ec8f9efd672a5e81d0bc7cd9ae0981b6cb020904acf26c02c17a1a36"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-ba8357e4fcf029e191",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "مارکو روبیو",
+      "speaker_candidates": [
+        "news-24a19efe5b66"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "اگر ترامپ لازم بداند اقدام نظامی علیه ایران انجام دهد، ما توانایی انجام چنین اقدامی را خواهیم داشت، اما ترجیح ما این است که این مسئله به‌صورت مسالمت‌آمیز حل‌وفصل شود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر ترامپ لازم بداند اقدام نظامی علیه ایران انجام دهد",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:d3b38aaa-8857-481f-a130-4317bc244147",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/945897/ادعای-روبیو-وزیر-خارجه-امریکا-اگر-ترامپ-لازم-بداند-اقدام-نظامی-علیه-ایران-انجام-دهد-ما-توانایی-انجام-چنین-اقدامی-را-داریم-اما-ترجیح-ما-این-است-که-این-مسئله-به-صورت-مسالمت-آمیز-حل-وفصل-شود",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T16:46:05",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "8fc9602b72fcddc8fe94cf4cbdf90ed45ba3bea4120f518826a360f952d2a258"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-bea5d28c99083805b3",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "مطهرنیا در پرسش‌وپاسخ سیمرغ طلایی تغییر سیاسی ایران را فرایندی انباشته می‌داند و احتمال جنگ را جدی‌تر از سایر سناریوهای نزدیک ارزیابی می‌کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "summary_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "e9f2da35334af19f8eab5f27fa78086b11d8a44b04ebb5a79a663a68b6f20b63"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-bfab88f4c5c85bc751",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "بدر عبدالعاطی",
+      "speaker_candidates": [
+        "news-d0cb45c42d30"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "از احتمال آغاز دور تازه‌ای از تنش در جنگ میان ایالات متحده و ایران بسیار عمیقاً نگران است و هشدار داد که این دور ویرانگرتر خواهد بود و پیامدهای گسترده‌ای بر جای خواهد گذاشت.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:3912abbf-a2e4-481f-bb94-acbdeb25654b",
+          "text_field": "summary_fa",
+          "source_title": "شفقنا فارسی",
+          "source_url": "https://fa.shafaqna.com/news/2391157/",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T08:33:23",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "e3d424959798c1c2d83c110395ec86c47afd67c4d7e1b1bb3a1a6f269d9dd7fa"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-c1cbe8b76aa183fb22",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ali_gholhaky",
+      "speaker_name": "علی قلهکی",
+      "speaker_candidates": [
+        "ali_gholhaky"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "طرح پیشنهادهایی پیرامون اورانیوم غنی‌شده و رفع تحریم‌ها نشان‌دهنده تغییر رویکرد احتمالی ایران در مذاکرات است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "32574cb0-09fb-4cb4-807a-5b3dc9b6a6d5",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/ali_gholhaky/4905",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T14:24:29",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "1519c74c1997dbe3cf1eaa9cbf7bfae74a3c174e37a8519d5fddbe1aa1b76f92"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-c225d1ee10ca493ae9",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": null,
+      "speaker_name": "محسن رضایی",
+      "speaker_candidates": [
+        "news-19b548dedaba"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "اگر آمریکا بابت حمله به ایران پاسخگو نشود، کشورهای دیگر نیز تصور خواهند کرد که حمله به ایران بدون پیامد خواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر آمریکا بابت حمله به ایران پاسخگو نشود",
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:62867447-1b31-4d04-9f97-153aa0227d6b",
+          "text_field": "summary_fa",
+          "source_title": "خبرآنلاین",
+          "source_url": "https://www.khabaronline.ir/news/2295761/%D8%AF%D8%A8%DB%8C%D8%B1-%D8%B4%D9%88%D8%B1%D8%A7%DB%8C-%D8%B9%D8%A7%D9%84%DB%8C-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%85%D9%84%DB%8C-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D8%A7%DB%8C%D8%AF-%D8%A8%D8%A7%D8%A8%D8%AA-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%AA%D9%86%D8%A8%DB%8C%D9%87",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T20:00:36",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "49ef3c4d2faeaee97ace2fcc0ac5bc0277884cf2a7edaf030a0f667bef0f8d67"
+        }
+      ],
+      "editorial_decision": null
     },
     {
       "id": "KC-c69a535cf545d7127c",
@@ -2021,6 +4841,94 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "02fbfa2c689c97996365a6965ebb4acb378f9740e17096a42f89cfc7aa9ecfcf"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-c9f08e293262fb579c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "source-golden-simorgh",
+      "speaker_name": "سیمرغ طلایی",
+      "speaker_candidates": [
+        "source-golden-simorgh"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "مطهرنیا در پرسش‌وپاسخ سیمرغ طلایی تغییر سیاسی ایران را فرایندی انباشته می‌داند و احتمال جنگ را جدی‌تر از سایر سناریوهای نزدیک ارزیابی می‌کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "editorial-motaharnia-golden-simorgh-qa-20261008",
+          "text_field": "summary_fa",
+          "source_title": "سیمرغ طلایی — پرسش‌وپاسخ",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T20:30:00Z",
+          "editorial_published_at": "2026-10-08",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "e9f2da35334af19f8eab5f27fa78086b11d8a44b04ebb5a79a663a68b6f20b63"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-c9fec0251ebcb3ea89",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "سیدعباس عراقچی",
+      "speaker_candidates": [
+        "news-baf4e4c30bb1"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "نامه ونس را به دقت بررسی کردیم و پس از موافقت واشنگتن با شرایط ما، درباره مستقیم یا غیرمستقیم بودن مذاکرات تصمیم‌گیری خواهیم کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:e18d83d8-3e16-4be6-90b5-455fc21eb29a",
+          "text_field": "summary_fa",
+          "source_title": "خبرآنلاین — تلگرام",
+          "source_url": "https://t.me/khabaronline_ir/666875",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T13:40:01",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "f3df0b60bc58dde01c4864ccf3d710e4cabc71b4064a97a72c226ac3aad068bd"
         }
       ],
       "editorial_decision": null
@@ -2190,6 +5098,50 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-d432aef35af28a8a13",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "احمد علم‌الهدی",
+      "speaker_candidates": [
+        "news-01341a8c96db"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "در صورت حمله دشمن، ایران راه‌های ارتباطی و کابل‌های ارتباط جهانی زیردریایی در تنگه هرمز را قطع خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:ae33ed77-5195-4e1c-ac32-cf33299e5203",
+          "text_field": "summary_fa",
+          "source_title": "فرارو",
+          "source_url": "https://fararu.com/fa/news/1013394/%D8%B9%D9%84%D9%85-%D8%A7%D9%84%D9%87%D8%AF%DB%8C-%D8%AF%D8%B1-%D8%B5%D9%88%D8%B1%D8%AA-%D8%AD%D9%85%D9%84%D9%87-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%DA%A9%D8%A7%D8%A8%D9%84-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B1%D8%AA%D8%A8%D8%A7%D8%B7-%D8%AC%D9%87%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%AA%D9%86%DA%AF%D9%87-%D9%87%D8%B1%D9%85%D8%B2-%D8%B1%D8%A7-%D9%82%D8%B7%D8%B9-%D9%85%DB%8C-%DA%A9%D9%86%DB%8C%D9%85",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-30T11:14:09",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "9239b69d948eb671532fc16e2dde7b95e138a84b992bf6eb6777175f022276e3"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-d67c75f28db066881a",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -2267,6 +5219,94 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "5a18aee93a851fad66bc93dbe13923b0ffd70802e9518cb75395cd6d34740024"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-d82393cd47ff2e7da8",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "محمد اکرمی‌نیا",
+      "speaker_candidates": [
+        "news-a27dcd66cb50"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "دکترین نظامی ایران از رویکرد صرفاً تدافعی به سمت رویکرد تهاجمی تغییر کرده و جنگ احتمالی آینده می‌تواند طولانی‌تر از جنگ گذشته باشد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:778c5e90-8f2a-4251-964e-7f3ba176edc1",
+          "text_field": "summary_fa",
+          "source_title": "فرارو",
+          "source_url": "https://fararu.com/fa/news/1013818/%D8%B3%D8%AE%D9%86%DA%AF%D9%88%DB%8C-%D8%A7%D8%B1%D8%AA%D8%B4-%D8%AC%D9%86%DA%AF-%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84%DB%8C-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D9%85%DB%8C-%D8%AA%D9%88%D8%A7%D9%86%D8%AF-%D8%B7%D9%88%D9%84%D8%A7%D9%86%DB%8C-%D8%AA%D8%B1-%D8%A7%D8%B2-%D8%AC%D9%86%DA%AF-%DA%AF%D8%B0%D8%B4%D8%AA%D9%87-%D8%A8%D8%A7%D8%B4%D8%AF",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-01T07:02:30",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "2a58c9f7da9af3bdca6542d3188480e93b4791c205458061cc64b2397e494f01"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-debd44a9a79f13822c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "MehdiMotaharnia1344",
+      "speaker_name": "مهدی مطهرنیا",
+      "speaker_candidates": [
+        "MehdiMotaharnia1344"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "مهدی مطهرنیا در گفت‌وگو با سیمرغ طلایی میان هشدارهای اطلاعاتی، عدم ممانعت آگاهانه و بهره‌برداری پس از ۷ اکتبر فرق می‌گذارد؛ خطای محاسباتی حماس و تهران، دو نگاه آمریکا و اسرائیل به ایران، و احتمال گسترش جنگ را بررسی می‌کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "پس از ۷ اکتبر",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "editorial-motaharnia-golden-simorgh-oct7-2026",
+          "text_field": "summary_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:12:53Z",
+          "editorial_published_at": "2026-10-08T06:12:53Z",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "baa5ece0d823e78089f7a155c2659246988c012a5a6451e4eedb4f5d4fbc1bb1"
         }
       ],
       "editorial_decision": null
@@ -2354,6 +5394,138 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-e1814f8edc69e9c80c",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ali_gholhaky",
+      "speaker_name": "علی قلهکی",
+      "speaker_candidates": [
+        "ali_gholhaky"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "تهدید «جنگ بدون محدودیت جغرافیایی» احتمالاً به معنای هدف قرار دادن اروپا در صورت بروز درگیری است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "d2b918a8-da4a-4b25-9f0d-1bd940e68c65",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/ali_gholhaky/4904",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T21:03:06",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "f2ca6d934ebf6afab75def3a1f6c79f7ac0d4d5439bee450c9576f30fc5618e2"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-e325926469232a163b",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ahmadzeidabad",
+      "speaker_name": "احمد زیدآبادی",
+      "speaker_candidates": [
+        "ahmadzeidabad"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "بر اساس اظهارات سناتور کریس مورفی، طرح نظامی احتمالی ترامپ علیه ایران جنون‌آمیز بوده و با زیر پا گذاشتن تعهدات بین‌المللی آمریکا، به احتمال زیاد به جنایت جنگی و تشدید ویرانگر درگیری‌ها منجر خواهد شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "358ffb1c-5dbe-4a9d-aab7-653839dfdc77",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/ahmadzeidabad/6081",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-30T10:28:26",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "ce2413b43266eba5137079c3aa3bb0c63f5beb1c48f5821992ad4f5003364a6d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-e407e2c47975957da5",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "عزمی بشاره",
+      "speaker_candidates": [
+        "news-ebb5655f491d"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "در موضوع جنگ با ایران تفاوتی میان دولت نتانیاهو و دولتی که از مخالفان او تشکیل شود، وجود نخواهد داشت.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:5fa0e4ba-5973-45ad-a1ba-090249d67ca5",
+          "text_field": "summary_fa",
+          "source_title": "شفقنا فارسی",
+          "source_url": "https://fa.shafaqna.com/news/2391157/",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-10-31T08:33:23",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "7638fbde82eb49509cb4e734f6c51bd15015cc2ba0b3a0044e7211eec3136c2f"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-e551b80f824e1ab7ea",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -2390,6 +5562,94 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-e57926e11cf46b1d72",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "donald-trump",
+      "speaker_name": "دونالد ترامپ",
+      "speaker_candidates": [
+        "donald-trump"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "نتایج انتخابات را می‌پذیرد و با دموکرات‌ها همکاری خواهد کرد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:6e0e4069-6a70-476b-8438-c4b0f0e5cd4f",
+          "text_field": "summary_fa",
+          "source_title": "France 24 Español",
+          "source_url": "https://www.france24.com/es/video/20261104-qu%C3%A9-reflejan-los-resultados-de-las-midterms-sobre-el-panorama-pol%C3%ADtico-de-estados-unidos",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T16:55:33",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "d0a4e70bbb2e30d7a951f9676251da221f7633ddfbef02efdfd53b2131fe7948"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-e5c43efffc8dd6c159",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "Karimipour_K",
+      "speaker_name": "یدالله کریمی‌پور",
+      "speaker_candidates": [
+        "Karimipour_K"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "دموکرات‌ها با قدرت‌گیری در کنگره، احتمالاً فشار بر روسیه را از طریق افزایش کمک‌ها به اوکراین افزایش خواهند داد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "ffbbf275-e320-41d4-8b5d-7c12490ece12",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/Karimipour_K/6333",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T16:27:27",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "c27fb79a0cd5c69fac9b49ea99bcfaa55bf9709819128981c6c30030bb6b3a28"
         }
       ],
       "editorial_decision": null
@@ -2436,6 +5696,50 @@
       "editorial_decision": null
     },
     {
+      "id": "KC-ed493b4701e6061e36",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": null,
+      "speaker_name": "محمد العریمی",
+      "speaker_candidates": [
+        "news-42906c25426e"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "توافقی میان واشنگتن و تهران در حال شکل‌گیری است که ممکن است بر پایه یک سازش مالی چند میلیارد دلاری برای تأمین مطالبات ایران و آزادسازی دارایی‌های بلوکه‌شده در قبال بازگشایی تنگه هرمز و آزادی کشتیرانی باشد و ابعاد آن طی روزهای آینده روشن‌تر خواهد شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:a56385cd-ef5d-45d7-a6ab-fec65f4d4693",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/946014/روزنانه-نگار-عمانی-توافقی-میان-واشنگتن-و-تهران-در-حال-شکل-گیری-است-این-توافق-احتمالا-می-تواند-بر-پایه-یک-سازش-مالی-بزرگ-به-ارزش-چندین-میلیارد-دلار-شکل-بگیرد-که-مطالبات-ایران-را-تأمین-کند-این-سازش-شامل-آزادسازی-میلیاردها-دلار-از-دارایی-های-بلوکه-شده-ایران-در-مقابل-بازگشایی-تنگه-هرمز-و-بازگشت-آزادی-کشتیرانی-خواهد-بود",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-01T13:55:44",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "023ebde500e30b391845dc627d15dab654d84a8b60b372658278a30cd8e80727"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-efa6c7a38687326470",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -2472,6 +5776,50 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "73505ab78e5c901038b08fd59e1fdccd79a01a7bd81cb06cfe6c604c4251c89e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-efdb003269a9093f82",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "source-golden-simorgh",
+      "speaker_name": "سیمرغ طلایی",
+      "speaker_candidates": [
+        "source-golden-simorgh"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "مهدی مطهرنیا در گفت‌وگو با سیمرغ طلایی میان هشدارهای اطلاعاتی، عدم ممانعت آگاهانه و بهره‌برداری پس از ۷ اکتبر فرق می‌گذارد؛ خطای محاسباتی حماس و تهران، دو نگاه آمریکا و اسرائیل به ایران، و احتمال گسترش جنگ را بررسی می‌کند.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "پس از ۷ اکتبر",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "editorial-motaharnia-golden-simorgh-oct7-2026",
+          "text_field": "summary_fa",
+          "source_title": "سیمرغ طلایی",
+          "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+          "source_date_label": null,
+          "editorial_recorded_at": "2026-10-08T06:12:53Z",
+          "editorial_published_at": "2026-10-08T06:12:53Z",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "baa5ece0d823e78089f7a155c2659246988c012a5a6451e4eedb4f5d4fbc1bb1"
         }
       ],
       "editorial_decision": null
@@ -2675,6 +6023,50 @@
       "manual_review_required": true
     },
     {
+      "id": "KC-f649460eb7a8f984ba",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "probabilistic_forecast",
+      "speaker_handle": "ali_gholhaky",
+      "speaker_name": "علی قلهکی",
+      "speaker_candidates": [
+        "ali_gholhaky"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "گزارش‌ها حاکی از احتمال عقب‌نشینی دو طرف از خطوط قرمز خود در پرونده هسته‌ای و تنگه هرمز است.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "probabilistic",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "32574cb0-09fb-4cb4-807a-5b3dc9b6a6d5",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/ali_gholhaky/4905",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-03T14:24:29",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "1519c74c1997dbe3cf1eaa9cbf7bfae74a3c174e37a8519d5fddbe1aa1b76f92"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
       "id": "KC-f8d94fbce662b9fdce",
       "status": "pending_editorial_review",
       "extraction_method": "conservative_rule_based_v1",
@@ -2711,6 +6103,94 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "61550ac3748813c3ab7830b35a2d80404817a9a8573fe0226f0a40908367053e"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-f9ca5450399b7b43b4",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "اسماعیل بقایی",
+      "speaker_candidates": [
+        "news-66fafbc86e7a"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "مذاکرات میان ایران و آمریکا از طریق میانجی‌ها بر مبنای طرح هفت روزه است و پاسخ ایران به هرگونه تجاوز نظامی، فوری و همه جانبه خواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "از طریق میانجی‌ها بر مبنای طرح هفت روز",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:642e9bc4-ed9a-40c0-a9e1-da558a00a209",
+          "text_field": "summary_fa",
+          "source_title": "میزان",
+          "source_url": "https://www.mizanonline.ir/fa/news/4927047/بقایی-مذاکرات-میان-ایران-و-آمریکا-از-طریق-میانجی-ها-بر-مبنای-طرح-هفت-روزه-است-پاسخ-ایران-به-هرگونه-تجاوز-نظامی-فوری-و-همه-جانبه-خواهد-بود",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T07:14:19",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "95809aa6ab58533caca16b655fba4736c8345940fe2e784a2c82bef8c12a6c7d"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-fbbf934d8b2c7a4668",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "donald-trump",
+      "speaker_name": "دونالد ترامپ",
+      "speaker_candidates": [
+        "donald-trump"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "شاید ونس در انتخابات ۲۰۲۸ نامزد نشود و نمی‌دانم چه کسی نامزد خواهد شد.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "در انتخابات ۲۰۲۸",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:54329560-6754-443e-bbba-fa3aa9708e08",
+          "text_field": "summary_fa",
+          "source_title": "انتخاب",
+          "source_url": "https://www.entekhab.ir/fa/news/946542/فاکس-نیوز-به-نقل-از-منابع-مطلع-اظهارات-ونس-در-مورد-ارتباط-جنگ-ایران-با-شکست-در-انتخابات-میان-دوره-ای-نوعی-فراخوان-برای-بسیج-جمهوری-خواهانی-است-که-معتقد-هستند-ترامپ-بیش-از-اندازه-با-اسرائیل-هم-سو-شده-ونس-می-خواهد-پیش-از-انتخابات-2028-ائتلافی-با-رأی-دهندگان-ناراضی-ترامپ-تشکیل-دهد",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-05T04:59:58",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": true,
+          "source_content_sha256": "a29efda7af9cab214ae7640d17a076cf566ed279bdb6fc67436326c597fa362b"
         }
       ],
       "editorial_decision": null
@@ -2793,6 +6273,138 @@
           "primary_speech_date_verified": false,
           "primary_source_verified": false,
           "source_content_sha256": "b2a2db441341ef5b8ac35951592ccc50650bc71e9a510711625de4cff8e15596"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-fcefe3d37ea427940e",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": null,
+      "speaker_name": "علاءالدین بروجردی",
+      "speaker_candidates": [
+        "news-e4ee526a7e0d"
+      ],
+      "identity_status": "indexed_news_person_requires_review",
+      "excerpt_exact_from_field": "انواع دارایی‌های دشمن باید در تیررس نیروهای مسلح قرار گیرد و این نیروها پایان‌بخش هرگونه حمله نظامی یا تروریستی خواهند بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "time_expression",
+        "raw_condition": null,
+        "raw_time_expression": "در تیر",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "news:3e647087-1ca7-4e79-b999-31932d4ea53e",
+          "text_field": "summary_fa",
+          "source_title": "عصر ایران",
+          "source_url": "https://www.asriran.com/fa/news/1203899/عضو-کمیسیون-امنیت-ملی-خروج-از-npt-و-ساخت-بمب-هسته-ای-مطالبه-عمومی-شده-است",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-04T15:23:01",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "news_statement",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "0620a9fa03890aa83454db49215da3190109837841e50b75546fd56b51dcf596"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-fdc22939534406fe31",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "forecast_candidate",
+      "speaker_handle": "yekhezaran",
+      "speaker_name": "حسین جابری‌انصاری",
+      "speaker_candidates": [
+        "yekhezaran"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "تشکیل ائتلاف دولتی برای آیزنکوت با وجود پیروزی اولیه در کسب توصیه نمایندگان، بسیار دشوار خواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "undetermined",
+        "raw_condition": null,
+        "raw_time_expression": null,
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "unspecified",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "5f02ac3c-6ebd-47ab-a5e6-fad54480e9c0",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/yekhezaran/52265",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-05T15:09:18",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "768d2361b711fc08223225c947e03f54c9189ee70b73996ff7ce20d3d5684662"
+        }
+      ],
+      "editorial_decision": null
+    },
+    {
+      "id": "KC-fe240f71b78c7f2603",
+      "status": "pending_editorial_review",
+      "extraction_method": "conservative_rule_based_v1",
+      "type_candidate": "conditional_forecast",
+      "speaker_handle": "rezanasrichannel",
+      "speaker_name": "رضا نصری",
+      "speaker_candidates": [
+        "rezanasrichannel"
+      ],
+      "identity_status": "matched_canonical_handle",
+      "excerpt_exact_from_field": "اگر این فرض در قبال ایران بشکند، خروج دیگر کشورها از معاهده و فروپاشی نظام جهانی عدم اشاعه قطعی خواهد بود.",
+      "excerpt_is_original_speech_verified": false,
+      "trigger_hint": {
+        "kind": "conditional",
+        "raw_condition": "اگر این فرض در قبال ایران بشکند",
+        "raw_time_expression": "در قبال ایران بشکند، خروج دی",
+        "mentioned_iso_date": null,
+        "verified_due_at": null,
+        "certainty": "conditional",
+        "review_required": true
+      },
+      "related_ledger_claim_ids_for_review": [],
+      "origins": [
+        {
+          "project": "pendar",
+          "feed": "figure_post",
+          "record_id": "45f3e38b-0750-43f5-bd89-1dc7db1532ac",
+          "text_field": "summary_fa",
+          "source_title": "",
+          "source_url": "https://t.me/rezanasrichannel/3398",
+          "source_date_label": null,
+          "editorial_recorded_at": null,
+          "editorial_published_at": "2026-11-02T14:49:46",
+          "primary_speech_date_verified": false,
+          "primary_source_verified": false,
+          "excerpt_basis": "editorial_or_news_summary",
+          "figure_post_kind": "analysis",
+          "source_direct_quote_flag": false,
+          "source_content_sha256": "cc130ebeab294ddffaed64bc0d685c394f59d6a39b76b2b48a7c3385c14e3844"
         }
       ],
       "editorial_decision": null
