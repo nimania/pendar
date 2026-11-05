@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-11-04T21:49:51+00:00",
+  "updated_at": "2026-11-05T21:56:55+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-99850f66fb76d2c927",
+      "date": "2026-11-03",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "U.K. Forces Track Russian Warships in 3 Operations Spanning 2 Weeks",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/03/u-k-forces-track-russian-warships-in-3-operations-spanning-2-weeks"
+    },
     {
       "id": "usni-c433f6c0698796969c",
       "date": "2026-11-02",
