@@ -62,7 +62,7 @@ EDITORIAL_META = re.compile(
     r"^این(?:‌|\s)?ها\s+پیش.?بینی\b|"
     r"متن\s+پیاده.?شده|نقل\s+است\s+نه\s+تأیید|"
     r"^نمی.?توانم\s+پیش.?بینی\b|"
-    r"^پیش.?بینی\s+قبلی\b)"
+    r"^پیش.?بینی\s+قبلی\b|"\n    r"^به\s+تعبیر\s+مجری\b|^مجری\s+(?:می\s+گوید|می\s+پرسد)\b|"\n    r"راستی.?آزمایی\s+مستقل\s+نشده|"\n    r"^اما\s+واکنش\s+.*درست\s+محاسبه\s+نکرد|"\n    r"^درباره\s+احتمال\s+.*پرهیز\s+می\s+دهد)"
 )
 STOPWORDS = set("که از در به را و با برای این آن اگر تا می شود شده است بود هستند "
                 "خواهد خواهند کرد کرده همان همه یک دو سه بر چه پس پیش یا اما نیز "
@@ -145,7 +145,9 @@ def qualifies(text: str) -> tuple[str, str] | None:
                  r"پیش.?بینی\s+نمی.?کنم)", t):
         return None
     conditional = bool(CONDITIONAL.search(text))
-    explicit = bool(FUTURE_VERB.search(text) or FUTURE_PREDICATE.search(text))
+    # Future tense alone is not a verifiable claim (e.g. a general maxim).
+    explicit = bool((FUTURE_VERB.search(text) or FUTURE_PREDICATE.search(text))
+                    and EVENT.search(text))
     probabilistic = bool(PROBABILITY.search(text) and EVENT.search(text))
     forecast = bool(FORECAST_VERB.search(text) and EVENT.search(text))
     if not (explicit or probabilistic or forecast):
@@ -227,10 +229,13 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
              if isinstance(c, dict) and isinstance(c.get("id"), str)}
     # The inbox is append-only; reviewed or dismissed records are never reset.
     found = dict(prior)
+    active_ids: set[str] = set()
+    scanned_sources: set[tuple[str, str]] = set()
     metrics = {"sources_scanned": 0, "source_spans_scanned": 0,
                "matched_new": 0, "ambiguous_sources": 0}
     for kind, source, field, full_text in source_records(recaps, views):
         metrics["sources_scanned"] += 1
+        scanned_sources.add((kind, str(source["id"])))
         who = attribution(source, kind, handles, names)
         if who["identity_status"] == "multi_speaker_requires_review":
             metrics["ambiguous_sources"] += 1
@@ -243,6 +248,7 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
             speaker_identifier = who["speaker_handle"] or "|".join(who["speaker_candidates"]) or who["speaker_name"] or "unknown"
             claim_key = norm(excerpt) + "\n" + norm(speaker_identifier)
             id_ = "KC-" + digest(claim_key)[:18]
+            active_ids.add(id_)
             origin = {
                 "project": "pendar",
                 "feed": kind,
@@ -259,6 +265,9 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
             }
             if id_ in found:
                 candidate = found[id_]
+                if candidate.get("status") == "screened_out_by_current_filter" and candidate.get("editorial_decision") is None:
+                    candidate["status"] = "pending_editorial_review"
+                    candidate.pop("automated_screening_note", None)
                 if not any(o.get("record_id") == origin["record_id"] and o.get("feed") == kind
                            for o in candidate.get("origins", [])):
                     candidate.setdefault("origins", []).append(origin)
@@ -282,6 +291,21 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
             }
             found[id_] = candidate
             metrics["matched_new"] += 1
+    # Do not erase history: when tightened filters reject an older machine
+    # candidate, keep the record but remove it from the pending review count.
+    # Never auto-screen a candidate whose source has gone missing.
+    for candidate_id, candidate in found.items():
+        if (candidate_id not in active_ids
+                and candidate.get("status") == "pending_editorial_review"
+                and candidate.get("editorial_decision") is None
+                and candidate.get("origins")
+                and all((o.get("feed"), str(o.get("record_id"))) in scanned_sources
+                        for o in candidate["origins"])):
+            candidate["status"] = "screened_out_by_current_filter"
+            candidate["automated_screening_note"] = (
+                "No longer meets conservative extraction conditions; preserved "
+                "for audit, not an editorial judgment."
+            )
     queue = {
         "schema_version": SCHEMA_VERSION,
         "publication_policy": "internal_review_queue_only_no_public_import",
@@ -291,7 +315,11 @@ def build_queue(recaps: list, views: list, ledger: dict, previous: dict | None =
         "stats": {
             "total": len(found),
             "pending": sum(c.get("status") == "pending_editorial_review" for c in found.values()),
-            "reviewed": sum(c.get("status") != "pending_editorial_review" for c in found.values()),
+            "screened": sum(c.get("status") == "screened_out_by_current_filter"
+                            for c in found.values()),
+            "reviewed": sum(c.get("status") not in
+                            ("pending_editorial_review", "screened_out_by_current_filter")
+                            for c in found.values()),
             "sources_scanned": metrics["sources_scanned"],
             "source_spans_scanned": metrics["source_spans_scanned"],
             "ambiguous_sources": metrics["ambiguous_sources"],
