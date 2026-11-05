@@ -257,7 +257,9 @@
     "https://t.me/kerman_news/140125",
     "https://t.me/kerman_news/140126",
     "https://t.me/kerman_news/140127",
-    "https://t.me/kerman_gov/10512"
+    "https://t.me/kerman_gov/10512",
+    "https://t.me/kerman_gov/10513",
+    "https://t.me/Kerman_akhbar/66213"
   ],
   "queue": [
     {
@@ -903,7 +905,12 @@
       "city_confidence": "review",
       "status": "review",
       "detected_at": "2026-11-05T16:15:06.272311+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66213"
+        }
+      ],
       "geography": "kerman",
       "media_repost_allowed": true
     },
@@ -1757,17 +1764,43 @@
       "delivery_kind": "photo",
       "telegram_message_id": 37,
       "sent_at": "2026-11-05T19:43:32.014953+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_gov/10513",
+      "source_post_id": "10513",
+      "title": "تقدیر ویژه نماینده مردم پنج‌ شهرستان جنوبی استان در خانه ملت از پیگیری‌های استاندار کرمان برای اخذ مجوز منطقه ویژه اقتصادی جازموریان و پتروشیمی",
+      "excerpt": "تقدیر ویژه نماینده مردم پنج‌ شهرستان جنوبی استان در خانه ملت از پیگیری‌های استاندار کرمان برای اخذ مجوز منطقه ویژه اقتصادی جازموریان و پتروشیمی شورای اداری جنوب کرمان _ جیرفت",
+      "paragraphs": [
+        "تقدیر ویژه نماینده مردم پنج‌ شهرستان جنوبی استان در خانه ملت از پیگیری‌های استاندار کرمان برای اخذ مجوز منطقه ویژه اقتصادی جازموریان و پتروشیمی",
+        "شورای اداری جنوب کرمان _ جیرفت"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-05T19:44:10+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "2d9df5cd9613088c",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-05T20:23:41.534879+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-05T19:43:32.014974+00:00",
+  "saved_at": "2026-11-05T20:24:02.226181+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-05T19:43:04.267567+00:00",
-    "fardaayekerman": "2026-11-05T19:43:04.267567+00:00",
-    "irna_kerman": "2026-11-05T19:43:04.267567+00:00",
-    "kerman_gov": "2026-11-05T19:43:04.267567+00:00",
-    "kerman_akhbar": "2026-11-05T19:43:04.267567+00:00",
-    "kerman_news": "2026-11-05T19:43:04.267567+00:00",
-    "kerman_rasaneh": "2026-11-05T19:43:04.267567+00:00",
-    "qh_qv": "2026-11-05T19:43:04.267567+00:00"
+    "kermane_no": "2026-11-05T20:23:41.534879+00:00",
+    "fardaayekerman": "2026-11-05T20:23:41.534879+00:00",
+    "irna_kerman": "2026-11-05T20:23:41.534879+00:00",
+    "kerman_gov": "2026-11-05T20:23:41.534879+00:00",
+    "kerman_akhbar": "2026-11-05T20:23:41.534879+00:00",
+    "kerman_news": "2026-11-05T20:23:41.534879+00:00",
+    "kerman_rasaneh": "2026-11-05T20:23:41.534879+00:00",
+    "qh_qv": "2026-11-05T20:23:41.534879+00:00"
   }
 }
