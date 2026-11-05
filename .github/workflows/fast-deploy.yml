@@ -21,6 +21,7 @@ on:
       - ".github/workflows/fast-deploy.yml"
       - "backend/tests/test_editorial_report_ui.js"
       - "backend/tests/test_karname_publish.py"
+      - "backend/tests/test_karname_scenarios.js"
       - "backend/scripts/publish_karname_data.py"
       - "backend/scripts/prepare_priority_site.py"
       - "backend/tests/test_front_page_desk.js"
@@ -333,6 +334,7 @@ jobs:
       - name: Verify Karname dashboard, alias and safe data publisher
         run: |
           node --check web-static/karname/app.js
+          node backend/tests/test_karname_scenarios.js
           python -m unittest discover -s backend/tests -p 'test_karname_publish.py' -v
       - name: Overlay current UI without overwriting generated data
         run: |
