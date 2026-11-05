@@ -1,12 +1,13 @@
 """Regression tests for the independently published Karname scoreboard."""
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.publish_karname_data import publish, validate
-
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "backend"))
+from scripts.publish_karname_data import publish, validate  # noqa: E402
 
 
 class KarnamePublicationTests(unittest.TestCase):
