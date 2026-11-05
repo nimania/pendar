@@ -13,12 +13,16 @@ on:
       - "backend/scripts/collect_karname_candidates.py"
       - "backend/scripts/fetch_karname_figures.py"
       - "backend/tests/test_karname_candidates.py"
+      - "backend/tests/test_karname_scenarios.js"
+      - "web-static/karname/app.js"
       - ".github/workflows/karname-intake.yml"
   pull_request:
     paths:
       - "backend/scripts/collect_karname_candidates.py"
       - "backend/scripts/fetch_karname_figures.py"
       - "backend/tests/test_karname_candidates.py"
+      - "backend/tests/test_karname_scenarios.js"
+      - "web-static/karname/app.js"
       - ".github/workflows/karname-intake.yml"
 
 permissions:
@@ -43,6 +47,10 @@ jobs:
           python-version: "3.11"
       - name: Test candidate extraction and safety boundaries
         run: python -m unittest discover -s backend/tests -p 'test_karname_candidates.py' -v
+      - name: Verify scenario UI and classifications
+        run: |
+          node --check web-static/karname/app.js
+          node backend/tests/test_karname_scenarios.js
       - name: Read current Pendar figure and news index
         id: figure_feed
         continue-on-error: true
