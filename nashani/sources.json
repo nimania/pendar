@@ -1,7 +1,7 @@
 {
-  "version": 1,
+  "version": 2,
   "territory": "Kerman city (not the entire province)",
-  "editorial_policy": "Short attributed excerpts; never copy long texts or media. Sensitive and ambiguous city items require approval.",
+  "editorial_policy": "Kerman-No: check every 30 minutes and prepare each fresh ordinary text post; keep sensitive allegations in editorial review. Other local sources: every 5 minutes, auto-publish only high-confidence Kerman-city reports. Store canonical source URLs for audit but do not include links in outgoing Telegram messages.",
   "sources": [
     {
       "name": "کرمان‌نو",
@@ -9,7 +9,9 @@
       "handle": "kermane_no",
       "enabled": true,
       "role": "independent-local-news",
-      "verified_from": "https://t.me/KERMANE_NO"
+      "verified_from": "https://t.me/KERMANE_NO",
+      "poll_minutes": 30,
+      "coverage": "all"
     },
     {
       "name": "فردای کرمان",
@@ -17,7 +19,9 @@
       "handle": "fardaayekerman",
       "enabled": true,
       "role": "independent-local-news",
-      "verified_from": "https://fardayekerman.ir"
+      "verified_from": "https://fardayekerman.ir",
+      "poll_minutes": 5,
+      "coverage": "city"
     },
     {
       "name": "ایرنا کرمان",
@@ -25,7 +29,9 @@
       "handle": "irna_kerman",
       "enabled": true,
       "role": "news-agency",
-      "verified_from": "https://t.me/irna_kerman"
+      "verified_from": "https://t.me/irna_kerman",
+      "poll_minutes": 5,
+      "coverage": "city"
     },
     {
       "name": "اخبار استانداری کرمان",
@@ -33,7 +39,9 @@
       "handle": "kerman_gov",
       "enabled": true,
       "role": "official-announcements",
-      "verified_from": "https://t.me/kerman_gov"
+      "verified_from": "https://t.me/kerman_gov",
+      "poll_minutes": 5,
+      "coverage": "city"
     },
     {
       "name": "آخرین خبر کرمان",
@@ -41,7 +49,30 @@
       "handle": "kerman_akhbar",
       "enabled": true,
       "role": "regional-news",
-      "verified_from": "https://t.me/kerman_akhbar"
+      "verified_from": "https://t.me/kerman_akhbar",
+      "poll_minutes": 5,
+      "coverage": "city"
+    },
+    {
+      "name": "اخبار کرمان",
+      "platform": "telegram",
+      "handle": "kerman_news",
+      "enabled": true,
+      "role": "regional-aggregator",
+      "verified_from": "https://t.me/kerman_news",
+      "poll_minutes": 5,
+      "coverage": "city"
+    },
+    {
+      "name": "کرمان رسانه",
+      "platform": "telegram",
+      "handle": "kerman_rasaneh",
+      "enabled": true,
+      "role": "regional-monitoring",
+      "verified_from": "https://t.me/kerman_rasaneh",
+      "poll_minutes": 5,
+      "coverage": "city",
+      "review_only": true
     }
   ]
 }
