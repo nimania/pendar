@@ -22,9 +22,9 @@ class KarnamePublicationTests(unittest.TestCase):
     def test_initial_import_is_truthful_and_unscored(self):
         path = ROOT / "backend/data/karname.json"
         data = validate(json.loads(path.read_text(encoding="utf-8")))
-        self.assertEqual(data["dataset_scope"], "initial_partial_import")
+        self.assertEqual(data["dataset_scope"], "reconstructed_partial_ledger")
         self.assertFalse(data["is_complete"])
-        self.assertEqual(len(data["claims"]), 9)
+        self.assertEqual(len(data["claims"]), 18)
         self.assertTrue(all(claim["result"] is None for claim in data["claims"]))
         by_id = {claim["id"]: claim for claim in data["claims"]}
         self.assertEqual(by_id["SOURI-20261101-02"]["speakers"], ["benjamin-souri"])
@@ -34,7 +34,54 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertEqual(data["provenance"]["attribution_correction"]["corrected_label"], "عباس سوری")
         self.assertEqual(by_id["SOURI-20261101-08"]["type_class"], "نقل گزارش")
         self.assertEqual(by_id["SOURI-20261101-09"]["type_class"], "نقل گزارش")
-        self.assertIn("۹ مدخل", data["provenance"]["disclosure"])
+        self.assertIn("18", data["provenance"]["disclosure"])
+
+    def test_canonical_ledger_reproduces_public_json(self):
+        from scripts.build_karname import build, extract
+        ledger = ROOT / "karname/daftar.md"
+        payload = extract(ledger.read_text(encoding="utf-8"))
+        output = json.loads((ROOT / "backend/data/karname.json").read_text(encoding="utf-8"))
+        self.assertEqual(payload, output)
+        self.assertEqual(build(ledger, ROOT / "backend/data/karname.json", check=True), output)
+
+    def test_additional_analysts_are_present_without_unverified_scores(self):
+        data = json.loads((ROOT / "backend/data/karname.json").read_text(encoding="utf-8"))
+        names = {p["name"] for p in data["speakers"]}
+        for expected in ("مهدی مطهرنیا", "فرهنگ هلاکویی", "احمد زیدآبادی",
+                         "سید محمد مرندی", "فؤاد ایزدی", "یوسف عزیزی"):
+            self.assertIn(expected, names)
+        new = [c for c in data["claims"] if c["id"].startswith("PDR-")]
+        self.assertEqual(len(new), 9)
+        self.assertTrue(all(c["result"] is None and c["result_source"] is None for c in new))
+        self.assertTrue(all(c["source_type"] == "secondary_editorial_recap" for c in new))
+        self.assertTrue(all(c["source_record_id"] and c["source_ref_url"] for c in new))
+        self.assertFalse(data["is_complete"])
+
+    def test_secondary_claims_trace_to_exact_published_recap(self):
+        data = json.loads((ROOT / "backend/data/karname.json").read_text(encoding="utf-8"))
+        recaps = json.loads((ROOT / "backend/data/editorial-recaps.json").read_text(encoding="utf-8"))
+        by_id = {r["id"]: r for r in recaps}
+        for claim in data["claims"]:
+            if claim.get("source_type") != "secondary_editorial_recap":
+                continue
+            with self.subTest(claim=claim["id"]):
+                source = by_id[claim["source_record_id"]]
+                self.assertIn(claim["source_anchor"], source["recap_fa"])
+                self.assertFalse(claim["source_primary_verified"])
+                self.assertIn("مستقلاً تأیید نشده", claim["said_date_basis"])
+
+    def test_canonical_source_cannot_drop_existing_claims(self):
+        from scripts.build_karname import build
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "daftar.md"
+            target = root / "karname.json"
+            target.write_text('{"claims":[{"id":"keep-me"}],"speakers":[]}', encoding="utf-8")
+            source.write_text(chr(96) * 3 + "json\n" +
+                              '{"claims":[],"speakers":[],"is_complete":false}' +
+                              "\n" + chr(96) * 3, encoding="utf-8")
+            with self.assertRaises(ValueError):
+                build(source, target)
 
     def test_pilot_notice_visible_in_app_code(self):
         code = (ROOT / "web-static/karname/app.js").read_text(encoding="utf-8")

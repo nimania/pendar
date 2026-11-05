@@ -445,7 +445,9 @@ jobs:
           node --check web-static/karname/app.js
           python -m unittest discover -s backend/tests -p 'test_karname_publish.py' -v
       - name: Publish verified predictions ledger when available
-        run: python backend/scripts/publish_karname_data.py --site backend/public --previous /tmp/previous-site
+        run: |
+          python backend/scripts/build_karname.py
+          python backend/scripts/publish_karname_data.py --site backend/public --previous /tmp/previous-site
       - name: Apply temporary news-and-figures publication profile
         run: python backend/scripts/prepare_priority_site.py backend/public
 
