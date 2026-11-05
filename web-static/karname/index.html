@@ -39,7 +39,7 @@
  <section class="stats" aria-label="آمار کارنامه و موتور استخراج">
    <article><strong id="stat-claims">—</strong><span>ادعا در کارنامهٔ عمومی</span><small>ثبت‌شده، نه لزوماً داوری‌شده</small></article>
    <article class="stat-intake"><strong id="stat-extracted" aria-live="polite">—</strong><span>نامزد استخراج‌شده از منابع</span><small>پیشنهاد ماشینی، نه ادعای تأییدشده</small></article>
-   <article class="stat-intake"><strong id="stat-pending" aria-live="polite">—</strong><span>نامزد در صف بررسی</span><small>تطبیق انتساب، متن و منبع</small></article>
+   <article class="stat-intake"><strong id="stat-pending" aria-live="polite">—</strong><span>گفتهٔ تحت رصد خودکار</span><small>انتشار با برچسب تأییدنشده</small></article>
    <article><strong id="stat-graded">—</strong><span>نتیجهٔ راستی‌آزمایی‌شده</span><small>حکم مستند درست یا نادرست</small></article>
    <article><strong id="stat-due">—</strong><span>موعد گذشته، منتظر سنجش</span><small>سررسید به معنی نادرست‌بودن نیست</small></article>
    <article><strong id="stat-speakers">—</strong><span>گوینده در بانک عمومی</span><small>شمار هویت‌ها، نه منابع پایش‌شده</small></article>
@@ -47,7 +47,7 @@
  <div class="site-width">
   <section id="intake-context" class="intake-context" aria-live="polite">
     <div><strong>چرا تعداد ادعاهای عمومی با نامزدهای استخراج‌شده برابر نیست؟</strong>
-      <p>موتور کارنامه گفته‌های تازه را از چهره‌ها و خبرها پیدا می‌کند؛ این موارد ابتدا به صف بررسی منبع و انتساب می‌روند. فقط پس از تأیید، به بانک عمومی اضافه می‌شوند. هیچ موردی صرفاً به‌خاطر عبور موعد، درست یا نادرست اعلام نمی‌شود.</p>
+      <p>موتور کارنامه هر شش ساعت نامزدهای تازه را از چهره‌ها و خبرهای پندار استخراج و <strong>به‌طور خودکار در تب «رصد خودکار» منتشر می‌کند</strong>؛ با نام منبع و هشدار روشن دربارهٔ انتساب و اصالت نقل‌قول. فقط مواردی که سند کافی داشته باشند به بانک اصلی پیش‌بینی‌های مستند ارتقا می‌یابند. موعد گذشته به معنی درست یا نادرست نیست.</p>
       <p id="intake-breakdown" class="intake-breakdown">در حال دریافت آمار مستقل صف بررسی…</p>
     </div>
     <a href="https://github.com/nimania/pendar/actions/workflows/karname-intake.yml" target="_blank" rel="noopener noreferrer">مشاهدهٔ اجرای شش‌ساعتهٔ استخراج‌گر ←</a>
@@ -55,6 +55,7 @@
   <div id="feed-notice" class="notice" hidden role="status"></div>
   <nav class="tabs" aria-label="بخش‌های کارنامه">
    <button data-tab="highlights" class="active" type="button">داغ‌ترین‌ها</button>
+   <button data-tab="auto" type="button">رصد خودکار گفته‌ها</button>
    <button data-tab="people" type="button">کارنامهٔ چهره‌ها</button>
    <button data-tab="duels" type="button">دوئل پیش‌بینی‌ها</button>
    <button data-tab="calendar" type="button">موعد رسید!</button>
