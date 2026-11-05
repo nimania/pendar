@@ -128,7 +128,17 @@ function detail(c){
  const recap=array(state.data?.recaps).find(r=>array(r.claims||r.claim_ids).includes(c.id));
  const recapLink=recap&&(recap.url||recap.link),validRecap=typeof recapLink==="string"&&/^https?:\/\//i.test(recapLink);
  let html='<div class="meta-line">'+pills(c)+'<span dir="ltr">'+esc(c.id)+'</span></div><h2 id="dialog-title">'+esc(claimText(c))+'</h2><div class="detail-grid"><div><strong>چه کسی گفته؟</strong>'+esc(names)+'</div><div><strong>چه زمانی؟</strong>'+esc(c.said||"تاریخ ذکر نشده")+'</div><div><strong>موعد بررسی</strong>'+esc(c.due_label||b.label||"مشخص نشده")+'</div><div><strong>نوع ادعا</strong>'+esc(c.type||c.type_class||"پیش‌بینی")+'</div></div>';
- if(c.source_title)html+='<div class="detail-source"><strong>منشأ این ثبت:</strong> '+esc(c.source_title)+'<p class="muted">انتساب بر اساس پروندهٔ ارائه‌شده است؛ تا ثبت لینک منبع اصلی، قابل راستی‌آزمایی مستقل از این صفحه نیست.</p></div>';
+ if(c.source_title){
+  const secondary=c.source_type==="secondary_editorial_recap";
+  const documentUrl=typeof c.source_ref_url==="string"&&/^https:\/\//.test(c.source_ref_url)?c.source_ref_url:null;
+  const link=documentUrl?'<p><a href="'+esc(documentUrl)+'" target="_blank" rel="noopener noreferrer">مشاهدهٔ سند مبنا در مخزن پندار ↗</a></p>':"";
+  html+='<div class="detail-source"><strong>منشأ این ثبت:</strong> '+esc(c.source_title)
+     +'<p class="muted">'+(secondary?"استخراج از ری‌کپ ثانویهٔ پندار؛ متن ویدئوی اصلی هنوز مستقلاً تطبیق داده نشده است.":"ثبت بر مبنای پروندهٔ ارائه‌شده؛ لینک منبع مستقیم هنوز ثبت نشده است.")+'</p>'
+     +(c.source_record_id?'<p class="muted">شناسهٔ گزارش: '+esc(c.source_record_id)+'</p>':"")
+     +(c.source_anchor?'<p>عبارت مبنای استخراج: '+esc(c.source_anchor)+'</p>':"")
+     +link+'</div>';
+ }
+ if(c.evaluation_trigger)html+='<div class="detail-source"><strong>معیار پیشنهادی سنجش:</strong><p>'+esc(c.evaluation_trigger)+'</p></div>';
  if(c.condition)html+='<div class="detail-source"><strong>شرط تحقق:</strong><p>'+esc(c.condition)+'</p></div>';
  if(c.speaker_note&&norm(c.speaker_note)!==norm(c.text))html+='<div class="detail-source"><strong>شرح و قیدهای اصلی:</strong><p>'+esc(c.speaker_note)+'</p></div>';
  html+='<div class="detail-source"><strong>وضعیت:</strong> '+esc(s.label)+(safeURL?'<p><a href="'+esc(safeURL)+'" target="_blank" rel="noopener noreferrer">مشاهدهٔ سند نتیجه ↗</a></p>':resultSource?'<p>'+esc(resultSource)+'</p>':'<p class="muted">سند نتیجه هنوز ثبت نشده است.</p>')+'</div>';
