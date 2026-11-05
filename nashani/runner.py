@@ -27,6 +27,7 @@ from bs4 import BeautifulSoup
 
 from editorial import compose_caption, extract_media, meaningful_lines, clean_news_line
 from media_delivery import MediaNotAvailable, upload_public_media
+from geography import geo_relevance, is_local_news
 
 REPO = os.getenv("GITHUB_REPOSITORY", "nimania/pendar")
 BRANCH = "nashani-state"
@@ -114,14 +115,24 @@ def is_sensitive(text):
 
 
 def regional_relevance(text):
-    """Require a Kerman toponym; 'کرمانشاه' and national-only news are not local."""
-    clean = normalize(text)
-    if re.search(r"(?<!\w)کرمان(?!\w)|(?<!\w)کرمانی(?:ان|ها)?(?!\w)", clean):
-        return "high"
-    for term in REGIONAL_PLACES + REGIONAL_WITH_CONTEXT:
-        if re.search(r"(?<!\w)" + re.escape(normalize(term)) + r"(?!\w)", clean):
-            return "high"
-    return "reject"
+    """Compatibility wrapper: a single strict rule for every news source."""
+    return "high" if geo_relevance(text) else "reject"
+
+
+def enforce_geography_on_queue(queue):
+    """Also block previously queued off-topic posts, without deleting history."""
+    excluded = 0
+    for row in queue:
+        if row.get("status") not in {"ready", "review"}:
+            continue
+        location = is_local_news(row)
+        if not location:
+            row["status"] = "excluded_nonlocal"
+            row["review_reason"] = "not_about_kerman_or_connected_neighbors"
+            excluded += 1
+        else:
+            row["geography"] = location
+    return excluded
 
 
 def looks_like_advertisement(text):
@@ -218,13 +229,9 @@ def evaluate(item, now, source=None):
         return None
     source = source or {}
     body = item["title"] + " " + item["excerpt"]
-    coverage = source.get("coverage", "city")
-    full_feed = coverage == "all"
-    relevance = regional_relevance(body) if coverage == "region" else city_relevance(body)
-    if relevance == "reject" and not full_feed:
+    location = is_local_news(item)
+    if not location:
         return None
-    if full_feed and relevance == "reject":
-        relevance = "source_full_feed"
     if looks_like_advertisement(body):
         return None
     sensitive = is_sensitive(body)
@@ -232,8 +239,9 @@ def evaluate(item, now, source=None):
     item["media_repost_allowed"] = bool(source.get("media_repost_allowed", False))
     item["source_hashtag"] = source.get("source_hashtag", "")
     item["risk"] = "sensitive" if sensitive else "ordinary"
-    item["city_confidence"] = relevance
-    item["status"] = "review" if sensitive or not item.get("paragraphs", [item["excerpt"]]) or source.get("review_only") or (not full_feed and relevance != "high") else "ready"
+    item["city_confidence"] = "high"
+    item["geography"] = location
+    item["status"] = "review" if sensitive or not item.get("paragraphs", [item["excerpt"]]) or source.get("review_only") else "ready"
     item["detected_at"] = now.isoformat()
     item["other_sources"] = []
     return item
@@ -367,6 +375,8 @@ def verify_telegram_identity(token, channel):
 
 
 def send_to_telegram(item, token, channel):
+    if not is_local_news(item):
+        raise ValueError("Rejected publication: news has no verified Kerman geography")
     if not token or not channel:
         raise RuntimeError("Missing Nashani Telegram token or channel")
     if str(channel) != str(EXPECTED_CHANNEL_ID):
@@ -418,6 +428,8 @@ def send_to_telegram(item, token, channel):
 
 
 def check_and_publish(item, state, ledger, token, channel):
+    if not is_local_news(item):
+        raise ValueError("Manual approval rejected: news is unrelated to Kerman")
     # Reserve first. A transport timeout can otherwise create duplicate posts.
     # Reject invalid bot credentials/permissions before reserving the story.
     verify_telegram_identity(token, channel)
@@ -543,6 +555,9 @@ def main():
             continue
         queue.append(item)
         new.append(item)
+    excluded = enforce_geography_on_queue(queue)
+    if excluded:
+        print(f"Nashani geo filter excluded {excluded} previously queued unrelated stories")
     # Recency order matters: lexicographic URL sorting would forget recent IDs.
     state["seen"] = seen_list[-5000:]
     if len(queue) > 300:
@@ -562,6 +577,8 @@ def main():
         matches = [x for x in queue if x.get("id") == args.approve]
         if len(matches) != 1 or matches[0].get("status") not in {"review", "ready"}:
             raise ValueError("Approval ID missing, duplicated or already sent")
+        if not is_local_news(matches[0]):
+            raise ValueError("Manual approval cannot bypass the Kerman geographic filter")
         check_and_publish(matches[0], state, ledger, token, channel)
     elif publishing:
         # Read from the persistent queue, not only this run's fresh discoveries.
