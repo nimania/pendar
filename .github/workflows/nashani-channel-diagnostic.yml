@@ -1,0 +1,80 @@
+name: Nashani Channel ID Diagnostic
+
+on:
+  push:
+    paths:
+      - '.github/workflows/nashani-channel-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Read-only Bot API chat discovery (no messages sent)
+        env:
+          BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          from urllib.request import Request, urlopen
+          from urllib.error import HTTPError
+          token=os.getenv("BOT_TOKEN","")
+          if not token:
+              print("Missing NASHANI_TELEGRAM_BOT_TOKEN secret")
+              sys.exit(1)
+          api="https://api.telegram.org/bot"+token+"/"
+          def call(method, params=None):
+              body=json.dumps(params).encode() if params is not None else None
+              req=Request(api+method, data=body, method="POST" if body else "GET", headers={"Content-Type":"application/json"})
+              try:
+                  with urlopen(req,timeout=15) as response:
+                      return json.load(response)
+              except HTTPError as error:
+                  try:
+                      description=json.loads(error.read().decode()).get("description","")
+                  except Exception:
+                      description=""
+                  print("Telegram method",method,"error",error.code,str(description)[:140])
+                  return {}
+          me=call("getMe")
+          if not me.get("ok"):
+              sys.exit(1)
+          identity=me["result"].get("username","")
+          print("Bot identity:",identity)
+          if identity.lower()!="neshanikermanbot":
+              print("Wrong bot configured")
+              sys.exit(1)
+          updates=call("getUpdates",{"limit":100,"timeout":0})
+          if not updates.get("ok"):
+              print("No update history available; cannot recover channel numeric ID")
+              sys.exit(0)
+          items=updates.get("result",[])
+          matches={}
+          for event in items:
+              for field in ("my_chat_member","channel_post","edited_channel_post"):
+                  entity=event.get(field) or {}
+                  chat=entity.get("chat") or {}
+                  username=str(chat.get("username","")).lower()
+                  if chat.get("type")=="channel" and username=="neshanikerman":
+                      matches[chat.get("id")]=username
+          print("Buffered update count:",len(items))
+          print("Matching public channel count:",len(matches))
+          if not matches:
+              print("No update confirms @neshanikerman; add bot and post a new channel message then retry")
+              sys.exit(0)
+          for chat_id in matches:
+              details=call("getChat",{"chat_id":chat_id})
+              found=details.get("result",{}) if details.get("ok") else {}
+              valid=found.get("username","").lower()=="neshanikerman" and found.get("type")=="channel"
+              print("Numeric chat ID:",chat_id,"verified:",valid)
+              if not valid:
+                  continue
+              member=call("getChatMember",{"chat_id":chat_id,"user_id":me["result"]["id"]})
+              rights=member.get("result",{}) if member.get("ok") else {}
+              print("Bot administrator:",rights.get("status")=="administrator",
+                    "can_post_messages:",rights.get("can_post_messages",False))
+          PY
