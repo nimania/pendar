@@ -91,6 +91,23 @@ def is_sensitive(text):
     return any(normalize(term) in clean for term in SENSITIVE)
 
 
+def source_due(source, state, now):
+    """Throttle individual public sources independently, without skipping failures."""
+    cadence = int(source.get("poll_minutes", 5))
+    if cadence < 5 or cadence > 120:
+        raise ValueError("poll_minutes must be between 5 and 120")
+    last = parse_time(state.get("source_last_checked", {}).get(source["handle"].lower()))
+    # Five seconds of tolerance for GitHub Actions scheduling jitter.
+    return last is None or (now - last).total_seconds() >= cadence * 60 - 5
+
+
+def clean_visible_excerpt(text):
+    """Keep clickable source URLs and Telegram handles out of the public caption."""
+    text = re.sub(r"(?:https?://|www\.)[^\s]+|(?<!\w)(?:[A-Za-z0-9_-]+\.)+(?:ir|com|net|org|me)(?:/[^\s]*)?", " ", text or "", flags=re.I)
+    text = re.sub(r"(?<!\w)@[A-Za-z0-9_]{3,}", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def short_text(text, limit=470):
     text = re.sub(r"\s+", " ", text or "").strip()
     if len(text) <= limit:
@@ -157,35 +174,38 @@ def duplicate(item, pending):
     return None
 
 
-def evaluate(item, now):
+def evaluate(item, now, source=None):
     stamp = parse_time(item["published_at"])
     if not stamp or stamp > now + timedelta(minutes=5) or now - stamp > MAX_AGE:
         return None
+    source = source or {}
     relevance = city_relevance(item["title"] + " " + item["excerpt"])
-    if relevance == "reject":
+    full_feed = source.get("coverage") == "all"
+    if relevance == "reject" and not full_feed:
         return None
+    if full_feed and relevance == "reject":
+        relevance = "source_full_feed"
     sensitive = is_sensitive(item["title"] + " " + item["excerpt"])
     item["id"] = story_id(item["url"])
     item["risk"] = "sensitive" if sensitive else "ordinary"
     item["city_confidence"] = relevance
-    item["status"] = "review" if sensitive or relevance != "high" else "ready"
+    item["status"] = "review" if sensitive or source.get("review_only") or (not full_feed and relevance != "high") else "ready"
     item["detected_at"] = now.isoformat()
     item["other_sources"] = []
     return item
 
 
 def telegram_message(item):
-    title = html.escape(short_text(item["title"], 125))
+    title = html.escape(short_text(clean_visible_excerpt(item["title"]), 125))
     lead = item["excerpt"]
     if normalize(lead).startswith(normalize(item["title"])):
         lead = lead[len(item["title"]):].strip(" :؛-—|")
-    lead = html.escape(short_text(lead, 180) or item["title"])
-    source = html.escape(item["source"])
-    link = html.escape(item["url"], quote=True)
+    lead = html.escape(short_text(clean_visible_excerpt(lead), 180) or item["title"])
+    # Cite the outlet in plain language, but keep original URLs only in the private ledger.
+    source = html.escape(item["source"].replace("\u200c", " "))
     return (f"📍 <b>نشانی | کرمان</b>\n\n"
             f"<b>{title}</b>\n\n"
-            f"به گزارش «{source}»: {lead}\n\n"
-            f"🔗 <a href=\"{link}\">منبع و متن اصلی</a>\n"
+            f"به گزارش {source}: {lead}\n\n"
             f"#کرمان #نشانی_کرمان")
 
 
@@ -337,20 +357,29 @@ def main():
         return
     sources = json.load(open(args.sources, encoding="utf-8"))["sources"]
     enabled = [s for s in sources if s.get("enabled")]
+    source_map = {s["handle"].lower(): s for s in enabled}
     now = utcnow()
+    ledger = None if args.dry_run else Ledger(os.getenv("GITHUB_TOKEN", ""))
+    state = {"source_last_checked": {}} if args.dry_run else ledger.load()
+    due = enabled if args.dry_run else [s for s in enabled if source_due(s, state, now)]
     results = []
     failed = []
-    for source in enabled:
+    for source in due:
         try:
             posts = source_posts(source)
+            if not posts:
+                raise ValueError("Source returned no text posts")
             results.extend(posts)
+            if not args.dry_run:
+                state.setdefault("source_last_checked", {})[source["handle"].lower()] = now.isoformat()
             print(json.dumps({"source": source["handle"], "posts": len(posts)},
                              ensure_ascii=False))
         except Exception as error:
             failed.append(source["handle"])
             print(f"Source {source['handle']} failed: {type(error).__name__}", file=sys.stderr)
     if args.dry_run:
-        relevant = [evaluate(dict(p), now) for p in results]
+        relevant = [evaluate(dict(p), now, source_map.get(p["source_handle"].lower()))
+                    for p in results]
         relevant = [p for p in relevant if p]
         print(json.dumps({"fetched": len(results), "eligible": len(relevant),
                           "source_errors": failed, "sample": relevant[:5]},
@@ -358,8 +387,6 @@ def main():
         return
     if not results and failed:
         raise RuntimeError("No news sources reachable: refusing to update state")
-    ledger = Ledger(os.getenv("GITHUB_TOKEN", ""))
-    state = ledger.load()
     if not state.get("initialized"):
         state["seen"] = sorted({p["url"] for p in results})
         state["initialized"] = True
@@ -376,10 +403,12 @@ def main():
             continue
         seen.add(post["url"])
         seen_list.append(post["url"])
-        item = evaluate(dict(post), now)
+        policy = source_map.get(post["source_handle"].lower(), {})
+        item = evaluate(dict(post), now, policy)
         if item is None:
             continue
-        old = duplicate(item, queue)
+        # Kerman-No full-feed mode preserves every distinct source post URL.
+        old = None if policy.get("coverage") == "all" else duplicate(item, queue)
         if old:
             if item["source"] != old["source"]:
                 old.setdefault("other_sources", []).append({
@@ -409,13 +438,16 @@ def main():
         check_and_publish(matches[0], state, ledger, token, channel)
     elif publishing:
         auto_items = [item for item in new if item.get("status") == "ready"]
-        # Never flood a channel after a delayed scrape; send at most two items.
-        for item in auto_items[2:]:
+        priority = [x for x in auto_items if source_map.get(x["source_handle"].lower(), {}).get("coverage") == "all"]
+        other = [x for x in auto_items if x not in priority]
+        # Kerman-No: all newly discovered ordinary text posts, subject to safety review.
+        # Other news feeds: up to two locally relevant items each run.
+        for item in other[2:]:
             item["status"] = "review"
             item["review_reason"] = "rate_limit"
-        if len(auto_items) > 2:
+        if len(other) > 2:
             ledger.save(state)
-        for item in auto_items[:2]:
+        for item in sorted(priority + other[:2], key=lambda p: p.get("published_at") or ""):
             check_and_publish(item, state, ledger, token, channel)
     else:
         print("Safe preview mode: outbound publishing DISABLED")
