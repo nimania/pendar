@@ -50,6 +50,32 @@ class CandidateIntakeTests(unittest.TestCase):
         self.assertIsNone(qualifies("در آینده هویت ملی اهمیت فراوانی دارد، "
                                     "ولی هنوز کسی درباره مسیر آن توافق نکرده است."))
 
+    def test_generic_statements_and_host_editorial_lines_are_screened(self):
+        self.assertIsNone(qualifies("به تعبیرِ مجری، هرچه به انتخابات آمریکا نزدیک می‌شویم، احتمال جنگ بیشتر شده است."))
+        self.assertIsNone(qualifies("این اولینش نیست، آخرینش هم نخواهد بود."))
+        self.assertIsNone(qualifies("به روایتِ او، هرکس به تاریخ توهین کرده، تا ابد به روشنفکران هم توهین خواهد کرد."))
+        self.assertIsNone(qualifies("گفتهٔ او دربارهٔ احتمال حمله، در این بازگویی راستی‌آزمایی مستقل نشده است."))
+        self.assertIsNone(qualifies("محور گفتگو: اگر حمله رخ دهد، هدف آمریکا چه خواهد بود؟"))
+        self.assertIsNotNone(qualifies("اگر جمهوری‌خواهان مجلس را ببرند، در انتخابات بعدی پیروز خواهند شد."))
+
+    def test_new_filter_screens_old_machine_noise_without_erasing_history(self):
+        noisy = "این اولینش نیست، آخرینش هم نخواهد بود."
+        # A prior revision could detect this generic statement through future tense.
+        old = build_queue([recap("r1", PREDICTION)], [],
+                          {"claims": [], "speakers": []}, figures=FIGURES)
+        old["candidates"][0]["excerpt_exact_from_field"] = noisy
+        old["candidates"][0]["editorial_decision"] = None
+        current = build_queue([recap("r1", noisy)], [],
+                              {"claims": [], "speakers": []}, previous=old, figures=FIGURES)
+        self.assertEqual(current["stats"]["total"], 1)
+        self.assertEqual(current["stats"]["screened"], 1)
+        self.assertEqual(current["stats"]["pending"], 0)
+        self.assertEqual(current["candidates"][0]["status"], "screened_out_by_current_filter")
+        # A missing source should not trigger mass screening.
+        missing = build_queue([], [], {"claims": [], "speakers": []},
+                              previous=old, figures=FIGURES)
+        self.assertEqual(missing["candidates"][0]["status"], "pending_editorial_review")
+
     def test_no_date_or_victory_is_invented(self):
         t = trigger_hint(PREDICTION, "unspecified")
         self.assertIsNone(t["verified_due_at"])
