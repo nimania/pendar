@@ -114,11 +114,13 @@ def is_sensitive(text):
 
 
 def regional_relevance(text):
+    """Require a Kerman toponym; 'کرمانشاه' and national-only news are not local."""
     clean = normalize(text)
-    if city_relevance(text) != "reject":
+    if re.search(r"(?<!\\w)کرمان(?!\\w)|(?<!\\w)کرمانی(?:ان|ها)?(?!\\w)", clean):
         return "high"
-    if any(normalize(term) in clean for term in REGIONAL_PLACES + REGIONAL_WITH_CONTEXT):
-        return "high"
+    for term in REGIONAL_PLACES + REGIONAL_WITH_CONTEXT:
+        if re.search(r"(?<!\\w)" + re.escape(normalize(term)) + r"(?!\\w)", clean):
+            return "high"
     return "reject"
 
 
