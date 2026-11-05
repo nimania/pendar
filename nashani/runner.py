@@ -375,10 +375,10 @@ def verify_telegram_identity(token, channel):
 
 
 def send_to_telegram(item, token, channel):
-    if not is_local_news(item):
-        raise ValueError("Rejected publication: news has no verified Kerman geography")
     if not token or not channel:
         raise RuntimeError("Missing Nashani Telegram token or channel")
+    if not is_local_news(item):
+        raise ValueError("Rejected publication: news has no verified Kerman geography")
     if str(channel) != str(EXPECTED_CHANNEL_ID):
         raise ValueError("NASHANI_CHANNEL_ID must be the verified numeric channel ID")
     verify_telegram_identity(token, channel)
