@@ -425,6 +425,8 @@ document.addEventListener("error",ev=>{
   ev.target.remove(); // visible initial remains when the verified photo fails to load
  }
 },true);
+const autoPersonParam=new URL(location.href).searchParams.get("person")||"";
+if(/^[A-Za-z0-9_-]{2,100}$/.test(autoPersonParam))state.autoPerson=autoPersonParam;
 let initial=location.hash.slice(1);if(labels[initial])state.tab=initial;
 render();load();
 })();
