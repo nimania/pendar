@@ -469,10 +469,12 @@
       "id": "08a9d8bd6c928409",
       "risk": "ordinary",
       "city_confidence": "high",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-05T11:06:41.938007+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "telegram_message_id": 4,
+      "sent_at": "2026-11-05T11:06:53.445827+00:00"
     }
   ],
-  "saved_at": "2026-11-05T11:06:50.179214+00:00"
+  "saved_at": "2026-11-05T11:06:53.445846+00:00"
 }
