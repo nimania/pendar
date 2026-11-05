@@ -28,6 +28,10 @@ class KarnamePublicationTests(unittest.TestCase):
         self.assertTrue(all(claim["result"] is None for claim in data["claims"]))
         by_id = {claim["id"]: claim for claim in data["claims"]}
         self.assertEqual(by_id["SOURI-20261101-02"]["speakers"], ["benjamin-souri"])
+        self.assertEqual(by_id["SOURI-20261101-01"]["speakers"], ["abbas-souri"])
+        self.assertEqual(data["speakers"][0]["name"], "عباس سوری")
+        self.assertEqual(sum("abbas-souri" in c["speakers"] for c in data["claims"]), 6)
+        self.assertEqual(data["provenance"]["attribution_correction"]["corrected_label"], "عباس سوری")
         self.assertEqual(by_id["SOURI-20261101-08"]["type_class"], "نقل گزارش")
         self.assertEqual(by_id["SOURI-20261101-09"]["type_class"], "نقل گزارش")
         self.assertIn("۹ مدخل", data["provenance"]["disclosure"])
