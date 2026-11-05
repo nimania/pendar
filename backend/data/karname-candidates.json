@@ -8,7 +8,8 @@
   "mirrored_jan_kalam_skipped": true,
   "stats": {
     "total": 64,
-    "pending": 64,
+    "pending": 50,
+    "screened": 14,
     "reviewed": 0,
     "sources_scanned": 61,
     "source_spans_scanned": 1200,
@@ -58,7 +59,7 @@
     },
     {
       "id": "KC-0d00ca6c38b305b4a8",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "probabilistic_forecast",
       "speaker_handle": null,
@@ -95,7 +96,8 @@
           "source_content_sha256": "bcb17dcc67d1f639465a2c89a04a915578934f4c95291204ff9c8028f9e11c08"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-14637dd30762a942ee",
@@ -304,7 +306,7 @@
     },
     {
       "id": "KC-2584ef3e3632142160",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "ahmadzeidabad",
@@ -341,7 +343,8 @@
           "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-32e43a2a7871d55ae2",
@@ -386,7 +389,7 @@
     },
     {
       "id": "KC-35326cbdb6864e6ab8",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "MehdiMotaharnia1344",
@@ -423,7 +426,8 @@
           "source_content_sha256": "c21ea73baa5a10d63b14bf31bc52849c26e369e0794d89f29a5a91255a3925ae"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-3ba2d3cf3f63f87796",
@@ -509,7 +513,7 @@
     },
     {
       "id": "KC-3e20f6a891587c70e9",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "probabilistic_forecast",
       "speaker_handle": "MehdiMotaharnia1344",
@@ -546,11 +550,12 @@
           "source_content_sha256": "9fbe9ceb478d9d09ddaf13ffcd5a312cbc39a8519af13647cb78d57833470aae"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-41a336de3d6c2c3a91",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "probabilistic_forecast",
       "speaker_handle": "mohammad-marandi",
@@ -587,7 +592,8 @@
           "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-42e81589ec900d0293",
@@ -632,7 +638,7 @@
     },
     {
       "id": "KC-49cbe58aa6e96bdb3b",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "probabilistic_forecast",
       "speaker_handle": "MehdiMotaharnia1344",
@@ -669,7 +675,8 @@
           "source_content_sha256": "04ef1a66a54c83e355f9678c96dcf024a65aba19488f43c7f04f30cdd74c96d1"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-4bb26cf497a3f8db59",
@@ -714,7 +721,7 @@
     },
     {
       "id": "KC-4cea5ee23d577c1804",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "darwinsabouri",
@@ -751,7 +758,8 @@
           "source_content_sha256": "02fbfa2c689c97996365a6965ebb4acb378f9740e17096a42f89cfc7aa9ecfcf"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-518690265cbf068e3a",
@@ -1001,7 +1009,7 @@
     },
     {
       "id": "KC-72be015557a316ce19",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "darwinsabouri",
@@ -1038,11 +1046,12 @@
           "source_content_sha256": "02fbfa2c689c97996365a6965ebb4acb378f9740e17096a42f89cfc7aa9ecfcf"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-7f31b04903810eecaa",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "MehdiMotaharnia1344",
@@ -1079,7 +1088,8 @@
           "source_content_sha256": "2279d2f1cb300bcf3522a823ebf6bdeb8258ff0dcb4b3ebd08b6d7fb3c451724"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-800227d5af2d1a2a70",
@@ -1124,7 +1134,7 @@
     },
     {
       "id": "KC-8405e2830701bba432",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "mohammad-marandi",
@@ -1161,7 +1171,8 @@
           "source_content_sha256": "85fbc88efa1bf4d5b0766ddc61d601ecc13bf3a79ec08b98b1733355373542d6"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-8729196cc6c258fe75",
@@ -1698,7 +1709,7 @@
     },
     {
       "id": "KC-b58eef3fa783634afd",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "conditional_forecast",
       "speaker_handle": "ahmadzeidabad",
@@ -1735,7 +1746,8 @@
           "source_content_sha256": "4dd8d3a659429d89fc7351d09fefb981bbb9e9723900d65dcfaa3b2e9ba7498d"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-c69a535cf545d7127c",
@@ -2354,7 +2366,7 @@
     },
     {
       "id": "KC-efef7bb299254bef5e",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "conditional_forecast",
       "speaker_handle": "MehdiMotaharnia1344",
@@ -2391,7 +2403,8 @@
           "source_content_sha256": "9fbe9ceb478d9d09ddaf13ffcd5a312cbc39a8519af13647cb78d57833470aae"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-f09215dc9d7d18098c",
@@ -2436,7 +2449,7 @@
     },
     {
       "id": "KC-f57e4c52221dc0832d",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "MehdiMotaharnia1344",
@@ -2473,11 +2486,12 @@
           "source_content_sha256": "90876ee5cc9932837774a054bd35ccf3db3c5547c7d85bc1139332e2019192a8"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-f5d8c6557085927c54",
-      "status": "pending_editorial_review",
+      "status": "screened_out_by_current_filter",
       "extraction_method": "conservative_rule_based_v1",
       "type_candidate": "forecast_candidate",
       "speaker_handle": "MehdiMotaharnia1344",
@@ -2514,7 +2528,8 @@
           "source_content_sha256": "90876ee5cc9932837774a054bd35ccf3db3c5547c7d85bc1139332e2019192a8"
         }
       ],
-      "editorial_decision": null
+      "editorial_decision": null,
+      "automated_screening_note": "No longer meets conservative extraction conditions; preserved for audit, not an editorial judgment."
     },
     {
       "id": "KC-f8d94fbce662b9fdce",
