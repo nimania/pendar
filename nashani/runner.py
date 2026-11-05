@@ -78,6 +78,24 @@ ADVERTISING_MARKERS = (
     "ارسال رایگان", "پرداخت در محل", "لینک خرید", "حراج",
     "سفارش دهید", "سفارش بده", "فروش اقساطی",
 )
+# Media-first articles must never become nonsensical text-only reports.
+VISUAL_STORY_MARKERS = (
+    "گزارش تصویری", "روایت تصویری", "یک روز یک قاب",
+    "عکس ها", "عکسهای", "آلبوم عکس", "تصاویر این", "تصاویر زیر",
+    "به روایت تصویر", "گزارش ویدیویی", "گزارش ویدئویی",
+    "ویدئوی", "ویدیوی", "در قاب تصویر",
+)
+SELF_PROMO_CALLS = (
+    "دنبال کنید", "فالو کنید", "عضو شوید", "به ما بپیوندید",
+    "مشترک شوید", "به کانال ما", "به صفحه ما",
+    "ما را دنبال", "همراه ما باشید", "برای عضویت",
+    "follow us", "join our channel", "subscribe",
+)
+SELF_PROMO_DESTINATIONS = (
+    "کانال", "اینستاگرام", "تلگرام", "صفحه", "پیج",
+    "شبکه های اجتماعی", "ایتا", "روبیکا", "واتساپ",
+    "اپلیکیشن", "رسانه ما",
+)
 
 
 def utcnow():
@@ -137,7 +155,35 @@ def enforce_geography_on_queue(queue):
 
 def looks_like_advertisement(text):
     clean = normalize(text)
-    return any(normalize(term) in clean for term in ADVERTISING_MARKERS)
+    if any(normalize(term) in clean for term in ADVERTISING_MARKERS):
+        return True
+    # Distinguish outlet/channel follow-us posts from ordinary local news.
+    return (any(normalize(term) in clean for term in SELF_PROMO_CALLS)
+            and any(normalize(term) in clean for term in SELF_PROMO_DESTINATIONS))
+
+
+def is_promotional_story(item):
+    return looks_like_advertisement(" ".join(
+        [item.get("title", ""), item.get("excerpt", "")]
+        + (item.get("paragraphs") or [])))
+
+
+def is_visual_story(item):
+    """A report that makes no sense without its referenced pictures/video."""
+    body = normalize(" ".join([item.get("title", ""), item.get("excerpt", "")]
+                              + (item.get("paragraphs") or [])))
+    return any(normalize(term) in body for term in VISUAL_STORY_MARKERS)
+
+
+def enforce_promotion_on_queue(queue):
+    """Also exclude already-queued self-promotional posts, without deleting audit history."""
+    excluded = 0
+    for item in queue:
+        if item.get("status") in {"ready", "review"} and is_promotional_story(item):
+            item["status"] = "excluded_promotion"
+            item["review_reason"] = "source_self_promotion_or_advertisement"
+            excluded += 1
+    return excluded
 
 
 def source_due(source, state, now):
@@ -232,7 +278,7 @@ def evaluate(item, now, source=None):
     location = is_local_news(item)
     if not location:
         return None
-    if looks_like_advertisement(body):
+    if is_promotional_story(item):
         return None
     sensitive = is_sensitive(body)
     item["id"] = story_id(item["url"])
@@ -241,7 +287,14 @@ def evaluate(item, now, source=None):
     item["risk"] = "sensitive" if sensitive else "ordinary"
     item["city_confidence"] = "high"
     item["geography"] = location
-    item["status"] = "review" if sensitive or not item.get("paragraphs", [item["excerpt"]]) or source.get("review_only") else "ready"
+    media_missing = is_visual_story(item) and (
+        not item["media_repost_allowed"] or not isinstance(item.get("media"), dict)
+    )
+    item["status"] = ("review" if sensitive or media_missing
+                      or not item.get("paragraphs", [item["excerpt"]])
+                      or source.get("review_only") else "ready")
+    if media_missing:
+        item["review_reason"] = "visual_report_requires_authorized_media"
     item["detected_at"] = now.isoformat()
     item["other_sources"] = []
     return item
@@ -379,12 +432,17 @@ def send_to_telegram(item, token, channel):
         raise RuntimeError("Missing Nashani Telegram token or channel")
     if not is_local_news(item):
         raise ValueError("Rejected publication: news has no verified Kerman geography")
+    if is_promotional_story(item):
+        raise ValueError("Rejected publication: source self-promotion or advertisement")
+    visual_required = is_visual_story(item)
+    media = item.get("media")
+    if visual_required and (not item.get("media_repost_allowed") or not isinstance(media, dict)):
+        raise MediaNotAvailable("Visual report requires authorized source media")
     if str(channel) != str(EXPECTED_CHANNEL_ID):
         raise ValueError("NASHANI_CHANNEL_ID must be the verified numeric channel ID")
     verify_telegram_identity(token, channel)
     api = "https://api.telegram.org/bot" + token + "/"
     caption = telegram_message(item)
-    media = item.get("media")
     if item.get("media_repost_allowed") and isinstance(media, dict):
         handle = item.get("source_handle", "")
         post_id = item.get("source_post_id", "")
@@ -416,7 +474,11 @@ def send_to_telegram(item, token, channel):
                 item["delivery_kind"] = media["kind"]
                 return message_id
             except MediaNotAvailable as error:
+                if visual_required:
+                    raise
                 print(f"Media not available ({error}); using attributed text instead")
+    if visual_required:
+        raise MediaNotAvailable("Source photo/video could not be delivered; text-only blocked")
     result = telegram_checked_call(api, "sendMessage", {
         "chat_id": channel, "text": caption,
         "parse_mode": "HTML", "link_preview_options": {"is_disabled": True},
@@ -430,6 +492,8 @@ def send_to_telegram(item, token, channel):
 def check_and_publish(item, state, ledger, token, channel):
     if not is_local_news(item):
         raise ValueError("Manual approval rejected: news is unrelated to Kerman")
+    if is_promotional_story(item):
+        raise ValueError("Manual approval cannot bypass the promotional-post filter")
     # Reserve first. A transport timeout can otherwise create duplicate posts.
     # Reject invalid bot credentials/permissions before reserving the story.
     verify_telegram_identity(token, channel)
@@ -437,6 +501,11 @@ def check_and_publish(item, state, ledger, token, channel):
     ledger.save(state)
     try:
         msg_id = send_to_telegram(item, token, channel)
+    except MediaNotAvailable:
+        item["status"] = "review"
+        item["review_reason"] = "visual_report_media_delivery_unavailable"
+        ledger.save(state)
+        raise
     except Exception:
         ledger.save(state)
         raise
@@ -454,6 +523,8 @@ def publish_batch(items, state, ledger, token, channel):
     """
     if not items:
         return 0
+    if any(not is_local_news(item) or is_promotional_story(item) for item in items):
+        raise ValueError("Batch contains a nonlocal or promotional story")
     verify_telegram_identity(token, channel)
     stamp = utcnow().isoformat()
     for item in items:
@@ -464,6 +535,11 @@ def publish_batch(items, state, ledger, token, channel):
     for position, item in enumerate(items):
         try:
             message_id = send_to_telegram(item, token, channel)
+        except MediaNotAvailable:
+            # Definitive no-send: hold the visual report for review, not text fallback.
+            item["status"] = "review"
+            item["review_reason"] = "visual_report_media_delivery_unavailable"
+            continue
         except Exception:
             # This post may have reached Telegram: keep uncertain. Subsequent
             # posts were definitely not attempted, so they can be retried.
@@ -558,6 +634,21 @@ def main():
     excluded = enforce_geography_on_queue(queue)
     if excluded:
         print(f"Nashani geo filter excluded {excluded} previously queued unrelated stories")
+    promoted = enforce_promotion_on_queue(queue)
+    if promoted:
+        print(f"Nashani promotion filter excluded {promoted} queued ads/subscribe posts")
+    # Sync source rights after registry updates; never grant rights not in sources.json.
+    for item in queue:
+        if item.get("status") not in {"ready", "review"}:
+            continue
+        policy = source_map.get(item.get("source_handle", "").lower(), {})
+        item["media_repost_allowed"] = bool(policy.get("media_repost_allowed", False))
+        if (item.get("review_reason") == "visual_report_requires_authorized_media"
+                and item["media_repost_allowed"] and isinstance(item.get("media"), dict)
+                and not is_sensitive(item.get("title", "") + " " + item.get("excerpt", ""))
+                and not policy.get("review_only")):
+            item["status"] = "ready"
+            item.pop("review_reason", None)
     # Recency order matters: lexicographic URL sorting would forget recent IDs.
     state["seen"] = seen_list[-5000:]
     if len(queue) > 300:
