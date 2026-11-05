@@ -44,6 +44,51 @@ class NewsRadarTests(unittest.TestCase):
         old = {"title": "آغاز مرمت بازار تاریخی شهر کرمان", "source": "الف"}
         self.assertIs(runner.duplicate(item, [old]), old)
 
+    def test_source_specific_poll_cadences(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        checked = {"source_last_checked": {
+            "kermane_no": "2026-11-05T15:09:00+00:00",
+            "irna_kerman": "2026-11-05T15:24:00+00:00",
+        }}
+        self.assertFalse(runner.source_due({"handle": "kermane_no", "poll_minutes": 30}, checked, now))
+        self.assertTrue(runner.source_due({"handle": "irna_kerman", "poll_minutes": 5}, checked, now))
+        checked["source_last_checked"]["kermane_no"] = "2026-11-05T14:59:00+00:00"
+        self.assertTrue(runner.source_due({"handle": "kermane_no", "poll_minutes": 30}, checked, now))
+
+    def test_full_feed_preserves_all_ordinary_posts_regardless_of_city(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        row = {"url": "https://t.me/kermane_no/999", "title": "خبر تازه از شهربابک",
+               "excerpt": "در نشست امروز شهربابک برنامه توسعه شهر اعلام شد",
+               "source": "کرمان‌نو", "published_at": now.isoformat()}
+        assessed = runner.evaluate(row, now, {"coverage": "all"})
+        self.assertEqual(assessed["status"], "ready")
+        self.assertEqual(assessed["city_confidence"], "source_full_feed")
+
+    def test_sensitive_full_feed_posts_still_require_review(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        row = {"url": "https://t.me/kermane_no/1000", "title": "بازداشت متهم",
+               "excerpt": "این خبر حاوی ادعای بازداشت در شهرستان است",
+               "source": "کرمان‌نو", "published_at": now.isoformat()}
+        self.assertEqual(runner.evaluate(row, now, {"coverage": "all"})["status"], "review")
+
+    def test_secondary_review_only_sources_do_not_auto_publish(self):
+        now = datetime(2026, 11, 5, 15, 30, tzinfo=timezone.utc)
+        row = {"url": "https://t.me/kerman_rasaneh/4", "title": "شهرداری کرمان طرح جدید را بررسی کرد",
+               "excerpt": "گزارش امروز درباره پروژه‌های شهر کرمان است",
+               "source": "کرمان رسانه", "published_at": now.isoformat()}
+        self.assertEqual(runner.evaluate(row, now, {"coverage": "city", "review_only": True})["status"], "review")
+
+    def test_message_uses_only_plain_outlet_attribution(self):
+        item = {"title": "شهرداری کرمان منطقه جدید اعلام کرد",
+                "excerpt": "شهرداری کرمان منطقه جدید اعلام کرد برای مشاهده متن کامل https://kermaneno.ir/x و @kermane_no",
+                "source": "کرمان‌نو", "url": "https://t.me/kermane_no/123"}
+        rendered = runner.telegram_message(item)
+        self.assertIn("به گزارش کرمان نو:", rendered)
+        self.assertNotIn("https://", rendered)
+        self.assertNotIn("href=", rendered)
+        self.assertNotIn("@kermane_no", rendered)
+        self.assertNotIn("منبع و متن اصلی", rendered)
+
     def test_html_is_escaped(self):
         item = {"title": "خبر <script> ناامن", "excerpt": "خبر <script> ناامن",
                 "source": "خبرگزاری", "url": "https://t.me/example/1"}
