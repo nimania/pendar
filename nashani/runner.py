@@ -349,6 +349,7 @@ def send_to_telegram(item, token, channel):
                     "parse_mode": "HTML",
                 })
                 if copied.get("ok"):
+                    item["delivery_kind"] = media["kind"]
                     return copied["result"]["message_id"]
             except TelegramApiError as error:
                 if error.code not in (400, 403):
@@ -362,7 +363,9 @@ def send_to_telegram(item, token, channel):
                     media = None
         if media is not None:
             try:
-                return upload_public_media(token, channel, media, caption)
+                message_id = upload_public_media(token, channel, media, caption)
+                item["delivery_kind"] = media["kind"]
+                return message_id
             except MediaNotAvailable as error:
                 print(f"Media not available ({error}); using attributed text instead")
     result = telegram_checked_call(api, "sendMessage", {
@@ -371,6 +374,7 @@ def send_to_telegram(item, token, channel):
     })
     if result.get("ok") is not True:
         raise RuntimeError("Telegram rejected text message")
+    item["delivery_kind"] = "text"
     return result["result"]["message_id"]
 
 

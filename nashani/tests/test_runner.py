@@ -141,6 +141,7 @@ class NewsRadarTests(unittest.TestCase):
                  "ok": True, "result": {"message_id": 44}}) as api:
             result = runner.send_to_telegram(item, "token", "-1003958286892")
         self.assertEqual(result, 44)
+        self.assertEqual(item["delivery_kind"], "photo")
         self.assertEqual(api.call_args.args[1], "copyMessage")
         payload = api.call_args.args[2]
         self.assertIn("🔶", payload["caption"])
@@ -161,6 +162,7 @@ class NewsRadarTests(unittest.TestCase):
              patch.object(runner, "upload_public_media", return_value=51) as upload:
             result = runner.send_to_telegram(item, "token", "-1003958286892")
         self.assertEqual(result, 51)
+        self.assertEqual(item["delivery_kind"], "video")
         self.assertEqual(upload.call_args.args[2]["kind"], "video")
 
     def test_caption_falls_back_to_text_on_missing_video(self):
@@ -173,6 +175,7 @@ class NewsRadarTests(unittest.TestCase):
         with patch.object(runner, "verify_telegram_identity"), \
              patch.object(runner, "telegram_checked_call", side_effect=calls) as api:
             self.assertEqual(runner.send_to_telegram(item, "token", "-1003958286892"), 9)
+        self.assertEqual(item["delivery_kind"], "text")
         self.assertEqual(api.call_args.args[1], "sendMessage")
 
     def test_no_publish_without_explicit_channel(self):
