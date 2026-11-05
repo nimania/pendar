@@ -203,7 +203,27 @@
     "https://t.me/fardaayekerman/34934",
     "https://t.me/fardaayekerman/34945",
     "https://t.me/kerman_news/140109",
-    "https://t.me/kerman_news/140110"
+    "https://t.me/kerman_news/140110",
+    "https://t.me/qh_qv/854",
+    "https://t.me/qh_qv/855",
+    "https://t.me/qh_qv/856",
+    "https://t.me/qh_qv/857",
+    "https://t.me/qh_qv/858",
+    "https://t.me/qh_qv/859",
+    "https://t.me/qh_qv/860",
+    "https://t.me/qh_qv/861",
+    "https://t.me/qh_qv/862",
+    "https://t.me/qh_qv/863",
+    "https://t.me/qh_qv/864",
+    "https://t.me/qh_qv/865",
+    "https://t.me/qh_qv/866",
+    "https://t.me/qh_qv/867",
+    "https://t.me/qh_qv/868",
+    "https://t.me/qh_qv/869",
+    "https://t.me/qh_qv/870",
+    "https://t.me/qh_qv/871",
+    "https://t.me/qh_qv/872",
+    "https://t.me/qh_qv/873"
   ],
   "queue": [
     {
@@ -1012,14 +1032,15 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-05T16:42:48.314076+00:00",
+  "saved_at": "2026-11-05T16:50:58.458752+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-05T16:15:06.272311+00:00",
-    "fardaayekerman": "2026-11-05T16:38:27.180690+00:00",
-    "irna_kerman": "2026-11-05T16:38:27.180690+00:00",
-    "kerman_gov": "2026-11-05T16:38:27.180690+00:00",
-    "kerman_akhbar": "2026-11-05T16:38:27.180690+00:00",
+    "kermane_no": "2026-11-05T16:50:53.449005+00:00",
+    "fardaayekerman": "2026-11-05T16:50:53.449005+00:00",
+    "irna_kerman": "2026-11-05T16:50:53.449005+00:00",
+    "kerman_gov": "2026-11-05T16:50:53.449005+00:00",
+    "kerman_akhbar": "2026-11-05T16:50:53.449005+00:00",
     "kerman_news": "2026-11-05T16:38:27.180690+00:00",
-    "kerman_rasaneh": "2026-11-05T16:38:27.180690+00:00"
+    "kerman_rasaneh": "2026-11-05T16:50:53.449005+00:00",
+    "qh_qv": "2026-11-05T16:50:53.449005+00:00"
   }
 }
