@@ -1,7 +1,7 @@
 {
   "version": 4,
   "territory": "Kerman city, all localities in Kerman Province, and neighboring-province matters explicitly connected to Kerman",
-  "editorial_policy": "A universal fail-closed geo check is mandatory for all source handles, including Kerman-No. Only articles explicitly connected with a Kerman city/province locality, or cross-border issues with a named Kerman endpoint, may be published. Off-topic national and neighboring-province-only news are excluded. Apply the gate to new items, queued items, manual approval and final send. Keep sensitive-story review and the outlet-source hashtag.",
+  "editorial_policy": "A universal fail-closed geo check is mandatory for all source handles, including Kerman-No. Only articles explicitly connected with a Kerman city/province locality, or cross-border issues with a named Kerman endpoint, may be published. Off-topic national and neighboring-province-only news are excluded. Apply the gate to new items, queued items, manual approval and final send. Keep sensitive-story review and the outlet-source hashtag. Suppress source/channel self-promotions and keep image-dependent reports in review if their authorized photo/video cannot be delivered.",
   "sources": [
     {
       "name": "کرمان‌نو",
@@ -52,9 +52,9 @@
       "verified_from": "https://t.me/kerman_gov",
       "poll_minutes": 5,
       "coverage": "kerman_geography",
-      "media_repost_allowed": false,
-      "media_permission_status": "not_owner_confirmed",
-      "geography_filter": "strict"
+      "media_repost_allowed": true,
+      "geography_filter": "strict",
+      "media_permission_status": "user_requested_photo_reposts_2026-11-05"
     },
     {
       "name": "آخرین خبر کرمان",
