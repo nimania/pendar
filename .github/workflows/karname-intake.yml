@@ -16,6 +16,7 @@ on:
       - "backend/scripts/build_karname_unified.py"
       - "backend/scripts/verify_karname_sources.py"
       - "backend/tests/test_karname_source_verification.py"
+      - "backend/tests/test_karname_evidence_cases.py"
       - "backend/tests/test_karname_person_pages.js"
       - "backend/tests/test_karname_unified.py"
       - "backend/tests/test_karname_unified.js"
@@ -73,6 +74,7 @@ jobs:
           python backend/scripts/build_karname_unified.py
           python -m unittest discover -s backend/tests -p 'test_karname_unified.py' -v
           python -m unittest discover -s backend/tests -p 'test_karname_source_verification.py' -v
+          python -m unittest discover -s backend/tests -p 'test_karname_evidence_cases.py' -v
       - name: Verify scenario UI and classifications
         run: |
           node --check web-static/karname/app.js
