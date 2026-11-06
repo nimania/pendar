@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-06",
+  "policy": "Evidence records are not final speaker verdicts. No forecast score is assigned until the original statement, date, wording and measurement rule are verified.",
+  "summary": {
+    "cases": 7,
+    "event_evidence_collected": 6,
+    "primary_statement_verified": 0,
+    "final_adjudications": 0
+  },
+  "sources": [
+    {
+      "id": "AP-CONGRESS-2026-11-05",
+      "publisher": "Associated Press",
+      "title": "Calling control of Congress in the 2026 midterm elections",
+      "published_at": "2026-11-05",
+      "url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/",
+      "supports": [
+        "K-009",
+        "K-010",
+        "K-011",
+        "K-012"
+      ],
+      "finding_fa": "AP اعلام کرد دموکرات‌ها کنترل سنا را در ۳ نوامبر و مجلس نمایندگان را در ۴ نوامبر به دست آورده‌اند.",
+      "limits_fa": "نتیجهٔ رویداد را تثبیت می‌کند، اما اصالت گفتار منتسب به گوینده را اثبات نمی‌کند."
+    },
+    {
+      "id": "AP-RESULT-2026-11-05",
+      "publisher": "Associated Press",
+      "title": "The Latest: Voters give Democrats control of Congress in rebuke to Trump",
+      "published_at": "2026-11-05",
+      "url": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd",
+      "supports": [
+        "K-009",
+        "K-010",
+        "K-011",
+        "K-012"
+      ],
+      "finding_fa": "گزارش نتیجهٔ انتخابات، کنترل هر دو مجلس توسط دموکرات‌ها را تأیید می‌کند.",
+      "limits_fa": "برای عدد نهایی هر کرسی، نسخهٔ نهایی داده‌های انتخاباتی باید جداگانه ثبت شود."
+    },
+    {
+      "id": "BALLOTPEDIA-2026-11-04",
+      "publisher": "Ballotpedia",
+      "title": "Election results, 2026",
+      "published_at": "2026-11-04",
+      "url": "https://ballotpedia.org/Election_results",
+      "supports": [
+        "K-009",
+        "K-010",
+        "K-011",
+        "K-012"
+      ],
+      "finding_fa": "جدول زمان‌دار نتایج، کرسی‌های اعلام‌شده و اعلام‌نشده را تفکیک می‌کند.",
+      "limits_fa": "snapshot در حال شمارش است؛ به‌تنهایی مرجع نهایی نیست."
+    },
+    {
+      "id": "WAPO-QESHM-2026-11-02",
+      "publisher": "The Washington Post",
+      "title": "U.S. forces launch new ‘defensive’ strikes in Iran on eve of election",
+      "published_at": "2026-11-02",
+      "url": "https://www.washingtonpost.com/national-security/2026/11/02/us-forces-launch-new-defensive-strikes-iran-on-eve-election/",
+      "supports": [
+        "K-001",
+        "K-005"
+      ],
+      "finding_fa": "گزارش از حملات هوایی آمریکا به جزیرهٔ قشم در ۲ نوامبر ۲۰۲۶ خبر می‌دهد.",
+      "limits_fa": "تعریف دقیق «حمله» و دامنهٔ ادعای گوینده باید از منبع اولیه استخراج شود."
+    },
+    {
+      "id": "REUTERS-TRUMP-PLEDGE-2026-10-08",
+      "publisher": "Reuters",
+      "title": "Trump says US will not attack Iran before midterm elections in November",
+      "published_at": "2026-10-08",
+      "url": "https://www.reuters.com/world/trump-us-having-productive-talks-with-iran-will-not-attack-before-us-elections-2026-10-08/",
+      "supports": [
+        "K-001",
+        "K-005"
+      ],
+      "finding_fa": "رویترز موضع علنی ترامپ مبنی بر حمله‌نکردن پیش از انتخابات را نقل می‌کند.",
+      "limits_fa": "اظهار ترامپ به‌خودی‌خود اثبات‌کنندهٔ عدم وقوع حمله نیست؛ گزارش حملهٔ ۲ نوامبر شاهد رویدادی متعارض است."
+    }
+  ],
+  "cases": [
+    {
+      "id": "K-009",
+      "claim_fa": "جمهوری‌خواهان با خطای نظرسنجی‌ها ممکن است سنا را نگه دارند",
+      "speaker_key": "رشیدی",
+      "event_status": "event_contrary_to_scenario",
+      "preliminary_finding_fa": "سناریوی حفظ کنترل سنا توسط جمهوری‌خواهان محقق نشد؛ AP کنترل سنا را به دموکرات‌ها نسبت داده است.",
+      "uncertainty_fa": "عبارت احتمال‌نماست و احتمال عددی ندارد؛ اصالت عبارت و تاریخ بیان در منبع اولیه تأیید نشده است.",
+      "source_ids": [
+        "AP-CONGRESS-2026-11-05",
+        "AP-RESULT-2026-11-05",
+        "BALLOTPEDIA-2026-11-04"
+      ],
+      "primary_statement_status": "missing",
+      "adjudication_status": "event_evidence_collected_pending_primary_statement",
+      "score": null
+    },
+    {
+      "id": "K-010",
+      "claim_fa": "جمهوری‌خواهان مجلس نمایندگان را از دست می‌دهند",
+      "speaker_key": "عزیزی",
+      "event_status": "event_consistent_with_claim",
+      "preliminary_finding_fa": "نتیجهٔ اعلام‌شده با جهت ادعا سازگار است؛ دموکرات‌ها کنترل مجلس نمایندگان را به دست آوردند.",
+      "uncertainty_fa": "متن دفتر از snapshot ارسالی آمده و پیوند/زمان‌مهر گفتار اصلی ثبت نشده است.",
+      "source_ids": [
+        "AP-CONGRESS-2026-11-05",
+        "AP-RESULT-2026-11-05",
+        "BALLOTPEDIA-2026-11-04"
+      ],
+      "primary_statement_status": "missing",
+      "adjudication_status": "event_evidence_collected_pending_primary_statement",
+      "score": null
+    },
+    {
+      "id": "K-011",
+      "claim_fa": "سنا هم ممکن است از دست برود",
+      "speaker_key": "عزیزی",
+      "event_status": "event_consistent_with_claim",
+      "preliminary_finding_fa": "دموکرات‌ها کنترل سنا را به دست آوردند؛ رویداد با جهت سناریوی مطرح‌شده سازگار است.",
+      "uncertainty_fa": "عبارت احتمال‌نماست؛ بدون احتمال/درجهٔ اطمینان و متن کامل نمی‌توان امتیاز قطعی محاسبه کرد.",
+      "source_ids": [
+        "AP-CONGRESS-2026-11-05",
+        "AP-RESULT-2026-11-05",
+        "BALLOTPEDIA-2026-11-04"
+      ],
+      "primary_statement_status": "missing",
+      "adjudication_status": "event_evidence_collected_pending_primary_statement",
+      "score": null
+    },
+    {
+      "id": "K-012",
+      "claim_fa": "دموکرات‌ها به دوسوم لازم برای مهار وتوی ترامپ نمی‌رسند",
+      "speaker_key": "رشیدی",
+      "event_status": "insufficient_seat_count_evidence",
+      "preliminary_finding_fa": "صرف کنترل اکثریت هر دو مجلس برای اثبات یا رد آستانهٔ دوسوم کافی نیست؛ شمار نهایی کرسی‌ها و دامنهٔ دقیق ادعا باید تثبیت شود.",
+      "uncertainty_fa": "عدد نهایی کرسی‌ها و تعریف اینکه ادعا هر دو مجلس یا یک مجلس را هدف می‌گیرد باید مستند شود.",
+      "source_ids": [
+        "AP-CONGRESS-2026-11-05",
+        "BALLOTPEDIA-2026-11-04"
+      ],
+      "primary_statement_status": "missing",
+      "adjudication_status": "open_requires_final_seat_count_and_primary_statement",
+      "score": null
+    },
+    {
+      "id": "K-001",
+      "claim_fa": "حمله پیش از ۱۳ آبان ممکن و برای ترامپ منطقی‌تر است",
+      "speaker_key": "مطهرنیا",
+      "event_status": "related_event_reported",
+      "preliminary_finding_fa": "واشنگتن‌پست از حملات آمریکا به قشم در ۲ نوامبر خبر داده است؛ این رویداد برای سنجش ادعا مرتبط است.",
+      "uncertainty_fa": "تاریخ دقیق بیان، منظور از حمله و افق دقیق «پیش از ۱۳ آبان» باید با ویدئوی اصلی تطبیق داده شود.",
+      "source_ids": [
+        "WAPO-QESHM-2026-11-02"
+      ],
+      "primary_statement_status": "missing",
+      "adjudication_status": "event_evidence_collected_pending_primary_statement",
+      "score": null
+    },
+    {
+      "id": "K-005",
+      "claim_fa": "آمریکا تا روز انتخابات از تنش پرهیز می‌کند",
+      "speaker_key": "رشیدی",
+      "event_status": "related_event_contradiction_possible",
+      "preliminary_finding_fa": "گزارش حملهٔ آمریکا به قشم در ۲ نوامبر با برداشت گسترده از «پرهیز از تنش» ناسازگار است.",
+      "uncertainty_fa": "ممکن است منظور گوینده پرهیز از تشدید علنی/جنگ گسترده بوده باشد؛ بدون متن کامل، حکم نهایی صادر نمی‌شود.",
+      "source_ids": [
+        "WAPO-QESHM-2026-11-02",
+        "REUTERS-TRUMP-PLEDGE-2026-10-08"
+      ],
+      "primary_statement_status": "missing",
+      "adjudication_status": "open_requires_contextual_primary_statement",
+      "score": null
+    },
+    {
+      "id": "K-018",
+      "claim_fa": "تهران پیش از انتخابات آمریکا توافق نمی‌کند",
+      "speaker_key": "عزیزی",
+      "event_status": "classification_review_required",
+      "preliminary_finding_fa": "متن از نظر ساختار یک گزارهٔ آینده‌نگر قابل سنجش است، اما در دفتر با نوع «توصیه» طبقه‌بندی شده؛ باید با گفتار اصلی تعیین شود که پیش‌بینی بوده یا توصیه.",
+      "uncertainty_fa": "تا تعیین نوع گفتار، وارد امتیاز پیش‌بینی نشود.",
+      "source_ids": [
+        "REUTERS-TRUMP-PLEDGE-2026-10-08"
+      ],
+      "primary_statement_status": "missing",
+      "adjudication_status": "open_requires_claim_type_review",
+      "score": null
+    }
+  ]
+}
