@@ -504,7 +504,7 @@ async function loadEvidenceCases(){
  if(state.tab==="evidence")render();
 }
 function render(){
- setHeading();if(!state.data&&state.tab!=="auto"&&state.tab!=="all"&&state.tab!=="people"&&state.tab!=="person"){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
+ setHeading();if(!state.data&&state.tab!=="auto"&&state.tab!=="all"&&state.tab!=="people"&&state.tab!=="person"&&state.tab!=="evidence"){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
  const views={highlights:renderHighlights,auto:renderAuto,evidence:renderEvidenceCases,people:renderPeople,person:renderPersonDetail,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderUnified};
  $("cards").innerHTML=(views[state.tab]||renderHighlights)();
 }
