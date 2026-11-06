@@ -426,7 +426,19 @@ function renderUnified(){
  const d=state.unifiedIndex,n=d.counts;
  const modes=[["all","همهٔ رکوردها"],["historical_ledger","پرونده‌های ثبت‌شده"],["automatic_observation","رصدهای تأییدنشده"],["quality_audit","ممیزی استخراج"]];
  const choices=modes.map(([k,t])=>'<button type="button" data-unified-filter="'+k+'" class="'+(state.unifiedFilter===k?"active":"")+'">'+t+'</button>').join("");
- const rows=d.entries.filter(r=>(state.unifiedFilter==="all"||r.layer===state.unifiedFilter)
+ // Mix documented and newly observed items on the landing page. Previously
+ // the first 60 were all historical, hiding every automatic observation.
+ const officialRows=d.entries.filter(r=>r.layer==="historical_ledger");
+ const autoRows=d.entries.filter(r=>r.layer==="automatic_observation");
+ const auditRows=d.entries.filter(r=>r.layer==="quality_audit");
+ const mixed=[];
+ for(let i=0;i<Math.max(autoRows.length,officialRows.length);i++){
+  if(autoRows[i])mixed.push(autoRows[i]);
+  if(officialRows[i])mixed.push(officialRows[i]);
+ }
+ mixed.push(...auditRows);
+ const rows=(state.unifiedFilter==="all"?mixed:d.entries).filter(r=>
+  (state.unifiedFilter==="all"||r.layer===state.unifiedFilter)
   &&(!state.unifiedQuery||norm([r.id,r.title,array(r.speaker_labels).join(" "),r.screening_reason,r.time_label].join(" ")).includes(norm(state.unifiedQuery))));
  const listed=rows.slice(0,state.unifiedLimit);
  const intro='<div class="unified-intro"><strong>'+fa(n.total)+' رکورد در سامانهٔ یکپارچه</strong><p>'
