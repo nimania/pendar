@@ -4,12 +4,144 @@
   "is_editorially_approved": false,
   "automation": "published_by_karname_scheduled_intake",
   "summary": {
-    "visible_observations": 136,
-    "requires_source_verification": 136,
+    "visible_observations": 142,
+    "requires_source_verification": 142,
     "independently_verified_results": 0
   },
   "notice_fa": "این بخش به‌صورت خودکار از منابع منتشرشده گردآوری می‌شود. متن می‌تواند بازگویی یا خلاصهٔ خبر باشد؛ انتساب، تاریخ بیان، تحقق شرط و نتیجه هنوز مستقلاً تأیید نشده‌اند.",
   "items": [
+    {
+      "id": "KC-9785a830ef3659857c",
+      "text_from_source": "در آینده خیلی نزدیک، کنگره و ترامپ به جان یکدیگر می‌افتند و بین آن‌ها درگیری‌هایی به وجود خواهد آمد.",
+      "person": {
+        "label": "اسماعیل کوثری",
+        "role": "نام مرتبط با خبر؛ انتساب نیازمند بررسی",
+        "profile_handle": null,
+        "identity_verified_from_primary": false,
+        "identity_status": "indexed_news_person_requires_review"
+      },
+      "observation_status": "auto_collected_unverified",
+      "publication_approved": false,
+      "evaluation": null,
+      "source": {
+        "kind": "figure_post",
+        "record_id": "news:67a9a758-c12a-4a11-835c-24dbb2f902e2",
+        "title": "دنیای اقتصاد",
+        "link": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4306511-%D8%B9%D8%B6%D9%88-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%85%D9%84%DB%8C-%D8%AF%D9%85%D9%88%DA%A9%D8%B1%D8%A7%D8%AA-%D9%87%D8%A7-%D9%87%D9%85-%D8%A7%D8%B2-%D9%85%D8%A7-%D8%AE%D9%88%D8%B4%D8%B4%D8%A7%D9%86-%D9%86%D9%85%DB%8C-%D8%A2%DB%8C%D8%AF-%D8%AF%D8%B1-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D9%86%D8%B2%D8%AF%DB%8C%DA%A9-%DA%A9%D9%86%DA%AF%D8%B1%D9%87-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D8%A8%D9%87-%D8%AC%D8%A7%D9%86-%DB%8C%DA%A9%D8%AF%DB%8C%DA%AF%D8%B1-%D9%85%DB%8C-%D8%A7%D9%81%D8%AA%D9%86%D8%AF",
+        "text_origin": "متن خبر یا خلاصهٔ خبری؛ گویندهٔ جمله مستقلاً احراز نشده",
+        "speech_date_verified": false,
+        "primary_verified": false,
+        "source_count": 1,
+        "indexed_at": "2026-11-05T21:33:39"
+      },
+      "trigger": {
+        "kind": "undetermined",
+        "condition_mention": null,
+        "time_mention": null,
+        "verified_deadline": null,
+        "result": null,
+        "needs_evidence": true
+      }
+    },
+    {
+      "id": "KC-7987fbb09e8cbb0abc",
+      "text_from_source": "دولت ترامپ عقب‌نشینی نخواهد کرد و با قدرت به مسیر خود ادامه می‌دهد؛ طرح استیضاح اقدامی سیاسی برای تخریب مخالفان است.",
+      "person": {
+        "label": "پیت هگست",
+        "role": "نام مرتبط با خبر؛ انتساب نیازمند بررسی",
+        "profile_handle": null,
+        "identity_verified_from_primary": false,
+        "identity_status": "indexed_news_person_requires_review"
+      },
+      "observation_status": "auto_collected_unverified",
+      "publication_approved": false,
+      "evaluation": null,
+      "source": {
+        "kind": "figure_post",
+        "record_id": "news:64ef6bac-f8cc-4821-96b7-400886e7d504",
+        "title": "انتخاب",
+        "link": "https://www.entekhab.ir/fa/news/946670/واکنش-وزیر-جنگ-ترامپ-به-تلاش-ها-برای-استیضاح-او-ما-تازه-مبارزه-را-آغاز-کرده-ایم-عقب-نشینی-نمی-کنیم-مصمم-هستیم-تا-کاری-که-آغاز-کرده-ایم-را-به-پایان-برسانیم-ایستادگی-می-کنیم-و-می-جنگیم",
+        "text_origin": "متن خبر یا خلاصهٔ خبری؛ گویندهٔ جمله مستقلاً احراز نشده",
+        "speech_date_verified": false,
+        "primary_verified": false,
+        "source_count": 1,
+        "indexed_at": "2026-11-05T21:10:53"
+      },
+      "trigger": {
+        "kind": "undetermined",
+        "condition_mention": null,
+        "time_mention": null,
+        "verified_deadline": null,
+        "result": null,
+        "needs_evidence": true
+      }
+    },
+    {
+      "id": "KC-b28f40104290b4ab0f",
+      "text_from_source": "پوتین اعلام کرده است که هر کمکی برای پایان جنگ انجام خواهد داد.",
+      "person": {
+        "label": "محسن رضایی",
+        "role": "نام مرتبط با خبر؛ انتساب نیازمند بررسی",
+        "profile_handle": null,
+        "identity_verified_from_primary": false,
+        "identity_status": "indexed_news_person_requires_review"
+      },
+      "observation_status": "auto_collected_unverified",
+      "publication_approved": false,
+      "evaluation": null,
+      "source": {
+        "kind": "figure_post",
+        "record_id": "news:1e2fedbf-3b30-42ef-b46b-01885d64de97",
+        "title": "انتخاب",
+        "link": "https://www.entekhab.ir/fa/news/946669/ادعای-ترامپ-درباره-ایران-ترجیح-می-دهم-در-صورت-امکان-بقیه-کشور-را-هم-نابود-نکنم-اما-شاید-مجبور-شوم-این-کار-را-انجام-دهم-رویترز-به-نقل-از-مقام-ارشد-ایرانی-ایران-پیشنهاد-هسته-ای-خود-را-از-طریق-قطر-ارسال-کرده-و-آمریکا-در-حال-بررسی-آن-است",
+        "text_origin": "متن خبر یا خلاصهٔ خبری؛ گویندهٔ جمله مستقلاً احراز نشده",
+        "speech_date_verified": false,
+        "primary_verified": false,
+        "source_count": 1,
+        "indexed_at": "2026-11-05T21:04:49"
+      },
+      "trigger": {
+        "kind": "undetermined",
+        "condition_mention": null,
+        "time_mention": null,
+        "verified_deadline": null,
+        "result": null,
+        "needs_evidence": true
+      }
+    },
+    {
+      "id": "KC-66723c125340ab43f4",
+      "text_from_source": "آقای پوتین پیشنهاد خاصی برای پایان جنگ ارائه نکرد اما اظهار داشت که اگر حالت نه جنگ و نه صلح زودتر تمام شود به نفع کشور شما خواهد بود.",
+      "person": {
+        "label": "محسن رضایی",
+        "role": "نام مرتبط با خبر؛ انتساب نیازمند بررسی",
+        "profile_handle": null,
+        "identity_verified_from_primary": false,
+        "identity_status": "indexed_news_person_requires_review"
+      },
+      "observation_status": "auto_collected_unverified",
+      "publication_approved": false,
+      "evaluation": null,
+      "source": {
+        "kind": "figure_post",
+        "record_id": "news:4716efea-e2e4-4db4-9f33-eb69668c180b",
+        "title": "عصر ایران",
+        "link": "https://www.asriran.com/fa/news/1204095/محسن-رضایی-به-آقای-پوتین-عرض-کردیم-تا-آمریکایی-ها-به-هفت-شرط-ما-عمل-نکنند-نه-تنگه-هرمز-باز-می-شود-و-نه-مذاکره-ای-در-کار-است",
+        "text_origin": "متن خبر یا خلاصهٔ خبری؛ گویندهٔ جمله مستقلاً احراز نشده",
+        "speech_date_verified": false,
+        "primary_verified": false,
+        "source_count": 1,
+        "indexed_at": "2026-11-05T19:00:14"
+      },
+      "trigger": {
+        "kind": "conditional",
+        "condition_mention": "اگر حالت نه جنگ و نه صلح زودتر تمام شود به نفع کشور شما خواهد بود",
+        "time_mention": null,
+        "verified_deadline": null,
+        "result": null,
+        "needs_evidence": true
+      }
+    },
     {
       "id": "KC-c872aa8b85a0e32afa",
       "text_from_source": "شایعه قطع کالابرگ ۳۰ تا ۴۰ میلیون نفر صحت ندارد و دولت در راستای عدالت‌محوری برای حمایت از اقشار آسیب‌پذیر، اصلاحاتی انجام می‌دهد که جزئیات آن اعلام خواهد شد.",
@@ -33,6 +165,72 @@
         "primary_verified": false,
         "source_count": 1,
         "indexed_at": "2026-11-05T18:44:30"
+      },
+      "trigger": {
+        "kind": "undetermined",
+        "condition_mention": null,
+        "time_mention": null,
+        "verified_deadline": null,
+        "result": null,
+        "needs_evidence": true
+      }
+    },
+    {
+      "id": "KC-213cf873e04f6a60e5",
+      "text_from_source": "عراق سکوی حمله به کشورهای همسایه نخواهد بود و بر ضرورت احترام به حاکمیت کشورها و راه‌حل‌های مسالمت‌آمیز تأکید داریم.",
+      "person": {
+        "label": "علی الزیدی",
+        "role": "نام مرتبط با خبر؛ انتساب نیازمند بررسی",
+        "profile_handle": null,
+        "identity_verified_from_primary": false,
+        "identity_status": "indexed_news_person_requires_review"
+      },
+      "observation_status": "auto_collected_unverified",
+      "publication_approved": false,
+      "evaluation": null,
+      "source": {
+        "kind": "figure_post",
+        "record_id": "news:195164b4-ff60-4a07-a9ed-22e401f57365",
+        "title": "اقتصاد آنلاین",
+        "link": "https://www.eghtesadonline.com/fa/news/2173702/تماس-مهم-نخست-وزیر-عراق-با-ترامپ-پیام-بغداد-درباره-تحولات-منطقه",
+        "text_origin": "متن خبر یا خلاصهٔ خبری؛ گویندهٔ جمله مستقلاً احراز نشده",
+        "speech_date_verified": false,
+        "primary_verified": false,
+        "source_count": 1,
+        "indexed_at": "2026-11-05T18:43:17"
+      },
+      "trigger": {
+        "kind": "undetermined",
+        "condition_mention": null,
+        "time_mention": null,
+        "verified_deadline": null,
+        "result": null,
+        "needs_evidence": true
+      }
+    },
+    {
+      "id": "KC-9f2b63c175c044422a",
+      "text_from_source": "تهران تا زمان تحقق شروط هفت‌گانه خود، تنگه هرمز را بازگشایی نخواهد کرد.",
+      "person": {
+        "label": "محسن رضایی",
+        "role": "نام مرتبط با خبر؛ انتساب نیازمند بررسی",
+        "profile_handle": null,
+        "identity_verified_from_primary": false,
+        "identity_status": "indexed_news_person_requires_review"
+      },
+      "observation_status": "auto_collected_unverified",
+      "publication_approved": false,
+      "evaluation": null,
+      "source": {
+        "kind": "figure_post",
+        "record_id": "news:a5925440-1345-496a-974b-b41bb85f383f",
+        "title": "تابناک",
+        "link": "https://tabnak.ir/fa/news/4200077/%D8%B3%D8%B1%D9%84%D8%B4%DA%A9%D8%B1%D8%B1%D8%B6%D8%A7%DB%8C%DB%8C-%D8%AF%D8%B1-%D8%AF%DB%8C%D8%AF%D8%A7%D8%B1-%D8%A8%D8%A7-%D9%BE%D9%88%D8%AA%DB%8C%D9%86-%D8%A7%D8%B2-%D8%B4%D8%B1%D9%88%D8%B7-%D9%87%D9%81%D8%AA%DA%AF%D8%A7%D9%86%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A8%D8%A7%D8%B2%DA%AF%D8%B4%D8%A7%DB%8C%DB%8C-%D8%AA%D9%86%DA%AF%D9%87-%D9%87%D8%B1%D9%85%D8%B2-%DA%AF%D9%81%D8%AA-8ff05b8a2c474eb4b37b0d7f",
+        "text_origin": "متن خبر یا خلاصهٔ خبری؛ گویندهٔ جمله مستقلاً احراز نشده",
+        "speech_date_verified": false,
+        "primary_verified": false,
+        "source_count": 1,
+        "indexed_at": "2026-11-05T18:23:06"
       },
       "trigger": {
         "kind": "undetermined",

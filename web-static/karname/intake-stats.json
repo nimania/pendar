@@ -3,16 +3,16 @@
   "scope": "public_aggregate_only",
   "is_editorially_approved": false,
   "counts": {
-    "extracted_candidates": 148,
-    "pending_review": 136,
+    "extracted_candidates": 154,
+    "pending_review": 142,
     "screened_out": 12,
     "previously_reviewed": 0,
     "manual_review_requested": 2
   },
   "coverage": {
-    "figure_profiles_scanned": 527,
-    "figure_posts_scanned": 819,
-    "source_spans_scanned": 2256,
+    "figure_profiles_scanned": 535,
+    "figure_posts_scanned": 832,
+    "source_spans_scanned": 2269,
     "figure_feed_available": true
   },
   "review_queue_url": "https://github.com/nimania/pendar/blob/main/backend/data/karname-candidates.json",
