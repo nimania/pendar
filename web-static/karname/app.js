@@ -208,7 +208,7 @@ function renderDuels(){
 function renderCalendar(){
  let rows=[...state.claims].filter(c=>c.kind!=="L"&&!scorable(c));
  rows.sort((a,b)=>{let ad=due(a)?.getTime()??Infinity,bd=due(b)?.getTime()??Infinity;return ad-bd;});
- if(!rows.length)return noData("مورد بازی وجود ندارد","با ثبت پیش‌بینی‌های دارای مهلت، تقویم سررسیدها فعال می‌شود.");
+ if(!rows.length)return renderAutoTriggerHints()||noData("مورد بازی وجود ندارد","با ثبت پیش‌بینی‌های دارای مهلت، تقویم سررسیدها فعال می‌شود.");
  let buckets=new Map();
  for(const c of rows){const b=bucket(c),key=c.bucket||"other",label=b.label||b.title||c.due_label||"بدون سررسید مشخص";if(!buckets.has(key))buckets.set(key,{label,claims:[]});buckets.get(key).claims.push(c);}
  return [...buckets.values()].map(b=>'<section class="calendar-group"><h3>'+esc(b.label)+'</h3><div class="group-items">'+b.claims.map((c,i)=>mini(c,i)).join("")+'</div></section>').join("")+renderAutoTriggerHints();
@@ -348,7 +348,7 @@ async function loadUnifiedIndex(){
   const d=await r.json();if(!validUnifiedIndex(d))throw Error("Integrated index invalid");
   state.unifiedIndex=d;state.unifiedLoadState="ready";
  }catch(err){state.unifiedIndex=null;state.unifiedLoadState="error";console.warn("Karname index unavailable",err.message);}
- if(["all","people","calendar","scenarios"].includes(state.tab))render();
+ if(["highlights","all","people","calendar","scenarios"].includes(state.tab))render();
 }
 function renderUnified(){
  if(state.unifiedLoadState==="loading")return noData("در حال دریافت بانک مشترک","همهٔ رکوردهای ثبت‌شده و رصدهای ماشینی در یک نمایه جست‌وجو می‌شوند.");
@@ -381,7 +381,7 @@ function renderUnified(){
   return '<article class="tile unified-record unified-screened"><span class="pill open">ممیزی · بدون انتساب قطعی</span>'
     +'<small dir="ltr">'+esc(r.id)+'</small><h3>کنارگذاشته‌شده از ادعاهای قابل‌سنجش</h3>'
     +'<p>'+esc(r.screening_reason||"مورد نیازمند ارزیابی کیفیت")+'</p>'
-    +'<p class="muted">متن اولیه و نام اشخاص به‌عنوان ادعای قابل انتشار بازنشر نشده‌اند؛ اصل سند در صف ممیزی حفظ شده است.</p></article>';
+    +'<p class="muted">متن اولیه به‌عنوان گفتهٔ قطعی یک فرد بازنشر نشده است؛ اصل سند در صف ممیزی حفظ شده است.</p></article>';
  }).join("");
  const more=rows.length>listed.length?'<button type="button" class="unified-more" data-unified-more="true">نمایش '+fa(Math.min(60,rows.length-listed.length))+' مورد بعدی</button>':"";
  return intro+tools+'<p class="unified-count">'+fa(listed.length)+' مورد از '+fa(rows.length)+' نتیجه</p>'
