@@ -13,6 +13,9 @@ on:
       - "backend/scripts/collect_karname_candidates.py"
       - "backend/scripts/build_karname_intake_stats.py"
       - "backend/scripts/build_karname_auto_radar.py"
+      - "backend/scripts/build_karname_unified.py"
+      - "backend/tests/test_karname_unified.py"
+      - "backend/tests/test_karname_unified.js"
       - "backend/tests/test_karname_auto_radar.py"
       - "backend/scripts/fetch_karname_figures.py"
       - "backend/tests/test_karname_candidates.py"
@@ -24,6 +27,9 @@ on:
       - "backend/scripts/collect_karname_candidates.py"
       - "backend/scripts/build_karname_intake_stats.py"
       - "backend/scripts/build_karname_auto_radar.py"
+      - "backend/scripts/build_karname_unified.py"
+      - "backend/tests/test_karname_unified.py"
+      - "backend/tests/test_karname_unified.js"
       - "backend/tests/test_karname_auto_radar.py"
       - "backend/scripts/fetch_karname_figures.py"
       - "backend/tests/test_karname_candidates.py"
@@ -57,10 +63,14 @@ jobs:
           python -m unittest discover -s backend/tests -p 'test_karname_candidates.py' -v
           python -m unittest discover -s backend/tests -p 'test_karname_intake_stats.py' -v
           python -m unittest discover -s backend/tests -p 'test_karname_auto_radar.py' -v
+          # Data may have advanced on main while this PR was open.
+          python backend/scripts/build_karname_unified.py
+          python -m unittest discover -s backend/tests -p 'test_karname_unified.py' -v
       - name: Verify scenario UI and classifications
         run: |
           node --check web-static/karname/app.js
           node backend/tests/test_karname_scenarios.js
+          node backend/tests/test_karname_unified.js
       - name: Read current Pendar figure and news index
         id: figure_feed
         continue-on-error: true
@@ -79,6 +89,8 @@ jobs:
           python backend/scripts/build_karname_intake_stats.py --check
           python backend/scripts/build_karname_auto_radar.py
           python backend/scripts/build_karname_auto_radar.py --check
+          python backend/scripts/build_karname_unified.py
+          python backend/scripts/build_karname_unified.py --check
           python - <<'PY'
           import json, os
           from pathlib import Path
@@ -109,14 +121,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git add backend/data/karname-candidates.json web-static/karname/intake-stats.json web-static/karname/auto-radar.json
+          git add backend/data/karname-candidates.json web-static/karname/intake-stats.json web-static/karname/auto-radar.json web-static/karname/unified-index.json
           if git diff --cached --quiet; then
             echo "No new candidates or review changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "data(karname): refresh automatic observation radar, review queue and public stats"
+          git commit -m "data(karname): refresh unified registry, radar observations and audit index"
           git pull --rebase origin main
           git push origin HEAD:main
           # A push using GITHUB_TOKEN does not trigger a separate workflow.
