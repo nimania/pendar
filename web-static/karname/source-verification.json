@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "scope": "automatic_source_verification_not_outcome_scoring",
-  "generated_at": "2026-11-06T13:23:09Z",
+  "generated_at": "2026-11-06T19:25:08Z",
   "policy_fa": "این بررسی صرفاً دسترس‌پذیری منبع و وجود متن در صفحه را می‌سنجد؛ نه اصالت گفتار شخص، نه تحقق رویداد و نه درست/نادرست‌بودن پیش‌بینی.",
   "summary": {
     "observations": 142,
     "checked_this_run": 18,
-    "exact_text_in_source_page": 3,
+    "exact_text_in_source_page": 5,
     "deadlines_requiring_evidence": 12,
     "outcomes_automatically_scored": 0
   },
@@ -488,36 +488,36 @@
       "outcome": "not_assessed"
     },
     "KC-8c52040eb3d9f9007b": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_accessible",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://t.me/Garajetadayoni/11717",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-8ef73abe9af59dd073": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_accessible",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://t.me/ahmadzeidabad/6082",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-8f12643c0c1d27db5d": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_accessible",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://t.me/hoderestan/2285",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-92727a1353fa0d6833": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.france24.com/en/french-interior-minister-fears-disorder-after-dark-on-halloween",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-929f19eff0b81db9cb": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -530,15 +530,15 @@
       "outcome": "not_assessed"
     },
     "KC-9466760dfcda1b2741": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-95340fb79c6e2a519f": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_accessible",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305286-%D8%AE%DB%8C%D8%B2-%D8%A7%D8%AD%D8%B2%D8%A7%D8%A8-%D8%B9%D8%B1%D8%A8%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%DA%A9%D9%86%D8%A7%D8%B1-%D8%B2%D8%AF%D9%86-%D9%86%D8%AA%D8%A7%D9%86%DB%8C%D8%A7%D9%87%D9%88-%D8%A2%D9%85%D8%A7%D8%AF%D9%87-%D9%85%D8%B0%D8%A7%DA%A9%D8%B1%D9%87-%D8%A8%D8%A7-%D8%A7%D8%B1%D8%AF%D9%88%DA%AF%D8%A7%D9%87-%D8%AA%D8%BA%DB%8C%DB%8C%D8%B1-%D9%87%D8%B3%D8%AA%DB%8C%D9%85",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -551,57 +551,57 @@
       "outcome": "not_assessed"
     },
     "KC-9785a830ef3659857c": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_text_found",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4306511-%D8%B9%D8%B6%D9%88-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%85%D9%84%DB%8C-%D8%AF%D9%85%D9%88%DA%A9%D8%B1%D8%A7%D8%AA-%D9%87%D8%A7-%D9%87%D9%85-%D8%A7%D8%B2-%D9%85%D8%A7-%D8%AE%D9%88%D8%B4%D8%B4%D8%A7%D9%86-%D9%86%D9%85%DB%8C-%D8%A2%DB%8C%D8%AF-%D8%AF%D8%B1-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D9%86%D8%B2%D8%AF%DB%8C%DA%A9-%DA%A9%D9%86%DA%AF%D8%B1%D9%87-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D8%A8%D9%87-%D8%AC%D8%A7%D9%86-%DB%8C%DA%A9%D8%AF%DB%8C%DA%AF%D8%B1-%D9%85%DB%8C-%D8%A7%D9%81%D8%AA%D9%86%D8%AF",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-98785fdf5b0730838f": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://fararu.com/fa/news/1013312/%D8%AC%D8%A7%D9%86-%DA%A9%D8%B1%DB%8C-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA-%D8%A7%D8%B4%D8%AA%D8%A8%D8%A7%D9%87%DB%8C-%D9%81%D8%A7%D8%AD%D8%B4-%D8%AE%D9%88%D8%A7%D9%87%D8%AF-%D8%A8%D9%88%D8%AF",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-9f2b63c175c044422a": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_text_found",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://tabnak.ir/fa/news/4200077/%D8%B3%D8%B1%D9%84%D8%B4%DA%A9%D8%B1%D8%B1%D8%B6%D8%A7%DB%8C%DB%8C-%D8%AF%D8%B1-%D8%AF%DB%8C%D8%AF%D8%A7%D8%B1-%D8%A8%D8%A7-%D9%BE%D9%88%D8%AA%DB%8C%D9%86-%D8%A7%D8%B2-%D8%B4%D8%B1%D9%88%D8%B7-%D9%87%D9%81%D8%AA%DA%AF%D8%A7%D9%86%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A8%D8%A7%D8%B2%DA%AF%D8%B4%D8%A7%DB%8C%DB%8C-%D8%AA%D9%86%DA%AF%D9%87-%D9%87%D8%B1%D9%85%D8%B2-%DA%AF%D9%81%D8%AA-8ff05b8a2c474eb4b37b0d7f",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-9f8582b8d349f9716f": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://fa.shafaqna.com/news/2391348/",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-a1dceaded4fef82820": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-a1ec6cd700a1c920ac": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-a2c93dc1ee8fefc8e0": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.entekhab.ir/fa/news/946238/ادعای-اکسیوس-رئیس-سیا-به-ترامپ-توصیه-می-کند-وضعیت-کنونی-نه-جنگ-نه-توافق-را-حفظ-کند-رتکلیف-به-ترامپ-گفته-تداوم-فشارهای-اقتصادی-و-افزایش-مشکلات-معیشتی-در-بلندمدت-ایران-را-وادار-به-دادن-امتیازات-بیشتر-خواهد-کرد",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-a6e811645dea462570": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.iranintl.com/202610314066",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -621,8 +621,8 @@
       "outcome": "not_assessed"
     },
     "KC-aa076945676116c7ff": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_accessible",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.irna.ir/news/86308633/%D8%B9%D8%B1%D8%A7%D9%82%DA%86%DB%8C-%DB%8C%D8%A7%D8%AF-%D9%88-%D9%86%D8%A7%D9%85-%D8%AF%DA%A9%D8%AA%D8%B1-%D9%BE%DB%8C%D8%B1%D9%88%D8%B2-%D9%85%D8%AC%D8%AA%D9%87%D8%AF%D8%B2%D8%A7%D8%AF%D9%87-%D8%AF%D8%B1-%D8%AD%D8%A7%D9%81%D8%B8%D9%87-%D8%B9%D9%84%D9%85%DB%8C-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%85%D8%A7%D9%86%D8%AF%DA%AF%D8%A7%D8%B1",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -635,15 +635,15 @@
       "outcome": "not_assessed"
     },
     "KC-abac935887e34e36a3": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.youtube.com/watch?v=ZTDWWQJ9DGg",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-ae851fab9c0e3394b7": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-06T19:25:08Z",
       "source_url": "https://www.eghtesadonline.com/fa/news/2173224/فوری-برنامه-ایران-برای-حمله-به-پایگاه-های-آمریکا-در-اروپا",
       "speaker_verified": false,
       "outcome": "not_assessed"
