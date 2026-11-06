@@ -3,7 +3,7 @@
 (()=>{
 "use strict";
 const DATA_URL="/data/karname.json", $=id=>document.getElementById(id);
-const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null,autoItems:[],autoQuery:"",autoKind:"",autoPerson:"",autoLoadState:"loading",autoNotice:""};
+const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null,autoItems:[],autoQuery:"",autoKind:"",autoPerson:"",autoLoadState:"loading",autoNotice:"",unifiedIndex:null,unifiedLoadState:"loading",unifiedFilter:"all",unifiedQuery:"",unifiedLimit:60};
 const labels={
   highlights:["منتخب کارنامه","پیش‌بینی‌ها زیر ذره‌بین","تازه‌ترین پرونده‌ها، با متن اصلی و منابع."],
   auto:["رادار خودکار پندار","چه گفته‌هایی تازه رصد شده‌اند؟","متن‌های یافت‌شده از منابع عمومی؛ انتساب، نقل مستقیم و نتیجه هنوز تأیید نشده‌اند."],
@@ -11,7 +11,7 @@ const labels={
   duels:["دو تحلیل؛ یک آینده","دوئل پیش‌بینی‌ها","دیدگاه‌های متفاوت را کنار هم ببینید."],
   calendar:["زمان حسابرسی","موعد رسید!","سررسیدهای گذشته و پیش‌بینی‌های در انتظار."],
   scenarios:["نقشهٔ دیدگاه‌ها","چه کسی کدام آینده را می‌بیند؟","گرایش به یک سناریو، نمرهٔ عملکرد نیست."],
-  all:["بانک پیش‌بینی‌ها","همهٔ پیش‌بینی‌ها","جست‌وجو و فیلتر در پرونده‌های مستند."]
+  all:["بانک یکپارچهٔ کارنامه","تمام رکوردها با سطح اعتبارشان","جست‌وجوی مشترک ادعاهای ثبت‌شده، رصدهای ماشینی و سوابق پالایش‌شده."]
 };
 function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
 function fa(v){return new Intl.NumberFormat("fa-IR",{maximumFractionDigits:1}).format(Number(v)||0);}
@@ -281,6 +281,65 @@ function renderAuto(){
  }).join("");
  return intro+controls+cards;
 }
+function validUnifiedIndex(data){
+ if(data?.schema_version!==1||data.scope!=="integrated_discovery_index_not_a_verdict_or_primary_source"||!Array.isArray(data.entries)||data.entries.length>15000)return false;
+ const count=data.counts||{}, seen=new Set(),layer={historical_ledger:0,automatic_observation:0,quality_audit:0};
+ for(const row of data.entries){
+  if(!row||typeof row.id!=="string"||seen.has(row.id)||!(row.layer in layer))return false;
+  seen.add(row.id);
+  if(!["recorded","unverified","screened_out","other_not_publicly_attributed"].includes(row.status))return false;
+  if(row.has_result_source===true&&row.layer!=="historical_ledger")return false;
+  layer[row.layer]++;
+ }
+ return count.total===data.entries.length&&count.documented===layer.historical_ledger
+  &&count.automatic_unverified===layer.automatic_observation
+  &&count.screened_from_public_claims+count.other_review_states===layer.quality_audit;
+}
+async function loadUnifiedIndex(){
+ try{
+  const r=await fetch("/karname/unified-index.json",{cache:"no-store"});if(!r.ok)throw Error("HTTP "+r.status);
+  const d=await r.json();if(!validUnifiedIndex(d))throw Error("Integrated index invalid");
+  state.unifiedIndex=d;state.unifiedLoadState="ready";
+ }catch(err){state.unifiedIndex=null;state.unifiedLoadState="error";console.warn("Karname index unavailable",err.message);}
+ if(["all","people","calendar","scenarios"].includes(state.tab))render();
+}
+function renderUnified(){
+ if(state.unifiedLoadState==="loading")return noData("در حال دریافت بانک مشترک","همهٔ رکوردهای ثبت‌شده و رصدهای ماشینی در یک نمایه جست‌وجو می‌شوند.");
+ if(state.unifiedLoadState==="error")return '<div class="unified-intro"><strong>نمایهٔ مشترک موقتاً در دسترس نیست.</strong><p>بانک رسمی همچنان قابل جست‌وجو است.</p></div>'+renderAll();
+ const d=state.unifiedIndex,n=d.counts;
+ const modes=[["all","همهٔ رکوردها"],["historical_ledger","پرونده‌های ثبت‌شده"],["automatic_observation","رصدهای تأییدنشده"],["quality_audit","ممیزی استخراج"]];
+ const choices=modes.map(([k,t])=>'<button type="button" data-unified-filter="'+k+'" class="'+(state.unifiedFilter===k?"active":"")+'">'+t+'</button>').join("");
+ const rows=d.entries.filter(r=>(state.unifiedFilter==="all"||r.layer===state.unifiedFilter)
+  &&(!state.unifiedQuery||norm([r.id,r.title,array(r.speaker_labels).join(" "),r.screening_reason,r.time_label].join(" ")).includes(norm(state.unifiedQuery))));
+ const listed=rows.slice(0,state.unifiedLimit);
+ const intro='<div class="unified-intro"><strong>'+fa(n.total)+' رکورد در سامانهٔ یکپارچه</strong><p>'
+  +fa(n.documented)+' پروندهٔ قبلی، '+fa(n.automatic_unverified)+' رصد ماشینی تأییدنشده، '
+  +fa(n.screened_from_public_claims+n.other_review_states)+' مدخل ممیزی؛ هیچ‌کدام با نمرهٔ ساختگی جمع زده نمی‌شوند.</p></div>';
+ const tools='<div class="unified-controls">'+choices+'</div><div class="tools unified-search"><input id="unified-search" type="search" value="'+esc(state.unifiedQuery)+'" placeholder="جست‌وجو در همهٔ نام‌ها، گفته‌ها و شناسه‌ها" aria-label="جست‌وجوی بانک یکپارچه"></div>';
+ const cards=listed.map(r=>{
+  if(r.layer==="historical_ledger"){
+   const c=state.claims.find(x=>x.id===r.id);
+   return c?mini(c,1):'<article class="tile unified-record"><h3>'+esc(r.title)+'</h3><p>منبع: بانک مستند</p></article>';
+  }
+  if(r.layer==="automatic_observation"){
+   const target='/karname/?observation='+encodeURIComponent(r.id)+'#auto';
+   const matches=array(r.linked_ledger_claim_ids_for_review);
+   const similar=matches.length?'<p class="unified-related">شباهت نیازمند بررسی با: '+matches.map(esc).join("، ")+'</p>':"";
+   return '<article class="tile unified-record"><span class="auto-provisional">رصد خودکار · انتساب و نتیجه تأییدنشده</span>'
+    +'<small dir="ltr">'+esc(r.id)+'</small><h3>'+esc(array(r.speaker_labels)[0]||"نام مرتبط با خبر")+'</h3>'
+    +'<p class="auto-quote">'+esc(r.title)+'</p>'
+    +(r.time_label?'<p class="auto-trigger">اشارهٔ زمانی (تأییدنشده): '+esc(r.time_label)+'</p>':"")+similar
+    +'<div class="tile-foot"><a href="'+esc(target)+'">مشاهدهٔ منبع و شرایط ←</a></div></article>';
+  }
+  return '<article class="tile unified-record unified-screened"><span class="pill open">ممیزی · بدون انتساب قطعی</span>'
+    +'<small dir="ltr">'+esc(r.id)+'</small><h3>کنارگذاشته‌شده از ادعاهای قابل‌سنجش</h3>'
+    +'<p>'+esc(r.screening_reason||"مورد نیازمند ارزیابی کیفیت")+'</p>'
+    +'<p class="muted">متن اولیه و نام اشخاص به‌عنوان ادعای قابل انتشار بازنشر نشده‌اند؛ اصل سند در صف ممیزی حفظ شده است.</p></article>';
+ }).join("");
+ const more=rows.length>listed.length?'<button type="button" class="unified-more" data-unified-more="true">نمایش '+fa(Math.min(60,rows.length-listed.length))+' مورد بعدی</button>':"";
+ return intro+tools+'<p class="unified-count">'+fa(listed.length)+' مورد از '+fa(rows.length)+' نتیجه</p>'
+   +(rows.length?cards:noData("رکوردی برای این فیلتر نیست","جست‌وجو را تغییر دهید."))+more;
+}
 function renderAll(){
  const speakers=state.speakers.map(s=>'<option value="'+esc(s.key||s.name)+'" '+(state.speaker===(s.key||s.name)?"selected":"")+'>'+esc(s.name||s.key)+'</option>').join("");
  const controls='<div class="tools"><input id="claim-search" type="search" value="'+esc(state.query)+'" placeholder="جست‌وجو در گفته‌ها، شناسه و نام تحلیلگر…" aria-label="جست‌وجوی ادعاها"><select id="filter-speaker" aria-label="تحلیلگر"><option value="">همهٔ تحلیلگران</option>'+speakers+'</select><select id="filter-status" aria-label="نتیجه"><option value="">همهٔ نتیجه‌ها</option><option value="good" '+(state.status==="good"?"selected":"")+'>درست</option><option value="half" '+(state.status==="half"?"selected":"")+'>نیمه‌درست</option><option value="bad" '+(state.status==="bad"?"selected":"")+'>نادرست</option><option value="wait" '+(state.status==="wait"?"selected":"")+'>منتظر بررسی</option><option value="open" '+(state.status==="open"?"selected":"")+'>باز و بلندمدت</option></select></div>';
@@ -288,8 +347,8 @@ function renderAll(){
  return controls+showClaims(rows);
 }
 function render(){
- setHeading();if(!state.data&&state.tab!=="auto"){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
- const views={highlights:renderHighlights,auto:renderAuto,people:renderPeople,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderAll};
+ setHeading();if(!state.data&&state.tab!=="auto"&&state.tab!=="all"){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
+ const views={highlights:renderHighlights,auto:renderAuto,people:renderPeople,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderUnified};
  $("cards").innerHTML=(views[state.tab]||renderHighlights)();
 }
 function detail(c){
@@ -337,12 +396,15 @@ function eventHandlers(){
  document.querySelectorAll(".tabs button").forEach(btn=>btn.addEventListener("click",()=>setTab(btn.dataset.tab)));
  $("cards").addEventListener("click",ev=>{
   let c=ev.target.closest("[data-claim]");if(c)return openClaim(c.dataset.claim);
+  let uf=ev.target.closest("[data-unified-filter]");if(uf){state.unifiedFilter=uf.dataset.unifiedFilter;state.unifiedLimit=60;render();return;}
+  if(ev.target.closest("[data-unified-more]")){state.unifiedLimit+=60;render();return;}
   let p=ev.target.closest("[data-person]");if(p){state.speaker=p.dataset.person;state.query="";state.status="";setTab("all");}
   let auto=ev.target.closest("[data-auto-person]");if(auto){state.autoPerson=auto.dataset.autoPerson;state.autoQuery="";state.autoKind="";setTab("auto");return;}
   if(ev.target.closest("[data-auto-reset]")){state.autoPerson="";render();return;}
   let sc=ev.target.closest("[data-scenario-person]");if(sc){state.selectedScenario={speakerKey:sc.dataset.scenarioPerson,family:sc.dataset.scenarioFamily,category:sc.dataset.scenarioKind||""};render();$("scenario-detail")?.scrollIntoView({block:"nearest",behavior:"smooth"});return;}
   if(ev.target.closest("[data-scenario-clear]")){state.selectedScenario=null;render();return;}
  });
+ $("cards").addEventListener("input",ev=>{if(ev.target.id==="unified-search"){const pos=ev.target.selectionStart;state.unifiedQuery=ev.target.value;state.unifiedLimit=60;render();let el=$("unified-search");if(el){el.focus();el.setSelectionRange(pos,pos);}return;}});
  $("cards").addEventListener("input",ev=>{if(ev.target.id==="auto-search"){let pos=ev.target.selectionStart;state.autoQuery=ev.target.value;render();let el=$("auto-search");if(el){el.focus();el.setSelectionRange(pos,pos);}return;}});
  $("cards").addEventListener("input",ev=>{if(ev.target.id==="claim-search"){let start=ev.target.selectionStart;state.query=ev.target.value;render();let inp=$("claim-search");if(inp){inp.focus();inp.setSelectionRange(start,start);}}});
  $("cards").addEventListener("change",ev=>{if(ev.target.id==="auto-kind"){state.autoKind=ev.target.value;render();return;} });
@@ -384,6 +446,7 @@ async function loadIntakeStats(){
 async function load(){
  void loadIntakeStats();
  void loadAutoRadar();
+ void loadUnifiedIndex();
  // Portrait lookup is best-effort. No invented images or name-only photo searches.
  const resource=(url,fallback)=>fetch(url,{cache:"no-cache"})
   .then(r=>r.ok?r.json():fallback).catch(()=>fallback);
@@ -425,6 +488,8 @@ document.addEventListener("error",ev=>{
   ev.target.remove(); // visible initial remains when the verified photo fails to load
  }
 },true);
+const observedParam=new URL(location.href).searchParams.get("observation")||"";
+if(/^KC-[0-9a-f]{18}$/.test(observedParam))state.autoQuery=observedParam;
 const autoPersonParam=new URL(location.href).searchParams.get("person")||"";
 if(/^[A-Za-z0-9_-]{2,100}$/.test(autoPersonParam))state.autoPerson=autoPersonParam;
 let initial=location.hash.slice(1);if(labels[initial])state.tab=initial;
