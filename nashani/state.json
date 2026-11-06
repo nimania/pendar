@@ -276,7 +276,8 @@
     "https://t.me/kerman_news/140133",
     "https://t.me/Kerman_akhbar/66217",
     "https://t.me/kerman_news/140134",
-    "https://t.me/kerman_news/140135"
+    "https://t.me/kerman_news/140135",
+    "https://t.me/irna_kerman/30301"
   ],
   "queue": [
     {
@@ -2064,17 +2065,44 @@
       "delivery_kind": "video",
       "telegram_message_id": 46,
       "sent_at": "2026-11-06T06:57:09.052947+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30301",
+      "source_post_id": "30301",
+      "title": "«سلیاک»، بیماری خاموشی که می‌تواند اندام‌های مختلف بدن را درگیر کند",
+      "excerpt": "«سلیاک»، بیماری خاموشی که می‌تواند اندام‌های مختلف بدن را درگیر کند فوق‌تخصص گوارش و عضو هیأت علمی دانشگاه علوم پزشکی کرمان با بیان اینکه بیماری «سلیاک» تنها به دستگاه گوارش محدود نمی‌شود، گفت: این بیماری خودایمنی با زمینه ژنتیکی ممکن است در سن‌های مختلف و با علائم متنوعی از مشکلات گوارشی و استخوانی تا اختلالات پوستی و عصبی بروز کند و گاه سال‌ها بدون تشخیص باقی بماند. irna_kerman",
+      "paragraphs": [
+        "«سلیاک»، بیماری خاموشی که می‌تواند اندام‌های مختلف بدن را درگیر کند",
+        "فوق‌تخصص گوارش و عضو هیأت علمی دانشگاه علوم پزشکی کرمان با بیان اینکه بیماری «سلیاک» تنها به دستگاه گوارش محدود نمی‌شود، گفت: این بیماری خودایمنی با زمینه ژنتیکی ممکن است در سن‌های مختلف و با علائم متنوعی از مشکلات گوارشی و استخوانی تا اختلالات پوستی و عصبی بروز کند و گاه سال‌ها بدون تشخیص باقی بماند.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/WRFCeMPfj3RR00oyK2-FiHC-RmkODjMBkyaoQmzskIT55SBjVkQ3cftxqG3B3alUrOkgF2bJS1F8OhSybcQvFjSBJVtnUsCnhb-HIIFtFeHjm2Z_KQ8Z1unfA-kbAVUgEX2q04_cSNurF-vCIs4pOItVyMODfC8rxk0HmxMf9FcU7QqORrEU6cMHNYP-8ZmLj3qP3m6rApK6ZlVlXK9eUcq3QFM8momiLzz4pl1JL5Z6ZY5jKdngJvYZPGBP6hS7hd437J2_KGSd9KSQ9sU7bg-LdfX-4Sfer4fUUF-cxt2-93fcbKirEMD2S3KAyJOLjFyVgDiCATBB3FqctWmT-g.jpg"
+      },
+      "published_at": "2026-11-06T07:11:18+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "9aa65e5f0e3cb260",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T07:16:28.968220+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-06T06:57:09.052964+00:00",
+  "saved_at": "2026-11-06T07:16:50.973418+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-06T06:56:39.084717+00:00",
-    "fardaayekerman": "2026-11-06T06:56:39.084717+00:00",
-    "irna_kerman": "2026-11-06T06:56:39.084717+00:00",
-    "kerman_gov": "2026-11-06T06:56:39.084717+00:00",
-    "kerman_akhbar": "2026-11-06T06:56:39.084717+00:00",
+    "fardaayekerman": "2026-11-06T07:16:28.968220+00:00",
+    "irna_kerman": "2026-11-06T07:16:28.968220+00:00",
+    "kerman_gov": "2026-11-06T07:16:28.968220+00:00",
+    "kerman_akhbar": "2026-11-06T07:16:28.968220+00:00",
     "kerman_news": "2026-11-06T06:56:39.084717+00:00",
-    "kerman_rasaneh": "2026-11-06T06:56:39.084717+00:00",
+    "kerman_rasaneh": "2026-11-06T07:16:28.968220+00:00",
     "qh_qv": "2026-11-06T06:56:39.084717+00:00"
   }
 }
