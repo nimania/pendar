@@ -361,7 +361,18 @@
     "https://t.me/kerman_news/140177",
     "https://t.me/kerman_news/140178",
     "https://t.me/kerman_news/140179",
-    "https://t.me/kerman_news/140180"
+    "https://t.me/kerman_news/140180",
+    "https://t.me/qh_qv/894",
+    "https://t.me/qh_qv/895",
+    "https://t.me/qh_qv/896",
+    "https://t.me/qh_qv/897",
+    "https://t.me/qh_qv/898",
+    "https://t.me/qh_qv/899",
+    "https://t.me/qh_qv/900",
+    "https://t.me/qh_qv/901",
+    "https://t.me/Kerman_akhbar/66231",
+    "https://t.me/qh_qv/902",
+    "https://t.me/qh_qv/903"
   ],
   "queue": [
     {
@@ -3103,7 +3114,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-06T18:29:51.084957+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66231"
+        }
+      ],
       "reserved_at": "2026-11-06T18:30:14.664094+00:00",
       "delivery_kind": "text",
       "telegram_message_id": 70,
@@ -3284,15 +3300,15 @@
       "sent_at": "2026-11-06T19:41:11.619501+00:00"
     }
   ],
-  "saved_at": "2026-11-06T19:41:11.619521+00:00",
+  "saved_at": "2026-11-06T21:05:31.750145+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-06T19:40:21.294521+00:00",
-    "fardaayekerman": "2026-11-06T19:40:21.294521+00:00",
-    "irna_kerman": "2026-11-06T19:40:21.294521+00:00",
-    "kerman_gov": "2026-11-06T19:40:21.294521+00:00",
-    "kerman_akhbar": "2026-11-06T19:40:21.294521+00:00",
-    "kerman_news": "2026-11-06T19:40:21.294521+00:00",
-    "kerman_rasaneh": "2026-11-06T19:40:21.294521+00:00",
-    "qh_qv": "2026-11-06T19:40:21.294521+00:00"
+    "kermane_no": "2026-11-06T21:05:18.506618+00:00",
+    "fardaayekerman": "2026-11-06T21:05:18.506618+00:00",
+    "irna_kerman": "2026-11-06T21:05:18.506618+00:00",
+    "kerman_gov": "2026-11-06T21:05:18.506618+00:00",
+    "kerman_akhbar": "2026-11-06T21:05:18.506618+00:00",
+    "kerman_news": "2026-11-06T21:05:18.506618+00:00",
+    "kerman_rasaneh": "2026-11-06T21:05:18.506618+00:00",
+    "qh_qv": "2026-11-06T21:05:18.506618+00:00"
   }
 }
