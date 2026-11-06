@@ -277,7 +277,39 @@
     "https://t.me/Kerman_akhbar/66217",
     "https://t.me/kerman_news/140134",
     "https://t.me/kerman_news/140135",
-    "https://t.me/irna_kerman/30301"
+    "https://t.me/irna_kerman/30301",
+    "https://t.me/kermane_no/59022",
+    "https://t.me/kerman_news/140136",
+    "https://t.me/kerman_gov/10515",
+    "https://t.me/Kerman_akhbar/66218",
+    "https://t.me/kerman_news/140137",
+    "https://t.me/kerman_news/140138",
+    "https://t.me/qh_qv/875",
+    "https://t.me/kerman_news/140139",
+    "https://t.me/qh_qv/876",
+    "https://t.me/qh_qv/877",
+    "https://t.me/Kerman_akhbar/66219",
+    "https://t.me/kerman_news/140140",
+    "https://t.me/kerman_gov/10516",
+    "https://t.me/Kerman_akhbar/66220",
+    "https://t.me/kerman_news/140141",
+    "https://t.me/kerman_news/140142",
+    "https://t.me/Kerman_akhbar/66221",
+    "https://t.me/qh_qv/881",
+    "https://t.me/kerman_news/140143",
+    "https://t.me/irna_kerman/30302",
+    "https://t.me/qh_qv/882",
+    "https://t.me/qh_qv/883",
+    "https://t.me/irna_kerman/30303",
+    "https://t.me/kerman_news/140144",
+    "https://t.me/Kerman_akhbar/66222",
+    "https://t.me/qh_qv/884",
+    "https://t.me/kerman_news/140145",
+    "https://t.me/qh_qv/885",
+    "https://t.me/kerman_news/140146",
+    "https://t.me/qh_qv/886",
+    "https://t.me/kerman_news/140147",
+    "https://t.me/Kerman_akhbar/66223"
   ],
   "queue": [
     {
@@ -2001,7 +2033,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-06T06:56:39.084717+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66220"
+        }
+      ],
       "reserved_at": "2026-11-06T06:56:58.942622+00:00",
       "delivery_kind": "text",
       "telegram_message_id": 44,
@@ -2096,17 +2133,365 @@
       "delivery_kind": "text",
       "telegram_message_id": 47,
       "sent_at": "2026-11-06T07:16:55.013702+00:00"
+    },
+    {
+      "url": "https://t.me/kermane_no/59022",
+      "source_post_id": "59022",
+      "title": "سند در بایگانی، قبر در اختیار دیگری",
+      "excerpt": "سند در بایگانی، قبر در اختیار دیگری یک شهروند کرمانی مدعی است قبری را که سال ۱۳۹۳ با دریافت سند و کروکی از شهرداری خریداری کرده بود، دوباره به فرد دیگری واگذار کرده‌اند و اکنون متوفای دیگری در آن دفن شده است. مسئولان سازمان مدیریت آرامستان‌های شهرداری کرمان می‌گویند هنگام بررسی محل، پلاک شناسایی وجود نداشته و در صورت تأیید اسناد، قبر جایگزین در اختیار شهروند قرار می‌گیرد. اما وقتی اسناد واگذاری در بایگانی سازمان موجود است، چرا شناسایی سابقه یک قبر باید به وجود پلاک یا مراجعه دوباره شهروند وابسته باشد؟",
+      "paragraphs": [
+        "سند در بایگانی، قبر در اختیار دیگری",
+        "یک شهروند کرمانی مدعی است قبری را که سال ۱۳۹۳ با دریافت سند و کروکی از شهرداری خریداری کرده بود، دوباره به فرد دیگری واگذار کرده‌اند و اکنون متوفای دیگری در آن دفن شده است.",
+        "مسئولان سازمان مدیریت آرامستان‌های شهرداری کرمان می‌گویند هنگام بررسی محل، پلاک شناسایی وجود نداشته و در صورت تأیید اسناد، قبر جایگزین در اختیار شهروند قرار می‌گیرد.",
+        "اما وقتی اسناد واگذاری در بایگانی سازمان موجود است، چرا شناسایی سابقه یک قبر باید به وجود پلاک یا مراجعه دوباره شهروند وابسته باشد؟"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-06T07:20:47+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "5f29a6c438be1e39",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140136",
+      "source_post_id": "140136",
+      "title": "تلفن‌قاپ‌های مسلح در دام پلیس آگاهی کرمان",
+      "excerpt": "تلفن‌قاپ‌های مسلح در دام پلیس آگاهی کرمان رئیس پلیس آگاهی استان کرمان در پی وقوع چندین فقره سرقت خشن با شیوه و شگرد مشابه در مناطق شمالی شهر کرمان، کارآگاهان موفق به شناسایی و دستگیری اعضای این باند سه‌نفره شدند. اعضای این باند در تحقیقات ابتدایی به ۲۰ فقره سرقت خشن تلفن همراه و ۵ فقره سرقت موتورسیکلت اعتراف کردند و بررسی‌های تخصصی برای شناسایی سایر جرائم احتمالی و کشف زوایای پنهان فعالیت مجرمانه آنان همچنان ادامه دارد.",
+      "paragraphs": [
+        "تلفن‌قاپ‌های مسلح در دام پلیس آگاهی کرمان",
+        "رئیس پلیس آگاهی استان کرمان",
+        "در پی وقوع چندین فقره سرقت خشن با شیوه و شگرد مشابه در مناطق شمالی شهر کرمان، کارآگاهان موفق به شناسایی و دستگیری اعضای این باند سه‌نفره شدند.",
+        "اعضای این باند در تحقیقات ابتدایی به ۲۰ فقره سرقت خشن تلفن همراه و ۵ فقره سرقت موتورسیکلت اعتراف کردند و بررسی‌های تخصصی برای شناسایی سایر جرائم احتمالی و کشف زوایای پنهان فعالیت مجرمانه آنان همچنان ادامه دارد."
+      ],
+      "media": null,
+      "published_at": "2026-11-06T07:22:06+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "b8e974865c53e00b",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10515",
+      "source_post_id": "10515",
+      "title": "بازدید استاندار کرمان از مدرسه در حال احداث خیرساز شهید عرب‌نژاد",
+      "excerpt": "بازدید استاندار کرمان از مدرسه در حال احداث خیرساز شهید عرب‌نژاد استاندار کرمان صبح جمعه ۱۵ آبانماه در جریان بازدید از مدرسه در حال احداث خیرساز شهید عرب‌نژاد واقع در منطقه شرف‌آباد با همراهی نماینده مردم کرمان و راور در خانه ملت و‌ معاون عمرانی استاندار، از نزدیک در جریان روند ساخت و ویژگی‌های فنی و مهندسی این پروژه آموزشی قرار گرفت. به گزارش روابط عمومی استانداری کرمان، این مدرسه با مشارکت و هزینه شخصی آقای عرب‌نژاد، برادر شهید عرب‌نژاد، و با هدف توسعه فضاهای آموزشی و ترویج فرهنگ مدرسه‌سازی در حال احداث است. یکی از ویژگی‌های شاخص این پروژه، استفاده از فناوری نوین سازه‌های ترکیبی از نوع است؛ روشی پیشرفته که بر اساس پژوهش‌های انجام‌شده در خارج از کشور توسعه یافته و دارای تأییدیه‌های فنی است. این فناوری از جمله روش‌های نوین اجرایی در حوزه ساخت‌وساز به شمار می‌رود. در این سیستم سازه‌ای، بتن‌ریزی به روش تزریقی و از پایین به بالا انجام می‌شود که موجب ایجاد بتنی متراکم و با مقاومت بالا در داخل ستون‌ها می‌شود.",
+      "paragraphs": [
+        "بازدید استاندار کرمان از مدرسه در حال احداث خیرساز شهید عرب‌نژاد",
+        "استاندار کرمان صبح جمعه ۱۵ آبانماه در جریان بازدید از مدرسه در حال احداث خیرساز شهید عرب‌نژاد واقع در منطقه شرف‌آباد با همراهی نماینده مردم کرمان و راور در خانه ملت و‌ معاون عمرانی استاندار، از نزدیک در جریان روند ساخت و ویژگی‌های فنی و مهندسی این پروژه آموزشی قرار گرفت.",
+        "به گزارش روابط عمومی استانداری کرمان، این مدرسه با مشارکت و هزینه شخصی آقای عرب‌نژاد، برادر شهید عرب‌نژاد، و با هدف توسعه فضاهای آموزشی و ترویج فرهنگ مدرسه‌سازی در حال احداث است.",
+        "یکی از ویژگی‌های شاخص این پروژه، استفاده از فناوری نوین سازه‌های ترکیبی از نوع",
+        "است؛ روشی پیشرفته که بر اساس پژوهش‌های انجام‌شده در خارج از کشور توسعه یافته و دارای تأییدیه‌های فنی است. این فناوری از جمله روش‌های نوین اجرایی در حوزه ساخت‌وساز به شمار می‌رود.",
+        "در این سیستم سازه‌ای، بتن‌ریزی به روش تزریقی و از پایین به بالا انجام می‌شود که موجب ایجاد بتنی متراکم و با مقاومت بالا در داخل ستون‌ها می‌شود."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/iB-5TCHl_ngao8BXG4txQPu3MceUHLQNRTHfspKu0foXtqm-merG01EHhkgkBgSbwAviKFWusZoyUWB1RtdFBeFTINoqUpfeCOw0xzTOLndQEBDGaad5J_rmjE09zGO4A00JncZoMs_s11b9UCICa-zAQbOyxnfxNpANOhYZiCRS2_Ys5MbwjgK1u16ArmNrYzaMdrCRF52q0lA30JUuk3fS8bV7wzC6JiBD7OZ792gBspcp3xrFH43JB2-7FWkXEHh2RHs2ssS7QF3_Nel-MqdQZ1xB8P4q4GCMcjLI-WBr7Ru7PnSfRh50_ppDkBng9q0rblHdqqqCHpXiSlfVug.jpg"
+      },
+      "published_at": "2026-11-06T07:34:07+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "47244d4edd79519f",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140137",
+      "source_post_id": "140137",
+      "title": "هواشناسی استان کرمان / وزش باد شدید و خیزش گردوخاک از امشب تا یکشنبه",
+      "excerpt": "هواشناسی استان کرمان / وزش باد شدید و خیزش گردوخاک از امشب تا یکشنبه طبق بررسی آخرین نقشه‌های پیش‌یابی هواشناسی، از امروز (جمعه) تا اواسط هفته آینده، رشد ابر و وزش باد نسبتاً شدید تا شدید، پدیده غالب جوی در سطح استان می‌باشد. همچنین امروز بعدازظهر در برخی مناطق جنوبی و جنوب‌شرقی به‌ویژه ارتفاعات این نواحی، ضمن رشد ابر، بارش پراکنده باران محتمل می‌باشد. از امشب تا صبح یکشنبه با وزش باد شدید و انتقال غبار به استان، خیزش گردوخاک، افزایش غلظت غبار و کاهش کیفیت هوا برای نیمه غربی، مناطق شمالی و برخی مناطق جنوب‌شرقی پیش‌بینی می‌شود. شایان ذکر است بعدازظهر یکشنبه و دوشنبه در برخی مناطق شمالی و شمال‌غربی، ضمن رشد ابر، وقوع بارش پراکنده باران مورد انتظار است.",
+      "paragraphs": [
+        "هواشناسی استان کرمان / وزش باد شدید و خیزش گردوخاک از امشب تا یکشنبه",
+        "طبق بررسی آخرین نقشه‌های پیش‌یابی هواشناسی، از امروز (جمعه) تا اواسط هفته آینده، رشد ابر و وزش باد نسبتاً شدید تا شدید، پدیده غالب جوی در سطح استان می‌باشد.",
+        "همچنین امروز بعدازظهر در برخی مناطق جنوبی و جنوب‌شرقی به‌ویژه ارتفاعات این نواحی، ضمن رشد ابر، بارش پراکنده باران محتمل می‌باشد.",
+        "از امشب تا صبح یکشنبه با وزش باد شدید و انتقال غبار به استان، خیزش گردوخاک، افزایش غلظت غبار و کاهش کیفیت هوا برای نیمه غربی، مناطق شمالی و برخی مناطق جنوب‌شرقی پیش‌بینی می‌شود.",
+        "شایان ذکر است بعدازظهر یکشنبه و دوشنبه در برخی مناطق شمالی و شمال‌غربی، ضمن رشد ابر، وقوع بارش پراکنده باران مورد انتظار است."
+      ],
+      "media": null,
+      "published_at": "2026-11-06T07:47:17+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "3d795e45db799636",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140140",
+      "source_post_id": "140140",
+      "title": "پــــانـزدهـم آبان ماه سالروز شهادت قاسم نجارزاده",
+      "excerpt": "پــــانـزدهـم آبان ماه سالروز شهادت قاسم نجارزاده دوازدهم شــهريور ،۱۳۴۶ در روستاي اميرآباد از توابع شهرستان بافت چشم به جهان گشود. پدرش صمداهلل و مادرش ستاره نام داشت. تاپايان دوره راهنمايي درس خواند. سرباز ارتش بود. پانزدهم آبان ،۱۳۶۶ در ايرانشهر هنگام درگيري با اشرار بر اثر اصابت گلوله به شهادت رسيد. مزار وي در گلزار شهداي روستاي گوغر تابعه شهرستان زادگاهش واقع است.",
+      "paragraphs": [
+        "پــــانـزدهـم آبان ماه سالروز شهادت قاسم نجارزاده",
+        "دوازدهم شــهريور ،۱۳۴۶ در روستاي اميرآباد از توابع شهرستان بافت چشم به جهان گشود. پدرش صمداهلل و مادرش ستاره نام داشت. تاپايان دوره راهنمايي درس خواند. سرباز ارتش بود. پانزدهم آبان ،۱۳۶۶ در ايرانشهر هنگام درگيري با اشرار بر اثر اصابت گلوله به شهادت رسيد. مزار وي در گلزار شهداي روستاي گوغر تابعه شهرستان زادگاهش واقع است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/h2CD5BrX5Cal8LvE99ni26dJAReC7Jn3E8WKt28nXvnAP4W56FJM09-efG8f70uLaFBRF0RDv1HiFLToVtwDgDQ5kgix5rfyoM4R6ym3E7BvIZijIef-tgFlanqWzbusZsLamnCsK-QgSil8u6UhJY6fAt0yFJcA5OgJGJ5xIGs7UaUK1aAWiBFv3auJxd_OdArGY4n4uVr_J9l-2LHo_jyUztgiPErkH8N1ElySxOOTwh2j_rrY5_HVIR-ZqHVX5qq9ZNcYPZJaCM8of_5MX5dXC4V7K7iJiW18TinrzylOOdbd7m8EmXPBGYFmnt04ji6BuSC3xRBAgy7rkROK5A.jpg"
+      },
+      "published_at": "2026-11-06T08:49:42+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "f2058f95b76e2e1e",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10516",
+      "source_post_id": "10516",
+      "title": "کلنگ‌زنی و بهره‌برداری از پروژه‌های عمرانی روستای شرف‌آباد با حضور استاندار کرمان",
+      "excerpt": "کلنگ‌زنی و بهره‌برداری از پروژه‌های عمرانی روستای شرف‌آباد با حضور استاندار کرمان شاهد تحرک جدی در حوزه زیرساختی روستاهای اطراف کرمان هستیم آبرسانی به ۱۴۰ روستای بالای ۲۰ خانوار استان تا دهه فجر امسال در حال اجرای بزرگترین عملیات آبرسانی در تاریخ استان کرمان استاندار کرمان با بیان اینکه امروز شاهد تحرک جدی در حوزه زیرساختی روستاهای اطراف کرمان هستیم، اظهار داست: تامین آب شرب روستاها را با هدف تامین آب ۶۶۴ روستای بالای ۲۰ خانوار آغاز کرده که تا پایان سال ۱۴۰۶ به اتمام خواهند رسید. به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی جمعه ۱۵ آبان ماه در مراسم کلنگ‌زنی و بهره‌برداری از پروژه‌های عمرانی روستای شرف‌آباد در ۲ سال گذشته ظرفیت بیش از ۲۰۰۰ لیتر بر ثانیه آب شرب به استان اضافه شده که ۸۰۰ لیتر آن مربوط به کرمان و روستاهای اطراف آن است. بزرگترین عملیات آبرسانی در تاریخ استان کرمان در حال انجام است و امیدواریم با تداوم این رویکرد و کمک و همدلی دستگاه‌ها، این حرکت خوب در راستای تامین زیرساخت‌ها و توسعه و آبادانی روستاهای اطراف شهر کرمان ادامه یابد",
+      "paragraphs": [
+        "کلنگ‌زنی و بهره‌برداری از پروژه‌های عمرانی روستای شرف‌آباد با حضور استاندار کرمان",
+        "شاهد تحرک جدی در حوزه زیرساختی روستاهای اطراف کرمان هستیم",
+        "آبرسانی به ۱۴۰ روستای بالای ۲۰ خانوار استان تا دهه فجر امسال",
+        "در حال اجرای بزرگترین عملیات آبرسانی در تاریخ استان کرمان",
+        "استاندار کرمان با بیان اینکه امروز شاهد تحرک جدی در حوزه زیرساختی روستاهای اطراف کرمان هستیم، اظهار داست: تامین آب شرب روستاها را با هدف تامین آب ۶۶۴ روستای بالای ۲۰ خانوار آغاز کرده که تا پایان سال ۱۴۰۶ به اتمام خواهند رسید.",
+        "به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی جمعه ۱۵ آبان ماه در مراسم کلنگ‌زنی و بهره‌برداری از پروژه‌های عمرانی روستای شرف‌آباد",
+        "در ۲ سال گذشته ظرفیت بیش از ۲۰۰۰ لیتر بر ثانیه آب شرب به استان اضافه شده که ۸۰۰ لیتر آن مربوط به کرمان و روستاهای اطراف آن است.",
+        "بزرگترین عملیات آبرسانی در تاریخ استان کرمان در حال انجام است و امیدواریم با تداوم این رویکرد و کمک و همدلی دستگاه‌ها، این حرکت خوب در راستای تامین زیرساخت‌ها و توسعه و آبادانی روستاهای اطراف شهر کرمان ادامه یابد"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/p6VwHpwYgGMZoLZzsux-njttBQKk28UluziQ5N2uV6bMXLmlpswoMnKdlCqwQLITG6WO8MS7ikxpYlUuHhuvLuCioUtKU6BkIQq7t8dScwoQctkKupZGUE1TFR-1LOSYCJ2sOtXqGgH-eT8fDm-SWYPg9z1S8o4eRiQoIgskltMSSM7Q3YEIwOWueY7qyFMNROJYEqmWhji93EoqVac_p-HkOaiqxYkRBObJ_zZxhXXsJYS-NcDutngNdTwqDyBCfegwGFNmmZyg5_EjF2j4VVGJv1fARnpwvKrCrf1YBLYIiFyKjudhCM6EM7kcN12isSLCGQlPZNqb4o0RbbLFxQ.jpg"
+      },
+      "published_at": "2026-11-06T08:59:06+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "8c04cdc22bddfd95",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140143",
+      "source_post_id": "140143",
+      "title": "آبگرفتگی معابر شهر دهبکری در پی بارش شدید باران شب گذشته",
+      "excerpt": "آبگرفتگی معابر شهر دهبکری در پی بارش شدید باران شب گذشته",
+      "paragraphs": [
+        "آبگرفتگی معابر شهر دهبکری در پی بارش شدید باران شب گذشته"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/ef4895e74d.mp4?token=Qa4CLEv19emzn30ueSPIgGMnovv_0UBD-CKc37KMax3q3AmLaIdr-l6g3BDSbtVTmdZ0h_tr1JZqtvjY_r3GvquUuEsGQIprHmqm89_gn84Vgm6HxgKButpS1JpNzRhtMT2-N3A3up1zHPAn0wfZlvmo0fORVoEeX6usQWXGAP3vGnre4ZrlMk2BbLqjsCYV3ynxZJ4cO8-fM250JAmt9OZvj-SMY11EfL427lNTVWMIHUBHFJ2QdH02EEVW98YxpsW_jYiJZGyGyI9mGSafjd2GCERHNKscG_Hg-UmD6IT68oSiMO9f_zsTecTbMN_Uw9Xj-4qARwKV29hC_3gIHQ"
+      },
+      "published_at": "2026-11-06T09:57:10+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "1ff060975ba7762d",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30302",
+      "source_post_id": "30302",
+      "title": "امام جمعه جیرفت: معماری نوین بازدارندگی ایران اسلامی در اوج اقتدار قرار دارد",
+      "excerpt": "امام جمعه جیرفت: معماری نوین بازدارندگی ایران اسلامی در اوج اقتدار قرار دارد امام جمعه جیرفت با تأکید بر اینکه معماری نوین بازدارندگی جمهوری اسلامی ایران امروز در اوج اقتدار، هوشمندی و آمادگی همه‌جانبه قرار دارد، گفت: بازتعریف و تکامل دکترین بازدارندگی کشور فراتر از توانمندی تنها نظامی و سخت‌افزاری، برآیند هم‌افزایی ظرفیت‌های فناورانه، اطلاعاتی، اقتصادی، اجتماعی و آمادگی کامل نیروهای مسلح و آحاد ملت است. irna_kerman",
+      "paragraphs": [
+        "امام جمعه جیرفت: معماری نوین بازدارندگی ایران اسلامی در اوج اقتدار قرار دارد",
+        "امام جمعه جیرفت با تأکید بر اینکه معماری نوین بازدارندگی جمهوری اسلامی ایران امروز در اوج اقتدار، هوشمندی و آمادگی همه‌جانبه قرار دارد، گفت: بازتعریف و تکامل دکترین بازدارندگی کشور فراتر از توانمندی تنها نظامی و سخت‌افزاری، برآیند هم‌افزایی ظرفیت‌های فناورانه، اطلاعاتی، اقتصادی، اجتماعی و آمادگی کامل نیروهای مسلح و آحاد ملت است.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/SGmJpg_HttNLoMR8nwKRs9EofY0ti5kA_QjUaVHiABeetVEXXQbV_VyaeJVHlqyrZuo4N2dal9HFquyF-fZI9iqWkDv6Tox8HuJP5FceJ6QrkIake3bFPFrBfCqaswZOXubVvjtNEKMNmxiPZnM7NpbXqPNAG6hl3O4hwanYJxdVoGWFiqPOgrZHO_w8l5OJyeAkmcjW0vx1MGI9e47OdZaTWPeoBwc2MgfKbvlN8p9EZvR3YO63L7RcdXN10Ba5MtKN_8As2aAK0nPAvgN-J1IE4XeuPAM81B9q-CXVol0SBwNWDQ8gF_UAHRIKXQD_7-vVQB115rjV3QhBnIQiIw.jpg"
+      },
+      "published_at": "2026-11-06T10:05:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "242689b3027772c4",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30303",
+      "source_post_id": "30303",
+      "title": "امام جمعه کرمان: ایران اسلامی امروز در قلب آمریکا تأثیر گذاشته است",
+      "excerpt": "امام جمعه کرمان: ایران اسلامی امروز در قلب آمریکا تأثیر گذاشته است نماینده ولی فقیه در استان و امام جمعه کرمان با اشاره به نزدیک پنج دهه پرچمداری ایران اسلامی در مبارزه با استکبار جهانی گفت: امروز ایران به جایگاهی از قدرت رسیده که می‌تواند در تحولات جهان و حتی در قلب آمریکا تأثیر بگذارد. irna_kerman",
+      "paragraphs": [
+        "امام جمعه کرمان: ایران اسلامی امروز در قلب آمریکا تأثیر گذاشته است",
+        "نماینده ولی فقیه در استان و امام جمعه کرمان با اشاره به نزدیک پنج دهه پرچمداری ایران اسلامی در مبارزه با استکبار جهانی گفت: امروز ایران به جایگاهی از قدرت رسیده که می‌تواند در تحولات جهان و حتی در قلب آمریکا تأثیر بگذارد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/ASpv16OJn1-nLExTjWjLKKwfLE2rmGFDi6v5ba8Hj7XToAAhe3gd_wDAC95moF01Ws1vFTIZxBSCRz2Kqo2bTdnTuNNsJ9PcNmvbUJIlswaf3xgiA4V4CUixIhqt8V-rEmnhxT_gy9sfZWRn-9RHKu_LUDfAf_J9F2ZeUJeGA3FFp1nIfOOm21bOG96vo-1VLndM9WAkcjiSTyPbsJ3OBnJbJ0VC6k6B4IaMyCebkhcLPpo8O4HytR9dTZKfz0rScsrX32EadIhQfrsHEYsrhTw_tQNPC2wfCnxczLuzZHlSwH-EBBHmit6eWEX8r6hfKiYRPx3s0zJjA8ki77jmoQ.jpg"
+      },
+      "published_at": "2026-11-06T10:16:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "7719b055327a87dc",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140144",
+      "source_post_id": "140144",
+      "title": "قلعه‌گنج میزبان پیکر مطهر شهید گمنام در ۱۸ آبان‌ماه می‌شود",
+      "excerpt": "قلعه‌گنج میزبان پیکر مطهر شهید گمنام در ۱۸ آبان‌ماه می‌شود فرمانده ناحیه مقاومت بسیج شهرستان قلعه‌گنج همزمان با ایام شهادت حضرت فاطمه زهرا(سلام‌الله‌علیها) و همگام با سراسر کشور، شهرستان قلعه‌گنج روز دوشنبه ۱۸ آبان‌ماه میزبان پیکر مطهر یک شهید گمنام خواهد بود. مراسم استقبال و تشییع پیکر مطهر این شهید والامقام در نقاط مختلف شهرستان قلعه‌گنج، از جمله مدارس، روستاها و مناطق مختلف بخش‌های چاه‌دادخدا و سرخ‌قلعه و شهر رمشک و همچنین مرکز شهر برگزار خواهد شد.",
+      "paragraphs": [
+        "قلعه‌گنج میزبان پیکر مطهر شهید گمنام در ۱۸ آبان‌ماه می‌شود",
+        "فرمانده ناحیه مقاومت بسیج شهرستان قلعه‌گنج",
+        "همزمان با ایام شهادت حضرت فاطمه زهرا(سلام‌الله‌علیها) و همگام با سراسر کشور، شهرستان قلعه‌گنج روز دوشنبه ۱۸ آبان‌ماه میزبان پیکر مطهر یک شهید گمنام خواهد بود.",
+        "مراسم استقبال و تشییع پیکر مطهر این شهید والامقام در نقاط مختلف شهرستان قلعه‌گنج، از جمله مدارس، روستاها و مناطق مختلف بخش‌های چاه‌دادخدا و سرخ‌قلعه و شهر رمشک و همچنین مرکز شهر برگزار خواهد شد."
+      ],
+      "media": null,
+      "published_at": "2026-11-06T10:26:06+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "a611d00df0b049e0",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140146",
+      "source_post_id": "140146",
+      "title": "استقبال از شهید گمنام هشت سال دفاع مقدس در بم",
+      "excerpt": "استقبال از شهید گمنام هشت سال دفاع مقدس در بم",
+      "paragraphs": [
+        "استقبال از شهید گمنام هشت سال دفاع مقدس در بم"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/c11e0f8e9e.mp4?token=B1xrgUsufN92t_CiFkV_YD0RYDRusDXUdHUDZKx7ENkpznDlmC0ZvDBbTiZhTRYPvzx5d4X0r4_Jbnq4XN1TNsOHCUE8CBK6RsosNKQVXpvE_1FHvGBvuJ1mWqSdoI72tsMS57tq7zkqk6sSh-0xmEEYylJJniescMCAn1DyZdU0X9EJcR0ZTiwvnjQW-3cHAx6zCabzZ76GZ9utKKM3wLwHHZDcGDgGxI0iVQU2BaMvAOYHxhxMu4jXlixKGUdbS2XHwxBRfawbJlH3Y6QhaiD3yfOCtGOP2ecxHs_lRZj85PTi_OdBXVvVILW-XGilnsFdbsmyWmAb872MX3_AxxVb8YKhZEje9fwfpg-87CbAdLPJeFzwUZaJlMqyYF5IHCZMH0KF0ybQK9Mfxko6_QeRYyW5T9h0Eaz2wRzQ3oS037Ow6UTVqQ9_Wf52Wqv7wjX0DDMQAi_u5x5YJqPz3YpHNWpfOxVQxP53rGigNS0xlvP56A-B0-8VuZJ9tYKOWFC9qizjDSU2gFjUuU2H2E9V3ZvjE7vT032YTET0RCI50jVyCyZ0BLoPRtVdZvru1OhaduFSBUd76B9NcYNFUtue78WVQytizA3Wvxqte96HXMsgvUU3XlFsWTiZduUEDmCvyyujIOFP52gParoSHfoHpe8mMAHLjS8g9SCGUPs"
+      },
+      "published_at": "2026-11-06T11:15:28+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "5d54075aa08a4a6c",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140147",
+      "source_post_id": "140147",
+      "title": "پاییز باغ شاهزاده ماهان کرمان‌",
+      "excerpt": "پاییز باغ شاهزاده ماهان کرمان‌",
+      "paragraphs": [
+        "پاییز باغ شاهزاده ماهان کرمان‌"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/aca8e96d77.mp4?token=az0nIBRe1hcaf-T7TA4rkfGvrvslipBOvEUFUJA1UGjlsxO0cmZbuua-QHFuLi6PuFbc84s2peOlhL9DIwNKjtQmCQkUL5xzHp2ZQ5WajcDRgTyzLMvTkDPCaV9UmwQ7W9cqFy0nA5gwapXQFuikaOsZ2tWcYZ06ti2ZnEGYHm2QEktCBdpgmTYhfAlLbp28SXCwO9Oh9Dp8gBEroBLERfkBIbVASQg1ArzPBY6QTef_Uf4hQoySwvO1MlhWRUvgJIOofDInZuverwhNMrKm2V-x6cqfqQarX_CumbaWzNy5xsJzT05AgSbjYXGTdCZI_o0kIxdryXYjJbvtqVD_Tw"
+      },
+      "published_at": "2026-11-06T11:25:02+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "651928176c8714a0",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66223",
+      "source_post_id": "66223",
+      "title": "کارت دعوت عروسی که ۳ میلیارد ریال آب خورد",
+      "excerpt": "کارت دعوت عروسی که ۳ میلیارد ریال آب خورد فرمانده انتظامی رفسنجان: فردی سودجو با ارسال بدافزار و لینک جعلی با عنوان کارت دعوت عروسی، به نرم‌افزار همراه بانک یک شهروند دسترسی پیدا کرده و بیش از ۳ میلیارد ریال از حساب وی برداشت کرده بود. شاکی بلافاصله پس از اطلاع از برداشت غیرمجاز، با مرکز فوریت‌های سایبری پلیس فتا (۰۹۶۳۸۰) تماس گرفت و با اقدام سریع کارشناسان، وجه برداشت‌شده مسدود و به حساب شاکی عودت داده شد.",
+      "paragraphs": [
+        "کارت دعوت عروسی که ۳ میلیارد ریال آب خورد",
+        "فرمانده انتظامی رفسنجان: فردی سودجو با ارسال بدافزار و لینک جعلی با عنوان کارت دعوت عروسی، به نرم‌افزار همراه بانک یک شهروند دسترسی پیدا کرده و بیش از ۳ میلیارد ریال از حساب وی برداشت کرده بود.",
+        "شاکی بلافاصله پس از اطلاع از برداشت غیرمجاز، با مرکز فوریت‌های سایبری پلیس فتا (۰۹۶۳۸۰) تماس گرفت و با اقدام سریع کارشناسان، وجه برداشت‌شده مسدود و به حساب شاکی عودت داده شد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/tVS8g5BZTU9UhDckhP9vMfa1jl3IaiKyIFwr8KNKVw7pvigLdvwq9QK-OtdgD4V0IaFBJjIok45nvae3d2vV0xE9fdN5JCzM7mkxvshZ6Owi6fSJ9TBlHeYJiL6E--S-jxk7sWKcC2BcQ3hLf5V_rzGxmWlZt1qtoPerrduAXo3CXTNeyZKS1R2mrE9-_SlbdVzlZzR1UggbHG8zDucPUUdJOFQPNjqmC7CFdpjbqkGh9xfwzUBYrnZyR-2wfoGwfqdLPAtbdqgxz6E19SvGYfQCDwKjsjStOQ5nsAnZezaxJ0s0HmgaTr0FahLX0LioseWghzOEslA0Ci5juW3hZQ.jpg"
+      },
+      "published_at": "2026-11-06T11:32:02+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "ab503d0227133228",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T11:33:10.419378+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-06T07:26:08.256129+00:00",
+  "saved_at": "2026-11-06T11:33:25.938612+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-06T06:56:39.084717+00:00",
-    "fardaayekerman": "2026-11-06T07:25:59.162581+00:00",
-    "irna_kerman": "2026-11-06T07:25:59.162581+00:00",
-    "kerman_gov": "2026-11-06T07:25:59.162581+00:00",
-    "kerman_akhbar": "2026-11-06T07:25:59.162581+00:00",
-    "kerman_news": "2026-11-06T06:56:39.084717+00:00",
-    "kerman_rasaneh": "2026-11-06T07:25:59.162581+00:00",
-    "qh_qv": "2026-11-06T06:56:39.084717+00:00"
+    "kermane_no": "2026-11-06T11:33:10.419378+00:00",
+    "fardaayekerman": "2026-11-06T11:33:10.419378+00:00",
+    "irna_kerman": "2026-11-06T11:33:10.419378+00:00",
+    "kerman_gov": "2026-11-06T11:33:10.419378+00:00",
+    "kerman_akhbar": "2026-11-06T11:33:10.419378+00:00",
+    "kerman_news": "2026-11-06T11:33:10.419378+00:00",
+    "kerman_rasaneh": "2026-11-06T11:33:10.419378+00:00",
+    "qh_qv": "2026-11-06T11:33:10.419378+00:00"
   }
 }
