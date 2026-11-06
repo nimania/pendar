@@ -219,6 +219,8 @@ def run(radar: Path = RADAR, ledger: Path = LEDGER, output: Path = OUTPUT,
     report = build(existing, main, old, budget=0 if check else budget)
     # --check verifies structural compatibility without repeating network calls.
     if check:
+        if not output.is_file():
+            raise ValueError("Evidence output missing; required for consistency check")
         existing_report = json.loads(output.read_text(encoding="utf-8"))
         if set(existing_report.get("observations", {})) != {
                 v["id"] for v in existing.get("items", [])}:
