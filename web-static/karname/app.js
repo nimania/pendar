@@ -445,7 +445,7 @@ function eventHandlers(){
   let c=ev.target.closest("[data-claim]");if(c)return openClaim(c.dataset.claim);
   let uf=ev.target.closest("[data-unified-filter]");if(uf){state.unifiedFilter=uf.dataset.unifiedFilter;state.unifiedLimit=60;render();return;}
   if(ev.target.closest("[data-unified-more]")){state.unifiedLimit+=60;render();return;}
-  let p=ev.target.closest("[data-person]");if(p){state.speaker=p.dataset.person;state.query="";state.status="";setTab("all");}
+  let p=ev.target.closest("[data-person]");if(p){state.speaker=p.dataset.person;state.query="";state.status="";state.unifiedFilter="historical_ledger";state.unifiedQuery=speaker(state.speaker);state.unifiedLimit=60;setTab("all");return;}
   let auto=ev.target.closest("[data-auto-person]");if(auto){state.autoPerson=auto.dataset.autoPerson;state.autoQuery="";state.autoKind="";setTab("auto");return;}
   if(ev.target.closest("[data-auto-reset]")){state.autoPerson="";render();return;}
   let sc=ev.target.closest("[data-scenario-person]");if(sc){state.selectedScenario={speakerKey:sc.dataset.scenarioPerson,family:sc.dataset.scenarioFamily,category:sc.dataset.scenarioKind||""};render();$("scenario-detail")?.scrollIntoView({block:"nearest",behavior:"smooth"});return;}
