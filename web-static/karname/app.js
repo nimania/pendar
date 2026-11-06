@@ -3,11 +3,12 @@
 (()=>{
 "use strict";
 const DATA_URL="/data/karname.json", $=id=>document.getElementById(id);
-const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"highlights",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null,autoItems:[],autoQuery:"",autoKind:"",autoPerson:"",autoLoadState:"loading",autoNotice:"",unifiedIndex:null,unifiedLoadState:"loading",unifiedFilter:"all",unifiedQuery:"",unifiedLimit:60};
+const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"all",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null,autoItems:[],autoQuery:"",autoKind:"",autoPerson:"",autoLoadState:"loading",autoNotice:"",unifiedIndex:null,unifiedLoadState:"loading",unifiedFilter:"all",unifiedQuery:"",unifiedLimit:60,personSelection:null,sourceChecks:null};
 const labels={
   highlights:["منتخب کارنامه","پیش‌بینی‌ها زیر ذره‌بین","تازه‌ترین پرونده‌ها، با متن اصلی و منابع."],
   auto:["رادار خودکار پندار","چه گفته‌هایی تازه رصد شده‌اند؟","متن‌های یافت‌شده از منابع عمومی؛ انتساب، نقل مستقیم و نتیجه هنوز تأیید نشده‌اند."],
-  people:["کارنامهٔ چهره‌ها","چه کسی چه گفته؟","امتیاز فقط برای پیش‌بینی‌های ارزیابی‌شده است."],
+  people:["فهرست همهٔ چهره‌ها","چه کسی چه گفته؟","موارد تاریخی و ماشینی جدا از هم."],
+  person:["پروندهٔ سخنان","گفته‌های ثبت‌شده و رصدشده","این رصدها لزوماً نقل‌قول مستقیم نیستند."],
   duels:["دو تحلیل؛ یک آینده","دوئل پیش‌بینی‌ها","دیدگاه‌های متفاوت را کنار هم ببینید."],
   calendar:["زمان حسابرسی","موعد رسید!","سررسیدهای گذشته و پیش‌بینی‌های در انتظار."],
   scenarios:["نقشهٔ دیدگاه‌ها","چه کسی کدام آینده را می‌بیند؟","گرایش به یک سناریو، نمرهٔ عملکرد نیست."],
@@ -182,20 +183,72 @@ function renderHighlights(){
  });
  return machineSummary()+showClaims(ranked.slice(0,12));
 }
-function renderPeople(){
- let rows=state.speakers.map(s=>{let claims=state.claims.filter(c=>array(c.speakers).some(v=>speakerId(v)===(s.key||s.name)));return {s,claims,score:score(claims)};}).filter(x=>x.claims.length).sort((a,b)=>b.claims.length-a.claims.length);
- if(!rows.length)return noData("هنوز کارنامه‌ای ثبت نشده","نام تحلیلگران پس از اتصال بانک داده در این قسمت ظاهر می‌شود.");
- return rows.map(x=>{
-  let {s,claims}=x,good=claims.filter(c=>status(c).key==="good").length,half=claims.filter(c=>status(c).key==="half").length,bad=claims.filter(c=>status(c).key==="bad").length,other=claims.length-good-half-bad;
-  let total=claims.length;
-  const handleForAuto=profileHandle(s)||s.handle||"";
-  const autoCount=state.autoItems.filter(x=>x.person?.profile_handle===handleForAuto&&handleForAuto).length;
-  let parts=[["good",good],["half",half],["bad",bad],["open",other]].map(([k,n])=>n?'<span class="'+k+'" style="flex:'+n+'" title="'+fa(n)+'"></span>':"").join("");
-  let handle=personHref(s);
-  const personTitle=handle?'<a class="profile-name" href="'+esc(handle)+'">'+esc(s.name||s.key||"گوینده")+'</a>':esc(s.name||s.key||"گوینده");
-  return '<article class="tile person"><div class="person-head">'+avatarMarkup(s)+'<div><h3>'+personTitle+'</h3><span class="muted">'+fa(total)+' ادعا</span></div></div><div class="score">'+esc(x.score.percent)+'</div><span class="muted">از '+fa(x.score.n)+' پیش‌بینی ارزیابی‌شده</span><div class="bar" aria-label="نتایج ثبت‌شده">'+parts+'</div><div class="tile-foot"><button class="open-card" type="button" data-person="'+esc(s.key||s.name)+'">دیدن پیش‌بینی‌ها ←</button>'+(handle?'<a href="'+esc(handle)+'">همهٔ سخنان این چهره در پندار</a>':"")+(autoCount?'<button type="button" class="auto-person-link" data-auto-person="'+esc(handleForAuto)+'">'+fa(autoCount)+' مورد رصد خودکار</button>':"")+'</div></article>';
- }).join("")+renderObservedPeople();
+
+function karnameOfficialLink(s){return '/karname/?speaker='+encodeURIComponent(s.key)+'#person';}
+function karnameMatch(item){
+ const p=item?.person||item||{},h=String(p.profile_handle||"").toLowerCase();
+ const found=state.speakers.filter(s=>(h&&[s.handle,profileHandle(s)].some(v=>v&&String(v).toLowerCase()===h))||personNorm(s.name)===personNorm(p.label));
+ return found.length===1?found[0]:null;
 }
+function karnameAutoLink(p){
+ const s=karnameMatch({person:p});
+ return s?karnameOfficialLink(s):'/karname/?mention='+encodeURIComponent(String(p.label||"نامشخص"))+'#person';
+}
+function renderPersonList(){
+ const map=new Map();
+ for(const s of state.speakers){
+  map.set('o:'+s.key,{s,name:s.name,official:state.claims.filter(c=>array(c.speakers).some(v=>speakerId(v)===s.key)).length,auto:0});
+ }
+ for(const o of state.autoItems){
+  const s=karnameMatch(o),key=s?'o:'+s.key:'m:'+personNorm(o.person?.label);
+  if(!map.has(key))map.set(key,{s:null,name:o.person?.label||"نامشخص",official:0,auto:0});
+  map.get(key).auto++;
+ }
+ const rows=[...map.values()].sort((a,b)=>b.official+b.auto-a.official-a.auto||a.name.localeCompare(b.name,'fa'));
+ return '<section class="person-directory-intro"><strong>'+fa(rows.length)+' نام و پرونده</strong><p>'+fa(state.speakers.length)+' گویندهٔ تاریخی و نام‌های مرتبط در خبرها؛ انتساب عبارت‌های ماشینی هنوز تأیید نشده است.</p></section>'
+ +'<div class="person-directory">'+rows.map(p=>{
+  const link=p.s?karnameOfficialLink(p.s):karnameAutoLink({label:p.name});
+  return '<a class="person-directory-item" href="'+esc(link)+'">'+(p.s?avatarMarkup(p.s):'<span class="avatar avatar-pending">؟</span>')
+   +'<span><b>'+esc(p.name)+'</b><small>'+fa(p.official)+' تاریخی · '+fa(p.auto)+' رصد خودکار</small></span></a>';
+ }).join('')+'</div>';
+}
+function renderPersonDetail(){
+ const select=state.personSelection;
+ if(!select)return noData('شخصی انتخاب نشده','نامی را از فهرست افراد انتخاب کنید.');
+ const s=select.key?state.speakers.find(p=>p.key===select.key):null;
+ const name=s?.name||select.name||"نامشخص";
+ const existing=s?state.claims.filter(c=>array(c.speakers).some(v=>speakerId(v)===s.key)):[];
+ const observed=state.autoItems.filter(o=>s?karnameMatch(o)?.key===s.key:!karnameMatch(o)&&personNorm(o.person?.label)===personNorm(select.name));
+ const portrait=s?avatarMarkup(s):'<span class="avatar avatar-pending">؟</span>';
+ const home=s?personHref(s):"";
+ const head='<nav class="person-breadcrumb"><a href="/karname/#people">همهٔ چهره‌ها</a> / '+esc(name)+'</nav>'
+   +'<section class="person-page-head">'+portrait+'<div><h2>'+esc(name)+'</h2><p>'+fa(existing.length)+' ادعای تاریخی · '+fa(observed.length)+' رصد خودکار</p>'
+   +(home?'<a href="'+esc(home)+'">پروندهٔ اصلی در پندار ←</a>':"")+'</div></section>';
+ const official='<section class="person-claim-section"><h3>ادعاهای دفتر اصلی</h3>'
+  +(existing.length?'<div class="person-claim-cards">'+existing.map((c,i)=>mini(c,i)).join('')+'</div>':'<p class="muted">مورد تاریخی ثبت نشده است.</p>')+'</section>';
+ const cards=observed.map(o=>{
+  const src=o.source||{},data=state.sourceChecks?.observations?.[o.id];
+  const url=typeof src.link==="string"&&/^https:\/\//.test(src.link)?'<a href="'+esc(src.link)+'" target="_blank" rel="noopener noreferrer">منبع منتشرشده ←</a>':"";
+  const text={source_text_found:"متن در صفحهٔ منبع یافته شد؛ اصالت و نتیجه تأیید نشده",source_accessible:"صفحه در دسترس؛ انتساب نامشخص",source_unavailable:"دریافت ناموفق؛ به معنی نادرستی نیست",pending_check:"در صف بررسی خودکار",no_source_url:"بدون لینک منبع"}[data?.status]||"تطبیق متن و منبع هنوز انجام نشده";
+  return '<article class="person-auto-item"><b dir="ltr">'+esc(o.id)+'</b><p>'+esc(o.text_from_source||"")+'</p><small>'+esc(src.text_origin||"متن ثانویه")+'</small>'
+  +'<span class="source-check">'+esc(text)+'</span><div class="person-evidence-actions">'+url
+  +'<a href="/karname/?observation='+encodeURIComponent(o.id)+'#auto">جزئیات رصد ←</a></div></article>';
+ }).join('');
+ const auto='<section class="person-claim-section"><h3>رصدهای ماشینی مرتبط با این نام</h3>'
+  +'<p class="person-trust-warning">متن‌های این بخش ممکن است خلاصهٔ خبر باشند، نه گفتهٔ مستقیم شخص. هیچ نتیجهٔ قطعی برای آن‌ها صادر نشده است.</p>'
+  +(cards?'<div class="person-auto-grid">'+cards+'</div>':'<p class="muted">رصدی ثبت نشده است.</p>')+'</section>';
+ return head+official+auto;
+}
+async function loadSourceChecks(){
+ try{const r=await fetch('/karname/source-verification.json',{cache:'no-store'});
+  if(!r.ok)throw Error('HTTP '+r.status);
+  const d=await r.json();
+  if(d?.schema_version!==1||d.scope!=='automatic_source_verification_not_outcome_scoring')throw Error('bad schema');
+  state.sourceChecks=d;
+ }catch(e){state.sourceChecks=null;}
+ if(['person','auto','all'].includes(state.tab))render();
+}
+function renderPeople(){return renderPersonList();}
 function renderDuels(){
  let map=new Map(state.claims.map(c=>[c.id,c]));
  let pairs=state.pairs.filter(p=>map.has(p.a)&&map.has(p.b));
@@ -394,8 +447,8 @@ function renderAll(){
  return controls+showClaims(rows);
 }
 function render(){
- setHeading();if(!state.data&&state.tab!=="auto"&&state.tab!=="all"){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
- const views={highlights:renderHighlights,auto:renderAuto,people:renderPeople,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderUnified};
+ setHeading();if(!state.data&&state.tab!=="auto"&&state.tab!=="all"&&state.tab!=="people"&&state.tab!=="person"){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
+ const views={highlights:renderHighlights,auto:renderAuto,people:renderPeople,person:renderPersonDetail,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderUnified};
  $("cards").innerHTML=(views[state.tab]||renderHighlights)();
 }
 function detail(c){
