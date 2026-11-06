@@ -1852,13 +1852,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-06T02:32:24.583953+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-06T02:32:39.983664+00:00"
+      "reserved_at": "2026-11-06T02:32:39.983664+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 40,
+      "sent_at": "2026-11-06T02:32:43.210319+00:00"
     }
   ],
-  "saved_at": "2026-11-06T02:32:39.983683+00:00",
+  "saved_at": "2026-11-06T02:32:43.210378+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-06T02:25:38.555070+00:00",
     "fardaayekerman": "2026-11-06T02:32:24.583953+00:00",
