@@ -1,0 +1,1581 @@
+{
+  "schema_version": 1,
+  "scope": "automatic_source_verification_not_outcome_scoring",
+  "generated_at": "2026-11-06T07:23:30Z",
+  "policy_fa": "این بررسی صرفاً دسترس‌پذیری منبع و وجود متن در صفحه را می‌سنجد؛ نه اصالت گفتار شخص، نه تحقق رویداد و نه درست/نادرست‌بودن پیش‌بینی.",
+  "summary": {
+    "observations": 142,
+    "checked_this_run": 0,
+    "exact_text_in_source_page": 0,
+    "deadlines_requiring_evidence": 12,
+    "outcomes_automatically_scored": 0
+  },
+  "observations": {
+    "KC-006a055688fe7d79c5": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.aa.com.tr/en/middle-east/iran-s-parliament-speaker-says-us-voters-rejected-war-tehran-backs-this-message/4110933",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-01ac53787fcec5bb2c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.asriran.com/fa/news/1203475/سناتور-آمریکایی-واشنگتن-جای-کثیفی-است",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-01ca8f05b0ccfe6a5e": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.irna.ir/news/86312798/%D8%B1%D8%A6%DB%8C%D8%B3-%D9%85%D8%AC%D9%84%D8%B3-%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%DA%AF%D8%A7%D9%86-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%86%D8%AE%D8%B3%D8%AA%DB%8C%D9%86-%D9%82%D8%B1%D8%A8%D8%A7%D9%86%DB%8C-%D8%B4%DA%A9%D8%B3%D8%AA-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA%DB%8C-%D8%AC%D9%85%D9%87%D9%88%D8%B1%DB%8C-%D8%AE%D9%88%D8%A7%D9%87%D8%A7%D9%86",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-0223606fee425bcbb9": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.fardanews.com/fa/tiny/news-1417383",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-06239fd776dddeecc4": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://ana.ir/fa/news/1093642/هشدار-جدی-سخنگوی-ارتش-به-آمریکا",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-077fdcba2a9d8d4190": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-0ca51d3e1e341a683a": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.independentpersian.com/node/423010/%D8%B3%DB%8C%D8%A7%D8%B3%DB%8C-%D9%88-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%DB%8C/%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D8%A7-%DB%B2%DB%B0-%D9%87%D8%B2%D8%A7%D8%B1-%D9%86%DB%8C%D8%B1%D9%88%DB%8C-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D8%AF%D8%B1-%D9%85%D9%86%D8%B7%D9%82%D9%87%D8%9B-%D8%A7%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84%DB%8C-%D8%AD%D9%85%D9%84%D8%A7%D8%AA-%D8%AF%D9%88%D8%A8%D8%A7%D8%B1%D9%87-%D8%AF%D8%B1",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-10cfc03402ea46c93b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305759-%D8%AA%D8%A7%DA%A9%D8%B1-%DA%A9%D8%A7%D8%B1%D9%84%D8%B3%D9%88%D9%86-%D9%85%D8%AF%D8%B9%DB%8C-%D8%B4%D8%AF-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%85%D9%85%DA%A9%D9%86-%D8%A7%D8%B3%D8%AA-%D8%AF%D8%B1-%DA%86%D9%86%D8%AF-%D8%B1%D9%88%D8%B2-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%AD%D9%85%D9%84%D9%87-%D9%87%D8%B3%D8%AA%D9%87-%D8%A7%DB%8C-%DA%A9%D9%86%D8%AF",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-14373a95373735198c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/Karimipour_K/6332",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-14637dd30762a942ee": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-1489c8232c792de70b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fa.shafaqna.com/news/2392212/",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-1589d7d8c5c70e7106": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-15ac9d8f383a7d2c67": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-1a60f55dc76d4c7582": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/946360/سی-ان-ان-هشت-رقابت-مجلس-نمایندگان-که-رئیس-ستاد-انتخاباتی-دموکرات-ها-دنبال-می-کند",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-1b4e41d08b15a05607": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-20f7aecee2b1dcc737": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/c65ynez5y599o?at_medium=RSS&at_campaign=rss",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-213cf873e04f6a60e5": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.eghtesadonline.com/fa/news/2173702/تماس-مهم-نخست-وزیر-عراق-با-ترامپ-پیام-بغداد-درباره-تحولات-منطقه",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-21b8d5a0b5ceadb7ad": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-2584ef3e3632142160": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-2aeb2a33520439fa46": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.yjc.ir/fa/news/9144023/هشدار-سخنگوی-ارتش-به-آمریکا-ماجراجویی-جدید-جغرافیای-جنگ-را-گسترده-می‌کند",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-2c42d10fff387157a8": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fararu.com/fa/news/1012817/%D8%A2%DB%8C%D8%A7-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D9%BE%DB%8C%D8%B4-%D8%A7%D8%B2-%D8%A7%D8%B3%D8%AA%D9%82%D8%B1%D8%A7%D8%B1-%DA%A9%D9%86%DA%AF%D8%B1%D9%87-%D8%AC%D8%AF%DB%8C%D8%AF-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%AD%D9%85%D9%84%D9%87-%D9%85%DB%8C-%DA%A9%D9%86%D8%AF",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-2fce1ade1761e9fc60": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.aljazeera.com/video/newsfeed/2026/11/4/trump-blames-iran-war-for-midterms-losses?traffic_source=rss",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-32e43a2a7871d55ae2": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-33078d46619cb73fe9": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.rouydad24.ir/fa/news/476166/عراقچی-رایزنی-ها-درباره-طرح-دو-روزه-با-میانجی-های-مذاکرات-ادامه-دارد-به-نتیجه-قطعی-نرسیده-ایم",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-3414585b0172e02225": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.fardanews.com/fa/tiny/news-1417336",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-370d1bc5892a9a7952": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/945730/سی-بی-اس-میانجی-های-قطری-در-تهران-حضور-داشتند-تا-آخرین-اصلاحات-در-پیش-نویس-پیشنهاد-پایان-دادن-به-جنگ-را-به-طرف-ایرانی-منتقل-کنند-نشانه-هایی-از-پیشرفت-در-روند-مذاکرات-مشاهده-می-شود",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-3ba2d3cf3f63f87796": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-3d10c85f3ec0850ec2": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/watch?v=ZTDWWQJ9DGg",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-3e4ac67a398455112a": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.fardanews.com/fa/tiny/news-1417696",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-42e81589ec900d0293": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-445bcb0625bb2c9e27": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.asriran.com/fa/news/1203216/عراقچی-رهبر-انقلاب-همه-امور-کشور-را-با-تسلط-اداره-می-کنند-سلاح-هایمان-را-به-روز-کرد-ه-ایم-هیچ-برنامه-ملاقاتی-با-هیات-آمریکایی-نداریم",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-45692e15c2006a3a4b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/946078/تاکر-کارلسون-مجری-مشهور-آمریکایی-ترامپ-تحت-فشار-نتانیاهو-ممکن-است-به-کوه-کلنگ-حمله-اتمی-کند-او-تا-شش-روز-دیگر-می-خواهد-درباره-استفاده-یا-عدم-استفاده-از-سلاح-اتمی-تصمیم-بگیرد-ترامپ-فعلا-مردد-است-هنوز-به-ونس-گوش-می-دهد-که-می-گوید-توافق-با-ایران-شدنی-است",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-4a5863a3bb51fba6d0": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/945687/جان-کری-وزیر-خارجه-سابق-آمریکا-ترامپ-با-مجموعه-ای-از-فرضیات-غلط-به-ایران-حمله-کرد-شروع-یک-حمله-نظامی-پس-از-انتخابات-میان-دوره-ای-آمریکا-اشتباه-بزرگی-خواهد-بود-اوضاع-به-قدری-غیرقابل-پیش-بینی-است-که-تقریبا-هر-اتفاقی-ممکن-است-رخ-دهد",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-4bb26cf497a3f8db59": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-4f431c79d242d49002": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/Karimipour_K/6327",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-508fa9a975d50d5ffa": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/jedaal/8560",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-518690265cbf068e3a": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-5329e0ea52d65c38cc": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305577-%D8%AF%D8%B1%DB%8C%D8%A7%D8%AF%D8%A7%D8%B1-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D9%86%DB%8C%D8%B1%D9%88%D9%87%D8%A7%DB%8C-%D9%85%D8%B3%D9%84%D8%AD-%D8%A2%D9%85%D8%A7%D8%AF%DA%AF%DB%8C-%D8%AE%D9%88%D8%AF-%D8%B1%D8%A7-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%85%D9%82%D8%A7%D8%A8%D9%84%D9%87-%D8%A8%D8%A7-%D8%AA%D9%87%D8%AF%DB%8C%D8%AF%D9%87%D8%A7-%D8%AC%D9%86%DA%AF-%D9%87%D8%A7%DB%8C-%D8%AA%D8%B1%DA%A9%DB%8C%D8%A8%DB%8C-%D8%A7%D8%B1%D8%AA%D9%82%D8%A7-%D9%85%DB%8C-%D8%AF%D9%87%D9%86%D8%AF",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-53e890c46b40f7d8aa": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.isna.ir/news/1405080905884/%D8%B3%D8%B1%D9%84%D8%B4%DA%A9%D8%B1-%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87%DB%8C-%D9%85%D9%86%D8%AA%D8%B8%D8%B1-%D8%A2%D8%BA%D8%A7%D8%B2-%D8%A7%D9%82%D8%AF%D8%A7%D9%85-%D8%AF%D8%B4%D9%85%D9%86-%D9%86%D9%85%DB%8C-%D9%85%D8%A7%D9%86%DB%8C%D9%85",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-561f01f8c49d508546": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-56cc80756c4e088d8b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fa.shafaqna.com/news/2394264/",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-58fc16c1e13f0ecfd3": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.bbc.co.uk/persian/live/ckdd8p9ypld7t?at_medium=RSS&at_campaign=rss",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-59a6e6ca4be2d6c1b9": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305732-%D8%B4%D8%B1%D8%B7-%D8%B2%D9%84%D9%86%D8%B3%DA%A9%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D9%88%D9%82%D9%81-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D9%BE%D8%A7%D9%84%D8%A7%DB%8C%D8%B4%DA%AF%D8%A7%D9%87-%D9%87%D8%A7%DB%8C-%D9%86%D9%81%D8%AA-%D8%B1%D9%88%D8%B3%DB%8C%D9%87",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-59bad804f7bea24f61": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-5a23051aac539336ab": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-5c31241345faf13d5e": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.eghtesadonline.com/fa/news/2172718/موضع-جدید-عراق-درباره-جنگ-ایران-و-آمریکا-بغداد-پشت-ایران-می-ماند-یا-کنار-می-کشد",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-5c72cd99daf931f28d": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.france24.com/es/video/20261104-juan-manfredi-pese-al-control-dem%C3%B3crata-del-congreso-trump-seguir%C3%A1-gobernando-por-decreto",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-5f2b03e4c6a6460f11": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-63df0f54474e9a87b5": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.asriran.com/fa/news/1204026/مدودف-تشدید-تحریم-های-روسیه-توسط-دموکرات-ها-به-زیان-واشنگتن-خواهد-شد",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-644af6650efbaa261e": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-6635a8f006a7fd1d1e": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/khabaronline_ir/666950",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-66723c125340ab43f4": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.asriran.com/fa/news/1204095/محسن-رضایی-به-آقای-پوتین-عرض-کردیم-تا-آمریکایی-ها-به-هفت-شرط-ما-عمل-نکنند-نه-تنگه-هرمز-باز-می-شود-و-نه-مذاکره-ای-در-کار-است",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-6abb17f086bd2223fc": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-6ae0006077b14f5d4b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/yekhezaran/52230",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-7013f5b814f3541443": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/sahandiranmehr/36681",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-75cf7b2e8f135d00e8": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/945695/ونس-ترامپ-اجازه-نخواهد-داد-درگیری-با-ایران-به-یک-جنگ-بی-پایان-تبدیل-شود",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-7987fbb09e8cbb0abc": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/946670/واکنش-وزیر-جنگ-ترامپ-به-تلاش-ها-برای-استیضاح-او-ما-تازه-مبارزه-را-آغاز-کرده-ایم-عقب-نشینی-نمی-کنیم-مصمم-هستیم-تا-کاری-که-آغاز-کرده-ایم-را-به-پایان-برسانیم-ایستادگی-می-کنیم-و-می-جنگیم",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-79cc4a92d0ffb7bf4a": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.independentpersian.com/node/423010/%D8%B3%DB%8C%D8%A7%D8%B3%DB%8C-%D9%88-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%DB%8C/%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D8%A7-%DB%B2%DB%B0-%D9%87%D8%B2%D8%A7%D8%B1-%D9%86%DB%8C%D8%B1%D9%88%DB%8C-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D8%AF%D8%B1-%D9%85%D9%86%D8%B7%D9%82%D9%87%D8%9B-%D8%A7%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84%DB%8C-%D8%AD%D9%85%D9%84%D8%A7%D8%AA-%D8%AF%D9%88%D8%A8%D8%A7%D8%B1%D9%87-%D8%AF%D8%B1",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-7c68e28802f4c9281d": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-7e41fe3b8d3966bc47": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.abc.es/internacional/merz-zelenski-piden-participacion-europa-negociaciones-ucrania-20261103171443-nt.html",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-800227d5af2d1a2a70": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-80117d63fb9544eedc": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://tabnak.ir/fa/news/100000328/%D8%A7%D9%86%D9%81%D8%AC%D8%A7%D8%B1%D9%87%D8%A7%DB%8C-%D9%82%D8%B4%D9%85-%D8%AA%D9%84%D8%A7%D8%B4-%D8%A7%D8%B3%D8%B1%D8%A7%D8%A6%DB%8C%D9%84-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D8%AE%D8%B1%DB%8C%D8%A8-%D9%85%D8%B0%D8%A7%DA%A9%D8%B1%D8%A7%D8%AA-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%88-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D9%88%D8%AF-%D9%86%D9%85%DB%8C%D8%AA%D9%88%D8%A7%D9%86-%DA%AF%D9%81%D8%AA-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D8%A7%D8%B5%D9%84%D8%A7-%D8%AF%D9%86%D8%A8%D8%A7%D9%84-%D8%AA%D9%88%D8%A7%D9%81%D9%82-%D9%86%DB%8C%D8%B3%D8%AA-6d09574518fd426cbb092cfe",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-8178b4d96ceb54d093": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://tabnak.ir/fa/news/100000405/%D9%85%D8%AD%D8%B3%D9%86-%D8%B1%D8%B6%D8%A7%DB%8C%DB%8C-%D9%BE%D8%A7%D8%B3%D8%AE-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%82%D8%A7%D9%86%D8%B9%DA%A9%D9%86%D9%86%D8%AF%D9%87-%D9%86%D8%A8%D9%88%D8%AF-9b318a483f5a4c21ada9f042",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-818196b4cfa27b195c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.sharghdaily.com/fa/tiny/news-1139681",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-84871b41fa67d5e3f6": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.fardanews.com/fa/tiny/news-1417383",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-853eccf70c14823329": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fa.shafaqna.com/news/2391624/",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-8729196cc6c258fe75": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-8aca61a6481202de40": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.fardanews.com/fa/tiny/news-1417565",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-8c52040eb3d9f9007b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/Garajetadayoni/11717",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-8ef73abe9af59dd073": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/ahmadzeidabad/6082",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-8f12643c0c1d27db5d": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/hoderestan/2285",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-92727a1353fa0d6833": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.france24.com/en/french-interior-minister-fears-disorder-after-dark-on-halloween",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-929f19eff0b81db9cb": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-92fb115104ce6a98ac": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-9466760dfcda1b2741": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-95340fb79c6e2a519f": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305286-%D8%AE%DB%8C%D8%B2-%D8%A7%D8%AD%D8%B2%D8%A7%D8%A8-%D8%B9%D8%B1%D8%A8%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%DA%A9%D9%86%D8%A7%D8%B1-%D8%B2%D8%AF%D9%86-%D9%86%D8%AA%D8%A7%D9%86%DB%8C%D8%A7%D9%87%D9%88-%D8%A2%D9%85%D8%A7%D8%AF%D9%87-%D9%85%D8%B0%D8%A7%DA%A9%D8%B1%D9%87-%D8%A8%D8%A7-%D8%A7%D8%B1%D8%AF%D9%88%DA%AF%D8%A7%D9%87-%D8%AA%D8%BA%DB%8C%DB%8C%D8%B1-%D9%87%D8%B3%D8%AA%DB%8C%D9%85",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-9766288c65494e7983": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-9785a830ef3659857c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4306511-%D8%B9%D8%B6%D9%88-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%85%D9%84%DB%8C-%D8%AF%D9%85%D9%88%DA%A9%D8%B1%D8%A7%D8%AA-%D9%87%D8%A7-%D9%87%D9%85-%D8%A7%D8%B2-%D9%85%D8%A7-%D8%AE%D9%88%D8%B4%D8%B4%D8%A7%D9%86-%D9%86%D9%85%DB%8C-%D8%A2%DB%8C%D8%AF-%D8%AF%D8%B1-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D9%86%D8%B2%D8%AF%DB%8C%DA%A9-%DA%A9%D9%86%DA%AF%D8%B1%D9%87-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D8%A8%D9%87-%D8%AC%D8%A7%D9%86-%DB%8C%DA%A9%D8%AF%DB%8C%DA%AF%D8%B1-%D9%85%DB%8C-%D8%A7%D9%81%D8%AA%D9%86%D8%AF",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-98785fdf5b0730838f": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fararu.com/fa/news/1013312/%D8%AC%D8%A7%D9%86-%DA%A9%D8%B1%DB%8C-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA-%D8%A7%D8%B4%D8%AA%D8%A8%D8%A7%D9%87%DB%8C-%D9%81%D8%A7%D8%AD%D8%B4-%D8%AE%D9%88%D8%A7%D9%87%D8%AF-%D8%A8%D9%88%D8%AF",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-9f2b63c175c044422a": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://tabnak.ir/fa/news/4200077/%D8%B3%D8%B1%D9%84%D8%B4%DA%A9%D8%B1%D8%B1%D8%B6%D8%A7%DB%8C%DB%8C-%D8%AF%D8%B1-%D8%AF%DB%8C%D8%AF%D8%A7%D8%B1-%D8%A8%D8%A7-%D9%BE%D9%88%D8%AA%DB%8C%D9%86-%D8%A7%D8%B2-%D8%B4%D8%B1%D9%88%D8%B7-%D9%87%D9%81%D8%AA%DA%AF%D8%A7%D9%86%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A8%D8%A7%D8%B2%DA%AF%D8%B4%D8%A7%DB%8C%DB%8C-%D8%AA%D9%86%DA%AF%D9%87-%D9%87%D8%B1%D9%85%D8%B2-%DA%AF%D9%81%D8%AA-8ff05b8a2c474eb4b37b0d7f",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-9f8582b8d349f9716f": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fa.shafaqna.com/news/2391348/",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-a1dceaded4fef82820": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-a1ec6cd700a1c920ac": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-a2c93dc1ee8fefc8e0": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/946238/ادعای-اکسیوس-رئیس-سیا-به-ترامپ-توصیه-می-کند-وضعیت-کنونی-نه-جنگ-نه-توافق-را-حفظ-کند-رتکلیف-به-ترامپ-گفته-تداوم-فشارهای-اقتصادی-و-افزایش-مشکلات-معیشتی-در-بلندمدت-ایران-را-وادار-به-دادن-امتیازات-بیشتر-خواهد-کرد",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-a6e811645dea462570": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.iranintl.com/202610314066",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-a857c3d7c10d76178e": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-a9a5d15c1a26e9248f": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-aa076945676116c7ff": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.irna.ir/news/86308633/%D8%B9%D8%B1%D8%A7%D9%82%DA%86%DB%8C-%DB%8C%D8%A7%D8%AF-%D9%88-%D9%86%D8%A7%D9%85-%D8%AF%DA%A9%D8%AA%D8%B1-%D9%BE%DB%8C%D8%B1%D9%88%D8%B2-%D9%85%D8%AC%D8%AA%D9%87%D8%AF%D8%B2%D8%A7%D8%AF%D9%87-%D8%AF%D8%B1-%D8%AD%D8%A7%D9%81%D8%B8%D9%87-%D8%B9%D9%84%D9%85%DB%8C-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%85%D8%A7%D9%86%D8%AF%DA%AF%D8%A7%D8%B1",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-aa36613503940b868c": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-abac935887e34e36a3": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/watch?v=ZTDWWQJ9DGg",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-ae851fab9c0e3394b7": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.eghtesadonline.com/fa/news/2173224/فوری-برنامه-ایران-برای-حمله-به-پایگاه-های-آمریکا-در-اروپا",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-b00e4d7d19843d8735": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-b15dcbbc69a98583d7": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-b28f40104290b4ab0f": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/946669/ادعای-ترامپ-درباره-ایران-ترجیح-می-دهم-در-صورت-امکان-بقیه-کشور-را-هم-نابود-نکنم-اما-شاید-مجبور-شوم-این-کار-را-انجام-دهم-رویترز-به-نقل-از-مقام-ارشد-ایرانی-ایران-پیشنهاد-هسته-ای-خود-را-از-طریق-قطر-ارسال-کرده-و-آمریکا-در-حال-بررسی-آن-است",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-b3e584fa3b39e74de0": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-b794457452c2715fb8": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/rasaee/33911",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-b9a42df7f046330b3d": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://ensafnews.com/676314/%d9%87%d8%af%d9%81-%d8%a7%db%8c%d8%b1%d8%a7%d9%86-%d8%a7%d8%b2-%d8%a8%d8%b3%d8%aa%d9%86-%d8%aa%d9%86%da%af%d9%87%d9%94-%d9%87%d8%b1%d9%85%d8%b2-%d9%81%d8%b1%d8%a7%d8%aa%d8%b1-%d8%a7%d8%b2-%d8%a7%d9%86/",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-ba8357e4fcf029e191": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/945897/ادعای-روبیو-وزیر-خارجه-امریکا-اگر-ترامپ-لازم-بداند-اقدام-نظامی-علیه-ایران-انجام-دهد-ما-توانایی-انجام-چنین-اقدامی-را-داریم-اما-ترجیح-ما-این-است-که-این-مسئله-به-صورت-مسالمت-آمیز-حل-وفصل-شود",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-bea5d28c99083805b3": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-bfab88f4c5c85bc751": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fa.shafaqna.com/news/2391157/",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c1cbe8b76aa183fb22": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/ali_gholhaky/4905",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c225d1ee10ca493ae9": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.khabaronline.ir/news/2295761/%D8%AF%D8%A8%DB%8C%D8%B1-%D8%B4%D9%88%D8%B1%D8%A7%DB%8C-%D8%B9%D8%A7%D9%84%DB%8C-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%85%D9%84%DB%8C-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D8%A7%DB%8C%D8%AF-%D8%A8%D8%A7%D8%A8%D8%AA-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%AA%D9%86%D8%A8%DB%8C%D9%87",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c69a535cf545d7127c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c83a5fbf12704a9e4a": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c872aa8b85a0e32afa": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.irna.ir/news/86313622/%D8%AA%DA%A9%D8%B0%DB%8C%D8%A8-%D8%B4%D8%A7%DB%8C%D8%B9%D9%87-%D9%82%D8%B7%D8%B9-%DA%A9%D8%A7%D9%84%D8%A7%D8%A8%D8%B1%DA%AF-%DB%B3%DB%B0-%D8%AA%D8%A7-%DB%B4%DB%B0-%D9%85%DB%8C%D9%84%DB%8C%D9%88%D9%86-%D9%86%D9%81%D8%B1",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c89af3046ae0499b08": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c921ded71d4840c6b7": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c9f08e293262fb579c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-c9fec0251ebcb3ea89": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/khabaronline_ir/666875",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-caf3d411b894e57d8b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-ce7d3d43b3dd965954": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-d2231b58b8c41ee13b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/Garajetadayoni/11769",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-d328933804886daec1": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-d43268b5d2f042ada4": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-d432aef35af28a8a13": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fararu.com/fa/news/1013394/%D8%B9%D9%84%D9%85-%D8%A7%D9%84%D9%87%D8%AF%DB%8C-%D8%AF%D8%B1-%D8%B5%D9%88%D8%B1%D8%AA-%D8%AD%D9%85%D9%84%D9%87-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%DA%A9%D8%A7%D8%A8%D9%84-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B1%D8%AA%D8%A8%D8%A7%D8%B7-%D8%AC%D9%87%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%AA%D9%86%DA%AF%D9%87-%D9%87%D8%B1%D9%85%D8%B2-%D8%B1%D8%A7-%D9%82%D8%B7%D8%B9-%D9%85%DB%8C-%DA%A9%D9%86%DB%8C%D9%85",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-d67c75f28db066881a": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-d814711dd62d8caede": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-d82393cd47ff2e7da8": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fararu.com/fa/news/1013818/%D8%B3%D8%AE%D9%86%DA%AF%D9%88%DB%8C-%D8%A7%D8%B1%D8%AA%D8%B4-%D8%AC%D9%86%DA%AF-%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84%DB%8C-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D9%85%DB%8C-%D8%AA%D9%88%D8%A7%D9%86%D8%AF-%D8%B7%D9%88%D9%84%D8%A7%D9%86%DB%8C-%D8%AA%D8%B1-%D8%A7%D8%B2-%D8%AC%D9%86%DA%AF-%DA%AF%D8%B0%D8%B4%D8%AA%D9%87-%D8%A8%D8%A7%D8%B4%D8%AF",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-debd44a9a79f13822c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-ded8bd3f6ee803e034": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-e009f338718ee16e87": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-e1814f8edc69e9c80c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/ali_gholhaky/4904",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-e325926469232a163b": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/ahmadzeidabad/6081",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-e407e2c47975957da5": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://fa.shafaqna.com/news/2391157/",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-e551b80f824e1ab7ea": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-e57926e11cf46b1d72": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.france24.com/es/video/20261104-qu%C3%A9-reflejan-los-resultados-de-las-midterms-sobre-el-panorama-pol%C3%ADtico-de-estados-unidos",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-e5c43efffc8dd6c159": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/Karimipour_K/6333",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-e742173873bca9724f": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-ed493b4701e6061e36": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/946014/روزنانه-نگار-عمانی-توافقی-میان-واشنگتن-و-تهران-در-حال-شکل-گیری-است-این-توافق-احتمالا-می-تواند-بر-پایه-یک-سازش-مالی-بزرگ-به-ارزش-چندین-میلیارد-دلار-شکل-بگیرد-که-مطالبات-ایران-را-تأمین-کند-این-سازش-شامل-آزادسازی-میلیاردها-دلار-از-دارایی-های-بلوکه-شده-ایران-در-مقابل-بازگشایی-تنگه-هرمز-و-بازگشت-آزادی-کشتیرانی-خواهد-بود",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-efa6c7a38687326470": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-efdb003269a9093f82": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-f09215dc9d7d18098c": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-f5d8c6557085927c54": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-f649460eb7a8f984ba": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/ali_gholhaky/4905",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-f8d94fbce662b9fdce": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-f9ca5450399b7b43b4": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.mizanonline.ir/fa/news/4927047/بقایی-مذاکرات-میان-ایران-و-آمریکا-از-طریق-میانجی-ها-بر-مبنای-طرح-هفت-روزه-است-پاسخ-ایران-به-هرگونه-تجاوز-نظامی-فوری-و-همه-جانبه-خواهد-بود",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-fbbf934d8b2c7a4668": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.entekhab.ir/fa/news/946542/فاکس-نیوز-به-نقل-از-منابع-مطلع-اظهارات-ونس-در-مورد-ارتباط-جنگ-ایران-با-شکست-در-انتخابات-میان-دوره-ای-نوعی-فراخوان-برای-بسیج-جمهوری-خواهانی-است-که-معتقد-هستند-ترامپ-بیش-از-اندازه-با-اسرائیل-هم-سو-شده-ونس-می-خواهد-پیش-از-انتخابات-2028-ائتلافی-با-رأی-دهندگان-ناراضی-ترامپ-تشکیل-دهد",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-fc3b7f94a18fa865b3": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-fcc686a578f02bb110": {
+      "status": "no_source_url",
+      "checked_at": null,
+      "source_url": null,
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-fcefe3d37ea427940e": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://www.asriran.com/fa/news/1203899/عضو-کمیسیون-امنیت-ملی-خروج-از-npt-و-ساخت-بمب-هسته-ای-مطالبه-عمومی-شده-است",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-fdc22939534406fe31": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/yekhezaran/52265",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    },
+    "KC-fe240f71b78c7f2603": {
+      "status": "pending_check",
+      "checked_at": null,
+      "source_url": "https://t.me/rezanasrichannel/3398",
+      "speaker_verified": false,
+      "outcome": "not_assessed"
+    }
+  },
+  "official_due_review": {
+    "K-001": {
+      "deadline_date": "2026-11-05",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-002": {
+      "deadline_date": "2026-11-05",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-003": {
+      "deadline_date": "2026-12-21",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-004": {
+      "deadline_date": "2027-01-30",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-005": {
+      "deadline_date": "2026-11-05",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-006": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-007": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-008": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-009": {
+      "deadline_date": "2026-11-05",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-010": {
+      "deadline_date": "2026-11-05",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-011": {
+      "deadline_date": "2026-11-05",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-012": {
+      "deadline_date": "2026-11-05",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-013": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-014": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-015": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-016": {
+      "deadline_date": "2026-12-21",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-017": {
+      "deadline_date": "2026-12-21",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-018": {
+      "deadline_date": "2026-11-05",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-019": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-020": {
+      "deadline_date": "2026-12-21",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-021": {
+      "deadline_date": "2026-11-21",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-022": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-023": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-024": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-025": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-026": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-027": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-028": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-029": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-030": {
+      "deadline_date": "2027-03-20",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-031": {
+      "deadline_date": "2027-12-31",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-032": {
+      "deadline_date": "2027-12-31",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-033": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-034": {
+      "deadline_date": "2027-12-31",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-035": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-036": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-037": {
+      "deadline_date": "2026-11-12",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-038": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-039": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-040": {
+      "deadline_date": "2027-12-31",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-041": {
+      "deadline_date": "2027-12-31",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-042": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-043": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-044": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-045": {
+      "deadline_date": "2028-11-07",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-046": {
+      "deadline_date": "2028-11-07",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-047": {
+      "deadline_date": "2027-03-20",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-048": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-049": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-050": {
+      "deadline_date": "2027-03-20",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-051": {
+      "deadline_date": "2027-03-20",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-052": {
+      "deadline_date": "2027-03-20",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-053": {
+      "deadline_date": "2027-03-20",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-054": {
+      "deadline_date": "2027-01-03",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "K-055": {
+      "deadline_date": "2027-12-31",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-001": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-002": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-003": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-004": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-005": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-006": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-007": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-008": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-009": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-010": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-011": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-012": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-013": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-014": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-015": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-016": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-017": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-018": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-019": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-020": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-021": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-022": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-023": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-024": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "L-025": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "PDR-HOL-20261008-02": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "PDR-IZA-20261021-01": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "PDR-MAR-20261018-01": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "PDR-MOT-20261019-01": {
+      "deadline_date": "2027-04-19",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "PDR-ZEI-20261020-01": {
+      "deadline_date": "2026-10-27",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "PDR-ZEI-20261020-02": {
+      "deadline_date": "2026-10-27",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-01": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-02": {
+      "deadline_date": "2027-03-20",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-03": {
+      "deadline_date": "2026-11-03",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-04": {
+      "deadline_date": "2026-11-03",
+      "triage_status": "deadline_passed_needs_evidence",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-05": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-06": {
+      "deadline_date": null,
+      "triage_status": "event_based_or_no_verified_deadline",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-07": {
+      "deadline_date": "2030-11-01",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-08": {
+      "deadline_date": "2027-03-31",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    },
+    "SOURI-20261101-09": {
+      "deadline_date": "2026-11-15",
+      "triage_status": "scheduled_future",
+      "automated_outcome": null,
+      "requires_independent_event_evidence": true
+    }
+  }
+}
