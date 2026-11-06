@@ -261,7 +261,8 @@
     "https://t.me/kerman_gov/10513",
     "https://t.me/Kerman_akhbar/66213",
     "https://t.me/qh_qv/874",
-    "https://t.me/irna_kerman/30298"
+    "https://t.me/irna_kerman/30298",
+    "https://t.me/irna_kerman/30299"
   ],
   "queue": [
     {
@@ -1827,17 +1828,44 @@
       "delivery_kind": "text",
       "telegram_message_id": 39,
       "sent_at": "2026-11-06T02:25:56.550045+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30299",
+      "source_post_id": "30299",
+      "title": "استاندار کرمان: این استان می‌تواند الگوی ملی مشارکت‌های مردمی در مدرسه‌سازی باشد",
+      "excerpt": "استاندار کرمان: این استان می‌تواند الگوی ملی مشارکت‌های مردمی در مدرسه‌سازی باشد استاندار کرمان با تأکید بر ضرورت تدوین الگوی مشارکت‌های جمعی در حوزه مدرسه‌سازی گفت: گفتمان مدرسه‌سازی در استان به‌خوبی شکل گرفته و به همراهی عمومی و مشارکت گسترده اقشار مختلف جامعه منجر شده است؛ از این رو کرمان ظرفیت تبدیل شدن به الگوی ملی مشارکت‌های مردمی در این حوزه را دارد. irna_kerman",
+      "paragraphs": [
+        "استاندار کرمان: این استان می‌تواند الگوی ملی مشارکت‌های مردمی در مدرسه‌سازی باشد",
+        "استاندار کرمان با تأکید بر ضرورت تدوین الگوی مشارکت‌های جمعی در حوزه مدرسه‌سازی گفت: گفتمان مدرسه‌سازی در استان به‌خوبی شکل گرفته و به همراهی عمومی و مشارکت گسترده اقشار مختلف جامعه منجر شده است؛ از این رو کرمان ظرفیت تبدیل شدن به الگوی ملی مشارکت‌های مردمی در این حوزه را دارد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/qMpvlf8BnZ7azQN8oX9F9jz1TumNZNOoyQJAGKDuDGXu8rj12ah0rAqd6IyOt1HXCqMy19nokQC0gHW1vsNvNrlXWXT5cB6_uzhxE9J0QRp7YmcXIQr8HqZ-aHMod5gTCyWXG1Js-3Wd8pYcmcSB-0e9oAPASbzJDRRZmCn-SFjvFlB3Yz3JFpraW7794AiNlNzsfHwhsGMEEaB2K4vvGNLtc35qbdJWG54AjsYdf8PNKoI__RYep2NSygmOiKpg0KSwYW00G4G8cOwTZ8s7KyH5Nzz1WU-vyl10qQbqDswbYSUYNrYfstNj4IFRv6NRgNanlXxYkvZfM5fO1x-oqg.jpg"
+      },
+      "published_at": "2026-11-06T02:26:18+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "42dcb36579af72df",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T02:32:24.583953+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-06T02:25:56.550057+00:00",
+  "saved_at": "2026-11-06T02:32:37.522148+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-06T02:25:38.555070+00:00",
-    "fardaayekerman": "2026-11-06T02:25:38.555070+00:00",
-    "irna_kerman": "2026-11-06T02:25:38.555070+00:00",
-    "kerman_gov": "2026-11-06T02:25:38.555070+00:00",
-    "kerman_akhbar": "2026-11-06T02:25:38.555070+00:00",
+    "fardaayekerman": "2026-11-06T02:32:24.583953+00:00",
+    "irna_kerman": "2026-11-06T02:32:24.583953+00:00",
+    "kerman_gov": "2026-11-06T02:32:24.583953+00:00",
+    "kerman_akhbar": "2026-11-06T02:32:24.583953+00:00",
     "kerman_news": "2026-11-06T02:25:38.555070+00:00",
-    "kerman_rasaneh": "2026-11-06T02:25:38.555070+00:00",
+    "kerman_rasaneh": "2026-11-06T02:32:24.583953+00:00",
     "qh_qv": "2026-11-06T02:25:38.555070+00:00"
   }
 }
