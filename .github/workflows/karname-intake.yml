@@ -25,6 +25,9 @@ on:
       - "backend/tests/test_karname_candidates.py"
       - "backend/tests/test_karname_scenarios.js"
       - "web-static/karname/app.js"
+      - "web-static/karname/index.html"
+      - "web-static/karname/style.css"
+      - "web-static/karname/evidence-cases.json"
       - ".github/workflows/karname-intake.yml"
   pull_request:
     paths:
