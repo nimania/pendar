@@ -270,7 +270,13 @@
     "https://t.me/Kerman_akhbar/66215",
     "https://t.me/kerman_news/140130",
     "https://t.me/kerman_news/140131",
-    "https://t.me/kerman_gov/10514"
+    "https://t.me/kerman_gov/10514",
+    "https://t.me/Kerman_akhbar/66216",
+    "https://t.me/kerman_news/140132",
+    "https://t.me/kerman_news/140133",
+    "https://t.me/Kerman_akhbar/66217",
+    "https://t.me/kerman_news/140134",
+    "https://t.me/kerman_news/140135"
   ],
   "queue": [
     {
@@ -1970,17 +1976,93 @@
       "delivery_kind": "photo",
       "telegram_message_id": 43,
       "sent_at": "2026-11-06T05:33:47.923405+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_news/140132",
+      "source_post_id": "140132",
+      "title": "زنی در بردسیر شکار سگ شکاری شد",
+      "excerpt": "زنی در بردسیر شکار سگ شکاری شد در حادثه‌ای تکان‌دهنده که آرامش روستای باغ‌حاجی (بخش لاله‌زار) را بر هم زد، یک خانم معلم بازنشسته ۶۰ ساله، بر اثر گازگرفتگی شدید توسط یک سگ شکاری از دنیا رفت. این حادثه زمانی رخ داد که سگی شکاری که متعلق به یکی از اهالی روستا بوده و بدون قلاده و کنترل در محیط رها شده بود، به این خانم آسیب رساند و شدت گازگرفتگی باعث شد که جان خود را از دست بدهد. این حادثه بار دیگر بحث خطرات رها کردن حیوانات در فضای عمومی و عدم رعایت پروتکل‌های نگهداری از حیوانات به‌خصوص سگ‌های شکاری و نگهبانی را مطرح کرده است.",
+      "paragraphs": [
+        "زنی در بردسیر شکار سگ شکاری شد",
+        "در حادثه‌ای تکان‌دهنده که آرامش روستای باغ‌حاجی (بخش لاله‌زار) را بر هم زد، یک خانم معلم بازنشسته ۶۰ ساله، بر اثر گازگرفتگی شدید توسط یک سگ شکاری از دنیا رفت.",
+        "این حادثه زمانی رخ داد که سگی شکاری که متعلق به یکی از اهالی روستا بوده و بدون قلاده و کنترل در محیط رها شده بود، به این خانم آسیب رساند و شدت گازگرفتگی باعث شد که جان خود را از دست بدهد.",
+        "این حادثه بار دیگر بحث خطرات رها کردن حیوانات در فضای عمومی و عدم رعایت پروتکل‌های نگهداری از حیوانات به‌خصوص سگ‌های شکاری و نگهبانی را مطرح کرده است."
+      ],
+      "media": null,
+      "published_at": "2026-11-06T05:43:39+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "5b7cb4afeb551d7c",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T06:56:39.084717+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66217",
+      "source_post_id": "66217",
+      "title": "عنبرآباد در مسیر تحول سبز برنامه کاشت ۲۰۰ هزار نهال و احیای ۵۰۰ هکتار مرتع",
+      "excerpt": "عنبرآباد در مسیر تحول سبز برنامه کاشت ۲۰۰ هزار نهال و احیای ۵۰۰ هکتار مرتع اداره منابع طبیعی شهرستان عنبرآباد با هدف توسعه پوشش گیاهی و تحقق اهداف طرح ملی کاشت یک میلیارد درخت، برنامه کاشت و توزیع ۲۰۰ هزار اصله نهال را در قالب ۱۰ پویش تا پایان سال در دستور کار دارد.",
+      "paragraphs": [
+        "عنبرآباد در مسیر تحول سبز برنامه کاشت ۲۰۰ هزار نهال و احیای ۵۰۰ هکتار مرتع",
+        "اداره منابع طبیعی شهرستان عنبرآباد با هدف توسعه پوشش گیاهی و تحقق اهداف طرح ملی کاشت یک میلیارد درخت، برنامه کاشت و توزیع ۲۰۰ هزار اصله نهال را در قالب ۱۰ پویش تا پایان سال در دستور کار دارد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/H-nvMd5cx5uRxUnjfenlMMTd2ROJu0DIc8enBjxlq50sxGJLfSDQeZJPNdU9_T6Z7kqUXQZC-aFCX73ZkpC8m_uM7wxI4H1MtVaiNsol3RqiOPdsgCM-qtz7WNslB2qycM52sIcQV1QxJ09sk8zzLGr71Cmv-CZRf0dWnphx6yBAb-IJSSXrT_UuPrRXuOUpNVAgMJTJ5qIooPFeZ2DArpYrJElIxq_-PZSBrPA3g5pXhjUm2An5nBqL5jNjoWZT9M_NQp60Pal9onbYjy7dz3vJBjrtpJIWlpEnLbPRyTLY28RaZgj_9NV4V5nV0YFUKNNb13UfT7HvncmSA9akvg.jpg"
+      },
+      "published_at": "2026-11-06T06:31:02+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "3d7b9d4ec0745af6",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T06:56:39.084717+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140135",
+      "source_post_id": "140135",
+      "title": "سوگواره کوچه‌های بنی‌هاشم در سیرجان",
+      "excerpt": "سوگواره کوچه‌های بنی‌هاشم در سیرجان",
+      "paragraphs": [
+        "سوگواره کوچه‌های بنی‌هاشم در سیرجان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/5137120fb0.mp4?token=ZJae2RrIItwFgbYjPZ1S_AYOqLcQLPmuwOlWMVZqdhtZ7dgvIXQqMp5YfpYoMHxSF3g9aqWqvYa7jlhvLkxap4b1XlE4L28rT7u2ovGUHSr12qSJyQPphENmrTOaTxaA_UF6JC7C_Sq7_fPI-1TQcADymjtrCVhDNkEXTuhruTUE-j8CWPr51VRA1KsyFzLBCZ38bKymkuyVzUSiuE09EPZMo6MJt7aHHZIgRs4j69Al5lFjIui7tBoaQrIT7nmWQIsGu0V2436ww4BMOK0Km2HYDXDVexQ2HPvfxnPH-KSwI6g1TzRj1hmkHXoz4QpYyo2uI34aMeJe5WfH6lQLsg"
+      },
+      "published_at": "2026-11-06T06:55:09+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "3bc91f61d485f831",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T06:56:39.084717+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-06T05:33:47.923421+00:00",
+  "saved_at": "2026-11-06T06:56:56.489644+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-06T05:33:25.670499+00:00",
-    "fardaayekerman": "2026-11-06T05:33:25.670499+00:00",
-    "irna_kerman": "2026-11-06T05:33:25.670499+00:00",
-    "kerman_gov": "2026-11-06T05:33:25.670499+00:00",
-    "kerman_akhbar": "2026-11-06T05:33:25.670499+00:00",
-    "kerman_news": "2026-11-06T05:33:25.670499+00:00",
-    "kerman_rasaneh": "2026-11-06T05:33:25.670499+00:00",
-    "qh_qv": "2026-11-06T05:33:25.670499+00:00"
+    "kermane_no": "2026-11-06T06:56:39.084717+00:00",
+    "fardaayekerman": "2026-11-06T06:56:39.084717+00:00",
+    "irna_kerman": "2026-11-06T06:56:39.084717+00:00",
+    "kerman_gov": "2026-11-06T06:56:39.084717+00:00",
+    "kerman_akhbar": "2026-11-06T06:56:39.084717+00:00",
+    "kerman_news": "2026-11-06T06:56:39.084717+00:00",
+    "kerman_rasaneh": "2026-11-06T06:56:39.084717+00:00",
+    "qh_qv": "2026-11-06T06:56:39.084717+00:00"
   }
 }
