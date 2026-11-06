@@ -194,6 +194,23 @@ function karnameAutoLink(p){
  const s=karnameMatch({person:p});
  return s?karnameOfficialLink(s):'/karname/?mention='+encodeURIComponent(String(p.label||"نامشخص"))+'#person';
 }
+
+function sourceBadge(id){
+ const c=state.sourceChecks?.observations?.[id];
+ const messages={source_text_found:"متن در صفحهٔ منبع یافت شد؛ گوینده و نتیجه هنوز احراز نشده",
+ source_accessible:"صفحهٔ منبع در دسترس است؛ متن/انتساب تأیید نشده",
+ source_unavailable:"دریافت منبع در این نوبت ممکن نشد",no_source_url:"بدون لینک قابل دریافت",
+ pending_check:"در صف بررسی خودکار"};
+ return '<span class="source-check">'+esc(messages[c?.status]||"تطبیق منبع هنوز گزارش نشده")+'</span>';
+}
+function renderVerificationOverview(){
+ const d=state.sourceChecks?.summary;if(!d)return "";
+ return '<section class="verification-overview"><strong>راستی‌آزمایی خودکار منابع</strong><p>'
+  +fa(d.checked_this_run||0)+' منبع در آخرین نوبت بررسی شد؛ '+fa(d.exact_text_in_source_page||0)
+  +' عبارت در صفحهٔ منبع یافت شد. '+fa(d.deadlines_requiring_evidence||0)
+  +' سررسید گذشته هنوز شواهد نتیجه می‌خواهند.</p>'
+  +'<small>یافتن متن در منبع، تأیید گوینده یا درست‌بودن پیش‌بینی نیست؛ نمرهٔ خودکار قطعی صادر نشده است.</small></section>';
+}
 function renderPersonList(){
  const map=new Map();
  for(const s of state.speakers){
@@ -376,7 +393,7 @@ function renderAuto(){
    +'<p class="auto-quote">'+esc(c.text_from_source)+'</p>'
    +'<p class="auto-evidence">'+esc(sourceLabel)+' · '+esc(source.title||"منبع در پندار")+'</p>'
    +'<p class="auto-explainer">'+esc(source.text_origin||"")+'</p>'
-   +'<div class="auto-trigger">'+esc(cond)+'</div>'
+   +'<div class="auto-trigger">'+esc(cond)+'</div>'+sourceBadge(c.id)
    +'<div class="tile-foot">'+link+'<span>نتیجه: هنوز بررسی نشده</span></div></article>';
  }).join("");
  return intro+controls+cards;
@@ -429,7 +446,7 @@ function renderUnified(){
     +'<small dir="ltr">'+esc(r.id)+'</small><h3><a href="'+esc(karnameAutoLink({label:array(r.speaker_labels)[0]||"نام مرتبط با خبر",profile_handle:array(r.speaker_keys)[0]||null}))+'">'+esc(array(r.speaker_labels)[0]||"نام مرتبط با خبر")+'</a></h3>'
     +'<p class="auto-quote">'+esc(r.title)+'</p>'
     +(r.time_label?'<p class="auto-trigger">اشارهٔ زمانی (تأییدنشده): '+esc(r.time_label)+'</p>':"")+similar
-    +'<div class="tile-foot"><a href="'+esc(target)+'">مشاهدهٔ منبع و شرایط ←</a></div></article>';
+    ++sourceBadge(r.id)+'<div class="tile-foot"><a href="'+esc(target)+'">مشاهدهٔ منبع و شرایط ←</a></div></article>';
   }
   return '<article class="tile unified-record unified-screened"><span class="pill open">ممیزی · بدون انتساب قطعی</span>'
     +'<small dir="ltr">'+esc(r.id)+'</small><h3>کنارگذاشته‌شده از ادعاهای قابل‌سنجش</h3>'
@@ -437,7 +454,7 @@ function renderUnified(){
     +'<p class="muted">متن اولیه به‌عنوان گفتهٔ قطعی یک فرد بازنشر نشده است؛ اصل سند در صف ممیزی حفظ شده است.</p></article>';
  }).join("");
  const more=rows.length>listed.length?'<button type="button" class="unified-more" data-unified-more="true">نمایش '+fa(Math.min(60,rows.length-listed.length))+' مورد بعدی</button>':"";
- return intro+tools+'<p class="unified-count">'+fa(listed.length)+' مورد از '+fa(rows.length)+' نتیجه</p>'
+ return renderVerificationOverview()+intro+tools+'<p class="unified-count">'+fa(listed.length)+' مورد از '+fa(rows.length)+' نتیجه</p>'
    +(rows.length?cards:noData("رکوردی برای این فیلتر نیست","جست‌وجو را تغییر دهید."))+more;
 }
 function renderAll(){
