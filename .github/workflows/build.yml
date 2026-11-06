@@ -449,7 +449,11 @@ jobs:
           python backend/scripts/build_karname_unified.py --check
           python -m unittest discover -s backend/tests -p 'test_karname_unified.py' -v
           node backend/tests/test_karname_unified.js
+          node backend/tests/test_karname_person_pages.js
           python -m unittest discover -s backend/tests -p 'test_karname_auto_radar.py' -v
+          python -m unittest discover -s backend/tests -p 'test_karname_source_verification.py' -v
+          node --check web-static/karname/app.js
+          python backend/scripts/verify_karname_sources.py --check
           node --check web-static/figures-profile.js
           node backend/tests/test_karname_figure_integration.js
           python backend/scripts/build_karname_intake_stats.py --check

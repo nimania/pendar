@@ -59,3 +59,40 @@ dialog .claim-contributors{padding:10px 0;border-bottom:1px solid #3a4653}
 .auto-trigger-hints li a:hover{border-color:var(--yellow)}.auto-trigger-hints small{color:#a6b5c4}
 .auto-trigger-hints>a{color:var(--yellow);font-size:12px;font-weight:800}
 @media(max-width:620px){.unified-intro{padding:14px}.unified-controls button{flex:1 1 auto}.observed-people{padding:12px}.observed-person-grid{grid-template-columns:1fr}}
+
+
+/* The unified interface makes speaker names navigable and indicates trust. */
+.person-directory-intro{grid-column:1/-1;background:#222e3c;border:1px solid #52657d;border-radius:15px;padding:15px 20px}
+.person-directory-intro strong{font-size:19px;color:var(--yellow)}.person-directory-intro p{margin-top:5px;font-size:13px;color:#bfccda;line-height:1.9}
+.person-directory{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px}
+.person-directory-item{display:flex;gap:12px;align-items:center;background:#253342;border:1px solid #52677b;padding:12px;border-radius:13px;min-width:0}
+.person-directory-item:hover,.person-directory-item:focus-visible{border-color:var(--yellow)}
+.person-directory-item .avatar{width:50px;height:50px;min-width:50px}
+.person-directory-item>span:last-child{min-width:0;display:flex;flex-direction:column;gap:6px}
+.person-directory-item b{color:#f0f6fd;overflow-wrap:anywhere;font-size:13px}
+.person-directory-item small{color:#c1ccd9;font-size:11px;line-height:1.6}
+.avatar-pending{display:grid;place-items:center;background:#35485e;color:#e2edfa;font-weight:800;border-radius:50%}
+.person-breadcrumb{grid-column:1/-1;color:#bbcbdc;font-size:13px}
+.person-breadcrumb a{color:var(--yellow)}
+.person-page-head{grid-column:1/-1;display:flex;gap:18px;align-items:center;border:1px solid #567084;background:#253545;border-radius:16px;padding:22px}
+.person-page-head .avatar{width:82px;height:82px;min-width:82px;font-size:30px}
+.person-page-head h2{font-size:25px;color:#f5f7fa;margin:0 0 8px}
+.person-page-head p{font-size:13px;color:#c9d4df;margin:0 0 12px}
+.person-page-head a{font-size:13px;font-weight:800;color:var(--yellow)}
+.person-claim-section{grid-column:1/-1;border:1px solid #455a70;background:#1d2a38;padding:20px;border-radius:16px;min-width:0}
+.person-claim-section h3{margin:0 0 13px;font-size:19px;color:#e9f2fc}
+.person-claim-cards,.person-auto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.person-auto-item{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid #617085;border-radius:12px;background:#273646;min-width:0}
+.person-auto-item b{font-size:10px;color:#b1c2d0;align-self:flex-start}
+.person-auto-item p{font-size:13px;line-height:2.1;overflow-wrap:anywhere;color:#f1f4f8}
+.person-auto-item small{font-size:11px;color:#b7c6d6;line-height:1.8}
+.person-evidence-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto}
+.person-evidence-actions a{font-size:12px;color:var(--yellow);font-weight:700}
+.person-trust-warning{padding:12px 14px;border:1px solid #927446;background:#3e3529;color:#f7dcad;font-size:13px;line-height:2;margin-bottom:14px;border-radius:11px}
+.source-check{display:inline-block;margin:10px 0 2px;background:#354b5d;border:1px solid #668398;color:#dce9f2;font-size:11px;line-height:1.75;padding:6px 10px;border-radius:9px}
+.verification-overview{grid-column:1/-1;background:#202f3c;border:1px solid #53677d;border-radius:14px;padding:16px 19px}
+.verification-overview strong{color:var(--yellow);font-size:17px}
+.verification-overview p{margin:9px 0;color:#e0e9f1;line-height:1.95;font-size:13px}
+.verification-overview small{color:#b5c6d7;line-height:1.9}
+.unified-record h3 a:hover{color:var(--yellow);text-decoration:underline}
+@media(max-width:620px){.person-directory{grid-template-columns:1fr}.person-page-head{padding:15px;gap:12px}.person-page-head .avatar{width:66px;height:66px;min-width:66px}.person-page-head h2{font-size:20px}.person-claim-section{padding:12px}.person-claim-cards,.person-auto-grid{grid-template-columns:1fr}}
