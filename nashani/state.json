@@ -347,7 +347,21 @@
     "https://t.me/irna_kerman/30306",
     "https://t.me/kerman_news/140166",
     "https://t.me/Kerman_akhbar/66229",
-    "https://t.me/kerman_news/140167"
+    "https://t.me/kerman_news/140167",
+    "https://t.me/kerman_gov/10542",
+    "https://t.me/qh_qv/891",
+    "https://t.me/qh_qv/892",
+    "https://t.me/qh_qv/893",
+    "https://t.me/irna_kerman/30307",
+    "https://t.me/kerman_news/140168",
+    "https://t.me/Kerman_akhbar/66230",
+    "https://t.me/kermane_no/59023",
+    "https://t.me/kerman_news/140169",
+    "https://t.me/kerman_news/140176",
+    "https://t.me/kerman_news/140177",
+    "https://t.me/kerman_news/140178",
+    "https://t.me/kerman_news/140179",
+    "https://t.me/kerman_news/140180"
   ],
   "queue": [
     {
@@ -3115,7 +3129,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-06T18:29:51.084957+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66230"
+        }
+      ]
     },
     {
       "url": "https://t.me/kerman_news/140166",
@@ -3143,17 +3162,124 @@
       "status": "review",
       "detected_at": "2026-11-06T18:29:51.084957+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30307",
+      "source_post_id": "30307",
+      "title": "حادثه رانندگی در جاده چترود به کرمان ۷ کشته و ۲ مصدوم برجا گذاشت",
+      "excerpt": "حادثه رانندگی در جاده چترود به کرمان ۷ کشته و ۲ مصدوم برجا گذاشت هلال احمر استان کرمان اعلام کرد که حادثه رانندگی برخورد ۲ خودروی سواری پژو پارس و شاهین در کیلومتر ۱۰ جاده چترود کرمان (مسیر فرعی کاظم‌آباد) هفت نفر کشته و ۲ نفر مصدوم برجا گذاشت. irna_kerman",
+      "paragraphs": [
+        "حادثه رانندگی در جاده چترود به کرمان ۷ کشته و ۲ مصدوم برجا گذاشت",
+        "هلال احمر استان کرمان اعلام کرد که حادثه رانندگی برخورد ۲ خودروی سواری پژو پارس و شاهین در کیلومتر ۱۰ جاده چترود کرمان (مسیر فرعی کاظم‌آباد) هفت نفر کشته و ۲ نفر مصدوم برجا گذاشت.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/kvFeOi0cxRHv4sDQoOn4F_aRNMyH2W_BpvCJikPQjV1sMP2U3wX9YbMTNhSTkMlN-9xpxRxKrpFN1Smgfrv9hex-UFO-_gzakhG4o-iyEKtLXcdEwYvsmkShRsm-2cd4qBVXFlmj23FR_dL8sSbdjcwldAGh0Cp13alsZx-wJ75ymfDofV5eKXRKFZMl_ulnanHIkInNCZxwAUaFDqL1Xk5rUas4rhvJvLA_eit-gKBxP5DqvW7xFvDYrq5fAMBOgnjqxhVFGElaI9RimWywAZm40FgTcgctzx0ZCwu8iGOT17uD8guJ3Yy1DO_TWw16hNNc0Rztuu4jlwdF0gxdJg.jpg"
+      },
+      "published_at": "2026-11-06T18:48:18+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "956a3d26039d60f7",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-06T19:40:21.294521+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59023",
+      "source_post_id": "59023",
+      "title": "تصادف در محور کرمان - چترود؛ ۷ کشته و ۲ مصدوم بر جای گذاشت",
+      "excerpt": "تصادف در محور کرمان - چترود؛ ۷ کشته و ۲ مصدوم بر جای گذاشت برخورد شدید دو دستگاه خودروی سواری در محور کرمان به چترود، به کشته شدن ۷ نفر و مصدومیت ۲ تن دیگر انجامید. بر اساس اعلام هلال‌احمر استان کرمان، این حادثه مرگبار ساعت ۱۹:۳۰ امشب میان دو خودروی شاهین و پژو پارس رخ داد که متأسفانه تمامی جان‌باختگان در صحنه حادثه دچار آسیب شدید شده بودند و مصدومان نیز برای مداوا به مراکز درمانی منتقل شدند.",
+      "paragraphs": [
+        "تصادف در محور کرمان - چترود؛ ۷ کشته و ۲ مصدوم بر جای گذاشت",
+        "برخورد شدید دو دستگاه خودروی سواری در محور کرمان به چترود، به کشته شدن ۷ نفر و مصدومیت ۲ تن دیگر انجامید.",
+        "بر اساس اعلام هلال‌احمر استان کرمان، این حادثه مرگبار ساعت ۱۹:۳۰ امشب میان دو خودروی شاهین و پژو پارس رخ داد که متأسفانه تمامی جان‌باختگان در صحنه حادثه دچار آسیب شدید شده بودند و مصدومان نیز برای مداوا به مراکز درمانی منتقل شدند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/v739Cc2xCL5bw6zkFY3CII3L3fzbKksBBG1yWLOTk82fshNOYGtXzWwUaGiVyRAUHUaI4pAE1mVfdDKdKeySJeGMbCu9SxO8Ejd3qYt2mb5qsAWLuNTzMXlJmO5voiiwNnYc5wBruSD-eEAYZLQ4m0RydvrgMZVKVKw5-mdMk7G8VrMAZIzoG3biDyqhBN-Gqc7ggJ1sQnmZ1BJhZ3BJTsnJfNRHFt1dKrAFo6FlPiEfHI18V8y6j94MekbVPNz2K1sPzFJudr5wJKyBEz2CIGhs-wjqLqSB3tHNurpappy7JR7qdujCfTR1I4vqb_hBr30innRO7G9vbVIT6XV2zQ.jpg"
+      },
+      "published_at": "2026-11-06T18:54:33+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "811c3f0c4ac8fc4e",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-06T19:40:21.294521+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140169",
+      "source_post_id": "140169",
+      "title": "فراخوان خبرفوری؛ ایران زیبا",
+      "excerpt": "فراخوان خبرفوری؛ ایران زیبا روایتی تصویری از زیبایی‌های ایران با نگاه شما؛ پاسخی به اظهارات توهین‌آمیز ترامپ که ایران را «زشت‌ترین و خشن‌ترین کشور جهان» توصیف کرده است. استان کرمان الوفوری را دنبال کنید",
+      "paragraphs": [
+        "فراخوان خبرفوری؛ ایران زیبا",
+        "روایتی تصویری از زیبایی‌های ایران با نگاه شما؛ پاسخی به اظهارات توهین‌آمیز ترامپ که ایران را «زشت‌ترین و خشن‌ترین کشور جهان» توصیف کرده است.",
+        "استان کرمان",
+        "الوفوری را دنبال کنید"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Z_axVKb7uNUnTGchYbVgOiT1Iat3uH_udl71Z7qEQRoD03hrxhWhDisnv3Ft_5iEwAl5zjkibch9zUHtMY0YLMUl1LeTb8telQzsh2ZXyHTFssrZIHT4b4NOh3lT9Z2JlR07NvjDcJQJqJ1XF3rFlD-M90avvBASO-2tLpElwScigtFRAY-mAY_H6Q800DYDG5IWtY5GWKb8FsBZ61OVOPvG6_A8Q1dKpBnZzG1Y03-Q8dyIVRCNdrbwB_qnjZGz5Si1XBSmsRG7fOoVEJ9AuU7sxG5SuKYmM9koFqm_TZISIWpReg9O-UCILwWT8oSakuJqk-v8B0u2xEiFTUA9-w.jpg"
+      },
+      "published_at": "2026-11-06T18:59:56+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "0bdf53d7b657c508",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T19:40:21.294521+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140176",
+      "source_post_id": "140176",
+      "title": "تجمع امشب بم‌ رنگ‌بوی عطر شهید داشت",
+      "excerpt": "تجمع امشب بم‌ رنگ‌بوی عطر شهید داشت",
+      "paragraphs": [
+        "تجمع امشب بم‌ رنگ‌بوی عطر شهید داشت"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/4bd8e7ec7c.mp4?token=CPtGBVIhUNlyNoiufdMSJRy1P4c0EcTnnrb6w5_XJllJdnEdYorZ3Pc8FS6hNRkW2jhHt22V-HS4xSvktQn03ymRKhl7Dg5KbNGAo6Dmvh13Qwi6FaH0EAkTzf_voSDJoj8v2AomBnFWl_N9viI6-qnV9nZuv7pJWStmD9VlDx4rZ9B2ONw9hMVCplxv9B2J5dsjCRIB6O6uF7WrZhcqhuvTnw_ygTkbATYwsot9NXNVKIbgsmD9H0LlrRtyk87l24PAS6FYQ3bAQvJsBbk2yWOnUj0xhtgU3l7MniP-L3HlnDFszWjn1Dn2qDRV0tOMM0ncJpAy8WVQUHGe-b0bWg"
+      },
+      "published_at": "2026-11-06T19:07:04+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "1f58efc10fb1bbea",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T19:40:21.294521+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-06T18:30:22.869791+00:00",
+  "saved_at": "2026-11-06T19:40:44.065547+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-06T18:29:51.084957+00:00",
-    "fardaayekerman": "2026-11-06T18:29:51.084957+00:00",
-    "irna_kerman": "2026-11-06T18:29:51.084957+00:00",
-    "kerman_gov": "2026-11-06T18:29:51.084957+00:00",
-    "kerman_akhbar": "2026-11-06T18:29:51.084957+00:00",
-    "kerman_news": "2026-11-06T18:29:51.084957+00:00",
-    "kerman_rasaneh": "2026-11-06T18:29:51.084957+00:00",
-    "qh_qv": "2026-11-06T18:29:51.084957+00:00"
+    "kermane_no": "2026-11-06T19:40:21.294521+00:00",
+    "fardaayekerman": "2026-11-06T19:40:21.294521+00:00",
+    "irna_kerman": "2026-11-06T19:40:21.294521+00:00",
+    "kerman_gov": "2026-11-06T19:40:21.294521+00:00",
+    "kerman_akhbar": "2026-11-06T19:40:21.294521+00:00",
+    "kerman_news": "2026-11-06T19:40:21.294521+00:00",
+    "kerman_rasaneh": "2026-11-06T19:40:21.294521+00:00",
+    "qh_qv": "2026-11-06T19:40:21.294521+00:00"
   }
 }
