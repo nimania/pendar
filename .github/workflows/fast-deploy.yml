@@ -504,6 +504,22 @@ jobs:
         run: |
           python -m unittest discover -s backend/tests -p test_figure_shell_refresh.py -v
           python backend/scripts/refresh_figure_shells.py --site site
+      - name: Verify unified Pendar theme reaches direct figure routes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          root=Path("site")
+          theme=root/"pendar-unified-theme.css"
+          assert theme.is_file() and theme.stat().st_size>2000, "Unified theme missing from published output"
+          index=(root/"index.html").read_text(encoding="utf-8")
+          assert "/pendar-unified-theme.css?v=20261106-1" in index, "Site shell does not load unified theme"
+          profile=root/"@ahmadzeidabad"/"index.html"
+          assert profile.is_file(), "Ahmed Zeidabadi profile direct page missing"
+          html=profile.read_text(encoding="utf-8")
+          assert "/pendar-unified-theme.css?v=20261106-1" in html, "Profile HTML still uses old theme"
+          assert "heritage-figures.css?v=20261106-karname-profiles-2" in html, "Figure profile CSS outdated"
+          print("Unified Pendar theme verified in homepage and direct person route")
+          PY
       - name: Publish readable, stable story permalinks and preserve old UUID URLs
         run: |
           python -m unittest discover -s backend/tests -p test_story_permalink_publishing.py -v
