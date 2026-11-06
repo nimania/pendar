@@ -7,9 +7,9 @@
     "review_queue": "backend/data/karname-candidates.json"
   },
   "counts": {
-    "total": 243,
+    "total": 249,
     "documented": 95,
-    "automatic_unverified": 136,
+    "automatic_unverified": 142,
     "screened_from_public_claims": 12,
     "other_review_states": 0
   },
@@ -2374,6 +2374,27 @@
       "source_url": "https://www.bbc.co.uk/news/articles/c65ynez5y599o?at_medium=RSS&at_campaign=rss"
     },
     {
+      "id": "KC-213cf873e04f6a60e5",
+      "layer": "automatic_observation",
+      "status": "unverified",
+      "title": "عراق سکوی حمله به کشورهای همسایه نخواهد بود و بر ضرورت احترام به حاکمیت کشورها و راه‌حل‌های مسالمت‌آمیز تأکید داریم.",
+      "speaker_labels": [
+        "علی الزیدی"
+      ],
+      "speaker_keys": [],
+      "identity_verification_level": "not_verified_from_primary",
+      "topics": [],
+      "time_label": null,
+      "time_is_verified_deadline": false,
+      "trigger_kind": "undetermined",
+      "condition_mention": null,
+      "has_result_source": false,
+      "linked_ledger_claim_ids_for_review": [],
+      "source_pointer": "news:195164b4-ff60-4a07-a9ed-22e401f57365",
+      "source_kind": "figure_post",
+      "source_url": "https://www.eghtesadonline.com/fa/news/2173702/تماس-مهم-نخست-وزیر-عراق-با-ترامپ-پیام-بغداد-درباره-تحولات-منطقه"
+    },
+    {
       "id": "KC-21b8d5a0b5ceadb7ad",
       "layer": "automatic_observation",
       "status": "unverified",
@@ -3200,6 +3221,27 @@
       "source_url": "https://t.me/khabaronline_ir/666950"
     },
     {
+      "id": "KC-66723c125340ab43f4",
+      "layer": "automatic_observation",
+      "status": "unverified",
+      "title": "آقای پوتین پیشنهاد خاصی برای پایان جنگ ارائه نکرد اما اظهار داشت که اگر حالت نه جنگ و نه صلح زودتر تمام شود به نفع کشور شما خواهد بود.",
+      "speaker_labels": [
+        "محسن رضایی"
+      ],
+      "speaker_keys": [],
+      "identity_verification_level": "not_verified_from_primary",
+      "topics": [],
+      "time_label": null,
+      "time_is_verified_deadline": false,
+      "trigger_kind": "conditional",
+      "condition_mention": "اگر حالت نه جنگ و نه صلح زودتر تمام شود به نفع کشور شما خواهد بود",
+      "has_result_source": false,
+      "linked_ledger_claim_ids_for_review": [],
+      "source_pointer": "news:4716efea-e2e4-4db4-9f33-eb69668c180b",
+      "source_kind": "figure_post",
+      "source_url": "https://www.asriran.com/fa/news/1204095/محسن-رضایی-به-آقای-پوتین-عرض-کردیم-تا-آمریکایی-ها-به-هفت-شرط-ما-عمل-نکنند-نه-تنگه-هرمز-باز-می-شود-و-نه-مذاکره-ای-در-کار-است"
+    },
+    {
       "id": "KC-6abb17f086bd2223fc",
       "layer": "automatic_observation",
       "status": "unverified",
@@ -3304,6 +3346,27 @@
       "source_pointer": "news:556ac117-84e2-43d5-ac76-ab5b24068cae",
       "source_kind": "figure_post",
       "source_url": "https://www.entekhab.ir/fa/news/945695/ونس-ترامپ-اجازه-نخواهد-داد-درگیری-با-ایران-به-یک-جنگ-بی-پایان-تبدیل-شود"
+    },
+    {
+      "id": "KC-7987fbb09e8cbb0abc",
+      "layer": "automatic_observation",
+      "status": "unverified",
+      "title": "دولت ترامپ عقب‌نشینی نخواهد کرد و با قدرت به مسیر خود ادامه می‌دهد؛ طرح استیضاح اقدامی سیاسی برای تخریب مخالفان است.",
+      "speaker_labels": [
+        "پیت هگست"
+      ],
+      "speaker_keys": [],
+      "identity_verification_level": "not_verified_from_primary",
+      "topics": [],
+      "time_label": null,
+      "time_is_verified_deadline": false,
+      "trigger_kind": "undetermined",
+      "condition_mention": null,
+      "has_result_source": false,
+      "linked_ledger_claim_ids_for_review": [],
+      "source_pointer": "news:64ef6bac-f8cc-4821-96b7-400886e7d504",
+      "source_kind": "figure_post",
+      "source_url": "https://www.entekhab.ir/fa/news/946670/واکنش-وزیر-جنگ-ترامپ-به-تلاش-ها-برای-استیضاح-او-ما-تازه-مبارزه-را-آغاز-کرده-ایم-عقب-نشینی-نمی-کنیم-مصمم-هستیم-تا-کاری-که-آغاز-کرده-ایم-را-به-پایان-برسانیم-ایستادگی-می-کنیم-و-می-جنگیم"
     },
     {
       "id": "KC-79cc4a92d0ffb7bf4a",
@@ -3774,6 +3837,27 @@
       "source_url": null
     },
     {
+      "id": "KC-9785a830ef3659857c",
+      "layer": "automatic_observation",
+      "status": "unverified",
+      "title": "در آینده خیلی نزدیک، کنگره و ترامپ به جان یکدیگر می‌افتند و بین آن‌ها درگیری‌هایی به وجود خواهد آمد.",
+      "speaker_labels": [
+        "اسماعیل کوثری"
+      ],
+      "speaker_keys": [],
+      "identity_verification_level": "not_verified_from_primary",
+      "topics": [],
+      "time_label": null,
+      "time_is_verified_deadline": false,
+      "trigger_kind": "undetermined",
+      "condition_mention": null,
+      "has_result_source": false,
+      "linked_ledger_claim_ids_for_review": [],
+      "source_pointer": "news:67a9a758-c12a-4a11-835c-24dbb2f902e2",
+      "source_kind": "figure_post",
+      "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4306511-%D8%B9%D8%B6%D9%88-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%85%D9%84%DB%8C-%D8%AF%D9%85%D9%88%DA%A9%D8%B1%D8%A7%D8%AA-%D9%87%D8%A7-%D9%87%D9%85-%D8%A7%D8%B2-%D9%85%D8%A7-%D8%AE%D9%88%D8%B4%D8%B4%D8%A7%D9%86-%D9%86%D9%85%DB%8C-%D8%A2%DB%8C%D8%AF-%D8%AF%D8%B1-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D9%86%D8%B2%D8%AF%DB%8C%DA%A9-%DA%A9%D9%86%DA%AF%D8%B1%D9%87-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D8%A8%D9%87-%D8%AC%D8%A7%D9%86-%DB%8C%DA%A9%D8%AF%DB%8C%DA%AF%D8%B1-%D9%85%DB%8C-%D8%A7%D9%81%D8%AA%D9%86%D8%AF"
+    },
+    {
       "id": "KC-98785fdf5b0730838f",
       "layer": "automatic_observation",
       "status": "unverified",
@@ -3793,6 +3877,27 @@
       "source_pointer": "news:61799cbd-734e-4576-8a82-c641f20ed146",
       "source_kind": "figure_post",
       "source_url": "https://fararu.com/fa/news/1013312/%D8%AC%D8%A7%D9%86-%DA%A9%D8%B1%DB%8C-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA-%D8%A7%D8%B4%D8%AA%D8%A8%D8%A7%D9%87%DB%8C-%D9%81%D8%A7%D8%AD%D8%B4-%D8%AE%D9%88%D8%A7%D9%87%D8%AF-%D8%A8%D9%88%D8%AF"
+    },
+    {
+      "id": "KC-9f2b63c175c044422a",
+      "layer": "automatic_observation",
+      "status": "unverified",
+      "title": "تهران تا زمان تحقق شروط هفت‌گانه خود، تنگه هرمز را بازگشایی نخواهد کرد.",
+      "speaker_labels": [
+        "محسن رضایی"
+      ],
+      "speaker_keys": [],
+      "identity_verification_level": "not_verified_from_primary",
+      "topics": [],
+      "time_label": null,
+      "time_is_verified_deadline": false,
+      "trigger_kind": "undetermined",
+      "condition_mention": null,
+      "has_result_source": false,
+      "linked_ledger_claim_ids_for_review": [],
+      "source_pointer": "news:a5925440-1345-496a-974b-b41bb85f383f",
+      "source_kind": "figure_post",
+      "source_url": "https://tabnak.ir/fa/news/4200077/%D8%B3%D8%B1%D9%84%D8%B4%DA%A9%D8%B1%D8%B1%D8%B6%D8%A7%DB%8C%DB%8C-%D8%AF%D8%B1-%D8%AF%DB%8C%D8%AF%D8%A7%D8%B1-%D8%A8%D8%A7-%D9%BE%D9%88%D8%AA%DB%8C%D9%86-%D8%A7%D8%B2-%D8%B4%D8%B1%D9%88%D8%B7-%D9%87%D9%81%D8%AA%DA%AF%D8%A7%D9%86%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A8%D8%A7%D8%B2%DA%AF%D8%B4%D8%A7%DB%8C%DB%8C-%D8%AA%D9%86%DA%AF%D9%87-%D9%87%D8%B1%D9%85%D8%B2-%DA%AF%D9%81%D8%AA-8ff05b8a2c474eb4b37b0d7f"
     },
     {
       "id": "KC-9f8582b8d349f9716f",
@@ -4080,6 +4185,27 @@
       "source_pointer": "editorial-motaharnia-golden-simorgh-finale-20261019",
       "source_kind": "editorial_recap",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u"
+    },
+    {
+      "id": "KC-b28f40104290b4ab0f",
+      "layer": "automatic_observation",
+      "status": "unverified",
+      "title": "پوتین اعلام کرده است که هر کمکی برای پایان جنگ انجام خواهد داد.",
+      "speaker_labels": [
+        "محسن رضایی"
+      ],
+      "speaker_keys": [],
+      "identity_verification_level": "not_verified_from_primary",
+      "topics": [],
+      "time_label": null,
+      "time_is_verified_deadline": false,
+      "trigger_kind": "undetermined",
+      "condition_mention": null,
+      "has_result_source": false,
+      "linked_ledger_claim_ids_for_review": [],
+      "source_pointer": "news:1e2fedbf-3b30-42ef-b46b-01885d64de97",
+      "source_kind": "figure_post",
+      "source_url": "https://www.entekhab.ir/fa/news/946669/ادعای-ترامپ-درباره-ایران-ترجیح-می-دهم-در-صورت-امکان-بقیه-کشور-را-هم-نابود-نکنم-اما-شاید-مجبور-شوم-این-کار-را-انجام-دهم-رویترز-به-نقل-از-مقام-ارشد-ایرانی-ایران-پیشنهاد-هسته-ای-خود-را-از-طریق-قطر-ارسال-کرده-و-آمریکا-در-حال-بررسی-آن-است"
     },
     {
       "id": "KC-b3e584fa3b39e74de0",
