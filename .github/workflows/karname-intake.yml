@@ -63,6 +63,8 @@ jobs:
           python -m unittest discover -s backend/tests -p 'test_karname_candidates.py' -v
           python -m unittest discover -s backend/tests -p 'test_karname_intake_stats.py' -v
           python -m unittest discover -s backend/tests -p 'test_karname_auto_radar.py' -v
+          # Data may have advanced on main while this PR was open.
+          python backend/scripts/build_karname_unified.py
           python -m unittest discover -s backend/tests -p 'test_karname_unified.py' -v
       - name: Verify scenario UI and classifications
         run: |
