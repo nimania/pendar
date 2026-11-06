@@ -14,6 +14,8 @@ on:
       - "backend/scripts/build_karname_intake_stats.py"
       - "backend/scripts/build_karname_auto_radar.py"
       - "backend/scripts/build_karname_unified.py"
+      - "backend/scripts/verify_karname_sources.py"
+      - "backend/tests/test_karname_source_verification.py"
       - "backend/tests/test_karname_unified.py"
       - "backend/tests/test_karname_unified.js"
       - "backend/tests/test_karname_auto_radar.py"
@@ -28,6 +30,8 @@ on:
       - "backend/scripts/build_karname_intake_stats.py"
       - "backend/scripts/build_karname_auto_radar.py"
       - "backend/scripts/build_karname_unified.py"
+      - "backend/scripts/verify_karname_sources.py"
+      - "backend/tests/test_karname_source_verification.py"
       - "backend/tests/test_karname_unified.py"
       - "backend/tests/test_karname_unified.js"
       - "backend/tests/test_karname_auto_radar.py"
@@ -66,6 +70,7 @@ jobs:
           # Data may have advanced on main while this PR was open.
           python backend/scripts/build_karname_unified.py
           python -m unittest discover -s backend/tests -p 'test_karname_unified.py' -v
+          python -m unittest discover -s backend/tests -p 'test_karname_source_verification.py' -v
       - name: Verify scenario UI and classifications
         run: |
           node --check web-static/karname/app.js
@@ -89,6 +94,13 @@ jobs:
           python backend/scripts/build_karname_intake_stats.py --check
           python backend/scripts/build_karname_auto_radar.py
           python backend/scripts/build_karname_auto_radar.py --check
+          # Source checks never issue a right/wrong forecast verdict.
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python backend/scripts/verify_karname_sources.py --budget 0
+          else
+            python backend/scripts/verify_karname_sources.py --budget 18
+          fi
+          python backend/scripts/verify_karname_sources.py --check
           python backend/scripts/build_karname_unified.py
           python backend/scripts/build_karname_unified.py --check
           python - <<'PY'
@@ -108,6 +120,9 @@ jobs:
               f.write("- Automatically displayed observations are **provisional and unverified**.\n")
               auto=json.loads(Path("web-static/karname/auto-radar.json").read_text(encoding="utf-8"))
               f.write(f"- Live automatic radar observations: **{auto['summary']['visible_observations']}**\n")
+              ver=json.loads(Path("web-static/karname/source-verification.json").read_text(encoding="utf-8"))
+              f.write(f"- Source pages checked this run: **{ver['summary']['checked_this_run']}**\n")
+              f.write(f"- Overdue cases needing independent evidence: **{ver['summary']['deadlines_requiring_evidence']}**\n")
           PY
       - name: Preserve review queue artifact
         uses: actions/upload-artifact@v4
@@ -121,7 +136,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git add backend/data/karname-candidates.json web-static/karname/intake-stats.json web-static/karname/auto-radar.json web-static/karname/unified-index.json
+          git add backend/data/karname-candidates.json web-static/karname/intake-stats.json web-static/karname/auto-radar.json web-static/karname/unified-index.json web-static/karname/source-verification.json
           if git diff --cached --quiet; then
             echo "No new candidates or review changes."
             exit 0
