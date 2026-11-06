@@ -74,7 +74,7 @@ function contributorLinks(c){
  const people=array(c.speakers).map(personRecord),top=people.slice(0,2);
  const links=top.map(s=>{
   const href=personHref(s),body=avatarMarkup(s)+'<span>'+esc(s.name||s.key)+'</span>';
-  return href?'<a class="claim-person" href="'+esc(href)+'" aria-label="پروندهٔ '+esc(s.name||s.key)+' در پندار">'+body+'</a>':'<span class="claim-person">'+body+'</span>';
+  return '<a class="claim-person" href="'+esc(karnameOfficialLink(s))+'" aria-label="سخنان و رصدهای '+esc(s.name||s.key)+'">'+body+'</a>';
  }).join("");
  return '<div class="claim-contributors" aria-label="گویندگان این ادعا">'+links+(people.length>top.length?'<span class="claim-extra">و '+fa(people.length-top.length)+' نفر دیگر</span>':"")+'</div>';
 }
@@ -351,7 +351,7 @@ async function loadAutoRadar(){
   state.autoItems=[];
   console.warn("Karname automatic observations unavailable:",err.message);
  }
- if(state.tab==="auto"||state.tab==="people")render();
+ if(["auto","people","person"].includes(state.tab))render();
 }
 function renderAuto(){
  if(state.autoLoadState==="loading")return noData("در حال دریافت رصدهای تازه","داده‌های خودکار مستقل از پرونده‌های اصلی دریافت می‌شوند.");
@@ -368,7 +368,7 @@ function renderAuto(){
   const person=c.person||{},source=c.source||{},trigger=c.trigger||{};
   const link=typeof source.link==="string"&&/^https:\/\//.test(source.link)?'<a href="'+esc(source.link)+'" target="_blank" rel="noopener noreferrer">بازکردن منبع منتشرشده ←</a>':"";
   const handle=person.profile_handle&&/^[a-zA-Z0-9_-]{2,100}$/.test(person.profile_handle)?'/@'+encodeURIComponent(person.profile_handle)+'/':"";
-  const name=handle?'<a href="'+esc(handle)+'" class="auto-profile">'+esc(person.label)+'</a>':esc(person.label||"نامشخص");
+  const name='<a href="'+esc(karnameAutoLink(person))+'" class="auto-profile">'+esc(person.label||"نامشخص")+'</a>';
   const cond=trigger.condition_mention?'شرطِ مطرح‌شده: '+trigger.condition_mention:trigger.time_mention?'اشارهٔ زمانی: '+trigger.time_mention:"موعد قطعی استخراج نشده";
   const sourceLabel=source.kind==="figure_post"?"خبر یا پست چهره":source.kind==="editorial_recap"?"بازگویی تحریریه":"متن نقل‌قول ثبت‌شده";
   return '<article class="tile auto-claim"><div class="auto-claim-head"><span class="auto-provisional">تأییدنشده · رصد خودکار</span><small dir="ltr">'+esc(c.id)+'</small></div>'
@@ -401,7 +401,7 @@ async function loadUnifiedIndex(){
   const d=await r.json();if(!validUnifiedIndex(d))throw Error("Integrated index invalid");
   state.unifiedIndex=d;state.unifiedLoadState="ready";
  }catch(err){state.unifiedIndex=null;state.unifiedLoadState="error";console.warn("Karname index unavailable",err.message);}
- if(["highlights","all","people","calendar","scenarios"].includes(state.tab))render();
+ if(["highlights","all","people","person","calendar","scenarios"].includes(state.tab))render();
 }
 function renderUnified(){
  if(state.unifiedLoadState==="loading")return noData("در حال دریافت بانک مشترک","همهٔ رکوردهای ثبت‌شده و رصدهای ماشینی در یک نمایه جست‌وجو می‌شوند.");
@@ -426,7 +426,7 @@ function renderUnified(){
    const matches=array(r.linked_ledger_claim_ids_for_review);
    const similar=matches.length?'<p class="unified-related">شباهت نیازمند بررسی با: '+matches.map(esc).join("، ")+'</p>':"";
    return '<article class="tile unified-record"><span class="auto-provisional">رصد خودکار · انتساب و نتیجه تأییدنشده</span>'
-    +'<small dir="ltr">'+esc(r.id)+'</small><h3>'+esc(array(r.speaker_labels)[0]||"نام مرتبط با خبر")+'</h3>'
+    +'<small dir="ltr">'+esc(r.id)+'</small><h3><a href="'+esc(karnameAutoLink({label:array(r.speaker_labels)[0]||"نام مرتبط با خبر",profile_handle:array(r.speaker_keys)[0]||null}))+'">'+esc(array(r.speaker_labels)[0]||"نام مرتبط با خبر")+'</a></h3>'
     +'<p class="auto-quote">'+esc(r.title)+'</p>'
     +(r.time_label?'<p class="auto-trigger">اشارهٔ زمانی (تأییدنشده): '+esc(r.time_label)+'</p>':"")+similar
     +'<div class="tile-foot"><a href="'+esc(target)+'">مشاهدهٔ منبع و شرایط ←</a></div></article>';
@@ -547,6 +547,7 @@ async function load(){
  void loadIntakeStats();
  void loadAutoRadar();
  void loadUnifiedIndex();
+ void loadSourceChecks();
  // Portrait lookup is best-effort. No invented images or name-only photo searches.
  const resource=(url,fallback)=>fetch(url,{cache:"no-cache"})
   .then(r=>r.ok?r.json():fallback).catch(()=>fallback);
@@ -588,12 +589,17 @@ document.addEventListener("error",ev=>{
   ev.target.remove(); // visible initial remains when the verified photo fails to load
  }
 },true);
+const selectedParams=new URL(location.href).searchParams;
+const selectedKey=selectedParams.get("speaker")||"";
+const selectedMention=selectedParams.get("mention")||"";
+if(selectedKey&&selectedKey.length<=110)state.personSelection={key:selectedKey};
+else if(selectedMention&&selectedMention.length<=160)state.personSelection={name:selectedMention};
 const observedParam=new URL(location.href).searchParams.get("observation")||"";
 if(/^KC-[0-9a-f]{18}$/.test(observedParam))state.autoQuery=observedParam;
 const autoSearchParam=new URL(location.href).searchParams.get("search")||"";
 if(autoSearchParam&&autoSearchParam.length<=120)state.autoQuery=autoSearchParam;
 const autoPersonParam=new URL(location.href).searchParams.get("person")||"";
 if(/^[A-Za-z0-9_-]{2,100}$/.test(autoPersonParam))state.autoPerson=autoPersonParam;
-let initial=location.hash.slice(1);if(labels[initial])state.tab=initial;
+let initial=location.hash.slice(1);if(labels[initial])state.tab=initial;else if(state.personSelection)state.tab="person";
 render();load();
 })();
