@@ -260,7 +260,8 @@
     "https://t.me/kerman_gov/10512",
     "https://t.me/kerman_gov/10513",
     "https://t.me/Kerman_akhbar/66213",
-    "https://t.me/qh_qv/874"
+    "https://t.me/qh_qv/874",
+    "https://t.me/irna_kerman/30298"
   ],
   "queue": [
     {
@@ -1795,17 +1796,44 @@
       "delivery_kind": "text",
       "telegram_message_id": 38,
       "sent_at": "2026-11-05T20:24:08.812636+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30298",
+      "source_post_id": "30298",
+      "title": "معاون وزیر آموزش و پرورش: کرمان برای ساخت هزار کلاس درس تا مهر ۱۴۰۷ برنامه‌ریزی کند",
+      "excerpt": "معاون وزیر آموزش و پرورش: کرمان برای ساخت هزار کلاس درس تا مهر ۱۴۰۷ برنامه‌ریزی کند معاون وزیر آموزش‌وپرورش و رئیس سازمان نوسازی، توسعه و تجهیز مدارس کشور با تأکید بر ضرورت توسعه عدالت آموزشی در استان کرمان گفت: باید با مشارکت دولت، خیران، صنایع و ظرفیت مسئولیت اجتماعی شرکت‌ها، برای ساخت و تکمیل حداقل یک‌هزار کلاس درس تا مهرماه ۱۴۰۷ برنامه‌ریزی شود. irna_kerman",
+      "paragraphs": [
+        "معاون وزیر آموزش و پرورش: کرمان برای ساخت هزار کلاس درس تا مهر ۱۴۰۷ برنامه‌ریزی کند",
+        "معاون وزیر آموزش‌وپرورش و رئیس سازمان نوسازی، توسعه و تجهیز مدارس کشور با تأکید بر ضرورت توسعه عدالت آموزشی در استان کرمان گفت: باید با مشارکت دولت، خیران، صنایع و ظرفیت مسئولیت اجتماعی شرکت‌ها، برای ساخت و تکمیل حداقل یک‌هزار کلاس درس تا مهرماه ۱۴۰۷ برنامه‌ریزی شود.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/A3Zys0HYc87IcCD1vudLvfxs0ZZZ3TI6-w_74jKDfyEXGkKYiqQT_rUJn5dGJgUN2QvGiusyU_oYslWho6xdu_mJg6v8ai_r1MyTxm0c9bNFrULbiUUKjiK4Fi2FZOAhR26DC4TaBytyFSGbxMYgvyDhw10AsmLD2v6EvHI0e-n7NMkpc0sdbG8p-NT1wtqHdu-s6sp9X0iPJdT2LuBOv5wXrL9A_RMREWIPKfNncA6flBbq50ejB6e3hunk6Yo4puKgibC-4GSUM9QNC_dZFZDkEMHuzoYBFhYNUJsx_2B-nSD03d1f7_2gSBRafh-ijRvJPqoQJsUP3tTQLOxi3g.jpg"
+      },
+      "published_at": "2026-11-06T02:16:17+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "acccd738121726d9",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T02:25:38.555070+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-06T00:26:28.450929+00:00",
+  "saved_at": "2026-11-06T02:25:52.017519+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-06T00:26:15.185444+00:00",
-    "fardaayekerman": "2026-11-06T00:26:15.185444+00:00",
-    "irna_kerman": "2026-11-06T00:26:15.185444+00:00",
-    "kerman_gov": "2026-11-06T00:26:15.185444+00:00",
-    "kerman_akhbar": "2026-11-06T00:26:15.185444+00:00",
-    "kerman_news": "2026-11-06T00:26:15.185444+00:00",
-    "kerman_rasaneh": "2026-11-06T00:26:15.185444+00:00",
-    "qh_qv": "2026-11-06T00:26:15.185444+00:00"
+    "kermane_no": "2026-11-06T02:25:38.555070+00:00",
+    "fardaayekerman": "2026-11-06T02:25:38.555070+00:00",
+    "irna_kerman": "2026-11-06T02:25:38.555070+00:00",
+    "kerman_gov": "2026-11-06T02:25:38.555070+00:00",
+    "kerman_akhbar": "2026-11-06T02:25:38.555070+00:00",
+    "kerman_news": "2026-11-06T02:25:38.555070+00:00",
+    "kerman_rasaneh": "2026-11-06T02:25:38.555070+00:00",
+    "qh_qv": "2026-11-06T02:25:38.555070+00:00"
   }
 }
