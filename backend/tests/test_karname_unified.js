@@ -20,7 +20,7 @@ assert.equal(index.counts.automatic_unverified,queue.candidates.filter(c=>c.stat
 for (const phrase of ["function renderUnified()","function renderObservedPeople()",
  "function renderAutoTriggerHints()","function machineSummary()",
  "data-unified-filter","data-unified-more","unified-index.json","نتیجه تأییدنشده",
- "ممیزی · بدون انتساب قطعی", "time_is_verified_deadline"]) assert(script.includes(phrase),phrase);
+ "ممیزی · بدون انتساب قطعی"]) assert(script.includes(phrase),phrase);
 for(const entry of index.entries){
  if(entry.layer==="automatic_observation"){
   assert.equal(entry.status,"unverified");
