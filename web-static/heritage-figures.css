@@ -492,3 +492,82 @@ html.heritage-figures-active body{
  #figures-view .x-profile-main{padding:16px!important}
  #figures-view .fig-person{min-height:108px!important;padding:10px!important}
 }
+
+
+/* Final profile and statement polish: same visual language as /karname/. */
+#figures-view.figure-profile-mode .x-profile{
+ color:#f3f5f7!important;background:transparent!important;
+ font-family:"Vazirmatn",Tahoma,sans-serif!important
+}
+#figures-view.figure-profile-mode .x-profile-main{
+ background:linear-gradient(135deg,#25303d 0%,#1b222c 80%)!important;
+ border-top:4px solid #ffd24f!important
+}
+#figures-view.figure-profile-mode .x-profile-main h1,
+#figures-view.figure-profile-mode .x-profile-main .fp-name{color:#f3f5f7!important}
+#figures-view.figure-profile-mode .x-profile-stats{border-color:#445365!important}
+#figures-view.figure-profile-mode .x-avatar-wrap img{border-color:#465668!important}
+#figures-view.figure-profile-mode .figure-profile-back{
+ background:#263340!important;color:#ffd24f!important;
+ border:1px solid #46576b!important;border-radius:10px!important
+}
+#figures-view.figure-profile-mode .figure-profile-back:hover{border-color:#ffd24f!important}
+#figures-view .figure-rail-box,#figures-view .figure-rail-people{
+ background:#1b222c!important;color:#edf1f5!important
+}
+#figures-view .figure-rail-person{
+ background:#1b222c!important;color:#edf1f5!important;
+ border-bottom:1px solid #354252!important
+}
+#figures-view .figure-rail-person:hover{background:#273441!important}
+#figures-view .figure-rail-person b{color:#edf1f5!important}
+#figures-view .figure-rail-person small{color:#a8b4c2!important}
+#figures-view .figure-rail-more{color:#ffd24f!important}
+#figures-view .figure-rail-initial{background:#364252!important;color:#ffd24f!important}
+#figures-view .figure-rail-follow,#figures-view .fig-follow{
+ background:#273441!important;color:#ffd24f!important;
+ border:1px solid #506074!important;border-radius:10px!important
+}
+#figures-view .figure-rail-follow.on,#figures-view .fig-follow.on{
+ background:#4d422b!important;color:#ffe39a!important;border-color:#947333!important
+}
+#figures-view .x-profile .x-profile-note,
+#figures-view .x-profile .muted,#figures-view .x-profile .x-post .muted{color:#a8b4c2!important}
+#figures-view .x-profile :is(.x-post,.x-profile-feed,.figure-works,.figure-stories,.candidate-news) h2,
+#figures-view .x-profile :is(.x-post,.x-profile-feed,.figure-works,.figure-stories,.candidate-news) h3{
+ color:#f3f5f7!important
+}
+#figures-view .x-profile :is(.x-post,.x-profile-feed,.figure-works,.figure-stories,.candidate-news) a{
+ color:#ffd24f
+}
+#figures-view .x-profile :is(.x-post,.x-profile-feed,.figure-works,.figure-stories,.candidate-news) p{
+ color:#d5dfe9
+}
+#figures-view .x-figure-actions button,#figures-view .x-figure-actions a,
+#figures-view .fig-profile-link,#figures-view .x-profile-actions button{
+ background:#273441!important;color:#e2eaf2!important;
+ border:1px solid #455669!important;border-radius:10px!important
+}
+#figures-view .x-figure-actions button:hover,#figures-view .x-figure-actions a:hover,
+#figures-view .fig-profile-link:hover,#figures-view .x-profile-actions button:hover{
+ border-color:#ffd24f!important;color:#ffd24f!important
+}
+#figures-view .statement-side-link small{color:#a8b4c2!important}
+#figures-view .statement-main .fig-head h1{color:#f3f5f7!important}
+#figures-view .statement-main p{color:#d5dfe9!important}
+#figures-view .pendar-telegram-promo{
+ background:#263340!important;border:1px solid #465668!important;
+ border-right:4px solid #ffd24f!important;border-radius:13px!important
+}
+#figures-view .pendar-telegram-promo strong{color:#f3f5f7!important}
+#figures-view .pendar-telegram-promo p{color:#b8c6d4!important}
+#figures-view .pendar-telegram-promo a{
+ background:#ffd24f!important;color:#15191f!important;border-radius:9px!important
+}
+#figures-view .figure-profile-side .story-inline-sponsor{background:transparent!important}
+@media(max-width:700px){
+ #figures-view.figure-profile-mode .magazine-figures-content{width:calc(100% - 24px)!important}
+ #figures-view.figure-profile-mode .figure-profile-columns{gap:13px!important}
+ #figures-view .x-profile-tabs{overflow-x:auto;flex-wrap:nowrap!important;scrollbar-width:thin}
+ #figures-view .x-profile-tabs button{white-space:nowrap}
+}
