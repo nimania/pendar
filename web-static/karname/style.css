@@ -96,3 +96,22 @@ dialog .claim-contributors{padding:10px 0;border-bottom:1px solid #3a4653}
 .verification-overview small{color:#b5c6d7;line-height:1.9}
 .unified-record h3 a:hover{color:var(--yellow);text-decoration:underline}
 @media(max-width:620px){.person-directory{grid-template-columns:1fr}.person-page-head{padding:15px;gap:12px}.person-page-head .avatar{width:66px;height:66px;min-width:66px}.person-page-head h2{font-size:20px}.person-claim-section{padding:12px}.person-claim-cards,.person-auto-grid{grid-template-columns:1fr}}
+
+
+/* Evidence docket — source-first adjudication, no unsupported scoring */
+.evidence-intro{margin:18px 0 22px;padding:18px 20px;border:1px solid #475467;border-right:4px solid #ffd24f;border-radius:14px;background:#202934;color:#f3f5f7}
+.evidence-intro strong{font-size:16px}.evidence-intro p{margin:7px 0 0;color:#c5d0dc;font-size:13px;line-height:1.9}
+.evidence-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.evidence-case{background:#1b222c;border:1px solid #34404e;border-top:3px solid #ffd24f;border-radius:14px;padding:18px;color:#f3f5f7;min-width:0}
+.evidence-case .meta-line{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.evidence-case .status-pill{font-size:11px;padding:4px 8px;border-radius:99px;background:#303a47;color:#ffe08a}
+.evidence-case .tile-title{font-size:16px;line-height:1.8;color:#fff}
+.evidence-case .tile-copy,.evidence-case .muted{color:#c6d1dc;line-height:1.9}
+.evidence-case details{border-top:1px solid #394657;margin-top:12px;padding-top:10px}
+.evidence-case summary{cursor:pointer;color:#ffd24f;font-weight:700;font-size:13px}
+.evidence-case details ul{padding-right:18px}
+.evidence-case details li{margin:10px 0;color:#cbd5df}
+.evidence-case details a{color:#ffe08a;text-decoration:underline}
+.evidence-case details p,.evidence-case details small{display:block;color:#aebdca;line-height:1.8;margin:4px 0}
+.evidence-no-score{font-size:11px;color:#ffe08a;background:#302b20;border-radius:8px;padding:8px 10px;margin-top:12px}
+@media(max-width:760px){.evidence-cards{grid-template-columns:1fr}}
