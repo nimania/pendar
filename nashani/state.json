@@ -262,7 +262,8 @@
     "https://t.me/Kerman_akhbar/66213",
     "https://t.me/qh_qv/874",
     "https://t.me/irna_kerman/30298",
-    "https://t.me/irna_kerman/30299"
+    "https://t.me/irna_kerman/30299",
+    "https://t.me/irna_kerman/30300"
   ],
   "queue": [
     {
@@ -1859,17 +1860,44 @@
       "delivery_kind": "text",
       "telegram_message_id": 40,
       "sent_at": "2026-11-06T02:32:43.210319+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30300",
+      "source_post_id": "30300",
+      "title": "امام جمعه جیرفت: وحدت امت و دولت خنثی‌کننده توطئه‌های نظام سلطه است",
+      "excerpt": "امام جمعه جیرفت: وحدت امت و دولت خنثی‌کننده توطئه‌های نظام سلطه است امام جمعه جیرفت با تأکید بر ضرورت حفظ انسجام و وحدت همه‌جانبه میان ملت و دولت گفت: با وحدت و همدلی، هیچ قدرتی در جهان قادر نخواهد بود ملت ایران را تسلیم کند و استقرار فرماندهی انتظامی جنوب کرمان، گامی ارزشمند در مسیر توسعه و امنیت منطقه است. irna_kerman",
+      "paragraphs": [
+        "امام جمعه جیرفت: وحدت امت و دولت خنثی‌کننده توطئه‌های نظام سلطه است",
+        "امام جمعه جیرفت با تأکید بر ضرورت حفظ انسجام و وحدت همه‌جانبه میان ملت و دولت گفت: با وحدت و همدلی، هیچ قدرتی در جهان قادر نخواهد بود ملت ایران را تسلیم کند و استقرار فرماندهی انتظامی جنوب کرمان، گامی ارزشمند در مسیر توسعه و امنیت منطقه است.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/XuJUY9Jo1hmKqNQnMwL8Exx1TDVP8gWsjZXmGrDpkemPUiton68h-SqqE0SACvznTsZTdx39IIclsbhvBgIXmwMWaIQcjvB-FxO8amQQMxu-h5lmZ6YFoOCM1_fLClQbyF9CVQ3ES43Vbjzc-6o_RiZk-QbxKOAl1sus5kS2Lv81YYaUE3R2Ipk1MZljeXXYlA8TkqPm-Faq_enYOOZgfx6Wk1gdS1FL7q2aiIka9eG90KV5RdMP7w6-mSy0joCO0qOhIc93_Vbc1CIEip-OeM1JhNZGj2aV7RV7Pq3cdj2WGwvvNn1PWRJZMBViHRL641ljFWiicXbTBFcwKRa83Q.jpg"
+      },
+      "published_at": "2026-11-06T03:37:18+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "d584539f4dbe79a1",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-06T03:40:35.429451+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-06T02:32:43.210378+00:00",
+  "saved_at": "2026-11-06T03:40:51.441265+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-06T02:25:38.555070+00:00",
-    "fardaayekerman": "2026-11-06T02:32:24.583953+00:00",
-    "irna_kerman": "2026-11-06T02:32:24.583953+00:00",
-    "kerman_gov": "2026-11-06T02:32:24.583953+00:00",
-    "kerman_akhbar": "2026-11-06T02:32:24.583953+00:00",
-    "kerman_news": "2026-11-06T02:25:38.555070+00:00",
-    "kerman_rasaneh": "2026-11-06T02:32:24.583953+00:00",
-    "qh_qv": "2026-11-06T02:25:38.555070+00:00"
+    "kermane_no": "2026-11-06T03:40:35.429451+00:00",
+    "fardaayekerman": "2026-11-06T03:40:35.429451+00:00",
+    "irna_kerman": "2026-11-06T03:40:35.429451+00:00",
+    "kerman_gov": "2026-11-06T03:40:35.429451+00:00",
+    "kerman_akhbar": "2026-11-06T03:40:35.429451+00:00",
+    "kerman_news": "2026-11-06T03:40:35.429451+00:00",
+    "kerman_rasaneh": "2026-11-06T03:40:35.429451+00:00",
+    "qh_qv": "2026-11-06T03:40:35.429451+00:00"
   }
 }
