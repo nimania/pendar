@@ -16,6 +16,7 @@ on:
       - "backend/scripts/build_karname_unified.py"
       - "backend/scripts/verify_karname_sources.py"
       - "backend/tests/test_karname_source_verification.py"
+      - "backend/tests/test_karname_person_pages.js"
       - "backend/tests/test_karname_unified.py"
       - "backend/tests/test_karname_unified.js"
       - "backend/tests/test_karname_auto_radar.py"
@@ -32,6 +33,7 @@ on:
       - "backend/scripts/build_karname_unified.py"
       - "backend/scripts/verify_karname_sources.py"
       - "backend/tests/test_karname_source_verification.py"
+      - "backend/tests/test_karname_person_pages.js"
       - "backend/tests/test_karname_unified.py"
       - "backend/tests/test_karname_unified.js"
       - "backend/tests/test_karname_auto_radar.py"
@@ -76,6 +78,7 @@ jobs:
           node --check web-static/karname/app.js
           node backend/tests/test_karname_scenarios.js
           node backend/tests/test_karname_unified.js
+          node backend/tests/test_karname_person_pages.js
       - name: Read current Pendar figure and news index
         id: figure_feed
         continue-on-error: true
