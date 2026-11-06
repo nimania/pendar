@@ -1,8 +1,47 @@
 {
   "version": 1,
-  "updated_at": "2026-11-05T21:56:55+00:00",
+  "updated_at": "2026-11-06T21:27:05+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-71ea403e8637657b13",
+      "date": "2026-11-04",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Report to Congress on the Federal Fleet of Oceanographic Research Vessels",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/04/report-to-congress-on-the-federal-fleet-of-oceanographic-research-vessels"
+    },
+    {
+      "id": "usni-4b7704eb1553e8dcd9",
+      "date": "2026-11-04",
+      "country": "uk",
+      "region": "med",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Royal Navy Carriers Operate in the High North, Mediterranean",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/04/royal-navy-carriers-operate-in-the-high-north-mediterranean"
+    },
+    {
+      "id": "usni-40b00b6140fb9a3766",
+      "date": "2026-11-04",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Navy Taps Career Submariner to Lead PAE Maritime",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/04/navy-taps-career-submariner-to-lead-pae-maritime"
+    },
     {
       "id": "usni-99850f66fb76d2c927",
       "date": "2026-11-03",
