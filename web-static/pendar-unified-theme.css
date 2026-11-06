@@ -1,0 +1,93 @@
+/* Pendar unified visual design — shared with /karname/.
+   This stylesheet is loaded last in the main shell, including prerendered /@handles/.
+   Keep the source data, routes, and existing accessibility labels unchanged. */
+:root{
+ --paper:#11151b!important;--surface:#1b222c!important;--surface-2:#202934!important;
+ --ink:#f3f5f7!important;--ink-soft:#b8c4d1!important;--ink-faint:#94a3b5!important;
+ --line:#34404e!important;--line-strong:#445366!important;
+ --accent:#ffd24f!important;--accent-2:#ffe18b!important;--accent-soft:#343022!important;
+ --brass:#ffd24f!important;--bg:#11151b!important;--card:#1b222c!important;
+ --soft:#202934!important;--text:#f3f5f7!important;--muted:#a8b4c2!important;
+ --border:#34404e!important;--panel:#1b222c!important;--on-accent:#11151b!important;
+ --nav-active:#ffd24f!important;--radius:16px;
+ --shadow:0 8px 25px #0003;--shadow-soft:0 3px 12px #0002;
+ color-scheme:dark!important;
+}
+html body{background:#11151b;color:#f3f5f7;font-family:"Vazirmatn",Tahoma,sans-serif}
+html body :is(button,input,select,textarea){font-family:"Vazirmatn",Tahoma,sans-serif}
+html body :is(button,a,input,select,textarea):focus-visible{outline:3px solid #ffd24f;outline-offset:3px}
+/* Legacy masthead: match Karname's dark rail and subdued navigation. */
+body>header.top,body>header.top>.home-report-masthead,
+body>header.top>.wrap{background:#171b21!important;color:#f3f5f7!important}
+body>header.top{border-bottom:1px solid #34404e!important}
+body>header.top .header-quicklinks{background:#1b222c!important}
+body>header.top .header-quicklinks>a{background:transparent!important;color:#d5dfe9!important;border-color:#34404e!important}
+body>header.top .header-quicklinks>a:hover{background:#293542!important;color:#ffd24f!important}
+body>header.top .home-report-tagline{color:#a8b4c2!important}
+/* Shared magazine identity used by reports and editorial author archives. */
+html.heritage-collection-active body{background:#11151b!important}
+.magazine-collection{
+ --magazine-orange:#ffd24f;--magazine-sea:#ffd24f;
+ --magazine-ink:#f3f5f7;--magazine-line:#34404e;
+ background:#11151b!important;color:#f3f5f7!important;font-family:"Vazirmatn",Tahoma,sans-serif!important
+}
+.magazine-collection-masthead{background:#171b21!important;border-bottom:1px solid #34404e}
+.magazine-collection-masthead-inner{min-height:83px}
+.magazine-collection-tagline{color:#a8b4c2!important;border-color:#34404e!important}
+.magazine-collection-back{border:1px solid #455367!important;border-radius:11px!important;background:#202934;color:#e3eaf1!important}
+.magazine-collection-nav{background:#1b222c!important;border-bottom:1px solid #34404e}
+.magazine-collection-nav a{color:#cbd6e1!important}
+.magazine-collection-nav a:hover,.magazine-collection-nav-current{background:#273441!important;color:#ffd24f!important;box-shadow:inset 0 -3px #ffd24f!important}
+.magazine-collection-container{max-width:1190px}
+.magazine-collection .editorial-library-header,.magazine-collection .editorial-author-header{
+ background:linear-gradient(135deg,#26313e,#1b222c)!important;
+ border:1px solid #3d4b5a!important;border-top:4px solid #ffd24f!important;
+ border-radius:18px!important;padding:27px 30px!important
+}
+.magazine-collection .editorial-library-header h1,.magazine-collection .editorial-author-header h1{color:#fff!important}
+.magazine-collection .editorial-library-eyebrow{color:#ffd24f!important}
+.magazine-collection .editorial-library-header p,.magazine-collection .editorial-author-header p{color:#b8c4d1!important}
+.magazine-collection .editorial-library-controls{
+ background:#1b222c!important;border:1px solid #34404e!important;border-radius:15px!important;
+ margin-top:14px!important
+}
+.magazine-collection :is(.editorial-library-filter,.editorial-library-controls input,.editorial-library-controls select){
+ background:#273441!important;color:#e6edf4!important;border:1px solid #455367!important;border-radius:10px!important
+}
+.magazine-collection .editorial-library-filter.on{background:#ffd24f!important;color:#11151b!important;border-color:#ffd24f!important}
+.magazine-collection :is(article,.editorial-library-card,.editorial-author-card,.editorial-story-card){
+ border-color:#34404e!important
+}
+.magazine-collection :is(.editorial-library-card,.editorial-author-card,.editorial-story-card){
+ background:#1b222c!important;color:#eaf0f6!important;border-radius:15px!important
+}
+.magazine-collection :is(.editorial-library-card,.editorial-author-card,.editorial-story-card) :is(h2,h3){color:#f3f5f7!important}
+/* Profile layouts have their own more specific component rules: complete
+   the remaining inherited light backgrounds on rails and old data cards. */
+html.heritage-figures-active #figures-view :is(.figure-profile-primary,.figure-profile-side){color:#eaf0f5}
+#figures-view.figure-profile-mode :is(.figure-rail-box,.figure-rail-people,.figure-rail-person,.figure-profile-search,.x-profile-top){
+ background:#1b222c!important;color:#f3f5f7!important;border-color:#34404e!important
+}
+#figures-view.figure-profile-mode .figure-rail-box :is(a,button){color:#ffd24f}
+#figures-view.figure-profile-mode :is(.x-profile-note,.fig-note,.x-profile-stats){color:#b8c4d1!important}
+#figures-view .x-profile .x-post :is(h1,h2,h3,strong){color:#f3f5f7!important}
+#figures-view .x-profile :is(.x-post,.x-profile-feed,.figure-rail-box,.statement-main) p{color:#d5dfe9!important}
+#figures-view .x-profile :is(.x-post,.x-profile-feed,.figure-rail-box,.statement-main) a{color:#ffd24f}
+/* Articles: inherit the same reading surface without losing editorial structure. */
+html.heritage-article-active body{background:#11151b!important;color:#f3f5f7!important}
+#detail-view .story-editorial{color:#f3f5f7!important;font-family:"Vazirmatn",Tahoma,sans-serif!important}
+#detail-view .story-editorial :is(h1,h2,h3){color:#f3f5f7!important}
+#detail-view .story-editorial :is(p,.story-editorial-body p){color:#d6e0ea!important}
+#detail-view .story-history{background:#1b222c!important;border-color:#34404e!important;color:#eaf0f5!important}
+#detail-view .story-history a{color:#eaf0f5!important}
+#detail-view .story-report-cite{background:#273441!important;color:#ffd24f!important;border-color:#455367!important}
+/* Native form controls: keep legible contrast throughout the SPA. */
+html body input:not([type="checkbox"]):not([type="radio"]),html body select,html body textarea{
+ color:#f3f5f7;background:#202934;border-color:#455367
+}
+html body input::placeholder,html body textarea::placeholder{color:#94a3b5}
+@media(max-width:700px){
+ .magazine-collection-container{width:calc(100% - 24px)}
+ .magazine-collection .editorial-library-header,.magazine-collection .editorial-author-header{padding:19px 16px!important}
+ .magazine-collection-masthead-inner{min-height:76px}
+}
