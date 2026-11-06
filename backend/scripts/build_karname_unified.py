@@ -29,6 +29,7 @@ def read_json(path: Path) -> dict:
 
 
 def normalized(ledger: dict, queue: dict, radar: dict) -> dict:
+    sys.path.insert(0, str(ROOT / "backend"))
     from scripts.build_karname_auto_radar import validate_queue
 
     official = ledger.get("claims")
