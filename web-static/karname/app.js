@@ -3,10 +3,11 @@
 (()=>{
 "use strict";
 const DATA_URL="/data/karname.json", $=id=>document.getElementById(id);
-const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"all",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null,autoItems:[],autoQuery:"",autoKind:"",autoPerson:"",autoLoadState:"loading",autoNotice:"",unifiedIndex:null,unifiedLoadState:"loading",unifiedFilter:"all",unifiedQuery:"",unifiedLimit:60,personSelection:null,sourceChecks:null};
+const state={data:null,claims:[],speakers:[],buckets:[],pairs:[],families:[],tab:"all",query:"",speaker:"",status:"",portraits:{},externalPortraits:{},figures:[],selectedScenario:null,autoItems:[],autoQuery:"",autoKind:"",autoPerson:"",autoLoadState:"loading",autoNotice:"",unifiedIndex:null,unifiedLoadState:"loading",unifiedFilter:"all",unifiedQuery:"",unifiedLimit:60,personSelection:null,sourceChecks:null,evidenceCases:null};
 const labels={
   highlights:["منتخب کارنامه","پیش‌بینی‌ها زیر ذره‌بین","تازه‌ترین پرونده‌ها، با متن اصلی و منابع."],
   auto:["رادار خودکار پندار","چه گفته‌هایی تازه رصد شده‌اند؟","متن‌های یافت‌شده از منابع عمومی؛ انتساب، نقل مستقیم و نتیجه هنوز تأیید نشده‌اند."],
+  evidence:["دفتر شواهد و داوری","هر نتیجه با سند؛ هر حکم با محدودیت روشن","شواهد رویداد از اصالت گفته جداست؛ تا تأیید منبع اولیه، امتیاز فردی صادر نمی‌شود."],
   people:["فهرست همهٔ چهره‌ها","چه کسی چه گفته؟","موارد تاریخی و ماشینی جدا از هم."],
   person:["پروندهٔ سخنان","گفته‌های ثبت‌شده و رصدشده","این رصدها لزوماً نقل‌قول مستقیم نیستند."],
   duels:["دو تحلیل؛ یک آینده","دوئل پیش‌بینی‌ها","دیدگاه‌های متفاوت را کنار هم ببینید."],
@@ -475,9 +476,36 @@ function renderAll(){
  let rows=state.claims.filter(c=>(!state.speaker||array(c.speakers).some(v=>speakerId(v)===state.speaker))&&(!state.status||status(c).key===state.status)&&(!state.query||norm([c.id,c.text,c.speaker_note,people(c).join(" ")].join(" ")).includes(norm(state.query))));
  return controls+showClaims(rows);
 }
+function renderEvidenceCases(){
+ const d=state.evidenceCases;
+ if(!d||!Array.isArray(d.cases))return noData("دفتر شواهد هنوز بارگذاری نشده","فایل شواهد در دسترس نیست یا ساختار آن معتبر نیست.");
+ const sources=new Map(array(d.sources).map(x=>[x.id,x]));
+ const statusLabel={
+  event_evidence_collected_pending_primary_statement:"شواهد رویداد موجود؛ منبع گفتار لازم است",
+  open_requires_final_seat_count_and_primary_statement:"باز؛ نیازمند شمار نهایی و منبع گفتار",
+  open_requires_contextual_primary_statement:"باز؛ نیازمند متن کامل و بافت",
+  open_requires_claim_type_review:"باز؛ نیازمند بازبینی نوع ادعا"
+ };
+ const cards=d.cases.map(c=>{
+  const refs=array(c.source_ids).map(id=>sources.get(id)).filter(Boolean);
+  const links=refs.map(x=>'<li><a href="'+esc(x.url)+'" target="_blank" rel="noopener noreferrer">'+esc(x.publisher)+' — '+esc(x.title)+'</a><p>'+esc(x.finding_fa||"")+'</p><small>'+esc(x.limits_fa||"")+'</small></li>').join("");
+  return '<article class="tile evidence-case"><div class="meta-line"><span class="eyebrow">'+esc(c.id)+'</span><span class="status-pill">'+esc(statusLabel[c.adjudication_status]||c.adjudication_status)+'</span></div><h3 class="tile-title">'+esc(c.claim_fa)+'</h3><p class="tile-copy">'+esc(c.preliminary_finding_fa)+'</p><p class="muted">'+esc(c.uncertainty_fa)+'</p><details><summary>مدارک و منابع ('+fa(refs.length)+')</summary><ul>'+links+'</ul></details><p class="evidence-no-score">امتیاز نهایی: '+(c.score===null?"صادر نشده":esc(c.score))+' · منبع اولیهٔ گفتار: '+esc(c.primary_statement_status==="missing"?"ثبت نشده":"ثبت شده")+'</p></article>';
+ }).join("");
+ return '<section class="evidence-intro"><strong>وضعیت دفتر شواهد</strong><p>'+fa(d.summary?.cases||d.cases.length)+' پروندهٔ بررسی؛ '+fa(d.summary?.event_evidence_collected||0)+' دارای شواهد رویدادی؛ '+fa(d.summary?.primary_statement_verified||0)+' منبع گفتار اولیهٔ تأییدشده؛ '+fa(d.summary?.final_adjudications||0)+' داوری نهایی.</p><p>سند وقوع رویداد، به‌تنهایی اصالت انتساب یا پیش‌بینی گوینده را ثابت نمی‌کند.</p></section><div class="cards evidence-cards">'+cards+'</div>';
+}
+async function loadEvidenceCases(){
+ try{
+  const r=await fetch("/karname/evidence-cases.json",{cache:"no-store"});
+  if(!r.ok)throw Error("HTTP "+r.status);
+  const d=await r.json();
+  if(d?.schema_version!==1||!Array.isArray(d.cases)||!Array.isArray(d.sources))throw Error("bad evidence schema");
+  state.evidenceCases=d;
+ }catch(e){state.evidenceCases=null;console.warn("Evidence docket unavailable:",e.message);}
+ if(state.tab==="evidence")render();
+}
 function render(){
  setHeading();if(!state.data&&state.tab!=="auto"&&state.tab!=="all"&&state.tab!=="people"&&state.tab!=="person"){$("cards").innerHTML=noData("هنوز دادهٔ کارنامه متصل نشده","صفحه ساخته شده است، اما بانک رسمی پیش‌بینی‌ها در مسیر عمومی انتشار موجود نیست. تا دریافت دادهٔ معتبر، هیچ آمار یا نتیجهٔ فرضی منتشر نمی‌کنیم.");return;}
- const views={highlights:renderHighlights,auto:renderAuto,people:renderPeople,person:renderPersonDetail,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderUnified};
+ const views={highlights:renderHighlights,auto:renderAuto,evidence:renderEvidenceCases,people:renderPeople,person:renderPersonDetail,duels:renderDuels,calendar:renderCalendar,scenarios:renderScenarios,all:renderUnified};
  $("cards").innerHTML=(views[state.tab]||renderHighlights)();
 }
 function detail(c){
@@ -577,6 +605,7 @@ async function load(){
  void loadAutoRadar();
  void loadUnifiedIndex();
  void loadSourceChecks();
+ void loadEvidenceCases();
  // Portrait lookup is best-effort. No invented images or name-only photo searches.
  const resource=(url,fallback)=>fetch(url,{cache:"no-cache"})
   .then(r=>r.ok?r.json():fallback).catch(()=>fallback);
