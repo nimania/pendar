@@ -1884,13 +1884,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-06T03:40:35.429451+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-06T03:40:54.052394+00:00"
+      "reserved_at": "2026-11-06T03:40:54.052394+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 41,
+      "sent_at": "2026-11-06T03:40:57.053172+00:00"
     }
   ],
-  "saved_at": "2026-11-06T03:40:54.052413+00:00",
+  "saved_at": "2026-11-06T03:40:57.053190+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-06T03:40:35.429451+00:00",
     "fardaayekerman": "2026-11-06T03:40:35.429451+00:00",
