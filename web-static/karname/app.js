@@ -128,12 +128,59 @@ function showClaims(filtered){
  if(!filtered.length)return noData("پرونده‌ای برای نمایش پیدا نشد","فیلترها را تغییر دهید یا منتظر ورود داده‌های مستند کارنامه باشید.");
  return filtered.map(mini).join("");
 }
+function machineSummary(){
+ const n=state.unifiedIndex?.counts;
+ if(!n)return "";
+ return '<section class="unified-intro unified-banner"><strong>رصد مشترک پندار: '+fa(n.total)+' رکورد</strong>'
+ +'<p>'+fa(n.documented)+' پروندهٔ تاریخی، '+fa(n.automatic_unverified)+' رصد خودکارِ بدون تأیید مستقل و '
+ +fa(n.screened_from_public_claims+n.other_review_states)+' مدخل محفوظ برای ممیزی.</p>'
+ +'<a href="/karname/#all" class="unified-href">جست‌وجوی تمام رکوردها ←</a></section>';
+}
+function renderObservedPeople(){
+ const index=state.unifiedIndex;
+ if(!index)return "";
+ const provisional=index.entries.filter(x=>x.layer==="automatic_observation");
+ const byName=new Map();
+ for(const entry of provisional){
+  const name=array(entry.speaker_labels)[0]||"نام نامشخص";
+  const key=array(entry.speaker_keys)[0]||name;
+  if(!byName.has(key))byName.set(key,{name,handle:array(entry.speaker_keys)[0]||null,count:0});
+  byName.get(key).count++;
+ }
+ const groups=[...byName.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,"fa"));
+ const rows=groups.slice(0,30).map(x=>{
+  const link=x.handle
+   ?'/karname/?person='+encodeURIComponent(x.handle)+'#auto'
+   :'/karname/?search='+encodeURIComponent(x.name)+'#auto';
+  return '<a href="'+esc(link)+'" class="observed-person">'+esc(x.name)
+    +'<span>'+fa(x.count)+' رصد · انتساب تأییدنشده</span></a>';
+ }).join("");
+ return '<section class="observed-people"><h3>نام‌های مرتبط با رصد خودکار</h3><p>این فهرست از متن خبرها و ری‌کپ‌ها به‌دست آمده و به معنای تأیید گویندهٔ جمله نیست. در محاسبهٔ امتیاز افراد وارد نمی‌شود.</p>'
+   +'<div class="observed-person-grid">'+rows+'</div>'
+   +(groups.length>30?'<a href="/karname/#all">مشاهدهٔ تمام نام‌ها و متن‌ها در بانک مشترک ←</a>':"")+'</section>';
+}
+function renderAutoTriggerHints(){
+ const index=state.unifiedIndex;if(!index)return "";
+ const list=index.entries.filter(x=>x.layer==="automatic_observation"
+  &&["conditional","time_expression"].includes(x.trigger_kind));
+ const timed=list.filter(x=>x.trigger_kind==="time_expression");
+ const conditional=list.filter(x=>x.trigger_kind==="conditional");
+ const links=list.slice(0,12).map(c=>{
+  const signal=c.time_label||c.condition_mention||"تاریخ یا شرط نامشخص";
+  return '<li><a href="/karname/?observation='+encodeURIComponent(c.id)+'#auto">'+esc(signal)
+   +' <small dir="ltr">'+esc(c.id)+'</small></a></li>';
+ }).join("");
+ return '<section class="calendar-group auto-trigger-hints"><h3>سرنخ‌های زمانی و شرطی از رصد خودکار</h3>'
+ +'<p class="muted">'+fa(timed.length)+' اشارهٔ زمانی و '+fa(conditional.length)
+ +' شرط استخراج شده است. هیچ‌کدام هنوز موعد قطعیِ احرازشده نیستند و به جدول سررسیدهای رسمی اضافه نشده‌اند.</p>'
+ +'<ul>'+links+'</ul><a href="/karname/#all">دیدن پرونده‌های ثبت‌شده و رصدهای جدید ←</a></section>';
+}
 function renderHighlights(){
  let ranked=[...state.claims].sort((a,b)=>{
    const rank=c=>{let s=status(c);return (s.key==="wait"?4:0)+(s.key==="good"||s.key==="bad"||s.key==="half"?3:0)+(c.kind==="K"?1:0)};
    return rank(b)-rank(a)||String(b.said||"").localeCompare(String(a.said||""));
  });
- return showClaims(ranked.slice(0,12));
+ return machineSummary()+showClaims(ranked.slice(0,12));
 }
 function renderPeople(){
  let rows=state.speakers.map(s=>{let claims=state.claims.filter(c=>array(c.speakers).some(v=>speakerId(v)===(s.key||s.name)));return {s,claims,score:score(claims)};}).filter(x=>x.claims.length).sort((a,b)=>b.claims.length-a.claims.length);
@@ -147,7 +194,7 @@ function renderPeople(){
   let handle=personHref(s);
   const personTitle=handle?'<a class="profile-name" href="'+esc(handle)+'">'+esc(s.name||s.key||"گوینده")+'</a>':esc(s.name||s.key||"گوینده");
   return '<article class="tile person"><div class="person-head">'+avatarMarkup(s)+'<div><h3>'+personTitle+'</h3><span class="muted">'+fa(total)+' ادعا</span></div></div><div class="score">'+esc(x.score.percent)+'</div><span class="muted">از '+fa(x.score.n)+' پیش‌بینی ارزیابی‌شده</span><div class="bar" aria-label="نتایج ثبت‌شده">'+parts+'</div><div class="tile-foot"><button class="open-card" type="button" data-person="'+esc(s.key||s.name)+'">دیدن پیش‌بینی‌ها ←</button>'+(handle?'<a href="'+esc(handle)+'">همهٔ سخنان این چهره در پندار</a>':"")+(autoCount?'<button type="button" class="auto-person-link" data-auto-person="'+esc(handleForAuto)+'">'+fa(autoCount)+' مورد رصد خودکار</button>':"")+'</div></article>';
- }).join("");
+ }).join("")+renderObservedPeople();
 }
 function renderDuels(){
  let map=new Map(state.claims.map(c=>[c.id,c]));
@@ -164,7 +211,7 @@ function renderCalendar(){
  if(!rows.length)return noData("مورد بازی وجود ندارد","با ثبت پیش‌بینی‌های دارای مهلت، تقویم سررسیدها فعال می‌شود.");
  let buckets=new Map();
  for(const c of rows){const b=bucket(c),key=c.bucket||"other",label=b.label||b.title||c.due_label||"بدون سررسید مشخص";if(!buckets.has(key))buckets.set(key,{label,claims:[]});buckets.get(key).claims.push(c);}
- return [...buckets.values()].map(b=>'<section class="calendar-group"><h3>'+esc(b.label)+'</h3><div class="group-items">'+b.claims.map((c,i)=>mini(c,i)).join("")+'</div></section>').join("");
+ return [...buckets.values()].map(b=>'<section class="calendar-group"><h3>'+esc(b.label)+'</h3><div class="group-items">'+b.claims.map((c,i)=>mini(c,i)).join("")+'</div></section>').join("")+renderAutoTriggerHints();
 }
 function scenarioCategory(dir){
  const d=norm(dir);
@@ -223,7 +270,7 @@ function renderScenarios(){
   const cards=unique.map(x=>'<li class="scenario-claim"><button type="button" data-claim="'+esc(x.claim.id)+'"><span class="pill open">'+esc(x.tag.dir||"نامشخص")+'</span><b dir="ltr">'+esc(x.claim.id)+'</b><span>'+esc(claimText(x.claim))+'</span></button></li>').join("");
   selected='<section id="scenario-detail" class="scenario-detail" aria-live="polite"><div class="scenario-detail-head"><h3>'+title+' · '+fa(matches.length)+' برچسب</h3><button type="button" class="scenario-close" data-scenario-clear="true" aria-label="بستن فهرست مواضع">بستن ✕</button></div><p class="muted">با انتخاب یک ادعا، متن، قیدها و منشأ آن باز می‌شود. چند موضع ممکن است به یک ادعا مربوط باشند.</p><ol>'+cards+'</ol></section>';
  }
- return heading+'<div class="matrix"><table><thead><tr><th scope="col">تحلیلگر</th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+selected;
+ return heading+'<div class="matrix"><table><thead><tr><th scope="col">تحلیلگر</th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+selected+machineSummary();
 }
 function validAutoRadar(value){
  return value?.schema_version===1
@@ -490,6 +537,8 @@ document.addEventListener("error",ev=>{
 },true);
 const observedParam=new URL(location.href).searchParams.get("observation")||"";
 if(/^KC-[0-9a-f]{18}$/.test(observedParam))state.autoQuery=observedParam;
+const autoSearchParam=new URL(location.href).searchParams.get("search")||"";
+if(autoSearchParam&&autoSearchParam.length<=120)state.autoQuery=autoSearchParam;
 const autoPersonParam=new URL(location.href).searchParams.get("person")||"";
 if(/^[A-Za-z0-9_-]{2,100}$/.test(autoPersonParam))state.autoPerson=autoPersonParam;
 let initial=location.hash.slice(1);if(labels[initial])state.tab=initial;
