@@ -276,5 +276,75 @@
     "publication_status": "code_and_schedule_added; actual_Bot_API_delivery_not_yet_verified",
     "approved_stream": "TCMB indicative TRY rates for USD EUR GBP, update only with source-new date and >=0.30% material movement",
     "iran_rial_stream": "pending separately verified Iranian free market provider; never infer from TCMB indicative IRR"
+  },
+  "savings_radar": {
+    "name_fa": "صرفه‌جو",
+    "status": "editorial_specification_only_not_publishing",
+    "objective": "Verifiable net savings for residents of Turkiye, not raw ads",
+    "primary_categories": [
+      "groceries",
+      "cleaning",
+      "baby essentials",
+      "personal care",
+      "transport",
+      "telecom"
+    ],
+    "secondary_categories": [
+      "electronics",
+      "home goods",
+      "clothing"
+    ],
+    "source_candidates": [
+      {
+        "name": "Fırsata Geldim",
+        "url": "https://firsatageldim.com/"
+      },
+      {
+        "name": "Hesap Aktüel",
+        "url": "https://www.hesapaktuel.com/aktuel"
+      },
+      {
+        "name": "BİM",
+        "url": "https://www.bim.com.tr/"
+      },
+      {
+        "name": "A101",
+        "url": "https://www.a101.com.tr/"
+      },
+      {
+        "name": "ŞOK",
+        "url": "https://www.sokmarket.com.tr/"
+      },
+      {
+        "name": "Migros",
+        "url": "https://www.migros.com.tr/"
+      },
+      {
+        "name": "CarrefourSA",
+        "url": "https://www.carrefoursa.com/"
+      },
+      {
+        "name": "Trendyol",
+        "url": "https://www.trendyol.com/"
+      }
+    ],
+    "publish_if": [
+      "seller-offer link or dated catalog is verified",
+      "offer is currently valid and has unambiguous product size and unit price",
+      "real net savings supported by valid comparative reference or historical price",
+      "cost and geographic applicability are stated; separate loyalty/app requirements",
+      "not duplicated and not a generic advertisement"
+    ],
+    "must_show": [
+      "price_try",
+      "unit_size",
+      "source",
+      "valid_until",
+      "location_or_online",
+      "conditions",
+      "verified_at"
+    ],
+    "posting_policy": "Two curated digests daily; urgent short-lived high-value offers as needed; no automatic reposting of copyrighted catalog images without permission.",
+    "consumer_disclaimer": "قیمت و موجودی ممکن است با شعبه و زمان تغییر کند؛ پیش از خرید، قیمت نهایی را در فروشگاه بررسی کنید."
   }
 }
