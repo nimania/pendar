@@ -5522,9 +5522,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-07T16:39:19.532376+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/kerman_gov/10567",
@@ -5550,9 +5551,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-07T16:39:19.532376+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/kerman_news/140217",
@@ -5670,9 +5672,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-07T16:39:19.532376+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-07T20:32:28.691040+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140221",
@@ -5755,9 +5758,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-07T18:38:33.088048+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-07T20:32:28.691040+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10568",
@@ -5896,9 +5900,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-07T20:32:07.433228+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-07T20:32:28.691040+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140232",
@@ -5958,7 +5963,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-07T20:32:25.772734+00:00",
+  "saved_at": "2026-11-07T20:32:28.691060+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-07T20:32:07.433228+00:00",
     "fardaayekerman": "2026-11-07T20:32:07.433228+00:00",
