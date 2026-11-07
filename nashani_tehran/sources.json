@@ -19,6 +19,43 @@
       "poll_minutes": 5,
       "media_repost_allowed": false,
       "source_hashtag": "تهران_تل"
+    },
+    {
+      "name": "ایرنا",
+      "platform": "telegram",
+      "handle": "irna_1313",
+      "enabled": true,
+      "poll_minutes": 5,
+      "role": "official-news-agency",
+      "media_repost_allowed": true,
+      "media_permission_status": "user_confirmed_2026-11-07",
+      "source_hashtag": "ایرنا",
+      "geography_filter": "tehran_city_strict"
+    },
+    {
+      "name": "ایسنا",
+      "platform": "telegram",
+      "handle": "isna94",
+      "enabled": true,
+      "poll_minutes": 5,
+      "role": "official-news-agency",
+      "media_repost_allowed": true,
+      "media_permission_status": "user_confirmed_2026-11-07",
+      "source_hashtag": "ایسنا",
+      "geography_filter": "tehran_city_strict"
+    },
+    {
+      "name": "مهر",
+      "platform": "telegram",
+      "handle": "mehrnews",
+      "enabled": true,
+      "poll_minutes": 5,
+      "role": "official-news-agency",
+      "media_repost_allowed": true,
+      "media_permission_status": "user_confirmed_2026-11-07",
+      "source_hashtag": "مهر",
+      "geography_filter": "tehran_city_strict"
     }
-  ]
+  ],
+  "editorial_policy": "Only confirmed Tehran city stories. Official news agency photo/video copying is user-authorized. Prefer native Telegram copyMessage; never circumvent protected media. If required visual unavailable, hold for review. Text/dated stories within five hours only. Source hashtag mandatory."
 }
