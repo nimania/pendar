@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "project": "نشانی: ترکیه",
+  "status": "editorial_priority_configured; telegram_publishing_not_configured",
+  "editorial_basis": "Provisional city-news priorities, not a verified ranking of Iranian residents by city.",
+  "country": "TR",
+  "language": "fa",
+  "priorities": [
+    {
+      "rank": 1,
+      "city_fa": "استانبول",
+      "city_en": "Istanbul",
+      "weight": 40
+    },
+    {
+      "rank": 2,
+      "city_fa": "آنتالیا",
+      "city_en": "Antalya",
+      "weight": 25
+    },
+    {
+      "rank": 3,
+      "city_fa": "آنکارا",
+      "city_en": "Ankara",
+      "weight": 20
+    },
+    {
+      "rank": 4,
+      "city_fa": "ازمیر",
+      "city_en": "Izmir",
+      "weight": 15
+    }
+  ],
+  "supplemental": [
+    {
+      "city_fa": "وان",
+      "city_en": "Van"
+    },
+    {
+      "city_fa": "دنیزلی",
+      "city_en": "Denizli"
+    }
+  ],
+  "rules": [
+    "News affecting residence, transport, services, safety, employment and the Iranian community can override city ranking.",
+    "Emergencies and material nationwide regulatory changes always take precedence.",
+    "Filter off-topic stories, preserve sources, verify timestamps and avoid duplicates.",
+    "No Telegram destination has been configured; do not auto-publish from this registry."
+  ]
+}
