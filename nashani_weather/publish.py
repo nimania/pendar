@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Twice-daily Nashani forecasts. Official AQI and model estimates are distinct."""
+"""Four daily Nashani forecasts. Official AQI and model estimates are distinct."""
 from __future__ import annotations
 import argparse
 import base64
@@ -143,7 +143,7 @@ def main():
     ap.add_argument("--check-connection",action="store_true")
     args=ap.parse_args()
     now=datetime.now(TZ)
-    slot="morning" if now.hour < 12 else "evening"
+    slot=("morning" if now.hour < 9 else "midday" if now.hour < 14 else "afternoon" if now.hour < 19 else "night")
     token=os.getenv("NASHANI_TELEGRAM_BOT_TOKEN","")
     if args.check_connection:
         for city in CITIES:
