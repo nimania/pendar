@@ -9,6 +9,10 @@
       "status": "published",
       "message_id": 21,
       "at": "2026-11-07T18:11:44.449165+03:30"
+    },
+    "2026-11-08-morning-کرمان": {
+      "status": "sending_uncertain",
+      "at": "2026-11-08T00:59:10.751819+03:30"
     }
   }
 }
