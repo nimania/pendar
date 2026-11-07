@@ -401,7 +401,40 @@
     "https://t.me/qh_qv/958",
     "https://t.me/kerman_gov/10553",
     "https://t.me/kerman_gov/10554",
-    "https://t.me/kerman_gov/10555"
+    "https://t.me/kerman_gov/10555",
+    "https://t.me/kerman_news/140181",
+    "https://t.me/irna_kerman/30308",
+    "https://t.me/fardaayekerman/34953",
+    "https://t.me/fardaayekerman/34954",
+    "https://t.me/fardaayekerman/34955",
+    "https://t.me/Kerman_akhbar/66232",
+    "https://t.me/kerman_news/140183",
+    "https://t.me/kermane_no/59024",
+    "https://t.me/kermane_no/59025",
+    "https://t.me/kermane_no/59026",
+    "https://t.me/kerman_news/140184",
+    "https://t.me/kerman_gov/10556",
+    "https://t.me/kerman_news/140185",
+    "https://t.me/kerman_news/140186",
+    "https://t.me/kermane_no/59027",
+    "https://t.me/kerman_gov/10557",
+    "https://t.me/kermane_no/59028",
+    "https://t.me/kerman_news/140187",
+    "https://t.me/kermane_no/59029",
+    "https://t.me/qh_qv/959",
+    "https://t.me/kermane_no/59030",
+    "https://t.me/qh_qv/960",
+    "https://t.me/kermane_no/59031",
+    "https://t.me/qh_qv/961",
+    "https://t.me/kermane_no/59032",
+    "https://t.me/kerman_news/140188",
+    "https://t.me/fardaayekerman/34956",
+    "https://t.me/qh_qv/962",
+    "https://t.me/kermane_no/59033",
+    "https://t.me/fardaayekerman/34957",
+    "https://t.me/kermane_no/59034",
+    "https://t.me/kerman_news/140189",
+    "https://t.me/qh_qv/963"
   ],
   "queue": [
     {
@@ -3428,17 +3461,356 @@
       "delivery_kind": "photo",
       "telegram_message_id": 76,
       "sent_at": "2026-11-07T03:48:11.106987+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30308",
+      "source_post_id": "30308",
+      "title": "زنگ خطر در خاستگاه طلای سبز؛ نجات پسته کرمان در گرو گذار از سنّت به کشاورزی دانش‌بنیان است",
+      "excerpt": "زنگ خطر در خاستگاه طلای سبز؛ نجات پسته کرمان در گرو گذار از سنّت به کشاورزی دانش‌بنیان است افت شدید سفره‌های زیرزمینی و سقوط تولید پسته تا مرز ۵۰۰ کیلوگرم در هکتار، زنگ خطر را برای حیات اقتصادی این محصول راهبردی به صدا درآورده است؛ بحرانی که به باور کارشناسان، تنها با توقف روش‌های سنتی، ساماندهی خرده‌مالکی و پیاده‌سازی مدیریت علمی در زنجیره تولید و آبیاری مهار خواهد شد. irna_kerman",
+      "paragraphs": [
+        "زنگ خطر در خاستگاه طلای سبز؛ نجات پسته کرمان در گرو گذار از سنّت به کشاورزی دانش‌بنیان است",
+        "افت شدید سفره‌های زیرزمینی و سقوط تولید پسته تا مرز ۵۰۰ کیلوگرم در هکتار، زنگ خطر را برای حیات اقتصادی این محصول راهبردی به صدا درآورده است؛ بحرانی که به باور کارشناسان، تنها با توقف روش‌های سنتی، ساماندهی خرده‌مالکی و پیاده‌سازی مدیریت علمی در زنجیره تولید و آبیاری مهار خواهد شد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/aul2ZggVEJ3unW4g30qfuDO435IZnaVAygoYc8HQor_XfZtx08evEPVuYeh2DDL_pcy4_2Y67bR74Hh20IpHylyoDxt1TkRDXLskwrQPc6m9Sc44RZmHAO0FljeGrXUtWFpeO3NTpr5PsjfE6Kxcg2dzFF9N7e_7PktGRidaLNudtLfw-siyI-RTQ0iEsS_fgQFBOmp4IhksqfddoRQmvYWhyouzGHJlk3YJg4Aac1lT2c0COFuaABZ-klhGkOvooxgvJ8QDO6edpfJ0ReV2jrd5T3jd_HyzhOU8I6fM_GRHQGgdeW9dUc0hiMRN52eaqx1LrixPPBUca1i7UErKgA.jpg"
+      },
+      "published_at": "2026-11-07T04:38:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "eea02e125a2157e6",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/34954",
+      "source_post_id": "34954",
+      "title": "معاون وزیر کار تشریح کرد؛",
+      "excerpt": "معاون وزیر کار تشریح کرد؛ معیار‌های جدید شناسایی مشمولان افزایش اعتبار کالابرگ فردای‌کرمان – گروه اقتصاد: معاون وزیر کار با تشریح معیارهای شناسایی مشمولان افزایش اعتبار کالابرگ گفت: «بخشی از مشمولان اقشار آسیب‌پذیری هستند که پیش‌تر از سوی دستگاه‌های حمایتی مانند کمیته امداد و سازمان بهزیستی شناسایی شده‌اند. برای مثال این گروه شامل افراد دارای معلولیتی می‌شوند که درآمد پایینی دارند، همچنین زنان سرپرست خانواری که در خانوادۀ خود فرد شاغل ندارند». یعقوب اندایش افزود: «افرادی که فاقد ملک و خودرو هستند و شغل رسمی یا منبع درآمد مشخصی ندارند نیز در زمرۀ گروه‌های آسیب‌پذیر قرار می‌گیرند». فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "معاون وزیر کار تشریح کرد؛",
+        "معیار‌های جدید شناسایی مشمولان افزایش اعتبار کالابرگ",
+        "فردای‌کرمان – گروه اقتصاد: معاون وزیر کار با تشریح معیارهای شناسایی مشمولان افزایش اعتبار کالابرگ گفت: «بخشی از مشمولان اقشار آسیب‌پذیری هستند که پیش‌تر از سوی دستگاه‌های حمایتی مانند کمیته امداد و سازمان بهزیستی شناسایی شده‌اند. برای مثال این گروه شامل افراد دارای معلولیتی می‌شوند که درآمد پایینی دارند، همچنین زنان سرپرست خانواری که در خانوادۀ خود فرد شاغل ندارند».",
+        "یعقوب اندایش افزود: «افرادی که فاقد ملک و خودرو هستند و شغل رسمی یا منبع درآمد مشخصی ندارند نیز در زمرۀ گروه‌های آسیب‌پذیر قرار می‌گیرند».",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/PcUcdKuN7alo5W7a_EZylDGPM8l4A4Cg7Itt9YCVb6xeY9WIS6ms9OB9BcDmMAtU2NLS6DINBjkVUIatyvmoMukd6kdBYTAMg3gPuoaNVzswtmVE1XDysPj5qXNqtzU3hfecBEoM_DY41lacYc6J861MhkBaC3Z6lrCnlNmM0hLuxzz2iKDyaRPnMKFIFZVGy7CtN5i3IbPL9mYk7InSAFJOzjygJFrALgRAxU2jrSHAcy2rwgYF4KIkWSwGURp-QgFJQuWo6dEqF-Wc1a2JdFsFu_hJ87T0FkUP07YutBRJQe9k7f7WfOXbl8swGX7vbF49zRK_Nefz7Y9aL7QeUA.jpg"
+      },
+      "published_at": "2026-11-07T04:50:10+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "531e6c17279467a6",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/34955",
+      "source_post_id": "34955",
+      "title": "برخورد مرگبار پژوپارس و شاهین؛",
+      "excerpt": "برخورد مرگبار پژوپارس و شاهین؛ ۷ نفر در تصادف جادۀ چترود – کرمان جان باختند فردای‌کرمان – گروه جامعه: مدیرعامل جمعیت هلال‌احمر استان کرمان با اشاره به وقوع یک حادثۀ رانندگی مرگبار در ساعت ۱۹:۲۸ شامگاه جمعه ۱۵ آبان‌ماه، گفت: «در برخورد ۲ خودروی سواری پژوپارس و شاهین در کیلومتر ۱۰ جادۀ چترود - کرمان (مسیر فرعی کاظم‌آباد)، هفت نفر جان باختند و ۲ نفر مصدوم شدند». فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "برخورد مرگبار پژوپارس و شاهین؛",
+        "۷ نفر در تصادف جادۀ چترود – کرمان جان باختند",
+        "فردای‌کرمان – گروه جامعه: مدیرعامل جمعیت هلال‌احمر استان کرمان با اشاره به وقوع یک حادثۀ رانندگی مرگبار در ساعت ۱۹:۲۸ شامگاه جمعه ۱۵ آبان‌ماه، گفت: «در برخورد ۲ خودروی سواری پژوپارس و شاهین در کیلومتر ۱۰ جادۀ چترود - کرمان (مسیر فرعی کاظم‌آباد)، هفت نفر جان باختند و ۲ نفر مصدوم شدند».",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/VlZzL2bG4OyD9B7KgBJ0EKx7oDlOF69jaadoVueNCTSvhvJUElHFuUhykuXs_3pLhkbZa5lHm_X4ZHga28tYLnCZ39pZZym7v6JuRg48CI4_g9W5voR8GIvwtyqhEki7yzTvY4UE1BJECxmQtRI_tdFf3esgk4x-Nv4z9Kor1FvdnqqGbSFBJ9TeudDwzLv6VvM671a2xIzP2FXBAofL2OGoVJPwF6s434nXMALzAh7AapUcRv4vxzVvkdUJoCqAcwzf7gKZIWaVIwkxfzs0Fmw616bi_U_ZM7-0u6hWqcPo1iK4EqiWdWtbFZiAvQH33At_HIrePpn1YNkFvX4gHw.jpg"
+      },
+      "published_at": "2026-11-07T04:54:41+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "d5125187267ef392",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66232",
+      "source_post_id": "66232",
+      "title": "عطر شهادت در شب‌های اقتدار جیرفت",
+      "excerpt": "عطر شهادت در شب‌های اقتدار جیرفت مراسم «شب‌های اقتدار» در شهرستان جیرفت در حالی برگزار شد که حضور پیکر مطهر یک شهید گمنام، فضای این مراسم را آکنده از معنویت و حال‌وهوای ایثار و شهادت کرد. مردم ولایت‌مدار جیرفت با استقبال از پیکر مطهر این شهید والامقام، بار دیگر ارادت خود را به آرمان‌های شهدا و فرهنگ ایثار و مقاومت نشان دادند. حضور شهید گمنام در این مراسم، جلوه‌ای از پیوند مردم این شهرستان با فرهنگ شهادت و یاد و خاطره شهیدان والامقام بود.",
+      "paragraphs": [
+        "عطر شهادت در شب‌های اقتدار جیرفت",
+        "مراسم «شب‌های اقتدار» در شهرستان جیرفت در حالی برگزار شد که حضور پیکر مطهر یک شهید گمنام، فضای این مراسم را آکنده از معنویت و حال‌وهوای ایثار و شهادت کرد.",
+        "مردم ولایت‌مدار جیرفت با استقبال از پیکر مطهر این شهید والامقام، بار دیگر ارادت خود را به آرمان‌های شهدا و فرهنگ ایثار و مقاومت نشان دادند.",
+        "حضور شهید گمنام در این مراسم، جلوه‌ای از پیوند مردم این شهرستان با فرهنگ شهادت و یاد و خاطره شهیدان والامقام بود."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/g9cTZpddOJG8KaBJKRIOehkIg9m67a-0HF5Y9XuJU_wfWMo1rTCSQGGX3OV4v0Chzrs8sWZbMqq-nxHOeX5dNrMvu1W7BXfHNjKMttnAI7X6AHkYkT8SiUsFzzhpEYns96fl5lWiYgxtbDmfWcesWFUuexdUeE8JL4d88WDaPKV5JMDFiGn5z0PKu7-MDWe0k217QPh8ZUzP0b74pnx-JEBgx8FswDsQm2a58stzO1BcIT9tHRNhmd2VmBfMMuMP8PD1sLxvM-pnrmLfF7nfIffWolQ4HYgSCDfrwjC63mEMrKZITK2Ye1kde5FaeAvVw-KHhEcvtEkvExRvralDkw.jpg"
+      },
+      "published_at": "2026-11-07T04:55:09+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "5e150fc7c7bb0290",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140183",
+      "source_post_id": "140183",
+      "title": "برخورد دو خودرو در کرمان و ۹ کشته و زخمی",
+      "excerpt": "برخورد دو خودرو در کرمان و ۹ کشته و زخمی کیلومتر ۱۰ محور چترود ـ کرمان، حوالی کاظم‌آباد شب گذشته شاهد صحنه خونین حادثه رانندگی بود. جایی که پژو پارس با شاهین برخورد کردند و ۹ نفر کشته و زخمی شدند، این حادثه در ساعت ۱۹:۲۸ رخ داد، ۷ نفر جان خود را از دست دادند و ۲ نفر دیگر زخمی شدند.",
+      "paragraphs": [
+        "برخورد دو خودرو در کرمان و ۹ کشته و زخمی",
+        "کیلومتر ۱۰ محور چترود ـ کرمان، حوالی کاظم‌آباد شب گذشته شاهد صحنه خونین حادثه رانندگی بود.",
+        "جایی که پژو پارس با شاهین برخورد کردند و ۹ نفر کشته و زخمی شدند، این حادثه در ساعت ۱۹:۲۸ رخ داد، ۷ نفر جان خود را از دست دادند و ۲ نفر دیگر زخمی شدند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Zc0qKjgnUEzcOarAXx_V9rdLFF_aH4CvDv-9J5_z6GXJkkOFQy9zPPVT_TCaUDVqcPkh8cazZjPVzamcUssn5pmKHBIKQlROS6fD6eCE8jwFxpOEpNDM8wuEEYqEA5BceQPqyi1CpYok447mARJ6W82k-LkF8Zmr5AgcvgtBF9A-97huQqxVdT3W9uDWNdupwqxYrlOpMarb3Pu-xB_bPfgZ5CCTe3V28SS6IDl3wvJdiZ5mPHn7Hd0xcLTGXYEAmHZE0I97_htPAitTxEzyXnrmhijMsQS4XPRodpqTQCiwsc0i0h9d6zv_Incw4bnA91Mhiqe_OxQVl1GK0SURpA.jpg"
+      },
+      "published_at": "2026-11-07T04:56:14+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "008ec53fd6a4a844",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10556",
+      "source_post_id": "10556",
+      "title": "بازدید معاون عمرانی استاندار کرمان از بیست‌وسومین نمایشگاه صنعت ساختمان",
+      "excerpt": "بازدید معاون عمرانی استاندار کرمان از بیست‌وسومین نمایشگاه صنعت ساختمان معاون هماهنگی امور عمرانی استاندار، از بیست‌وسومین نمایشگاه صنعت ساختمان در محل سایت نمایشگاهی عمران علوی بازدید کرد. به گزارش روابط عمومی استانداری کرمان. علی‌اصغر ذاکری هرندی در جریان این بازدید، با تأکید بر ضرورت معرفی فناوری‌ها، نوآوری‌ها و دستاوردهای جدید در صنعت ساختمان، اظهار داشت: نمایشگاه‌ها باید زمینه ارتباط مستقیم تولیدکنندگان و تأمین‌کنندگان را فراهم کرده و بستر مناسبی برای شبکه‌سازی، تبادل تجربیات و انتقال دانش تخصصی ایجاد کنند. معاون هماهنگی امور عمرانی استاندار همچنین با اشاره به نقش نمایشگاه‌ها در توسعه صنعت ساختمان افزود: برگزاری چنین رویدادهایی می‌تواند به افزایش رقابت‌پذیری، ایجاد فرصت‌های آموزشی و تخصصی و ارتقای کیفیت خدمات و محصولات در حوزه ساختمان کمک کند.",
+      "paragraphs": [
+        "بازدید معاون عمرانی استاندار کرمان از بیست‌وسومین نمایشگاه صنعت ساختمان",
+        "معاون هماهنگی امور عمرانی استاندار، از بیست‌وسومین نمایشگاه صنعت ساختمان در محل سایت نمایشگاهی عمران علوی بازدید کرد.",
+        "به گزارش روابط عمومی استانداری کرمان. علی‌اصغر ذاکری هرندی در جریان این بازدید، با تأکید بر ضرورت معرفی فناوری‌ها، نوآوری‌ها و دستاوردهای جدید در صنعت ساختمان، اظهار داشت: نمایشگاه‌ها باید زمینه ارتباط مستقیم تولیدکنندگان و تأمین‌کنندگان را فراهم کرده و بستر مناسبی برای شبکه‌سازی، تبادل تجربیات و انتقال دانش تخصصی ایجاد کنند.",
+        "معاون هماهنگی امور عمرانی استاندار همچنین با اشاره به نقش نمایشگاه‌ها در توسعه صنعت ساختمان افزود: برگزاری چنین رویدادهایی می‌تواند به افزایش رقابت‌پذیری، ایجاد فرصت‌های آموزشی و تخصصی و ارتقای کیفیت خدمات و محصولات در حوزه ساختمان کمک کند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/ObsO_uYzknN5eSY5DnEcmynoN41Xnj7dDGKojHuW3M045lW-b937zsMK-2WuPLiodGfj9Ri34Ymn7J0vd5qfNvofrn4-loq0TdfH_sHdcPY9Gf950lm6cPmg9etnZ74UqI7apouMP6qDuKq9JBEjflpJNq8ReHVYd4sRMmSs-uM9A3pFfKTfAWIXqIWURt5j4wgI36XRHWZByfciJ3TmFfqgCho77_XE0lm1Aam_-b3gekza72-uZ-Qil_FawTq_W1X79n_2t1lvF0IbiVI73RSUPrwYXbESCpXLKJaCnNz2lgl66mGhFGigZ7pPdyIVsjQMbqXBqoenETa-aCBrJA.jpg"
+      },
+      "published_at": "2026-11-07T05:22:46+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "b92361f1ac81ad90",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10557",
+      "source_post_id": "10557",
+      "title": "آغاز سفر معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس جمهور به بم",
+      "excerpt": "آغاز سفر معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس جمهور به بم به گزارش روابط عمومی استانداری کرمان، دکتر حسین‌ افشین معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس جمهور صبح امروز شنبه ۱۶ آبان ماه با استقبال رسمی دکتر محمدعلی طالبی استاندار کرمان، فرماندار بم و دیگر مسؤلان استانی وارد فرودگاه شهدای بم شد. بازدید از مدرسه هوشمند ارگ جدید بم، بازدید از مجموعه کارخانه‌های خودروسازان بم، کرمان‌ موتور، قوای محرکه و مدیران خودرو از جمله برنامه‌های سفر دکتر حسین افشین معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس جمهور به بم است.",
+      "paragraphs": [
+        "آغاز سفر معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس جمهور به بم",
+        "به گزارش روابط عمومی استانداری کرمان، دکتر حسین‌ افشین معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس جمهور صبح امروز شنبه ۱۶ آبان ماه با استقبال رسمی دکتر محمدعلی طالبی استاندار کرمان، فرماندار بم و دیگر مسؤلان استانی وارد فرودگاه شهدای بم شد.",
+        "بازدید از مدرسه هوشمند ارگ جدید بم، بازدید از مجموعه کارخانه‌های خودروسازان بم، کرمان‌ موتور، قوای محرکه و مدیران خودرو از جمله برنامه‌های سفر دکتر حسین افشین معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس جمهور به بم است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/m963B_JI_2DZPXDrq5bdZcWxE6ol1OyURoYdsSeliFLnJgH4sXwtsLM6gAZaz4QC5ConT0tlqIN_K8MEWXY8Js-ugtet-6_4es7xyj94qSGLkHpwTZAXcmBo08rYHLxqTHNMM208aQj8wVX6yHy-QWCYJjes1OnmETCfsYO8w7EWZxeZ92AVDplHvErI4tlBj4D_4JBTu6qOvHNlWsexKCAaiXhpV3LIesNNfCRzbtnaYb_Q9q2ewPS9KbSTsWmKcUxnJQ3zkFcxXhCrA5iuHwanjF6oLCvM1i0S7Rhd1U_qfEEgrcIf2RfsQugWb6lyid87Z6ytErWrHS9lO0fGGA.jpg"
+      },
+      "published_at": "2026-11-07T05:45:47+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "693e5af5818ce323",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59030",
+      "source_post_id": "59030",
+      "title": "معاون علمی رئیس‌جمهور وارد بم شد",
+      "excerpt": "معاون علمی رئیس‌جمهور وارد بم شد حسین افشین، معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس‌جمهور، صبح روز شنبه با ورود به فرودگاه بم، مورد استقبال استاندار کرمان و جمعی از مسئولان اجرایی استان و شهرستان قرار گرفت. به گزارش کرمان نو، در آیین استقبال از معاون رئیس‌جمهور، استاندار کرمان به همراه فرماندار بم و جمعی از مسئولان منطقه ویژه اقتصادی ارگ جدید حضور داشتند. انتظار می‌رود در جریان این سفر، موضوعاتی از جمله توسعه زیرساخت‌های علمی و فناوری، حمایت از شرکت‌های دانش‌بنیان منطقه و بررسی چالش‌های حوزه اقتصاد دانش‌بنیان استان کرمان مورد بحث و بررسی قرار گیرد.",
+      "paragraphs": [
+        "معاون علمی رئیس‌جمهور وارد بم شد",
+        "حسین افشین، معاون علمی، فناوری و اقتصاد دانش‌بنیان رئیس‌جمهور، صبح روز شنبه با ورود به فرودگاه بم، مورد استقبال استاندار کرمان و جمعی از مسئولان اجرایی استان و شهرستان قرار گرفت.",
+        "به گزارش کرمان نو، در آیین استقبال از معاون رئیس‌جمهور، استاندار کرمان به همراه فرماندار بم و جمعی از مسئولان منطقه ویژه اقتصادی ارگ جدید حضور داشتند.",
+        "انتظار می‌رود در جریان این سفر، موضوعاتی از جمله توسعه زیرساخت‌های علمی و فناوری، حمایت از شرکت‌های دانش‌بنیان منطقه و بررسی چالش‌های حوزه اقتصاد دانش‌بنیان استان کرمان مورد بحث و بررسی قرار گیرد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/g932n3MDCzaAvoo776Mpkirrz0msfZZyK3T_Hsak7aB72KXT3vdgn9CSCmS7NNwo9ssf_Womv-8sP9B_07IcSbYSLUxbGKaCixXs_GTGNnL2mht1bfPWrToQe64OXMH8FQdIcg4EPaRjH5MqaDyr8VYdcb8NDTDjWer2bWH4Ni2qOfU_uPblYxtKgvGRxilHxZ3hbK_qqLkVbuDjZSV7l877Q-rVkuImFKyIFM_kec2E618gQ-YnJ8rhdoyTrgaa1B0itb6ci_4aqSafp6txTM9D0iVZVKuqYjPdLZahVejMr0ZTrjm5p5-LYtvFJmNq9oIZSQ94ohMXsj7w3QuUbQ.jpg"
+      },
+      "published_at": "2026-11-07T06:07:10+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "3591cd0ca4b54e99",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59031",
+      "source_post_id": "59031",
+      "title": "آبرسانی به ۱۴۰ روستای کرمان تا دهه فجر",
+      "excerpt": "آبرسانی به ۱۴۰ روستای کرمان تا دهه فجر استاندار کرمان از تکمیل آبرسانی به ۱۴۰ روستای بالای ۲۰ خانوار تا دهه فجر امسال و اجرای طرح جامع تامین آب ۶۶۴ روستای استان تا پایان سال ۱۴۰۶ خبر داد. محمدعلی طالبی در آیین بهره‌برداری از پروژه‌های عمرانی شرف‌آباد کرمان با اشاره به تلاش برای ساماندهی سکونتگاه‌های پیرامونی و توسعه زیرساخت‌ها اعلام کرد که پروژه انتقال آب خلیج فارس به کرمان طی یک ماه آینده به بهره‌برداری می‌رسد. به گفته وی، طی دو سال گذشته بیش از ۲ هزار لیتر بر ثانیه به ظرفیت آب آشامیدنی استان افزوده شده که ۸۰۰ لیتر بر ثانیه آن سهم شهر کرمان و روستاهای اطراف است. همچنین در این سفر، پروژه‌های عمرانی و بهسازی معابر در ۴۰ هکتار از شرف‌آباد با اعتبار ۱۰۰ میلیارد تومان و طرح ملی پلاک هوشمند (GNAF) برای ۱۲ هزار ملک در این منطقه افتتاح شد. /ایرنا",
+      "paragraphs": [
+        "آبرسانی به ۱۴۰ روستای کرمان تا دهه فجر",
+        "استاندار کرمان از تکمیل آبرسانی به ۱۴۰ روستای بالای ۲۰ خانوار تا دهه فجر امسال و اجرای طرح جامع تامین آب ۶۶۴ روستای استان تا پایان سال ۱۴۰۶ خبر داد.",
+        "محمدعلی طالبی در آیین بهره‌برداری از پروژه‌های عمرانی شرف‌آباد کرمان با اشاره به تلاش برای ساماندهی سکونتگاه‌های پیرامونی و توسعه زیرساخت‌ها اعلام کرد که پروژه انتقال آب خلیج فارس به کرمان طی یک ماه آینده به بهره‌برداری می‌رسد. به گفته وی، طی دو سال گذشته بیش از ۲ هزار لیتر بر ثانیه به ظرفیت آب آشامیدنی استان افزوده شده که ۸۰۰ لیتر بر ثانیه آن سهم شهر کرمان و روستاهای اطراف است. همچنین در این سفر، پروژه‌های عمرانی و بهسازی معابر در ۴۰ هکتار از شرف‌آباد با اعتبار ۱۰۰ میلیارد تومان و طرح ملی پلاک هوشمند (GNAF) برای ۱۲ هزار ملک در این منطقه افتتاح شد. /ایرنا"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/sydcGlwnOKSIiP5vRspNBsXM9riMJDa2ufOW6GPi8dqDtX-C0lUvJrLmngCFcZMSdYfwUx3soyodW045PkfqHjczCuDTHSZMMfi7uNy9I-2F8y3jrDzT7fgJcnbAblBKeJljt4wOk0QU5xv3v5PwxdD2I9N9-QzLhvWw1ihjbUWDD3CdvKhAuE5LcndgYWch_kbtA42WmB1s-CvRQiScw22rm-vxhay02pBAjCMQc82KUlMwv6A4KyxsGLK9FOL5GyUxthMjT1Kkgdkt_1rzAGZOk3q4kkv_fhJxs2PhZU4tSP33RhGdg18HbC4V6f3f3ou9tTSgN3KV_i9S14rcqQ.jpg"
+      },
+      "published_at": "2026-11-07T06:11:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "a8ca8be02e1d4274",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140188",
+      "source_post_id": "140188",
+      "title": "به زیبایی و شکوه ارگ بم",
+      "excerpt": "به زیبایی و شکوه ارگ بم",
+      "paragraphs": [
+        "به زیبایی و شکوه ارگ بم"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/5da5a19279.mp4?token=J2g9XZuCLeyvNUu7ig7ai1rpVc_1cKHA6okFZdUaOyQ2E3bbamsWCofXhDy7Q9fD7O6PyIvq2KHwmZ2AyOiJ0QYN5a8CGDb7WI2gasWW_A1VJgJYsm4DMgGtAFuFhT23zOc9Ohgz0ZjeraoafPxBnWr_ViIPnaFbx5YnyWDgOWGoByvt16_D2kSXcPYPoqnO6S95I9-38laxoiZXJj1AK_IRRlXyttXV1ItAITIdq8X4D_qzUIISWhBROlR0q8fhDWVNHcNxI17qq-sWW-GhhKapdRFsdeY8ZwBcijikE_fdhe2gpVSkLCJI85BBGG2Fj-H_3uvEEpRQBcUhwUhH-w"
+      },
+      "published_at": "2026-11-07T06:25:39+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "eb57c5f84d155aa3",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/34956",
+      "source_post_id": "34956",
+      "title": "در نشست شورای سیاستگذاری جشنواره سی‌و هشتم تئاتر استان کرمان مطرح شد؛",
+      "excerpt": "در نشست شورای سیاستگذاری جشنواره سی‌و هشتم تئاتر استان کرمان مطرح شد؛ دبیرخانه جشنواره تئاتر استان باید به سرعت شکل بگیرد فردای کرمان ـ گروه فرهنگ و هنر: نشست شورای سیاستگذاری سی و هشتمین جشنواره تئاتر استان با حضور مدیرکل فرهنگ و ارشاد اسلامی استان کرمان و اعضای این شورا، برگزار شد. این نشست با حضور حسین اسحاقی مدیرکل فرهنگ و ارشاد اسلامی، علی سلطانی معاون امور هنری و سینمایی اداره کل، رضا درویشی، محمد قاسمی و مسعود سلطانی‌زاده از پیشکسوتان تئاتر استان، احسان رضوانی مدیرعامل و اشکان عاشوری رئیس هیئت مدیره انجمن هنرهای نمایشی استان کرمان، فرهاد باغینی‌پور رئیس گروه امور هنری و علیرضا اسلامی کارشناس تئاتر اداره کل برگزار شد. فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "در نشست شورای سیاستگذاری جشنواره سی‌و هشتم تئاتر استان کرمان مطرح شد؛",
+        "دبیرخانه جشنواره تئاتر استان باید به سرعت شکل بگیرد",
+        "فردای کرمان ـ گروه فرهنگ و هنر: نشست شورای سیاستگذاری سی و هشتمین جشنواره تئاتر استان با حضور مدیرکل فرهنگ و ارشاد اسلامی استان کرمان و اعضای این شورا، برگزار شد.",
+        "این نشست با حضور حسین اسحاقی مدیرکل فرهنگ و ارشاد اسلامی، علی سلطانی معاون امور هنری و سینمایی اداره کل، رضا درویشی، محمد قاسمی و مسعود سلطانی‌زاده از پیشکسوتان تئاتر استان، احسان رضوانی مدیرعامل و اشکان عاشوری رئیس هیئت مدیره انجمن هنرهای نمایشی استان کرمان، فرهاد باغینی‌پور رئیس گروه امور هنری و علیرضا اسلامی کارشناس تئاتر اداره کل برگزار شد.",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/hPgvRWcu-uKGdop8WpYOZrOzJX77oUGMEAYxTr_35uiifFrJHWoT8ZV0ioZ5gBd2D8tp4KxFSYJEYDiqIFTT6Lh8H5oQTjaCCXi1zVEYzQC-p92Qj5EQsdS3BdJ8kOwHbktBbXnUhjsDyLHGqpNGNImdJwhGAgdLEGJq80HpulRqzP1zmBKUJPj6yHFujbJhZ2IxYNVYK_4ND50rluP8mWK43YOCEx0YiBwxVJ0XKvJfyEOz_lh7XOt6-bMG4pa-okjW9vg6I95TFD-l81wVDSDh8T-_mxG_w73FBn1WJeMqbpxwSL6-UEdEqm2ZUb0PyiLwDstSp3PZv_gcPM_a8w.jpg"
+      },
+      "published_at": "2026-11-07T06:31:11+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "387ac83670c04fb8",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59034",
+      "source_post_id": "59034",
+      "title": "بررسی صلاحیت عمومی ۳۲۰ پذیرفته‌شده آزمون کارشناسان رسمی دادگستری در کرمان",
+      "excerpt": "بررسی صلاحیت عمومی ۳۲۰ پذیرفته‌شده آزمون کارشناسان رسمی دادگستری در کرمان رئیس مرکز کارشناسان رسمی دادگستری کرمان از بررسی مدارک و احراز صلاحیت‌های عمومی ۳۲۰ نفر از پذیرفته‌شدگان آزمون کارشناسان رسمی در این استان خبر داد. به گفته عباس دلفاردی، این فرآیند طی روزهای ۱۴ و ۱۵ آبان‌ماه برای پذیرفته‌شدگان در ۲۵ رشته مختلف کارشناسی برگزار شد. پذیرفته‌شدگان نهایی پس از طی مراحل گزینش و ارزیابی، وارد دوره کارآموزی یک تا سه‌ساله شامل آموزش‌های عمومی و تخصصی شده و پس از موفقیت در این مراحل، پروانه کارشناسی رسمی دادگستری را دریافت خواهند کرد. /خبرگزاری مهر",
+      "paragraphs": [
+        "بررسی صلاحیت عمومی ۳۲۰ پذیرفته‌شده آزمون کارشناسان رسمی دادگستری در کرمان",
+        "رئیس مرکز کارشناسان رسمی دادگستری کرمان از بررسی مدارک و احراز صلاحیت‌های عمومی ۳۲۰ نفر از پذیرفته‌شدگان آزمون کارشناسان رسمی در این استان خبر داد.",
+        "به گفته عباس دلفاردی، این فرآیند طی روزهای ۱۴ و ۱۵ آبان‌ماه برای پذیرفته‌شدگان در ۲۵ رشته مختلف کارشناسی برگزار شد. پذیرفته‌شدگان نهایی پس از طی مراحل گزینش و ارزیابی، وارد دوره کارآموزی یک تا سه‌ساله شامل آموزش‌های عمومی و تخصصی شده و پس از موفقیت در این مراحل، پروانه کارشناسی رسمی دادگستری را دریافت خواهند کرد. /خبرگزاری مهر"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/GecE7HgmflVs0iJyPkUDPy5AUZbEghJA6FglLloculYsmYgjkSHRsa4uX4BAH3zKMseqdzTVp4LP4FKp17DAgCcdGNGPMnEhIy1GzuuZ2b6CwR73wnGzA6yl1IP_3xxU7qBOaliEAtOaxVy9GsvNn2O9b8gaTCbj1AsGBFiEr5jVYQBgqu19X4GvpvHA0PTPC7Qnx_UKSux-i5rzVTplPvy1cUKzpgEAdIIrsFXWeYXc7Q7jFB7j600KVC9c8n44qFCdsu8wTEPzTMCAALo5R1UvsjsqH6fyBpuhdnzU22wEjyQ-lJnMGK60IrESjOksDDWhrnkq-Zj30axnTXXvnw.jpg"
+      },
+      "published_at": "2026-11-07T06:44:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "c49f824b1305f95f",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T06:46:52.351160+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-07T03:48:11.107004+00:00",
+  "saved_at": "2026-11-07T06:47:08.666365+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-07T03:47:42.658437+00:00",
-    "fardaayekerman": "2026-11-07T03:47:42.658437+00:00",
-    "irna_kerman": "2026-11-07T03:47:42.658437+00:00",
-    "kerman_gov": "2026-11-07T03:47:42.658437+00:00",
-    "kerman_akhbar": "2026-11-07T03:47:42.658437+00:00",
-    "kerman_news": "2026-11-07T03:47:42.658437+00:00",
-    "kerman_rasaneh": "2026-11-07T03:47:42.658437+00:00",
-    "qh_qv": "2026-11-07T03:47:42.658437+00:00"
+    "kermane_no": "2026-11-07T06:46:52.351160+00:00",
+    "fardaayekerman": "2026-11-07T06:46:52.351160+00:00",
+    "irna_kerman": "2026-11-07T06:46:52.351160+00:00",
+    "kerman_gov": "2026-11-07T06:46:52.351160+00:00",
+    "kerman_akhbar": "2026-11-07T06:46:52.351160+00:00",
+    "kerman_news": "2026-11-07T06:46:52.351160+00:00",
+    "kerman_rasaneh": "2026-11-07T06:46:52.351160+00:00",
+    "qh_qv": "2026-11-07T06:46:52.351160+00:00"
   }
 }
