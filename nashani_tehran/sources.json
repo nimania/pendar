@@ -106,7 +106,7 @@
       "handle": "eitaa_akhbartehran",
       "url": "https://eitaa.com/akhbartehran",
       "platform": "eitaa",
-      "enabled": true,
+      "enabled": false,
       "poll_minutes": 30,
       "role": "local-news-monitoring",
       "media_repost_allowed": false,
@@ -114,7 +114,9 @@
       "source_hashtag": "اخبار_تهران_ایتا_",
       "geography_filter": "tehran_city_strict",
       "require_article_date": true,
-      "max_age_hours": 5
+      "max_age_hours": 5,
+      "integration_status": "registered_pending_eitaa_public_archive_parser",
+      "note": "Eitaa preview is readable in a browser but cannot use Telegram /s/ adapter. Do not attempt incorrect Telegram intake."
     },
     {
       "name": "ایرنا ـ استان تهران",
