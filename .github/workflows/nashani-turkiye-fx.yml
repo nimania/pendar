@@ -36,7 +36,7 @@ jobs:
           NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
-          if [ "$DRY_RUN" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then
+          if [ "$DRY_RUN" = "true" ]; then
             python nashani_turkey/fx.py --dry-run
           else
             python nashani_turkey/fx.py
