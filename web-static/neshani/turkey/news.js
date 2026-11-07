@@ -16,6 +16,13 @@ const CITY_PRIORITY=[
  {city:"وان",rank:5,terms:/(?:^|[^\\p{L}])وان(?:$|[^\\p{L}])|\\bvan\\b/iu},
  {city:"دنیزلی",rank:6,terms:/دنیزلی|denizli/i}
 ];
+const migrationTerms=/اقامت|مهاجر|مهاجرت|ایرانیان ترکیه|پناهجو|پناهنده|دیپورت|اخراج از ترکیه|ویزای ترکیه|تابعیت ترکیه|اجازه کار|ikamet|göçmen|göç idaresi|yabancılar|yabancı uyruklu|çalışma izni|vatandaşlık|mülteci|sığınmacı|iranlı|iran vatandaşları|sınır dışı|deport/i;
+const highImpact=/تمدید اقامت|تغییر قانون|ممنوعیت|تصمیم جدید|روند جدید|e-ikamet|ikamet izni|çalışma izni|resmî gazete|resmi gazete|yönetmelik|قانون اقامت|ثبت نشانی/i;
+function migrationRank(s){
+ const text=[s.headline_fa,s.title_fa,s.title,s.summary_fa].filter(Boolean).join(" ");
+ if(!migrationTerms.test(text))return 2;
+ return highImpact.test(text)?0:1;
+}
 function cityRank(s){
  const text=[s.headline_fa,s.title_fa,s.title,s.summary_fa].filter(Boolean).join(" ");
  const hit=CITY_PRIORITY.find(x=>x.terms.test(text));
@@ -31,7 +38,7 @@ try{
    const name=String(s.headline_fa||s.title_fa||s.title||"");
    const summary=String(s.summary_fa||"");
    return (country(s)||turkey.test(name))&&name.length>12&&!other.test(name.slice(0,30));
- }).sort((a,b)=>cityRank(a)-cityRank(b)||sortTime(b)-sortTime(a)).slice(0,8);
+ }).sort((a,b)=>migrationRank(a)-migrationRank(b)||cityRank(a)-cityRank(b)||sortTime(b)-sortTime(a)).slice(0,8);
  if(!matches.length){status.textContent="فعلاً خبر منطبق با ترکیه پیدا نشد.";return;}
  container.innerHTML=matches.map(s=>{
    const title=String(s.headline_fa||s.title_fa||s.title||"");
