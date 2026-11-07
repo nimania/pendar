@@ -1,0 +1,100 @@
+name: Nashani Tehran city-news radar
+
+on:
+  schedule:
+    # Offset from minute zero to reduce collisions with high-volume scheduled workflows.
+    # GitHub cron is best-effort, not a hard five-minute timer.
+    - cron: '2-59/5 * * * *'
+  workflow_run:
+    # Independent fallback wake-ups from existing Pendar workflows.
+    # No reverse dependency and no workflow in this list is triggered by Nashani.
+    workflows:
+      - "Collect Pendar News (independent)"
+      - "Pendar Safe Collector Recovery"
+      - "Fast Deploy Pendar UI"
+      - "Google Trends Iran Collector"
+    types: [completed]
+  push:
+    paths:
+      - '.github/workflows/nashani-tehran.yml'
+      - 'nashani_tehran/runner.py'
+      - 'nashani_tehran/sources.json'
+  pull_request:
+    paths:
+      - 'nashani_tehran/**'
+      - '.github/workflows/nashani-tehran.yml'
+  workflow_dispatch:
+    inputs:
+      approve_id:
+        description: 'Optional exact 16-char reviewed story ID to publish'
+        required: false
+        type: string
+      check_connection:
+        description: 'Verify @neshanikermanbot is an admin of Nashani Tehran channel; do not send a message'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nashani-tehran-radar
+  cancel-in-progress: false
+
+jobs:
+  test:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'beautifulsoup4>=4.12,<5' 'requests>=2.31,<3'
+      - run: python -m py_compile nashani_tehran/*.py
+      - name: Public-source smoke test (read-only)
+        run: python nashani_tehran/runner.py --dry-run
+
+  collect:
+    if: >-
+      github.event_name != 'pull_request' &&
+      github.ref == 'refs/heads/main' &&
+      (github.event_name != 'workflow_run' ||
+       (github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_branch == 'main'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install 'beautifulsoup4>=4.12,<5' 'requests>=2.31,<3'
+      - name: Unit tests
+        run: python -m py_compile nashani_tehran/*.py
+      - name: Validate Telegram bot and channel before opening publishing
+        id: telegram_connection
+        continue-on-error: true
+        env:
+          NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
+          NASHANI_CHANNEL_ID: '@neshanitehran'
+        run: python nashani_tehran/runner.py --check-connection
+      - name: Monitor sources and publish verified local news
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
+          NASHANI_CHANNEL_ID: '@neshanitehran'
+          NASHANI_PUBLISH_ENABLED: ${{ steps.telegram_connection.outcome == 'success' && 'true' || 'false' }}
+          APPROVE_ID: ${{ inputs.approve_id }}
+          CHECK_CONNECTION: ${{ inputs.check_connection }}
+        run: |
+          if [ "$CHECK_CONNECTION" = "true" ]; then
+            python nashani_tehran/runner.py --check-connection
+          elif [ -n "$APPROVE_ID" ]; then
+            python nashani_tehran/runner.py --approve "$APPROVE_ID"
+          else
+            python nashani_tehran/runner.py
+          fi
