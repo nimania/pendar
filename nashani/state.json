@@ -3351,13 +3351,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-07T03:14:06.883514+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-07T03:14:20.927867+00:00"
+      "reserved_at": "2026-11-07T03:14:20.927867+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 74,
+      "sent_at": "2026-11-07T03:14:24.487201+00:00"
     }
   ],
-  "saved_at": "2026-11-07T03:14:20.927885+00:00",
+  "saved_at": "2026-11-07T03:14:24.487222+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-07T03:14:06.883514+00:00",
     "fardaayekerman": "2026-11-07T03:14:06.883514+00:00",
