@@ -228,7 +228,9 @@
       "استانبول",
       "آنتالیا",
       "آنکارا",
-      "ازمیر"
+      "ازمیر",
+      "وان",
+      "دنیزلی"
     ],
     "supplemental_cities": [
       "وان",
@@ -238,8 +240,10 @@
     "source": "Open-Meteo for forecast; MGM for official warnings",
     "model_air_source": "Open-Meteo / CAMS model, not official station measurement",
     "local_timezone": "Europe/Istanbul",
-    "report_frequency": "4 per day",
-    "status": "planned_separate_pipeline"
+    "report_frequency": "4 daily at 06:30, 11:30, 16:30, 21:30 Europe/Istanbul",
+    "status": "implementation_committed; automatic_schedule_configured; first_delivery_not_yet_verified",
+    "details": "Daily temperatures and precipitation, current temperature and model-based AQI (Open-Meteo/CAMS, explicitly not station measurement). Missing or stale data omitted. One six-city digest per slot.",
+    "workflow": ".github/workflows/nashani-turkiye-weather.yml"
   },
   "flight_watcher": {
     "name": "Iran Flights Watcher",
