@@ -17,7 +17,8 @@
       "message_id": 9
     },
     "savings_guide": {
-      "status": "sending_uncertain"
+      "status": "published",
+      "message_id": 10
     }
   }
 }
