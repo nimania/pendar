@@ -579,7 +579,11 @@
     "https://t.me/irna_1313/471014",
     "https://t.me/tehranpress1/132288",
     "https://t.me/irna_1313/471015",
-    "https://t.me/mehrnews/429764"
+    "https://t.me/mehrnews/429764",
+    "https://t.me/mehrnews/429765",
+    "https://t.me/irna_1313/471016",
+    "https://www.mehrnews.com/news/7003570/%D8%A8%D8%A7%D8%B2%D8%AF%DB%8C%D8%AF-%D8%B4%D8%A8%D8%A7%D9%86%D9%87-%D8%B1%D8%A6%DB%8C%D8%B3-%D8%A7%D9%88%D8%B1%DA%98%D8%A7%D9%86%D8%B3-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A7%D8%B2-%D8%B1%D9%88%D9%86%D8%AF-%D8%AE%D8%AF%D9%85%D8%AA-%D8%B1%D8%B3%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%B4%D8%B1%D8%A7%DB%8C%D8%B7",
+    "https://t.me/irna_1313/471017"
   ],
   "queue": [
     {
@@ -2855,16 +2859,38 @@
       "status": "review",
       "detected_at": "2026-11-07T21:48:28.173144+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://www.mehrnews.com/news/7003570/%D8%A8%D8%A7%D8%B2%D8%AF%DB%8C%D8%AF-%D8%B4%D8%A8%D8%A7%D9%86%D9%87-%D8%B1%D8%A6%DB%8C%D8%B3-%D8%A7%D9%88%D8%B1%DA%98%D8%A7%D9%86%D8%B3-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A7%D8%B2-%D8%B1%D9%88%D9%86%D8%AF-%D8%AE%D8%AF%D9%85%D8%AA-%D8%B1%D8%B3%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%B4%D8%B1%D8%A7%DB%8C%D8%B7",
+      "source_post_id": "%D8%A8%D8%A7%D8%B2%D8%AF%DB%8C%D8%AF-%D8%B4%D8%A8%D8%A7%D9%86%D9%87-%D8%B1%D8%A6%DB%8C%D8%B3-%D8%A7%D9%88%D8%B1%DA%98%D8%A7%D9%86%D8%B3-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A7%D8%B2-%D8%B1%D9%88%D9%86%D8%AF-%D8%AE%D8%AF%D9%85%D8%AA-%D8%B1%D8%B3%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%B4%D8%B1%D8%A7%DB%8C%D8%B7",
+      "title": "بازدید شبانه رئیس اورژانس استان تهران از روند خدمت‌رسانی در شرایط جوی",
+      "excerpt": "رئیس اورژانس استان تهران از آمادگی نیروهای عملیاتی و روند خدمت‌رسانی به شهروندان در شرایط جوی نامساعد بازدید کرد.",
+      "paragraphs": [
+        "رئیس اورژانس استان تهران از آمادگی نیروهای عملیاتی و روند خدمت‌رسانی به شهروندان در شرایط جوی نامساعد بازدید کرد."
+      ],
+      "published_at": "2026-11-07T22:05:10+00:00",
+      "media": null,
+      "source": "مهر ـ تهران",
+      "source_handle": "web_mehr_tehran",
+      "id": "5383e180f3910880",
+      "media_repost_allowed": true,
+      "source_hashtag": "مهر_تهران",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T22:20:01.066065+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-07T21:49:48.272557+00:00",
+  "saved_at": "2026-11-07T22:21:19.093104+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-07T21:48:28.173144+00:00",
-    "tehran_tel": "2026-11-07T21:48:28.173144+00:00",
-    "irna_1313": "2026-11-07T21:48:28.173144+00:00",
-    "isna94": "2026-11-07T21:48:28.173144+00:00",
-    "mehrnews": "2026-11-07T21:48:28.173144+00:00",
+    "tehranpress1": "2026-11-07T22:20:01.066065+00:00",
+    "tehran_tel": "2026-11-07T22:20:01.066065+00:00",
+    "irna_1313": "2026-11-07T22:20:01.066065+00:00",
+    "isna94": "2026-11-07T22:20:01.066065+00:00",
+    "mehrnews": "2026-11-07T22:20:01.066065+00:00",
     "web_shahr": "2026-11-07T16:39:19.149081+00:00",
-    "web_mehr_tehran": "2026-11-07T21:48:28.173144+00:00"
+    "web_mehr_tehran": "2026-11-07T22:20:01.066065+00:00"
   }
 }
