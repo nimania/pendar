@@ -10,6 +10,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/nashani-turkiye-launch.yml'
+      - 'nashani_turkey/launch.py'
 permissions:
   contents: write
 concurrency:
