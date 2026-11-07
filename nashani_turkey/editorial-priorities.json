@@ -45,18 +45,22 @@
     "News affecting residence, transport, services, safety, employment and the Iranian community can override city ranking.",
     "Emergencies and material nationwide regulatory changes always take precedence.",
     "Filter off-topic stories, preserve sources, verify timestamps and avoid duplicates.",
-    "No Telegram destination has been configured; do not auto-publish from this registry.",
     "Migration content ranks ahead of geographic priority; city order is a tie-breaker.",
     "A news report never establishes a legal change on its own. Cross-check against Göç İdaresi, Resmî Gazete or competent authority.",
     "Distinguish migration to Turkey, internal migration, refugee/asylum reports, and regulations for Iranian citizens.",
-    "Avoid automatic copying of full text/photo/video where re-use rights have not been confirmed."
+    "Avoid automatic copying of full text/photo/video where re-use rights have not been confirmed.",
+    "Official changes to migration law and Iran–Turkey flight disruptions override all city rankings.",
+    "Weather in multiple Turkish cities is a separate regular beat; severe weather nationwide takes priority."
   ],
   "primary_beat": "migration_residence_and_migrants",
   "priority_order": [
-    "urgent_migration_regulation",
+    "official_migration_law_change",
+    "iran_turkey_flights_all_airports",
+    "urgent_weather_earthquake_safety",
     "iranian_residents_and_crossborder",
     "work_study_housing_health_for_foreigners",
     "migrant_communities_and_reporting",
+    "city_weather_and_air_quality",
     "other_city_life",
     "general_turkey_news"
   ],
@@ -190,5 +194,50 @@
       "use": "migration and city services",
       "status": "candidate"
     }
-  ]
+  ],
+  "telegram": {
+    "channel": "@neshaniturkiye",
+    "bot_username": "neshanikermanbot",
+    "bot_token_secret": "NASHANI_TELEGRAM_BOT_TOKEN",
+    "permission_reported_by_owner": true,
+    "verified_by_bot_api": false,
+    "publication_status": "pending_verified_connection"
+  },
+  "flight_policy": {
+    "scope": "all airports and cities in Iran and Turkey regardless of city ranking",
+    "topics": [
+      "cancellation",
+      "delay",
+      "route openings and closures",
+      "airport disruption",
+      "airspace and NOTAM",
+      "entry and transit rules",
+      "airline policy changes"
+    ],
+    "require_official_confirmation_for_disruption": true,
+    "official_sources": [
+      "https://www.dhmi.gov.tr/",
+      "https://www.shgm.gov.tr/",
+      "https://www.turkishairlines.com/",
+      "https://www.flypgs.com/"
+    ]
+  },
+  "weather_policy": {
+    "regular_cities": [
+      "استانبول",
+      "آنتالیا",
+      "آنکارا",
+      "ازمیر"
+    ],
+    "supplemental_cities": [
+      "وان",
+      "دنیزلی"
+    ],
+    "emergency_priority": "all Turkish cities",
+    "source": "Open-Meteo for forecast; MGM for official warnings",
+    "model_air_source": "Open-Meteo / CAMS model, not official station measurement",
+    "local_timezone": "Europe/Istanbul",
+    "report_frequency": "4 per day",
+    "status": "planned_separate_pipeline"
+  }
 }
