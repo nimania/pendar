@@ -486,7 +486,20 @@
     "https://t.me/isna94/412286",
     "https://t.me/irna_1313/470991",
     "https://t.me/mehrnews/429711",
-    "https://t.me/mehrnews/429712"
+    "https://t.me/mehrnews/429712",
+    "https://t.me/irna_1313/470992",
+    "https://t.me/tehranpress1/132259",
+    "https://t.me/mehrnews/429713",
+    "https://t.me/tehranpress1/132260",
+    "https://t.me/tehranpress1/132261",
+    "https://t.me/mehrnews/429714",
+    "https://t.me/isna94/412287",
+    "https://t.me/tehranpress1/132262",
+    "https://t.me/mehrnews/429715",
+    "https://t.me/mehrnews/429716",
+    "https://t.me/irna_1313/470993",
+    "https://t.me/Tehran_Tel/114739",
+    "https://t.me/tehranpress1/132263"
   ],
   "queue": [
     {
@@ -1980,15 +1993,152 @@
       "status": "ready",
       "detected_at": "2026-11-07T18:07:54.766646+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132259",
+      "source_post_id": "132259",
+      "title": "باران هم، مانع حضور پُرشور مردم در اجتماعات شبانه نشد",
+      "excerpt": "باران هم، مانع حضور پُرشور مردم در اجتماعات شبانه نشد تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "باران هم، مانع حضور پُرشور مردم در اجتماعات شبانه نشد",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/2edef5ed01.mp4?token=V5KI0HJIxEyeMibRq5RGoY0uI9EMZjUubv_PpgTzcpRLeS66tAj2XbjW6nt7ZecXOab17m3bpQYZRzzAYy79vvpUREgzHu0XnBmqTBA3b1EQM-X7CmzkSwQMMwsEIlV1OlvH0-AdEChBo8vLEeYqw0tBaOmg4-vCiMu96sJq556whHzElwYS4fqmSz6sg0HSvcIO2rjxBqGx_HgS0IKoupVwj71qs_AngbI6pH5KIJWGRyrb5eM70IL3bBzy5DHpoM1V70XcT3oyHQ-egSQ4zV6CbW-kQ9vgZwN9lTsQK8hDFsqbohDGBH1tsIhaWkarMZ98wll8fdaHqHAkYugH6Q"
+      },
+      "published_at": "2026-11-07T18:41:05+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "11639b45d8206ae6",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T19:03:40.659702+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132260",
+      "source_post_id": "132260",
+      "title": "زمین‌های کشاورزی پرچل الیگودرز",
+      "excerpt": "زمین‌های کشاورزی پرچل الیگودرز زیر گل‌ولای رفت طغیان سیلاب در روستای پرچل از توابع بخش ذلقی شهرستان الیگودرز، خسارات گسترده‌ای به اراضی کشاورزی، منازل مسکونی و زیرساخت‌های این منطقه وارد کرده‌است. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "زمین‌های کشاورزی پرچل الیگودرز",
+        "زیر گل‌ولای رفت",
+        "طغیان سیلاب در روستای پرچل از توابع بخش ذلقی شهرستان الیگودرز، خسارات گسترده‌ای به اراضی کشاورزی، منازل مسکونی و زیرساخت‌های این منطقه وارد کرده‌است.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/172aefb518.mp4?token=Nh_SnukWNoy-2RB1mGfavM-T66RuKdwE3zaxlP1YobW7wjqN39C951Uipv5Hc53fnMQR9XbNuGjw9x4mpx9w5sBENSGf3F67Av-NPnFBX5KXDYCdVf45QCPoRgVAmMpUHawVq237syLtauIUgcYhJ0wCors5JgtR61QfHzB7aHjWM1I4KItz8ku4OSyysmRuIEptX_NlyrN6Z57EFpa_jHnVrdJQwa9zpFDvDMtSVHZidUWvp99iUXiXcjdDkeiANTDPaMjNi-X174Ow7PplOEv7qCL9Xcsw8k2VLPXsyhkEqZfGJ-UcvJKqtMsl7_H2Kgw2sve5WVI_b4F9NackYg"
+      },
+      "published_at": "2026-11-07T18:46:19+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "78aad9e876c8aa4b",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T19:03:40.659702+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132261",
+      "source_post_id": "132261",
+      "title": "رژیم چنج در آمریکا اینگونه اتفاق افتاد!",
+      "excerpt": "رژیم چنج در آمریکا اینگونه اتفاق افتاد! دریاسالار میلتون سندز (Milton Sands) فرمانده عملیات ویژه نیروی دریایی ۲۲ آگوست ۲۰۲۵ برکنار شد! تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "رژیم چنج در آمریکا اینگونه اتفاق افتاد!",
+        "دریاسالار میلتون سندز (Milton Sands) فرمانده عملیات ویژه نیروی دریایی",
+        "۲۲ آگوست ۲۰۲۵ برکنار شد!",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/MTl4VIrC49e-2zlRTaX1U8Gpre4npkxeDT1b9GmPkj_IeMy_vudnhvdiCDCDiiGv1nLSFrKsX-trQ_CMCqS3Bci_MugcdgR95lvc1oYFZcFSObDtqW-lfz09mvhZU1Knk6uIqQNQAvRq4AwKRyyf8ykHs-EEKsuxosz8c25EXqmrp24MoaTCB6YoeEtlsRs94rj1OWJwTs4R1Ox94CqAdU61We7OBtESE5lVma_EL5_Kdoa4sBQbvkV_uFvc7DPEETRFf3HlhEuzB2llTL07LHGnKTFBCMl1gn_IdvYquCsvQRZLHtCym9qAhf1WYFx0z4S6dHkKUFHvsENOhJZdWw.jpg"
+      },
+      "published_at": "2026-11-07T18:46:19+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "c1777a07110e9f69",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T19:03:40.659702+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132262",
+      "source_post_id": "132262",
+      "title": "کسب دو نشان دیگر برای ایران در المپیک جوانان",
+      "excerpt": "کسب دو نشان دیگر برای ایران در المپیک جوانان امیرعلی دومیرکلایی، نماینده کشورمان در وزن ۶۰ کیلوگرم، در دیدار پایانی رقابت‌های کشتی ساحلی، مقابل ویلفردو رودریگز گونزالز، نماینده ونزوئلا، نتیجه را واگذار کرد و صاحب نشان نقره شد. رضا جلیلیان هم در دیدار رده‌بندی وزن ۸۰ کیلوگرم کشتی ساحلی، مقابل کنستانتینوس مورتزیلاکیس از یونان پیروز و نشان برنز را کسب کرد. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "کسب دو نشان دیگر برای ایران در المپیک جوانان",
+        "امیرعلی دومیرکلایی، نماینده کشورمان در وزن ۶۰ کیلوگرم، در دیدار پایانی رقابت‌های کشتی ساحلی، مقابل ویلفردو رودریگز گونزالز، نماینده ونزوئلا، نتیجه را واگذار کرد و صاحب نشان نقره شد.",
+        "رضا جلیلیان هم در دیدار رده‌بندی وزن ۸۰ کیلوگرم کشتی ساحلی، مقابل کنستانتینوس مورتزیلاکیس از یونان پیروز و نشان برنز را کسب کرد.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/RoSyb7VqL9xnPj8o0Ia9hJQVMMwt9ro41HIdeW9wDAfzW8YtylpWSXsYhfx9KaDHqoucY83Sc0gSJei9X5NexFx6F07EVdOB5xzzlzRMOcPnAAg0hZV3IvvenJugiL9nvwIgZnlXy1KEQwO3Mmzi3H-jXTYmQ-bHSyII-EtOT0KTdxDcYss9x76XAaNkUUF9V_2EKny2CAZSoO9QpDJTy_SNsybsbBhX6-8LiMkK_ecy3L-ygAL57MrkgPjTrMY6yGzROEZv0WEv20FwEBlVSH5wlFEpGH4WKyaXoEEXwN_IWNQX6XeEYNGUtj5ukVVTH94fC2AJjPHJVace91qeVg.jpg"
+      },
+      "published_at": "2026-11-07T18:54:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "8428c91686208961",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T19:03:40.659702+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132263",
+      "source_post_id": "132263",
+      "title": "سلام از سنگال به قهرمانان ایران",
+      "excerpt": "سلام از سنگال به قهرمانان ایران ورزشکاران ایران در المپیک جوانان سنگال با میدان‌داران همراه شدند. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "سلام از سنگال به قهرمانان ایران",
+        "ورزشکاران ایران در المپیک جوانان سنگال با میدان‌داران همراه شدند.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/6bb7244f79.mp4?token=UaMZvGXXMtuPeuXAg6UjRyBkdX48IR-JGGo5-fCLZESrAjaA1pt_d7R8KUrp_EQChPOcH_MumdQR_TBuYYqpst1TzSCabKJcTEOZpGriSJhtT_vaZ_256Q0RO14ehZ2HwI1_xQ2YPFg4k9_F0gFMJwif0N8WLjItED8E1rZyjckvdpeln2lFBVn0jixm2zSkMbyiiJZcCKUGQd1317YSxj4pt4fV03GgXVTCgYBR-WszsXGXmI1pJ3ejlMUaT0JFV_L1JapmiNTUmY7fBnYj_qW2L9o9_GDc89kWkUebX2JRG79WFyr60a4_2xgnefR2rId8kGPQz40492UktQEUwAqRvh6aGHl_ojeLPpty5c3wtNwZsKjO9u_BjEYemDIZz5LExp5E15xl_1c0VBOBENPezbpA9qvRHDzhkVjZak276JOSzvpXm-ty3i3BZx1pEFlGqmguoHPxekC6oUL65lfkuW8baskPUsezxAnHbRj3xHIPRj65izzwaJLq4v_gK2wK7dD_A0YI3PJgPX58qm1_y-3HcwlxvJzuuQuTe4CbUDOYt7D4hvTjeVO6lFSr0-aIb9Ij3CBjK7OHzXT_milYY57Oama8IjwE58nsV32XkYmkxZzrJ3yUyq4KLMrX0nrA9DjQqh1IFJRylH_7IGDKJlonY42O8A_mOa18uKE"
+      },
+      "published_at": "2026-11-07T19:03:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "e6a25dbb8e49a51b",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T19:03:40.659702+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-07T18:39:50.748939+00:00",
+  "saved_at": "2026-11-07T19:04:49.100257+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-07T18:38:31.448076+00:00",
-    "tehran_tel": "2026-11-07T18:38:31.448076+00:00",
-    "irna_1313": "2026-11-07T18:38:31.448076+00:00",
-    "isna94": "2026-11-07T18:38:31.448076+00:00",
-    "mehrnews": "2026-11-07T18:38:31.448076+00:00",
+    "tehranpress1": "2026-11-07T19:03:40.659702+00:00",
+    "tehran_tel": "2026-11-07T19:03:40.659702+00:00",
+    "irna_1313": "2026-11-07T19:03:40.659702+00:00",
+    "isna94": "2026-11-07T19:03:40.659702+00:00",
+    "mehrnews": "2026-11-07T19:03:40.659702+00:00",
     "web_shahr": "2026-11-07T16:39:19.149081+00:00",
     "web_mehr_tehran": "2026-11-07T18:38:31.448076+00:00"
   }
