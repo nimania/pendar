@@ -51,7 +51,9 @@
     "Avoid automatic copying of full text/photo/video where re-use rights have not been confirmed.",
     "Official changes to migration law and Iran–Turkey flight disruptions override all city rankings.",
     "Weather in multiple Turkish cities is a separate regular beat; severe weather nationwide takes priority.",
-    "All reports derived from @iran_flights_watcher must attribute source, show data timestamp, and carry the explicit purchase-decision disclaimer."
+    "All reports derived from @iran_flights_watcher must attribute source, show data timestamp, and carry the explicit purchase-decision disclaimer.",
+    "Ordinary municipal news is curated, at most two posts per day for the entire Turkey channel; urgent safety or travel disruptions bypass this quota.",
+    "Do not publish ceremonial publicity or routine municipal press releases without practical audience value."
   ],
   "primary_beat": "migration_residence_and_migrants",
   "priority_order": [
@@ -415,5 +417,55 @@
       "label": "Turkey local price, not delivered price in Iran",
       "no_unauthorized_commerce": "Do not claim goods may be freely imported without checking relevant rules"
     }
+  },
+  "city_news_policy": {
+    "priority": "supplemental_below_migration_flights_weather_fx",
+    "ordinary_daily_limit": 2,
+    "emergency_override": true,
+    "coverage_order": [
+      "استانبول",
+      "آنتالیا",
+      "آنکارا",
+      "ازمیر",
+      "وان",
+      "دنیزلی"
+    ],
+    "in_scope": [
+      "metro and urban transit disruptions",
+      "airport access and closures",
+      "major citywide water and electricity outages",
+      "significant public-service changes",
+      "road closures affecting travel",
+      "major local events relevant to Iranian residents"
+    ],
+    "out_of_scope": [
+      "routine ceremonies and publicity",
+      "irrelevant political commentary",
+      "minor local crime without material public impact",
+      "repetitive headlines"
+    ],
+    "source_candidates": [
+      {
+        "name": "İBB İstanbul",
+        "url": "https://www.ibb.istanbul/"
+      },
+      {
+        "name": "Metro İstanbul",
+        "url": "https://www.metro.istanbul/"
+      },
+      {
+        "name": "Antalya Büyükşehir Belediyesi",
+        "url": "https://www.antalya.bel.tr/"
+      },
+      {
+        "name": "Ankara Büyükşehir Belediyesi",
+        "url": "https://www.ankara.bel.tr/"
+      },
+      {
+        "name": "İzmir Büyükşehir Belediyesi",
+        "url": "https://www.izmir.bel.tr/"
+      }
+    ],
+    "publication_status": "editorial-policy-set; city-news collector not yet verified"
   }
 }
