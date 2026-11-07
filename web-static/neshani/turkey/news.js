@@ -8,6 +8,20 @@ const other=/\b(?:US|IL|RU)\b/;
 const arr=x=>Array.isArray(x)?x:Array.isArray(x?.stories)?x.stories:Array.isArray(x?.items)?x.items:[];
 const country=s=>(Array.isArray(s.countries)?s.countries:[]).some(c=>/^(TR|turkey|türkiye|ترکیه)$/i.test(String(c?.code||c?.name_fa||c?.name_en||c)));
 const sortTime=s=>Date.parse(s.published_at||s.created_at||s.updated_at||"")||0;
+const CITY_PRIORITY=[
+ {city:"استانبول",rank:1,terms:/استانبول|istanbul|İstanbul/i},
+ {city:"آنتالیا",rank:2,terms:/آنتالیا|antalya/i},
+ {city:"آنکارا",rank:3,terms:/آنکارا|ankara/i},
+ {city:"ازمیر",rank:4,terms:/ازمیر|izmir|İzmir/i},
+ {city:"وان",rank:5,terms:/(?:^|[^\\p{L}])وان(?:$|[^\\p{L}])|\\bvan\\b/iu},
+ {city:"دنیزلی",rank:6,terms:/دنیزلی|denizli/i}
+];
+function cityRank(s){
+ const text=[s.headline_fa,s.title_fa,s.title,s.summary_fa].filter(Boolean).join(" ");
+ const hit=CITY_PRIORITY.find(x=>x.terms.test(text));
+ return hit?hit.rank:7;
+}
+
 async function render(){
 try{
  const response=await fetch("/data/stories.json",{cache:"no-store"});
@@ -17,7 +31,7 @@ try{
    const name=String(s.headline_fa||s.title_fa||s.title||"");
    const summary=String(s.summary_fa||"");
    return (country(s)||turkey.test(name))&&name.length>12&&!other.test(name.slice(0,30));
- }).sort((a,b)=>sortTime(b)-sortTime(a)).slice(0,8);
+ }).sort((a,b)=>cityRank(a)-cityRank(b)||sortTime(b)-sortTime(a)).slice(0,8);
  if(!matches.length){status.textContent="فعلاً خبر منطبق با ترکیه پیدا نشد.";return;}
  container.innerHTML=matches.map(s=>{
    const title=String(s.headline_fa||s.title_fa||s.title||"");
