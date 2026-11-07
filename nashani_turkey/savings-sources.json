@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "scope": "Turkey discounts and verified consumer prices",
+  "publication": "review_only_until_verified",
+  "sources": [
+    {
+      "brand": "Zara",
+      "category": "fashion",
+      "url": "https://www.zara.com/tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "H&M",
+      "category": "fashion",
+      "url": "https://www2.hm.com/tr_tr/index.html",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Mango",
+      "category": "fashion",
+      "url": "https://shop.mango.com/tr/tr",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Pull&Bear",
+      "category": "fashion",
+      "url": "https://www.pullandbear.com/tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Bershka",
+      "category": "fashion",
+      "url": "https://www.bershka.com/tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Stradivarius",
+      "category": "fashion",
+      "url": "https://www.stradivarius.com/tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Massimo Dutti",
+      "category": "fashion",
+      "url": "https://www.massimodutti.com/tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "LC Waikiki",
+      "category": "fashion",
+      "url": "https://www.lcw.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Koton",
+      "category": "fashion",
+      "url": "https://www.koton.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "DeFacto",
+      "category": "fashion",
+      "url": "https://www.defacto.com.tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Boyner",
+      "category": "fashion",
+      "url": "https://www.boyner.com.tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Mavi",
+      "category": "fashion",
+      "url": "https://www.mavi.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Penti",
+      "category": "fashion",
+      "url": "https://www.penti.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "IKEA",
+      "category": "home",
+      "url": "https://www.ikea.com.tr/kampanyalar-indirimler-firsatlar",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Koçtaş",
+      "category": "home",
+      "url": "https://www.koctas.com.tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "JYSK",
+      "category": "home",
+      "url": "https://jysk.com.tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Evidea",
+      "category": "home",
+      "url": "https://www.evidea.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "English Home",
+      "category": "home",
+      "url": "https://www.englishhome.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Madame Coco",
+      "category": "home",
+      "url": "https://www.madamecoco.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Zara Home",
+      "category": "home",
+      "url": "https://www.zarahome.com/tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Karaca",
+      "category": "kitchen",
+      "url": "https://www.karaca.com/kampanyalar",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Jumbo",
+      "category": "kitchen",
+      "url": "https://www.jumbo.com.tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Kütahya Porselen",
+      "category": "kitchen",
+      "url": "https://www.kutahyaporselen.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Schafer",
+      "category": "kitchen",
+      "url": "https://www.schafer.com.tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Emsan",
+      "category": "kitchen",
+      "url": "https://www.emsan.com.tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Paşabahçe",
+      "category": "kitchen",
+      "url": "https://www.pasabahcemagazalari.com/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    },
+    {
+      "brand": "Tefal",
+      "category": "kitchen",
+      "url": "https://www.tefal.com.tr/",
+      "status": "candidate",
+      "poll_minutes": 180,
+      "license": "links_and_short_original_summaries_only"
+    }
+  ]
+}
