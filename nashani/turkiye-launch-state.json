@@ -25,7 +25,8 @@
       "message_id": 11
     },
     "mgm_rize_artvin_20261107": {
-      "status": "sending_uncertain"
+      "status": "published",
+      "message_id": 12
     }
   }
 }
