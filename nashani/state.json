@@ -564,7 +564,22 @@
     "https://t.me/Kerman_akhbar/66246",
     "https://t.me/kerman_news/140220",
     "https://t.me/irna_kerman/30318",
-    "https://t.me/kerman_news/140221"
+    "https://t.me/kerman_news/140221",
+    "https://t.me/kerman_news/140222",
+    "https://t.me/qh_qv/975",
+    "https://t.me/kermane_no/59088",
+    "https://t.me/irna_kerman/30319",
+    "https://t.me/kerman_gov/10568",
+    "https://t.me/qh_qv/976",
+    "https://t.me/Kerman_akhbar/66247",
+    "https://t.me/irna_kerman/30320",
+    "https://t.me/kerman_news/140223",
+    "https://t.me/kerman_news/140225",
+    "https://t.me/kerman_news/140226",
+    "https://t.me/kerman_news/140227",
+    "https://t.me/Kerman_akhbar/66248",
+    "https://t.me/kerman_news/140228",
+    "https://t.me/kerman_news/140229"
   ],
   "queue": [
     {
@@ -4778,7 +4793,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-07T13:54:42.807955+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66248"
+        }
+      ]
     },
     {
       "url": "https://t.me/kermane_no/59067",
@@ -4832,7 +4852,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-07T13:54:42.807955+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66247"
+        }
+      ]
     },
     {
       "url": "https://t.me/Kerman_akhbar/66238",
@@ -5635,17 +5660,176 @@
       "status": "ready",
       "detected_at": "2026-11-07T16:39:19.532376+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59088",
+      "source_post_id": "59088",
+      "title": "بسته خبری 2020 شنبه 16 آبان از پایگاه خبری کرمان نو را بشنوید",
+      "excerpt": "بسته خبری 2020 شنبه 16 آبان از پایگاه خبری کرمان نو را بشنوید",
+      "paragraphs": [
+        "بسته خبری 2020 شنبه 16 آبان از پایگاه خبری کرمان نو را بشنوید"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-07T16:50:21+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "4fe2c826306c620d",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T18:38:33.088048+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30319",
+      "source_post_id": "30319",
+      "title": "فناوری هسته‌ای، از تشخیص دقیق سرطان تا امید به درمان بیماران در کرمان",
+      "excerpt": "فناوری هسته‌ای، از تشخیص دقیق سرطان تا امید به درمان بیماران در کرمان همزمان با روز جهانی فیزیک پزشکی، نقش فناوری‌های نوین هسته‌ای و دانش فیزیک پزشکی در تشخیص زودهنگام بیماری‌ها، شناسایی دقیق تومورها و درمان سرطان بیش‌از گذشته مورد توجه قرار گرفته، دانشی که با بهره‌گیری از پرتوها و رادیوداروها، افق‌های تازه‌ای را در نظام سلامت گشوده و آثار آن در توسعه خدمات تشخیصی و درمانی استان کرمان نیز قابل مشاهده است. irna_kerman",
+      "paragraphs": [
+        "فناوری هسته‌ای، از تشخیص دقیق سرطان تا امید به درمان بیماران در کرمان",
+        "همزمان با روز جهانی فیزیک پزشکی، نقش فناوری‌های نوین هسته‌ای و دانش فیزیک پزشکی در تشخیص زودهنگام بیماری‌ها، شناسایی دقیق تومورها و درمان سرطان بیش‌از گذشته مورد توجه قرار گرفته، دانشی که با بهره‌گیری از پرتوها و رادیوداروها، افق‌های تازه‌ای را در نظام سلامت گشوده و آثار آن در توسعه خدمات تشخیصی و درمانی استان کرمان نیز قابل مشاهده است.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/UzN-SGyjzsonFgDzz3iWIHpSGiB6TK7cW5NIEL-1GEaLkqDlmtIPq93eBgkYFziJlofjvJ8CLaaZgXgGPwqRGoiFcbBXoQJzbDkQZQmE6aabwtmhM8ld-9Sv54uh9kPbIF23r2Utp7GV34MZ5Fwz-xOUN2PHqXNkykSEazKO8UobnJ5aoQiKx3SCgSrxkX6t73pirt_Y0oH55iZ3ULZrp9rHMqDixkjhoqOJdUAj53zi5u4D1pkvBrRHMecbU-PUzZtJ4YycO2x-QiP_m9m-uIM6neMVRlrt6Fr_Ztr6ldddikzT6gIO5U-igqcIWtQzdPIvDlMRBlkm39gMQRX6cg.jpg"
+      },
+      "published_at": "2026-11-07T16:52:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "8d5cf89f7b753345",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T18:38:33.088048+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10568",
+      "source_post_id": "10568",
+      "title": "شورای راهبردی جوانان کرمان به الگویی ملی برای مشارکت نسل جوان در توسعه تبدیل شده است",
+      "excerpt": "شورای راهبردی جوانان کرمان به الگویی ملی برای مشارکت نسل جوان در توسعه تبدیل شده است معاون توسعه مدیریت و منابع استاندار کرمان، شورای راهبردی جوانان استان را تجربه‌ای موفق در بهره‌گیری از ظرفیت نسل جوان دانست و گفت: این شورا با تکیه بر مشارکت واقعی، انتخابات و مسئولیت‌پذیری، زمینه حضور سازمان‌یافته جوانان در تصمیم‌سازی‌ها و برنامه‌های توسعه‌ای را فراهم کرده است. به گزارش روابط عمومی استانداری کرمان، مرضیه مهدوی در آیین اختتامیه اجلاسیه دو روزه ایران‌سازان فراهم کردن بستر حضور و نقش‌آفرینی مؤثر نسل جوان در تصمیم‌سازی‌ها، ضرورتی انکارناپذیر برای تحقق توسعه است. شورای راهبردی جوانان با ایجاد زمینه مشارکت اجتماعی و همراهی با مدیریت استان، نقش مؤثری در بهره‌گیری از دیدگاه‌ها و توانمندی‌های جوانان داشته است. ساختار مشارکتی و سازوکار انتخابات در سطوح مختلف، زمینه شکل‌گیری الگویی از حکمرانی جوانان مبتنی بر انتخاب، اعتماد و مسئولیت‌پذیری را فراهم کرده است.",
+      "paragraphs": [
+        "شورای راهبردی جوانان کرمان به الگویی ملی برای مشارکت نسل جوان در توسعه تبدیل شده است",
+        "معاون توسعه مدیریت و منابع استاندار کرمان، شورای راهبردی جوانان استان را تجربه‌ای موفق در بهره‌گیری از ظرفیت نسل جوان دانست و گفت: این شورا با تکیه بر مشارکت واقعی، انتخابات و مسئولیت‌پذیری، زمینه حضور سازمان‌یافته جوانان در تصمیم‌سازی‌ها و برنامه‌های توسعه‌ای را فراهم کرده است.",
+        "به گزارش روابط عمومی استانداری کرمان، مرضیه مهدوی در آیین اختتامیه اجلاسیه دو روزه ایران‌سازان",
+        "فراهم کردن بستر حضور و نقش‌آفرینی مؤثر نسل جوان در تصمیم‌سازی‌ها، ضرورتی انکارناپذیر برای تحقق توسعه است.",
+        "شورای راهبردی جوانان با ایجاد زمینه مشارکت اجتماعی و همراهی با مدیریت استان، نقش مؤثری در بهره‌گیری از دیدگاه‌ها و توانمندی‌های جوانان داشته است.",
+        "ساختار مشارکتی و سازوکار انتخابات در سطوح مختلف، زمینه شکل‌گیری الگویی از حکمرانی جوانان مبتنی بر انتخاب، اعتماد و مسئولیت‌پذیری را فراهم کرده است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/vOZ87S6qAk0InF59RsazkWA-vTEqH11djQAgm16oJUelEbiGlrXWHVioGQnTYg9p_09YxYTaECxzLZ_uHctC8gruCPJyzaeJgEPaltlN6lJXABpktW1kEfNd2kg65Kql_XmYvD_r6xpyvLmBoqtrctIP2-nGS8MiNXjJNuPtsnsZj08y32MgdybNcOebD1_6BArfRsT8_6c4j-vPs37-t4IsTXoN5i4Wb2Aud6y5rnwQYYSHqUUAPjPveNL9Evz9MpzwE69bkhjqQTWePup_r73PJv3-6Lc3XQtnJODSly8jujwXuUw6OpEFo659Pqo0P9rxUp0fenzds_qOveiKoQ.jpg"
+      },
+      "published_at": "2026-11-07T16:56:09+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "50421c1efe47a9b0",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T18:38:33.088048+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30320",
+      "source_post_id": "30320",
+      "title": "گام بلند بم در حوزه سلامت و آموزش؛ بیمارستان پاستور و دانشگاه این شهر مجهز شدند",
+      "excerpt": "گام بلند بم در حوزه سلامت و آموزش؛ بیمارستان پاستور و دانشگاه این شهر مجهز شدند همزمان با سفر استاندار کرمان به شهرستان بم، بخش‌های آنژیوگرافی و فیزیوتراپی بیمارستان پاستور و همچنین مجتمع کارگاهی و آزمایشگاهی مرکز آموزش عالی این شهرستان با مجموع اعتباری بالغ بر ۵۰۵ میلیارد تومان به بهره‌برداری رسید. irna_kerman",
+      "paragraphs": [
+        "گام بلند بم در حوزه سلامت و آموزش؛ بیمارستان پاستور و دانشگاه این شهر مجهز شدند",
+        "همزمان با سفر استاندار کرمان به شهرستان بم، بخش‌های آنژیوگرافی و فیزیوتراپی بیمارستان پاستور و همچنین مجتمع کارگاهی و آزمایشگاهی مرکز آموزش عالی این شهرستان با مجموع اعتباری بالغ بر ۵۰۵ میلیارد تومان به بهره‌برداری رسید.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Bn1aj7W8_CncfLbt_k4FNlogs6se3YTN5_S9FnwQ50eLHBGkWdD9GU3aIOaM4V80Fyb7Wna4zUwaGXiQCGP7MBAT-TcYagma-j6MmfbUkCu74OSNH624h1ZkdIFJpX0OuYVPqNFwJXBPS1yl8sGDTjPugrUbsh3HVNxVXJ85BlxKiFHRbYtePTraV3v7OYyZ_OoGg_8MIPyHmUqiJ7ANTQt3OGzUH2-YNjbX4QvoyYj73sbUzpd_K2I-Zn8UNQAd0W6jvcrw_Clyg7MExClHJfscRaaNuVWLKPgUr7pidHTmeJ79WnZqm3xDdlUxKQpWywIs3XLtWFwqJQndfbMGdw.jpg"
+      },
+      "published_at": "2026-11-07T17:03:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "28d7775a410a860b",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T18:38:33.088048+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140223",
+      "source_post_id": "140223",
+      "title": "مراسم فاطمیون روستای شهید زمانی از بخش شهداد با حضور شهیدگمنام",
+      "excerpt": "مراسم فاطمیون روستای شهید زمانی از بخش شهداد با حضور شهیدگمنام",
+      "paragraphs": [
+        "مراسم فاطمیون روستای شهید زمانی از بخش شهداد با حضور شهیدگمنام"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/897d071f1d.mp4?token=S713A57RtYxLft6cxKCbhlMjH70mJitAnYr_QQK1iKwaOMLKJWCVem7FbqQ-cGmg8_FmFr8wSYUV72Kg9Nlsz-LGTJBoM4mZIlTw9K95TiC4LGWsHgPRq4_iMu5OpiOdIbY0hjT3vhGpovn5ewUq5HmX6T47g53gs-lA9XuqrQn6S76qDZk-Y84un-v8mmSqP7jy2c9K-UmWdpYK_YLP7SGCYFlxH0bIecSvika3F7o2VXvnFZFUTyxmmMQXqRUacnb3qjy5yj1p_khYb-YK6eDbD2xjuiN76odTTPElqaTxL2Q5_YltRbZ9mC4ei4fj35-xujxvEaCEnPBuwVhstg"
+      },
+      "published_at": "2026-11-07T17:06:45+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "78a0d7f7be10c55a",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T18:38:33.088048+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140227",
+      "source_post_id": "140227",
+      "title": "حضور مردم رفسنجان در میدان شهید سلیمانی در شب ۲۵۱",
+      "excerpt": "حضور مردم رفسنجان در میدان شهید سلیمانی در شب ۲۵۱",
+      "paragraphs": [
+        "حضور مردم رفسنجان در میدان شهید سلیمانی در شب ۲۵۱"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/e5647b0c40.mp4?token=HJu24p955cZdySMq50j8fXFjlziodW_-FFr60ZoTBwAERVuJq0BL8fT_qb0_VxbFl_c0bS7JGuEJZ0HeAV4sdxo0aEDHkyNQ01xfUwMT1TYPRy80eo-xaAU0cYKJ1y59c9rW2UkYsccI1ZV1AupuOj1aTP7DbvbzcHevhIy2uT8UNBGgjdNcDJCSwhDkoGIbfbQPsAIaSc8tgX63HJCQHaANpnz7gpJ6g3ZcbkGUB7ZUc-tokmxaWjYnbHkbLuyDbt_A0X4hdZh-r7iU7Wi5K_Isv1hKGZfq6YbC_FNOREPAeBByZItluuwiRoaByMJ4mh7PIVHVPRp8DY4WePlj3g"
+      },
+      "published_at": "2026-11-07T17:49:48+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "8ab2f4f10c7eaf36",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T18:38:33.088048+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-07T16:40:13.377078+00:00",
+  "saved_at": "2026-11-07T18:38:51.850729+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-07T16:39:19.532376+00:00",
-    "fardaayekerman": "2026-11-07T16:39:19.532376+00:00",
-    "irna_kerman": "2026-11-07T16:39:19.532376+00:00",
-    "kerman_gov": "2026-11-07T16:39:19.532376+00:00",
-    "kerman_akhbar": "2026-11-07T16:39:19.532376+00:00",
-    "kerman_news": "2026-11-07T16:39:19.532376+00:00",
-    "kerman_rasaneh": "2026-11-07T16:39:19.532376+00:00",
-    "qh_qv": "2026-11-07T16:39:19.532376+00:00"
+    "kermane_no": "2026-11-07T18:38:33.088048+00:00",
+    "fardaayekerman": "2026-11-07T18:38:33.088048+00:00",
+    "irna_kerman": "2026-11-07T18:38:33.088048+00:00",
+    "kerman_gov": "2026-11-07T18:38:33.088048+00:00",
+    "kerman_akhbar": "2026-11-07T18:38:33.088048+00:00",
+    "kerman_news": "2026-11-07T18:38:33.088048+00:00",
+    "kerman_rasaneh": "2026-11-07T18:38:33.088048+00:00",
+    "qh_qv": "2026-11-07T18:38:33.088048+00:00"
   }
 }
