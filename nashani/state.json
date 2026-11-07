@@ -3351,12 +3351,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-07T03:14:06.883514+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-07T03:14:20.927867+00:00"
     }
   ],
-  "saved_at": "2026-11-07T03:14:18.875764+00:00",
+  "saved_at": "2026-11-07T03:14:20.927885+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-07T03:14:06.883514+00:00",
     "fardaayekerman": "2026-11-07T03:14:06.883514+00:00",
