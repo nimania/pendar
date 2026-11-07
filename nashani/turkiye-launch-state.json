@@ -37,7 +37,8 @@
       "message_id": 14
     },
     "istanbul_iett_20261107": {
-      "status": "sending_uncertain"
+      "status": "published",
+      "message_id": 15
     }
   }
 }
