@@ -273,6 +273,8 @@
     "free_market_irr_threshold_pct": 0.7,
     "staleness": "Label source day; do not call daily reference rates realtime; hide unavailable IRR instead of inventing price",
     "conversion_note": "1 TRY in target units, with reciprocal USD/EUR/GBP and toman = rial/10 only when validated source is available",
-    "publication_status": "implementation_pending"
+    "publication_status": "code_and_schedule_added; actual_Bot_API_delivery_not_yet_verified",
+    "approved_stream": "TCMB indicative TRY rates for USD EUR GBP, update only with source-new date and >=0.30% material movement",
+    "iran_rial_stream": "pending separately verified Iranian free market provider; never infer from TCMB indicative IRR"
   }
 }
