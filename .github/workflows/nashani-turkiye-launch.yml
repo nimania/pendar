@@ -1,0 +1,34 @@
+name: Nashani Turkiye first posts
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        type: boolean
+        description: "Preview launch posts without publication"
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/nashani-turkiye-launch.yml'
+permissions:
+  contents: write
+concurrency:
+  group: nashani-turkiye-launch
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile
+        run: python -m py_compile nashani_turkey/launch.py
+      - name: Publish verified launch posts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: python nashani_turkey/launch.py
