@@ -1,0 +1,43 @@
+name: Nashani Turkiye city weather and air
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        type: boolean
+        default: true
+        description: "Preview only, do not publish"
+  schedule:
+    # Istanbul local time UTC+3: 06:30 / 11:30 / 16:30 / 21:30
+    - cron: '30 3,8,13,18 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/nashani-turkiye-weather.yml'
+      - 'nashani_turkey/weather.py'
+permissions:
+  contents: write
+concurrency:
+  group: nashani-turkiye-weather
+  cancel-in-progress: false
+jobs:
+  weather:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate syntax
+        run: python -m py_compile nashani_turkey/weather.py
+      - name: Collect and publish city weather
+        env:
+          NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then
+            python nashani_turkey/weather.py --dry-run
+          else
+            python nashani_turkey/weather.py
+          fi
