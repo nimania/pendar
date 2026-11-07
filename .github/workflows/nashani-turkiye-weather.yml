@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
-          if [ "$DRY_RUN" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then
+          if [ "$DRY_RUN" = "true" ]; then
             python nashani_turkey/weather.py --dry-run
           else
             python nashani_turkey/weather.py
