@@ -255,5 +255,24 @@
     "required_disclaimer_fa": "این گزارش بر اساس سابقهٔ انجام یا لغو پروازها تهیه شده و تضمینی برای انجام پرواز آینده نیست. تصمیم خرید بلیت بر عهدهٔ خود مسافر است و تهیه‌کنندهٔ این آمار مسئولیتی دربارهٔ تصمیم خرید یا پیامدهای آن نمی‌پذیرد.",
     "presentation": "Do not independently characterize any flight as lowest risk or guaranteed; attribution and observation time mandatory",
     "source_media_repost_allowed": false
+  },
+  "fx_policy": {
+    "priority": [
+      "USD",
+      "IRR",
+      "EUR",
+      "GBP"
+    ],
+    "base": "TRY",
+    "reporting": "publish only when a verified new rate exceeds a configured threshold; daily digest if changes not material",
+    "sources": {
+      "USD_EUR_GBP": "TCMB indicative daily exchange rates",
+      "IRR": "Independent Iranian free-market toman source required; official IRR shall not be substituted"
+    },
+    "nominal_threshold_pct": 0.3,
+    "free_market_irr_threshold_pct": 0.7,
+    "staleness": "Label source day; do not call daily reference rates realtime; hide unavailable IRR instead of inventing price",
+    "conversion_note": "1 TRY in target units, with reciprocal USD/EUR/GBP and toman = rial/10 only when validated source is available",
+    "publication_status": "implementation_pending"
   }
 }
