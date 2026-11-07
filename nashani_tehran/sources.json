@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "territory": "Tehran city only",
+  "sources": [
+    {
+      "name": "تهران‌پرس",
+      "platform": "telegram",
+      "handle": "tehranpress1",
+      "enabled": true,
+      "poll_minutes": 5,
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس"
+    },
+    {
+      "name": "اخبار تهران‌تل",
+      "platform": "telegram",
+      "handle": "tehran_tel",
+      "enabled": true,
+      "poll_minutes": 5,
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_تل"
+    }
+  ]
+}
