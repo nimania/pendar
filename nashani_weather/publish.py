@@ -9,9 +9,11 @@ import sys
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from urllib.error import HTTPError
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 from app.weather.service import fetch_weather
+
+COORDS={"کرمان":(30.2839,57.0834),"تهران":(35.6892,51.3890)}
 
 TZ = ZoneInfo("Asia/Tehran")
 STATE_PATH = "nashani/weather-state.json"
@@ -84,6 +86,26 @@ def save_state(gh,state,sha):
         body["sha"]=sha
     return request(state_endpoint(),body,token=gh,method="PUT")
 
+def forecast_three_days(city):
+    lat,lon=COORDS[city]
+    params=urlencode({"latitude":lat,"longitude":lon,"daily":"temperature_2m_max,temperature_2m_min,precipitation_probability_max",
+                      "timezone":"Asia/Tehran","forecast_days":3})
+    try:
+        d=request("https://api.open-meteo.com/v1/forecast?"+params)["daily"]
+        dates=d.get("time") or []
+        out=[]
+        for i in range(min(3,len(dates))):
+            high=(d.get("temperature_2m_max") or [])[i]
+            low=(d.get("temperature_2m_min") or [])[i]
+            rain=(d.get("precipitation_probability_max") or [])[i]
+            if high is None or low is None:
+                continue
+            label=("امروز" if i==0 else "فردا" if i==1 else "پس‌فردا")
+            out.append(label+": "+str(round(low))+" تا "+str(round(high))+"° | احتمال بارش "+(str(round(rain))+"٪" if rain is not None else "نامشخص"))
+        return out
+    except (HTTPError, OSError, KeyError, TypeError, IndexError, ValueError):
+        return []
+
 def fmt(value, unit=""):
     return "نامشخص" if value is None else str(value)+unit
 
@@ -94,6 +116,9 @@ def compose(row,city,now):
            "🌡 دمای فعلی: "+fmt(row.get("temp")," درجه"),
            "📈 کمینه و بیشینه امروز: "+fmt(row.get("min"))+" تا "+fmt(row.get("max"))+" درجه",
            "☁️ وضعیت: "+str(row.get("cond_fa") or "نامشخص")]
+    days=row.get("three_days") or []
+    if days:
+        lines+=["","📅 پیش‌بینی سه‌روزه:"]+["• "+day for day in days]
     aqi=row.get("aqi")
     if aqi is not None:
         label=CONDITIONS.get(row.get("aqi_class"),row.get("aqi_label") or "نامشخص")
@@ -137,6 +162,7 @@ def main():
         if not row or row.get("temp") is None:
             print("Skipping incomplete forecast",city)
             continue
+        row["three_days"]=forecast_three_days(city)
         message=compose(row,city,now)
         if args.dry_run:
             print(city,"\n",message,"\n")
