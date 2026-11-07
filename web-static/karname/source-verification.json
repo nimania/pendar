@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "automatic_source_verification_not_outcome_scoring",
-  "generated_at": "2026-11-07T13:02:19Z",
+  "generated_at": "2026-11-07T21:51:38Z",
   "policy_fa": "این بررسی صرفاً دسترس‌پذیری منبع و وجود متن در صفحه را می‌سنجد؛ نه اصالت گفتار شخص، نه تحقق رویداد و نه درست/نادرست‌بودن پیش‌بینی.",
   "summary": {
     "observations": 142,
@@ -13,35 +13,35 @@
   "observations": {
     "KC-006a055688fe7d79c5": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.aa.com.tr/en/middle-east/iran-s-parliament-speaker-says-us-voters-rejected-war-tehran-backs-this-message/4110933",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-01ac53787fcec5bb2c": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.asriran.com/fa/news/1203475/سناتور-آمریکایی-واشنگتن-جای-کثیفی-است",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-01ca8f05b0ccfe6a5e": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.irna.ir/news/86312798/%D8%B1%D8%A6%DB%8C%D8%B3-%D9%85%D8%AC%D9%84%D8%B3-%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%DA%AF%D8%A7%D9%86-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%86%D8%AE%D8%B3%D8%AA%DB%8C%D9%86-%D9%82%D8%B1%D8%A8%D8%A7%D9%86%DB%8C-%D8%B4%DA%A9%D8%B3%D8%AA-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA%DB%8C-%D8%AC%D9%85%D9%87%D9%88%D8%B1%DB%8C-%D8%AE%D9%88%D8%A7%D9%87%D8%A7%D9%86",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-0223606fee425bcbb9": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.fardanews.com/fa/tiny/news-1417383",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-06239fd776dddeecc4": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://ana.ir/fa/news/1093642/هشدار-جدی-سخنگوی-ارتش-به-آمریکا",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -55,21 +55,21 @@
     },
     "KC-0ca51d3e1e341a683a": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.independentpersian.com/node/423010/%D8%B3%DB%8C%D8%A7%D8%B3%DB%8C-%D9%88-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%DB%8C/%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D8%A7-%DB%B2%DB%B0-%D9%87%D8%B2%D8%A7%D8%B1-%D9%86%DB%8C%D8%B1%D9%88%DB%8C-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D8%AF%D8%B1-%D9%85%D9%86%D8%B7%D9%82%D9%87%D8%9B-%D8%A7%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84%DB%8C-%D8%AD%D9%85%D9%84%D8%A7%D8%AA-%D8%AF%D9%88%D8%A8%D8%A7%D8%B1%D9%87-%D8%AF%D8%B1",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-10cfc03402ea46c93b": {
       "status": "source_text_found",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305759-%D8%AA%D8%A7%DA%A9%D8%B1-%DA%A9%D8%A7%D8%B1%D9%84%D8%B3%D9%88%D9%86-%D9%85%D8%AF%D8%B9%DB%8C-%D8%B4%D8%AF-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%85%D9%85%DA%A9%D9%86-%D8%A7%D8%B3%D8%AA-%D8%AF%D8%B1-%DA%86%D9%86%D8%AF-%D8%B1%D9%88%D8%B2-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%AD%D9%85%D9%84%D9%87-%D9%87%D8%B3%D8%AA%D9%87-%D8%A7%DB%8C-%DA%A9%D9%86%D8%AF",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-14373a95373735198c": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://t.me/Karimipour_K/6332",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -83,28 +83,28 @@
     },
     "KC-1489c8232c792de70b": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://fa.shafaqna.com/news/2392212/",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-1589d7d8c5c70e7106": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-15ac9d8f383a7d2c67": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-1a60f55dc76d4c7582": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.entekhab.ir/fa/news/946360/سی-ان-ان-هشت-رقابت-مجلس-نمایندگان-که-رئیس-ستاد-انتخاباتی-دموکرات-ها-دنبال-می-کند",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -118,21 +118,21 @@
     },
     "KC-20f7aecee2b1dcc737": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.bbc.co.uk/news/articles/c65ynez5y599o?at_medium=RSS&at_campaign=rss",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-213cf873e04f6a60e5": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.eghtesadonline.com/fa/news/2173702/تماس-مهم-نخست-وزیر-عراق-با-ترامپ-پیام-بغداد-درباره-تحولات-منطقه",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-21b8d5a0b5ceadb7ad": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -985,22 +985,22 @@
       "outcome": "not_assessed"
     },
     "KC-fcefe3d37ea427940e": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_unavailable",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://www.asriran.com/fa/news/1203899/عضو-کمیسیون-امنیت-ملی-خروج-از-npt-و-ساخت-بمب-هسته-ای-مطالبه-عمومی-شده-است",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-fdc22939534406fe31": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_accessible",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://t.me/yekhezaran/52265",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-fe240f71b78c7f2603": {
-      "status": "pending_check",
-      "checked_at": null,
+      "status": "source_accessible",
+      "checked_at": "2026-11-07T21:51:38Z",
       "source_url": "https://t.me/rezanasrichannel/3398",
       "speaker_verified": false,
       "outcome": "not_assessed"
