@@ -557,7 +557,29 @@
     "https://t.me/tehranpress1/132280",
     "https://t.me/tehranpress1/132281",
     "https://t.me/irna_1313/471007",
-    "https://t.me/irna_1313/471008"
+    "https://t.me/irna_1313/471008",
+    "https://www.mehrnews.com/news/7003194/%D8%AE%D9%88%D8%B1%D8%B4%DB%8C%D8%AF%DB%8C-%D8%A8%D8%A7%D8%B1%D8%B4-%D8%A8%D8%A7%D8%B1%D8%A7%D9%86-%D9%88-%D8%A8%D8%B1%D9%81-%D8%AA%D8%A7-%DB%8C%DA%A9%D8%B4%D9%86%D8%A8%D9%87-%D8%AF%D8%B1-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A7%D8%AF%D8%A7%D9%85%D9%87-%D8%AF%D8%A7%D8%B1%D8%AF",
+    "https://t.me/tehranpress1/132282",
+    "https://t.me/tehranpress1/132283",
+    "https://t.me/Tehran_Tel/114747",
+    "https://t.me/tehranpress1/132284",
+    "https://t.me/irna_1313/471009",
+    "https://t.me/mehrnews/429744",
+    "https://t.me/mehrnews/429752",
+    "https://t.me/isna94/412298",
+    "https://t.me/mehrnews/429760",
+    "https://t.me/irna_1313/471010",
+    "https://t.me/mehrnews/429761",
+    "https://t.me/mehrnews/429762",
+    "https://t.me/tehranpress1/132287",
+    "https://t.me/irna_1313/471011",
+    "https://t.me/irna_1313/471012",
+    "https://t.me/mehrnews/429763",
+    "https://t.me/irna_1313/471013",
+    "https://t.me/irna_1313/471014",
+    "https://t.me/tehranpress1/132288",
+    "https://t.me/irna_1313/471015",
+    "https://t.me/mehrnews/429764"
   ],
   "queue": [
     {
@@ -2689,16 +2711,152 @@
       "status": "ready",
       "detected_at": "2026-11-07T20:32:03.074695+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132282",
+      "source_post_id": "132282",
+      "title": "قدرت برتر منطقه همچنان سر زبان‌هاست",
+      "excerpt": "قدرت برتر منطقه همچنان سر زبان‌هاست تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "قدرت برتر منطقه همچنان سر زبان‌هاست",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/e1ac650a3a.mp4?token=rt03GXs_85fD2rFi_XvVSwG57Dm-PePi4UITB8iB81Qw_kNYbswqGK5mU-TTTc6dHeAR9Eel-YwDmuQWEHM0yxzcHV1kc2fTt-RAzqYpwKGN3q0LyO96lmEdBRJI5Y7NG56isICZPAyGncKTywiTzvzssabOgqRJNw-wXy-a4fcfHqdnpZlio56TSUESUUhoeUyXuKMd-xgCp01yf_mfJwtR_GnBNRWyJyovPgbibnzky3ph1qwOzIFIVqdxZ5UhBX9_bcvAOuZNPxlpRh4nc86FBsfbpT_6jDlmRFtt1qOpVN6sfOfJirtNtKlrPKBZiKOE69clzZs2-EfjsZMD-g"
+      },
+      "published_at": "2026-11-07T20:41:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "43ef0fd08fa64c25",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T21:48:28.173144+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132283",
+      "source_post_id": "132283",
+      "title": "جنگ علیه ایران، منفورترین جنگ آمریکا در نظرسنجی‌ها",
+      "excerpt": "جنگ علیه ایران، منفورترین جنگ آمریکا در نظرسنجی‌ها کلش ریپورت: بررسی ۱۵۳ نظرسنجی افکار عمومی نشان می‌دهد جنگ علیه ایران در میان هفت جنگ بزرگ آمریکا در دوران نظرسنجی‌های مدرن، کمترین میزان محبوبیت را دارد. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "جنگ علیه ایران، منفورترین جنگ آمریکا در نظرسنجی‌ها",
+        "کلش ریپورت: بررسی ۱۵۳ نظرسنجی افکار عمومی نشان می‌دهد جنگ علیه ایران در میان هفت جنگ بزرگ آمریکا در دوران نظرسنجی‌های مدرن، کمترین میزان محبوبیت را دارد.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/l6iLOSVUCK-J_Xy-3HHnV2Ota1MYsIs6Vxyjtv0mc7-dN-T4IO2IyMJv5C_GSFnzVY75GV-yX4KaGlfMoDS3lKhygbXFEGYdX0lBY4SXpRjv_7n9XNk0hja1-lWEgjtGl0KcBmYEmevmN_HQYq13nhH0_taQebFLrIFGQ1-xcYKw8bGTRcR2be93XG0Uj7evrDnqA63m6XdMW7TyBhvX5SSnPCzfBWCVmBaKT49bQGOasnKC0VbYSXVHr6i7-QKSQYTW5XUx5WDAuRg68ozDpA7Y2lLHfZj8APv9uY2kh27ONL_HkiDKjmvXYC33dDwYwbOXvDdDQfCHW6Uew3GEeA.jpg"
+      },
+      "published_at": "2026-11-07T20:45:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "f431c8be513c1066",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T21:48:28.173144+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132284",
+      "source_post_id": "132284",
+      "title": "تداوم انفجار‌های مرموز در صنعت نفت و گاز آمریکا",
+      "excerpt": "تداوم انفجار‌های مرموز در صنعت نفت و گاز آمریکا انفجار و آتش‌سوزی‌های مرموز در صنعت نفت و گاز آمریکا ادامه دارد؛ این بار مخازن نگهداری نفت در ایالت تگزاس طعمه حریق شدند. صبح چهارشنبه ۴ نوامبر ۲۰۲۶، یکی از مخازن نگهداری نفت خام در نزدیکی بزرگراه I-20 و شهر مرکل در شهرستان تیلور ایالت تگزاس دچار آتش‌سوزی شد. هنوز علت اصلی حادثه مشخص نشده و بررسی‌ها در این زمینه ادامه دارد. کارشناسان با توجه به حوادث مشابه، خسارت این آتش‌سوزی را حدود یک میلیون دلار برآورد کرده‌اند و می‌گویند ممکن است پس از بررسی‌های نهایی، این رقم افزایش یابد. هنوز مشخص نیست این مخازن متعلق به کدام شرکت است، اما احتمال می‌رود به یکی از میدان‌های نفتی همان منطقه تعلق داشته باشد. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "تداوم انفجار‌های مرموز در صنعت نفت و گاز آمریکا",
+        "انفجار و آتش‌سوزی‌های مرموز در صنعت نفت و گاز آمریکا ادامه دارد؛ این بار مخازن نگهداری نفت در ایالت تگزاس طعمه حریق شدند.",
+        "صبح چهارشنبه ۴ نوامبر ۲۰۲۶، یکی از مخازن نگهداری نفت خام در نزدیکی بزرگراه I-20 و شهر مرکل در شهرستان تیلور ایالت تگزاس دچار آتش‌سوزی شد. هنوز علت اصلی حادثه مشخص نشده و بررسی‌ها در این زمینه ادامه دارد.",
+        "کارشناسان با توجه به حوادث مشابه، خسارت این آتش‌سوزی را حدود یک میلیون دلار برآورد کرده‌اند و می‌گویند ممکن است پس از بررسی‌های نهایی، این رقم افزایش یابد. هنوز مشخص نیست این مخازن متعلق به کدام شرکت است، اما احتمال می‌رود به یکی از میدان‌های نفتی همان منطقه تعلق داشته باشد.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-07T20:49:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "0f89f32d18962d89",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-07T21:48:28.173144+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132287",
+      "source_post_id": "132287",
+      "title": "از سلول‌های سوئد تا قلبِ تجریش",
+      "excerpt": "از سلول‌های سوئد تا قلبِ تجریش امشب در میان تجمعات میدان تجریش تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "از سلول‌های سوئد تا قلبِ تجریش",
+        "امشب در میان تجمعات میدان تجریش",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/02440f8819.mp4?token=Be72n6lLsD48C2QvvgETO9JuSWbUNj39LpKvwfDgeO-7d9CPDFbEBFuKcSzU1IPNFiA7wuVvl960yWw8X8nSVwVgZifg4R1C4jpjyv9WX3Ff8Yko_2mCPCBZQRpFw_EF2V8ErR6KrNTQqUBfUUK1isTYpnAHxDuuMGRuyVaAh3NQux6RfUbz5QLF1GCuw5mAWPYMZcKVpF1GtWjlqdhGdD9eTyZDM1JPWBXvpAD3LtNKXCP6u6won44S7kI7q8DJckq50OFABsdfvruhNrBCzI9ReSLcL5v1R8_7qvYZnYmHq_gDBTa7YQo5G24sfziRAYIcTAb7P0hGOPRjPA5TlBOP5-s0hPDqyKazVNgM2iHxz7IiL5l7YC2L_8Bl37MYFybvXIEpUMkZkRPUz5cvlmbR1k2WqXZA751207tX-fPVDOaBrPzrQzrbSk8633VtG1OscJP-JtW6MaDhA3rHXsExKtN3rv6-SDO-eQzTfSapqMSps4dslexW1hELLeJNEIjLIhFF0MLIU0zZ5ihXQRvCWLFJjP7t9kCsUJqMRrEOw_I7q0yTBno4ACaqCLzviFzUadm4mPFTk1FnNTIO-Gwv2G4pJcdAHXGWYWfdu1MIS3L1DjNPe6stFMnHCBXoP7ZJTn5tLNbx_uwYYk003euRwz738hbrpK_IaYnVkG4"
+      },
+      "published_at": "2026-11-07T21:02:59+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "f8e25d2af6e6a5fc",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T21:48:28.173144+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132288",
+      "source_post_id": "132288",
+      "title": "انفجار و آتش‌سوزی دو نفتکش در تنگه هرمز",
+      "excerpt": "انفجار و آتش‌سوزی دو نفتکش در تنگه هرمز نیروی دریایی سپاه دو فروند نفتکش متخلف یکی در محدوده شرق تنگه هرمز و دیگری در تنگه هرمز که قصد عبور از مسیر غیرمجاز را داشتند پس از برخورد با مین در آتش بسیار شدیدی در حال سوختن می‌باشند. این دو نفتکش که با تخلف متعدد و خاموش‌نمودن سامانه ناوبری و موقعیت‌یاب خود، قصد عبور از مسیر غیرمجاز تنگه هرمز را داشتند که پس از برخورد با مین منفجر و در حال سوختن می‌باشند. نیروی دریایی سپاه هشدار می‌دهد: همانطور که قبلا اعلام شده است هر کشتی و شناوری که با ارتش متجاوز و غارتگر امریکا همکاری کند و از مقررات ایرانی تنگه هرمز سرپیچی کند و وارد منطقه غیرمجاز شود مطمئنا با مین برخورد می‌کند لذا به خیال پردازی‌های فرمانده سنتکام توجه نکنید. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "انفجار و آتش‌سوزی دو نفتکش در تنگه هرمز",
+        "نیروی دریایی سپاه",
+        "دو فروند نفتکش متخلف یکی در محدوده شرق تنگه هرمز و دیگری در تنگه هرمز که قصد عبور از مسیر غیرمجاز را داشتند پس از برخورد با مین در آتش بسیار شدیدی در حال سوختن می‌باشند.",
+        "این دو نفتکش که با تخلف متعدد و خاموش‌نمودن سامانه ناوبری و موقعیت‌یاب خود، قصد عبور از مسیر غیرمجاز تنگه هرمز را داشتند که پس از برخورد با مین منفجر و در حال سوختن می‌باشند.",
+        "نیروی دریایی سپاه هشدار می‌دهد: همانطور که قبلا اعلام شده است هر کشتی و شناوری که با ارتش متجاوز و غارتگر امریکا همکاری کند و از مقررات ایرانی تنگه هرمز سرپیچی کند و وارد منطقه غیرمجاز شود مطمئنا با مین برخورد می‌کند لذا به خیال پردازی‌های فرمانده سنتکام توجه نکنید.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": null,
+      "published_at": "2026-11-07T21:31:05+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "6fba59469dbb2363",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-07T21:48:28.173144+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-07T20:33:51.286474+00:00",
+  "saved_at": "2026-11-07T21:49:40.892615+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-07T20:32:03.074695+00:00",
-    "tehran_tel": "2026-11-07T20:32:03.074695+00:00",
-    "irna_1313": "2026-11-07T20:32:03.074695+00:00",
-    "isna94": "2026-11-07T20:32:03.074695+00:00",
-    "mehrnews": "2026-11-07T20:32:03.074695+00:00",
+    "tehranpress1": "2026-11-07T21:48:28.173144+00:00",
+    "tehran_tel": "2026-11-07T21:48:28.173144+00:00",
+    "irna_1313": "2026-11-07T21:48:28.173144+00:00",
+    "isna94": "2026-11-07T21:48:28.173144+00:00",
+    "mehrnews": "2026-11-07T21:48:28.173144+00:00",
     "web_shahr": "2026-11-07T16:39:19.149081+00:00",
-    "web_mehr_tehran": "2026-11-07T20:32:03.074695+00:00"
+    "web_mehr_tehran": "2026-11-07T21:48:28.173144+00:00"
   }
 }
