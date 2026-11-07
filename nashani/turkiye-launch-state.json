@@ -1,7 +1,8 @@
 {
   "posts": {
     "introduction": {
-      "status": "sending_uncertain"
+      "status": "published",
+      "message_id": 4
     }
   }
 }
