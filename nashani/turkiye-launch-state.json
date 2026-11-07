@@ -15,6 +15,9 @@
     "official_links": {
       "status": "published",
       "message_id": 9
+    },
+    "savings_guide": {
+      "status": "sending_uncertain"
     }
   }
 }
