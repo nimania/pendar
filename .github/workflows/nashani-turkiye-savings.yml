@@ -1,0 +1,36 @@
+name: Nashani Turkiye savings discovery (review only)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 6,13,19 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'nashani_turkey/savings-sources.json'
+      - 'nashani_turkey/savings_scan.py'
+      - '.github/workflows/nashani-turkiye-savings.yml'
+permissions:
+  contents: read
+concurrency:
+  group: nashani-turkiye-savings-discovery
+  cancel-in-progress: true
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install 'beautifulsoup4>=4.12,<5'
+      - name: Compile collector
+        run: python -m py_compile nashani_turkey/savings_scan.py
+      - name: Read official campaign pages only
+        run: python nashani_turkey/savings_scan.py --output savings-output/candidates.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: turkiye-savings-candidates
+          path: savings-output/candidates.json
+          retention-days: 7
+          if-no-files-found: error
