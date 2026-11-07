@@ -1,0 +1,40 @@
+{
+  "updated_at": "2026-11-07",
+  "city": "استانبول",
+  "entries": [
+    {
+      "id": "istanbul-weather-20261107",
+      "category": "هواشناسی",
+      "title": "باران و باد ۴۰ تا ۶۰ کیلومتر بر ساعت در منطقه استانبول",
+      "summary": "گزارش رسمی ۷ نوامبر: آسمان ابری و رگبارهای پراکنده در استانبول؛ دما پایین‌تر از میانگین فصل و احتمال باد شدید شمالی. بازه اعتبار تا صبح ۸ نوامبر.",
+      "published_date": "2026-11-07",
+      "valid_until": "2026-11-08T06:00:00+03:00",
+      "source_name": "MGM اداره هواشناسی استانبول",
+      "source_url": "https://istanbul.mgm.gov.tr/tahmin-gunluk.aspx",
+      "telegram_url": "https://t.me/neshaniturkiye/14",
+      "status": "official_forecast"
+    },
+    {
+      "id": "istanbul-five-day-20261107",
+      "category": "پیش‌بینی",
+      "title": "پیش‌بینی پنج‌روزه استانبول: ۸ تا ۱۳ درجه امروز؛ بارش در چند روز آینده",
+      "summary": "برای شنبه رگبار، یکشنبه باران، دوشنبه نیمه‌ابری و برای سه‌شنبه و چهارشنبه دوباره بارش پیش‌بینی شده است. اعداد و شرایط ممکن است در به‌روزرسانی بعدی تغییر کنند.",
+      "published_date": "2026-11-07",
+      "source_name": "MGM پیش‌بینی پنج‌روزه استانبول",
+      "source_url": "https://istanbul.mgm.gov.tr/tahmin-tum-merkezler.aspx?i=ISTANBUL",
+      "status": "official_forecast"
+    },
+    {
+      "id": "istanbul-iett-20261107",
+      "category": "حمل‌ونقل",
+      "title": "اطلاعیه امروز IETT: چند سرویس لغو و یک مسیر اتوبوس تغییر کرده است",
+      "summary": "طبق فهرست روزانه ۷ نوامبر، برخی سرویس‌های مسیر ۱۵ Temmuz Mahallesi–Aksaray و Kağıthane–Seyrantepe انجام نمی‌شوند؛ در مسیر Acarlar–Maltepe نیز تغییر مسیر اعلام شده است. این به معنی تعطیلی کامل خطوط نیست.",
+      "published_date": "2026-11-07",
+      "valid_until": "2026-11-07T23:59:00+03:00",
+      "source_name": "IETT / e-Devlet",
+      "source_url": "https://www.turkiye.gov.tr/etvt-otobus-seferleri-hakkinda-duyurular",
+      "telegram_url": "https://t.me/neshaniturkiye/15",
+      "status": "official_service_notice"
+    }
+  ]
+}
