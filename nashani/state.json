@@ -530,7 +530,41 @@
     "https://t.me/qh_qv/973",
     "https://t.me/Kerman_akhbar/66242",
     "https://t.me/kerman_gov/10564",
-    "https://t.me/irna_kerman/30314"
+    "https://t.me/irna_kerman/30314",
+    "https://t.me/qh_qv/974",
+    "https://t.me/kermane_no/59078",
+    "https://t.me/kerman_news/140210",
+    "https://t.me/kermane_no/59079",
+    "https://t.me/kerman_news/140211",
+    "https://t.me/kermane_no/59080",
+    "https://t.me/kerman_news/140212",
+    "https://t.me/kermane_no/59081",
+    "https://t.me/kerman_news/140213",
+    "https://t.me/Kerman_akhbar/66243",
+    "https://t.me/kermane_no/59082",
+    "https://t.me/kerman_news/140214",
+    "https://t.me/kerman_news/140215",
+    "https://t.me/irna_kerman/30315",
+    "https://t.me/kermane_no/59083",
+    "https://t.me/kermane_no/59084",
+    "https://t.me/Kerman_akhbar/66244",
+    "https://t.me/Kerman_akhbar/66245",
+    "https://t.me/kerman_news/140216",
+    "https://t.me/kermane_no/59085",
+    "https://t.me/kerman_gov/10565",
+    "https://t.me/kermane_no/59086",
+    "https://t.me/kerman_gov/10566",
+    "https://t.me/kerman_gov/10567",
+    "https://t.me/kerman_news/140217",
+    "https://t.me/kerman_news/140218",
+    "https://t.me/irna_kerman/30316",
+    "https://t.me/kermane_no/59087",
+    "https://t.me/kerman_news/140219",
+    "https://t.me/irna_kerman/30317",
+    "https://t.me/Kerman_akhbar/66246",
+    "https://t.me/kerman_news/140220",
+    "https://t.me/irna_kerman/30318",
+    "https://t.me/kerman_news/140221"
   ],
   "queue": [
     {
@@ -4256,7 +4290,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-07T10:42:17.956768+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66244"
+        }
+      ],
       "reserved_at": "2026-11-07T10:42:35.847419+00:00",
       "delivery_kind": "text",
       "telegram_message_id": 92,
@@ -5053,7 +5092,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-07T13:54:42.807955+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66245"
+        }
+      ],
       "reserved_at": "2026-11-07T14:23:39.310524+00:00",
       "delivery_kind": "text",
       "telegram_message_id": 105,
@@ -5165,17 +5209,411 @@
       "status": "ready",
       "detected_at": "2026-11-07T14:23:27.381137+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59078",
+      "source_post_id": "59078",
+      "title": "پیش‌بینی گردوخاک تا اواسط هفته و کاهش دما در کرمان",
+      "excerpt": "پیش‌بینی گردوخاک تا اواسط هفته و کاهش دما در کرمان بر اساس نقشه‌های هواشناسی، افزایش پوشش ابر، وزش باد نسبتاً شدید و خیزش گردوخاک تا اواسط هفته در سطح استان کرمان ادامه خواهد داشت. همچنین در ساعات بعدازظهر برخی مناطق، به‌ویژه نواحی شمالی و ارتفاعات، شاهد رشد ابر و احتمال بارش‌های پراکنده و خفیف خواهند بود. ناپایداری‌های جوی از روز چهارشنبه شدت می‌گیرد و از اواخر هفته نیز کاهش محسوس دما در استان رخ خواهد داد.",
+      "paragraphs": [
+        "پیش‌بینی گردوخاک تا اواسط هفته و کاهش دما در کرمان",
+        "بر اساس نقشه‌های هواشناسی، افزایش پوشش ابر، وزش باد نسبتاً شدید و خیزش گردوخاک تا اواسط هفته در سطح استان کرمان ادامه خواهد داشت.",
+        "همچنین در ساعات بعدازظهر برخی مناطق، به‌ویژه نواحی شمالی و ارتفاعات، شاهد رشد ابر و احتمال بارش‌های پراکنده و خفیف خواهند بود.",
+        "ناپایداری‌های جوی از روز چهارشنبه شدت می‌گیرد و از اواخر هفته نیز کاهش محسوس دما در استان رخ خواهد داد."
+      ],
+      "media": null,
+      "published_at": "2026-11-07T14:00:07+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "d0b47ea82253e264",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140211",
+      "source_post_id": "140211",
+      "title": "غرق‌شدن دختر ۱۴ ساله در رودخانه پاکلاتون آسمینون",
+      "excerpt": "غرق‌شدن دختر ۱۴ ساله در رودخانه پاکلاتون آسمینون دختر نوجوان ۱۴ ساله اهل قلعه‌گنج که به همراه خانواده برای تفریح به منطقه آسمینون و حاشیه رودخانه پاکلاتون سفر کرده بود، بر اثر غرق‌شدن در یکی از حوضچه‌های این رودخانه جان خود را از دست داد. نبود تابلوهای هشداردهنده و آشنایی نداشتن برخی افراد با اصول شنا، از جمله عواملی است که طی سال‌های گذشته حوادث مشابهی را در این منطقه رقم زده است. فرماندار منوجان نیز ضمن ابراز تأسف، بر ضرورت نصب تابلوهای هشداردهنده و تربیت نیروهای نجات‌غریق برای پیشگیری از حوادث مشابه تأکید کرد.",
+      "paragraphs": [
+        "غرق‌شدن دختر ۱۴ ساله در رودخانه پاکلاتون آسمینون",
+        "دختر نوجوان ۱۴ ساله اهل قلعه‌گنج که به همراه خانواده برای تفریح به منطقه آسمینون و حاشیه رودخانه پاکلاتون سفر کرده بود، بر اثر غرق‌شدن در یکی از حوضچه‌های این رودخانه جان خود را از دست داد.",
+        "نبود تابلوهای هشداردهنده و آشنایی نداشتن برخی افراد با اصول شنا، از جمله عواملی است که طی سال‌های گذشته حوادث مشابهی را در این منطقه رقم زده است.",
+        "فرماندار منوجان نیز ضمن ابراز تأسف، بر ضرورت نصب تابلوهای هشداردهنده و تربیت نیروهای نجات‌غریق برای پیشگیری از حوادث مشابه تأکید کرد."
+      ],
+      "media": null,
+      "published_at": "2026-11-07T14:14:30+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "eeed2ab1b56e216d",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59082",
+      "source_post_id": "59082",
+      "title": "کاهش مصرف سوخت خودروها و رفع موانع تولید؛ دو محور اصلی سفر معاون رئیس‌جمهور به بم",
+      "excerpt": "کاهش مصرف سوخت خودروها و رفع موانع تولید؛ دو محور اصلی سفر معاون رئیس‌جمهور به بم معاون علمی رئیس‌جمهور در بازدید از خودروسازان منطقه ویژه اقتصادی ارگ جدید بم، بر توسعه خودروهای کم‌مصرف و بهره‌گیری از ظرفیت شرکت‌های دانش‌بنیان تأکید کرد. استاندار کرمان نیز در این سفر خواستار تعیین تکلیف و رفع فوری موانع ارزی و تولیدی صنایع خودروسازی این منطقه شد. حسین افشین با اشاره به سیاست دولت چهاردهم در زمینه بهینه‌سازی مصرف انرژی، تصریح کرد که رویکرد اصلی دولت، اصلاح فناوری و کاهش مصرف سوخت خودروها است.",
+      "paragraphs": [
+        "کاهش مصرف سوخت خودروها و رفع موانع تولید؛ دو محور اصلی سفر معاون رئیس‌جمهور به بم",
+        "معاون علمی رئیس‌جمهور در بازدید از خودروسازان منطقه ویژه اقتصادی ارگ جدید بم، بر توسعه خودروهای کم‌مصرف و بهره‌گیری از ظرفیت شرکت‌های دانش‌بنیان تأکید کرد.",
+        "استاندار کرمان نیز در این سفر خواستار تعیین تکلیف و رفع فوری موانع ارزی و تولیدی صنایع خودروسازی این منطقه شد.",
+        "حسین افشین با اشاره به سیاست دولت چهاردهم در زمینه بهینه‌سازی مصرف انرژی، تصریح کرد که رویکرد اصلی دولت، اصلاح فناوری و کاهش مصرف سوخت خودروها است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/mjj4qV_cG9-W3ESt3FLVvI5OTSxsgi1P6P-so7AgEnsCXy3vQ1Lv42Ucf3EpIach_81rdFoGnGcZ8b-rRZFZ6b_r7mD3aJPXIMOe4HOx7FFTLhHmD_87eSA-h4i8lKwVS8iE6RmMkxHchfmquxSqTSUzU4ZpEuSh1HKvRNHZAAWWdafqZvitKIOidgZYXLVm7P5naqYDq5ROPeU-HlmcURPmjCXs_jSWI157eQJ-p2K-MOuovjVn5ugWmiNcFfAXlzHrZY9ka3Skz7u6-ox9G09HeoUocRnkDmKUP6JK1D6XaY6bfrwWajDLctioRdEHXSCyjm1u8Y2I3XJ4bi0YXQ.jpg"
+      },
+      "published_at": "2026-11-07T14:40:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "4060ad41c6e3486b",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140215",
+      "source_post_id": "140215",
+      "title": "پایان دیدار خاتون بم ۰_۳ آیی‌یاوادی",
+      "excerpt": "پایان دیدار خاتون بم ۰_۳ آیی‌یاوادی پایان کار خاتون بم در لیگ قهرمانان آسیا زنان!",
+      "paragraphs": [
+        "پایان دیدار خاتون بم ۰_۳ آیی‌یاوادی",
+        "پایان کار خاتون بم در لیگ قهرمانان آسیا زنان!"
+      ],
+      "media": null,
+      "published_at": "2026-11-07T14:46:01+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "c4ae1e60c363e78f",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30315",
+      "source_post_id": "30315",
+      "title": "مدیرکل تقسیمات کشوری: مطالعات‌ طرح «استان کرمان جنوبی» در وزارت کشور نهایی شده است‌",
+      "excerpt": "مدیرکل تقسیمات کشوری: مطالعات‌ طرح «استان کرمان جنوبی» در وزارت کشور نهایی شده است‌ مدیرکل تقسیمات کشوری وزارت کشور با اشاره به اولویت این وزارتخانه برای توسعه مناطق مغفول‌مانده شرق و مرکز کشور تأکید کرد: مطالعات طرح استان شدن کرمان جنوبی در وزارت کشور نهایی شده و در صورت پایداری شرایط کلان کشور، این منطقه در صدر استان‌های در آستانه تأسیس قرار دارد. irna_kerman",
+      "paragraphs": [
+        "مدیرکل تقسیمات کشوری: مطالعات‌ طرح «استان کرمان جنوبی» در وزارت کشور نهایی شده است‌",
+        "مدیرکل تقسیمات کشوری وزارت کشور با اشاره به اولویت این وزارتخانه برای توسعه مناطق مغفول‌مانده شرق و مرکز کشور تأکید کرد: مطالعات طرح استان شدن کرمان جنوبی در وزارت کشور نهایی شده و در صورت پایداری شرایط کلان کشور، این منطقه در صدر استان‌های در آستانه تأسیس قرار دارد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/srqzfaR57-LpvJ0aLDmrq7u4C8USlFUgRhNkHKhAeIfzgsGQHJDoJ_KYGMIHQdbh-W5Q86H0O53GbzDLuY_1k5-xP4JasavLoSvjiPPZvysIt4niPRGD1ORFSvjE6bbRSYef9pZtSdKfdCzsDp3o04dn4OiSkysRbw58e3XjfPlYN-8uLd0Rwwpm88wQWdMLFZl4hJlipeSNI9GCjIqGo-c8wAZ7ysc1WuGEOAz-Xv2rIbTNrzfEVgZB6HQaipVRDigfPY71meNtKI52Inhid-hP6pmPHEt7DZXEuZmDRQ2FoxhiQMaD1Qkauue4KIy6_OaOK5dKviEveC1IKPVviA.jpg"
+      },
+      "published_at": "2026-11-07T14:48:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "2405b78bec98a75f",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140216",
+      "source_post_id": "140216",
+      "title": "دستگیری ۴۷ قاچاقچی و خرده‌فروش با کشف ۹۸ کیلوگرم مواد مخدر در سیرجان",
+      "excerpt": "دستگیری ۴۷ قاچاقچی و خرده‌فروش با کشف ۹۸ کیلوگرم مواد مخدر در سیرجان فرمانده انتظامی شهرستان سیرجان در راستای برخورد قاطع با خرده‌فروشان و قاچاقچیان مواد مخدر طی ۴ روز گذشته در نقاط مختلف این شهرستان و محورهای مواصلاتی به اجرا درآمد. مأموران در این برنامه ، ۴۳ خرده‌فروش و ۴ قاچاقچی عمده را دستگیر کردند و در بازرسی از مخفیگاه‌ها و خودروهای متهمان، بیش از ۹۸ کیلوگرم مواد مخدر صنعتی و سنتی را کشف کردند.. با اشاره به توقیف ۷ دستگاه خودرو و پلمپ ۴ باب منزل و ۱۰ باب مغازه متعلق به توزیع‌کنندگان مواد مخدر در این برنامه همچنین در این مدت ۵۲ معتاد متجاهر نیز جمع‌آوری و برای درمان و بهبودی به مراکز مجاز درمانی اعزام شدند.",
+      "paragraphs": [
+        "دستگیری ۴۷ قاچاقچی و خرده‌فروش با کشف ۹۸ کیلوگرم مواد مخدر در سیرجان",
+        "فرمانده انتظامی شهرستان سیرجان",
+        "در راستای برخورد قاطع با خرده‌فروشان و قاچاقچیان مواد مخدر طی ۴ روز گذشته در نقاط مختلف این شهرستان و محورهای مواصلاتی به اجرا درآمد.",
+        "مأموران در این برنامه ، ۴۳ خرده‌فروش و ۴ قاچاقچی عمده را دستگیر کردند و در بازرسی از مخفیگاه‌ها و خودروهای متهمان، بیش از ۹۸ کیلوگرم مواد مخدر صنعتی و سنتی را کشف کردند..",
+        "با اشاره به توقیف ۷ دستگاه خودرو و پلمپ ۴ باب منزل و ۱۰ باب مغازه متعلق به توزیع‌کنندگان مواد مخدر در این برنامه همچنین در این مدت ۵۲ معتاد متجاهر نیز جمع‌آوری و برای درمان و بهبودی به مراکز مجاز درمانی اعزام شدند."
+      ],
+      "media": null,
+      "published_at": "2026-11-07T15:04:53+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "55f0b9ac51828173",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10565",
+      "source_post_id": "10565",
+      "title": "ارتباط مستقیم با شهردار کرمان از طریق شماره تلفن ۱۱۱",
+      "excerpt": "ارتباط مستقیم با شهردار کرمان از طریق شماره تلفن ۱۱۱ یکشنبه 17 آبان ماه ساعت 10 صبح",
+      "paragraphs": [
+        "ارتباط مستقیم با شهردار کرمان از طریق شماره تلفن ۱۱۱",
+        "یکشنبه 17 آبان ماه",
+        "ساعت 10 صبح"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/YdEB1gHJGCxgCTZOBBr07SpfSTThjzIJiXzZwaW7TwyYUWS5Uc8A-q-vQzMCPT1SRraPiz-oqbDHqVGIdWoG4Vk2Vl8qsxHTaGT2NVRdWZ8fVVq4XzBfUKKVAbqDfg_M5Nkcyj4DR1dbcJdcsDnwofroeKCPlIm4sy1yQJRm-tCsz1mqDGqY5zTFcNcHUCXEja01aJ-udnTwizMxATvUGdYrR-r18Cc0unJ0kGbPz2ruQscv9e5LsxH6wjjLM84LRgz0VvgGXMPDUyJr2gshJ_ufptgRYdFiuUI-92xDNcc2RHODOboE83wXlzVP8EwsbDRzwBhqzXdSI2CLGrJEQw.jpg"
+      },
+      "published_at": "2026-11-07T15:19:42+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "204e7e6f331a9bc6",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59086",
+      "source_post_id": "59086",
+      "title": "کشف ۱۱۴ کیسه آرد احتکاری در یک دامداری در راور",
+      "excerpt": "کشف ۱۱۴ کیسه آرد احتکاری در یک دامداری در راور دادستان عمومی و انقلاب شهرستان راور از کشف مقادیر قابل توجهی آرد خارج از شبکه قانونی توزیع در این شهرستان خبر داد. در پی دریافت گزارش‌های مردمی، مأموران پلیس اطلاعات راور با دستور قضایی از یک دامداری بازرسی کرده و ۱۱۴ کیسه آرد احتکاری را کشف کردند. ارزش ریالی این محموله احتکار شده حدود ۳ میلیارد و ۴۲۰ میلیون ریال برآورد شده است.",
+      "paragraphs": [
+        "کشف ۱۱۴ کیسه آرد احتکاری در یک دامداری در راور",
+        "دادستان عمومی و انقلاب شهرستان راور از کشف مقادیر قابل توجهی آرد خارج از شبکه قانونی توزیع در این شهرستان خبر داد.",
+        "در پی دریافت گزارش‌های مردمی، مأموران پلیس اطلاعات راور با دستور قضایی از یک دامداری بازرسی کرده و ۱۱۴ کیسه آرد احتکاری را کشف کردند.",
+        "ارزش ریالی این محموله احتکار شده حدود ۳ میلیارد و ۴۲۰ میلیون ریال برآورد شده است."
+      ],
+      "media": null,
+      "published_at": "2026-11-07T15:20:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "f3a6aa8b9bac985a",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10566",
+      "source_post_id": "10566",
+      "title": "ارتباط مستقیم با فرماندار شهرستان کرمان از طریق شماره تلفن ۱۱۱",
+      "excerpt": "ارتباط مستقیم با فرماندار شهرستان کرمان از طریق شماره تلفن ۱۱۱ یکشنبه 17 آبان ماه ساعت 8 صبح",
+      "paragraphs": [
+        "ارتباط مستقیم با فرماندار شهرستان کرمان از طریق شماره تلفن ۱۱۱",
+        "یکشنبه 17 آبان ماه",
+        "ساعت 8 صبح"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/RAiyZw0BPq4_bOHML02iAPUHXrFYK9YGCZquRZohCj96UJ-cBvNpX4zv9FCHGayrvQi8chAdlAMOnom999iJKBgMzMyXle6meIzIgAJ4TzKJhD07mfGtMKYCUgZ-s1db8rRFCeP6PaGINcjOc-Uat-Ls34EHFEYoC6Is3k8a5ekXW36-aTYaiCqd9aYIdRdrDe6srTdMqSF-SiEtXUd-wbZHQxP2BnQRIIYRK4roEbZlRmsVGMoXiTBEY-HNZIARu8aBIbhkwvI4Og0dWXEpoyvYk3VDXJm3QMgJDHBfgDhV_gVOfoJH0COB2GxrsxLHJKBScdkkHLAHdn_W_bv7Gg.jpg"
+      },
+      "published_at": "2026-11-07T15:20:30+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "84fd3ecb61a3ab9d",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10567",
+      "source_post_id": "10567",
+      "title": "افتتاح بخش کارگاه‌ها و آزمایشگاه‌های مرکز آموزش عالی بم با اعتبار ۲۰۰ میلیارد تومان با حضور استاندار کرمان",
+      "excerpt": "افتتاح بخش کارگاه‌ها و آزمایشگاه‌های مرکز آموزش عالی بم با اعتبار ۲۰۰ میلیارد تومان با حضور استاندار کرمان در راستای توسعه زیرساخت‌های آموزشی و پژوهشی، بخش کارگاه‌ها و آزمایشگاه‌های مرکز آموزش عالی بم با حضور استاندار کرمان به بهره‌برداری رسید. به گزارش روابط عمومی استانداری کرمان، این مجموعه آموزشی و پژوهشی که عصر شنبه ۱۶ آبان ماه با حضور استاندار کرمان و نماینده مردم شهرستان‌های شرقی استان به بهره‌برداری رسید، با زیربنای ۲۶۵۰ مترمربع در دو طبقه احداث شده و شامل ۱۲ کارگاه و ۲۰ آزمایشگاه، متناسب با نیازهای رشته‌های فنی و مهندسی است. برای ساخت و راه‌اندازی این بخش، بالغ بر ۲۰۰ میلیارد تومان اعتبار هزینه شده و با افتتاح آن، امکانات مناسبی برای دانشجویان ۶ رشته فنی و مهندسی دایر در این مرکز آموزش عالی فراهم شده است.",
+      "paragraphs": [
+        "افتتاح بخش کارگاه‌ها و آزمایشگاه‌های مرکز آموزش عالی بم با اعتبار ۲۰۰ میلیارد تومان با حضور استاندار کرمان",
+        "در راستای توسعه زیرساخت‌های آموزشی و پژوهشی، بخش کارگاه‌ها و آزمایشگاه‌های مرکز آموزش عالی بم با حضور استاندار کرمان به بهره‌برداری رسید.",
+        "به گزارش روابط عمومی استانداری کرمان، این مجموعه آموزشی و پژوهشی که عصر شنبه ۱۶ آبان ماه با حضور استاندار کرمان و نماینده مردم شهرستان‌های شرقی استان به بهره‌برداری رسید، با زیربنای ۲۶۵۰ مترمربع در دو طبقه احداث شده و شامل ۱۲ کارگاه و ۲۰ آزمایشگاه، متناسب با نیازهای رشته‌های فنی و مهندسی است.",
+        "برای ساخت و راه‌اندازی این بخش، بالغ بر ۲۰۰ میلیارد تومان اعتبار هزینه شده و با افتتاح آن، امکانات مناسبی برای دانشجویان ۶ رشته فنی و مهندسی دایر در این مرکز آموزش عالی فراهم شده است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/d-n3dev4o9rSszAh526gPZqdZMv6TsWFwRq0zxqWEoX-wKeynXargpqrVLxABRlNqulCjYAvbVG1KrlYC1f4323aRpjXWK_bRrri3gnlF_6Jl7t68V0zi3IX5S5pdH1TBDPPAKDu373CeCBrSu7pL9XIA-uAgJ3L0iPnEBJvfkcYCXxYLnt4MSYCYvk3EcvIi5ewa1xFX3OrcE7DbsUVK4pSsRMAr3pBKg4_TEon5c3KSiq0nEluunPOKJDITaWxgObFkWoUqbHMGsD-MxWqduHoDIXrJGVMCmUR_Sb9rV0erpG0vJHQ83adES_fSPhCNy4szOAe8_p9F7k1kdlONg.jpg"
+      },
+      "published_at": "2026-11-07T15:22:21+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "64192b5968748ddf",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140217",
+      "source_post_id": "140217",
+      "title": "موج ۲۵۱ خروش مردم دیار حاج قاسم در میدان کوثر کرمان",
+      "excerpt": "موج ۲۵۱ خروش مردم دیار حاج قاسم در میدان کوثر کرمان",
+      "paragraphs": [
+        "موج ۲۵۱ خروش مردم دیار حاج قاسم در میدان کوثر کرمان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/0735ad6dc1.mp4?token=S74ZrTTjXN27jj7KJsdjXZf1biCwQGRv_OJ5Yyz2cBgQYl5vtSMDwpkCZaycl5UmuRD2zLgRUkNUCSDONX_jxLdgXFKrOJeSngu7IxjyFLT-nka3V54BwD3EXkx1dsAjWTQ8zmY0bHKhHZeGwW3KEdXz53DtZmu_jzYemrfxSH6lTjjkkF_HzLwA5sqlS1Qz3RRZJAWKT7PfAoEm9NQv6gllWA7tYQLVlcOOLD73GKmHk-V_9iZNFoj_dlb80w-a-414DeloLYAKwss7omSYsoOm_UlLxl4CPG46u9Xg4SdGCoFZB5d8cvzs1hwO_C4HhmEBZVVMcbkC3u3tesyk2Q"
+      },
+      "published_at": "2026-11-07T15:22:50+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "09806e2f793740c8",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59087",
+      "source_post_id": "59087",
+      "title": "کاهش میانگین بارش‌های کشور در سال آبی جاری",
+      "excerpt": "کاهش میانگین بارش‌های کشور در سال آبی جاری بر اساس آمارهای سازمان هواشناسی، میزان بارش‌های کشور از ابتدای سال آبی جاری تا چهاردهم آبان‌ماه در مقایسه با دوره بلندمدت ۲.۷ میلی‌متر کاهش یافته است. بر این اساس، میانگین بارش‌ها که در دوره بلندمدت ۱۴ میلی‌متر بوده، با کاهشی ۱۹ درصدی به ۱۱.۴ میلی‌متر رسیده است. در این میان، تنها در ۹ استان از جمله کرمان، آذربایجان شرقی و اردبیل بارش‌ها مثبت بوده، اما در ۲۲ استان دیگر روند نزولی ثبت شده که بیشترین کاهش مربوط به استان یزد است.",
+      "paragraphs": [
+        "کاهش میانگین بارش‌های کشور در سال آبی جاری",
+        "بر اساس آمارهای سازمان هواشناسی، میزان بارش‌های کشور از ابتدای سال آبی جاری تا چهاردهم آبان‌ماه در مقایسه با دوره بلندمدت ۲.۷ میلی‌متر کاهش یافته است.",
+        "بر این اساس، میانگین بارش‌ها که در دوره بلندمدت ۱۴ میلی‌متر بوده، با کاهشی ۱۹ درصدی به ۱۱.۴ میلی‌متر رسیده است.",
+        "در این میان، تنها در ۹ استان از جمله کرمان، آذربایجان شرقی و اردبیل بارش‌ها مثبت بوده، اما در ۲۲ استان دیگر روند نزولی ثبت شده که بیشترین کاهش مربوط به استان یزد است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/i4Y6qW9eYRrnhcrudDZACJEbRZrJFN9l6bFx8lTzDQNTVFU2ixrq8SkmhNopKBAaIKIDDlTSENYOMSEmY-WsMoshTd2Sw7FBu4uWNMVGKFhqBBs5zze98dHD85-uRfFqfIlz8qpdwx8FwC9agDJY8lIxc_GICKQe8EXn1ly7pkrPMDa-SMBd2AbZlYd9K4IIZMa0smDaYE3z1dd5cx43zIVaZ10SwYAwQIBO26P2kNFYaYjzEYm8FzreNLXq5Y5gzUFapG8s4eEY1fjatDRW9svtu42xOmrqD7wjbnFReNArzfO-z1l7u9Ls8nAuV4yeBgxdEh5zQiK9jBL_u3SYzg.jpg"
+      },
+      "published_at": "2026-11-07T15:30:03+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "58358a84c57c5c69",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140220",
+      "source_post_id": "140220",
+      "title": "سلامت مردم قربانی تعلل مدیران",
+      "excerpt": "سلامت مردم قربانی تعلل مدیران کرمان در آستانه بحران بهداشتی است، اما مدیران به جای پاسخگویی، توپ را در زمین یکدیگر می‌اندازند. مدیرعامل آبفا در گفت و گویی با خبرنگار رسانه «اخبار کرمان» از عدم مسئولیت آبفا تا زمان اتصال شبکه فاضلابی که ۲۹ سال طول کشیده، می‌گوید. او در این مصاحبه اعلام می‌کند:«تا زمان اتصال شبکه، جمع‌آوری فاضلاب بر اساس ماده ۵۵ قانون شهرداری‌ها و مبحث ۱۹ نظام مهندسی، بر عهده مالکان و شهرداری است و آبفا هیچ مسئولیتی ندارد.» وی با اشاره به کاسه‌ای بودن زمین کرمان و بالا آمدن آب چاه‌ها، تخلیه فاضلاب خام را در خارج از لندفیل شهرداری تخلف خواند و خواستار برخورد شد. وی در این گفت و گو از حل مشکل فاضلاب غرب کرمان تا پایان اسفندماه خبر داد و عملیات اجرایی تمام شده، اما پمپ‌ها و لوله‌های استیل در گمرک متوقف‌اند و ترخیص و نصب آن‌ها ۹۰ روز زمان می‌برد.وی محلات تحت پوشش تا اسفند را پشت برج اول، شهرک الهیه و همتی‌فر عنوان کرد.",
+      "paragraphs": [
+        "سلامت مردم قربانی تعلل مدیران",
+        "کرمان در آستانه بحران بهداشتی است، اما مدیران به جای پاسخگویی، توپ را در زمین یکدیگر می‌اندازند. مدیرعامل آبفا در گفت و گویی با خبرنگار رسانه «اخبار کرمان» از عدم مسئولیت آبفا تا زمان اتصال شبکه فاضلابی که ۲۹ سال طول کشیده، می‌گوید. او در این مصاحبه اعلام می‌کند:«تا زمان اتصال شبکه، جمع‌آوری فاضلاب بر اساس ماده ۵۵ قانون شهرداری‌ها و مبحث ۱۹ نظام مهندسی، بر عهده مالکان و شهرداری است و آبفا هیچ مسئولیتی ندارد.»",
+        "وی با اشاره به کاسه‌ای بودن زمین کرمان و بالا آمدن آب چاه‌ها، تخلیه فاضلاب خام را در خارج از لندفیل شهرداری تخلف خواند و خواستار برخورد شد.",
+        "وی در این گفت و گو از حل مشکل فاضلاب غرب کرمان تا پایان اسفندماه خبر داد و عملیات اجرایی تمام شده، اما پمپ‌ها و لوله‌های استیل در گمرک متوقف‌اند و ترخیص و نصب آن‌ها ۹۰ روز زمان می‌برد.وی محلات تحت پوشش تا اسفند را پشت برج اول، شهرک الهیه و همتی‌فر عنوان کرد."
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-07T16:10:47+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "c5a66c020dcef2ab",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30318",
+      "source_post_id": "30318",
+      "title": "مدیرکل تقسیمات وزارت کشور: پرونده ارتقای بخش اسماعیلی جیرفت به هیئت دولت ارسال می‌شود",
+      "excerpt": "مدیرکل تقسیمات وزارت کشور: پرونده ارتقای بخش اسماعیلی جیرفت به هیئت دولت ارسال می‌شود مدیرکل تقسیمات کشوری وزارت کشور با اشاره به تکمیل فرآیند کارشناسی پرونده ارتقای بخش اسماعیلی جیرفت به شهرستان، از بررسی موضوع نام‌گذاری آن در کمیته نام‌گذاری وزارت کشور طی ماه جاری و سپس ارسال طرح به هیئت وزیران و کمیسیون سیاسی دولت خبر داد. irna_kerman",
+      "paragraphs": [
+        "مدیرکل تقسیمات وزارت کشور: پرونده ارتقای بخش اسماعیلی جیرفت به هیئت دولت ارسال می‌شود",
+        "مدیرکل تقسیمات کشوری وزارت کشور با اشاره به تکمیل فرآیند کارشناسی پرونده ارتقای بخش اسماعیلی جیرفت به شهرستان، از بررسی موضوع نام‌گذاری آن در کمیته نام‌گذاری وزارت کشور طی ماه جاری و سپس ارسال طرح به هیئت وزیران و کمیسیون سیاسی دولت خبر داد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/BgzjydbBgjuppANY4M3sfWTNnwE39h5jW8iceVXUXqfXrfmm-w03AQ0WB6AMWXTTTd49l0laEf7w4-Bwm0Erx2NhKRmQtyiVIOIOBWkh0KNachJzW-RaVnDEWb2ajXnqS06Cmq7RkRD3DjOk5bdsS0VZsPO7VIG9V1INaNULS39Bn0rTtrmZQYxi-qnuu6T-iVc0gNodL6vHdjIXUhA0B5nDbqCEpXiG8jGLma11hgqzqARbfQm199vWwjWSpINAzyLydRhKzGr4L8P1j_D2LVpk4SseWOYIpWXLwORBXLVd6q-vBVBQZsGRo_ECImqsZUCOB_UsvP1xyazKd7FrgA.jpg"
+      },
+      "published_at": "2026-11-07T16:11:18+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "c5c30f5b62c706a8",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140221",
+      "source_post_id": "140221",
+      "title": "کوچه باغ های گلباف کرمان",
+      "excerpt": "کوچه باغ های گلباف کرمان",
+      "paragraphs": [
+        "کوچه باغ های گلباف کرمان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/0d64c664c7.mp4?token=E3GzW9T0-Jh0yDEt87Y-fNve2GrE1NbD22x-VCldJwzljD8Apl5SzDgiS_fyw4SLouFGl0SNTMVd5s3cSY1odswy2ihcEr3i_RauMyQ6JiF5yzAAqmtgFbY00YGOrLZ4gGtx6NotCZGPEDj0zG3bXcurnyQleSom4Ai9LFFr0o2qaJ3XbLJSO3SIRAYY6hdUZygwIYjR3oVInzmruv3154cxdBkecWRskZJvu6bA00WC-o1OosavQ-0gdfCPr_-QVg1VzvhBhY0wuuxbWxJSUfZdxtxWx9DlgUX7U-CIozxyHm5AWa9Gzdta1P8_Sz8OZ02eXcopOlGAmLoRKbaLnw"
+      },
+      "published_at": "2026-11-07T16:28:01+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "ccd84304e9492d13",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-07T16:39:19.532376+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-07T14:23:51.779510+00:00",
+  "saved_at": "2026-11-07T16:39:35.781655+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-07T13:54:42.807955+00:00",
-    "fardaayekerman": "2026-11-07T14:23:27.381137+00:00",
-    "irna_kerman": "2026-11-07T14:23:27.381137+00:00",
-    "kerman_gov": "2026-11-07T14:23:27.381137+00:00",
-    "kerman_akhbar": "2026-11-07T14:23:27.381137+00:00",
-    "kerman_news": "2026-11-07T13:54:42.807955+00:00",
-    "kerman_rasaneh": "2026-11-07T14:23:27.381137+00:00",
-    "qh_qv": "2026-11-07T13:54:42.807955+00:00"
+    "kermane_no": "2026-11-07T16:39:19.532376+00:00",
+    "fardaayekerman": "2026-11-07T16:39:19.532376+00:00",
+    "irna_kerman": "2026-11-07T16:39:19.532376+00:00",
+    "kerman_gov": "2026-11-07T16:39:19.532376+00:00",
+    "kerman_akhbar": "2026-11-07T16:39:19.532376+00:00",
+    "kerman_news": "2026-11-07T16:39:19.532376+00:00",
+    "kerman_rasaneh": "2026-11-07T16:39:19.532376+00:00",
+    "qh_qv": "2026-11-07T16:39:19.532376+00:00"
   }
 }
