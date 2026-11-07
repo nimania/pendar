@@ -27,6 +27,7 @@ from bs4 import BeautifulSoup
 
 from editorial import compose_caption, extract_media, meaningful_lines, clean_news_line
 from media_delivery import MediaNotAvailable, upload_public_media
+from web_sources import website_posts
 from geography import geo_relevance, is_local_news
 
 
@@ -213,7 +214,7 @@ def short_text(text, limit=470):
 
 def source_posts(source, timeout=18):
     if source.get("platform") == "website":
-        raise ValueError("Website feeds not configured")
+        return website_posts(source)
     handle = source["handle"].lstrip("@")
     if not re.fullmatch(r"[A-Za-z0-9_]{5,32}", handle):
         raise ValueError("Invalid Telegram channel handle")
