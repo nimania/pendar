@@ -35,6 +35,26 @@
       "source_url": "https://www.turkiye.gov.tr/etvt-otobus-seferleri-hakkinda-duyurular",
       "telegram_url": "https://t.me/neshaniturkiye/15",
       "status": "official_service_notice"
+    },
+    {
+      "id": "istanbul-airport-weather-20261107",
+      "category": "فرودگاه",
+      "title": "پیش‌بینی پنج‌روزه محدوده فرودگاه استانبول: بارندگی امروز و فردا",
+      "summary": "در پیش‌بینی سازمان هواشناسی ترکیه برای فرودگاه استانبول، شنبه رگبار با دمای حدود ۸ تا ۱۱ درجه و یکشنبه باران با دمای حدود ۷ تا ۱۰ درجه درج شده است. این گزارش به‌معنی لغو یا تأخیر پرواز نیست؛ وضعیت پرواز را جداگانه از شرکت هواپیمایی کنترل کنید.",
+      "published_date": "2026-11-07",
+      "source_name": "MGM پیش‌بینی ایستگاه Istanbul Havalimanı",
+      "source_url": "https://istanbul.mgm.gov.tr/tahmin-tum-merkezler.aspx?i=ISTANBUL",
+      "status": "official_forecast"
+    },
+    {
+      "id": "istanbul-pendik-weather-20261107",
+      "category": "محله‌ها",
+      "title": "پندیک امروز بارانی؛ دمای پیش‌بینی‌شده ۷ تا ۱۲ درجه",
+      "summary": "سازمان هواشناسی برای پندیک در شنبه ۷ نوامبر رگبار و بازه دمای ۷ تا ۱۲ درجه، و برای یکشنبه بارندگی و بازه ۵ تا ۱۱ درجه پیش‌بینی کرده است. پیش‌بینی‌ها ممکن است به‌روز شوند.",
+      "published_date": "2026-11-07",
+      "source_name": "MGM پیش‌بینی پندیک",
+      "source_url": "https://www.mgm.gov.tr/tahmin/il-ve-ilceler.aspx?il=ISTANBUL&ilce=PENDIK",
+      "status": "official_forecast"
     }
   ]
 }
