@@ -45,6 +45,150 @@
     "News affecting residence, transport, services, safety, employment and the Iranian community can override city ranking.",
     "Emergencies and material nationwide regulatory changes always take precedence.",
     "Filter off-topic stories, preserve sources, verify timestamps and avoid duplicates.",
-    "No Telegram destination has been configured; do not auto-publish from this registry."
+    "No Telegram destination has been configured; do not auto-publish from this registry.",
+    "Migration content ranks ahead of geographic priority; city order is a tie-breaker.",
+    "A news report never establishes a legal change on its own. Cross-check against Göç İdaresi, Resmî Gazete or competent authority.",
+    "Distinguish migration to Turkey, internal migration, refugee/asylum reports, and regulations for Iranian citizens.",
+    "Avoid automatic copying of full text/photo/video where re-use rights have not been confirmed."
+  ],
+  "primary_beat": "migration_residence_and_migrants",
+  "priority_order": [
+    "urgent_migration_regulation",
+    "iranian_residents_and_crossborder",
+    "work_study_housing_health_for_foreigners",
+    "migrant_communities_and_reporting",
+    "other_city_life",
+    "general_turkey_news"
+  ],
+  "migration_keywords_tr": [
+    "ikamet izni",
+    "oturma izni",
+    "e-ikamet",
+    "göç idaresi",
+    "göçmen",
+    "yabancı uyruklu",
+    "yabancılar",
+    "çalışma izni",
+    "sınır dışı",
+    "deport",
+    "vize",
+    "vatandaşlık",
+    "uluslararası koruma",
+    "geçici koruma",
+    "mülteci",
+    "sığınmacı",
+    "İranlı",
+    "İran vatandaşları",
+    "yabancı öğrenci",
+    "adres kaydı",
+    "mahalle kapatma",
+    "ikamet randevusu"
+  ],
+  "migration_keywords_fa": [
+    "اقامت",
+    "مهاجرت",
+    "مهاجران",
+    "ایرانیان ترکیه",
+    "اجازه کار",
+    "اخراج",
+    "دیپورت",
+    "پناهجو",
+    "پناهنده",
+    "ویزای ترکیه",
+    "تابعیت ترکیه",
+    "تمدید اقامت"
+  ],
+  "sources": [
+    {
+      "title": "Göç İdaresi Başkanlığı",
+      "url": "https://www.goc.gov.tr/",
+      "type": "official",
+      "use": "legal verification",
+      "status": "reference"
+    },
+    {
+      "title": "e-İkamet",
+      "url": "https://e-ikamet.goc.gov.tr/",
+      "type": "official",
+      "use": "residence applications",
+      "status": "reference"
+    },
+    {
+      "title": "İstanbul İl Göç İdaresi",
+      "url": "https://istanbul.goc.gov.tr/",
+      "type": "official",
+      "use": "Istanbul city/permit notices",
+      "status": "reference"
+    },
+    {
+      "title": "TÜİK",
+      "url": "https://data.tuik.gov.tr/",
+      "type": "official",
+      "use": "migration statistics",
+      "status": "reference"
+    },
+    {
+      "title": "Resmî Gazete",
+      "url": "https://www.resmigazete.gov.tr/",
+      "type": "official",
+      "use": "regulations effective dates",
+      "status": "reference"
+    },
+    {
+      "title": "Anadolu Ajansı",
+      "url": "https://www.aa.com.tr/tr",
+      "type": "news",
+      "use": "Turkish migration reporting",
+      "status": "candidate"
+    },
+    {
+      "title": "TRT Haber",
+      "url": "https://www.trthaber.com/",
+      "type": "news",
+      "use": "public service news",
+      "status": "candidate"
+    },
+    {
+      "title": "DHA",
+      "url": "https://www.dha.com.tr/",
+      "type": "news",
+      "use": "city and nationwide reporting",
+      "status": "candidate"
+    },
+    {
+      "title": "T24",
+      "url": "https://t24.com.tr/",
+      "type": "newspaper",
+      "use": "migration news and investigations",
+      "status": "candidate"
+    },
+    {
+      "title": "bianet",
+      "url": "https://bianet.org/",
+      "type": "news",
+      "use": "migrant rights and living conditions",
+      "status": "candidate"
+    },
+    {
+      "title": "Hürriyet",
+      "url": "https://www.hurriyet.com.tr/",
+      "type": "newspaper",
+      "use": "mainstream coverage",
+      "status": "candidate"
+    },
+    {
+      "title": "Sözcü",
+      "url": "https://www.sozcu.com.tr/",
+      "type": "newspaper",
+      "use": "additional editorial perspective",
+      "status": "candidate"
+    },
+    {
+      "title": "NTV",
+      "url": "https://www.ntv.com.tr/",
+      "type": "news",
+      "use": "migration and city services",
+      "status": "candidate"
+    }
   ]
 }
