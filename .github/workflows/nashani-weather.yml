@@ -1,0 +1,46 @@
+name: Nashani city weather and air quality
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview without Telegram publication"
+        type: boolean
+        default: true
+  schedule:
+    # Tehran time (UTC+3:30): 06:30 and 18:30
+    - cron: '0 3,15 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/nashani-weather.yml'
+      - 'nashani_weather/**'
+permissions:
+  contents: write
+concurrency:
+  group: nashani-weather-posts
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install runtime
+        run: python -m pip install 'httpx>=0.28,<1'
+      - name: Verify syntax
+        run: python -m py_compile nashani_weather/publish.py
+      - name: Run weather/air reports
+        env:
+          PYTHONPATH: 'backend'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then
+            python nashani_weather/publish.py --dry-run
+          else
+            python nashani_weather/publish.py
+          fi
