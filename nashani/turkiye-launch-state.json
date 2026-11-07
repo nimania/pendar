@@ -11,6 +11,9 @@
     "flights_weather": {
       "status": "published",
       "message_id": 6
+    },
+    "official_links": {
+      "status": "sending_uncertain"
     }
   }
 }
