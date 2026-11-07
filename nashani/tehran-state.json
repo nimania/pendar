@@ -324,7 +324,28 @@
     "https://t.me/mehrnews/429647",
     "https://t.me/mehrnews/429648",
     "https://t.me/mehrnews/429649",
-    "https://www.mehrnews.com/news/7003118/%D8%AF%D8%B3%D8%AA%DA%AF%DB%8C%D8%B1%DB%8C-%D8%A7%D9%88%D8%A8%D8%A7%D8%B4-%DA%86%D8%A7%D9%82%D9%88%DA%A9%D8%B4-%D8%AF%D8%B1-%D9%86%D8%B3%DB%8C%D9%85-%D8%B4%D9%87%D8%B1"
+    "https://www.mehrnews.com/news/7003118/%D8%AF%D8%B3%D8%AA%DA%AF%DB%8C%D8%B1%DB%8C-%D8%A7%D9%88%D8%A8%D8%A7%D8%B4-%DA%86%D8%A7%D9%82%D9%88%DA%A9%D8%B4-%D8%AF%D8%B1-%D9%86%D8%B3%DB%8C%D9%85-%D8%B4%D9%87%D8%B1",
+    "https://t.me/irna_1313/470906",
+    "https://t.me/isna94/412234",
+    "https://t.me/irna_1313/470907",
+    "https://t.me/isna94/412235",
+    "https://t.me/irna_1313/470908",
+    "https://t.me/irna_1313/470909",
+    "https://t.me/isna94/412236",
+    "https://t.me/tehranpress1/132253",
+    "https://t.me/irna_1313/470910",
+    "https://t.me/mehrnews/429650",
+    "https://t.me/irna_1313/470911",
+    "https://t.me/irna_1313/470912",
+    "https://t.me/mehrnews/429651",
+    "https://t.me/isna94/412237",
+    "https://t.me/isna94/412238",
+    "https://t.me/irna_1313/470913",
+    "https://www.mehrnews.com/news/7003203/%D9%BE%D8%A7%DB%8C%DA%AF%D8%A7%D9%87-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3-%D8%A2%D9%85%D8%A8%D9%88%D9%84%D8%A7%D9%86%D8%B3-%D9%88-%D8%B3%D9%87-%D9%85%D9%88%D8%AA%D9%88%D8%B1%D9%84%D8%A7%D9%86%D8%B3-%D8%AF%D8%B1-%D8%AC%D9%88%D8%A7%D8%AF%D8%A2%D8%A8%D8%A7%D8%AF-%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD-%D8%B4%D8%AF",
+    "https://t.me/mehrnews/429652",
+    "https://t.me/mehrnews/429653",
+    "https://t.me/irna_1313/470914",
+    "https://t.me/irna_1313/470915"
   ],
   "queue": [
     {
@@ -1329,16 +1350,65 @@
       "status": "ready",
       "detected_at": "2026-11-07T13:19:33.800026+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132253",
+      "source_post_id": "132253",
+      "title": "ترکیب استقلال مقابل استقلال خوزستان",
+      "excerpt": "ترکیب استقلال مقابل استقلال خوزستان حبیب فرعباسی، سامان فلاح، عارف آقاسی، حسین گودرزی، صالح حردانی، روزبه چشمی، امیرمحمد رزاقی‌نیا، جلال‌الدین ماشاریپوف، محمدحسین اسلامی، یاسر آسانی و محمدرضا آزادی. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "ترکیب استقلال مقابل استقلال خوزستان",
+        "حبیب فرعباسی، سامان فلاح، عارف آقاسی، حسین گودرزی، صالح حردانی، روزبه چشمی، امیرمحمد رزاقی‌نیا، جلال‌الدین ماشاریپوف، محمدحسین اسلامی، یاسر آسانی و محمدرضا آزادی.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/OmKOkZVkPl0rMbCYTiMQL-JMObTPm3hQTSYYuLbFe8bFKxSh7bq5VabGzJNESf-OiWsex3hEurTy8WOzKq2nC2mpDNPkg8JTYGDGYKpBSeiyrw2CTbKcXAAmUWM-pFBb4To_w3AqsVf9c6P3QaEngbWxybPGqnR3CnjkJ1fe7DTGP3LPfkVyHNELBCz3BXcRd1-gdpQHvs-e7uuIpbp0vg6lu31AAD3d-vnomZPCK0kDdMK_jEYKuV1hEbCF8PydSu_Tpy4N8If7QZMa-pJC7tqhh6ULVOdf6n09cO5KQ56GfoFyPBqiBXeEvvvyFFWRb6glSY_KzRitp4mmVbJZnw.jpg"
+      },
+      "published_at": "2026-11-07T13:34:12+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "93aa7f48b8c27e5f",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T13:54:39.669688+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://www.mehrnews.com/news/7003203/%D9%BE%D8%A7%DB%8C%DA%AF%D8%A7%D9%87-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3-%D8%A2%D9%85%D8%A8%D9%88%D9%84%D8%A7%D9%86%D8%B3-%D9%88-%D8%B3%D9%87-%D9%85%D9%88%D8%AA%D9%88%D8%B1%D9%84%D8%A7%D9%86%D8%B3-%D8%AF%D8%B1-%D8%AC%D9%88%D8%A7%D8%AF%D8%A2%D8%A8%D8%A7%D8%AF-%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD-%D8%B4%D8%AF",
+      "source_post_id": "%D9%BE%D8%A7%DB%8C%DA%AF%D8%A7%D9%87-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3-%D8%A2%D9%85%D8%A8%D9%88%D9%84%D8%A7%D9%86%D8%B3-%D9%88-%D8%B3%D9%87-%D9%85%D9%88%D8%AA%D9%88%D8%B1%D9%84%D8%A7%D9%86%D8%B3-%D8%AF%D8%B1-%D8%AC%D9%88%D8%A7%D8%AF%D8%A2%D8%A8%D8%A7%D8%AF-%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD-%D8%B4%D8%AF",
+      "title": "پایگاه اتوبوس‌آمبولانس و سه موتورلانس در جوادآباد افتتاح شد",
+      "excerpt": "ورامین - روابط عمومی اورژانس استان تهران، از بهره‌برداری پایگاه اتوبوس‌آمبولانس جوادآباد با استقرار یک دستگاه اتوبوس‌آمبولانس و سه موتورلانس با هدف تقویت خدمات فوریت‌های پزشکی خبر داد.",
+      "paragraphs": [
+        "ورامین - روابط عمومی اورژانس استان تهران، از بهره‌برداری پایگاه اتوبوس‌آمبولانس جوادآباد با استقرار یک دستگاه اتوبوس‌آمبولانس و سه موتورلانس با هدف تقویت خدمات فوریت‌های پزشکی خبر داد."
+      ],
+      "published_at": "2026-11-07T13:49:16+00:00",
+      "media": null,
+      "source": "مهر ـ تهران",
+      "source_handle": "web_mehr_tehran",
+      "id": "71e8cc4311912fd5",
+      "media_repost_allowed": true,
+      "source_hashtag": "مهر_تهران",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-07T13:54:39.669688+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-07T13:20:57.925420+00:00",
+  "saved_at": "2026-11-07T13:55:54.175015+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-07T13:19:33.800026+00:00",
-    "tehran_tel": "2026-11-07T13:19:33.800026+00:00",
-    "irna_1313": "2026-11-07T13:19:33.800026+00:00",
-    "isna94": "2026-11-07T13:19:33.800026+00:00",
-    "mehrnews": "2026-11-07T13:19:33.800026+00:00",
-    "web_shahr": "2026-11-07T13:19:33.800026+00:00",
-    "web_mehr_tehran": "2026-11-07T13:19:33.800026+00:00"
+    "tehranpress1": "2026-11-07T13:54:39.669688+00:00",
+    "tehran_tel": "2026-11-07T13:54:39.669688+00:00",
+    "irna_1313": "2026-11-07T13:54:39.669688+00:00",
+    "isna94": "2026-11-07T13:54:39.669688+00:00",
+    "mehrnews": "2026-11-07T13:54:39.669688+00:00",
+    "web_shahr": "2026-11-07T13:54:39.669688+00:00",
+    "web_mehr_tehran": "2026-11-07T13:54:39.669688+00:00"
   }
 }
