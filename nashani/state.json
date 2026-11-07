@@ -579,7 +579,8 @@
     "https://t.me/kerman_news/140227",
     "https://t.me/Kerman_akhbar/66248",
     "https://t.me/kerman_news/140228",
-    "https://t.me/kerman_news/140229"
+    "https://t.me/kerman_news/140229",
+    "https://t.me/Kerman_akhbar/66249"
   ],
   "queue": [
     {
@@ -4655,7 +4656,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-07T10:42:17.956768+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66249"
+        }
+      ]
     },
     {
       "url": "https://t.me/kerman_news/140198",
@@ -5854,15 +5860,15 @@
       "sent_at": "2026-11-07T18:39:32.499275+00:00"
     }
   ],
-  "saved_at": "2026-11-07T18:39:32.499297+00:00",
+  "saved_at": "2026-11-07T19:04:00.469778+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-07T18:38:33.088048+00:00",
-    "fardaayekerman": "2026-11-07T18:38:33.088048+00:00",
-    "irna_kerman": "2026-11-07T18:38:33.088048+00:00",
-    "kerman_gov": "2026-11-07T18:38:33.088048+00:00",
-    "kerman_akhbar": "2026-11-07T18:38:33.088048+00:00",
+    "fardaayekerman": "2026-11-07T19:03:41.649863+00:00",
+    "irna_kerman": "2026-11-07T19:03:41.649863+00:00",
+    "kerman_gov": "2026-11-07T19:03:41.649863+00:00",
+    "kerman_akhbar": "2026-11-07T19:03:41.649863+00:00",
     "kerman_news": "2026-11-07T18:38:33.088048+00:00",
-    "kerman_rasaneh": "2026-11-07T18:38:33.088048+00:00",
+    "kerman_rasaneh": "2026-11-07T19:03:41.649863+00:00",
     "qh_qv": "2026-11-07T18:38:33.088048+00:00"
   }
 }
