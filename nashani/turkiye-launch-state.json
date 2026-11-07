@@ -19,6 +19,9 @@
     "savings_guide": {
       "status": "published",
       "message_id": 10
+    },
+    "mgm_van_20261107": {
+      "status": "sending_uncertain"
     }
   }
 }
