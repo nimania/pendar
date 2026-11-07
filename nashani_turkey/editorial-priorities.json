@@ -345,6 +345,71 @@
       "verified_at"
     ],
     "posting_policy": "Two curated digests daily; urgent short-lived high-value offers as needed; no automatic reposting of copyrighted catalog images without permission.",
-    "consumer_disclaimer": "قیمت و موجودی ممکن است با شعبه و زمان تغییر کند؛ پیش از خرید، قیمت نهایی را در فروشگاه بررسی کنید."
+    "consumer_disclaimer": "قیمت و موجودی ممکن است با شعبه و زمان تغییر کند؛ پیش از خرید، قیمت نهایی را در فروشگاه بررسی کنید.",
+    "audiences": [
+      "residents_in_turkiye",
+      "iranian_online_shopping_and_resellers"
+    ],
+    "shopping_segments": [
+      {
+        "category": "fashion",
+        "brands": [
+          "Zara",
+          "H&M",
+          "Mango",
+          "Pull&Bear",
+          "Bershka",
+          "Stradivarius",
+          "Massimo Dutti",
+          "LC Waikiki",
+          "Koton",
+          "DeFacto",
+          "Boyner",
+          "Mavi",
+          "Penti"
+        ],
+        "priority": "high"
+      },
+      {
+        "category": "home_furnishing",
+        "brands": [
+          "IKEA",
+          "Koçtaş",
+          "JYSK",
+          "Evidea",
+          "English Home",
+          "Madame Coco",
+          "Zara Home"
+        ],
+        "priority": "high"
+      },
+      {
+        "category": "kitchen_tableware",
+        "brands": [
+          "Karaca",
+          "Jumbo",
+          "Kütahya Porselen",
+          "Schafer",
+          "Emsan",
+          "Paşabahçe",
+          "Tefal"
+        ],
+        "priority": "high"
+      }
+    ],
+    "cross_border_policy": {
+      "require_iranian_retail_viability": "Do not declare export/resale profitability without documented landed costs and rules",
+      "margin_components": [
+        "TRY base unit price",
+        "international delivery",
+        "procurement/packing",
+        "customs duties where applicable",
+        "VAT",
+        "FX spread",
+        "returns and risk"
+      ],
+      "label": "Turkey local price, not delivered price in Iran",
+      "no_unauthorized_commerce": "Do not claim goods may be freely imported without checking relevant rules"
+    }
   }
 }
