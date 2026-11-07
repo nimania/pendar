@@ -33,7 +33,8 @@
       "message_id": 13
     },
     "istanbul_mgm_20261107": {
-      "status": "sending_uncertain"
+      "status": "published",
+      "message_id": 14
     }
   }
 }
