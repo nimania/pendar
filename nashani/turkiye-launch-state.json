@@ -9,7 +9,8 @@
       "message_id": 5
     },
     "flights_weather": {
-      "status": "sending_uncertain"
+      "status": "published",
+      "message_id": 6
     }
   }
 }
