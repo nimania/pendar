@@ -605,11 +605,16 @@ def main():
     if not results and failed:
         raise RuntimeError("No news sources reachable: refusing to update state")
     if not state.get("initialized"):
-        state["seen"] = sorted({p["url"] for p in results})
+        # User authorized first fresh Tehran post. Seed the history while
+        # allowing precisely ONE newest eligible city story through.
+        eligible_first = [p for p in results if evaluate(dict(p), now,
+                          source_map.get(p["source_handle"].lower()))]
+        eligible_first.sort(key=lambda p: p["published_at"] or "")
+        first_url = eligible_first[-1]["url"] if eligible_first else None
+        state["seen"] = sorted({p["url"] for p in results if p["url"] != first_url})
         state["initialized"] = True
         ledger.save(state)
-        print(f"Initial baseline: {len(state['seen'])} URLs, no historic news published")
-        return
+        print(f"Initial Tehran baseline: {len(state['seen'])} old URLs; first eligible={bool(first_url)}")
 
     seen_list = list(state.get("seen", []))
     seen = set(seen_list)
