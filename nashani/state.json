@@ -773,7 +773,17 @@
     "https://t.me/irna_kerman/30338",
     "https://t.me/kerman_gov/10583",
     "https://t.me/kerman_news/140280",
-    "https://t.me/qh_qv/993"
+    "https://t.me/qh_qv/993",
+    "https://t.me/kerman_news/140281",
+    "https://t.me/kerman_news/140282",
+    "https://t.me/kerman_news/140283",
+    "https://t.me/qh_qv/994",
+    "https://t.me/qh_qv/995",
+    "https://t.me/Kerman_akhbar/66278",
+    "https://t.me/qh_qv/996",
+    "https://t.me/qh_qv/997",
+    "https://t.me/qh_qv/998",
+    "https://t.me/qh_qv/999"
   ],
   "queue": [
     {
@@ -9092,15 +9102,15 @@
       "sent_at": "2026-11-08T19:20:45.057070+00:00"
     }
   ],
-  "saved_at": "2026-11-08T19:20:45.057111+00:00",
+  "saved_at": "2026-11-08T20:46:41.581894+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-08T19:20:22.312128+00:00",
-    "fardaayekerman": "2026-11-08T19:20:22.312128+00:00",
-    "irna_kerman": "2026-11-08T19:20:22.312128+00:00",
-    "kerman_gov": "2026-11-08T19:20:22.312128+00:00",
-    "kerman_akhbar": "2026-11-08T19:20:22.312128+00:00",
-    "kerman_news": "2026-11-08T19:20:22.312128+00:00",
-    "kerman_rasaneh": "2026-11-08T19:20:22.312128+00:00",
-    "qh_qv": "2026-11-08T19:20:22.312128+00:00"
+    "kermane_no": "2026-11-08T20:46:28.036698+00:00",
+    "fardaayekerman": "2026-11-08T20:46:28.036698+00:00",
+    "irna_kerman": "2026-11-08T20:46:28.036698+00:00",
+    "kerman_gov": "2026-11-08T20:46:28.036698+00:00",
+    "kerman_akhbar": "2026-11-08T20:46:28.036698+00:00",
+    "kerman_news": "2026-11-08T20:46:28.036698+00:00",
+    "kerman_rasaneh": "2026-11-08T20:46:28.036698+00:00",
+    "qh_qv": "2026-11-08T20:46:28.036698+00:00"
   }
 }
