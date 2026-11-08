@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-11-06T21:27:05+00:00",
+  "updated_at": "2026-11-08T11:13:59+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-f41f0e47320f83f3b0",
+      "date": "2026-11-05",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "North Korean Leader Inspects New Warship Under Construction at Nampho Shipyard",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/05/north-korean-leader-inspects-new-warship-under-construction-at-nampho-shipyard"
+    },
     {
       "id": "usni-71ea403e8637657b13",
       "date": "2026-11-04",
