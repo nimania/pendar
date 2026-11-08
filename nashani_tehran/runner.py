@@ -24,6 +24,7 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
+from propaganda import is_pure_propaganda
 
 from editorial import compose_caption, extract_media, meaningful_lines, clean_news_line
 from media_delivery import MediaNotAvailable, upload_public_media
@@ -165,9 +166,9 @@ def looks_like_advertisement(text):
 
 
 def is_promotional_story(item):
-    return looks_like_advertisement(" ".join(
-        [item.get("title", ""), item.get("excerpt", "")]
-        + (item.get("paragraphs") or [])))
+    body = " ".join([item.get("title", ""), item.get("excerpt", "")]
+                    + (item.get("paragraphs") or []))
+    return looks_like_advertisement(body) or is_pure_propaganda(body)
 
 
 def is_visual_story(item):
