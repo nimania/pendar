@@ -744,7 +744,60 @@
     "https://t.me/isna94/412339",
     "https://t.me/isna94/412341",
     "https://t.me/isna94/412342",
-    "https://t.me/tehranpress1/132295"
+    "https://t.me/tehranpress1/132295",
+    "https://t.me/mehrnews/429813",
+    "https://www.mehrnews.com/news/7003987/%D8%B9%D9%84%D8%AA-%D8%A7%D9%86%D8%AA%D8%B4%D8%A7%D8%B1-%D8%AF%D9%88%D8%AF-%D8%BA%D9%84%DB%8C%D8%B8-%D8%A7%D8%B2-%D9%81%D9%84%D8%B1-%D9%BE%D8%A7%D9%84%D8%A7%DB%8C%D8%B4%DA%AF%D8%A7%D9%87-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A7%D8%B9%D9%84%D8%A7%D9%85-%D8%B4%D8%AF",
+    "https://t.me/isna94/412347",
+    "https://t.me/tehranpress1/132296",
+    "https://t.me/isna94/412348",
+    "https://t.me/mehrnews/429814",
+    "https://t.me/mehrnews/429815",
+    "https://t.me/mehrnews/429816",
+    "https://t.me/mehrnews/429817",
+    "https://t.me/mehrnews/429818",
+    "https://t.me/isna94/412349",
+    "https://t.me/mehrnews/429819",
+    "https://t.me/isna94/412350",
+    "https://t.me/isna94/412351",
+    "https://t.me/isna94/412352",
+    "https://t.me/isna94/412353",
+    "https://t.me/isna94/412354",
+    "https://t.me/mehrnews/429820",
+    "https://t.me/mehrnews/429821",
+    "https://t.me/mehrnews/429822",
+    "https://t.me/mehrnews/429823",
+    "https://t.me/Tehran_Tel/114754",
+    "https://t.me/isna94/412355",
+    "https://t.me/isna94/412356",
+    "https://t.me/mehrnews/429824",
+    "https://t.me/Tehran_Tel/114755",
+    "https://t.me/isna94/412357",
+    "https://t.me/isna94/412358",
+    "https://t.me/isna94/412359",
+    "https://t.me/tehranpress1/132297",
+    "https://t.me/isna94/412360",
+    "https://t.me/irna_1313/471166",
+    "https://t.me/irna_1313/471176",
+    "https://t.me/irna_1313/471177",
+    "https://t.me/irna_1313/471178",
+    "https://t.me/tehranpress1/132298",
+    "https://t.me/isna94/412361",
+    "https://t.me/irna_1313/471179",
+    "https://t.me/tehranpress1/132299",
+    "https://t.me/tehranpress1/132300",
+    "https://t.me/irna_1313/471180",
+    "https://t.me/isna94/412362",
+    "https://t.me/irna_1313/471181",
+    "https://t.me/isna94/412363",
+    "https://t.me/irna_1313/471182",
+    "https://t.me/irna_1313/471184",
+    "https://t.me/irna_1313/471185",
+    "https://www.mehrnews.com/news/7004084/%D8%A2%D8%BA%D8%A7%D8%B2-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D9%86%D9%88%DB%8C%D9%86-%D8%B4%DB%8C%D9%85%DB%8C-%D8%AF%D8%B1%D9%85%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%A8%DB%8C%D9%85%D8%A7%D8%B1%D8%B3%D8%AA%D8%A7%D9%86-%D8%B4%D9%87%D8%AF%D8%A7%DB%8C-%D8%B3%D9%84%D8%A7%D9%85%D8%AA",
+    "https://t.me/irna_1313/471186",
+    "https://t.me/irna_1313/471187",
+    "https://t.me/isna94/412366",
+    "https://t.me/isna94/412367",
+    "https://t.me/irna_1313/471188"
   ],
   "queue": [
     {
@@ -3424,7 +3477,12 @@
       "geography": "tehran_city",
       "status": "ready",
       "detected_at": "2026-11-08T07:49:46.176131+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "تهران‌پرس",
+          "url": "https://t.me/tehranpress1/132298"
+        }
+      ]
     },
     {
       "url": "https://t.me/irna_1313/471106",
@@ -3559,16 +3617,128 @@
       "status": "review",
       "detected_at": "2026-11-08T07:49:46.176131+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/mehrnews/429819",
+      "source_post_id": "429819",
+      "title": "گواهی‌های انسانی/ ۶۳",
+      "excerpt": "گواهی‌های انسانی/ ۶۳ تاب‌آوری و پیروزی یادداشت مهمان، کورش علیانی، فعال فرهنگی هجوم پیام‌های تخفیف، برخلاف ظاهر فریبنده‌شان، شاید بیش از هر چیز از خالی‌شدن جیب مردم و دشواری فروش در اقتصاد جنگ‌زده خبر بدهند. اقتصاد آن سوی جنگ نیز بیرون از میدان پیامدها نیست. کنترل تنگه‌ هرمز به دست ایران و فشار بر عبور انرژی و کالا، هزینه‌ تجارت، حمل‌ونقل، و تولید را برای دیگر کشورها بالا می‌برد. وقتی هزینه‌ زندگی بالا می‌رود، قدرت خرید خانوارهای اروپایی و آمریکایی نیز زیر فشار قرار می‌گیرد. جنگی که گمان می‌کردند ایران را به زانو درآورد، هزینه‌های خودش را به سوی آغازکنندگانش برگردانده است.",
+      "paragraphs": [
+        "گواهی‌های انسانی/ ۶۳",
+        "تاب‌آوری و پیروزی",
+        "یادداشت مهمان، کورش علیانی، فعال فرهنگی",
+        "هجوم پیام‌های تخفیف، برخلاف ظاهر فریبنده‌شان، شاید بیش از هر چیز از خالی‌شدن جیب مردم و دشواری فروش در اقتصاد جنگ‌زده خبر بدهند.",
+        "اقتصاد آن سوی جنگ نیز بیرون از میدان پیامدها نیست. کنترل تنگه‌ هرمز به دست ایران و فشار بر عبور انرژی و کالا، هزینه‌ تجارت، حمل‌ونقل، و تولید را برای دیگر کشورها بالا می‌برد. وقتی هزینه‌ زندگی بالا می‌رود، قدرت خرید خانوارهای اروپایی و آمریکایی نیز زیر فشار قرار می‌گیرد. جنگی که گمان می‌کردند ایران را به زانو درآورد، هزینه‌های خودش را به سوی آغازکنندگانش برگردانده است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/WSE3lT7VOaw-Ao8_9My2Dupn7CnXflG23WosS0b6FVG5mrkCqa1FUvfFsdA-ht5uW2ZscegoXvsPF3_dUOSQQ7nS9lQ-zfXt-AI2Se1ja3_yEKv6AmZljER2DLic-5pX4RxTBn9AhmY_RqsZbtbGiGTmJP5QKZu8yTXCI6AS09ai-1HsI9Pk1Z0rT3le56_VqnMsxoGsKgZVMtrR5XhqYQls5h1vZbENokd4VvKH38H4Wn2V0lVKk9ehkOKNRrfHt4OLp6ivsf_2jujTLiBuJUvYiSTGCb7766N-_eirJcOMJnayU2aLpduRhB4WUlTkxGCDr3f-qcwU4x-xD65NQw.jpg"
+      },
+      "published_at": "2026-11-08T08:25:29+00:00",
+      "source": "مهر",
+      "source_handle": "mehrnews",
+      "id": "c95d56e997a13dbf",
+      "media_repost_allowed": true,
+      "source_hashtag": "مهر",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T09:29:51.369726+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132297",
+      "source_post_id": "132297",
+      "title": "استقرار ۵۰۰ نیروی آتش نشان برای مخاطرات احتمالی باران",
+      "excerpt": "استقرار ۵۰۰ نیروی آتش نشان برای مخاطرات احتمالی باران علیرضا کاظمی، معاون عملیات سازمان آتش نشانی تهران ۵۰۰ نیروی آتش نشان برای خطرات احتمالی باران در تهران مستقر شده‌اند. نیرو‌های آتش نشان تا دو روز آینده در آماده باش کامل هستند. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "استقرار ۵۰۰ نیروی آتش نشان برای مخاطرات احتمالی باران",
+        "علیرضا کاظمی، معاون عملیات سازمان آتش نشانی تهران",
+        "۵۰۰ نیروی آتش نشان برای خطرات احتمالی باران در تهران مستقر شده‌اند.",
+        "نیرو‌های آتش نشان تا دو روز آینده در آماده باش کامل هستند.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/e0142ed7de.mp4?token=E4XcjLJADuNzqmnXVarEals8_AtINuHffGnk3IbHAm92R-3O3943KiKSc4vMT7CETGgn5ukjf68gkCbxiFnOqqXHiBVI2RoaPuGlPdXGdPhPYBUdTtwjectHigy8jRADgWYPLfnMnkqLCvBha3KLQnDC1h37aHMYb0H44QcyAXAqwDsQIWVOEoySt9JDvWjhvz9VGzu5IH6QfBHUFBuGlb5IOCNWfod5MkcivMqE-rjYXT3uedgwg4NYFBeQbaunShqfJFRy23iS4lfwJ8tMHFoxJkllkmcGI6mH1QLQMvU5xZHsp64N0G9Sbobdx_4hMPDUq4XmSJnQll6ClYOvDQ"
+      },
+      "published_at": "2026-11-08T08:58:17+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "49875f59325ef6f1",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T09:29:51.369726+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/471177",
+      "source_post_id": "471177",
+      "title": "اعلام زمان مراسم تشییع و خاکسپاری دبیرکل حزب توسعه ملی",
+      "excerpt": "اعلام زمان مراسم تشییع و خاکسپاری دبیرکل حزب توسعه ملی مراسم تشییع و خاکسپاری محمد صادق نوروزی روز دوشنبه ۱۸ آبان‌ماه ۱۴۰۵، ساعت ۱۱ صبح، در آستان مقدس امامزاده سید جعفر و حمیده خاتون (باغ فیض)، واقع در تهران، بزرگراه شهید اشرفی اصفهانی، باغ فیض برگزار خواهد…",
+      "paragraphs": [
+        "اعلام زمان مراسم تشییع و خاکسپاری دبیرکل حزب توسعه ملی",
+        "مراسم تشییع و خاکسپاری محمد صادق نوروزی روز دوشنبه ۱۸ آبان‌ماه ۱۴۰۵، ساعت ۱۱ صبح، در آستان مقدس امامزاده سید جعفر و حمیده خاتون (باغ فیض)، واقع در تهران، بزرگراه شهید اشرفی اصفهانی، باغ فیض برگزار خواهد…"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/oO0WYttUnOnlzjfFY4Z0tgkyovtkqG0OLIuLz8MffLQH07qdnPgXvueYBc7DCFl2svvFSek6OWIBadj2in6SAnqAFZavh7bnyUTcBlU0-QKFt_dAdtpVgcMr8UjQwLi69Fcd7B7N88TFLsWZFmE41RLAthmBWw6NA34nkTqkMp_meN3c13N1OgCEUvllYJJEXkTbP0EcjQnd8Ual5T2hoaTUi2YSPFa4IzoyGerWgDvLYjT-BKJr1MTDYaxLMUb-qQGz5GvAoQMdddFAeu74czjoU0lzqGZsbB8B4vG1I36m86Ef67LPGIusI_qUqheKVXgtq4aEa02Dy3IQK0fSHA.jpg"
+      },
+      "published_at": "2026-11-08T09:06:39+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "a45a7c5a1882a2bf",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T09:29:51.369726+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132299",
+      "source_post_id": "132299",
+      "title": "اگر از پایگاه‌های آمریکا در آلمان یا آلبانی یا انگلیس علیه ایران استفاده شود، هدف ما خواهند بود",
+      "excerpt": "اگر از پایگاه‌های آمریکا در آلمان یا آلبانی یا انگلیس علیه ایران استفاده شود، هدف ما خواهند بود محمدجواد لاریجانی با استراتژی «حذف محدودیت جغرافیایی» اگر از پایگاه‌های آمریکا در آلمان یا آلبانی یا انگلیس علیه ایران استفاده شود، این پایگاه‌ها هدف مشروع ما خواهند شد. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "اگر از پایگاه‌های آمریکا در آلمان یا آلبانی یا انگلیس علیه ایران استفاده شود، هدف ما خواهند بود",
+        "محمدجواد لاریجانی",
+        "با استراتژی «حذف محدودیت جغرافیایی» اگر از پایگاه‌های آمریکا در آلمان یا آلبانی یا انگلیس علیه ایران استفاده شود، این پایگاه‌ها هدف مشروع ما خواهند شد.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/2fe75dbb40.mp4?token=DiltGY-RfyMr4vs2Q6T0fz2c-dO5ZFMlfmfzcRhlrhvNHYdNkDp0qq_r5e6P-U5yGK9CYVzho5ulYaGP9HQ21gInA8psO81wxFU8CzCE-FxQHW5wonz5NsxsPeoApANGSLj02TCecjc6ApZGOKUvV56ncJbaRXZtxM_iOKNhOL8KgtWtr4MyNdZTjJf93bhQInnQQT9MOX3eeh1POMn7Z3Rw-DpIukWMreYZYWj23iFKOqTnRGWxKKSgLWriL16E9UXX1ZxWRsiincmplmuAIz9VV9SgvHr-bAdz_d9iKYB43fSnavhkVASNkw_my6NTXnZmXMNWciJSXpAzEcQSTg"
+      },
+      "published_at": "2026-11-08T09:12:06+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "5c2eebc1c055bfe0",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T09:29:51.369726+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T07:51:16.933065+00:00",
+  "saved_at": "2026-11-08T09:31:06.634030+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-08T07:49:46.176131+00:00",
-    "tehran_tel": "2026-11-08T07:49:46.176131+00:00",
-    "irna_1313": "2026-11-08T07:49:46.176131+00:00",
-    "isna94": "2026-11-08T07:49:46.176131+00:00",
-    "mehrnews": "2026-11-08T07:49:46.176131+00:00",
+    "tehranpress1": "2026-11-08T09:29:51.369726+00:00",
+    "tehran_tel": "2026-11-08T09:29:51.369726+00:00",
+    "irna_1313": "2026-11-08T09:29:51.369726+00:00",
+    "isna94": "2026-11-08T09:29:51.369726+00:00",
+    "mehrnews": "2026-11-08T09:29:51.369726+00:00",
     "web_shahr": "2026-11-07T16:39:19.149081+00:00",
-    "web_mehr_tehran": "2026-11-08T07:49:46.176131+00:00"
+    "web_mehr_tehran": "2026-11-08T09:29:51.369726+00:00"
   }
 }
