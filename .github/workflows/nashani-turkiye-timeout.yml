@@ -1,0 +1,40 @@
+name: Nashani Turkiye daily Time Out guide
+on:
+  schedule:
+    # 12:15 Istanbul / 12:45 Tehran. GitHub may delay scheduled jobs.
+    - cron: '15 9 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        type: boolean
+        default: true
+  push:
+    branches: [main]
+    paths:
+      - 'nashani_turkey/timeout_daily.py'
+      - '.github/workflows/nashani-turkiye-timeout.yml'
+permissions:
+  contents: write
+concurrency:
+  group: nashani-turkiye-timeout
+  cancel-in-progress: false
+jobs:
+  introduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install beautifulsoup4 httpx pydantic-settings
+      - run: python -m py_compile nashani_turkey/timeout_daily.py
+      - name: Discover, summarize and publish one venue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
+        run: python nashani_turkey/timeout_daily.py
