@@ -26,7 +26,8 @@
       "at": "2026-11-08T13:23:42.484654+03:30"
     },
     "2026-11-08-midday-تهران": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 53,
       "at": "2026-11-08T13:23:42.484654+03:30"
     }
   }
