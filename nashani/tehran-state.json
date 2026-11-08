@@ -1049,7 +1049,21 @@
     "https://t.me/isna94/412486",
     "https://t.me/tehranpress1/132331",
     "https://t.me/irna_1313/471410",
-    "https://t.me/mehrnews/430001"
+    "https://t.me/mehrnews/430001",
+    "https://shahr.ir/news/88097/%D8%A7%DA%AF%D8%B1-%D8%A7%D9%82%D8%AF%D8%A7%D9%85%D8%A7%D8%AA-%D8%A7%D9%86%D8%AC%D8%A7%D9%85-%D8%B4%D8%AF%D9%87-%D8%AF%D8%B1-%D9%85%D8%AD%D9%84%D8%A7%D8%AA-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%B1%D8%A7-%D8%A7%D8%B2-%D9%86%D8%B2%D8%AF%DB%8C%DA%A9-%D9%86%D9%85%DB%8C-%D8%AF%DB%8C%D8%AF%D9%85-%D8%A8%D8%A7%D9%88%D8%B1",
+    "https://t.me/tehranpress1/132332",
+    "https://t.me/irna_1313/471420",
+    "https://t.me/isna94/412487",
+    "https://t.me/irna_1313/471421",
+    "https://t.me/tehranpress1/132333",
+    "https://t.me/mehrnews/430008",
+    "https://t.me/mehrnews/430009",
+    "https://t.me/isna94/412488",
+    "https://t.me/irna_1313/471422",
+    "https://t.me/tehranpress1/132334",
+    "https://t.me/irna_1313/471423",
+    "https://t.me/irna_1313/471424",
+    "https://t.me/tehranpress1/132335"
   ],
   "queue": [
     {
@@ -4937,16 +4951,173 @@
       "status": "review",
       "detected_at": "2026-11-08T18:53:56.586889+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://shahr.ir/news/88097/%D8%A7%DA%AF%D8%B1-%D8%A7%D9%82%D8%AF%D8%A7%D9%85%D8%A7%D8%AA-%D8%A7%D9%86%D8%AC%D8%A7%D9%85-%D8%B4%D8%AF%D9%87-%D8%AF%D8%B1-%D9%85%D8%AD%D9%84%D8%A7%D8%AA-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%B1%D8%A7-%D8%A7%D8%B2-%D9%86%D8%B2%D8%AF%DB%8C%DA%A9-%D9%86%D9%85%DB%8C-%D8%AF%DB%8C%D8%AF%D9%85-%D8%A8%D8%A7%D9%88%D8%B1",
+      "source_post_id": "%D8%A7%DA%AF%D8%B1-%D8%A7%D9%82%D8%AF%D8%A7%D9%85%D8%A7%D8%AA-%D8%A7%D9%86%D8%AC%D8%A7%D9%85-%D8%B4%D8%AF%D9%87-%D8%AF%D8%B1-%D9%85%D8%AD%D9%84%D8%A7%D8%AA-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%B1%D8%A7-%D8%A7%D8%B2-%D9%86%D8%B2%D8%AF%DB%8C%DA%A9-%D9%86%D9%85%DB%8C-%D8%AF%DB%8C%D8%AF%D9%85-%D8%A8%D8%A7%D9%88%D8%B1",
+      "title": "اگر اقدامات انجام‌شده در محلات تهران را از نزدیک نمی‌دیدم، باور نمی‌کردم",
+      "excerpt": "جلسه هم‌اندیشی و بررسی مسائل و ظرفیت‌های محله خلیج‌فارس شمالی با حضور رئیس‌جمهور و حجت‌الاسلام‌والمسلمین مهدی طائب، رئیس سازمان بسیج مستضعفین، در مسجد جامع زین‌العابدین (ع) این محله برگزار شد.",
+      "paragraphs": [
+        "جلسه هم‌اندیشی و بررسی مسائل و ظرفیت‌های محله خلیج‌فارس شمالی با حضور رئیس‌جمهور و حجت‌الاسلام‌والمسلمین مهدی طائب، رئیس سازمان بسیج مستضعفین، در مسجد جامع زین‌العابدین (ع) این محله برگزار شد."
+      ],
+      "published_at": "2026-11-08T18:32:22+00:00",
+      "media": null,
+      "source": "شهر",
+      "source_handle": "web_shahr",
+      "id": "3dd6955b391d5c8a",
+      "media_repost_allowed": false,
+      "source_hashtag": "شهر",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:20.293727+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132332",
+      "source_post_id": "132332",
+      "title": "سرپرست وزارت نفت: از مردم خواهش می‌کنم به پویش ۱۸ تا ۲۰ درجه بپیوندند",
+      "excerpt": "سرپرست وزارت نفت: از مردم خواهش می‌کنم به پویش ۱۸ تا ۲۰ درجه بپیوندند تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "سرپرست وزارت نفت: از مردم خواهش می‌کنم به پویش ۱۸ تا ۲۰ درجه بپیوندند",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/bc95f9ed58.mp4?token=YkumHYh2zXiHPnkptxWM9fC23trovLEPN0I3yA17wTlIXXcXCPYyrLSf7os8XQ-WWRLnrzLjA9KojUv5vCzDy3se35NqB3OXpTYOHTG9YGOsuxBb-o32cVeoKqS8vH3BBok7dIbH_TO0jiS6E7eFhGSD_BgpfpvotIFD7lmN8JOOgpYb43HAl-DMduIaZv9lFh4e33ZgzgBpV9ilbWNx5dD7wjXKvwUdX5R8lpETuz5OLLAa-23aOyu_0RQ4pDBjGZmXsKCU7mv6FKdtmGKFUFmIeCpDAFr5LM2BuLelr4D1cNj-8J7WvZn_mlSQVIuwmkWM90npLhLUITy2yqg9aA"
+      },
+      "published_at": "2026-11-08T18:54:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "cfd2a9ee2308c61e",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:20.293727+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132333",
+      "source_post_id": "132333",
+      "title": "مدارس مازندران فردا مجازی شد",
+      "excerpt": "مدارس مازندران فردا مجازی شد استانداری مازندران به‌دلیل بارندگی شدید و کاهش محسوس دما، مدارس استان برای حفظ سلامت و ایمنی دانش‌آموزان فردا دوشنبه غیرحضوری شدند. غیرحضوری بودن مشمول ادارات و بانک‌ها و دستگاه‌های اجرایی نمی‌شود و همهٔ ادارات و بانک‌ها به روال عادی با تمام ظرفیت فردا فعال خواهند بود. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "مدارس مازندران فردا مجازی شد",
+        "استانداری مازندران",
+        "به‌دلیل بارندگی شدید و کاهش محسوس دما، مدارس استان برای حفظ سلامت و ایمنی دانش‌آموزان فردا دوشنبه غیرحضوری شدند.",
+        "غیرحضوری بودن مشمول ادارات و بانک‌ها و دستگاه‌های اجرایی نمی‌شود و همهٔ ادارات و بانک‌ها به روال عادی با تمام ظرفیت فردا فعال خواهند بود.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": null,
+      "published_at": "2026-11-08T19:03:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "6725cb161e594204",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:20.293727+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/mehrnews/430008",
+      "source_post_id": "430008",
+      "title": "پرونده «جنگ رمضان»/۲۰۳؛",
+      "excerpt": "پرونده «جنگ رمضان»/۲۰۳؛ بازتاب پیامدهای جنگ علیه ایران در رسانه‌های جهان علی راشد النعیمی، رئیس کمیته دفاع، کشور و امور خارجه شورای ملی فدرال امارات، در مصاحبه‌ای اختصاصی گفت نسبت به مذاکرات آمریکا و ایران «کمی خوش‌بین» است و در روزهای اخیر پیشرفت‌هایی از طریق میانجیگری قطر دیده شده است. ان‌بی‌سی نیوز ایران خود را برای احتمال از سرگیری جنگ آماده می‌کند و در همین حال، برخی مقامات خواستار بازنگری در سیاست هسته‌ای و ساخت بمب اتمی شده‌اند. به نوشته این گزارش، در شمال تهران مرکز آموزشی نیروهای داوطلب «جانفدا» افتتاح شد؛ اردوگاهی با میدان تیراندازی، مسیر طناب‌بازی و دیوار فرود با شعار «مرگ بر ترامپ». روزنامه ایندیپندنت خبر خوب رد قاطع دونالد ترامپ از سوی مردم آمریکا با این نگرانی همراه است که رئیس‌جمهوری که به‌طور فزاینده‌ای از واقعیت جدا شده، ممکن است واکنشی غیرعقلانی‌تر و ویرانگرتر از همیشه نشان دهد. به نوشته این سرمقاله، نشانه‌های اولیه مختلط‌اند: ترامپ نتیجه انتخابات را پذیرفت و گفت دموکرات‌ها «کار خوبی کردند»، اما سوزان وایلز را از ریاست ستاد برکنار کرد و استفن میلر را جانشین او کرد. سی‌جی‌تی‌ان پیروزی دموکرات‌ها در انتخابات میان‌دوره‌ای و تسلط آنان بر هر دو مجلس کنگره از ژانویه ۲۰۲۷، زمینه‌ساز مناقشات تازه با دولت دونالد ترامپ بر سر بودجه، تنظیم مقررات هوش مصنوعی و سیاست‌های تعرفه‌ای خواهد شد. جنگ آمریکا و اسرائیل علیه ایران با هدفی سریع و راهبردی، یعنی سرنگونی نظام و نابودی توانمندی‌های صنعتی و فناورانه ایران، آغاز شد، اما در تحقق اهداف خود ناکام ماند. پس از شکست جنگ ۱۲ روزه ژوئن ۲۰۲۵ و تلاش برای ایجاد آشوب داخلی، جنگ ۴۰ روزه از ۲۸ فوریه ۲۰۲۶ نیز نتوانست نظام ایران را سرنگون کند و حتی به تقویت همبستگی عمومی انجامید.",
+      "paragraphs": [
+        "پرونده «جنگ رمضان»/۲۰۳؛",
+        "بازتاب پیامدهای جنگ علیه ایران در رسانه‌های جهان",
+        "علی راشد النعیمی، رئیس کمیته دفاع، کشور و امور خارجه شورای ملی فدرال امارات، در مصاحبه‌ای اختصاصی گفت نسبت به مذاکرات آمریکا و ایران «کمی خوش‌بین» است و در روزهای اخیر پیشرفت‌هایی از طریق میانجیگری قطر دیده شده است.",
+        "ان‌بی‌سی نیوز",
+        "ایران خود را برای احتمال از سرگیری جنگ آماده می‌کند و در همین حال، برخی مقامات خواستار بازنگری در سیاست هسته‌ای و ساخت بمب اتمی شده‌اند. به نوشته این گزارش، در شمال تهران مرکز آموزشی نیروهای داوطلب «جانفدا» افتتاح شد؛ اردوگاهی با میدان تیراندازی، مسیر طناب‌بازی و دیوار فرود با شعار «مرگ بر ترامپ».",
+        "روزنامه ایندیپندنت",
+        "خبر خوب رد قاطع دونالد ترامپ از سوی مردم آمریکا با این نگرانی همراه است که رئیس‌جمهوری که به‌طور فزاینده‌ای از واقعیت جدا شده، ممکن است واکنشی غیرعقلانی‌تر و ویرانگرتر از همیشه نشان دهد. به نوشته این سرمقاله، نشانه‌های اولیه مختلط‌اند: ترامپ نتیجه انتخابات را پذیرفت و گفت دموکرات‌ها «کار خوبی کردند»، اما سوزان وایلز را از ریاست ستاد برکنار کرد و استفن میلر را جانشین او کرد.",
+        "سی‌جی‌تی‌ان",
+        "پیروزی دموکرات‌ها در انتخابات میان‌دوره‌ای و تسلط آنان بر هر دو مجلس کنگره از ژانویه ۲۰۲۷، زمینه‌ساز مناقشات تازه با دولت دونالد ترامپ بر سر بودجه، تنظیم مقررات هوش مصنوعی و سیاست‌های تعرفه‌ای خواهد شد.",
+        "جنگ آمریکا و اسرائیل علیه ایران با هدفی سریع و راهبردی، یعنی سرنگونی نظام و نابودی توانمندی‌های صنعتی و فناورانه ایران، آغاز شد، اما در تحقق اهداف خود ناکام ماند. پس از شکست جنگ ۱۲ روزه ژوئن ۲۰۲۵ و تلاش برای ایجاد آشوب داخلی، جنگ ۴۰ روزه از ۲۸ فوریه ۲۰۲۶ نیز نتوانست نظام ایران را سرنگون کند و حتی به تقویت همبستگی عمومی انجامید."
+      ],
+      "media": null,
+      "published_at": "2026-11-08T19:05:44+00:00",
+      "source": "مهر",
+      "source_handle": "mehrnews",
+      "id": "8e480b8ea82343ad",
+      "media_repost_allowed": true,
+      "source_hashtag": "مهر",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-08T19:20:20.293727+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132334",
+      "source_post_id": "132334",
+      "title": "نقطه‌زن‌های هوافضای سپاه چگونه ساختمان وزارت جنگ اسرائیل را ویران کردند؟",
+      "excerpt": "نقطه‌زن‌های هوافضای سپاه چگونه ساختمان وزارت جنگ اسرائیل را ویران کردند؟ تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "نقطه‌زن‌های هوافضای سپاه چگونه ساختمان وزارت جنگ اسرائیل را ویران کردند؟",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/9751e07843.mp4?token=ssyK9Le-C9G-iAXT5t8SjWKx2pIT517RRZuqHozKYPEBy2QZUbmdn-pmnxLxiUUzZI7ChMNiCg3LQGXpkUJ_foE3jbvXw0QZp9JD_SN4UkJyFEwikTlvE0ERLr2DDOmfMH26g_SChHLPN16qW5I8gQdS2FnB8ijY_CnJLZ2WBPQYr-joSF8eB8bBFs2vE5Sfi_JQuQdYdh9GCa6NEsXcoN6g-fYC5AL3cbYNAZH3g5FfLwNHDl2Jd5LNh9tl3SW_bB-yfJAdEVCzDM0t8CH7WJhQr4pXaPwnMj6ImNqs6jxEje9WNB-HmXzuEo3WqFC4VaLeIeRxJExm-dkIwpSZ7C62EqYbihS8mwy4t2nDWQNNRMPJF1P9-aoZhckYbVxvuBa7ZLfp2mcAek7h-OhbP_is8Go277UoID0JYfWteGaYLrsU4ECl8vqDhFK8aPj4czHq1_MXTFNAzhfSbVKAnBEKXTW_DgZzov-8mJrmtGegTQQ9skec9nve73XsCR-gRtG7z5RBaeZylkOO1Zdsbz7QJeaDYwqAIH74Hk1CJe0Depbj1Eibec-EgaDRLKFt-IcrVzK7cQwQj56J7dSOBRQFSGo4LNZCh68th-0dHzsD0s2AJLRFIrXN6pQbapo-qlipkFHOtIIFnWJ_3IsyA-BgN0AKZA7Vet6XtWt29T0"
+      },
+      "published_at": "2026-11-08T19:11:56+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "05b65987a76a369f",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:20.293727+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132335",
+      "source_post_id": "132335",
+      "title": "سیل چادر آوارگان غزه را برد",
+      "excerpt": "سیل چادر آوارگان غزه را برد تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "سیل چادر آوارگان غزه را برد",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/5c4a624576.mp4?token=lhh5Gwl23H9QspGX415SVscpHvWUctd9hpv39Mj44sftWm2vKsMpYLtvrOB_wPv4PjItyttawj0EywxLv5_xBPXdxZbbXj__55WRWxuKkmaDsVVXkmRmDC2e930UHIpAMmfmr7UCUbel3ZtGx3Jwe_aJuFcWJCajrVps7HRRcig6ES1pE20E1PSDEVTwab1U9p2K0j7dMNdJ3a76JKnDDvftfvLanM4G-MCz6fqyYZ40aNGt7Pl7h8ZntpLqyxtKXADSk_QR9kWQsiLQEk4GHvisu43DUhTAEs_YhiFL8FCMLtM2EFjRvj87IuvWnNU_oAY_BMSeeY7OGPKBqomJEw"
+      },
+      "published_at": "2026-11-08T19:18:01+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "f7e34cf16bd3a114",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:20.293727+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T18:54:43.084201+00:00",
+  "saved_at": "2026-11-08T19:21:22.767201+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-08T18:53:56.586889+00:00",
-    "tehran_tel": "2026-11-08T18:53:56.586889+00:00",
-    "irna_1313": "2026-11-08T18:53:56.586889+00:00",
-    "isna94": "2026-11-08T18:53:56.586889+00:00",
-    "mehrnews": "2026-11-08T18:53:56.586889+00:00",
-    "web_shahr": "2026-11-08T18:30:51.588560+00:00",
-    "web_mehr_tehran": "2026-11-08T18:30:51.588560+00:00"
+    "tehranpress1": "2026-11-08T19:20:20.293727+00:00",
+    "tehran_tel": "2026-11-08T19:20:20.293727+00:00",
+    "irna_1313": "2026-11-08T19:20:20.293727+00:00",
+    "isna94": "2026-11-08T19:20:20.293727+00:00",
+    "mehrnews": "2026-11-08T19:20:20.293727+00:00",
+    "web_shahr": "2026-11-08T19:20:20.293727+00:00",
+    "web_mehr_tehran": "2026-11-08T19:20:20.293727+00:00"
   }
 }
