@@ -763,7 +763,17 @@
     "https://t.me/Kerman_akhbar/66273",
     "https://t.me/Kerman_akhbar/66274",
     "https://t.me/kerman_news/140276",
-    "https://t.me/kerman_news/140277"
+    "https://t.me/kerman_news/140277",
+    "https://t.me/irna_kerman/30337",
+    "https://t.me/Kerman_akhbar/66275",
+    "https://t.me/kerman_news/140278",
+    "https://t.me/Kerman_akhbar/66276",
+    "https://t.me/Kerman_akhbar/66277",
+    "https://t.me/kerman_news/140279",
+    "https://t.me/irna_kerman/30338",
+    "https://t.me/kerman_gov/10583",
+    "https://t.me/kerman_news/140280",
+    "https://t.me/qh_qv/993"
   ],
   "queue": [
     {
@@ -8346,7 +8356,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-08T13:23:11.397388+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66276"
+        }
+      ],
       "reserved_at": "2026-11-08T14:51:12.820266+00:00",
       "delivery_kind": "text",
       "telegram_message_id": 176,
@@ -8875,17 +8890,201 @@
       "delivery_kind": "text",
       "telegram_message_id": 193,
       "sent_at": "2026-11-08T18:31:08.009568+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30337",
+      "source_post_id": "30337",
+      "title": "اجرای نخستین روز طرح مردم‌یاری پلیس در رودبار جنوب؛ از توزیع غذای گرم تا خدمات پزشکی",
+      "excerpt": "اجرای نخستین روز طرح مردم‌یاری پلیس در رودبار جنوب؛ از توزیع غذای گرم تا خدمات پزشکی فرمانده انتظامی جنوب استان کرمان از اجرای نخستین روز از طرح بزرگ مردم‌یاری در روستاهای اطراف شهرستان رودبار جنوب با ارائه خدمات متنوع بهداشتی، حمایتی و معیشتی خبر داد. irna_kerman",
+      "paragraphs": [
+        "اجرای نخستین روز طرح مردم‌یاری پلیس در رودبار جنوب؛ از توزیع غذای گرم تا خدمات پزشکی",
+        "فرمانده انتظامی جنوب استان کرمان از اجرای نخستین روز از طرح بزرگ مردم‌یاری در روستاهای اطراف شهرستان رودبار جنوب با ارائه خدمات متنوع بهداشتی، حمایتی و معیشتی خبر داد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/NVSlEMEr_9iingR8d5MdfmLri_uqjmLiv4WFH4Ni586pFqkB3JZ2pcqcc-1utqBKADMapBV8vNLM7glIeyfYhIOvv_Q0k9-x0PYTbAMvYt7_wjFTpXZPyMRtU01s5h5yjsTqygs9Fw3Yw4SzD-maLkKM3OlMRfr403wqQv6uLdo0w5nsPOfPn_ryf0aLt3PflZOgZwZkKTOIFb1mi1tIPzJ1xVCrMupSoZdA3GrBgZ73Uz58-KwnUuCUrbeu811ZwI43jNHztvNqszSP4cw2BUrDwnIvQ-J7Bo2hwmqSkTAtmhZpgbUhp01sdKyfPnwrPYGRLSFf97oT9Scsjm1DNg.jpg"
+      },
+      "published_at": "2026-11-08T18:34:18+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "fc2a096e58a4cfcc",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:22.312128+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66275",
+      "source_post_id": "66275",
+      "title": "مهدی رحمتی سرمربی گل‌گهر: به هواداران قول می‌دهم تیم را درست کنم",
+      "excerpt": "مهدی رحمتی سرمربی گل‌گهر: به هواداران قول می‌دهم تیم را درست کنم",
+      "paragraphs": [
+        "مهدی رحمتی سرمربی گل‌گهر: به هواداران قول می‌دهم تیم را درست کنم"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/9c00ca4e17.mp4?token=QNZl2ewqu4is294vWoALI6u6H1ID3WeK1jXhj1u-jjrP9VzH-pEW-O02Ve65NQtp3ERV2giImZDVRUrXBfMbHxMgigENrWVDchBsxvjyZokTO7hY5C5Rxw9NohdxjYtr1BI_qeC_44mAGuqtRjYxeEGXPjbobdO7vo17GWcdXWuIKb4OFbdZHMKra5svN5PZ8cYjjQ1HPHQYmH34UXg6LDhFqMOJyxpEMXh--De4ugvMxLUTBowmru1ujuj2YQP71cK86_yOSmW0mW2DAGG_e4yYXVY8WBIJMkJphBe5NgMwsvmNNuEIfYem9h7G-LV6GPeu1a-mVdqw2Pp72oEFYg"
+      },
+      "published_at": "2026-11-08T18:45:43+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "de93d31fa64aeb29",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:22.312128+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140278",
+      "source_post_id": "140278",
+      "title": "مهم ترین خبرهای روز",
+      "excerpt": "مهم ترین خبرهای روز کشف ۹۲ کیلوگرم موادمخدر توسط پلیس کرمان باد شدید، گردوخاک و بارش در انتظار استان کرمان دستگیری ۵۱۶ خرده‌فروش و قاچاقچی و کشف ۱۹۸ کیلوگرم مواد مخدر در کرمان غرق‌شدن دختر ۱۴ ساله در رودخانه پاکلاتون آسمینون دستور دستگیری مسئول نگهداری سگ شکاری در بردسیر صادر شد حقوق کارکنان دولت با اجرای پرداخت عملکردی کاهش نمی‌یابد اینترنت ناپایدار چابهار، سد راه زندگی دیجیتال شهروندان کشف بیش‌از ۱۰ کیلوگرم هروئین در عملیات مشترک پلیس کرمان و جیرفت",
+      "paragraphs": [
+        "مهم ترین خبرهای روز",
+        "کشف ۹۲ کیلوگرم موادمخدر توسط پلیس کرمان",
+        "باد شدید، گردوخاک و بارش در انتظار استان کرمان",
+        "دستگیری ۵۱۶ خرده‌فروش و قاچاقچی و کشف ۱۹۸ کیلوگرم مواد مخدر در کرمان",
+        "غرق‌شدن دختر ۱۴ ساله در رودخانه پاکلاتون آسمینون",
+        "دستور دستگیری مسئول نگهداری سگ شکاری در بردسیر صادر شد",
+        "حقوق کارکنان دولت با اجرای پرداخت عملکردی کاهش نمی‌یابد",
+        "اینترنت ناپایدار چابهار، سد راه زندگی دیجیتال شهروندان",
+        "کشف بیش‌از ۱۰ کیلوگرم هروئین در عملیات مشترک پلیس کرمان و جیرفت"
+      ],
+      "media": null,
+      "published_at": "2026-11-08T18:46:58+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "b510d972340999f5",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-08T19:20:22.312128+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140279",
+      "source_post_id": "140279",
+      "title": "چرا معمای حل‌نشده ۲۵ساله دهکده گل‌ها برای کرمانی‌ها",
+      "excerpt": "چرا معمای حل‌نشده ۲۵ساله دهکده گل‌ها برای کرمانی‌ها ۲۵ سال از شکل‌گیری دهکده گل‌ها می‌گذرد؛ مجموعه‌ای که به روایت رئیس هیئت‌مدیره آن، با تصمیم و مجوز دستگاه‌های دولتی شکل گرفت، مردم در آن ساکن شدند و برای ساخت‌وساز و سکونت هزینه پرداخت کردند، اما در ادامه گرفتار اختلافات اداری، تخریب گسترده و محرومیت از خدمات زیربنایی شد. حالا پس از گذشت بیش از دو دهه، پرسش همچنان پابرجاست؛ چرا مجموعه‌ای که به گفته نماینده ساکنان با مجوز دستگاه‌های اجرایی شکل گرفته، هنوز برای برخورداری از خدمات اولیه و تعیین تکلیف وضعیت خود باید میان ادارات مختلف در رفت‌وآمد باشد؟",
+      "paragraphs": [
+        "چرا معمای حل‌نشده ۲۵ساله دهکده گل‌ها برای کرمانی‌ها",
+        "۲۵ سال از شکل‌گیری دهکده گل‌ها می‌گذرد؛ مجموعه‌ای که به روایت رئیس هیئت‌مدیره آن، با تصمیم و مجوز دستگاه‌های دولتی شکل گرفت، مردم در آن ساکن شدند و برای ساخت‌وساز و سکونت هزینه پرداخت کردند، اما در ادامه گرفتار اختلافات اداری، تخریب گسترده و محرومیت از خدمات زیربنایی شد.",
+        "حالا پس از گذشت بیش از دو دهه، پرسش همچنان پابرجاست؛ چرا مجموعه‌ای که به گفته نماینده ساکنان با مجوز دستگاه‌های اجرایی شکل گرفته، هنوز برای برخورداری از خدمات اولیه و تعیین تکلیف وضعیت خود باید میان ادارات مختلف در رفت‌وآمد باشد؟"
+      ],
+      "media": null,
+      "published_at": "2026-11-08T19:05:23+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "7eba3083e7011703",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:22.312128+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30338",
+      "source_post_id": "30338",
+      "title": "عطر شهید در عنبرآباد پیچید؛ استقبال نسل جوان از لاله‌ گلگون‌کفن در تجمع «شب‌های اقتدار»",
+      "excerpt": "عطر شهید در عنبرآباد پیچید؛ استقبال نسل جوان از لاله‌ گلگون‌کفن در تجمع «شب‌های اقتدار» فضای شهرستان عنبرآباد همزمان با شب‌های اقتدار، میزبان لاله‌ای گلگون‌کفن بود که حضور حماسی، پرشور و احساسی اقشار مختلف مردم، به‌ویژه نسل جوان و نوجوان در آیین تشییع این شهید گمنام، جلوه‌ای بی‌نظیر از تجدید میثاق با آرمان‌های شهدا را به تصویر کشید. irna_kerman",
+      "paragraphs": [
+        "عطر شهید در عنبرآباد پیچید؛ استقبال نسل جوان از لاله‌ گلگون‌کفن در تجمع «شب‌های اقتدار»",
+        "فضای شهرستان عنبرآباد همزمان با شب‌های اقتدار، میزبان لاله‌ای گلگون‌کفن بود که حضور حماسی، پرشور و احساسی اقشار مختلف مردم، به‌ویژه نسل جوان و نوجوان در آیین تشییع این شهید گمنام، جلوه‌ای بی‌نظیر از تجدید میثاق با آرمان‌های شهدا را به تصویر کشید.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/vxPtwWA9OEgOr9IF46d9X5Fvt8_vcUBo85VByHFeqsgipB6EMOpFnUDwhC1n-OskyRCLaeXrgJqRGmkH2BEOsxYxJgvuluCUQohu6K1hOhqoRxZezTfeYXNFxaSU7rcuZMQZw7mnbhbjdyBZEs3OXOfECZU3HCtmG5nTJFvaFhjr-g8wwSRi7GCRJ5Kjbx0IQamlzWD8r5oTrXjyxOHfz_LW1xmiRpFfAcaYH_gdqiO5C08mNpRewSzJYMrrCuoyeTAo0KZ1FthZ1ePp7j4qjyQMNILSexJfbQoDr6gxaN6QpLqd3dY3VYsEHadmw5WmoXUWN-Im2-Kkn9uv9gnUlg.jpg"
+      },
+      "published_at": "2026-11-08T19:06:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "bf63baeac8828f1e",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:22.312128+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10583",
+      "source_post_id": "10583",
+      "title": "برگزاری پانزدهمین جلسه کارگروه رفع موانع تولید استان کرمان به ریاست معاون هماهنگی امور اقتصادی استاندار کرمان",
+      "excerpt": "برگزاری پانزدهمین جلسه کارگروه رفع موانع تولید استان کرمان به ریاست معاون هماهنگی امور اقتصادی استاندار کرمان شبکه کرمان _ اخبار ساعت ۲۰",
+      "paragraphs": [
+        "برگزاری پانزدهمین جلسه کارگروه رفع موانع تولید استان کرمان به ریاست معاون هماهنگی امور اقتصادی استاندار کرمان",
+        "شبکه کرمان _ اخبار ساعت ۲۰"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-08T19:06:39+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "84f4027b2d473850",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:22.312128+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140280",
+      "source_post_id": "140280",
+      "title": "اطلاعیه قطعی یا افت فشار آب در مناطقی از شهر رفسنجان",
+      "excerpt": "اطلاعیه قطعی یا افت فشار آب در مناطقی از شهر رفسنجان روابط عمومی شرکت آب و فاضلاب رفسنجان اعلام کرد به اطلاع ساکنین محترم واقع در بلوار آیت‌الله طالقانی، خیابان ابوذر و شهرک جانبازان می‌رساند، به دلیل عملیات اصلاح و تغییر مسیر خطوط شبکه در راستای اجرای طرح عمرانی میدان علی‌بن‌ابیطالب، از ساعت ۹ صبح دوشنبه مورخ ۱۴۰۵/۸/۱۸ به مدت ۴ ساعت احتمالاً با افت فشار شبکه یا قطعی آب مواجه خواهند شد. ضمن عذرخواهی از شهروندان محترم ساکن در مناطق یادشده، تقاضا دارد با صبر و شکیبایی خود این شرکت را همراهی فرمایند.",
+      "paragraphs": [
+        "اطلاعیه قطعی یا افت فشار آب در مناطقی از شهر رفسنجان",
+        "روابط عمومی شرکت آب و فاضلاب رفسنجان اعلام کرد",
+        "به اطلاع ساکنین محترم واقع در بلوار آیت‌الله طالقانی، خیابان ابوذر و شهرک جانبازان می‌رساند، به دلیل عملیات اصلاح و تغییر مسیر خطوط شبکه در راستای اجرای طرح عمرانی میدان علی‌بن‌ابیطالب، از ساعت ۹ صبح دوشنبه مورخ ۱۴۰۵/۸/۱۸ به مدت ۴ ساعت احتمالاً با افت فشار شبکه یا قطعی آب مواجه خواهند شد.",
+        "ضمن عذرخواهی از شهروندان محترم ساکن در مناطق یادشده، تقاضا دارد با صبر و شکیبایی خود این شرکت را همراهی فرمایند."
+      ],
+      "media": null,
+      "published_at": "2026-11-08T19:07:38+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "5f207610c7672740",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T19:20:22.312128+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T18:31:08.009585+00:00",
+  "saved_at": "2026-11-08T19:20:35.480492+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-08T18:30:50.325924+00:00",
-    "fardaayekerman": "2026-11-08T18:30:50.325924+00:00",
-    "irna_kerman": "2026-11-08T18:30:50.325924+00:00",
-    "kerman_gov": "2026-11-08T18:30:50.325924+00:00",
-    "kerman_akhbar": "2026-11-08T18:30:50.325924+00:00",
-    "kerman_news": "2026-11-08T18:30:50.325924+00:00",
-    "kerman_rasaneh": "2026-11-08T18:30:50.325924+00:00",
-    "qh_qv": "2026-11-08T18:30:50.325924+00:00"
+    "kermane_no": "2026-11-08T19:20:22.312128+00:00",
+    "fardaayekerman": "2026-11-08T19:20:22.312128+00:00",
+    "irna_kerman": "2026-11-08T19:20:22.312128+00:00",
+    "kerman_gov": "2026-11-08T19:20:22.312128+00:00",
+    "kerman_akhbar": "2026-11-08T19:20:22.312128+00:00",
+    "kerman_news": "2026-11-08T19:20:22.312128+00:00",
+    "kerman_rasaneh": "2026-11-08T19:20:22.312128+00:00",
+    "qh_qv": "2026-11-08T19:20:22.312128+00:00"
   }
 }
