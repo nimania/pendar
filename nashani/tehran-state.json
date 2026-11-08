@@ -1031,7 +1031,25 @@
     "https://t.me/isna94/412478",
     "https://t.me/irna_1313/471403",
     "https://t.me/mehrnews/429999",
-    "https://t.me/isna94/412479"
+    "https://t.me/isna94/412479",
+    "https://t.me/isna94/412480",
+    "https://t.me/irna_1313/471404",
+    "https://t.me/isna94/412481",
+    "https://t.me/mehrnews/430000",
+    "https://t.me/irna_1313/471405",
+    "https://t.me/isna94/412482",
+    "https://t.me/isna94/412483",
+    "https://t.me/irna_1313/471406",
+    "https://t.me/irna_1313/471407",
+    "https://t.me/isna94/412484",
+    "https://t.me/tehranpress1/132330",
+    "https://t.me/irna_1313/471408",
+    "https://t.me/isna94/412485",
+    "https://t.me/irna_1313/471409",
+    "https://t.me/isna94/412486",
+    "https://t.me/tehranpress1/132331",
+    "https://t.me/irna_1313/471410",
+    "https://t.me/mehrnews/430001"
   ],
   "queue": [
     {
@@ -4860,15 +4878,66 @@
       "status": "review",
       "detected_at": "2026-11-08T18:30:51.588560+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132330",
+      "source_post_id": "132330",
+      "title": "رهبر شهید انقلاب: دخالتهای آمریکا در نقاط مختلف از عوامل افزایش انزوای آن در دنیا است",
+      "excerpt": "رهبر شهید انقلاب: دخالتهای آمریکا در نقاط مختلف از عوامل افزایش انزوای آن در دنیا است ۶ آذر ۱۴۰۴ تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "رهبر شهید انقلاب: دخالتهای آمریکا در نقاط مختلف از عوامل افزایش انزوای آن در دنیا است",
+        "۶ آذر ۱۴۰۴",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-08T18:40:05+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "0de67ee73be1873b",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T18:53:56.586889+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132331",
+      "source_post_id": "132331",
+      "title": "حمله هوایی رژیم سعودی به یک مزرعه در الحدیده یمن",
+      "excerpt": "حمله هوایی رژیم سعودی به یک مزرعه در الحدیده یمن جنگنده‌های رژیم سعودی، مزرعه یک شهروند یمنی در منطقه الخشم استان الحدیده را دو بار بمباران کردند. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "حمله هوایی رژیم سعودی به یک مزرعه در الحدیده یمن",
+        "جنگنده‌های رژیم سعودی، مزرعه یک شهروند یمنی در منطقه الخشم استان الحدیده را دو بار بمباران کردند.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": null,
+      "published_at": "2026-11-08T18:45:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "c798afb0ecac36fb",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-08T18:53:56.586889+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T18:31:56.278608+00:00",
+  "saved_at": "2026-11-08T18:54:38.118122+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-08T18:30:51.588560+00:00",
-    "tehran_tel": "2026-11-08T18:30:51.588560+00:00",
-    "irna_1313": "2026-11-08T18:30:51.588560+00:00",
-    "isna94": "2026-11-08T18:30:51.588560+00:00",
-    "mehrnews": "2026-11-08T18:30:51.588560+00:00",
+    "tehranpress1": "2026-11-08T18:53:56.586889+00:00",
+    "tehran_tel": "2026-11-08T18:53:56.586889+00:00",
+    "irna_1313": "2026-11-08T18:53:56.586889+00:00",
+    "isna94": "2026-11-08T18:53:56.586889+00:00",
+    "mehrnews": "2026-11-08T18:53:56.586889+00:00",
     "web_shahr": "2026-11-08T18:30:51.588560+00:00",
     "web_mehr_tehran": "2026-11-08T18:30:51.588560+00:00"
   }
