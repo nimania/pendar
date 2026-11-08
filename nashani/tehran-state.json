@@ -1106,7 +1106,25 @@
     "https://t.me/isna94/412502",
     "https://t.me/irna_1313/471436",
     "https://t.me/tehranpress1/132349",
-    "https://t.me/irna_1313/471437"
+    "https://t.me/irna_1313/471437",
+    "https://t.me/tehranpress1/132350",
+    "https://t.me/tehranpress1/132351",
+    "https://t.me/isna94/412503",
+    "https://t.me/irna_1313/471438",
+    "https://t.me/isna94/412504",
+    "https://t.me/irna_1313/471439",
+    "https://t.me/irna_1313/471440",
+    "https://t.me/irna_1313/471441",
+    "https://t.me/mehrnews/430037",
+    "https://t.me/irna_1313/471442",
+    "https://t.me/irna_1313/471443",
+    "https://t.me/irna_1313/471444",
+    "https://t.me/mehrnews/430038",
+    "https://t.me/mehrnews/430048",
+    "https://t.me/mehrnews/430049",
+    "https://t.me/tehranpress1/132352",
+    "https://t.me/irna_1313/471445",
+    "https://t.me/irna_1313/471446"
   ],
   "queue": [
     {
@@ -5533,16 +5551,98 @@
       "status": "ready",
       "detected_at": "2026-11-08T20:46:25.662724+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132350",
+      "source_post_id": "132350",
+      "title": "آخرین حضور و صحبت‌های زنده‌یاد",
+      "excerpt": "آخرین حضور و صحبت‌های زنده‌یاد کوروش زارعی بازیگر سینما، تئاتر و تلویزیون، در قاب برنامه «محفل» شبکه سه؛ حرف‌هایی که امروز شنیدنش رنگ و بوی دیگری دارد… «همیشه از خدا خواستم که هر کاری در سینما، تئاتر و تلویزیون می‌کنم، برای قرآن و اهل‌بیت و اسلام باشد؛ و آرزویم این است که مرگم هم در همین راه باشد…» تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "آخرین حضور و صحبت‌های زنده‌یاد",
+        "کوروش زارعی",
+        "بازیگر سینما، تئاتر و تلویزیون، در قاب برنامه «محفل» شبکه سه؛ حرف‌هایی که امروز شنیدنش رنگ و بوی دیگری دارد…",
+        "«همیشه از خدا خواستم که هر کاری در سینما، تئاتر و تلویزیون می‌کنم، برای قرآن و اهل‌بیت و اسلام باشد؛ و آرزویم این است که مرگم هم در همین راه باشد…»",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/a102e1486e.mp4?token=Ft9zS6OJWfbZ_Ct6IXqop4NrmmEFddVOIkHMewTxpuoSGc7jyup-Umuli6PeLpxf4UeCJqZDHNZMwlMqW53jF5t3BGF0HbytZUUS4Tt67r_cT_1zVT7yKQ3POERvSO1o02JW8HADKb-tdiH4sp5yhEM5TYxlm5ged0s_EzHZv-nW_NiB3TznIZzj3jpv8xRE1bsco-HR0VU9Ln1ZFrGgqxVN-bCg3LCQg_QsfNPNbhD5jAPT5gaulSdU44oBslTmNMv_4UtxYViZAoEmio4dAjvr7uW3e0VChwNRB7q36Ev9mxg3S_oOuVJ9XFQcJGVoZJtF1ldlulCmdFDOnXX7JQ"
+      },
+      "published_at": "2026-11-08T20:56:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "bfd24b7426c3a030",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T22:30:05.556834+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132351",
+      "source_post_id": "132351",
+      "title": "۷۰ هزار چادر فلسطینی‌های آواره در غزه در تقریباً ۱۲ ساعت از اولین طوفان زمستانی به زیر آب رفتند",
+      "excerpt": "۷۰ هزار چادر فلسطینی‌های آواره در غزه در تقریباً ۱۲ ساعت از اولین طوفان زمستانی به زیر آب رفتند تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "۷۰ هزار چادر فلسطینی‌های آواره در غزه در تقریباً ۱۲ ساعت از اولین طوفان زمستانی به زیر آب رفتند",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/625beda272.mp4?token=BTt79Pu2Sj54hMUUQ0Dw-aHJVGCTI67vvSvtEDpSTzFsHOMleCcMWiLxkb57lZvHNvxvF68_tiiWVzlTOWZIKT5zRG7_oGO6qbcEsmi5MgzNC44ReG8akiR0eqQ09BbqHmYQg-DAGjBwkssHJRF1i21R4P1JpfBQMl6gxl8FbpNYvBeHidbEClg-MBf9sxdjU6wfXaUENjwO-1PIjkhf-wapCHsILYwwo_OErtNvYBC_qhr_kSxYF8C0Ms2K5nYikAeRLDEJpqnJGrA7wb_8YvfY9lrcTAVlqUe7cIah6qDFBo4xfGsa0YPVx9yJAk7-yNEBkc9HzX0Em5IFvSEmIQ"
+      },
+      "published_at": "2026-11-08T20:57:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "6a5349206ac725c7",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T22:30:05.556834+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132352",
+      "source_post_id": "132352",
+      "title": "ویدئو کلاژ | دویست و پنجاه و دومین شب از اجتماعات امیدآفرین در میادین پایتخت",
+      "excerpt": "ویدئو کلاژ | دویست و پنجاه و دومین شب از اجتماعات امیدآفرین در میادین پایتخت یک‌شنبه ۱۷ آبان ۱۴۰۵ تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "ویدئو کلاژ | دویست و پنجاه و دومین شب از اجتماعات امیدآفرین در میادین پایتخت",
+        "یک‌شنبه ۱۷ آبان ۱۴۰۵",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-08T22:02:31+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "f0266cf543e8bd4f",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T22:30:05.556834+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T20:47:35.089546+00:00",
+  "saved_at": "2026-11-08T22:31:11.248428+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-08T20:46:25.662724+00:00",
-    "tehran_tel": "2026-11-08T20:46:25.662724+00:00",
-    "irna_1313": "2026-11-08T20:46:25.662724+00:00",
-    "isna94": "2026-11-08T20:46:25.662724+00:00",
-    "mehrnews": "2026-11-08T20:46:25.662724+00:00",
-    "web_shahr": "2026-11-08T20:46:25.662724+00:00",
-    "web_mehr_tehran": "2026-11-08T20:46:25.662724+00:00"
+    "tehranpress1": "2026-11-08T22:30:05.556834+00:00",
+    "tehran_tel": "2026-11-08T22:30:05.556834+00:00",
+    "irna_1313": "2026-11-08T22:30:05.556834+00:00",
+    "isna94": "2026-11-08T22:30:05.556834+00:00",
+    "mehrnews": "2026-11-08T22:30:05.556834+00:00",
+    "web_shahr": "2026-11-08T22:30:05.556834+00:00",
+    "web_mehr_tehran": "2026-11-08T22:30:05.556834+00:00"
   }
 }
