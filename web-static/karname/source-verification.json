@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "automatic_source_verification_not_outcome_scoring",
-  "generated_at": "2026-11-07T21:51:38Z",
+  "generated_at": "2026-11-08T06:02:26Z",
   "policy_fa": "این بررسی صرفاً دسترس‌پذیری منبع و وجود متن در صفحه را می‌سنجد؛ نه اصالت گفتار شخص، نه تحقق رویداد و نه درست/نادرست‌بودن پیش‌بینی.",
   "summary": {
     "observations": 142,
@@ -146,21 +146,21 @@
     },
     "KC-2aeb2a33520439fa46": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.yjc.ir/fa/news/9144023/هشدار-سخنگوی-ارتش-به-آمریکا-ماجراجویی-جدید-جغرافیای-جنگ-را-گسترده-می‌کند",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-2c42d10fff387157a8": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://fararu.com/fa/news/1012817/%D8%A2%DB%8C%D8%A7-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D9%BE%DB%8C%D8%B4-%D8%A7%D8%B2-%D8%A7%D8%B3%D8%AA%D9%82%D8%B1%D8%A7%D8%B1-%DA%A9%D9%86%DA%AF%D8%B1%D9%87-%D8%AC%D8%AF%DB%8C%D8%AF-%D8%A8%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%AD%D9%85%D9%84%D9%87-%D9%85%DB%8C-%DA%A9%D9%86%D8%AF",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-2fce1ade1761e9fc60": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T07:43:12Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.aljazeera.com/video/newsfeed/2026/11/4/trump-blames-iran-war-for-midterms-losses?traffic_source=rss",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -174,42 +174,42 @@
     },
     "KC-33078d46619cb73fe9": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.rouydad24.ir/fa/news/476166/عراقچی-رایزنی-ها-درباره-طرح-دو-روزه-با-میانجی-های-مذاکرات-ادامه-دارد-به-نتیجه-قطعی-نرسیده-ایم",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-3414585b0172e02225": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.fardanews.com/fa/tiny/news-1417336",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-370d1bc5892a9a7952": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.entekhab.ir/fa/news/945730/سی-بی-اس-میانجی-های-قطری-در-تهران-حضور-داشتند-تا-آخرین-اصلاحات-در-پیش-نویس-پیشنهاد-پایان-دادن-به-جنگ-را-به-طرف-ایرانی-منتقل-کنند-نشانه-هایی-از-پیشرفت-در-روند-مذاکرات-مشاهده-می-شود",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-3ba2d3cf3f63f87796": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-3d10c85f3ec0850ec2": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.youtube.com/watch?v=ZTDWWQJ9DGg",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-3e4ac67a398455112a": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.fardanews.com/fa/tiny/news-1417696",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -223,21 +223,21 @@
     },
     "KC-445bcb0625bb2c9e27": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.asriran.com/fa/news/1203216/عراقچی-رهبر-انقلاب-همه-امور-کشور-را-با-تسلط-اداره-می-کنند-سلاح-هایمان-را-به-روز-کرد-ه-ایم-هیچ-برنامه-ملاقاتی-با-هیات-آمریکایی-نداریم",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-45692e15c2006a3a4b": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.entekhab.ir/fa/news/946078/تاکر-کارلسون-مجری-مشهور-آمریکایی-ترامپ-تحت-فشار-نتانیاهو-ممکن-است-به-کوه-کلنگ-حمله-اتمی-کند-او-تا-شش-روز-دیگر-می-خواهد-درباره-استفاده-یا-عدم-استفاده-از-سلاح-اتمی-تصمیم-بگیرد-ترامپ-فعلا-مردد-است-هنوز-به-ونس-گوش-می-دهد-که-می-گوید-توافق-با-ایران-شدنی-است",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-4a5863a3bb51fba6d0": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.entekhab.ir/fa/news/945687/جان-کری-وزیر-خارجه-سابق-آمریکا-ترامپ-با-مجموعه-ای-از-فرضیات-غلط-به-ایران-حمله-کرد-شروع-یک-حمله-نظامی-پس-از-انتخابات-میان-دوره-ای-آمریکا-اشتباه-بزرگی-خواهد-بود-اوضاع-به-قدری-غیرقابل-پیش-بینی-است-که-تقریبا-هر-اتفاقی-ممکن-است-رخ-دهد",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -251,14 +251,14 @@
     },
     "KC-4f431c79d242d49002": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://t.me/Karimipour_K/6327",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-508fa9a975d50d5ffa": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://t.me/jedaal/8560",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -272,28 +272,28 @@
     },
     "KC-5329e0ea52d65c38cc": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305577-%D8%AF%D8%B1%DB%8C%D8%A7%D8%AF%D8%A7%D8%B1-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D9%86%DB%8C%D8%B1%D9%88%D9%87%D8%A7%DB%8C-%D9%85%D8%B3%D9%84%D8%AD-%D8%A2%D9%85%D8%A7%D8%AF%DA%AF%DB%8C-%D8%AE%D9%88%D8%AF-%D8%B1%D8%A7-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%85%D9%82%D8%A7%D8%A8%D9%84%D9%87-%D8%A8%D8%A7-%D8%AA%D9%87%D8%AF%DB%8C%D8%AF%D9%87%D8%A7-%D8%AC%D9%86%DA%AF-%D9%87%D8%A7%DB%8C-%D8%AA%D8%B1%DA%A9%DB%8C%D8%A8%DB%8C-%D8%A7%D8%B1%D8%AA%D9%82%D8%A7-%D9%85%DB%8C-%D8%AF%D9%87%D9%86%D8%AF",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-53e890c46b40f7d8aa": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.isna.ir/news/1405080905884/%D8%B3%D8%B1%D9%84%D8%B4%DA%A9%D8%B1-%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87%DB%8C-%D9%85%D9%86%D8%AA%D8%B8%D8%B1-%D8%A2%D8%BA%D8%A7%D8%B2-%D8%A7%D9%82%D8%AF%D8%A7%D9%85-%D8%AF%D8%B4%D9%85%D9%86-%D9%86%D9%85%DB%8C-%D9%85%D8%A7%D9%86%DB%8C%D9%85",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-561f01f8c49d508546": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-56cc80756c4e088d8b": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T06:02:26Z",
       "source_url": "https://fa.shafaqna.com/news/2394264/",
       "speaker_verified": false,
       "outcome": "not_assessed"
