@@ -881,7 +881,29 @@
     "https://t.me/isna94/412433",
     "https://t.me/mehrnews/429939",
     "https://t.me/tehranpress1/132323",
-    "https://t.me/irna_1313/471282"
+    "https://t.me/irna_1313/471282",
+    "https://t.me/mehrnews/429940",
+    "https://t.me/irna_1313/471283",
+    "https://t.me/isna94/412434",
+    "https://t.me/irna_1313/471284",
+    "https://t.me/isna94/412435",
+    "https://t.me/irna_1313/471285",
+    "https://t.me/isna94/412436",
+    "https://t.me/irna_1313/471286",
+    "https://t.me/tehranpress1/132324",
+    "https://t.me/mehrnews/429941",
+    "https://t.me/irna_1313/471287",
+    "https://t.me/irna_1313/471288",
+    "https://t.me/mehrnews/429942",
+    "https://t.me/isna94/412437",
+    "https://t.me/irna_1313/471289",
+    "https://t.me/irna_1313/471290",
+    "https://t.me/isna94/412438",
+    "https://t.me/isna94/412439",
+    "https://t.me/irna_1313/471291",
+    "https://t.me/tehranpress1/132325",
+    "https://t.me/isna94/412440",
+    "https://t.me/mehrnews/429944"
   ],
   "queue": [
     {
@@ -4296,17 +4318,75 @@
       "geography": "tehran_city",
       "status": "review",
       "detected_at": "2026-11-08T13:33:27.054785+00:00",
+      "other_sources": [
+        {
+          "name": "مهر",
+          "url": "https://t.me/mehrnews/429942"
+        }
+      ]
+    },
+    {
+      "url": "https://t.me/tehranpress1/132324",
+      "source_post_id": "132324",
+      "title": "کارولین لیویت: ترامپ دیگر هرگز نامزد انتخابات نخواهد شد",
+      "excerpt": "کارولین لیویت: ترامپ دیگر هرگز نامزد انتخابات نخواهد شد سخنگوی پیشین کاخ سفید ترامپ دیگر هرگز در صدر فهرست انتخاباتی قرار نخواهد گرفت. ما به کسی نیاز داریم که شعار «اول آمریکا» را سرلوحه کار خود قرار دهد تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "کارولین لیویت: ترامپ دیگر هرگز نامزد انتخابات نخواهد شد",
+        "سخنگوی پیشین کاخ سفید",
+        "ترامپ دیگر هرگز در صدر فهرست انتخاباتی قرار نخواهد گرفت.",
+        "ما به کسی نیاز داریم که شعار «اول آمریکا» را سرلوحه کار خود قرار دهد",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/45d7075d8b.mp4?token=uvFNnfOOh671TYl0C2QXoX1Oqy2nzeGQS-jGshqumKTOaCzLxm9Zt1U4NUTXYWrTOWta8u_2tUn-nSi0zRwNsyx7I7OVpojIpi8QwG_lHtgnZZ043NwOe9RIToV9ChSFEhVy7NKrA2Z8HblYNA-wQnvNCgHbpOsHtJExQ9LZs62Po0L7EDDyi0IRlBxvapvAUaaJ-JxZdOhrRXxVefZvhq9dyCOZa5CIO7MTx7rre3WCmjW2QoCLkSSSOKrs94VFVn6hgJy2_kRsMqHEsYnDfs_UB7r2CdrjIsHl5TEJeZbWHUBDb19c9vjHJsjtRsyPShbbBtoy2ygdYIMhjrZMQA"
+      },
+      "published_at": "2026-11-08T13:50:21+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "105c401397085991",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T14:16:52.045636+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132325",
+      "source_post_id": "132325",
+      "title": "دادستان کل کشور: ۲۰ هزار گزارش مردمی درباره شبکه‌های صهیونیستی دریافت شد",
+      "excerpt": "دادستان کل کشور: ۲۰ هزار گزارش مردمی درباره شبکه‌های صهیونیستی دریافت شد سامانه‌ای ایمن و گمنام‌ساز جهت گزارش‌دهی مردمی علیه تحرکات پیاده‌نظام رژیم صهیونیستی و آمریکا طراحی شد که طی آن گزارش‌های مردمی متعددی بالغ بر ۲۰ هزار مورد گزارش هویتی و رفتاری شبکه‌های صهیونیستی دریافت شد و این مشارکت مدنی ضربه سنگینی به اهداف آشوب‌طلبانه و پروژه ضدامنیتی دشمن وارد و توطئه‌های ضدمردمی را خنثی کرد. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "دادستان کل کشور: ۲۰ هزار گزارش مردمی درباره شبکه‌های صهیونیستی دریافت شد",
+        "سامانه‌ای ایمن و گمنام‌ساز جهت گزارش‌دهی مردمی علیه تحرکات پیاده‌نظام رژیم صهیونیستی و آمریکا طراحی شد که طی آن گزارش‌های مردمی متعددی بالغ بر ۲۰ هزار مورد گزارش هویتی و رفتاری شبکه‌های صهیونیستی دریافت شد و این مشارکت مدنی ضربه سنگینی به اهداف آشوب‌طلبانه و پروژه ضدامنیتی دشمن وارد و توطئه‌های ضدمردمی را خنثی کرد.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": null,
+      "published_at": "2026-11-08T14:10:25+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "9ec11cb43ef41ff1",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-08T14:16:52.045636+00:00",
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T13:34:27.399963+00:00",
+  "saved_at": "2026-11-08T14:18:03.938242+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-08T13:33:27.054785+00:00",
-    "tehran_tel": "2026-11-08T13:33:27.054785+00:00",
-    "irna_1313": "2026-11-08T13:33:27.054785+00:00",
-    "isna94": "2026-11-08T13:33:27.054785+00:00",
-    "mehrnews": "2026-11-08T13:33:27.054785+00:00",
-    "web_shahr": "2026-11-08T13:23:10.470928+00:00",
-    "web_mehr_tehran": "2026-11-08T13:23:10.470928+00:00"
+    "tehranpress1": "2026-11-08T14:16:52.045636+00:00",
+    "tehran_tel": "2026-11-08T14:16:52.045636+00:00",
+    "irna_1313": "2026-11-08T14:16:52.045636+00:00",
+    "isna94": "2026-11-08T14:16:52.045636+00:00",
+    "mehrnews": "2026-11-08T14:16:52.045636+00:00",
+    "web_shahr": "2026-11-08T14:16:52.045636+00:00",
+    "web_mehr_tehran": "2026-11-08T14:16:52.045636+00:00"
   }
 }
