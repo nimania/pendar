@@ -8914,10 +8914,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-08T19:20:22.312128+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-08T19:20:38.013137+00:00"
+      "reserved_at": "2026-11-08T19:20:38.013137+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 194,
+      "sent_at": "2026-11-08T19:20:40.808025+00:00"
     },
     {
       "url": "https://t.me/Kerman_akhbar/66275",
@@ -8940,10 +8943,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-08T19:20:22.312128+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-08T19:20:38.013137+00:00"
+      "reserved_at": "2026-11-08T19:20:38.013137+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 195,
+      "sent_at": "2026-11-08T19:20:42.226685+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140278",
@@ -8995,10 +9001,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-08T19:20:22.312128+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-08T19:20:38.013137+00:00"
+      "reserved_at": "2026-11-08T19:20:38.013137+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 196,
+      "sent_at": "2026-11-08T19:20:43.631501+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30338",
@@ -9074,13 +9083,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-08T19:20:22.312128+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-08T19:20:38.013137+00:00"
+      "reserved_at": "2026-11-08T19:20:38.013137+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 197,
+      "sent_at": "2026-11-08T19:20:45.057070+00:00"
     }
   ],
-  "saved_at": "2026-11-08T19:20:38.013161+00:00",
+  "saved_at": "2026-11-08T19:20:45.057111+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-08T19:20:22.312128+00:00",
     "fardaayekerman": "2026-11-08T19:20:22.312128+00:00",
