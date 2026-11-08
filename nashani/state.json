@@ -729,7 +729,20 @@
     "https://t.me/kerman_news/140266",
     "https://t.me/irna_kerman/30334",
     "https://t.me/irna_kerman/30335",
-    "https://t.me/kerman_news/140267"
+    "https://t.me/kerman_news/140267",
+    "https://t.me/Kerman_akhbar/66270",
+    "https://t.me/kermane_no/59142",
+    "https://t.me/kerman_news/140268",
+    "https://t.me/kerman_news/140269",
+    "https://t.me/kermane_no/59143",
+    "https://t.me/qh_qv/981",
+    "https://t.me/qh_qv/982",
+    "https://t.me/kermane_no/59144",
+    "https://t.me/irna_kerman/30336",
+    "https://t.me/kerman_news/140270",
+    "https://t.me/Kerman_akhbar/66271",
+    "https://t.me/Kerman_akhbar/66272",
+    "https://t.me/kerman_news/140271"
   ],
   "queue": [
     {
@@ -5589,7 +5602,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-07T16:39:19.532376+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66270"
+        }
+      ]
     },
     {
       "url": "https://t.me/kerman_gov/10565",
@@ -7794,7 +7812,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-08T12:16:26.126869+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66272"
+        }
+      ]
     },
     {
       "url": "https://t.me/kerman_gov/10578",
@@ -8498,17 +8521,159 @@
       "status": "review",
       "detected_at": "2026-11-08T14:50:55.954727+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59142",
+      "source_post_id": "59142",
+      "title": "شهبا پس از پیروزی مس کرمان",
+      "excerpt": "شهبا پس از پیروزی مس کرمان این پیروزی را به آقای حسین‌خانی و همکارانش تقدیم می‌کنیم قاسم شهبا سرمربی تیم فوتبال مس کرمان پس از کسب اولین پیروزی این تیم در لیگ یک فوتبال مردان ضمن تقدیم کردن این پیروزی به کادر قبلی مس گفت: این پیروزی را به آقای حسین‌خانی و همکارانش تقدیم می‌کنیم. به آینده امیدواریم و انشاالله نتایج بهتری را برای این تیم رقم بزنیم.",
+      "paragraphs": [
+        "شهبا پس از پیروزی مس کرمان",
+        "این پیروزی را به آقای حسین‌خانی و همکارانش تقدیم می‌کنیم",
+        "قاسم شهبا سرمربی تیم فوتبال مس کرمان پس از کسب اولین پیروزی این تیم در لیگ یک فوتبال مردان ضمن تقدیم کردن این پیروزی به کادر قبلی مس گفت: این پیروزی را به آقای حسین‌خانی و همکارانش تقدیم می‌کنیم. به آینده امیدواریم و انشاالله نتایج بهتری را برای این تیم رقم بزنیم."
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-08T15:04:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "4068d9a1669aeb4c",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T16:21:06.339098+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140268",
+      "source_post_id": "140268",
+      "title": "گل ولی‌پور پس از بازبینی صحنه رد شد",
+      "excerpt": "گل ولی‌پور پس از بازبینی صحنه رد شد گل‌گهر ۰-۰ ذوب‌آهن",
+      "paragraphs": [
+        "گل ولی‌پور پس از بازبینی صحنه رد شد",
+        "گل‌گهر ۰-۰ ذوب‌آهن"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/5f23dc5df8.mp4?token=R9V-klAu3ClOQ2YQDH8m95whGWm8wQ6IJamg-z3IGMm65vVz9CjleoDsp7wNphZNmQCOsUQvZBAJ7W_qMr2vgnp7KU_u_8VVpFpj_VQclsyUn7NQjdgdbGyuz5rEvFuukmMYbHCb2RYYl_VvEb-ohLVLxEkhjvcQ9JUDh-3YGj6eeuT3h6RUpduDezP66Y6Mx7yWoePwZ5PWtoTaLbPwppuZ4ioFKS4dHNSrx8L-AinR6_VmL-6yqVR9B4J1kn6zQlYfzzqXZir98oGYXx6nqOcSowjSvf4Ae1qRVkljb3s6rX1FMRQ0vQSVhb0QF75TsIEvoM4r58relb6oieQxfg"
+      },
+      "published_at": "2026-11-08T15:08:38+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "4cc33c4c3cf4033a",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T16:21:06.339098+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59143",
+      "source_post_id": "59143",
+      "title": "آیین تشییع و بدرقه زنده‌یاد اصغر ضرابی",
+      "excerpt": "آیین تشییع و بدرقه زنده‌یاد اصغر ضرابی روزنامه‌نگار، منتقد ادبی و ویراستار پیشکسوت کشورمان زمان: دوشنبه ۱۸ آبان‌ماه ساعت ۱۰ صبح مکان: تالار فرهنگ و هنر کرمان",
+      "paragraphs": [
+        "آیین تشییع و بدرقه زنده‌یاد اصغر ضرابی",
+        "روزنامه‌نگار، منتقد ادبی و ویراستار پیشکسوت کشورمان",
+        "زمان: دوشنبه ۱۸ آبان‌ماه ساعت ۱۰ صبح",
+        "مکان: تالار فرهنگ و هنر کرمان"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/RcVkci9lLqdWU1bW1dBYEPhnUqQra2HTKLzhr3v_o7nd6KIe8w8HU_CcQNayDtSfEXPDV6j4WmouRPVjqueQeDA-4wsxRAU_aVmjTPe3mSI0Z637lhkEXRcJ9PUnfwWZp_kjlxb4cgXt1j0g-S6fyVnHSk8Rd8DJQQUBYxBZWHpU3KjeWwyfrUitCmEBBLdndh4rDwEatNxTyKs7C6w7bK2fZ31UTHX2vqXQ3Lx2bl4xwFwggPzX-nfGKY81zMezMrB4SARNo-tdmQVEXLaSkL4mkDzB64VEjxXjZbca9pjg6TlQZESu9l8q3wt61XfDxkIV9vXouXPBxhrpQit-bg.jpg"
+      },
+      "published_at": "2026-11-08T15:27:27+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "2cb54f4bbaa4c7dd",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T16:21:06.339098+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59144",
+      "source_post_id": "59144",
+      "title": "به گزارش کرمان نو، هفته دوازدهم لیگ برتر فوتبال مردان امروز یکشنبه ۱۷ آبان با دیدار بین گل‌گهر سیرجان و ذوب‌آهن اصفهان و با تساوی بدون گل به پایان رسید.",
+      "excerpt": "به گزارش کرمان نو، هفته دوازدهم لیگ برتر فوتبال مردان امروز یکشنبه ۱۷ آبان با دیدار بین گل‌گهر سیرجان و ذوب‌آهن اصفهان و با تساوی بدون گل به پایان رسید. نیمه اول دیدار درحالی‌که شاگردان محمد ربیعی، موقعیت‌های بهتری برای رسیدن به گلزنی داشتند بدون گل به پایان رسید. در این دیدار مصدومیت زودهنگام سید احسان حسینی در نیمه اول یکی از بدشانسی‌های مهدی رحمتی و گل‌گهر بود. جایی که او در دقیقه ۳۶ از زمین بازی خارج شد و جای خود را به سیامک نعمتی داد. اما این آخر بدبیاری‌های این تیم نبود و با اخراج امیر جعفری در دقیقه ۶۸ این تیم ۱۰ نفره نیز شد. گل‌گهر در دقیقه ۹۴ گل نیز به ثمر رساند؛ اما این گل پس از رفتن به VAR مردود اعلام شد تا بازی با تساوی بدون گل به پایان برسد.",
+      "paragraphs": [
+        "به گزارش کرمان نو، هفته دوازدهم لیگ برتر فوتبال مردان امروز یکشنبه ۱۷ آبان با دیدار بین گل‌گهر سیرجان و ذوب‌آهن اصفهان و با تساوی بدون گل به پایان رسید.",
+        "نیمه اول دیدار درحالی‌که شاگردان محمد ربیعی، موقعیت‌های بهتری برای رسیدن به گلزنی داشتند بدون گل به پایان رسید.",
+        "در این دیدار مصدومیت زودهنگام سید احسان حسینی در نیمه اول یکی از بدشانسی‌های مهدی رحمتی و گل‌گهر بود. جایی که او در دقیقه ۳۶ از زمین بازی خارج شد و جای خود را به سیامک نعمتی داد.",
+        "اما این آخر بدبیاری‌های این تیم نبود و با اخراج امیر جعفری در دقیقه ۶۸ این تیم ۱۰ نفره نیز شد.",
+        "گل‌گهر در دقیقه ۹۴ گل نیز به ثمر رساند؛ اما این گل پس از رفتن به VAR مردود اعلام شد تا بازی با تساوی بدون گل به پایان برسد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/IulnSKpc7JXtgEqBEMKoaVtA3kOrZ5KpuCGMXQPFcCkN8Y85Gk4efS5oFhtFwQkIqX8tu9N2ick4EFYOKQ9mEGvKvDERmmEHzPpsdsqQ-uikEOask9q2btlwewoohmAItjaMwjvYsRPiu8CupZw6-RaMWvs4T7F9IPPbnqVAn3yyUPlFeOmwW2IrRv1oYjmgxIdQKW57FXjiQfIEP9f2P94KrKR5imPJ43AfuyjLpia5CMaHtteEt32WU96ShH1GmI81jWSWY9kks_b9-qwEYGaYPTgcJRnRZVLCyGMO2s-TDozQ6YrCdSwjmPY6EpZjHd5Vv139EJx3wUkeJBoVVg.jpg"
+      },
+      "published_at": "2026-11-08T15:47:03+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "82927b10c9f5b399",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T16:21:06.339098+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140270",
+      "source_post_id": "140270",
+      "title": "خوشحالی‌ گل‌گهری‌ها دوامی نداشت",
+      "excerpt": "خوشحالی‌ گل‌گهری‌ها دوامی نداشت دو تیم همچنان در حسرت برد. گل‌گهر ۰ - ۰ ذوب‌آهن",
+      "paragraphs": [
+        "خوشحالی‌ گل‌گهری‌ها دوامی نداشت",
+        "دو تیم همچنان در حسرت برد.",
+        "گل‌گهر ۰ - ۰ ذوب‌آهن"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/ZOz4__IKJlQ2X7KJbTD5ZrWiwyidTELGNU3S-njnh6YZivoJqZJCoLDRQOYsxOXZLgS6x5jywhFmhYdZn-4r_x8oCHj9nsFvc9qup3Nqb5EpR1Pf-7zVM7B34aVwvDzSeDWOwu7kXOto7kEB8IknGrucW5TPoL-Q8-Qv35y_5mmP3FXryW15UGUDU4M2sXOLzhFB6QDNklUIaq3w5gxN5DaU9Z5PZZNKGe2Kld4QfjAbpcnPBd6Exvv8tzisrcWpPoSax7Pdq9quQJF3yvumaepYcUUiQBRY8k8y4iXgZWW0ShBLdN1jv-ACPwuX31e_9wcuAlk79288-qlJOUjGAQ.jpg"
+      },
+      "published_at": "2026-11-08T15:49:18+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "987888240d45482d",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T16:21:06.339098+00:00",
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66271"
+        }
+      ]
     }
   ],
-  "saved_at": "2026-11-08T14:51:32.321742+00:00",
+  "saved_at": "2026-11-08T16:21:18.276521+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-08T14:50:55.954727+00:00",
-    "fardaayekerman": "2026-11-08T14:50:55.954727+00:00",
-    "irna_kerman": "2026-11-08T14:50:55.954727+00:00",
-    "kerman_gov": "2026-11-08T14:50:55.954727+00:00",
-    "kerman_akhbar": "2026-11-08T14:50:55.954727+00:00",
-    "kerman_news": "2026-11-08T14:50:55.954727+00:00",
-    "kerman_rasaneh": "2026-11-08T14:50:55.954727+00:00",
-    "qh_qv": "2026-11-08T14:50:55.954727+00:00"
+    "kermane_no": "2026-11-08T16:21:06.339098+00:00",
+    "fardaayekerman": "2026-11-08T16:21:06.339098+00:00",
+    "irna_kerman": "2026-11-08T16:21:06.339098+00:00",
+    "kerman_gov": "2026-11-08T16:21:06.339098+00:00",
+    "kerman_akhbar": "2026-11-08T16:21:06.339098+00:00",
+    "kerman_news": "2026-11-08T16:21:06.339098+00:00",
+    "kerman_rasaneh": "2026-11-08T16:21:06.339098+00:00",
+    "qh_qv": "2026-11-08T16:21:06.339098+00:00"
   }
 }
