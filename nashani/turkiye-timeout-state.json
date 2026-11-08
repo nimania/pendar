@@ -1,0 +1,17 @@
+{
+  "slots": {},
+  "venues": {
+    "https://www.timeout.com/istanbul/restaurants/bart": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/restaurants/bart",
+      "at": "2026-11-08T18:33:47.390086+03:00"
+    }
+  },
+  "days": {
+    "2026-11-08": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/restaurants/bart",
+      "at": "2026-11-08T18:33:47.390086+03:00"
+    }
+  }
+}
