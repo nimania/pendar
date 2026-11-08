@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "automatic_source_verification_not_outcome_scoring",
-  "generated_at": "2026-11-08T06:02:26Z",
+  "generated_at": "2026-11-08T13:25:53Z",
   "policy_fa": "این بررسی صرفاً دسترس‌پذیری منبع و وجود متن در صفحه را می‌سنجد؛ نه اصالت گفتار شخص، نه تحقق رویداد و نه درست/نادرست‌بودن پیش‌بینی.",
   "summary": {
     "observations": 142,
@@ -300,14 +300,14 @@
     },
     "KC-58fc16c1e13f0ecfd3": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.bbc.co.uk/persian/live/ckdd8p9ypld7t?at_medium=RSS&at_campaign=rss",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-59a6e6ca4be2d6c1b9": {
       "status": "source_text_found",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305732-%D8%B4%D8%B1%D8%B7-%D8%B2%D9%84%D9%86%D8%B3%DA%A9%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D9%88%D9%82%D9%81-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D9%BE%D8%A7%D9%84%D8%A7%DB%8C%D8%B4%DA%AF%D8%A7%D9%87-%D9%87%D8%A7%DB%8C-%D9%86%D9%81%D8%AA-%D8%B1%D9%88%D8%B3%DB%8C%D9%87",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -321,35 +321,35 @@
     },
     "KC-5a23051aac539336ab": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:22:04Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-5c31241345faf13d5e": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.eghtesadonline.com/fa/news/2172718/موضع-جدید-عراق-درباره-جنگ-ایران-و-آمریکا-بغداد-پشت-ایران-می-ماند-یا-کنار-می-کشد",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-5c72cd99daf931f28d": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.france24.com/es/video/20261104-juan-manfredi-pese-al-control-dem%C3%B3crata-del-congreso-trump-seguir%C3%A1-gobernando-por-decreto",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-5f2b03e4c6a6460f11": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-63df0f54474e9a87b5": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.asriran.com/fa/news/1204026/مدودف-تشدید-تحریم-های-روسیه-توسط-دموکرات-ها-به-زیان-واشنگتن-خواهد-شد",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -363,14 +363,14 @@
     },
     "KC-6635a8f006a7fd1d1e": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://t.me/khabaronline_ir/666950",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-66723c125340ab43f4": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.asriran.com/fa/news/1204095/محسن-رضایی-به-آقای-پوتین-عرض-کردیم-تا-آمریکایی-ها-به-هفت-شرط-ما-عمل-نکنند-نه-تنگه-هرمز-باز-می-شود-و-نه-مذاکره-ای-در-کار-است",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -384,35 +384,35 @@
     },
     "KC-6ae0006077b14f5d4b": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://t.me/yekhezaran/52230",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-7013f5b814f3541443": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://t.me/sahandiranmehr/36681",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-75cf7b2e8f135d00e8": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.entekhab.ir/fa/news/945695/ونس-ترامپ-اجازه-نخواهد-داد-درگیری-با-ایران-به-یک-جنگ-بی-پایان-تبدیل-شود",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-7987fbb09e8cbb0abc": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.entekhab.ir/fa/news/946670/واکنش-وزیر-جنگ-ترامپ-به-تلاش-ها-برای-استیضاح-او-ما-تازه-مبارزه-را-آغاز-کرده-ایم-عقب-نشینی-نمی-کنیم-مصمم-هستیم-تا-کاری-که-آغاز-کرده-ایم-را-به-پایان-برسانیم-ایستادگی-می-کنیم-و-می-جنگیم",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-79cc4a92d0ffb7bf4a": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.independentpersian.com/node/423010/%D8%B3%DB%8C%D8%A7%D8%B3%DB%8C-%D9%88-%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%DB%8C/%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D8%A7-%DB%B2%DB%B0-%D9%87%D8%B2%D8%A7%D8%B1-%D9%86%DB%8C%D8%B1%D9%88%DB%8C-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D8%AF%D8%B1-%D9%85%D9%86%D8%B7%D9%82%D9%87%D8%9B-%D8%A7%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84%DB%8C-%D8%AD%D9%85%D9%84%D8%A7%D8%AA-%D8%AF%D9%88%D8%A8%D8%A7%D8%B1%D9%87-%D8%AF%D8%B1",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -426,7 +426,7 @@
     },
     "KC-7e41fe3b8d3966bc47": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.abc.es/internacional/merz-zelenski-piden-participacion-europa-negociaciones-ucrania-20261103171443-nt.html",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -440,21 +440,21 @@
     },
     "KC-80117d63fb9544eedc": {
       "status": "source_accessible",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://tabnak.ir/fa/news/100000328/%D8%A7%D9%86%D9%81%D8%AC%D8%A7%D8%B1%D9%87%D8%A7%DB%8C-%D9%82%D8%B4%D9%85-%D8%AA%D9%84%D8%A7%D8%B4-%D8%A7%D8%B3%D8%B1%D8%A7%D8%A6%DB%8C%D9%84-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D8%AE%D8%B1%DB%8C%D8%A8-%D9%85%D8%B0%D8%A7%DA%A9%D8%B1%D8%A7%D8%AA-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%88-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D9%88%D8%AF-%D9%86%D9%85%DB%8C%D8%AA%D9%88%D8%A7%D9%86-%DA%AF%D9%81%D8%AA-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D8%A7%D8%B5%D9%84%D8%A7-%D8%AF%D9%86%D8%A8%D8%A7%D9%84-%D8%AA%D9%88%D8%A7%D9%81%D9%82-%D9%86%DB%8C%D8%B3%D8%AA-6d09574518fd426cbb092cfe",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-8178b4d96ceb54d093": {
       "status": "source_text_found",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://tabnak.ir/fa/news/100000405/%D9%85%D8%AD%D8%B3%D9%86-%D8%B1%D8%B6%D8%A7%DB%8C%DB%8C-%D9%BE%D8%A7%D8%B3%D8%AE-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%82%D8%A7%D9%86%D8%B9%DA%A9%D9%86%D9%86%D8%AF%D9%87-%D9%86%D8%A8%D9%88%D8%AF-9b318a483f5a4c21ada9f042",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-818196b4cfa27b195c": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-06T13:23:09Z",
+      "checked_at": "2026-11-08T13:25:53Z",
       "source_url": "https://www.sharghdaily.com/fa/tiny/news-1139681",
       "speaker_verified": false,
       "outcome": "not_assessed"
