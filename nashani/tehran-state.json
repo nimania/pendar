@@ -4137,9 +4137,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-08T13:23:10.470928+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132307",
@@ -4168,9 +4169,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-08T13:23:10.470928+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132317",
@@ -4226,9 +4228,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-08T13:23:10.470928+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-08T16:21:59.402072+00:00"
     },
     {
       "url": "https://www.mehrnews.com/news/7004375/%D8%A8%D8%A7%D8%B1%D8%B4-%D8%A8%D8%A7%D8%B1%D8%A7%D9%86-%D8%AF%D8%B1-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D9%85%D8%AA%D9%88%D9%82%D9%81-%D8%B4%D8%AF",
@@ -4248,9 +4251,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-08T13:23:10.470928+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-08T16:21:59.402072+00:00"
     },
     {
       "url": "https://t.me/isna94/412413",
@@ -4595,7 +4599,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T16:21:57.404558+00:00",
+  "saved_at": "2026-11-08T16:21:59.402093+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-08T16:21:05.381480+00:00",
     "tehran_tel": "2026-11-08T16:21:05.381480+00:00",
