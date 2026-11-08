@@ -1,8 +1,34 @@
 {
   "version": 1,
-  "updated_at": "2026-11-08T11:13:59+00:00",
+  "updated_at": "2026-11-08T20:24:45+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-d3e69e29693ca0df18",
+      "date": "2026-11-06",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Theodore Roosevelt Carrier Strike Group Pulls Into Singapore",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/06/theodore-roosevelt-carrier-strike-group-pulls-into-singapore"
+    },
+    {
+      "id": "usni-7de07c2106b57fbd5a",
+      "date": "2026-11-06",
+      "country": "other",
+      "region": "westpac",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "انتشار گزارش تحولات دریایی غرب اقیانوس آرام",
+      "original_title": "USNI News Western Pacific Pulse: Nov. 6, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/06/usni-news-western-pacific-pulse-nov-6-2026"
+    },
     {
       "id": "usni-f41f0e47320f83f3b0",
       "date": "2026-11-05",
