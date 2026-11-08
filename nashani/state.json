@@ -757,7 +757,13 @@
     "https://t.me/qh_qv/988",
     "https://t.me/qh_qv/989",
     "https://t.me/kerman_gov/10582",
-    "https://t.me/qh_qv/990"
+    "https://t.me/qh_qv/990",
+    "https://t.me/qh_qv/991",
+    "https://t.me/qh_qv/992",
+    "https://t.me/Kerman_akhbar/66273",
+    "https://t.me/Kerman_akhbar/66274",
+    "https://t.me/kerman_news/140276",
+    "https://t.me/kerman_news/140277"
   ],
   "queue": [
     {
@@ -8736,7 +8742,16 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-08T17:59:04.962921+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66273"
+        },
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66274"
+        }
+      ],
       "reserved_at": "2026-11-08T17:59:23.638738+00:00",
       "delivery_kind": "text",
       "telegram_message_id": 188,
@@ -8833,17 +8848,40 @@
       "delivery_kind": "photo",
       "telegram_message_id": 191,
       "sent_at": "2026-11-08T17:59:34.695725+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_news/140277",
+      "source_post_id": "140277",
+      "title": "مس کرمان با شهبا طعم اولین پیروزی فصل را چشید",
+      "excerpt": "مس کرمان با شهبا طعم اولین پیروزی فصل را چشید تیم مس کرمان در نخستین بازی که قاسم شهبا را روی نیمکت خود داشت، پس از عقب‌افتادن در نیمه اول، با نتیجه دو بر یک نفت مسجدسلیمان را شکست داد تا اولین سه امتیاز فصل خود را به دست آورد و به‌طور موقت از منطقه سقوط خارج شود.",
+      "paragraphs": [
+        "مس کرمان با شهبا طعم اولین پیروزی فصل را چشید",
+        "تیم مس کرمان در نخستین بازی که قاسم شهبا را روی نیمکت خود داشت، پس از عقب‌افتادن در نیمه اول، با نتیجه دو بر یک نفت مسجدسلیمان را شکست داد تا اولین سه امتیاز فصل خود را به دست آورد و به‌طور موقت از منطقه سقوط خارج شود."
+      ],
+      "media": null,
+      "published_at": "2026-11-08T18:29:19+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "c061e94c3fecb21f",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T18:30:50.325924+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T17:59:34.695741+00:00",
+  "saved_at": "2026-11-08T18:31:03.329940+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-08T17:59:04.962921+00:00",
-    "fardaayekerman": "2026-11-08T17:59:04.962921+00:00",
-    "irna_kerman": "2026-11-08T17:59:04.962921+00:00",
-    "kerman_gov": "2026-11-08T17:59:04.962921+00:00",
-    "kerman_akhbar": "2026-11-08T17:59:04.962921+00:00",
-    "kerman_news": "2026-11-08T17:59:04.962921+00:00",
-    "kerman_rasaneh": "2026-11-08T17:59:04.962921+00:00",
-    "qh_qv": "2026-11-08T17:59:04.962921+00:00"
+    "kermane_no": "2026-11-08T18:30:50.325924+00:00",
+    "fardaayekerman": "2026-11-08T18:30:50.325924+00:00",
+    "irna_kerman": "2026-11-08T18:30:50.325924+00:00",
+    "kerman_gov": "2026-11-08T18:30:50.325924+00:00",
+    "kerman_akhbar": "2026-11-08T18:30:50.325924+00:00",
+    "kerman_news": "2026-11-08T18:30:50.325924+00:00",
+    "kerman_rasaneh": "2026-11-08T18:30:50.325924+00:00",
+    "qh_qv": "2026-11-08T18:30:50.325924+00:00"
   }
 }
