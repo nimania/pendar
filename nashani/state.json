@@ -8868,13 +8868,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-08T18:30:50.325924+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-08T18:31:05.491269+00:00"
+      "reserved_at": "2026-11-08T18:31:05.491269+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 193,
+      "sent_at": "2026-11-08T18:31:08.009568+00:00"
     }
   ],
-  "saved_at": "2026-11-08T18:31:05.491284+00:00",
+  "saved_at": "2026-11-08T18:31:08.009585+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-08T18:30:50.325924+00:00",
     "fardaayekerman": "2026-11-08T18:30:50.325924+00:00",
