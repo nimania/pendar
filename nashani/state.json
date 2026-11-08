@@ -742,7 +742,22 @@
     "https://t.me/kerman_news/140270",
     "https://t.me/Kerman_akhbar/66271",
     "https://t.me/Kerman_akhbar/66272",
-    "https://t.me/kerman_news/140271"
+    "https://t.me/kerman_news/140271",
+    "https://t.me/kerman_news/140272",
+    "https://t.me/qh_qv/983",
+    "https://t.me/kermane_no/59145",
+    "https://t.me/kermane_no/59146",
+    "https://t.me/kerman_news/140273",
+    "https://t.me/qh_qv/984",
+    "https://t.me/kerman_news/140274",
+    "https://t.me/qh_qv/985",
+    "https://t.me/qh_qv/986",
+    "https://t.me/kerman_news/140275",
+    "https://t.me/qh_qv/987",
+    "https://t.me/qh_qv/988",
+    "https://t.me/qh_qv/989",
+    "https://t.me/kerman_gov/10582",
+    "https://t.me/qh_qv/990"
   ],
   "queue": [
     {
@@ -8696,17 +8711,121 @@
       "delivery_kind": "photo",
       "telegram_message_id": 187,
       "sent_at": "2026-11-08T16:22:02.077001+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_news/140272",
+      "source_post_id": "140272",
+      "title": "کشف ۹۲ کیلوگرم موادمخدر توسط پلیس کرمان",
+      "excerpt": "کشف ۹۲ کیلوگرم موادمخدر توسط پلیس کرمان مأموران پلیس کرمان هنگام گشت‌زنی شبانه در یکی از جاده‌های فرعی حوزه شهرستان بم به کرمان یک دستگاه خودروی پژو ۴۰۵ و یک دستگاه کوییک را متوقف و در بازرسی از آن‌ها، ۸۲ کیلو تریاک کشف و متهمان را دستگير کردند.",
+      "paragraphs": [
+        "کشف ۹۲ کیلوگرم موادمخدر توسط پلیس کرمان",
+        "مأموران پلیس کرمان",
+        "هنگام گشت‌زنی شبانه در یکی از جاده‌های فرعی حوزه شهرستان بم به کرمان یک دستگاه خودروی پژو ۴۰۵ و یک دستگاه کوییک را متوقف و در بازرسی از آن‌ها، ۸۲ کیلو تریاک کشف و متهمان را دستگير کردند."
+      ],
+      "media": null,
+      "published_at": "2026-11-08T16:43:56+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "59001a99f392fc63",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T17:59:04.962921+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59145",
+      "source_post_id": "59145",
+      "title": "بسته خبری 2020 یکشنبه 17 آبان از پایگاه خبری کرمان نو را بشنوید",
+      "excerpt": "بسته خبری 2020 یکشنبه 17 آبان از پایگاه خبری کرمان نو را بشنوید",
+      "paragraphs": [
+        "بسته خبری 2020 یکشنبه 17 آبان از پایگاه خبری کرمان نو را بشنوید"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-08T16:50:12+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "f71ba58f4a298cd1",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T17:59:04.962921+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59146",
+      "source_post_id": "59146",
+      "title": "به گزارش کرمان‌نو، تیم فوتبال مس رفسنجان در هفته نهم لیگ یک از ساعت ۱۷:۳۰ دقیقه امروز یکشنبه ۱۷ آبان برابر تیم جزیره قشم قرار گرفت که در این دیدار خارج از خانه با یک گل بازی را واگذار کرد.",
+      "excerpt": "به گزارش کرمان‌نو، تیم فوتبال مس رفسنجان در هفته نهم لیگ یک از ساعت ۱۷:۳۰ دقیقه امروز یکشنبه ۱۷ آبان برابر تیم جزیره قشم قرار گرفت که در این دیدار خارج از خانه با یک گل بازی را واگذار کرد. مس رفسنجان که هفته گذشته نیز برابر پارس جنوبی جم تساوی کرده بود حالا دومین هفته ناکامی خود را برابر رقبای بالانشین تجربه کرده است و با ۱۶ امتیاز در رده چهارم قرار گرفت.",
+      "paragraphs": [
+        "به گزارش کرمان‌نو، تیم فوتبال مس رفسنجان در هفته نهم لیگ یک از ساعت ۱۷:۳۰ دقیقه امروز یکشنبه ۱۷ آبان برابر تیم جزیره قشم قرار گرفت که در این دیدار خارج از خانه با یک گل بازی را واگذار کرد.",
+        "مس رفسنجان که هفته گذشته نیز برابر پارس جنوبی جم تساوی کرده بود حالا دومین هفته ناکامی خود را برابر رقبای بالانشین تجربه کرده است و با ۱۶ امتیاز در رده چهارم قرار گرفت."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/kc-LlwcvfL3NgrBiwCyEbJVK3IgnrRJ86bMaODUmtvOd8czJ29JZxCTT0MpyUNgsDTI6TJI75oxFVIR77q447_QHsSvyXJZa16rhpj2g4xaXHWu68QuARYwbobp_852jRXgIlo-Mo1Zfz3CBSDqvmgMVe_VACay-FAzVXN_ZVr6D8V0M53u293qJrsK7jYWjBDTwZN-4N3a-rIKSdHeK8o4IZT9demvXYz6cS1SYfNmJGXwYoDeNwusVwGh3qigaCwjDKP61eet7k477N4gWL22yRh-Um3nOJ5WLLN-7HxkUX23jIWmtaHUTS-Z_aJdpLvzVTwwhfM0y6Fna5mr1SA.jpg"
+      },
+      "published_at": "2026-11-08T17:05:04+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "1d546f27284cbfd8",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T17:59:04.962921+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10582",
+      "source_post_id": "10582",
+      "title": "بررسی روند ارتقاء",
+      "excerpt": "بررسی روند ارتقاء بخش‌های گلباف و راین به شهرستان در بازدید مدیرکل تقسیمات کشوری وزارت کشور مدیرکل تقسیمات کشوری وزارت کشور با همراهی معاون سیاسی و اجتماعی استاندار کرمان، از بخش‌های گلباف و راین بازدید کرد تا شرایط و روند ارتقای این دو بخش به شهرستان را بررسی کند. به گزارش روابط عمومی استانداری کرمان، در جریان این بازدید، مدیرکل تقسیمات کشوری و کارشناسان همراه، ظرفیت‌ها و شرایط موجود در گلباف و راین را مورد بررسی قرار دادند و با مسئولان محلی درباره الزامات، ضوابط و فرایندهای قانونی ارتقاء به شهرستان به تبادل نظر پرداختند. این بازدید با هدف بررسی میدانی شرایط و پیگیری موضوع ارتقای گلباف و راین به شهرستان انجام شد.",
+      "paragraphs": [
+        "بررسی روند ارتقاء",
+        "بخش‌های گلباف و راین به شهرستان در بازدید مدیرکل تقسیمات کشوری وزارت کشور",
+        "مدیرکل تقسیمات کشوری وزارت کشور با همراهی معاون سیاسی و اجتماعی استاندار کرمان، از بخش‌های گلباف و راین بازدید کرد تا شرایط و روند ارتقای این دو بخش به شهرستان را بررسی کند.",
+        "به گزارش روابط عمومی استانداری کرمان، در جریان این بازدید، مدیرکل تقسیمات کشوری و کارشناسان همراه، ظرفیت‌ها و شرایط موجود در گلباف و راین را مورد بررسی قرار دادند و با مسئولان محلی درباره الزامات، ضوابط و فرایندهای قانونی ارتقاء به شهرستان به تبادل نظر پرداختند.",
+        "این بازدید با هدف بررسی میدانی شرایط و پیگیری موضوع ارتقای گلباف و راین به شهرستان انجام شد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Gdu0E2dxFtequ5p4r544L1iKvrPlzKyovGI_5J4CLME9ZOG6aHL6JPTnpQw2yvDghwndmug-QqarsQ4ycchecdOd2FM3hvv7g0wN1YO5U_6aaVBZYCLuMkYkMMtZuirC3wmvXDuBC-0fQVIcFIjMYRxGqhQvYtXl_EnFxduzbfZz0nOJbbLQKKnIzF6POLHb2Fvavd9b68vUPG3k4V_pDLRsT38MSaAJ8lPMU54dzsezfJBhIx2WQ2k72KU-E_rj0SY5rf2hdgkjrCg1EBaaTCE6kRTLb50FiSzYoqha3_qAVVaSvI0ZASbaOszGtUiBAMXZArJH-64_n1FN7SiQLg.jpg"
+      },
+      "published_at": "2026-11-08T17:51:49+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "f15bb7a20864b382",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-08T17:59:04.962921+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-08T16:22:02.077023+00:00",
+  "saved_at": "2026-11-08T17:59:21.069045+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-08T16:21:06.339098+00:00",
-    "fardaayekerman": "2026-11-08T16:21:06.339098+00:00",
-    "irna_kerman": "2026-11-08T16:21:06.339098+00:00",
-    "kerman_gov": "2026-11-08T16:21:06.339098+00:00",
-    "kerman_akhbar": "2026-11-08T16:21:06.339098+00:00",
-    "kerman_news": "2026-11-08T16:21:06.339098+00:00",
-    "kerman_rasaneh": "2026-11-08T16:21:06.339098+00:00",
-    "qh_qv": "2026-11-08T16:21:06.339098+00:00"
+    "kermane_no": "2026-11-08T17:59:04.962921+00:00",
+    "fardaayekerman": "2026-11-08T17:59:04.962921+00:00",
+    "irna_kerman": "2026-11-08T17:59:04.962921+00:00",
+    "kerman_gov": "2026-11-08T17:59:04.962921+00:00",
+    "kerman_akhbar": "2026-11-08T17:59:04.962921+00:00",
+    "kerman_news": "2026-11-08T17:59:04.962921+00:00",
+    "kerman_rasaneh": "2026-11-08T17:59:04.962921+00:00",
+    "qh_qv": "2026-11-08T17:59:04.962921+00:00"
   }
 }
