@@ -1279,7 +1279,27 @@
     "https://t.me/isna94/412571",
     "https://t.me/mehrnews/430161",
     "https://t.me/irna_1313/471617",
-    "https://t.me/mehrnews/430162"
+    "https://t.me/mehrnews/430162",
+    "https://t.me/irna_1313/471618",
+    "https://t.me/isna94/412572",
+    "https://t.me/irna_1313/471619",
+    "https://t.me/isna94/412573",
+    "https://t.me/mehrnews/430163",
+    "https://t.me/irna_1313/471620",
+    "https://t.me/irna_1313/471621",
+    "https://t.me/mehrnews/430164",
+    "https://t.me/mehrnews/430165",
+    "https://t.me/irna_1313/471622",
+    "https://t.me/irna_1313/471623",
+    "https://t.me/irna_1313/471624",
+    "https://t.me/irna_1313/471625",
+    "https://t.me/irna_1313/471626",
+    "https://t.me/tehranpress1/132365",
+    "https://t.me/isna94/412574",
+    "https://t.me/irna_1313/471627",
+    "https://t.me/Tehran_Tel/114786",
+    "https://t.me/isna94/412575",
+    "https://t.me/irna_1313/471629"
   ],
   "queue": [
     {
@@ -6413,15 +6433,38 @@
       "status": "review",
       "detected_at": "2026-11-09T09:38:41.130859+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132365",
+      "source_post_id": "132365",
+      "title": "در جریان معاملات امروز شاخص کل بورس با افزایش ۴۷ هزار و ۸۰۲ واحد در سطح ۸ میلیون و ۱۳۷ هزار واحدی ایستاد.",
+      "excerpt": "در جریان معاملات امروز شاخص کل بورس با افزایش ۴۷ هزار و ۸۰۲ واحد در سطح ۸ میلیون و ۱۳۷ هزار واحدی ایستاد. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "در جریان معاملات امروز شاخص کل بورس با افزایش ۴۷ هزار و ۸۰۲ واحد در سطح ۸ میلیون و ۱۳۷ هزار واحدی ایستاد.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": null,
+      "published_at": "2026-11-09T09:50:21+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "685507572bf0d56f",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-09T09:58:21.459550+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-09T09:39:57.566219+00:00",
+  "saved_at": "2026-11-09T09:59:00.840789+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-09T09:38:41.130859+00:00",
-    "tehran_tel": "2026-11-09T09:38:41.130859+00:00",
-    "irna_1313": "2026-11-09T09:38:41.130859+00:00",
-    "isna94": "2026-11-09T09:38:41.130859+00:00",
-    "mehrnews": "2026-11-09T09:38:41.130859+00:00",
+    "tehranpress1": "2026-11-09T09:58:21.459550+00:00",
+    "tehran_tel": "2026-11-09T09:58:21.459550+00:00",
+    "irna_1313": "2026-11-09T09:58:21.459550+00:00",
+    "isna94": "2026-11-09T09:58:21.459550+00:00",
+    "mehrnews": "2026-11-09T09:58:21.459550+00:00",
     "web_shahr": "2026-11-09T09:38:41.130859+00:00",
     "web_mehr_tehran": "2026-11-09T09:38:41.130859+00:00"
   }
