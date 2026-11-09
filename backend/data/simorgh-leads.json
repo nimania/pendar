@@ -3,6 +3,23 @@
   "description": "Editorial review queue only; publication requires independent verification and explicit approval.",
   "leads": [
     {
+      "id": "fa4aeacfaa830e8cf9c9",
+      "channel": "@simorghdata369",
+      "source_url": "https://t.me/simorghdata369/3421",
+      "source_published_at": "2026-11-08T20:27:48+00:00",
+      "headline_hint": "🚨🇮🇷 گزارش سه شلیک از سواحل سیریک به سمت تنگه هرمز",
+      "source_excerpt": "🚨🇮🇷 گزارش سه شلیک از سواحل سیریک به سمت تنگه هرمز صداوسیما به نقل از یک منبع آگاه در شهرستان سیریک استان هرمزگان گزارش داد دقایقی پیش صدای سه شلیک از این منطقه به سمت تنگه هرمز شنیده شده است. #️⃣ به گفته این منبع، شلیک‌ها در ارتباط با مقابله با شناورهایی بوده که ایران آن‌ها را متخلف می‌داند. #️⃣ تاکنون هویت شناورها، نوع سلاح‌های استفاده‌شده و نتیجه شلیک‌ها اعلام نشده است. #️⃣ همچنین مشخص نیست آیا شناوری هدف اصابت قرار گرفته یا شلیک‌ها صرفاً هشداردهنده بوده‌اند. ♨️: اصل انتشار گزارش تأیید شده، اما جزئیات عملیات و ادعای برخورد با شناورها هنوز تأیید مستقل ندارد. 🌟 آشیان سیمرغ | تنها رسانه خبری دکتر مهدی مطهرنیا📽 📡 @simorghdata369✅ zal🪫 👉👍👍👍",
+      "first_seen_at": "2026-11-09T07:05:16.619293+00:00",
+      "review_status": "pending",
+      "reviewed_by": "",
+      "approved_at": null,
+      "approved_headline_fa": "",
+      "approved_summary_fa": "",
+      "why_it_matters_fa": "",
+      "independent_sources": [],
+      "review_note": ""
+    },
+    {
       "id": "581c40d6556f8e3e0265",
       "channel": "@simorghdata369",
       "source_url": "https://t.me/simorghdata369/3414",
