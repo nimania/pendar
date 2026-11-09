@@ -41,7 +41,8 @@
       "at": "2026-11-08T21:44:04.924948+03:30"
     },
     "2026-11-09-afternoon-کرمان": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 222,
       "at": "2026-11-09T14:26:49.499837+03:30"
     }
   }
