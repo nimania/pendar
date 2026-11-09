@@ -8,9 +8,10 @@
       "message_id": 19
     },
     "https://www.timeout.com/istanbul/restaurants/sahra-uygur-restaurant": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/sahra-uygur-restaurant",
-      "at": "2026-11-09T22:50:43.158661+03:00"
+      "at": "2026-11-09T22:50:43.158661+03:00",
+      "message_id": 23
     }
   },
   "days": {
@@ -21,9 +22,10 @@
       "message_id": 19
     },
     "2026-11-09": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/sahra-uygur-restaurant",
-      "at": "2026-11-09T22:50:43.158661+03:00"
+      "at": "2026-11-09T22:50:43.158661+03:00",
+      "message_id": 23
     }
   }
 }
