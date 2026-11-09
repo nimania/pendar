@@ -46,7 +46,8 @@
       "at": "2026-11-09T14:26:49.499837+03:30"
     },
     "2026-11-09-afternoon-تهران": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 91,
       "at": "2026-11-09T14:26:49.499837+03:30"
     }
   }
