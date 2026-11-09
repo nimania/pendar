@@ -6,6 +6,11 @@
       "url": "https://www.timeout.com/istanbul/restaurants/bart",
       "at": "2026-11-08T18:33:47.390086+03:00",
       "message_id": 19
+    },
+    "https://www.timeout.com/istanbul/restaurants/sahra-uygur-restaurant": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/restaurants/sahra-uygur-restaurant",
+      "at": "2026-11-09T22:50:43.158661+03:00"
     }
   },
   "days": {
@@ -14,6 +19,11 @@
       "url": "https://www.timeout.com/istanbul/restaurants/bart",
       "at": "2026-11-08T18:33:47.390086+03:00",
       "message_id": 19
+    },
+    "2026-11-09": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/restaurants/sahra-uygur-restaurant",
+      "at": "2026-11-09T22:50:43.158661+03:00"
     }
   }
 }
