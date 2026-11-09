@@ -922,41 +922,15 @@
     "https://t.me/kerman_news/140344",
     "https://t.me/Kerman_akhbar/66295",
     "https://t.me/Kerman_akhbar/66296",
-    "https://t.me/kerman_news/140345"
+    "https://t.me/kerman_news/140345",
+    "https://t.me/kerman_news/140346",
+    "https://t.me/kerman_news/140347",
+    "https://t.me/kerman_news/140348",
+    "https://t.me/kerman_news/140349",
+    "https://t.me/Kerman_akhbar/66297",
+    "https://t.me/Kerman_akhbar/66298"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kermane_no/59016",
-      "source_post_id": "59016",
-      "title": "موافقت سازمان امور مالیاتی با معافیت مالیاتی مدارس غیردولتی",
-      "excerpt": "موافقت سازمان امور مالیاتی با معافیت مالیاتی مدارس غیردولتی مدیرکل مدارس و مراکز غیردولتی وزارت آموزش‌وپرورش از پاسخ مثبت سازمان امور مالیاتی به درخواست معافیت فعالیت‌های آموزشی و فرهنگی مدارس غیردولتی از مالیات بر ارزش افزوده خبر داد و اعلام کرد این موضوع در وزارت اقتصاد در حال پیگیری نهایی است. رضا زینی‌وند در ششمین جلسه شورای آموزش‌وپرورش استان کرمان با اشاره به اینکه فعالیت‌های آموزشی و پژوهشی طبق قانون مشمول معافیت هستند، بر لزوم اجرای یکسان قوانین، واگذاری املاک مازاد و صدور شناسه ملی برای مدارس غیردولتی تأکید کرد. وی با بیان اینکه مدارس غیردولتی رقیب مدارس دولتی نیستند بلکه ظرفیتی بزرگ برای نظام آموزشی محسوب می‌شوند، خاطرنشان کرد که در حال حاضر حدود ۲۱ هزار مدرسه غیردولتی با دو میلیون و ۵۰۰ هزار دانش‌آموز در کشور فعال هستند و بیش از ۳۰۰ هزار نفر در این بخش اشتغال دارند.",
-      "paragraphs": [
-        "موافقت سازمان امور مالیاتی با معافیت مالیاتی مدارس غیردولتی",
-        "مدیرکل مدارس و مراکز غیردولتی وزارت آموزش‌وپرورش از پاسخ مثبت سازمان امور مالیاتی به درخواست معافیت فعالیت‌های آموزشی و فرهنگی مدارس غیردولتی از مالیات بر ارزش افزوده خبر داد و اعلام کرد این موضوع در وزارت اقتصاد در حال پیگیری نهایی است.",
-        "رضا زینی‌وند در ششمین جلسه شورای آموزش‌وپرورش استان کرمان با اشاره به اینکه فعالیت‌های آموزشی و پژوهشی طبق قانون مشمول معافیت هستند، بر لزوم اجرای یکسان قوانین، واگذاری املاک مازاد و صدور شناسه ملی برای مدارس غیردولتی تأکید کرد.",
-        "وی با بیان اینکه مدارس غیردولتی رقیب مدارس دولتی نیستند بلکه ظرفیتی بزرگ برای نظام آموزشی محسوب می‌شوند، خاطرنشان کرد که در حال حاضر حدود ۲۱ هزار مدرسه غیردولتی با دو میلیون و ۵۰۰ هزار دانش‌آموز در کشور فعال هستند و بیش از ۳۰۰ هزار نفر در این بخش اشتغال دارند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/PtmFuzWgXD9mukV5mkqYYxQJ7WCGUgIu1OaD1tmiHqDB2gDVgbDS6myryl2ejJ1M99HBRn7iMdBQc9ET-98Nas7iuMtevnxvUva7cekNwhFODt8dUJ6eOM3amn0y1nQTjKT28qup3IKON3DgYIrHtVBEjbb0zqItHXcZXCp6wn88qFHCfqcIKkJ8B2ZFWT52dz1hhvDbWLprN9fdUwM6tsW8pO2C0Ik3ULmK9aqaf8QHV8q6fw1XOxF4Obk-jW-e62P8pNGrCfZMLrJUp62gTJE-0O4MTW303ClIRwJP4Ezhc1pSko4bJJTMV6nFRE0X-F9hdiA2nz_uJHwIF0nDUg.jpg"
-      },
-      "published_at": "2026-11-05T16:51:25+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "e4cf652952d1cd40",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-05T17:45:46.320241+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-05T17:45:56.881284+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 21,
-      "sent_at": "2026-11-05T17:46:01.910319+00:00"
-    },
     {
       "url": "https://t.me/kermane_no/59017",
       "source_post_id": "59017",
@@ -10050,17 +10024,42 @@
       "status": "ready",
       "detected_at": "2026-11-09T19:13:07.700174+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140346",
+      "source_post_id": "140346",
+      "title": "بارش شدید در جاده دهبکری به جیرفت",
+      "excerpt": "بارش شدید در جاده دهبکری به جیرفت",
+      "paragraphs": [
+        "بارش شدید در جاده دهبکری به جیرفت"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/04eb03eafa.mp4?token=PL72eWJ2nQvdUc9nD3PcIPmBm-zkky3E1jVRMRgBxgElOHBPEWfjrWHMoW7ehJZ9cabVAxVbAws-YfFGJA6DBbJTdrnnBgJrzYHa9-hK0F6C_ZDAtxyZtQIWMSg3JNbiqoHRr5ew6evUz4cimUCgIAxbrcTr2r6cWhqzABeUNzOUy5tCISFSd2wd-PTh1tS4HmN9MsUQywlGA-zj5vUXfh_q1JuRV868oMMe2YjtkYJmynmd85xND9msLYeos9cevKHi80lnKeLCHL_JY4JynmoyoRkrrze7aREzSSncIYP7ppmjOTbP6Q-_SmQzQmcWL8Wtkb3f2zlhqSoun8vgpA"
+      },
+      "published_at": "2026-11-09T19:24:27+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "e4ccdcea6dbf9ffa",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-09T20:36:40.134674+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-09T19:13:41.567818+00:00",
+  "saved_at": "2026-11-09T20:37:02.393650+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-09T19:13:07.700174+00:00",
-    "fardaayekerman": "2026-11-09T19:13:07.700174+00:00",
-    "irna_kerman": "2026-11-09T19:13:07.700174+00:00",
-    "kerman_gov": "2026-11-09T19:13:07.700174+00:00",
-    "kerman_akhbar": "2026-11-09T19:13:07.700174+00:00",
-    "kerman_news": "2026-11-09T19:13:07.700174+00:00",
-    "kerman_rasaneh": "2026-11-09T19:13:07.700174+00:00",
-    "qh_qv": "2026-11-09T19:13:07.700174+00:00"
+    "kermane_no": "2026-11-09T20:36:40.134674+00:00",
+    "fardaayekerman": "2026-11-09T20:36:40.134674+00:00",
+    "irna_kerman": "2026-11-09T20:36:40.134674+00:00",
+    "kerman_gov": "2026-11-09T20:36:40.134674+00:00",
+    "kerman_akhbar": "2026-11-09T20:36:40.134674+00:00",
+    "kerman_news": "2026-11-09T20:36:40.134674+00:00",
+    "kerman_rasaneh": "2026-11-09T20:36:40.134674+00:00",
+    "qh_qv": "2026-11-09T20:36:40.134674+00:00"
   }
 }
