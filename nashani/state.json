@@ -913,67 +913,18 @@
     "https://t.me/qh_qv/1006",
     "https://t.me/kerman_news/140339",
     "https://t.me/kerman_news/140340",
-    "https://t.me/kerman_news/140341"
+    "https://t.me/kerman_news/140341",
+    "https://t.me/qh_qv/1007",
+    "https://t.me/Kerman_akhbar/66293",
+    "https://t.me/Kerman_akhbar/66294",
+    "https://t.me/kerman_news/140342",
+    "https://t.me/kerman_news/140343",
+    "https://t.me/kerman_news/140344",
+    "https://t.me/Kerman_akhbar/66295",
+    "https://t.me/Kerman_akhbar/66296",
+    "https://t.me/kerman_news/140345"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140099",
-      "title": "رئیس مرکز مدیریت راه‌های جنوب کرمان: با وجود تداوم بارش‌ها و ناپایداری‌های جوی، تمامی مسیرهای ارتباطی این منطقه باز و تردد در آن‌ها جریان…",
-      "excerpt": "♦️ رئیس مرکز مدیریت راه‌های جنوب کرمان: با وجود تداوم بارش‌ها و ناپایداری‌های جوی، تمامی مسیرهای ارتباطی این منطقه باز و تردد در آن‌ها جریان دارد @kerman_news",
-      "published_at": "2026-11-05T15:07:24+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "5aae1d84443dcba5",
-      "risk": "ordinary",
-      "city_confidence": "review",
-      "status": "review",
-      "detected_at": "2026-11-05T16:15:06.272311+00:00",
-      "other_sources": [],
-      "geography": "kerman",
-      "media_repost_allowed": true
-    },
-    {
-      "url": "https://t.me/Kerman_akhbar/66204",
-      "title": "خبر خوش رئیس سازمان نوسازی مدارس برای دانش‌آموزان جنوب کرمان",
-      "excerpt": "خبر خوش رئیس سازمان نوسازی مدارس برای دانش‌آموزان جنوب کرمان 🔹 رئیس سازمان نوسازی مدارس کشور: رفع کمبود فضای آموزشی و تجهیزات سرمایشی مدارس جنوب کرمان با جدیت پیگیری می‌شود. 🔹 در قالب طرح شهید عرب، چنانچه زیرساخت‌های لازم برای نصب تجهیزات سرمایشی از سوی مردم، شهرداری‌ها، دهیاری‌ها و خیران فراهم شود، سازمان نوسازی مدارس نیز در تأمین اسپلیت و تجهیزات مورد نیاز مشارکت خواهد کرد. 🔹 حمایت از تکمیل طرح‌های نیمه‌تمام، توسعه محوطه‌سازی مدارس و تجهیز هنرستان‌های فنی و حرفه‌ای از جمله برنامه‌هایی است که برای رفع مشکلات آموزشی منطقه دنبال می‌شود. @Kerman_akhbar",
-      "published_at": "2026-11-05T15:15:39+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "3dca94e075c360db",
-      "risk": "ordinary",
-      "city_confidence": "review",
-      "status": "review",
-      "detected_at": "2026-11-05T16:15:06.272311+00:00",
-      "other_sources": [],
-      "geography": "kerman",
-      "media_repost_allowed": false
-    },
-    {
-      "url": "https://t.me/Kerman_akhbar/66207",
-      "source_post_id": "66207",
-      "title": "مسئولان تجهیزات مورد نیاز ما را تامین کند",
-      "excerpt": "مسئولان تجهیزات مورد نیاز ما را تامین کند ابوالفضل ملک اولادی ورزشکار کرمانی تیم ملی پاراشنای ایران که موفق شده بود در مسابقات پاراآسیایی مدال برنز فینال رشته ۱۰۰ متر کرال پشت مردان کلاس S۹ را کسب کند . امیدی برای این مدال نبود و برای کسب تجربه رفته بودم؛ اما خداراشکر مدال کسب کردم. برای مسابقات آسیایی بعدی با قدرت‌تر آماده می‌شوم. از مدیران انتظار داریم که حداقل تجهیزات موردنیاز ما را فراهم کنند و حمایت لازم را از ما داشته باشند تا بتوانیم مدال‌های بهتری برای کرمان و ایران بیاوریم. ما نماینده ایران در مسابقات هستیم و امیدوارم مسئولان بیشتر ما را ببینند.",
-      "paragraphs": [
-        "مسئولان تجهیزات مورد نیاز ما را تامین کند",
-        "ابوالفضل ملک اولادی ورزشکار کرمانی تیم ملی پاراشنای ایران",
-        "که موفق شده بود در مسابقات پاراآسیایی مدال برنز فینال رشته ۱۰۰ متر کرال پشت مردان کلاس S۹ را کسب کند .",
-        "امیدی برای این مدال نبود و برای کسب تجربه رفته بودم؛ اما خداراشکر مدال کسب کردم. برای مسابقات آسیایی بعدی با قدرت‌تر آماده می‌شوم.",
-        "از مدیران انتظار داریم که حداقل تجهیزات موردنیاز ما را فراهم کنند و حمایت لازم را از ما داشته باشند تا بتوانیم مدال‌های بهتری برای کرمان و ایران بیاوریم. ما نماینده ایران در مسابقات هستیم و امیدوارم مسئولان بیشتر ما را ببینند."
-      ],
-      "media": null,
-      "published_at": "2026-11-05T16:55:25+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "0145811df2faa882",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "review",
-      "status": "review",
-      "detected_at": "2026-11-05T16:56:31.998931+00:00",
-      "other_sources": [],
-      "geography": "kerman"
-    },
     {
       "url": "https://t.me/kermane_no/59016",
       "source_post_id": "59016",
@@ -4501,6 +4452,10 @@
         {
           "name": "آخرین خبر کرمان",
           "url": "https://t.me/Kerman_akhbar/66269"
+        },
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66296"
         }
       ],
       "reserved_at": "2026-11-07T14:23:39.310524+00:00",
@@ -9790,7 +9745,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-09T17:50:17.294989+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66293"
+        }
+      ]
     },
     {
       "url": "https://t.me/irna_kerman/30347",
@@ -9979,17 +9939,95 @@
       "status": "ready",
       "detected_at": "2026-11-09T17:50:17.294989+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140342",
+      "source_post_id": "140342",
+      "title": "هشدار بارندگی در محور جیرفت–جبالبارز و محورجیرفت-بافت",
+      "excerpt": "هشدار بارندگی در محور جیرفت–جبالبارز و محورجیرفت-بافت مرکز مدیریت راه‌های جنوب کرمان بارش باران در محور جیرفت–جبالبارز و همچنین محورجیرفت-بافت محدوده سربیژن زخ می دهد. با توجه به لغزندگی سطح جاده، رانندگان با سرعت مطمئنه حرکت کرده، از سبقت غیرمجاز خودداری و فاصله طولی مناسب را رعایت کنند.",
+      "paragraphs": [
+        "هشدار بارندگی در محور جیرفت–جبالبارز و محورجیرفت-بافت",
+        "مرکز مدیریت راه‌های جنوب کرمان",
+        "بارش باران در محور جیرفت–جبالبارز و همچنین محورجیرفت-بافت محدوده سربیژن زخ می دهد.",
+        "با توجه به لغزندگی سطح جاده، رانندگان با سرعت مطمئنه حرکت کرده، از سبقت غیرمجاز خودداری و فاصله طولی مناسب را رعایت کنند."
+      ],
+      "media": null,
+      "published_at": "2026-11-09T18:08:22+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "be8485cb8586c67d",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-09T19:13:07.700174+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140343",
+      "source_post_id": "140343",
+      "title": "نتیجه نظرسنجی؛ مهم‌ترین مانع تأمین مسکن برای خانواده‌های کرمان چیست؟",
+      "excerpt": "نتیجه نظرسنجی؛ مهم‌ترین مانع تأمین مسکن برای خانواده‌های کرمان چیست؟ بر اساس نتایج ترکیبی نظرسنجی در ۴ پلتفرم، قیمت بالای خرید خانه با ۴۱٫۶٪، مهم‌ترین دغدغه پاسخ‌دهندگان بوده است.",
+      "paragraphs": [
+        "نتیجه نظرسنجی؛ مهم‌ترین مانع تأمین مسکن برای خانواده‌های کرمان چیست؟",
+        "بر اساس نتایج ترکیبی نظرسنجی در ۴ پلتفرم، قیمت بالای خرید خانه با ۴۱٫۶٪، مهم‌ترین دغدغه پاسخ‌دهندگان بوده است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/oFullU--4DIDIq--xl_YDsy9ydpGBqrncJ947ksjB8hSk2WFeyk6pljs3YHd165xqNwEtZJ22YMhHh8F5dAZ3jV1KUMkyyp4sSQ2ICiHSlU2TnBDlKfAwwhQHsUJ3da-IE2jByGDr0xeN9Z2NEalQAzyaIvqZnxJInvVZFwtBW0U04cVzWlNl6N60zSiA0h83zLT4bn7KXhTvvl44l96N2uamLo54jXH8F-h4J81bpdu2UILn3v5Xox8PNDcWjpZaH921GOqyEsPanMf36kojoBZzUrofu2J5H5K0NUODuF360PfTQDgzK22jYDQ95l1cCaRvuACi1yU7hho1Lf1JA.jpg"
+      },
+      "published_at": "2026-11-09T18:34:50+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "11e79a885aacca04",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-09T19:13:07.700174+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140345",
+      "source_post_id": "140345",
+      "title": "زنی در بردسیر شکار سگ شکاری شد",
+      "excerpt": "زنی در بردسیر شکار سگ شکاری شد در حادثه‌ای تکان‌دهنده که آرامش روستای باغ‌حاجی (بخش لاله‌زار) را بر هم زد، یک خانم معلم بازنشسته ۶۰ ساله، بر اثر گازگرفتگی شدید توسط یک سگ شکاری از دنیا رفت. این حادثه زمانی رخ داد که سگی شکاری که متعلق به یکی از اهالی…",
+      "paragraphs": [
+        "زنی در بردسیر شکار سگ شکاری شد",
+        "در حادثه‌ای تکان‌دهنده که آرامش روستای باغ‌حاجی (بخش لاله‌زار) را بر هم زد، یک خانم معلم بازنشسته ۶۰ ساله، بر اثر گازگرفتگی شدید توسط یک سگ شکاری از دنیا رفت.",
+        "این حادثه زمانی رخ داد که سگی شکاری که متعلق به یکی از اهالی…"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/917ba402fd.mp4?token=h5aGp7ZeGZwKtgvoOPFqpvmIbCoy3sX5dHgkymSWQYkEMQjeeTzRknI4u-2M-9rK62Mhr2TrOjfMlGjmegvf_SqInZhpIkYZ08Mif5gADWuI9VmERSbn4epyONLsGoYqyoicpToSNwe0jzKFqulz6E-rkTqM_frVmW9fD_oyZBpol5ifS8vS3Ck-oPtJKiaWN8Qx_GzOzM8H7RcP-IKobsMTn-ut_81_R_UkeObvvxdslnFcn8dDgQvzsMXuj_H-fRBkHkmEUFPM0BEIn_X7bwF4IPrLS0wneB3dFqq9yvZIzgAeDJVcBqFh_Ej9rvG7xvyqKgPUhXZgs21HiB06kg"
+      },
+      "published_at": "2026-11-09T19:08:50+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "08edef12e63da81a",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-09T19:13:07.700174+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-09T17:51:01.715174+00:00",
+  "saved_at": "2026-11-09T19:13:19.931524+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-09T17:50:17.294989+00:00",
-    "fardaayekerman": "2026-11-09T17:50:17.294989+00:00",
-    "irna_kerman": "2026-11-09T17:50:17.294989+00:00",
-    "kerman_gov": "2026-11-09T17:50:17.294989+00:00",
-    "kerman_akhbar": "2026-11-09T17:50:17.294989+00:00",
-    "kerman_news": "2026-11-09T17:50:17.294989+00:00",
-    "kerman_rasaneh": "2026-11-09T17:50:17.294989+00:00",
-    "qh_qv": "2026-11-09T17:50:17.294989+00:00"
+    "kermane_no": "2026-11-09T19:13:07.700174+00:00",
+    "fardaayekerman": "2026-11-09T19:13:07.700174+00:00",
+    "irna_kerman": "2026-11-09T19:13:07.700174+00:00",
+    "kerman_gov": "2026-11-09T19:13:07.700174+00:00",
+    "kerman_akhbar": "2026-11-09T19:13:07.700174+00:00",
+    "kerman_news": "2026-11-09T19:13:07.700174+00:00",
+    "kerman_rasaneh": "2026-11-09T19:13:07.700174+00:00",
+    "qh_qv": "2026-11-09T19:13:07.700174+00:00"
   }
 }
