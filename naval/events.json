@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-08T20:24:45+00:00",
+  "updated_at": "2026-11-09T12:45:17+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
     {
@@ -15,6 +15,19 @@
       "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
       "source": "USNI News",
       "url": "https://news.usni.org/2026/11/06/theodore-roosevelt-carrier-strike-group-pulls-into-singapore"
+    },
+    {
+      "id": "usni-b0d59cabc6dcdd3b39",
+      "date": "2026-11-06",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "The Future of French Fleet Close-in Defense",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/06/the-future-of-french-fleet-close-in-defense"
     },
     {
       "id": "usni-7de07c2106b57fbd5a",
