@@ -1458,7 +1458,25 @@
     "https://t.me/tehranpress1/132405",
     "https://t.me/tehranpress1/132406",
     "https://t.me/isna94/412652",
-    "https://t.me/mehrnews/430323"
+    "https://t.me/mehrnews/430323",
+    "https://t.me/irna_1313/471880",
+    "https://t.me/irna_1313/471881",
+    "https://t.me/tehranpress1/132407",
+    "https://t.me/irna_1313/471882",
+    "https://t.me/tehranpress1/132408",
+    "https://t.me/isna94/412653",
+    "https://t.me/irna_1313/471883",
+    "https://t.me/mehrnews/430326",
+    "https://t.me/mehrnews/430328",
+    "https://t.me/mehrnews/430329",
+    "https://t.me/tehranpress1/132409",
+    "https://t.me/irna_1313/471884",
+    "https://t.me/mehrnews/430330",
+    "https://t.me/mehrnews/430338",
+    "https://t.me/isna94/412654",
+    "https://t.me/mehrnews/430346",
+    "https://t.me/irna_1313/471885",
+    "https://t.me/tehranpress1/132410"
   ],
   "queue": [
     {
@@ -7513,15 +7531,127 @@
       "status": "ready",
       "detected_at": "2026-11-09T20:08:22.519428+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132407",
+      "source_post_id": "132407",
+      "title": "قاضی‌زاده هاشمی: ترامپ در هیچ‌کجای دنیا جدی گرفته نمی‌شود",
+      "excerpt": "قاضی‌زاده هاشمی: ترامپ در هیچ‌کجای دنیا جدی گرفته نمی‌شود نماینده مجلس شاید برخی در فضای افکار عمومی داخل کشور ترامپ را جدی بگیرند. اما ترامپ در هیچ‌کجای دنیا جدی گرفته نمی‌شود، چه بین ملت‌ها و چه در میان بسیاری از سیاستمداران. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "قاضی‌زاده هاشمی: ترامپ در هیچ‌کجای دنیا جدی گرفته نمی‌شود",
+        "نماینده مجلس",
+        "شاید برخی در فضای افکار عمومی داخل کشور ترامپ را جدی بگیرند.",
+        "اما ترامپ در هیچ‌کجای دنیا جدی گرفته نمی‌شود، چه بین ملت‌ها و چه در میان بسیاری از سیاستمداران.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/1de1ea493a.mp4?token=LCa4gfolSeN4C79fAgYODfZB3v_9toFnon4bh3eEf3Z1wnil-K6kGCDL4WVI67x6qwAhcR5j-ak6qDauaJPQIolzErHoUM-siuuHYuvDAOB1KfchjhSYvG_T_I2p5kijGGK_gkke_0l1sAUOJUkBqDfaSV3u_ZxDKad5-eRZYlHO9X9mmAcrixMTZW7rkFS9jlNAkvDrfIPMGZ6TPN90mXLa4SkDVsf8mySovo1P1yhWPaiz8KZ88bb3U4Mrzd69N0j4X-mHm22Fw8C5eqHBRwRS8_ffJzMeCvoM-xB3rMb4Kil_7WcnEYp-T3mRC2M_LFnJ9xjs8HobZhZVogcEIA"
+      },
+      "published_at": "2026-11-09T20:15:10+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "d01ab1b9a7f9baa9",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-09T20:36:38.120454+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132408",
+      "source_post_id": "132408",
+      "title": "باید به طرف آمریکایی بفهمانیم که دوران امتیاز گرفتن از طریق فشار تمام شده است",
+      "excerpt": "باید به طرف آمریکایی بفهمانیم که دوران امتیاز گرفتن از طریق فشار تمام شده است تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "باید به طرف آمریکایی بفهمانیم که دوران امتیاز گرفتن از طریق فشار تمام شده است",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-09T20:21:01+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "0bde5394edc48081",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-09T20:36:38.120454+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132409",
+      "source_post_id": "132409",
+      "title": "امیر جهانشاهی: به هر سطح از تهدید، پاسخ فوری و پرقدرت می‌دهیم",
+      "excerpt": "امیر جهانشاهی: به هر سطح از تهدید، پاسخ فوری و پرقدرت می‌دهیم امیر سرتیپ «علی جهانشاهی» فرمانده نیروی زمینی ارتش: نیروی زمینی ارتش آماده است تا در مقابله با تهدیدات در هر سطحی فوری، محکم، پر قدرت و با شدت بیش از پیش پاسخ دهد. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "امیر جهانشاهی: به هر سطح از تهدید، پاسخ فوری و پرقدرت می‌دهیم",
+        "امیر سرتیپ «علی جهانشاهی» فرمانده نیروی زمینی ارتش: نیروی زمینی ارتش آماده است تا در مقابله با تهدیدات در هر سطحی فوری، محکم، پر قدرت و با شدت بیش از پیش پاسخ دهد.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/HONnkHvWoY_60A05v5h9jXwaO4udFOdvV2YVN2AmD68EZhDMwK4FFAef-bFbaYjUrSQZ90eNOo7TcEo2Ac6nIqtpzuLXloP1yGOBAILJDT_wBdO1HuJsdSnotqe7MgCjB6YCrYO5nc7_qSy_MngVl269RbBpAn9o1nAmo-T6C1Pak0HsE-F--FJdS8WVAU8d2ZsB-UVzMch7zaIRIWyIIfaPWaycucfegEIZsRfiFfgh8JPD5fwkB4vhCSrQbeERjSxUIfZBFft9oB0tBxUHQZYhUtC7N7JH7LqRFU1OFHbLbi4YeTV0kN5olbZUjKobP-SQ36F_APoj8FbrQJUkMw.jpg"
+      },
+      "published_at": "2026-11-09T20:29:01+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "63484ebe91add2cd",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-09T20:36:38.120454+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132410",
+      "source_post_id": "132410",
+      "title": "انتقاد ایران از رویکرد دوگانه گروسی در محکوم کردن حمله به تاسیسات هسته‌ای",
+      "excerpt": "انتقاد ایران از رویکرد دوگانه گروسی در محکوم کردن حمله به تاسیسات هسته‌ای هیات نمایندگی ایران هنگام بمباران تاسیسات ایران گروسی محکومیت را خارج از حوزه کاری می‌دانست. هیات ایران در بیانیه ای در رسانه اجتماعی ایکس با اشاره به تصویری از گروسی که در آن وی کشته شدن یک نیروی نیروگاه هسته ای زاپورژیا در اوکراین را محکوم می کند نوشت: زمانی که بمب‌های آمریکا و رژیم اسرائیل به تأسیسات هسته‌ای صلح‌آمیز و محافظت شده ایران اصابت کردند که در تاریخ آژانس بی‌سابقه بود، یا دانشمندان هسته‌ای ایران ترور شدند، این اقدامات هرگز محکوم نشدند. در آن موقعیت‌ها، مدیرکل ظاهراً محکومیت را خارج از «حوزه» و «کار» خود می‌دانست. هیات نمایندگی ایران تاکید کرد: قابل تحسین است، عبارت «به شدت محکوم می‌کند» به وضوح می‌تواند توسط رافائل گروسی، مدیرکل آژانس بین‌المللی انرژی اتمی استفاده شود. اما چرا در همه موقعیت‌ها به طور مداوم اعمال نمی‌شود؟ تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "انتقاد ایران از رویکرد دوگانه گروسی در محکوم کردن حمله به تاسیسات هسته‌ای",
+        "هیات نمایندگی ایران",
+        "هنگام بمباران تاسیسات ایران گروسی محکومیت را خارج از حوزه کاری می‌دانست.",
+        "هیات ایران در بیانیه ای در رسانه اجتماعی ایکس با اشاره به تصویری از گروسی که در آن وی کشته شدن یک نیروی نیروگاه هسته ای زاپورژیا در اوکراین را محکوم می کند نوشت: زمانی که بمب‌های آمریکا و رژیم اسرائیل به تأسیسات هسته‌ای صلح‌آمیز و محافظت شده ایران اصابت کردند که در تاریخ آژانس بی‌سابقه بود، یا دانشمندان هسته‌ای ایران ترور شدند، این اقدامات هرگز محکوم نشدند. در آن موقعیت‌ها، مدیرکل ظاهراً محکومیت را خارج از «حوزه» و «کار» خود می‌دانست.",
+        "هیات نمایندگی ایران تاکید کرد: قابل تحسین است، عبارت «به شدت محکوم می‌کند» به وضوح می‌تواند توسط رافائل گروسی، مدیرکل آژانس بین‌المللی انرژی اتمی استفاده شود. اما چرا در همه موقعیت‌ها به طور مداوم اعمال نمی‌شود؟",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/p5v4V85bTRTOA_kQZKU55navNMtUiPl5jNwk3_7_BsSn9AMPxL4b-JbSHFOnil8TnnajSzSSfqj0KbSilnYeKRor89XHelCEBiO4ezaSKv2Iml5qmC59nRGtqIRxH1rbtX2zQzCe_PRip_3u9ufkxe3m_kEDqdcVjvxWDVtkk3UZdk4-DkYrB4q1DeoqEcn0-sKebmFHsGGq2FcDBA8QwPfC-l0O4s36ZU96SXp9YuO-SJ_VwDvRG8qLESvYkOuTJLkjpxPn0K4QfjMqWszOPmQdkmCTH-gb-yU3QisjbCAa0Cwz-uoI46JOwI-iHL37NTcmKx_5-Z3A_eiikqLEqQ.jpg"
+      },
+      "published_at": "2026-11-09T20:34:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "e45fb05ce6141122",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-09T20:36:38.120454+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-09T20:09:31.547462+00:00",
+  "saved_at": "2026-11-09T20:37:37.515908+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-09T20:08:22.519428+00:00",
-    "tehran_tel": "2026-11-09T20:08:22.519428+00:00",
-    "irna_1313": "2026-11-09T20:08:22.519428+00:00",
-    "isna94": "2026-11-09T20:08:22.519428+00:00",
-    "mehrnews": "2026-11-09T20:08:22.519428+00:00",
+    "tehranpress1": "2026-11-09T20:36:38.120454+00:00",
+    "tehran_tel": "2026-11-09T20:36:38.120454+00:00",
+    "irna_1313": "2026-11-09T20:36:38.120454+00:00",
+    "isna94": "2026-11-09T20:36:38.120454+00:00",
+    "mehrnews": "2026-11-09T20:36:38.120454+00:00",
     "web_shahr": "2026-11-09T20:08:22.519428+00:00",
     "web_mehr_tehran": "2026-11-09T20:08:22.519428+00:00"
   }
