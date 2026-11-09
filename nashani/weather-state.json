@@ -56,7 +56,8 @@
       "at": "2026-11-10T02:22:41.397666+03:30"
     },
     "2026-11-10-morning-تهران": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 100,
       "at": "2026-11-10T02:22:41.397666+03:30"
     }
   }
