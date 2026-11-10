@@ -1077,74 +1077,14 @@
     "https://t.me/kermane_no/59257",
     "https://t.me/kermane_no/59258",
     "https://t.me/Kerman_akhbar/66312",
-    "https://t.me/kerman_news/140408"
+    "https://t.me/kerman_news/140408",
+    "https://t.me/kerman_news/140409",
+    "https://t.me/kerman_news/140410",
+    "https://t.me/kerman_news/140411",
+    "https://t.me/Kerman_akhbar/66313",
+    "https://t.me/kerman_news/140412"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140188",
-      "source_post_id": "140188",
-      "title": "به زیبایی و شکوه ارگ بم",
-      "excerpt": "به زیبایی و شکوه ارگ بم",
-      "paragraphs": [
-        "به زیبایی و شکوه ارگ بم"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/5da5a19279.mp4?token=J2g9XZuCLeyvNUu7ig7ai1rpVc_1cKHA6okFZdUaOyQ2E3bbamsWCofXhDy7Q9fD7O6PyIvq2KHwmZ2AyOiJ0QYN5a8CGDb7WI2gasWW_A1VJgJYsm4DMgGtAFuFhT23zOc9Ohgz0ZjeraoafPxBnWr_ViIPnaFbx5YnyWDgOWGoByvt16_D2kSXcPYPoqnO6S95I9-38laxoiZXJj1AK_IRRlXyttXV1ItAITIdq8X4D_qzUIISWhBROlR0q8fhDWVNHcNxI17qq-sWW-GhhKapdRFsdeY8ZwBcijikE_fdhe2gpVSkLCJI85BBGG2Fj-H_3uvEEpRQBcUhwUhH-w"
-      },
-      "published_at": "2026-11-07T06:25:39+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "eb57c5f84d155aa3",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-07T06:46:52.351160+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-07T06:47:11.127823+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 81,
-      "sent_at": "2026-11-07T06:47:28.486076+00:00"
-    },
-    {
-      "url": "https://t.me/fardaayekerman/34956",
-      "source_post_id": "34956",
-      "title": "در نشست شورای سیاستگذاری جشنواره سی‌و هشتم تئاتر استان کرمان مطرح شد؛",
-      "excerpt": "در نشست شورای سیاستگذاری جشنواره سی‌و هشتم تئاتر استان کرمان مطرح شد؛ دبیرخانه جشنواره تئاتر استان باید به سرعت شکل بگیرد فردای کرمان ـ گروه فرهنگ و هنر: نشست شورای سیاستگذاری سی و هشتمین جشنواره تئاتر استان با حضور مدیرکل فرهنگ و ارشاد اسلامی استان کرمان و اعضای این شورا، برگزار شد. این نشست با حضور حسین اسحاقی مدیرکل فرهنگ و ارشاد اسلامی، علی سلطانی معاون امور هنری و سینمایی اداره کل، رضا درویشی، محمد قاسمی و مسعود سلطانی‌زاده از پیشکسوتان تئاتر استان، احسان رضوانی مدیرعامل و اشکان عاشوری رئیس هیئت مدیره انجمن هنرهای نمایشی استان کرمان، فرهاد باغینی‌پور رئیس گروه امور هنری و علیرضا اسلامی کارشناس تئاتر اداره کل برگزار شد. فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
-      "paragraphs": [
-        "در نشست شورای سیاستگذاری جشنواره سی‌و هشتم تئاتر استان کرمان مطرح شد؛",
-        "دبیرخانه جشنواره تئاتر استان باید به سرعت شکل بگیرد",
-        "فردای کرمان ـ گروه فرهنگ و هنر: نشست شورای سیاستگذاری سی و هشتمین جشنواره تئاتر استان با حضور مدیرکل فرهنگ و ارشاد اسلامی استان کرمان و اعضای این شورا، برگزار شد.",
-        "این نشست با حضور حسین اسحاقی مدیرکل فرهنگ و ارشاد اسلامی، علی سلطانی معاون امور هنری و سینمایی اداره کل، رضا درویشی، محمد قاسمی و مسعود سلطانی‌زاده از پیشکسوتان تئاتر استان، احسان رضوانی مدیرعامل و اشکان عاشوری رئیس هیئت مدیره انجمن هنرهای نمایشی استان کرمان، فرهاد باغینی‌پور رئیس گروه امور هنری و علیرضا اسلامی کارشناس تئاتر اداره کل برگزار شد.",
-        "فردای‌کرمان در تلگرام",
-        "فردای‌کرمان در ایتا",
-        "فردای‌کرمان در بله",
-        "فردای‌کرمان درواتسپ"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/hPgvRWcu-uKGdop8WpYOZrOzJX77oUGMEAYxTr_35uiifFrJHWoT8ZV0ioZ5gBd2D8tp4KxFSYJEYDiqIFTT6Lh8H5oQTjaCCXi1zVEYzQC-p92Qj5EQsdS3BdJ8kOwHbktBbXnUhjsDyLHGqpNGNImdJwhGAgdLEGJq80HpulRqzP1zmBKUJPj6yHFujbJhZ2IxYNVYK_4ND50rluP8mWK43YOCEx0YiBwxVJ0XKvJfyEOz_lh7XOt6-bMG4pa-okjW9vg6I95TFD-l81wVDSDh8T-_mxG_w73FBn1WJeMqbpxwSL6-UEdEqm2ZUb0PyiLwDstSp3PZv_gcPM_a8w.jpg"
-      },
-      "published_at": "2026-11-07T06:31:11+00:00",
-      "source": "فردای کرمان",
-      "source_handle": "fardaayekerman",
-      "id": "387ac83670c04fb8",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-07T06:46:52.351160+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-07T10:42:35.847419+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 87,
-      "sent_at": "2026-11-07T10:42:50.163102+00:00"
-    },
     {
       "url": "https://t.me/kermane_no/59034",
       "source_post_id": "59034",
@@ -9092,7 +9032,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-10T11:48:31.796300+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66313"
+        }
+      ],
       "reserved_at": "2026-11-10T11:48:56.766773+00:00",
       "delivery_kind": "video",
       "telegram_message_id": 275,
@@ -10078,17 +10023,69 @@
       "status": "ready",
       "detected_at": "2026-11-10T17:17:56.870452+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140411",
+      "source_post_id": "140411",
+      "title": "فردوس کاویانی؛ هنرمندی از دیار کرمان",
+      "excerpt": "فردوس کاویانی؛ هنرمندی از دیار کرمان بازیگری که با لبخند، صمیمیت و نقش‌آفرینی‌های ماندگارش در خاطره چند نسل از مخاطبان سینما و تلویزیون ایران جای گرفت. از «قهوه تلخ» و «در حاشیه» تا آثار متعدد سینمایی و تلویزیونی؛ فردوس کاویانی با سال‌ها فعالیت هنری، نامی ماندگار در تاریخ هنر ایران از خود به یادگار گذاشت. یاد و نام این هنرمند ارزشمند کرمانی گرامی باد.",
+      "paragraphs": [
+        "فردوس کاویانی؛ هنرمندی از دیار کرمان",
+        "بازیگری که با لبخند، صمیمیت و نقش‌آفرینی‌های ماندگارش در خاطره چند نسل از مخاطبان سینما و تلویزیون ایران جای گرفت.",
+        "از «قهوه تلخ» و «در حاشیه» تا آثار متعدد سینمایی و تلویزیونی؛ فردوس کاویانی با سال‌ها فعالیت هنری، نامی ماندگار در تاریخ هنر ایران از خود به یادگار گذاشت.",
+        "یاد و نام این هنرمند ارزشمند کرمانی گرامی باد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/d1v8gkJgkLNyCNPcHXAhUnL3PKnfTrh-KcxwTUckiew5Z5ihNJ6SfvC6EBUps57MTU76Gh8_9qP_KsjSTKUQLB_ooeprS-6seIE7aPYPrePwirbOrHyrGejQI_uSA1o_XAyP6CDiz7I1w1pUeEChWkqTap7vdgDMKDSuaNyWk55B3qaCp5-tG_psonZOGTHn7YOSNK9ld8SwuxmQjBQqtANk_vPm0ZAeV_97Si4o8Xku7cimBREoSshX_K-EM5wG9JnT84fiqfGHgzohYU0jubZaEBXsvWo_urRAvfZT5NfN2Y9wO-CDT-xq20SwX-Fl6mEl87_VXTS10wxXmRG8XQ.jpg"
+      },
+      "published_at": "2026-11-10T17:58:16+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "cde3d5b9024ef355",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T18:26:33.044534+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140412",
+      "source_post_id": "140412",
+      "title": "تشییع باشکوه پیکر مطهر شهید فیروزی و شهید گمنام در رودبار جنوب",
+      "excerpt": "تشییع باشکوه پیکر مطهر شهید فیروزی و شهید گمنام در رودبار جنوب امروز مردم قدرشناس و شهیدپرور این شهرستان با حضور گسترده در مراسم استقبال و تشییع پیکر مطهر شهید علی‌اکبر فیروزی و شهید گمنام، صحنه‌هایی باشکوه از عشق، وفاداری و احترام به مقام والای شهدا را رقم زدند. اقشار مختلف مردم، از پیر و جوان گرفته تا خانواده‌ها و مسئولان، با حضور در این مراسم به استقبال پیکرهای مطهر شهدا آمدند و با سردادن شعارهای حماسی و ذکر صلوات، یاد و خاطره ایثارگری‌های شهیدان را گرامی داشتند.",
+      "paragraphs": [
+        "تشییع باشکوه پیکر مطهر شهید فیروزی و شهید گمنام در رودبار جنوب",
+        "امروز مردم قدرشناس و شهیدپرور این شهرستان با حضور گسترده در مراسم استقبال و تشییع پیکر مطهر شهید علی‌اکبر فیروزی و شهید گمنام، صحنه‌هایی باشکوه از عشق، وفاداری و احترام به مقام والای شهدا را رقم زدند.",
+        "اقشار مختلف مردم، از پیر و جوان گرفته تا خانواده‌ها و مسئولان، با حضور در این مراسم به استقبال پیکرهای مطهر شهدا آمدند و با سردادن شعارهای حماسی و ذکر صلوات، یاد و خاطره ایثارگری‌های شهیدان را گرامی داشتند."
+      ],
+      "media": null,
+      "published_at": "2026-11-10T18:17:07+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "1ee9e2675f9b0a24",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T18:26:33.044534+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-10T17:46:07.242338+00:00",
+  "saved_at": "2026-11-10T18:27:03.702854+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-10T17:17:56.870452+00:00",
-    "fardaayekerman": "2026-11-10T17:45:24.109930+00:00",
-    "irna_kerman": "2026-11-10T17:45:24.109930+00:00",
-    "kerman_gov": "2026-11-10T17:45:24.109930+00:00",
-    "kerman_akhbar": "2026-11-10T17:45:24.109930+00:00",
-    "kerman_news": "2026-11-10T17:17:56.870452+00:00",
-    "kerman_rasaneh": "2026-11-10T17:45:24.109930+00:00",
-    "qh_qv": "2026-11-10T17:17:56.870452+00:00"
+    "kermane_no": "2026-11-10T18:26:33.044534+00:00",
+    "fardaayekerman": "2026-11-10T18:26:33.044534+00:00",
+    "irna_kerman": "2026-11-10T18:26:33.044534+00:00",
+    "kerman_gov": "2026-11-10T18:26:33.044534+00:00",
+    "kerman_akhbar": "2026-11-10T18:26:33.044534+00:00",
+    "kerman_news": "2026-11-10T18:26:33.044534+00:00",
+    "kerman_rasaneh": "2026-11-10T18:26:33.044534+00:00",
+    "qh_qv": "2026-11-10T18:26:33.044534+00:00"
   }
 }
