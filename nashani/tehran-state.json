@@ -7878,10 +7878,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-10T01:47:12.354688+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-10T02:45:18.506062+00:00"
+      "reserved_at": "2026-11-10T02:45:18.506062+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 103,
+      "sent_at": "2026-11-10T02:45:21.036605+00:00"
     },
     {
       "url": "https://t.me/mehrnews/430360",
@@ -7903,13 +7906,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-10T01:47:12.354688+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-10T02:45:18.506062+00:00"
+      "reserved_at": "2026-11-10T02:45:18.506062+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 104,
+      "sent_at": "2026-11-10T02:45:22.142985+00:00"
     }
   ],
-  "saved_at": "2026-11-10T02:45:18.506079+00:00",
+  "saved_at": "2026-11-10T02:45:22.143005+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-10T02:44:20.843233+00:00",
     "tehran_tel": "2026-11-10T02:44:20.843233+00:00",
