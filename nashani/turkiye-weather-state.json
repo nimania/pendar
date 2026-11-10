@@ -35,14 +35,15 @@
       "message_id": 21,
       "at": "2026-11-09T01:24:35.375320+03:00"
     },
+    "2026-11-10-afternoon": {
+      "status": "published",
+      "message_id": 26,
+      "at": "2026-11-10T14:37:56.734163+03:00"
+    },
     "2026-11-10-morning": {
       "status": "published",
       "message_id": 25,
       "at": "2026-11-10T02:07:07.209293+03:00"
-    },
-    "2026-11-10-afternoon": {
-      "status": "sending_uncertain",
-      "at": "2026-11-10T14:37:56.734163+03:00"
     }
   }
 }
