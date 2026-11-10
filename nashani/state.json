@@ -1003,74 +1003,16 @@
     "https://t.me/kermane_no/59228",
     "https://t.me/kerman_news/140372",
     "https://t.me/Kerman_akhbar/66304",
-    "https://t.me/kermane_no/59229"
+    "https://t.me/kermane_no/59229",
+    "https://t.me/Kerman_akhbar/66305",
+    "https://t.me/kerman_news/140373",
+    "https://t.me/kermane_no/59230",
+    "https://t.me/kermane_no/59231",
+    "https://t.me/kermane_no/59232",
+    "https://t.me/kerman_news/140374",
+    "https://t.me/qh_qv/1011"
   ],
   "queue": [
-    {
-      "url": "https://t.me/irna_kerman/30303",
-      "source_post_id": "30303",
-      "title": "امام جمعه کرمان: ایران اسلامی امروز در قلب آمریکا تأثیر گذاشته است",
-      "excerpt": "امام جمعه کرمان: ایران اسلامی امروز در قلب آمریکا تأثیر گذاشته است نماینده ولی فقیه در استان و امام جمعه کرمان با اشاره به نزدیک پنج دهه پرچمداری ایران اسلامی در مبارزه با استکبار جهانی گفت: امروز ایران به جایگاهی از قدرت رسیده که می‌تواند در تحولات جهان و حتی در قلب آمریکا تأثیر بگذارد. irna_kerman",
-      "paragraphs": [
-        "امام جمعه کرمان: ایران اسلامی امروز در قلب آمریکا تأثیر گذاشته است",
-        "نماینده ولی فقیه در استان و امام جمعه کرمان با اشاره به نزدیک پنج دهه پرچمداری ایران اسلامی در مبارزه با استکبار جهانی گفت: امروز ایران به جایگاهی از قدرت رسیده که می‌تواند در تحولات جهان و حتی در قلب آمریکا تأثیر بگذارد.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/ASpv16OJn1-nLExTjWjLKKwfLE2rmGFDi6v5ba8Hj7XToAAhe3gd_wDAC95moF01Ws1vFTIZxBSCRz2Kqo2bTdnTuNNsJ9PcNmvbUJIlswaf3xgiA4V4CUixIhqt8V-rEmnhxT_gy9sfZWRn-9RHKu_LUDfAf_J9F2ZeUJeGA3FFp1nIfOOm21bOG96vo-1VLndM9WAkcjiSTyPbsJ3OBnJbJ0VC6k6B4IaMyCebkhcLPpo8O4HytR9dTZKfz0rScsrX32EadIhQfrsHEYsrhTw_tQNPC2wfCnxczLuzZHlSwH-EBBHmit6eWEX8r6hfKiYRPx3s0zJjA8ki77jmoQ.jpg"
-      },
-      "published_at": "2026-11-06T10:16:20+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "7719b055327a87dc",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-06T11:33:10.419378+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-06T12:32:23.108905+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 57,
-      "sent_at": "2026-11-06T12:32:27.335726+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140144",
-      "source_post_id": "140144",
-      "title": "قلعه‌گنج میزبان پیکر مطهر شهید گمنام در ۱۸ آبان‌ماه می‌شود",
-      "excerpt": "قلعه‌گنج میزبان پیکر مطهر شهید گمنام در ۱۸ آبان‌ماه می‌شود فرمانده ناحیه مقاومت بسیج شهرستان قلعه‌گنج همزمان با ایام شهادت حضرت فاطمه زهرا(سلام‌الله‌علیها) و همگام با سراسر کشور، شهرستان قلعه‌گنج روز دوشنبه ۱۸ آبان‌ماه میزبان پیکر مطهر یک شهید گمنام خواهد بود. مراسم استقبال و تشییع پیکر مطهر این شهید والامقام در نقاط مختلف شهرستان قلعه‌گنج، از جمله مدارس، روستاها و مناطق مختلف بخش‌های چاه‌دادخدا و سرخ‌قلعه و شهر رمشک و همچنین مرکز شهر برگزار خواهد شد.",
-      "paragraphs": [
-        "قلعه‌گنج میزبان پیکر مطهر شهید گمنام در ۱۸ آبان‌ماه می‌شود",
-        "فرمانده ناحیه مقاومت بسیج شهرستان قلعه‌گنج",
-        "همزمان با ایام شهادت حضرت فاطمه زهرا(سلام‌الله‌علیها) و همگام با سراسر کشور، شهرستان قلعه‌گنج روز دوشنبه ۱۸ آبان‌ماه میزبان پیکر مطهر یک شهید گمنام خواهد بود.",
-        "مراسم استقبال و تشییع پیکر مطهر این شهید والامقام در نقاط مختلف شهرستان قلعه‌گنج، از جمله مدارس، روستاها و مناطق مختلف بخش‌های چاه‌دادخدا و سرخ‌قلعه و شهر رمشک و همچنین مرکز شهر برگزار خواهد شد."
-      ],
-      "media": null,
-      "published_at": "2026-11-06T10:26:06+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "a611d00df0b049e0",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-06T11:33:10.419378+00:00",
-      "other_sources": [
-        {
-          "name": "آخرین خبر کرمان",
-          "url": "https://t.me/Kerman_akhbar/66226"
-        }
-      ],
-      "reserved_at": "2026-11-06T11:33:28.132776+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 53,
-      "sent_at": "2026-11-06T11:33:44.712071+00:00"
-    },
     {
       "url": "https://t.me/kerman_news/140146",
       "source_post_id": "140146",
@@ -10049,17 +9991,71 @@
       "status": "ready",
       "detected_at": "2026-11-10T10:04:18.546219+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66305",
+      "source_post_id": "66305",
+      "title": "یک دهه انتظار برای بازگشت به روستایی که سیلاب از نقشه محو کرد",
+      "excerpt": "یک دهه انتظار برای بازگشت به روستایی که سیلاب از نقشه محو کرد اسفندماه ۱۳۹۵، بارندگی‌های شدید و سرریز شدن سد نساء شهرستان بم، سیلابی سنگین را به سمت روستای جلگه و روستاهای پایین‌دست روانه کرد؛ سیلابی که به گفته اهالی، پس از فروکش کردن آب، نه تنها خانه‌ها و تأسیسات دام و طیور و کوچه‌های روستا را با خاک یکسان کرد، بلکه بقایای برخی ساختمان‌ها هم چند کیلومتر پایین‌تر از محل روستا پراکنده بود. شدت جریان به حدی بود که عملاً یک روستا را از نقشه پاک کرد. با گذشت حدود ۱۰ سال از وقوع این حادثه، موضوع تعیین محل جدید برای اسکان اهالی و احیای روستای جلگه همچنان به سرانجام نرسیده است.",
+      "paragraphs": [
+        "یک دهه انتظار برای بازگشت به روستایی که سیلاب از نقشه محو کرد",
+        "اسفندماه ۱۳۹۵، بارندگی‌های شدید و سرریز شدن سد نساء شهرستان بم، سیلابی سنگین را به سمت روستای جلگه و روستاهای پایین‌دست روانه کرد؛ سیلابی که به گفته اهالی، پس از فروکش کردن آب، نه تنها خانه‌ها و تأسیسات دام و طیور و کوچه‌های روستا را با خاک یکسان کرد، بلکه بقایای برخی ساختمان‌ها هم چند کیلومتر پایین‌تر از محل روستا پراکنده بود. شدت جریان به حدی بود که عملاً یک روستا را از نقشه پاک کرد.",
+        "با گذشت حدود ۱۰ سال از وقوع این حادثه، موضوع تعیین محل جدید برای اسکان اهالی و احیای روستای جلگه همچنان به سرانجام نرسیده است."
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/d853f44b26.mp4?token=SIiJ93bx-hStXVbe-w1mLB7euUTeyak-A77pNp9lEhFibgKGj9AP4860qmSS3NWRVIjyKsP8kuJKHZqP7Fnd_6kDIDMlL7wWe3GT_vN9bzmtPt1HS21ImZx9pam_M_YtD3p-Wut9Pu6P0D2rXcadNMOHVdafcOHRJHFx7ZHMaywjuMXX4c66kzC3SZxPboroKXANBeKd9z_azwHE5zGmnJRdGREyT9aXatfUNuX-JXBR0u-nn_H1rffJ6U_IzscwwXst8goR0YZsHo0XjN2Ksl0fJ00dH1dRqDDBw2iVw9Bj-1iDS6oCNXs3Y09PExi2agN8axdFG2xU8vbyVCstkjYTlmpcbKjTwbG1v4ZOz3etJpawhSXA9m1Ioqg6g_HMuQMavuydoGBlPLw5K6TKhxOMSgrT8jsceYiOu_XcBiuod4PfiZqDL8Q52A_t722kPKQKMlsE95VLE0giuw858_v8uRtj7H5I8ymy1lXi2_kdv4d5tu6r5kyuY8T02UfUHCWhZ0hlimjN9bi9WKIayHoF3ECHIr4D-Qx0wKx0e-jUdq3NLHpUmLAW9A_fdnccUn9bTMET8RLFRGDqh_GhlgLsWeosyDJ2s1r-CibR_JFd_kxnixHddp2uYLfob0NJfs_HGuRXj6V1dRFlCE1eHae4MEgDsMq87AiOXkaYoyw"
+      },
+      "published_at": "2026-11-10T10:03:58+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "832057387699268e",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T10:56:45.703781+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59232",
+      "source_post_id": "59232",
+      "title": "برگزاری نوزدهمین المپیاد آتش‌نشانی و امداد و نجات معادن کشور به میزبانی سیرجان",
+      "excerpt": "برگزاری نوزدهمین المپیاد آتش‌نشانی و امداد و نجات معادن کشور به میزبانی سیرجان نوزدهمین المپیاد علمی و عملیاتی آتش‌نشانی و امداد و نجات معادن کشور به میزبانی شرکت گهرزمین در مجموعه گردشگری گهرپارک سیرجان در حال برگزاری است. رضا صادقی، دبیر برگزاری این المپیاد، از حضور **۳۱ تیم** و **۲۰۰ شرکت‌کننده** از سراسر کشور خبر داد و اعلام کرد امسال برای نخستین بار مسابقات به‌صورت ترکیبی و با هدف ارتقای سطح کیفی، علمی و انگیزشی فعالان حوزه ایمنی برگزار می‌شود. این رقابت‌ها به مدت **۴ روز** ادامه دارد. /صداوسیما",
+      "paragraphs": [
+        "برگزاری نوزدهمین المپیاد آتش‌نشانی و امداد و نجات معادن کشور به میزبانی سیرجان",
+        "نوزدهمین المپیاد علمی و عملیاتی آتش‌نشانی و امداد و نجات معادن کشور به میزبانی شرکت گهرزمین در مجموعه گردشگری گهرپارک سیرجان در حال برگزاری است.",
+        "رضا صادقی، دبیر برگزاری این المپیاد، از حضور **۳۱ تیم** و **۲۰۰ شرکت‌کننده** از سراسر کشور خبر داد و اعلام کرد امسال برای نخستین بار مسابقات به‌صورت ترکیبی و با هدف ارتقای سطح کیفی، علمی و انگیزشی فعالان حوزه ایمنی برگزار می‌شود. این رقابت‌ها به مدت **۴ روز** ادامه دارد. /صداوسیما"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/ZW44zjen0d0cn9RyyoYOlyQJ48vJP1Dzvpngqs52zt3TDaZCIQRhDhxWtOu_h7VI5rtySu108gC8vHRY8C355wSZHyAY7uFJTurF4g79qQKDDsrZKxTZeWTrNOv0MBLkE8eogOgwCfYiNoOI43ZIAxltZwLWKft-f9jee5iJgQ68QqlCrRZ4iDXHt2DB5HXWvv3vHIB9psSqMcuP5U5rvEydo60lvN5Iks5zs_Ix26N_MDjVyeBNdQzPNZNnSXGUWzPruzGC-YQ6Xtdez29InQoHT_Jy6hQsS-F_DFvB2C_ZVLXrWcAXkViAm7lQZTLvbeoztuRX2RH_3b_YHLEL1w.jpg"
+      },
+      "published_at": "2026-11-10T10:47:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "8fe411716a3fccd8",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T10:56:45.703781+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-10T10:05:17.280438+00:00",
+  "saved_at": "2026-11-10T10:56:56.549651+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-10T10:04:18.546219+00:00",
-    "fardaayekerman": "2026-11-10T10:04:18.546219+00:00",
-    "irna_kerman": "2026-11-10T10:04:18.546219+00:00",
-    "kerman_gov": "2026-11-10T10:04:18.546219+00:00",
-    "kerman_akhbar": "2026-11-10T10:04:18.546219+00:00",
-    "kerman_news": "2026-11-10T10:04:18.546219+00:00",
-    "kerman_rasaneh": "2026-11-10T10:04:18.546219+00:00",
-    "qh_qv": "2026-11-10T10:04:18.546219+00:00"
+    "kermane_no": "2026-11-10T10:56:45.703781+00:00",
+    "fardaayekerman": "2026-11-10T10:56:45.703781+00:00",
+    "irna_kerman": "2026-11-10T10:56:45.703781+00:00",
+    "kerman_gov": "2026-11-10T10:56:45.703781+00:00",
+    "kerman_akhbar": "2026-11-10T10:56:45.703781+00:00",
+    "kerman_news": "2026-11-10T10:56:45.703781+00:00",
+    "kerman_rasaneh": "2026-11-10T10:56:45.703781+00:00",
+    "qh_qv": "2026-11-10T10:56:45.703781+00:00"
   }
 }
