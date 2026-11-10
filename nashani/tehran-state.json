@@ -1481,7 +1481,56 @@
     "https://t.me/irna_1313/471886",
     "https://t.me/isna94/412655",
     "https://t.me/mehrnews/430348",
-    "https://t.me/tehranpress1/132411"
+    "https://t.me/tehranpress1/132411",
+    "https://t.me/mehrnews/430349",
+    "https://t.me/tehranpress1/132412",
+    "https://t.me/tehranpress1/132413",
+    "https://t.me/tehranpress1/132414",
+    "https://t.me/mehrnews/430350",
+    "https://t.me/tehranpress1/132415",
+    "https://t.me/mehrnews/430351",
+    "https://t.me/irna_1313/471889",
+    "https://t.me/mehrnews/430352",
+    "https://t.me/mehrnews/430353",
+    "https://t.me/irna_1313/471890",
+    "https://t.me/irna_1313/471891",
+    "https://t.me/mehrnews/430354",
+    "https://t.me/mehrnews/430355",
+    "https://t.me/isna94/412656",
+    "https://t.me/irna_1313/471892",
+    "https://t.me/irna_1313/471893",
+    "https://t.me/isna94/412657",
+    "https://t.me/mehrnews/430356",
+    "https://t.me/mehrnews/430357",
+    "https://t.me/mehrnews/430358",
+    "https://t.me/irna_1313/471894",
+    "https://t.me/isna94/412658",
+    "https://t.me/irna_1313/471895",
+    "https://t.me/isna94/412659",
+    "https://t.me/irna_1313/471896",
+    "https://t.me/mehrnews/430359",
+    "https://t.me/mehrnews/430360",
+    "https://t.me/mehrnews/430361",
+    "https://t.me/isna94/412660",
+    "https://t.me/mehrnews/430362",
+    "https://t.me/irna_1313/471897",
+    "https://t.me/mehrnews/430363",
+    "https://t.me/irna_1313/471898",
+    "https://t.me/mehrnews/430364",
+    "https://t.me/irna_1313/471899",
+    "https://t.me/mehrnews/430365",
+    "https://t.me/irna_1313/471900",
+    "https://t.me/irna_1313/471901",
+    "https://t.me/mehrnews/430366",
+    "https://t.me/irna_1313/471902",
+    "https://t.me/irna_1313/471903",
+    "https://t.me/irna_1313/471904",
+    "https://t.me/mehrnews/430367",
+    "https://t.me/mehrnews/430368",
+    "https://t.me/irna_1313/471905",
+    "https://t.me/irna_1313/471906",
+    "https://t.me/irna_1313/471907",
+    "https://t.me/irna_1313/471908"
   ],
   "queue": [
     {
@@ -5350,7 +5399,12 @@
       "geography": "tehran_city",
       "status": "review",
       "detected_at": "2026-11-08T18:30:51.588560+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "تهران‌پرس",
+          "url": "https://t.me/tehranpress1/132415"
+        }
+      ]
     },
     {
       "url": "https://t.me/tehranpress1/132330",
@@ -7690,16 +7744,143 @@
       "status": "ready",
       "detected_at": "2026-11-09T20:44:18.676923+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132412",
+      "source_post_id": "132412",
+      "title": "دلیل عصبانیت یاسر آسانی توهینی بود که ایلدروم به او کرده بود",
+      "excerpt": "دلیل عصبانیت یاسر آسانی توهینی بود که ایلدروم به او کرده بود تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "دلیل عصبانیت یاسر آسانی توهینی بود که ایلدروم به او کرده بود",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/a4fd2e24c8.mp4?token=SEpc6CXa8WYicZoB9VaLZIBhmBuVnEk6OfdNBieKYHc1wxNWL2vFGAAGtuWVEgPogVGVvY9srmZkPuZMdb-byCmQGmw7StgdBpTvmJUfFxHTCZjqgOt3goeQAmKfyBRjkWLbdYzm0hGWHj_VsC2IHa9rYcotNGMm5-Wz8UxruUrLfaVTcW4b4pouMupYCFPZwbuxj2Z1aFlifpQy-S0mcxhfKju-evoJadGuUAMgt-62zuuC3_2se75EESgldFqwRWvyPkyr8gu5e04R_BnXHLlxUVcTFAYtVv5Ejo4ArT598raboVz7wXFeC9b0bmoRDb1yYEIs8m_EwcKRYPZoIA"
+      },
+      "published_at": "2026-11-09T20:56:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "3a2d072da2c7b436",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-10T01:47:12.354688+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132413",
+      "source_post_id": "132413",
+      "title": "اعتراف به جنایات در کنگره آمریکا: حمله به دبستان میناب عامدانه بود",
+      "excerpt": "اعتراف به جنایات در کنگره آمریکا: حمله به دبستان میناب عامدانه بود توماس مسی، نماینده کنگره آمریکا، در حال خواندن گزارش جنایت میناب حمله به این دبستان، یک خطای موردی در هدف‌گیری نبود که بتوان آن را از عملکرد وزیر دفاع جدا دانست. همچنین نمی‌توان رفتار وزیر هگزث را صرفاً به‌عنوان یک اشتباه منفرد در هدف‌گیری یا یک خطای مقطعی ناشی از شرایط مبهم و آشفته میدان جنگ توجیه کرد. وزیر جنگ عامدانه و به‌صورت نظام‌مند از رعایت قوانین و دستورالعمل‌هایی که برای حفاظت از غیرنظامیان در جریان مخاصمات مسلحانه الزامی شده‌اند، سر باز زده است. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "اعتراف به جنایات در کنگره آمریکا: حمله به دبستان میناب عامدانه بود",
+        "توماس مسی، نماینده کنگره آمریکا، در حال خواندن گزارش جنایت میناب",
+        "حمله به این دبستان، یک خطای موردی در هدف‌گیری نبود که بتوان آن را از عملکرد وزیر دفاع جدا دانست. همچنین نمی‌توان رفتار وزیر هگزث را صرفاً به‌عنوان یک اشتباه منفرد در هدف‌گیری یا یک خطای مقطعی ناشی از شرایط مبهم و آشفته میدان جنگ توجیه کرد.",
+        "وزیر جنگ عامدانه و به‌صورت نظام‌مند از رعایت قوانین و دستورالعمل‌هایی که برای حفاظت از غیرنظامیان در جریان مخاصمات مسلحانه الزامی شده‌اند، سر باز زده است.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/c34164da6d.mp4?token=CsxamFk2MrYtI5O5hScw-nVrr7Zh8R5XXbUbAjObkNbq6If8pTxV57pg7eOYPmjBk0WpKr4-swqa3qdQduPr3eo6jVdZd1FBDoXgwZm3kH54AqB4EQL6mv2RxayIAiQ6WMqtCPS-6Le7jGZ4LDR7IVoqbZrUscBV85X4DrRzZ5ZW-lOKFUncb8-o58FWkFWF4mQC4tqDlUBSOLrnq0leFrP2V7V-NBuiza58fffwYvjVAoeBTXLJQQic27IRFpG04tjHl88Uy49FwyaySWFSOAR2kn1s_EgFj-K0OqRw_RLXZugAmZiAev8MCz6LmfUARbElTbSNB8TH3gXdv7TGnTzoLYYGMqknLXWitR9ENcuYlvuH2_duRcW1gSNrDutwJRiNb4oohoOr2QiJZhWoYyGpijaw_6z9cGAq5qraeb67jIHbQJRGf3qFSIx1nXYKlYBH2IGEFbmyeDQT784STQ5YPI-eEt4U2NpNTzs5qqOhyJVQlX8AwFaoOXyE8JMF1U5N6F2kgYRk9lSL-fG7i4rS94h3rQJ8XKuOf9GXGF6tJT-wZRWgCS1AQJnzDxJQ0sz9GR52DM9Ho7mOsVJxsH0JrprSkZ-jLGCuNWz4izHcr0djjMAgjRxHVogYUkwXcmv5R27x7EdgEMGthHOr_gJwSqXM3BRMKCcD7HrBjy0"
+      },
+      "published_at": "2026-11-09T20:56:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "cde607fd21af6118",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-10T01:47:12.354688+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132414",
+      "source_post_id": "132414",
+      "title": "میثاقی: با سانسور هم نمی توانم بگویم که ایلدروم به یاسر آسانی چه گفت",
+      "excerpt": "میثاقی: با سانسور هم نمی توانم بگویم که ایلدروم به یاسر آسانی چه گفت تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "میثاقی: با سانسور هم نمی توانم بگویم که ایلدروم به یاسر آسانی چه گفت",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/487b68aa74.mp4?token=k404AIWFxn0XlV2NjUV2kRd46hknT5-cQRlQpcNjbtQt_ehfabSohJHDsU8rPn1g9REbf-JQO0wkhi4OJwXwc-fmQLXVwWRTITy16AShcbZ3zv0_JCTTjU8vZ6z7hpOew5fCCKrKaKsCu83f5FyBTXTQwfvF3QldzDqiiqBHhAEzT1ap0C_YSNINf2Elf9lbfW0YkIEUiD4aAkjg-O1XzHJAyNZIVtwG0uIh7-4gY6Fh_IpmGd4iELdhuRcMrnG5U_25Nai2SHQ2K8Ytxnh0po_om1X0dRf0UjqZfd4O6_O5JMnNksTEJ4DGJO5KXdzK3dAvCPWWcRsN6XfKeQQq8Q"
+      },
+      "published_at": "2026-11-09T20:56:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "82e88616024b87e6",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-10T01:47:12.354688+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/mehrnews/430357",
+      "source_post_id": "430357",
+      "title": "نخست وزیر و وزیر خارجه قطر: در دیدار با ترامپ و معاونش، راهکارهای پیشبرد مذاکرات غیرمستقیم تهران و واشنگتن را بررسی کردم و از گفتگوهای سازنده برای تحقق توافق و ثبات در منطقه قدردانی می‌کنم.",
+      "excerpt": "نخست وزیر و وزیر خارجه قطر: در دیدار با ترامپ و معاونش، راهکارهای پیشبرد مذاکرات غیرمستقیم تهران و واشنگتن را بررسی کردم و از گفتگوهای سازنده برای تحقق توافق و ثبات در منطقه قدردانی می‌کنم.",
+      "paragraphs": [
+        "نخست وزیر و وزیر خارجه قطر: در دیدار با ترامپ و معاونش، راهکارهای پیشبرد مذاکرات غیرمستقیم تهران و واشنگتن را بررسی کردم و از گفتگوهای سازنده برای تحقق توافق و ثبات در منطقه قدردانی می‌کنم."
+      ],
+      "media": null,
+      "published_at": "2026-11-09T22:17:37+00:00",
+      "source": "مهر",
+      "source_handle": "mehrnews",
+      "id": "06f525279453e254",
+      "media_repost_allowed": true,
+      "source_hashtag": "مهر",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-10T01:47:12.354688+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/mehrnews/430360",
+      "source_post_id": "430360",
+      "title": "دفاع مجدد ترامپ از وزیر جنگ خود",
+      "excerpt": "دفاع مجدد ترامپ از وزیر جنگ خود دونالد ترامپ با حمایت از وزیر جنگ خود برای دموکرات‌ها و نمایندگانی از حزب جمهوری‌خواه که خواهان برکناری پیت هگست هستند، خط و نشان کشید. وی مدعی شد که هگست در جنگ علیه ایران پیروز شده است یا حداقل در حال کسب پیروزی در آن است.",
+      "paragraphs": [
+        "دفاع مجدد ترامپ از وزیر جنگ خود",
+        "دونالد ترامپ با حمایت از وزیر جنگ خود برای دموکرات‌ها و نمایندگانی از حزب جمهوری‌خواه که خواهان برکناری پیت هگست هستند، خط و نشان کشید.",
+        "وی مدعی شد که هگست در جنگ علیه ایران پیروز شده است یا حداقل در حال کسب پیروزی در آن است."
+      ],
+      "media": null,
+      "published_at": "2026-11-09T23:01:22+00:00",
+      "source": "مهر",
+      "source_handle": "mehrnews",
+      "id": "b14fd096385cc690",
+      "media_repost_allowed": true,
+      "source_hashtag": "مهر",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-10T01:47:12.354688+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-09T20:45:28.575579+00:00",
+  "saved_at": "2026-11-10T01:48:19.412097+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-09T20:44:18.676923+00:00",
-    "tehran_tel": "2026-11-09T20:44:18.676923+00:00",
-    "irna_1313": "2026-11-09T20:44:18.676923+00:00",
-    "isna94": "2026-11-09T20:44:18.676923+00:00",
-    "mehrnews": "2026-11-09T20:44:18.676923+00:00",
-    "web_shahr": "2026-11-09T20:44:18.676923+00:00",
-    "web_mehr_tehran": "2026-11-09T20:44:18.676923+00:00"
+    "tehranpress1": "2026-11-10T01:47:12.354688+00:00",
+    "tehran_tel": "2026-11-10T01:47:12.354688+00:00",
+    "irna_1313": "2026-11-10T01:47:12.354688+00:00",
+    "isna94": "2026-11-10T01:47:12.354688+00:00",
+    "mehrnews": "2026-11-10T01:47:12.354688+00:00",
+    "web_shahr": "2026-11-10T01:47:12.354688+00:00",
+    "web_mehr_tehran": "2026-11-10T01:47:12.354688+00:00"
   }
 }
