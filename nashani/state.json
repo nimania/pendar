@@ -1010,189 +1010,21 @@
     "https://t.me/kermane_no/59231",
     "https://t.me/kermane_no/59232",
     "https://t.me/kerman_news/140374",
-    "https://t.me/qh_qv/1011"
+    "https://t.me/qh_qv/1011",
+    "https://t.me/kermane_no/59233",
+    "https://t.me/irna_kerman/30353",
+    "https://t.me/Kerman_akhbar/66306",
+    "https://t.me/kermane_no/59234",
+    "https://t.me/kerman_news/140375",
+    "https://t.me/fardaayekerman/34988",
+    "https://t.me/kermane_no/59235",
+    "https://t.me/kerman_news/140376",
+    "https://t.me/kermane_no/59236",
+    "https://t.me/fardaayekerman/34989",
+    "https://t.me/kermane_no/59237",
+    "https://t.me/kerman_news/140377"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140146",
-      "source_post_id": "140146",
-      "title": "استقبال از شهید گمنام هشت سال دفاع مقدس در بم",
-      "excerpt": "استقبال از شهید گمنام هشت سال دفاع مقدس در بم",
-      "paragraphs": [
-        "استقبال از شهید گمنام هشت سال دفاع مقدس در بم"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/c11e0f8e9e.mp4?token=B1xrgUsufN92t_CiFkV_YD0RYDRusDXUdHUDZKx7ENkpznDlmC0ZvDBbTiZhTRYPvzx5d4X0r4_Jbnq4XN1TNsOHCUE8CBK6RsosNKQVXpvE_1FHvGBvuJ1mWqSdoI72tsMS57tq7zkqk6sSh-0xmEEYylJJniescMCAn1DyZdU0X9EJcR0ZTiwvnjQW-3cHAx6zCabzZ76GZ9utKKM3wLwHHZDcGDgGxI0iVQU2BaMvAOYHxhxMu4jXlixKGUdbS2XHwxBRfawbJlH3Y6QhaiD3yfOCtGOP2ecxHs_lRZj85PTi_OdBXVvVILW-XGilnsFdbsmyWmAb872MX3_AxxVb8YKhZEje9fwfpg-87CbAdLPJeFzwUZaJlMqyYF5IHCZMH0KF0ybQK9Mfxko6_QeRYyW5T9h0Eaz2wRzQ3oS037Ow6UTVqQ9_Wf52Wqv7wjX0DDMQAi_u5x5YJqPz3YpHNWpfOxVQxP53rGigNS0xlvP56A-B0-8VuZJ9tYKOWFC9qizjDSU2gFjUuU2H2E9V3ZvjE7vT032YTET0RCI50jVyCyZ0BLoPRtVdZvru1OhaduFSBUd76B9NcYNFUtue78WVQytizA3Wvxqte96HXMsgvUU3XlFsWTiZduUEDmCvyyujIOFP52gParoSHfoHpe8mMAHLjS8g9SCGUPs"
-      },
-      "published_at": "2026-11-06T11:15:28+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "5d54075aa08a4a6c",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-06T11:33:10.419378+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-06T11:33:28.132776+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 54,
-      "sent_at": "2026-11-06T11:33:49.566426+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140147",
-      "source_post_id": "140147",
-      "title": "پاییز باغ شاهزاده ماهان کرمان‌",
-      "excerpt": "پاییز باغ شاهزاده ماهان کرمان‌",
-      "paragraphs": [
-        "پاییز باغ شاهزاده ماهان کرمان‌"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/aca8e96d77.mp4?token=az0nIBRe1hcaf-T7TA4rkfGvrvslipBOvEUFUJA1UGjlsxO0cmZbuua-QHFuLi6PuFbc84s2peOlhL9DIwNKjtQmCQkUL5xzHp2ZQ5WajcDRgTyzLMvTkDPCaV9UmwQ7W9cqFy0nA5gwapXQFuikaOsZ2tWcYZ06ti2ZnEGYHm2QEktCBdpgmTYhfAlLbp28SXCwO9Oh9Dp8gBEroBLERfkBIbVASQg1ArzPBY6QTef_Uf4hQoySwvO1MlhWRUvgJIOofDInZuverwhNMrKm2V-x6cqfqQarX_CumbaWzNy5xsJzT05AgSbjYXGTdCZI_o0kIxdryXYjJbvtqVD_Tw"
-      },
-      "published_at": "2026-11-06T11:25:02+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "651928176c8714a0",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-06T11:33:10.419378+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-06T11:33:28.132776+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 55,
-      "sent_at": "2026-11-06T11:33:57.891340+00:00"
-    },
-    {
-      "url": "https://t.me/Kerman_akhbar/66223",
-      "source_post_id": "66223",
-      "title": "کارت دعوت عروسی که ۳ میلیارد ریال آب خورد",
-      "excerpt": "کارت دعوت عروسی که ۳ میلیارد ریال آب خورد فرمانده انتظامی رفسنجان: فردی سودجو با ارسال بدافزار و لینک جعلی با عنوان کارت دعوت عروسی، به نرم‌افزار همراه بانک یک شهروند دسترسی پیدا کرده و بیش از ۳ میلیارد ریال از حساب وی برداشت کرده بود. شاکی بلافاصله پس از اطلاع از برداشت غیرمجاز، با مرکز فوریت‌های سایبری پلیس فتا (۰۹۶۳۸۰) تماس گرفت و با اقدام سریع کارشناسان، وجه برداشت‌شده مسدود و به حساب شاکی عودت داده شد.",
-      "paragraphs": [
-        "کارت دعوت عروسی که ۳ میلیارد ریال آب خورد",
-        "فرمانده انتظامی رفسنجان: فردی سودجو با ارسال بدافزار و لینک جعلی با عنوان کارت دعوت عروسی، به نرم‌افزار همراه بانک یک شهروند دسترسی پیدا کرده و بیش از ۳ میلیارد ریال از حساب وی برداشت کرده بود.",
-        "شاکی بلافاصله پس از اطلاع از برداشت غیرمجاز، با مرکز فوریت‌های سایبری پلیس فتا (۰۹۶۳۸۰) تماس گرفت و با اقدام سریع کارشناسان، وجه برداشت‌شده مسدود و به حساب شاکی عودت داده شد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/tVS8g5BZTU9UhDckhP9vMfa1jl3IaiKyIFwr8KNKVw7pvigLdvwq9QK-OtdgD4V0IaFBJjIok45nvae3d2vV0xE9fdN5JCzM7mkxvshZ6Owi6fSJ9TBlHeYJiL6E--S-jxk7sWKcC2BcQ3hLf5V_rzGxmWlZt1qtoPerrduAXo3CXTNeyZKS1R2mrE9-_SlbdVzlZzR1UggbHG8zDucPUUdJOFQPNjqmC7CFdpjbqkGh9xfwzUBYrnZyR-2wfoGwfqdLPAtbdqgxz6E19SvGYfQCDwKjsjStOQ5nsAnZezaxJ0s0HmgaTr0FahLX0LioseWghzOEslA0Ci5juW3hZQ.jpg"
-      },
-      "published_at": "2026-11-06T11:32:02+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "ab503d0227133228",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-06T11:33:10.419378+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-06T15:20:27.832228+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 61,
-      "sent_at": "2026-11-06T15:20:30.603699+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140148",
-      "source_post_id": "140148",
-      "title": "هشدار مدیریت بحران درباره افت فشار گاز در پیک سرما؛ ۱۱ استان کشور و ۸ شهرستان کرمان در معرض محدودیت قرار دارند",
-      "excerpt": "هشدار مدیریت بحران درباره افت فشار گاز در پیک سرما؛ ۱۱ استان کشور و ۸ شهرستان کرمان در معرض محدودیت قرار دارند معاون هماهنگی امور عمرانی استاندار کرمان مشکلات تأمین گاز محدود به استان کرمان نیست و بر اساس برآوردهای ارائه‌شده، ۱۱ استان کشور در فصل سرد با محدودیت‌های گازی مواجه خواهند بود. در استان کرمان تعدادی از شهرستان‌های شرقی و برخی مناطق شمالی و جنوبی در دوره اوج مصرف با افت فشار گاز مواجه خواهند شد. بازه زمانی مورد توجه از حدود ۱۵ آذرماه تا ۱۵ بهمن‌ماه‌ خواهد بود که مدیریت استان از هم‌اکنون تمهیدات لازم برای کاهش آثار این محدودیت‌ها را در دستور کار قرار داده است. فرمانداران و بخشداران باید مصوبات ستاد بحران و ابلاغیه‌های شرکت گاز را جدی گرفته و نسبت به اطلاع‌رسانی دقیق به مردم اقدام کنند.",
-      "paragraphs": [
-        "هشدار مدیریت بحران درباره افت فشار گاز در پیک سرما؛ ۱۱ استان کشور و ۸ شهرستان کرمان در معرض محدودیت قرار دارند",
-        "معاون هماهنگی امور عمرانی استاندار کرمان",
-        "مشکلات تأمین گاز محدود به استان کرمان نیست و بر اساس برآوردهای ارائه‌شده، ۱۱ استان کشور در فصل سرد با محدودیت‌های گازی مواجه خواهند بود.",
-        "در استان کرمان تعدادی از شهرستان‌های شرقی و برخی مناطق شمالی و جنوبی در دوره اوج مصرف با افت فشار گاز مواجه خواهند شد.",
-        "بازه زمانی مورد توجه از حدود ۱۵ آذرماه تا ۱۵ بهمن‌ماه‌ خواهد بود که مدیریت استان از هم‌اکنون تمهیدات لازم برای کاهش آثار این محدودیت‌ها را در دستور کار قرار داده است.",
-        "فرمانداران و بخشداران باید مصوبات ستاد بحران و ابلاغیه‌های شرکت گاز را جدی گرفته و نسبت به اطلاع‌رسانی دقیق به مردم اقدام کنند."
-      ],
-      "media": null,
-      "published_at": "2026-11-06T11:52:22+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "b3baf446ed9d421a",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-06T12:32:06.503699+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-06T12:32:23.108905+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 58,
-      "sent_at": "2026-11-06T12:32:28.814691+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30304",
-      "source_post_id": "30304",
-      "title": "استاندار کرمان: تامین آب‌ ۱۴۰ روستای بالای ۲۰ خانوار تا دهه فجر در دستور کار است‌",
-      "excerpt": "استاندار کرمان: تامین آب‌ ۱۴۰ روستای بالای ۲۰ خانوار تا دهه فجر در دستور کار است‌ استاندار کرمان با اشاره به شتاب گرفتن اجرای طرح‌های زیرساختی در مناطق روستایی و حاشیه‌ای این استان گفت: آبرسانی به ۱۴۰ روستای بالای ۲۰ خانوار تا دهه فجر امسال به پایان می‌رسد و طرح جامع تامین آب آشامیدنی ۶۶۴ روستای استان نیز تا پایان سال ۱۴۰۶ تکمیل خواهد شد. irna_kerman",
-      "paragraphs": [
-        "استاندار کرمان: تامین آب‌ ۱۴۰ روستای بالای ۲۰ خانوار تا دهه فجر در دستور کار است‌",
-        "استاندار کرمان با اشاره به شتاب گرفتن اجرای طرح‌های زیرساختی در مناطق روستایی و حاشیه‌ای این استان گفت: آبرسانی به ۱۴۰ روستای بالای ۲۰ خانوار تا دهه فجر امسال به پایان می‌رسد و طرح جامع تامین آب آشامیدنی ۶۶۴ روستای استان نیز تا پایان سال ۱۴۰۶ تکمیل خواهد شد.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/jej3aZm795v3MZ93nxXN9WV5eVl-QIr5Cr3mhKZOjfzKqmaBAlPKFOxD275IeFIWWycdsyUVLIi06_cN4QrJnnMsgCM33i_hHn8it8wMWbNbwPkzmpfJIxWQIxyA-d_Sal8q7oGBV_Sctaf8g3esika97n6JwRYQt5DF8MlsKe9-2chD3gwdmbQp7YDnAsicsJK1Lh-krS4yfHQQPThplcoF1zYFeIOuBtbAAQYa4bjlGcbspw0ejhxELpJ4kfTx3qMuat7mqTexnYXmc1mzE0JDyXcQkDa2Sp-uUOKjEsLfypIo1_gAEMyGg9cWI6RQmFvz5_DsdtOOivbiRiSJMQ.jpg"
-      },
-      "published_at": "2026-11-06T11:59:17+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "fcac220851375fe7",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-06T12:32:06.503699+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-06T15:20:27.832228+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 62,
-      "sent_at": "2026-11-06T15:20:32.069946+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140150",
-      "source_post_id": "140150",
-      "title": "صحبت با خدا در جیرفت",
-      "excerpt": "صحبت با خدا در جیرفت",
-      "paragraphs": [
-        "صحبت با خدا در جیرفت"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/6c5696dbae.mp4?token=fUO-DKX8ZW4UTaFPejrROv3PCnOX-O0ZNGVpPHz0Bk6I5VIBox9G0KORTy6R-V_t3oN1T2bmLhpKs4sSVDQv-__PfKUf0IQz2AHmbVK_P2dbA1DDYNE0WTD0BX_MBsMj9PVrfCX1txFaax46vLwsox8pFJyfgISXZVpnKf8wqh3VX_PpiAT1Pz3sXMP4Or7nUsi1Seld0tGHIbvxcItLeS9AkOK08B2q1JVMb_wd7bnd-YsLho5IrAuKjynNASQPw-lBtnsv_88AkzEcj51wsOLA8JXuQoEsZmitKDPGKc7vF3tTPBSICdBsgi9w1M6_pi3H5bHgv6M1jp1g41fZEQ"
-      },
-      "published_at": "2026-11-06T12:00:36+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "c6b4681de81a180b",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-06T12:32:06.503699+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-06T12:32:23.108905+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 59,
-      "sent_at": "2026-11-06T12:32:33.737830+00:00"
-    },
     {
       "url": "https://t.me/kerman_news/140151",
       "source_post_id": "140151",
@@ -10079,17 +9911,186 @@
       "status": "ready",
       "detected_at": "2026-11-10T10:56:45.703781+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30353",
+      "source_post_id": "30353",
+      "title": "مدیرکل ارشاد کرمان: مجوز ۳۰۹ عنوان کتاب در استان صادر شد",
+      "excerpt": "مدیرکل ارشاد کرمان: مجوز ۳۰۹ عنوان کتاب در استان صادر شد مدیرکل فرهنگ و ارشاد اسلامی استان کرمان گفت: از ابتدای سال ۱۴۰۵ تاکنون بیش‌از ۳۱۹ عنوان کتاب درخواست بررسی و صدور مجوز چاپ داشته‌اند که از این تعداد، مجوز چاپ ۳۰۹ عنوان کتاب صادر شده است. irna_kerman",
+      "paragraphs": [
+        "مدیرکل ارشاد کرمان: مجوز ۳۰۹ عنوان کتاب در استان صادر شد",
+        "مدیرکل فرهنگ و ارشاد اسلامی استان کرمان گفت: از ابتدای سال ۱۴۰۵ تاکنون بیش‌از ۳۱۹ عنوان کتاب درخواست بررسی و صدور مجوز چاپ داشته‌اند که از این تعداد، مجوز چاپ ۳۰۹ عنوان کتاب صادر شده است.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Eah2PC_hyzVaw9YD4STL7d3hkr6GnpmI_xrIK1rylNmJfkZDjlDNL3N-Yi3CaQkG3ojch3Uedlx7vMkkg6QclC53_lEyX_4DBUoPLsyWfDFba4wpOv-lS7pdlRQ3lgoGqpLg72aPI60AZT_Bb1xbPZqyzlay_wr4wqrjb9IQ_askM_iHhjkW6ehipYcVn5XH1reXh-Z2TMXIW_NRIRtOUp5Q5Rt4GZWeaCx2PyPZbYa520vWjK5D-5qiT2KGZuFuu4WtmA6vXgpWgaokhUq8APffEHByUuGnkGr95gMCAXQskhDb8Ohov3RmOKLCwXs7eu72BTI81w6A9b7mh3s9Pw.jpg"
+      },
+      "published_at": "2026-11-10T11:02:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "8290501fc940f52e",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T11:48:31.796300+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66306",
+      "source_post_id": "66306",
+      "title": "رشته گوهرشناسی در دانشگاه باهنر کرمان نوگشایی شد",
+      "excerpt": "رشته گوهرشناسی در دانشگاه باهنر کرمان نوگشایی شد برای نخستین بار رشته گوهرشناسی در دانشگاه شهید باهنر کرمان در مقطع کارشناسی‌ارشد راه‌اندازی شد. استان کرمان به‌عنوان بهشت معادن شناخته می‌شود و تربیت نیرو‌های متخصص جوان در بخش‌های مربوط به معادن از اهمیت به‌سزایی برخوردار است. دانشجویان رشته گوهرشناسی با متد‌های روز دنیا در خصوص گوهر سنگ آشنا می‌شوند و پیش‌بینی می‌شود، کرمان بتواند با فارغ‌التحصیل شدن این افراد گامی دیگر در راستای ارتقای اقتصادی و توسعه اشتغال بر مبنای گوهرشناسی و گوهرتراشی و در حوزه برندسازی و طراحی‌های روز دنیا بردارد.",
+      "paragraphs": [
+        "رشته گوهرشناسی در دانشگاه باهنر کرمان نوگشایی شد",
+        "برای نخستین بار رشته گوهرشناسی در دانشگاه شهید باهنر کرمان در مقطع کارشناسی‌ارشد راه‌اندازی شد. استان کرمان به‌عنوان بهشت معادن شناخته می‌شود و تربیت نیرو‌های متخصص جوان در بخش‌های مربوط به معادن از اهمیت به‌سزایی برخوردار است.",
+        "دانشجویان رشته گوهرشناسی با متد‌های روز دنیا در خصوص گوهر سنگ آشنا می‌شوند و پیش‌بینی می‌شود، کرمان بتواند با فارغ‌التحصیل شدن این افراد گامی دیگر در راستای ارتقای اقتصادی و توسعه اشتغال بر مبنای گوهرشناسی و گوهرتراشی و در حوزه برندسازی و طراحی‌های روز دنیا بردارد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/OFNpqx8fdzrjsgWFot-WPWthn0URvAmmcHYgdnAjAjHxjg76f9_kkbifRNRImXjQ0tiemcjzHFgR4b3tHekafbTTb2KbJdpBYyL87o3yeV-WTKkfr2-V8sCtaFNqoCtoUGo3VYLBqeOPDVjwH-S77qwOdLCx_W0BMaTJohCrz98ujefTKBSbpSrYGjGfdRCLosSUCOxovY3cFS07ls3Xq4RsM5T2rzg-JG3mohaNeqwqnxTPt731v63t4QiAWMMsUk2Fd66mbrw_aFEN0pBCUPmTP8PBAxL-35ha3HbetMgsTXR7hTZFhNOPOlsK2ypQL7S77seMaf7-3pN6p423SA.jpg"
+      },
+      "published_at": "2026-11-10T11:04:07+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "629c45fc8a6dcf85",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T11:48:31.796300+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140375",
+      "source_post_id": "140375",
+      "title": "قدم‌هایی عاشقانه یک مادر و دختر برای استقبال از شهید گمنام",
+      "excerpt": "قدم‌هایی عاشقانه یک مادر و دختر برای استقبال از شهید گمنام قاب تماشایی ارادت مادر و دختری به شهید گمنام در روستای گنج‌آباد، پایگاه عشایری شهرستان قلعه‌گنج؛ جایی که پرچم‌های «لبیک یا حسین» و ایران، جلوه‌ای از عشق و دلدادگی به شهدا را به تصویر کشید.",
+      "paragraphs": [
+        "قدم‌هایی عاشقانه یک مادر و دختر برای استقبال از شهید گمنام",
+        "قاب تماشایی ارادت مادر و دختری به شهید گمنام در روستای گنج‌آباد، پایگاه عشایری شهرستان قلعه‌گنج؛ جایی که پرچم‌های «لبیک یا حسین» و ایران، جلوه‌ای از عشق و دلدادگی به شهدا را به تصویر کشید."
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/810e9e9f4f.mp4?token=etlANE0SY6ZSDFEG-4tEYN-EmHpxeLEQHIftnMcns5WAns9BCu6nvg6afcPbmgTWcQ18D4L_y95yS3cuOnWNrS-qxB-7fIuhbndvvSz2e21nw2DAlgSwi2RjIeeyJ45-lOVH-3ndFaQcGQBjND84HIBfJNFa-4w5A8xYLRwGLFWtjJcv-1DmpagEyKo7lg8Mwec9ZxNQS9pysOl-qMfJHfNFz0-3wSUPz32yF31jB5cUEBiKjRCv29ZvCo9qQ5S9JoV8uleVaZRDYlKv1sC7NSKxz_OVZxOunttg-aYIO49_C8WJTvvIwfi8b8nOO9NAPRfnK57A_StJRw9IDGT4kA"
+      },
+      "published_at": "2026-11-10T11:18:12+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "3ebe5def6c49ac51",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T11:48:31.796300+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/34988",
+      "source_post_id": "34988",
+      "title": "مدیرکل ارشاد استان تشریح کرد؛",
+      "excerpt": "مدیرکل ارشاد استان تشریح کرد؛ جزئیات برنامه‌های هفتۀ کتاب در استان کرمان امکان خرید کتاب با یارانۀ ۲۰ درصدی از ۲۳ آبان فردای‌کرمان – گروه فرهنگ‌وهنر: مدیرکل فرهنگ و ارشاد اسلامی استان کرمان با تشریح برنامه‌های سی‌وچهارمین دورۀ هفتۀ کتاب از ۲۳ تا ۳۰ آبان‌ماه با شعار «با کتاب گفت‌وگو کنیم»، از اختصاص ۲۰ درصد یارانۀ خرید کتاب تا سقف ۲ میلیون تومان در سامانۀ «بازار کتاب» برای شهروندان خبر داد. حسین اسحاقی اجرای برنامه‌هایی چون طرح معلم دانا، مسابقات کتابخوانی و برگزاری نمایشگاه‌های شهرستانی را از دیگر اقدامات این هفته برشمرد. فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "مدیرکل ارشاد استان تشریح کرد؛",
+        "جزئیات برنامه‌های هفتۀ کتاب در استان کرمان",
+        "امکان خرید کتاب با یارانۀ ۲۰ درصدی از ۲۳ آبان",
+        "فردای‌کرمان – گروه فرهنگ‌وهنر: مدیرکل فرهنگ و ارشاد اسلامی استان کرمان با تشریح برنامه‌های سی‌وچهارمین دورۀ هفتۀ کتاب از ۲۳ تا ۳۰ آبان‌ماه با شعار «با کتاب گفت‌وگو کنیم»، از اختصاص ۲۰ درصد یارانۀ خرید کتاب تا سقف ۲ میلیون تومان در سامانۀ «بازار کتاب» برای شهروندان خبر داد.",
+        "حسین اسحاقی اجرای برنامه‌هایی چون طرح معلم دانا، مسابقات کتابخوانی و برگزاری نمایشگاه‌های شهرستانی را از دیگر اقدامات این هفته برشمرد.",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/LS59npbNvWE2AFP5gyX6zDKmleZP4wLGuhLb5ET-tkjcRHO4EdpaKE-NIF5mOYw7Ro2WZ_3tHFM71_eHKA2iyu_AI90juHk3gAgx5VUKdNlnsLn3vMVmhrc4QVyGlin75SGm8u5pZZeZnt4clAcCaXVgPkbrzr0NpkvYINKNFNocRknxrr29-njfVVINuWOs9VEPCqwDWLPu66ggBYnPpDPk2dVjISvq_p0RgPcOQ4SYgk1-lqE1nsOhbRJNqOAYD6FjT_Hw452zXiAs1i78AkUukL6CLLAIhYxeDBF8YWPAUHvWQCpxOGRdpHcuoKpwFWRIF-eaUQmIY2YS_Nkr4g.jpg"
+      },
+      "published_at": "2026-11-10T11:24:22+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "ff40495d2560ad11",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T11:48:31.796300+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59235",
+      "source_post_id": "59235",
+      "title": "آموزش زبان کرمانی عادل فردوسی‌پور و افسانه چترنور",
+      "excerpt": "آموزش زبان کرمانی عادل فردوسی‌پور و افسانه چترنور",
+      "paragraphs": [
+        "آموزش زبان کرمانی عادل فردوسی‌پور و افسانه چترنور"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/e1cc1f396f.mp4?token=kqR6aZu1IONx9g9Tk51IYjsInSKxPSihsyGsZhw-CWaHXZ3KxTLlrV9JdpE1M6AUGlIsRAUmkTZgPMWkm3dG5YwZlTloq3zn5dv5hjkUl5rOIiPqPtH72Xi7vUsbKrlKkoh5DJ8xKFtN_pXJG9RQ3sI4WYiHJzqYs6q_kQP5zB97XyY5oKLNGoGb6IYwpcu-AI7hBSbbRNjAuQLVljWdk3ldUe80NSKiVhk3Q1LFNz6GcJboLBNTrzE0qf_EhXbZyw3Ufs00kqM08Qffc2X3TEJvqmFRA0ve_sDI-JL6EgbmHelWTko5eLBBJvjKvpymeJBSSn8AEAKEi4htE6acDYWOpGPPJgrUDPjvR3m_yJOfwRxPGsEpzEljmzYPM_ib305LxFaLPd8quvZ40nG9StDJNw4Nax8aoRuL-b8n-6oBPvwGr8dv3EhiyaKqNfG_gV9yGSa5ZYGah72x-eD3NdPOT5KFLz0rHzzCgVpF21iBWL2Mh-pu7emhKtuQ6RrzYc-exPxNBiFoTJJ4PSz4BcA7I0RbPUvvLPVvJS478EhQjqh_St8RHpk-3Wpaz8lMgpmY2V0l6NDEKTgkiX0IrwOxzwQ6jsb7EQRO3f6H6YGX2g2aDZYSErWvG97giqxzjDm64dEXG5M0_9VmmbDUMpm4EEasNpxSft6FvnJPxA8"
+      },
+      "published_at": "2026-11-10T11:24:35+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "e1ebdc887a150d30",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T11:48:31.796300+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/34989",
+      "source_post_id": "34989",
+      "title": "مدیرکل میراث‌فرهنگی استان کرمان خبر داد؛",
+      "excerpt": "مدیرکل میراث‌فرهنگی استان کرمان خبر داد؛ «موزه ریاست‌جمهوری» رفسنجان در فهرست آثار ملی ثبت شد فردای‌کرمان – گروه جامعه: مدیرکل میراث‌فرهنگی استان کرمان از ثبت ساختمان مرکز اسناد، کتابخانه و موزه ریاست‌جمهوری آیت‌الله هاشمی رفسنجانی در فهرست آثار ملی کشور خبر داد. فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "مدیرکل میراث‌فرهنگی استان کرمان خبر داد؛",
+        "«موزه ریاست‌جمهوری» رفسنجان در فهرست آثار ملی ثبت شد",
+        "فردای‌کرمان – گروه جامعه: مدیرکل میراث‌فرهنگی استان کرمان از ثبت ساختمان مرکز اسناد، کتابخانه و موزه ریاست‌جمهوری آیت‌الله هاشمی رفسنجانی در فهرست آثار ملی کشور خبر داد.",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/cHrh6-378RRxP6eCV3bCptX2LI-Rr1Y87d8r1VkKcf5Q_FQ1IywAWup5bYGjCUUhf1TZ2gLik1Crz_HOTo8dh3XQyjVx7K1Hv2AH8y1RbBArG3TaLP_i_s2YwXr9rLvgY_xAaEHYUWnQjYfn-7xj4DLuYrh9XoyUl_QVOZymntY5qZBryC4zgucdyaX_9SGV7ai7slatcjY12bf5EVOQSjhego3g0hVBe-Qj3BfxmHAp8sdCBvQmMqtPyWzZCbQzREUMONw8XLZCHtreJIIJbwzwYmTNtL-RVjPVgo1tbZBjmEaoDOrNCsftzww9HgA6rOXuV_h6aXYWNAKuaxcjYg.jpg"
+      },
+      "published_at": "2026-11-10T11:38:30+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "3dc76f0fd7d7dd4c",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T11:48:31.796300+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-10T10:57:23.184191+00:00",
+  "saved_at": "2026-11-10T11:48:53.275143+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-10T10:56:45.703781+00:00",
-    "fardaayekerman": "2026-11-10T10:56:45.703781+00:00",
-    "irna_kerman": "2026-11-10T10:56:45.703781+00:00",
-    "kerman_gov": "2026-11-10T10:56:45.703781+00:00",
-    "kerman_akhbar": "2026-11-10T10:56:45.703781+00:00",
-    "kerman_news": "2026-11-10T10:56:45.703781+00:00",
-    "kerman_rasaneh": "2026-11-10T10:56:45.703781+00:00",
-    "qh_qv": "2026-11-10T10:56:45.703781+00:00"
+    "kermane_no": "2026-11-10T11:48:31.796300+00:00",
+    "fardaayekerman": "2026-11-10T11:48:31.796300+00:00",
+    "irna_kerman": "2026-11-10T11:48:31.796300+00:00",
+    "kerman_gov": "2026-11-10T11:48:31.796300+00:00",
+    "kerman_akhbar": "2026-11-10T11:48:31.796300+00:00",
+    "kerman_news": "2026-11-10T11:48:31.796300+00:00",
+    "kerman_rasaneh": "2026-11-10T11:48:31.796300+00:00",
+    "qh_qv": "2026-11-10T11:48:31.796300+00:00"
   }
 }
