@@ -1,0 +1,35 @@
+name: Send one 7x7 crossword widget in a private bot chat
+
+on:
+  workflow_dispatch:
+    inputs:
+      command_code:
+        description: "Code sent privately to @neshanikermanbot as /jadval CODE; use 8+ ASCII characters"
+        required: false
+        type: string
+      recipient_chat_id:
+        description: "Optional numeric private Telegram chat ID (alternative to command_code)"
+        required: false
+        type: string
+      confirm_send:
+        description: "Set true to send. False = identity and size checks only"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  private-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate then send native Telegram widget to one consenting person
+        env:
+          NASHANI_TELEGRAM_BOT_TOKEN: ${{ secrets.NASHANI_TELEGRAM_BOT_TOKEN }}
+          JADVAL_COMMAND_CODE: ${{ inputs.command_code }}
+          JADVAL_RECIPIENT_CHAT_ID: ${{ inputs.recipient_chat_id }}
+          JADVAL_CONFIRM_SEND: ${{ inputs.confirm_send }}
+        run: python3 telegram_crossword/send_one_widget.py
