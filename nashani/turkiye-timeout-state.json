@@ -12,6 +12,11 @@
       "url": "https://www.timeout.com/istanbul/restaurants/sahra-uygur-restaurant",
       "at": "2026-11-09T22:50:43.158661+03:00",
       "message_id": 23
+    },
+    "https://www.timeout.com/istanbul/restaurants/lyre": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/restaurants/lyre",
+      "at": "2026-11-10T20:04:49.634673+03:00"
     }
   },
   "days": {
@@ -26,6 +31,11 @@
       "url": "https://www.timeout.com/istanbul/restaurants/sahra-uygur-restaurant",
       "at": "2026-11-09T22:50:43.158661+03:00",
       "message_id": 23
+    },
+    "2026-11-10": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/restaurants/lyre",
+      "at": "2026-11-10T20:04:49.634673+03:00"
     }
   }
 }
