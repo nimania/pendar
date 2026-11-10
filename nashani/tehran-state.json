@@ -1809,7 +1809,35 @@
     "https://t.me/isna94/412807",
     "https://t.me/mehrnews/430604",
     "https://t.me/irna_1313/472327",
-    "https://t.me/mehrnews/430605"
+    "https://t.me/mehrnews/430605",
+    "https://t.me/isna94/412808",
+    "https://www.mehrnews.com/news/7007005/%DA%AF%D9%84%D8%A7%DB%8C%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%D9%85%D8%A7%D9%85-%D8%AC%D9%85%D8%B9%D9%87-%D8%AF%D9%85%D8%A7%D9%88%D9%86%D8%AF-%D8%A7%D8%B2-%D9%82%D8%B7%D8%B9%DB%8C-%D8%A2%D8%A8-%D8%B6%D8%B9%D9%81-%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AA-%D9%88-%D8%AA%D8%B1%D8%A7%D9%81%DB%8C%DA%A9-%DA%AF%DB%8C%D9%84%D8%A7%D9%88%D9%86%D8%AF",
+    "https://t.me/isna94/412809",
+    "https://t.me/mehrnews/430606",
+    "https://t.me/irna_1313/472331",
+    "https://t.me/isna94/412810",
+    "https://t.me/mehrnews/430607",
+    "https://t.me/irna_1313/472341",
+    "https://t.me/isna94/412811",
+    "https://t.me/irna_1313/472342",
+    "https://t.me/irna_1313/472343",
+    "https://t.me/mehrnews/430608",
+    "https://t.me/isna94/412812",
+    "https://t.me/isna94/412813",
+    "https://t.me/irna_1313/472344",
+    "https://t.me/Tehran_Tel/114839",
+    "https://t.me/irna_1313/472354",
+    "https://t.me/isna94/412814",
+    "https://t.me/irna_1313/472355",
+    "https://t.me/mehrnews/430609",
+    "https://t.me/irna_1313/472356",
+    "https://t.me/isna94/412815",
+    "https://t.me/irna_1313/472357",
+    "https://t.me/tehranpress1/132452",
+    "https://t.me/irna_1313/472358",
+    "https://t.me/mehrnews/430610",
+    "https://t.me/irna_1313/472359",
+    "https://t.me/isna94/412816"
   ],
   "queue": [
     {
@@ -9560,16 +9588,98 @@
       "status": "ready",
       "detected_at": "2026-11-10T17:17:59.581394+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://www.mehrnews.com/news/7007005/%DA%AF%D9%84%D8%A7%DB%8C%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%D9%85%D8%A7%D9%85-%D8%AC%D9%85%D8%B9%D9%87-%D8%AF%D9%85%D8%A7%D9%88%D9%86%D8%AF-%D8%A7%D8%B2-%D9%82%D8%B7%D8%B9%DB%8C-%D8%A2%D8%A8-%D8%B6%D8%B9%D9%81-%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AA-%D9%88-%D8%AA%D8%B1%D8%A7%D9%81%DB%8C%DA%A9-%DA%AF%DB%8C%D9%84%D8%A7%D9%88%D9%86%D8%AF",
+      "source_post_id": "%DA%AF%D9%84%D8%A7%DB%8C%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%D9%85%D8%A7%D9%85-%D8%AC%D9%85%D8%B9%D9%87-%D8%AF%D9%85%D8%A7%D9%88%D9%86%D8%AF-%D8%A7%D8%B2-%D9%82%D8%B7%D8%B9%DB%8C-%D8%A2%D8%A8-%D8%B6%D8%B9%D9%81-%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AA-%D9%88-%D8%AA%D8%B1%D8%A7%D9%81%DB%8C%DA%A9-%DA%AF%DB%8C%D9%84%D8%A7%D9%88%D9%86%D8%AF",
+      "title": "گلایه‌های امام جمعه دماوند از قطعی آب، ضعف اینترنت و ترافیک گیلاوند",
+      "excerpt": "تهران- امام جمعه دماوند با انتقاد از قطعی‌های مکرر تابستانه آب، وضعیت ضعیف اینترنت و مشکلات ترافیکی گیلاوند، خواستار نگاه ویژه استاندار به زیرساخت‌ها و بودجه فرهنگی این شهرستان شد.",
+      "paragraphs": [
+        "تهران- امام جمعه دماوند با انتقاد از قطعی‌های مکرر تابستانه آب، وضعیت ضعیف اینترنت و مشکلات ترافیکی گیلاوند، خواستار نگاه ویژه استاندار به زیرساخت‌ها و بودجه فرهنگی این شهرستان شد."
+      ],
+      "published_at": "2026-11-10T17:20:00+00:00",
+      "media": null,
+      "source": "مهر ـ تهران",
+      "source_handle": "web_mehr_tehran",
+      "id": "7d1cebe2c031bf97",
+      "media_repost_allowed": true,
+      "source_hashtag": "مهر_تهران",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-10T18:11:08.136568+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132452",
+      "source_post_id": "132452",
+      "title": "فرصتی برای دیده‌شدن قهرمانان گمنام",
+      "excerpt": "فرصتی برای دیده‌شدن قهرمانان گمنام نخستین جشنواره ملی سلمان فارسی؛ فرصتی برای شناسایی، انتخاب و تجلیل از بسیجیان نمونه کشور در سال ۱۴۰۵ است. هر ایرانی میتواند یک بسیجی نمونه باشد؛ شانس خود را امتحان کنید. اگر در عرصه‌های هنری، ورزشی یا علمی رتبه ملی یا بین‌المللی کسب کرده‌اید، یا در عرصه‌های مختلف نقش‌آفرینی بسیج، اقدامات شاخص با اثرگذاری ملی یا بین‌المللی داشته‌اید، این فرصت را از دست ندهید مهلت ثبت‌نام: ۱۶ تا ۲۶ آبان ۱۴۰۵ برای ثبت‌نام و کسب اطلاعات بیشتر به نشانی زیر مراجعه کنید توانمندی‌هایت را معرفی کن؛ اسوه‌ای برای دیگران باش. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "فرصتی برای دیده‌شدن قهرمانان گمنام",
+        "نخستین جشنواره ملی سلمان فارسی؛ فرصتی برای شناسایی، انتخاب و تجلیل از بسیجیان نمونه کشور در سال ۱۴۰۵ است.",
+        "هر ایرانی میتواند یک بسیجی نمونه باشد؛ شانس خود را امتحان کنید.",
+        "اگر در عرصه‌های هنری، ورزشی یا علمی رتبه ملی یا بین‌المللی کسب کرده‌اید، یا در عرصه‌های مختلف نقش‌آفرینی بسیج، اقدامات شاخص با اثرگذاری ملی یا بین‌المللی داشته‌اید، این فرصت را از دست ندهید",
+        "مهلت ثبت‌نام: ۱۶ تا ۲۶ آبان ۱۴۰۵",
+        "برای ثبت‌نام و کسب اطلاعات بیشتر به نشانی زیر مراجعه کنید",
+        "توانمندی‌هایت را معرفی کن؛ اسوه‌ای برای دیگران باش.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/4dd0f0baf8.mp4?token=LIlXOnJZCHoO91NJ_pUhgYUkPqHcyS6NOe4OiuzJEE4tO8eW1IyRez4jMZGM1wUdVYpqoiRxnBwVzsrN50fFC_PmqjZnTl5jfXIoeqecJ1UlrE0254iMBo9-q6EeVozE6Y7AjB36iq-rgGDER7wbwvbSTzolN5DEVHr8emAXS0dUG76WseErUvqTVxfJ2DmqdxjbfgBxl8zdZsuLQFWrxfQw7Yb_GgGeEix56ZweAa-ZOgV4YETXlTVhrKM9R4ftjFG7pPM54Yn-S_EP1mNkGm0c6xnBigX7ixEGK_w2s8woqm5jSTNjbPBDhi_WU-a9B-GNjmMdA4E_qBm59h7PQzzoLYYGMqknLXWitR9ENcuYlvuH2_duRcW1gSNrDutwJRiNb4oohoOr2QiJZhWoYyGpijaw_6z9cGAq5qraeb67jIHbQJRGf3qFSIx1nXYKlYBH2IGEFbmyeDQT784STQ5YPI-eEt4U2NpNTzs5qqOhyJVQlX8AwFaoOXyE8JMF1U5N6F2kgYRk9lSL-fG7i4rS94h3rQJ8XKuOf9GXGF6tJT-wZRWgCS1AQJnzDxJQ0sz9GR52DM9Ho7mOsVJxsH0JrprSkZ-jLGCuNWz4izHcr0djjMAgjRxHVogYUkwXcmv5R27x7EdgEMGthHOr_gJwSqXM3BRMKCcD7HrBjy0"
+      },
+      "published_at": "2026-11-10T18:04:45+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "21732e556459eace",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-10T18:11:08.136568+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/isna94/412816",
+      "source_post_id": "412816",
+      "title": "کشف و توقیف ۹۰۰ تن برنج پاکستانی در کهریزک؛ محموله به میادین تهران می‌رود",
+      "excerpt": "کشف و توقیف ۹۰۰ تن برنج پاکستانی در کهریزک؛ محموله به میادین تهران می‌رود مدیرکل تعزیرات حکومتی شهرستان‌های استان تهران در گفت‌وگو با ایسنا حدود ۹۰۰ تن برنج پاکستانی در انباری واقع در منطقه شورآباد کهریزک کشف و توقیف شد. این محموله پس از طی مراحل قانونی برای توزیع در میادین میوه و تره‌بار ۲۲ منطقه تهران در اختیار سازمان اموال تملیکی قرار می‌گیرد.",
+      "paragraphs": [
+        "کشف و توقیف ۹۰۰ تن برنج پاکستانی در کهریزک؛ محموله به میادین تهران می‌رود",
+        "مدیرکل تعزیرات حکومتی شهرستان‌های استان تهران در گفت‌وگو با ایسنا",
+        "حدود ۹۰۰ تن برنج پاکستانی در انباری واقع در منطقه شورآباد کهریزک کشف و توقیف شد.",
+        "این محموله پس از طی مراحل قانونی برای توزیع در میادین میوه و تره‌بار ۲۲ منطقه تهران در اختیار سازمان اموال تملیکی قرار می‌گیرد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/GJg6PYBRXtYQZYuxPD_l_fAAgMmuw3XQbMTuR45WT93S2IBF5xc2fpKFdWTYZyJ4ozyrD1riyep_-jJTh8tqRK_LIPmbmmIb3T9dG7-guZwCaIdIUwOJh6OKWY-Xh1tklvDMSjyNoHude3S8ghSJU8YqT1W_572--Qj7_PBQjGJaxX7s2mlZBVDvA6a8tDAc954lCsxwHUkq4v-_FX7ToQra8aDJT4AgpU9w3rm64lKVOYVeDSjCS8vrMvon6-BLfR6CAly5nP3--PBQMHBMepPvTGaTR85fOhtkTd-J4uENgn4z8SfghUCID3A1JUbdx2qrraYq4UKWWn-nPtk5Fg.jpg"
+      },
+      "published_at": "2026-11-10T18:09:18+00:00",
+      "source": "ایسنا",
+      "source_handle": "isna94",
+      "id": "39730cf068df0efa",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایسنا",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-10T18:11:08.136568+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-10T17:19:04.412297+00:00",
+  "saved_at": "2026-11-10T18:12:15.957913+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-10T17:17:59.581394+00:00",
-    "tehran_tel": "2026-11-10T17:17:59.581394+00:00",
-    "irna_1313": "2026-11-10T17:17:59.581394+00:00",
-    "isna94": "2026-11-10T17:17:59.581394+00:00",
-    "mehrnews": "2026-11-10T17:17:59.581394+00:00",
-    "web_shahr": "2026-11-10T17:17:59.581394+00:00",
-    "web_mehr_tehran": "2026-11-10T17:17:59.581394+00:00"
+    "tehranpress1": "2026-11-10T18:11:08.136568+00:00",
+    "tehran_tel": "2026-11-10T18:11:08.136568+00:00",
+    "irna_1313": "2026-11-10T18:11:08.136568+00:00",
+    "isna94": "2026-11-10T18:11:08.136568+00:00",
+    "mehrnews": "2026-11-10T18:11:08.136568+00:00",
+    "web_shahr": "2026-11-10T18:11:08.136568+00:00",
+    "web_mehr_tehran": "2026-11-10T18:11:08.136568+00:00"
   }
 }
