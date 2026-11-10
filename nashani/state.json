@@ -1092,37 +1092,14 @@
     "https://t.me/kerman_news/140417",
     "https://t.me/kerman_news/140418",
     "https://t.me/kerman_news/140419",
-    "https://t.me/qh_qv/1022"
+    "https://t.me/qh_qv/1022",
+    "https://t.me/qh_qv/1024",
+    "https://t.me/qh_qv/1025",
+    "https://t.me/qh_qv/1026",
+    "https://t.me/qh_qv/1027",
+    "https://t.me/Kerman_akhbar/66316"
   ],
   "queue": [
-    {
-      "url": "https://t.me/irna_kerman/30309",
-      "source_post_id": "30309",
-      "title": "چرا سهمیه آرد برخی از عشایر جنوب کرمان قطع شد؟",
-      "excerpt": "چرا سهمیه آرد برخی از عشایر جنوب کرمان قطع شد؟ اجرای طرح هوشمندسازی توزیع آرد در مناطق عشایری جنوب کرمان اگرچه با هدف عدالت و شفافیت آغاز شد اما اطلاع‌نداشتن برخی عشایر از این مساله و خرید نان از نانوایی‌ها، به مسدود شدن و انتظار طولانی کدهای ملی سرپرستان خانوار انجامید؛ چالشی که مدیرکل امور عشایر ضمن توضیح ابعاد این طرح، زوایای پنهان پایش‌های الکترونیکی را تشریح کرد. irna_kerman",
-      "paragraphs": [
-        "چرا سهمیه آرد برخی از عشایر جنوب کرمان قطع شد؟",
-        "اجرای طرح هوشمندسازی توزیع آرد در مناطق عشایری جنوب کرمان اگرچه با هدف عدالت و شفافیت آغاز شد اما اطلاع‌نداشتن برخی عشایر از این مساله و خرید نان از نانوایی‌ها، به مسدود شدن و انتظار طولانی کدهای ملی سرپرستان خانوار انجامید؛ چالشی که مدیرکل امور عشایر ضمن توضیح ابعاد این طرح، زوایای پنهان پایش‌های الکترونیکی را تشریح کرد.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/LdFWrq5F2WlxG4h8-btE9rWxii8y1VwUXYmNP51N_52VERVh_Z2OeFpR2x_dDpPlmo2FIaIsC7_3ZIxZ9pFVoSYI5T0G-cdNmkt4EQceLM1JtDLuvPvFnx6RFAKTk2YUTrSwT5KcpHkFtKPqSALcNkCU-wxhaXAFA9tJpCm3TtJyTxky31vTF86Qtkgxl9oR9j9zV7iZsLM8RFfrWweKFrcHidbpf38CzojiJx8rsxcyECseGYSdBB5f8N580Szx_TDM_JJT1nmI1oakNSxuvtWVkkbbfuGRoWAbQ7RZ4fZxkUMjVrwdN1x9zXIHr0dqroMTp3H4r1sWEj72dp6b1Q.jpg"
-      },
-      "published_at": "2026-11-07T07:12:21+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "f377a3056509a106",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "expired",
-      "detected_at": "2026-11-07T07:48:12.305063+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/irna_kerman/30310",
       "source_post_id": "30310",
@@ -10095,17 +10072,44 @@
       "status": "review",
       "detected_at": "2026-11-10T19:43:49.043800+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66316",
+      "source_post_id": "66316",
+      "title": "آغاز برداشت طلای سرخ از مزارع شهربابک",
+      "excerpt": "آغاز برداشت طلای سرخ از مزارع شهربابک مدیر جهاد کشاورزی شهربابک: زعفران با سطح زیر کشت ۱۶۸ هکتار، یکی از محصولات اقتصادی و ارزشمند بخش کشاورزی شهربابک به شمار می‌رود. شهرستان شهربابک از نظر سطح زیر کشت زعفران، رتبه سوم استان کرمان را به خود اختصاص داده است. میانگین عملکرد این محصول درشهرستان ۴.۵ تا ۵ کیلوگرم کلاله خشک در هر هکتار برآورد می‌شود و پیش‌بینی می‌شود امسال تولید مطلوبی داشته باشیم.",
+      "paragraphs": [
+        "آغاز برداشت طلای سرخ از مزارع شهربابک",
+        "مدیر جهاد کشاورزی شهربابک: زعفران با سطح زیر کشت ۱۶۸ هکتار، یکی از محصولات اقتصادی و ارزشمند بخش کشاورزی شهربابک به شمار می‌رود.",
+        "شهرستان شهربابک از نظر سطح زیر کشت زعفران، رتبه سوم استان کرمان را به خود اختصاص داده است. میانگین عملکرد این محصول درشهرستان ۴.۵ تا ۵ کیلوگرم کلاله خشک در هر هکتار برآورد می‌شود و پیش‌بینی می‌شود امسال تولید مطلوبی داشته باشیم."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/BcVc1ptqU7kwTYMqxgHN0TDRFCERUznl_OZ7Ci2IYd8Jra79J9Y-mhXvL-43aWcAjOKgvEph3qLzYBVUFlHKTno4FAhIXPUHUlMeDVGiUECN01rWVRK4OQbmnCVOTnSYD9WH-8C5wQWu7Dosnqop3qYA4MNcVAazJ7x3JibuiBfKQN9i_RIW4c5ylCcq10wgH9W1MIlGmnyku3mT_V3ie1FhyyYP8ATqdt_KT0WhDgvT1CxtD-U9BurlW5Sa33r92psRo1TNogptO3paQ9VsaruXcueXB3FMeC9ztRyqjytel5dJWLApC5pks6RNsAYLes-7luQzmHrDwAH5ekCebA.jpg"
+      },
+      "published_at": "2026-11-10T20:03:21+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "2db0123108506271",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-10T22:32:16.084382+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-10T19:44:31.635537+00:00",
+  "saved_at": "2026-11-10T22:32:35.354053+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-10T19:43:49.043800+00:00",
-    "fardaayekerman": "2026-11-10T19:43:49.043800+00:00",
-    "irna_kerman": "2026-11-10T19:43:49.043800+00:00",
-    "kerman_gov": "2026-11-10T19:43:49.043800+00:00",
-    "kerman_akhbar": "2026-11-10T19:43:49.043800+00:00",
-    "kerman_news": "2026-11-10T19:43:49.043800+00:00",
-    "kerman_rasaneh": "2026-11-10T19:43:49.043800+00:00",
-    "qh_qv": "2026-11-10T19:43:49.043800+00:00"
+    "kermane_no": "2026-11-10T22:32:16.084382+00:00",
+    "fardaayekerman": "2026-11-10T22:32:16.084382+00:00",
+    "irna_kerman": "2026-11-10T22:32:16.084382+00:00",
+    "kerman_gov": "2026-11-10T22:32:16.084382+00:00",
+    "kerman_akhbar": "2026-11-10T22:32:16.084382+00:00",
+    "kerman_news": "2026-11-10T22:32:16.084382+00:00",
+    "kerman_rasaneh": "2026-11-10T22:32:16.084382+00:00",
+    "qh_qv": "2026-11-10T22:32:16.084382+00:00"
   }
 }
