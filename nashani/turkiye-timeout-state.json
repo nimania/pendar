@@ -14,9 +14,10 @@
       "message_id": 23
     },
     "https://www.timeout.com/istanbul/restaurants/lyre": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/lyre",
-      "at": "2026-11-10T20:04:49.634673+03:00"
+      "at": "2026-11-10T20:04:49.634673+03:00",
+      "message_id": 27
     }
   },
   "days": {
@@ -33,9 +34,10 @@
       "message_id": 23
     },
     "2026-11-10": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/lyre",
-      "at": "2026-11-10T20:04:49.634673+03:00"
+      "at": "2026-11-10T20:04:49.634673+03:00",
+      "message_id": 27
     }
   }
 }
