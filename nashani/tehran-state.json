@@ -10031,9 +10031,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-10T22:32:19.081910+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://www.mehrnews.com/news/7007223/%D8%AA%D9%88%D9%82%DB%8C%D9%81-%DB%B9%DB%B0%DB%B0-%D8%AA%D9%86-%D8%A8%D8%B1%D9%86%D8%AC-%D9%BE%D8%A7%DA%A9%D8%B3%D8%AA%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%A7%D9%86%D8%A8%D8%A7%D8%B1-%D8%B4%D9%88%D8%B1%D8%A2%D8%A8%D8%A7%D8%AF-%DA%A9%D9%87%D8%B1%DB%8C%D8%B2%DA%A9",
@@ -10080,12 +10081,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-10T22:32:19.081910+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-11T02:17:27.444753+00:00"
     }
   ],
-  "saved_at": "2026-11-11T02:17:25.426654+00:00",
+  "saved_at": "2026-11-11T02:17:27.444770+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-11T02:16:18.662464+00:00",
     "tehran_tel": "2026-11-11T02:16:18.662464+00:00",
