@@ -1,1 +1,1 @@
-SEO rebuild requested after Search Console verification on 2026-10-07.
+SEO full rebuild requested on 2026-11-11 to restore a verified Pages baseline and publish crawlable editorial statement URLs.
