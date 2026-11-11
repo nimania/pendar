@@ -855,6 +855,12 @@ jobs:
           AI_API_KEY: ${{ secrets.AI_API_KEY }}
           AI_MODEL_STRONG: ${{ secrets.AI_MODEL_STRONG }}
         run: python backend/scripts/publish_statement_recaps.py --site site
+      - name: Publish crawlable reviewed editorial statements after site trimming
+        run: |
+          python -m unittest discover -s backend/tests -p test_editorial_statement_pages.py -v
+          python backend/scripts/publish_editorial_statement_pages.py --site site --source backend/data/editorial-recaps.json
+          test -s site/statement/editorial-zeidabadi-shabehjang-eragh-20261020/index.html
+          python backend/scripts/audit_pages_size.py site 780000000
       - name: Upload light Pages site
         uses: actions/upload-pages-artifact@v3
         with:
