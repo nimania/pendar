@@ -10205,9 +10205,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-11T22:17:56.964378+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-11T22:18:12.335182+00:00"
     },
     {
       "url": "https://t.me/Kerman_akhbar/66341",
@@ -10228,12 +10229,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-11T22:17:56.964378+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-11T22:18:12.335182+00:00"
     }
   ],
-  "saved_at": "2026-11-11T22:18:09.745937+00:00",
+  "saved_at": "2026-11-11T22:18:12.335203+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-11T22:17:56.964378+00:00",
     "fardaayekerman": "2026-11-11T22:17:56.964378+00:00",
