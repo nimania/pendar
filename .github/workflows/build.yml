@@ -5,6 +5,10 @@ name: Build & Deploy Pendar (static)
 # A push to main also republishes front-end changes such as the figures timeline.
 # It generates the news and publishes a static site to GitHub Pages — free.
 on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/seo-rebuild-trigger.txt"
   workflow_dispatch:
     inputs:
       resolve_url:
@@ -138,6 +142,45 @@ jobs:
           python -m scripts.export_static
           python -m scripts.build_editorial_reports
           python -m scripts.build_periodicals
+      - name: Restore reviewed editorial recaps into generated figures before SEO
+        run: |
+          python - <<'PY_EDITORIAL_RECAPS'
+          import json
+          from pathlib import Path
+          figures_path=Path('backend/public/data/figures.json')
+          reviewed_path=Path('backend/data/editorial-recaps.json')
+          figures_data=json.loads(figures_path.read_text(encoding='utf-8'))
+          recaps=json.loads(reviewed_path.read_text(encoding='utf-8'))
+          figures=figures_data.get('figures',[])
+          by_handle={str(x.get('handle','')).lower():x for x in figures}
+          merged=0
+          for item in recaps:
+              if not item.get('id') or not str(item.get('recap_fa') or '').strip():
+                  continue
+              for profile in item.get('profiles',[]):
+                  handle=str(profile.get('handle','')).lower()
+                  if handle and handle not in by_handle:
+                      clone=profile.copy()
+                      clone.setdefault('posts',[])
+                      figures.append(clone)
+                      by_handle[handle]=clone
+              for handle in item.get('handles',[]):
+                  figure=by_handle.get(str(handle).lower())
+                  if figure is None:
+                      continue
+                  post={k:v for k,v in item.items() if k not in ('handles','profiles')}
+                  post.update(handle=figure['handle'],avatar=figure.get('avatar',''),
+                              role_fa=item.get('source_name','گفت‌وگو'),
+                              published_at=item.get('published_at') or item.get('recorded_at'))
+                  posts=figure.setdefault('posts',[])
+                  posts[:]=[p for p in posts if str(p.get('id'))!=str(item['id'])]
+                  posts.insert(0,post)
+                  merged+=1
+          figures_path.write_text(json.dumps(figures_data,ensure_ascii=False),encoding='utf-8')
+          if not merged:
+              raise SystemExit('::error::No reviewed editorial recaps restored to published figures')
+          print('Reviewed editorial statements restored before SEO:',merged)
+          PY_EDITORIAL_RECAPS
       - name: Overlay freshest Jan-e Jaraid data before publishing
         env:
           GH_TOKEN: ${{ github.token }}
@@ -486,6 +529,12 @@ jobs:
         run: |
           python -m unittest discover -s backend/tests -p test_editorial_story_sitemap.py -v
           python backend/scripts/publish_editorial_story_sitemap.py --site backend/public
+
+      - name: Publish reviewed editorial statement SEO pages after trimming
+        run: |
+          python -m unittest discover -s backend/tests -p test_editorial_statement_pages.py -v
+          python backend/scripts/publish_editorial_statement_pages.py --site backend/public --source backend/data/editorial-recaps.json
+          test -s backend/public/statement/editorial-zeidabadi-shabehjang-eragh-20261020/index.html
 
       - name: Losslessly pack movie details for GitHub Pages size
         run: python backend/scripts/pack_movie_details.py --site backend/public --minimum 1000
