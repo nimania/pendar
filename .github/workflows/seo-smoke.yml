@@ -2,10 +2,14 @@ name: Smoke-test crawlable SEO output
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
     paths:
       - "backend/scripts/build_seo.py"
+      - "backend/scripts/publish_editorial_statement_pages.py"
+      - "backend/tests/test_editorial_statement_pages.py"
       - "backend/scripts/share_seo_shell.py"
       - "backend/scripts/reconcile_published_sitemaps.py"
       - "backend/tests/test_shared_seo_shell.py"
@@ -32,4 +36,6 @@ jobs:
           python -m unittest discover -s backend/tests -p test_shared_seo_shell.py -v
           python -m unittest discover -s backend/tests -p test_reconcile_published_sitemaps.py -v
       - name: Validate full crawlable HTML fixture and rebuild
-        run: python backend/tests/test_seo.py
+        run: |
+          python backend/tests/test_seo.py
+          python backend/tests/test_editorial_statement_pages.py
