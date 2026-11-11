@@ -1931,7 +1931,11 @@
     "https://t.me/isna94/412835",
     "https://t.me/irna_1313/472400",
     "https://t.me/irna_1313/472401",
-    "https://t.me/irna_1313/472409"
+    "https://t.me/irna_1313/472409",
+    "https://t.me/isna94/412837",
+    "https://t.me/isna94/412838",
+    "https://t.me/irna_1313/472410",
+    "https://t.me/irna_1313/472411"
   ],
   "queue": [
     {
@@ -10091,15 +10095,44 @@
       "delivery_kind": "text",
       "telegram_message_id": 131,
       "sent_at": "2026-11-11T02:17:29.911256+00:00"
+    },
+    {
+      "url": "https://t.me/isna94/412837",
+      "source_post_id": "412837",
+      "title": "شومر: ادعای «پیروزی تاریخی» هگست در جنگ ایران مضحک است",
+      "excerpt": "شومر: ادعای «پیروزی تاریخی» هگست در جنگ ایران مضحک است رهبر دموکرات‌های سنای آمریکا ادعای «پیروزی تاریخی» هگست در جنگ ایران مضحک است. اینکه قیمت هر گالن بنزین به بیش از ۴ دلار رسیده، پیروزی تاریخی نیست. اینکه تلاش می‌کنند آمار تلفات نیروهای آمریکایی را از مردم پنهان کنند هم قطعاً هیچ نشانه‌ای از یک پیروزی تاریخی ندارد.",
+      "paragraphs": [
+        "شومر: ادعای «پیروزی تاریخی» هگست در جنگ ایران مضحک است",
+        "رهبر دموکرات‌های سنای آمریکا",
+        "ادعای «پیروزی تاریخی» هگست در جنگ ایران مضحک است.",
+        "اینکه قیمت هر گالن بنزین به بیش از ۴ دلار رسیده، پیروزی تاریخی نیست.",
+        "اینکه تلاش می‌کنند آمار تلفات نیروهای آمریکایی را از مردم پنهان کنند هم قطعاً هیچ نشانه‌ای از یک پیروزی تاریخی ندارد."
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/4c9993a868.mp4?token=HJWsSp88X9eH_piLw7ZM5P6TGuf3DVkVfafNTvLPBrXVA6ckJQ9tUOWKhKtKqSnm04PqAdiOiTaCmH7Fd-ZGfDbXFQdLZUyF2pAdqCHU52ji6Y96hJ7p43UvQH4o9Qz-FZlfsecGSO0mZqI5xm5vpkrq7XJNquMGZp0famN17YdIRBPA2E7rLux2unpsZmX2oRIzRrKtzpyyQHp6fNWNaqTQDU3uOgbUk8Nz8qxqC1wS4HgyVh92FfLcCjyA7pgRop-qN_6ODHfEUINGF5-h5Ia_WZEWOv07vXfYc1_StlMqnXgLG9bnRP8h6J_O61EsByVxVwG-sPO7Styqh8Lu-Q"
+      },
+      "published_at": "2026-11-11T02:57:01+00:00",
+      "source": "ایسنا",
+      "source_handle": "isna94",
+      "id": "3a2f8c015e475ba5",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایسنا",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-11T03:15:47.627949+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-11T02:57:44.768984+00:00",
+  "saved_at": "2026-11-11T03:16:46.128033+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-11T02:56:39.363186+00:00",
-    "tehran_tel": "2026-11-11T02:56:39.363186+00:00",
-    "irna_1313": "2026-11-11T02:56:39.363186+00:00",
-    "isna94": "2026-11-11T02:56:39.363186+00:00",
-    "mehrnews": "2026-11-11T02:56:39.363186+00:00",
+    "tehranpress1": "2026-11-11T03:15:47.627949+00:00",
+    "tehran_tel": "2026-11-11T03:15:47.627949+00:00",
+    "irna_1313": "2026-11-11T03:15:47.627949+00:00",
+    "isna94": "2026-11-11T03:15:47.627949+00:00",
+    "mehrnews": "2026-11-11T03:15:47.627949+00:00",
     "web_shahr": "2026-11-10T19:43:48.102438+00:00",
     "web_mehr_tehran": "2026-11-11T02:56:39.363186+00:00"
   }
