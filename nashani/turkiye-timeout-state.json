@@ -20,9 +20,10 @@
       "message_id": 27
     },
     "https://www.timeout.com/istanbul/restaurants/cinnamom": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/cinnamom",
-      "at": "2026-11-11T20:10:13.579192+03:00"
+      "at": "2026-11-11T20:10:13.579192+03:00",
+      "message_id": 31
     }
   },
   "days": {
@@ -45,9 +46,10 @@
       "message_id": 27
     },
     "2026-11-11": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/cinnamom",
-      "at": "2026-11-11T20:10:13.579192+03:00"
+      "at": "2026-11-11T20:10:13.579192+03:00",
+      "message_id": 31
     }
   }
 }
