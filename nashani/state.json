@@ -1373,36 +1373,11 @@
     "https://t.me/kerman_news/140525",
     "https://t.me/kerman_news/140526",
     "https://t.me/kerman_news/140527",
-    "https://t.me/Kerman_akhbar/66359"
+    "https://t.me/Kerman_akhbar/66359",
+    "https://t.me/irna_kerman/30374",
+    "https://t.me/qh_qv/1054"
   ],
   "queue": [
-    {
-      "url": "https://t.me/irna_kerman/30333",
-      "source_post_id": "30333",
-      "title": "کشف بیش‌از ۱۰ کیلوگرم هروئین در عملیات مشترک پلیس کرمان و جیرفت",
-      "excerpt": "کشف بیش‌از ۱۰ کیلوگرم هروئین در عملیات مشترک پلیس کرمان و جیرفت رئیس پلیس مبارزه با موادمخدر استان کرمان از کشف ۱۰ کیلو و ۲۰۰ گرم هروئین در عملیات مشترک مأموران پلیس مبارزه با موادمخدر استان و شهرستان جیرفت و دستگیری ۲ متهم در این رابطه خبر داد. irna_kerman",
-      "paragraphs": [
-        "کشف بیش‌از ۱۰ کیلوگرم هروئین در عملیات مشترک پلیس کرمان و جیرفت",
-        "رئیس پلیس مبارزه با موادمخدر استان کرمان از کشف ۱۰ کیلو و ۲۰۰ گرم هروئین در عملیات مشترک مأموران پلیس مبارزه با موادمخدر استان و شهرستان جیرفت و دستگیری ۲ متهم در این رابطه خبر داد.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/otLbXfn8MazH2DsASg9HNF5QB0t2EHGcPvOD-lUhSGVh-bDWrDKcJUd3n6OlPKA8F2ZSNAswukUxvvnB_IUlO-6p_0ZjhprfO6BgggFwQZSTABJ429M6-dY60HvO2H173__De6CknzCmvd124LRVzxLkTjJOA6eDAOnDfnW_yHa2eUCvdcKO3XJ5OmCFUQZWz4pi5qmPnXFqPQrd9Eb5FuNxCqngLpIXUT-fQlUnFuB9owyVM9BjKqz0-Y1XahjZgaFABV0MFKZ0TmwSZmWpOWiMJKuJmTIHHOx6xKa4r0iaTk8Q9DqDvr1eZxQYo9eHiT3dVpZtdUYfXeem0sPwmA.jpg"
-      },
-      "published_at": "2026-11-08T11:06:19+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "eecba15a213905a9",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-08T12:16:26.126869+00:00",
-      "other_sources": []
-    },
     {
       "url": "https://t.me/kerman_news/140256",
       "source_post_id": "140256",
@@ -10407,17 +10382,44 @@
       "delivery_kind": "photo",
       "telegram_message_id": 406,
       "sent_at": "2026-11-12T19:54:13.209730+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30374",
+      "source_post_id": "30374",
+      "title": "«سعید افروز» قهرمان عبور از محدودیت‌ها؛ایمان و پشتکار،نام ایران را طنین انداز کرد",
+      "excerpt": "«سعید افروز» قهرمان عبور از محدودیت‌ها؛ایمان و پشتکار،نام ایران را طنین انداز کرد فرماندار جیرفت در مراسم استقبال از «سعید افروز» قهرمان طلایی المپیک آسیایی (ناگویا) گفت: این قهرمان نامدار با اراده پولادین و خودباوری، نام ایران را در بلندای ورزش جهان طنین‌انداز کرد و امروز به الگویی شایسته برای جوانان جنوب استان تبدیل شده است. irna_kerman",
+      "paragraphs": [
+        "«سعید افروز» قهرمان عبور از محدودیت‌ها؛ایمان و پشتکار،نام ایران را طنین انداز کرد",
+        "فرماندار جیرفت در مراسم استقبال از «سعید افروز» قهرمان طلایی المپیک آسیایی (ناگویا) گفت: این قهرمان نامدار با اراده پولادین و خودباوری، نام ایران را در بلندای ورزش جهان طنین‌انداز کرد و امروز به الگویی شایسته برای جوانان جنوب استان تبدیل شده است.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/EigrDevMy8DkRWNguS7ZyUMyP1UvlAJNC4hiLLKvSxNeAaVfrq5SVw3t2umzCXcOlkQ0LutMKY9iHgyK3Mdj5tc5nARqLjTDpiJthmEBOtaOZyab1EBvICD0ntPQzzrAdRUFVhBLOi6ptxEKgwdtlfEsnIM0r2lBhp60yGk2vkXEYpVlE6D1kOUI26yz78DBCxpQrX04-8SMdU6JIuQSUmB30vovRoaq9-HHlQ6iXtINhLz3saQpkmvbWB-4LqXgF2dlNQNTF18ffOsA3FsE0qeKAXSLgATM0VwU5LIR-JeHR5hUhgIR5NkWyu1TobMbDX-lHAjVVxgAurkN3WeKzw.jpg"
+      },
+      "published_at": "2026-11-12T20:11:18+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "0597f6ad84ff70a9",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-12T20:46:50.625705+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-12T19:54:13.209749+00:00",
+  "saved_at": "2026-11-12T20:47:07.753817+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-12T19:53:32.101393+00:00",
-    "fardaayekerman": "2026-11-12T19:53:32.101393+00:00",
-    "irna_kerman": "2026-11-12T19:53:32.101393+00:00",
-    "kerman_gov": "2026-11-12T19:53:32.101393+00:00",
-    "kerman_akhbar": "2026-11-12T19:53:32.101393+00:00",
-    "kerman_news": "2026-11-12T19:53:32.101393+00:00",
-    "kerman_rasaneh": "2026-11-12T19:53:32.101393+00:00",
-    "qh_qv": "2026-11-12T19:53:32.101393+00:00"
+    "kermane_no": "2026-11-12T20:46:50.625705+00:00",
+    "fardaayekerman": "2026-11-12T20:46:50.625705+00:00",
+    "irna_kerman": "2026-11-12T20:46:50.625705+00:00",
+    "kerman_gov": "2026-11-12T20:46:50.625705+00:00",
+    "kerman_akhbar": "2026-11-12T20:46:50.625705+00:00",
+    "kerman_news": "2026-11-12T20:46:50.625705+00:00",
+    "kerman_rasaneh": "2026-11-12T20:46:50.625705+00:00",
+    "qh_qv": "2026-11-12T20:46:50.625705+00:00"
   }
 }
