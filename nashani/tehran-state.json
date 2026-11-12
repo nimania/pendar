@@ -2722,40 +2722,11 @@
     "https://t.me/mehrnews/431257",
     "https://t.me/mehrnews/431264",
     "https://t.me/tehranpress1/132541",
-    "https://t.me/irna_1313/473187"
+    "https://t.me/irna_1313/473187",
+    "https://t.me/irna_1313/473188",
+    "https://t.me/irna_1313/473189"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132303",
-      "source_post_id": "132303",
-      "title": "جاده چالوس - کرج بازگشایی شد",
-      "excerpt": "جاده چالوس - کرج بازگشایی شد فرمانده پلیس راه مازندران از بازگشایی محور کرج - چالوس و آزاد راه تهران - شمال خبرداد و گفت که این مسیر حوالی ساعت چهار بامداد روز گذشته به علت بارش های شدید، ریزش برف، باران و احتمال سقوط سنگ در محدوده استان های البرز و تهران مسدود شده بود. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "جاده چالوس - کرج بازگشایی شد",
-        "فرمانده پلیس راه مازندران از بازگشایی محور کرج - چالوس و آزاد راه تهران - شمال خبرداد و گفت که این مسیر حوالی ساعت چهار بامداد روز گذشته به علت بارش های شدید، ریزش برف، باران و احتمال سقوط سنگ در محدوده استان های البرز و تهران مسدود شده بود.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/DJ2Tyskvz2wUcy7-0GU4Ay9IW8v7-_4Bp8PWREkOIEzWTV-ywJyKLz60ubtJpqxsKhyn8kkRiyjA0zSUo-_4aUOnlSvA3JgwRmxe8Gr6-Cj3IUrI6Wrzc3Mpv78BpQhhnBEUUm8OmmZu47w0LPgdHfkhN63nzay7ec5hSpzqS46AwDrEXl-_3v-6yu8EEYy0NhWHsVe-7gCUt-XtZj4UnCRhB07mabJmDWG1mOPJxb8d0UgB__ZsclvIGjiDuQPohcJ5A_7Xo-LI8g1_PS9am-xwhYcESoApvrKYhwQSKrx22X29BmVwnyRwey-CfUb4Ic8Wc8RM92A7zkqE8Irhzg.jpg"
-      },
-      "published_at": "2026-11-08T10:10:21+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "a5040df43d16a392",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-08T13:23:10.470928+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T14:52:23.637448+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 61,
-      "sent_at": "2026-11-08T14:52:26.850219+00:00"
-    },
     {
       "url": "https://t.me/tehranpress1/132304",
       "source_post_id": "132304",
@@ -11265,16 +11236,43 @@
       "status": "ready",
       "detected_at": "2026-11-12T22:21:17.430586+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/473188",
+      "source_post_id": "473188",
+      "title": "هفته پنجم لیگ ملت‌های اروپا؛",
+      "excerpt": "هفته پنجم لیگ ملت‌های اروپا؛ پیروزی بزرگ ایتالیا و اولین شکست زیدان در شب برد انگلیس و اسپانیا در آغاز هفته پنجم لیگ ملت‌های اروپا، ایتالیا برابر فرانسه به پیروزی رسید، انگلیس هم کرواسی را شکست داد و اسپانیا از سد چک گذشت.",
+      "paragraphs": [
+        "هفته پنجم لیگ ملت‌های اروپا؛",
+        "پیروزی بزرگ ایتالیا و اولین شکست زیدان در شب برد انگلیس و اسپانیا",
+        "در آغاز هفته پنجم لیگ ملت‌های اروپا، ایتالیا برابر فرانسه به پیروزی رسید، انگلیس هم کرواسی را شکست داد و اسپانیا از سد چک گذشت."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/iMhzYOgPF3wS_--RwMnXCAkqwO2RH4BfLQ_O6Sz_EzTGyilZGoMHVb_KYS0w9hyCS4NdbSXLYwGg-6aL3HQ9kxPJouLysMoPzNcD07mk8NBd6K_vHwBrGwwej9V2RFEXj8YNks9z1swDUrqWE0RJU9uoKC1JLLQOk8hBYboUqbs9rkWWBqkXNdNNm4cpbhQUScuY1X_UlpbSPcu69WToJng2KQplKAbXP52B2nkkNVLuALfxHQtnnNzFZa7zyAZM14EGjrbfBOXudVBRoxJwwzPJVd5EI2SmbBFBPOBrok8PUj6qzdT941OTLgCFBQ4do-61Jimrh4e1qsNJifdrEA.jpg"
+      },
+      "published_at": "2026-11-12T22:40:19+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "b2f69179e5369ee4",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-12T22:52:19.191915+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-12T22:41:12.477489+00:00",
+  "saved_at": "2026-11-12T22:53:23.219463+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-12T22:40:24.790275+00:00",
-    "tehran_tel": "2026-11-12T22:40:24.790275+00:00",
-    "irna_1313": "2026-11-12T22:40:24.790275+00:00",
-    "isna94": "2026-11-12T22:40:24.790275+00:00",
-    "mehrnews": "2026-11-12T22:40:24.790275+00:00",
-    "web_shahr": "2026-11-12T22:21:17.430586+00:00",
-    "web_mehr_tehran": "2026-11-12T22:21:17.430586+00:00"
+    "tehranpress1": "2026-11-12T22:52:19.191915+00:00",
+    "tehran_tel": "2026-11-12T22:52:19.191915+00:00",
+    "irna_1313": "2026-11-12T22:52:19.191915+00:00",
+    "isna94": "2026-11-12T22:52:19.191915+00:00",
+    "mehrnews": "2026-11-12T22:52:19.191915+00:00",
+    "web_shahr": "2026-11-12T22:52:19.191915+00:00",
+    "web_mehr_tehran": "2026-11-12T22:52:19.191915+00:00"
   }
 }
