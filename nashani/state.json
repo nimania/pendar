@@ -1321,40 +1321,19 @@
     "https://t.me/kerman_news/140493",
     "https://t.me/kermane_no/59324",
     "https://t.me/kerman_news/140494",
-    "https://t.me/kerman_news/140495"
+    "https://t.me/kerman_news/140495",
+    "https://t.me/kerman_news/140496",
+    "https://t.me/irna_kerman/30371",
+    "https://t.me/Kerman_akhbar/66353",
+    "https://t.me/kerman_news/140499",
+    "https://t.me/kerman_news/140500",
+    "https://t.me/kerman_news/140501",
+    "https://t.me/qh_qv/1046",
+    "https://t.me/qh_qv/1047",
+    "https://t.me/qh_qv/1048",
+    "https://t.me/qh_qv/1049"
   ],
   "queue": [
-    {
-      "url": "https://t.me/Kerman_akhbar/66258",
-      "source_post_id": "66258",
-      "title": "تداوم عملیات اجرایی «میدان دام کرمان»",
-      "excerpt": "تداوم عملیات اجرایی «میدان دام کرمان» مدیرعامل سازمان عمران و بازآفرینی فضاهای شهری شهرداری کرمان: در راستای تحقق اهداف مدیریت شهری در حوزه نظم‌بخشی به فعالیت‌های صنفی، ارتقای شاخص‌های بهداشت عمومی و توسعه زیرساخت‌های تخصصی، عملیات اجرایی پروژه احداث میدان دام کرمان از پانزدهم خردادماه به‌طور رسمی آغاز شد. این طرح کلان عمرانی با هم‌افزایی و مشارکت معاونت محیط‌زیست و خدمات‌شهری و سازمان ساماندهی مشاغل شهری و با تکیه بر توان تخصصی و اجرایی این سازمان وارد فاز عملیاتی شده است.",
-      "paragraphs": [
-        "تداوم عملیات اجرایی «میدان دام کرمان»",
-        "مدیرعامل سازمان عمران و بازآفرینی فضاهای شهری شهرداری کرمان: در راستای تحقق اهداف مدیریت شهری در حوزه نظم‌بخشی به فعالیت‌های صنفی، ارتقای شاخص‌های بهداشت عمومی و توسعه زیرساخت‌های تخصصی، عملیات اجرایی پروژه احداث میدان دام کرمان از پانزدهم خردادماه به‌طور رسمی آغاز شد.",
-        "این طرح کلان عمرانی با هم‌افزایی و مشارکت معاونت محیط‌زیست و خدمات‌شهری و سازمان ساماندهی مشاغل شهری و با تکیه بر توان تخصصی و اجرایی این سازمان وارد فاز عملیاتی شده است."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/liHkFn-a14duWxV5yPGKmFbL7XfLnQcT-GR8T9y5-OxbDZY8zzXzO8y76-xRMo-QYa6nwITG1eFTm6t-2G_ECFJkO1R3m7K2_DHKYmC9leV332MmZAng8xyBbvNgj6dPzlxkmH5tIx3_KcX1w-RtMR9gv9xFCHEhjtRyao1neSIrd_Bv8ZsRXXWcLcwyc4WxMmcEIQc84SlSECfBkiJJTHCIL2X4-luK_B3_nCbOnE3Mg875U9PKyt1mqWjlqigNlvzPp4fni8uUQgDM26Cs2F6HGW6ZZteo9OYiy6bKbHISZrfuIUxnbNe2dRG23BMQGKdBOAftYWDcz9KGgHYuYw.jpg"
-      },
-      "published_at": "2026-11-08T08:50:17+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "e616e28aab89bee8",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T09:29:55.143020+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T13:33:36.111545+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 165,
-      "sent_at": "2026-11-08T13:33:40.952303+00:00"
-    },
     {
       "url": "https://t.me/kerman_gov/10577",
       "source_post_id": "10577",
@@ -4982,7 +4961,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-10T08:51:34.131981+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66353"
+        }
+      ]
     },
     {
       "url": "https://t.me/kerman_gov/10590",
@@ -10311,17 +10295,44 @@
       "status": "ready",
       "detected_at": "2026-11-12T11:52:15.396169+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30371",
+      "source_post_id": "30371",
+      "title": "عنبرآباد میزبان هجدهمین دوره مسابقات سراسری قرآن کریم جامعه کار و تلاش شد",
+      "excerpt": "عنبرآباد میزبان هجدهمین دوره مسابقات سراسری قرآن کریم جامعه کار و تلاش شد هجدهمین دوره مسابقات سراسری قرآن کریم جامعه کار و تلاش کشور، ویژه کارگران و خانواده‌های آنان، امروز /پنجشنبه/ با رقابت ۶۰ شرکت‌کننده زن و مرد از شهرستان‌های جنوب استان کرمان، به میزبانی شهرستان عنبرآباد آغاز شد. irna_kerman",
+      "paragraphs": [
+        "عنبرآباد میزبان هجدهمین دوره مسابقات سراسری قرآن کریم جامعه کار و تلاش شد",
+        "هجدهمین دوره مسابقات سراسری قرآن کریم جامعه کار و تلاش کشور، ویژه کارگران و خانواده‌های آنان، امروز /پنجشنبه/ با رقابت ۶۰ شرکت‌کننده زن و مرد از شهرستان‌های جنوب استان کرمان، به میزبانی شهرستان عنبرآباد آغاز شد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/dMfinK9ndVUlgBfDBck6UJN97eZ1aLJDwWZTu9NwtwYmjlw0F6C7qoKVTmc2CdB0ul64H5KQ94fb6fr8usYfrZcaLACsHi7ackp4NIrNtLRKD79o7aiJtRLpr6UDJnPnM6kgoJpYZyCZ2Suqti9HD3LluQws8OyKJqEPwjIyWc0JGhQrYm-AKo5DpIa722Q5T2GG911mFrVHm8CJN-LQHTfcAVD8bjojvLcrsN0cnvYq4nUKJFokd-6SLQv-IinZrnnzXbWUzjp_wDK367_vf2A0slLFnz3iLBNaovms4mIsnMAKAhGRf62Ya1HnIoyCw2abobZSCIXWUm-C1YpKAw.jpg"
+      },
+      "published_at": "2026-11-12T11:59:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "fce2942eecc2df57",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-12T13:02:25.768470+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-12T11:52:53.427545+00:00",
+  "saved_at": "2026-11-12T13:02:43.065737+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-12T11:52:15.396169+00:00",
-    "fardaayekerman": "2026-11-12T11:52:15.396169+00:00",
-    "irna_kerman": "2026-11-12T11:52:15.396169+00:00",
-    "kerman_gov": "2026-11-12T11:52:15.396169+00:00",
-    "kerman_akhbar": "2026-11-12T11:52:15.396169+00:00",
-    "kerman_news": "2026-11-12T11:52:15.396169+00:00",
-    "kerman_rasaneh": "2026-11-12T11:52:15.396169+00:00",
-    "qh_qv": "2026-11-12T11:52:15.396169+00:00"
+    "kermane_no": "2026-11-12T13:02:25.768470+00:00",
+    "fardaayekerman": "2026-11-12T13:02:25.768470+00:00",
+    "irna_kerman": "2026-11-12T13:02:25.768470+00:00",
+    "kerman_gov": "2026-11-12T13:02:25.768470+00:00",
+    "kerman_akhbar": "2026-11-12T13:02:25.768470+00:00",
+    "kerman_news": "2026-11-12T13:02:25.768470+00:00",
+    "kerman_rasaneh": "2026-11-12T13:02:25.768470+00:00",
+    "qh_qv": "2026-11-12T13:02:25.768470+00:00"
   }
 }
