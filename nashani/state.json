@@ -10251,9 +10251,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T19:53:52.507598+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30373",
@@ -10278,9 +10279,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T19:53:52.507598+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10612",
@@ -10307,9 +10309,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T19:53:52.507598+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140518",
@@ -10330,9 +10333,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T19:53:52.507598+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140520",
@@ -10355,9 +10359,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T19:53:52.507598+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140524",
@@ -10380,12 +10385,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T19:53:52.507598+00:00"
     }
   ],
-  "saved_at": "2026-11-12T19:53:50.107776+00:00",
+  "saved_at": "2026-11-12T19:53:52.507619+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-12T19:53:32.101393+00:00",
     "fardaayekerman": "2026-11-12T19:53:32.101393+00:00",
