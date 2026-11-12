@@ -10231,13 +10231,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-12T03:24:09.675795+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-12T03:24:25.497116+00:00"
+      "reserved_at": "2026-11-12T03:24:25.497116+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 359,
+      "sent_at": "2026-11-12T03:24:29.773588+00:00"
     }
   ],
-  "saved_at": "2026-11-12T03:24:25.497161+00:00",
+  "saved_at": "2026-11-12T03:24:29.773605+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-12T03:24:09.675795+00:00",
     "fardaayekerman": "2026-11-12T03:24:09.675795+00:00",
