@@ -10886,13 +10886,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-11T22:17:57.304534+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-12T00:36:59.834661+00:00"
+      "reserved_at": "2026-11-12T00:36:59.834661+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 149,
+      "sent_at": "2026-11-12T00:37:03.772215+00:00"
     }
   ],
-  "saved_at": "2026-11-12T00:36:59.834679+00:00",
+  "saved_at": "2026-11-12T00:37:03.772233+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-12T00:35:50.181452+00:00",
     "tehran_tel": "2026-11-12T00:35:50.181452+00:00",
