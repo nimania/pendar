@@ -98,6 +98,10 @@
       "status": "published",
       "message_id": 375,
       "at": "2026-11-12T14:10:55.709385+03:30"
+    },
+    "2026-11-12-afternoon-تهران": {
+      "status": "sending_uncertain",
+      "at": "2026-11-12T14:10:55.709385+03:30"
     }
   }
 }
