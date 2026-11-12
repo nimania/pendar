@@ -10984,9 +10984,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T16:20:09.186209+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T16:55:46.502592+00:00"
     },
     {
       "url": "https://t.me/Tehran_Tel/114897",
@@ -11064,9 +11065,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T16:20:09.186209+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T16:55:46.502592+00:00"
     },
     {
       "url": "https://t.me/irna_1313/473119",
@@ -11149,7 +11151,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-12T16:55:42.401190+00:00",
+  "saved_at": "2026-11-12T16:55:46.502607+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-12T16:54:37.574226+00:00",
     "tehran_tel": "2026-11-12T16:54:37.574226+00:00",
