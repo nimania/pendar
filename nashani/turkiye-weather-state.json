@@ -54,6 +54,10 @@
       "status": "published",
       "message_id": 30,
       "at": "2026-11-11T14:23:39.158998+03:00"
+    },
+    "2026-11-12-afternoon": {
+      "status": "sending_uncertain",
+      "at": "2026-11-12T14:43:06.004666+03:00"
     }
   }
 }
