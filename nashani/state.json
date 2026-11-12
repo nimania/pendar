@@ -10231,12 +10231,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-12T03:24:09.675795+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-12T03:24:25.497116+00:00"
     }
   ],
-  "saved_at": "2026-11-12T03:24:23.166281+00:00",
+  "saved_at": "2026-11-12T03:24:25.497161+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-12T03:24:09.675795+00:00",
     "fardaayekerman": "2026-11-12T03:24:09.675795+00:00",
