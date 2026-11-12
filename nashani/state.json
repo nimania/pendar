@@ -1356,191 +1356,26 @@
     "https://t.me/kerman_news/140514",
     "https://t.me/kerman_news/140515",
     "https://t.me/Kerman_akhbar/66358",
-    "https://t.me/qh_qv/1051"
+    "https://t.me/qh_qv/1051",
+    "https://t.me/kerman_news/140516",
+    "https://t.me/qh_qv/1052",
+    "https://t.me/irna_kerman/30373",
+    "https://t.me/qh_qv/1053",
+    "https://t.me/kerman_news/140517",
+    "https://t.me/kerman_gov/10612",
+    "https://t.me/kerman_news/140518",
+    "https://t.me/kerman_news/140519",
+    "https://t.me/kerman_news/140520",
+    "https://t.me/kerman_news/140521",
+    "https://t.me/kerman_news/140523",
+    "https://t.me/kermane_no/59326",
+    "https://t.me/kerman_news/140524",
+    "https://t.me/kerman_news/140525",
+    "https://t.me/kerman_news/140526",
+    "https://t.me/kerman_news/140527",
+    "https://t.me/Kerman_akhbar/66359"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kermane_no/59120",
-      "source_post_id": "59120",
-      "title": "احداث «پارک زندگی» در فاز دوم پارک جنگلی قائم کرمان",
-      "excerpt": "احداث «پارک زندگی» در فاز دوم پارک جنگلی قائم کرمان مدیرکل منابع طبیعی و آبخیزداری استان کرمان از اختصاص بخشی از فاز دوم پارک جنگلی قائم به احداث «پارک زندگی» با هدف توسعه فضای سبز و همکاری مشترک با شهرداری خبر داد. این طرح با هدف ترویج فرهنگ درختکاری اجرا می‌شود تا شهروندان بتوانند به مناسبت رویدادهای مهم زندگی یا یادبود عزیزان خود، نهال‌هایی را به نام خود در این مجموعه بکارند و خاطره‌ای ماندگار در طبیعت ثبت کنند.",
-      "paragraphs": [
-        "احداث «پارک زندگی» در فاز دوم پارک جنگلی قائم کرمان",
-        "مدیرکل منابع طبیعی و آبخیزداری استان کرمان از اختصاص بخشی از فاز دوم پارک جنگلی قائم به احداث «پارک زندگی» با هدف توسعه فضای سبز و همکاری مشترک با شهرداری خبر داد.",
-        "این طرح با هدف ترویج فرهنگ درختکاری اجرا می‌شود تا شهروندان بتوانند به مناسبت رویدادهای مهم زندگی یا یادبود عزیزان خود، نهال‌هایی را به نام خود در این مجموعه بکارند و خاطره‌ای ماندگار در طبیعت ثبت کنند."
-      ],
-      "media": null,
-      "published_at": "2026-11-08T10:20:01+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "99ffe838972b88bf",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T12:16:26.126869+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T13:33:36.111545+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 166,
-      "sent_at": "2026-11-08T13:33:42.080660+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59121",
-      "source_post_id": "59121",
-      "title": "تاکید بر هماهنگی صنعت آب و برق برای برخورد با چاه‌های غیرمجاز در کرمان",
-      "excerpt": "تاکید بر هماهنگی صنعت آب و برق برای برخورد با چاه‌های غیرمجاز در کرمان نشست هماهنگی مانور مشترک صنعت آب و برق استان کرمان با هدف تسریع در شناسایی و مسلوب‌المنفعه کردن چاه‌های غیرمجاز و با حضور مدیرعامل شرکت آب منطقه‌ای برگزار شد. در این جلسه بر ضرورت تعامل دستگاه‌های مسئول، قطع انشعابات برق چاه‌های غیرمجاز و صیانت از منابع آب زیرزمینی تأکید شد.",
-      "paragraphs": [
-        "تاکید بر هماهنگی صنعت آب و برق برای برخورد با چاه‌های غیرمجاز در کرمان",
-        "نشست هماهنگی مانور مشترک صنعت آب و برق استان کرمان با هدف تسریع در شناسایی و مسلوب‌المنفعه کردن چاه‌های غیرمجاز و با حضور مدیرعامل شرکت آب منطقه‌ای برگزار شد.",
-        "در این جلسه بر ضرورت تعامل دستگاه‌های مسئول، قطع انشعابات برق چاه‌های غیرمجاز و صیانت از منابع آب زیرزمینی تأکید شد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/AfjdJT8Adk65qHaQBfZcDWUzH55Fk-cFn9djJgqsQGqm2k2o2rq27Dg6SqlT0gPa9kQ-2Q6iHMPD-2ZgqDVGPDn07Tyc_HVk9xXHRrjUtvcU2HgjRFD5wahZjDUgt0z4YqJunxBTWlI4qXDwBk13_ikLre2WrriXoTaFtqKK-KKmebxc4Ja0k1L5toRBa7Ju1eaEQv1xoYZZgaEY5s2J-MbtKSi0rUpd41DnR3BVEwI3yBdTMbQnrV1McDwR9-MhOKDsUSHAhfPD1JH7KaUZVLIqsJtktMeA43WlHox2MxzjJuqXN_Z-0G4UcLUpi-L2JmBagI6l_ckbO7ARyI0Jrg.jpg"
-      },
-      "published_at": "2026-11-08T10:30:03+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "8a435e78ad02379b",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T12:16:26.126869+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T13:33:36.111545+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 167,
-      "sent_at": "2026-11-08T13:33:44.551414+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59122",
-      "source_post_id": "59122",
-      "title": "رونمایی از پوستر شانزدهمین جشنواره تئاتر فجر در جیرفت؛ توسعه فرهنگی پیشران پیشرفت پایدار است",
-      "excerpt": "رونمایی از پوستر شانزدهمین جشنواره تئاتر فجر در جیرفت؛ توسعه فرهنگی پیشران پیشرفت پایدار است آیین رونمایی از پوستر شانزدهمین جشنواره تئاتر استانی فجر جنوب کرمان با حضور مقامات محلی و اهالی فرهنگ و هنر برگزار شد تا پیش‌درآمدی بر رویدادهای فرهنگی نیمه دوم سال در این منطقه باشد. فرماندار جیرفت در این مراسم توسعه فرهنگی را یکی از ارکان اساسی پیشرفت پایدار دانست و تئاتر را ابزاری برای بازنمایی دغدغه‌های اجتماعی و تقویت امید و همدلی در جامعه برشمرد. مدیرکل فرهنگ و ارشاد اسلامی جنوب کرمان نیز با اشاره به ضرورت افزایش تاب‌آوری جامعه، از اجرای بسته‌ای فشرده از رویدادهای فرهنگی شامل نمایشگاه کتاب پس از هشت سال وقفه، جشنواره‌های موسیقی نوایی، تئاتر خیابانی و شعر گویش‌های محلی تا پایان سال خبر داد.",
-      "paragraphs": [
-        "رونمایی از پوستر شانزدهمین جشنواره تئاتر فجر در جیرفت؛ توسعه فرهنگی پیشران پیشرفت پایدار است",
-        "آیین رونمایی از پوستر شانزدهمین جشنواره تئاتر استانی فجر جنوب کرمان با حضور مقامات محلی و اهالی فرهنگ و هنر برگزار شد تا پیش‌درآمدی بر رویدادهای فرهنگی نیمه دوم سال در این منطقه باشد.",
-        "فرماندار جیرفت در این مراسم توسعه فرهنگی را یکی از ارکان اساسی پیشرفت پایدار دانست و تئاتر را ابزاری برای بازنمایی دغدغه‌های اجتماعی و تقویت امید و همدلی در جامعه برشمرد.",
-        "مدیرکل فرهنگ و ارشاد اسلامی جنوب کرمان نیز با اشاره به ضرورت افزایش تاب‌آوری جامعه، از اجرای بسته‌ای فشرده از رویدادهای فرهنگی شامل نمایشگاه کتاب پس از هشت سال وقفه، جشنواره‌های موسیقی نوایی، تئاتر خیابانی و شعر گویش‌های محلی تا پایان سال خبر داد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/O3nJRq54nJL48pTBekjrl_1ykbDnZGp4B0s_kOW6KJjLkVtvyw8SHQgAcMpncGjrQtw4FQneap74F0083Em5eaO9nK1twqys34QahI9ebacSTDnk7hhO_AWtNNvtRFsZ403f_e_JzEutAYdUCzPrOYgJPHo8GQs37ObabY_ppdCm7JZgwVSKBuImNjnjZfk5QWTQRVofocGK9qZRDqdbx2FqFUwlmFIYDzilS0hEGlg4Q4j02RZvAVk0_WEZveCS6681m0zu0CRHsvs4pnraZcGIslR-G2v5Q1xURCfTC91SCWhJWv-VoexdzWojiz8fC1eHWIk1qBTrqQhH8QJQWQ.jpg"
-      },
-      "published_at": "2026-11-08T10:40:02+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "d3bdb7eeb9d45570",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T12:16:26.126869+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T13:33:36.111545+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 168,
-      "sent_at": "2026-11-08T13:33:48.705289+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59123",
-      "source_post_id": "59123",
-      "title": "باد شدید، گردوخاک و بارش در انتظار استان کرمان",
-      "excerpt": "باد شدید، گردوخاک و بارش در انتظار استان کرمان هواشناسی کرمان برای امروز، یک‌شنبه ۱۷ آبان، در نیمه شمالی استان رشد ابر و بارش پراکنده و در دیگر مناطق وزش باد نسبتاً شدید پیش‌بینی کرد. روزهای دوشنبه و سه‌شنبه وزش باد شدید و خیزش گردوخاک بیشتر مناطق را دربرمی‌گیرد. در برخی مناطق جنوبی نیز احتمال بارش پراکنده باران وجود دارد. از اواخر وقت سه‌شنبه، سامانه بارشی جدیدی وارد استان می‌شود و برای بیشتر مناطق افزایش ابر و بارش باران و در ارتفاعات بارش برف پیش‌بینی شده است. نیمه جنوبی استان نیز احتمالاً شاهد تگرگ، رگبار، رعدوبرق و تندباد لحظه‌ای خواهد بود. کاهش نسبی دما در روزهای پایانی هفته مورد انتظار است.",
-      "paragraphs": [
-        "باد شدید، گردوخاک و بارش در انتظار استان کرمان",
-        "هواشناسی کرمان برای امروز، یک‌شنبه ۱۷ آبان، در نیمه شمالی استان رشد ابر و بارش پراکنده و در دیگر مناطق وزش باد نسبتاً شدید پیش‌بینی کرد.",
-        "روزهای دوشنبه و سه‌شنبه وزش باد شدید و خیزش گردوخاک بیشتر مناطق را دربرمی‌گیرد. در برخی مناطق جنوبی نیز احتمال بارش پراکنده باران وجود دارد.",
-        "از اواخر وقت سه‌شنبه، سامانه بارشی جدیدی وارد استان می‌شود و برای بیشتر مناطق افزایش ابر و بارش باران و در ارتفاعات بارش برف پیش‌بینی شده است. نیمه جنوبی استان نیز احتمالاً شاهد تگرگ، رگبار، رعدوبرق و تندباد لحظه‌ای خواهد بود.",
-        "کاهش نسبی دما در روزهای پایانی هفته مورد انتظار است."
-      ],
-      "media": null,
-      "published_at": "2026-11-08T10:50:01+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "6c0344d17c0d1628",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T12:16:26.126869+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T13:33:36.111545+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 169,
-      "sent_at": "2026-11-08T13:33:49.805042+00:00"
-    },
-    {
-      "url": "https://t.me/Kerman_akhbar/66260",
-      "source_post_id": "66260",
-      "title": "گل‌گهر ـ ذوب‌آهن از دریچه آمار!",
-      "excerpt": "گل‌گهر ـ ذوب‌آهن از دریچه آمار! هفته دوازدهم لیگ برتر فوتبال کشور با دیدار دو تیم گل‌گهر و ذوب آهن اصفهان جدالی سخت و دیداری حساس را برگزار می‌کنند. تا این لحظه دو تیم در لیگ برتر ۱۳ بار رودر روی هم قرار گرفته‌اند که تیم گل‌گهر ۵ برد داشته و سهم ذوب‌آهن ۴ برد بوده است و ۴ بازی هم با نتیجه مساوی به پایان رسیده است. وفردا باید دید دیدار چهاردهم را چه تیمی به نفع خود تمام می‌کند. تیم فوتبال گل‌گهر با انجام ۱۰ بازی و ۱۲ امتیاز در جایگاه یازدهم جدول قرار دارد و تیم ذوب آهن با ۱۱ بازی و ۹ امتیاز در ردیف ۱۶ جدول قرار گرفته است.",
-      "paragraphs": [
-        "گل‌گهر ـ ذوب‌آهن از دریچه آمار!",
-        "هفته دوازدهم لیگ برتر فوتبال کشور با دیدار دو تیم گل‌گهر و ذوب آهن اصفهان جدالی سخت و دیداری حساس را برگزار می‌کنند.",
-        "تا این لحظه دو تیم در لیگ برتر ۱۳ بار رودر روی هم قرار گرفته‌اند که تیم گل‌گهر ۵ برد داشته و سهم ذوب‌آهن ۴ برد بوده است و ۴ بازی هم با نتیجه مساوی به پایان رسیده است. وفردا باید دید دیدار چهاردهم را چه تیمی به نفع خود تمام می‌کند.",
-        "تیم فوتبال گل‌گهر با انجام ۱۰ بازی و ۱۲ امتیاز در جایگاه یازدهم جدول قرار دارد و تیم ذوب آهن با ۱۱ بازی و ۹ امتیاز در ردیف ۱۶ جدول قرار گرفته است."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/tyJ08g-9lZK_Hx-Uu4h2Q8jKhlPc8J-hFyaw0cGROjm6Ra3dgh1jN-wwy5rcMpAIOPbO-HFUssNKM4GnN25avec70_ygAfpemoa-TI8IYKZYJ9r2OpHNhyoZ5dcbT8Olwx3NqheumDbmeO3AtRNSPapJBPBFS5h26pKa_sTI-EJJFhWaq2ZePz3a2lVyQP4LoLekABKfCGx8qr4zCBk_3Xiufz8Yzfy20cTz2OY-CW1Y2iZN1eflPLc4gidbVUM9xF1EpDVqDn21KHG-pEBlbyC9Y6BALPhHJKGNbzSY0CJk0o573HF6LT8UKxeMVyzJQNR5RuzO4niAe0Oeackm3Q.jpg"
-      },
-      "published_at": "2026-11-08T10:55:19+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "062f956445ec3705",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "expired",
-      "detected_at": "2026-11-08T12:16:26.126869+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/kermane_no/59124",
-      "source_post_id": "59124",
-      "title": "رئیس دفتر نمایندگی اتاق بازرگانی شرق کرمان",
-      "excerpt": "رئیس دفتر نمایندگی اتاق بازرگانی شرق کرمان افت ۲۰ درصدی میانگین صادرات شرق کرمان؛ ارزش پایه گمرکی خرمای مضافتی کاهش یافت کرمان‌نو- رئیس دفتر نمایندگی اتاق بازرگانی شرق کرمان از کاهش میانگین حدود ۲۰ درصدی صادرات محصولات این منطقه در هفت‌ماهه نخست سال ۱۴۰۵ نسبت به مدت مشابه سال گذشته خبر داد و گفت: ارزش پایه گمرکی خرمای مضافتی پس از پیگیری‌های انجام‌شده، از ۲۳۰۰ دلار به حدود هزار دلار کاهش یافته و قرار است این اصلاح در روزهای آینده به گمرکات کشور ابلاغ شود. به گزارش کرمان‌نو، حامد بدرآبادی رئیس دفتر نمایندگی اتاق بازرگانی شرق کرمان در نشست با خبرنگاران، با اشاره به وضعیت صادرات محصولات کشاورزی و به‌ویژه خرما گفت: بررسی آمار هفت‌ماهه نخست سال جاری در مقایسه با مدت مشابه سال گذشته، از کاهش میانگین حدود ۲۰ درصدی صادرات حکایت دارد؛ البته میزان افت در محصولات مختلف یکسان نیست.",
-      "paragraphs": [
-        "رئیس دفتر نمایندگی اتاق بازرگانی شرق کرمان",
-        "افت ۲۰ درصدی میانگین صادرات شرق کرمان؛ ارزش پایه گمرکی خرمای مضافتی کاهش یافت",
-        "کرمان‌نو- رئیس دفتر نمایندگی اتاق بازرگانی شرق کرمان از کاهش میانگین حدود ۲۰ درصدی صادرات محصولات این منطقه در هفت‌ماهه نخست سال ۱۴۰۵ نسبت به مدت مشابه سال گذشته خبر داد و گفت: ارزش پایه گمرکی خرمای مضافتی پس از پیگیری‌های انجام‌شده، از ۲۳۰۰ دلار به حدود هزار دلار کاهش یافته و قرار است این اصلاح در روزهای آینده به گمرکات کشور ابلاغ شود.",
-        "به گزارش کرمان‌نو، حامد بدرآبادی رئیس دفتر نمایندگی اتاق بازرگانی شرق کرمان در نشست با خبرنگاران، با اشاره به وضعیت صادرات محصولات کشاورزی و به‌ویژه خرما گفت: بررسی آمار هفت‌ماهه نخست سال جاری در مقایسه با مدت مشابه سال گذشته، از کاهش میانگین حدود ۲۰ درصدی صادرات حکایت دارد؛ البته میزان افت در محصولات مختلف یکسان نیست."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/qgtEwZx3RbYqf2z2eULdsGgQ1WGfgeaRs9ebUsptiv0C4qCICVNDD66FfdVyp9QGSL8fdRGODSU5JP0SClXnaMrL8xRkqeSoETeDlYa9oSQ-iVTT-jS6zcmAthbbBtCT0hv-YmyNKNBY8oFfijJQrZ3nX3cHwUQeEJB10_xuBkPqlRnlqoXKk36ggEOwMSeklYRJskg-4El3-QgFdCM4zFEXbS9bdhLkt7eee8UoW8z6HbUDqQUjGJt7fhmLbgEdG5ZU1SZKtXXjCePbuqFiqhXuQVZCwsXDxQL0tDKMEjUWfAYDUbt_TrvaCKaeKdi81PzeErLRJJqyAPYuE30sXg.jpg"
-      },
-      "published_at": "2026-11-08T10:58:27+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "0b60271246cde799",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T12:16:26.126869+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T13:33:36.111545+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 170,
-      "sent_at": "2026-11-08T13:33:51.991787+00:00"
-    },
     {
       "url": "https://t.me/irna_kerman/30333",
       "source_post_id": "30333",
@@ -10393,17 +10228,172 @@
       "delivery_kind": "text",
       "telegram_message_id": 400,
       "sent_at": "2026-11-12T17:45:45.351226+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_news/140516",
+      "source_post_id": "140516",
+      "title": "پخت سمنو در اجتماع شبانه کرمانی‌ها",
+      "excerpt": "پخت سمنو در اجتماع شبانه کرمانی‌ها همزمان با شب شهادت حضرت زهرا سلام‌الله‌علیها میدان کوثر کرمان برای پذیرایی از عزاداران دخت نبی‌اکرم صلی‌الله‌علیه پخت سمنو را آغاز کردند.",
+      "paragraphs": [
+        "پخت سمنو در اجتماع شبانه کرمانی‌ها",
+        "همزمان با شب شهادت حضرت زهرا سلام‌الله‌علیها میدان کوثر کرمان برای پذیرایی از عزاداران دخت نبی‌اکرم صلی‌الله‌علیه پخت سمنو را آغاز کردند."
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/cd791b698e.mp4?token=qEpzOjs38K7zmp1eRfd-X1W_eEwpvvETMtvSEM08K27o6TXcMJX97eD4u4KWn9-7_Y6nJiToUNSEKYWYzo-P8VS77rn8J4OmmfsC8RwzIv2qsN9XI9DxyNBwX8V9sdcUM9KwTJl_tesa18mxf3NPXVmIKoF4sYJx4mlQ6HQOxogPA3xxKdeo5PMEzT7W6Ag5HrS08rZC6O85qBVbiTaRYtbDfQhpX_EO-m79no325F44AdXRtK885vszTeKONdcsgtarHjdSzVf3x7WNToBBrdk7OVN_Z2gH7fKxAaNbxhS_NSP4OMo3S-lcNGcZTnak5UdAB_3XWujqOMCCl9pfFA"
+      },
+      "published_at": "2026-11-12T17:47:56+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "a7f01dc6f340ef83",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-12T19:53:32.101393+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30373",
+      "source_post_id": "30373",
+      "title": "سوگواری کرمانی‌ها در شب شهادت حضرت زهرا (س) با تشییع پیکر مطهر شهدای گمنام‌ همراه شد",
+      "excerpt": "سوگواری کرمانی‌ها در شب شهادت حضرت زهرا (س) با تشییع پیکر مطهر شهدای گمنام‌ همراه شد میدان کوثر کرمان شامگاه پنجشنبه، در شب شهادت حضرت فاطمه زهرا (س)، با حضور مردم و پیکرهای مطهر ۶ شهید گمنام، حال‌وهوایی آمیخته به سوگواری و همبستگی داشت؛ اجتماعی که حضور یگان رزمی هوافضای سپاه در میان مردم و پخت سمنوی سنتی برای پذیرایی از عزاداران، رنگ‌وبویی ویژه به آن بخشید. irna_kerman",
+      "paragraphs": [
+        "سوگواری کرمانی‌ها در شب شهادت حضرت زهرا (س) با تشییع پیکر مطهر شهدای گمنام‌ همراه شد",
+        "میدان کوثر کرمان شامگاه پنجشنبه، در شب شهادت حضرت فاطمه زهرا (س)، با حضور مردم و پیکرهای مطهر ۶ شهید گمنام، حال‌وهوایی آمیخته به سوگواری و همبستگی داشت؛ اجتماعی که حضور یگان رزمی هوافضای سپاه در میان مردم و پخت سمنوی سنتی برای پذیرایی از عزاداران، رنگ‌وبویی ویژه به آن بخشید.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/hwoNdgrH0Q5UaKIhvJ_sYlMyfODl5P0fHjovWxJmBJjengOXI9pqDbvI4qxtR3NDRLzcP2yc2UVQHl4Tk09brnDJFfYMOwFw_rMehPbtuHbRo9yFrxrILRX5foBR-BU4XpaToufnEocZApJWkBEywjbhdiaGpHukTgo9NewGsA9WfsSrQoQvwqMd-sE0kXdZ_a8NHCq69zjs5WELR0MjZT43FjhBJgpRoJU5srdIa05xL3rODM23oC4ydcK-W7VXXIyh1Kt1TYtvdzIVXEnaau7_ZF--Yv3UGgEg5yjkMk9SrPKhOXEs7PcxqCbqrUu7awsNT3rCiUQM8IpNZ1NX_g.jpg"
+      },
+      "published_at": "2026-11-12T18:03:17+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "0bbf27e3611e09b4",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-12T19:53:32.101393+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10612",
+      "source_post_id": "10612",
+      "title": "یک روز، یک قاب| کرمان در سوگ بانوی بی‌نشان؛ روایت ارادت به حضرت فاطمه زهرا (س)",
+      "excerpt": "یک روز، یک قاب| کرمان در سوگ بانوی بی‌نشان؛ روایت ارادت به حضرت فاطمه زهرا (س) در روزهای حزن و اندوه ایام فاطمیه، کوچه‌ها و خیابان‌های کرمان رنگ ماتم به خود گرفته‌اند و دل‌های عاشقان اهل‌بیت (ع) در سوگ بانوی دو عالم، حضرت فاطمه زهرا (س)، به سوگ نشسته است. از هیئت‌ها و تکایا تا مساجد و حسینیه‌ها، صدای روضه و نوحه طنین‌انداز شده و مردم دیار کریمان با برپایی مراسم عزاداری، بار دیگر ارادت و دلدادگی خود را به ساحت مقدس حضرت صدیقه طاهره (س) نشان می‌دهند. اینجا کرمان است؛ شهری که در روزهای فاطمیه، روایتگر عشق، ایمان و دلدادگی مردمانی است که نام و یاد حضرت زهرا (س) در جان و باورشان ریشه دوانده است. عکس: محمدحسین قنبری",
+      "paragraphs": [
+        "یک روز، یک قاب| کرمان در سوگ بانوی بی‌نشان؛ روایت ارادت به حضرت فاطمه زهرا (س)",
+        "در روزهای حزن و اندوه ایام فاطمیه، کوچه‌ها و خیابان‌های کرمان رنگ ماتم به خود گرفته‌اند و دل‌های عاشقان اهل‌بیت (ع) در سوگ بانوی دو عالم، حضرت فاطمه زهرا (س)، به سوگ نشسته است.",
+        "از هیئت‌ها و تکایا تا مساجد و حسینیه‌ها، صدای روضه و نوحه طنین‌انداز شده و مردم دیار کریمان با برپایی مراسم عزاداری، بار دیگر ارادت و دلدادگی خود را به ساحت مقدس حضرت صدیقه طاهره (س) نشان می‌دهند.",
+        "اینجا کرمان است؛ شهری که در روزهای فاطمیه، روایتگر عشق، ایمان و دلدادگی مردمانی است که نام و یاد حضرت زهرا (س) در جان و باورشان ریشه دوانده است.",
+        "عکس: محمدحسین قنبری"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Jqai6TfJjLqBBW0b12wRaXBVMDLFUWPn9lE5urWH_DshTDxxsvlRTPbqf5vOeAq2WULvieYU4W5VEE1tiZPH3vHey7RXqvKq0c2S3v449M13o4cxMAnl9lObhrv1C34TiiBmOa7Z1e00y7u99961e2zJ8lOuQQCz9fmpY6b46LjLlC9U3qiStDWQoVhpHTII_cqqHeje3cPsM82Cqq6F8E-qhEZWKXVt0GubsZhb9pG2pINZfQ6N4JJ2d3-EVK-XwRcraRKrimGVSr4dgUFNnYxqS9qlxP5i0J7DaoKHD6CVXUo6zCezg61ymt590nVEYSE3O-F1QJByXBZAjMMjOw.jpg"
+      },
+      "published_at": "2026-11-12T18:09:09+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "a7a340ea0653a6e9",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-12T19:53:32.101393+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140518",
+      "source_post_id": "140518",
+      "title": "میدکو فراور زرند کرمان مغلوب استقلال کازرون شد",
+      "excerpt": "میدکو فراور زرند کرمان مغلوب استقلال کازرون شد تیم هندبال میدکو فراور زرند کرمان در هفته سوم لیگ برتر مردان کشور، مقابل استقلال کازرون شکست خورد تا نماینده کازرون با کسب سومین پیروزی متوالی و ۶ امتیاز، به صدر جدول رده‌بندی صعود کند.",
+      "paragraphs": [
+        "میدکو فراور زرند کرمان مغلوب استقلال کازرون شد",
+        "تیم هندبال میدکو فراور زرند کرمان در هفته سوم لیگ برتر مردان کشور، مقابل استقلال کازرون شکست خورد تا نماینده کازرون با کسب سومین پیروزی متوالی و ۶ امتیاز، به صدر جدول رده‌بندی صعود کند."
+      ],
+      "media": null,
+      "published_at": "2026-11-12T18:15:03+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "2ae582dbc2771c0a",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-12T19:53:32.101393+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140520",
+      "source_post_id": "140520",
+      "title": "شهدای خوشنام در حلقه محبت و ارادت کرمانیان",
+      "excerpt": "شهدای خوشنام در حلقه محبت و ارادت کرمانیان",
+      "paragraphs": [
+        "شهدای خوشنام در حلقه محبت و ارادت کرمانیان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/d794538fd7.mp4?token=ZT3ncGmqdz4ehpRx6idF8O1Jq9yYjasrdxcYg_tGDt25FsX5UbxmaQgb2e_8rhxd-_-f7won_CW8R0nUNOCtoAZMzpHoi6NWfP8Mh4l8qAQuGeU7Fg6upc_ZY5mZfXFv7zSB0t6CAVRqnOsX2UO-NpodXoksAxG1-D8gGK5bH0Zj1owuzcmhWwNlcaHcA3w-2XXVDA-aytOUl1TAp2_0ShfCgr-jz9K1ts5VgI83KBdux6kBA5tbcBqGgPTtLujw9VjtlKW8bJgIiZHByIE3cb1QtkifDRUr2DqWRDAf8Km21bhV8TQfzaxoc4NGVeqGH4x1VhaBRuynWhSFsKDGFHfwDigKhIp14MLInbN6xEX3gzN-PDLCaMd9mAnpq5jW8jknZ0c4_mIr0D0qHjnQ0dJo66pOndEKICYssmpPci-pdJ7cTzT_sRwn4Dm9T5FQqrLAj3uPxWSd7uBIsx30UXNesMPw4b7Xd96od5wRdw92B-xJCodw1dUCPcLVm0ACTTxXXCntB9nzgXBqdVFTl7YTCbSeV4RrkM3knJVMFBIvPw9SlZoP8G9-g7OUk91Gq-0fNRpMT_M0muGtEQWVjov6k4zrnVHSbR8SWQYrpIBJC3njET1nUPkLeYaRcMP3wlg504QvZSbgpvfvJQK4taOfaZIRBjliyDFU84SSrHM"
+      },
+      "published_at": "2026-11-12T18:47:00+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "22d6d5834effd143",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-12T19:53:32.101393+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140524",
+      "source_post_id": "140524",
+      "title": "مراسم استقبال و تشییع و تدفین شهید گمنام در سیرجان",
+      "excerpt": "مراسم استقبال و تشییع و تدفین شهید گمنام در سیرجان",
+      "paragraphs": [
+        "مراسم استقبال و تشییع و تدفین شهید گمنام در سیرجان"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/oYMHiPSpew7hUdoWdNZ1KVtoKQ0vXtod6jFV131trk498qAIwpYZ0RU4jyW1HhRut19ZKWMSe5y1CXj2AVk4RzD4J1zvo7dig5D5yoKQNeFuAOkh9MhFuqnBuykzIbhMvVgPuwMKUcSef_K0EKPbpnTHkp_7PbQ0fcyzCtL_yD5XkjI1LYXeT5c5sD6qTM_Ng2LK3PvD8B0S7OVlhFixbqrunKhzSUP4BVdJU9weC8zhAzRA5H8HJTTbzb9xb9shIPw7FUOXB3NKt9_1uNpmihSnGX-VF5v1iF3DpFRYx4M6IbjKPRtcKJ4hpPBeVyeP5ttjA0MdZIsXEHrWuPsgXQ.jpg"
+      },
+      "published_at": "2026-11-12T19:20:38+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "81a4c6acda6469f9",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-12T19:53:32.101393+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-12T17:45:45.351244+00:00",
+  "saved_at": "2026-11-12T19:53:50.107776+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-12T17:45:16.201632+00:00",
-    "fardaayekerman": "2026-11-12T17:45:16.201632+00:00",
-    "irna_kerman": "2026-11-12T17:45:16.201632+00:00",
-    "kerman_gov": "2026-11-12T17:45:16.201632+00:00",
-    "kerman_akhbar": "2026-11-12T17:45:16.201632+00:00",
-    "kerman_news": "2026-11-12T17:45:16.201632+00:00",
-    "kerman_rasaneh": "2026-11-12T17:45:16.201632+00:00",
-    "qh_qv": "2026-11-12T17:45:16.201632+00:00"
+    "kermane_no": "2026-11-12T19:53:32.101393+00:00",
+    "fardaayekerman": "2026-11-12T19:53:32.101393+00:00",
+    "irna_kerman": "2026-11-12T19:53:32.101393+00:00",
+    "kerman_gov": "2026-11-12T19:53:32.101393+00:00",
+    "kerman_akhbar": "2026-11-12T19:53:32.101393+00:00",
+    "kerman_news": "2026-11-12T19:53:32.101393+00:00",
+    "kerman_rasaneh": "2026-11-12T19:53:32.101393+00:00",
+    "qh_qv": "2026-11-12T19:53:32.101393+00:00"
   }
 }
