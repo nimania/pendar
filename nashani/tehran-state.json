@@ -2437,70 +2437,35 @@
     "https://t.me/mehrnews/431053",
     "https://t.me/isna94/413050",
     "https://t.me/irna_1313/473013",
-    "https://t.me/irna_1313/473014"
+    "https://t.me/irna_1313/473014",
+    "https://t.me/irna_1313/473015",
+    "https://t.me/mehrnews/431054",
+    "https://t.me/isna94/413051",
+    "https://t.me/irna_1313/473016",
+    "https://t.me/irna_1313/473017",
+    "https://t.me/mehrnews/431055",
+    "https://t.me/isna94/413053",
+    "https://t.me/tehranpress1/132505",
+    "https://t.me/irna_1313/473018",
+    "https://t.me/mehrnews/431056",
+    "https://t.me/mehrnews/431057",
+    "https://t.me/irna_1313/473019",
+    "https://t.me/irna_1313/473020",
+    "https://t.me/mehrnews/431058",
+    "https://t.me/isna94/413054",
+    "https://t.me/irna_1313/473021",
+    "https://t.me/isna94/413055",
+    "https://t.me/isna94/413056",
+    "https://t.me/irna_1313/473022",
+    "https://t.me/irna_1313/473023",
+    "https://t.me/isna94/413057",
+    "https://t.me/mehrnews/431059",
+    "https://t.me/mehrnews/431060",
+    "https://t.me/irna_1313/473024",
+    "https://t.me/mehrnews/431067",
+    "https://t.me/mehrnews/431068"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132260",
-      "source_post_id": "132260",
-      "title": "زمین‌های کشاورزی پرچل الیگودرز",
-      "excerpt": "زمین‌های کشاورزی پرچل الیگودرز زیر گل‌ولای رفت طغیان سیلاب در روستای پرچل از توابع بخش ذلقی شهرستان الیگودرز، خسارات گسترده‌ای به اراضی کشاورزی، منازل مسکونی و زیرساخت‌های این منطقه وارد کرده‌است. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "زمین‌های کشاورزی پرچل الیگودرز",
-        "زیر گل‌ولای رفت",
-        "طغیان سیلاب در روستای پرچل از توابع بخش ذلقی شهرستان الیگودرز، خسارات گسترده‌ای به اراضی کشاورزی، منازل مسکونی و زیرساخت‌های این منطقه وارد کرده‌است.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/172aefb518.mp4?token=Nh_SnukWNoy-2RB1mGfavM-T66RuKdwE3zaxlP1YobW7wjqN39C951Uipv5Hc53fnMQR9XbNuGjw9x4mpx9w5sBENSGf3F67Av-NPnFBX5KXDYCdVf45QCPoRgVAmMpUHawVq237syLtauIUgcYhJ0wCors5JgtR61QfHzB7aHjWM1I4KItz8ku4OSyysmRuIEptX_NlyrN6Z57EFpa_jHnVrdJQwa9zpFDvDMtSVHZidUWvp99iUXiXcjdDkeiANTDPaMjNi-X174Ow7PplOEv7qCL9Xcsw8k2VLPXsyhkEqZfGJ-UcvJKqtMsl7_H2Kgw2sve5WVI_b4F9NackYg"
-      },
-      "published_at": "2026-11-07T18:46:19+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "78aad9e876c8aa4b",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-07T19:03:40.659702+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-07T23:04:11.007876+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 38,
-      "sent_at": "2026-11-07T23:04:14.835562+00:00"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132261",
-      "source_post_id": "132261",
-      "title": "رژیم چنج در آمریکا اینگونه اتفاق افتاد!",
-      "excerpt": "رژیم چنج در آمریکا اینگونه اتفاق افتاد! دریاسالار میلتون سندز (Milton Sands) فرمانده عملیات ویژه نیروی دریایی ۲۲ آگوست ۲۰۲۵ برکنار شد! تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "رژیم چنج در آمریکا اینگونه اتفاق افتاد!",
-        "دریاسالار میلتون سندز (Milton Sands) فرمانده عملیات ویژه نیروی دریایی",
-        "۲۲ آگوست ۲۰۲۵ برکنار شد!",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/MTl4VIrC49e-2zlRTaX1U8Gpre4npkxeDT1b9GmPkj_IeMy_vudnhvdiCDCDiiGv1nLSFrKsX-trQ_CMCqS3Bci_MugcdgR95lvc1oYFZcFSObDtqW-lfz09mvhZU1Knk6uIqQNQAvRq4AwKRyyf8ykHs-EEKsuxosz8c25EXqmrp24MoaTCB6YoeEtlsRs94rj1OWJwTs4R1Ox94CqAdU61We7OBtESE5lVma_EL5_Kdoa4sBQbvkV_uFvc7DPEETRFf3HlhEuzB2llTL07LHGnKTFBCMl1gn_IdvYquCsvQRZLHtCym9qAhf1WYFx0z4S6dHkKUFHvsENOhJZdWw.jpg"
-      },
-      "published_at": "2026-11-07T18:46:19+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "c1777a07110e9f69",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-07T19:03:40.659702+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/tehranpress1/132262",
       "source_post_id": "132262",
@@ -10982,16 +10947,68 @@
       "status": "ready",
       "detected_at": "2026-11-12T07:43:29.006160+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132505",
+      "source_post_id": "132505",
+      "title": "تصاویری از انفجار نفتکش های متخلف پس از برخورد با مین در مسیر غیرمجاز تنگه هرمز",
+      "excerpt": "تصاویری از انفجار نفتکش های متخلف پس از برخورد با مین در مسیر غیرمجاز تنگه هرمز تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "تصاویری از انفجار نفتکش های متخلف پس از برخورد با مین در مسیر غیرمجاز تنگه هرمز",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/d696653163.mp4?token=dCi0b3lvbDZfYkz1g-7pA-3gEWAU5UMupG3KXNlPUsYWZ0AoPaa14wNoDS3Ml8xDOB2Zzp16XvHRpKq_0sUly5H9F5q7Ogh4rAqsI-HbvgfzPXy_iB8bPPGBJovWkxAyhdDaNEZxUVFcUwyELXiyybVGNfonLcTljNvp6w46vV9iqMKHTsrXg3WNp47z7ekeOI-fsSoYS7GUjral6Q8ryl82ex6Hncz41ayLkuh35h6gEshNjnhUlIlqf2SMNY3q752vsQZ3EMhC7MDNikJ8QNtUj8_xftwsdOCtAjuLP17WNXs43jPfCcDukrc8n8eBM5-vbn1NA1TJVW-wLqE8wA"
+      },
+      "published_at": "2026-11-12T08:21:17+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "3f73c979dca7270e",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-12T08:51:19.679521+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/473019",
+      "source_post_id": "473019",
+      "title": "تمهیدات ترافیکی مراسم تشییع پیکر مطهر ۱۱۰ شهید گمنام جنگ تحمیلی اعلام شد",
+      "excerpt": "تمهیدات ترافیکی مراسم تشییع پیکر مطهر ۱۱۰ شهید گمنام جنگ تحمیلی اعلام شد رئیس پلیس راهور تهران بزرگ با اشاره به برگزاری مراسم تشییع و وداع ۱۱۰ تن از شهدای گمنام تازه تفحص شده جنگ تحمیلی همزمان با سالروز شهادت حضرت فاطمه زهرا (س) و روز ملی گرامیداشت شهدای گمنام در پایتخت از اجرای طرح تمهیدات انتظامی-ترافیکی ویژه بمنظور تامین و ارتقاء ایمنی و تسهیل عبور و مرور در روز جمعه ۲۲ آبانماه ۱۴۰۵ در پایتخت خبر داد.",
+      "paragraphs": [
+        "تمهیدات ترافیکی مراسم تشییع پیکر مطهر ۱۱۰ شهید گمنام جنگ تحمیلی اعلام شد",
+        "رئیس پلیس راهور تهران بزرگ با اشاره به برگزاری مراسم تشییع و وداع ۱۱۰ تن از شهدای گمنام تازه تفحص شده جنگ تحمیلی همزمان با سالروز شهادت حضرت فاطمه زهرا (س) و روز ملی گرامیداشت شهدای گمنام در پایتخت از اجرای طرح تمهیدات انتظامی-ترافیکی ویژه بمنظور تامین و ارتقاء ایمنی و تسهیل عبور و مرور در روز جمعه ۲۲ آبانماه ۱۴۰۵ در پایتخت خبر داد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/mHbs1Nhazfwrgj2lyrzmbSJQaEByaoKN370YNCqKHjOSpf4Tcq-na4ox5yKEPrHg-e0tHjdiRuwrAuPEHJh-hDL8NH58Ae3lh7yHOu8rw_ZwHuaWRNToz2GUTkM6l-uyFihWgc1e9BMF4zIiWGjnv1HRr-lBhosZilekW4c8eBwt7C-uXV2isdHfxsjYm9p4-jt41p0nn1-8wrsIo786yJSMEXcuJWENvUubRXnF1n3wyq78qjnNt0QNdm6n8W1JWKwVSCMChy_ESkLS44LP9L98V7DAlB3vZhaH-nsgB4JZKgU6QgXQR3FAqOZiPeKc9jKyhCyRKnN8_2UGxoLD7Q.jpg"
+      },
+      "published_at": "2026-11-12T08:31:01+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "ad307f3fbd98c2da",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-12T08:51:19.679521+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-12T08:13:47.230040+00:00",
+  "saved_at": "2026-11-12T08:52:31.133383+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-12T08:12:35.089624+00:00",
-    "tehran_tel": "2026-11-12T08:12:35.089624+00:00",
-    "irna_1313": "2026-11-12T08:12:35.089624+00:00",
-    "isna94": "2026-11-12T08:12:35.089624+00:00",
-    "mehrnews": "2026-11-12T08:12:35.089624+00:00",
-    "web_shahr": "2026-11-12T07:43:29.006160+00:00",
-    "web_mehr_tehran": "2026-11-12T07:43:29.006160+00:00"
+    "tehranpress1": "2026-11-12T08:51:19.679521+00:00",
+    "tehran_tel": "2026-11-12T08:51:19.679521+00:00",
+    "irna_1313": "2026-11-12T08:51:19.679521+00:00",
+    "isna94": "2026-11-12T08:51:19.679521+00:00",
+    "mehrnews": "2026-11-12T08:51:19.679521+00:00",
+    "web_shahr": "2026-11-12T08:51:19.679521+00:00",
+    "web_mehr_tehran": "2026-11-12T08:51:19.679521+00:00"
   }
 }
