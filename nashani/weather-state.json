@@ -115,7 +115,8 @@
       "at": "2026-11-13T00:09:30.134640+03:30"
     },
     "2026-11-13-afternoon-کرمان": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 426,
       "at": "2026-11-13T14:06:01.463042+03:30"
     }
   }
