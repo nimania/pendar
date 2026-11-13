@@ -2900,61 +2900,17 @@
     "https://t.me/irna_1313/473291",
     "https://t.me/isna94/413206",
     "https://t.me/mehrnews/431358",
-    "https://t.me/irna_1313/473292"
+    "https://t.me/irna_1313/473292",
+    "https://t.me/isna94/413212",
+    "https://t.me/tehranpress1/132585",
+    "https://t.me/irna_1313/473293",
+    "https://t.me/tehranpress1/132593",
+    "https://t.me/mehrnews/431359",
+    "https://t.me/irna_1313/473302",
+    "https://t.me/mehrnews/431360",
+    "https://t.me/irna_1313/473303"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132345",
-      "source_post_id": "132345",
-      "title": "دعوت گل‌محمدی از ۳۰ بازیکن به نخستین اردوی تیم ملی امید",
-      "excerpt": "دعوت گل‌محمدی از ۳۰ بازیکن به نخستین اردوی تیم ملی امید تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "دعوت گل‌محمدی از ۳۰ بازیکن به نخستین اردوی تیم ملی امید",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/h0z0QHdiO1FkTmx6OQPYiQWWHH9OR96UyCD-rPM3jL_yQYplTJyvzFJ6O68ktPwfeYgDW6_m_mUkZ1MLzgr_ZSuOFPEv992XsbdcJfI83qpXiv6jnZEf6tcrlwhpI8vyMUqm0ZfSZF3OS22BqSdCkV_qUvl3NPUaa-yLpC9Cu4MlQPzY_SqXStyNm4j-O6X1q_sEDmYh95o8_YXP22Q2Dm_R9CDdnKve8akpmAxtKIywnzjGAGQaWsw6iHsvDww7CmmjvUVsz3OGKXYTYFu7IDtyZBLTt6N3JhPXPeNq-GMyAznfaXJVN7rTmBVWte2IJwODzL7ZF0ZRHU9LRXLMNQ.jpg"
-      },
-      "published_at": "2026-11-08T20:23:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "c978a986ce576a37",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-08T20:46:25.662724+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132346",
-      "source_post_id": "132346",
-      "title": "به گفته یک منبع آگاه در سیریک، دقایقی پیش صدای سه شلیک از محدوده سیریک به سمت تنگه هرمز شنیده شد.",
-      "excerpt": "به گفته یک منبع آگاه در سیریک، دقایقی پیش صدای سه شلیک از محدوده سیریک به سمت تنگه هرمز شنیده شد. شلیک‌ها مربوط به برخورد با شناورهای متخلف در تنگه هرمز بوده است. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "به گفته یک منبع آگاه در سیریک، دقایقی پیش صدای سه شلیک از محدوده سیریک به سمت تنگه هرمز شنیده شد.",
-        "شلیک‌ها مربوط به برخورد با شناورهای متخلف در تنگه هرمز بوده است.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": null,
-      "published_at": "2026-11-08T20:23:37+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "f716cae5e4751030",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-08T20:46:25.662724+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/tehranpress1/132347",
       "source_post_id": "132347",
@@ -11433,15 +11389,74 @@
       "status": "review",
       "detected_at": "2026-11-13T10:05:37.057330+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132585",
+      "source_post_id": "132585",
+      "title": "دوربین تهران پرس| تشییع باشکوه پیکرهای مطهر ۱۱۰ شهید گمنام در تهران",
+      "excerpt": "دوربین تهران پرس| تشییع باشکوه پیکرهای مطهر ۱۱۰ شهید گمنام در تهران آیین تشییع پیکرهای مطهر ۱۱۰ شهید گمنام دوران دفاع مقدس، هم‌زمان با سالروز شهادت حضرت فاطمه زهرا (س)، صبح جمعه ۲۲ آبان‌ماه ۱۴۰۵ با حضور پرشور مردم شهیدپرور، خانواده‌های معظم شهدا، ایثارگران و جمعی از مسئولان در تهران برگزار شد. این مراسم از مقابل دانشگاه تهران آغاز شد و کاروان پیکرهای مطهر شهدا با بدرقه مردم پایتخت به سمت معراج شهدا حرکت کرد. مردم قدرشناس تهران با حضور گسترده در این آیین، بار دیگر عشق و ارادت خود را به مقام شامخ شهدا و آرمان‌های والای آنان به نمایش گذاشتند و با شهدای گمنام هشت سال دفاع مقدس وداع کردند. جمعه ۲۲ آبان ۱۴۰۵ تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "دوربین تهران پرس| تشییع باشکوه پیکرهای مطهر ۱۱۰ شهید گمنام در تهران",
+        "آیین تشییع پیکرهای مطهر ۱۱۰ شهید گمنام دوران دفاع مقدس، هم‌زمان با سالروز شهادت حضرت فاطمه زهرا (س)، صبح جمعه ۲۲ آبان‌ماه ۱۴۰۵ با حضور پرشور مردم شهیدپرور، خانواده‌های معظم شهدا، ایثارگران و جمعی از مسئولان در تهران برگزار شد.",
+        "این مراسم از مقابل دانشگاه تهران آغاز شد و کاروان پیکرهای مطهر شهدا با بدرقه مردم پایتخت به سمت معراج شهدا حرکت کرد.",
+        "مردم قدرشناس تهران با حضور گسترده در این آیین، بار دیگر عشق و ارادت خود را به مقام شامخ شهدا و آرمان‌های والای آنان به نمایش گذاشتند و با شهدای گمنام هشت سال دفاع مقدس وداع کردند.",
+        "جمعه ۲۲ آبان ۱۴۰۵",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/vPW-bykzRWKsQI9yiKNo6dlGDydBPycS450EGaPJwo-EBdVU11TRtBCKcPqQaOAr2HvkGif3xG9dNrI6fGrjQYzEKdFcjHcLrtDcEdZF6kTfIHAgD4r1xTwJ_jPmBi-cnJFcfDVQSKRhM4s98NXfnRyg-2jzt5wc8F44VrrhLwovvBpRrchfnozUr8cFBbGHFmEp2dRI70ISXUz0duR4LnI-H1Krr-50UfBpGhkeH5myJxy_DW-roW0lDKnNjNprMbuf6fZc_Ch2skp8FmSTW8Dm5im1ahxEYAvIlbz6iUVTsXx_xc0nx92QsRSDl9ldTMwtO3540puTK_5Y9P_pZg.jpg"
+      },
+      "published_at": "2026-11-13T10:09:20+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "f3f66133c05da7d8",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.559764+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132593",
+      "source_post_id": "132593",
+      "title": "۴۰۴ میلیارد دلار کسری بودجه آمریکا در سال مالی ۲۰۲۷",
+      "excerpt": "۴۰۴ میلیارد دلار کسری بودجه آمریکا در سال مالی ۲۰۲۷ وزارت خزانه‌داری آمریکا اعلام کرد که دولت این کشور سال مالی ۲۰۲۷ را با ثبت کسری بودجه ۴۰۴ میلیارد دلاری در ماه اکتبر آغاز کرده است. خبرگزاری رویترز نوشت که این رقم برای این ماه رکورد محسوب می‌شود و در مقایسه با مدت مشابه سال گذشته ۱۲۰ میلیارد دلار، معادل ۴۲ درصد، افزایش دارد. این افزایش در شرایطی رخ داده است که درآمدهای دولت ترامپ کاهش یافته و هزینه‌های آن به‌شدت افزایش پیدا کرده است. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "۴۰۴ میلیارد دلار کسری بودجه آمریکا در سال مالی ۲۰۲۷",
+        "وزارت خزانه‌داری آمریکا اعلام کرد که دولت این کشور سال مالی ۲۰۲۷ را با ثبت کسری بودجه ۴۰۴ میلیارد دلاری در ماه اکتبر آغاز کرده است.",
+        "خبرگزاری رویترز نوشت که این رقم برای این ماه رکورد محسوب می‌شود و در مقایسه با مدت مشابه سال گذشته ۱۲۰ میلیارد دلار، معادل ۴۲ درصد، افزایش دارد.",
+        "این افزایش در شرایطی رخ داده است که درآمدهای دولت ترامپ کاهش یافته و هزینه‌های آن به‌شدت افزایش پیدا کرده است.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/mY04a6vEwlRgpOMMKfa0BuzZo3vZS-QpJZj95azVigCrUP9m6Cjud97JXZlza5O78WC55ytxKB94oiJOd-1Zc3x8wt4_EKp-5TZz3a_bf7NU_sl1MSopN9cNEwYRu-32II6_oBGELHtJoLMtn4cewjSdUD1RMj39fb4TIzryT-cQ4Gh73Q0PFW6TxnZcbsmzfvmSv_9LCzB5qARkfdukPV1pnCexc5KhN8cO5p2Gb4v-0CrQUuPrLvmYox6al8QR7rWelY0_wJR3ksbDv1d1f_j2ENCT4NFZ-cY8AG6Q1aSmECsqo4vQ4Dh8X6FMA1G5tMYWVRXsBnTG7Vm5_OI6gA.jpg"
+      },
+      "published_at": "2026-11-13T10:10:01+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "cad15f2737a59a0c",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.559764+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T10:06:49.410554+00:00",
+  "saved_at": "2026-11-13T10:26:43.976132+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-13T10:05:37.057330+00:00",
-    "tehran_tel": "2026-11-13T10:05:37.057330+00:00",
-    "irna_1313": "2026-11-13T10:05:37.057330+00:00",
-    "isna94": "2026-11-13T10:05:37.057330+00:00",
-    "mehrnews": "2026-11-13T10:05:37.057330+00:00",
+    "tehranpress1": "2026-11-13T10:25:57.559764+00:00",
+    "tehran_tel": "2026-11-13T10:25:57.559764+00:00",
+    "irna_1313": "2026-11-13T10:25:57.559764+00:00",
+    "isna94": "2026-11-13T10:25:57.559764+00:00",
+    "mehrnews": "2026-11-13T10:25:57.559764+00:00",
     "web_shahr": "2026-11-13T10:05:37.057330+00:00",
     "web_mehr_tehran": "2026-11-13T10:05:37.057330+00:00"
   }
