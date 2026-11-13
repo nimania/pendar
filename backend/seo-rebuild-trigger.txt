@@ -1,1 +1,2 @@
 Recovery 2026-11-13: regenerate retained complete-site artifact and fresh news after artifact expiry.
+Recovery 2026-11-14: rerun full verified build after repairing Karname publish test; refresh news, figures, books, press and Pages recovery artifact.
