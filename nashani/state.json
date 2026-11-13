@@ -1419,110 +1419,14 @@
     "https://t.me/kerman_news/140547",
     "https://t.me/kerman_news/140548",
     "https://t.me/irna_kerman/30378",
-    "https://t.me/kerman_news/140549"
+    "https://t.me/kerman_news/140549",
+    "https://t.me/kermane_no/59329",
+    "https://t.me/kerman_news/140550",
+    "https://t.me/irna_kerman/30379",
+    "https://t.me/kerman_news/140551",
+    "https://t.me/kerman_news/140552"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kermane_no/59143",
-      "source_post_id": "59143",
-      "title": "آیین تشییع و بدرقه زنده‌یاد اصغر ضرابی",
-      "excerpt": "آیین تشییع و بدرقه زنده‌یاد اصغر ضرابی روزنامه‌نگار، منتقد ادبی و ویراستار پیشکسوت کشورمان زمان: دوشنبه ۱۸ آبان‌ماه ساعت ۱۰ صبح مکان: تالار فرهنگ و هنر کرمان",
-      "paragraphs": [
-        "آیین تشییع و بدرقه زنده‌یاد اصغر ضرابی",
-        "روزنامه‌نگار، منتقد ادبی و ویراستار پیشکسوت کشورمان",
-        "زمان: دوشنبه ۱۸ آبان‌ماه ساعت ۱۰ صبح",
-        "مکان: تالار فرهنگ و هنر کرمان"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/RcVkci9lLqdWU1bW1dBYEPhnUqQra2HTKLzhr3v_o7nd6KIe8w8HU_CcQNayDtSfEXPDV6j4WmouRPVjqueQeDA-4wsxRAU_aVmjTPe3mSI0Z637lhkEXRcJ9PUnfwWZp_kjlxb4cgXt1j0g-S6fyVnHSk8Rd8DJQQUBYxBZWHpU3KjeWwyfrUitCmEBBLdndh4rDwEatNxTyKs7C6w7bK2fZ31UTHX2vqXQ3Lx2bl4xwFwggPzX-nfGKY81zMezMrB4SARNo-tdmQVEXLaSkL4mkDzB64VEjxXjZbca9pjg6TlQZESu9l8q3wt61XfDxkIV9vXouXPBxhrpQit-bg.jpg"
-      },
-      "published_at": "2026-11-08T15:27:27+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "2cb54f4bbaa4c7dd",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T16:21:06.339098+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T16:21:20.612611+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 185,
-      "sent_at": "2026-11-08T16:21:47.684236+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59144",
-      "source_post_id": "59144",
-      "title": "به گزارش کرمان نو، هفته دوازدهم لیگ برتر فوتبال مردان امروز یکشنبه ۱۷ آبان با دیدار بین گل‌گهر سیرجان و ذوب‌آهن اصفهان و با تساوی بدون گل به پایان رسید.",
-      "excerpt": "به گزارش کرمان نو، هفته دوازدهم لیگ برتر فوتبال مردان امروز یکشنبه ۱۷ آبان با دیدار بین گل‌گهر سیرجان و ذوب‌آهن اصفهان و با تساوی بدون گل به پایان رسید. نیمه اول دیدار درحالی‌که شاگردان محمد ربیعی، موقعیت‌های بهتری برای رسیدن به گلزنی داشتند بدون گل به پایان رسید. در این دیدار مصدومیت زودهنگام سید احسان حسینی در نیمه اول یکی از بدشانسی‌های مهدی رحمتی و گل‌گهر بود. جایی که او در دقیقه ۳۶ از زمین بازی خارج شد و جای خود را به سیامک نعمتی داد. اما این آخر بدبیاری‌های این تیم نبود و با اخراج امیر جعفری در دقیقه ۶۸ این تیم ۱۰ نفره نیز شد. گل‌گهر در دقیقه ۹۴ گل نیز به ثمر رساند؛ اما این گل پس از رفتن به VAR مردود اعلام شد تا بازی با تساوی بدون گل به پایان برسد.",
-      "paragraphs": [
-        "به گزارش کرمان نو، هفته دوازدهم لیگ برتر فوتبال مردان امروز یکشنبه ۱۷ آبان با دیدار بین گل‌گهر سیرجان و ذوب‌آهن اصفهان و با تساوی بدون گل به پایان رسید.",
-        "نیمه اول دیدار درحالی‌که شاگردان محمد ربیعی، موقعیت‌های بهتری برای رسیدن به گلزنی داشتند بدون گل به پایان رسید.",
-        "در این دیدار مصدومیت زودهنگام سید احسان حسینی در نیمه اول یکی از بدشانسی‌های مهدی رحمتی و گل‌گهر بود. جایی که او در دقیقه ۳۶ از زمین بازی خارج شد و جای خود را به سیامک نعمتی داد.",
-        "اما این آخر بدبیاری‌های این تیم نبود و با اخراج امیر جعفری در دقیقه ۶۸ این تیم ۱۰ نفره نیز شد.",
-        "گل‌گهر در دقیقه ۹۴ گل نیز به ثمر رساند؛ اما این گل پس از رفتن به VAR مردود اعلام شد تا بازی با تساوی بدون گل به پایان برسد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/IulnSKpc7JXtgEqBEMKoaVtA3kOrZ5KpuCGMXQPFcCkN8Y85Gk4efS5oFhtFwQkIqX8tu9N2ick4EFYOKQ9mEGvKvDERmmEHzPpsdsqQ-uikEOask9q2btlwewoohmAItjaMwjvYsRPiu8CupZw6-RaMWvs4T7F9IPPbnqVAn3yyUPlFeOmwW2IrRv1oYjmgxIdQKW57FXjiQfIEP9f2P94KrKR5imPJ43AfuyjLpia5CMaHtteEt32WU96ShH1GmI81jWSWY9kks_b9-qwEYGaYPTgcJRnRZVLCyGMO2s-TDozQ6YrCdSwjmPY6EpZjHd5Vv139EJx3wUkeJBoVVg.jpg"
-      },
-      "published_at": "2026-11-08T15:47:03+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "82927b10c9f5b399",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T16:21:06.339098+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T16:21:20.612611+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 186,
-      "sent_at": "2026-11-08T16:21:50.108509+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140270",
-      "source_post_id": "140270",
-      "title": "خوشحالی‌ گل‌گهری‌ها دوامی نداشت",
-      "excerpt": "خوشحالی‌ گل‌گهری‌ها دوامی نداشت دو تیم همچنان در حسرت برد. گل‌گهر ۰ - ۰ ذوب‌آهن",
-      "paragraphs": [
-        "خوشحالی‌ گل‌گهری‌ها دوامی نداشت",
-        "دو تیم همچنان در حسرت برد.",
-        "گل‌گهر ۰ - ۰ ذوب‌آهن"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/ZOz4__IKJlQ2X7KJbTD5ZrWiwyidTELGNU3S-njnh6YZivoJqZJCoLDRQOYsxOXZLgS6x5jywhFmhYdZn-4r_x8oCHj9nsFvc9qup3Nqb5EpR1Pf-7zVM7B34aVwvDzSeDWOwu7kXOto7kEB8IknGrucW5TPoL-Q8-Qv35y_5mmP3FXryW15UGUDU4M2sXOLzhFB6QDNklUIaq3w5gxN5DaU9Z5PZZNKGe2Kld4QfjAbpcnPBd6Exvv8tzisrcWpPoSax7Pdq9quQJF3yvumaepYcUUiQBRY8k8y4iXgZWW0ShBLdN1jv-ACPwuX31e_9wcuAlk79288-qlJOUjGAQ.jpg"
-      },
-      "published_at": "2026-11-08T15:49:18+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "987888240d45482d",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T16:21:06.339098+00:00",
-      "other_sources": [
-        {
-          "name": "آخرین خبر کرمان",
-          "url": "https://t.me/Kerman_akhbar/66271"
-        }
-      ],
-      "reserved_at": "2026-11-08T16:21:20.612611+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 187,
-      "sent_at": "2026-11-08T16:22:02.077001+00:00"
-    },
     {
       "url": "https://t.me/kerman_news/140272",
       "source_post_id": "140272",
@@ -10464,17 +10368,93 @@
       "status": "ready",
       "detected_at": "2026-11-13T10:25:57.949895+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140550",
+      "source_post_id": "140550",
+      "title": "کشف ۱۱۴ کیسه آرد احتکاری در راور",
+      "excerpt": "کشف ۱۱۴ کیسه آرد احتکاری در راور دادستان عمومی و انقلاب شهرستان راور در پی دریافت گزارش‌هایی مبنی بر نگهداری و احتکار مقادیر قابل توجهی آرد خارج از شبکه قانونی توزیع، موضوع با دستور مستقیم دادستانی در دستور کار پلیس اطلاعات شهرستان راور قرار گرفت. در جریان بازرسی از محل موردنظر، ۱۱۴ کیسه آرد به ارزش تقریبی ۳ میلیارد و ۴۲۰ میلیون ریال کشف شد که بر اساس بررسی‌های اولیه، خارج از ضوابط قانونی نگهداری شده و احتمال احتکار و عرضه خارج از شبکه آن مطرح است.",
+      "paragraphs": [
+        "کشف ۱۱۴ کیسه آرد احتکاری در راور",
+        "دادستان عمومی و انقلاب شهرستان راور",
+        "در پی دریافت گزارش‌هایی مبنی بر نگهداری و احتکار مقادیر قابل توجهی آرد خارج از شبکه قانونی توزیع، موضوع با دستور مستقیم دادستانی در دستور کار پلیس اطلاعات شهرستان راور قرار گرفت.",
+        "در جریان بازرسی از محل موردنظر، ۱۱۴ کیسه آرد به ارزش تقریبی ۳ میلیارد و ۴۲۰ میلیون ریال کشف شد که بر اساس بررسی‌های اولیه، خارج از ضوابط قانونی نگهداری شده و احتمال احتکار و عرضه خارج از شبکه آن مطرح است."
+      ],
+      "media": null,
+      "published_at": "2026-11-13T10:42:22+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "66b81f080844514d",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-13T11:36:15.940823+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30379",
+      "source_post_id": "30379",
+      "title": "امام جمعه جیرفت: مدیریت ایران بر تنگه هرمز، مصداق بارز «جهاد ابتدایی» است",
+      "excerpt": "امام جمعه جیرفت: مدیریت ایران بر تنگه هرمز، مصداق بارز «جهاد ابتدایی» است امام جمعه جیرفت با تبیین ابعاد راهبردی بیانات رهبر معظم انقلاب درباره مدیریت ایران بر تنگه هرمز و انهدام پایگاه‌های آمریکایی، این اقدامات را مصداق جهاد ابتدایی منطقه‌ای عنوان کرد. irna_kerman",
+      "paragraphs": [
+        "امام جمعه جیرفت: مدیریت ایران بر تنگه هرمز، مصداق بارز «جهاد ابتدایی» است",
+        "امام جمعه جیرفت با تبیین ابعاد راهبردی بیانات رهبر معظم انقلاب درباره مدیریت ایران بر تنگه هرمز و انهدام پایگاه‌های آمریکایی، این اقدامات را مصداق جهاد ابتدایی منطقه‌ای عنوان کرد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/XJT4IXxyT3bXmz6hmHZI4EisaAUBezN_CYNpmpNwx-PO0EwDsGownTCBLZq8I9PjO3WHiVAyFoasvaHvaVZSyK_LOmxNB1QEolv6rVsZMKG5jf-Lo9asVz1ljlCcMBLh-H5AyBgHfzYFaqfKLyQCpJv4nS_cZGMxl9a_s-oL5ECe3rw8OlCoWN_XrQrHBDRuvAee-vusDSpWqJtaDdmlbuoS2dBWYrA5WMZycfWDh2ml48rjuue1zqe8WfpHhF15Vs5Ne_-fjVf3h890yNNmb3oSWP2mjmFhPZHplinASYeI0yrMsb89orIaonte1RAe0b7T8Jeo7W6-m_ifEKahVQ.jpg"
+      },
+      "published_at": "2026-11-13T10:48:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "02d4e2ddb3c994f4",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T11:36:15.940823+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140552",
+      "source_post_id": "140552",
+      "title": "عامل قتل صاحب فروشگاه مواد غذایی در قلعه گنج دستگیر شد",
+      "excerpt": "عامل قتل صاحب فروشگاه مواد غذایی در قلعه گنج دستگیر شد فرمانده انتظامی جنوب استان کرمان در پی دریافت خبری مبنی بر وقوع یک فقره قتل در بازار قلعه گنج، بررسی موضوع به‌صورت ویژه در دستور کار مأموران انتظامی شهرستان قلعه گنج قرار گرفت.",
+      "paragraphs": [
+        "عامل قتل صاحب فروشگاه مواد غذایی در قلعه گنج دستگیر شد",
+        "فرمانده انتظامی جنوب استان کرمان",
+        "در پی دریافت خبری مبنی بر وقوع یک فقره قتل در بازار قلعه گنج، بررسی موضوع به‌صورت ویژه در دستور کار مأموران انتظامی شهرستان قلعه گنج قرار گرفت."
+      ],
+      "media": null,
+      "published_at": "2026-11-13T11:23:34+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "9d1a9b40c2850397",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-13T11:36:15.940823+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T10:26:58.160508+00:00",
+  "saved_at": "2026-11-13T11:36:28.865806+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-13T10:25:57.949895+00:00",
-    "fardaayekerman": "2026-11-13T10:25:57.949895+00:00",
-    "irna_kerman": "2026-11-13T10:25:57.949895+00:00",
-    "kerman_gov": "2026-11-13T10:25:57.949895+00:00",
-    "kerman_akhbar": "2026-11-13T10:25:57.949895+00:00",
-    "kerman_news": "2026-11-13T10:25:57.949895+00:00",
-    "kerman_rasaneh": "2026-11-13T10:25:57.949895+00:00",
-    "qh_qv": "2026-11-13T10:25:57.949895+00:00"
+    "kermane_no": "2026-11-13T11:36:15.940823+00:00",
+    "fardaayekerman": "2026-11-13T11:36:15.940823+00:00",
+    "irna_kerman": "2026-11-13T11:36:15.940823+00:00",
+    "kerman_gov": "2026-11-13T11:36:15.940823+00:00",
+    "kerman_akhbar": "2026-11-13T11:36:15.940823+00:00",
+    "kerman_news": "2026-11-13T11:36:15.940823+00:00",
+    "kerman_rasaneh": "2026-11-13T11:36:15.940823+00:00",
+    "qh_qv": "2026-11-13T11:36:15.940823+00:00"
   }
 }
