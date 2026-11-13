@@ -1405,248 +1405,23 @@
     "https://t.me/irna_kerman/30377",
     "https://t.me/kerman_news/140539",
     "https://t.me/kerman_news/140540",
-    "https://t.me/kerman_news/140541"
+    "https://t.me/kerman_news/140541",
+    "https://t.me/Kerman_akhbar/66362",
+    "https://t.me/Kerman_akhbar/66363",
+    "https://t.me/Kerman_akhbar/66364",
+    "https://t.me/Kerman_akhbar/66365",
+    "https://t.me/kerman_news/140542",
+    "https://t.me/kerman_news/140543",
+    "https://t.me/kermane_no/59328",
+    "https://t.me/kerman_news/140544",
+    "https://t.me/kerman_news/140545",
+    "https://t.me/kerman_news/140546",
+    "https://t.me/kerman_news/140547",
+    "https://t.me/kerman_news/140548",
+    "https://t.me/irna_kerman/30378",
+    "https://t.me/kerman_news/140549"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kermane_no/59136",
-      "source_post_id": "59136",
-      "title": "حساب‌های بانکی شرکت‌های بزرگ معدنی باید به استان کرمان منتقل شود",
-      "excerpt": "حساب‌های بانکی شرکت‌های بزرگ معدنی باید به استان کرمان منتقل شود رئیس‌کل دادگستری استان کرمان در نشستی با نمایندگان مجلس، بر ضرورت انتقال دفاتر مرکزی و حساب‌های بانکی شرکت‌های بزرگ معدنی به داخل استان تأکید کرد و این اقدام را راهگشای بسیاری از مشکلات اقتصادی و معیشتی دانست. دادخدا سالاری با اشاره به تبصره‌های قانونی معادن، خواستار پیگیری جدی برای هزینه شدن ۶۵ درصد درآمدهای زیرساختی و استمرار بازگشت سهم ۱۵ درصدی حقوق دولتی معادن به کرمان شد. وی همچنین با انتقاد از هزینه‌کرد منابع مسئولیت‌های اجتماعی در امور غیرضروری مانند باشگاه‌داری و پرداخت حقوق‌های نامتعارف به مدیران، تصریح کرد که دستگاه قضایی در برخورد با فساد و تخلفات هیچ خط قرمزی ندارد.",
-      "paragraphs": [
-        "حساب‌های بانکی شرکت‌های بزرگ معدنی باید به استان کرمان منتقل شود",
-        "رئیس‌کل دادگستری استان کرمان در نشستی با نمایندگان مجلس، بر ضرورت انتقال دفاتر مرکزی و حساب‌های بانکی شرکت‌های بزرگ معدنی به داخل استان تأکید کرد و این اقدام را راهگشای بسیاری از مشکلات اقتصادی و معیشتی دانست.",
-        "دادخدا سالاری با اشاره به تبصره‌های قانونی معادن، خواستار پیگیری جدی برای هزینه شدن ۶۵ درصد درآمدهای زیرساختی و استمرار بازگشت سهم ۱۵ درصدی حقوق دولتی معادن به کرمان شد.",
-        "وی همچنین با انتقاد از هزینه‌کرد منابع مسئولیت‌های اجتماعی در امور غیرضروری مانند باشگاه‌داری و پرداخت حقوق‌های نامتعارف به مدیران، تصریح کرد که دستگاه قضایی در برخورد با فساد و تخلفات هیچ خط قرمزی ندارد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/Qrvo0fXw1Bc4JgZBctJtTErFlz59j8FtrBYzXUbIN3n7nZpck__izXQBbrXEUAXLEXfW7Xe1LG5Lx8Qz7m7GDPZZhsXCNpzYVPUkdBc5nIRxBTTyE5sM5d20xHWDA_xVzK1y0k1MD5oj6qJe8y-8wqboMKfSTtTpHQAWY0SPsQzfKEJvmFvtd0vSm4eVtDD3oUcPNyFecLjkrbUsDF4wK1qfYG_05iIoV4f8KWMzGN28KejVqazRM1B7qliMziq5FAj3R-Ri-wZEibWRpwMZEzxz9Pcrz_m2PNb7RJqqomhwsM7tf0Ca6YH16IPG5Usv-yZj_-fURl3HkDpmmb0HhA.jpg"
-      },
-      "published_at": "2026-11-08T13:00:03+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "d236168ded2e88a0",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T13:23:11.397388+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T14:51:12.820266+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 177,
-      "sent_at": "2026-11-08T14:51:27.850008+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59137",
-      "source_post_id": "59137",
-      "title": "ساماندهی اتباع خارجی با هم‌افزایی دستگاه‌های امنیتی، انتظامی و قضایی دنبال شود",
-      "excerpt": "ساماندهی اتباع خارجی با هم‌افزایی دستگاه‌های امنیتی، انتظامی و قضایی دنبال شود کارگروه ساماندهی اتباع و مهاجرین خارجی استان کرمان به ریاست معاون امنیتی و انتظامی استاندار برگزار شد و بر ضرورت تقویت طرح‌های ساماندهی و برخورد با تخلفات تأکید کرد. رحمان جلالی در این نشست تدوین نقشه راه، تعامل میان ارکان امنیتی، انتظامی و قضایی و همچنین تشکیل اتاق وضعیت ساماندهی اتباع را برای پیشبرد امور ضروری دانست.",
-      "paragraphs": [
-        "ساماندهی اتباع خارجی با هم‌افزایی دستگاه‌های امنیتی، انتظامی و قضایی دنبال شود",
-        "کارگروه ساماندهی اتباع و مهاجرین خارجی استان کرمان به ریاست معاون امنیتی و انتظامی استاندار برگزار شد و بر ضرورت تقویت طرح‌های ساماندهی و برخورد با تخلفات تأکید کرد.",
-        "رحمان جلالی در این نشست تدوین نقشه راه، تعامل میان ارکان امنیتی، انتظامی و قضایی و همچنین تشکیل اتاق وضعیت ساماندهی اتباع را برای پیشبرد امور ضروری دانست."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/cfXmLyJ7rnjndSh9ByovggkQfRnShfnxl2DYhUbJ2_zOtTH50sZUzRqJDAb_93tPryHZO4XDL0TTaUD2dDw29wXow-Bqpn5z15Y2z-okcSJHAfPW35jg2fVs7Jf70VO-T6krBT4Ajw0DjkNFHZ_ZSFQmvZ1vh6KAvbyPAbmES7BxKvZexKDHROeLvuLtgvsuXdVVpdt61yu8EFmS3TYTYT2GR2eKrFRO06KMdS_LVFjSomR-N7tfkGfqd0pS138XNC_j9Ptdr3kq5xPz0YXLEGVz2qDsRcaV_fc8qg1sSXb6fcL42rhvnqvhLJr5DM56aZXP54CmKEGfwYN3WGVIjQ.jpg"
-      },
-      "published_at": "2026-11-08T13:10:02+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "ab1bb2932f5adda7",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T13:23:11.397388+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T14:51:12.820266+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 178,
-      "sent_at": "2026-11-08T14:51:30.881427+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140261",
-      "source_post_id": "140261",
-      "title": "باد شدید، گردوخاک و بارش در انتظار استان کرمان",
-      "excerpt": "باد شدید، گردوخاک و بارش در انتظار استان کرمان هواشناسی کرمان برای امروز، یک‌شنبه ۱۷ آبان، در نیمه شمالی استان رشد ابر و بارش پراکنده و در دیگر مناطق وزش باد نسبتاً شدید پیش‌بینی کرد. روزهای دوشنبه و سه‌شنبه وزش باد شدید و خیزش گردوخاک بیشتر مناطق را دربرمی‌گیرد. در برخی مناطق جنوبی نیز احتمال بارش پراکنده باران وجود دارد. از اواخر وقت سه‌شنبه، سامانه بارشی جدیدی وارد استان می‌شود و برای بیشتر مناطق افزایش ابر و بارش باران و در ارتفاعات بارش برف پیش‌بینی شده است. نیمه جنوبی استان نیز احتمالاً شاهد تگرگ، رگبار، رعدوبرق و تندباد لحظه‌ای خواهد بود. کاهش نسبی دما در روزهای پایانی هفته مورد انتظار است.",
-      "paragraphs": [
-        "باد شدید، گردوخاک و بارش در انتظار استان کرمان",
-        "هواشناسی کرمان برای امروز، یک‌شنبه ۱۷ آبان، در نیمه شمالی استان رشد ابر و بارش پراکنده و در دیگر مناطق وزش باد نسبتاً شدید پیش‌بینی کرد.",
-        "روزهای دوشنبه و سه‌شنبه وزش باد شدید و خیزش گردوخاک بیشتر مناطق را دربرمی‌گیرد. در برخی مناطق جنوبی نیز احتمال بارش پراکنده باران وجود دارد.",
-        "از اواخر وقت سه‌شنبه، سامانه بارشی جدیدی وارد استان می‌شود و برای بیشتر مناطق افزایش ابر و بارش باران و در ارتفاعات بارش برف پیش‌بینی شده است. نیمه جنوبی استان نیز احتمالاً شاهد تگرگ، رگبار، رعدوبرق و تندباد لحظه‌ای خواهد بود.",
-        "کاهش نسبی دما در روزهای پایانی هفته مورد انتظار است."
-      ],
-      "media": null,
-      "published_at": "2026-11-08T13:13:41+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "59fbc2cfdb820896",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T13:23:11.397388+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T14:51:12.820266+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 179,
-      "sent_at": "2026-11-08T14:51:32.321720+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59139",
-      "source_post_id": "59139",
-      "title": "تصادف چترود؛ ۸ کشته در یک شب",
-      "excerpt": "تصادف چترود؛ ۸ کشته در یک شب جمعه ۱۵ آبان، برخورد شاهین و پژو پارس در محور چترود–کرمان. ۴ جوان اهل کاظم‌آباد، راننده سرویس و ۲ کارگر زن در صحنه جان باختند و یکی از مصدومان هم در بیمارستان فوت کرد. پلیس راهور: علت، انحراف به چپ پژو پارس و ناتوانی در کنترل خودرو بود. جاده سابقه تصادف دارد و اهالی می‌گویند خط‌کشی و روشنایی کافی ندارد. احداث سرعت‌گیر هم تصویب شد.",
-      "paragraphs": [
-        "تصادف چترود؛ ۸ کشته در یک شب",
-        "جمعه ۱۵ آبان، برخورد شاهین و پژو پارس در محور چترود–کرمان. ۴ جوان اهل کاظم‌آباد، راننده سرویس و ۲ کارگر زن در صحنه جان باختند و یکی از مصدومان هم در بیمارستان فوت کرد.",
-        "پلیس راهور: علت، انحراف به چپ پژو پارس و ناتوانی در کنترل خودرو بود. جاده سابقه تصادف دارد و اهالی می‌گویند خط‌کشی و روشنایی کافی ندارد. احداث سرعت‌گیر هم تصویب شد."
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-08T13:43:54+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "777fb59bce214b01",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-08T14:50:55.954727+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/kermane_no/59140",
-      "source_post_id": "59140",
-      "title": "هفته نهم لیگ یک فوتبال: مس کرمان ۲ - نفت مسجد سلیمان یک",
-      "excerpt": "هفته نهم لیگ یک فوتبال: مس کرمان ۲ - نفت مسجد سلیمان یک کامبک شاگردان شهبا و کسب اولین سه امتیاز مس کرمان قاسم شهبا در نخستین بازی که به‌عنوان سرمربی مس کرمان روی نیمکت این تیم حضور داشت با کامبک تماشایی که شاگردانش داشتند اولین سه امتیاز مس کرمان در لیگ یک امسال را کسب کرد. به گزارش کرمان نو، هفته نهم لیگ دسته یک فوتبال مردان در حالی برای مس کرمان امروز یکشنبه ۱۷ آبان از ساعت ۱۵ در رفسنجان برابر نفت مسجد سلیمان برگزار شد که این دیدار نخستین تجربه رسمی قاسم شهبا روی نیمکت نارنجی‌های کرمان بود. این دیدار با نتیجه ۲ بر یک با یک کامبک به سود مسی‌ها به پایان رسید. درحالی‌که دقایق ابتدایی بازی پایاپایی از ۲ تیم شاهد بودیم و شاید در دقایقی موقعیت‌های مس بهتر نیز بود؛ اما این تیم نفت مسجد سلیمان بود که در دقیقه ۱۳ به‌وسیله یزدان خورشیدپور به اولین گل بازی رسیدند تا مسی‌های کرمان از مهمان خود عقب بیفتند.",
-      "paragraphs": [
-        "هفته نهم لیگ یک فوتبال: مس کرمان ۲ - نفت مسجد سلیمان یک",
-        "کامبک شاگردان شهبا و کسب اولین سه امتیاز مس کرمان",
-        "قاسم شهبا در نخستین بازی که به‌عنوان سرمربی مس کرمان روی نیمکت این تیم حضور داشت با کامبک تماشایی که شاگردانش داشتند اولین سه امتیاز مس کرمان در لیگ یک امسال را کسب کرد.",
-        "به گزارش کرمان نو، هفته نهم لیگ دسته یک فوتبال مردان در حالی برای مس کرمان امروز یکشنبه ۱۷ آبان از ساعت ۱۵ در رفسنجان برابر نفت مسجد سلیمان برگزار شد که این دیدار نخستین تجربه رسمی قاسم شهبا روی نیمکت نارنجی‌های کرمان بود.",
-        "این دیدار با نتیجه ۲ بر یک با یک کامبک به سود مسی‌ها به پایان رسید.",
-        "درحالی‌که دقایق ابتدایی بازی پایاپایی از ۲ تیم شاهد بودیم و شاید در دقایقی موقعیت‌های مس بهتر نیز بود؛ اما این تیم نفت مسجد سلیمان بود که در دقیقه ۱۳ به‌وسیله یزدان خورشیدپور به اولین گل بازی رسیدند تا مسی‌های کرمان از مهمان خود عقب بیفتند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/WKxqwWV3rvjEvE0HS39VRmTKWDifUa_Xmswzlk9QrlGKB43sNjx_KmsuBF483HUVrA1N2WrXOkYNjTvQ6ea7t5RylG1kwv0Zi_9-kFy6GW5b81Szxxx-wmok_8Nltf_l3mbUMwJaDPxXUHbbRl-ArRLQ7RJGnqEhhhLFeezSfIe9BE6W-GY1cgSP3r8XcaCoVJE4V8SsHkADy1fvzhzHw32kByF9m_CeWMqLZKqqWopI4FaESeIbUoy4nSOswIBmiPVs1Eh_R50ltvEVQOXKaZy4Ou9-3jszXRxczas3QrTal4ywsNlahj09YoP6YldO0zDSHwZAahW4X8wMR0ZMcQ.jpg"
-      },
-      "published_at": "2026-11-08T13:56:46+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "5fdf7a478b419f08",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T14:50:55.954727+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T16:21:20.612611+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 182,
-      "sent_at": "2026-11-08T16:21:39.177365+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140264",
-      "source_post_id": "140264",
-      "title": "دستگیری عاملان تیراندازی در خیابان آزادگان کرمان در کمتر از ۲۴ ساعت",
-      "excerpt": "دستگیری عاملان تیراندازی در خیابان آزادگان کرمان در کمتر از ۲۴ ساعت فرمانده انتظامی شهرستان کرمان در پی وقوع یک فقره تیراندازی در جریان نزاع و درگیری با هدف خودنمایی و ایجاد رعب و وحشت برای شهروندان، عاملان این اقدام پس از تیراندازی از محل متواری شدند وبا تلاش مجاهدانه مأموران در کمتر از ۲۴ ساعت، هر دو نفر دستگیر و یک قبضه سلاح کشف شد.",
-      "paragraphs": [
-        "دستگیری عاملان تیراندازی در خیابان آزادگان کرمان در کمتر از ۲۴ ساعت",
-        "فرمانده انتظامی شهرستان کرمان",
-        "در پی وقوع یک فقره تیراندازی در جریان نزاع و درگیری با هدف خودنمایی و ایجاد رعب و وحشت برای شهروندان، عاملان این اقدام پس از تیراندازی از محل متواری شدند وبا تلاش مجاهدانه مأموران در کمتر از ۲۴ ساعت، هر دو نفر دستگیر و یک قبضه سلاح کشف شد."
-      ],
-      "media": null,
-      "published_at": "2026-11-08T14:06:13+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "48a27c86b5ff7925",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-08T14:50:55.954727+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/kermane_no/59142",
-      "source_post_id": "59142",
-      "title": "شهبا پس از پیروزی مس کرمان",
-      "excerpt": "شهبا پس از پیروزی مس کرمان این پیروزی را به آقای حسین‌خانی و همکارانش تقدیم می‌کنیم قاسم شهبا سرمربی تیم فوتبال مس کرمان پس از کسب اولین پیروزی این تیم در لیگ یک فوتبال مردان ضمن تقدیم کردن این پیروزی به کادر قبلی مس گفت: این پیروزی را به آقای حسین‌خانی و همکارانش تقدیم می‌کنیم. به آینده امیدواریم و انشاالله نتایج بهتری را برای این تیم رقم بزنیم.",
-      "paragraphs": [
-        "شهبا پس از پیروزی مس کرمان",
-        "این پیروزی را به آقای حسین‌خانی و همکارانش تقدیم می‌کنیم",
-        "قاسم شهبا سرمربی تیم فوتبال مس کرمان پس از کسب اولین پیروزی این تیم در لیگ یک فوتبال مردان ضمن تقدیم کردن این پیروزی به کادر قبلی مس گفت: این پیروزی را به آقای حسین‌خانی و همکارانش تقدیم می‌کنیم. به آینده امیدواریم و انشاالله نتایج بهتری را برای این تیم رقم بزنیم."
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-08T15:04:02+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "4068d9a1669aeb4c",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T16:21:06.339098+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T16:21:20.612611+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 183,
-      "sent_at": "2026-11-08T16:21:40.662192+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140268",
-      "source_post_id": "140268",
-      "title": "گل ولی‌پور پس از بازبینی صحنه رد شد",
-      "excerpt": "گل ولی‌پور پس از بازبینی صحنه رد شد گل‌گهر ۰-۰ ذوب‌آهن",
-      "paragraphs": [
-        "گل ولی‌پور پس از بازبینی صحنه رد شد",
-        "گل‌گهر ۰-۰ ذوب‌آهن"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/5f23dc5df8.mp4?token=R9V-klAu3ClOQ2YQDH8m95whGWm8wQ6IJamg-z3IGMm65vVz9CjleoDsp7wNphZNmQCOsUQvZBAJ7W_qMr2vgnp7KU_u_8VVpFpj_VQclsyUn7NQjdgdbGyuz5rEvFuukmMYbHCb2RYYl_VvEb-ohLVLxEkhjvcQ9JUDh-3YGj6eeuT3h6RUpduDezP66Y6Mx7yWoePwZ5PWtoTaLbPwppuZ4ioFKS4dHNSrx8L-AinR6_VmL-6yqVR9B4J1kn6zQlYfzzqXZir98oGYXx6nqOcSowjSvf4Ae1qRVkljb3s6rX1FMRQ0vQSVhb0QF75TsIEvoM4r58relb6oieQxfg"
-      },
-      "published_at": "2026-11-08T15:08:38+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "4cc33c4c3cf4033a",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T16:21:06.339098+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T16:21:20.612611+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 184,
-      "sent_at": "2026-11-08T16:21:45.395174+00:00"
-    },
     {
       "url": "https://t.me/kermane_no/59143",
       "source_post_id": "59143",
@@ -10221,7 +9996,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66362"
+        }
+      ],
       "reserved_at": "2026-11-13T07:56:43.014032+00:00",
       "delivery_kind": "text",
       "telegram_message_id": 411,
@@ -10250,7 +10030,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66363"
+        }
+      ],
       "reserved_at": "2026-11-13T07:56:43.014032+00:00",
       "delivery_kind": "text",
       "telegram_message_id": 412,
@@ -10312,7 +10097,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66364"
+        }
+      ],
       "reserved_at": "2026-11-13T07:56:43.014032+00:00",
       "delivery_kind": "video",
       "telegram_message_id": 414,
@@ -10442,17 +10232,221 @@
       "delivery_kind": "photo",
       "telegram_message_id": 418,
       "sent_at": "2026-11-13T08:43:52.252206+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_news/140542",
+      "source_post_id": "140542",
+      "title": "لحظاتی از چشم‌انتظاری مردم رفسنجان برای حضور ۴ لاله زهرایی",
+      "excerpt": "لحظاتی از چشم‌انتظاری مردم رفسنجان برای حضور ۴ لاله زهرایی",
+      "paragraphs": [
+        "لحظاتی از چشم‌انتظاری مردم رفسنجان برای حضور ۴ لاله زهرایی"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/3749568d7a.mp4?token=d5pGUbkwoOYYgge1QtpJAuQyvP8it27IxtlBHl4g1EKoKyJlzx8_3DjYw4URUqSS7UxURm7P5duTDfJZpmP1y9cZE2k5fSocK8kZrXi4kls3tFY7EuOHv3Sz2fyT9ZVt9Os-zxDDCBzGaiAmvJ2yJBX9_2mi6bEsMhjI4v2d1pd5LANC6ZzuiFZMAf2RsRf1sRJmDhWjs4pIoewSFl48aTja7DKVmME3Y3KAguEczCJdWl3zdisS5T3pWc-5aM2-kMsyL25oA-yC-_DZIIHAnuEcZFXXEQGMQrCkrNEOcdytUN03A4fWLSriGNL8603Illmemo9ZsyI5P_s6Pq1FSQ"
+      },
+      "published_at": "2026-11-13T08:49:34+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "c9d1ac447e8159a8",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.949895+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140543",
+      "source_post_id": "140543",
+      "title": "اقامه نماز بر پیکر شهدای گمنام در رفسنجان",
+      "excerpt": "اقامه نماز بر پیکر شهدای گمنام در رفسنجان",
+      "paragraphs": [
+        "اقامه نماز بر پیکر شهدای گمنام در رفسنجان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/89bcaf59d0.mp4?token=QUUxb50cHjAe4T2AxSVHviCTXqTsx17wbbdLnKytfA58waokT02QCXB4OkaNbgAwzVJOZNcczBfyj4yJhPcZXz2rdPTAfh1MrSrXdS2ANbq18_EIiX1PNzBZiXU4oaDbJh6HouuVrnfljSGRpj6MiYyykyQ3AYTselXJcqil_kGAlWAfQPh8kLlgekFIA1tSdioV3pelPNJJhrmqonDw_kBOl1jLr3S8u05IzSMwF9BzZMTRaTWBpc6HJfwht8BsIJWeQr700p6l_D1_xMkDOTAaRht_Yj0a4HynjXHvynsW2rsHpoJtisOZYvdqGeGxajQlbHGuRXNf6xxSZY1kRlKV6OqvjYjeDVV2MTTQPrCRg5P1BKXWenLLr5rl0H8yoKzob-9lC7RgAXVPCOWSXOeft8Qsi0RDU-je_4xBA3FxuX1qa5QznsLpDZtk_rULosgV31-J_gm4W31LVRxTXck_ZOUYAxHA6TFzswWqf2qhBX-TdV-abFef9MtEagkdfN5nAPfRM90vqlnDwQTB2VW9S4qoIM7mV1Zi-DjD3tMsfO_TWd1oFTNrplbhyhMDru7kOpl9btBU7Ib1YeG1J8Q1ZmHyUH0dNYMsy790-ephq5A2l7pC-ykjbV3DUMDpQDhAr5BHvSUvoGf0lhpn4wqZQ0H2C_Zg59g-Nq_vcX8"
+      },
+      "published_at": "2026-11-13T08:52:33+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "045d4b9e01df7fc6",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.949895+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59328",
+      "source_post_id": "59328",
+      "title": "برنز دختران جوان فوتسالیست ایران در المپیک سنگال",
+      "excerpt": "برنز دختران جوان فوتسالیست ایران در المپیک سنگال تیم ملی فوتسال دختران جوان ایران موفق شد در المپیک سنگال ۲۰۲۶ بر سکوی سوم این رقابت‌ها بایستد و مدال برنز این مسابقات را کسب کند. الناز حسینی فوتسالیست جوان کرمانی نیز به همراه تیم ملی در این مسابقات حضور داشت.",
+      "paragraphs": [
+        "برنز دختران جوان فوتسالیست ایران در المپیک سنگال",
+        "تیم ملی فوتسال دختران جوان ایران موفق شد در المپیک سنگال ۲۰۲۶ بر سکوی سوم این رقابت‌ها بایستد و مدال برنز این مسابقات را کسب کند. الناز حسینی فوتسالیست جوان کرمانی نیز به همراه تیم ملی در این مسابقات حضور داشت."
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-13T09:00:44+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "52950ae20180a5ab",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.949895+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140544",
+      "source_post_id": "140544",
+      "title": "دسته عزای ظهر شهادت حضرت زهرا(س) در کرمان",
+      "excerpt": "دسته عزای ظهر شهادت حضرت زهرا(س) در کرمان",
+      "paragraphs": [
+        "دسته عزای ظهر شهادت حضرت زهرا(س) در کرمان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-13T09:22:24+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "1667354b63e3ce80",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.949895+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140546",
+      "source_post_id": "140546",
+      "title": "تشییع ۱۷ لاله گلگون کفن در کرمان",
+      "excerpt": "تشییع ۱۷ لاله گلگون کفن در کرمان",
+      "paragraphs": [
+        "تشییع ۱۷ لاله گلگون کفن در کرمان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-13T09:55:47+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "0d17eaafdbb2d981",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.949895+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140548",
+      "source_post_id": "140548",
+      "title": "ادای احترام فرمانده سپاه ثارالله به شهدای خوشنام در رفسنجان",
+      "excerpt": "ادای احترام فرمانده سپاه ثارالله به شهدای خوشنام در رفسنجان",
+      "paragraphs": [
+        "ادای احترام فرمانده سپاه ثارالله به شهدای خوشنام در رفسنجان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/7c0571d1bc.mp4?token=d_2hkMqIBvr_V3oqOKeDAaX_4_mFppIBjmm0siyVLOOEYG2U38zwh314Wa70GRTw6Nd4oi_6dKHxHxla6qIKyvldrR5f7DkZmn9z9SnOrdVMFcQknhMU_SGcZG4KwXRzM5Rig6vRcSrbpS5wru7GUSNFwcQGrAPbJT0kS2qt2akwLovFwIv1E1OLlQ9s1tDgJMheShxfV5xPg5FS8_UD1NYcxqi6zhq0HdDH5EV5w6th0PS9aRr_0yd7SFNQHshyV6Xm8ojZXr5-FcVvxT5LuHFFT_--cC_2qTjiyMqXJfmoPFWDz0omkrFYYZ2dJo8sh2XsUbbdAvQfCSzdE-f3bmLrE9lFzCtmplNQhj4AZ4R4sBsPQAMlf1XYC9sImSKOlBNQeSt49vuYibDSy80PuKVs5C7Z_vUP3YAGP3aaHXg61-tgWp8MpBdcopJJ4awypAvHF-vNlDYceAX1w40-k24F6SjbpKH3f3Gn-75T3GpOwwWU6EFc-rFYi5CFlGcR68wCb2zRMCgFLSaQC6hTYjNvxulcKrmCwir3_Al6syUIG18L0rgwxlPYNBDFVglWVobJvuSKSThtuafmt-c8CjgtfUPSOH47gr7VmHD9ucKChfak_d0Qj1FjWHCzavQMOpUVeo-H_ZXx5HtDgGFdk3FrWDJVCRGF9OiydvSD7d4"
+      },
+      "published_at": "2026-11-13T10:02:00+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "5a4067a041cf3c58",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.949895+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30378",
+      "source_post_id": "30378",
+      "title": "امام جمعه کرمان: انسجام ملی خط قرمز «ملت امام حسین (ع)» است",
+      "excerpt": "امام جمعه کرمان: انسجام ملی خط قرمز «ملت امام حسین (ع)» است نماینده ولی فقیه در استان و امام جمعه کرمان، انسجام ملی و وحدت را خط قرمز ملت امام حسین(ع) عنوان کرد و گفت: با وحدت و همدلی پای آرمان‌های کشور و خون شهدا می‌ایستیم. irna_kerman",
+      "paragraphs": [
+        "امام جمعه کرمان: انسجام ملی خط قرمز «ملت امام حسین (ع)» است",
+        "نماینده ولی فقیه در استان و امام جمعه کرمان، انسجام ملی و وحدت را خط قرمز ملت امام حسین(ع) عنوان کرد و گفت: با وحدت و همدلی پای آرمان‌های کشور و خون شهدا می‌ایستیم.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Rk1c9H8nVuixGdYT-V8xh3I2EHEvbdWATfiIU-cteAGL1zMUfqL8gqme8IQaJDmSuyUjfeHGDQgGsGEoQhF8bkOYt2vVZG4RVnwreUriTg3k4bLkCCk7OL9bgNhzJK9043NkMLj4Rk8owywO6ODdbgGa10zabCaOcU5whms1t1OEITmj--GSvLDwHjU8VC9csZa5bm9udmoQYWlEcO8ZHWzqN3UnYsfsdSQb-FqapX-0g0jgu0iSA3BjffD60gR-G95lx2CCvZo2gmcWAEMArN6gJz4PNREwUbyVGDp1T977vwHTd0O_T1Z5hTNneyD26rJpm1lYwZUzuq5g-pfJ1Q.jpg"
+      },
+      "published_at": "2026-11-13T10:07:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "fb1affd6921fefe4",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.949895+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140549",
+      "source_post_id": "140549",
+      "title": "تشییع باشکوه پیکر مطهر ۱۷ شهید گمنام در کرمان",
+      "excerpt": "تشییع باشکوه پیکر مطهر ۱۷ شهید گمنام در کرمان عکس: مهدی امین زاده",
+      "paragraphs": [
+        "تشییع باشکوه پیکر مطهر ۱۷ شهید گمنام در کرمان",
+        "عکس: مهدی امین زاده"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/E8-cqqSyfUsgGaHmrXtHK8jyWkXt9IzIL4gW3BiktkZbolvA5V6LYtvqBa7dvLZZRGjLn8rYKKLyOsclMQldjnRGh3DgFQ78Mbex3NSa_0z5VtuPHGAhfG-HiWmqVg5khYammZ_O2OwRXUhxsCEgrVuINEMw-q5RKbf1-XKECYnSPUCD8yB1KjlbVnulZ1_WTsTuFVZW56cnQpSSQ9DAW43ioKlwEaYgTWYPV4O8mWXC2sRW0Q5qLqeKbOxWGePD8lRRG-r0vUefPL2LHpJB6Tpea7xlh-GBHJ4mH50yodFaKll7ITXnSI9GB9EIIaK5sps0oAP36EwLuhSKSb-EGQ.jpg"
+      },
+      "published_at": "2026-11-13T10:17:46+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "512c8a0c5a71eaa8",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T10:25:57.949895+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T08:43:52.252222+00:00",
+  "saved_at": "2026-11-13T10:26:09.469000+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-13T08:43:28.475200+00:00",
-    "fardaayekerman": "2026-11-13T08:43:28.475200+00:00",
-    "irna_kerman": "2026-11-13T08:43:28.475200+00:00",
-    "kerman_gov": "2026-11-13T08:43:28.475200+00:00",
-    "kerman_akhbar": "2026-11-13T08:43:28.475200+00:00",
-    "kerman_news": "2026-11-13T08:43:28.475200+00:00",
-    "kerman_rasaneh": "2026-11-13T08:43:28.475200+00:00",
-    "qh_qv": "2026-11-13T08:43:28.475200+00:00"
+    "kermane_no": "2026-11-13T10:25:57.949895+00:00",
+    "fardaayekerman": "2026-11-13T10:25:57.949895+00:00",
+    "irna_kerman": "2026-11-13T10:25:57.949895+00:00",
+    "kerman_gov": "2026-11-13T10:25:57.949895+00:00",
+    "kerman_akhbar": "2026-11-13T10:25:57.949895+00:00",
+    "kerman_news": "2026-11-13T10:25:57.949895+00:00",
+    "kerman_rasaneh": "2026-11-13T10:25:57.949895+00:00",
+    "qh_qv": "2026-11-13T10:25:57.949895+00:00"
   }
 }
