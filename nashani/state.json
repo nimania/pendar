@@ -1424,225 +1424,28 @@
     "https://t.me/kerman_news/140550",
     "https://t.me/irna_kerman/30379",
     "https://t.me/kerman_news/140551",
-    "https://t.me/kerman_news/140552"
+    "https://t.me/kerman_news/140552",
+    "https://t.me/kerman_news/140553",
+    "https://t.me/Kerman_akhbar/66366",
+    "https://t.me/Kerman_akhbar/66367",
+    "https://t.me/kermane_no/59330",
+    "https://t.me/kerman_news/140554",
+    "https://t.me/kerman_gov/10627",
+    "https://t.me/kerman_news/140555",
+    "https://t.me/Kerman_akhbar/66368",
+    "https://t.me/Kerman_akhbar/66369",
+    "https://t.me/kerman_news/140556",
+    "https://t.me/kerman_news/140557",
+    "https://t.me/kermane_no/59331",
+    "https://t.me/kerman_news/140558",
+    "https://t.me/Kerman_akhbar/66370",
+    "https://t.me/kerman_news/140559",
+    "https://t.me/kerman_news/140560",
+    "https://t.me/qh_qv/1065",
+    "https://t.me/kerman_news/140561",
+    "https://t.me/Kerman_akhbar/66371"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140272",
-      "source_post_id": "140272",
-      "title": "کشف ۹۲ کیلوگرم موادمخدر توسط پلیس کرمان",
-      "excerpt": "کشف ۹۲ کیلوگرم موادمخدر توسط پلیس کرمان مأموران پلیس کرمان هنگام گشت‌زنی شبانه در یکی از جاده‌های فرعی حوزه شهرستان بم به کرمان یک دستگاه خودروی پژو ۴۰۵ و یک دستگاه کوییک را متوقف و در بازرسی از آن‌ها، ۸۲ کیلو تریاک کشف و متهمان را دستگير کردند.",
-      "paragraphs": [
-        "کشف ۹۲ کیلوگرم موادمخدر توسط پلیس کرمان",
-        "مأموران پلیس کرمان",
-        "هنگام گشت‌زنی شبانه در یکی از جاده‌های فرعی حوزه شهرستان بم به کرمان یک دستگاه خودروی پژو ۴۰۵ و یک دستگاه کوییک را متوقف و در بازرسی از آن‌ها، ۸۲ کیلو تریاک کشف و متهمان را دستگير کردند."
-      ],
-      "media": null,
-      "published_at": "2026-11-08T16:43:56+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "59001a99f392fc63",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T17:59:04.962921+00:00",
-      "other_sources": [
-        {
-          "name": "آخرین خبر کرمان",
-          "url": "https://t.me/Kerman_akhbar/66273"
-        },
-        {
-          "name": "آخرین خبر کرمان",
-          "url": "https://t.me/Kerman_akhbar/66274"
-        }
-      ],
-      "reserved_at": "2026-11-08T17:59:23.638738+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 188,
-      "sent_at": "2026-11-08T17:59:26.687290+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59145",
-      "source_post_id": "59145",
-      "title": "بسته خبری 2020 یکشنبه 17 آبان از پایگاه خبری کرمان نو را بشنوید",
-      "excerpt": "بسته خبری 2020 یکشنبه 17 آبان از پایگاه خبری کرمان نو را بشنوید",
-      "paragraphs": [
-        "بسته خبری 2020 یکشنبه 17 آبان از پایگاه خبری کرمان نو را بشنوید"
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-08T16:50:12+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "f71ba58f4a298cd1",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T17:59:04.962921+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T17:59:23.638738+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 189,
-      "sent_at": "2026-11-08T17:59:28.504316+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59146",
-      "source_post_id": "59146",
-      "title": "به گزارش کرمان‌نو، تیم فوتبال مس رفسنجان در هفته نهم لیگ یک از ساعت ۱۷:۳۰ دقیقه امروز یکشنبه ۱۷ آبان برابر تیم جزیره قشم قرار گرفت که در این دیدار خارج از خانه با یک گل بازی را واگذار کرد.",
-      "excerpt": "به گزارش کرمان‌نو، تیم فوتبال مس رفسنجان در هفته نهم لیگ یک از ساعت ۱۷:۳۰ دقیقه امروز یکشنبه ۱۷ آبان برابر تیم جزیره قشم قرار گرفت که در این دیدار خارج از خانه با یک گل بازی را واگذار کرد. مس رفسنجان که هفته گذشته نیز برابر پارس جنوبی جم تساوی کرده بود حالا دومین هفته ناکامی خود را برابر رقبای بالانشین تجربه کرده است و با ۱۶ امتیاز در رده چهارم قرار گرفت.",
-      "paragraphs": [
-        "به گزارش کرمان‌نو، تیم فوتبال مس رفسنجان در هفته نهم لیگ یک از ساعت ۱۷:۳۰ دقیقه امروز یکشنبه ۱۷ آبان برابر تیم جزیره قشم قرار گرفت که در این دیدار خارج از خانه با یک گل بازی را واگذار کرد.",
-        "مس رفسنجان که هفته گذشته نیز برابر پارس جنوبی جم تساوی کرده بود حالا دومین هفته ناکامی خود را برابر رقبای بالانشین تجربه کرده است و با ۱۶ امتیاز در رده چهارم قرار گرفت."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/kc-LlwcvfL3NgrBiwCyEbJVK3IgnrRJ86bMaODUmtvOd8czJ29JZxCTT0MpyUNgsDTI6TJI75oxFVIR77q447_QHsSvyXJZa16rhpj2g4xaXHWu68QuARYwbobp_852jRXgIlo-Mo1Zfz3CBSDqvmgMVe_VACay-FAzVXN_ZVr6D8V0M53u293qJrsK7jYWjBDTwZN-4N3a-rIKSdHeK8o4IZT9demvXYz6cS1SYfNmJGXwYoDeNwusVwGh3qigaCwjDKP61eet7k477N4gWL22yRh-Um3nOJ5WLLN-7HxkUX23jIWmtaHUTS-Z_aJdpLvzVTwwhfM0y6Fna5mr1SA.jpg"
-      },
-      "published_at": "2026-11-08T17:05:04+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "1d546f27284cbfd8",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T17:59:04.962921+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T17:59:23.638738+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 190,
-      "sent_at": "2026-11-08T17:59:31.574672+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_gov/10582",
-      "source_post_id": "10582",
-      "title": "بررسی روند ارتقاء",
-      "excerpt": "بررسی روند ارتقاء بخش‌های گلباف و راین به شهرستان در بازدید مدیرکل تقسیمات کشوری وزارت کشور مدیرکل تقسیمات کشوری وزارت کشور با همراهی معاون سیاسی و اجتماعی استاندار کرمان، از بخش‌های گلباف و راین بازدید کرد تا شرایط و روند ارتقای این دو بخش به شهرستان را بررسی کند. به گزارش روابط عمومی استانداری کرمان، در جریان این بازدید، مدیرکل تقسیمات کشوری و کارشناسان همراه، ظرفیت‌ها و شرایط موجود در گلباف و راین را مورد بررسی قرار دادند و با مسئولان محلی درباره الزامات، ضوابط و فرایندهای قانونی ارتقاء به شهرستان به تبادل نظر پرداختند. این بازدید با هدف بررسی میدانی شرایط و پیگیری موضوع ارتقای گلباف و راین به شهرستان انجام شد.",
-      "paragraphs": [
-        "بررسی روند ارتقاء",
-        "بخش‌های گلباف و راین به شهرستان در بازدید مدیرکل تقسیمات کشوری وزارت کشور",
-        "مدیرکل تقسیمات کشوری وزارت کشور با همراهی معاون سیاسی و اجتماعی استاندار کرمان، از بخش‌های گلباف و راین بازدید کرد تا شرایط و روند ارتقای این دو بخش به شهرستان را بررسی کند.",
-        "به گزارش روابط عمومی استانداری کرمان، در جریان این بازدید، مدیرکل تقسیمات کشوری و کارشناسان همراه، ظرفیت‌ها و شرایط موجود در گلباف و راین را مورد بررسی قرار دادند و با مسئولان محلی درباره الزامات، ضوابط و فرایندهای قانونی ارتقاء به شهرستان به تبادل نظر پرداختند.",
-        "این بازدید با هدف بررسی میدانی شرایط و پیگیری موضوع ارتقای گلباف و راین به شهرستان انجام شد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/Gdu0E2dxFtequ5p4r544L1iKvrPlzKyovGI_5J4CLME9ZOG6aHL6JPTnpQw2yvDghwndmug-QqarsQ4ycchecdOd2FM3hvv7g0wN1YO5U_6aaVBZYCLuMkYkMMtZuirC3wmvXDuBC-0fQVIcFIjMYRxGqhQvYtXl_EnFxduzbfZz0nOJbbLQKKnIzF6POLHb2Fvavd9b68vUPG3k4V_pDLRsT38MSaAJ8lPMU54dzsezfJBhIx2WQ2k72KU-E_rj0SY5rf2hdgkjrCg1EBaaTCE6kRTLb50FiSzYoqha3_qAVVaSvI0ZASbaOszGtUiBAMXZArJH-64_n1FN7SiQLg.jpg"
-      },
-      "published_at": "2026-11-08T17:51:49+00:00",
-      "source": "اخبار استانداری کرمان",
-      "source_handle": "kerman_gov",
-      "id": "f15bb7a20864b382",
-      "media_repost_allowed": true,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T17:59:04.962921+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T17:59:23.638738+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 191,
-      "sent_at": "2026-11-08T17:59:34.695725+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140277",
-      "source_post_id": "140277",
-      "title": "مس کرمان با شهبا طعم اولین پیروزی فصل را چشید",
-      "excerpt": "مس کرمان با شهبا طعم اولین پیروزی فصل را چشید تیم مس کرمان در نخستین بازی که قاسم شهبا را روی نیمکت خود داشت، پس از عقب‌افتادن در نیمه اول، با نتیجه دو بر یک نفت مسجدسلیمان را شکست داد تا اولین سه امتیاز فصل خود را به دست آورد و به‌طور موقت از منطقه سقوط خارج شود.",
-      "paragraphs": [
-        "مس کرمان با شهبا طعم اولین پیروزی فصل را چشید",
-        "تیم مس کرمان در نخستین بازی که قاسم شهبا را روی نیمکت خود داشت، پس از عقب‌افتادن در نیمه اول، با نتیجه دو بر یک نفت مسجدسلیمان را شکست داد تا اولین سه امتیاز فصل خود را به دست آورد و به‌طور موقت از منطقه سقوط خارج شود."
-      ],
-      "media": null,
-      "published_at": "2026-11-08T18:29:19+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "c061e94c3fecb21f",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T18:30:50.325924+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T18:31:05.491269+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 193,
-      "sent_at": "2026-11-08T18:31:08.009568+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30337",
-      "source_post_id": "30337",
-      "title": "اجرای نخستین روز طرح مردم‌یاری پلیس در رودبار جنوب؛ از توزیع غذای گرم تا خدمات پزشکی",
-      "excerpt": "اجرای نخستین روز طرح مردم‌یاری پلیس در رودبار جنوب؛ از توزیع غذای گرم تا خدمات پزشکی فرمانده انتظامی جنوب استان کرمان از اجرای نخستین روز از طرح بزرگ مردم‌یاری در روستاهای اطراف شهرستان رودبار جنوب با ارائه خدمات متنوع بهداشتی، حمایتی و معیشتی خبر داد. irna_kerman",
-      "paragraphs": [
-        "اجرای نخستین روز طرح مردم‌یاری پلیس در رودبار جنوب؛ از توزیع غذای گرم تا خدمات پزشکی",
-        "فرمانده انتظامی جنوب استان کرمان از اجرای نخستین روز از طرح بزرگ مردم‌یاری در روستاهای اطراف شهرستان رودبار جنوب با ارائه خدمات متنوع بهداشتی، حمایتی و معیشتی خبر داد.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/NVSlEMEr_9iingR8d5MdfmLri_uqjmLiv4WFH4Ni586pFqkB3JZ2pcqcc-1utqBKADMapBV8vNLM7glIeyfYhIOvv_Q0k9-x0PYTbAMvYt7_wjFTpXZPyMRtU01s5h5yjsTqygs9Fw3Yw4SzD-maLkKM3OlMRfr403wqQv6uLdo0w5nsPOfPn_ryf0aLt3PflZOgZwZkKTOIFb1mi1tIPzJ1xVCrMupSoZdA3GrBgZ73Uz58-KwnUuCUrbeu811ZwI43jNHztvNqszSP4cw2BUrDwnIvQ-J7Bo2hwmqSkTAtmhZpgbUhp01sdKyfPnwrPYGRLSFf97oT9Scsjm1DNg.jpg"
-      },
-      "published_at": "2026-11-08T18:34:18+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "fc2a096e58a4cfcc",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T19:20:22.312128+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T19:20:38.013137+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 194,
-      "sent_at": "2026-11-08T19:20:40.808025+00:00"
-    },
-    {
-      "url": "https://t.me/Kerman_akhbar/66275",
-      "source_post_id": "66275",
-      "title": "مهدی رحمتی سرمربی گل‌گهر: به هواداران قول می‌دهم تیم را درست کنم",
-      "excerpt": "مهدی رحمتی سرمربی گل‌گهر: به هواداران قول می‌دهم تیم را درست کنم",
-      "paragraphs": [
-        "مهدی رحمتی سرمربی گل‌گهر: به هواداران قول می‌دهم تیم را درست کنم"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/9c00ca4e17.mp4?token=QNZl2ewqu4is294vWoALI6u6H1ID3WeK1jXhj1u-jjrP9VzH-pEW-O02Ve65NQtp3ERV2giImZDVRUrXBfMbHxMgigENrWVDchBsxvjyZokTO7hY5C5Rxw9NohdxjYtr1BI_qeC_44mAGuqtRjYxeEGXPjbobdO7vo17GWcdXWuIKb4OFbdZHMKra5svN5PZ8cYjjQ1HPHQYmH34UXg6LDhFqMOJyxpEMXh--De4ugvMxLUTBowmru1ujuj2YQP71cK86_yOSmW0mW2DAGG_e4yYXVY8WBIJMkJphBe5NgMwsvmNNuEIfYem9h7G-LV6GPeu1a-mVdqw2Pp72oEFYg"
-      },
-      "published_at": "2026-11-08T18:45:43+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "de93d31fa64aeb29",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-08T19:20:22.312128+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-08T19:20:38.013137+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 195,
-      "sent_at": "2026-11-08T19:20:42.226685+00:00"
-    },
     {
       "url": "https://t.me/kerman_news/140278",
       "source_post_id": "140278",
@@ -10396,7 +10199,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-13T11:36:15.940823+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66366"
+        }
+      ]
     },
     {
       "url": "https://t.me/irna_kerman/30379",
@@ -10451,18 +10259,198 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-13T11:36:15.940823+00:00",
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66367"
+        }
+      ]
+    },
+    {
+      "url": "https://t.me/kermane_no/59330",
+      "source_post_id": "59330",
+      "title": "مراسم عزاداری شهادت حضرت زهرا (س) روستای سردر چترود",
+      "excerpt": "مراسم عزاداری شهادت حضرت زهرا (س) روستای سردر چترود",
+      "paragraphs": [
+        "مراسم عزاداری شهادت حضرت زهرا (س) روستای سردر چترود"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/b2ea5a4e37.mp4?token=LQzArCd9r49EDcg3DoJJDT16GA9FgzRgr6Lp4-4IhKitWtPz6jsy863toU67RKFCRQnd_nOavsOuvwYaxti10QLKvxu2oRG-TemGoBcS0a12GqcLQtuTdrJYqm_90EQnMdWnAg74x9K3XrY2jnk2mC6eVAgyk9ifWOHK816YRQa00MvjRSNGHUnayPPPM-HudftqfhdMw6RTEEwZWRaFfLP1UhTRkXXzidg3nt8BWY5pDxhWJeapyGGGkDkd6Ejxreu0rdnft1OHO-5H3GDPfK3EGz3kIYRp0eXTbVvQK32Y78ZpocWloRmQTGK08FY3PqZn0Rq4342f5wdyvEMpX1vfFsmhfiIpVzVciVNzYjJDoUwG9bGVyhzwxEV98YrxRzyLkSI0Zaimg4uH1_OmbnxKfpA1fb5qwIgEi2mjNd2-xwXgAc4Ry2i8PT12YOZ5dZ2rjPio7qrsOd5lc-tmjIsa46-0TPILg7Mvqy0XpYbmHTB9zqvTf3qgjxEMZyx8B96Xl0umpcbuseVl19EHNiBpZxxxyK2HDSwtUOKvtmQa0UqBN7U223UxWC3C4Wxxqv5ttBcP3JJFGjkwT_Hou71QJI6ZxTSO4L7nqkvUJZg-NhySuoZVkKvnHFGVZsN5iuP-hxLfETlB6jdTXNxNRoOBH_0Woj5U1RfODD4Lf0I"
+      },
+      "published_at": "2026-11-13T12:09:49+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "eea7b60f7092088a",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T16:21:16.876141+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140554",
+      "source_post_id": "140554",
+      "title": "دشمنی آمریکا با ایران با تغییر دولت‌ها پایان نمی‌یابد",
+      "excerpt": "دشمنی آمریکا با ایران با تغییر دولت‌ها پایان نمی‌یابد امام جمعه کرمان مسئولان ارشد نظام با زیرکی، هوشیاری و دقت، شرایط را دنبال می‌کنند و به این نکته توجه دارند که راهی جز تقویت بازدارندگی تا رسیدن به سطحی که دشمن جرأت کوچک‌ترین نگاه چپ به کشور را نداشته باشد، وجود ندارد. ما اهل منطق هستیم، اما دشمن ما منطق ندارد؛ بنابراین در کنار به رخ کشیدن منطق خود در برابر دنیا، باید برای نشاندن دشمن در جای خود، همان‌گونه که تاکنون عمل کرده‌ایم، بازدارندگی را در عرصه‌های مختلف تقویت کنیم تا دشمن به‌طور کامل مأیوس شود.",
+      "paragraphs": [
+        "دشمنی آمریکا با ایران با تغییر دولت‌ها پایان نمی‌یابد",
+        "امام جمعه کرمان",
+        "مسئولان ارشد نظام با زیرکی، هوشیاری و دقت، شرایط را دنبال می‌کنند و به این نکته توجه دارند که راهی جز تقویت بازدارندگی تا رسیدن به سطحی که دشمن جرأت کوچک‌ترین نگاه چپ به کشور را نداشته باشد، وجود ندارد.",
+        "ما اهل منطق هستیم، اما دشمن ما منطق ندارد؛ بنابراین در کنار به رخ کشیدن منطق خود در برابر دنیا، باید برای نشاندن دشمن در جای خود، همان‌گونه که تاکنون عمل کرده‌ایم، بازدارندگی را در عرصه‌های مختلف تقویت کنیم تا دشمن به‌طور کامل مأیوس شود."
+      ],
+      "media": null,
+      "published_at": "2026-11-13T12:15:22+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "b298a80cd2abc467",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T16:21:16.876141+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66368",
+      "source_post_id": "66368",
+      "title": "تشییع و خاکسپاری شهید گمنام در روستای ابارق بم",
+      "excerpt": "تشییع و خاکسپاری شهید گمنام در روستای ابارق بم",
+      "paragraphs": [
+        "تشییع و خاکسپاری شهید گمنام در روستای ابارق بم"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/34352dae55.mp4?token=MfpKR7uzoSliL2Nk010twM1qyC6cs9m75PqhHHt9C0n23RCl4KxOJzPB-cHt2EpP_JLwGYLlLk7VEwAT7ljyMZyTHcHcDh60nx17so2Vm01tLaHyRD3RYV5Bo6hOKosDUl2W0XKml_EVSn-iMz4wWSFJgVBKI6-w1_RwMOeKG_2Tf56FQxhHV9mMCO7c4NC53bW5u3f4RKxoU60CFD7LxFZMIeQZUEiRg6Wtwpxpq0qZ6BK49rjaiynIQzVxLUSh9qJJ4CQtKBhnJLW_gT7o5AbZkt4gBAD3yerQPTXgyMPsYQqn_MAb6gNYCXFRHNOmW4AOSxu6Ikb5wYhU5TgbkLzxW4X9D9Jc99cJJM_7SkdyC8lOcoTwYJJME1RIjDLTFn_K00a48BlANgj0j8ItaCD15nECKSzN8_H2cox_VYe0z158dKIPOYfzjtCb57987GfFpZ7lD3ycmvmw5bEXedn8A9-umcs1iM7nW7-A6FyhIDT38I2zfBH6QLSt7MnJzNq_y2-GSKUC6llj0crpyUCpe2mJPywuzeSmtuM83dzaVqTviVq4rLiDR4kzF23oMcegE43yE-WMwtI_0jzzStx7x93GKEag4CPpM6Da4MNQx6xulgrzKyvTSfm0GVxapuIDLR0AMDL7x_ye48FFTKvbNTq1EU5VYtGlgMuvXhU"
+      },
+      "published_at": "2026-11-13T12:50:27+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "00611202721b33a9",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T16:21:16.876141+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66369",
+      "source_post_id": "66369",
+      "title": "عزاداری مردم سیرجان در روز شهادت ام‌ابیها",
+      "excerpt": "عزاداری مردم سیرجان در روز شهادت ام‌ابیها",
+      "paragraphs": [
+        "عزاداری مردم سیرجان در روز شهادت ام‌ابیها"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/8f27813c8c.mp4?token=K5-N5b9DPFlaIFATxpTzfc9TrziA04BHKQhbn5G89NgS6V3a3qbOClzXPKs-v-R6ZnQzYXONHW3lkGynDDI2AeeJaIgJi5Z-pQagXvTJIn6IXgQ8INxh5vUSY5lqLRMNqgTY41tlC09oLaI5HME1J1Onu2OqPVulz_yIWwu5gMWPT04DKKv_q9eZevAKPedkA1K61qdtXZoYQJnWjVpesQ_19iMjLXb4itpWH_CWXfmbsjiKHJHgZX8A7hquBFdDE5slRIgoEMJ94B4_dpvpw-ezcDsJNEK69RCD3A5ZO63gGKllIXebv8EbBQt_wuVQs6yimr-KS3g73yhtiNtriiMhrpJVaOd2pVzmFov_TJHomPpf412CerlVfRBtZDuAk1c-4CJQ5IKM_ibrOhtWilvekg81Mj4ao_nNErPTdDD8jDVxbfUvFMafBl5iFRtTsLQSfo0X77QnZLyoJxMi9HIJaj2ANHkieyQeEUZz0iDGM8WfDLFsQlCEq51JncNWzWbSq3Hpcxnh3h89g4fLZfQBD4PMXs4srRjSi1QHxlKjjW8jcQqUBGkwrxvDDDOSFiJ1_g34ZOUOtPkLzh8I-cDjKkl9-GzQgWtPCLzZRdoicMjeG8mCKSyo1ePu265SxBYTR97IKW7oOLoOwYvA90XiWFcAY_eXyzyCrYv4Zf8"
+      },
+      "published_at": "2026-11-13T12:50:28+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "fba0595860b88d53",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T16:21:16.876141+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140557",
+      "source_post_id": "140557",
+      "title": "مدیریت ایران بر تنگه هرمز، مصداق بارز «جهاد ابتدایی» است",
+      "excerpt": "مدیریت ایران بر تنگه هرمز، مصداق بارز «جهاد ابتدایی» است امام جمعه جیرفت اعمال مدیریت جمهوری اسلامی بر تنگه هرمز و در هم شکستن پایگاه‌های نظامی آمریکا، گرچه واکنشی به تجاوزات دشمن در جنگ تحمیلی سوم بود، اما در عین حال یک «جهاد ابتدایی» علیه جبهه استکبار در ابعاد منطقه‌ای محسوب می‌شود که ادبیات نوین و تحول‌آفرینی را در فقه سیاسی جهان اسلام گشوده است. کشورهای منطقه باید بدانند تظاهر صوری به اسلام، حاکمیت‌های هم‌پیمان با مستکبران را در برابر خشم امت اسلامی مصون نمی‌دارد و مستند قرآنی این راهبرد، آیه ۷۵ سوره نساء در دفاع از مستضعفان است.",
+      "paragraphs": [
+        "مدیریت ایران بر تنگه هرمز، مصداق بارز «جهاد ابتدایی» است",
+        "امام جمعه جیرفت",
+        "اعمال مدیریت جمهوری اسلامی بر تنگه هرمز و در هم شکستن پایگاه‌های نظامی آمریکا، گرچه واکنشی به تجاوزات دشمن در جنگ تحمیلی سوم بود، اما در عین حال یک «جهاد ابتدایی» علیه جبهه استکبار در ابعاد منطقه‌ای محسوب می‌شود که ادبیات نوین و تحول‌آفرینی را در فقه سیاسی جهان اسلام گشوده است.",
+        "کشورهای منطقه باید بدانند تظاهر صوری به اسلام، حاکمیت‌های هم‌پیمان با مستکبران را در برابر خشم امت اسلامی مصون نمی‌دارد و مستند قرآنی این راهبرد، آیه ۷۵ سوره نساء در دفاع از مستضعفان است."
+      ],
+      "media": null,
+      "published_at": "2026-11-13T13:39:29+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "1e4266c3cd03b340",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-13T16:21:16.876141+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140559",
+      "source_post_id": "140559",
+      "title": "اجتماع بزرگ فاطمیون در رفسنجان برگزار شد",
+      "excerpt": "اجتماع بزرگ فاطمیون در رفسنجان برگزار شد عصر امروز جمعه ۲۲ آبان‌ماه، اجتماع بزرگ فاطمیون همزمان با عصر شهادت حضرت فاطمه زهرا (س) به همت هیئت فاطمیون رفسنجان برگزار شد. این مراسم با دسته‌روی و عزاداری از میدان انقلاب (فردوس) به سمت یادمان شهید گمنام بوستان جوان برگزار شد و مورد استقبال گسترده مردم مؤمن و عزادار رفسنجان قرار گرفت.",
+      "paragraphs": [
+        "اجتماع بزرگ فاطمیون در رفسنجان برگزار شد",
+        "عصر امروز جمعه ۲۲ آبان‌ماه، اجتماع بزرگ فاطمیون همزمان با عصر شهادت حضرت فاطمه زهرا (س) به همت هیئت فاطمیون رفسنجان برگزار شد.",
+        "این مراسم با دسته‌روی و عزاداری از میدان انقلاب (فردوس) به سمت یادمان شهید گمنام بوستان جوان برگزار شد و مورد استقبال گسترده مردم مؤمن و عزادار رفسنجان قرار گرفت."
+      ],
+      "media": null,
+      "published_at": "2026-11-13T14:44:27+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "ee83f025fe0e0972",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T16:21:16.876141+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66371",
+      "source_post_id": "66371",
+      "title": "تدفین شهید گمنام در شهرک صنعتی سدید کرمان",
+      "excerpt": "تدفین شهید گمنام در شهرک صنعتی سدید کرمان پیکر مطهر یکی از شهدای گمنام همزمان با سالروز شهادت حضرت فاطمه زهرا(س)در شهرک صنعتی سدید تشییع و تدفین شد.",
+      "paragraphs": [
+        "تدفین شهید گمنام در شهرک صنعتی سدید کرمان",
+        "پیکر مطهر یکی از شهدای گمنام همزمان با سالروز شهادت حضرت فاطمه زهرا(س)در شهرک صنعتی سدید تشییع و تدفین شد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/AeQE_qny8C4e5J0UibQiNgm7lnTpkUi_54cKZuxL3KitrYO0dzwy0u6VVao98brloGC5gF_2F1MC0eDNSpn307D7lBliENvEmHn0__rLV3fQ8VxBEsfV4QIzgYT0uTBSePgp8KPK1RyrtBOvmKcBWT73rS6Z7bgD2TzG1oVpO9zX2RvBZ-UNIeA7vDiaubwjULiJ4haFQ-4yVk3TpVDFMYd3lM_XxHL0VdbysXSCQvRfg22tim1MaDgzBmz0gZe3yc90Obv7y2mHZUtEqmajNzCFKwovjnxhrigv1HDSswqSSlIXvTra1qjP-h5Q-oiYFWATs_iG1vk5ZksE9681ig.jpg"
+      },
+      "published_at": "2026-11-13T16:07:06+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "621fc939684383c7",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T16:21:16.876141+00:00",
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T11:36:40.994713+00:00",
+  "saved_at": "2026-11-13T16:21:34.799631+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-13T11:36:15.940823+00:00",
-    "fardaayekerman": "2026-11-13T11:36:15.940823+00:00",
-    "irna_kerman": "2026-11-13T11:36:15.940823+00:00",
-    "kerman_gov": "2026-11-13T11:36:15.940823+00:00",
-    "kerman_akhbar": "2026-11-13T11:36:15.940823+00:00",
-    "kerman_news": "2026-11-13T11:36:15.940823+00:00",
-    "kerman_rasaneh": "2026-11-13T11:36:15.940823+00:00",
-    "qh_qv": "2026-11-13T11:36:15.940823+00:00"
+    "kermane_no": "2026-11-13T16:21:16.876141+00:00",
+    "fardaayekerman": "2026-11-13T16:21:16.876141+00:00",
+    "irna_kerman": "2026-11-13T16:21:16.876141+00:00",
+    "kerman_gov": "2026-11-13T16:21:16.876141+00:00",
+    "kerman_akhbar": "2026-11-13T16:21:16.876141+00:00",
+    "kerman_news": "2026-11-13T16:21:16.876141+00:00",
+    "kerman_rasaneh": "2026-11-13T16:21:16.876141+00:00",
+    "qh_qv": "2026-11-13T16:21:16.876141+00:00"
   }
 }
