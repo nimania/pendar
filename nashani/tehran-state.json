@@ -2908,230 +2908,50 @@
     "https://t.me/mehrnews/431359",
     "https://t.me/irna_1313/473302",
     "https://t.me/mehrnews/431360",
-    "https://t.me/irna_1313/473303"
+    "https://t.me/irna_1313/473303",
+    "https://t.me/irna_1313/473304",
+    "https://t.me/isna94/413216",
+    "https://t.me/irna_1313/473305",
+    "https://t.me/tehranpress1/132594",
+    "https://t.me/mehrnews/431364",
+    "https://t.me/irna_1313/473306",
+    "https://t.me/isna94/413217",
+    "https://t.me/irna_1313/473307",
+    "https://t.me/irna_1313/473308",
+    "https://t.me/irna_1313/473309",
+    "https://t.me/mehrnews/431365",
+    "https://t.me/mehrnews/431366",
+    "https://t.me/isna94/413218",
+    "https://www.mehrnews.com/news/7009381/%D8%AA%D8%AC%D9%85%D8%B9-%D8%A8%D8%A7%D9%86%D9%88%D8%A7%D9%86-%D9%85%D8%A8%D8%B9%D9%88%D8%AB-%D9%81%D8%A7%D8%B7%D9%85%DB%8C-%D8%AF%D8%B1-%D9%88%D8%B1%D8%A7%D9%85%DB%8C%D9%86",
+    "https://t.me/irna_1313/473310",
+    "https://t.me/Tehran_Tel/114917",
+    "https://t.me/irna_1313/473311",
+    "https://t.me/irna_1313/473312",
+    "https://t.me/irna_1313/473313",
+    "https://t.me/Tehran_Tel/114918",
+    "https://t.me/isna94/413219",
+    "https://t.me/tehranpress1/132596",
+    "https://t.me/irna_1313/473314",
+    "https://t.me/isna94/413220",
+    "https://t.me/irna_1313/473316",
+    "https://t.me/mehrnews/431367",
+    "https://t.me/mehrnews/431368",
+    "https://t.me/mehrnews/431369",
+    "https://t.me/mehrnews/431370",
+    "https://t.me/mehrnews/431371",
+    "https://t.me/Tehran_Tel/114919",
+    "https://t.me/mehrnews/431372",
+    "https://t.me/irna_1313/473317",
+    "https://t.me/isna94/413221",
+    "https://t.me/irna_1313/473318",
+    "https://t.me/Tehran_Tel/114920",
+    "https://t.me/tehranpress1/132597",
+    "https://t.me/isna94/413222",
+    "https://t.me/irna_1313/473319",
+    "https://t.me/isna94/413223",
+    "https://t.me/tehranpress1/132598"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132347",
-      "source_post_id": "132347",
-      "title": "دار و دستۀ ترامپ روی دور شکست",
-      "excerpt": "دار و دستۀ ترامپ روی دور شکست تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "دار و دستۀ ترامپ روی دور شکست",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/01543c195c.mp4?token=MEPO_EyoEZKDs1nRtASysA9bV8RxyaB-S3DlPHeTxyDbeZ6VuJw5UuGHcwVHM9ULgDDnJzq35Xq3JnsKfPml5Q9-uY23FxljtM5X4HAxtQNtc_S4GIxQKXinFMYYiqKBVNB05RbOxnUU20OQS94m_F7uoYMa7rzuTQBBodIQhaGBQbJz35L1RBxuGkNT5Q78TQtmm8dp-A-54BUEiv1PaXvbFfDDtXQNLfWWk3bTVzEkrXjWZykcnBGF-h3LUuXiFG2I6FdLxUFq0q_hfUJFeeL2du4NOril35wfWWKHl4kui01tSdOKXXRb0sGFqz0usqb1ix7YR8ApO506ICC2Ng"
-      },
-      "published_at": "2026-11-08T20:26:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "736a03d7a70efb51",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-08T20:46:25.662724+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132348",
-      "source_post_id": "132348",
-      "title": "منابع عربی از حمله پهپادی به میدان گازی کورمور در شمال عراق گزارش می‌دهند",
-      "excerpt": "منابع عربی از حمله پهپادی به میدان گازی کورمور در شمال عراق گزارش می‌دهند تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "منابع عربی از حمله پهپادی به میدان گازی کورمور در شمال عراق گزارش می‌دهند",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": null,
-      "published_at": "2026-11-08T20:37:54+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "3ad0dd66a5d8c4b7",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "review",
-      "detected_at": "2026-11-08T20:46:25.662724+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/tehranpress1/132349",
-      "source_post_id": "132349",
-      "title": "سوال از وزیر بهداشت: چه‌کسانی باید واکسن آنفلوانزا بزنند؟",
-      "excerpt": "سوال از وزیر بهداشت: چه‌کسانی باید واکسن آنفلوانزا بزنند؟ تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "سوال از وزیر بهداشت: چه‌کسانی باید واکسن آنفلوانزا بزنند؟",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/97e98c5e31.mp4?token=fzKBHZhk4u0sNZx1nFWwu1Iq4TJwjbNFz7MGAU7PaPsxICt-LPaLwWERrvePWKTC_zymMwkrujdEdt0PftEd7I78A6n1kgF_WD6rwJsX3qRacG0qn179k45QBbsoam_a1ElG_dR6gVMo693GSWkS234LINMD2FA4lHqv4xcsUaEw8iB37vG2GNaE1QRM0VUMM092b4oPrLkZE2ESbxSwEhhXVNgjpyTgWRFG9hgxMQJt1YBdIzv7i4Q7getmWCRJUDuLxzwdXi9JIvoJubDTlqY-RJZ-IINsDiIp-UE5tXv00dM78CQ42rDSkH7bcHQ6et_oismC3fH8d2nEXOCE0g"
-      },
-      "published_at": "2026-11-08T20:44:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "d321d56654d93188",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-08T20:46:25.662724+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132350",
-      "source_post_id": "132350",
-      "title": "آخرین حضور و صحبت‌های زنده‌یاد",
-      "excerpt": "آخرین حضور و صحبت‌های زنده‌یاد کوروش زارعی بازیگر سینما، تئاتر و تلویزیون، در قاب برنامه «محفل» شبکه سه؛ حرف‌هایی که امروز شنیدنش رنگ و بوی دیگری دارد… «همیشه از خدا خواستم که هر کاری در سینما، تئاتر و تلویزیون می‌کنم، برای قرآن و اهل‌بیت و اسلام باشد؛ و آرزویم این است که مرگم هم در همین راه باشد…» تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "آخرین حضور و صحبت‌های زنده‌یاد",
-        "کوروش زارعی",
-        "بازیگر سینما، تئاتر و تلویزیون، در قاب برنامه «محفل» شبکه سه؛ حرف‌هایی که امروز شنیدنش رنگ و بوی دیگری دارد…",
-        "«همیشه از خدا خواستم که هر کاری در سینما، تئاتر و تلویزیون می‌کنم، برای قرآن و اهل‌بیت و اسلام باشد؛ و آرزویم این است که مرگم هم در همین راه باشد…»",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/a102e1486e.mp4?token=Ft9zS6OJWfbZ_Ct6IXqop4NrmmEFddVOIkHMewTxpuoSGc7jyup-Umuli6PeLpxf4UeCJqZDHNZMwlMqW53jF5t3BGF0HbytZUUS4Tt67r_cT_1zVT7yKQ3POERvSO1o02JW8HADKb-tdiH4sp5yhEM5TYxlm5ged0s_EzHZv-nW_NiB3TznIZzj3jpv8xRE1bsco-HR0VU9Ln1ZFrGgqxVN-bCg3LCQg_QsfNPNbhD5jAPT5gaulSdU44oBslTmNMv_4UtxYViZAoEmio4dAjvr7uW3e0VChwNRB7q36Ev9mxg3S_oOuVJ9XFQcJGVoZJtF1ldlulCmdFDOnXX7JQ"
-      },
-      "published_at": "2026-11-08T20:56:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "bfd24b7426c3a030",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-08T22:30:05.556834+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132351",
-      "source_post_id": "132351",
-      "title": "۷۰ هزار چادر فلسطینی‌های آواره در غزه در تقریباً ۱۲ ساعت از اولین طوفان زمستانی به زیر آب رفتند",
-      "excerpt": "۷۰ هزار چادر فلسطینی‌های آواره در غزه در تقریباً ۱۲ ساعت از اولین طوفان زمستانی به زیر آب رفتند تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "۷۰ هزار چادر فلسطینی‌های آواره در غزه در تقریباً ۱۲ ساعت از اولین طوفان زمستانی به زیر آب رفتند",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/625beda272.mp4?token=BTt79Pu2Sj54hMUUQ0Dw-aHJVGCTI67vvSvtEDpSTzFsHOMleCcMWiLxkb57lZvHNvxvF68_tiiWVzlTOWZIKT5zRG7_oGO6qbcEsmi5MgzNC44ReG8akiR0eqQ09BbqHmYQg-DAGjBwkssHJRF1i21R4P1JpfBQMl6gxl8FbpNYvBeHidbEClg-MBf9sxdjU6wfXaUENjwO-1PIjkhf-wapCHsILYwwo_OErtNvYBC_qhr_kSxYF8C0Ms2K5nYikAeRLDEJpqnJGrA7wb_8YvfY9lrcTAVlqUe7cIah6qDFBo4xfGsa0YPVx9yJAk7-yNEBkc9HzX0Em5IFvSEmIQ"
-      },
-      "published_at": "2026-11-08T20:57:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "6a5349206ac725c7",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-08T22:30:05.556834+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132352",
-      "source_post_id": "132352",
-      "title": "ویدئو کلاژ | دویست و پنجاه و دومین شب از اجتماعات امیدآفرین در میادین پایتخت",
-      "excerpt": "ویدئو کلاژ | دویست و پنجاه و دومین شب از اجتماعات امیدآفرین در میادین پایتخت یک‌شنبه ۱۷ آبان ۱۴۰۵ تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "ویدئو کلاژ | دویست و پنجاه و دومین شب از اجتماعات امیدآفرین در میادین پایتخت",
-        "یک‌شنبه ۱۷ آبان ۱۴۰۵",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-08T22:02:31+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "f0266cf543e8bd4f",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-08T22:30:05.556834+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-09T02:00:30.813158+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 84,
-      "sent_at": "2026-11-09T02:00:34.123576+00:00"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132353",
-      "source_post_id": "132353",
-      "title": "بعضی تصاویر را هیچ تیتری نمی‌تواند توصیف کند...",
-      "excerpt": "بعضی تصاویر را هیچ تیتری نمی‌تواند توصیف کند... تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "بعضی تصاویر را هیچ تیتری نمی‌تواند توصیف کند...",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/ec984c83ba.mp4?token=aBkjn_hlRJm_lCUGS98qvk5GWTgJa-klE9dQgmdPqR-tag4VlhrZLTGrnQmA_pqrsh9tUBTjhNeFyF_fdV9bwl9xxcINYsWsTXFhiduKu_iYjiMm3ZueOgvryYt4MBWy5HZr2_oko2yKl3XlNtPH5X-99fDXVTkhLKh2ZJmRAKr8ihWUPeONqezVNMzZJD4KoqY_kzObjkeKLVkMlVHjeE-AMMpMBjMprZaxSOppCvEzCNiVE2T8Q-K_vmdCfxuD9RRg9AnPnbfMDfspVY_InlPzadEcOD1Z5B97GBeSRLKhc73bypXjrVMAL5thGyW2Bn8iaOOJqTC3Z7My6zpHIA"
-      },
-      "published_at": "2026-11-09T04:11:01+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "65084204cb9d5d3b",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-09T07:13:02.616792+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-09T07:14:20.072914+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 85,
-      "sent_at": "2026-11-09T07:14:23.136195+00:00"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132354",
-      "source_post_id": "132354",
-      "title": "سناریوی آمریکا برای حمله به تاسیسات اتمی ایران چقدر موفقیت آمیز خواهد بود؟",
-      "excerpt": "سناریوی آمریکا برای حمله به تاسیسات اتمی ایران چقدر موفقیت آمیز خواهد بود؟ تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "سناریوی آمریکا برای حمله به تاسیسات اتمی ایران چقدر موفقیت آمیز خواهد بود؟",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-09T04:33:40+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "d7556211abbf46e8",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "review",
-      "detected_at": "2026-11-09T07:13:02.616792+00:00",
-      "other_sources": []
-    },
     {
       "url": "https://t.me/tehranpress1/132355",
       "source_post_id": "132355",
@@ -11456,16 +11276,247 @@
       "status": "ready",
       "detected_at": "2026-11-13T10:25:57.559764+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132594",
+      "source_post_id": "132594",
+      "title": "هگست مقصر کشته شدن غیرنظامیان در ایران است",
+      "excerpt": "هگست مقصر کشته شدن غیرنظامیان در ایران است پسر وزیر دفاع دوره ریاست جمهوری باراک اوباما پیت هگست وزیر جنگ ایالات متحده مسئول کشته شدن غیرنظامیان در ایران و کشتارهای فراقانونی در منطقه کارائیب است.» همگی این اقدامات صورت گرفته به دستور شخص هگست و دونالد ترامپ رئیس جمهور آمریکا، نیازمند پاسخگویی و شفاف‌سازی هستند. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "هگست مقصر کشته شدن غیرنظامیان در ایران است",
+        "پسر وزیر دفاع دوره ریاست جمهوری باراک اوباما",
+        "پیت هگست وزیر جنگ ایالات متحده مسئول کشته شدن غیرنظامیان در ایران و کشتارهای فراقانونی در منطقه کارائیب است.»",
+        "همگی این اقدامات صورت گرفته به دستور شخص هگست و دونالد ترامپ رئیس جمهور آمریکا، نیازمند پاسخگویی و شفاف‌سازی هستند.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/QxOS6mawnCXyBAekoHsglYaoa_Tlq0oIJ61c7kjz5vTflHW7eUp7Ar6HxaDcTz6MFRfmGAeFboE_JEGGqlJ20Cr6PDpIC5TTslT_lLYeVG5lK-iIx0UFi3IM6jM2jqwfjyUgR6A0UpwGqd__JzMQK4_L1qnSHCliFiGipfCT2pzup1olZ6HiO8-mWzzUOPkZocWzEA6z9JubrvlOnG-LnIdEww0_Bv2KHWSU3OnzH-t74PfrbLP6s4X5hFUqtmgSXP_s54aj-E-jtW7GQS_qIZZS8R9Yx_L1FyEJCGylqkMHsU8sBK0G-LSd84c2_NQlnDjbZAdZ8epiqHBIwXDg9w.jpg"
+      },
+      "published_at": "2026-11-13T10:34:47+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "6eb5b9bd0a6a3995",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-13T11:36:11.236927+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/isna94/413217",
+      "source_post_id": "413217",
+      "title": "کیفیت هوای پایتخت در شرایط «ناسالم برای گروه‌های حساس»",
+      "excerpt": "کیفیت هوای پایتخت در شرایط «ناسالم برای گروه‌های حساس» براساس اعلام شرکت کنترل کیفیت هوای تهران، میانگین کیفیت هوای پایتخت هم‌اکنون‌ (۲۲ آبان‌ماه) در شرایط «ناسالم برای گروه‌های حساس» است.",
+      "paragraphs": [
+        "کیفیت هوای پایتخت در شرایط «ناسالم برای گروه‌های حساس»",
+        "براساس اعلام شرکت کنترل کیفیت هوای تهران، میانگین کیفیت هوای پایتخت هم‌اکنون‌ (۲۲ آبان‌ماه) در شرایط «ناسالم برای گروه‌های حساس» است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/CNWpOqoc8alPbfHqk0ExbnzxGnsjezPmWcR0x6oQaNN199Pvp_o7sLngae0dn0ZwpZJonTvpxI1GdThQZS7N1UN6Y1aWOKauQtlsU50iaV3RB-lP2ubpX09uFi2P3gd87gk2kc7tHdG3cKvtYNXTJw_zlfLovCSWfTtowPZxszUYz1Ok5eLOLcUKY_KRnAhuzVCO9D7kGyh2Mzy_zTwTGjOTsbN_BkTiOJ_gRqjQZsJL34_VIvrcOMsaxGvlooTKDmXy4vbQ_9v-sJJ75_gcVkmIJtcmMDDgg-BVkxE67dSuVPlJyCMXbEWVGEEfADOSlJ5oJE9qdDXkxqpxGpWZgA.jpg"
+      },
+      "published_at": "2026-11-13T10:37:03+00:00",
+      "source": "ایسنا",
+      "source_handle": "isna94",
+      "id": "1f916c5881ad804b",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایسنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-13T11:36:11.236927+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/473307",
+      "source_post_id": "473307",
+      "title": "بسته خبری ایرنا؛ مهم‌ترین خبرهای صبح امروز ۲۲ آبان ۱۴۰۵",
+      "excerpt": "بسته خبری ایرنا؛ مهم‌ترین خبرهای صبح امروز ۲۲ آبان ۱۴۰۵ مراسم تشییع پیکرهای پاک ۱۱۰ شهید گمنام دفاع مقدس در تهران ناگفته‌هایی از زندگی شهید طهرانی‌مقدم؛ میدان‌دار آسمان افزایش دما و غلظت آلاینده های جوی در کشور سردار ایزدی: ما در هر سطح و هر نوع از تهدید، پاسخ فوری، اثرگذار و پشیمان کننده خواهیم داد حضور رئیس جمهور پزشکیان در مراسم تشییع شهدای گمنام افشای افزایش اختلاف ترامپ و نتانیاهو بر سر جنگ با ایران؛ مشاجره لفظی در تماس تلفنی انفجار و آتش سوزی مهیب کشتی متخلف حمل گاز مایع در شرق تنگه هرمز کیفرخواست پرونده نمایشگاه فیتکس تهران صادر شد مرز سومار به صورت موقت تا اطلاع ثانوی بسته شد معاون استاندار کرمانشاه: فعالیت مرزهای پرویزخان و خسروی با تمام ظرفیت ادامه دارد ترامپ با ادعای حفاظت از متحدان آمریکا، جنگ تجاوزکارانه علیه ایران را توجیه کرد سواحل بوشهر تا سه‌شنبه آینده مواج است انهدام یک فروند پهپاد MQ1 توسط نیروی دریایی ارتش در منطقه کوهستک",
+      "paragraphs": [
+        "بسته خبری ایرنا؛ مهم‌ترین خبرهای صبح امروز ۲۲ آبان ۱۴۰۵",
+        "مراسم تشییع پیکرهای پاک ۱۱۰ شهید گمنام دفاع مقدس در تهران",
+        "ناگفته‌هایی از زندگی شهید طهرانی‌مقدم؛ میدان‌دار آسمان",
+        "افزایش دما و غلظت آلاینده های جوی در کشور",
+        "سردار ایزدی: ما در هر سطح و هر نوع از تهدید، پاسخ فوری، اثرگذار و پشیمان کننده خواهیم داد",
+        "حضور رئیس جمهور پزشکیان در مراسم تشییع شهدای گمنام",
+        "افشای افزایش اختلاف ترامپ و نتانیاهو بر سر جنگ با ایران؛ مشاجره لفظی در تماس تلفنی",
+        "انفجار و آتش سوزی مهیب کشتی متخلف حمل گاز مایع در شرق تنگه هرمز",
+        "کیفرخواست پرونده نمایشگاه فیتکس تهران صادر شد",
+        "مرز سومار به صورت موقت تا اطلاع ثانوی بسته شد",
+        "معاون استاندار کرمانشاه: فعالیت مرزهای پرویزخان و خسروی با تمام ظرفیت ادامه دارد",
+        "ترامپ با ادعای حفاظت از متحدان آمریکا، جنگ تجاوزکارانه علیه ایران را توجیه کرد",
+        "سواحل بوشهر تا سه‌شنبه آینده مواج است",
+        "انهدام یک فروند پهپاد MQ1 توسط نیروی دریایی ارتش در منطقه کوهستک"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/N7nc27M_JWUC5VPsVbp8ue1waQyUNO-ntEBCQuuBK50E2tXB9P5CFjV-6hGxEWwkOoFVSiR-1FeAgdEQgOAg-fEL885aswgCAasN9qjYwCVj-wIOmV4mt5g-SgLSYRt6tBNXsvAA-H36Kwbkbb2v173yoNekmN9W21d7ashXPcsuTlFsOKbFpNqp3CWXWyi0o506h2_2TgDgtb7QeUffMeitBopldDbnMZ0NQGLIZGV3iupCRc00wu-e9ELdYFbeZIAG7XUzJoT94X2KIwHzxOs4Mh7zpVAaKX8Dig5gRRlO_j694fCCo6toCKQRKWanB1Sls6tfcmnTrLihkgzrIw.jpg"
+      },
+      "published_at": "2026-11-13T10:38:28+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "670abb969b11e964",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-13T11:36:11.236927+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/isna94/413218",
+      "source_post_id": "413218",
+      "title": "ابوترابی‌فرد، خطیب نماز جمعه این هفته تهران: ایران با پرتاب ماهواره‌های بومی بر مدار زمین به شمار کشورهای محدود دارای چرخه کامل فضایی پیوست",
+      "excerpt": "ابوترابی‌فرد، خطیب نماز جمعه این هفته تهران: ایران با پرتاب ماهواره‌های بومی بر مدار زمین به شمار کشورهای محدود دارای چرخه کامل فضایی پیوست پیشرفت در پرتابگرهای فضایی به طور مستقیم توان موشکی تهران را ارتقا بخشیده است امروز هوافضا هم آزمایشگاه فناوری‌های حساس است و هم سکوی اقتدار علمی ایرانیان قدرت نامتقارن به ایران این ظرفیت را داده است که می‌تواند بزرگ‌ترین دارایی خود یعنی کنترل تنگه هرمز را به سلاحی اقتصادی مبدل نماید که به آن امکان می‌دهد قدرت خود را در اقتصاد جهانی اعمال کند وضعیت اکنون منطقه می‌تواند به شکل‌گیری ساختاری بدیع و قدرتمند در خاورمیانه منجر شود، اتحادی نظامی یا شبکه‌ای از ائتلاف‌ها میان کشورهای همسایه که به تأمین امنیت جمعی خود متعهد باشند و این نگاه در نشست تهران کلید خورد.",
+      "paragraphs": [
+        "ابوترابی‌فرد، خطیب نماز جمعه این هفته تهران: ایران با پرتاب ماهواره‌های بومی بر مدار زمین به شمار کشورهای محدود دارای چرخه کامل فضایی پیوست",
+        "پیشرفت در پرتابگرهای فضایی به طور مستقیم توان موشکی تهران را ارتقا بخشیده است",
+        "امروز هوافضا هم آزمایشگاه فناوری‌های حساس است و هم سکوی اقتدار علمی ایرانیان",
+        "قدرت نامتقارن به ایران این ظرفیت را داده است که می‌تواند بزرگ‌ترین دارایی خود یعنی کنترل تنگه هرمز را به سلاحی اقتصادی مبدل نماید که به آن امکان می‌دهد قدرت خود را در اقتصاد جهانی اعمال کند",
+        "وضعیت اکنون منطقه می‌تواند به شکل‌گیری ساختاری بدیع و قدرتمند در خاورمیانه منجر شود، اتحادی نظامی یا شبکه‌ای از ائتلاف‌ها میان کشورهای همسایه که به تأمین امنیت جمعی خود متعهد باشند و این نگاه در نشست تهران کلید خورد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/HGke-zLE3FtUcV92I8uzoHsUfxDi-_lGItQlyjxuvnJLUgjbcxl7pfJzLwwk3nAEsDcJVfZUyO_fVszJhJvbaFEmxv0UU5nfk-n6ArxVqQOEjVwuuNvDJwGUBc_JmdlRmsZGJSatPnW1qAdmzXLxpdNOekrOU1J6tIpkr-xRmAjd3ZqYIgq6cr1PJchaKuTeToSKW5DKUKNH8C-W6Gt6qrgFr6r7HxsMMx-HqkfbSSuyp0KgAx1FJUiVrWJdJurVd_wlsZvQt6e2YIRqVgL3HyteJvp2FcwvvCDJ_Y9hO7MP5r6vWA6Dn1GgdfqNDgmjUWarknPxPFPqgQidxCZG5w.jpg"
+      },
+      "published_at": "2026-11-13T10:45:20+00:00",
+      "source": "ایسنا",
+      "source_handle": "isna94",
+      "id": "eed08c7f40d7c487",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایسنا",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-13T11:36:11.236927+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132596",
+      "source_post_id": "132596",
+      "title": "بازگشت آلودگی، تهران دفن شده زیر غبار آلودگی هوا از نمای قله توچال، صبح امروز",
+      "excerpt": "بازگشت آلودگی، تهران دفن شده زیر غبار آلودگی هوا از نمای قله توچال، صبح امروز تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "بازگشت آلودگی، تهران دفن شده زیر غبار آلودگی هوا از نمای قله توچال، صبح امروز",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/8b8b043f3a.mp4?token=mSFz6MUqjufy9RVjKWMLYT2hCRGNsr11SAkLITUj1ieg4fHD-vABw1hSMhGAUjwRnyptKxz9gHDpbI5Q0LkHBG8xuLkgZDkDqqiF3n7qOyzv5_0akirv8zIAfiy-vX-sxHElbory3DmSKpi-GpRkRQm5DN6f64Z5ffxaFh4FdMM57JCramX0s6pqiG6_L9uBOwrLcxMElubEHL8VRwOxDCuh4TbzOnUZEZICNtOJHN-RGZFB0JzrE_i0QlwpUjWUS-Nl9d9gQJiHHSsI5K-DVJb8SZcOVDgiX0ILLDop4EJjDWoVADJVQX4RkjKnMIP4VRlB-IwVdQMWaQeqUNLNQg"
+      },
+      "published_at": "2026-11-13T11:01:01+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "a9f9ab90f480b4e3",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-13T11:36:11.236927+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/473314",
+      "source_post_id": "473314",
+      "title": "حضور رئیس جمهور پزشکیان در مراسم تشییع ۱۱۰ شهید گمنام صبح امروز",
+      "excerpt": "حضور رئیس جمهور پزشکیان در مراسم تشییع ۱۱۰ شهید گمنام صبح امروز دکتر مسعود پزشکیان، به همراه دکتر محسن حاجی‌میرزایی، رئیس دفتر رئیس‌جمهور، در میان مردم حاضر در مراسم تشییع ۱۱۰ شهید گمنام در خیابان انقلاب تهران حضور یافتند و به مقام شامخ شهدا ادای احترام کردند.",
+      "paragraphs": [
+        "حضور رئیس جمهور پزشکیان در مراسم تشییع ۱۱۰ شهید گمنام صبح امروز",
+        "دکتر مسعود پزشکیان، به همراه دکتر محسن حاجی‌میرزایی، رئیس دفتر رئیس‌جمهور، در میان مردم حاضر در مراسم تشییع ۱۱۰ شهید گمنام در خیابان انقلاب تهران حضور یافتند و به مقام شامخ شهدا ادای احترام کردند."
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-13T11:01:57+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "ce27ae244a57aa0c",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-13T11:36:11.236927+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/isna94/413221",
+      "source_post_id": "413221",
+      "title": "مردم پایتخت به احترام ۱۱۰ شهید گمنام به خیابان آمدند",
+      "excerpt": "مردم پایتخت به احترام ۱۱۰ شهید گمنام به خیابان آمدند پیکر۱۱۰ شهید گمنام دفاع مقدس همزمان با سالروز شهادت حضرت زهرا(س) و همراه با مردم دیگر شهرهای کشور جمعه ۲۲ آبان در تهران تشییع شدند. مردم پایتخت شهدای گمنام را از سردر‌‌دانشگاه تهران تا معراج شهدا بدرقه کردند.",
+      "paragraphs": [
+        "مردم پایتخت به احترام ۱۱۰ شهید گمنام به خیابان آمدند",
+        "پیکر۱۱۰ شهید گمنام دفاع مقدس همزمان با سالروز شهادت حضرت زهرا(س) و همراه با مردم دیگر شهرهای کشور جمعه ۲۲ آبان در تهران تشییع شدند.",
+        "مردم پایتخت شهدای گمنام را از سردر‌‌دانشگاه تهران تا معراج شهدا بدرقه کردند."
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-13T11:17:46+00:00",
+      "source": "ایسنا",
+      "source_handle": "isna94",
+      "id": "e0680573ca189611",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایسنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-13T11:36:11.236927+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132598",
+      "source_post_id": "132598",
+      "title": "اژه‌ای: تشییع ۳۵۰ شهید گمنام خون تازه‌ای به رگ‌های ملت تزریق کرد",
+      "excerpt": "اژه‌ای: تشییع ۳۵۰ شهید گمنام خون تازه‌ای به رگ‌های ملت تزریق کرد رئیس قوه قضاییه به مناسبت تشییع پیکر ۳۵۰ شهید گمنام دفاع مقدس ملت ایران شهادت را از دامان حضرت زهرا(س) به ارث برده و در سایه این ایمان الهی از هیچ تهدیدی نمی‌هراسد. تشییع شهدا خشت محکمی بر سنگر مقاومت است. ما به پشتوانه این خون‌های مطهر، استوارتر از همیشه ایستاده‌ایم تا پرچم این نهضت الهی را به دست صاحب اصلی‌اش حضرت بقیة‌الله‌الاعظم(عج) برسانیم. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "اژه‌ای: تشییع ۳۵۰ شهید گمنام خون تازه‌ای به رگ‌های ملت تزریق کرد",
+        "رئیس قوه قضاییه به مناسبت تشییع پیکر ۳۵۰ شهید گمنام دفاع مقدس",
+        "ملت ایران شهادت را از دامان حضرت زهرا(س) به ارث برده و در سایه این ایمان الهی از هیچ تهدیدی نمی‌هراسد.",
+        "تشییع شهدا خشت محکمی بر سنگر مقاومت است.",
+        "ما به پشتوانه این خون‌های مطهر، استوارتر از همیشه ایستاده‌ایم تا پرچم این نهضت الهی را به دست صاحب اصلی‌اش حضرت بقیة‌الله‌الاعظم(عج) برسانیم.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/KVUBmnVvUVBdiGLh3uE9vwxFPgaQQuC7ybvgLk_U5mkkUa_spRUAcvJeEole85QgZi1XFNiDAS9VBBRcHy2FaM7qmBuGEGKrz_HiUM1W-4IeIk3o7WhR0Rg8UZ6EcLeyjD8ijMSi3T-yHntzUr1O25nFKQv9EaEVewJSnDt5tt9A0Y7FF0PQmFej66HA-sQiY8BTG4SBydB5Hwnqo381uGPlC_sZWV6WxnIYVwsChpbI5UX-6btEnYh8Af-ZLOsLV9B8Tc2iO5tBFWUJwU6TvW3XQlY5gvNOipQuTEOOD8CzYgvmkQ11PfYFWAUiZsCrCuLRGUfjJ0IiLgx8GtNusQ.jpg"
+      },
+      "published_at": "2026-11-13T11:30:53+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "1b85e958cfe492d5",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-13T11:36:11.236927+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T10:26:51.357052+00:00",
+  "saved_at": "2026-11-13T11:37:19.685417+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-13T10:25:57.559764+00:00",
-    "tehran_tel": "2026-11-13T10:25:57.559764+00:00",
-    "irna_1313": "2026-11-13T10:25:57.559764+00:00",
-    "isna94": "2026-11-13T10:25:57.559764+00:00",
-    "mehrnews": "2026-11-13T10:25:57.559764+00:00",
-    "web_shahr": "2026-11-13T10:05:37.057330+00:00",
-    "web_mehr_tehran": "2026-11-13T10:05:37.057330+00:00"
+    "tehranpress1": "2026-11-13T11:36:11.236927+00:00",
+    "tehran_tel": "2026-11-13T11:36:11.236927+00:00",
+    "irna_1313": "2026-11-13T11:36:11.236927+00:00",
+    "isna94": "2026-11-13T11:36:11.236927+00:00",
+    "mehrnews": "2026-11-13T11:36:11.236927+00:00",
+    "web_shahr": "2026-11-13T11:36:11.236927+00:00",
+    "web_mehr_tehran": "2026-11-13T11:36:11.236927+00:00"
   }
 }
