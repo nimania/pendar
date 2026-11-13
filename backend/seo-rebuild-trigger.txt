@@ -1,1 +1,1 @@
-SEO full rebuild requested on 2026-11-11 to restore a verified Pages baseline and publish crawlable editorial statement URLs.
+Recovery 2026-11-13: regenerate retained complete-site artifact and fresh news after artifact expiry.
