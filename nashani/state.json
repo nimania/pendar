@@ -10461,12 +10461,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-13T18:47:39.436926+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-13T18:47:54.187733+00:00"
     }
   ],
-  "saved_at": "2026-11-13T18:47:52.093728+00:00",
+  "saved_at": "2026-11-13T18:47:54.187779+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-13T18:47:39.436926+00:00",
     "fardaayekerman": "2026-11-13T18:47:39.436926+00:00",
