@@ -1402,37 +1402,12 @@
     "https://t.me/kermane_no/59327",
     "https://t.me/irna_kerman/30376",
     "https://t.me/kerman_news/140538",
-    "https://t.me/irna_kerman/30377"
+    "https://t.me/irna_kerman/30377",
+    "https://t.me/kerman_news/140539",
+    "https://t.me/kerman_news/140540",
+    "https://t.me/kerman_news/140541"
   ],
   "queue": [
-    {
-      "url": "https://t.me/Kerman_akhbar/66263",
-      "source_post_id": "66263",
-      "title": "ترکیب ذوب‌آهن و گل‌گهر",
-      "excerpt": "ترکیب ذوب‌آهن و گل‌گهر هفته دوازدهم لیگ‌برتر ایران ساعت ۱۶:۱۵",
-      "paragraphs": [
-        "ترکیب ذوب‌آهن و گل‌گهر",
-        "هفته دوازدهم لیگ‌برتر ایران",
-        "ساعت ۱۶:۱۵"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/eWqy2NOM3djkxjA3lBmIMMpbLIm8eOxkk6lhy0JMgwNK7E4rrk9IkaSdIEERZKGJE240FI2eCFpyjN3hN35sTdpOC2azhiFRLKLBhWbPUPBw7paD589EHxksfUVXicdOBDETPehMuVyWZONzjdFh_6zynuELpY9T_d_iIRvy1Se3q2nxZf1amp6dO3Cz3UgTYneSVkV_6n_lxq5sDSQvaR9CmUpJZQGIcOWPDUOuu4JW2g7Mcr2aBVr7Qj32j8yC108t4veTOw44IE5XTHTdQa8Lyg1lS2me14NlsFoxZi0jY13V8h1uFNn6pGbUAsHx06KLKOgl8cHCdQ4LtCQD2g.jpg"
-      },
-      "published_at": "2026-11-08T12:41:28+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "92a4959ab137d29c",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "expired",
-      "detected_at": "2026-11-08T13:23:11.397388+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/kermane_no/59136",
       "source_post_id": "59136",
@@ -10428,17 +10403,44 @@
       "status": "ready",
       "detected_at": "2026-11-13T07:56:24.908311+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140541",
+      "source_post_id": "140541",
+      "title": "قطع درختان بهشت‌زهرای کهنوج به دستور چه کسی انجام شد؟",
+      "excerpt": "قطع درختان بهشت‌زهرای کهنوج به دستور چه کسی انجام شد؟ به گزارش کهنوجیها، شماری از شهروندان از قطع درختان سبز و تنومند بهشت‌زهرای کهنوج گلایه کرده‌اند. به گفته آنان، با توجه به کمبود سایه‌بان در آرامستان، خانواده‌ها هنگام برگزاری مراسم ترحیم از سایه این درختان استفاده می‌کردند. شهروندان از شهرداری کهنوج خواسته‌اند علت قطع درختان و مرجع صادرکننده دستور را اعلام کند.",
+      "paragraphs": [
+        "قطع درختان بهشت‌زهرای کهنوج به دستور چه کسی انجام شد؟",
+        "به گزارش کهنوجیها، شماری از شهروندان از قطع درختان سبز و تنومند بهشت‌زهرای کهنوج گلایه کرده‌اند. به گفته آنان، با توجه به کمبود سایه‌بان در آرامستان، خانواده‌ها هنگام برگزاری مراسم ترحیم از سایه این درختان استفاده می‌کردند.",
+        "شهروندان از شهرداری کهنوج خواسته‌اند علت قطع درختان و مرجع صادرکننده دستور را اعلام کند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/UTxPTEWmmyHXZ7C7zA5zmttf2AlrTiIPzDBa24bGAcSWDUYfESIW6yCky31_yTM4KFbtqucaBG13_SJpJVqcacwnCuJTkFDGI3hUsypfPbt4qaqTvRnFDMtE9GOTzqyLIJijHEdsGtil2GkUqeYPNI3qKY4jJ8pX6R7Qic8AxoJ-GBDTkDtr2b-Qc1RAuamx9da-QlF_lpLVieSG7P_5Ga7iSIhPOIyKthWr7E5DPFcnf8AZaea5uZB-G_yUvJwLp-_LG3QBQN8vpAN7ckUZbImIoJHOIiJu-0btsStXj8Og1Cibcjg7SL0H48Xhqq6H-JDhxR8A_F2M7YkxQjpu7w.jpg"
+      },
+      "published_at": "2026-11-13T08:18:41+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "26c2b18985f34549",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-13T08:43:28.475200+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T07:57:15.564655+00:00",
+  "saved_at": "2026-11-13T08:43:41.886626+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-13T07:56:24.908311+00:00",
-    "fardaayekerman": "2026-11-13T07:56:24.908311+00:00",
-    "irna_kerman": "2026-11-13T07:56:24.908311+00:00",
-    "kerman_gov": "2026-11-13T07:56:24.908311+00:00",
-    "kerman_akhbar": "2026-11-13T07:56:24.908311+00:00",
-    "kerman_news": "2026-11-13T07:56:24.908311+00:00",
-    "kerman_rasaneh": "2026-11-13T07:56:24.908311+00:00",
-    "qh_qv": "2026-11-13T07:56:24.908311+00:00"
+    "kermane_no": "2026-11-13T08:43:28.475200+00:00",
+    "fardaayekerman": "2026-11-13T08:43:28.475200+00:00",
+    "irna_kerman": "2026-11-13T08:43:28.475200+00:00",
+    "kerman_gov": "2026-11-13T08:43:28.475200+00:00",
+    "kerman_akhbar": "2026-11-13T08:43:28.475200+00:00",
+    "kerman_news": "2026-11-13T08:43:28.475200+00:00",
+    "kerman_rasaneh": "2026-11-13T08:43:28.475200+00:00",
+    "qh_qv": "2026-11-13T08:43:28.475200+00:00"
   }
 }
