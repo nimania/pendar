@@ -10688,10 +10688,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-13T07:56:23.999198+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-13T07:57:22.849550+00:00"
+      "reserved_at": "2026-11-13T07:57:22.849550+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 180,
+      "sent_at": "2026-11-13T07:57:25.471777+00:00"
     },
     {
       "url": "https://shahr.ir/news/88233/%D8%B1%D8%A7%D9%87%D9%86%D9%85%D8%A7%DB%8C-%D8%B4%D9%87%D8%B1%D9%88%D9%86%D8%AF%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D8%B5%D9%85%DB%8C%D9%85-%DA%AF%DB%8C%D8%B1%DB%8C-%D8%AF%D8%B1%D8%B3%D8%AA-%D8%AF%D8%B1-%D8%B4%D8%B1%D8%A7%DB%8C%D8%B7-%D8%A8%D8%AD%D8%B1%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D9%84%D8%AD%D8%B8%D9%87",
@@ -10711,10 +10714,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-13T07:56:23.999198+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-13T07:57:22.849550+00:00"
+      "reserved_at": "2026-11-13T07:57:22.849550+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 181,
+      "sent_at": "2026-11-13T07:57:26.765996+00:00"
     },
     {
       "url": "https://shahr.ir/news/87141/%D8%A8%D8%A7%D8%B2%D8%AF%DB%8C%D8%AF-%D8%A7%D8%B2-%DB%B6%DB%B0-%D9%87%D8%B2%D8%A7%D8%B1-%D9%88%D8%A7%D8%AD%D8%AF-%D8%B5%D9%86%D9%81%DB%8C-%D8%AF%D8%B1-%D9%82%D8%A7%D9%84%D8%A8-%D8%B7%D8%B1%D8%AD-%D8%B1%D9%81%D8%B9-%D8%B3%D8%AF-%D9%85%D8%B9%D8%A8%D8%B1-%D8%A7%D8%B2-%D8%A7%D8%AE%D8%B7%D8%A7%D8%B1",
@@ -11377,7 +11383,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T07:57:22.849569+00:00",
+  "saved_at": "2026-11-13T07:57:26.766015+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-13T07:56:23.999198+00:00",
     "tehran_tel": "2026-11-13T07:56:23.999198+00:00",
