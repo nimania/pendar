@@ -3052,37 +3052,18 @@
     "https://t.me/tehranpress1/132615",
     "https://t.me/irna_1313/473400",
     "https://t.me/irna_1313/473401",
-    "https://t.me/tehranpress1/132616"
+    "https://t.me/tehranpress1/132616",
+    "https://t.me/irna_1313/473402",
+    "https://t.me/irna_1313/473403",
+    "https://t.me/isna94/413268",
+    "https://t.me/irna_1313/473404",
+    "https://t.me/irna_1313/473405",
+    "https://t.me/mehrnews/431470",
+    "https://t.me/tehranpress1/132617",
+    "https://t.me/isna94/413269",
+    "https://t.me/mehrnews/431471"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132378",
-      "source_post_id": "132378",
-      "title": "دریاچه ارومیه در ۴۸ ساعت جان تازه گرفت",
-      "excerpt": "دریاچه ارومیه در ۴۸ ساعت جان تازه گرفت بارش‌های پاییزی از ۱۵ تا ۱۷ آبان، وسعت دریاچه ارومیه را ۲۴ کیلومترمربع افزایش داد و حجم آب آن را به ۲.۵۸ میلیارد مترمکعب رساند. ‏ تراز آب دریاچه نیز از ۱۲۷۰.۵۹ به ۱۲۷۰.۶۰ متر رسید. ‏ حجم آب دریاچه در مقایسه با مدت مشابه سال گذشته، از ۳۵۰ میلیون به ۲ میلیارد و ۵۸۰ میلیون مترمکعب افزایش یافته است. ‏ با وجود این بهبود، رئیس سازمان حفاظت محیط‌زیست می‌گوید هنوز نمی‌توان از احیای دریاچه سخن گفت. تداوم بهبود وضعیت ارومیه به مدیریت مصرف آب، کنترل برداشت‌ها و تأمین حقابه زیست‌محیطی وابسته است. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "دریاچه ارومیه در ۴۸ ساعت جان تازه گرفت",
-        "بارش‌های پاییزی از ۱۵ تا ۱۷ آبان، وسعت دریاچه ارومیه را ۲۴ کیلومترمربع افزایش داد و حجم آب آن را به ۲.۵۸ میلیارد مترمکعب رساند.",
-        "‏ تراز آب دریاچه نیز از ۱۲۷۰.۵۹ به ۱۲۷۰.۶۰ متر رسید.",
-        "‏ حجم آب دریاچه در مقایسه با مدت مشابه سال گذشته، از ۳۵۰ میلیون به ۲ میلیارد و ۵۸۰ میلیون مترمکعب افزایش یافته است.",
-        "‏ با وجود این بهبود، رئیس سازمان حفاظت محیط‌زیست می‌گوید هنوز نمی‌توان از احیای دریاچه سخن گفت. تداوم بهبود وضعیت ارومیه به مدیریت مصرف آب، کنترل برداشت‌ها و تأمین حقابه زیست‌محیطی وابسته است.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": null,
-      "published_at": "2026-11-09T14:30:39+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "66f235389ec85650",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-09T17:50:14.568933+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/tehranpress1/132379",
       "source_post_id": "132379",
@@ -11648,15 +11629,41 @@
       "status": "ready",
       "detected_at": "2026-11-13T17:41:39.783296+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132617",
+      "source_post_id": "132617",
+      "title": "عالی‌ترین مقام حضرت زهرا(س)؛ به روایت شهید سیدحسن نصرالله",
+      "excerpt": "عالی‌ترین مقام حضرت زهرا(س)؛ به روایت شهید سیدحسن نصرالله تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "عالی‌ترین مقام حضرت زهرا(س)؛ به روایت شهید سیدحسن نصرالله",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/367b0a6d1f.mp4?token=uAvWH1_JVZzdxbxlSrBvpYWUfygdXTROzom8VFsFtQ5v-CzSQYcYsYWEI9NzLDBOJ4E1Gdy32oRoU-TlHuWSv7FXEwbEtkDrHrfS3gpha6HPoULB88KTwTfDJXbOlvrXciZDdAIedARk9O_28CcH1HHx9IO8pfeHY1QR1OSzh8Lb1x2l5GXFzpl_eR2SXwe8w4WsslaI9tthOwPxLJN8_FYzEslSfn-Ksz_69sT2Z4GwrF_Fnma4CdiiqH2fZvbYmN_FL-L93HpfdzWvNyqRPrxtIz5DO0J9x_pWGQDNUgzKJhatx-NJVHJZdkN-2kncxl8RwatV5PM6_gV-mXXJVQ"
+      },
+      "published_at": "2026-11-13T18:01:21+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "8b16935281a44f63",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-13T18:08:38.036195+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T17:43:30.738978+00:00",
+  "saved_at": "2026-11-13T18:09:23.802809+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-13T17:41:39.783296+00:00",
-    "tehran_tel": "2026-11-13T17:41:39.783296+00:00",
-    "irna_1313": "2026-11-13T17:41:39.783296+00:00",
-    "isna94": "2026-11-13T17:41:39.783296+00:00",
-    "mehrnews": "2026-11-13T17:41:39.783296+00:00",
+    "tehranpress1": "2026-11-13T18:08:38.036195+00:00",
+    "tehran_tel": "2026-11-13T18:08:38.036195+00:00",
+    "irna_1313": "2026-11-13T18:08:38.036195+00:00",
+    "isna94": "2026-11-13T18:08:38.036195+00:00",
+    "mehrnews": "2026-11-13T18:08:38.036195+00:00",
     "web_shahr": "2026-11-13T17:41:39.783296+00:00",
     "web_mehr_tehran": "2026-11-13T17:41:39.783296+00:00"
   }
