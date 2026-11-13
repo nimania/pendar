@@ -32,9 +32,10 @@
       "message_id": 34
     },
     "https://www.timeout.com/istanbul/restaurants/stride-bike-n-coffee": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/stride-bike-n-coffee",
-      "at": "2026-11-13T20:14:28.154902+03:00"
+      "at": "2026-11-13T20:14:28.154902+03:00",
+      "message_id": 38
     }
   },
   "days": {
@@ -69,9 +70,10 @@
       "message_id": 34
     },
     "2026-11-13": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/stride-bike-n-coffee",
-      "at": "2026-11-13T20:14:28.154902+03:00"
+      "at": "2026-11-13T20:14:28.154902+03:00",
+      "message_id": 38
     }
   }
 }
