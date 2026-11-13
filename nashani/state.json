@@ -10433,10 +10433,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-13T18:08:19.968462+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-13T18:08:34.769854+00:00"
+      "reserved_at": "2026-11-13T18:08:34.769854+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 436,
+      "sent_at": "2026-11-13T18:08:37.389077+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140565",
@@ -10464,7 +10467,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-13T18:08:34.769866+00:00",
+  "saved_at": "2026-11-13T18:08:37.389092+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-13T18:08:19.968462+00:00",
     "fardaayekerman": "2026-11-13T18:08:19.968462+00:00",
