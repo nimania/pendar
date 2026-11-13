@@ -241,7 +241,7 @@ function renderPersonDetail(){
  const home=s?personHref(s):"";
  const head='<nav class="person-breadcrumb"><a href="/karname/#people">همهٔ چهره‌ها</a> / '+esc(name)+'</nav>'
    +'<section class="person-page-head">'+portrait+'<div><h2>'+esc(name)+'</h2><p>'+fa(existing.length)+' ادعای تاریخی · '+fa(observed.length)+' رصد خودکار</p>'
-   +(home?'<a href="'+esc(home)+'">پروندهٔ اصلی در پندار ←</a>':"")+'</div></section>';
+   +(home?'<a href="'+esc(home)+'">همهٔ سخنان این چهره در پندار ←</a>':"")+'</div></section>';
  const official='<section class="person-claim-section"><h3>ادعاهای دفتر اصلی</h3>'
   +(existing.length?'<div class="person-claim-cards">'+existing.map((c,i)=>mini(c,i)).join('')+'</div>':'<p class="muted">مورد تاریخی ثبت نشده است.</p>')+'</section>';
  const cards=observed.map(o=>{
