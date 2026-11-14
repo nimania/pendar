@@ -11793,13 +11793,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-13T22:12:58.729626+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-14T02:30:46.304298+00:00"
+      "reserved_at": "2026-11-14T02:30:46.304298+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 206,
+      "sent_at": "2026-11-14T02:30:49.726916+00:00"
     }
   ],
-  "saved_at": "2026-11-14T02:30:46.304314+00:00",
+  "saved_at": "2026-11-14T02:30:49.726936+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-14T02:29:42.312656+00:00",
     "tehran_tel": "2026-11-14T02:29:42.312656+00:00",
