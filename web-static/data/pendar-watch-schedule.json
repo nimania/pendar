@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T14:37:49.910689+00:00",
+  "generated_at": "2026-11-14T13:34:05.654782+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -732,46 +732,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-4330",
-      "title_fa": "سرزمین اوباش",
-      "start": "2026-11-13T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/247718",
-      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 9 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-6100",
-      "title_fa": "سرزمین اوباش",
-      "start": "2026-11-13T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/247718",
-      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 9 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4330",
-      "title_fa": "پادشاه تالسا",
-      "start": "2026-11-13T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/153312",
-      "icon": "https://image.tmdb.org/t/p/w500/24OWkuqt3eqkLO2d0CQ9D8D1yqY.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 5 از فصل 4؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "انتهای خیابان اوک",
-      "start": "2026-11-13T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1101383",
-      "icon": "https://image.tmdb.org/t/p/w500/vp0HL1AadTFIuJ0gePaMqoeVxOy.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "بیگانه : رومولوس",
       "start": "2026-11-21T00:00:00+03:30",
@@ -998,16 +958,6 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1195803",
       "icon": "https://image.tmdb.org/t/p/w500/6FcBZOKvyrLCKGCyBG0ySCR4okt.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "انتقام جویان: پایان بازی",
-      "start": "2026-11-13T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/299534",
-      "icon": "https://image.tmdb.org/t/p/w500/3tHI8WXY4zbJCY6wApi7DIMdgFZ.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -1362,26 +1312,6 @@
       "desc_fa": "قسمت 131 از فصل 31؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-13T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 120 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-13T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 120 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-6",
       "title_fa": "آخر شب با ست مایرز",
       "start": "2026-11-17T00:00:00+03:30",
@@ -1410,16 +1340,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 45 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-290",
-      "title_fa": "فردا از آنِ ماست",
-      "start": "2026-11-13T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/72879",
-      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 55 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "tmdb-network-6",
@@ -1462,12 +1382,92 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "digital-world",
-      "title_fa": "Heartland",
-      "start": "2026-11-13T00:00:00+03:30",
+      "channel_id": "tmdb-network-4330",
+      "title_fa": "سرزمین اوباش",
+      "start": "2026-11-20T00:00:00+03:30",
       "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1543469",
-      "icon": "https://image.tmdb.org/t/p/w500/zhxlzxBlO1sWB1rPn7RmAoeQ2na.jpg",
+      "source_url": "https://www.themoviedb.org/tv/247718",
+      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 10 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6100",
+      "title_fa": "سرزمین اوباش",
+      "start": "2026-11-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/247718",
+      "icon": "https://image.tmdb.org/t/p/w500/shuopjzpwkVIBtPyJ9eSp0ARiQV.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 10 از فصل 2؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 121 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 121 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4330",
+      "title_fa": "پادشاه تالسا",
+      "start": "2026-11-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/153312",
+      "icon": "https://image.tmdb.org/t/p/w500/24OWkuqt3eqkLO2d0CQ9D8D1yqY.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 6 از فصل 4؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "فردا از آنِ ماست",
+      "start": "2026-11-16T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/72879",
+      "icon": "https://image.tmdb.org/t/p/w500/7BjipkA48xXLauTg45QKiOb144a.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 56 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-290",
+      "title_fa": "ماجراهای دختر کفشدوزکی و گربه سیاه",
+      "start": "2026-11-15T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65334",
+      "icon": "https://image.tmdb.org/t/p/w500/A1IYd5bMKgxVdj0BgOTNUYwI0EJ.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 4 از فصل 7؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Best Pancakes in the County",
+      "start": "2026-11-20T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1615596",
+      "icon": "https://image.tmdb.org/t/p/w500/wXVYDQl2ENk3NhT1ETS4C8cAEOC.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "هرگز رها مکن",
+      "start": "2026-11-19T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/814889",
+      "icon": "https://image.tmdb.org/t/p/w500/kPX9ImdCLCQBtvAoOVX727HgFFl.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
