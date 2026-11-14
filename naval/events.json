@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-11-11T22:38:30+00:00",
+  "updated_at": "2026-11-14T20:39:26+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-cb16b4f311eefe3863",
+      "date": "2026-11-12",
+      "country": "uk",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Royal Navy to Trial Northrop Grumman Test Aircraft on Carrier in 2027",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/12/royal-navy-to-trial-northrop-grumman-test-aircraft-on-carrier-in-2027"
+    },
     {
       "id": "usni-4f78c1dc6af44a738a",
       "date": "2026-11-09",
