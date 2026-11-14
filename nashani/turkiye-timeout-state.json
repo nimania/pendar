@@ -38,9 +38,10 @@
       "message_id": 38
     },
     "https://www.timeout.com/istanbul/restaurants/yedideyedi": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/yedideyedi",
-      "at": "2026-11-14T18:50:10.386455+03:00"
+      "at": "2026-11-14T18:50:10.386455+03:00",
+      "message_id": 41
     }
   },
   "days": {
@@ -81,9 +82,10 @@
       "message_id": 38
     },
     "2026-11-14": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/restaurants/yedideyedi",
-      "at": "2026-11-14T18:50:10.386455+03:00"
+      "at": "2026-11-14T18:50:10.386455+03:00",
+      "message_id": 41
     }
   }
 }
