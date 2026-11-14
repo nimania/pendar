@@ -11166,10 +11166,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-14T16:32:24.933419+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-14T21:16:26.554167+00:00"
+      "reserved_at": "2026-11-14T21:16:26.554167+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 229,
+      "sent_at": "2026-11-14T21:16:32.647133+00:00"
     },
     {
       "url": "https://t.me/irna_1313/473752",
@@ -12317,7 +12320,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-14T21:16:26.554181+00:00",
+  "saved_at": "2026-11-14T21:16:33.085599+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-14T21:15:17.820681+00:00",
     "tehran_tel": "2026-11-14T21:15:17.820681+00:00",
