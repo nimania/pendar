@@ -3638,32 +3638,13 @@
     "https://t.me/mehrnews/431754",
     "https://t.me/irna_1313/473810",
     "https://t.me/tehranpress1/132686",
-    "https://www.mehrnews.com/news/7011045/%D8%AA%D8%A3%DA%A9%DB%8C%D8%AF-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1-%D8%AA%D8%AF%D8%A7%D9%88%D9%85-%D8%A2%D9%85%D9%88%D8%B2%D8%B4-%D8%AD%D8%B6%D9%88%D8%B1%DB%8C-%D9%85%D8%AE%D8%A7%D9%84%D9%81%D8%AA-%D8%AC%D8%AF%DB%8C-%D8%A8%D8%A7-%D8%AA%D8%B9%D8%B7%DB%8C%D9%84%DB%8C-%D9%85%D8%AF%D8%A7%D8%B1%D8%B3"
+    "https://www.mehrnews.com/news/7011045/%D8%AA%D8%A3%DA%A9%DB%8C%D8%AF-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1-%D8%AA%D8%AF%D8%A7%D9%88%D9%85-%D8%A2%D9%85%D9%88%D8%B2%D8%B4-%D8%AD%D8%B6%D9%88%D8%B1%DB%8C-%D9%85%D8%AE%D8%A7%D9%84%D9%81%D8%AA-%D8%AC%D8%AF%DB%8C-%D8%A8%D8%A7-%D8%AA%D8%B9%D8%B7%DB%8C%D9%84%DB%8C-%D9%85%D8%AF%D8%A7%D8%B1%D8%B3",
+    "https://t.me/tehranpress1/132687",
+    "https://t.me/irna_1313/473811",
+    "https://t.me/irna_1313/473821",
+    "https://t.me/mehrnews/431755"
   ],
   "queue": [
-    {
-      "url": "https://shahr.ir/news/88231/%D9%BE%DB%8C%D8%B4-%D8%A8%DB%8C%D9%86%DB%8C-%DB%B2-%D8%AA%D8%A7-%DB%B5-%D9%BE%D8%B1%D9%88%DA%98%D9%87-%D8%AC%D8%AF%DB%8C%D8%AF-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AE%D8%A7%D9%86%D9%87-%D8%B1%DB%8C%D8%B2",
-      "source_post_id": "%D9%BE%DB%8C%D8%B4-%D8%A8%DB%8C%D9%86%DB%8C-%DB%B2-%D8%AA%D8%A7-%DB%B5-%D9%BE%D8%B1%D9%88%DA%98%D9%87-%D8%AC%D8%AF%DB%8C%D8%AF-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AE%D8%A7%D9%86%D9%87-%D8%B1%DB%8C%D8%B2",
-      "title": "جزئیات جدید از پروژه «خانه‌ریز» در تهران/ طرحی الگو برای سایر استان‌ها",
-      "excerpt": "مدیرعامل سازمان سرمایه‌گذاری و مشارکت‌های مردمی شهرداری تهران جزئیات جدیدی از پروژه «خانه‌ریز» تشریح کرد و گفت: همانطور که طرح «تورم صفر» الگوی دیگر استان‌ها شد، «خانه ریز» هم همین وضعیت را دارد و ما بستر را فراهم می‌کنیم تا شهرهای دیگر هم از آن استفاده کنند.",
-      "paragraphs": [
-        "مدیرعامل سازمان سرمایه‌گذاری و مشارکت‌های مردمی شهرداری تهران جزئیات جدیدی از پروژه «خانه‌ریز» تشریح کرد و گفت: همانطور که طرح «تورم صفر» الگوی دیگر استان‌ها شد، «خانه ریز» هم همین وضعیت را دارد و ما بستر را فراهم می‌کنیم تا شهرهای دیگر هم از آن استفاده کنند."
-      ],
-      "published_at": "2026-11-11T07:43:41+00:00",
-      "media": null,
-      "source": "شهر",
-      "source_handle": "web_shahr",
-      "id": "52d2fc3f9587c524",
-      "media_repost_allowed": false,
-      "source_hashtag": "شهر",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-11T09:51:44.472152+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/isna94/412885",
       "source_post_id": "412885",
@@ -12286,15 +12267,42 @@
       "status": "ready",
       "detected_at": "2026-11-14T20:42:57.793971+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132687",
+      "source_post_id": "132687",
+      "title": "سیلاب ناگهانی در مکه بر اثر بارندگی شدید",
+      "excerpt": "سیلاب ناگهانی در مکه بر اثر بارندگی شدید بارش شدید باران در منطقه «الجرانه» در مکه مکرمه، موجب جاری‌شدن سیلاب ناگهانی شد. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "سیلاب ناگهانی در مکه بر اثر بارندگی شدید",
+        "بارش شدید باران در منطقه «الجرانه» در مکه مکرمه، موجب جاری‌شدن سیلاب ناگهانی شد.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/5cb6cc6f2d.mp4?token=IyGs1oXKegOuC3s5G9oNcYDh8GVTT5U70hz5-e5XoVEGw88zlh3sT-jjyfF26vLeZmQsuxzYAYzeQXx1lsrAQEEDNpbJp8lcecHaH3IosKukbiTywELCli4OLeFPKnyBw7dVDxfSm8E9KKh4ZyUnK2cHswO7KdVGonklfn-j8e8VQHJopjjhCm1zwSZQYSUAArOuFv39WzLc3thN1LcePy6QEIW4fIsQU38qnHjaP8x0A_vZWEE96VtVVBRVD1yXDKcFYWOV60WYbyXtwpbmY8lXDlGvfjwvlL2yu_3ctoRVhdQ89MIaHBrhJTPIwBExaJGXY7nR8Mqu1mfXGksQWQ"
+      },
+      "published_at": "2026-11-14T20:48:02+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "b47a851ec6f09b4c",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-14T20:54:39.465600+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-14T20:44:10.968311+00:00",
+  "saved_at": "2026-11-14T20:55:25.316979+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-14T20:42:57.793971+00:00",
-    "tehran_tel": "2026-11-14T20:42:57.793971+00:00",
-    "irna_1313": "2026-11-14T20:42:57.793971+00:00",
-    "isna94": "2026-11-14T20:42:57.793971+00:00",
-    "mehrnews": "2026-11-14T20:42:57.793971+00:00",
+    "tehranpress1": "2026-11-14T20:54:39.465600+00:00",
+    "tehran_tel": "2026-11-14T20:54:39.465600+00:00",
+    "irna_1313": "2026-11-14T20:54:39.465600+00:00",
+    "isna94": "2026-11-14T20:54:39.465600+00:00",
+    "mehrnews": "2026-11-14T20:54:39.465600+00:00",
     "web_shahr": "2026-11-14T20:42:57.793971+00:00",
     "web_mehr_tehran": "2026-11-14T20:42:57.793971+00:00"
   }
