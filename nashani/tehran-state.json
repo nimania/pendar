@@ -11442,10 +11442,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-14T07:02:45.322765+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-14T10:30:52.891132+00:00"
+      "reserved_at": "2026-11-14T10:30:52.891132+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 214,
+      "sent_at": "2026-11-14T10:30:55.306774+00:00"
     },
     {
       "url": "https://t.me/mehrnews/431537",
@@ -11497,10 +11500,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-14T07:02:45.322765+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-14T10:30:52.891132+00:00"
+      "reserved_at": "2026-11-14T10:30:52.891132+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 215,
+      "sent_at": "2026-11-14T10:30:56.523944+00:00"
     },
     {
       "url": "https://t.me/mehrnews/431544",
@@ -11975,7 +11981,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-14T10:30:52.891151+00:00",
+  "saved_at": "2026-11-14T10:30:56.523964+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-14T10:29:55.831289+00:00",
     "tehran_tel": "2026-11-14T10:29:55.831289+00:00",
