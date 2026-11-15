@@ -11694,9 +11694,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T07:13:34.373292+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132694",
@@ -11779,9 +11780,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T08:09:04.726346+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132695",
@@ -11828,9 +11830,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132696",
@@ -11855,9 +11858,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132697",
@@ -11881,9 +11885,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/isna94/413520",
@@ -11908,14 +11913,15 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
       "other_sources": [
         {
           "name": "اخبار تهران‌تل",
           "url": "https://t.me/Tehran_Tel/114982"
         }
-      ]
+      ],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132698",
@@ -11966,9 +11972,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T14:51:03.813287+00:00"
     },
     {
       "url": "https://t.me/mehrnews/431961",
@@ -11993,9 +12000,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T14:51:03.813287+00:00"
     },
     {
       "url": "https://t.me/irna_1313/474090",
@@ -12635,7 +12643,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-15T14:51:01.550858+00:00",
+  "saved_at": "2026-11-15T14:51:03.813305+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-15T14:49:56.095580+00:00",
     "tehran_tel": "2026-11-15T14:49:56.095580+00:00",
