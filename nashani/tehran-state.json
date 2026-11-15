@@ -12199,10 +12199,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T07:13:34.373292+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T07:21:29.686391+00:00"
+      "reserved_at": "2026-11-15T07:21:29.686391+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 239,
+      "sent_at": "2026-11-15T07:21:33.113711+00:00"
     },
     {
       "url": "https://www.mehrnews.com/news/7010409/%D8%B2%D9%86%DA%AF-%D8%AE%D8%B7%D8%B1-%DA%AF%D8%A7%D8%B2%DA%AF%D8%B1%D9%81%D8%AA%DA%AF%DB%8C-%D8%AF%D8%B1-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%DB%B6%DB%B5-%D9%82%D8%B1%D8%A8%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%B4%D8%B4-%D9%85%D8%A7%D9%87-%DB%B3%DB%B2-%D9%85%D8%B3%D9%85%D9%88%D9%85-%D8%AF%D8%B1",
@@ -12222,10 +12225,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T07:13:34.373292+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T07:21:29.686391+00:00"
+      "reserved_at": "2026-11-15T07:21:29.686391+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 240,
+      "sent_at": "2026-11-15T07:21:34.783072+00:00"
     },
     {
       "url": "https://www.mehrnews.com/news/7011122/%D8%B2%D9%85%DB%8C%D9%86-%D9%84%D8%B1%D8%B2%D9%87-%DB%B2-%DB%B6-%D8%B1%DB%8C%D8%B4%D8%AA%D8%B1%DB%8C-%D9%84%D9%88%D8%A7%D8%B3%D8%A7%D9%86-%D8%B1%D8%A7-%D9%84%D8%B1%D8%B2%D8%A7%D9%86%D8%AF-%D8%AF%D9%88%D9%85%DB%8C%D9%86-%D8%B2%D9%84%D8%B2%D9%84%D9%87-%D8%A7%D8%B2-%D8%B4%D8%A8-%DA%AF%D8%B0%D8%B4%D8%AA%D9%87",
@@ -12486,7 +12492,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-15T07:21:29.686409+00:00",
+  "saved_at": "2026-11-15T07:21:34.783089+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-15T07:20:38.527825+00:00",
     "tehran_tel": "2026-11-15T07:20:38.527825+00:00",
