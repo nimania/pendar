@@ -91,7 +91,8 @@
       "at": "2026-11-15T14:24:14.753535+03:00"
     },
     "2026-11-15-night": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 45,
       "at": "2026-11-15T22:26:35.253219+03:00"
     }
   }
