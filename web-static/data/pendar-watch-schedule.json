@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T13:34:05.654782+00:00",
+  "generated_at": "2026-11-15T13:57:51.677182+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -651,16 +651,6 @@
     }
   ],
   "programmes": [
-    {
-      "channel_id": "digital-world",
-      "title_fa": "خانم وب",
-      "start": "2026-11-14T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/634492",
-      "icon": "https://image.tmdb.org/t/p/w500/5KYfiwVBbIJlegyGzSYp4uO99r2.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
     {
       "channel_id": "digital-world",
       "title_fa": "اودیسه",
@@ -1317,7 +1307,7 @@
       "start": "2026-11-17T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/tv/61818",
-      "icon": "https://image.tmdb.org/t/p/w500/u0ttHM5ZQCvnfL0lkueEgS4h2nI.jpg",
+      "icon": "https://image.tmdb.org/t/p/w500/qKFP9Se7LJtBaxrMS41iu63dtK3.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 29 از فصل 14؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
@@ -1468,6 +1458,26 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/814889",
       "icon": "https://image.tmdb.org/t/p/w500/kPX9ImdCLCQBtvAoOVX727HgFFl.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-2739",
+      "title_fa": "ازدواج دوباره ملکه",
+      "start": "2026-11-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/279246",
+      "icon": "https://image.tmdb.org/t/p/w500/xCJxClwZSofe7nMCU6EWRYDjfDc.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "Guarding Stars",
+      "start": "2026-11-18T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1551025",
+      "icon": "https://image.tmdb.org/t/p/w500/wWNizZ4IcSld3xXH1WEXziJiNJN.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
