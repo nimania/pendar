@@ -10496,9 +10496,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T08:09:06.088108+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T08:09:28.337527+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30388",
@@ -10523,9 +10524,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T08:09:06.088108+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T08:09:28.337527+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30389",
@@ -10550,9 +10552,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T08:09:06.088108+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T08:09:28.337527+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59381",
@@ -10628,9 +10631,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T08:09:06.088108+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T08:09:28.337527+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59383",
@@ -10656,12 +10660,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T08:09:06.088108+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T08:09:28.337527+00:00"
     }
   ],
-  "saved_at": "2026-11-15T08:09:25.789887+00:00",
+  "saved_at": "2026-11-15T08:09:28.337547+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-15T08:09:06.088108+00:00",
     "fardaayekerman": "2026-11-15T08:09:06.088108+00:00",
