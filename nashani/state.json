@@ -1643,40 +1643,10 @@
     "https://t.me/kerman_news/140632",
     "https://t.me/kerman_news/140633",
     "https://t.me/kerman_gov/10650",
-    "https://t.me/kerman_news/140634"
+    "https://t.me/kerman_news/140634",
+    "https://t.me/Kerman_akhbar/66403"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kermane_no/59221",
-      "source_post_id": "59221",
-      "title": "رفع انسداد مسیر رودخانه «شور» کوهبنان",
-      "excerpt": "رفع انسداد مسیر رودخانه «شور» کوهبنان مسیر رودخانه شور کوهبنان که در پی بارندگی‌ها دچار انسداد شده بود، با تلاش و همکاری شرکت آب منطقه‌ای کرمان بازگشایی و پاکسازی شد. این عملیات با هدف تسهیل جریان طبیعی آب، ارتقای ایمنی و کاهش خطر آب‌گرفتگی در مناطق پیرامونی انجام شده است تا از بروز خسارات احتمالی ناشی از سیلاب‌های پیش‌رو جلوگیری شود. /فارس",
-      "paragraphs": [
-        "رفع انسداد مسیر رودخانه «شور» کوهبنان",
-        "مسیر رودخانه شور کوهبنان که در پی بارندگی‌ها دچار انسداد شده بود، با تلاش و همکاری شرکت آب منطقه‌ای کرمان بازگشایی و پاکسازی شد.",
-        "این عملیات با هدف تسهیل جریان طبیعی آب، ارتقای ایمنی و کاهش خطر آب‌گرفتگی در مناطق پیرامونی انجام شده است تا از بروز خسارات احتمالی ناشی از سیلاب‌های پیش‌رو جلوگیری شود. /فارس"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/dRRth0glt9OFP4Jc8ZtLN7JT1l3fZ5jqW7H7hOiG6uN7ERy34QXgFLel2JIkG1_wN1vn9bW-x0YEazFam4kIOHefLJTOvKWXT08IuQZNMcGmr2LzXfFip4nfSP1K1R7qTLUH0ioRb0PlV43JzlEORPhM934nN-ArjIb8-Q-W8ZP9txJlS1pW5Kj3eDsJbx4OI_9ZJf5jdJDktowteCPbZJdvFNSc1Y9L8zy_hzrOivY--d9otvjn34w3e2JyCR0uZP21lJ4pB-2scUiLLrYEGNMCeRBPxpQa30HvLrPN2X1qVMSuyPOGy12mpCeftC1qvFMxvZLq8S4eLiCjq79Efw.jpg"
-      },
-      "published_at": "2026-11-10T08:47:02+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "2cc26acbf880ed6e",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-10T08:51:34.131981+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-10T10:56:58.588404+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 265,
-      "sent_at": "2026-11-10T10:57:18.011045+00:00"
-    },
     {
       "url": "https://t.me/kermane_no/59222",
       "source_post_id": "59222",
@@ -10655,17 +10625,44 @@
       "status": "ready",
       "detected_at": "2026-11-15T06:51:21.129621+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/Kerman_akhbar/66403",
+      "source_post_id": "66403",
+      "title": "برآورد ابتلای ۱۸ هزار جیرفتی به دیابت",
+      "excerpt": "برآورد ابتلای ۱۸ هزار جیرفتی به دیابت رئیس مرکز بهداشت جیرفت: از مجموع ۱۳۲ هزار نفر جمعیت بالای ۳۰ سال شهرستان، برآورد می‌شود حدود ۱۸ هزار نفر به دیابت مبتلا باشند که تاکنون ۸ هزار و ۸۵۵ نفر شناسایی و در سامانه‌های بهداشتی ثبت شده‌اند. حداقل ۱۴ درصد جمعیت بالای ۳۰ سال کشور به دیابت مبتلا هستند، برآوردها نشان می‌دهد حدود ۴۰ درصد مبتلایان از بیماری خود اطلاع ندارند و همین مسئله ضرورت تشخیص به‌موقع و افزایش سطح آگاهی جامعه را بیش از پیش نمایان می‌کند.",
+      "paragraphs": [
+        "برآورد ابتلای ۱۸ هزار جیرفتی به دیابت",
+        "رئیس مرکز بهداشت جیرفت: از مجموع ۱۳۲ هزار نفر جمعیت بالای ۳۰ سال شهرستان، برآورد می‌شود حدود ۱۸ هزار نفر به دیابت مبتلا باشند که تاکنون ۸ هزار و ۸۵۵ نفر شناسایی و در سامانه‌های بهداشتی ثبت شده‌اند.",
+        "حداقل ۱۴ درصد جمعیت بالای ۳۰ سال کشور به دیابت مبتلا هستند، برآوردها نشان می‌دهد حدود ۴۰ درصد مبتلایان از بیماری خود اطلاع ندارند و همین مسئله ضرورت تشخیص به‌موقع و افزایش سطح آگاهی جامعه را بیش از پیش نمایان می‌کند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/oC5WCmwO_DN471Xp-kJ_JBdFAsRuRZxxqoQAOybkzht3wXc4eCqzwu1oTVlGsuECYkXf1wp5lDcGDwE6E5s3E3CyVDYdU0ll9u4kLZKnWgrrGWnb8SlH6whV29x2FdPAcafZL065HcBTvboE27V2OG3hYBSF8qNSUEoGc9_6iMfvQ48H_UiV89ucMnQM9FJVmk41eIHqLeTrg1bagtoA3xOyPS59fFsFdHY22iRFsKRq-MYaq8F3IixBjyPG8ubqP8Lj4YS0jFIhhtjOT3Oyn50vRW1alwsD9L0-WHkmMg6QWh5CMMbPqgaATJ_wOLinMlmVe5Gqa3RzVW_rJBph3w.jpg"
+      },
+      "published_at": "2026-11-15T07:10:18+00:00",
+      "source": "آخرین خبر کرمان",
+      "source_handle": "kerman_akhbar",
+      "id": "7afddcc1aa610109",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-15T07:13:31.592799+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-15T06:51:47.175108+00:00",
+  "saved_at": "2026-11-15T07:13:45.415545+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-15T06:51:21.129621+00:00",
-    "fardaayekerman": "2026-11-15T06:51:21.129621+00:00",
-    "irna_kerman": "2026-11-15T06:51:21.129621+00:00",
-    "kerman_gov": "2026-11-15T06:51:21.129621+00:00",
-    "kerman_akhbar": "2026-11-15T06:51:21.129621+00:00",
+    "fardaayekerman": "2026-11-15T07:13:31.592799+00:00",
+    "irna_kerman": "2026-11-15T07:13:31.592799+00:00",
+    "kerman_gov": "2026-11-15T07:13:31.592799+00:00",
+    "kerman_akhbar": "2026-11-15T07:13:31.592799+00:00",
     "kerman_news": "2026-11-15T06:51:21.129621+00:00",
-    "kerman_rasaneh": "2026-11-15T06:51:21.129621+00:00",
+    "kerman_rasaneh": "2026-11-15T07:13:31.592799+00:00",
     "qh_qv": "2026-11-15T06:51:21.129621+00:00"
   }
 }
