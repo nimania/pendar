@@ -10820,12 +10820,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T20:23:55.215017+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T20:37:03.279402+00:00"
     }
   ],
-  "saved_at": "2026-11-15T20:37:00.601112+00:00",
+  "saved_at": "2026-11-15T20:37:03.279423+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-15T20:36:44.183655+00:00",
     "fardaayekerman": "2026-11-15T20:36:44.183655+00:00",
