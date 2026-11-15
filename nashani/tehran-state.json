@@ -11412,9 +11412,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/irna_1313/474096",
@@ -11463,9 +11464,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/mehrnews/431970",
@@ -11522,9 +11524,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T11:31:21.651296+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://shahr.ir/news/88390/%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D8%AF-%D8%B4%D9%88%D8%B1%D8%A7%DB%8C-%D8%B4%D9%87%D8%B1%DB%8C-%D9%87%D8%A7-%D8%AF%D8%B1-%D8%AE%D8%B5%D9%88%D8%B5-%D9%85%D8%B5%D9%88%D8%A8%D9%87-%D9%87%DB%8C%D8%A6%D8%AA-%D9%88%D8%B2%DB%8C%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D9%85%D8%B1%DA%A9%D8%B2%D8%AF%D8%A7%DB%8C%DB%8C",
@@ -11576,9 +11579,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/Tehran_Tel/114989",
@@ -11600,14 +11604,15 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
       "other_sources": [
         {
           "name": "تهران‌پرس",
           "url": "https://t.me/tehranpress1/132704"
         }
-      ]
+      ],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132703",
@@ -11631,9 +11636,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/Tehran_Tel/114991",
@@ -11661,9 +11667,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132705",
@@ -11707,9 +11714,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/Tehran_Tel/114992",
@@ -11733,9 +11741,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132706",
@@ -11760,9 +11769,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132707",
@@ -11814,9 +11824,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132708",
@@ -11864,9 +11875,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/irna_1313/474157",
@@ -11890,9 +11902,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/mehrnews/432072",
@@ -11916,9 +11929,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/irna_1313/474172",
@@ -11942,9 +11956,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:49:56.095580+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/132710",
@@ -11969,9 +11984,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T15:23:45.714819+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/mehrnews/432078",
@@ -11995,9 +12011,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T15:23:45.714819+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/Tehran_Tel/115007",
@@ -12031,9 +12048,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T20:08:25.542651+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T20:09:22.073973+00:00"
     },
     {
       "url": "https://t.me/isna94/413611",
@@ -12056,9 +12074,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T20:08:25.542651+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T20:09:22.073973+00:00"
     },
     {
       "url": "https://t.me/Tehran_Tel/115009",
@@ -12668,7 +12687,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-15T20:09:20.066189+00:00",
+  "saved_at": "2026-11-15T20:09:22.073994+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-15T20:08:25.542651+00:00",
     "tehran_tel": "2026-11-15T20:08:25.542651+00:00",
