@@ -10230,9 +10230,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-15T14:28:58.292983+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/kermane_no/59411",
@@ -10425,9 +10426,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T14:28:58.292983+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T18:00:03.397946+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10667",
@@ -10454,9 +10456,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T14:49:56.189122+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T18:00:03.397946+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59419",
@@ -10509,9 +10512,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T15:23:44.819801+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T18:00:03.397946+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59423",
@@ -10534,9 +10538,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T15:23:44.819801+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T18:00:03.397946+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140658",
@@ -10559,14 +10564,15 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T15:23:44.819801+00:00",
       "other_sources": [
         {
           "name": "آخرین خبر کرمان",
           "url": "https://t.me/Kerman_akhbar/66414"
         }
-      ]
+      ],
+      "reserved_at": "2026-11-15T18:00:03.397946+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10668",
@@ -10590,9 +10596,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T15:23:44.819801+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T18:00:03.397946+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59426",
@@ -10618,9 +10625,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T15:23:44.819801+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T18:00:03.397946+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30395",
@@ -10668,9 +10676,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-15T17:59:41.453318+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-15T18:00:03.397946+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59427",
@@ -10778,7 +10787,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-15T17:59:59.019646+00:00",
+  "saved_at": "2026-11-15T18:00:03.397970+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-15T17:59:41.453318+00:00",
     "fardaayekerman": "2026-11-15T17:59:41.453318+00:00",
