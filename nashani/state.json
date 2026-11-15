@@ -10058,10 +10058,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T11:31:23.948476+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T14:29:13.589587+00:00"
+      "reserved_at": "2026-11-15T14:29:13.589587+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 517,
+      "sent_at": "2026-11-15T14:29:25.819232+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10662",
@@ -10086,10 +10089,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T11:31:23.948476+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T14:29:13.589587+00:00"
+      "reserved_at": "2026-11-15T14:29:13.589587+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 518,
+      "sent_at": "2026-11-15T14:29:28.850452+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10663",
@@ -10114,10 +10120,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T11:31:23.948476+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T14:29:13.589587+00:00"
+      "reserved_at": "2026-11-15T14:29:13.589587+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 519,
+      "sent_at": "2026-11-15T14:29:32.659407+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30392",
@@ -10167,10 +10176,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T11:31:23.948476+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T14:29:13.589587+00:00"
+      "reserved_at": "2026-11-15T14:29:13.589587+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 520,
+      "sent_at": "2026-11-15T14:29:33.775663+00:00"
     },
     {
       "url": "https://t.me/Kerman_akhbar/66407",
@@ -10255,10 +10267,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T11:31:23.948476+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T14:29:13.589587+00:00"
+      "reserved_at": "2026-11-15T14:29:13.589587+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 521,
+      "sent_at": "2026-11-15T14:29:36.247640+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10664",
@@ -10338,10 +10353,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T11:31:23.948476+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T14:29:13.589587+00:00"
+      "reserved_at": "2026-11-15T14:29:13.589587+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 522,
+      "sent_at": "2026-11-15T14:30:04.810738+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140649",
@@ -10449,10 +10467,9 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "ready",
       "detected_at": "2026-11-15T14:28:58.292983+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-15T14:29:13.589587+00:00"
+      "other_sources": []
     },
     {
       "url": "https://t.me/kermane_no/59408",
@@ -10716,7 +10733,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-15T14:29:13.589607+00:00",
+  "saved_at": "2026-11-15T14:30:05.165233+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-15T14:28:58.292983+00:00",
     "fardaayekerman": "2026-11-15T14:28:58.292983+00:00",
