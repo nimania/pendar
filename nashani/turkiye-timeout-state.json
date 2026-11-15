@@ -42,6 +42,11 @@
       "url": "https://www.timeout.com/istanbul/restaurants/yedideyedi",
       "at": "2026-11-14T18:50:10.386455+03:00",
       "message_id": 41
+    },
+    "https://www.timeout.com/istanbul/art/salt-galata": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/art/salt-galata",
+      "at": "2026-11-15T19:23:15.354118+03:00"
     }
   },
   "days": {
@@ -86,6 +91,11 @@
       "url": "https://www.timeout.com/istanbul/restaurants/yedideyedi",
       "at": "2026-11-14T18:50:10.386455+03:00",
       "message_id": 41
+    },
+    "2026-11-15": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/art/salt-galata",
+      "at": "2026-11-15T19:23:15.354118+03:00"
     }
   }
 }
