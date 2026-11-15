@@ -12434,13 +12434,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-15T03:06:34.385561+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-15T03:07:45.207598+00:00"
+      "reserved_at": "2026-11-15T03:07:45.207598+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 238,
+      "sent_at": "2026-11-15T03:07:50.505635+00:00"
     }
   ],
-  "saved_at": "2026-11-15T03:07:45.207613+00:00",
+  "saved_at": "2026-11-15T03:07:50.505653+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-15T03:06:34.385561+00:00",
     "tehran_tel": "2026-11-15T03:06:34.385561+00:00",
