@@ -3684,38 +3684,35 @@
     "https://t.me/irna_1313/473839",
     "https://t.me/mehrnews/431773",
     "https://t.me/irna_1313/473840",
-    "https://t.me/irna_1313/473841"
+    "https://t.me/irna_1313/473841",
+    "https://t.me/irna_1313/473843",
+    "https://t.me/mehrnews/431774",
+    "https://t.me/isna94/413464",
+    "https://t.me/irna_1313/473844",
+    "https://t.me/mehrnews/431775",
+    "https://t.me/isna94/413465",
+    "https://t.me/isna94/413466",
+    "https://t.me/mehrnews/431776",
+    "https://t.me/irna_1313/473846",
+    "https://t.me/isna94/413467",
+    "https://t.me/mehrnews/431777",
+    "https://t.me/isna94/413468",
+    "https://t.me/irna_1313/473847",
+    "https://t.me/mehrnews/431778",
+    "https://t.me/mehrnews/431779",
+    "https://t.me/mehrnews/431780",
+    "https://t.me/irna_1313/473848",
+    "https://t.me/mehrnews/431781",
+    "https://t.me/irna_1313/473849",
+    "https://t.me/mehrnews/431782",
+    "https://t.me/irna_1313/473850",
+    "https://t.me/mehrnews/431783",
+    "https://t.me/irna_1313/473851",
+    "https://t.me/mehrnews/431784",
+    "https://t.me/mehrnews/431785",
+    "https://t.me/irna_1313/473860"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132469",
-      "source_post_id": "132469",
-      "title": "روزنامه صهیونیستی «اسرائیل هیوم»: اسرائیل کنترل امنیت خود را از دست داده است",
-      "excerpt": "روزنامه صهیونیستی «اسرائیل هیوم»: اسرائیل کنترل امنیت خود را از دست داده است «اسرائیل هیوم»: نتانیاهو برای حفظ جایگاه خود به هر اقدامی متوسل خواهد شد و همچنان نتایج انتخابات پارلمانی ۲۷ اکتبر را نپذیرفته است. «اسرائیل هیوم» به نقل از فرمانده پیشین یگان پدافند هوایی رژیم صهیونیستی: اسرائیل کنترل امنیت خود را از دست داده و در وضعیت بی‌ثباتی قرار گرفته است. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "روزنامه صهیونیستی «اسرائیل هیوم»: اسرائیل کنترل امنیت خود را از دست داده است",
-        "«اسرائیل هیوم»: نتانیاهو برای حفظ جایگاه خود به هر اقدامی متوسل خواهد شد و همچنان نتایج انتخابات پارلمانی ۲۷ اکتبر را نپذیرفته است.",
-        "«اسرائیل هیوم» به نقل از فرمانده پیشین یگان پدافند هوایی رژیم صهیونیستی: اسرائیل کنترل امنیت خود را از دست داده و در وضعیت بی‌ثباتی قرار گرفته است.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/EWTHGosoiRWXVx3MLatUiLzb3UNdD2Ip60TRSiaasOLqYQOqalKtAl27cakthZudzKhpDaWbcZx1SY14rBi4xGRwmsCKSEIT9C9LsUXrWOxmsmby5PJTm3rmuKZf9QXkJM1gwhRtbzT_jRoiXfzJY5v7SeJrlGnACxLu7ckUdbLbALpD7SZXBwOxto0lhZpWs6lapzV45Wj4icbgkXKVb5nbmLvkGoIUQE3azxIx6gFr5BdQVpKBYbftrzJiwC5VpEzEEMG7UCToYBX2Oeq4XWVKk9XvIKhM8PImh4ZdbJG_gZWM5Uerzd6JYqPAQfoh_K3cv8fWD7Ma1-MCeA2hJA.jpg"
-      },
-      "published_at": "2026-11-11T09:15:22+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "fc23c9a1911cc2e6",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-11T09:51:44.472152+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/isna94/412897",
       "source_post_id": "412897",
@@ -12402,16 +12399,50 @@
       "status": "review",
       "detected_at": "2026-11-14T23:24:36.104059+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/mehrnews/431779",
+      "source_post_id": "431779",
+      "title": "تیتر یک، گزارش ها و یادداشت های تهران تایمز",
+      "excerpt": "تیتر یک، گزارش ها و یادداشت های تهران تایمز شرط‌بندی روی اسب بازنده: قمار ابوظبی در تنگه هرمز چگونه امارات با تأمین مالی یک کریدور جنوبیِ پرهزینه و پرخطر، تلاش کرد کنترل ایران را درهم بشکند — و ناکام ماند گزارش های تحلیلی تغییر روایت مقام‌های آمریکایی، تردیدها درباره تعطیلی حریم هوایی آمریکا را افزایش می‌دهد از میدان نبرد تا صندوق‌های رأی؛ جنگ به خانه بازمی‌گردد Tehran Times today November 15, 2026 Follow us on دانلود تمام صفحات تهران تایمز",
+      "paragraphs": [
+        "تیتر یک، گزارش ها و یادداشت های تهران تایمز",
+        "شرط‌بندی روی اسب بازنده: قمار ابوظبی در تنگه هرمز",
+        "چگونه امارات با تأمین مالی یک کریدور جنوبیِ پرهزینه و پرخطر، تلاش کرد کنترل ایران را درهم بشکند — و ناکام ماند",
+        "گزارش های تحلیلی",
+        "تغییر روایت مقام‌های آمریکایی، تردیدها درباره تعطیلی حریم هوایی آمریکا را افزایش می‌دهد",
+        "از میدان نبرد تا صندوق‌های رأی؛ جنگ به خانه بازمی‌گردد",
+        "Tehran Times today",
+        "November 15, 2026",
+        "Follow us on",
+        "دانلود تمام صفحات تهران تایمز"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/U4s4vuG2jO_NPFrv_hAWQO1wvMPoSDo6Ac-2iY5Oisy4HL3I3K2Z-bkq-DP5NSuAzglxmVfOE2wYlCzgzO4TJs3BszIJwjgYvyvJtkPdjquG9qn6YWKlSF7IU76gGTS2rmi6dawFbhqek-volv7dsgpDBUJqJUFQ5d17b61qE3A-ApH3tZ0WdRI7tbepCzFy0MV0m9EJ9rG2D_T8tTVKPy_hBTg7LEnly2kT2xK5lI8CASKwI5l9U9tDQ0i5n4bOyMQyqaG5DAZ7t_HIZ4WwAsNBGDtqPKU1Ob_i0CsHMd_Yv2QC5DWtfwQglcOufvIBqKw5rsWgi2Zxlxpw9dDL-A.jpg"
+      },
+      "published_at": "2026-11-15T02:23:33+00:00",
+      "source": "مهر",
+      "source_handle": "mehrnews",
+      "id": "3a37ce34b7d5d86c",
+      "media_repost_allowed": true,
+      "source_hashtag": "مهر",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-15T03:06:34.385561+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-15T01:10:54.526213+00:00",
+  "saved_at": "2026-11-15T03:07:42.224592+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-15T01:09:56.701747+00:00",
-    "tehran_tel": "2026-11-15T01:09:56.701747+00:00",
-    "irna_1313": "2026-11-15T01:09:56.701747+00:00",
-    "isna94": "2026-11-15T01:09:56.701747+00:00",
-    "mehrnews": "2026-11-15T01:09:56.701747+00:00",
-    "web_shahr": "2026-11-15T01:09:56.701747+00:00",
-    "web_mehr_tehran": "2026-11-15T01:09:56.701747+00:00"
+    "tehranpress1": "2026-11-15T03:06:34.385561+00:00",
+    "tehran_tel": "2026-11-15T03:06:34.385561+00:00",
+    "irna_1313": "2026-11-15T03:06:34.385561+00:00",
+    "isna94": "2026-11-15T03:06:34.385561+00:00",
+    "mehrnews": "2026-11-15T03:06:34.385561+00:00",
+    "web_shahr": "2026-11-15T03:06:34.385561+00:00",
+    "web_mehr_tehran": "2026-11-15T03:06:34.385561+00:00"
   }
 }
