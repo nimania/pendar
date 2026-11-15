@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-11-14T20:39:26+00:00",
+  "updated_at": "2026-11-15T20:59:22+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-90ad881f9167f1130e",
+      "date": "2026-11-13",
+      "country": "other",
+      "region": "westpac",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "انتشار گزارش تحولات دریایی غرب اقیانوس آرام",
+      "original_title": "USNI News Western Pacific Pulse: Nov. 13, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/13/usni-news-western-pacific-pulse-nov-13-2026"
+    },
     {
       "id": "usni-cb16b4f311eefe3863",
       "date": "2026-11-12",
