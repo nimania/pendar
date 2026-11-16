@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "scope": "automatic_source_verification_not_outcome_scoring",
-  "generated_at": "2026-11-15T18:52:05Z",
+  "generated_at": "2026-11-16T06:30:57Z",
   "policy_fa": "این بررسی صرفاً دسترس‌پذیری منبع و وجود متن در صفحه را می‌سنجد؛ نه اصالت گفتار شخص، نه تحقق رویداد و نه درست/نادرست‌بودن پیش‌بینی.",
   "summary": {
     "observations": 142,
     "checked_this_run": 18,
     "exact_text_in_source_page": 6,
-    "deadlines_requiring_evidence": 13,
+    "deadlines_requiring_evidence": 14,
     "outcomes_automatically_scored": 0
   },
   "observations": {
@@ -279,35 +279,35 @@
     },
     "KC-53e890c46b40f7d8aa": {
       "status": "source_accessible",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.isna.ir/news/1405080905884/%D8%B3%D8%B1%D9%84%D8%B4%DA%A9%D8%B1-%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87%DB%8C-%D9%85%D9%86%D8%AA%D8%B8%D8%B1-%D8%A2%D8%BA%D8%A7%D8%B2-%D8%A7%D9%82%D8%AF%D8%A7%D9%85-%D8%AF%D8%B4%D9%85%D9%86-%D9%86%D9%85%DB%8C-%D9%85%D8%A7%D9%86%DB%8C%D9%85",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-561f01f8c49d508546": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-56cc80756c4e088d8b": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://fa.shafaqna.com/news/2394264/",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-58fc16c1e13f0ecfd3": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.bbc.co.uk/persian/live/ckdd8p9ypld7t?at_medium=RSS&at_campaign=rss",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-59a6e6ca4be2d6c1b9": {
       "status": "source_text_found",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://donya-e-eqtesad.com/%D8%A8%D8%AE%D8%B4-%D8%B3%D8%A7%DB%8C%D8%AA-%D8%AE%D9%88%D8%A7%D9%86-62/4305732-%D8%B4%D8%B1%D8%B7-%D8%B2%D9%84%D9%86%D8%B3%DA%A9%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D9%88%D9%82%D9%81-%D8%AD%D9%85%D9%84%D9%87-%D8%A8%D9%87-%D9%BE%D8%A7%D9%84%D8%A7%DB%8C%D8%B4%DA%AF%D8%A7%D9%87-%D9%87%D8%A7%DB%8C-%D9%86%D9%81%D8%AA-%D8%B1%D9%88%D8%B3%DB%8C%D9%87",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -321,35 +321,35 @@
     },
     "KC-5a23051aac539336ab": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-5c31241345faf13d5e": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.eghtesadonline.com/fa/news/2172718/موضع-جدید-عراق-درباره-جنگ-ایران-و-آمریکا-بغداد-پشت-ایران-می-ماند-یا-کنار-می-کشد",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-5c72cd99daf931f28d": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.france24.com/es/video/20261104-juan-manfredi-pese-al-control-dem%C3%B3crata-del-congreso-trump-seguir%C3%A1-gobernando-por-decreto",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-5f2b03e4c6a6460f11": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.youtube.com/@GoldenSimorgh-d4u",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-63df0f54474e9a87b5": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.asriran.com/fa/news/1204026/مدودف-تشدید-تحریم-های-روسیه-توسط-دموکرات-ها-به-زیان-واشنگتن-خواهد-شد",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -363,14 +363,14 @@
     },
     "KC-6635a8f006a7fd1d1e": {
       "status": "source_accessible",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://t.me/khabaronline_ir/666950",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-66723c125340ab43f4": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.asriran.com/fa/news/1204095/محسن-رضایی-به-آقای-پوتین-عرض-کردیم-تا-آمریکایی-ها-به-هفت-شرط-ما-عمل-نکنند-نه-تنگه-هرمز-باز-می-شود-و-نه-مذاکره-ای-در-کار-است",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -384,21 +384,21 @@
     },
     "KC-6ae0006077b14f5d4b": {
       "status": "source_accessible",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://t.me/yekhezaran/52230",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-7013f5b814f3541443": {
       "status": "source_accessible",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://t.me/sahandiranmehr/36681",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-75cf7b2e8f135d00e8": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T20:39:31Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.entekhab.ir/fa/news/945695/ونس-ترامپ-اجازه-نخواهد-داد-درگیری-با-ایران-به-یک-جنگ-بی-پایان-تبدیل-شود",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -944,7 +944,7 @@
     },
     "KC-f649460eb7a8f984ba": {
       "status": "source_accessible",
-      "checked_at": "2026-11-13T19:43:17Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://t.me/ali_gholhaky/4905",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -958,14 +958,14 @@
     },
     "KC-f9ca5450399b7b43b4": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T19:43:17Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.mizanonline.ir/fa/news/4927047/بقایی-مذاکرات-میان-ایران-و-آمریکا-از-طریق-میانجی-ها-بر-مبنای-طرح-هفت-روزه-است-پاسخ-ایران-به-هرگونه-تجاوز-نظامی-فوری-و-همه-جانبه-خواهد-بود",
       "speaker_verified": false,
       "outcome": "not_assessed"
     },
     "KC-fbbf934d8b2c7a4668": {
       "status": "source_unavailable",
-      "checked_at": "2026-11-13T19:43:17Z",
+      "checked_at": "2026-11-16T06:30:57Z",
       "source_url": "https://www.entekhab.ir/fa/news/946542/فاکس-نیوز-به-نقل-از-منابع-مطلع-اظهارات-ونس-در-مورد-ارتباط-جنگ-ایران-با-شکست-در-انتخابات-میان-دوره-ای-نوعی-فراخوان-برای-بسیج-جمهوری-خواهانی-است-که-معتقد-هستند-ترامپ-بیش-از-اندازه-با-اسرائیل-هم-سو-شده-ونس-می-خواهد-پیش-از-انتخابات-2028-ائتلافی-با-رأی-دهندگان-ناراضی-ترامپ-تشکیل-دهد",
       "speaker_verified": false,
       "outcome": "not_assessed"
@@ -1573,7 +1573,7 @@
     },
     "SOURI-20261101-09": {
       "deadline_date": "2026-11-15",
-      "triage_status": "scheduled_future",
+      "triage_status": "deadline_passed_needs_evidence",
       "automated_outcome": null,
       "requires_independent_event_evidence": true
     }
