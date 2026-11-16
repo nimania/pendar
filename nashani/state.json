@@ -1805,93 +1805,18 @@
     "https://t.me/kermane_no/59432",
     "https://t.me/Kerman_akhbar/66423",
     "https://t.me/kerman_news/140679",
-    "https://t.me/kermane_no/59433"
+    "https://t.me/kermane_no/59433",
+    "https://t.me/kermane_no/59434",
+    "https://t.me/kerman_news/140680",
+    "https://t.me/irna_kerman/30399",
+    "https://t.me/kermane_no/59435",
+    "https://t.me/fardaayekerman/35018",
+    "https://t.me/kermane_no/59436",
+    "https://t.me/kerman_news/140681",
+    "https://t.me/kermane_no/59437",
+    "https://t.me/Kerman_akhbar/66424"
   ],
   "queue": [
-    {
-      "url": "https://t.me/irna_kerman/30363",
-      "source_post_id": "30363",
-      "title": "عضو شورای شهر کرمان: پارک مجاور «کرمان‌مال» در بودجه امسال شهرداری نیست",
-      "excerpt": "عضو شورای شهر کرمان: پارک مجاور «کرمان‌مال» در بودجه امسال شهرداری نیست رئیس کمیسیون حقوقی شورای شهر کرمان در واکنش به اظهارات سخنگوی شهرداری درباره پارک کنار مجتمع تجاری کرمان‌مال توضیحاتی داد و گفت که این پارک نه‌تنها در بودجه امسال شهرداری نبوده بلکه عملیات عمرانی آن با کیفیت نامناسبی انجام شده به‌گونه‌ای که پروژه در بخش‌هایی دچار فرونشست شده ‌است. irna_kerman",
-      "paragraphs": [
-        "عضو شورای شهر کرمان: پارک مجاور «کرمان‌مال» در بودجه امسال شهرداری نیست",
-        "رئیس کمیسیون حقوقی شورای شهر کرمان در واکنش به اظهارات سخنگوی شهرداری درباره پارک کنار مجتمع تجاری کرمان‌مال توضیحاتی داد و گفت که این پارک نه‌تنها در بودجه امسال شهرداری نبوده بلکه عملیات عمرانی آن با کیفیت نامناسبی انجام شده به‌گونه‌ای که پروژه در بخش‌هایی دچار فرونشست شده ‌است.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/aefsQy_CTqrg1ceWIuK4sMKqngPmCXPoOJTUMe5q2G1Tpk-uBO-dd4RZyVfqrbw44uHv-PUMfmNCtnpfq35mbzTM_UEZ5pM44KDLDkR2EUez-ANnlEaskYppUDnzdjzC276Q49pbdFisWkoPRrQVaXNM11Va6JpywgTUOE7_6fjixSfWV9x-ieaKVoLG2gmMKYrs4dw7WKc98RWuZ3HeI54cZQyGiXVEf5r2MtxBlOwypHzhPo0HXxZq24kLTDi9vAYCnLowp6EbO8lZ4i9AesyJRTSt0PA7rgtxG23ntd2hAABSidR27JcHn4c2Guph6Ez_G0qWKRDuYi59Yk7Ehw.jpg"
-      },
-      "published_at": "2026-11-11T08:05:22+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "4c50cb4b4c71a7a0",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "expired",
-      "detected_at": "2026-11-11T09:35:58.752111+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/kerman_news/140429",
-      "source_post_id": "140429",
-      "title": "هم اکنون بارش باران در مجتمع مس سرچشمه رفسنجان",
-      "excerpt": "هم اکنون بارش باران در مجتمع مس سرچشمه رفسنجان",
-      "paragraphs": [
-        "هم اکنون بارش باران در مجتمع مس سرچشمه رفسنجان"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/a145124fd8.mp4?token=vxtWjzNDaNqa61p9yH2vis_vDQ7rx4vfrTYbFSNZytcJFzBtFk7EWy0eop7wgxVyioGsFw3ce9jrcwqGpqa0w3AexNxk54D-kHVm2b5mQmOF79mXtvAV7Dz1UD6BAXJOoWe55TpanN1bJhnzhhduvam3eJ47XxUQ7WsV1A0xhMjIb549VsXSyPCRysbB6QJGOY3JT_oZe0XbNz8e1d3eyhM3-mC9Z3TSboP2-yFxFI3VQIuppx17kAmQEtUa_wOew1x690qy4lNB4ACPSR77hBNJIrI95q5xz2dYSchzGuziO3x9DAHH07a1MGJiWxrc9kYqOuQJpsMaI9roRAQADg"
-      },
-      "published_at": "2026-11-11T08:19:54+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "5949b53e39ca8401",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-11T09:35:58.752111+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-11T09:36:13.159682+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 316,
-      "sent_at": "2026-11-11T09:36:22.993273+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59276",
-      "source_post_id": "59276",
-      "title": "خودروهای دارای بیش از ۵ میلیون تومان خلافی توقیف می‌شوند",
-      "excerpt": "خودروهای دارای بیش از ۵ میلیون تومان خلافی توقیف می‌شوند رئیس پلیس راهور استان کرمان با اشاره به اجرای طرح برخورد با خودروهای دارای بدهی معوقه، از توقیف وسایل نقلیه با بیش از ۵ میلیون تومان خلافی خبر داد. وی بر ضرورت پرداخت به‌موقع جرائم رانندگی و تسویه حساب خلافی‌ها تأکید کرد و از رانندگان خواست برای جلوگیری از قرار گرفتن خودرو در فرآیند توقیف، هرچه سریع‌تر نسبت به استعلام و پرداخت بدهی‌های معوقه خود اقدام کنند.",
-      "paragraphs": [
-        "خودروهای دارای بیش از ۵ میلیون تومان خلافی توقیف می‌شوند",
-        "رئیس پلیس راهور استان کرمان با اشاره به اجرای طرح برخورد با خودروهای دارای بدهی معوقه، از توقیف وسایل نقلیه با بیش از ۵ میلیون تومان خلافی خبر داد.",
-        "وی بر ضرورت پرداخت به‌موقع جرائم رانندگی و تسویه حساب خلافی‌ها تأکید کرد و از رانندگان خواست برای جلوگیری از قرار گرفتن خودرو در فرآیند توقیف، هرچه سریع‌تر نسبت به استعلام و پرداخت بدهی‌های معوقه خود اقدام کنند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/GY6_wj3tRWFy0yVuv3weC2Mzh0qDv4de6e_V1PzpzBn7rpZ7d_iw6yznYgnfNGQOB3JJYl8I-Bap-l79W0qyZiWq23OOHVv5h_Rm2voUE-u1a54bq8IWmkd7y7Xc8ngU6VKOLzxqMqvds5yUFM5OCmp9pXY7G2GWkeHcJckbkhLcKhcCPHiHN8sgN_n5oXUs1vTTCeiZSEqEtyH9VI_1o-5BPpoHvd6yveNUULyxneDr6xKlueVJ8B1jUAtab2QDws-gaRZx_IgcSJujU4l79zZUf18aKMwKW74a6tQli-6ck-Z5Jsfxrjk7TyX01_isl_a99NrjMuulZuTJxqvo2g.jpg"
-      },
-      "published_at": "2026-11-11T08:21:03+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "deb17f514a3f0506",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-11T09:35:58.752111+00:00",
-      "other_sources": []
-    },
     {
       "url": "https://t.me/Kerman_akhbar/66325",
       "source_post_id": "66325",
@@ -10871,17 +10796,100 @@
       "delivery_kind": "photo",
       "telegram_message_id": 557,
       "sent_at": "2026-11-16T06:30:37.355780+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30399",
+      "source_post_id": "30399",
+      "title": "زنگ کتاب و کتابخوانی در رودبار جنوب استان کرمان نواخته شد",
+      "excerpt": "زنگ کتاب و کتابخوانی در رودبار جنوب استان کرمان نواخته شد همزمان با هفته کتاب و کتابخوانی، آیین نواختن زنگ کتاب امروز /دوشنبه/با حضور مدیرکل فرهنگ و ارشاد اسلامی جنوب کرمان و جمعی از مسوولان محلی در مدرسه حضرت زینب (س) شهرستان رودبار جنوب برگزار شد. irna_kerman",
+      "paragraphs": [
+        "زنگ کتاب و کتابخوانی در رودبار جنوب استان کرمان نواخته شد",
+        "همزمان با هفته کتاب و کتابخوانی، آیین نواختن زنگ کتاب امروز /دوشنبه/با حضور مدیرکل فرهنگ و ارشاد اسلامی جنوب کرمان و جمعی از مسوولان محلی در مدرسه حضرت زینب (س) شهرستان رودبار جنوب برگزار شد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/lL3Lw1NCYrVdTmChpmJNWA4VqagZkn-tfEwkWlk1IXaX8_rqINDCQlhg9QjehjmiuaHHnc6ykIpYJHA7TvyVm73ktFDryXTfyWJ_KQnajwqjGeC702Wyo--RcKzmghXklFAp8ut0X2b8qpOT5izOvbZcEAhaEpAu3dMisvldW5jUNGqrSqHSYVZbEmsQsUp-B0an8J9Lmn20407NkKJNLAv1LJO0Y4ae6ci56IWy6PyBkWyBG31WoVVEMyHZg3Ip9xOnSHusr9I77cPyBrNYkKNO-PXC6cXw3LrEN7imtyfPWJa7iD57nltGCXgVkXkVerr44IVkBXnIOFNBujR17w.jpg"
+      },
+      "published_at": "2026-11-16T06:44:21+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "ae6006c27f5935db",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T07:19:07.465639+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/35018",
+      "source_post_id": "35018",
+      "title": "تخریب سینمایی که ثبت ملی شده بود؛",
+      "excerpt": "تخریب سینمایی که ثبت ملی شده بود؛ سرنوشت نامعلوم سینما نور کرمان! شکایت حقوقی میراث فرهنگی به‌جایی می‌رسد؟ فردای کرمان ـ گروه فرهنگ و هنر: ثبت ملی هم نتوانست مانع تخریب سینما نور کرمان شود. به گفته سرپرست معاونت میراث‌فرهنگی استان کرمان، بخش زیادی از این بنا، چیزی در حدود ۷۰ درصد آن، تخریب شده که به احتمال زیاد عامدانه بوده و دراین‌باره از سوی میراث‌فرهنگی شکایت حقوقی ثبت شده و در حال پیگیری است. فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "تخریب سینمایی که ثبت ملی شده بود؛",
+        "سرنوشت نامعلوم سینما نور کرمان!",
+        "شکایت حقوقی میراث فرهنگی به‌جایی می‌رسد؟",
+        "فردای کرمان ـ گروه فرهنگ و هنر: ثبت ملی هم نتوانست مانع تخریب سینما نور کرمان شود. به گفته سرپرست معاونت میراث‌فرهنگی استان کرمان، بخش زیادی از این بنا، چیزی در حدود ۷۰ درصد آن، تخریب شده که به احتمال زیاد عامدانه بوده و دراین‌باره از سوی میراث‌فرهنگی شکایت حقوقی ثبت شده و در حال پیگیری است.",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/fz-uC-Jl9Ve3pzsUSNuHajxEDFPQmgCkIaCZYQqblzXed27aper3l7yV0DAtQV8t8tvRvDeWW62WicKsGFIsC2BYcV4eJv9EMN4pYLCup_xaRcvND-CfWtiayWw0rOp69rrFhSfmn2SnWIv0AloAL_JvUPBMdOVlR8b6y7nyVxApzXFAGqqYjVzVmu42Hp80PqHfuGmg49VVi17VheNpO3F5qnzmwLaO0iaDKSnvpUHIPCSqgMst2VkhlAo0eGYZJZukm9SzMlvZUwnX99g6QmxhTDt5G9ZDJpseArySbAuI0HS-qYm-BPDwnUpNfv1L2W6rEqSz2iTrSzvfC5b6dg.jpg"
+      },
+      "published_at": "2026-11-16T06:50:41+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "c6c25caf34bd3e6e",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T07:19:07.465639+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59436",
+      "source_post_id": "59436",
+      "title": "تأمین مالی ۱۸ پروژه در کرمان از محل طرح نشان‌دار کردن مالیات",
+      "excerpt": "تأمین مالی ۱۸ پروژه در کرمان از محل طرح نشان‌دار کردن مالیات مدیرکل امور مالیاتی استان کرمان از تأمین مالی ۱۸ پروژه از مجموع ۵۷ پروژه پیش‌بینی‌شده در طرح نشان‌دار کردن مالیات خبر داد. به گفته حمید زینل‌پور، تا ۲۳ آبان‌ماه ۹ هزار و ۴۰۰ مؤدی در این طرح مشارکت کرده‌اند و برای اجرای پروژه‌ها در مجموع بیش از هزار و ۲۲۱ میلیارد تومان اعتبار پیش‌بینی شده است. او از مؤدیان خواست تا پایان آبان‌ماه برای تأمین اعتبار ۳۹ پروژه باقی‌مانده مشارکت کنند. /ایسنا",
+      "paragraphs": [
+        "تأمین مالی ۱۸ پروژه در کرمان از محل طرح نشان‌دار کردن مالیات",
+        "مدیرکل امور مالیاتی استان کرمان از تأمین مالی ۱۸ پروژه از مجموع ۵۷ پروژه پیش‌بینی‌شده در طرح نشان‌دار کردن مالیات خبر داد.",
+        "به گفته حمید زینل‌پور، تا ۲۳ آبان‌ماه ۹ هزار و ۴۰۰ مؤدی در این طرح مشارکت کرده‌اند و برای اجرای پروژه‌ها در مجموع بیش از هزار و ۲۲۱ میلیارد تومان اعتبار پیش‌بینی شده است. او از مؤدیان خواست تا پایان آبان‌ماه برای تأمین اعتبار ۳۹ پروژه باقی‌مانده مشارکت کنند. /ایسنا"
+      ],
+      "media": null,
+      "published_at": "2026-11-16T07:01:01+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "701d64cd5d6bdffc",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T07:19:07.465639+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-16T06:30:37.355796+00:00",
+  "saved_at": "2026-11-16T07:19:22.674084+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-16T06:29:54.213551+00:00",
-    "fardaayekerman": "2026-11-16T06:29:54.213551+00:00",
-    "irna_kerman": "2026-11-16T06:29:54.213551+00:00",
-    "kerman_gov": "2026-11-16T06:29:54.213551+00:00",
-    "kerman_akhbar": "2026-11-16T06:29:54.213551+00:00",
-    "kerman_news": "2026-11-16T06:29:54.213551+00:00",
-    "kerman_rasaneh": "2026-11-16T06:29:54.213551+00:00",
-    "qh_qv": "2026-11-16T06:29:54.213551+00:00"
+    "kermane_no": "2026-11-16T07:19:07.465639+00:00",
+    "fardaayekerman": "2026-11-16T07:19:07.465639+00:00",
+    "irna_kerman": "2026-11-16T07:19:07.465639+00:00",
+    "kerman_gov": "2026-11-16T07:19:07.465639+00:00",
+    "kerman_akhbar": "2026-11-16T07:19:07.465639+00:00",
+    "kerman_news": "2026-11-16T07:19:07.465639+00:00",
+    "kerman_rasaneh": "2026-11-16T07:19:07.465639+00:00",
+    "qh_qv": "2026-11-16T07:19:07.465639+00:00"
   }
 }
