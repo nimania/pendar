@@ -1780,183 +1780,26 @@
     "https://t.me/qh_qv/1090",
     "https://t.me/qh_qv/1091",
     "https://t.me/qh_qv/1093",
-    "https://t.me/qh_qv/1094"
+    "https://t.me/qh_qv/1094",
+    "https://t.me/irna_kerman/30397",
+    "https://t.me/kerman_news/140675",
+    "https://t.me/qh_qv/1095",
+    "https://t.me/kerman_news/140676",
+    "https://t.me/qh_qv/1096",
+    "https://t.me/Kerman_akhbar/66420",
+    "https://t.me/irna_kerman/30398",
+    "https://t.me/Kerman_akhbar/66421",
+    "https://t.me/Kerman_akhbar/66422",
+    "https://t.me/kermane_no/59428",
+    "https://t.me/kerman_gov/10674",
+    "https://t.me/kerman_news/140677",
+    "https://t.me/kermane_no/59429",
+    "https://t.me/kerman_gov/10675",
+    "https://t.me/fardaayekerman/35015",
+    "https://t.me/fardaayekerman/35016",
+    "https://t.me/kerman_gov/10676"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kermane_no/59266",
-      "source_post_id": "59266",
-      "title": "انهدام باندهای سرقت کابل برق و پلمب ۳۷ کارگاه ضایعاتی",
-      "excerpt": "انهدام باندهای سرقت کابل برق و پلمب ۳۷ کارگاه ضایعاتی فرمانده انتظامی سیرجان از دستگیری ۲۸۰ سارق و ۹۵ مالخر، انهدام ۹ باند سرقت و کشف ۵۵۳ فقره سرقت تجهیزات برق‌رسانی در این شهرستان خبر داد. سرهنگ منصور رمضان‌نژاد با اعلام این خبر افزود: در این عملیات‌ها ۲۳۰۰ کیلوگرم سیم مسروقه کشف و ۳۷ کارگاه ضایعاتی متخلف نیز پلمب شدند. وی توسعه استفاده از سیم‌های خودنگهدار و همکاری نهادها و شهروندان را از راهکارهای مهم پیشگیری از تکرار این جرایم برشمرد. /صداوسیما",
-      "paragraphs": [
-        "انهدام باندهای سرقت کابل برق و پلمب ۳۷ کارگاه ضایعاتی",
-        "فرمانده انتظامی سیرجان از دستگیری ۲۸۰ سارق و ۹۵ مالخر، انهدام ۹ باند سرقت و کشف ۵۵۳ فقره سرقت تجهیزات برق‌رسانی در این شهرستان خبر داد.",
-        "سرهنگ منصور رمضان‌نژاد با اعلام این خبر افزود: در این عملیات‌ها ۲۳۰۰ کیلوگرم سیم مسروقه کشف و ۳۷ کارگاه ضایعاتی متخلف نیز پلمب شدند. وی توسعه استفاده از سیم‌های خودنگهدار و همکاری نهادها و شهروندان را از راهکارهای مهم پیشگیری از تکرار این جرایم برشمرد. /صداوسیما"
-      ],
-      "media": null,
-      "published_at": "2026-11-11T06:28:02+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "100ab7292cb59d74",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-11T07:10:51.124558+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/Kerman_akhbar/66321",
-      "source_post_id": "66321",
-      "title": "ادامۀ فعالیت سامانۀ بارشی در نیمۀ جنوبی کشور",
-      "excerpt": "ادامۀ فعالیت سامانۀ بارشی در نیمۀ جنوبی کشور هواشناسی: امروز در بوشهر، فارس، کرمان، هرمزگان و برخی نواحی سیستان‌وبلوچستان، خراسان‌رضوی و جنوبی بارش داریم. روند کاهش دما امروز هم در شمال‌شرق کشور قابل لمس خواهد بود و تا فردا ادامه دارد. از روز جمعه در اکثر نقاط کشور شاهد روند افزایش دما خواهیم بود.",
-      "paragraphs": [
-        "ادامۀ فعالیت سامانۀ بارشی در نیمۀ جنوبی کشور",
-        "هواشناسی: امروز در بوشهر، فارس، کرمان، هرمزگان و برخی نواحی سیستان‌وبلوچستان، خراسان‌رضوی و جنوبی بارش داریم.",
-        "روند کاهش دما امروز هم در شمال‌شرق کشور قابل لمس خواهد بود و تا فردا ادامه دارد.",
-        "از روز جمعه در اکثر نقاط کشور شاهد روند افزایش دما خواهیم بود."
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/6917667c86.mp4?token=o4tEQMj4A6nm8KCnXo_yffPVzMeR8kAIUZkukAWgdMa0j5PeBqo6-03eEw4d_RM2Y1rMNVgxoGYkhcrXgIQOGYqbEo8PwkTqPj3NT7ybMlERtYHMjqJ0O8-0Rqs-mqytzB_N4lVyqUnkyf6IAxVO3L8tKc6lMgyZPkbPv8VwcpFCSk6iruociOfqh9doB0UK_diaOUhbmtPqa90bRA1BNYP6_xOeoStuOeL1OGaF3kK8HxjavPRZQwrH8jEK5AWTWYb4DeqO_yyxIjNUfAM1r_8Ro8mCowi0V2l9OhE6iY3te8IagDc8-AkIo4-wipi-szEXWE4aCAslRb0AJDgJhA"
-      },
-      "published_at": "2026-11-11T06:31:02+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "3f78838031e06d2e",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-11T07:10:51.124558+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-11T10:56:54.733246+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 324,
-      "sent_at": "2026-11-11T10:56:57.187150+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30362",
-      "source_post_id": "30362",
-      "title": "تعدیل پایه صادراتی خرما؛ گامی برای انتفاع واقعی باغداران جنوب کرمان است",
-      "excerpt": "تعدیل پایه صادراتی خرما؛ گامی برای انتفاع واقعی باغداران جنوب کرمان است عبور از رکورد برداشت ۲۵۰ هزار تُن خرما در قطب طلایی کشاورزی جنوب کرمان اگرچه نشانگر همت والا و ظرفیت بی‌بدیل باغداران این خطه است، اما قفل شدن مسیر صادرات به دلیل بالا بودن پایه صادراتی، دست‌رنج این تولیدکنندگان را به تاراج می‌داد؛ معضلی که اکنون با تدبیر و دستور وزیر جهاد کشاورزی برای تعدیل این نرخ، بار دیگر امیدی تازه در دل نخل‌داران «هند کوچک» زنده کرده است. irna_kerman",
-      "paragraphs": [
-        "تعدیل پایه صادراتی خرما؛ گامی برای انتفاع واقعی باغداران جنوب کرمان است",
-        "عبور از رکورد برداشت ۲۵۰ هزار تُن خرما در قطب طلایی کشاورزی جنوب کرمان اگرچه نشانگر همت والا و ظرفیت بی‌بدیل باغداران این خطه است، اما قفل شدن مسیر صادرات به دلیل بالا بودن پایه صادراتی، دست‌رنج این تولیدکنندگان را به تاراج می‌داد؛ معضلی که اکنون با تدبیر و دستور وزیر جهاد کشاورزی برای تعدیل این نرخ، بار دیگر امیدی تازه در دل نخل‌داران «هند کوچک» زنده کرده است.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/c2PR8bsOUF7a8BBBnNscZ3SciDOD5i_Lgn1Qjfr8NGYdnNNwRjYnY-p3uJruq0DzlMx9E58oHlWdCEOxEOGbdXCY9yjcMGHIFV791SpHXbbM3w_SFdHkuMpl5FKJ1iqWU0c6ZlvJFho9bThHm7W-cvvvL8vm4QRd5lP8cytTttdgEZP3F_aQ9lA0Vex3aBxtM6rnpc7W9J36xKuWhLxtl5d0k_0XjCDzZobeBpF57jtDSb5LablukKlvsdADCSTE16sUJ_Nc6-__uia8PQniGfRhq6AiSRbcvqoCjPEWqhlg5C-Hzqqmm2TOQRId0SbReBvkvUPcu8V0rN1I0xwo5g.jpg"
-      },
-      "published_at": "2026-11-11T06:31:23+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "15125014367dce11",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-11T07:10:51.124558+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-11T10:56:54.733246+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 325,
-      "sent_at": "2026-11-11T10:56:58.453663+00:00"
-    },
-    {
-      "url": "https://t.me/Kerman_akhbar/66322",
-      "source_post_id": "66322",
-      "title": "تولد مهر و امید از دل شعله‌ها",
-      "excerpt": "تولد مهر و امید از دل شعله‌ها ماجرا از یک پیام شروع شد و به اقدامی جهادی و خداپسندانه رسید، جایی که ۱۹ نفر از گچ‌کاران شهرستان زرند، خانه خانواده‌ای کم‌بضاعت را که چند روز پیش بر اثر آتش‌سوزی آسیب دیده بود، در مدت یک روز گچ‌کاری و تحویل صاحبخانه دادند.",
-      "paragraphs": [
-        "تولد مهر و امید از دل شعله‌ها",
-        "ماجرا از یک پیام شروع شد و به اقدامی جهادی و خداپسندانه رسید، جایی که ۱۹ نفر از گچ‌کاران شهرستان زرند، خانه خانواده‌ای کم‌بضاعت را که چند روز پیش بر اثر آتش‌سوزی آسیب دیده بود، در مدت یک روز گچ‌کاری و تحویل صاحبخانه دادند."
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/2a4dcdf600.mp4?token=iO1ER6RB203V75BbJVx1ImCw3WyiFC_mDhhTPenJGa0NCx0B3300cik6DUvMroaDDw0OsBVasGuHxqHtGc6lCZOqy-lmGOHRVswLEMqkqtIXIcUIvrXS32X0TaZ69bgIyxVOg9pYcdzbIE_25S_VOoViMQYyfSWw_vWuBWrqF7Zdio1eWYAoW7DqnT4d6zF_hXZ4RpxSQyEKyrfoc4_eTU6wrJtzN8pg0P0AEN7xzd-8T54VEhs72ymX_VbkdtiiqtvxxnLy105h1kDRZtJc58nZVuLONUMjrnV8UcZb8cAFl-yBJaxxeM70QEZbmJCHA-IRqyDhMHh54PPMQ-4htg"
-      },
-      "published_at": "2026-11-11T06:34:16+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "5902b36c31fcf7d9",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "expired",
-      "detected_at": "2026-11-11T07:10:51.124558+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/kerman_gov/10598",
-      "source_post_id": "10598",
-      "title": "عطر حضور شهید گمنام در استانداری کرمان؛ آیین عزاداری فاطمی و وداع با شهید دفاع مقدس",
-      "excerpt": "عطر حضور شهید گمنام در استانداری کرمان؛ آیین عزاداری فاطمی و وداع با شهید دفاع مقدس هم‌زمان با ایام شهادت حضرت فاطمه زهرا (س)، آیین سوگواری و وداع با پیکر مطهر شهید گمنام هشت سال دفاع مقدس، چهارشنبه ۲۰ آبان‌ماه با حضور معاونان، مدیران و کارکنان استانداری کرمان برگزار شد. به گزارش روابط عمومی استانداری کرمان، این مجموعه روز چهارشنبه میزبان پیکر مطهر شهید گمنامی بود که با حضور خود، فضای استانداری را عطرآگین کرد. در این آیین معنوی، حاضران با برگزاری مراسم عزاداری شهادت حضرت فاطمه زهرا (س)، به مقام شامخ شهیدان ادای احترام کردند و با پیکر مطهر این شهید گمنام وداع گفتند. معاونان، مدیران ستادی، مدیران کل و کارکنان استانداری کرمان در این مراسم حضور داشتند و یاد و خاطره ایثارگری‌ها و فداکاری‌های شهدای هشت سال دفاع مقدس را گرامی داشتند.",
-      "paragraphs": [
-        "عطر حضور شهید گمنام در استانداری کرمان؛ آیین عزاداری فاطمی و وداع با شهید دفاع مقدس",
-        "هم‌زمان با ایام شهادت حضرت فاطمه زهرا (س)، آیین سوگواری و وداع با پیکر مطهر شهید گمنام هشت سال دفاع مقدس، چهارشنبه ۲۰ آبان‌ماه با حضور معاونان، مدیران و کارکنان استانداری کرمان برگزار شد.",
-        "به گزارش روابط عمومی استانداری کرمان، این مجموعه روز چهارشنبه میزبان پیکر مطهر شهید گمنامی بود که با حضور خود، فضای استانداری را عطرآگین کرد.",
-        "در این آیین معنوی، حاضران با برگزاری مراسم عزاداری شهادت حضرت فاطمه زهرا (س)، به مقام شامخ شهیدان ادای احترام کردند و با پیکر مطهر این شهید گمنام وداع گفتند.",
-        "معاونان، مدیران ستادی، مدیران کل و کارکنان استانداری کرمان در این مراسم حضور داشتند و یاد و خاطره ایثارگری‌ها و فداکاری‌های شهدای هشت سال دفاع مقدس را گرامی داشتند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/o5__9pbR8ZLAgZOdMMZeJce6aZBl1cVRXdMYpqWs6Jq47ddYxh_WoXfCvsb7zHzuWoAS_n1OrWs45fK5GqF-z-cqn7Ec9SF4YQNZnOU-r8bj2cV1DbJmukonOTCYil1VLXd8AeCje2qFldLhsvxG40QwELoCIcp6_59l1qtkdk7442R9YXhOveDlzAKrS0JzTMNVYwTlZOGUrz6F8BAdBXJjj785i_G4YPDk6ThaEpv3WydRxrV-dg5rCQawmQrRFnWMZq-7QhFTlOxcd06QnLL5-IRfZq9NWaSZ9jiQzezN4CTBcAsGBEWfgYhvEb0t_WqjBEZQ9BARlu1iXL2NBg.jpg"
-      },
-      "published_at": "2026-11-11T06:56:20+00:00",
-      "source": "اخبار استانداری کرمان",
-      "source_handle": "kerman_gov",
-      "id": "e953fc66e9a4d206",
-      "media_repost_allowed": true,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "expired",
-      "detected_at": "2026-11-11T07:10:51.124558+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/kermane_no/59269",
-      "source_post_id": "59269",
-      "title": "به گزارش «کرمان‌نو»، در پی وقوع یک سانحه رانندگی و پس از تأیید مرگ مغزی فاطمه سلطانی، مادر ۳۰ساله رفسنجانی، توسط متخصصان در بامداد ۲۰ آبان‌ماه، کبد و کلیه‌های ایشان با رضایت خانواده اهدا شد.",
-      "excerpt": "به گزارش «کرمان‌نو»، در پی وقوع یک سانحه رانندگی و پس از تأیید مرگ مغزی فاطمه سلطانی، مادر ۳۰ساله رفسنجانی، توسط متخصصان در بامداد ۲۰ آبان‌ماه، کبد و کلیه‌های ایشان با رضایت خانواده اهدا شد. زهرا عظیمی، کارشناس هماهنگ‌کننده واحد فراهم‌آوری پیوند عضو دانشگاه علوم پزشکی رفسنجان، در این خصوص گفت: در حالی که اندوه این خانواده با غم فقدان و ایام شهادت گره خورده بود، این عمل بزرگ و انسان‌دوستانه باعث شد تا در گوشه‌ای دیگر، سه تن از بیماران نیازمند، دوباره نفس‌های خود را در سینه احساس کنند و فرصتی دوباره برای زندگی بیابند.",
-      "paragraphs": [
-        "به گزارش «کرمان‌نو»، در پی وقوع یک سانحه رانندگی و پس از تأیید مرگ مغزی فاطمه سلطانی، مادر ۳۰ساله رفسنجانی، توسط متخصصان در بامداد ۲۰ آبان‌ماه، کبد و کلیه‌های ایشان با رضایت خانواده اهدا شد.",
-        "زهرا عظیمی، کارشناس هماهنگ‌کننده واحد فراهم‌آوری پیوند عضو دانشگاه علوم پزشکی رفسنجان، در این خصوص گفت: در حالی که اندوه این خانواده با غم فقدان و ایام شهادت گره خورده بود، این عمل بزرگ و انسان‌دوستانه باعث شد تا در گوشه‌ای دیگر، سه تن از بیماران نیازمند، دوباره نفس‌های خود را در سینه احساس کنند و فرصتی دوباره برای زندگی بیابند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/vTkJViHMvOc-m1sSxItmASKAU4z0aQpMiHuLuApLbFwHdQrq01AAaYsMw5zFE7W7RAA9A0vmeVDaIf_GuGY2XVv-3IRb6EbktzSGH6UTy-PI5DCPLUZVQJ9XGnDCuSh33cmm-0AyoVIRqKeKvB4O7EMe_brRRkPh2iE8CX4DM9cijmyTy7wQgIYgSwm11oSWMigK49W9oLSdTelkeIhIhFIsAxluDtFFbLEgt2pTaNDFi-8BLZAR6AkmfH-qabeRUB-opJK1Z31yqmCHVTgdDeZ6f1swYCheYspzD17t_9Im0_ai5J3g-GXSCk9Ip4rq4YwIsLXiJ0razWIhf0CqJQ.jpg"
-      },
-      "published_at": "2026-11-11T07:05:56+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "14ab7ee0e2e79313",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-11T07:10:51.124558+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-11T07:11:12.738989+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 312,
-      "sent_at": "2026-11-11T07:11:38.692542+00:00"
-    },
     {
       "url": "https://t.me/kerman_news/140426",
       "source_post_id": "140426",
@@ -10831,17 +10674,186 @@
       "delivery_kind": "photo",
       "telegram_message_id": 550,
       "sent_at": "2026-11-15T20:37:14.423470+00:00"
+    },
+    {
+      "url": "https://t.me/irna_kerman/30397",
+      "source_post_id": "30397",
+      "title": "چهار شهر استان کرمان در یک قدمی انتخاب به‌عنوان پایتخت کتاب ایران",
+      "excerpt": "چهار شهر استان کرمان در یک قدمی انتخاب به‌عنوان پایتخت کتاب ایران شهرهای «بم، شهربابک، ماهان و کهنوج» از استان کرمان به مرحله داوری نهایی انتخاب پایتخت کتاب ایران و شهرهای دوستدار کتاب راه یافتند. مدیرکل فرهنگ و ارشاد اسلامی استان کرمان این موفقیت را فرصتی برای تقویت زیرساخت‌های فرهنگی، تثبیت برنامه‌های پایدار کتاب‌خوانی و ارتقای جایگاه استان در نقشه فرهنگی کشور دانست. irna_kerman",
+      "paragraphs": [
+        "چهار شهر استان کرمان در یک قدمی انتخاب به‌عنوان پایتخت کتاب ایران",
+        "شهرهای «بم، شهربابک، ماهان و کهنوج» از استان کرمان به مرحله داوری نهایی انتخاب پایتخت کتاب ایران و شهرهای دوستدار کتاب راه یافتند. مدیرکل فرهنگ و ارشاد اسلامی استان کرمان این موفقیت را فرصتی برای تقویت زیرساخت‌های فرهنگی، تثبیت برنامه‌های پایدار کتاب‌خوانی و ارتقای جایگاه استان در نقشه فرهنگی کشور دانست.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/CwUBT0t3nNFQG5eWsClRGPhjYBE1dlMy357ovI5jJmrFDXrvPYsdYwUwA5N3QgkgfCyBpPiYNOo_jZN7DJsGeQtTMEkMDwMGkTwqYWXQYjCg-WM0X_-ZNv-070LVBwSMd5xKJEkoVLjr6gORQDaUx0ssEylHUyti2m3BEo85Y4afOxD_33fuTPgX-_ISNbQhCOd8W163nc5uQ51BwofkW_1GEsuPwh_nC-qzgR88ZbCfSbkbHTKnCZgCtnYn5F9Gg40IOLGmiEm2KDTPNQ6oTR4pudjBb3-F71XZuoFs4IvUULjm0LWP3jyZLwN1kjEfXf_BiUBuGUmWb5PEFs8x_g.jpg"
+      },
+      "published_at": "2026-11-16T04:30:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "70c12a3b55d4d0c9",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T05:22:52.189495+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30398",
+      "source_post_id": "30398",
+      "title": "واکنش میراث‌فرهنگی به تخریب سینما نور کرمان: شکایت کردیم",
+      "excerpt": "واکنش میراث‌فرهنگی به تخریب سینما نور کرمان: شکایت کردیم کرمان – ایرنا – ثبت ملی هم نتوانست مانع تخریب سینما «نور» کرمان شود. بنا به گفته سرپرست معاونت میراث‌فرهنگی استان کرمان، بخش زیادی از این بنا، چیزی در حدود ۷۰ درصد آن، تخریب شده که به احتمال زیاد عامدانه بوده و دراین‌باره از سوی میراث‌فرهنگی شکایت حقوقی ثبت شده و در حال پیگیری است. irna_kerman",
+      "paragraphs": [
+        "واکنش میراث‌فرهنگی به تخریب سینما نور کرمان: شکایت کردیم",
+        "کرمان – ایرنا – ثبت ملی هم نتوانست مانع تخریب سینما «نور» کرمان شود. بنا به گفته سرپرست معاونت میراث‌فرهنگی استان کرمان، بخش زیادی از این بنا، چیزی در حدود ۷۰ درصد آن، تخریب شده که به احتمال زیاد عامدانه بوده و دراین‌باره از سوی میراث‌فرهنگی شکایت حقوقی ثبت شده و در حال پیگیری است.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/so7WwllRJjpXzUdaxWoIS24EXMAVEHdfbW637uo3XDdeZSE-3pP2LXwE71gaxR-c_ZcIVTyV12ugiSUhHSRq6ZWS0tMe8gbxOAiGsc0bq9KlLl-hpqAy2nm8HToEma0JjjpTkzS4NtS5C3_QH7L1SZ_EsoffGjRNnlt3N1aO6zajMPbRLk7Mrm-CwbHjKEIW9v_9IPKg-0zsQ-qyAyhWNOTMK2vvK0TdaICTcO1GloaRyoie-21YwGSi2fIgpSjqC5GIlHSlI8pJlQTgkMHMQAUJkmTgCtR1ryEFVW20nTB7G3KrLb9epILdRLyNg1jsyqs4bATYTFGVIMxNsp5Mkg.jpg"
+      },
+      "published_at": "2026-11-16T04:51:18+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "4b372370ff772d80",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T05:22:52.189495+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10674",
+      "source_post_id": "10674",
+      "title": "تأکید معاون عمرانی استاندار کرمان بر آماده‌سازی زیرساخت‌های مراسم بزرگداشت شهید سلیمانی و خدمات‌رسانی به زائران",
+      "excerpt": "تأکید معاون عمرانی استاندار کرمان بر آماده‌سازی زیرساخت‌های مراسم بزرگداشت شهید سلیمانی و خدمات‌رسانی به زائران معاون هماهنگی امور عمرانی استانداری کرمان بر اجرای به‌موقع مصوبات و آماده‌سازی زیرساخت‌های مورد نیاز برای برگزاری مراسم بزرگداشت سپهبد شهید حاج قاسم سلیمانی و ارائه خدمات مطلوب به زائران تأکید کرد. به گزارش روابط عمومی استانداری کرمان، نشست کمیته عمرانی و زیرساخت ستاد بزرگداشت سپهبد شهید حاج قاسم سلیمانی، به ریاست معاون هماهنگی امور عمرانی استانداری و با حضور اعضای این کمیته برگزار شد. در این نشست، آخرین وضعیت زیرساخت‌های مورد نیاز مراسم بررسی و درباره هماهنگی دستگاه‌های اجرایی برای تأمین امکانات و آماده‌سازی زیرساخت‌ها تصمیم‌گیری شد. در این نشست، تأمین و استقرار کانکس برای نیروهای انتظامی و سپاه، ساماندهی و آماده‌سازی پارکینگ‌ها، بررسی وضعیت پیاده‌روها و رفع نواقص مسیرهای تردد زائران مورد بررسی قرار گرفت. همچنین بر تکمیل زیرساخت‌های امنیتی و ترمیم حصار امنیتی محدوده برگزاری مراسم تأکید شد.",
+      "paragraphs": [
+        "تأکید معاون عمرانی استاندار کرمان بر آماده‌سازی زیرساخت‌های مراسم بزرگداشت شهید سلیمانی و خدمات‌رسانی به زائران",
+        "معاون هماهنگی امور عمرانی استانداری کرمان بر اجرای به‌موقع مصوبات و آماده‌سازی زیرساخت‌های مورد نیاز برای برگزاری مراسم بزرگداشت سپهبد شهید حاج قاسم سلیمانی و ارائه خدمات مطلوب به زائران تأکید کرد.",
+        "به گزارش روابط عمومی استانداری کرمان، نشست کمیته عمرانی و زیرساخت ستاد بزرگداشت سپهبد شهید حاج قاسم سلیمانی، به ریاست معاون هماهنگی امور عمرانی استانداری و با حضور اعضای این کمیته برگزار شد.",
+        "در این نشست، آخرین وضعیت زیرساخت‌های مورد نیاز مراسم بررسی و درباره هماهنگی دستگاه‌های اجرایی برای تأمین امکانات و آماده‌سازی زیرساخت‌ها تصمیم‌گیری شد.",
+        "در این نشست، تأمین و استقرار کانکس برای نیروهای انتظامی و سپاه، ساماندهی و آماده‌سازی پارکینگ‌ها، بررسی وضعیت پیاده‌روها و رفع نواقص مسیرهای تردد زائران مورد بررسی قرار گرفت. همچنین بر تکمیل زیرساخت‌های امنیتی و ترمیم حصار امنیتی محدوده برگزاری مراسم تأکید شد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/t7p5rfuZeq3bezmgmD76NRVDOsQLTqxRpbCTV3pMp0ssHOF8oojyuJ3FwXfE2cYdT_K9u6vyCyakSubDWB0tqEalPtQseRF0AzUYPxBqIL-VfV63DYubC-NjaDX2RPGiPiMDawAQ4c_drMoiU4AsmMioC-emYORPsClJdoF2lwDc6heElt4_YujNGNqUeLpBHAhZo-Ol5HS-9MYcIptx8l9OrNY7-CnBPviLFNOt8nzx49tFO_T3D09TA64A-kKbwcdGeIWvkrLj9f8Xr3w-nuhj6VHmky-PibQLmESbB9AwpYmuDjllfH_M6klc3k9cPFEqNXJ6hyQfrMAwUcJp6A.jpg"
+      },
+      "published_at": "2026-11-16T05:10:21+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "2c8fafc3226f4850",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T05:22:52.189495+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10675",
+      "source_post_id": "10675",
+      "title": "پایش هفتگی بانک‌ها برای تسریع پرداخت تسهیلات تولیدی و سرمایه‌گذاری در استان کرمان",
+      "excerpt": "پایش هفتگی بانک‌ها برای تسریع پرداخت تسهیلات تولیدی و سرمایه‌گذاری در استان کرمان معاون هماهنگی امور اقتصادی استاندار کرمان از ارزیابی هفتگی عملکرد بانک‌ها و دستگاه‌های اجرایی در پرداخت تسهیلات از محل منابع بازگشتی و تبصره‌ای خبر داد و بر شناسایی و رفع موانع پرداخت این منابع تأکید کرد. به گزارش روابط عمومی استانداری کرمان، غلامرضا سالاری در جلسه بررسی روند پرداخت تسهیلات بانکی از محل منابع بازگشتی و تبصره‌ای استان روند پرداخت تسهیلات و عملکرد بانک‌ها و دستگاه‌های اجرایی به‌صورت هفتگی ارزیابی می‌شود تا ضمن رصد میزان پیشرفت، موانع و مشکلات موجود شناسایی و برای رفع آن‌ها تصمیم‌گیری شود. بانک‌ها باید از ظرفیت و منابع در اختیار خود برای تسهیل تأمین مالی واحدهای تولیدی و بنگاه‌های اقتصادی استفاده کنند.",
+      "paragraphs": [
+        "پایش هفتگی بانک‌ها برای تسریع پرداخت تسهیلات تولیدی و سرمایه‌گذاری در استان کرمان",
+        "معاون هماهنگی امور اقتصادی استاندار کرمان از ارزیابی هفتگی عملکرد بانک‌ها و دستگاه‌های اجرایی در پرداخت تسهیلات از محل منابع بازگشتی و تبصره‌ای خبر داد و بر شناسایی و رفع موانع پرداخت این منابع تأکید کرد.",
+        "به گزارش روابط عمومی استانداری کرمان، غلامرضا سالاری در جلسه بررسی روند پرداخت تسهیلات بانکی از محل منابع بازگشتی و تبصره‌ای استان",
+        "روند پرداخت تسهیلات و عملکرد بانک‌ها و دستگاه‌های اجرایی به‌صورت هفتگی ارزیابی می‌شود تا ضمن رصد میزان پیشرفت، موانع و مشکلات موجود شناسایی و برای رفع آن‌ها تصمیم‌گیری شود.",
+        "بانک‌ها باید از ظرفیت و منابع در اختیار خود برای تسهیل تأمین مالی واحدهای تولیدی و بنگاه‌های اقتصادی استفاده کنند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/pOGIVSsA41nhuYLuY7y0zuRk1VVuhNf7OUGtZnuewK-kxoYazs31TJpL5qiaSjtwGyVCDP3XdfD5kEzBKlTJmBjWBE2zMIuoaLBsT1dzrGP1zI86vlfoWW-n-8gSBm4GJI79_UermBkJvHlHTaDa8aFv8XpNmW2zNTH--zgfKQKUQGe-dLcH3NtceSarxZXwYVO14Erj4y1w2MOFTAqZx_Ilu542wYdNIGbu7W5qUCmFMbJn0I1GuEmbWWmSWCwvXwffVmDkRQLV9NPk3tooYdV9F1Wyyn0H11LTI96PgLyTS2Ac1adUsSIxKYayoTeMIWWC_8RuQJX7DT-PZphqjw.jpg"
+      },
+      "published_at": "2026-11-16T05:16:08+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "0b21ce855d44defe",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T05:22:52.189495+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/35016",
+      "source_post_id": "35016",
+      "title": "استاندار کرمان خبر داد؛",
+      "excerpt": "استاندار کرمان خبر داد؛ احتمال قطع گاز ۵ شهرستان‌ شرقی کرمان در زمستان فردای‌کرمان – گروه اقتصاد: استاندار کرمان با اشاره به احتمال افت فشار و قطعی گاز در شهرستان‌های شرقی استان در فصل زمستان، اعلام کرد که برنامه‌ریزی برای تأمین سوخت جایگزین از جمله نفت سفید و کپسول گاز در دستور کار قرار گرفته است. محمدعلی طالبی همچنین با تأکید بر ضرورت صرفه‌جویی در مصرف انرژی، از مردم خواست با کاهش مصرف خود به مدیریت شرایط کمک کنند تا کار به قطع گاز در انتهای خطوط لوله نرسد. فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "استاندار کرمان خبر داد؛",
+        "احتمال قطع گاز ۵ شهرستان‌ شرقی کرمان در زمستان",
+        "فردای‌کرمان – گروه اقتصاد: استاندار کرمان با اشاره به احتمال افت فشار و قطعی گاز در شهرستان‌های شرقی استان در فصل زمستان، اعلام کرد که برنامه‌ریزی برای تأمین سوخت جایگزین از جمله نفت سفید و کپسول گاز در دستور کار قرار گرفته است.",
+        "محمدعلی طالبی همچنین با تأکید بر ضرورت صرفه‌جویی در مصرف انرژی، از مردم خواست با کاهش مصرف خود به مدیریت شرایط کمک کنند تا کار به قطع گاز در انتهای خطوط لوله نرسد.",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/fpah9bAXSMyW6xJdt8lusKwI-6G8Ui4Jn3cFrc3x0x2lpzcdX6gUw0fcZCP3o8263WIb-Knyti17WlFeWGbgSey0_nHORlzCnV-nsnlCfKKVQ8pQKt55goSKmVD0j_4eTkvveFfyVPVVyODBKuDRLM7mFYXwVMTbdjO4iBPyIfmW-_38BmjBcAlQo-7lYOFTQ1tT1IQcdviiB9ZCbkW1PNcWRdYWQqx4ll2gpx9owc-Dy5TJuJ_b4H92eGcQCh4LmI9UqOle3mRHh8q8HTg-g-rlOR1Z6ymWEhdU4xw-x9Ep60G3bZ14bLdtQdfNpigknvuqaYjM-6OAFHDhgbJ0wQ.jpg"
+      },
+      "published_at": "2026-11-16T05:17:56+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "03c52256035cba6d",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T05:22:52.189495+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10676",
+      "source_post_id": "10676",
+      "title": "روایت_توسعه| گام بلند استان کرمان در خانه‌دار شدن مردم طی ۲ سال گذشته از ساخت ۱۸ هزار و ۴۵۰ واحد مسکونی در روستاها تا واگذاری هزاران قطعه زمین در شهرها؛ تحقق وعده خانه‌دار شدن خانواده‌ها با توسعه زیرساخت‌های مسکن، حمایت از جوانی جمعیت و تأمین زمین برای…",
+      "excerpt": "روایت_توسعه| گام بلند استان کرمان در خانه‌دار شدن مردم طی ۲ سال گذشته از ساخت ۱۸ هزار و ۴۵۰ واحد مسکونی در روستاها تا واگذاری هزاران قطعه زمین در شهرها؛ تحقق وعده خانه‌دار شدن خانواده‌ها با توسعه زیرساخت‌های مسکن، حمایت از جوانی جمعیت و تأمین زمین برای…",
+      "paragraphs": [
+        "روایت_توسعه| گام بلند استان کرمان در خانه‌دار شدن مردم طی ۲ سال گذشته از ساخت ۱۸ هزار و ۴۵۰ واحد مسکونی در روستاها تا واگذاری هزاران قطعه زمین در شهرها؛ تحقق وعده خانه‌دار شدن خانواده‌ها با توسعه زیرساخت‌های مسکن، حمایت از جوانی جمعیت و تأمین زمین برای…"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/FX88jd41jINTp5knX-1190qsmupQXPfaWQndxiufJ9a-t7OB-JBE5d-Hkt9uHZ4WHONhbzThuLw3d9bCnBO-u3IMfNIwqSfMLubyHXnxAyg1zQc0dmPHVDY16J6cz8spCaJO0qoRkp032P8kN4Fkp_yKLRz1xPYcmoU5LCRa_Nsmn61shjXq_RpuWB9cewDdo9mylINnoOkzzMCA4erc2NUKtV9MRR1MedbkFeVxc68jvkiyIugRI6DQCRn6CICy-aboUodl34kenOlDk0EAGui9Yyd4zbESLxF50dwJJO5pO69X-MOXhIvH_fQQN391cLi_x4UPvupUFOOLRMkj7Q.jpg"
+      },
+      "published_at": "2026-11-16T05:17:56+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "81ec85663a1e5634",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-16T05:22:52.189495+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-16T03:10:03.745389+00:00",
+  "saved_at": "2026-11-16T05:23:07.408190+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-16T03:09:45.547808+00:00",
-    "fardaayekerman": "2026-11-16T03:09:45.547808+00:00",
-    "irna_kerman": "2026-11-16T03:09:45.547808+00:00",
-    "kerman_gov": "2026-11-16T03:09:45.547808+00:00",
-    "kerman_akhbar": "2026-11-16T03:09:45.547808+00:00",
-    "kerman_news": "2026-11-16T03:09:45.547808+00:00",
-    "kerman_rasaneh": "2026-11-16T03:09:45.547808+00:00",
-    "qh_qv": "2026-11-16T03:09:45.547808+00:00"
+    "kermane_no": "2026-11-16T05:22:52.189495+00:00",
+    "fardaayekerman": "2026-11-16T05:22:52.189495+00:00",
+    "irna_kerman": "2026-11-16T05:22:52.189495+00:00",
+    "kerman_gov": "2026-11-16T05:22:52.189495+00:00",
+    "kerman_akhbar": "2026-11-16T05:22:52.189495+00:00",
+    "kerman_news": "2026-11-16T05:22:52.189495+00:00",
+    "kerman_rasaneh": "2026-11-16T05:22:52.189495+00:00",
+    "qh_qv": "2026-11-16T05:22:52.189495+00:00"
   }
 }
