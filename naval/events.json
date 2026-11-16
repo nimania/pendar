@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-15T20:59:22+00:00",
+  "updated_at": "2026-11-16T12:39:23+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
     {
@@ -15,6 +15,19 @@
       "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
       "source": "USNI News",
       "url": "https://news.usni.org/2026/11/13/usni-news-western-pacific-pulse-nov-13-2026"
+    },
+    {
+      "id": "usni-1d4cb905f2b6854711",
+      "date": "2026-11-13",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "The New Six Frigates",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/13/the-new-six-frigates"
     },
     {
       "id": "usni-cb16b4f311eefe3863",
