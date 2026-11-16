@@ -50,9 +50,10 @@
       "message_id": 44
     },
     "https://www.timeout.com/istanbul/art/pilevneli-mecidiyekoey": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/art/pilevneli-mecidiyekoey",
-      "at": "2026-11-16T22:38:30.812458+03:00"
+      "at": "2026-11-16T22:38:30.812458+03:00",
+      "message_id": 47
     }
   },
   "days": {
@@ -105,9 +106,10 @@
       "message_id": 44
     },
     "2026-11-16": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/art/pilevneli-mecidiyekoey",
-      "at": "2026-11-16T22:38:30.812458+03:00"
+      "at": "2026-11-16T22:38:30.812458+03:00",
+      "message_id": 47
     }
   }
 }
