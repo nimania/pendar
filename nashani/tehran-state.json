@@ -4237,160 +4237,30 @@
     "https://t.me/irna_1313/474378",
     "https://t.me/irna_1313/474380",
     "https://t.me/irna_1313/474381",
-    "https://t.me/mehrnews/432209"
+    "https://t.me/mehrnews/432209",
+    "https://t.me/tehranpress1/132752",
+    "https://t.me/isna94/413654",
+    "https://t.me/irna_1313/474382",
+    "https://t.me/mehrnews/432210",
+    "https://t.me/mehrnews/432211",
+    "https://t.me/isna94/413656",
+    "https://t.me/irna_1313/474383",
+    "https://t.me/mehrnews/432212",
+    "https://t.me/irna_1313/474384",
+    "https://t.me/isna94/413657",
+    "https://t.me/tehranpress1/132753",
+    "https://t.me/irna_1313/474385",
+    "https://t.me/irna_1313/474386",
+    "https://t.me/isna94/413658",
+    "https://t.me/tehranpress1/132754",
+    "https://t.me/mehrnews/432213",
+    "https://t.me/isna94/413659",
+    "https://t.me/irna_1313/474387",
+    "https://t.me/mehrnews/432214",
+    "https://t.me/mehrnews/432215",
+    "https://t.me/mehrnews/432216"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132538",
-      "source_post_id": "132538",
-      "title": "طرح مهدویت امام زمان (عج) چه زمانی به وقوع می‌پیوندند؟",
-      "excerpt": "طرح مهدویت امام زمان (عج) چه زمانی به وقوع می‌پیوندند؟ تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "طرح مهدویت امام زمان (عج) چه زمانی به وقوع می‌پیوندند؟",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-12T20:25:01+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "bbdc66cd343076f4",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-12T22:21:17.430586+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T01:05:52.643440+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 174,
-      "sent_at": "2026-11-13T01:05:55.607552+00:00"
-    },
-    {
-      "url": "https://t.me/irna_1313/473179",
-      "source_post_id": "473179",
-      "title": "ارتش پاکستان: نشست تهران در راستای کاهش تنش‌ها و تقویت همکاری‌های منطقه‌ای بود",
-      "excerpt": "ارتش پاکستان: نشست تهران در راستای کاهش تنش‌ها و تقویت همکاری‌های منطقه‌ای بود احمد شریف چودری سخنگوی ارتش پاکستان با تاکید بر پیشبرد دیپلماسی و خویشتنداری از سوی همه طرف ها، گفت: نشست چهارجانبه تهران گامی در مسیر تنش زدایی و تقویت همکاری‌های منطقه‌ای بود.",
-      "paragraphs": [
-        "ارتش پاکستان: نشست تهران در راستای کاهش تنش‌ها و تقویت همکاری‌های منطقه‌ای بود",
-        "احمد شریف چودری سخنگوی ارتش پاکستان با تاکید بر پیشبرد دیپلماسی و خویشتنداری از سوی همه طرف ها، گفت: نشست چهارجانبه تهران گامی در مسیر تنش زدایی و تقویت همکاری‌های منطقه‌ای بود."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/qSEVdgcx_OVdOI6N7RBkPdmY9qWshnTGk1MSwRtMaqlnXo4qbBI0Nkl30b_VvxAfGk0-K-48OkT4JvYiOwQue_l5vCwmavnolC-QD12hWlw0G0G9-b2jImPb7hhquVJUvrsGed4C5cbiPI0fMuK9GxhXgMuKODLB758scrFCZ8PcNu8mTg0Moz2LD-o2XfRQdeUJafWDmZvZ9e6jlaxyVuPfh95yQ4Nt6Qb8UWttGh8BmZ64JtL4wYDVMSmaHFCCPWNVPow8L-nNzjiON00s9qOGnSQhxagAj7XAFytYOuqXhR_eYQhyitn6K-T7qhvb6uq5e7_BQL9j4LvARn57hA.jpg"
-      },
-      "published_at": "2026-11-12T21:04:22+00:00",
-      "source": "ایرنا",
-      "source_handle": "irna_1313",
-      "id": "bfeb1cdb2299e894",
-      "media_repost_allowed": true,
-      "source_hashtag": "ایرنا",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-12T22:21:17.430586+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T01:05:52.643440+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 175,
-      "sent_at": "2026-11-13T01:05:58.366358+00:00"
-    },
-    {
-      "url": "https://t.me/mehrnews/431248",
-      "source_post_id": "431248",
-      "title": "آئین وداع با پیکر شهدای گمنام در میدان جمهوری",
-      "excerpt": "آئین وداع با پیکر شهدای گمنام در میدان جمهوری آئین وداع با پیکر مطهر شهدای گمنام دفاع مقدس، شامگاه پنجشنبه ۲۱ آبان ۱۴۰۵ با حضور اقشار مختلف مردم در میدان جمهوری تهران برگزار شد.",
-      "paragraphs": [
-        "آئین وداع با پیکر شهدای گمنام در میدان جمهوری",
-        "آئین وداع با پیکر مطهر شهدای گمنام دفاع مقدس، شامگاه پنجشنبه ۲۱ آبان ۱۴۰۵ با حضور اقشار مختلف مردم در میدان جمهوری تهران برگزار شد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/sXir5CSn9LatLYkBzWPjGAJDk9ezu-DwAlZbuWGgri-N0W-HW8f7-5eqQ2EzPXcU4oCqPiSAKVlLJujfkNrCIqsqoDEF2f8dGpM7yNvn4Tv2DOM71XiG5klsbZDzl_1pOLZEX79TSisWKzD0L8lo6O7EsNZv8J5hrvjrtXzVC2TOYz5CpvfPwsH_GEcyy_uypwRmA9JSjr5kjsBxvNAR_fBg9XMVrTidvlvTlIb2emD6Hmji1QLIm4AT3Ou87_B6T_J1Z631BQXbhSBvCySGUqTVe8_Ptnx_xkLajIIFyZN4Atqit_co4dmssLyWHnC3iIgjPwgSkLvo4YjGE3R9wQ.jpg"
-      },
-      "published_at": "2026-11-12T21:33:35+00:00",
-      "source": "مهر",
-      "source_handle": "mehrnews",
-      "id": "820ff83a28a6ef6f",
-      "media_repost_allowed": true,
-      "source_hashtag": "مهر",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-12T22:21:17.430586+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132540",
-      "source_post_id": "132540",
-      "title": "میزبانی منطقه ۱۴ تهران از شهید گمنام در شب شهادت حضرت زهرا (س)",
-      "excerpt": "میزبانی منطقه ۱۴ تهران از شهید گمنام در شب شهادت حضرت زهرا (س) هم‌زمان با شب ۲۵۷ اجتماع «حضور در میدان نبرد» در منطقه ۱۴ تهران و در شب شهادت حضرت فاطمه زهرا (سلام‌الله‌علیها)، مردم شهیدپرور این منطقه میزبان پیکر مطهر یک شهید گمنام شدند. این مراسم با حضور اقشار مختلف مردم و در فضایی آکنده از عطر ایثار و شهادت برگزار شد؛ حاضران با استقبال از پیکر مطهر شهید گمنام، بار دیگر با آرمان‌های والای شهدا و انقلاب اسلامی تجدید پیمان کردند. پنجشنبه ۲۱ آبان‌ماه ۱۴۰۵ خبرنگار: سیدمحسن طباطبایی تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "میزبانی منطقه ۱۴ تهران از شهید گمنام در شب شهادت حضرت زهرا (س)",
-        "هم‌زمان با شب ۲۵۷ اجتماع «حضور در میدان نبرد» در منطقه ۱۴ تهران و در شب شهادت حضرت فاطمه زهرا (سلام‌الله‌علیها)، مردم شهیدپرور این منطقه میزبان پیکر مطهر یک شهید گمنام شدند.",
-        "این مراسم با حضور اقشار مختلف مردم و در فضایی آکنده از عطر ایثار و شهادت برگزار شد؛ حاضران با استقبال از پیکر مطهر شهید گمنام، بار دیگر با آرمان‌های والای شهدا و انقلاب اسلامی تجدید پیمان کردند.",
-        "پنجشنبه ۲۱ آبان‌ماه ۱۴۰۵",
-        "خبرنگار: سیدمحسن طباطبایی",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/ffbf2306a7.mp4?token=ZKd2S5SEKe1125-Acb0D0g4RIhW6YjlEeWBtvNwm2vCY34oj3Pt5DrL4-67yHos6YjNcwBdcnDMWQLLtXbNg_R9oQY1v_xTEmW1QbITm8CChzk9CRq-zIdy-qIX56W37tMRMywzrS8zUF5HAJrVKZjsvgtUry0TXy5KaraI7Z1u-5Wb4srJjYqO4kQRlJuGS9bTWf37VlZkrtKXcbJNf2Y6ZJVVcQktM22s6UmTBdNA7AtqIbkf7QKKR1nMxs6YTG7vjNl-rVIQDq5bGibPRFwxAe80ckA-poS7EtQPp31AsIpQyetgvYrwQtlzyLTorZAblmKJUq_VamiDMK63ZEIp9nLj2Z1UwZcXxd6GApPa1aNz9wcZ3UcDuSTaVsxsoH8hZNbCzuxWM1UtmDW9kmxpKJl0s-NG7L8toluFSngYEf1N7kZxIUErjM3YQsALNLS32ZNefZy0JB7S9Ljqks1rCuBg5ltCbarhX_k6Ls3q3q8T324_vZwYH1GnRiIojHNu5PfXQSFmXkymaHCtTX-JivNUSlWb_NpQJ5sZFM_4JVp0gkboepKd5L1-hYXSm7_mTlshchzhNG3VG3byn0YTduDd6LSIIadezktw46-0edK1OirOq3xJEq5mPWjnLtmu3tEL6zQ_x4BKBW01eM4Xt-zmZsrdLNw1KqaKFP3A"
-      },
-      "published_at": "2026-11-12T21:52:09+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "fc6d12a1587a11bd",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-12T22:21:17.430586+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T02:45:33.678674+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 176,
-      "sent_at": "2026-11-13T02:45:36.272181+00:00"
-    },
-    {
-      "url": "https://t.me/mehrnews/431264",
-      "source_post_id": "431264",
-      "title": "آئین وداع با پیکر شهدای گمنام در میدان انقلاب",
-      "excerpt": "آئین وداع با پیکر شهدای گمنام در میدان انقلاب آئین وداع با پیکر مطهر شهدای گمنام دفاع مقدس، شامگاه پنجشنبه ۲۱ آبان ۱۴۰۵ با حضور اقشار مختلف مردم در میدان انقلاب تهران برگزار شد.",
-      "paragraphs": [
-        "آئین وداع با پیکر شهدای گمنام در میدان انقلاب",
-        "آئین وداع با پیکر مطهر شهدای گمنام دفاع مقدس، شامگاه پنجشنبه ۲۱ آبان ۱۴۰۵ با حضور اقشار مختلف مردم در میدان انقلاب تهران برگزار شد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/TqF_ZxP2qoIEQLIpyKaHWdhKQRLTrvZYneasmvc4SveIxh-0P-El5HRls0S6gZt7jtP575hsFxJaaPtBn7JAvOxWQjFFbBmVkQzMXVOEuEQemNmJUeqAH3QjqF3n7dqKkNQfXQCX9xfV429V3N4Nx7jbs-bSs8xskFNn2iaT8grms6AHCafvDwqNW56N1gMqibqTekU5Nm_qu_pakPcl9IAbMUGpC0hsx81IdMJ-E8OF22MlOQvOMVd3Mj5DeJ0WiKErsan_Niwk5a2Ff4oJJ0HTuudoCjHxr_Wkc77nH3C_g9YF7t4GmF92nia8KUPd1sc9vi6Doucurfcmn1lRBw.jpg"
-      },
-      "published_at": "2026-11-12T22:12:49+00:00",
-      "source": "مهر",
-      "source_handle": "mehrnews",
-      "id": "b8c995dfa69192ee",
-      "media_repost_allowed": true,
-      "source_hashtag": "مهر",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-12T22:21:17.430586+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T02:45:33.678674+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 177,
-      "sent_at": "2026-11-13T02:45:38.833644+00:00"
-    },
     {
       "url": "https://t.me/tehranpress1/132541",
       "source_post_id": "132541",
@@ -12859,15 +12729,161 @@
       "status": "ready",
       "detected_at": "2026-11-16T06:09:01.315734+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132752",
+      "source_post_id": "132752",
+      "title": "سالانه ۴ میلیون نفر از مجموعهٔ توچال بازدید می‌کنند",
+      "excerpt": "سالانه ۴ میلیون نفر از مجموعهٔ توچال بازدید می‌کنند مدیرعامل مجموعهٔ فرهنگی-ورزشی توچال با اشاره به بازدید سالانه ۴ میلیون نفر از این مجموعه، از کاهش ۲۰ درصدی آمار ورودی‌ها نسبت به پارسال خبر داد و گفت: افزایش دغدغه‌های معیشتی مردم و کاهش توجه به تفریح و ورزش از جمله عواملی است که احتمالاً در افت مراجعه به توچال تأثیر داشته است. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "سالانه ۴ میلیون نفر از مجموعهٔ توچال بازدید می‌کنند",
+        "مدیرعامل مجموعهٔ فرهنگی-ورزشی توچال با اشاره به بازدید سالانه ۴ میلیون نفر از این مجموعه، از کاهش ۲۰ درصدی آمار ورودی‌ها نسبت به پارسال خبر داد و گفت: افزایش دغدغه‌های معیشتی مردم و کاهش توجه به تفریح و ورزش از جمله عواملی است که احتمالاً در افت مراجعه به توچال تأثیر داشته است.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/148cdd9ba3.mp4?token=J9Z32XkW6Gjnm0EKxfftu5_VVaDLez0_C18cJ6hb5sU6ksf6YEBhytO4URh2VM5dLQHE0kzM90vQWlDKuSqtSWDm7vE07cSvvyLDR2oc8kh5r3FWTKypadJ71X5VRBM7cA5rIrezNlVVsEVbh-oKr47EG6OusXLVQPPfx2J8stkfK2295P02vkrSRG52V2AUsWxxY23zvAM6W3VpGpvKq3GuoGZ0hdjYNHPf1nDqHggrwAiYfSVMDJUo2Nznb-j7OoREgn7PtT04MvAC7QGyqFh7xrl2PgbVxvJ03vIWOL_ulkFs1fCxZRh6a8cwzFYdoBK5bwL2Mf_9h1ZIY1V8e1P52zOTKrwaF7AF87cOqmwhtCR6mowpsm8Ar8AB1EJE2Aa7iu_JTfA3z94RR8HzZ4s26TpqZmiIaUbvIGQDarTAgiWdSYCyb2wA6Vj1v1W3KwI91xwEy7gGlKD51vR4So50jUJ_K9r-bTCVAI0jLQyUoaQcZ37PM9EF9vkjfr-rpfaEJb-xMpJHHI57kj9pPBSjtzaKhd60eNRibfCNSRzjYTdJk8WvCHkq8FLtXB_WpoVGFbql6vbJHJuVEci9CtossL1TEyqyGmf-n0Yjj8lH5iCCQK0d55YQfF7KJbPJP7c8mokxpAkyAwwzvqy_pcqJmN_nZtncWbZoHJ5SXLY"
+      },
+      "published_at": "2026-11-16T06:09:08+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "89eaffbeb0277a03",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-16T06:29:56.517405+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/isna94/413657",
+      "source_post_id": "413657",
+      "title": "دموکرات‌ها به دنبال افشای ارتباطات مالی ترامپ با عربستان، امارات و قطر",
+      "excerpt": "دموکرات‌ها به دنبال افشای ارتباطات مالی ترامپ با عربستان، امارات و قطر به گزارش روزنامه واشنگتن‌پست، عربستان سعودی، امارات متحده عربی و قطر خود را برای مواجهه با تحقیقات گسترده کنگره آمریکا درباره اتهامات فساد مرتبط با ترامپ، دولت او و اعضای خانواده‌اش آماده می‌کنند. این تحقیقات در پی پیروزی دموکرات‌ها در هر دو مجلس کنگره انجام خواهد شد. دموکرات‌ها هشدار داده‌اند که عدم همکاری این کشورها با تحقیقات می‌تواند روابط آن‌ها با واشنگتن را به خطر بیندازد؛ از جمله فروش تسلیحات در آینده و کمک‌های امنیتی آمریکا.",
+      "paragraphs": [
+        "دموکرات‌ها به دنبال افشای ارتباطات مالی ترامپ با عربستان، امارات و قطر",
+        "به گزارش روزنامه واشنگتن‌پست، عربستان سعودی، امارات متحده عربی و قطر خود را برای مواجهه با تحقیقات گسترده کنگره آمریکا درباره اتهامات فساد مرتبط با ترامپ، دولت او و اعضای خانواده‌اش آماده می‌کنند.",
+        "این تحقیقات در پی پیروزی دموکرات‌ها در هر دو مجلس کنگره انجام خواهد شد.",
+        "دموکرات‌ها هشدار داده‌اند که عدم همکاری این کشورها با تحقیقات می‌تواند روابط آن‌ها با واشنگتن را به خطر بیندازد؛ از جمله فروش تسلیحات در آینده و کمک‌های امنیتی آمریکا."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/KR9WrDnErSkIHpqjfz5IfqjADLhxCTLm_2ZLuwLp2bYTmXnkdMdB11RSHU-21e2k5_RdFTxX6HDJcifUtr_hFtLwd5KHNsxcbap7_PZmGzCL6VxbHJTMgQ69XDinq8CaCcftzdBe4lTMK-OU_y9tZBHpUP2FNh5fefYEm64ZdeQfvItW0q7hdK9s1zBweghWg-64Qa4TA4btHtFpVCxI4XmMR9uIVBbXHLnmlx_7Vr4mUN-dbur9xFXQbsKWt9pEqyRCzQ5f80R9-wZqw43xX9toLVxFbE-JiDGHG8uBALxHcWr4L0-9-iIL7EA6cQXn_Q5goxWlEuLtDLPAkptTVQ.jpg"
+      },
+      "published_at": "2026-11-16T06:19:01+00:00",
+      "source": "ایسنا",
+      "source_handle": "isna94",
+      "id": "0ed82b9afdfc2ab8",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایسنا",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-16T06:29:56.517405+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132753",
+      "source_post_id": "132753",
+      "title": "کاشت نهال به یاد رهبر شهید امت در منطقه ۱۲ تهران",
+      "excerpt": "کاشت نهال به یاد رهبر شهید امت در منطقه ۱۲ تهران همزمان با اجرای پویش بزرگ «کاشت ۳۱۳ هزار نهال امید»، نهالی به یاد رهبر شهید امت غرس شد. این اقدام با هدف پاسداشت یاد و خاطره شهدا، ترویج فرهنگ درختکاری و حفاظت از محیط زیست انجام شد. در این آیین، فرمانده سپاه ناحیه مقاومت بسیج حضرت امام خمینی(ره)، رئیس بنیاد شهید و امور ایثارگران منطقه ۱۲ تهران، رئیس آموزش و پرورش منطقه ۱۲ تهران و خانواده‌های معظم شهدای جنگ رمضان حضور داشتند. دوشنبه ۲۵ آبان‌ماه ۱۴۰۵ خبرنگار: فرشید تاجیک تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "کاشت نهال به یاد رهبر شهید امت در منطقه ۱۲ تهران",
+        "همزمان با اجرای پویش بزرگ «کاشت ۳۱۳ هزار نهال امید»، نهالی به یاد رهبر شهید امت غرس شد.",
+        "این اقدام با هدف پاسداشت یاد و خاطره شهدا، ترویج فرهنگ درختکاری و حفاظت از محیط زیست انجام شد.",
+        "در این آیین، فرمانده سپاه ناحیه مقاومت بسیج حضرت امام خمینی(ره)، رئیس بنیاد شهید و امور ایثارگران منطقه ۱۲ تهران، رئیس آموزش و پرورش منطقه ۱۲ تهران و خانواده‌های معظم شهدای جنگ رمضان حضور داشتند.",
+        "دوشنبه ۲۵ آبان‌ماه ۱۴۰۵",
+        "خبرنگار: فرشید تاجیک",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/ccbd5b3721.mp4?token=VRwDfyRVXcAHkBCZ1tGwev32O9fyIJ7sXGCHZznlCBfUfkInSrnaJQJqheUCeyJcjs8TwXXo1GowNk87fCBoTQeBBs9sBhY0H2H6lqtLtBwQCEUS-fE8EiiVImmEfLV7sHauA4CN2pRL5Ycx2PWMfKHd7MdHLeT9nfUiCnnE-Te0l7hF68TLI3tZCZ_HK2t2BYNtAkPH3fOSgsoK97f2u096oI_gevVgoQK2fBQO1mCbwiv90lJQ6nGeqXONA6NcTMalhk5pYAV6e6IQoCJRTLqIRiHc0477B5eLKMbGgsKQfKGbCyH_4qR9_z8gXhk9YRgL7T5lyR81zmlViLzraYi-rc8JTn60jg3WQw8tSra5FJxajnlRbgTcvWPed9A7hoA88mFEYCu96vjiXAEZIAWkQueE-1qfgrnZIiKZoOLSGAUdxqESUh_wv6CWr27chfsCsgVoKSxYSAmHOwd9qM7iqlPdgl1WkxUyV4FV1b61Q8iTvryYmw13wykAZmAL84M8Ol7JirvcyAAKeOKp5D_ZEhqwoY_cuXrmIQkPFgzhCGz6UMwuTUnj_s4PDZe4dZ6NOvNp-dJRftmQqnzb8PDbBsTnn49KDphInnbCV3xZTrl6vLoFMz2QYxq3AZWfks8FtguR1kxPhFOt7Z_JSDXnBAlnUdZaDVx7DBCB7MQ"
+      },
+      "published_at": "2026-11-16T06:19:51+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "f334eaf0321dfb4c",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-16T06:29:56.517405+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/474385",
+      "source_post_id": "474385",
+      "title": "«سروهای سرخ فارس»",
+      "excerpt": "«سروهای سرخ فارس» نخستین نکوداشت شهدای قهرمان، فرماندهان و دانشمندان جان‌فدای دیار دین، حماسه و هنر در جنگ‌های دوم و سوم تحمیلی و گرامیداشت شهدای ورزشگاه لامرد با نمایش مستند، خاطره‌گویی و برنامه‌های فرهنگی و هنری سه‌شنبه ۲۶ آبان ۱۴۰۵ ساعت ۱۴:۳۰ تا ۱۷ تهران، خیابان سمیه، تقاطع حافظ، تالار اندیشه حوزه هنری",
+      "paragraphs": [
+        "«سروهای سرخ فارس»",
+        "نخستین نکوداشت شهدای قهرمان، فرماندهان و دانشمندان جان‌فدای دیار دین، حماسه و هنر در جنگ‌های دوم و سوم تحمیلی و گرامیداشت شهدای ورزشگاه لامرد",
+        "با نمایش مستند، خاطره‌گویی و برنامه‌های فرهنگی و هنری",
+        "سه‌شنبه ۲۶ آبان ۱۴۰۵ ساعت ۱۴:۳۰ تا ۱۷",
+        "تهران، خیابان سمیه، تقاطع حافظ، تالار اندیشه حوزه هنری"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/hH68ZDan9ovxDtYlW73ghrjT1zHM4h4KFJD3-5i0SLgVMkB6aDvOnI7lKSDlllVuzpWoCRtFnG-DMPlIAr9fONEezqMVHPw_xq7cftsdUFmPCmvEUo-oDuVT_-QImDoQoNHSTCSH6SfVPfy_pwe4Ev-23XNiWmPorh_Iav3cnEf2qz62PN1dI0sHRptAoeDnH5HV05tnQ2YrrLnrhy2-EL8yxzGnEb4ON1fYBlYGi3o8X6zxCNYcaBYk3oJmRMH5KHMweF_NkYxDssbaJecxphVjtO7QoP2eTyvdbExaDZDbgMbM4-bP0cyKIDKPt3JQmMsth8S_g_Cf5DcrJy5EUg.jpg"
+      },
+      "published_at": "2026-11-16T06:20:06+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "05ea871fd96dcd26",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-16T06:29:56.517405+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/132754",
+      "source_post_id": "132754",
+      "title": "هر نهال، نشانی از امید؛ منطقه ۱۲ میزبان پویش بزرگ کاشت نهال",
+      "excerpt": "هر نهال، نشانی از امید؛ منطقه ۱۲ میزبان پویش بزرگ کاشت نهال پویش بزرگ «کاشت ۳۱۳ هزار نهال امید» با هدف گسترش فضای سبز، ترویج فرهنگ درختکاری و پاسداشت محیط زیست، با حضور فرمانده ناحیه مقاومت بسیج حضرت امام خمینی(ره)، جمعی از مسئولان منطقه و خانواده‌های معظم شهدا در منطقه ۱۲ برگزار شد. این حرکت نمادین، جلوه‌ای از همدلی و مشارکت اجتماعی در مسیر ساختن ایرانی سرسبزتر و حفظ میراث طبیعی برای نسل‌های آینده است. دوشنبه ۲۵ آبان‌ماه ۱۴۰۵ خبرنگار: فرشید تاجیک تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "هر نهال، نشانی از امید؛ منطقه ۱۲ میزبان پویش بزرگ کاشت نهال",
+        "پویش بزرگ «کاشت ۳۱۳ هزار نهال امید» با هدف گسترش فضای سبز، ترویج فرهنگ درختکاری و پاسداشت محیط زیست، با حضور فرمانده ناحیه مقاومت بسیج حضرت امام خمینی(ره)، جمعی از مسئولان منطقه و خانواده‌های معظم شهدا",
+        "در منطقه ۱۲ برگزار شد.",
+        "این حرکت نمادین، جلوه‌ای از همدلی و مشارکت اجتماعی در مسیر ساختن ایرانی سرسبزتر و حفظ میراث طبیعی برای نسل‌های آینده است.",
+        "دوشنبه ۲۵ آبان‌ماه ۱۴۰۵",
+        "خبرنگار: فرشید تاجیک",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/f2_VXvYZCSxn9l7VLxQDCvTf0Ql003jScEp-zyHETxpOZUzKESmO29URtm24zyqRWFxrY2lz9WITIeTuRsobvarUnBjVHuL4XYc1e60F6V42I31obCkyIoll2bli-P2wp2olmsgxeOhVUY6n8x2bKxu0RHIzhK5cSLQ0hgd3ObYRZfJPMspM4fDGnoFT-BTpnYLDWAXixO4TMIIE3XEsgrn9KX3h_B9oObUmq57VNVAqVNbegJra1Ph3PUl4DfNyDcMDSlIiJ5CTixSd8Kgm-GDeQJw1RncpmLSoIo4RCviy5jZTVKjV9ics9-4cRxoe1b8Ne_WTYWWG3EeMgv7qVw.jpg"
+      },
+      "published_at": "2026-11-16T06:23:17+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "206f3936b43552a4",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-16T06:29:56.517405+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-16T06:09:50.987879+00:00",
+  "saved_at": "2026-11-16T06:30:54.766366+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-16T06:09:01.315734+00:00",
-    "tehran_tel": "2026-11-16T06:09:01.315734+00:00",
-    "irna_1313": "2026-11-16T06:09:01.315734+00:00",
-    "isna94": "2026-11-16T06:09:01.315734+00:00",
-    "mehrnews": "2026-11-16T06:09:01.315734+00:00",
+    "tehranpress1": "2026-11-16T06:29:56.517405+00:00",
+    "tehran_tel": "2026-11-16T06:29:56.517405+00:00",
+    "irna_1313": "2026-11-16T06:29:56.517405+00:00",
+    "isna94": "2026-11-16T06:29:56.517405+00:00",
+    "mehrnews": "2026-11-16T06:29:56.517405+00:00",
     "web_shahr": "2026-11-16T06:09:01.315734+00:00",
     "web_mehr_tehran": "2026-11-16T06:09:01.315734+00:00"
   }
