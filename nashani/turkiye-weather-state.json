@@ -101,7 +101,8 @@
       "at": "2026-11-16T14:56:45.878987+03:00"
     },
     "2026-11-17-morning": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 48,
       "at": "2026-11-17T01:59:30.260326+03:00"
     }
   }
