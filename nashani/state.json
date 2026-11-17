@@ -1934,75 +1934,14 @@
     "https://t.me/kerman_news/140728",
     "https://t.me/qh_qv/1108",
     "https://t.me/Kerman_akhbar/66441",
-    "https://t.me/qh_qv/1109"
+    "https://t.me/qh_qv/1109",
+    "https://t.me/kerman_gov/10692",
+    "https://t.me/kerman_news/140729",
+    "https://t.me/irna_kerman/30405",
+    "https://t.me/kerman_news/140730",
+    "https://t.me/Kerman_akhbar/66442"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140478",
-      "source_post_id": "140478",
-      "title": "اینجا معراج شهداست؛ میزبانی کرمان از ۱۷ شهید گمنام",
-      "excerpt": "اینجا معراج شهداست؛ میزبانی کرمان از ۱۷ شهید گمنام عکس: مهدی امین زاده",
-      "paragraphs": [
-        "اینجا معراج شهداست؛ میزبانی کرمان از ۱۷ شهید گمنام",
-        "عکس: مهدی امین زاده"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/ujjDZbpdIjcomj4Vymo4OhF6QVcRrpwsLpdlHtnrg9IuXVJwxLW4Q4ZAZ9OuFon4UWWydBRcQh1djUf6_pVoCkVh0DKaJp6YI0slfWaFGy65zG4u5AQQ9v8RVqxQwbYQvxIcjVVZiOsK7xrnrRcBXkF8DLH5EtDBTJPktz6K7-OLSEdc72Q47dTPH4raH9IiU0-Qd2ONauQfGQzda3j-BLEBDf7NcLd_BRg3VWwfiwmyPa-r5CtRR1lpuU40tRTg698QRUMQRvS7YvwYbOUiylmVnSPsUnaP1TAzEzJGTPitLAkHxC_qcLm_zGP2uUNrFpblq23EvHaWHXbZeSj5fA.jpg"
-      },
-      "published_at": "2026-11-12T06:50:19+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "7ddab07a57670834",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T08:12:38.927208+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T08:51:35.112630+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 372,
-      "sent_at": "2026-11-12T08:52:01.148446+00:00"
-    },
-    {
-      "url": "https://t.me/fardaayekerman/34997",
-      "source_post_id": "34997",
-      "title": "مدیرکل دفتر امور اجتماعی استانداری کرمان خبر داد؛",
-      "excerpt": "مدیرکل دفتر امور اجتماعی استانداری کرمان خبر داد؛ خدمات ۸۵۰ تشکل مردمی کرمان هدفمند می‌شود تشکیل ۶ کمیته تخصصی برای ساماندهی آسیب‌های اجتماعی فردای‌کرمان – گروه جامعه: مدیرکل دفتر امور اجتماعی و فرهنگی استانداری کرمان از تشکیل ۶ کمیته تخصصی با مشارکت تشکل‌های مردم‌نهاد استان خبر داد و گفت: «این کمیته‌ها با هدف شبکه‌سازی، هم‌افزایی و استفادۀ هدفمند از ظرفیت بیش از ۸۵۰ تشکل ثبت‌شده، زمینه‌ساز راه‌اندازی خانۀ تشکل‌ها در استان خواهند بود». فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
-      "paragraphs": [
-        "مدیرکل دفتر امور اجتماعی استانداری کرمان خبر داد؛",
-        "خدمات ۸۵۰ تشکل مردمی کرمان هدفمند می‌شود",
-        "تشکیل ۶ کمیته تخصصی برای ساماندهی آسیب‌های اجتماعی",
-        "فردای‌کرمان – گروه جامعه: مدیرکل دفتر امور اجتماعی و فرهنگی استانداری کرمان از تشکیل ۶ کمیته تخصصی با مشارکت تشکل‌های مردم‌نهاد استان خبر داد و گفت: «این کمیته‌ها با هدف شبکه‌سازی، هم‌افزایی و استفادۀ هدفمند از ظرفیت بیش از ۸۵۰ تشکل ثبت‌شده، زمینه‌ساز راه‌اندازی خانۀ تشکل‌ها در استان خواهند بود».",
-        "فردای‌کرمان در تلگرام",
-        "فردای‌کرمان در ایتا",
-        "فردای‌کرمان در بله",
-        "فردای‌کرمان درواتسپ"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/ln77jeCTOdHjR7dE25JjTKATtR3wBfnypA4f77GDx0_ozNpMulcU-g_LmXsJhZxDGFWDRvcT1BkCehaRV8E1XKWpjGpyemJ9mWTS5D8QvvMPVQlbJEJWXvC-eXCJP4TFF9ddc0Yk0lTHmCZJVXdiI01WMAhtxFiOojU0_PjaJlazuf_Dk4JZbBK6jL5TTK27ol1g8EGhQC922EYtmsigTsRjVCXAM_kjQbJ72tBzw_s2RTddiRB5DwsKt9TRHT-q3tZaWnMSrduBsPxrFZz7YE9A2YO3RjhkNYBOcchNYTkh87bw-5-E8P4y88DvMWGCGotVZDVfin5s-3EV0YDt7g.jpg"
-      },
-      "published_at": "2026-11-12T06:54:41+00:00",
-      "source": "فردای کرمان",
-      "source_handle": "fardaayekerman",
-      "id": "8cea44a18dfdae26",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T08:12:38.927208+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T11:52:32.470531+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 376,
-      "sent_at": "2026-11-12T11:52:35.455509+00:00"
-    },
     {
       "url": "https://t.me/Kerman_akhbar/66346",
       "source_post_id": "66346",
@@ -10933,17 +10872,72 @@
       "delivery_kind": "text",
       "telegram_message_id": 584,
       "sent_at": "2026-11-16T23:15:51.828649+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_gov/10692",
+      "source_post_id": "10692",
+      "title": "آغاز طرح احراز هویت و ثبت اطلاعات بیومتریک زندانیان اتباع خارجی در کرمان",
+      "excerpt": "آغاز طرح احراز هویت و ثبت اطلاعات بیومتریک زندانیان اتباع خارجی در کرمان با راهبری اداره‌کل امور اتباع و مهاجران خارجی استانداری کرمان؛ طرح تخصصی شناسایی، احراز هویت و ثبت اطلاعات بیومتریک زندانیان اتباع خارجی در زندان کرمان، با همکاری دستگاه‌های قضایی، انتظامی و اجرایی استان آغاز شد. به گزارش روابط عمومی استانداری کرمان، این طرح در راستای اجرای مصوبات کارگروه فرعی ساماندهی اتباع و مهاجران خارجی استان و با هدف پیشگیری از تخلفات حقوقی و کیفری، تقویت نظارت‌های تخصصی و ساماندهی وضعیت هویتی اتباع خارجی به اجرا درآمده است. در جریان اجرای این طرح، اطلاعات هویتی و مدارک شناسایی زندانیان اتباع خارجی با استفاده از ظرفیت‌های تخصصی و اطلاعاتی دستگاه‌های مسئول بررسی و تطبیق داده می‌شود. در این فرآیند، مواردی از مغایرت میان اطلاعات خوداظهاری، مشخصات سجلی و مدارک هویتی و همچنین موارد مشکوک به جعل اسناد و مدارک شناسایی شناسایی شده و برای بررسی و رسیدگی قانونی به مراجع قضایی ارجاع شده است.",
+      "paragraphs": [
+        "آغاز طرح احراز هویت و ثبت اطلاعات بیومتریک زندانیان اتباع خارجی در کرمان",
+        "با راهبری اداره‌کل امور اتباع و مهاجران خارجی استانداری کرمان؛ طرح تخصصی شناسایی، احراز هویت و ثبت اطلاعات بیومتریک زندانیان اتباع خارجی در زندان کرمان، با همکاری دستگاه‌های قضایی، انتظامی و اجرایی استان آغاز شد.",
+        "به گزارش روابط عمومی استانداری کرمان، این طرح در راستای اجرای مصوبات کارگروه فرعی ساماندهی اتباع و مهاجران خارجی استان و با هدف پیشگیری از تخلفات حقوقی و کیفری، تقویت نظارت‌های تخصصی و ساماندهی وضعیت هویتی اتباع خارجی به اجرا درآمده است.",
+        "در جریان اجرای این طرح، اطلاعات هویتی و مدارک شناسایی زندانیان اتباع خارجی با استفاده از ظرفیت‌های تخصصی و اطلاعاتی دستگاه‌های مسئول بررسی و تطبیق داده می‌شود. در این فرآیند، مواردی از مغایرت میان اطلاعات خوداظهاری، مشخصات سجلی و مدارک هویتی و همچنین موارد مشکوک به جعل اسناد و مدارک شناسایی شناسایی شده و برای بررسی و رسیدگی قانونی به مراجع قضایی ارجاع شده است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/gQpOCpVinqCTayGWoYbTeCFaqSFJIDdjxB_-iqWPKJEX1zEleg3xlRYs4weRk1LjF8D6akNCTdQ6EnqSEC-Atp10YuGgLOqFDGUF7Ojb6Pb_iC94qOj5NcYry-f_CEtjDG0DrLrYSkARdXeVKx3nnNzfEdZ-HssBydeZRkigI09XJh7ymroed0MqhXMiRh34CWNY1adHrNr-cPi_UMqT8JFjVwn7m2kITumrq_PigDXzcnq2rwelzOiApvnWBHUynkqufdAZxHg9IVAKSV9brKslYbqet7iSJAz3o-fYcQj1beB9pf0LdR8mB5fIZKB3cEpRRLFXcTUqlapPD7Qi0A.jpg"
+      },
+      "published_at": "2026-11-17T03:14:01+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "e96db48d3aa70eba",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T04:48:05.690620+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30405",
+      "source_post_id": "30405",
+      "title": "زوال تدریجی کرمانِ کهن",
+      "excerpt": "زوال تدریجی کرمانِ کهن کرمان – ایرنا – کرمان که تا حدود ۲ دهه پیش در کنار شیراز، اصفهان، یزد و تبریز در فهرست شهرهای تاریخی مهم ایران قرار داشت، در پی تخریب‌های گسترده و پیاپی، نه‌تنها پیوند خود را با گذشته تاریخی از دست داده بلکه در فضاهای معاصر نیز با آشفتگی و نابسامانی مواجه است؛ وضعیتی که به باور برخی کارشناسان، نسبتی با مفهوم و موجودیتی به نام «شهر» ندارد. irna_kerman",
+      "paragraphs": [
+        "زوال تدریجی کرمانِ کهن",
+        "کرمان – ایرنا – کرمان که تا حدود ۲ دهه پیش در کنار شیراز، اصفهان، یزد و تبریز در فهرست شهرهای تاریخی مهم ایران قرار داشت، در پی تخریب‌های گسترده و پیاپی، نه‌تنها پیوند خود را با گذشته تاریخی از دست داده بلکه در فضاهای معاصر نیز با آشفتگی و نابسامانی مواجه است؛ وضعیتی که به باور برخی کارشناسان، نسبتی با مفهوم و موجودیتی به نام «شهر» ندارد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/Ep0-XoZkASPcGWhA5V8pOrhDmeloapO4ITKWlO4Wj6XrCrh7_H0fbqClPQpdxiT0IJ17h34GnXms-MPJf581agw4gdL0wORZOOg6bZpEyFCtZCnnPsPRo6OiXGr2Hh33zyOu_gNeriWzkZC5AeL5Dr2nKyqfthkfQOZYKX2GVo-yMC8gkmRU4-Db091QPO4Lp69EYqeC8ZHRNb4UFr_KUFZPYPEDQvH6Hn0FyHVfW4Jg1eo4MiJs7sUeryDQfBumTs0QtrEN548zGFGTLWtQEeMCXkypqOGUi0SwM_3BzPilz21x8fDobClLjcjsoDVYM4nji1I3j7dd4KgkiYKV9Q.jpg"
+      },
+      "published_at": "2026-11-17T04:38:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "262a37e959f301e2",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T04:48:05.690620+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-17T01:05:14.093796+00:00",
+  "saved_at": "2026-11-17T04:48:17.104146+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-17T01:05:04.433531+00:00",
-    "fardaayekerman": "2026-11-17T01:05:04.433531+00:00",
-    "irna_kerman": "2026-11-17T01:05:04.433531+00:00",
-    "kerman_gov": "2026-11-17T01:05:04.433531+00:00",
-    "kerman_akhbar": "2026-11-17T01:05:04.433531+00:00",
-    "kerman_news": "2026-11-17T01:05:04.433531+00:00",
-    "kerman_rasaneh": "2026-11-17T01:05:04.433531+00:00",
-    "qh_qv": "2026-11-17T01:05:04.433531+00:00"
+    "kermane_no": "2026-11-17T04:48:05.690620+00:00",
+    "fardaayekerman": "2026-11-17T04:48:05.690620+00:00",
+    "irna_kerman": "2026-11-17T04:48:05.690620+00:00",
+    "kerman_gov": "2026-11-17T04:48:05.690620+00:00",
+    "kerman_akhbar": "2026-11-17T04:48:05.690620+00:00",
+    "kerman_news": "2026-11-17T04:48:05.690620+00:00",
+    "kerman_rasaneh": "2026-11-17T04:48:05.690620+00:00",
+    "qh_qv": "2026-11-17T04:48:05.690620+00:00"
   }
 }
