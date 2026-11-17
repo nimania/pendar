@@ -2060,100 +2060,14 @@
     "https://t.me/Kerman_akhbar/66455",
     "https://t.me/kerman_news/140768",
     "https://t.me/Kerman_akhbar/66456",
-    "https://t.me/kerman_news/140769"
+    "https://t.me/kerman_news/140769",
+    "https://t.me/kerman_gov/10705",
+    "https://t.me/Kerman_akhbar/66457",
+    "https://t.me/kerman_news/140770",
+    "https://t.me/kerman_news/140771",
+    "https://t.me/kerman_gov/10707"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140568",
-      "source_post_id": "140568",
-      "title": "مروری بر مهمترین اخبار امروز",
-      "excerpt": "مروری بر مهمترین اخبار امروز مرگ راننده ۲۸ ساله بر اثر واژگونی زانتیا در محور سرچشمه کشف محموله ۳۲ هزار لیتری بنزین قاچاق در منوجان کاپیتان سابق پرسپولیس با پیراهن آبی برگشت عامل قتل صاحب فروشگاه مواد غذایی در قلعه گنج دستگیر شد ۱۱۴ کیسه آرد احتکاری در راور خارج از ضوابط قانونی نگهداری شده بود کشف شده و احتمال احتکار و عرضه خارج از شبکه آن مطرح است عراق گذرگاه مرزی سومار میان عراق و ایران را بست",
-      "paragraphs": [
-        "مروری بر مهمترین اخبار امروز",
-        "مرگ راننده ۲۸ ساله بر اثر واژگونی زانتیا در محور سرچشمه",
-        "کشف محموله ۳۲ هزار لیتری بنزین قاچاق در منوجان",
-        "کاپیتان سابق پرسپولیس با پیراهن آبی برگشت",
-        "عامل قتل صاحب فروشگاه مواد غذایی در قلعه گنج دستگیر شد",
-        "۱۱۴ کیسه آرد احتکاری در راور خارج از ضوابط قانونی نگهداری شده بود کشف شده و احتمال احتکار و عرضه خارج از شبکه آن مطرح است",
-        "عراق گذرگاه مرزی سومار میان عراق و ایران را بست"
-      ],
-      "media": null,
-      "published_at": "2026-11-13T19:11:44+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "cab3ddb800a8152b",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-13T22:12:46.909016+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/kerman_news/140573",
-      "source_post_id": "140573",
-      "title": "عکس پسر بچه کرمانی روی قاب عکس ترحیم / علت مرگ چه بود؟",
-      "excerpt": "عکس پسر بچه کرمانی روی قاب عکس ترحیم / علت مرگ چه بود؟ رئیس پلیس راهور استان کرمان این کودک قربانی بی‌احتیاطی راننده‌ای شد که اگر با سرعت مجاز حرکت می‌کرد و لحظه‌ای بیشتر به مسئولیت خود پشت فرمان توجه داشت، شاید امروز در کنار پدر و مادرش زندگی می‌کرد. بسیاری از این سوانح نتیجه سهل‌انگاری و بی‌توجهی رانندگان است؛ در حالی که کاهش سرعت و دقت بیشتر هنگام رانندگی می‌تواند از وقوع حوادث مرگبار جلوگیری کند.",
-      "paragraphs": [
-        "عکس پسر بچه کرمانی روی قاب عکس ترحیم / علت مرگ چه بود؟",
-        "رئیس پلیس راهور استان کرمان",
-        "این کودک قربانی بی‌احتیاطی راننده‌ای شد که اگر با سرعت مجاز حرکت می‌کرد و لحظه‌ای بیشتر به مسئولیت خود پشت فرمان توجه داشت، شاید امروز در کنار پدر و مادرش زندگی می‌کرد.",
-        "بسیاری از این سوانح نتیجه سهل‌انگاری و بی‌توجهی رانندگان است؛ در حالی که کاهش سرعت و دقت بیشتر هنگام رانندگی می‌تواند از وقوع حوادث مرگبار جلوگیری کند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/If6kfrl3ajhOh_66J6p-G5W79MrPxMhWiHSbupl2kfLnVqe2PKMrYuLkKJsTnT1BFbDypjSNEQzgKWorDFea098LSMsvbc1ILdM-EQobgt4Pd3Z4Zvh-z94qNpvOnWygWPPY-exsiNNJQGs3mmYhprfFHtUty2-YQIF6LFWtR7qe9Kva34AG5TV890DLr7FGozGdRRhTbPQF7U4TkuLpwjxI7SeQVOFI64OyD_KcMHyyScseyluyMp4JXJOAuccQgwIqCQhBD4vXruI9nPMpubr-GJBVOMhzXxDuDbfw7ztWj2GVzGfdruHI0v5bLZaxvnPNMVp5161rGcG8EL2QIQ.jpg"
-      },
-      "published_at": "2026-11-14T04:46:43+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "ee0666b820cb9415",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-14T07:02:46.961052+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-14T07:03:03.020313+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 440,
-      "sent_at": "2026-11-14T07:03:08.866884+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30380",
-      "source_post_id": "30380",
-      "title": "مونوکسید کربن، قاتل خاموش روزهای سرد؛ هشدار اورژانس کرمان درباره خطر گازگرفتگی",
-      "excerpt": "مونوکسید کربن، قاتل خاموش روزهای سرد؛ هشدار اورژانس کرمان درباره خطر گازگرفتگی همزمان با کاهش دما و افزایش استفاده از وسایل گرمایشی در استان کرمان، مسئولان اورژانس پیش‌بیمارستانی نسبت به خطر مسمومیت با گاز مونوکسید کربن هشدار داده و تأکید می‌کنند که بی‌توجهی به اصول ایمنی در نصب و استفاده از وسایل گرمایشی می‌تواند حوادثی جبران‌ناپذیر و حتی مرگبار رقم بزند. irna_kerman",
-      "paragraphs": [
-        "مونوکسید کربن، قاتل خاموش روزهای سرد؛ هشدار اورژانس کرمان درباره خطر گازگرفتگی",
-        "همزمان با کاهش دما و افزایش استفاده از وسایل گرمایشی در استان کرمان، مسئولان اورژانس پیش‌بیمارستانی نسبت به خطر مسمومیت با گاز مونوکسید کربن هشدار داده و تأکید می‌کنند که بی‌توجهی به اصول ایمنی در نصب و استفاده از وسایل گرمایشی می‌تواند حوادثی جبران‌ناپذیر و حتی مرگبار رقم بزند.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/lLT6uLoMj_T4IXY7mZaREN2u7O6vYsUPxh98pmWKrTIZ7AT20reLH4OYS-NJOypobsnDWe78Jvi-VKtqEP2cc2bSiNEKWksV46bJZLIZeiQbXo0jL7hEP3QrMF-i1u4azy5CjtcOf3AmZUMjFNR9KinC9tj9_srokcjovk-x6B2LfGhwRpjP10yovMO-huDtSiKVI-Foueli9gPReIbiSeRxYArT9aPFm8sPYjdIhnuevMwJbGWGzL5_G5cT1ZspE4RlcGO4ZPZSGHDpp6vPx7nADNfKiFWTCZKWQHsLkUUwLZQ9_qcHOW7fIqm_QISz9Md_DKV4BRKQuvRY4kWucA.jpg"
-      },
-      "published_at": "2026-11-14T04:49:20+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "f3e1e14b80a3efef",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-14T07:02:46.961052+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-14T07:03:03.020313+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 441,
-      "sent_at": "2026-11-14T07:03:10.142922+00:00"
-    },
     {
       "url": "https://t.me/kermane_no/59332",
       "source_post_id": "59332",
@@ -10490,7 +10404,12 @@
       "geography": "kerman",
       "status": "ready",
       "detected_at": "2026-11-17T13:54:04.764731+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66457"
+        }
+      ]
     },
     {
       "url": "https://t.me/kerman_news/140758",
@@ -10944,17 +10863,96 @@
       "status": "ready",
       "detected_at": "2026-11-17T18:05:42.253320+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10705",
+      "source_post_id": "10705",
+      "title": "مسابقات ورزش‌های بیابانی می‌تواند به برند کرمان تبدیل شود",
+      "excerpt": "مسابقات ورزش‌های بیابانی می‌تواند به برند کرمان تبدیل شود استاندار کرمان گفت: مسابقات ورزش‌های بیابانی به رویدادی ویژه و برند استان کرمان تبدیل شود. به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی شامگاه سه‌شنبه ۲۶ آبان‌ماه در جلسه هماهنگی همایش گردشگری ورزشی، با اشاره به ظرفیت‌های بیابان لوت شرکت‌هایی در زمینه تولید و تأمین تجهیزات و کمپ‌های اسکان موقت فعالیت دارند که می‌توان از توانمندی آن‌ها برای فراهم‌کردن امکانات اقامت در رویدادهای مرتبط با بیابان لوت استفاده کرد. کرمان از ظرفیت گسترده‌ای برای طراحی و اجرای برنامه‌های متنوع گردشگری برخوردار است و باید از این توانمندی‌ها برای جذب گردشگر به استان استفاده کرد. کرمان باید با بهره‌گیری از موقعیت و ظرفیت‌های موجود، فرصت‌های جدید گردشگری را شناسایی و برای معرفی و استفاده از آن‌ها برنامه‌ریزی کند.",
+      "paragraphs": [
+        "مسابقات ورزش‌های بیابانی می‌تواند به برند کرمان تبدیل شود",
+        "استاندار کرمان گفت: مسابقات ورزش‌های بیابانی به رویدادی ویژه و برند استان کرمان تبدیل شود.",
+        "به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی شامگاه سه‌شنبه ۲۶ آبان‌ماه در جلسه هماهنگی همایش گردشگری ورزشی، با اشاره به ظرفیت‌های بیابان لوت",
+        "شرکت‌هایی در زمینه تولید و تأمین تجهیزات و کمپ‌های اسکان موقت فعالیت دارند که می‌توان از توانمندی آن‌ها برای فراهم‌کردن امکانات اقامت در رویدادهای مرتبط با بیابان لوت استفاده کرد.",
+        "کرمان از ظرفیت گسترده‌ای برای طراحی و اجرای برنامه‌های متنوع گردشگری برخوردار است و باید از این توانمندی‌ها برای جذب گردشگر به استان استفاده کرد.",
+        "کرمان باید با بهره‌گیری از موقعیت و ظرفیت‌های موجود، فرصت‌های جدید گردشگری را شناسایی و برای معرفی و استفاده از آن‌ها برنامه‌ریزی کند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/RCbHU-nLwwvLIFfUB_T2W0j6dm2d0eWhNeBHtfcZlP6-bqXOkQb6TaEhlWQV4CRHGlw3RQgmpjgjLQrJoYZndQDrynaIMfh5KNChhUvAfLmigjRnPGrWv1ZdeaPJDRiTWVdxXFpKihXWdeogaUxpOA_x8kAklgiHfXW17UcSbIl5OwASiRxdbiRVy1ki-qpHS5vtg9LAJQWUaGkBlOhXMETGZIXdLxT5D4qidE_CRnBioLilpVXkPswv4oA_wI6f1QAsD05q9dx0lpFmDR2rkQH4AbIa5PQQPhshoBNuFcjgA6WBMGkc2S4qmz2k3NXHXgZlEmVG8zvQ3C6eX05kEA.jpg"
+      },
+      "published_at": "2026-11-17T18:13:04+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "d20e5d3ddd32f134",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T18:38:41.105838+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140770",
+      "source_post_id": "140770",
+      "title": "از جنس تاریخ، به رنگ نور، به نام کرمان",
+      "excerpt": "از جنس تاریخ، به رنگ نور، به نام کرمان",
+      "paragraphs": [
+        "از جنس تاریخ، به رنگ نور، به نام کرمان"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/651e666e0d.mp4?token=LJIhGz6ynIMBl1cjUgcLduTnOKbUVAxzTRBpa7Icx9yviBzLEvAMhw0PGjlZu3IGSDcGovVJSJD4Tz24saL_iisfERJHhE472KK7ljHWHSd9ZAVrYigz13koimbHAqesJXICLXc09FuD9CrTuMF770wUhDrllMtcOsF6PzbWHEFjEeu3gLbo1jLEy20ZjKV24DXL_ZlvlNcpx9EOaeU2maoXvwmr_cOsaflERZYBsAQZpnoQ9DAUXIdjpKvSMqu_0nRpLgWMQBZh65rGofpJ0dcF-qGCRsGNWVwfbg1DcViF4adODZYEi7-Cd2a_D7YTWl3JXZF6VLOBSPay4sTN1A"
+      },
+      "published_at": "2026-11-17T18:26:00+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "2e4c36272596e3a4",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T18:38:41.105838+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140771",
+      "source_post_id": "140771",
+      "title": "کرمان | جمع‌آوری زباله در صدر مطالبات محیط‌زیستی",
+      "excerpt": "کرمان | جمع‌آوری زباله در صدر مطالبات محیط‌زیستی «تجمع زباله و ضعف جمع‌آوری» با سهم ۵۳٫۳ درصدی، مهم‌ترین دغدغه محیط‌زیستی پاسخ‌دهندگان است. پس از آن، گردوغبار و فرسایش خاک با ۲۲٫۹ درصد قرار دارد؛ نتیجه‌ای که اهمیت بهبود خدمات جمع‌آوری پسماند و رسیدگی…",
+      "paragraphs": [
+        "کرمان | جمع‌آوری زباله در صدر مطالبات محیط‌زیستی",
+        "«تجمع زباله و ضعف جمع‌آوری» با سهم ۵۳٫۳ درصدی، مهم‌ترین دغدغه محیط‌زیستی پاسخ‌دهندگان است.",
+        "پس از آن، گردوغبار و فرسایش خاک با ۲۲٫۹ درصد قرار دارد؛ نتیجه‌ای که اهمیت بهبود خدمات جمع‌آوری پسماند و رسیدگی…"
+      ],
+      "media": null,
+      "published_at": "2026-11-17T18:35:46+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "f4259d19c2210f07",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T18:38:41.105838+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-17T18:08:16.772534+00:00",
+  "saved_at": "2026-11-17T18:39:06.455447+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-17T18:05:42.253320+00:00",
-    "fardaayekerman": "2026-11-17T18:05:42.253320+00:00",
-    "irna_kerman": "2026-11-17T18:05:42.253320+00:00",
-    "kerman_gov": "2026-11-17T18:05:42.253320+00:00",
-    "kerman_akhbar": "2026-11-17T18:05:42.253320+00:00",
-    "kerman_news": "2026-11-17T18:05:42.253320+00:00",
-    "kerman_rasaneh": "2026-11-17T18:05:42.253320+00:00",
-    "qh_qv": "2026-11-17T18:05:42.253320+00:00"
+    "kermane_no": "2026-11-17T18:38:41.105838+00:00",
+    "fardaayekerman": "2026-11-17T18:38:41.105838+00:00",
+    "irna_kerman": "2026-11-17T18:38:41.105838+00:00",
+    "kerman_gov": "2026-11-17T18:38:41.105838+00:00",
+    "kerman_akhbar": "2026-11-17T18:38:41.105838+00:00",
+    "kerman_news": "2026-11-17T18:38:41.105838+00:00",
+    "kerman_rasaneh": "2026-11-17T18:38:41.105838+00:00",
+    "qh_qv": "2026-11-17T18:38:41.105838+00:00"
   }
 }
