@@ -1985,130 +1985,16 @@
     "https://t.me/kerman_news/140741",
     "https://t.me/kermane_no/59490",
     "https://t.me/kerman_news/140742",
-    "https://t.me/kermane_no/59491"
+    "https://t.me/kermane_no/59491",
+    "https://t.me/kermane_no/59492",
+    "https://t.me/kermane_no/59493",
+    "https://t.me/kerman_news/140743",
+    "https://t.me/fardaayekerman/35031",
+    "https://t.me/kermane_no/59494",
+    "https://t.me/Kerman_akhbar/66448",
+    "https://t.me/kerman_news/140744"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140516",
-      "source_post_id": "140516",
-      "title": "پخت سمنو در اجتماع شبانه کرمانی‌ها",
-      "excerpt": "پخت سمنو در اجتماع شبانه کرمانی‌ها همزمان با شب شهادت حضرت زهرا سلام‌الله‌علیها میدان کوثر کرمان برای پذیرایی از عزاداران دخت نبی‌اکرم صلی‌الله‌علیه پخت سمنو را آغاز کردند.",
-      "paragraphs": [
-        "پخت سمنو در اجتماع شبانه کرمانی‌ها",
-        "همزمان با شب شهادت حضرت زهرا سلام‌الله‌علیها میدان کوثر کرمان برای پذیرایی از عزاداران دخت نبی‌اکرم صلی‌الله‌علیه پخت سمنو را آغاز کردند."
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/cd791b698e.mp4?token=qEpzOjs38K7zmp1eRfd-X1W_eEwpvvETMtvSEM08K27o6TXcMJX97eD4u4KWn9-7_Y6nJiToUNSEKYWYzo-P8VS77rn8J4OmmfsC8RwzIv2qsN9XI9DxyNBwX8V9sdcUM9KwTJl_tesa18mxf3NPXVmIKoF4sYJx4mlQ6HQOxogPA3xxKdeo5PMEzT7W6Ag5HrS08rZC6O85qBVbiTaRYtbDfQhpX_EO-m79no325F44AdXRtK885vszTeKONdcsgtarHjdSzVf3x7WNToBBrdk7OVN_Z2gH7fKxAaNbxhS_NSP4OMo3S-lcNGcZTnak5UdAB_3XWujqOMCCl9pfFA"
-      },
-      "published_at": "2026-11-12T17:47:56+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "a7f01dc6f340ef83",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T19:53:52.507598+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 401,
-      "sent_at": "2026-11-12T19:53:58.481384+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30373",
-      "source_post_id": "30373",
-      "title": "سوگواری کرمانی‌ها در شب شهادت حضرت زهرا (س) با تشییع پیکر مطهر شهدای گمنام‌ همراه شد",
-      "excerpt": "سوگواری کرمانی‌ها در شب شهادت حضرت زهرا (س) با تشییع پیکر مطهر شهدای گمنام‌ همراه شد میدان کوثر کرمان شامگاه پنجشنبه، در شب شهادت حضرت فاطمه زهرا (س)، با حضور مردم و پیکرهای مطهر ۶ شهید گمنام، حال‌وهوایی آمیخته به سوگواری و همبستگی داشت؛ اجتماعی که حضور یگان رزمی هوافضای سپاه در میان مردم و پخت سمنوی سنتی برای پذیرایی از عزاداران، رنگ‌وبویی ویژه به آن بخشید. irna_kerman",
-      "paragraphs": [
-        "سوگواری کرمانی‌ها در شب شهادت حضرت زهرا (س) با تشییع پیکر مطهر شهدای گمنام‌ همراه شد",
-        "میدان کوثر کرمان شامگاه پنجشنبه، در شب شهادت حضرت فاطمه زهرا (س)، با حضور مردم و پیکرهای مطهر ۶ شهید گمنام، حال‌وهوایی آمیخته به سوگواری و همبستگی داشت؛ اجتماعی که حضور یگان رزمی هوافضای سپاه در میان مردم و پخت سمنوی سنتی برای پذیرایی از عزاداران، رنگ‌وبویی ویژه به آن بخشید.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/hwoNdgrH0Q5UaKIhvJ_sYlMyfODl5P0fHjovWxJmBJjengOXI9pqDbvI4qxtR3NDRLzcP2yc2UVQHl4Tk09brnDJFfYMOwFw_rMehPbtuHbRo9yFrxrILRX5foBR-BU4XpaToufnEocZApJWkBEywjbhdiaGpHukTgo9NewGsA9WfsSrQoQvwqMd-sE0kXdZ_a8NHCq69zjs5WELR0MjZT43FjhBJgpRoJU5srdIa05xL3rODM23oC4ydcK-W7VXXIyh1Kt1TYtvdzIVXEnaau7_ZF--Yv3UGgEg5yjkMk9SrPKhOXEs7PcxqCbqrUu7awsNT3rCiUQM8IpNZ1NX_g.jpg"
-      },
-      "published_at": "2026-11-12T18:03:17+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "0bbf27e3611e09b4",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T19:53:52.507598+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 402,
-      "sent_at": "2026-11-12T19:53:59.889048+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_gov/10612",
-      "source_post_id": "10612",
-      "title": "یک روز، یک قاب| کرمان در سوگ بانوی بی‌نشان؛ روایت ارادت به حضرت فاطمه زهرا (س)",
-      "excerpt": "یک روز، یک قاب| کرمان در سوگ بانوی بی‌نشان؛ روایت ارادت به حضرت فاطمه زهرا (س) در روزهای حزن و اندوه ایام فاطمیه، کوچه‌ها و خیابان‌های کرمان رنگ ماتم به خود گرفته‌اند و دل‌های عاشقان اهل‌بیت (ع) در سوگ بانوی دو عالم، حضرت فاطمه زهرا (س)، به سوگ نشسته است. از هیئت‌ها و تکایا تا مساجد و حسینیه‌ها، صدای روضه و نوحه طنین‌انداز شده و مردم دیار کریمان با برپایی مراسم عزاداری، بار دیگر ارادت و دلدادگی خود را به ساحت مقدس حضرت صدیقه طاهره (س) نشان می‌دهند. اینجا کرمان است؛ شهری که در روزهای فاطمیه، روایتگر عشق، ایمان و دلدادگی مردمانی است که نام و یاد حضرت زهرا (س) در جان و باورشان ریشه دوانده است. عکس: محمدحسین قنبری",
-      "paragraphs": [
-        "یک روز، یک قاب| کرمان در سوگ بانوی بی‌نشان؛ روایت ارادت به حضرت فاطمه زهرا (س)",
-        "در روزهای حزن و اندوه ایام فاطمیه، کوچه‌ها و خیابان‌های کرمان رنگ ماتم به خود گرفته‌اند و دل‌های عاشقان اهل‌بیت (ع) در سوگ بانوی دو عالم، حضرت فاطمه زهرا (س)، به سوگ نشسته است.",
-        "از هیئت‌ها و تکایا تا مساجد و حسینیه‌ها، صدای روضه و نوحه طنین‌انداز شده و مردم دیار کریمان با برپایی مراسم عزاداری، بار دیگر ارادت و دلدادگی خود را به ساحت مقدس حضرت صدیقه طاهره (س) نشان می‌دهند.",
-        "اینجا کرمان است؛ شهری که در روزهای فاطمیه، روایتگر عشق، ایمان و دلدادگی مردمانی است که نام و یاد حضرت زهرا (س) در جان و باورشان ریشه دوانده است.",
-        "عکس: محمدحسین قنبری"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/Jqai6TfJjLqBBW0b12wRaXBVMDLFUWPn9lE5urWH_DshTDxxsvlRTPbqf5vOeAq2WULvieYU4W5VEE1tiZPH3vHey7RXqvKq0c2S3v449M13o4cxMAnl9lObhrv1C34TiiBmOa7Z1e00y7u99961e2zJ8lOuQQCz9fmpY6b46LjLlC9U3qiStDWQoVhpHTII_cqqHeje3cPsM82Cqq6F8E-qhEZWKXVt0GubsZhb9pG2pINZfQ6N4JJ2d3-EVK-XwRcraRKrimGVSr4dgUFNnYxqS9qlxP5i0J7DaoKHD6CVXUo6zCezg61ymt590nVEYSE3O-F1QJByXBZAjMMjOw.jpg"
-      },
-      "published_at": "2026-11-12T18:09:09+00:00",
-      "source": "اخبار استانداری کرمان",
-      "source_handle": "kerman_gov",
-      "id": "a7a340ea0653a6e9",
-      "media_repost_allowed": true,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T19:53:52.507598+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 403,
-      "sent_at": "2026-11-12T19:54:02.593206+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140518",
-      "source_post_id": "140518",
-      "title": "میدکو فراور زرند کرمان مغلوب استقلال کازرون شد",
-      "excerpt": "میدکو فراور زرند کرمان مغلوب استقلال کازرون شد تیم هندبال میدکو فراور زرند کرمان در هفته سوم لیگ برتر مردان کشور، مقابل استقلال کازرون شکست خورد تا نماینده کازرون با کسب سومین پیروزی متوالی و ۶ امتیاز، به صدر جدول رده‌بندی صعود کند.",
-      "paragraphs": [
-        "میدکو فراور زرند کرمان مغلوب استقلال کازرون شد",
-        "تیم هندبال میدکو فراور زرند کرمان در هفته سوم لیگ برتر مردان کشور، مقابل استقلال کازرون شکست خورد تا نماینده کازرون با کسب سومین پیروزی متوالی و ۶ امتیاز، به صدر جدول رده‌بندی صعود کند."
-      ],
-      "media": null,
-      "published_at": "2026-11-12T18:15:03+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "2ae582dbc2771c0a",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T19:53:52.507598+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 404,
-      "sent_at": "2026-11-12T19:54:03.944865+00:00"
-    },
     {
       "url": "https://t.me/kerman_news/140520",
       "source_post_id": "140520",
@@ -10054,7 +9940,12 @@
       "geography": "kerman",
       "status": "published",
       "detected_at": "2026-11-17T08:33:28.387045+00:00",
-      "other_sources": [],
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66448"
+        }
+      ],
       "reserved_at": "2026-11-17T08:33:45.906679+00:00",
       "delivery_kind": "photo",
       "telegram_message_id": 588,
@@ -10946,17 +10837,132 @@
       "status": "ready",
       "detected_at": "2026-11-17T08:33:28.387045+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59492",
+      "source_post_id": "59492",
+      "title": "برگزاری دهمین اجلاسیه استانی نماز در کرمان با تأکید بر ترویج فرهنگ اقامه نماز",
+      "excerpt": "برگزاری دهمین اجلاسیه استانی نماز در کرمان با تأکید بر ترویج فرهنگ اقامه نماز دهمین اجلاسیه استانی نماز با حضور مسئولان ارشد استان و اقشار مختلف مردم در تالار احسان کرمان برگزار شد. رئیس ستاد اقامه نماز استان کرمان در این آیین با اشاره به اهداف برگزاری این رویداد، بر لزوم توجه به زیرساخت‌ها، تجهیز نمازخانه‌ها و رفع چالش‌های موجود در حوزه اقامه نماز تأکید کرد. در این اجلاسیه علاوه بر بررسی راهکارهای توسعه فرهنگ نماز میان نسل جوان، از دستگاه‌ها و افراد برتر در ترویج این فریضه تقدیر شد. /تسنیم",
+      "paragraphs": [
+        "برگزاری دهمین اجلاسیه استانی نماز در کرمان با تأکید بر ترویج فرهنگ اقامه نماز",
+        "دهمین اجلاسیه استانی نماز با حضور مسئولان ارشد استان و اقشار مختلف مردم در تالار احسان کرمان برگزار شد.",
+        "رئیس ستاد اقامه نماز استان کرمان در این آیین با اشاره به اهداف برگزاری این رویداد، بر لزوم توجه به زیرساخت‌ها، تجهیز نمازخانه‌ها و رفع چالش‌های موجود در حوزه اقامه نماز تأکید کرد. در این اجلاسیه علاوه بر بررسی راهکارهای توسعه فرهنگ نماز میان نسل جوان، از دستگاه‌ها و افراد برتر در ترویج این فریضه تقدیر شد. /تسنیم"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/eu5VkGXzzKA4KBeknRSFAigI0zKFuG4Jr52vASst0j8OxWKw2SR7GO-S4Wm57hE2G73kVJEBIsASegY8yTVBSkUccS91c9e1Pc5YqvhwoegkJxTWTSFdrkqPxon3O4QTZ4WlxgAI2SdbsXZCKl9rVD1QnvxejhQlWKniGPxi-nCSF_TdGFbkJDGXTunOqc0zpUt5oi4uLsxkkmgr41MGiX1NdkC7690R068ZWI83ZHwb9WOqIw2r0ED0VD_KQR_T8hqun8dEezfIwCufxJ-q3aF7wpQLH8rUrKEbtHr0NQuWxi5Tl-TeuAuBXqDbomrHmJ3v57w7UWbRXUD2uBVE2Q.jpg"
+      },
+      "published_at": "2026-11-17T08:34:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "73d6e46e3ff63e30",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T09:12:49.259395+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59493",
+      "source_post_id": "59493",
+      "title": "مدیرکل تعاون کرمان از گلخانه شرکت تعاونی «شایان» در کهنوج بازدید کرد",
+      "excerpt": "مدیرکل تعاون کرمان از گلخانه شرکت تعاونی «شایان» در کهنوج بازدید کرد مدیرکل تعاون، کار و رفاه اجتماعی استان کرمان در سفر به جنوب استان از گلخانه و محصولات کشاورزی شرکت تعاونی «شایان» در کهنوج بازدید کرد. علیرضا ابراهیمی در این بازدید از نزدیک در جریان روند تولید، ظرفیت‌های کشاورزی و فعالیت‌های اشتغال‌زای این تعاونی قرار گرفت و بر حمایت این اداره‌کل از طرح‌های تعاونی و تولیدی که به ایجاد اشتغال پایدار و رونق تولید در منطقه منجر می‌شوند، تأکید کرد.",
+      "paragraphs": [
+        "مدیرکل تعاون کرمان از گلخانه شرکت تعاونی «شایان» در کهنوج بازدید کرد",
+        "مدیرکل تعاون، کار و رفاه اجتماعی استان کرمان در سفر به جنوب استان از گلخانه و محصولات کشاورزی شرکت تعاونی «شایان» در کهنوج بازدید کرد.",
+        "علیرضا ابراهیمی در این بازدید از نزدیک در جریان روند تولید، ظرفیت‌های کشاورزی و فعالیت‌های اشتغال‌زای این تعاونی قرار گرفت و بر حمایت این اداره‌کل از طرح‌های تعاونی و تولیدی که به ایجاد اشتغال پایدار و رونق تولید در منطقه منجر می‌شوند، تأکید کرد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/b8S9eW3cgvgcv_S6cmh5ei8IWV8zVsDbaLPGxjN7F1i4kDeKg20XukxXH9o3wPD88Lgtd0Z1_cW2iZNJiz59TGChf449ORn1mAUDvZAxnm_M0L0xNLjYWuB20G69hE-HETJ-9IsNc6tShpkSkdDRPmUvfu6PDXojU_LxEkYFwJl3wLKFMHLDnBxoRT9h0YmiCQj4lZrXyS7npVnQjZ6of1GfJlyenLJonrD2bKETEJk7jM3x-cZThCgbAIX7HsSfH3ojdobEp4g6Cbtl15i6XJ03lYwJaKfZFXGxuHcBq7pLFVNbyEPk2N-lPlyH0hqyFgvEP4sk4QFPGgpes8xq7Q.jpg"
+      },
+      "published_at": "2026-11-17T08:46:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "5b1bfedc4459ac11",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T09:12:49.259395+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/fardaayekerman/35031",
+      "source_post_id": "35031",
+      "title": "با پشتیبانی شرکت ملی مس؛",
+      "excerpt": "با پشتیبانی شرکت ملی مس؛ باغ تاریخی بیرم‌آباد پس از چندین دهه به روی مردم گشوده می‌شود فردای‌کرمان - گروه اطلاع‌رسانی: باغ بیرم‌آباد کرمان پس از چندین دهه دوری از دسترس عموم، با پشتیبانی شرکت ملی صنایع مس ایران در چارچوب مسئولیت اجتماعی، آماده بازگشت به زندگی اجتماعی شهر شده است. آیین افتتاح رسمی این مجموعه تاریخی، سه‌شنبه ۲۶ آبان‌ماه و گشایش عمومی باغ، چهارشنبه ۲۷ آبان‌ماه برگزار می‌شود تا بار دیگر امکان حضور و بهره‌مندی مردم از این میراث ارزشمند فراهم شود. فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "با پشتیبانی شرکت ملی مس؛",
+        "باغ تاریخی بیرم‌آباد پس از چندین دهه به روی مردم گشوده می‌شود",
+        "فردای‌کرمان - گروه اطلاع‌رسانی: باغ بیرم‌آباد کرمان پس از چندین دهه دوری از دسترس عموم، با پشتیبانی شرکت ملی صنایع مس ایران در چارچوب مسئولیت اجتماعی، آماده بازگشت به زندگی اجتماعی شهر شده است.",
+        "آیین افتتاح رسمی این مجموعه تاریخی، سه‌شنبه ۲۶ آبان‌ماه و گشایش عمومی باغ، چهارشنبه ۲۷ آبان‌ماه برگزار می‌شود تا بار دیگر امکان حضور و بهره‌مندی مردم از این میراث ارزشمند فراهم شود.",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/flk5El1hTZgXp2-SDjiVBJQnkQBfJMXkAo9KHgwAMk7eAZ78FIGqcEGfP4FqWlZtbsGTmqLX8jvmCghNS90wPotiAXs-PDZCtPCTf7vO2_U4GJoiBi-SiV7Nhh4h28ohaz2dD6WI8hLPIpwXVIEFHhtkuQzEHhXtBOPyLF4rCvCniHKcf1T-rcOUO4J9S00Z6OjSlGG5MUgpdFPn41l3Emh149-Eh59HKhLf51opYAjeld92ms4wBPYt6LdTcaSFvRGZybLIoCsQv5turQypJKZcpNrvLIMAQ01HtWE6fRj6VeqTHx2ALks5jHstSg1BCnJmUvtWEeTNk_0FAywtww.jpg"
+      },
+      "published_at": "2026-11-17T08:56:16+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "e435ae270c5b89ba",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T09:12:49.259395+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140744",
+      "source_post_id": "140744",
+      "title": "اسامی محرومان هفته سیزدهم لیگ برتر فوتبال",
+      "excerpt": "اسامی محرومان هفته سیزدهم لیگ برتر فوتبال پرسپولیس: وحید فاضلی (مربی، کارت قرمز) گل‌گهر: علیرضا قدیری (مربی، انضباطی) و امیر جعفری صیقلانی (کارت قرمز) نساجی: سعید دقیقی (سرمربی، ۲ اخطاره) آلومینیوم اراک: امیر نوری (۴ اخطاره) استقلال خوزستان: حسن سلطانی‌مهر (تدارکات، ۲ اخطاره) پیکان: حجت‌الله احمدی فالحیان (۴ اخطاره) فجر سپاسی: سیدمجید نصیری (۴ اخطاره)",
+      "paragraphs": [
+        "اسامی محرومان هفته سیزدهم لیگ برتر فوتبال",
+        "پرسپولیس: وحید فاضلی (مربی، کارت قرمز)",
+        "گل‌گهر: علیرضا قدیری (مربی، انضباطی) و امیر جعفری صیقلانی (کارت قرمز)",
+        "نساجی: سعید دقیقی (سرمربی، ۲ اخطاره)",
+        "آلومینیوم اراک: امیر نوری (۴ اخطاره)",
+        "استقلال خوزستان: حسن سلطانی‌مهر (تدارکات، ۲ اخطاره)",
+        "پیکان: حجت‌الله احمدی فالحیان (۴ اخطاره)",
+        "فجر سپاسی: سیدمجید نصیری (۴ اخطاره)"
+      ],
+      "media": null,
+      "published_at": "2026-11-17T09:12:01+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "4670f4bc57a8c12a",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T09:12:49.259395+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-17T08:34:10.687873+00:00",
+  "saved_at": "2026-11-17T09:13:16.728052+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-17T08:33:28.387045+00:00",
-    "fardaayekerman": "2026-11-17T08:33:28.387045+00:00",
-    "irna_kerman": "2026-11-17T08:33:28.387045+00:00",
-    "kerman_gov": "2026-11-17T08:33:28.387045+00:00",
-    "kerman_akhbar": "2026-11-17T08:33:28.387045+00:00",
-    "kerman_news": "2026-11-17T08:33:28.387045+00:00",
-    "kerman_rasaneh": "2026-11-17T08:33:28.387045+00:00",
-    "qh_qv": "2026-11-17T08:33:28.387045+00:00"
+    "kermane_no": "2026-11-17T09:12:49.259395+00:00",
+    "fardaayekerman": "2026-11-17T09:12:49.259395+00:00",
+    "irna_kerman": "2026-11-17T09:12:49.259395+00:00",
+    "kerman_gov": "2026-11-17T09:12:49.259395+00:00",
+    "kerman_akhbar": "2026-11-17T09:12:49.259395+00:00",
+    "kerman_news": "2026-11-17T09:12:49.259395+00:00",
+    "kerman_rasaneh": "2026-11-17T09:12:49.259395+00:00",
+    "qh_qv": "2026-11-17T09:12:49.259395+00:00"
   }
 }
