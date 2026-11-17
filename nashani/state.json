@@ -2035,40 +2035,11 @@
     "https://t.me/kerman_news/140756",
     "https://t.me/kermane_no/59512",
     "https://t.me/kerman_gov/10700",
-    "https://t.me/kerman_news/140757"
+    "https://t.me/kerman_news/140757",
+    "https://t.me/kerman_news/140758",
+    "https://t.me/kerman_news/140759"
   ],
   "queue": [
-    {
-      "url": "https://t.me/irna_kerman/30378",
-      "source_post_id": "30378",
-      "title": "امام جمعه کرمان: انسجام ملی خط قرمز «ملت امام حسین (ع)» است",
-      "excerpt": "امام جمعه کرمان: انسجام ملی خط قرمز «ملت امام حسین (ع)» است نماینده ولی فقیه در استان و امام جمعه کرمان، انسجام ملی و وحدت را خط قرمز ملت امام حسین(ع) عنوان کرد و گفت: با وحدت و همدلی پای آرمان‌های کشور و خون شهدا می‌ایستیم. irna_kerman",
-      "paragraphs": [
-        "امام جمعه کرمان: انسجام ملی خط قرمز «ملت امام حسین (ع)» است",
-        "نماینده ولی فقیه در استان و امام جمعه کرمان، انسجام ملی و وحدت را خط قرمز ملت امام حسین(ع) عنوان کرد و گفت: با وحدت و همدلی پای آرمان‌های کشور و خون شهدا می‌ایستیم.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/Rk1c9H8nVuixGdYT-V8xh3I2EHEvbdWATfiIU-cteAGL1zMUfqL8gqme8IQaJDmSuyUjfeHGDQgGsGEoQhF8bkOYt2vVZG4RVnwreUriTg3k4bLkCCk7OL9bgNhzJK9043NkMLj4Rk8owywO6ODdbgGa10zabCaOcU5whms1t1OEITmj--GSvLDwHjU8VC9csZa5bm9udmoQYWlEcO8ZHWzqN3UnYsfsdSQb-FqapX-0g0jgu0iSA3BjffD60gR-G95lx2CCvZo2gmcWAEMArN6gJz4PNREwUbyVGDp1T977vwHTd0O_T1Z5hTNneyD26rJpm1lYwZUzuq5g-pfJ1Q.jpg"
-      },
-      "published_at": "2026-11-13T10:07:19+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "fb1affd6921fefe4",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T10:25:57.949895+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T10:26:11.698881+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 425,
-      "sent_at": "2026-11-13T10:26:58.160490+00:00"
-    },
     {
       "url": "https://t.me/kerman_news/140549",
       "source_post_id": "140549",
@@ -10947,17 +10918,44 @@
       "status": "ready",
       "detected_at": "2026-11-17T13:54:04.764731+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140758",
+      "source_post_id": "140758",
+      "title": "کرمان | جمع‌آوری زباله در صدر مطالبات محیط‌زیستی",
+      "excerpt": "کرمان | جمع‌آوری زباله در صدر مطالبات محیط‌زیستی «تجمع زباله و ضعف جمع‌آوری» با سهم ۵۳٫۳ درصدی، مهم‌ترین دغدغه محیط‌زیستی پاسخ‌دهندگان است. پس از آن، گردوغبار و فرسایش خاک با ۲۲٫۹ درصد قرار دارد؛ نتیجه‌ای که اهمیت بهبود خدمات جمع‌آوری پسماند و رسیدگی به کانون‌های گردوغبار را برجسته می‌کند.",
+      "paragraphs": [
+        "کرمان | جمع‌آوری زباله در صدر مطالبات محیط‌زیستی",
+        "«تجمع زباله و ضعف جمع‌آوری» با سهم ۵۳٫۳ درصدی، مهم‌ترین دغدغه محیط‌زیستی پاسخ‌دهندگان است.",
+        "پس از آن، گردوغبار و فرسایش خاک با ۲۲٫۹ درصد قرار دارد؛ نتیجه‌ای که اهمیت بهبود خدمات جمع‌آوری پسماند و رسیدگی به کانون‌های گردوغبار را برجسته می‌کند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/ngiqaFipJZvkueRZ80gVveI6ZSn3CK3CINNxZ0Jbubh6iRP6JqnqXGYJdm-SKEW_RFkBsw7bzUS8y5DDufeCIbGzJjw8hDegG3avnFVPOPkNSfQhkhDGLBRQ0iE4KD72LajWj3vrzTZZFaMHmFtK1J8KDBwggN30kCM-pB-lBTXfZ0m7NeH3luu65PJ8wrRgGVjdWqBzeAQniV2nwnSx2eysc44kTSN4MWXACHf-fOgujpV5tIMzZ5i88c9qah4gf1OrGEyT_FRk_4VDBK1vcNRvxPQF1aNG3yaIyChFvqvBBdSD8bSkAAOYyKh8OHNJ_5eT3kOSWVOcuzuigcZLmw.jpg"
+      },
+      "published_at": "2026-11-17T13:53:26+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "82e8cd7ec18d6211",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T14:24:19.355290+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-17T13:54:29.796959+00:00",
+  "saved_at": "2026-11-17T14:24:36.506589+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-17T13:54:04.764731+00:00",
-    "fardaayekerman": "2026-11-17T13:54:04.764731+00:00",
-    "irna_kerman": "2026-11-17T13:54:04.764731+00:00",
-    "kerman_gov": "2026-11-17T13:54:04.764731+00:00",
-    "kerman_akhbar": "2026-11-17T13:54:04.764731+00:00",
-    "kerman_news": "2026-11-17T13:54:04.764731+00:00",
-    "kerman_rasaneh": "2026-11-17T13:54:04.764731+00:00",
-    "qh_qv": "2026-11-17T13:54:04.764731+00:00"
+    "kermane_no": "2026-11-17T14:24:19.355290+00:00",
+    "fardaayekerman": "2026-11-17T14:24:19.355290+00:00",
+    "irna_kerman": "2026-11-17T14:24:19.355290+00:00",
+    "kerman_gov": "2026-11-17T14:24:19.355290+00:00",
+    "kerman_akhbar": "2026-11-17T14:24:19.355290+00:00",
+    "kerman_news": "2026-11-17T14:24:19.355290+00:00",
+    "kerman_rasaneh": "2026-11-17T14:24:19.355290+00:00",
+    "qh_qv": "2026-11-17T14:24:19.355290+00:00"
   }
 }
