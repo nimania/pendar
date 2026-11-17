@@ -190,7 +190,8 @@
       "at": "2026-11-17T15:00:51.290890+03:30"
     },
     "2026-11-17-afternoon-تهران": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 298,
       "at": "2026-11-17T15:00:51.290890+03:30"
     }
   }
