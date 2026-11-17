@@ -1939,40 +1939,12 @@
     "https://t.me/kerman_news/140729",
     "https://t.me/irna_kerman/30405",
     "https://t.me/kerman_news/140730",
-    "https://t.me/Kerman_akhbar/66442"
+    "https://t.me/Kerman_akhbar/66442",
+    "https://t.me/Kerman_akhbar/66443",
+    "https://t.me/fardaayekerman/35025",
+    "https://t.me/fardaayekerman/35026"
   ],
   "queue": [
-    {
-      "url": "https://t.me/Kerman_akhbar/66346",
-      "source_post_id": "66346",
-      "title": "لایروبی رودخانه جور کوهبنان با هدف کاهش خطرات ناشی از سیلاب",
-      "excerpt": "لایروبی رودخانه جور کوهبنان با هدف کاهش خطرات ناشی از سیلاب مسیر رودخانه جور در شهرستان کوهبنان با هدف رفع موانع و تسهیل جریان آب و کاهش خطرات ناشی از سیلاب، لایروبی و بازگشایی شد. اجرای این عملیات ضمن بهبود عبور جریان طبیعی آب، نقش مؤثری در کاهش احتمال آب‌گرفتگی مناطق پیرامونی و پیشگیری از خسارات احتمالی ناشی از بارندگی‌های شدید و وقوع سیلاب دارد.",
-      "paragraphs": [
-        "لایروبی رودخانه جور کوهبنان با هدف کاهش خطرات ناشی از سیلاب",
-        "مسیر رودخانه جور در شهرستان کوهبنان با هدف رفع موانع و تسهیل جریان آب و کاهش خطرات ناشی از سیلاب، لایروبی و بازگشایی شد.",
-        "اجرای این عملیات ضمن بهبود عبور جریان طبیعی آب، نقش مؤثری در کاهش احتمال آب‌گرفتگی مناطق پیرامونی و پیشگیری از خسارات احتمالی ناشی از بارندگی‌های شدید و وقوع سیلاب دارد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/OlGAHAftyqxOouESvQ6hsRYpTlCyG8VNg4n7yKcUjVAwPHfPaxr9EcpZel7BML0O4if9qUstcYW7wNURZ-gZrjh5F6hYVqo49b92VyLengLFf7aHtbncUGTQ3lXGdJd6SGG_cRca3V94Altx2TOf8dpw0xv-QQWENdrJpragXz80MUPA0ycWkeMbkG7VmVXkkojfhaVKEus5XZzYPLQiBG5wmoQ33jIz8V0kuybrLlO_TeuDJ46-MmAwDonyE1TySc07tfzepSzH5HGP36Vu1Lm9FMz_D67iouzsztD05SzPsuQ8KZkfKCH9zNU3QPKZy3w39tU7dc4fM6AdqMUpiQ.jpg"
-      },
-      "published_at": "2026-11-12T07:04:42+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "a1c6647d03e0efef",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T08:12:38.927208+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T11:52:32.470531+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 377,
-      "sent_at": "2026-11-12T11:52:36.938669+00:00"
-    },
     {
       "url": "https://t.me/Kerman_akhbar/66347",
       "source_post_id": "66347",
@@ -10935,17 +10907,49 @@
       "delivery_kind": "text",
       "telegram_message_id": 586,
       "sent_at": "2026-11-17T04:48:35.886546+00:00"
+    },
+    {
+      "url": "https://t.me/fardaayekerman/35026",
+      "source_post_id": "35026",
+      "title": "در آیین چهارمین مرحلۀ نوسازی ناوگان حمل‌ونقل شهری مطرح شد؛",
+      "excerpt": "در آیین چهارمین مرحلۀ نوسازی ناوگان حمل‌ونقل شهری مطرح شد؛ زیرساخت BRT در کرمان در حال اجراست راه‌حل ترافیک فقط خرید اتوبوس نیست فردای‌کرمان – گروه جامعه: شهردار کرمان در آیین رونمایی از ۱۲ دستگاه اتوبوس جدید و اضافه شدن آن‌ها به ناوگان حمل‌ونقل شهری، با تأکید بر اینکه تعداد ۱۵۰ اتوبوس برای شهر کرمان کفایت نمی‌کند و ناوگان حمل‌ونقل عمومی نباید کمتر از ۳۰۰ دستگاه باشد، گفت: «باید ببینیم که آیا هنوز می‌خواهیم به شکل سنتی مسائل را پیگیری کنیم، یعنی راه‌حل ترافیک را در خرید اتوبوس بدانیم یا اینکه راه‌های جایگزین برای جلب رضایتمندی حداکثری مردم وجود دارد؟». فردای‌کرمان در تلگرام فردای‌کرمان در ایتا فردای‌کرمان در بله فردای‌کرمان درواتسپ",
+      "paragraphs": [
+        "در آیین چهارمین مرحلۀ نوسازی ناوگان حمل‌ونقل شهری مطرح شد؛",
+        "زیرساخت BRT در کرمان در حال اجراست",
+        "راه‌حل ترافیک فقط خرید اتوبوس نیست",
+        "فردای‌کرمان – گروه جامعه: شهردار کرمان در آیین رونمایی از ۱۲ دستگاه اتوبوس جدید و اضافه شدن آن‌ها به ناوگان حمل‌ونقل شهری، با تأکید بر اینکه تعداد ۱۵۰ اتوبوس برای شهر کرمان کفایت نمی‌کند و ناوگان حمل‌ونقل عمومی نباید کمتر از ۳۰۰ دستگاه باشد، گفت: «باید ببینیم که آیا هنوز می‌خواهیم به شکل سنتی مسائل را پیگیری کنیم، یعنی راه‌حل ترافیک را در خرید اتوبوس بدانیم یا اینکه راه‌های جایگزین برای جلب رضایتمندی حداکثری مردم وجود دارد؟».",
+        "فردای‌کرمان در تلگرام",
+        "فردای‌کرمان در ایتا",
+        "فردای‌کرمان در بله",
+        "فردای‌کرمان درواتسپ"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/fY15XS1Cq_gfJN91NFs6r5IKTRVFCECwLxsNGjPqc7adbDF4wnnymhD1tOIEXjrYlVL-2Xga_YzmGcflb9dMCNm0bNW6R48TsZerNEAbTylWTyhvYhBsJaA0oRCBhX2-AMndCBXJllItYjYKrrQLcZ1kDgu5eRdYddK39FSKgR_iRW8_R9fa4ULUiuZTLon5D6pWHE86wsZuNLFqgMHK1mhIPn6IYYhRhPnNN7Ta9cF8RZ6tWqfa73E656aRsaQ7u8NJTNIPj2Rn1uSzVacFyVa-f0AmoNrTrk8Mu8nnXmDoGFa39BL2Qxs8aYDheok6fnMBPj0bbwLLlBHvk3JIGQ.jpg"
+      },
+      "published_at": "2026-11-17T05:01:33+00:00",
+      "source": "فردای کرمان",
+      "source_handle": "fardaayekerman",
+      "id": "1048a3da122629ac",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T05:07:52.151434+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-17T04:48:35.886564+00:00",
+  "saved_at": "2026-11-17T05:08:14.458538+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-17T04:48:05.690620+00:00",
-    "fardaayekerman": "2026-11-17T04:48:05.690620+00:00",
-    "irna_kerman": "2026-11-17T04:48:05.690620+00:00",
-    "kerman_gov": "2026-11-17T04:48:05.690620+00:00",
-    "kerman_akhbar": "2026-11-17T04:48:05.690620+00:00",
+    "fardaayekerman": "2026-11-17T05:07:52.151434+00:00",
+    "irna_kerman": "2026-11-17T05:07:52.151434+00:00",
+    "kerman_gov": "2026-11-17T05:07:52.151434+00:00",
+    "kerman_akhbar": "2026-11-17T05:07:52.151434+00:00",
     "kerman_news": "2026-11-17T04:48:05.690620+00:00",
-    "kerman_rasaneh": "2026-11-17T04:48:05.690620+00:00",
+    "kerman_rasaneh": "2026-11-17T05:07:52.151434+00:00",
     "qh_qv": "2026-11-17T04:48:05.690620+00:00"
   }
 }
