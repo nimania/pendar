@@ -1992,593 +1992,52 @@
     "https://t.me/fardaayekerman/35031",
     "https://t.me/kermane_no/59494",
     "https://t.me/Kerman_akhbar/66448",
-    "https://t.me/kerman_news/140744"
+    "https://t.me/kerman_news/140744",
+    "https://t.me/kermane_no/59495",
+    "https://t.me/kermane_no/59496",
+    "https://t.me/kerman_news/140745",
+    "https://t.me/kermane_no/59497",
+    "https://t.me/kerman_gov/10698",
+    "https://t.me/kerman_gov/10699",
+    "https://t.me/Kerman_akhbar/66449",
+    "https://t.me/kermane_no/59498",
+    "https://t.me/irna_kerman/30410",
+    "https://t.me/kerman_news/140747",
+    "https://t.me/kermane_no/59499",
+    "https://t.me/kermane_no/59500",
+    "https://t.me/kerman_news/140748",
+    "https://t.me/kermane_no/59501",
+    "https://t.me/qh_qv/1110",
+    "https://t.me/kermane_no/59502",
+    "https://t.me/kerman_news/140749",
+    "https://t.me/Kerman_akhbar/66450",
+    "https://t.me/kermane_no/59503",
+    "https://t.me/kermane_no/59504",
+    "https://t.me/kermane_no/59505",
+    "https://t.me/kerman_news/140750",
+    "https://t.me/kermane_no/59506",
+    "https://t.me/irna_kerman/30411",
+    "https://t.me/kermane_no/59507",
+    "https://t.me/kerman_news/140751",
+    "https://t.me/kerman_news/140752",
+    "https://t.me/kermane_no/59508",
+    "https://t.me/Kerman_akhbar/66451",
+    "https://t.me/kermane_no/59509",
+    "https://t.me/kerman_news/140753",
+    "https://t.me/irna_kerman/30412",
+    "https://t.me/kermane_no/59510",
+    "https://t.me/irna_kerman/30413",
+    "https://t.me/kermane_no/59511",
+    "https://t.me/kerman_news/140754",
+    "https://t.me/irna_kerman/30414",
+    "https://t.me/kerman_news/140755",
+    "https://t.me/Kerman_akhbar/66452",
+    "https://t.me/kerman_news/140756",
+    "https://t.me/kermane_no/59512",
+    "https://t.me/kerman_gov/10700",
+    "https://t.me/kerman_news/140757"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140520",
-      "source_post_id": "140520",
-      "title": "شهدای خوشنام در حلقه محبت و ارادت کرمانیان",
-      "excerpt": "شهدای خوشنام در حلقه محبت و ارادت کرمانیان",
-      "paragraphs": [
-        "شهدای خوشنام در حلقه محبت و ارادت کرمانیان"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/d794538fd7.mp4?token=ZT3ncGmqdz4ehpRx6idF8O1Jq9yYjasrdxcYg_tGDt25FsX5UbxmaQgb2e_8rhxd-_-f7won_CW8R0nUNOCtoAZMzpHoi6NWfP8Mh4l8qAQuGeU7Fg6upc_ZY5mZfXFv7zSB0t6CAVRqnOsX2UO-NpodXoksAxG1-D8gGK5bH0Zj1owuzcmhWwNlcaHcA3w-2XXVDA-aytOUl1TAp2_0ShfCgr-jz9K1ts5VgI83KBdux6kBA5tbcBqGgPTtLujw9VjtlKW8bJgIiZHByIE3cb1QtkifDRUr2DqWRDAf8Km21bhV8TQfzaxoc4NGVeqGH4x1VhaBRuynWhSFsKDGFHfwDigKhIp14MLInbN6xEX3gzN-PDLCaMd9mAnpq5jW8jknZ0c4_mIr0D0qHjnQ0dJo66pOndEKICYssmpPci-pdJ7cTzT_sRwn4Dm9T5FQqrLAj3uPxWSd7uBIsx30UXNesMPw4b7Xd96od5wRdw92B-xJCodw1dUCPcLVm0ACTTxXXCntB9nzgXBqdVFTl7YTCbSeV4RrkM3knJVMFBIvPw9SlZoP8G9-g7OUk91Gq-0fNRpMT_M0muGtEQWVjov6k4zrnVHSbR8SWQYrpIBJC3njET1nUPkLeYaRcMP3wlg504QvZSbgpvfvJQK4taOfaZIRBjliyDFU84SSrHM"
-      },
-      "published_at": "2026-11-12T18:47:00+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "22d6d5834effd143",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T19:53:52.507598+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 405,
-      "sent_at": "2026-11-12T19:54:08.503688+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140524",
-      "source_post_id": "140524",
-      "title": "مراسم استقبال و تشییع و تدفین شهید گمنام در سیرجان",
-      "excerpt": "مراسم استقبال و تشییع و تدفین شهید گمنام در سیرجان",
-      "paragraphs": [
-        "مراسم استقبال و تشییع و تدفین شهید گمنام در سیرجان"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/oYMHiPSpew7hUdoWdNZ1KVtoKQ0vXtod6jFV131trk498qAIwpYZ0RU4jyW1HhRut19ZKWMSe5y1CXj2AVk4RzD4J1zvo7dig5D5yoKQNeFuAOkh9MhFuqnBuykzIbhMvVgPuwMKUcSef_K0EKPbpnTHkp_7PbQ0fcyzCtL_yD5XkjI1LYXeT5c5sD6qTM_Ng2LK3PvD8B0S7OVlhFixbqrunKhzSUP4BVdJU9weC8zhAzRA5H8HJTTbzb9xb9shIPw7FUOXB3NKt9_1uNpmihSnGX-VF5v1iF3DpFRYx4M6IbjKPRtcKJ4hpPBeVyeP5ttjA0MdZIsXEHrWuPsgXQ.jpg"
-      },
-      "published_at": "2026-11-12T19:20:38+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "81a4c6acda6469f9",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T19:53:32.101393+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T19:53:52.507598+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 406,
-      "sent_at": "2026-11-12T19:54:13.209730+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30374",
-      "source_post_id": "30374",
-      "title": "«سعید افروز» قهرمان عبور از محدودیت‌ها؛ایمان و پشتکار،نام ایران را طنین انداز کرد",
-      "excerpt": "«سعید افروز» قهرمان عبور از محدودیت‌ها؛ایمان و پشتکار،نام ایران را طنین انداز کرد فرماندار جیرفت در مراسم استقبال از «سعید افروز» قهرمان طلایی المپیک آسیایی (ناگویا) گفت: این قهرمان نامدار با اراده پولادین و خودباوری، نام ایران را در بلندای ورزش جهان طنین‌انداز کرد و امروز به الگویی شایسته برای جوانان جنوب استان تبدیل شده است. irna_kerman",
-      "paragraphs": [
-        "«سعید افروز» قهرمان عبور از محدودیت‌ها؛ایمان و پشتکار،نام ایران را طنین انداز کرد",
-        "فرماندار جیرفت در مراسم استقبال از «سعید افروز» قهرمان طلایی المپیک آسیایی (ناگویا) گفت: این قهرمان نامدار با اراده پولادین و خودباوری، نام ایران را در بلندای ورزش جهان طنین‌انداز کرد و امروز به الگویی شایسته برای جوانان جنوب استان تبدیل شده است.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/EigrDevMy8DkRWNguS7ZyUMyP1UvlAJNC4hiLLKvSxNeAaVfrq5SVw3t2umzCXcOlkQ0LutMKY9iHgyK3Mdj5tc5nARqLjTDpiJthmEBOtaOZyab1EBvICD0ntPQzzrAdRUFVhBLOi6ptxEKgwdtlfEsnIM0r2lBhp60yGk2vkXEYpVlE6D1kOUI26yz78DBCxpQrX04-8SMdU6JIuQSUmB30vovRoaq9-HHlQ6iXtINhLz3saQpkmvbWB-4LqXgF2dlNQNTF18ffOsA3FsE0qeKAXSLgATM0VwU5LIR-JeHR5hUhgIR5NkWyu1TobMbDX-lHAjVVxgAurkN3WeKzw.jpg"
-      },
-      "published_at": "2026-11-12T20:11:18+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "0597f6ad84ff70a9",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-12T20:46:50.625705+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-12T20:47:10.700934+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 408,
-      "sent_at": "2026-11-12T20:47:14.262932+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30375",
-      "source_post_id": "30375",
-      "title": "کلیدواژه نجات بافت تاریخی کرمان در دستان مدیریت شهری",
-      "excerpt": "کلیدواژه نجات بافت تاریخی کرمان در دستان مدیریت شهری نشست مشترک شهردار کرمان و مدیرکل میراث‌فرهنگی، گردشگری و صنایع‌دستی استان، نقطه‌عطفی در تقویت تعاملات بین‌بخشی برای نجات بافت تاریخی کلان‌شهر کرمان رقم زد؛ نشستی که در آن علاوه‌بر کلید خوردن برنامه‌های اجرایی برای ساماندهی بازار قلعه و محدوده قلعه‌دختر، راهبرد کلیدی «پهنه‌بندی یکپارچه» با محوریت ثبت جهانی «ملک سلیمان» به عنوان میان‌بری هوشمندانه برای هم‌افزایی ارزش‌های باستانی این خطه مطرح شد. irna_kerman",
-      "paragraphs": [
-        "کلیدواژه نجات بافت تاریخی کرمان در دستان مدیریت شهری",
-        "نشست مشترک شهردار کرمان و مدیرکل میراث‌فرهنگی، گردشگری و صنایع‌دستی استان، نقطه‌عطفی در تقویت تعاملات بین‌بخشی برای نجات بافت تاریخی کلان‌شهر کرمان رقم زد؛ نشستی که در آن علاوه‌بر کلید خوردن برنامه‌های اجرایی برای ساماندهی بازار قلعه و محدوده قلعه‌دختر، راهبرد کلیدی «پهنه‌بندی یکپارچه» با محوریت ثبت جهانی «ملک سلیمان» به عنوان میان‌بری هوشمندانه برای هم‌افزایی ارزش‌های باستانی این خطه مطرح شد.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/Nsk6o3cUcvkPkk30v08f-uFQKPxHEdn_KTD3aTn-YGxW_twutxyVCOienMyg5VEGGnB1oscZUOLrK7rFTlOXEVmPuQWvepRUI5Jb7n8w4D8kdoXLE5uAQ0t_-Zp8AG_jB6lydHnAPe15J6mg_X4Ps3TBa6uNbvtMd7Nuufls3Pe5ZNXogsDpxPuly3kXQr2-fe5XnOGK4eg8wkq-T7rx0r6rr9gQPVAasmmJrKAlzTmziDy5_kIvisF9sBj1pXWYerRo_IyJiMmmm7EAmwy-pPACmfQwfdQfiW_lfBNUdABrpW0y8JHkuvWXi54qsSXY_OPw0Zd4cazRe0spkf8-Iw.jpg"
-      },
-      "published_at": "2026-11-13T05:10:19+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "22b90b0168fb20c8",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T07:56:43.014032+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 409,
-      "sent_at": "2026-11-13T07:56:46.669554+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140533",
-      "source_post_id": "140533",
-      "title": "کرمانیان به صف برای آخرین میزبانی از ۱۷ طلایه‌دار عزت",
-      "excerpt": "کرمانیان به صف برای آخرین میزبانی از ۱۷ طلایه‌دار عزت",
-      "paragraphs": [
-        "کرمانیان به صف برای آخرین میزبانی از ۱۷ طلایه‌دار عزت"
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-13T06:13:25+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "6ca8f1b36c0ed0f7",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T07:56:43.014032+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 410,
-      "sent_at": "2026-11-13T07:56:48.505685+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140535",
-      "source_post_id": "140535",
-      "title": "ماندگاری هوای سرد تا یکشنبه در کرمان",
-      "excerpt": "ماندگاری هوای سرد تا یکشنبه در کرمان طبق بررسی آخرین نقشه‌های پیش‌یابی هواشناسی امروز-جمعه تا اواسط هفته آینده جوی نسبتا پایدار و آرام در بعضی ساعت همراه با وزش باد برای اکثر مناطق استان پیش‌بینی می‌شود. روز دوشنبه هفته آینده در برخی مناطق جنوب شرقی و شمال غربی وزش باد نسبتا شدید محتمل است. همچنین به لحاظ دمایی تا روز یکشنبه ماندگاری هوای سرد را خواهیم داشت و سپس افزایش نسبی دما برای اغلب مناطق پیش‌بینی می‌شود.",
-      "paragraphs": [
-        "ماندگاری هوای سرد تا یکشنبه در کرمان",
-        "طبق بررسی آخرین نقشه‌های پیش‌یابی هواشناسی امروز-جمعه تا اواسط هفته آینده جوی نسبتا پایدار و آرام در بعضی ساعت همراه با وزش باد برای اکثر مناطق استان پیش‌بینی می‌شود.",
-        "روز دوشنبه هفته آینده در برخی مناطق جنوب شرقی و شمال غربی وزش باد نسبتا شدید محتمل است.",
-        "همچنین به لحاظ دمایی تا روز یکشنبه ماندگاری هوای سرد را خواهیم داشت و سپس افزایش نسبی دما برای اغلب مناطق پیش‌بینی می‌شود."
-      ],
-      "media": null,
-      "published_at": "2026-11-13T06:44:13+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "55791229747642cc",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [
-        {
-          "name": "آخرین خبر کرمان",
-          "url": "https://t.me/Kerman_akhbar/66362"
-        }
-      ],
-      "reserved_at": "2026-11-13T07:56:43.014032+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 411,
-      "sent_at": "2026-11-13T07:56:50.023562+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140536",
-      "source_post_id": "140536",
-      "title": "تشییع پیکر مطهر شهدای گمنام دفاع مقدس - کرمان",
-      "excerpt": "تشییع پیکر مطهر شهدای گمنام دفاع مقدس - کرمان",
-      "paragraphs": [
-        "تشییع پیکر مطهر شهدای گمنام دفاع مقدس - کرمان"
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-13T07:16:12+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "1fd208e896586bad",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [
-        {
-          "name": "آخرین خبر کرمان",
-          "url": "https://t.me/Kerman_akhbar/66363"
-        }
-      ],
-      "reserved_at": "2026-11-13T07:56:43.014032+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 412,
-      "sent_at": "2026-11-13T07:56:51.840349+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_gov/10622",
-      "source_post_id": "10622",
-      "title": "حضور استاندار کرمان در مراسم تشییع شهدای گمنام دفاع مقدس/بدرقه ۱۷ پرستوی مهاجر در دیار کریمان",
-      "excerpt": "حضور استاندار کرمان در مراسم تشییع شهدای گمنام دفاع مقدس/بدرقه ۱۷ پرستوی مهاجر در دیار کریمان دکتر محمدعلی طالبی، استاندار کرمان، همزمان با ایام شهادت حضرت فاطمه زهرا(س)، در مراسم تشییع پیکر مطهر ۱۷ شهید گمنام تازه‌تفحص‌شده دوران هشت سال دفاع مقدس در شهر کرمان حضور یافت. به گزارش روابط عمومی استانداری کرمان، در این مراسم که با حضور اقشار مختلف مردم و جمعی از مسئولان برگزار شد، استاندار کرمان در کنار مردم در مراسم تشییع شهدا شرکت کرد و با قرار دادن شانه زیر پیکر مطهر یکی از شهدای گمنام، در آیین بدرقه این شهیدان والامقام مشارکت داشت. مراسم تشییع شهدای گمنام با حضور پرشور مردم و در فضایی آکنده از معنویت و ارادت به شهدا برگزار شد و حاضران با سردادن شعارهای انقلابی و مذهبی، یاد و خاطره شهدای دفاع مقدس را گرامی داشتند. پیکر مطهر این ۱۷ شهید پس از مراسم تشییع در کرمان، برای خاکسپاری به شهرستان‌های کرمان، رفسنجان، بافت، زرند، سیرجان، بم و شهربابک منتقل شد تا در نقاط تعیین‌شده آرام گیرند",
-      "paragraphs": [
-        "حضور استاندار کرمان در مراسم تشییع شهدای گمنام دفاع مقدس/بدرقه ۱۷ پرستوی مهاجر در دیار کریمان",
-        "دکتر محمدعلی طالبی، استاندار کرمان، همزمان با ایام شهادت حضرت فاطمه زهرا(س)، در مراسم تشییع پیکر مطهر ۱۷ شهید گمنام تازه‌تفحص‌شده دوران هشت سال دفاع مقدس در شهر کرمان حضور یافت.",
-        "به گزارش روابط عمومی استانداری کرمان، در این مراسم که با حضور اقشار مختلف مردم و جمعی از مسئولان برگزار شد، استاندار کرمان در کنار مردم در مراسم تشییع شهدا شرکت کرد و با قرار دادن شانه زیر پیکر مطهر یکی از شهدای گمنام، در آیین بدرقه این شهیدان والامقام مشارکت داشت.",
-        "مراسم تشییع شهدای گمنام با حضور پرشور مردم و در فضایی آکنده از معنویت و ارادت به شهدا برگزار شد و حاضران با سردادن شعارهای انقلابی و مذهبی، یاد و خاطره شهدای دفاع مقدس را گرامی داشتند.",
-        "پیکر مطهر این ۱۷ شهید پس از مراسم تشییع در کرمان، برای خاکسپاری به شهرستان‌های کرمان، رفسنجان، بافت، زرند، سیرجان، بم و شهربابک منتقل شد تا در نقاط تعیین‌شده آرام گیرند"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/J76iVUeT7UhsQJy18hl58Z5nfOiamQiS4ErWl-0vVfMzPyU6SGP7aXrCBYBDU26lRYjvICU53piXIFFpPYzKuWGxo3apQ87KM3c3Yox0wz2c1aRs9gorRMTg0z97jnMcSjFmXeGHCEgyQMTu2xCPnlsDjYDYcw90luG1ujucc_e8UY14G7ypwZwUwkEgGNeesDyBHs5AIWuaBl0YySmxDRvgA78-P98ZgVJq0QOXkAhrj9hPyhqH_E1XsXqFnoL-8ZIXFtiHU3yGyHn55l7wKQuD-A8sDDR5objIN_kODHoSLAAyy4Fi7XZOKN35STHOW3S-P-ZlPWuB_vwYp2L9ew.jpg"
-      },
-      "published_at": "2026-11-13T07:19:21+00:00",
-      "source": "اخبار استانداری کرمان",
-      "source_handle": "kerman_gov",
-      "id": "258eb0f08b405b1c",
-      "media_repost_allowed": true,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T07:56:43.014032+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 413,
-      "sent_at": "2026-11-13T07:56:56.239713+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140537",
-      "source_post_id": "140537",
-      "title": "مردم کرمان، لاله‌های گمنام را عاشقانه بر دوش کشیدند",
-      "excerpt": "مردم کرمان، لاله‌های گمنام را عاشقانه بر دوش کشیدند",
-      "paragraphs": [
-        "مردم کرمان، لاله‌های گمنام را عاشقانه بر دوش کشیدند"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/791ec8e500.mp4?token=ZTC5foV_qBIZg89S1mIdwyWXNMcnBgmlZzXqtfWWtUNUY4INnPhTwOGsCD_MAOO8J9hlHLPJE2qo_wzMbId6mZfVXtGktbOFlJeOyrLz1IdjDqtnbcr_vEOIqE2lMZCpo_BC4su5XwsUa7Hkkc56ER4g83TUbMiqeI9D-9K_q0e85v_xbZyULhS-dD6r7vPij8D2fyVN3zsFEmAOrbNGV2eSbj9ENfo9Jd1fiunXLYeKaFauzG1kMvhLol5eGdokVsho-WPzzXudCYvR0lCGbyWxcAQe1zLmEm7YYsC-APPtt_l5c5iWcKIAm5IaF0dys_Ys-F8k4OVdVTmsELY90g"
-      },
-      "published_at": "2026-11-13T07:26:19+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "4a40dd555a07a5d6",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [
-        {
-          "name": "آخرین خبر کرمان",
-          "url": "https://t.me/Kerman_akhbar/66364"
-        }
-      ],
-      "reserved_at": "2026-11-13T07:56:43.014032+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 414,
-      "sent_at": "2026-11-13T07:57:12.435118+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59327",
-      "source_post_id": "59327",
-      "title": "حضور استاندار کرمان در مراسم تشییع شهدای گمنام دفاع مقدس و بدرقه ۱۷ شهید در دیار کریمان",
-      "excerpt": "حضور استاندار کرمان در مراسم تشییع شهدای گمنام دفاع مقدس و بدرقه ۱۷ شهید در دیار کریمان محمدعلی طالبی، استاندار کرمان، همزمان با ایام شهادت حضرت فاطمه زهرا (س)، در مراسم تشییع پیکر مطهر ۱۷ شهید گمنام تازه‌تفحص‌شده دوران دفاع مقدس در شهر کرمان شرکت کرد. در این مراسم که با حضور پرشور اقشار مختلف مردم و جمعی از مسئولان برگزار شد، استاندار کرمان در کنار مردم در آیین بدرقه این شهدای والامقام مشارکت داشت. پیکر مطهر این ۱۷ شهید پس از برگزاری مراسم تشییع در کرمان، برای خاکسپاری به شهرستان‌های کرمان، رفسنجان، بافت، زرند، سیرجان، بم و شهربابک منتقل شدند.",
-      "paragraphs": [
-        "حضور استاندار کرمان در مراسم تشییع شهدای گمنام دفاع مقدس و بدرقه ۱۷ شهید در دیار کریمان",
-        "محمدعلی طالبی، استاندار کرمان، همزمان با ایام شهادت حضرت فاطمه زهرا (س)، در مراسم تشییع پیکر مطهر ۱۷ شهید گمنام تازه‌تفحص‌شده دوران دفاع مقدس در شهر کرمان شرکت کرد.",
-        "در این مراسم که با حضور پرشور اقشار مختلف مردم و جمعی از مسئولان برگزار شد، استاندار کرمان در کنار مردم در آیین بدرقه این شهدای والامقام مشارکت داشت.",
-        "پیکر مطهر این ۱۷ شهید پس از برگزاری مراسم تشییع در کرمان، برای خاکسپاری به شهرستان‌های کرمان، رفسنجان، بافت، زرند، سیرجان، بم و شهربابک منتقل شدند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/uijxcInNr5rirwrP_OSy4hQ-dvEMKZjLx2nw9f9Ng6m0T-VhXQ8oi6HJv9h44N812VpEALDqn96jjvf445NYaUwYrEVdVVihu1REdzzhUHPNMx1zJs26HU_vD4c7F2w25ayUUisJ33Ys8MYPXwOf3NJB_3DAntmCmY5yqssAy5Yi6MhXOsFhO15eDyeg8QIrs6hk1B7B17LlVifCVEl0unSC_mBkk0HNblpvW9b464k1CkP-td0tu7S3bN4yHW4iQkgRcED7Xqg-Ax4okV6OGk_PRaCIUXgBHaIjWFLbYxjgXIulr5Hl8MoujIYM8IrH95Spsbbthus3PImuMHN_Vw.jpg"
-      },
-      "published_at": "2026-11-13T07:31:39+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "2a411ad427abc08e",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T07:56:43.014032+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 415,
-      "sent_at": "2026-11-13T07:57:15.564638+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30376",
-      "source_post_id": "30376",
-      "title": "واکنش دستگاه قضا به تخریب گلخانه در دلفارد جیرفت؛ متصرف پیش‌تر اخطار قانونی داشت",
-      "excerpt": "واکنش دستگاه قضا به تخریب گلخانه در دلفارد جیرفت؛ متصرف پیش‌تر اخطار قانونی داشت به دنبال حواشی و مباحث مطرح‌شده پیرامون تخریب گلخانه ساخته شده در منطقه دلفارد جیرفت و تصرف اراضی ملی، رئیس حوزه قضایی بخش ساردوئیه این شهرستان زوایای پنهان و مبانی قانونی این برخورد قاطع را تشریح کرد. irna_kerman",
-      "paragraphs": [
-        "واکنش دستگاه قضا به تخریب گلخانه در دلفارد جیرفت؛ متصرف پیش‌تر اخطار قانونی داشت",
-        "به دنبال حواشی و مباحث مطرح‌شده پیرامون تخریب گلخانه ساخته شده در منطقه دلفارد جیرفت و تصرف اراضی ملی، رئیس حوزه قضایی بخش ساردوئیه این شهرستان زوایای پنهان و مبانی قانونی این برخورد قاطع را تشریح کرد.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/IN6FFQ-UFgOT550E1Zo3LKzcW2srBIy3uE87FoTDYcgAfQAEAipTjcVAV1EZKhjurwrNT4JHEbteCNjQLA7nJci4cBB-kVvljr6syb_RLqatgdGS8427CfprdcLoDm6pdww3S7n1V0oto44rqppMja6tluBAHkC4NIkABNzewt2UTnsxWRAipR7HortWPhtUTmi-L0H5dvjE4kD4Cmhn9URx72H6yYdHks0EXGBfBYqYsWVeNqxtSvoxMTxG3zYAV4EaEI7ymZHww5ycxSSLyDU0o8nA_Z2y0WdBSZHxZX83Ui-c8iyGTRNi44lhNub1zg_B53GEowlFo2oeE33tkg.jpg"
-      },
-      "published_at": "2026-11-13T07:33:18+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "d3190c14c50ade51",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T08:43:44.173111+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 416,
-      "sent_at": "2026-11-13T08:43:46.918547+00:00"
-    },
-    {
-      "url": "https://t.me/irna_kerman/30377",
-      "source_post_id": "30377",
-      "title": "کرمان میزبان ۱۷ پرستوی مهاجر؛ دیار کریمان در آیین بدرقه شهدای گمنام سراپا شور و ماتم شد",
-      "excerpt": "کرمان میزبان ۱۷ پرستوی مهاجر؛ دیار کریمان در آیین بدرقه شهدای گمنام سراپا شور و ماتم شد شهر کرمان امروز جمعه در آیین بدرقه ۱۷ کبوتر پرکشیده دوران دفاع مقدس، بار دیگر به عطر ایثار و شهادت معطر شد؛ مراسمی که در سایه‌سار ایام فاطمیه، حضور پرشور اقشار مختلف مردم و همراهی استاندار کرمان، جلوه‌ای بی‌بدیل از تجدید بیعت با آرمان‌های شهداء را به نمایش گذاشت. irna_kerman",
-      "paragraphs": [
-        "کرمان میزبان ۱۷ پرستوی مهاجر؛ دیار کریمان در آیین بدرقه شهدای گمنام سراپا شور و ماتم شد",
-        "شهر کرمان امروز جمعه در آیین بدرقه ۱۷ کبوتر پرکشیده دوران دفاع مقدس، بار دیگر به عطر ایثار و شهادت معطر شد؛ مراسمی که در سایه‌سار ایام فاطمیه، حضور پرشور اقشار مختلف مردم و همراهی استاندار کرمان، جلوه‌ای بی‌بدیل از تجدید بیعت با آرمان‌های شهداء را به نمایش گذاشت.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/IOltcdlTAC-lpYNm2a8T2C6Tuc26fTLtd15qRhMvIniOplzUH79TSqXcjHogDWGlxZ331OMUF-d2rAPeNRHFyHfGKXZs1iobHvwz9ciS4Asz_yN0L3rIjUmgQVtza73t4E2lV2iXbA6Fk8wbR99xrUaM5KpeSw2iZYfFosPn6_uALv26SeojYKqJnn-4cRQS-0OfryExiFohLR4iKVxn40v3zyOpRe72sdJe3WPAENh63COqGw2b53RDkh5VxocpEB07DNE6yzSr1fKg1xeQoH43jKjwwPrCAtF7xpfgaVxSSsu7BsmAgLQMtbo0t4UQBqiihmI3AU2QkirWnGScZA.jpg"
-      },
-      "published_at": "2026-11-13T07:54:18+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "c2edb3e4aac9d11a",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T07:56:24.908311+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T08:43:44.173111+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 417,
-      "sent_at": "2026-11-13T08:43:48.074300+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140541",
-      "source_post_id": "140541",
-      "title": "قطع درختان بهشت‌زهرای کهنوج به دستور چه کسی انجام شد؟",
-      "excerpt": "قطع درختان بهشت‌زهرای کهنوج به دستور چه کسی انجام شد؟ به گزارش کهنوجیها، شماری از شهروندان از قطع درختان سبز و تنومند بهشت‌زهرای کهنوج گلایه کرده‌اند. به گفته آنان، با توجه به کمبود سایه‌بان در آرامستان، خانواده‌ها هنگام برگزاری مراسم ترحیم از سایه این درختان استفاده می‌کردند. شهروندان از شهرداری کهنوج خواسته‌اند علت قطع درختان و مرجع صادرکننده دستور را اعلام کند.",
-      "paragraphs": [
-        "قطع درختان بهشت‌زهرای کهنوج به دستور چه کسی انجام شد؟",
-        "به گزارش کهنوجیها، شماری از شهروندان از قطع درختان سبز و تنومند بهشت‌زهرای کهنوج گلایه کرده‌اند. به گفته آنان، با توجه به کمبود سایه‌بان در آرامستان، خانواده‌ها هنگام برگزاری مراسم ترحیم از سایه این درختان استفاده می‌کردند.",
-        "شهروندان از شهرداری کهنوج خواسته‌اند علت قطع درختان و مرجع صادرکننده دستور را اعلام کند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/UTxPTEWmmyHXZ7C7zA5zmttf2AlrTiIPzDBa24bGAcSWDUYfESIW6yCky31_yTM4KFbtqucaBG13_SJpJVqcacwnCuJTkFDGI3hUsypfPbt4qaqTvRnFDMtE9GOTzqyLIJijHEdsGtil2GkUqeYPNI3qKY4jJ8pX6R7Qic8AxoJ-GBDTkDtr2b-Qc1RAuamx9da-QlF_lpLVieSG7P_5Ga7iSIhPOIyKthWr7E5DPFcnf8AZaea5uZB-G_yUvJwLp-_LG3QBQN8vpAN7ckUZbImIoJHOIiJu-0btsStXj8Og1Cibcjg7SL0H48Xhqq6H-JDhxR8A_F2M7YkxQjpu7w.jpg"
-      },
-      "published_at": "2026-11-13T08:18:41+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "26c2b18985f34549",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T08:43:28.475200+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T08:43:44.173111+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 418,
-      "sent_at": "2026-11-13T08:43:52.252206+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140542",
-      "source_post_id": "140542",
-      "title": "لحظاتی از چشم‌انتظاری مردم رفسنجان برای حضور ۴ لاله زهرایی",
-      "excerpt": "لحظاتی از چشم‌انتظاری مردم رفسنجان برای حضور ۴ لاله زهرایی",
-      "paragraphs": [
-        "لحظاتی از چشم‌انتظاری مردم رفسنجان برای حضور ۴ لاله زهرایی"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/3749568d7a.mp4?token=d5pGUbkwoOYYgge1QtpJAuQyvP8it27IxtlBHl4g1EKoKyJlzx8_3DjYw4URUqSS7UxURm7P5duTDfJZpmP1y9cZE2k5fSocK8kZrXi4kls3tFY7EuOHv3Sz2fyT9ZVt9Os-zxDDCBzGaiAmvJ2yJBX9_2mi6bEsMhjI4v2d1pd5LANC6ZzuiFZMAf2RsRf1sRJmDhWjs4pIoewSFl48aTja7DKVmME3Y3KAguEczCJdWl3zdisS5T3pWc-5aM2-kMsyL25oA-yC-_DZIIHAnuEcZFXXEQGMQrCkrNEOcdytUN03A4fWLSriGNL8603Illmemo9ZsyI5P_s6Pq1FSQ"
-      },
-      "published_at": "2026-11-13T08:49:34+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "c9d1ac447e8159a8",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T10:25:57.949895+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T10:26:11.698881+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 419,
-      "sent_at": "2026-11-13T10:26:17.157375+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140543",
-      "source_post_id": "140543",
-      "title": "اقامه نماز بر پیکر شهدای گمنام در رفسنجان",
-      "excerpt": "اقامه نماز بر پیکر شهدای گمنام در رفسنجان",
-      "paragraphs": [
-        "اقامه نماز بر پیکر شهدای گمنام در رفسنجان"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/89bcaf59d0.mp4?token=QUUxb50cHjAe4T2AxSVHviCTXqTsx17wbbdLnKytfA58waokT02QCXB4OkaNbgAwzVJOZNcczBfyj4yJhPcZXz2rdPTAfh1MrSrXdS2ANbq18_EIiX1PNzBZiXU4oaDbJh6HouuVrnfljSGRpj6MiYyykyQ3AYTselXJcqil_kGAlWAfQPh8kLlgekFIA1tSdioV3pelPNJJhrmqonDw_kBOl1jLr3S8u05IzSMwF9BzZMTRaTWBpc6HJfwht8BsIJWeQr700p6l_D1_xMkDOTAaRht_Yj0a4HynjXHvynsW2rsHpoJtisOZYvdqGeGxajQlbHGuRXNf6xxSZY1kRlKV6OqvjYjeDVV2MTTQPrCRg5P1BKXWenLLr5rl0H8yoKzob-9lC7RgAXVPCOWSXOeft8Qsi0RDU-je_4xBA3FxuX1qa5QznsLpDZtk_rULosgV31-J_gm4W31LVRxTXck_ZOUYAxHA6TFzswWqf2qhBX-TdV-abFef9MtEagkdfN5nAPfRM90vqlnDwQTB2VW9S4qoIM7mV1Zi-DjD3tMsfO_TWd1oFTNrplbhyhMDru7kOpl9btBU7Ib1YeG1J8Q1ZmHyUH0dNYMsy790-ephq5A2l7pC-ykjbV3DUMDpQDhAr5BHvSUvoGf0lhpn4wqZQ0H2C_Zg59g-Nq_vcX8"
-      },
-      "published_at": "2026-11-13T08:52:33+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "045d4b9e01df7fc6",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T10:25:57.949895+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T10:26:11.698881+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 420,
-      "sent_at": "2026-11-13T10:26:22.479590+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59328",
-      "source_post_id": "59328",
-      "title": "برنز دختران جوان فوتسالیست ایران در المپیک سنگال",
-      "excerpt": "برنز دختران جوان فوتسالیست ایران در المپیک سنگال تیم ملی فوتسال دختران جوان ایران موفق شد در المپیک سنگال ۲۰۲۶ بر سکوی سوم این رقابت‌ها بایستد و مدال برنز این مسابقات را کسب کند. الناز حسینی فوتسالیست جوان کرمانی نیز به همراه تیم ملی در این مسابقات حضور داشت.",
-      "paragraphs": [
-        "برنز دختران جوان فوتسالیست ایران در المپیک سنگال",
-        "تیم ملی فوتسال دختران جوان ایران موفق شد در المپیک سنگال ۲۰۲۶ بر سکوی سوم این رقابت‌ها بایستد و مدال برنز این مسابقات را کسب کند. الناز حسینی فوتسالیست جوان کرمانی نیز به همراه تیم ملی در این مسابقات حضور داشت."
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-13T09:00:44+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "52950ae20180a5ab",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T10:25:57.949895+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T10:26:11.698881+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 421,
-      "sent_at": "2026-11-13T10:26:23.986193+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140544",
-      "source_post_id": "140544",
-      "title": "دسته عزای ظهر شهادت حضرت زهرا(س) در کرمان",
-      "excerpt": "دسته عزای ظهر شهادت حضرت زهرا(س) در کرمان",
-      "paragraphs": [
-        "دسته عزای ظهر شهادت حضرت زهرا(س) در کرمان"
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-13T09:22:24+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "1667354b63e3ce80",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T10:25:57.949895+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T10:26:11.698881+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 422,
-      "sent_at": "2026-11-13T10:26:25.392099+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140546",
-      "source_post_id": "140546",
-      "title": "تشییع ۱۷ لاله گلگون کفن در کرمان",
-      "excerpt": "تشییع ۱۷ لاله گلگون کفن در کرمان",
-      "paragraphs": [
-        "تشییع ۱۷ لاله گلگون کفن در کرمان"
-      ],
-      "media": {
-        "kind": "video",
-        "url": null
-      },
-      "published_at": "2026-11-13T09:55:47+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "0d17eaafdbb2d981",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T10:25:57.949895+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T10:26:11.698881+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 423,
-      "sent_at": "2026-11-13T10:26:28.424922+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140548",
-      "source_post_id": "140548",
-      "title": "ادای احترام فرمانده سپاه ثارالله به شهدای خوشنام در رفسنجان",
-      "excerpt": "ادای احترام فرمانده سپاه ثارالله به شهدای خوشنام در رفسنجان",
-      "paragraphs": [
-        "ادای احترام فرمانده سپاه ثارالله به شهدای خوشنام در رفسنجان"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/7c0571d1bc.mp4?token=d_2hkMqIBvr_V3oqOKeDAaX_4_mFppIBjmm0siyVLOOEYG2U38zwh314Wa70GRTw6Nd4oi_6dKHxHxla6qIKyvldrR5f7DkZmn9z9SnOrdVMFcQknhMU_SGcZG4KwXRzM5Rig6vRcSrbpS5wru7GUSNFwcQGrAPbJT0kS2qt2akwLovFwIv1E1OLlQ9s1tDgJMheShxfV5xPg5FS8_UD1NYcxqi6zhq0HdDH5EV5w6th0PS9aRr_0yd7SFNQHshyV6Xm8ojZXr5-FcVvxT5LuHFFT_--cC_2qTjiyMqXJfmoPFWDz0omkrFYYZ2dJo8sh2XsUbbdAvQfCSzdE-f3bmLrE9lFzCtmplNQhj4AZ4R4sBsPQAMlf1XYC9sImSKOlBNQeSt49vuYibDSy80PuKVs5C7Z_vUP3YAGP3aaHXg61-tgWp8MpBdcopJJ4awypAvHF-vNlDYceAX1w40-k24F6SjbpKH3f3Gn-75T3GpOwwWU6EFc-rFYi5CFlGcR68wCb2zRMCgFLSaQC6hTYjNvxulcKrmCwir3_Al6syUIG18L0rgwxlPYNBDFVglWVobJvuSKSThtuafmt-c8CjgtfUPSOH47gr7VmHD9ucKChfak_d0Qj1FjWHCzavQMOpUVeo-H_ZXx5HtDgGFdk3FrWDJVCRGF9OiydvSD7d4"
-      },
-      "published_at": "2026-11-13T10:02:00+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "5a4067a041cf3c58",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-13T10:25:57.949895+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-13T10:26:11.698881+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 424,
-      "sent_at": "2026-11-13T10:26:55.848415+00:00"
-    },
     {
       "url": "https://t.me/irna_kerman/30378",
       "source_post_id": "30378",
@@ -10035,7 +9494,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-17T08:33:28.387045+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66449"
+        }
+      ]
     },
     {
       "url": "https://t.me/kerman_gov/10693",
@@ -10811,7 +10275,12 @@
       "geography": "kerman",
       "status": "review",
       "detected_at": "2026-11-17T08:33:28.387045+00:00",
-      "other_sources": []
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66450"
+        }
+      ]
     },
     {
       "url": "https://t.me/kermane_no/59491",
@@ -10952,18 +10421,518 @@
       "geography": "kerman",
       "status": "ready",
       "detected_at": "2026-11-17T09:12:49.259395+00:00",
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66451"
+        }
+      ]
+    },
+    {
+      "url": "https://t.me/kermane_no/59495",
+      "source_post_id": "59495",
+      "title": "تکمیل پروژه انتقال آب خلیج فارس به کرمان تا پایان آذرماه",
+      "excerpt": "تکمیل پروژه انتقال آب خلیج فارس به کرمان تا پایان آذرماه در نشست استاندار کرمان با معاون آب و آبفای وزیر نیرو، مقرر شد پروژه انتقال آب خلیج فارس به کرمان حداکثر تا پایان آذرماه آماده بهره‌برداری شود. در این نشست که با حضور معاون هماهنگی امور عمرانی استانداری و مدیرعامل شرکت آب منطقه‌ای استان برگزار شد، آخرین وضعیت پیشرفت پروژه بررسی و درباره تکمیل بخش‌های باقی‌مانده تصمیم‌گیری شد. همچنین مقرر شد تمهیدات لازم برای آغاز عملیات اجرایی پروژه انتقال آب به جنوب کرمان تا پایان سال جاری فراهم شود. محمدعلی طالبی با تأکید بر ضرورت تسریع در اجرای پروژه‌های راهبردی تأمین آب استان، خواستار هماهنگی جدی وزارت نیرو و دستگاه‌های اجرایی استان برای تحقق زمان‌بندی تعیین‌شده شد. /تسنیم",
+      "paragraphs": [
+        "تکمیل پروژه انتقال آب خلیج فارس به کرمان تا پایان آذرماه",
+        "در نشست استاندار کرمان با معاون آب و آبفای وزیر نیرو، مقرر شد پروژه انتقال آب خلیج فارس به کرمان حداکثر تا پایان آذرماه آماده بهره‌برداری شود.",
+        "در این نشست که با حضور معاون هماهنگی امور عمرانی استانداری و مدیرعامل شرکت آب منطقه‌ای استان برگزار شد، آخرین وضعیت پیشرفت پروژه بررسی و درباره تکمیل بخش‌های باقی‌مانده تصمیم‌گیری شد. همچنین مقرر شد تمهیدات لازم برای آغاز عملیات اجرایی پروژه انتقال آب به جنوب کرمان تا پایان سال جاری فراهم شود. محمدعلی طالبی با تأکید بر ضرورت تسریع در اجرای پروژه‌های راهبردی تأمین آب استان، خواستار هماهنگی جدی وزارت نیرو و دستگاه‌های اجرایی استان برای تحقق زمان‌بندی تعیین‌شده شد. /تسنیم"
+      ],
+      "media": null,
+      "published_at": "2026-11-17T09:15:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "caf517956ab6d3a3",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59497",
+      "source_post_id": "59497",
+      "title": "افزایش چشمگیر حق‌الزحمه و سرانه آموزشی نهضت سوادآموزی کرمان در سال ۱۴۰۵",
+      "excerpt": "افزایش چشمگیر حق‌الزحمه و سرانه آموزشی نهضت سوادآموزی کرمان در سال ۱۴۰۵ سرپرست معاونت سوادآموزی آموزش و پرورش استان کرمان از افزایش نرخ حق‌الزحمه آموزش‌دهندگان و سرانه آموزشی این نهاد در سال ۱۴۰۵ خبر داد. بر اساس اعلام این معاونت، نرخ ساعتی حق‌الزحمه در دوره تحکیم از ۶۶۰ هزار ریال به یک میلیون و ۴۶۰ هزار ریال و در دوره‌های انتقال و سوادآموزی به یک میلیون و ۴۰ هزار ریال افزایش یافته است. همچنین تمهیدات لازم برای ثبت‌نام و آموزش بیش از ۲۹۱۱ سوادآموز ایرانی و اتباع در سال جاری فراهم شده و حجم فعالیت‌های سوادآموزی استان نسبت به سال گذشته رشد داشته است. رفع چالش‌های مالی، تسریع در انعقاد قراردادها و نظارت بر عملکرد مؤسسات مجری نیز در دستور کار قرار گرفته است.",
+      "paragraphs": [
+        "افزایش چشمگیر حق‌الزحمه و سرانه آموزشی نهضت سوادآموزی کرمان در سال ۱۴۰۵",
+        "سرپرست معاونت سوادآموزی آموزش و پرورش استان کرمان از افزایش نرخ حق‌الزحمه آموزش‌دهندگان و سرانه آموزشی این نهاد در سال ۱۴۰۵ خبر داد.",
+        "بر اساس اعلام این معاونت، نرخ ساعتی حق‌الزحمه در دوره تحکیم از ۶۶۰ هزار ریال به یک میلیون و ۴۶۰ هزار ریال و در دوره‌های انتقال و سوادآموزی به یک میلیون و ۴۰ هزار ریال افزایش یافته است. همچنین تمهیدات لازم برای ثبت‌نام و آموزش بیش از ۲۹۱۱ سوادآموز ایرانی و اتباع در سال جاری فراهم شده و حجم فعالیت‌های سوادآموزی استان نسبت به سال گذشته رشد داشته است. رفع چالش‌های مالی، تسریع در انعقاد قراردادها و نظارت بر عملکرد مؤسسات مجری نیز در دستور کار قرار گرفته است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/U4mr7lGm1MrKSoq90NKfRJeRJmolcHrYqX2dS_pKqVfr2_yw0dNoWuH_BnitKgVUsyKlXP6K2UKimKlIKdefFCiEbYYM4RrvUGBk_-bf2VDZ8vbwYyz5YdlP-S_FIQWPkVjCCdwQbWQlNaZgyEcfEf2_mBgFXKyO_JjJIUDGLjs1YsPkqJm8sv8CAY-fdrczr1WCVNQlBANNBgcqdUMs_FUmwLcu4vEaMFKoIi9NlZKlFV56R7gJyTY_5X5NQ6BwwFeu8LYfTtPZPhWqvR7iTH4mIImaNmDClq4d8oPLAG7RZFB6bEmG6lcdi2dmn_PqlK7388iSrwB9Wr9HjtBSdQ.jpg"
+      },
+      "published_at": "2026-11-17T09:47:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "1dd722a0dd66a090",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10698",
+      "source_post_id": "10698",
+      "title": "ارتباط مستقیم با مدیرکل میراث فرهنگی، گردشگری و صنایع دستی استان کرمان از طریق شماره تلفن ۱۱۱",
+      "excerpt": "ارتباط مستقیم با مدیرکل میراث فرهنگی، گردشگری و صنایع دستی استان کرمان از طریق شماره تلفن ۱۱۱ چهارشنبه 27 آبان ماه ساعت 8 صبح",
+      "paragraphs": [
+        "ارتباط مستقیم با مدیرکل میراث فرهنگی، گردشگری و صنایع دستی استان کرمان از طریق شماره تلفن ۱۱۱",
+        "چهارشنبه 27 آبان ماه",
+        "ساعت 8 صبح"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/ryqt6ykOEbgHGKzMAY-xO2ZW03yapTvBChFG5U_cMufHpEj-fOFjAfl7-MjnNieb6pkVSYDFYdaO47HOa7aGJ3LEpk0cEgxm0ltgAZqjVRoFOjGTIPtCEsSHb5s1REI5IfxX5XH4jN1Ql22GVY4AkCOns1zmuldTsI99eiVOiLOyEasL3mxQ7HdHyTBvwDI3Mj0aF8DOdogqQMcZyGX9jyEcXDZkTn5cSp1Q2V8EH0dpuFHfRkvIABCpw_gaCMnnysNFBog9LIknJye_PL3efvYk2x-xT7FRUdM2cHj7gG4fy98C4hDpb8rCjvxp_xmH6pfpUfhpsYw13vAeNR2pUg.jpg"
+      },
+      "published_at": "2026-11-17T09:47:21+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "b30dd854bcadb20a",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10699",
+      "source_post_id": "10699",
+      "title": "ارتباط مستقیم با مدیرکل بهزیستی استان کرمان از طریق شماره تلفن ۱۱۱",
+      "excerpt": "ارتباط مستقیم با مدیرکل بهزیستی استان کرمان از طریق شماره تلفن ۱۱۱ چهارشنبه 27 آبان ماه ساعت 10 صبح",
+      "paragraphs": [
+        "ارتباط مستقیم با مدیرکل بهزیستی استان کرمان از طریق شماره تلفن ۱۱۱",
+        "چهارشنبه 27 آبان ماه",
+        "ساعت 10 صبح"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/oyOpCdN03yluRrrogvE8DXRsr5k5fZVVhc2aARBm-BPBTh9HfFxZY33mLwgRf01r53_aixXwaeyaabZDys2iWvx03SLhLutob_t67IPPIYF-C4CthohsBCfXvYEPYwKRJaMjSpvhkvE60R7WYC9YlNzXSmblLVfLUP-zgmzr5oOEl6vKug0_yNMfiytJAVW4VS4oNQ7jWYwpez78gOtKzAA3OB0BD_KEXOfZt6Z1yv2FxRkCkyOiIjLyXf_IdoyZ68zGFKGtsYQN2F1vwMDFwAxABmBT70pdZmvMyPHVoCvC_TgUMhfzVa78F29fDfPJ3emFcExxCu03LTNgbdzfiw.jpg"
+      },
+      "published_at": "2026-11-17T09:48:01+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "8d1c133d1708e3ab",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30410",
+      "source_post_id": "30410",
+      "title": "اختصاص تسهیلات ۲۰۰ میلیون تومانی برای اشتغال هر مددجوی زندانی در جیرفت+ فیلم",
+      "excerpt": "اختصاص تسهیلات ۲۰۰ میلیون تومانی برای اشتغال هر مددجوی زندانی در جیرفت+ فیلم جیرفت ـ ایرنا ـ رئیس دادگستری جیرفت از اختصاص تسهیلات قرض‌الحسنه۲۰۰ میلیون تومانی به‌ازای اشتغال هر مددجو با همکاری بنیاد تعاون زندانیان استان کرمان خبر داد. irna_kerman",
+      "paragraphs": [
+        "اختصاص تسهیلات ۲۰۰ میلیون تومانی برای اشتغال هر مددجوی زندانی در جیرفت+ فیلم",
+        "جیرفت ـ ایرنا ـ رئیس دادگستری جیرفت از اختصاص تسهیلات قرض‌الحسنه۲۰۰ میلیون تومانی به‌ازای اشتغال هر مددجو با همکاری بنیاد تعاون زندانیان استان کرمان خبر داد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/lWyqPxlEXrWWUFt0XULwCm0HtHaI8YQX_kwF9BR6d0dNdeG1Tq1iBdniPwkqbKbr5H714gYKSJ2T4v1GSjCJWu8aMSGOqnUT_m4_kPbWPmC6e01B8P-vmR4zXG9LX4Mg8j_buQD1Gk37b4UlUqWDkE56ckC53oLCwe-k3Z5nLQF97nfp4PcNEVmSCr1KBHwrUgAjIARCZZZAt3n7xu_GCr1PyLwU0uvflDLT4lkj3kA39jHlSGoEb52DaF3uCLo1RYOqV3OoxKGaEqdRvw4Q3V-nFU2UilzJRRpW0s9FrH8lX6UX3_cYGsHhMAN98K4lKoyYw0isxCr-YcBoq4HCHg.jpg"
+      },
+      "published_at": "2026-11-17T10:08:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "1be0df797415f83a",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59501",
+      "source_post_id": "59501",
+      "title": "کشف۱۵۰ کیلوگرم پسته مسروقه در رفسنجان",
+      "excerpt": "کشف۱۵۰ کیلوگرم پسته مسروقه در رفسنجان پلیس رفسنجان از دستگیری چند متهم به سرقت مغازه و کشف۱۵۰ کیلوگرم پسته مسروقه از خودروی آنان خبر داد. به گفته پلیس، مأموران کلانتری رفسنجان در بازرسی از خودرو، علاوه بر پسته‌ها، تعدادی ابزار و ادوات سرقت نیز کشف کردند. متهمان به سرقت اعتراف و به مرجع قضایی معرفی شدند.",
+      "paragraphs": [
+        "کشف۱۵۰ کیلوگرم پسته مسروقه در رفسنجان",
+        "پلیس رفسنجان از دستگیری چند متهم به سرقت مغازه و کشف۱۵۰ کیلوگرم پسته مسروقه از خودروی آنان خبر داد.",
+        "به گفته پلیس، مأموران کلانتری رفسنجان در بازرسی از خودرو، علاوه بر پسته‌ها، تعدادی ابزار و ادوات سرقت نیز کشف کردند. متهمان به سرقت اعتراف و به مرجع قضایی معرفی شدند."
+      ],
+      "media": null,
+      "published_at": "2026-11-17T10:34:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "e4683b02acdb841b",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59502",
+      "source_post_id": "59502",
+      "title": "بررسی راهکارهای توسعه تجارت خارجی کرمان در نشست استاندار و نمایندگان مجلس",
+      "excerpt": "بررسی راهکارهای توسعه تجارت خارجی کرمان در نشست استاندار و نمایندگان مجلس استاندار کرمان و اعضای مجمع نمایندگان استان در مجلس، راهکارهای گسترش تجارت خارجی و بهره‌گیری از ظرفیت‌های بین‌المللی برای توسعه اقتصادی را بررسی کردند. در این نشست، مسائل شهرستان‌ها و حوزه‌های انتخابیه نیز مطرح شد. حاضران بر فعال‌تر شدن اتاق بازرگانی و تشکل‌های اقتصادی و شناسایی مزیت‌های مناطق مختلف استان برای توسعه صادرات، جذب سرمایه‌گذاری و گسترش مبادلات با کشورهای هدف تأکید کردند.",
+      "paragraphs": [
+        "بررسی راهکارهای توسعه تجارت خارجی کرمان در نشست استاندار و نمایندگان مجلس",
+        "استاندار کرمان و اعضای مجمع نمایندگان استان در مجلس، راهکارهای گسترش تجارت خارجی و بهره‌گیری از ظرفیت‌های بین‌المللی برای توسعه اقتصادی را بررسی کردند.",
+        "در این نشست، مسائل شهرستان‌ها و حوزه‌های انتخابیه نیز مطرح شد. حاضران بر فعال‌تر شدن اتاق بازرگانی و تشکل‌های اقتصادی و شناسایی مزیت‌های مناطق مختلف استان برای توسعه صادرات، جذب سرمایه‌گذاری و گسترش مبادلات با کشورهای هدف تأکید کردند."
+      ],
+      "media": null,
+      "published_at": "2026-11-17T10:47:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "a5e5634caafd48c7",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59504",
+      "source_post_id": "59504",
+      "title": "به گزارش کرمان نو؛شرکت گاز استان کرمان از ممنوعیت استفاده از وسایل گرمایشی در ادارات تا ابتدای دی‌ماه خبر داد و ۲۰۰ اکیپ نظارتی را برای بازرسی از اصناف و دستگاه‌ها اعزام کرد.",
+      "excerpt": "به گزارش کرمان نو؛شرکت گاز استان کرمان از ممنوعیت استفاده از وسایل گرمایشی در ادارات تا ابتدای دی‌ماه خبر داد و ۲۰۰ اکیپ نظارتی را برای بازرسی از اصناف و دستگاه‌ها اعزام کرد. این طرح با هدف مدیریت مصرف انرژی و جلوگیری از بحران در فصل سرما اجرا می‌شود. مأموران بر واحدهای تجاری، صنفی و اداری نظارت دارند و در صورت تکرار تخلف و بی‌توجهی به تذکرها، اشتراک گاز واحدهای متخلف قطع خواهد شد.",
+      "paragraphs": [
+        "به گزارش کرمان نو؛شرکت گاز استان کرمان از ممنوعیت استفاده از وسایل گرمایشی در ادارات تا ابتدای دی‌ماه خبر داد و ۲۰۰ اکیپ نظارتی را برای بازرسی از اصناف و دستگاه‌ها اعزام کرد.",
+        "این طرح با هدف مدیریت مصرف انرژی و جلوگیری از بحران در فصل سرما اجرا می‌شود. مأموران بر واحدهای تجاری، صنفی و اداری نظارت دارند و در صورت تکرار تخلف و بی‌توجهی به تذکرها، اشتراک گاز واحدهای متخلف قطع خواهد شد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/K52VDpVsbshPt7WDvE6V-IGwgs8FG1nhgxytDIArhI4tZX0fBcmc-XQF68Fxu2IMKyhqHdbj52Ddo0gygipXoGBVbgoMyWOFs5E3wvyT4A7YcvF9nrV4IkzA0-d64czFyvuHeSzPh0_tRGIMp0ohaRRPx3o4Szn04IhdL_mB2pdIKzttvHg6SIcP4joTBNiTKcGQPsZEqAiKdVCvDqx4gfpP4luFRTbzf4QSGlA_jXw0xukKsjR9AM3spvDCpz68MLmN6GfZtzjDD-rutXT_JSLWJ8fkws9lci1DfgbQC3AVWjn9B1QwGAeXNYWSOqL_pWEFOJCmiIibh6hdonC_Sw.jpg"
+      },
+      "published_at": "2026-11-17T11:06:32+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "f97fef2f51c6cbc5",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59505",
+      "source_post_id": "59505",
+      "title": "هشدار متخصص رفسنجانی درباره پیامدهای زایمان زودرس و سزارین غیرضروری",
+      "excerpt": "هشدار متخصص رفسنجانی درباره پیامدهای زایمان زودرس و سزارین غیرضروری عضو هیئت علمی دانشگاه علوم پزشکی رفسنجان با اشاره به پیامدهای اقتصادی و روانی تولد نوزاد نارس، بر پرهیز از سزارین‌های غیرضروری و زایمان‌های برنامه‌ریزی‌شده در بارداری طبیعی تأکید کرد. آزیتا منشوری گفت نوزادان نارس ممکن است به بستری طولانی در بخش مراقبت‌های ویژه نیاز داشته باشند؛ موضوعی که هزینه خانواده را افزایش می‌دهد، مادر و نوزاد را از هم جدا می‌کند و خطر عفونت بیمارستانی و عوارض پایدار را به همراه دارد. او از متخصصان خواست زمان پایان بارداری را بر پایه ضرورت‌های علمی تعیین کنند.",
+      "paragraphs": [
+        "هشدار متخصص رفسنجانی درباره پیامدهای زایمان زودرس و سزارین غیرضروری",
+        "عضو هیئت علمی دانشگاه علوم پزشکی رفسنجان با اشاره به پیامدهای اقتصادی و روانی تولد نوزاد نارس، بر پرهیز از سزارین‌های غیرضروری و زایمان‌های برنامه‌ریزی‌شده در بارداری طبیعی تأکید کرد.",
+        "آزیتا منشوری گفت نوزادان نارس ممکن است به بستری طولانی در بخش مراقبت‌های ویژه نیاز داشته باشند؛ موضوعی که هزینه خانواده را افزایش می‌دهد، مادر و نوزاد را از هم جدا می‌کند و خطر عفونت بیمارستانی و عوارض پایدار را به همراه دارد. او از متخصصان خواست زمان پایان بارداری را بر پایه ضرورت‌های علمی تعیین کنند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/s81StAN4UYNOUJz44KXjDTA02Odz5xq7gZcqo75ytSrTAmsDPSzg56_YZ8tcpT8dacjQbzyBvVmDSFzkGrAUsAYP6-JFNO_lrgsw5FKKuMFlqgwEigMA-ijjz2F5EuFGnIJRLlR1fZqY4BtkUtqiX9b56BoIU_L6FpzxcngczRDK_SdSP-_jZj644ylwy0pY3uusMm7X_X5Su2NX6urttC0S3wXBAosqFRQyDJ2OJAwfNXu_SLlUUJcdkv-I24jTMS-xwdIbQBmgMi2UDxoCc8YPxKa44lNtfwNj9OnVSIhdFOlp4-KTh7gcQO9AMWiF9eKDV-Ki2QvZffttyyYzzQ.jpg"
+      },
+      "published_at": "2026-11-17T11:15:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "9b641192463c5654",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59506",
+      "source_post_id": "59506",
+      "title": "پرداخت تسهیلات ۲۰۰ میلیون تومانی اشتغال‌زایی به زندانیان جیرفت",
+      "excerpt": "پرداخت تسهیلات ۲۰۰ میلیون تومانی اشتغال‌زایی به زندانیان جیرفت رئیس دادگستری جیرفت از اختصاص تسهیلات قرض‌الحسنه ۲۰۰ میلیون تومانی به‌ازای اشتغال هر مددجو توسط بنیاد تعاون زندانیان استان کرمان خبر داد. این تسهیلات با هدف توانمندسازی زندانیان، حمایت از خانواده‌های آنان، کاهش آسیب‌های اجتماعی و فراهم‌سازی زمینه بازگشت مؤثر به جامعه پرداخت می‌شود. از کارآفرینان و فعالان اقتصادی دعوت شده است برای بهره‌مندی از این حمایت‌ها به اداره زندان جیرفت یا مرکز بنیاد تعاون زندانیان استان مراجعه کنند.",
+      "paragraphs": [
+        "پرداخت تسهیلات ۲۰۰ میلیون تومانی اشتغال‌زایی به زندانیان جیرفت",
+        "رئیس دادگستری جیرفت از اختصاص تسهیلات قرض‌الحسنه ۲۰۰ میلیون تومانی به‌ازای اشتغال هر مددجو توسط بنیاد تعاون زندانیان استان کرمان خبر داد.",
+        "این تسهیلات با هدف توانمندسازی زندانیان، حمایت از خانواده‌های آنان، کاهش آسیب‌های اجتماعی و فراهم‌سازی زمینه بازگشت مؤثر به جامعه پرداخت می‌شود. از کارآفرینان و فعالان اقتصادی دعوت شده است برای بهره‌مندی از این حمایت‌ها به اداره زندان جیرفت یا مرکز بنیاد تعاون زندانیان استان مراجعه کنند."
+      ],
+      "media": null,
+      "published_at": "2026-11-17T11:30:16+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "d6bb9b70036e29c2",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59507",
+      "source_post_id": "59507",
+      "title": "استفاده از ظرفیت سران طوایف برای آزادی زندانیان و صلح و سازش در کرمان",
+      "excerpt": "استفاده از ظرفیت سران طوایف برای آزادی زندانیان و صلح و سازش در کرمان دادستان عمومی و انقلاب مرکز استان کرمان از برنامه‌ریزی برای حل‌وفصل پرونده‌ها و آزادی شماری از زندانیان با همراهی سران طوایف تا هفته مقاومت خبر داد. مهدی بخشی در نشست وبیناری با سران طوایف جنوب و شرق استان، نقش بزرگان محلی را در برقراری امنیت، رهایی گروگان‌ها و حل اختلافات مؤثر خواند و تأکید کرد که از این ظرفیت برای کاهش آسیب‌های اجتماعی و گسترش فرهنگ صلح و سازش بهره گرفته می‌شود.",
+      "paragraphs": [
+        "استفاده از ظرفیت سران طوایف برای آزادی زندانیان و صلح و سازش در کرمان",
+        "دادستان عمومی و انقلاب مرکز استان کرمان از برنامه‌ریزی برای حل‌وفصل پرونده‌ها و آزادی شماری از زندانیان با همراهی سران طوایف تا هفته مقاومت خبر داد.",
+        "مهدی بخشی در نشست وبیناری با سران طوایف جنوب و شرق استان، نقش بزرگان محلی را در برقراری امنیت، رهایی گروگان‌ها و حل اختلافات مؤثر خواند و تأکید کرد که از این ظرفیت برای کاهش آسیب‌های اجتماعی و گسترش فرهنگ صلح و سازش بهره گرفته می‌شود."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/LH9GmbLNr3_tUXt8eZfH7ZNeN6PSlTv7XMw1s5FbKmh4tz7RNdj-b-27ouM8J76qbUntGodoVCEyRmuEJTf85OO_XjNRg7b3sqDgTGd2blLeqBln6hmTbW5Uf8E70AuNN5pgjlTeBN1fyA44i5MCRQrMrPd5GXtqHTEIFUlPPs6lRWam7YaNeU6Q_UIlVeOKPQKG2nPlSiXBWM3F90aE-WfYdO-_udTh_05aW3MfylR1R_-u4FoTo1CRANzpzuzBnXyoiOXS2C9W572N0KOr91tQVa7lzzAI1lKQJCs2WXBMMORlOTfI8LmbM6aVbf94xxH3bP1Q9kkKdsT4e_O82A.jpg"
+      },
+      "published_at": "2026-11-17T11:46:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "e9a9ecd3ecf0473b",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140753",
+      "source_post_id": "140753",
+      "title": "سیلابی که روستای جلگه بم را ویران کرد؛ ۱۰ سال بلاتکلیفی برای احیا",
+      "excerpt": "سیلابی که روستای جلگه بم را ویران کرد؛ ۱۰ سال بلاتکلیفی برای احیا در اسفندماه ۱۳۹۵، بارندگی‌های شدید و سرریز شدن سد نساء در شهرستان بم، سیلابی سنگین را به سمت روستای جلگه و روستاهای پایین‌دست روانه کرد. این حادثه منجر به ویرانی خانه‌ها و آواره شدن خانواده‌ها شد. اکنون، پس از گذشت ده سال، اهالی همچنان در انتظار کمک مسؤولان هستند تا بتوانند به زندگی عادی خود بازگردند.",
+      "paragraphs": [
+        "سیلابی که روستای جلگه بم را ویران کرد؛ ۱۰ سال بلاتکلیفی برای احیا",
+        "در اسفندماه ۱۳۹۵، بارندگی‌های شدید و سرریز شدن سد نساء در شهرستان بم، سیلابی سنگین را به سمت روستای جلگه و روستاهای پایین‌دست روانه کرد. این حادثه منجر به ویرانی خانه‌ها و آواره شدن خانواده‌ها شد. اکنون، پس از گذشت ده سال، اهالی همچنان در انتظار کمک مسؤولان هستند تا بتوانند به زندگی عادی خود بازگردند."
+      ],
+      "media": null,
+      "published_at": "2026-11-17T12:24:08+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "a7d3b56b1bc8cae3",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30412",
+      "source_post_id": "30412",
+      "title": "هشدار محدودیت تأمین گاز در شرق کرمان؛ ۹ شهر در معرض افت فشار یا قطعی قرار گرفت",
+      "excerpt": "هشدار محدودیت تأمین گاز در شرق کرمان؛ ۹ شهر در معرض افت فشار یا قطعی قرار گرفت مدیر شرکت پخش فرآورده‌های نفتی منطقه کرمان با اشاره به محدودیت‌های شبکه گاز کشور، نسبت به احتمال زیاد افت فشار یا قطع کامل گاز در ۹ شهر شرق این استان هشدار داد. irna_kerman",
+      "paragraphs": [
+        "هشدار محدودیت تأمین گاز در شرق کرمان؛ ۹ شهر در معرض افت فشار یا قطعی قرار گرفت",
+        "مدیر شرکت پخش فرآورده‌های نفتی منطقه کرمان با اشاره به محدودیت‌های شبکه گاز کشور، نسبت به احتمال زیاد افت فشار یا قطع کامل گاز در ۹ شهر شرق این استان هشدار داد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/BYsNdkPdXpUYJEFdXOJG-mLfkV4Uu2nckHspLrKqfVOjmw4Wj1POLbcro8AXS59XzWDjCT8nHoJKybOf1ahuSLdJiH9DIHn-aEmS7LXy-T_VUIf2s8xsmAiXAs5v_zse0qB60pJqUmSqa-eOD7Yg600SwpYM7fJmFQm8IfbWLZSsI2oXe6bZ8qwMfS4Lx7G0ska6jNCAYhnOAmeeTeEtGNgtV3HRdqFHJmmfUkMbemxK2nNZwoX813LqRS5hx11ZrTF1gogSb29zVtZkX6m7pm2tfVlUEHBP3x1gufBB5nqGCd3lbCm9qMto1tSkRHC_l3CM4ieyI9gAJb57HQji5A.jpg"
+      },
+      "published_at": "2026-11-17T12:32:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "05eb454b80dfae9c",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59510",
+      "source_post_id": "59510",
+      "title": "به گزارش کرمان نو؛صادرات انواع پیاز، سیب‌زمینی و گوجه‌فرنگی به دلیل افزایش نامتعارف قیمت در بازار داخلی، تا اطلاع ثانوی به صورت مطلق ممنوع اعلام شد.",
+      "excerpt": "به گزارش کرمان نو؛صادرات انواع پیاز، سیب‌زمینی و گوجه‌فرنگی به دلیل افزایش نامتعارف قیمت در بازار داخلی، تا اطلاع ثانوی به صورت مطلق ممنوع اعلام شد. بر اساس نامه رسمی معاونت توسعه بازرگانی، این تصمیم پس از دریافت گزارش‌هایی درباره صادرات غیرمجاز و جاسازی این محصولات در لایه زیرین سایر اقلام مجاز در کامیون‌های ترانزیتی به کشورهای همسایه اتخاذ شده است. بر همین اساس، مسئولان گمرک و سازمان توسعه تجارت ملزم به جلوگیری صددرصدی از صادرات این اقلام شده‌اند.",
+      "paragraphs": [
+        "به گزارش کرمان نو؛صادرات انواع پیاز، سیب‌زمینی و گوجه‌فرنگی به دلیل افزایش نامتعارف قیمت در بازار داخلی، تا اطلاع ثانوی به صورت مطلق ممنوع اعلام شد.",
+        "بر اساس نامه رسمی معاونت توسعه بازرگانی، این تصمیم پس از دریافت گزارش‌هایی درباره صادرات غیرمجاز و جاسازی این محصولات در لایه زیرین سایر اقلام مجاز در کامیون‌های ترانزیتی به کشورهای همسایه اتخاذ شده است. بر همین اساس، مسئولان گمرک و سازمان توسعه تجارت ملزم به جلوگیری صددرصدی از صادرات این اقلام شده‌اند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/LDMAM62PfsWDpoA5VnDbKKGQcGSNdVFba0vpunB4iUG8k5YqG5zBRYySKe0GfEE1_hSpVe6H79a1tFRk6_swHXnUglK3CXf9CXfXC5pL3UoX1jnBLaonRSXu8XXtR5rlaR-FgnT62F91kOYiW9AtYma2RZ3QPFaxOYvqhjlxjIxu-qw8meV8mmmliQJWPockGBcB4f2SVEsc-uySaxNtvf50N5cIfWLbT3agS4GQyGwuPWDGaFO1PODK3j03FWCABftJ6aU3Ko3zL_jff5XoDZ_Kqu5D8lNvMoXr6FOo_uyVh8DeJH2AwiIldsFtRWl7fIfvuIDdXinlDKpg54515A.jpg"
+      },
+      "published_at": "2026-11-17T12:33:02+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "d29dcb2cbf3fa4d8",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30413",
+      "source_post_id": "30413",
+      "title": "محیط‌بانِ متهم به شکار غیرمجاز در جوپار کرمان دستگیر شد",
+      "excerpt": "محیط‌بانِ متهم به شکار غیرمجاز در جوپار کرمان دستگیر شد فرمانده یگان حفاظت محیط زیست کشور گفت: فردی با سابقه محیط‌بانی به اتهام شکار غیرمجاز در منطقه حفاظت‌شده جوپار استان کرمان دستگیر شد اما این فرد در زمان وقوع تخلف در مرخصی تحصیلی بوده و هیچ ارتباط اداری و کاری فعالی با سازمان حفاظت محیط زیست نداشته است. irna_kerman",
+      "paragraphs": [
+        "محیط‌بانِ متهم به شکار غیرمجاز در جوپار کرمان دستگیر شد",
+        "فرمانده یگان حفاظت محیط زیست کشور گفت: فردی با سابقه محیط‌بانی به اتهام شکار غیرمجاز در منطقه حفاظت‌شده جوپار استان کرمان دستگیر شد اما این فرد در زمان وقوع تخلف در مرخصی تحصیلی بوده و هیچ ارتباط اداری و کاری فعالی با سازمان حفاظت محیط زیست نداشته است.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/hv1IZKKdJHw9-HAiNLgUqfDjfGaOnkvRBN56BvxB01SWnYXFN33eFIbWmFeSicf_J3j9ZsRVK5wwLP-44TBT7pIEyYSHUSHsp2eQdfUAF1jVykmXDlFtYY4u7y1-o-vPZY0_kz3nnD3wnGN2L2OX-Tbwqao15Vq9WsIiUclKCh2SWRrgd5K7hEmiU5XcWmmknGPoebIn5peoummse8PkkDUdpKMWbAlLzVwFYcDL81vwAx04nRM5KcdKc2eQM00wmkJ7Twu4AQ4CNroXkkI3GVOYNg_Lpl-qIFKnrcHrK3VwqTi5v1-ESyZfflkhRNQbl0gJddg4cYxO5A469bGaGQ.jpg"
+      },
+      "published_at": "2026-11-17T12:33:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "31c63d743697e78a",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140754",
+      "source_post_id": "140754",
+      "title": "محیط‌بانِ متهم به شکار غیرمجاز در جوپار کرمان دستگیر شد",
+      "excerpt": "محیط‌بانِ متهم به شکار غیرمجاز در جوپار کرمان دستگیر شد فرمانده یگان حفاظت محیط زیست کشور فردی با سابقه محیط‌بانی به اتهام شکار غیرمجاز در منطقه حفاظت‌شده جوپار استان کرمان دستگیر شد اما این فرد در زمان وقوع تخلف در مرخصی تحصیلی بوده و هیچ ارتباط اداری و کاری فعالی با سازمان حفاظت محیط زیست نداشته است.",
+      "paragraphs": [
+        "محیط‌بانِ متهم به شکار غیرمجاز در جوپار کرمان دستگیر شد",
+        "فرمانده یگان حفاظت محیط زیست کشور",
+        "فردی با سابقه محیط‌بانی به اتهام شکار غیرمجاز در منطقه حفاظت‌شده جوپار استان کرمان دستگیر شد اما این فرد در زمان وقوع تخلف در مرخصی تحصیلی بوده و هیچ ارتباط اداری و کاری فعالی با سازمان حفاظت محیط زیست نداشته است."
+      ],
+      "media": null,
+      "published_at": "2026-11-17T12:47:46+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "5ec578bf697b688b",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30414",
+      "source_post_id": "30414",
+      "title": "باغ تاریخی بیرم‌آباد کرمان با حضور استاندار افتتاح شد",
+      "excerpt": "باغ تاریخی بیرم‌آباد کرمان با حضور استاندار افتتاح شد باغ تاریخی بیرم‌آباد کرمان با حضور محمدعلی طالبی، استاندار کرمان و معاون وزیر صمت پس از سال‌ها انتظار و طی مراحل مرمت و ساماندهی امروز سه‌شنبه، افتتاح شد تا یکی از کهن‌ترین باغ‌های تاریخی این شهر بار دیگر در مسیر بهره‌مندی شهروندان و گردشگران قرار گیرد. irna_kerman",
+      "paragraphs": [
+        "باغ تاریخی بیرم‌آباد کرمان با حضور استاندار افتتاح شد",
+        "باغ تاریخی بیرم‌آباد کرمان با حضور محمدعلی طالبی، استاندار کرمان و معاون وزیر صمت پس از سال‌ها انتظار و طی مراحل مرمت و ساماندهی امروز سه‌شنبه، افتتاح شد تا یکی از کهن‌ترین باغ‌های تاریخی این شهر بار دیگر در مسیر بهره‌مندی شهروندان و گردشگران قرار گیرد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/jQ8ustUrY2TnQigzCXpaSfNEQ4-KuaOOFfwh8GZue5xDvDs5uja5jUYQpD4bgOp8F14i67sUI-BAJJCuwGBLDQw_RDyJcFVtGrxDHYucbaVS-VnZaLXi-9qXtut5W7fueBkSY8fs2ekZ7Edp_H_chZ8qSmzQhdOHabjm5kHfLxKQO1k5ahN2pbM_SwpGKzSX9Zb5Bv-ACWuvGiS9yi1r-p5Wq4Tva0TdervSjOIJAEjUE3_-GdXAVnFiP5niocohnORlgb6yPG4EgkjRH_y2Z9bf3OiKKHwh5yrR4bgevsdkWE7eeuAJFg3oRMK7phAfWGt95KRPkg05BthsV4duRA.jpg"
+      },
+      "published_at": "2026-11-17T13:03:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "2b3cf717a8295046",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_gov/10700",
+      "source_post_id": "10700",
+      "title": "شوراهای حل اختلاف یکی از موفق‌ترین جلوه‌های مشارکت مردم در امور هستند",
+      "excerpt": "شوراهای حل اختلاف یکی از موفق‌ترین جلوه‌های مشارکت مردم در امور هستند استاندار کرمان گفت: یکی از موفق‌ترین جلوه‌های مشارکت مردم در امور در قالب شوراهای حل اختلاف رقم خورد. به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی در همایش صلح پایدار با حضور معاون قوه قضاییه شبکه‌ای از نخبگان جامعه در کنار دستگاه قضایی، بار عظیمی از مسئولیت رسیدگی به اختلافات و برقراری صلح و سازش را بر عهده گرفتند که کارنامه درخشانی از فعالیت‌های خود بر جا گذاشتند. در استان کرمان به دلیل تنوع قومی، پراکندگی زیاد، گستردگی و همچنین تنوع موضوعاتی که می‌تواند مبنای برخی اختلافات و تشکیل پرونده‌های قضایی شود، اهمیت و جایگاه این شوراها بسیار مهم و قابل توجه است.",
+      "paragraphs": [
+        "شوراهای حل اختلاف یکی از موفق‌ترین جلوه‌های مشارکت مردم در امور هستند",
+        "استاندار کرمان گفت: یکی از موفق‌ترین جلوه‌های مشارکت مردم در امور در قالب شوراهای حل اختلاف رقم خورد.",
+        "به گزارش روابط عمومی استانداری کرمان، دکتر محمدعلی طالبی در همایش صلح پایدار با حضور معاون قوه قضاییه",
+        "شبکه‌ای از نخبگان جامعه در کنار دستگاه قضایی، بار عظیمی از مسئولیت رسیدگی به اختلافات و برقراری صلح و سازش را بر عهده گرفتند که کارنامه درخشانی از فعالیت‌های خود بر جا گذاشتند.",
+        "در استان کرمان به دلیل تنوع قومی، پراکندگی زیاد، گستردگی و همچنین تنوع موضوعاتی که می‌تواند مبنای برخی اختلافات و تشکیل پرونده‌های قضایی شود، اهمیت و جایگاه این شوراها بسیار مهم و قابل توجه است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/dk73LQRg4LVQWOuj8PYMVsN_V3vCZWst4cLv26EsknEucvixcZ8olMYMGPva_ELSDS97ZdWmXVf5iXyn_vKpM6lfMUgDXqMgi5F9CbgB3xviJFHmDdPTQsik6JuOlRx4OZ92ujo75_8XAUDAG78fQSH1i_l8USNEDPOQAco38p7h0knA6B0hUuBTpMWcgIE87Tl87z1VelfTRSGNxejdhjHJy_09VF2qndk9oGIQ8dFKz5xFlv2GZQr903LVdNfW5A5otc4QKaXFLrwfCcc0lTKmsunaur8LsEtZTa-x6-Hgayk_GHePAYqY2YC5RrufqilUh7svHEjvX7GeDysMlA.jpg"
+      },
+      "published_at": "2026-11-17T13:44:48+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "3ae919ce7f14e867",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/140757",
+      "source_post_id": "140757",
+      "title": "لاله‌زار سومین منطقه سرد کشور شد؛ جوی آرام تا پایان هفته در کرمان",
+      "excerpt": "لاله‌زار سومین منطقه سرد کشور شد؛ جوی آرام تا پایان هفته در کرمان حبیبی، رئیس مرکز پیش‌بینی اداره کل هواشناسی استان کرمان تا پایان هفته جوی نسبتاً پایدار و آرام در بیشتر مناطق استان پیش‌بینی می‌شود و در برخی ساعات افزایش ابر و وزش باد دور از انتظار نیست. روزهای پنجشنبه و جمعه در برخی مناطق جنوب و شرق استان وزش باد نسبتاً شدید پیش‌بینی می‌شود که در مناطق مستعد می‌تواند موجب خیزش گردوخاک و کاهش کیفیت هوا شود. وضعیت دمایی استان در ۲۴ ساعت گذشته تا صبح امروز ۲۵ آبان‌ماه، شهر کرمان با ثبت حداقل دمای ۱.۲ درجه سانتی‌گراد، پس از شهرکرد و یاسوج یکی از سردترین صبح‌ها را در میان مراکز استان‌های کشور تجربه کرد. ایستگاه هواشناسی لاله‌زار با ثبت حداقل دمای منفی ۴ درجه سانتی‌گراد، پس از دشت نمدان با منفی ۵.۳ و توچال با منفی ۴.۸ درجه سانتی‌گراد، سومین ایستگاه سرد کشور در صبح امروز بود.",
+      "paragraphs": [
+        "لاله‌زار سومین منطقه سرد کشور شد؛ جوی آرام تا پایان هفته در کرمان",
+        "حبیبی، رئیس مرکز پیش‌بینی اداره کل هواشناسی استان کرمان",
+        "تا پایان هفته جوی نسبتاً پایدار و آرام در بیشتر مناطق استان پیش‌بینی می‌شود و در برخی ساعات افزایش ابر و وزش باد دور از انتظار نیست.",
+        "روزهای پنجشنبه و جمعه در برخی مناطق جنوب و شرق استان وزش باد نسبتاً شدید پیش‌بینی می‌شود که در مناطق مستعد می‌تواند موجب خیزش گردوخاک و کاهش کیفیت هوا شود.",
+        "وضعیت دمایی استان در ۲۴ ساعت گذشته تا صبح امروز ۲۵ آبان‌ماه، شهر کرمان با ثبت حداقل دمای ۱.۲ درجه سانتی‌گراد، پس از شهرکرد و یاسوج یکی از سردترین صبح‌ها را در میان مراکز استان‌های کشور تجربه کرد.",
+        "ایستگاه هواشناسی لاله‌زار با ثبت حداقل دمای منفی ۴ درجه سانتی‌گراد، پس از دشت نمدان با منفی ۵.۳ و توچال با منفی",
+        "۴.۸ درجه سانتی‌گراد، سومین ایستگاه سرد کشور در صبح امروز بود."
+      ],
+      "media": null,
+      "published_at": "2026-11-17T13:50:26+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "4980b36c4375a332",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-17T13:54:04.764731+00:00",
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-17T09:13:22.835675+00:00",
+  "saved_at": "2026-11-17T13:54:26.446873+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-17T09:12:49.259395+00:00",
-    "fardaayekerman": "2026-11-17T09:12:49.259395+00:00",
-    "irna_kerman": "2026-11-17T09:12:49.259395+00:00",
-    "kerman_gov": "2026-11-17T09:12:49.259395+00:00",
-    "kerman_akhbar": "2026-11-17T09:12:49.259395+00:00",
-    "kerman_news": "2026-11-17T09:12:49.259395+00:00",
-    "kerman_rasaneh": "2026-11-17T09:12:49.259395+00:00",
-    "qh_qv": "2026-11-17T09:12:49.259395+00:00"
+    "kermane_no": "2026-11-17T13:54:04.764731+00:00",
+    "fardaayekerman": "2026-11-17T13:54:04.764731+00:00",
+    "irna_kerman": "2026-11-17T13:54:04.764731+00:00",
+    "kerman_gov": "2026-11-17T13:54:04.764731+00:00",
+    "kerman_akhbar": "2026-11-17T13:54:04.764731+00:00",
+    "kerman_news": "2026-11-17T13:54:04.764731+00:00",
+    "kerman_rasaneh": "2026-11-17T13:54:04.764731+00:00",
+    "qh_qv": "2026-11-17T13:54:04.764731+00:00"
   }
 }
