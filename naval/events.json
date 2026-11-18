@@ -1,8 +1,34 @@
 {
   "version": 1,
-  "updated_at": "2026-11-16T12:39:23+00:00",
+  "updated_at": "2026-11-18T22:55:35+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-b1e25364fd1abe78df",
+      "date": "2026-11-16",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Vice Adm. Oliver Lewis Takes Command of 2nd Fleet",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/16/vice-adm-oliver-lewis-takes-command-of-2nd-fleet"
+    },
+    {
+      "id": "usni-876b3995769fcb31ab",
+      "date": "2026-11-16",
+      "country": "us",
+      "region": "global",
+      "type": "گزارش استقرار",
+      "sensitive": true,
+      "title": "انتشار گزارش دوره‌ای ناوگروه‌های آمریکا",
+      "original_title": "USNI News Fleet and Marine Tracker: Nov. 16, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/16/usni-news-fleet-and-marine-tracker-nov-16-2026"
+    },
     {
       "id": "usni-90ad881f9167f1130e",
       "date": "2026-11-13",
