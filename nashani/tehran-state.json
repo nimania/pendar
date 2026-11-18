@@ -2,12 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/mehrnews/429507",
-    "https://t.me/irna_1313/470718",
-    "https://t.me/isna94/412161",
-    "https://t.me/irna_1313/470719",
-    "https://t.me/irna_1313/470720",
-    "https://t.me/mehrnews/429508",
     "https://t.me/isna94/412162",
     "https://t.me/irna_1313/470721",
     "https://t.me/mehrnews/429509",
@@ -5001,7 +4995,13 @@
     "https://t.me/irna_1313/475193",
     "https://t.me/mehrnews/432960",
     "https://t.me/mehrnews/432961",
-    "https://t.me/mehrnews/432962"
+    "https://t.me/mehrnews/432962",
+    "https://t.me/irna_1313/475194",
+    "https://t.me/irna_1313/475195",
+    "https://t.me/mehrnews/432963",
+    "https://t.me/mehrnews/432964",
+    "https://t.me/mehrnews/432965",
+    "https://t.me/irna_1313/475196"
   ],
   "queue": [
     {
@@ -13631,14 +13631,14 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-18T00:12:10.490706+00:00",
+  "saved_at": "2026-11-18T01:21:05.836797+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-18T00:10:47.805210+00:00",
-    "tehran_tel": "2026-11-18T00:10:47.805210+00:00",
-    "irna_1313": "2026-11-18T00:10:47.805210+00:00",
-    "isna94": "2026-11-18T00:10:47.805210+00:00",
-    "mehrnews": "2026-11-18T00:10:47.805210+00:00",
-    "web_shahr": "2026-11-18T00:10:47.805210+00:00",
-    "web_mehr_tehran": "2026-11-18T00:10:47.805210+00:00"
+    "tehranpress1": "2026-11-18T01:20:10.752027+00:00",
+    "tehran_tel": "2026-11-18T01:20:10.752027+00:00",
+    "irna_1313": "2026-11-18T01:20:10.752027+00:00",
+    "isna94": "2026-11-18T01:20:10.752027+00:00",
+    "mehrnews": "2026-11-18T01:20:10.752027+00:00",
+    "web_shahr": "2026-11-18T01:20:10.752027+00:00",
+    "web_mehr_tehran": "2026-11-18T01:20:10.752027+00:00"
   }
 }
