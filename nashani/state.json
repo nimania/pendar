@@ -11154,9 +11154,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-18T20:53:54.418481+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-18T23:14:47.275597+00:00"
     },
     {
       "url": "https://t.me/kerman_news/140830",
@@ -11190,7 +11191,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-18T23:14:44.166519+00:00",
+  "saved_at": "2026-11-18T23:14:47.275614+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-18T23:14:27.624235+00:00",
     "fardaayekerman": "2026-11-18T23:14:27.624235+00:00",
