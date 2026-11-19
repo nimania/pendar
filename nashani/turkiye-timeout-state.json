@@ -66,6 +66,11 @@
       "url": "https://www.timeout.com/istanbul/art/pilot",
       "at": "2026-11-18T21:06:46.768556+03:00",
       "message_id": 51
+    },
+    "https://www.timeout.com/istanbul/art/dirimart-dolapdere": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/art/dirimart-dolapdere",
+      "at": "2026-11-19T21:18:48.609868+03:00"
     }
   },
   "days": {
@@ -134,6 +139,11 @@
       "url": "https://www.timeout.com/istanbul/art/pilot",
       "at": "2026-11-18T21:06:46.768556+03:00",
       "message_id": 51
+    },
+    "2026-11-19": {
+      "status": "sending_uncertain",
+      "url": "https://www.timeout.com/istanbul/art/dirimart-dolapdere",
+      "at": "2026-11-19T21:18:48.609868+03:00"
     }
   }
 }
