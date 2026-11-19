@@ -68,9 +68,10 @@
       "message_id": 51
     },
     "https://www.timeout.com/istanbul/art/dirimart-dolapdere": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/art/dirimart-dolapdere",
-      "at": "2026-11-19T21:18:48.609868+03:00"
+      "at": "2026-11-19T21:18:48.609868+03:00",
+      "message_id": 54
     }
   },
   "days": {
@@ -141,9 +142,10 @@
       "message_id": 51
     },
     "2026-11-19": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/art/dirimart-dolapdere",
-      "at": "2026-11-19T21:18:48.609868+03:00"
+      "at": "2026-11-19T21:18:48.609868+03:00",
+      "message_id": 54
     }
   }
 }
