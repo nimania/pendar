@@ -74,9 +74,10 @@
       "message_id": 54
     },
     "https://www.timeout.com/istanbul/art/ara-guler-musuem": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/art/ara-guler-musuem",
-      "at": "2026-11-20T20:50:02.228358+03:00"
+      "at": "2026-11-20T20:50:02.228358+03:00",
+      "message_id": 57
     }
   },
   "days": {
@@ -153,9 +154,10 @@
       "message_id": 54
     },
     "2026-11-20": {
-      "status": "sending_uncertain",
+      "status": "published",
       "url": "https://www.timeout.com/istanbul/art/ara-guler-musuem",
-      "at": "2026-11-20T20:50:02.228358+03:00"
+      "at": "2026-11-20T20:50:02.228358+03:00",
+      "message_id": 57
     }
   }
 }
