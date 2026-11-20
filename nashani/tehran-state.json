@@ -13573,13 +13573,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-19T21:45:24.744913+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-20T02:39:05.391286+00:00"
+      "reserved_at": "2026-11-20T02:39:05.391286+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 355,
+      "sent_at": "2026-11-20T02:39:08.845830+00:00"
     }
   ],
-  "saved_at": "2026-11-20T02:39:05.391303+00:00",
+  "saved_at": "2026-11-20T02:39:08.845849+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-20T02:38:00.081305+00:00",
     "tehran_tel": "2026-11-20T02:38:00.081305+00:00",
