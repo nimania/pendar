@@ -1,8 +1,34 @@
 {
   "version": 1,
-  "updated_at": "2026-11-20T12:45:49+00:00",
+  "updated_at": "2026-11-20T22:37:56+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-90f19cc06cc6cec6ad",
+      "date": "2026-11-18",
+      "country": "us",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Carrier USS George Washington Leaves Middle East After Three Months",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/18/carrier-uss-george-washington-leaves-middle-east-after-three-months"
+    },
+    {
+      "id": "usni-0b2f719d42863893bc",
+      "date": "2026-11-18",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "U.K. Carrier Strike Group Concludes 6-month Operation Firecrest Deployment",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/18/u-k-carrier-strike-group-concludes-6-month-operation-firecrest-deployment"
+    },
     {
       "id": "usni-16dba6c07cf72b043e",
       "date": "2026-11-17",
