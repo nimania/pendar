@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-11-18T22:55:35+00:00",
+  "updated_at": "2026-11-20T12:45:49+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-16dba6c07cf72b043e",
+      "date": "2026-11-17",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Reverting Ford-class Carriers to Steam is ‘Non-Starter,’ Says SASC Chair Wicker",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/17/reverting-ford-class-carriers-to-steam-is-non-starter-says-sasc-chair-wicker"
+    },
     {
       "id": "usni-b1e25364fd1abe78df",
       "date": "2026-11-16",
