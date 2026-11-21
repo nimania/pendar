@@ -130,14 +130,15 @@
       "message_id": 55,
       "at": "2026-11-20T00:44:06.007051+03:00"
     },
+    "2026-11-21-afternoon": {
+      "status": "published",
+      "message_id": 60,
+      "at": "2026-11-21T14:38:30.369690+03:00"
+    },
     "2026-11-21-morning": {
       "status": "published",
       "message_id": 59,
       "at": "2026-11-21T00:27:15.354724+03:00"
-    },
-    "2026-11-21-afternoon": {
-      "status": "sending_uncertain",
-      "at": "2026-11-21T14:38:30.369690+03:00"
     }
   }
 }
