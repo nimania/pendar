@@ -2,9 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/isna94/412645",
-    "https://t.me/mehrnews/430305",
-    "https://t.me/mehrnews/430307",
     "https://t.me/mehrnews/430308",
     "https://t.me/tehranpress1/132388",
     "https://t.me/irna_1313/471866",
@@ -5001,63 +4998,12 @@
     "https://shahr.ir/news/88637/%D8%A8%D8%A7%D8%B2%D8%A7%D8%B1-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%86%D8%AE%D8%B3%D8%AA%DB%8C%D9%86-%D8%A8%D8%A7%D8%B1-%D8%A8%D9%87-%D8%B7%D9%88%D8%B1-%DA%A9%D8%A7%D9%85%D9%84-%D8%A8%D8%A7-%D8%A7%D8%B3%DA%A9%D9%86-%D9%84%DB%8C%D8%B2%D8%B1%DB%8C-%D9%85%D8%B3%D8%AA%D9%86%D8%AF%D8%B3%D8%A7%D8%B2%DB%8C",
     "https://t.me/irna_1313/476318",
     "https://t.me/isna94/414433",
-    "https://t.me/isna94/414434"
+    "https://t.me/isna94/414434",
+    "https://t.me/tehranpress1/133081",
+    "https://t.me/tehranpress1/133082",
+    "https://t.me/isna94/414435"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132854",
-      "source_post_id": "132854",
-      "title": "در پی ارتحال آیت‌الله العظمی وحیدخراسانی؛",
-      "excerpt": "در پی ارتحال آیت‌الله العظمی وحیدخراسانی؛ سه روز عزای عمومی و تعطیلی چهارشنبه در قم معاون سیاسی و امنیتی استاندار قم از اعلام سه روز عزای عمومی در استان و تعطیلی مدارس و ادارات در روز چهارشنبه ۲۷ آبان ۱۴۰۵، همزمان با مراسم تشییع پیکر مطهر حضرت آیت‌الله العظمی وحید خراسانی خبر داد. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "در پی ارتحال آیت‌الله العظمی وحیدخراسانی؛",
-        "سه روز عزای عمومی و تعطیلی چهارشنبه در قم",
-        "معاون سیاسی و امنیتی استاندار قم از اعلام سه روز عزای عمومی در استان و تعطیلی مدارس و ادارات در روز چهارشنبه ۲۷ آبان ۱۴۰۵، همزمان با مراسم تشییع پیکر مطهر حضرت آیت‌الله العظمی وحید خراسانی خبر داد.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": null,
-      "published_at": "2026-11-17T07:17:48+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "0ccb7781da6f2633",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-17T08:33:42.147536+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/tehranpress1/132855",
-      "source_post_id": "132855",
-      "title": "پیمان بسیجیان با آرمان‌های امام و شهدا در حرم مطهر امام(ره)",
-      "excerpt": "پیمان بسیجیان با آرمان‌های امام و شهدا در حرم مطهر امام(ره) مراسم تجدید میثاق بسیجیان با آرمان‌های امام خمینی(ره) و امام مجاهد شهید، همزمان با هفته بسیج و با حضور جمعی از مسئولان لشکری و کشوری در حرم مطهر امام راحل برگزار شد. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "پیمان بسیجیان با آرمان‌های امام و شهدا در حرم مطهر امام(ره)",
-        "مراسم تجدید میثاق بسیجیان با آرمان‌های امام خمینی(ره) و امام مجاهد شهید، همزمان با هفته بسیج و با حضور جمعی از مسئولان لشکری و کشوری در حرم مطهر امام راحل برگزار شد.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/bbddfab072.mp4?token=E0RqEyr5caKyqQ0YkTruTuPXNaxYaRb39V_nRA8YqklJnY58fJ-QU9wNCE0RgDWHeucJ6YwN8Ib1QephL7ADzlZyxwM3jvtX-Z0cA7puVfacjIjfPO6MjtC9RV5Ts8wQUg_mExs1uWhPte533-4GhCF2wafdNhQOup8NbQUqAY-iF3J5JjnhPLiDrJCxtaoGEi7y84EqUqvoFkMjIEGw4qc-Lyh4orR94H3ZS3afNzDnFWKNSUwCsGahsVW84YPLABRKjp488ugPy1VweScwBE8YKqTtxmiq53TQKCIhrxksRb_iYi3vrrYZm7FglrsSw0LT0eE78EcWfMxFD7BrElks_n5vWLZeKut83EIQ5Q4y0lRbEvtpUs3s4sCL9BgdlJpwXlj_lO08uhLmvajU2uaTVyeACKkbjhMBGnrOZ3XaNgk0J4UkNbU9qHC4XofKn-pnEVG32fhd44dNU6cHvHe7qUgCOz2Ky-O1BNQWe1OU76zZ5mOSHypc_wvfgBhBK-wTbVbQEFCq--C1Ad4mravQyvXtBLiV2U6XXeyxKipItR0VsBE6nR3tYVSCG_bgNrxqKoWoE98iGCkhH9Zymg6atgzpyebyHUWLIxtxE61jjzYohEmqU2_kIg8HiTB7OImHVde1xgJd8kfPEcTWH7nvSF7j9HikaMwBsoTipCc"
-      },
-      "published_at": "2026-11-17T07:18:39+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "f5a3e84d74202028",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-17T08:33:42.147536+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://shahr.ir/news/88509/%D8%A2%D9%85%D8%A7%D8%AF%D9%87-%D8%A8%D8%A7%D8%B4-%D8%B4%D8%A8%D8%A7%D9%86%D9%87-%D8%B4%D9%87%D8%B1%D8%AF%D8%A7%D8%B1%DB%8C-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AD%D9%85%D8%A7%DB%8C%D8%AA-%D8%A7%D8%B2-%D8%A7%D9%81%D8%B1%D8%A7%D8%AF-%D8%A8%DB%8C-%D8%B3%D8%B1%D9%BE%D9%86%D8%A7%D9%87",
       "source_post_id": "%D8%A2%D9%85%D8%A7%D8%AF%D9%87-%D8%A8%D8%A7%D8%B4-%D8%B4%D8%A8%D8%A7%D9%86%D9%87-%D8%B4%D9%87%D8%B1%D8%AF%D8%A7%D8%B1%DB%8C-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AD%D9%85%D8%A7%DB%8C%D8%AA-%D8%A7%D8%B2-%D8%A7%D9%81%D8%B1%D8%A7%D8%AF-%D8%A8%DB%8C-%D8%B3%D8%B1%D9%BE%D9%86%D8%A7%D9%87",
@@ -13460,16 +13406,69 @@
       "status": "ready",
       "detected_at": "2026-11-21T03:32:11.946762+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/133081",
+      "source_post_id": "133081",
+      "title": "لحظاتی کمتر دیده شده از حضور سال ۱۳۹۶ رهبر شهید انقلاب در منطقه زلزله‌زده سرپل ذهاب",
+      "excerpt": "لحظاتی کمتر دیده شده از حضور سال ۱۳۹۶ رهبر شهید انقلاب در منطقه زلزله‌زده سرپل ذهاب همراهی حضرت آیت‌الله سیدمجتبی خامنه‌ای با رهبر شهید انقلاب در بازدید از وضعیت مردم زلزله‌زده کرمانشاه تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "لحظاتی کمتر دیده شده از حضور سال ۱۳۹۶ رهبر شهید انقلاب در منطقه زلزله‌زده سرپل ذهاب",
+        "همراهی حضرت آیت‌الله سیدمجتبی خامنه‌ای با رهبر شهید انقلاب در بازدید از وضعیت مردم زلزله‌زده کرمانشاه",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/c29191657c.mp4?token=mzZQXEPavS_4PBy7X4HkqIJh--YETgqrYS0FQWWRR4Le6lL54yXm4riaLB99J9BNhy6h1Q1u1yWzM0qwKfl1FWyMTwTP2QuNpXGiT9dKt3WezI2cTN_xvZQoE7Z6ogbA6X3dr8fReKZqmg6qLNHgZbHTKv_hvmhU8lSfmL8jeBbsYFwKzmQ-paWa9H2qZDvhBMsv7jzjOwX928GtDQv76113KW4dq2OisTQB3zAiEGxHSgy-X2-eID-jyU1Fyi6l_496hAEezyAuonIKlXDEejsoHtk-B21AjGPPqbOIqJHRvViGMOevg5Y9EEhb-tnuMfGwW7YlnkUFqppcjSSwpp8zCKGId48JH4XsaqmYLF_FOyVTgSXrAR1GbygpqpAklv0oVrDwBv9atgiO7S9LPZJTWuqVd-9Jm6yDrvoc2zxb2PVBunx4Sj0e4SmoTFNsNfbWdNqKXmYK4IqvKoZ_-pgFUKsUQrViwx5ItgVabrtMrRHO59lirReuSduWloBhKKHTZWcDeXyGuT7K94tLcPqGf__nrII0f_OfzZHGdgADeB-ZnXw6qj0MooqHeg3PaJpDsD87nNlsEi_6dQiWfdlBcW_jF5Ta6XH6nKIjmPKOR1weH06kPW1pjfv-HK7BzSGjMHPFE16BwgIRHKIIYrambEGkHOL3YM9uKYgviiw"
+      },
+      "published_at": "2026-11-21T03:50:03+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "914f371e540c9165",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "review",
+      "detected_at": "2026-11-21T04:02:14.538738+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/133082",
+      "source_post_id": "133082",
+      "title": "پنجره‌ای به رویداد «از قهرمان بخوان»، به یاد رهبر شهید انقلاب، کتابخوان‌ترین رهبر دنیا در رواق کشوردوست. ۱۴۰۵/۸/۲۹",
+      "excerpt": "پنجره‌ای به رویداد «از قهرمان بخوان»، به یاد رهبر شهید انقلاب، کتابخوان‌ترین رهبر دنیا در رواق کشوردوست. ۱۴۰۵/۸/۲۹ تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "پنجره‌ای به رویداد «از قهرمان بخوان»، به یاد رهبر شهید انقلاب، کتابخوان‌ترین رهبر دنیا در رواق کشوردوست. ۱۴۰۵/۸/۲۹",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-21T03:54:54+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "1e6ae17cc57c9054",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-21T04:02:14.538738+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-21T03:33:32.102233+00:00",
+  "saved_at": "2026-11-21T04:03:21.958702+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-21T03:32:11.946762+00:00",
-    "tehran_tel": "2026-11-21T03:32:11.946762+00:00",
-    "irna_1313": "2026-11-21T03:32:11.946762+00:00",
-    "isna94": "2026-11-21T03:32:11.946762+00:00",
-    "mehrnews": "2026-11-21T03:32:11.946762+00:00",
-    "web_shahr": "2026-11-21T03:32:11.946762+00:00",
-    "web_mehr_tehran": "2026-11-21T03:32:11.946762+00:00"
+    "tehranpress1": "2026-11-21T04:02:14.538738+00:00",
+    "tehran_tel": "2026-11-21T04:02:14.538738+00:00",
+    "irna_1313": "2026-11-21T04:02:14.538738+00:00",
+    "isna94": "2026-11-21T04:02:14.538738+00:00",
+    "mehrnews": "2026-11-21T04:02:14.538738+00:00",
+    "web_shahr": "2026-11-21T04:02:14.538738+00:00",
+    "web_mehr_tehran": "2026-11-21T04:02:14.538738+00:00"
   }
 }
