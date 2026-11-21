@@ -240,7 +240,8 @@
       "at": "2026-11-21T14:10:33.518726+03:30"
     },
     "2026-11-21-afternoon-تهران": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 389,
       "at": "2026-11-21T14:10:33.518726+03:30"
     }
   }
