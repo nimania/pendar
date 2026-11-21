@@ -12861,9 +12861,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-21T16:24:51.639078+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/133107",
@@ -12890,9 +12891,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-21T16:24:51.639078+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/133108",
@@ -12916,9 +12918,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-21T16:24:51.639078+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/133109",
@@ -12942,9 +12945,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-21T16:24:51.639078+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-21T19:15:50.459375+00:00"
     },
     {
       "url": "https://t.me/tehranpress1/133110",
@@ -12965,9 +12969,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-21T16:24:51.639078+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-21T19:15:50.459375+00:00"
     },
     {
       "url": "https://t.me/irna_1313/476564",
@@ -13410,7 +13415,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-21T19:15:48.070812+00:00",
+  "saved_at": "2026-11-21T19:15:50.459394+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-21T19:14:34.320029+00:00",
     "tehran_tel": "2026-11-21T19:14:34.320029+00:00",
