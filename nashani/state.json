@@ -10913,9 +10913,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-21T07:46:27.531457+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/kerman_news/140949",
@@ -10967,9 +10968,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-21T07:46:27.531457+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/kermane_no/59634",
@@ -11029,9 +11031,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-21T08:47:09.498996+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-21T12:34:02.192947+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59635",
@@ -11145,9 +11148,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-21T08:47:09.498996+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-21T12:34:02.192947+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10765",
@@ -11645,12 +11649,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-21T12:33:47.301474+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-21T12:34:02.192947+00:00"
     }
   ],
-  "saved_at": "2026-11-21T12:34:00.281497+00:00",
+  "saved_at": "2026-11-21T12:34:02.192966+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-21T12:33:47.301474+00:00",
     "fardaayekerman": "2026-11-21T12:33:47.301474+00:00",
