@@ -2,15 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/irna_1313/472356",
-    "https://t.me/isna94/412815",
-    "https://t.me/irna_1313/472357",
-    "https://t.me/tehranpress1/132452",
-    "https://t.me/irna_1313/472358",
-    "https://t.me/mehrnews/430610",
-    "https://t.me/irna_1313/472359",
-    "https://t.me/isna94/412816",
-    "https://t.me/irna_1313/472360",
     "https://t.me/irna_1313/472361",
     "https://t.me/irna_1313/472362",
     "https://t.me/mehrnews/430619",
@@ -5001,40 +4992,18 @@
     "https://t.me/mehrnews/434050",
     "https://t.me/mehrnews/434051",
     "https://t.me/isna94/414585",
-    "https://t.me/tehranpress1/133140"
+    "https://t.me/tehranpress1/133140",
+    "https://t.me/irna_1313/476654",
+    "https://t.me/mehrnews/434052",
+    "https://t.me/mehrnews/434053",
+    "https://t.me/irna_1313/476655",
+    "https://t.me/tehranpress1/133141",
+    "https://t.me/mehrnews/434054",
+    "https://t.me/mehrnews/434055",
+    "https://t.me/mehrnews/434056",
+    "https://t.me/mehrnews/434057"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/132914",
-      "source_post_id": "132914",
-      "title": "هواشناسی: امروز در بیشتر مناطق کشور جو آرام خواهد بود",
-      "excerpt": "هواشناسی: امروز در بیشتر مناطق کشور جو آرام خواهد بود فردا در غرب و شمال‌غرب کشور بارندگی داریم. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "هواشناسی: امروز در بیشتر مناطق کشور جو آرام خواهد بود",
-        "فردا در غرب و شمال‌غرب کشور بارندگی داریم.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/87d3ff0e4c.mp4?token=uvZduHbdjRYaxf0fYgYa_z7b1lXL8aINgM8ZW__de-BHWZ81b_Ka0uSWQoqRQv7ZhBU3Ov08wYQMO6VYbx51p59H4BBk4hZZrjsH0SDATu7jg751tN7qOBya7yq2fHdxWOvbsc3XdMrkvy2UoWDCaJO7hpuyD7l75ALA0Gom1FmT0UARc_orC4IYOf94HiFqGlko7pj7EgN2tWgHdGmbO0ksAusZOB4AGdbxli1Sz7a1uDCbW56Nk25nx_n8uh4C3fbyT-FIP2Ub_1bD9zUyak4H0EbnNNAjLcFtcn_DCBqoS1OFSCNlIgNTolXF_OeRyQ9gFQSFgt-9MZW2oQxQWA"
-      },
-      "published_at": "2026-11-18T05:33:10+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "60e3d1a7e9250610",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-18T07:43:36.059902+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-18T09:11:54.127905+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 322,
-      "sent_at": "2026-11-18T09:11:59.096974+00:00"
-    },
     {
       "url": "https://t.me/tehranpress1/132915",
       "source_post_id": "132915",
@@ -13431,15 +13400,44 @@
       "status": "ready",
       "detected_at": "2026-11-21T21:27:02.399541+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/133141",
+      "source_post_id": "133141",
+      "title": "تصاویری از سیل سهمگین در جنوب آمریکا",
+      "excerpt": "تصاویری از سیل سهمگین در جنوب آمریکا در پی وقوع سیل شدید در آمریکا، چندین خانه در ایالت فلوریدا زیر آب رفته‌اند. رسانه‌ها از بسته شدن جاده‌های اصلی در مناطق سیل‌زده خبر می‌دهند. تصاویر منتشر شده از شهرستان ولوسیا نشان می‌دهد که برخی از ساکنان نتوانستند مناطق سیل‌زده را ترک کنند و در میانه سیلاب گرفتار شده‌اند. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "تصاویری از سیل سهمگین در جنوب آمریکا",
+        "در پی وقوع سیل شدید در آمریکا، چندین خانه در ایالت فلوریدا زیر آب رفته‌اند.",
+        "رسانه‌ها از بسته شدن جاده‌های اصلی در مناطق سیل‌زده خبر می‌دهند.",
+        "تصاویر منتشر شده از شهرستان ولوسیا نشان می‌دهد که برخی از ساکنان نتوانستند مناطق سیل‌زده را ترک کنند و در میانه سیلاب گرفتار شده‌اند.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/556b2387c0.mp4?token=HGYHIj-DRzrjP-iP5M0W_20YKNihjCt3TMikpxPH8CthDBWyP5g-yQ4o1X8Wjy1K7PCsIqnJKnxS9zZSKxU3fRtfl82a8Picqquov5rcF2ffaVs8kkfhwfd5b_wKDUBKWWSFPqs_FE8putDZ1F1zClejca0XRJlgbufnlxuhSYpd_3eIv9z9wwH3dqDVwArokHcUlrA2p9ayrJ7k8eDvwVnD49K0LWrCquKKOmUGOez5eXkKjoEAwcQ_1AVtSrvyTxrTIVByCWtltgCh6MM8TQA-lycIxsjoufc-23QKNwJQulpBs3i78W8OpYjucyJVSRAG0iXpzuaN5QUaQgJFMQ"
+      },
+      "published_at": "2026-11-21T21:47:54+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "2947ea43de7cb8b3",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-21T21:54:12.567843+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-21T21:28:02.627138+00:00",
+  "saved_at": "2026-11-21T21:55:05.833860+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-21T21:27:02.399541+00:00",
-    "tehran_tel": "2026-11-21T21:27:02.399541+00:00",
-    "irna_1313": "2026-11-21T21:27:02.399541+00:00",
-    "isna94": "2026-11-21T21:27:02.399541+00:00",
-    "mehrnews": "2026-11-21T21:27:02.399541+00:00",
+    "tehranpress1": "2026-11-21T21:54:12.567843+00:00",
+    "tehran_tel": "2026-11-21T21:54:12.567843+00:00",
+    "irna_1313": "2026-11-21T21:54:12.567843+00:00",
+    "isna94": "2026-11-21T21:54:12.567843+00:00",
+    "mehrnews": "2026-11-21T21:54:12.567843+00:00",
     "web_shahr": "2026-11-21T21:27:02.399541+00:00",
     "web_mehr_tehran": "2026-11-21T21:27:02.399541+00:00"
   }
