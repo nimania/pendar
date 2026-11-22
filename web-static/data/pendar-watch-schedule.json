@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T14:41:45.108113+00:00",
+  "generated_at": "2026-11-22T14:37:22.299368+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -707,26 +707,6 @@
     }
   ],
   "programmes": [
-    {
-      "channel_id": "digital-world",
-      "title_fa": "بیگانه : رومولوس",
-      "start": "2026-11-21T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/945961",
-      "icon": "https://image.tmdb.org/t/p/w500/oE8HVR9PmB4S4MFpqQ1meLeZhv5.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "توطئه‌آمیز: از دل دوردست‌ها",
-      "start": "2026-11-21T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1291595",
-      "icon": "https://image.tmdb.org/t/p/w500/3kpvXIX1UvXDgEGSuTlVicKeYQS.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
     {
       "channel_id": "digital-world",
       "title_fa": "Fjord",
@@ -1468,16 +1448,6 @@
       "desc_fa": "قسمت 249 از فصل 8؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-569",
-      "title_fa": "کاراگاه کونان",
-      "start": "2026-11-21T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/30983",
-      "icon": "https://image.tmdb.org/t/p/w500/gW14n6xxONXrya8CIDhRe5Ada7U.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1221 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "مرد عنکبوتی: در میان دنیای عنکبوتی",
       "start": "2026-12-01T00:00:00+03:30",
@@ -1496,6 +1466,16 @@
       "icon": "https://image.tmdb.org/t/p/w500/rDLQrX4ikNeSWi0lwTdz2p1FnrD.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-74",
+      "title_fa": "Watch What Happens Live with Andy Cohen",
+      "start": "2026-11-29T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/22980",
+      "icon": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 192 از فصل 23؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     }
   ]
 }
