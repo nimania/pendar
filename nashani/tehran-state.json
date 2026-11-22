@@ -12919,9 +12919,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-22T14:51:15.492074+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://shahr.ir/news/88738/%D8%AF%D9%88-%D9%82%D9%84%D9%85-%DA%A9%D8%A7%D9%84%D8%A7-%D8%A8%D9%87-%D8%A7%D9%82%D9%84%D8%A7%D9%85-%D8%B7%D8%B1%D8%AD-%D8%AA%D9%88%D8%B1%D9%85-%D8%B5%D9%81%D8%B1-%D8%A7%D8%B6%D8%A7%D9%81%D9%87-%D8%B4%D8%AF",
@@ -12941,14 +12942,15 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-22T14:51:15.492074+00:00",
       "other_sources": [
         {
           "name": "تهران‌پرس",
           "url": "https://t.me/tehranpress1/133159"
         }
-      ]
+      ],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/133158",
@@ -12969,9 +12971,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-22T14:51:15.492074+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/tehranpress1/133160",
@@ -12997,9 +13000,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-22T14:51:15.492074+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-22T18:05:03.358198+00:00"
     },
     {
       "url": "https://t.me/isna94/414671",
@@ -13080,9 +13084,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-22T14:51:15.492074+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-22T18:05:03.358198+00:00"
     },
     {
       "url": "https://t.me/tehranpress1/133161",
@@ -13468,7 +13473,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-22T18:05:00.569742+00:00",
+  "saved_at": "2026-11-22T18:05:03.358221+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-22T18:03:45.464694+00:00",
     "tehran_tel": "2026-11-22T18:03:45.464694+00:00",
