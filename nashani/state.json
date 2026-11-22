@@ -11527,9 +11527,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-22T06:31:45.926122+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-22T06:45:33.929499+00:00"
     },
     {
       "url": "https://t.me/fardaayekerman/35064",
@@ -11619,9 +11620,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-22T06:31:45.926122+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-22T06:45:33.929499+00:00"
     },
     {
       "url": "https://t.me/Kerman_akhbar/66554",
@@ -11849,7 +11851,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-22T06:45:31.427782+00:00",
+  "saved_at": "2026-11-22T06:45:33.929519+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-22T06:31:45.926122+00:00",
     "fardaayekerman": "2026-11-22T06:45:19.099860+00:00",
