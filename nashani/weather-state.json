@@ -280,7 +280,8 @@
       "at": "2026-11-23T15:21:36.125140+03:30"
     },
     "2026-11-23-afternoon-تهران": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 445,
       "at": "2026-11-23T15:21:36.125140+03:30"
     }
   }
