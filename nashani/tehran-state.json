@@ -13536,12 +13536,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-24T05:00:09.338699+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-24T05:36:50.261986+00:00"
     }
   ],
-  "saved_at": "2026-11-24T05:36:47.985656+00:00",
+  "saved_at": "2026-11-24T05:36:50.262004+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-24T05:34:02.301204+00:00",
     "tehran_tel": "2026-11-24T05:34:02.301204+00:00",
