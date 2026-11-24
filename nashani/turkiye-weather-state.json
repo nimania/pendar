@@ -166,7 +166,8 @@
       "at": "2026-11-24T07:02:15.542979+03:00"
     },
     "2026-11-24-night": {
-      "status": "sending_uncertain",
+      "status": "published",
+      "message_id": 67,
       "at": "2026-11-24T22:39:52.064945+03:00"
     }
   }
