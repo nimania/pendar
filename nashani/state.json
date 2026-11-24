@@ -3051,70 +3051,12 @@
     "https://t.me/qh_qv/1216",
     "https://t.me/qh_qv/1217",
     "https://t.me/qh_qv/1218",
-    "https://t.me/qh_qv/1219"
+    "https://t.me/qh_qv/1219",
+    "https://t.me/kerman_news/141131",
+    "https://t.me/kerman_news/141132",
+    "https://t.me/irna_kerman/30473"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kerman_news/140880",
-      "source_post_id": "140880",
-      "title": "تیم والیبال فولاد سیرجان ایرانیان در لیگ والیبال مردان آسیای مرکزی ۲۰۲۶ پیروز شد",
-      "excerpt": "تیم والیبال فولاد سیرجان ایرانیان در لیگ والیبال مردان آسیای مرکزی ۲۰۲۶ پیروز شد تیم والیبال فولاد سیرجان ایرانیان در سومین دیدار خود از رقابت‌های لیگ والیبال مردان آسیای مرکزی ۲۰۲۶، با نمایشی یکدست و کم‌نقص موفق شد ژتیسو قزاقستان را با نتیجه ۳ بر صفر شکست دهد.",
-      "paragraphs": [
-        "تیم والیبال فولاد سیرجان ایرانیان در لیگ والیبال مردان آسیای مرکزی ۲۰۲۶ پیروز شد",
-        "تیم والیبال فولاد سیرجان ایرانیان در سومین دیدار خود از رقابت‌های لیگ والیبال مردان آسیای مرکزی ۲۰۲۶، با نمایشی یکدست و کم‌نقص موفق شد ژتیسو قزاقستان را با نتیجه ۳ بر صفر شکست دهد."
-      ],
-      "media": null,
-      "published_at": "2026-11-19T17:05:21+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "8eee5bbd83029f4c",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-19T17:23:03.214975+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-19T19:10:00.886429+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 706,
-      "sent_at": "2026-11-19T19:10:38.244746+00:00"
-    },
-    {
-      "url": "https://t.me/kerman_news/140885",
-      "source_post_id": "140885",
-      "title": "مدیرکل غله اجرای نان دو نرخی در کرمان را تأیید کرد",
-      "excerpt": "مدیرکل غله اجرای نان دو نرخی در کرمان را تأیید کرد مدیرکل غله و امور بازرگانی استان در ۱۲ استان کشور از جمله کرمان طرحی برای کنترل مصارف بالای آرد نانوایی‌ها درحال اجراست تا جلوی برخی تخلفات در این حوزه گرفته شود، و اگر میانگین هر فرد ماهانه ۲۰ نان مصرف کند تا چندبرابر آن حتی مشمول تخلف نمی‌شود و مقادیر بالای خرید و فروش آرد به منظور فروش آن به قیمت بالا در بازار آزاد مدنظر مسئولین است که باید کنترل شود. دولت برنامه ای برای سهمیه بندی نان ندارد و افزایش قیمت نیز فعلا در دستور کار ما نیست.",
-      "paragraphs": [
-        "مدیرکل غله اجرای نان دو نرخی در کرمان را تأیید کرد",
-        "مدیرکل غله و امور بازرگانی استان",
-        "در ۱۲ استان کشور از جمله کرمان طرحی برای کنترل مصارف بالای آرد نانوایی‌ها درحال اجراست تا جلوی برخی تخلفات در این حوزه گرفته شود، و اگر میانگین هر فرد ماهانه ۲۰ نان مصرف کند تا چندبرابر آن حتی مشمول تخلف نمی‌شود و مقادیر بالای خرید و فروش آرد به منظور فروش آن به قیمت بالا در بازار آزاد مدنظر مسئولین است که باید کنترل شود.",
-        "دولت برنامه ای برای سهمیه بندی نان ندارد و افزایش قیمت نیز فعلا در دستور کار ما نیست."
-      ],
-      "media": null,
-      "published_at": "2026-11-19T18:46:49+00:00",
-      "source": "اخبار کرمان",
-      "source_handle": "kerman_news",
-      "id": "3a3a2fc794837728",
-      "media_repost_allowed": true,
-      "source_hashtag": "اخبار_کرمان",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-19T19:09:43.702739+00:00",
-      "other_sources": [
-        {
-          "name": "آخرین خبر کرمان",
-          "url": "https://t.me/Kerman_akhbar/66513"
-        }
-      ],
-      "reserved_at": "2026-11-19T19:10:00.886429+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 707,
-      "sent_at": "2026-11-19T19:10:39.707953+00:00"
-    },
     {
       "url": "https://t.me/kerman_gov/10739",
       "source_post_id": "10739",
@@ -11985,17 +11927,69 @@
       "delivery_kind": "photo",
       "telegram_message_id": 929,
       "sent_at": "2026-11-23T22:40:17.474780+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_news/141132",
+      "source_post_id": "141132",
+      "title": "طنین الله‌اکبر در بیست‌وسومین یادواره شهدای روستاهای پیروزآباد و ابوذریه رودبار جنوب",
+      "excerpt": "طنین الله‌اکبر در بیست‌وسومین یادواره شهدای روستاهای پیروزآباد و ابوذریه رودبار جنوب",
+      "paragraphs": [
+        "طنین الله‌اکبر در بیست‌وسومین یادواره شهدای روستاهای پیروزآباد و ابوذریه رودبار جنوب"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/460cb86ea7.mp4?token=aU9CmTEhvj3t2xZ23ADGZ39C8yDi5CjcZppGEdrw92tWE2uR5Zy7unErslcKMm-nNM2jPp2N4ImMKksJu6ugCk0e0rics63_-OGS_KNg2fF1LLXngjr1HbiLzVOsQsA3zpPHlXcrnxiSzd0QQruTyX1K_eENbGw1l39xoUd_j1FAxv3R7wlFOP0X-ADU4AY5U6Ug66DoUusmw74XYA8pTRPhe-Lx0HB5qxBaYCqh6LmmEQ9m6QGkiK42bVx5uu-n_RkH-cZnebS0r3X5Ay0KPmefwJ00n0OAXtn_86jcXsmUTsRXVMvPcThdaiHOPZV1Mkfe_ABTgMDpHQ4t_iLJwA"
+      },
+      "published_at": "2026-11-24T04:46:56+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "7f588401ead7e6b7",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-24T04:59:57.336202+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30473",
+      "source_post_id": "30473",
+      "title": "کرمان در تب‌وتاب برگزاری جشنواره موسیقی نواحی ایران",
+      "excerpt": "کرمان در تب‌وتاب برگزاری جشنواره موسیقی نواحی ایران شمارش معکوس برای برگزاری هجدهمین دوره جشنواره موسیقی نواحی ایران به میزبانی کرمان آغاز شده و همه چیز برای برپایی یک رویداد هنری ملی و بین‌المللی مهیاست. هنرمندان حاضر در این جشنواره از ۹ آذرماه در شهر کرمان و ۱۲ شهرستان، نغمه‌ها و سازهای اقوام مختلف را در آسمان کویر طنین‌انداز خواهند کرد. irna_kerman",
+      "paragraphs": [
+        "کرمان در تب‌وتاب برگزاری جشنواره موسیقی نواحی ایران",
+        "شمارش معکوس برای برگزاری هجدهمین دوره جشنواره موسیقی نواحی ایران به میزبانی کرمان آغاز شده و همه چیز برای برپایی یک رویداد هنری ملی و بین‌المللی مهیاست. هنرمندان حاضر در این جشنواره از ۹ آذرماه در شهر کرمان و ۱۲ شهرستان، نغمه‌ها و سازهای اقوام مختلف را در آسمان کویر طنین‌انداز خواهند کرد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/KwfZmXNhwvq23pNoZtyISdulMlnxLLvxNRFdhYwMsKM6l20NLQfsv17jgttt3AvUed1woFQTLQFrBY887wQ3ZfHdSptkoevn_7wFPpiLt7Pqao5nruzu7eLW3-mAzsGSiSYFqiR_6mQ_yWfNN-36WCqsGEsBqNL7b2bP_GuZftVxd_jTG46ywJfm3v6ylP2Qx5hHSR59uwz31e55xaqGMeeRE5Th6kXSL5eobY3YkMAiyYi_aUQ5iERpmZcXghYDEES3hrWAi8DCY-PA6X8gMBaHPhLUiJI6RXw5fCs8UyAvrB1j0hyTWYeWz2GR8OBsNCMmgx4eb6KiJXXEiQfAWw.jpg"
+      },
+      "published_at": "2026-11-24T04:57:19+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "93e6deb0af76752e",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-24T04:59:57.336202+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-23T23:02:32.071991+00:00",
+  "saved_at": "2026-11-24T05:00:14.210375+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-23T22:39:42.308283+00:00",
-    "fardaayekerman": "2026-11-23T23:02:19.908713+00:00",
-    "irna_kerman": "2026-11-23T23:02:19.908713+00:00",
-    "kerman_gov": "2026-11-23T23:02:19.908713+00:00",
-    "kerman_akhbar": "2026-11-23T23:02:19.908713+00:00",
-    "kerman_news": "2026-11-23T22:39:42.308283+00:00",
-    "kerman_rasaneh": "2026-11-23T23:02:19.908713+00:00",
-    "qh_qv": "2026-11-23T22:39:42.308283+00:00"
+    "kermane_no": "2026-11-24T04:59:57.336202+00:00",
+    "fardaayekerman": "2026-11-24T04:59:57.336202+00:00",
+    "irna_kerman": "2026-11-24T04:59:57.336202+00:00",
+    "kerman_gov": "2026-11-24T04:59:57.336202+00:00",
+    "kerman_akhbar": "2026-11-24T04:59:57.336202+00:00",
+    "kerman_news": "2026-11-24T04:59:57.336202+00:00",
+    "kerman_rasaneh": "2026-11-24T04:59:57.336202+00:00",
+    "qh_qv": "2026-11-24T04:59:57.336202+00:00"
   }
 }
