@@ -2,23 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/irna_1313/473506",
-    "https://t.me/isna94/413318",
-    "https://t.me/irna_1313/473507",
-    "https://t.me/irna_1313/473508",
-    "https://t.me/isna94/413319",
-    "https://t.me/irna_1313/473509",
-    "https://t.me/mehrnews/431551",
-    "https://t.me/irna_1313/473510",
-    "https://t.me/irna_1313/473511",
-    "https://t.me/isna94/413320",
-    "https://t.me/irna_1313/473512",
-    "https://t.me/irna_1313/473513",
-    "https://t.me/isna94/413321",
-    "https://t.me/irna_1313/473514",
-    "https://t.me/mehrnews/431552",
-    "https://t.me/isna94/413322",
-    "https://t.me/irna_1313/473515",
     "https://t.me/Tehran_Tel/114936",
     "https://www.mehrnews.com/news/7010136/%D8%AA%D9%88%D9%84%DB%8C%D8%AF-%DB%8C%DA%A9-%D8%AA%D9%86-%D8%B2%D8%B9%D9%81%D8%B1%D8%A7%D9%86-%D8%AF%D8%B1-%D8%B1%D8%A8%D8%A7%D8%B7-%DA%A9%D8%B1%DB%8C%D9%85-%D8%B3%D9%87%D9%85-%DA%A9%D8%B4%D8%A7%D9%88%D8%B1%D8%B2%D8%A7%D9%86-%D8%A7%D8%B2-%D8%A7%D8%B1%D8%B2%D8%B4-%D8%A7%D9%81%D8%B2%D9%88%D8%AF%D9%87",
     "https://t.me/tehranpress1/132636",
@@ -5001,43 +4984,26 @@
     "https://t.me/isna94/415281",
     "https://t.me/mehrnews/435325",
     "https://t.me/irna_1313/478186",
-    "https://t.me/mehrnews/435326"
+    "https://t.me/mehrnews/435326",
+    "https://t.me/mehrnews/435327",
+    "https://t.me/irna_1313/478187",
+    "https://t.me/mehrnews/435328",
+    "https://t.me/isna94/415282",
+    "https://t.me/irna_1313/478188",
+    "https://t.me/isna94/415283",
+    "https://t.me/isna94/415284",
+    "https://t.me/irna_1313/478189",
+    "https://t.me/mehrnews/435329",
+    "https://t.me/isna94/415286",
+    "https://t.me/mehrnews/435330",
+    "https://t.me/irna_1313/478190",
+    "https://t.me/irna_1313/478191",
+    "https://t.me/irna_1313/478192",
+    "https://t.me/irna_1313/478193",
+    "https://t.me/mehrnews/435331",
+    "https://t.me/irna_1313/478194"
   ],
   "queue": [
-    {
-      "url": "https://t.me/mehrnews/433693",
-      "source_post_id": "433693",
-      "title": "رئیس کمیسیون حمل و نقل شورای شهر تهران: تقریباً نیمی از آلودگی هوای تهران، مربوط به وسایل نقلیه فرسوده است",
-      "excerpt": "رئیس کمیسیون حمل و نقل شورای شهر تهران: تقریباً نیمی از آلودگی هوای تهران، مربوط به وسایل نقلیه فرسوده است",
-      "paragraphs": [
-        "رئیس کمیسیون حمل و نقل شورای شهر تهران: تقریباً نیمی از آلودگی هوای تهران، مربوط به وسایل نقلیه فرسوده است"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/9ae687955c.mp4?token=DcErYoeK2KPwwW1sfvSsT9RJdMeDNJ8ks8velfGvkPIpTVvrpJHM9_VQJfDm2DVsEeNIvSEusafoj_zO7TqHpW1wStbfJ_7XKkLV-VCKKRmlVkAVqWRhdgj2nUGlZv5btGdlo1KU2WR1yaIc0K2l5D8VpzKDLHQXXdGQprbAk69T-NJtAU_bHlh3R_eODBOERCobZkG0AjzrIqZfYvaQiIQbZmM0Zix17xWcM6uV4FOjELw7SEFgPcxzDdIQ9Ify0r2ROLoGwv_ucMwGRJhwwcJsmZFqhO5YgszrFZjahR63Xr5I0LLdhrOWk-vIlKYDtZTnT3XirPQ1tcANQVZ1hQ"
-      },
-      "published_at": "2026-11-20T18:29:47+00:00",
-      "source": "مهر",
-      "source_handle": "mehrnews",
-      "id": "3f75efc826bf3286",
-      "media_repost_allowed": true,
-      "source_hashtag": "مهر",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-20T18:51:31.230306+00:00",
-      "other_sources": [
-        {
-          "name": "ایسنا",
-          "url": "https://t.me/isna94/414404"
-        }
-      ],
-      "reserved_at": "2026-11-20T23:15:44.271508+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 376,
-      "sent_at": "2026-11-20T23:15:54.400550+00:00"
-    },
     {
       "url": "https://t.me/tehranpress1/133065",
       "source_post_id": "133065",
@@ -13543,16 +13509,43 @@
       "status": "ready",
       "detected_at": "2026-11-25T21:05:34.742194+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/478194",
+      "source_post_id": "478194",
+      "title": "شکست بایرن مونیخ و توقف پی‌اس‌جی در شب پیروزی اینتر و لیورپول",
+      "excerpt": "شکست بایرن مونیخ و توقف پی‌اس‌جی در شب پیروزی اینتر و لیورپول در هفته پنجم لیگ قهرمانان اروپا، بایرن مونیخ با نتیجه ۲ بر یک به لیل باخت و پاری‌سن‌ژرمن پس از تساوی ۲ بر ۲ مقابل رم، در رده دوم ماند. اینتر ۲ بر صفر اشتوتگارت را شکست داد و لیورپول با دو گل الکساندر ایساک، ۳ بر صفر از سد کلوب بروژ گذشت و به رده پنجم رسید.",
+      "paragraphs": [
+        "شکست بایرن مونیخ و توقف پی‌اس‌جی در شب پیروزی اینتر و لیورپول",
+        "در هفته پنجم لیگ قهرمانان اروپا، بایرن مونیخ با نتیجه ۲ بر یک به لیل باخت و پاری‌سن‌ژرمن پس از تساوی ۲ بر ۲ مقابل رم، در رده دوم ماند.",
+        "اینتر ۲ بر صفر اشتوتگارت را شکست داد و لیورپول با دو گل الکساندر ایساک، ۳ بر صفر از سد کلوب بروژ گذشت و به رده پنجم رسید."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/oLHUWcznXWhs1gAKRqYjtii8uQB8OGg6iJHDSoLVjW01Ta_ZdG_zOozRLXOvDo53a71QLWXad6bt1UgdqsPYei1O8czB5hqHhoeSk0_sC3VJ0IQ1zSbssZcnspsDqts_1wKPxytYflKKL8i5zUJNJqbBZ-P6VmWDpfSUC6MTcFFfsEnBCB4yuMnGKV8wbRT_FMNZoAwVnh-yb_KdPMDnLKF1juoNNKXYBUr07tXWpRHbAYezX_Ly45CatxYUSactFpmr96g4AiBV-cK8eWF-6o4p97QzyZfWVm10ObSWew1_h5yI-DZXnGvitrKRwG94CQvaGd7q9xJVH_F26c-TFQ.jpg"
+      },
+      "published_at": "2026-11-25T22:26:54+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "ab75a3fd45c98a8a",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-25T22:31:13.869031+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-25T21:06:40.036749+00:00",
+  "saved_at": "2026-11-25T22:32:08.598585+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-25T21:05:34.742194+00:00",
-    "tehran_tel": "2026-11-25T21:05:34.742194+00:00",
-    "irna_1313": "2026-11-25T21:05:34.742194+00:00",
-    "isna94": "2026-11-25T21:05:34.742194+00:00",
-    "mehrnews": "2026-11-25T21:05:34.742194+00:00",
-    "web_shahr": "2026-11-25T21:05:34.742194+00:00",
-    "web_mehr_tehran": "2026-11-25T21:05:34.742194+00:00"
+    "tehranpress1": "2026-11-25T22:31:13.869031+00:00",
+    "tehran_tel": "2026-11-25T22:31:13.869031+00:00",
+    "irna_1313": "2026-11-25T22:31:13.869031+00:00",
+    "isna94": "2026-11-25T22:31:13.869031+00:00",
+    "mehrnews": "2026-11-25T22:31:13.869031+00:00",
+    "web_shahr": "2026-11-25T22:31:13.869031+00:00",
+    "web_mehr_tehran": "2026-11-25T22:31:13.869031+00:00"
   }
 }
