@@ -12207,13 +12207,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-25T22:31:13.732224+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-25T22:31:33.203018+00:00"
+      "reserved_at": "2026-11-25T22:31:33.203018+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 1005,
+      "sent_at": "2026-11-25T22:31:38.097538+00:00"
     }
   ],
-  "saved_at": "2026-11-25T22:31:33.203034+00:00",
+  "saved_at": "2026-11-25T22:31:38.097555+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-25T22:31:13.732224+00:00",
     "fardaayekerman": "2026-11-25T22:31:13.732224+00:00",
