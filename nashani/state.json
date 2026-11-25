@@ -12169,9 +12169,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-25T21:05:34.918188+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-25T21:05:55.805509+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10800",
@@ -12201,12 +12202,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-25T21:05:34.918188+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-25T21:05:55.805509+00:00"
     }
   ],
-  "saved_at": "2026-11-25T21:05:52.689906+00:00",
+  "saved_at": "2026-11-25T21:05:55.805527+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-25T21:05:34.918188+00:00",
     "fardaayekerman": "2026-11-25T21:05:34.918188+00:00",
