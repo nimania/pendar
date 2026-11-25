@@ -12207,12 +12207,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-25T22:31:13.732224+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-25T22:31:33.203018+00:00"
     }
   ],
-  "saved_at": "2026-11-25T22:31:30.605167+00:00",
+  "saved_at": "2026-11-25T22:31:33.203034+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-25T22:31:13.732224+00:00",
     "fardaayekerman": "2026-11-25T22:31:13.732224+00:00",
