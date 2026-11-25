@@ -2,21 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/mehrnews/431535",
-    "https://t.me/isna94/413314",
-    "https://t.me/Tehran_Tel/114934",
-    "https://t.me/tehranpress1/132634",
-    "https://t.me/mehrnews/431536",
-    "https://t.me/mehrnews/431537",
-    "https://t.me/mehrnews/431538",
-    "https://t.me/irna_1313/473500",
-    "https://t.me/mehrnews/431539",
-    "https://t.me/mehrnews/431540",
-    "https://t.me/isna94/413315",
-    "https://t.me/irna_1313/473501",
-    "https://t.me/mehrnews/431541",
-    "https://t.me/mehrnews/431542",
-    "https://t.me/mehrnews/431543",
     "https://t.me/isna94/413316",
     "https://shahr.ir/news/88306/%D8%B3%D8%A7%D9%84%D8%A7%D9%86%D9%87-%D8%A8%DB%8C%D8%B4-%D8%A7%D8%B2-%DB%B8%DB%B0%DB%B0-%D9%86%D9%81%D8%B1-%D8%AF%D8%B1-%DA%A9%D8%B4%D9%88%D8%B1-%D9%82%D8%B1%D8%A8%D8%A7%D9%86%DB%8C-%D9%85%D8%B3%D9%85%D9%88%D9%85%DB%8C%D8%AA-%D8%A8%D8%A7-%DA%AF%D8%A7%D8%B2-%D9%85%D9%88%D9%86%D9%88%DA%A9%D8%B3%DB%8C%D8%AF",
     "https://t.me/mehrnews/431544",
@@ -5001,39 +4986,24 @@
     "https://t.me/mehrnews/435305",
     "https://t.me/mehrnews/435306",
     "https://t.me/Tehran_Tel/115253",
-    "https://t.me/Tehran_Tel/115254"
+    "https://t.me/Tehran_Tel/115254",
+    "https://t.me/irna_1313/478172",
+    "https://t.me/irna_1313/478173",
+    "https://t.me/irna_1313/478174",
+    "https://t.me/mehrnews/435307",
+    "https://t.me/isna94/415270",
+    "https://t.me/Tehran_Tel/115255",
+    "https://t.me/mehrnews/435308",
+    "https://t.me/irna_1313/478175",
+    "https://t.me/irna_1313/478176",
+    "https://t.me/mehrnews/435309",
+    "https://t.me/isna94/415271",
+    "https://t.me/irna_1313/478177",
+    "https://t.me/tehranpress1/133297",
+    "https://t.me/irna_1313/478178",
+    "https://t.me/isna94/415278"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/133064",
-      "source_post_id": "133064",
-      "title": "شبکه MS NOW پخش زنده نشست خبری ترامپ را قطع کرد",
-      "excerpt": "شبکه MS NOW پخش زنده نشست خبری ترامپ را قطع کرد تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "شبکه MS NOW پخش زنده نشست خبری ترامپ را قطع کرد",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/28d6ddb6bc.mp4?token=qUbtfJSxxowH84JRdLkOeaIpUezHS-fOpaK_aDtPNd7k_UUhsiriL3A4OGhxzfUxOig7iJiZwM4105DrxirLFOqNI_bKraniWVZoo9GiHedZyJIG0xboXVwcwTzMfFJ_PGblCaM2w77sKX64fQFxZJnXFCDYhfbntcYFZnjVOnX-my0dyP7ONPSIVJWslgYQL6ues8KNVA8gvslccOLY8NW45fVEaszelc5jSxtdlG-GTat_9_NaLVsP0WdCBCjNROs133CXCiaVZthuDHBRKgh56_oL3-Vv2fBuYSjP9NVFvdAHKMjwmQXK3UhllBqJvt5oqAvvnUl-dBsTDt0aUQ"
-      },
-      "published_at": "2026-11-20T18:17:39+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "b602129b4b177ac5",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-20T18:51:31.230306+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-20T22:43:26.359832+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 374,
-      "sent_at": "2026-11-20T22:43:32.661979+00:00"
-    },
     {
       "url": "https://t.me/mehrnews/433692",
       "source_post_id": "433692",
@@ -13535,16 +13505,42 @@
       "status": "ready",
       "detected_at": "2026-11-25T19:37:49.632816+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/133297",
+      "source_post_id": "133297",
+      "title": "قلب ریاض زیر خنجر یمنی",
+      "excerpt": "قلب ریاض زیر خنجر یمنی تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "قلب ریاض زیر خنجر یمنی",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/b183dcc788.mp4?token=pqO7R4hUI4lTLCOOApbJD0aKQskeoiYEkDG_p90kpCTKYYzK3i0rb8Qd6nq8qg8_5Knz_18LpO9nkJF5lLEKLcTzpN8XOYeOFrO0GAuQ1SwffOYFfU3DV26XZro2vYVAE0i3k61XPsva4_U25FdSDTSEuX-Jlf4oBq7zWLfIEK0_yk0Xmuv_w6WwbRSisV3Vb75d7LHDptzU3b38O-QrfWdgyMcqWsyMvEhOAEGpOA-NfNVscU5fpI3C_KO3TKt-VT6NaTfhG475RXKvUqs4-ecx2jAampEk3InynSD9Pg99lbiz9YT6S8kglpVSdVbWQSlH5s_pDSh12CRwZREjug"
+      },
+      "published_at": "2026-11-25T20:07:04+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "ed18e1458b34c36f",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-25T20:12:52.674210+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-25T19:39:13.217008+00:00",
+  "saved_at": "2026-11-25T20:14:16.355602+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-25T19:37:49.632816+00:00",
-    "tehran_tel": "2026-11-25T19:37:49.632816+00:00",
-    "irna_1313": "2026-11-25T19:37:49.632816+00:00",
-    "isna94": "2026-11-25T19:37:49.632816+00:00",
-    "mehrnews": "2026-11-25T19:37:49.632816+00:00",
-    "web_shahr": "2026-11-25T19:37:49.632816+00:00",
-    "web_mehr_tehran": "2026-11-25T19:37:49.632816+00:00"
+    "tehranpress1": "2026-11-25T20:12:52.674210+00:00",
+    "tehran_tel": "2026-11-25T20:12:52.674210+00:00",
+    "irna_1313": "2026-11-25T20:12:52.674210+00:00",
+    "isna94": "2026-11-25T20:12:52.674210+00:00",
+    "mehrnews": "2026-11-25T20:12:52.674210+00:00",
+    "web_shahr": "2026-11-25T20:12:52.674210+00:00",
+    "web_mehr_tehran": "2026-11-25T20:12:52.674210+00:00"
   }
 }
