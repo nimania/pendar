@@ -3345,41 +3345,10 @@
     "https://t.me/Kerman_akhbar/66639",
     "https://t.me/qh_qv/1256",
     "https://t.me/kerman_gov/10799",
-    "https://t.me/kerman_gov/10800"
+    "https://t.me/kerman_gov/10800",
+    "https://t.me/kerman_gov/10801"
   ],
   "queue": [
-    {
-      "url": "https://t.me/kermane_no/59650",
-      "source_post_id": "59650",
-      "title": "سهم مصرف خانگی از ناترازی گاز در استان کرمان چقدر است؟",
-      "excerpt": "سهم مصرف خانگی از ناترازی گاز در استان کرمان چقدر است؟ شرکت گاز از مردم کرمان می‌خواهد مصرفشان را ۱۰ درصد کم کنند تا زمستان را بدون قطعی پشت سر بگذاریم. درخواست قابل‌فهمی است. اما وقتی اعداد اعلام‌شده از سوی کارشناس همین شرکت را کنار هم می‌گذاریم، یک سؤال پیش می‌آید: سهم هر بخش از صرفه‌جویی دقیقا چقدر است؟ کارشناس شرکت گاز استان کرمان در برنامه رادیویی «میکروفون صبح» گفته در بیست‌وچهار ساعت گذشته منتهی به اخرین روز آبان ۱۴۰۵ نزدیک به بیست‌وهشت میلیون مترمکعب گاز در استان مصرف شده. گزارش «کرمان نو» در این ارتباط را ببینید",
-      "paragraphs": [
-        "سهم مصرف خانگی از ناترازی گاز در استان کرمان چقدر است؟",
-        "شرکت گاز از مردم کرمان می‌خواهد مصرفشان را ۱۰ درصد کم کنند تا زمستان را بدون قطعی پشت سر بگذاریم. درخواست قابل‌فهمی است.",
-        "اما وقتی اعداد اعلام‌شده از سوی کارشناس همین شرکت را کنار هم می‌گذاریم، یک سؤال پیش می‌آید: سهم هر بخش از صرفه‌جویی دقیقا چقدر است؟ کارشناس شرکت گاز استان کرمان در برنامه رادیویی «میکروفون صبح» گفته در بیست‌وچهار ساعت گذشته منتهی به اخرین روز آبان ۱۴۰۵ نزدیک به بیست‌وهشت میلیون مترمکعب گاز در استان مصرف شده.",
-        "گزارش «کرمان نو» در این ارتباط را ببینید"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/ee52f23b37.mp4?token=jXdIaYZy5FWtkoDBqv47V3p6xWNoAcT_sP6L01NCVuBE_PNvIaZLteVFwoQjxmg8XNkkJ6wft0ILCIJQfIp6wnEV8rU45JpHDSFjrsJc9He48NWXA1d7gNiDMD2iCeaFAzDUpKn_YYZBHuM8tP0OeY0pf4x4FGxf3-aUXSbP3i0FNBTK_SqeoMai9O3zUJZzWaMbS7Oi3tVKM1wWZuE8kc5uOD4GT_JjX1bwPAK4ds5XoyzFPf_4rl_oEOT9RakMPg9ZD-FvsEunH4501OKwmWqWtAvGS8wknvIs42_rlcGFufO2fqXOpoXd8Q35Isab52s9I2bzviqa_wB2duSQhR-K9lLq133l1wUMc3FXsnwrgsu7oQxDudtxFPEgd9mRxpob4CIynn2HY7eIgC67FyaH_lLq68-WrYEekjzhCVMQlZlTzATx8hbJX1kSxFQ_CnKA38_h5zrUI37D6phzWEmwfFIgfmehrWFLbF_znkTj3iUnF7Pl2Z7ZNG7_zBDfypmnkK2TEhpkrMkw8-BJozaU7HxBKkpMXbvnYGukzf84kTlQC1ab5VcJ_3hePMnBxphJ0y6hPBuvzJsLXNh9_i78JVuXis0WkdvIAbAj7KBftsCQ13ssnpegKKSkuldS3n9te1-mBPKpY5x5mcYy3zTQ1IAIADsrtJLS6zZL7CA"
-      },
-      "published_at": "2026-11-21T13:08:08+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "0c4aa6fa633aebcc",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-21T16:24:53.747885+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-21T16:25:18.870783+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 786,
-      "sent_at": "2026-11-21T16:25:33.752801+00:00"
-    },
     {
       "url": "https://t.me/kermane_no/59651",
       "source_post_id": "59651",
@@ -12212,17 +12181,46 @@
       "delivery_kind": "text",
       "telegram_message_id": 1003,
       "sent_at": "2026-11-25T21:06:03.700729+00:00"
+    },
+    {
+      "url": "https://t.me/kerman_gov/10801",
+      "source_post_id": "10801",
+      "title": "نشست مدیران کل روابط‌عمومی استانداری‌های کشور به میزبانی کرمان برگزار شد",
+      "excerpt": "نشست مدیران کل روابط‌عمومی استانداری‌های کشور به میزبانی کرمان برگزار شد نشست مدیران کل روابط‌عمومی استانداری‌های کشور با حضور حمید خواجه‌نژاد، مشاور وزیر و رئیس مرکز اطلاع‌رسانی وزارت کشور، و دکتر محمدعلی طالبی، استاندار کرمان، به میزبانی استان کرمان برگزار شد. این نشست با هدف تبادل نظر و هم‌اندیشی درباره موضوعات مهم و اولویت‌های اطلاع‌رسانی کشور برگزار شد و حاضران درباره مسائل مرتبط با مدیریت مصرف انرژی و اجرای طرح کالابرگ به بحث و تبادل نظر پرداختند. در این گردهمایی، معاون رفاه و امور اقتصادی وزارت تعاون، کار و رفاه اجتماعی نیز به‌صورت برخط حضور یافت و درباره روند اجرای طرح کالابرگ توضیحاتی ارائه کرد. همچنین بر اهمیت نقش روابط‌عمومی‌ها در تبیین موضوعات و برنامه‌های اولویت‌دار، اطلاع‌رسانی دقیق و آگاهی‌بخشی به مردم تأکید شد.",
+      "paragraphs": [
+        "نشست مدیران کل روابط‌عمومی استانداری‌های کشور به میزبانی کرمان برگزار شد",
+        "نشست مدیران کل روابط‌عمومی استانداری‌های کشور با حضور حمید خواجه‌نژاد، مشاور وزیر و رئیس مرکز اطلاع‌رسانی وزارت کشور، و دکتر محمدعلی طالبی، استاندار کرمان، به میزبانی استان کرمان برگزار شد.",
+        "این نشست با هدف تبادل نظر و هم‌اندیشی درباره موضوعات مهم و اولویت‌های اطلاع‌رسانی کشور برگزار شد و حاضران درباره مسائل مرتبط با مدیریت مصرف انرژی و اجرای طرح کالابرگ به بحث و تبادل نظر پرداختند.",
+        "در این گردهمایی، معاون رفاه و امور اقتصادی وزارت تعاون، کار و رفاه اجتماعی نیز به‌صورت برخط حضور یافت و درباره روند اجرای طرح کالابرگ توضیحاتی ارائه کرد.",
+        "همچنین بر اهمیت نقش روابط‌عمومی‌ها در تبیین موضوعات و برنامه‌های اولویت‌دار، اطلاع‌رسانی دقیق و آگاهی‌بخشی به مردم تأکید شد."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/CylHczpzlSX6my42Ix5o_0_3ui8vDl0L-RUljT79mmdJ8fnliMh26CgFyZKCFKhbXFJ3gmkutXOSJUn7rsVga9sM4JAzcVHa_inmPoGrZj03B9aZWrD8S7Jcf94Rp_as8Cut93oLf-eDX0XlCW3RHzxLcPHqnZEYQPg-A_aPz2YwcV3p2SW-Vv2ufnGe8aYeRpdpXD9Z7KchN77vB9HzwSH1oL57AtQ4ShgcHtXn6cAl_AAYk51qamU9E5wbjUG2LMxEVmHkU7zc5bYq-qJIW2-3I0XFB2EWIMpDCWAQT_CkuvUkAxpRChdkgDAYtJevO0z1VLV9VpLHsu-f1VooPQ.jpg"
+      },
+      "published_at": "2026-11-25T21:12:35+00:00",
+      "source": "اخبار استانداری کرمان",
+      "source_handle": "kerman_gov",
+      "id": "e0949555418d1eda",
+      "media_repost_allowed": true,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-25T22:31:13.732224+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-25T21:06:03.700746+00:00",
+  "saved_at": "2026-11-25T22:31:30.605167+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-25T21:05:34.918188+00:00",
-    "fardaayekerman": "2026-11-25T21:05:34.918188+00:00",
-    "irna_kerman": "2026-11-25T21:05:34.918188+00:00",
-    "kerman_gov": "2026-11-25T21:05:34.918188+00:00",
-    "kerman_akhbar": "2026-11-25T21:05:34.918188+00:00",
-    "kerman_news": "2026-11-25T21:05:34.918188+00:00",
-    "kerman_rasaneh": "2026-11-25T21:05:34.918188+00:00",
-    "qh_qv": "2026-11-25T21:05:34.918188+00:00"
+    "kermane_no": "2026-11-25T22:31:13.732224+00:00",
+    "fardaayekerman": "2026-11-25T22:31:13.732224+00:00",
+    "irna_kerman": "2026-11-25T22:31:13.732224+00:00",
+    "kerman_gov": "2026-11-25T22:31:13.732224+00:00",
+    "kerman_akhbar": "2026-11-25T22:31:13.732224+00:00",
+    "kerman_news": "2026-11-25T22:31:13.732224+00:00",
+    "kerman_rasaneh": "2026-11-25T22:31:13.732224+00:00",
+    "qh_qv": "2026-11-25T22:31:13.732224+00:00"
   }
 }
