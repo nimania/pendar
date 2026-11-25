@@ -2,21 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/isna94/413316",
-    "https://shahr.ir/news/88306/%D8%B3%D8%A7%D9%84%D8%A7%D9%86%D9%87-%D8%A8%DB%8C%D8%B4-%D8%A7%D8%B2-%DB%B8%DB%B0%DB%B0-%D9%86%D9%81%D8%B1-%D8%AF%D8%B1-%DA%A9%D8%B4%D9%88%D8%B1-%D9%82%D8%B1%D8%A8%D8%A7%D9%86%DB%8C-%D9%85%D8%B3%D9%85%D9%88%D9%85%DB%8C%D8%AA-%D8%A8%D8%A7-%DA%AF%D8%A7%D8%B2-%D9%85%D9%88%D9%86%D9%88%DA%A9%D8%B3%DB%8C%D8%AF",
-    "https://t.me/mehrnews/431544",
-    "https://t.me/mehrnews/431545",
-    "https://t.me/mehrnews/431546",
-    "https://t.me/mehrnews/431547",
-    "https://t.me/irna_1313/473502",
-    "https://t.me/irna_1313/473503",
-    "https://t.me/isna94/413317",
-    "https://t.me/irna_1313/473504",
-    "https://t.me/tehranpress1/132635",
-    "https://t.me/irna_1313/473505",
-    "https://t.me/mehrnews/431548",
-    "https://t.me/mehrnews/431549",
-    "https://t.me/mehrnews/431550",
     "https://t.me/irna_1313/473506",
     "https://t.me/isna94/413318",
     "https://t.me/irna_1313/473507",
@@ -5001,39 +4986,24 @@
     "https://t.me/irna_1313/478177",
     "https://t.me/tehranpress1/133297",
     "https://t.me/irna_1313/478178",
-    "https://t.me/isna94/415278"
+    "https://t.me/isna94/415278",
+    "https://t.me/mehrnews/435310",
+    "https://t.me/mehrnews/435317",
+    "https://t.me/isna94/415279",
+    "https://t.me/irna_1313/478179",
+    "https://t.me/irna_1313/478180",
+    "https://t.me/mehrnews/435324",
+    "https://t.me/irna_1313/478181",
+    "https://t.me/irna_1313/478182",
+    "https://t.me/irna_1313/478184",
+    "https://t.me/isna94/415280",
+    "https://t.me/irna_1313/478185",
+    "https://t.me/isna94/415281",
+    "https://t.me/mehrnews/435325",
+    "https://t.me/irna_1313/478186",
+    "https://t.me/mehrnews/435326"
   ],
   "queue": [
-    {
-      "url": "https://t.me/mehrnews/433692",
-      "source_post_id": "433692",
-      "title": "پرونده بدهی‌های نکول‌شده شهرداری تهران پس از دو دهه بسته می‌شود",
-      "excerpt": "پرونده بدهی‌های نکول‌شده شهرداری تهران پس از دو دهه بسته می‌شود علیرضا زاکانی، شهردار تهران، در آیین اختتامیه رویداد «ایران پیشرو» و نمایشگاه سیتکس اعلام کرد: با پیگیری‌های انجام‌شده، بدهی‌های ریالی شهرداری به صفر رسیده و پیش‌بینی می‌شود پرونده بدهی‌های نکول‌شده ارزی نیز در ماه‌های آینده پس از سه دهه و نیم بسته شود.",
-      "paragraphs": [
-        "پرونده بدهی‌های نکول‌شده شهرداری تهران پس از دو دهه بسته می‌شود",
-        "علیرضا زاکانی، شهردار تهران، در آیین اختتامیه رویداد «ایران پیشرو» و نمایشگاه سیتکس اعلام کرد: با پیگیری‌های انجام‌شده، بدهی‌های ریالی شهرداری به صفر رسیده و پیش‌بینی می‌شود پرونده بدهی‌های نکول‌شده ارزی نیز در ماه‌های آینده پس از سه دهه و نیم بسته شود."
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/2ec8c8de9e.mp4?token=PUEyLPtwjFRqI4OIltgLoFirGjbVx4D8f9plN4X1Lai7fK7AgxCZxY0i6vX-tZUdwcqgDWVwLlUxovdujfE0LPkhZQU3O_4P4wyl0bQ2UNHTcepxDDKVcrBhHClYEPWEU5bQ91PG53JrlDoLddAeOI7tpbYRbf7NRhTNhU_VfBAvV96jd-_HKV5QFeLVfgPucbM8nOPRrb7b7vWFJ3jaWVjMKsOOFf6BfcQrGwqEmwlWXG4MfMKGW4aPYDCAq42CxNHw7-yt3i4YpZN-TEI95SSJcq6iqBHUDB_w0dR5cHLH2KC9RpVADp-z-0OKo_zk_oc1qsZ2gAM4hRT7tzq_nA"
-      },
-      "published_at": "2026-11-20T18:27:25+00:00",
-      "source": "مهر",
-      "source_handle": "mehrnews",
-      "id": "14b7735cc69d4769",
-      "media_repost_allowed": true,
-      "source_hashtag": "مهر",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "published",
-      "detected_at": "2026-11-20T18:51:31.230306+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-20T23:15:44.271508+00:00",
-      "delivery_kind": "video",
-      "telegram_message_id": 375,
-      "sent_at": "2026-11-20T23:15:50.410753+00:00"
-    },
     {
       "url": "https://t.me/mehrnews/433693",
       "source_post_id": "433693",
@@ -13539,16 +13509,42 @@
       "status": "ready",
       "detected_at": "2026-11-25T20:12:52.674210+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/478179",
+      "source_post_id": "478179",
+      "title": "لیگ قهرمانان اروپا؛ پیروزی پرگل بارسلونا در باکو",
+      "excerpt": "لیگ قهرمانان اروپا؛ پیروزی پرگل بارسلونا در باکو تیم فوتبال بارسلونا در هفته پنجم لیگ قهرمانان اروپا برابر صباح باکو به یک پیروزی پرگل رسید.",
+      "paragraphs": [
+        "لیگ قهرمانان اروپا؛ پیروزی پرگل بارسلونا در باکو",
+        "تیم فوتبال بارسلونا در هفته پنجم لیگ قهرمانان اروپا برابر صباح باکو به یک پیروزی پرگل رسید."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/jhqw7wxOJ2Ciggo1H7O4-tM3onihRz2y_cmkhMKjlgsOhF9SnbrPoN_Dt6qTF1iECKc8UTrdD06GJ8wp73nrrClz8b-b6w95RllaxZqVTzAQMfU43T1PxmmZuxQDmGhvnWV3ZhmpOBPxpce5Wp3LaIHsdb7_IJE9KdS9chPUuf2l7hJSIVGw-6CzAu3C4ntrRBbj4V0uNOmZ-1hkymz2MsOC4-XdR1pak1T4FmIoMV_aHFu82JTVghFH8cj0p44MSYjgeocCFQ9EvPSB3OX5aCM6EmcXgwyz1-x7LGEbv5APjloMTBWVB-ej8jl8w-ylI1Z-tNDpgbuEecC6-rDfJw.jpg"
+      },
+      "published_at": "2026-11-25T20:19:57+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "112d9ae4e5334438",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-25T21:05:34.742194+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-25T20:14:23.837987+00:00",
+  "saved_at": "2026-11-25T21:06:33.537896+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-25T20:12:52.674210+00:00",
-    "tehran_tel": "2026-11-25T20:12:52.674210+00:00",
-    "irna_1313": "2026-11-25T20:12:52.674210+00:00",
-    "isna94": "2026-11-25T20:12:52.674210+00:00",
-    "mehrnews": "2026-11-25T20:12:52.674210+00:00",
-    "web_shahr": "2026-11-25T20:12:52.674210+00:00",
-    "web_mehr_tehran": "2026-11-25T20:12:52.674210+00:00"
+    "tehranpress1": "2026-11-25T21:05:34.742194+00:00",
+    "tehran_tel": "2026-11-25T21:05:34.742194+00:00",
+    "irna_1313": "2026-11-25T21:05:34.742194+00:00",
+    "isna94": "2026-11-25T21:05:34.742194+00:00",
+    "mehrnews": "2026-11-25T21:05:34.742194+00:00",
+    "web_shahr": "2026-11-25T21:05:34.742194+00:00",
+    "web_mehr_tehran": "2026-11-25T21:05:34.742194+00:00"
   }
 }
