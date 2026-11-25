@@ -169,6 +169,10 @@
       "status": "published",
       "message_id": 67,
       "at": "2026-11-24T22:39:52.064945+03:00"
+    },
+    "2026-11-25-afternoon": {
+      "status": "sending_uncertain",
+      "at": "2026-11-25T16:23:27.881866+03:00"
     }
   }
 }
