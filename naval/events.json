@@ -1,8 +1,34 @@
 {
   "version": 1,
-  "updated_at": "2026-11-22T21:42:46+00:00",
+  "updated_at": "2026-11-26T00:14:31+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-70448e394023d283ed",
+      "date": "2026-11-23",
+      "country": "us",
+      "region": "global",
+      "type": "گزارش استقرار",
+      "sensitive": true,
+      "title": "انتشار گزارش دوره‌ای ناوگروه‌های آمریکا",
+      "original_title": "USNI News Fleet and Marine Tracker: Nov. 23, 2026",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/23/usni-news-fleet-and-marine-tracker-nov-23-2026"
+    },
+    {
+      "id": "usni-3f391de36a2cad48dc",
+      "date": "2026-11-23",
+      "country": "nato",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش یک رزمایش دریایی در منبع",
+      "original_title": "Recon Marines Join Finnish Naval Exercise, Baltic NATO Naval Drills",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/23/recon-marines-join-finnish-naval-exercise-baltic-nato-naval-drills"
+    },
     {
       "id": "usni-4227970bf166cba1da",
       "date": "2026-11-20",
