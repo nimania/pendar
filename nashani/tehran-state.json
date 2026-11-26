@@ -2,9 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/mehrnews/431585",
-    "https://t.me/mehrnews/431586",
-    "https://t.me/mehrnews/431587",
     "https://t.me/isna94/413346",
     "https://t.me/irna_1313/473572",
     "https://t.me/mehrnews/431588",
@@ -5001,7 +4998,10 @@
     "https://t.me/irna_1313/478213",
     "https://t.me/irna_1313/478214",
     "https://t.me/isna94/415288",
-    "https://shahr.ir/news/88936/%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%DB%B5%DB%B4-%D8%AF%D8%B1%D8%B5%D8%AF%DB%8C-%D9%85%D8%B3%D8%A7%D9%81%D8%B1%D8%A7%D9%86-%D8%B4%D8%A8%DA%A9%D9%87-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3%D8%B1%D8%A7%D9%86%DB%8C-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%B4%D8%AF%D9%86"
+    "https://shahr.ir/news/88936/%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%DB%B5%DB%B4-%D8%AF%D8%B1%D8%B5%D8%AF%DB%8C-%D9%85%D8%B3%D8%A7%D9%81%D8%B1%D8%A7%D9%86-%D8%B4%D8%A8%DA%A9%D9%87-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3%D8%B1%D8%A7%D9%86%DB%8C-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%B4%D8%AF%D9%86",
+    "https://t.me/mehrnews/435340",
+    "https://t.me/mehrnews/435341",
+    "https://t.me/isna94/415289"
   ],
   "queue": [
     {
@@ -13556,13 +13556,13 @@
       "sent_at": "2026-11-26T03:09:58.901856+00:00"
     }
   ],
-  "saved_at": "2026-11-26T03:09:58.901864+00:00",
+  "saved_at": "2026-11-26T03:33:41.028965+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-26T03:08:39.509179+00:00",
-    "tehran_tel": "2026-11-26T03:08:39.509179+00:00",
-    "irna_1313": "2026-11-26T03:08:39.509179+00:00",
-    "isna94": "2026-11-26T03:08:39.509179+00:00",
-    "mehrnews": "2026-11-26T03:08:39.509179+00:00",
+    "tehranpress1": "2026-11-26T03:32:55.739776+00:00",
+    "tehran_tel": "2026-11-26T03:32:55.739776+00:00",
+    "irna_1313": "2026-11-26T03:32:55.739776+00:00",
+    "isna94": "2026-11-26T03:32:55.739776+00:00",
+    "mehrnews": "2026-11-26T03:32:55.739776+00:00",
     "web_shahr": "2026-11-26T03:08:39.509179+00:00",
     "web_mehr_tehran": "2026-11-26T03:08:39.509179+00:00"
   }
