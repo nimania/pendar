@@ -2,26 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/Tehran_Tel/114936",
-    "https://www.mehrnews.com/news/7010136/%D8%AA%D9%88%D9%84%DB%8C%D8%AF-%DB%8C%DA%A9-%D8%AA%D9%86-%D8%B2%D8%B9%D9%81%D8%B1%D8%A7%D9%86-%D8%AF%D8%B1-%D8%B1%D8%A8%D8%A7%D8%B7-%DA%A9%D8%B1%DB%8C%D9%85-%D8%B3%D9%87%D9%85-%DA%A9%D8%B4%D8%A7%D9%88%D8%B1%D8%B2%D8%A7%D9%86-%D8%A7%D8%B2-%D8%A7%D8%B1%D8%B2%D8%B4-%D8%A7%D9%81%D8%B2%D9%88%D8%AF%D9%87",
-    "https://t.me/tehranpress1/132636",
-    "https://t.me/isna94/413329",
-    "https://t.me/isna94/413330",
-    "https://t.me/isna94/413333",
-    "https://t.me/isna94/413334",
-    "https://t.me/isna94/413335",
-    "https://t.me/mehrnews/431573",
-    "https://t.me/mehrnews/431574",
-    "https://t.me/mehrnews/431575",
-    "https://t.me/isna94/413336",
-    "https://t.me/tehranpress1/132637",
-    "https://shahr.ir/news/88305/%DB%8C%DA%A9-%D8%B4%D8%A8-%D8%AF%D8%B1-%D9%85%D8%AF%D8%AF%D8%B3%D8%B1%D8%A7%DB%8C-%D9%85%D9%86%D8%B7%D9%82%D9%87-%DB%B2%DB%B0-%D8%B3%D9%82%D9%81%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%B2%D9%86%D8%AF%DA%AF%DB%8C-%D9%88-%D8%AC%D8%A7%DB%8C%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A8%D8%A7%D8%B2%DB%8C%D8%A7%D8%A8%DB%8C",
-    "https://t.me/isna94/413337",
-    "https://t.me/mehrnews/431576",
-    "https://t.me/isna94/413338",
-    "https://t.me/isna94/413339",
-    "https://t.me/isna94/413340",
-    "https://t.me/isna94/413341",
     "https://t.me/mehrnews/431577",
     "https://t.me/isna94/413342",
     "https://t.me/isna94/413344",
@@ -5001,7 +4981,27 @@
     "https://t.me/irna_1313/478192",
     "https://t.me/irna_1313/478193",
     "https://t.me/mehrnews/435331",
-    "https://t.me/irna_1313/478194"
+    "https://t.me/irna_1313/478194",
+    "https://shahr.ir/news/88898/%D9%88%D8%A7%DA%AF%D8%B0%D8%A7%D8%B1%DB%8C-%D8%BA%D8%B1%D9%81%D9%87-%D9%87%D8%A7%DB%8C-%D8%A8%D8%A7%D8%B2%D8%A7%D8%B1-%D8%AC%D9%86%D8%AA-%D8%AC%D8%AF%DB%8C%D8%AF-%D8%A7%D8%B2-%DB%B2%DB%B5-%D8%A2%D8%B0%D8%B1%D9%85%D8%A7%D9%87",
+    "https://shahr.ir/news/88912/%D9%85%D9%88%D8%AA%D9%88%D8%B1%D8%B3%DB%8C%DA%A9%D9%84%D8%AA-%D9%87%D8%A7-%D8%B2%DB%8C%D8%B1-%D8%B0%D8%B1%D9%87-%D8%A8%DB%8C%D9%86-%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%D8%B4%D9%87%D8%B1%DB%8C-%D8%A7%D8%B2-%D8%AE%D8%B7%D9%88%D8%B7-%D9%88%DB%8C%DA%98%D9%87-%D8%AA%D8%A7-%D8%AA%D8%B4%D9%88%DB%8C%D9%82",
+    "https://t.me/mehrnews/435332",
+    "https://t.me/irna_1313/478195",
+    "https://t.me/mehrnews/435333",
+    "https://t.me/irna_1313/478196",
+    "https://t.me/mehrnews/435334",
+    "https://t.me/irna_1313/478197",
+    "https://t.me/mehrnews/435335",
+    "https://t.me/irna_1313/478198",
+    "https://t.me/mehrnews/435336",
+    "https://t.me/mehrnews/435337",
+    "https://t.me/mehrnews/435338",
+    "https://t.me/irna_1313/478199",
+    "https://t.me/irna_1313/478200",
+    "https://t.me/mehrnews/435339",
+    "https://t.me/irna_1313/478201",
+    "https://t.me/irna_1313/478202",
+    "https://t.me/irna_1313/478203",
+    "https://t.me/isna94/415287"
   ],
   "queue": [
     {
@@ -13546,14 +13546,14 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-25T22:32:18.360175+00:00",
+  "saved_at": "2026-11-26T02:28:39.608910+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-25T22:31:13.869031+00:00",
-    "tehran_tel": "2026-11-25T22:31:13.869031+00:00",
-    "irna_1313": "2026-11-25T22:31:13.869031+00:00",
-    "isna94": "2026-11-25T22:31:13.869031+00:00",
-    "mehrnews": "2026-11-25T22:31:13.869031+00:00",
-    "web_shahr": "2026-11-25T22:31:13.869031+00:00",
-    "web_mehr_tehran": "2026-11-25T22:31:13.869031+00:00"
+    "tehranpress1": "2026-11-26T02:27:49.502460+00:00",
+    "tehran_tel": "2026-11-26T02:27:49.502460+00:00",
+    "irna_1313": "2026-11-26T02:27:49.502460+00:00",
+    "isna94": "2026-11-26T02:27:49.502460+00:00",
+    "mehrnews": "2026-11-26T02:27:49.502460+00:00",
+    "web_shahr": "2026-11-26T02:27:49.502460+00:00",
+    "web_mehr_tehran": "2026-11-26T02:27:49.502460+00:00"
   }
 }
