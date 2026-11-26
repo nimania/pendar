@@ -12134,9 +12134,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-26T03:08:40.746500+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-26T03:09:01.697037+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10803",
@@ -12161,9 +12162,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-26T03:08:40.746500+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-26T03:09:01.697037+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10804",
@@ -12225,7 +12227,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-26T03:08:58.749163+00:00",
+  "saved_at": "2026-11-26T03:09:01.697054+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-26T03:08:40.746500+00:00",
     "fardaayekerman": "2026-11-26T03:08:40.746500+00:00",
