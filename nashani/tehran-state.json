@@ -2,11 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/mehrnews/431577",
-    "https://t.me/isna94/413342",
-    "https://t.me/isna94/413344",
-    "https://t.me/mehrnews/431578",
-    "https://t.me/tehranpress1/132638",
     "https://t.me/mehrnews/431585",
     "https://t.me/mehrnews/431586",
     "https://t.me/mehrnews/431587",
@@ -5001,35 +4996,14 @@
     "https://t.me/irna_1313/478201",
     "https://t.me/irna_1313/478202",
     "https://t.me/irna_1313/478203",
-    "https://t.me/isna94/415287"
+    "https://t.me/isna94/415287",
+    "https://t.me/irna_1313/478204",
+    "https://t.me/irna_1313/478213",
+    "https://t.me/irna_1313/478214",
+    "https://t.me/isna94/415288",
+    "https://shahr.ir/news/88936/%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%DB%B5%DB%B4-%D8%AF%D8%B1%D8%B5%D8%AF%DB%8C-%D9%85%D8%B3%D8%A7%D9%81%D8%B1%D8%A7%D9%86-%D8%B4%D8%A8%DA%A9%D9%87-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3%D8%B1%D8%A7%D9%86%DB%8C-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%B4%D8%AF%D9%86"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/133065",
-      "source_post_id": "133065",
-      "title": "فرمانده‌کل سپاه: متجاوز باید تنبیه شود؛ آنها را رها نخواهیم کرد.",
-      "excerpt": "فرمانده‌کل سپاه: متجاوز باید تنبیه شود؛ آنها را رها نخواهیم کرد. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "فرمانده‌کل سپاه: متجاوز باید تنبیه شود؛ آنها را رها نخواهیم کرد.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/e98a84058d.mp4?token=sXB7JeUOJIy0Uv8UsScXJ1WS2WDX5G93DzSYxN7zmxb1CByK7zodPafApPv7QQOQ-bexOEWMbNkia9pZjWdBQs4FRyJG8ok-zbkDZ_lc7jDCv3krOlCeKFcmoIkdMtYZ0ta01eVF6DTi-ceYgTETqRJiGin3w5jp8XOhLNZysQuOhRCn4o_nnotlCXB1UlPPQQCcOG4gn3LqoS3c-kAS4Qlpw8EDYUEOFet-EtNT8kyZpCwJcQT9wW5RkEU-8lLeoeGavwSyCrkX6n0Xo9IWbgJxE46MTRmBcDzD8GSGmKfTXPHQaIVYpPDYtR12-nYAEfp6EUxNUbyLtdnwTJfIow"
-      },
-      "published_at": "2026-11-20T18:31:44+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "5b1fc71ceedb4241",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "review",
-      "detected_at": "2026-11-20T18:51:31.230306+00:00",
-      "other_sources": []
-    },
     {
       "url": "https://t.me/mehrnews/433694",
       "source_post_id": "433694",
@@ -13554,16 +13528,38 @@
       "delivery_kind": "photo",
       "telegram_message_id": 494,
       "sent_at": "2026-11-26T02:28:46.341829+00:00"
+    },
+    {
+      "url": "https://shahr.ir/news/88936/%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%DB%B5%DB%B4-%D8%AF%D8%B1%D8%B5%D8%AF%DB%8C-%D9%85%D8%B3%D8%A7%D9%81%D8%B1%D8%A7%D9%86-%D8%B4%D8%A8%DA%A9%D9%87-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3%D8%B1%D8%A7%D9%86%DB%8C-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%B4%D8%AF%D9%86",
+      "source_post_id": "%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%DB%B5%DB%B4-%D8%AF%D8%B1%D8%B5%D8%AF%DB%8C-%D9%85%D8%B3%D8%A7%D9%81%D8%B1%D8%A7%D9%86-%D8%B4%D8%A8%DA%A9%D9%87-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3%D8%B1%D8%A7%D9%86%DB%8C-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%B4%D8%AF%D9%86",
+      "title": "افزایش ۵۴ درصدی مسافران شبکه اتوبوسرانی تهران پس از رایگان شدن خدمات",
+      "excerpt": "مجموع مسافران روزانه خطوط اتوبوسرانی تهران با رایگان‌سازی خدمات این ناوگان، از یک میلیون و ۳۲۹ هزار نفر فراتر رفته و کل شبکه نسبت به مدت مشابه سال گذشته با افزایش حدود ۵۴ درصدی مسافر مواجه شده است.",
+      "paragraphs": [
+        "مجموع مسافران روزانه خطوط اتوبوسرانی تهران با رایگان‌سازی خدمات این ناوگان، از یک میلیون و ۳۲۹ هزار نفر فراتر رفته و کل شبکه نسبت به مدت مشابه سال گذشته با افزایش حدود ۵۴ درصدی مسافر مواجه شده است."
+      ],
+      "published_at": "2026-11-26T02:53:00+00:00",
+      "media": null,
+      "source": "شهر",
+      "source_handle": "web_shahr",
+      "id": "549582eae63f18a0",
+      "media_repost_allowed": false,
+      "source_hashtag": "شهر",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-26T03:08:39.509179+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-26T02:28:46.341853+00:00",
+  "saved_at": "2026-11-26T03:09:53.994192+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-26T02:27:49.502460+00:00",
-    "tehran_tel": "2026-11-26T02:27:49.502460+00:00",
-    "irna_1313": "2026-11-26T02:27:49.502460+00:00",
-    "isna94": "2026-11-26T02:27:49.502460+00:00",
-    "mehrnews": "2026-11-26T02:27:49.502460+00:00",
-    "web_shahr": "2026-11-26T02:27:49.502460+00:00",
-    "web_mehr_tehran": "2026-11-26T02:27:49.502460+00:00"
+    "tehranpress1": "2026-11-26T03:08:39.509179+00:00",
+    "tehran_tel": "2026-11-26T03:08:39.509179+00:00",
+    "irna_1313": "2026-11-26T03:08:39.509179+00:00",
+    "isna94": "2026-11-26T03:08:39.509179+00:00",
+    "mehrnews": "2026-11-26T03:08:39.509179+00:00",
+    "web_shahr": "2026-11-26T03:08:39.509179+00:00",
+    "web_mehr_tehran": "2026-11-26T03:08:39.509179+00:00"
   }
 }
