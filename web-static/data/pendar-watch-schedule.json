@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T17:15:27.525318+00:00",
+  "generated_at": "2026-11-26T16:56:49.137792+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -709,16 +709,6 @@
   "programmes": [
     {
       "channel_id": "digital-world",
-      "title_fa": "The Mosquito Bowl",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1458300",
-      "icon": "https://image.tmdb.org/t/p/w500/zbT4sxoCEeFWlQG4SC5X9Q8v6PC.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "دونده",
       "start": "2026-11-27T00:00:00+03:30",
       "date_only": true,
@@ -798,26 +788,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-1024",
-      "title_fa": "ارباب حلقه‌ها: حلقه‌های قدرت",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/84773",
-      "icon": "https://image.tmdb.org/t/p/w500/y9J6BfEuusqbBfQaFTEE55R3T4V.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 3؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-2739",
-      "title_fa": "ازدواج دوباره ملکه",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/279246",
-      "icon": "https://image.tmdb.org/t/p/w500/xCJxClwZSofe7nMCU6EWRYDjfDc.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 9 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "By Any Means",
       "start": "2026-12-03T00:00:00+03:30",
@@ -846,16 +816,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/rKnxmir8m5I3RdSTdZr3jaQaCZi.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 3 از فصل 11؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-2980",
-      "title_fa": "กฎหลังเที่ยงคืน",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/330613",
-      "icon": "https://image.tmdb.org/t/p/w500/hJF2csAuSuNRJIacTkQmfkd6GgL.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 6 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -1428,86 +1388,6 @@
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
     {
-      "channel_id": "tmdb-network-274",
-      "title_fa": "Goede Tijden, Slechte Tijden",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/11890",
-      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 51 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1334",
-      "title_fa": "Goede Tijden, Slechte Tijden",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/11890",
-      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 51 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-9",
-      "title_fa": "Coronation Street",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/291",
-      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 216 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 128 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 128 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4",
-      "title_fa": "EastEnders",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/1871",
-      "icon": "https://image.tmdb.org/t/p/w500/ETFWCToRFx45vNAsNexh31ufSE.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 188 از فصل 42؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-249",
-      "title_fa": "Un si grand soleil",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/81329",
-      "icon": "https://image.tmdb.org/t/p/w500/dhEN7hDJ3TR86JK36VyySEoPFok.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 251 از فصل 8؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-361",
-      "title_fa": "Un si grand soleil",
-      "start": "2026-11-25T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/81329",
-      "icon": "https://image.tmdb.org/t/p/w500/dhEN7hDJ3TR86JK36VyySEoPFok.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 251 از فصل 8؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "digital-world",
       "title_fa": "وریتی",
       "start": "2026-12-05T00:00:00+03:30",
@@ -1524,6 +1404,116 @@
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1255833",
       "icon": "https://image.tmdb.org/t/p/w500/kjtsf34hgWrVMyQDq9jnzb28PAW.jpg",
+      "quality_score": 85,
+      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "قانون و نظم: واحد قربانیان ویژه",
+      "start": "2026-12-03T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/2734",
+      "icon": "https://image.tmdb.org/t/p/w500/qRVm0gh4xCLxCr1Ayw0l1CYbylR.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 28؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-103",
+      "title_fa": "ドラえもん",
+      "start": "2026-11-28T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/65733",
+      "icon": "https://image.tmdb.org/t/p/w500/9YqdMXlPTQGLIG67vqZdsPdPC4T.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 1551 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-274",
+      "title_fa": "Goede Tijden, Slechte Tijden",
+      "start": "2026-11-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/11890",
+      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 52 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1334",
+      "title_fa": "Goede Tijden, Slechte Tijden",
+      "start": "2026-11-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/11890",
+      "icon": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 52 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-6",
+      "title_fa": "قانون و نظم",
+      "start": "2026-12-03T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/549",
+      "icon": "https://image.tmdb.org/t/p/w500/hmd2tEtjolLWpNLCTvXS2PO5VCi.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 26؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9",
+      "title_fa": "Coronation Street",
+      "start": "2026-11-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/291",
+      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 217 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 129 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 129 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-2980",
+      "title_fa": "กฎหลังเที่ยงคืน",
+      "start": "2026-12-02T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/330613",
+      "icon": "https://image.tmdb.org/t/p/w500/hJF2csAuSuNRJIacTkQmfkd6GgL.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 7 از فصل 1؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4",
+      "title_fa": "EastEnders",
+      "start": "2026-11-26T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/1871",
+      "icon": "https://image.tmdb.org/t/p/w500/ETFWCToRFx45vNAsNexh31ufSE.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 189 از فصل 42؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "digital-world",
+      "title_fa": "لنگ‌دراز",
+      "start": "2026-12-10T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/movie/1226578",
+      "icon": "https://image.tmdb.org/t/p/w500/9l4qcpeOnUN7HshFvxUBiYmfVO7.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     }
