@@ -13547,13 +13547,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-26T03:08:39.509179+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-26T03:09:56.199008+00:00"
+      "reserved_at": "2026-11-26T03:09:56.199008+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 495,
+      "sent_at": "2026-11-26T03:09:58.901856+00:00"
     }
   ],
-  "saved_at": "2026-11-26T03:09:56.199017+00:00",
+  "saved_at": "2026-11-26T03:09:58.901864+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-26T03:08:39.509179+00:00",
     "tehran_tel": "2026-11-26T03:08:39.509179+00:00",
