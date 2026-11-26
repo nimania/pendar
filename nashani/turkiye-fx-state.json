@@ -29,15 +29,16 @@
       "message_id": 68
     },
     "26.11.2026": {
-      "status": "sending_uncertain"
+      "status": "published",
+      "message_id": 72
     }
   },
   "last": {
-    "day": "25.11.2026",
+    "day": "26.11.2026",
     "mid": {
-      "USD": "50.5986",
-      "EUR": "55.3469",
-      "GBP": "66.12985"
+      "USD": "50.63215",
+      "EUR": "55.5468",
+      "GBP": "66.3585"
     }
   }
 }
