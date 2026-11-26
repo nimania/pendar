@@ -12134,10 +12134,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-26T03:08:40.746500+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-26T03:09:01.697037+00:00"
+      "reserved_at": "2026-11-26T03:09:01.697037+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 1006,
+      "sent_at": "2026-11-26T03:09:06.807311+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10803",
@@ -12162,10 +12165,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-26T03:08:40.746500+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-26T03:09:01.697037+00:00"
+      "reserved_at": "2026-11-26T03:09:01.697037+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 1007,
+      "sent_at": "2026-11-26T03:09:09.004552+00:00"
     },
     {
       "url": "https://t.me/kerman_gov/10804",
@@ -12227,7 +12233,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-26T03:09:01.697054+00:00",
+  "saved_at": "2026-11-26T03:09:09.004570+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-26T03:08:40.746500+00:00",
     "fardaayekerman": "2026-11-26T03:08:40.746500+00:00",
