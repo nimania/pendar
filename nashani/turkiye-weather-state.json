@@ -189,6 +189,10 @@
       "status": "published",
       "message_id": 73,
       "at": "2026-11-27T01:31:25.826538+03:00"
+    },
+    "2026-11-27-afternoon": {
+      "status": "sending_uncertain",
+      "at": "2026-11-27T15:59:33.565346+03:00"
     }
   }
 }
