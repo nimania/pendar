@@ -13562,13 +13562,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-27T04:19:04.664922+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-27T04:19:52.281814+00:00"
+      "reserved_at": "2026-11-27T04:19:52.281814+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 514,
+      "sent_at": "2026-11-27T04:19:54.623979+00:00"
     }
   ],
-  "saved_at": "2026-11-27T04:19:52.281834+00:00",
+  "saved_at": "2026-11-27T04:19:54.624002+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-27T04:19:04.664922+00:00",
     "tehran_tel": "2026-11-27T04:19:04.664922+00:00",
