@@ -13555,12 +13555,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T05:22:40.128402+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-27T05:23:40.092023+00:00"
     }
   ],
-  "saved_at": "2026-11-27T05:23:36.874023+00:00",
+  "saved_at": "2026-11-27T05:23:40.092047+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-27T05:22:40.128402+00:00",
     "tehran_tel": "2026-11-27T05:22:40.128402+00:00",
