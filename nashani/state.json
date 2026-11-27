@@ -12070,10 +12070,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-27T14:23:55.447025+00:00"
+      "reserved_at": "2026-11-27T14:23:55.447025+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 1048,
+      "sent_at": "2026-11-27T14:23:58.795923+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141348",
@@ -12303,10 +12306,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-27T14:18:10.533814+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-27T14:23:55.447025+00:00"
+      "reserved_at": "2026-11-27T14:23:55.447025+00:00",
+      "delivery_kind": "photo",
+      "telegram_message_id": 1049,
+      "sent_at": "2026-11-27T14:24:02.189227+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141360",
@@ -12327,10 +12333,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-27T14:18:10.533814+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-27T14:23:55.447025+00:00"
+      "reserved_at": "2026-11-27T14:23:55.447025+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 1050,
+      "sent_at": "2026-11-27T14:24:03.996962+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141361",
@@ -12359,7 +12368,7 @@
       "reserved_at": "2026-11-27T14:23:55.447025+00:00"
     }
   ],
-  "saved_at": "2026-11-27T14:23:55.447076+00:00",
+  "saved_at": "2026-11-27T14:24:04.947399+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-27T14:18:10.533814+00:00",
     "fardaayekerman": "2026-11-27T14:23:35.271551+00:00",
