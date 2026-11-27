@@ -2,11 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/isna94/413443",
-    "https://t.me/mehrnews/431716",
-    "https://t.me/mehrnews/431717",
-    "https://t.me/tehranpress1/132661",
-    "https://t.me/tehranpress1/132662",
     "https://t.me/mehrnews/431718",
     "https://t.me/tehranpress1/132663",
     "https://www.mehrnews.com/news/7010876/%D8%A7%D9%86%D8%AC%D9%85%D9%86-%D9%85%D9%87%D9%86%D8%AF%D8%B3%D8%A7%D9%86-%D8%AF%D9%85%D8%A7%D9%88%D9%86%D8%AF-%D9%81%D8%B1%D8%AF-%D8%A8%D8%A7%D8%B2%D8%AF%D8%A7%D8%B4%D8%AA%DB%8C-%D9%BE%D8%B1%D9%88%D9%86%D8%AF%D9%87-%D8%B1%D8%B4%D9%88%D9%87-%D9%86%D8%A7%D8%B8%D8%B1-%DA%AF%D8%A7%D8%B2-%D9%88-%D8%BA%DB%8C%D8%B1%D8%A8%D9%88%D9%85%DB%8C",
@@ -5001,36 +4996,14 @@
     "https://t.me/irna_1313/478512",
     "https://t.me/irna_1313/478513",
     "https://shahr.ir/news/88937/%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%DB%B7%DB%B0-%D9%85%DB%8C%D9%84%DB%8C%D9%88%D9%86-%D9%86%D9%81%D8%B1%DB%8C-%D9%85%D8%B3%D8%A7%D9%81%D8%B1%D8%A7%D9%86-%D9%85%D8%AA%D8%B1%D9%88-%D8%AF%D8%B1-%DB%B8-%D9%85%D8%A7%D9%87%D9%87-%D8%A7%D9%85%D8%B3%D8%A7%D9%84-%D8%B3%D9%87%D9%85-%D8%B4%D9%87%D8%B1%D9%88%D9%86%D8%AF%D8%A7%D9%86",
-    "https://t.me/mehrnews/435492"
+    "https://t.me/mehrnews/435492",
+    "https://t.me/irna_1313/478514",
+    "https://t.me/isna94/415410",
+    "https://t.me/isna94/415411",
+    "https://t.me/isna94/415412",
+    "https://shahr.ir/news/88965/%D8%B1%D9%88%D8%A7%DB%8C%D8%AA-%DB%8C%DA%A9-%D9%85%DB%8C%D8%B2%D8%A8%D8%A7%D9%86%DB%8C-%D9%85%D8%AA%D9%81%D8%A7%D9%88%D8%AA-%D8%AE%D8%A7%D9%86%D9%88%D8%A7%D8%AF%D9%87-%D8%B4%D9%87%D8%AF%D8%A7%DB%8C-%D9%85%DB%8C%D9%86%D8%A7%D8%A8-%D9%85%D9%87%D9%85%D8%A7%D9%86-%D8%A7%D8%B1%D8%A7%D8%B6%DB%8C-%D8%B9%D8%A8%D8%A7%D8%B3-%D8%A2%D8%A8%D8%A7%D8%AF"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/133090",
-      "source_post_id": "133090",
-      "title": "عصبانیت مزدوران اینترنشنال از انتخاب بیرانوند و مرضیه جعفری به‌عنوان بهترین‌های آسیا",
-      "excerpt": "عصبانیت مزدوران اینترنشنال از انتخاب بیرانوند و مرضیه جعفری به‌عنوان بهترین‌های آسیا تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "عصبانیت مزدوران اینترنشنال از انتخاب بیرانوند و مرضیه جعفری به‌عنوان بهترین‌های آسیا",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/204b4192bb.mp4?token=OR9FcJ0CXEyvhjHrjWweJgVJWwftvUWc3vqGrtAmuDxpkAqclMZUTX0eNSwPyxitmzXnJokWtmOrPXx92EjFR7IHyMTrPFLDZBDk8wHeSL4qLKmwUbMPb7Rq_0FxZSa4rQel7C8lEzI9c3NY2R6SlQPZLM56ypu-lmqnCc6BmSM71ovyvET2vqvs5mDPPeVzmPIRGsnLt820hQsSV0lTMbDAFCotGiSH9Z63NIDHA2wxIJRsSwgP4V96XD_2lJfzZKOzk0RLSys59X6y3TMkEanrlql7ty15MFgjK66Ei4_SQO9SGA8B3lKqb9pd5hizXhXl7-slQ2TzWmMzVQYeyg"
-      },
-      "published_at": "2026-11-21T06:41:47+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "f704c0534cb0ecba",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-21T07:46:27.060170+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/isna94/414456",
       "source_post_id": "414456",
@@ -13570,16 +13543,38 @@
       "delivery_kind": "text",
       "telegram_message_id": 513,
       "sent_at": "2026-11-27T03:11:02.318639+00:00"
+    },
+    {
+      "url": "https://shahr.ir/news/88965/%D8%B1%D9%88%D8%A7%DB%8C%D8%AA-%DB%8C%DA%A9-%D9%85%DB%8C%D8%B2%D8%A8%D8%A7%D9%86%DB%8C-%D9%85%D8%AA%D9%81%D8%A7%D9%88%D8%AA-%D8%AE%D8%A7%D9%86%D9%88%D8%A7%D8%AF%D9%87-%D8%B4%D9%87%D8%AF%D8%A7%DB%8C-%D9%85%DB%8C%D9%86%D8%A7%D8%A8-%D9%85%D9%87%D9%85%D8%A7%D9%86-%D8%A7%D8%B1%D8%A7%D8%B6%DB%8C-%D8%B9%D8%A8%D8%A7%D8%B3-%D8%A2%D8%A8%D8%A7%D8%AF",
+      "source_post_id": "%D8%B1%D9%88%D8%A7%DB%8C%D8%AA-%DB%8C%DA%A9-%D9%85%DB%8C%D8%B2%D8%A8%D8%A7%D9%86%DB%8C-%D9%85%D8%AA%D9%81%D8%A7%D9%88%D8%AA-%D8%AE%D8%A7%D9%86%D9%88%D8%A7%D8%AF%D9%87-%D8%B4%D9%87%D8%AF%D8%A7%DB%8C-%D9%85%DB%8C%D9%86%D8%A7%D8%A8-%D9%85%D9%87%D9%85%D8%A7%D9%86-%D8%A7%D8%B1%D8%A7%D8%B6%DB%8C-%D8%B9%D8%A8%D8%A7%D8%B3-%D8%A2%D8%A8%D8%A7%D8%AF",
+      "title": "روایت یک میزبانی متفاوت؛ خانواده شهدای میناب مهمان اراضی عباس‌آباد شدند",
+      "excerpt": "میزبانی اراضی عباس‌آباد از خانواده‌های شهدای مدرسه شجره طیبه میناب، فرصتی برای ساعاتی حضور در فضای فرهنگی و گردشگری پایتخت بود؛ برنامه‌ای که در کنار بازدید از جاذبه‌های تهران، با روایت‌های تلخ خانواده‌ها، قاب عکس دانش‌آموزان شهید و یادآوری زخم‌های برجای‌مانده از این حادثه، رنگ‌وبویی متفاوت به خود گرفت.",
+      "paragraphs": [
+        "میزبانی اراضی عباس‌آباد از خانواده‌های شهدای مدرسه شجره طیبه میناب، فرصتی برای ساعاتی حضور در فضای فرهنگی و گردشگری پایتخت بود؛ برنامه‌ای که در کنار بازدید از جاذبه‌های تهران، با روایت‌های تلخ خانواده‌ها، قاب عکس دانش‌آموزان شهید و یادآوری زخم‌های برجای‌مانده از این حادثه، رنگ‌وبویی متفاوت به خود گرفت."
+      ],
+      "published_at": "2026-11-27T04:12:59+00:00",
+      "media": null,
+      "source": "شهر",
+      "source_handle": "web_shahr",
+      "id": "f12a02ca2bbc383e",
+      "media_repost_allowed": false,
+      "source_hashtag": "شهر",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-27T04:19:04.664922+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-27T03:11:02.318660+00:00",
+  "saved_at": "2026-11-27T04:19:50.262179+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-27T03:10:12.874547+00:00",
-    "tehran_tel": "2026-11-27T03:10:12.874547+00:00",
-    "irna_1313": "2026-11-27T03:10:12.874547+00:00",
-    "isna94": "2026-11-27T03:10:12.874547+00:00",
-    "mehrnews": "2026-11-27T03:10:12.874547+00:00",
-    "web_shahr": "2026-11-27T03:10:12.874547+00:00",
-    "web_mehr_tehran": "2026-11-27T03:10:12.874547+00:00"
+    "tehranpress1": "2026-11-27T04:19:04.664922+00:00",
+    "tehran_tel": "2026-11-27T04:19:04.664922+00:00",
+    "irna_1313": "2026-11-27T04:19:04.664922+00:00",
+    "isna94": "2026-11-27T04:19:04.664922+00:00",
+    "mehrnews": "2026-11-27T04:19:04.664922+00:00",
+    "web_shahr": "2026-11-27T04:19:04.664922+00:00",
+    "web_mehr_tehran": "2026-11-27T04:19:04.664922+00:00"
   }
 }
