@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "updated_at": "2026-11-26T00:14:31+00:00",
+  "updated_at": "2026-11-27T00:31:45+00:00",
   "scope": "Public regional reports only; no vessel coordinates, routes or live tracking.",
   "events": [
+    {
+      "id": "usni-163bb7186fdac14a2f",
+      "date": "2026-11-24",
+      "country": "other",
+      "region": "global",
+      "type": "خبر دریایی",
+      "sensitive": false,
+      "title": "گزارش تازه منبع درباره تحولات دریایی",
+      "original_title": "Philippine Forces Train to Secure Luzon Strait with Warships, BrahMos Missiles",
+      "description": "این مدخل صرفاً به متن منبع پیوند می‌دهد و موقعیت یا مسیر هیچ ناوی را نمایش نمی‌دهد.",
+      "source": "USNI News",
+      "url": "https://news.usni.org/2026/11/24/philippine-forces-train-to-secure-luzon-strait-with-warships-brahmos-missiles"
+    },
     {
       "id": "usni-70448e394023d283ed",
       "date": "2026-11-23",
