@@ -11867,9 +11867,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-27T12:39:36.908232+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30498",
@@ -11894,9 +11895,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-27T12:39:36.908232+00:00"
     },
     {
       "url": "https://t.me/Kerman_akhbar/66670",
@@ -11944,14 +11946,15 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
       "other_sources": [
         {
           "name": "آخرین خبر کرمان",
           "url": "https://t.me/Kerman_akhbar/66677"
         }
-      ]
+      ],
+      "reserved_at": "2026-11-27T12:39:36.908232+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141340",
@@ -11974,9 +11977,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-27T12:39:36.908232+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141342",
@@ -11998,14 +12002,15 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
       "other_sources": [
         {
           "name": "آخرین خبر کرمان",
           "url": "https://t.me/Kerman_akhbar/66675"
         }
-      ]
+      ],
+      "reserved_at": "2026-11-27T12:39:36.908232+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141343",
@@ -12028,9 +12033,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-27T12:39:36.908232+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30500",
@@ -12080,9 +12086,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-27T12:39:36.908232+00:00"
     },
     {
       "url": "https://t.me/Kerman_akhbar/66673",
@@ -12155,9 +12162,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-27T12:39:15.775095+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-27T12:39:36.908232+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141349",
@@ -12287,7 +12295,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-27T12:39:33.660815+00:00",
+  "saved_at": "2026-11-27T12:39:36.908256+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-27T12:39:15.775095+00:00",
     "fardaayekerman": "2026-11-27T12:39:15.775095+00:00",
