@@ -343,6 +343,10 @@
       "status": "published",
       "message_id": 505,
       "at": "2026-11-27T01:38:27.683016+03:30"
+    },
+    "2026-11-27-afternoon-کرمان": {
+      "status": "sending_uncertain",
+      "at": "2026-11-27T15:18:24.098130+03:30"
     }
   }
 }
