@@ -12275,10 +12275,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-27T05:22:40.755849+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-27T05:22:59.801650+00:00"
+      "reserved_at": "2026-11-27T05:22:59.801650+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 1029,
+      "sent_at": "2026-11-27T05:23:04.067497+00:00"
     },
     {
       "url": "https://t.me/Kerman_akhbar/66667",
@@ -12302,13 +12305,16 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-27T05:22:40.755849+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-27T05:22:59.801650+00:00"
+      "reserved_at": "2026-11-27T05:22:59.801650+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 1030,
+      "sent_at": "2026-11-27T05:23:06.029252+00:00"
     }
   ],
-  "saved_at": "2026-11-27T05:22:59.801671+00:00",
+  "saved_at": "2026-11-27T05:23:06.029272+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-27T05:22:40.755849+00:00",
     "fardaayekerman": "2026-11-27T05:22:40.755849+00:00",
