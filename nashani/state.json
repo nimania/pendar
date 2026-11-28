@@ -3725,173 +3725,22 @@
     "https://t.me/Kerman_akhbar/66698",
     "https://t.me/Kerman_akhbar/66699",
     "https://t.me/kermane_no/59955",
-    "https://t.me/kerman_gov/10849"
+    "https://t.me/kerman_gov/10849",
+    "https://t.me/kerman_news/141430",
+    "https://t.me/kerman_news/141431",
+    "https://t.me/qh_qv/1309",
+    "https://t.me/kermane_no/59956",
+    "https://t.me/kerman_news/141432",
+    "https://t.me/Kerman_akhbar/66700",
+    "https://t.me/kerman_news/141433",
+    "https://t.me/irna_kerman/30505",
+    "https://t.me/kerman_news/141434",
+    "https://t.me/kerman_news/141435",
+    "https://t.me/irna_kerman/30506",
+    "https://t.me/kerman_news/141436",
+    "https://t.me/kermane_no/59957"
   ],
   "queue": [
-    {
-      "url": "https://t.me/Kerman_akhbar/66591",
-      "source_post_id": "66591",
-      "title": "دستگيری سارق حرفه‌ای محتويات داخل خودرو با تلاش مأموران کلانتری ۱۹ کرمان",
-      "excerpt": "دستگيری سارق حرفه‌ای محتويات داخل خودرو با تلاش مأموران کلانتری ۱۹ کرمان ماموران کلانتری کرمان این سارق که با استفاده از يک دستگاه خودروی پرايد سرقتی در سطح شهر تردد و اقدام به سرقت محتويات داخل خودروهاي شهروندان مي‌کرد را دستگیر و ضمن کشف خودروی مسروقه ۶ فقره سرقت محتويات داخل خودرو را نیز کشف کردند.",
-      "paragraphs": [
-        "دستگيری سارق حرفه‌ای محتويات داخل خودرو با تلاش مأموران کلانتری ۱۹ کرمان",
-        "ماموران کلانتری کرمان این سارق که با استفاده از يک دستگاه خودروی پرايد سرقتی در سطح شهر تردد و اقدام به سرقت محتويات داخل خودروهاي شهروندان مي‌کرد را دستگیر و ضمن کشف خودروی مسروقه ۶ فقره سرقت محتويات داخل خودرو را نیز کشف کردند."
-      ],
-      "media": null,
-      "published_at": "2026-11-23T17:02:08+00:00",
-      "source": "آخرین خبر کرمان",
-      "source_handle": "kerman_akhbar",
-      "id": "5251d9324f9b5b4d",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-23T20:35:20.637383+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/irna_kerman/30472",
-      "source_post_id": "30472",
-      "title": "مس کرمان مقابل بعثت کرمانشاه متوقف شد",
-      "excerpt": "مس کرمان مقابل بعثت کرمانشاه متوقف شد تیم فوتبال مس کرمان در هفته یازدهم رقابت‌های لیگ دسته یک کشور با نتیجه تساوی بدون گل مقابل بعث کرمانشاه متوقف شد. irna_kerman",
-      "paragraphs": [
-        "مس کرمان مقابل بعثت کرمانشاه متوقف شد",
-        "تیم فوتبال مس کرمان در هفته یازدهم رقابت‌های لیگ دسته یک کشور با نتیجه تساوی بدون گل مقابل بعث کرمانشاه متوقف شد.",
-        "irna_kerman"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/sgIWuLxU7ljRfmhOw5wh-TcPGHy0TlNTjq_pzOO4DMxRi0ogfR8inCZJQB-8e_pTNaRnyiA9_0YmvWlROXUXzqSMmxUZDrMC5KWUPGh90DS6gfsheib688td_HmefK4uPFsyjvIVwsy4M13RUVTY5h9_a3zPokQB52ZezpmawN9IJU6T33EIgZS8vD9MqwF1-kPvxv9NAYWSeRNOpbCQN7nNducVEYzPN0pqVmFFFX2cClEjE6Ar9wM8__s3zriY7tbeszHxeFMk-UpBdd4POVvm1SOVaTLpJlGIGlzCiI1PTveBJd2wwRNagAR9DuiXF2uvnRrNAO7mEey1got-6Q.jpg"
-      },
-      "published_at": "2026-11-23T17:05:22+00:00",
-      "source": "ایرنا کرمان",
-      "source_handle": "irna_kerman",
-      "id": "2a6aeabaa975bd9c",
-      "media_repost_allowed": false,
-      "source_hashtag": "",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-23T20:35:20.637383+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-23T20:35:41.713638+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 917,
-      "sent_at": "2026-11-23T20:36:02.380119+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59762",
-      "source_post_id": "59762",
-      "title": "۲۵۱ مأموریت آتش‌نشانی کرمان در آبان؛ نجات ۷۴ نفر",
-      "excerpt": "۲۵۱ مأموریت آتش‌نشانی کرمان در آبان؛ نجات ۷۴ نفر آتش‌نشانان شهرداری کرمان در آبان‌ماه ۲۵۱ مأموریت امداد و اطفای حریق انجام دادند که در جریان آن ۷۴ نفر نجات یافتند، ۴۲ نفر مصدوم شدند و چهار نفر جان باختند. حریق زباله با ۲۵ مورد، آتش‌سوزی خودرو با ۲۰ مورد و حریق منازل با ۱۷ مورد بیشترین آتش‌سوزی‌ها بود و حوادث مار و حیوانات با ۶۹ مورد در صدر عملیات امداد قرار داشت.",
-      "paragraphs": [
-        "۲۵۱ مأموریت آتش‌نشانی کرمان در آبان؛ نجات ۷۴ نفر",
-        "آتش‌نشانان شهرداری کرمان در آبان‌ماه ۲۵۱ مأموریت امداد و اطفای حریق انجام دادند که در جریان آن ۷۴ نفر نجات یافتند، ۴۲ نفر مصدوم شدند و چهار نفر جان باختند.",
-        "حریق زباله با ۲۵ مورد، آتش‌سوزی خودرو با ۲۰ مورد و حریق منازل با ۱۷ مورد بیشترین آتش‌سوزی‌ها بود و حوادث مار و حیوانات با ۶۹ مورد در صدر عملیات امداد قرار داشت."
-      ],
-      "media": null,
-      "published_at": "2026-11-23T17:07:23+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "00a6404c0a1cc1f5",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-23T20:35:20.637383+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/kermane_no/59763",
-      "source_post_id": "59763",
-      "title": "پیروزی ۵ بر ۱ گل‌گهر سیرجان مقابل ملوان در لیگ برتر فوتبال زنان",
-      "excerpt": "پیروزی ۵ بر ۱ گل‌گهر سیرجان مقابل ملوان در لیگ برتر فوتبال زنان تیم فوتبال زنان گل‌گهر سیرجان در هفته نهم لیگ برتر با نتیجه ۵ بر یک ملوان را در بندرانزلی شکست داد و برای دومین هفته پیاپی پنج گل به ثمر رساند. مریم خلیلی‌فر و افسانه چترنور هر کدام دو گل و فاطمه عادلی یک گل زدند و گل‌گهر نیم‌فصل نخست را با دو امتیاز فاصله از صدرنشین به پایان رساند.",
-      "paragraphs": [
-        "پیروزی ۵ بر ۱ گل‌گهر سیرجان مقابل ملوان در لیگ برتر فوتبال زنان",
-        "تیم فوتبال زنان گل‌گهر سیرجان در هفته نهم لیگ برتر با نتیجه ۵ بر یک ملوان را در بندرانزلی شکست داد و برای دومین هفته پیاپی پنج گل به ثمر رساند.",
-        "مریم خلیلی‌فر و افسانه چترنور هر کدام دو گل و فاطمه عادلی یک گل زدند و گل‌گهر نیم‌فصل نخست را با دو امتیاز فاصله از صدرنشین به پایان رساند."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/fxOO2_vKV-M41rBTFo8D1-1LcuT8YrPH2nYOVKcEauzhCmypaySnYi4ZvtwRWHPx0RylKWD6mOFlWxrb_b3tgYkgBdmP4B2Quo8H2zloyhvUOrybje1EBmWCQfGMcVUFdHVOVcyFOWROK0ihzTL0ulzPI44z6hvBQX4jnUBuCOPQoJPeZkYIaNHIMo8F8h_J1Mv0oGsDaIGJhVVrZJdYqndCOaJJTAjOBew2mT1meEaSx19Aw_Pp8YBihhaqHpHKJqJYIwgvG65OvJsF6zhk3Z3oFmnc6_i_IAMhDiDFuawmkcAlFNk8_BLYI7gQwKvzpKbZrgymlsPpbmkNDmZI0g.jpg"
-      },
-      "published_at": "2026-11-23T17:23:29+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "12c81205643def52",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-23T20:35:20.637383+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-23T21:44:31.775552+00:00",
-      "delivery_kind": "photo",
-      "telegram_message_id": 921,
-      "sent_at": "2026-11-23T21:44:45.707139+00:00"
-    },
-    {
-      "url": "https://t.me/kermane_no/59764",
-      "source_post_id": "59764",
-      "title": "شکست دیرهنگام مس رفسنجان برابر فولاد ب",
-      "excerpt": "شکست دیرهنگام مس رفسنجان برابر فولاد ب تیم فوتبال مس رفسنجان در هفته یازدهم لیگ یک، در دیداری خارج از خانه ۲ بر یک مغلوب فولاد ب شد. مس رفسنجان که در دقیقه ۹۰ با گل محمد صابری‌پور بازی را مساوی کرده بود، در دقیقه ششم وقت‌های تلف‌شده روی یک ضدحمله گل دوم را دریافت کرد و با ۱۹ امتیاز رده دوم جدول را از دست داد.",
-      "paragraphs": [
-        "شکست دیرهنگام مس رفسنجان برابر فولاد ب",
-        "تیم فوتبال مس رفسنجان در هفته یازدهم لیگ یک، در دیداری خارج از خانه ۲ بر یک مغلوب فولاد ب شد.",
-        "مس رفسنجان که در دقیقه ۹۰ با گل محمد صابری‌پور بازی را مساوی کرده بود، در دقیقه ششم وقت‌های تلف‌شده روی یک ضدحمله گل دوم را دریافت کرد و با ۱۹ امتیاز رده دوم جدول را از دست داد."
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/rqQno7H0UOaILXTW6DELxmRDW4i7Tc7ZDrTE4LJ8WSsZoWcz8-ay58LcNBPKPWJ9TTykXFiSA8VbK0tciuAQFYlgC_t627ogaEp4hAze3x4hS2aDNTEGvp5otj2gVpqyHSdrEP5nE1bSobU0vkKt7mksN8YurSpaWD_lt8SulYQ7vbw94eztXg-ccJhZhAjG_ELpqL-vV6zfKhCTXGjty6aqRJWTkTqOhEmRd8lr4P3oSJUsH92VOozR7d6cUgIDn3Dr2NnrlRZMnwyO0PJo26VmrB1w35D40IvFMnQqCJbQh3xbNRJKpTrOXHxGtYJmtJnmI2aOZmB1bWDWwsQaIQ.jpg"
-      },
-      "published_at": "2026-11-23T17:38:04+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "b99d3dd74698252f",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "review",
-      "detected_at": "2026-11-23T20:35:20.637383+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/kermane_no/59765",
-      "source_post_id": "59765",
-      "title": "لاله‌زار بردسیر دومین نقطه سرد کشور شد",
-      "excerpt": "لاله‌زار بردسیر دومین نقطه سرد کشور شد لاله‌زار بردسیر صبح امروز دوشنبه ۲ آذر با دمای ۲ درجه زیر صفر، پس از دشت نمدان، دومین ایستگاه سرد کشور و سردترین نقطه استان کرمان بود. در همین مدت منوجان با بیشینه ۳۰٫۹ درجه گرم‌ترین ایستگاه استان بود و هواشناسی برای روزهای آینده احتمال افزایش سرعت باد در برخی مناطق شرقی و شمال‌غربی استان را پیش‌بینی کرده است.",
-      "paragraphs": [
-        "لاله‌زار بردسیر دومین نقطه سرد کشور شد",
-        "لاله‌زار بردسیر صبح امروز دوشنبه ۲ آذر با دمای ۲ درجه زیر صفر، پس از دشت نمدان، دومین ایستگاه سرد کشور و سردترین نقطه استان کرمان بود.",
-        "در همین مدت منوجان با بیشینه ۳۰٫۹ درجه گرم‌ترین ایستگاه استان بود و هواشناسی برای روزهای آینده احتمال افزایش سرعت باد در برخی مناطق شرقی و شمال‌غربی استان را پیش‌بینی کرده است."
-      ],
-      "media": null,
-      "published_at": "2026-11-23T17:54:40+00:00",
-      "source": "کرمان‌نو",
-      "source_handle": "kermane_no",
-      "id": "434153d729eabd36",
-      "media_repost_allowed": true,
-      "source_hashtag": "کرمان_نو",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "kerman",
-      "status": "published",
-      "detected_at": "2026-11-23T20:35:20.637383+00:00",
-      "other_sources": [],
-      "reserved_at": "2026-11-23T21:44:31.775552+00:00",
-      "delivery_kind": "text",
-      "telegram_message_id": 922,
-      "sent_at": "2026-11-23T21:44:47.683720+00:00"
-    },
     {
       "url": "https://t.me/kerman_news/141122",
       "source_post_id": "141122",
@@ -12554,17 +12403,179 @@
       "status": "ready",
       "detected_at": "2026-11-28T14:32:58.563627+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/141431",
+      "source_post_id": "141431",
+      "title": "تیراندازی پلیس، سارقان کابل برق را در سیرجان زمین‌گیر کرد",
+      "excerpt": "تیراندازی پلیس، سارقان کابل برق را در سیرجان زمین‌گیر کرد فرمانده انتظامی سیرجان دو سارق سابقه‌دار کابل برق در عملیات مأموران کلانتری ۱۴ که با تیراندازی همراه بود، دستگیر شدند و در ادامه یک مالخر نیز بازداشت شد. متهمان در بازجویی‌ها به پنج فقره سرقت سیم و کابل برق در محدوده نجف‌شهر اعتراف کرده‌اند. بررسی سوابق آن‌ها نیز از سابقه فعالیت حرفه‌ای در سرقت خودرو، اماکن خصوصی و تجهیزات برق حکایت دارد.",
+      "paragraphs": [
+        "تیراندازی پلیس، سارقان کابل برق را در سیرجان زمین‌گیر کرد",
+        "فرمانده انتظامی سیرجان",
+        "دو سارق سابقه‌دار کابل برق در عملیات مأموران کلانتری ۱۴ که با تیراندازی همراه بود، دستگیر شدند و در ادامه یک مالخر نیز بازداشت شد.",
+        "متهمان در بازجویی‌ها به پنج فقره سرقت سیم و کابل برق در محدوده نجف‌شهر اعتراف کرده‌اند. بررسی سوابق آن‌ها نیز از سابقه فعالیت حرفه‌ای در سرقت خودرو، اماکن خصوصی و تجهیزات برق حکایت دارد."
+      ],
+      "media": null,
+      "published_at": "2026-11-28T15:10:09+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "b26fcb870e0607bf",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-28T16:52:46.896343+00:00",
+      "other_sources": [
+        {
+          "name": "آخرین خبر کرمان",
+          "url": "https://t.me/Kerman_akhbar/66700"
+        }
+      ]
+    },
+    {
+      "url": "https://t.me/kermane_no/59956",
+      "source_post_id": "59956",
+      "title": "به گزارش کرمان‌نو، محمدعلی طالبی استاندار کرمان در جلسه شورای اجتماعی استان با انتقاد از تشکیل نشدن ستاد نظارت بر اجرای قانون حمایت از افراد دارای معلولیت گفت: در این مورد گلایه‌ای دارم، بیش از یک سال قبل قرار بود ستاد نظارت بر اجرای قانون در حمایت از حقوق افراد دارای معلولیت تشکیل شود و من با این موضوع موافقت کردم. باید ببینیم کدام نهاد باید پیگیری می‌کرده اما نکرده و چرا کاری که پیشنهاد داده شده انجام نشده؟ خود این نشان‌دهنده این است که ساختارهای اداری ما برای پیگیری برخی از موضوعات چابکی لازم را ندارد.",
+      "excerpt": "به گزارش کرمان‌نو، محمدعلی طالبی استاندار کرمان در جلسه شورای اجتماعی استان با انتقاد از تشکیل نشدن ستاد نظارت بر اجرای قانون حمایت از افراد دارای معلولیت گفت: در این مورد گلایه‌ای دارم، بیش از یک سال قبل قرار بود ستاد نظارت بر اجرای قانون در حمایت از حقوق افراد دارای معلولیت تشکیل شود و من با این موضوع موافقت کردم. باید ببینیم کدام نهاد باید پیگیری می‌کرده اما نکرده و چرا کاری که پیشنهاد داده شده انجام نشده؟ خود این نشان‌دهنده این است که ساختارهای اداری ما برای پیگیری برخی از موضوعات چابکی لازم را ندارد. او ادامه داد: ستاد ساماندهی متکدیان هم داشتیم درخواستم این است که یک کار کارشناسی را در نحوه برخورد با متکدیان انجام بدهند. در بحث اعتبارات کمک می‌کنیم. نیرو انتظامی و بهزیستی نیز در بحث جمع‌آوری کمک بدهد و کاری هماهنگ در سطح استان صورت بگیرد. استاندار افزود: در طول یک سال گذشته در حوزه‌های مسئولیت اجتماعی پول کم نگذاشتیم؛ اما اگر بررسی کنیم می‌بینیم که هیچ‌کدام از این کارها مصوبه شورای اجتماعی را نداشته است.",
+      "paragraphs": [
+        "به گزارش کرمان‌نو، محمدعلی طالبی استاندار کرمان در جلسه شورای اجتماعی استان با انتقاد از تشکیل نشدن ستاد نظارت بر اجرای قانون حمایت از افراد دارای معلولیت گفت: در این مورد گلایه‌ای دارم، بیش از یک سال قبل قرار بود ستاد نظارت بر اجرای قانون در حمایت از حقوق افراد دارای معلولیت تشکیل شود و من با این موضوع موافقت کردم. باید ببینیم کدام نهاد باید پیگیری می‌کرده اما نکرده و چرا کاری که پیشنهاد داده شده انجام نشده؟ خود این نشان‌دهنده این است که ساختارهای اداری ما برای پیگیری برخی از موضوعات چابکی لازم را ندارد.",
+        "او ادامه داد: ستاد ساماندهی متکدیان هم داشتیم درخواستم این است که یک کار کارشناسی را در نحوه برخورد با متکدیان انجام بدهند. در بحث اعتبارات کمک می‌کنیم. نیرو انتظامی و بهزیستی نیز در بحث جمع‌آوری کمک بدهد و کاری هماهنگ در سطح استان صورت بگیرد.",
+        "استاندار افزود: در طول یک سال گذشته در حوزه‌های مسئولیت اجتماعی پول کم نگذاشتیم؛ اما اگر بررسی کنیم می‌بینیم که هیچ‌کدام از این کارها مصوبه شورای اجتماعی را نداشته است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/svVvLIlU2IVXexy5B_TJIivVewZQj6nBlnVAkeIsIXxhq9J0P6IzrNCUszFGvDv2wfftUQit05bCJNNxBsqzHjEnPz527AfjGvNZ8eie2RY-uiZ_2GaQps7DcUw2tHNoPFCaqlLBmiJxG_YY0nkZiBxCy-shuPV4YDgOMg6Fzrv4mdbIgxwB5a7mCxTGo3q9oPRLYVegERdrFLHXLTMJ1w873IkmRnZB9naF4e1_kKO8HlYkZB9DOrQbqkKGT1D18nCeUfemI5LwOjhD5gx1JMlkGgmy-PTyyUroVTnVjDeO5XR-rmBCpq-6rCiMwNrvGNNX7Lk7sDP6NtB-BWH36w.jpg"
+      },
+      "published_at": "2026-11-28T15:21:22+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "c647c0554d46b09d",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-28T16:52:46.896343+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kerman_news/141433",
+      "source_post_id": "141433",
+      "title": "توقیف پژو پارس متخلف توسط پلیس راهور رفسنجان",
+      "excerpt": "توقیف پژو پارس متخلف توسط پلیس راهور رفسنجان تغییر غیرمجاز در ارتفاع و ظاهر خودرو، استفاده از سیستم تعلیق پنوماتیک، نصب چراغ‌های رنگی و خیره‌کننده و ایجاد آلودگی صوتی از جمله تخلفات این خودرو عنوان شده است.",
+      "paragraphs": [
+        "توقیف پژو پارس متخلف توسط پلیس راهور رفسنجان",
+        "تغییر غیرمجاز در ارتفاع و ظاهر خودرو، استفاده از سیستم تعلیق پنوماتیک، نصب چراغ‌های رنگی و خیره‌کننده و ایجاد آلودگی صوتی از جمله تخلفات این خودرو عنوان شده است."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/EslGFi3rUvs5iYJr7zo08OOZEKiXIr0SaLSrUtmYOPC1KWkij5ideUvHe5MwvsDMp_VFW1anAGfAIjMi4Iq3Cb_XNIXjMFttHfoIbYIQlm0I15Wgu_vgeBE8kLbbeZppSs6ugHFXFCqhBxW57xv-9xT_DmOOA7Gtm0GhdmaKTfYbKPFgamFeHqRddWiLYBXyuaD00TP726t-KiKj2AxZg2r8_08QYEXc1K0HbFAPknieTHav6Qv-k8q1Y_ncsfScvpPD3PU9AwXgi2uM-svhV-uwgvHH0fVqUP463bF9sgEAzTEZjiypzzHZo830gDqQ1gAvhjEog8vMFb77qTVgrg.jpg"
+      },
+      "published_at": "2026-11-28T15:46:30+00:00",
+      "source": "اخبار کرمان",
+      "source_handle": "kerman_news",
+      "id": "69ce89720af76165",
+      "media_repost_allowed": true,
+      "source_hashtag": "اخبار_کرمان",
+      "risk": "sensitive",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "review",
+      "detected_at": "2026-11-28T16:52:46.896343+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30505",
+      "source_post_id": "30505",
+      "title": "ترسیم نقشه راه مدیریت استان کرمان برای مأموریت‌های اجتماعی",
+      "excerpt": "ترسیم نقشه راه مدیریت استان کرمان برای مأموریت‌های اجتماعی انتقاد از کُندی ساختارهای اداری در پیگیری مطالبات و حقوق معلولان، ضرورت هدایت هوشمندانه منابع مسئولیت اجتماعی در کنار بودجه‌های دولتی و تأکید بر پرهیز از موازی‌کاری دستگاه‌ها، از محورهای مهم نشست شورای اجتماعی استان کرمان بود که استاندار در آن بر لزوم تقویت نظام تصمیم‌گیری جمعی و رویکرد مأموریت‌محور برای حل ریشه‌ای چالش‌های اجتماعی تأکید کرد. irna_kerman",
+      "paragraphs": [
+        "ترسیم نقشه راه مدیریت استان کرمان برای مأموریت‌های اجتماعی",
+        "انتقاد از کُندی ساختارهای اداری در پیگیری مطالبات و حقوق معلولان، ضرورت هدایت هوشمندانه منابع مسئولیت اجتماعی در کنار بودجه‌های دولتی و تأکید بر پرهیز از موازی‌کاری دستگاه‌ها، از محورهای مهم نشست شورای اجتماعی استان کرمان بود که استاندار در آن بر لزوم تقویت نظام تصمیم‌گیری جمعی و رویکرد مأموریت‌محور برای حل ریشه‌ای چالش‌های اجتماعی تأکید کرد.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/mhaUm8GTH_5-J1Tr2uk6y1PkryqolwZcbq0e4uAiXIP25WLZaA1A6JtnNi-h-Ffb0iaYl-U1L_-xSHIJEeSv_FphWT4z87QHb77pUo10wkLV50_Ra7EX7lXaMGTkVSFSgYxlMn9SacNKIEnMPeaugOVq1-AUo1Xn0wGrR7Ib5IXdzweDNWvZuxyC3bR-pmU-KqWxxSctIhnyCUH3vIkta0jl14DMTRKS6DQt_r3Ocecw2OA5YgJ_1EWEAHnDS5Ocq4gVgVPQ8hyomgRGLhOs75gnJd6BeUiJvsTSOiTJ1uZ1GFZCiAYiw5G2NFldtrzPIe9LjOcoj1HM76fs1YgC3A.jpg"
+      },
+      "published_at": "2026-11-28T16:12:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "f6b49378a5277707",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-28T16:52:46.896343+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_kerman/30506",
+      "source_post_id": "30506",
+      "title": "نوای کهن تاریخ در چهارسوق جنوب کرمان؛ جشنواره ملی موسیقی نواحی میزبان خطه تمدن‌ها شد",
+      "excerpt": "نوای کهن تاریخ در چهارسوق جنوب کرمان؛ جشنواره ملی موسیقی نواحی میزبان خطه تمدن‌ها شد طنین سازها و حنجره‌های اصیل در پهنه جنوب کرمان پیچید؛ هجدهمین جشنواره ملی موسیقی نواحی ایران در حالی گام به این منطقه تمدنی گذاشته که این رویداد، فراتر از یک رخداد هنری، تجلی‌گاه پیوند نسلی، پاسداری از میراث شفاهی و آیینه‌ای تمام‌نما از رنج‌ها و شادی‌های مردمان این خطه است تا چهار شهرستان جنوبی استان میزبان اصیل‌ترین آواهای سرزمین ایران باشند. irna_kerman",
+      "paragraphs": [
+        "نوای کهن تاریخ در چهارسوق جنوب کرمان؛ جشنواره ملی موسیقی نواحی میزبان خطه تمدن‌ها شد",
+        "طنین سازها و حنجره‌های اصیل در پهنه جنوب کرمان پیچید؛ هجدهمین جشنواره ملی موسیقی نواحی ایران در حالی گام به این منطقه تمدنی گذاشته که این رویداد، فراتر از یک رخداد هنری، تجلی‌گاه پیوند نسلی، پاسداری از میراث شفاهی و آیینه‌ای تمام‌نما از رنج‌ها و شادی‌های مردمان این خطه است تا چهار شهرستان جنوبی استان میزبان اصیل‌ترین آواهای سرزمین ایران باشند.",
+        "irna_kerman"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/CLnVFy2OyNEKU9XaGV7i7lRaCLTiUIBYny4iy9bQEpYnM73N8_BK2r0tepssnyY6SLe6kwMtYRLiSxDChzvhtLg3uqRFuE0NoqDKBTaLwKzB6G83JPNb0JYQ8aHjfEwm10N4EoJerxafCg9MOVnKdMxwlsxarEF8I2I6rOnNrPC0nqxBymrxnwruI4vYzg1KRLzeXSriv9kbH4hlIDy68Rl2wdQYT8TWQ726W9m10h9l2DZxN0ky9OqQgwL5YH91EDeFnduWbpmrEUzqzSEQSyhxTeHFd9il0RFYtzQINdiiNM4nuzvMeVhr5ZPA9BE6SI2K9OpwRPsenLNBzgAnJg.jpg"
+      },
+      "published_at": "2026-11-28T16:22:20+00:00",
+      "source": "ایرنا کرمان",
+      "source_handle": "irna_kerman",
+      "id": "9f610f97ae061831",
+      "media_repost_allowed": false,
+      "source_hashtag": "",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-28T16:52:46.896343+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/kermane_no/59957",
+      "source_post_id": "59957",
+      "title": "بسته خبری 2020 شنبه 7 آذر از پایگاه خبری کرمان نو را بشنوید",
+      "excerpt": "بسته خبری 2020 شنبه 7 آذر از پایگاه خبری کرمان نو را بشنوید",
+      "paragraphs": [
+        "بسته خبری 2020 شنبه 7 آذر از پایگاه خبری کرمان نو را بشنوید"
+      ],
+      "media": {
+        "kind": "video",
+        "url": null
+      },
+      "published_at": "2026-11-28T16:50:04+00:00",
+      "source": "کرمان‌نو",
+      "source_handle": "kermane_no",
+      "id": "025e7d4711d09dd5",
+      "media_repost_allowed": true,
+      "source_hashtag": "کرمان_نو",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "kerman",
+      "status": "ready",
+      "detected_at": "2026-11-28T16:52:46.896343+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-28T14:33:38.635639+00:00",
+  "saved_at": "2026-11-28T16:52:59.877114+00:00",
   "source_last_checked": {
-    "kermane_no": "2026-11-28T14:32:58.563627+00:00",
-    "fardaayekerman": "2026-11-28T14:32:58.563627+00:00",
-    "irna_kerman": "2026-11-28T14:32:58.563627+00:00",
-    "kerman_gov": "2026-11-28T14:32:58.563627+00:00",
-    "kerman_akhbar": "2026-11-28T14:32:58.563627+00:00",
-    "kerman_news": "2026-11-28T14:32:58.563627+00:00",
-    "kerman_rasaneh": "2026-11-28T14:32:58.563627+00:00",
-    "qh_qv": "2026-11-28T14:32:58.563627+00:00"
+    "kermane_no": "2026-11-28T16:52:46.896343+00:00",
+    "fardaayekerman": "2026-11-28T16:52:46.896343+00:00",
+    "irna_kerman": "2026-11-28T16:52:46.896343+00:00",
+    "kerman_gov": "2026-11-28T16:52:46.896343+00:00",
+    "kerman_akhbar": "2026-11-28T16:52:46.896343+00:00",
+    "kerman_news": "2026-11-28T16:52:46.896343+00:00",
+    "kerman_rasaneh": "2026-11-28T16:52:46.896343+00:00",
+    "qh_qv": "2026-11-28T16:52:46.896343+00:00"
   }
 }
