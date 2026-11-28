@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T16:41:59.564822+00:00",
+  "generated_at": "2026-11-28T15:34:01.331123+00:00",
   "channels": [
     {
       "id": "stream-filmnet",
@@ -709,36 +709,6 @@
   "programmes": [
     {
       "channel_id": "digital-world",
-      "title_fa": "دونده",
-      "start": "2026-11-27T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1377237",
-      "icon": "https://image.tmdb.org/t/p/w500/xpXg0ym8rVkk35CPYr60XkSxGaa.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "درخت جادویی سرزمین‌های دوردست",
-      "start": "2026-11-27T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1140521",
-      "icon": "https://image.tmdb.org/t/p/w500/kANw5tS48RlK44RvOTcF287q6SQ.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
-      "title_fa": "दृश्यम: आखिरी हिस्सा",
-      "start": "2026-11-27T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/movie/1269325",
-      "icon": "https://image.tmdb.org/t/p/w500/7T62GSduOWDMB0gGDBs9pmtLTSB.jpg",
-      "quality_score": 85,
-      "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "digital-world",
       "title_fa": "سوپر ماریو کهکشان",
       "start": "2026-11-30T00:00:00+03:30",
       "date_only": true,
@@ -763,7 +733,7 @@
       "start": "2026-12-01T00:00:00+03:30",
       "date_only": true,
       "source_url": "https://www.themoviedb.org/movie/1153576",
-      "icon": "https://image.tmdb.org/t/p/w500/zdBHWGS41vFDa4vfybZX0zYbNeC.jpg",
+      "icon": "https://image.tmdb.org/t/p/w500/98wkLVyWu7WEWKw5rDC8j91regF.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
     },
@@ -836,26 +806,6 @@
       "icon": "https://image.tmdb.org/t/p/w500/l1JFNC1SdgyXVr7BaD5ehaYBvOC.jpg",
       "quality_score": 85,
       "desc_fa": "عرضهٔ دیجیتال در آمریکا طبق TMDB؛ این تاریخ تضمین موجودی در یک پلتفرم مشخص نیست."
-    },
-    {
-      "channel_id": "tmdb-network-13",
-      "title_fa": "باب‌اسفنجی شلوارمکعبی",
-      "start": "2026-11-27T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/387",
-      "icon": "https://image.tmdb.org/t/p/w500/5h0EU2lqBb03dp5vtRuUHJwqzem.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 1 از فصل 18؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-4330",
-      "title_fa": "پادشاه تالسا",
-      "start": "2026-11-27T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/153312",
-      "icon": "https://image.tmdb.org/t/p/w500/24OWkuqt3eqkLO2d0CQ9D8D1yqY.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 7 از فصل 4؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
       "channel_id": "digital-world",
@@ -1478,36 +1428,6 @@
       "desc_fa": "قسمت 53 از فصل 37؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     },
     {
-      "channel_id": "tmdb-network-9",
-      "title_fa": "Coronation Street",
-      "start": "2026-11-27T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/291",
-      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 218 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-192",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-27T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 130 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
-      "channel_id": "tmdb-network-1826",
-      "title_fa": "بینِلَندِری‌ها",
-      "start": "2026-11-27T00:00:00+03:30",
-      "date_only": true,
-      "source_url": "https://www.themoviedb.org/tv/206559",
-      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
-      "quality_score": 85,
-      "desc_fa": "قسمت 130 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
-    },
-    {
       "channel_id": "tmdb-network-4",
       "title_fa": "EastEnders",
       "start": "2026-11-30T00:00:00+03:30",
@@ -1516,6 +1436,66 @@
       "icon": "https://image.tmdb.org/t/p/w500/ETFWCToRFx45vNAsNexh31ufSE.jpg",
       "quality_score": 85,
       "desc_fa": "قسمت 190 از فصل 42؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-9",
+      "title_fa": "Coronation Street",
+      "start": "2026-11-29T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/291",
+      "icon": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 219 از فصل 67؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-192",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-30T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 131 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-1826",
+      "title_fa": "بینِلَندِری‌ها",
+      "start": "2026-11-30T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/206559",
+      "icon": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 131 از فصل 22؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-4330",
+      "title_fa": "پادشاه تالسا",
+      "start": "2026-12-04T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/153312",
+      "icon": "https://image.tmdb.org/t/p/w500/24OWkuqt3eqkLO2d0CQ9D8D1yqY.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 8 از فصل 4؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-249",
+      "title_fa": "Un si grand soleil",
+      "start": "2026-11-30T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/81329",
+      "icon": "https://image.tmdb.org/t/p/w500/dhEN7hDJ3TR86JK36VyySEoPFok.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 254 از فصل 8؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
+    },
+    {
+      "channel_id": "tmdb-network-361",
+      "title_fa": "Un si grand soleil",
+      "start": "2026-11-30T00:00:00+03:30",
+      "date_only": true,
+      "source_url": "https://www.themoviedb.org/tv/81329",
+      "icon": "https://image.tmdb.org/t/p/w500/dhEN7hDJ3TR86JK36VyySEoPFok.jpg",
+      "quality_score": 85,
+      "desc_fa": "قسمت 254 از فصل 8؛ تاریخ پخش طبق TMDB، ساعت اعلام نشده."
     }
   ]
 }
