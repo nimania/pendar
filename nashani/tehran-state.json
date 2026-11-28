@@ -2,18 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/irna_1313/473980",
-    "https://t.me/mehrnews/431864",
-    "https://t.me/Tehran_Tel/114970",
-    "https://t.me/Tehran_Tel/114971",
-    "https://shahr.ir/news/88387/%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%AF%D8%B1-%D9%85%D8%B3%DB%8C%D8%B1-%D9%87%D9%88%D8%B4%D9%85%D9%86%D8%AF%D8%B3%D8%A7%D8%B2%DB%8C-%DA%AF%D8%B1%D8%AF%D8%B4%DA%AF%D8%B1%DB%8C-%D8%A7%D8%B2-%D8%A7%D8%B7%D9%84%D8%B3-%D8%AF%DB%8C%D8%AC%DB%8C%D8%AA%D8%A7%D9%84-%D8%AA%D8%A7-%D8%AA%D9%88%D8%B3%D8%B9%D9%87-%D8%AA%D9%88%D8%B1%D9%87%D8%A7%DB%8C",
-    "https://t.me/Tehran_Tel/114972",
-    "https://t.me/tehranpress1/132696",
-    "https://t.me/tehranpress1/132697",
-    "https://t.me/isna94/413520",
-    "https://t.me/isna94/413521",
-    "https://t.me/tehranpress1/132698",
-    "https://t.me/isna94/413522",
     "https://t.me/isna94/413525",
     "https://t.me/tehranpress1/132699",
     "https://t.me/isna94/413526",
@@ -5001,66 +4989,21 @@
     "https://t.me/irna_1313/478793",
     "https://t.me/irna_1313/478794",
     "https://t.me/isna94/415548",
-    "https://t.me/irna_1313/478798"
+    "https://t.me/irna_1313/478798",
+    "https://t.me/irna_1313/478799",
+    "https://t.me/isna94/415549",
+    "https://t.me/tehranpress1/133406",
+    "https://t.me/irna_1313/478806",
+    "https://t.me/irna_1313/478807",
+    "https://t.me/irna_1313/478808",
+    "https://t.me/isna94/415550",
+    "https://t.me/mehrnews/435709",
+    "https://t.me/mehrnews/435710",
+    "https://t.me/irna_1313/478809",
+    "https://t.me/irna_1313/478810",
+    "https://t.me/irna_1313/478811"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/133127",
-      "source_post_id": "133127",
-      "title": "وزیر جهاد کشاورزی: بعد از اصلاح ارزی، حدود ۴/۵ میلیارد دلار مطالبات تجار است که دولت موظف به پرداخت آن است",
-      "excerpt": "وزیر جهاد کشاورزی: بعد از اصلاح ارزی، حدود ۴/۵ میلیارد دلار مطالبات تجار است که دولت موظف به پرداخت آن است تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "وزیر جهاد کشاورزی: بعد از اصلاح ارزی، حدود ۴/۵ میلیارد دلار مطالبات تجار است که دولت موظف به پرداخت آن است",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/ba28c210a2.mp4?token=F-0CxEtNYi-sn24TZVHoFZ_c1i07QXGY5JoS14tMh1pIWCFLIaiJgoJxv03fsolnzLAJSz4evvw9sG-KlNlPz0-Xr7krSkIA3xaTIOd6WXHGn0LCtG0_kmRNEn9GpT6KQiinG0cpHbV3_bMxtKEPa8BbzZo3Ws6PXsd1s3xr89WK_OfkjanVecygqO2j1VALcmdVzRbt3OnuFM-9C7a5QY3bDruQ88aYuij9mFleNf4FNDbVS13BwhuMANw5uURwICEm0ma1xsMr75HlGS4MbHlOL6bX88eLYVtLmCZGuWusvX7SQP3Xm69Tdt8ahQrUy9zbgGme642RLtQ9pILSjQ"
-      },
-      "published_at": "2026-11-21T19:29:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "4b6eecf974f051d1",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-21T19:45:04.302946+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/tehranpress1/133128",
-      "source_post_id": "133128",
-      "title": "پزشکیان: درحال مدیریت ناترازی زمستان هستیم",
-      "excerpt": "پزشکیان: درحال مدیریت ناترازی زمستان هستیم رئیس‌جمهور در همایش بازار سرمایه در حال برنامه‌ریزی برای مدیریت ناترازی در زمستان هستیم. باید تولید آخرین بخشی باشد که انرژی آن قطع می‌شود‌. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "پزشکیان: درحال مدیریت ناترازی زمستان هستیم",
-        "رئیس‌جمهور در همایش بازار سرمایه",
-        "در حال برنامه‌ریزی برای مدیریت ناترازی در زمستان هستیم.",
-        "باید تولید آخرین بخشی باشد که انرژی آن قطع می‌شود‌.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/8e1876cedb.mp4?token=H518vY5QD0aQaZXPqaBi8yxpB_jRGPr6pa9VCQst1-thehuDBBwszYOz4vMNzJUJnQP76u1vD5pjZV2pM39mdDvpl_bEKXu59ZYi2aIYfzM0RJA4iX0dNoSQYX-PBovFCMFR3rtng5UDnp13QkJQs_4tXuqqLcf9XEQxsWRZOJr8wSDfoIdTs9dArbqqTGq41dI3L_oQ2zuqpvQ7Lxhf9-ffkqWLdOGXKkAjzm4-Hx0RyvIcQehsaOXHp54m22ZOsxyjh3K62DBq76_80iJHJSKkmhIS3sRcpAi9u19j13k7SJ9I9M8s_fSf0cD26ZNP5TkTlsIFUJgD3Izh4522fA"
-      },
-      "published_at": "2026-11-21T19:53:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "53cef0f499610ef8",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-21T21:27:02.399541+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
     {
       "url": "https://t.me/tehranpress1/133129",
       "source_post_id": "133129",
@@ -13617,16 +13560,69 @@
       "status": "ready",
       "detected_at": "2026-11-28T04:24:43.268157+00:00",
       "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/133406",
+      "source_post_id": "133406",
+      "title": "تا ۲۵ سال دیگر از هر ۳ ایرانی، یک نفر سالمند می‌شود",
+      "excerpt": "تا ۲۵ سال دیگر از هر ۳ ایرانی، یک نفر سالمند می‌شود رئیس دبیرخانۀ شورای ملی سالمندان کشور: تا سال ۱۴۳۰، در صورت تداوم روند فعلی جمعیت، حدود ۳۳ درصد ایرانیان سالمند خواهند بود. تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "تا ۲۵ سال دیگر از هر ۳ ایرانی، یک نفر سالمند می‌شود",
+        "رئیس دبیرخانۀ شورای ملی سالمندان کشور: تا سال ۱۴۳۰، در صورت تداوم روند فعلی جمعیت، حدود ۳۳ درصد ایرانیان سالمند خواهند بود.",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/7eeaa01d4a.mp4?token=iNsZJoU6eVs5SrvmWWOTbV_JrJfIKHHppMyRiImXMI7xWOSQ5QYkUagBcxny5bVBBgxrIrIvqYifi1JfBcWKiIKLhRYkcCaKqKkBmwhd1ZGwL2PTvW095RyYW4s6YuDNFCIyp_FRU4tZMllQAfzuXjmSrX1oQwZfABDFJrFponoYDJvYBrgopD8zugPMl0Ytk0BR2VMlzUyZtoB6wpkfHPg69dDaY2Aifxs8x0WG-1L61ZNp-DHIwOWzJs09nhs6qOueoB4R7-4ODCIsR3J4YcLx1zczQS0lIdjxhorDTRB76eNaZyVyku_73MwCpx2nfOPCHi6klzNnLzKgrKdK3g"
+      },
+      "published_at": "2026-11-28T04:31:13+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "99fa9422cc5caddd",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-28T04:58:17.425872+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/irna_1313/478809",
+      "source_post_id": "478809",
+      "title": "ترافیک سنگین در آزادراه های البرز",
+      "excerpt": "ترافیک سنگین در آزادراه های البرز سرهنگ « پیمان کرمی» رییس پلیس راه البرز از ترافیک سنگین در آزادراه تهران - کرج -قزوین در محدوده این استان خبرداد و از رانندگان خواست با احتیاط رانندگی کنند.",
+      "paragraphs": [
+        "ترافیک سنگین در آزادراه های البرز",
+        "سرهنگ « پیمان کرمی» رییس پلیس راه البرز از ترافیک سنگین در آزادراه تهران - کرج -قزوین در محدوده این استان خبرداد و از رانندگان خواست با احتیاط رانندگی کنند."
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/TYw0sER26axRlfvpnhhzd2I8rgw_uWyJiEf17qCa3awOn-RMo07YX9OLqv6bMkxWwma0sYjCrpzjL1mj4_El8_kW7iS_MDu4IRoJWNh52XeQMGmhEje7V4dfoW8c9lFS3WNxHJ5pmgBYmwkqBLoIBWG7p-RRdLYdI0fmWbSNnm_KaR8TIDsV_xp-lQgujv0r8i0wa5fkIO3WvFNj8gERwCusrqKxKUZQC2TqlSw-Tp7nBM0rSKhIlJuCQ7stAhvOOk2BCRvgOMRjPTiMRUWgsB1lpw_73C2UTFfJhFplqWslTsc5q9GXa6P0gH0_hdoYQGyiWckikEmCI49_IUuF_A.jpg"
+      },
+      "published_at": "2026-11-28T04:49:43+00:00",
+      "source": "ایرنا",
+      "source_handle": "irna_1313",
+      "id": "db288b9e4d20126a",
+      "media_repost_allowed": true,
+      "source_hashtag": "ایرنا",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-28T04:58:17.425872+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-28T04:25:38.245855+00:00",
+  "saved_at": "2026-11-28T04:58:51.337868+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-28T04:24:43.268157+00:00",
-    "tehran_tel": "2026-11-28T04:24:43.268157+00:00",
-    "irna_1313": "2026-11-28T04:24:43.268157+00:00",
-    "isna94": "2026-11-28T04:24:43.268157+00:00",
-    "mehrnews": "2026-11-28T04:24:43.268157+00:00",
-    "web_shahr": "2026-11-28T04:24:43.268157+00:00",
-    "web_mehr_tehran": "2026-11-28T04:24:43.268157+00:00"
+    "tehranpress1": "2026-11-28T04:58:17.425872+00:00",
+    "tehran_tel": "2026-11-28T04:58:17.425872+00:00",
+    "irna_1313": "2026-11-28T04:58:17.425872+00:00",
+    "isna94": "2026-11-28T04:58:17.425872+00:00",
+    "mehrnews": "2026-11-28T04:58:17.425872+00:00",
+    "web_shahr": "2026-11-28T04:58:17.425872+00:00",
+    "web_mehr_tehran": "2026-11-28T04:58:17.425872+00:00"
   }
 }
