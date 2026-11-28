@@ -2,17 +2,6 @@
   "version": 1,
   "initialized": true,
   "seen": [
-    "https://t.me/mehrnews/431859",
-    "https://t.me/irna_1313/473975",
-    "https://t.me/irna_1313/473976",
-    "https://t.me/irna_1313/473977",
-    "https://t.me/mehrnews/431860",
-    "https://t.me/isna94/413509",
-    "https://t.me/irna_1313/473978",
-    "https://t.me/irna_1313/473979",
-    "https://t.me/mehrnews/431861",
-    "https://t.me/mehrnews/431862",
-    "https://t.me/mehrnews/431863",
     "https://t.me/irna_1313/473980",
     "https://t.me/mehrnews/431864",
     "https://t.me/Tehran_Tel/114970",
@@ -5001,99 +4990,20 @@
     "https://t.me/irna_1313/478773",
     "https://t.me/irna_1313/478783",
     "https://t.me/mehrnews/435708",
-    "https://t.me/irna_1313/478790"
+    "https://t.me/irna_1313/478790",
+    "https://shahr.ir/news/88974/%D9%88%D8%B1%D9%88%D8%AF-%D8%AE%D9%88%D8%AF%D8%B1%D9%88%D9%87%D8%A7%DB%8C-%D8%B3%D9%86%DA%AF%DB%8C%D9%86-%D9%88-%D8%AC%D8%B1%D8%AB%D9%82%DB%8C%D9%84-%D9%81%D9%88%D9%82-%D8%B3%D9%86%DA%AF%DB%8C%D9%86-%D8%A8%D9%87-%D9%86%D8%A7%D9%88%DA%AF%D8%A7%D9%86-%D8%A2%D8%AA%D8%B4-%D9%86%D8%B4%D8%A7%D9%86%DB%8C-%D8%AA%D9%87%D8%B1%D8%A7%D9%86",
+    "https://t.me/irna_1313/478791",
+    "https://t.me/irna_1313/478792",
+    "https://t.me/tehranpress1/133404",
+    "https://shahr.ir/news/88969/%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%B3%D8%A7%D8%B2%DB%8C-%D8%A8%D9%84%DB%8C%D8%AA-%D9%85%D8%AA%D8%B1%D9%88-%D9%88-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3-%D8%AF%D8%B1-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%DA%86%D9%87-%D8%AA%D8%BA%DB%8C%DB%8C%D8%B1%DB%8C-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF-%DA%A9%D8%B1%D8%AF",
+    "https://t.me/tehranpress1/133405",
+    "https://t.me/isna94/415546",
+    "https://t.me/irna_1313/478793",
+    "https://t.me/irna_1313/478794",
+    "https://t.me/isna94/415548",
+    "https://t.me/irna_1313/478798"
   ],
   "queue": [
-    {
-      "url": "https://t.me/tehranpress1/133124",
-      "source_post_id": "133124",
-      "title": "وزیر جهاد کشاورزی: در بخش کشاورزی ما شاهد رشد مثبت ۲/۳ درصدی در ارزش افزوده هستیم و ۷۰ هزار شغل جدید ایجاد کردیم",
-      "excerpt": "وزیر جهاد کشاورزی: در بخش کشاورزی ما شاهد رشد مثبت ۲/۳ درصدی در ارزش افزوده هستیم و ۷۰ هزار شغل جدید ایجاد کردیم تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "وزیر جهاد کشاورزی: در بخش کشاورزی ما شاهد رشد مثبت ۲/۳ درصدی در ارزش افزوده هستیم و ۷۰ هزار شغل جدید ایجاد کردیم",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/6a7791593f.mp4?token=Yzblxt6SM9dB6O2U2ef4yboWxssuSVOqdnTgl21FQLGx27YI1XSseDHTM8amMtkzEE_3mTWsM2VPUMKXjHy0zuYtd_b9BQ03tQcN6nXi4jMBGmXP6YKYUujS-SS0VfpjwDl2Ei7HoVIfMMXjnqpanQ_cCbAOh3NzqTmRD-Mjc6bw_ik0ywVUtEpb-N6hGJeM1zF926lU4T385sRbpOBAlrdAdhIXs-K_8xXn2P0-CM75pU9SW5pnnSX6FqPjuKvNspbqQiPFE0E7BP0OShftpWcoTQkGZmtlGghuvmCx9kxPQ1JkmtKCrIod6FbPZbOvZ4b9gb1cQpKmFNNv7TQBbA"
-      },
-      "published_at": "2026-11-21T19:16:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "11fffd0a27b9ae23",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "ordinary",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "expired",
-      "detected_at": "2026-11-21T19:45:04.302946+00:00",
-      "other_sources": [],
-      "review_reason": "old_news_not_sent"
-    },
-    {
-      "url": "https://t.me/mehrnews/434006",
-      "source_post_id": "434006",
-      "title": "تیتر یک، گزارش ها و یادداشت های تهران تایمز",
-      "excerpt": "تیتر یک، گزارش ها و یادداشت های تهران تایمز «ایران میدان نبرد را تعیین خواهد کرد» همزمان با بازدید فرمانده کل سپاه و فرمانده نیروی هوافضا از «شهر موشکی»؛ از یک پرتابگر جدید رونمایی شد. گزارش تحلیلی دولت عراق و کتائب حزب‌الله به راه‌حلی میانه برای حل اختلافات دست یافتند. مصاحبه اختصاصی گفتگوی اختصاصی تهران تایمز با مسلم شجاعی، مدیرکل گردشگری خارجی وزارت گردشگری و میراث فرهنگی ایران به دنبال تقویت همکاری‌های گردشگری فرامرزی با کشورهای همسایه است Tehran Times today November 22, 2026 Follow us on دانلود تمام صفحات تهران تایمز",
-      "paragraphs": [
-        "تیتر یک، گزارش ها و یادداشت های تهران تایمز",
-        "«ایران میدان نبرد را تعیین خواهد کرد»",
-        "همزمان با بازدید فرمانده کل سپاه و فرمانده نیروی هوافضا از «شهر موشکی»؛ از یک پرتابگر جدید رونمایی شد.",
-        "گزارش تحلیلی",
-        "دولت عراق و کتائب حزب‌الله به راه‌حلی میانه برای حل اختلافات دست یافتند.",
-        "مصاحبه اختصاصی",
-        "گفتگوی اختصاصی تهران تایمز با مسلم شجاعی، مدیرکل گردشگری خارجی وزارت گردشگری و میراث فرهنگی",
-        "ایران به دنبال تقویت همکاری‌های گردشگری فرامرزی با کشورهای همسایه است",
-        "Tehran Times today",
-        "November 22, 2026",
-        "Follow us on",
-        "دانلود تمام صفحات تهران تایمز"
-      ],
-      "media": {
-        "kind": "photo",
-        "url": "https://cdn4.telesco.pe/file/fO3OKZDSWExkut0APJPGpVNZXdsAsHV6SdcbPQ7YD7hGfikfXmlt40VDzcXG7S7X1vTJoLGxtOqkmYo7sAEE920cJx9CziyRZy54ZPsGL80Ad3hSv8Ak3h3bHnMnL_Jie9kximfmey6l9UcfFEVfLcGIsekIy7HXt_dCu-z1zb5ljDMypZfGnHP8uIyRH2QGzrt3neVLtPs_ZC_kdbEXMTZCS2mpHGVufAk1COCHkIzJSmdRbjqD6NMpYEFWQ0JLqsL6C3KIsFmBUHitm_pdTnEdkGun5zsz7xup-0mPbQbna6By0zjzKhMC6MMyOCD5rwytnpEh3Xor0lM6VmEl3Q.jpg"
-      },
-      "published_at": "2026-11-21T19:19:28+00:00",
-      "source": "مهر",
-      "source_handle": "mehrnews",
-      "id": "a9978d59216f24d8",
-      "media_repost_allowed": true,
-      "source_hashtag": "مهر",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "review",
-      "detected_at": "2026-11-21T19:45:04.302946+00:00",
-      "other_sources": []
-    },
-    {
-      "url": "https://t.me/tehranpress1/133125",
-      "source_post_id": "133125",
-      "title": "وزیر جهاد کشاورزی: با وجود درگیری‌ها در جنوب کشور، امسال از واردات ماهی تن تقریبا بی‌نیاز شدیم.",
-      "excerpt": "وزیر جهاد کشاورزی: با وجود درگیری‌ها در جنوب کشور، امسال از واردات ماهی تن تقریبا بی‌نیاز شدیم. در بخش میگو نیز ۳۵ درصد رشد داشتیم. تهران پرس؛ رسانه تخصصی شهر تهران",
-      "paragraphs": [
-        "وزیر جهاد کشاورزی: با وجود درگیری‌ها در جنوب کشور، امسال از واردات ماهی تن تقریبا بی‌نیاز شدیم.",
-        "در بخش میگو نیز ۳۵ درصد رشد داشتیم.",
-        "تهران پرس؛ رسانه تخصصی شهر تهران"
-      ],
-      "media": {
-        "kind": "video",
-        "url": "https://cdn4.telesco.pe/file/0bb65061c1.mp4?token=eTmdBymVYcq9HhPhZcCr8jaZ9NTPkIAWNkQGql3VZ2FVa-Co3YG47ZM63lDkKCHr-mZ4thROhcDj5noEJqIu7ZTaYnBpTyxsIpWyLWTMBxjtCojiA0ZDyFJMpB8E-qxUnsbn7zxTs9TvWZ5EOdnmrMFDE2y5kZmXA68IfRnOjp_t7LSpbZ1hcSX1hZ6GLAfmW0g62VNrABYJJ8qtNh-wJHG40T24JXZ9O0r8gQ7tU5w-oUTowWAtpJoARKoJ4alUZJP21m_WR53P6pLmjpD4hsOFrM9c2AIbLUle5kMB_-eeJLgA0Ygoa2HM95Cdvyu_YtIzutDcc0o7tfX4Q09-5zzoLYYGMqknLXWitR9ENcuYlvuH2_duRcW1gSNrDutwJRiNb4oohoOr2QiJZhWoYyGpijaw_6z9cGAq5qraeb67jIHbQJRGf3qFSIx1nXYKlYBH2IGEFbmyeDQT784STQ5YPI-eEt4U2NpNTzs5qqOhyJVQlX8AwFaoOXyE8JMF1U5N6F2kgYRk9lSL-fG7i4rS94h3rQJ8XKuOf9GXGF6tJT-wZRWgCS1AQJnzDxJQ0sz9GR52DM9Ho7mOsVJxsH0JrprSkZ-jLGCuNWz4izHcr0djjMAgjRxHVogYUkwXcmv5R27x7EdgEMGthHOr_gJwSqXM3BRMKCcD7HrBjy0"
-      },
-      "published_at": "2026-11-21T19:23:02+00:00",
-      "source": "تهران‌پرس",
-      "source_handle": "tehranpress1",
-      "id": "938613f226ec6788",
-      "media_repost_allowed": false,
-      "source_hashtag": "تهران_پرس",
-      "risk": "sensitive",
-      "city_confidence": "high",
-      "geography": "tehran_city",
-      "status": "review",
-      "detected_at": "2026-11-21T19:45:04.302946+00:00",
-      "other_sources": []
-    },
     {
       "url": "https://t.me/tehranpress1/133127",
       "source_post_id": "133127",
@@ -13624,16 +13534,91 @@
       "delivery_kind": "photo",
       "telegram_message_id": 532,
       "sent_at": "2026-11-28T03:31:07.743720+00:00"
+    },
+    {
+      "url": "https://t.me/tehranpress1/133404",
+      "source_post_id": "133404",
+      "title": "شنبه ۷ آذر ۱۴۰۵",
+      "excerpt": "شنبه ۷ آذر ۱۴۰۵ تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "شنبه ۷ آذر ۱۴۰۵",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "photo",
+        "url": "https://cdn4.telesco.pe/file/lPmZGfL9cSiG8WYPEj0BfR5dE4KIBkojTb8Dbf7v-N-uKdiSsIxUkRh4vnMJmdJWCduBnRBdPLGVZbgl_xQI4rSENFi0NU2ZsHJOkXijtAlxQFKzKLZECHkuIHiSN6krBwb0IWTO7QdeCuN1_uyPO_DN3qIVRcMWtwFcYF3KXHaxltEfK-hhpW_SLJRd9XajhmS7L0uKJwMbSVJzhn46m7nR6qxhzFaONAPSwm6z2AbcP81wTcLSZALhA3D2ysfMb9wEeRiIg6r3ncpQmDvu0u-fMXwAPaVmRqIyR2Ct1HMEnGX7oJPcmg4HGpOk9WzxFQhzi47onB33hsvfkeFb-w.jpg"
+      },
+      "published_at": "2026-11-28T03:47:01+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "0d6cba2a7a0f25db",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-28T04:24:43.268157+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://shahr.ir/news/88969/%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%B3%D8%A7%D8%B2%DB%8C-%D8%A8%D9%84%DB%8C%D8%AA-%D9%85%D8%AA%D8%B1%D9%88-%D9%88-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3-%D8%AF%D8%B1-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%DA%86%D9%87-%D8%AA%D8%BA%DB%8C%DB%8C%D8%B1%DB%8C-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF-%DA%A9%D8%B1%D8%AF",
+      "source_post_id": "%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%B3%D8%A7%D8%B2%DB%8C-%D8%A8%D9%84%DB%8C%D8%AA-%D9%85%D8%AA%D8%B1%D9%88-%D9%88-%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3-%D8%AF%D8%B1-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%DA%86%D9%87-%D8%AA%D8%BA%DB%8C%DB%8C%D8%B1%DB%8C-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF-%DA%A9%D8%B1%D8%AF",
+      "title": "رایگان‌سازی بلیت مترو و اتوبوس در تهران چه تغییری ایجاد کرد؟",
+      "excerpt": "رایگان‌سازی بلیت مترو و اتوبوس در ابتدا تصمیمی برای تسهیل رفت‌وآمد مردم در روزهای جنگ بود که حالا نشانه‌هایی از تغییر در سفرهای روزانه، ترافیک و مصرف بنزین پایتخت به جا گذاشته است.",
+      "paragraphs": [
+        "رایگان‌سازی بلیت مترو و اتوبوس در ابتدا تصمیمی برای تسهیل رفت‌وآمد مردم در روزهای جنگ بود که حالا نشانه‌هایی از تغییر در سفرهای روزانه، ترافیک و مصرف بنزین پایتخت به جا گذاشته است."
+      ],
+      "published_at": "2026-11-28T03:51:00+00:00",
+      "media": null,
+      "source": "شهر",
+      "source_handle": "web_shahr",
+      "id": "275f690d12e03cd9",
+      "media_repost_allowed": false,
+      "source_hashtag": "شهر",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-28T04:24:43.268157+00:00",
+      "other_sources": []
+    },
+    {
+      "url": "https://t.me/tehranpress1/133405",
+      "source_post_id": "133405",
+      "title": "اولین نعمتی که باید برای آن شکرگزار باشیم",
+      "excerpt": "اولین نعمتی که باید برای آن شکرگزار باشیم نکات معنوی و اخلاقی از زبان رهبر انقلاب تهران پرس؛ رسانه تخصصی شهر تهران",
+      "paragraphs": [
+        "اولین نعمتی که باید برای آن شکرگزار باشیم",
+        "نکات معنوی و اخلاقی از زبان رهبر انقلاب",
+        "تهران پرس؛ رسانه تخصصی شهر تهران"
+      ],
+      "media": {
+        "kind": "video",
+        "url": "https://cdn4.telesco.pe/file/f19ac25664.mp4?token=cy8aWoH4Mmtit_jtzInp8dsrFys2zBMyDpG_Qc6iFWkmrRucWTlkMP7shkyQ_J2EzfUlDe5TEnnEwacCz3KnbJBajqFrafn4Xn5pH5mlN53VhqztjfQEuIti8NKsF0gU6MafEg9uU5aJim90dcWFSNtLoiv8IVB-7oo3C8hdxtJ2j5lmDy1-V8uG4_T9l5sivxxWRmDukD_rHbw4X8pYr61pHTWcv5lw6FKvJEt6S-530K2LcjXRhDVbEmnksJeJlBdR6qmEocu2a4uNsdS98SA73gZ5-I8AssOzM2u52Z3Asrr0HQGFmrnCsb9qPi97VAOK6IG7HPsE4qiLYa_nwqz5awVi8B3YKhdywyKt41lKQUr9YdEr8nzhxSkvBG_C9ukLiu7JTCu9trV1cDlGboC7TvpYbr-OirYB3Ci9QsiGFWuba8gfdjt9FMvByfgOYH1LX5j1TaTanB9i3dQJbviqkBa4zZKI9Vj8c_7uezZgLCw3Sr8S4JZN4FaWf0Xl3GxLSl4v0u9zxUGuWVR6-bt2x98DilyX2NPFh6B5yhjYaQs9Br00zkf5E2Fo2i0LN6K7f8Oo8gXiB3MZ7tOey6SqfMFqRrHqkg1KNrUjtWrYn0yFm7WnZevq6yETnSZBeAnoJVGBJbVexndfX6UeOcKynru4bm5U6eB9NrRXFX4"
+      },
+      "published_at": "2026-11-28T03:55:05+00:00",
+      "source": "تهران‌پرس",
+      "source_handle": "tehranpress1",
+      "id": "2e524d7f85bb043d",
+      "media_repost_allowed": false,
+      "source_hashtag": "تهران_پرس",
+      "risk": "ordinary",
+      "city_confidence": "high",
+      "geography": "tehran_city",
+      "status": "ready",
+      "detected_at": "2026-11-28T04:24:43.268157+00:00",
+      "other_sources": []
     }
   ],
-  "saved_at": "2026-11-28T03:31:07.743737+00:00",
+  "saved_at": "2026-11-28T04:25:32.205117+00:00",
   "source_last_checked": {
-    "tehranpress1": "2026-11-28T03:30:24.777852+00:00",
-    "tehran_tel": "2026-11-28T03:30:24.777852+00:00",
-    "irna_1313": "2026-11-28T03:30:24.777852+00:00",
-    "isna94": "2026-11-28T03:30:24.777852+00:00",
-    "mehrnews": "2026-11-28T03:30:24.777852+00:00",
-    "web_shahr": "2026-11-28T03:30:24.777852+00:00",
-    "web_mehr_tehran": "2026-11-28T03:30:24.777852+00:00"
+    "tehranpress1": "2026-11-28T04:24:43.268157+00:00",
+    "tehran_tel": "2026-11-28T04:24:43.268157+00:00",
+    "irna_1313": "2026-11-28T04:24:43.268157+00:00",
+    "isna94": "2026-11-28T04:24:43.268157+00:00",
+    "mehrnews": "2026-11-28T04:24:43.268157+00:00",
+    "web_shahr": "2026-11-28T04:24:43.268157+00:00",
+    "web_mehr_tehran": "2026-11-28T04:24:43.268157+00:00"
   }
 }
