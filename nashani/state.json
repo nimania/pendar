@@ -12180,9 +12180,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "expired",
       "detected_at": "2026-11-28T14:32:58.563627+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "review_reason": "old_news_not_sent"
     },
     {
       "url": "https://t.me/kerman_news/141431",
@@ -12294,9 +12295,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-28T16:52:46.896343+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-28T20:25:37.097366+00:00"
     },
     {
       "url": "https://t.me/irna_kerman/30506",
@@ -12321,9 +12323,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-28T16:52:46.896343+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-28T20:25:37.097366+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59957",
@@ -12372,14 +12375,15 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-28T20:25:16.081901+00:00",
       "other_sources": [
         {
           "name": "آخرین خبر کرمان",
           "url": "https://t.me/Kerman_akhbar/66701"
         }
-      ]
+      ],
+      "reserved_at": "2026-11-28T20:25:37.097366+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141439",
@@ -12429,9 +12433,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-28T20:25:16.081901+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-28T20:25:37.097366+00:00"
     },
     {
       "url": "https://t.me/Kerman_akhbar/66703",
@@ -12479,9 +12484,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-28T20:25:16.081901+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-28T20:25:37.097366+00:00"
     },
     {
       "url": "https://t.me/kermane_no/59959",
@@ -12509,9 +12515,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-28T20:25:16.081901+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-28T20:25:37.097366+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141444",
@@ -12532,9 +12539,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-28T20:25:16.081901+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-28T20:25:37.097366+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141445",
@@ -12556,9 +12564,10 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "kerman",
-      "status": "ready",
+      "status": "sending_uncertain",
       "detected_at": "2026-11-28T20:25:16.081901+00:00",
-      "other_sources": []
+      "other_sources": [],
+      "reserved_at": "2026-11-28T20:25:37.097366+00:00"
     },
     {
       "url": "https://t.me/kerman_news/141446",
@@ -12615,7 +12624,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-28T20:25:33.955246+00:00",
+  "saved_at": "2026-11-28T20:25:37.097386+00:00",
   "source_last_checked": {
     "kermane_no": "2026-11-28T20:25:16.081901+00:00",
     "fardaayekerman": "2026-11-28T20:25:16.081901+00:00",
