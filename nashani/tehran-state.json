@@ -13338,10 +13338,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-28T07:46:18.632069+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-28T12:17:23.923709+00:00"
+      "reserved_at": "2026-11-28T12:17:23.923709+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 539,
+      "sent_at": "2026-11-28T12:17:27.234158+00:00"
     },
     {
       "url": "https://shahr.ir/news/88988/%DA%AF%D8%A7%D9%85-%D8%AF%D9%88%D9%85-%D8%AA%D9%82%D8%A7%D8%B7%D8%B9-%D8%BA%DB%8C%D8%B1-%D9%87%D9%85%D8%B3%D8%B7%D8%AD-%D8%B4%D9%87%D8%B1-%D8%A2%D9%81%D8%AA%D8%A7%D8%A8-%D8%A8%D8%A7-%D8%A2%D8%B2%D8%A7%D8%AF%D8%B1%D8%A7%D9%87-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D9%82%D9%85-%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD",
@@ -13361,10 +13364,13 @@
       "risk": "ordinary",
       "city_confidence": "high",
       "geography": "tehran_city",
-      "status": "sending_uncertain",
+      "status": "published",
       "detected_at": "2026-11-28T07:46:18.632069+00:00",
       "other_sources": [],
-      "reserved_at": "2026-11-28T12:17:23.923709+00:00"
+      "reserved_at": "2026-11-28T12:17:23.923709+00:00",
+      "delivery_kind": "text",
+      "telegram_message_id": 540,
+      "sent_at": "2026-11-28T12:17:28.651878+00:00"
     },
     {
       "url": "https://shahr.ir/news/88983/%D8%A7%D8%AA%D9%88%D8%A8%D9%88%D8%B3-%D9%87%D8%A7%DB%8C-%DB%B2%DB%B6-%D9%85%D8%AA%D8%B1%DB%8C-%D8%AA%D8%A7%D8%B2%D9%87-%D9%88%D8%A7%D8%B1%D8%AF%D9%87%D8%A7%DB%8C-%D9%85%D8%AA%D9%81%D8%A7%D9%88%D8%AA-%D9%86%D8%A7%D9%88%DA%AF%D8%A7%D9%86-%D8%AD%D9%85%D9%84-%D9%88-%D9%86%D9%82%D9%84-%D8%B9%D9%85%D9%88%D9%85%DB%8C",
@@ -13594,7 +13600,7 @@
       "other_sources": []
     }
   ],
-  "saved_at": "2026-11-28T12:17:23.923727+00:00",
+  "saved_at": "2026-11-28T12:17:28.651895+00:00",
   "source_last_checked": {
     "tehranpress1": "2026-11-28T12:15:58.097451+00:00",
     "tehran_tel": "2026-11-28T12:15:58.097451+00:00",
